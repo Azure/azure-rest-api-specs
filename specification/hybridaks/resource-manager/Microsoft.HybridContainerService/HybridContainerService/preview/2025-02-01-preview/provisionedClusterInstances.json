@@ -3,7 +3,7 @@
   "info": {
     "title": "HybridContainerService",
     "description": "The Microsoft.HybridContainerService Rest API spec.",
-    "version": "2023-11-15-preview"
+    "version": "2025-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -43,26 +43,26 @@
           }
         },
         "summary": "Gets the provisioned cluster instance",
-        "description": "Gets the Hybrid AKS provisioned cluster instance",
+        "description": "Gets the provisioned cluster instance",
         "parameters": [
           {
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Gets the default provisionedClusterInstances resource.",
+            "description": "Gets the provisionedClusterInstances resource",
             "schema": {
-              "$ref": "#/definitions/provisionedClusters"
+              "$ref": "#/definitions/provisionedCluster"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -78,21 +78,22 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "summary": "Creates the provisioned cluster instance",
-        "description": "Creates the Hybrid AKS provisioned cluster instance",
+        "summary": "Creates or updates the provisioned cluster instance",
+        "description": "Creates or updates the provisioned cluster instance",
         "parameters": [
           {
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "provisionedClusterInstance",
             "in": "body",
             "required": true,
+            "description": "Provisioned Cluster resource definition",
             "schema": {
-              "$ref": "#/definitions/provisionedClusters"
+              "$ref": "#/definitions/provisionedCluster"
             }
           }
         ],
@@ -100,19 +101,19 @@
           "200": {
             "description": "Updates the provisionedClusterInstances resource.",
             "schema": {
-              "$ref": "#/definitions/provisionedClusters"
+              "$ref": "#/definitions/provisionedCluster"
             }
           },
           "201": {
             "description": "Creates the provisionedClusterInstances resource.",
             "schema": {
-              "$ref": "#/definitions/provisionedClusters"
+              "$ref": "#/definitions/provisionedCluster"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -125,13 +126,13 @@
           }
         },
         "summary": "Deletes the provisioned cluster instance",
-        "description": "Deletes the Hybrid AKS provisioned cluster instance",
+        "description": "Deletes the provisioned cluster instance",
         "parameters": [
           {
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-long-running-operation": true,
@@ -153,7 +154,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -167,27 +168,27 @@
             "$ref": "./examples/ListProvisionedClusterInstances.json"
           }
         },
-        "summary": "Gets the provisioned cluster instances associated with the connected cluster",
-        "description": "Gets the Hybrid AKS provisioned cluster instances associated with the connected cluster",
+        "summary": "Lists the ProvisionedClusterInstance resource associated with the ConnectedCluster",
+        "description": "Lists the ProvisionedClusterInstance resource associated with the ConnectedCluster",
         "parameters": [
           {
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Lists all provisionedClusterInstances associated with the connected cluster.",
+            "description": "Lists the ProvisionedClusterInstance resource associated with the ConnectedCluster",
             "schema": {
-              "$ref": "#/definitions/provisionedClustersListResult"
+              "$ref": "#/definitions/provisionedClusterListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -202,13 +203,14 @@
           "provisionedClusterInstances"
         ],
         "operationId": "provisionedClusterInstances_GetUpgradeProfile",
-        "summary": "Gets the upgrade profile of a provisioned cluster instance.",
+        "summary": "Gets the upgrade profile of a provisioned cluster",
+        "description": "Gets the upgrade profile of a provisioned cluster",
         "parameters": [
           {
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -221,7 +223,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -247,12 +249,13 @@
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
+            "description": "Hybrid Identity Metadata resource definition",
             "schema": {
               "$ref": "#/definitions/hybridIdentityMetadata"
             }
@@ -260,13 +263,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated the hybridIdentityMetadata resource.",
+            "description": "Updates the hybridIdentityMetadata resource.",
             "schema": {
               "$ref": "#/definitions/hybridIdentityMetadata"
             }
           },
           "201": {
-            "description": "Created the hybridIdentityMetadata resource.",
+            "description": "Creates the hybridIdentityMetadata resource.",
             "schema": {
               "$ref": "#/definitions/hybridIdentityMetadata"
             }
@@ -274,7 +277,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -293,7 +296,7 @@
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -306,7 +309,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -325,7 +328,7 @@
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-long-running-operation": true,
@@ -347,7 +350,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -371,7 +374,7 @@
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -384,7 +387,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -396,8 +399,8 @@
     "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}": {
       "get": {
         "operationId": "agentPool_Get",
-        "summary": "Gets the agent pool in the provisioned cluster instance",
-        "description": "Gets the agent pool in the Hybrid AKS provisioned cluster instance",
+        "summary": "Gets the specified agent pool in the provisioned cluster",
+        "description": "Gets the specified agent pool in the provisioned cluster",
         "x-ms-examples": {
           "GetAgentPool": {
             "$ref": "./examples/GetAgentPool.json"
@@ -411,7 +414,7 @@
             "$ref": "#/parameters/agentPoolNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -424,7 +427,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -435,8 +438,8 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "summary": "Creates the agent pool in the provisioned cluster instance",
-        "description": "Creates the agent pool in the Hybrid AKS provisioned cluster instance",
+        "summary": "Creates or updates the agent pool in the provisioned cluster",
+        "description": "Creates or updates the agent pool in the provisioned cluster",
         "x-ms-examples": {
           "PutAgentPool": {
             "$ref": "./examples/PutAgentPool.json"
@@ -450,12 +453,13 @@
             "$ref": "#/parameters/agentPoolNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "agentPool",
             "in": "body",
             "required": true,
+            "description": "Agent Pool resource definition",
             "schema": {
               "$ref": "#/definitions/agentPool"
             }
@@ -477,15 +481,15 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
         "operationId": "agentPool_Delete",
-        "summary": "Deletes the agent pool in the provisioned cluster instance",
-        "description": "Deletes the agent pool in the Hybrid AKS provisioned cluster instance",
+        "summary": "Deletes the specified agent pool in the provisioned cluster",
+        "description": "Deletes the specified agent pool in the provisioned cluster",
         "x-ms-examples": {
           "DeleteAgentPool": {
             "$ref": "./examples/DeleteAgentPool.json"
@@ -499,7 +503,7 @@
             "$ref": "#/parameters/agentPoolNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-long-running-operation": true,
@@ -521,65 +525,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "operationId": "agentPool_Update",
-        "summary": "Updates the agent pool in the provisioned cluster instance",
-        "description": "Updates the agent pool in the Hybrid AKS provisioned cluster instance",
-        "x-ms-examples": {
-          "UpdateAgentPool": {
-            "$ref": "./examples/UpdateAgentPool.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/connectedClusterResourceUriParameter"
-          },
-          {
-            "$ref": "#/parameters/agentPoolNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "agentPool",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/agentPoolPatch"
-            }
-          }
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "200": {
-            "description": "Updates the agent pool in the provisionedClusterInstances resource.",
-            "schema": {
-              "$ref": "#/definitions/agentPool"
-            }
-          },
-          "202": {
-            "description": "Updates the agent pool in the provisionedClusterInstances resource.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/agentPool"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -588,8 +534,8 @@
     "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools": {
       "get": {
         "operationId": "agentPool_ListByProvisionedCluster",
-        "summary": "Gets the agent pools in the provisioned cluster instance",
-        "description": "Gets the agent pools in the Hybrid AKS provisioned cluster instance",
+        "summary": "Gets the list of agent pools in the specified provisioned cluster",
+        "description": "Gets the list of agent pools in the specified provisioned cluster",
         "x-ms-examples": {
           "ListAgentPoolByProvisionedClusterInstance": {
             "$ref": "./examples/ListAgentPoolByProvisionedClusterInstance.json"
@@ -600,12 +546,12 @@
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Gets all the agentPools in the provisionedClusterInstances resource.",
+            "description": "Gets the list of agentPools in the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/agentPoolListResult"
             }
@@ -613,9 +559,12 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -625,11 +574,11 @@
           "provisionedClusterInstances"
         ],
         "operationId": "provisionedClusterInstances_ListUserKubeconfig",
-        "summary": "Listing the AAD user credentials of a provisioned cluster instance used only in direct mode.",
-        "description": "Lists the AAD user credentials of a provisioned cluster instance used only in direct mode.",
+        "summary": "Lists the user credentials of the provisioned cluster (can only be used within private network)",
+        "description": "Lists the user credentials of the provisioned cluster (can only be used within private network)",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
@@ -653,7 +602,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -675,11 +624,11 @@
           "provisionedClusterInstances"
         ],
         "operationId": "provisionedClusterInstances_ListAdminKubeconfig",
-        "summary": "Listing the admin credentials of a provisioned cluster instance used only in direct mode.",
-        "description": "Lists the admin credentials of a provisioned cluster instance used only in direct mode.",
+        "summary": "Lists the admin credentials of the provisioned cluster (can only be used within private network)",
+        "description": "Lists the admin credentials of the provisioned cluster (can only be used within private network)",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/connectedClusterResourceUriParameter"
@@ -703,7 +652,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -727,19 +676,19 @@
             "$ref": "./examples/GetKubernetesVersions.json"
           }
         },
-        "summary": "Gets the supported kubernetes versions",
-        "description": "Gets the supported kubernetes versions from the underlying custom location",
+        "summary": "Lists the supported kubernetes versions",
+        "description": "Lists the supported kubernetes versions for the specified custom location",
         "parameters": [
           {
             "$ref": "#/parameters/customLocationResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Gets the supported kubernetes versions from the underlying custom location",
+            "description": "Lists the supported kubernetes versions for the specified custom location",
             "schema": {
               "$ref": "#/definitions/KubernetesVersionProfile"
             }
@@ -747,7 +696,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -759,8 +708,8 @@
             "$ref": "./examples/PutKubernetesVersions.json"
           }
         },
-        "summary": "Puts the kubernetes version",
-        "description": "Puts the kubernetes version resource type",
+        "summary": "Puts the default kubernetes version resource type (one time operation, before listing the kubernetes versions)",
+        "description": "Puts the default kubernetes version resource type (one time operation, before listing the kubernetes versions)",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -770,7 +719,7 @@
             "$ref": "#/parameters/customLocationResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "kubernetesVersions",
@@ -784,13 +733,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the kubernetes version resource",
+            "description": "Updates the default kubernetes version resource",
             "schema": {
               "$ref": "#/definitions/KubernetesVersionProfile"
             }
           },
           "201": {
-            "description": "Creates the kubernetes version resource",
+            "description": "Creates the default kubernetes version resource",
             "schema": {
               "$ref": "#/definitions/KubernetesVersionProfile"
             }
@@ -798,7 +747,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -810,8 +759,8 @@
             "$ref": "./examples/DeleteKubernetesVersions.json"
           }
         },
-        "summary": "Delete the kubernetes versions",
-        "description": "Delete the kubernetes versions resource type",
+        "summary": "Deletes the default kubernetes version resource type",
+        "description": "Delete the default kubernetes versions resource type",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -821,7 +770,7 @@
             "$ref": "#/parameters/customLocationResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -839,7 +788,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -854,18 +803,18 @@
           }
         },
         "summary": "Lists the supported kubernetes versions",
-        "description": "Lists the supported kubernetes versions from the underlying custom location",
+        "description": "Lists the supported kubernetes versions for the specified custom location",
         "parameters": [
           {
             "$ref": "#/parameters/customLocationResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Lists the supported kubernetes versions from the underlying custom location",
+            "description": "Lists the supported kubernetes versions for the specified custom location",
             "schema": {
               "$ref": "#/definitions/KubernetesVersionProfileList"
             }
@@ -873,7 +822,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -890,19 +839,19 @@
             "$ref": "./examples/GetVmSkus.json"
           }
         },
-        "summary": "Gets the supported VM skus",
-        "description": "Gets the supported VM skus from the underlying custom location",
+        "summary": "Lists the supported VM skus",
+        "description": "Lists the supported VM skus for the specified custom location",
         "parameters": [
           {
             "$ref": "#/parameters/customLocationResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Gets the supported Vm Skus from the underlying appliance",
+            "description": "Lists the supported VM skus for the specified custom location",
             "schema": {
               "$ref": "#/definitions/VmSkuProfile"
             }
@@ -910,7 +859,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -922,8 +871,8 @@
             "$ref": "./examples/PutVmSkus.json"
           }
         },
-        "summary": "Puts the VM SKUs",
-        "description": "Puts the VM SKUs resource type",
+        "summary": "Puts the default VM skus resource type (one time operation, before listing the VM skus)",
+        "description": "Puts the default VM skus resource type (one time operation, before listing the VM skus)",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -933,7 +882,7 @@
             "$ref": "#/parameters/customLocationResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "skus",
@@ -947,13 +896,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the Vm Skus resource",
+            "description": "Updates the default VM skus resource",
             "schema": {
               "$ref": "#/definitions/VmSkuProfile"
             }
           },
           "201": {
-            "description": "Creates the Vm Skus resource",
+            "description": "Creates the default VM skus resource",
             "schema": {
               "$ref": "#/definitions/VmSkuProfile"
             }
@@ -961,7 +910,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -973,8 +922,8 @@
             "$ref": "./examples/DeleteVmSkus.json"
           }
         },
-        "summary": "Deletes the Vm Skus",
-        "description": "Deletes the Vm Sku resource type",
+        "summary": "Deletes the default VM skus resource type",
+        "description": "Deletes the default VM skus resource type",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -984,7 +933,7 @@
             "$ref": "#/parameters/customLocationResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1002,7 +951,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1016,19 +965,19 @@
             "$ref": "./examples/ListVmSkus.json"
           }
         },
-        "summary": "Lists the supported VM SKUs",
-        "description": "Lists the supported VM SKUs from the underlying custom location",
+        "summary": "Lists the supported VM skus",
+        "description": "Lists the supported VM skus for the specified custom location",
         "parameters": [
           {
             "$ref": "#/parameters/customLocationResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Gets the supported Vm Skus from the underlying appliance",
+            "description": "Lists the supported VM skus for the specified custom location",
             "schema": {
               "$ref": "#/definitions/VmSkuProfileList"
             }
@@ -1036,7 +985,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1048,6 +997,8 @@
     "/providers/Microsoft.HybridContainerService/operations": {
       "get": {
         "operationId": "Operations_List",
+        "description": "Lists the supported operations",
+        "summary": "Lists the supported operations",
         "x-ms-examples": {
           "ListOperations": {
             "$ref": "./examples/ListOperations.json"
@@ -1055,20 +1006,20 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1157,20 +1108,28 @@
       "type": "object",
       "properties": {
         "linuxProfile": {
-          "description": "LinuxProfile - The profile for Linux VMs in the Provisioned Cluster.",
+          "description": "The profile for Linux VMs in the provisioned cluster.",
           "$ref": "#/definitions/LinuxProfileProperties"
         },
         "controlPlane": {
-          "$ref": "#/definitions/ControlPlaneProfile",
-          "description": "ControlPlane - ControlPlane Configuration"
+          "description": "The profile for control plane of the provisioned cluster.",
+          "$ref": "#/definitions/ControlPlaneProfile"
         },
         "kubernetesVersion": {
           "type": "string",
-          "description": "KubernetesVersion - Version of Kubernetes specified when creating the managed cluster."
+          "description": "The version of Kubernetes in use by the provisioned cluster."
         },
         "networkProfile": {
-          "description": "NetworkProfile - Profile of network configuration.",
+          "description": "The network configuration profile for the provisioned cluster.",
           "$ref": "#/definitions/NetworkProfile"
+        },
+        "storageProfile": {
+          "description": "The storage configuration profile for the provisioned cluster.",
+          "$ref": "#/definitions/StorageProfile"
+        },
+        "clusterVMAccessProfile": {
+          "description": "The SSH restricted access profile for the VMs in the provisioned cluster.",
+          "$ref": "#/definitions/ClusterVMAccessProfile"
         },
         "agentPoolProfiles": {
           "type": "array",
@@ -1178,13 +1137,14 @@
             "$ref": "#/definitions/NamedAgentPoolProfile"
           },
           "x-ms-identifiers": [],
-          "description": "The agent pools of the cluster."
+          "description": "The agent pool properties for the provisioned cluster."
         },
         "cloudProviderProfile": {
-          "description": "The underlying cloud infra provider properties.",
+          "description": "The profile for the underlying cloud infrastructure provider for the provisioned cluster.",
           "$ref": "#/definitions/CloudProviderProfile"
         },
         "provisioningState": {
+          "description": "The status of the latest long running operation for the provisioned cluster.",
           "$ref": "#/definitions/ProvisioningState"
         },
         "status": {
@@ -1197,46 +1157,146 @@
                 "$ref": "#/definitions/AddonStatusProfile"
               },
               "x-ms-identifiers": [],
-              "description": "Status of the control plane components"
+              "description": "The detailed status of the provisioned cluster components including addons."
+            },
+            "currentState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The current state of the provisioned cluster."
             },
             "errorMessage": {
               "type": "string",
-              "description": "ErrorMessage - Error messages during creation of cluster"
-            },
-            "operationStatus": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "operationId": {
-                  "type": "string"
-                },
-                "status": {
-                  "type": "string"
-                }
-              },
-              "description": "Contains Provisioning errors"
+              "description": "Error messages during a provisioned cluster operation or steady state."
             }
           },
-          "description": "HybridAKSClusterStatus defines the observed state of HybridAKSCluster"
+          "description": "The observed status of the provisioned cluster."
         },
         "licenseProfile": {
           "$ref": "#/definitions/ProvisionedClusterLicenseProfile",
           "description": "The license profile of the provisioned cluster."
+        },
+        "autoScalerProfile": {
+          "type": "object",
+          "properties": {
+            "balance-similar-node-groups": {
+              "type": "string",
+              "title": "Detects similar node pools and balances the number of nodes between them.",
+              "description": "Valid values are 'true' and 'false'"
+            },
+            "expander": {
+              "type": "string",
+              "enum": [
+                "least-waste",
+                "most-pods",
+                "priority",
+                "random"
+              ],
+              "x-ms-enum": {
+                "name": "expander",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "least-waste",
+                    "description": "Selects the node group that will have the least idle CPU (if tied, unused memory) after scale-up. This is useful when you have different classes of nodes, for example, high CPU or high memory nodes, and only want to expand those when there are pending pods that need a lot of those resources."
+                  },
+                  {
+                    "value": "most-pods",
+                    "description": "Selects the node group that would be able to schedule the most pods when scaling up. This is useful when you are using nodeSelector to make sure certain pods land on certain nodes. Note that this won't cause the autoscaler to select bigger nodes vs. smaller, as it can add multiple smaller nodes at once."
+                  },
+                  {
+                    "value": "priority",
+                    "description": "Selects the node group that has the highest priority assigned by the user. It's configuration is described in more details [here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md)."
+                  },
+                  {
+                    "value": "random",
+                    "description": "Used when you don't have a particular need for the node groups to scale differently."
+                  }
+                ]
+              },
+              "title": "The expander to use when scaling up",
+              "description": "If not specified, the default is 'random'. See [expanders](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders) for more information."
+            },
+            "max-empty-bulk-delete": {
+              "type": "string",
+              "title": "The maximum number of empty nodes that can be deleted at the same time. This must be a positive integer.",
+              "description": "The default is 10."
+            },
+            "max-graceful-termination-sec": {
+              "type": "string",
+              "title": "The maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node.",
+              "description": "The default is 600."
+            },
+            "max-node-provision-time": {
+              "type": "string",
+              "title": "The maximum time the autoscaler waits for a node to be provisioned.",
+              "description": "The default is '15m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+            },
+            "max-total-unready-percentage": {
+              "type": "string",
+              "title": "The maximum percentage of unready nodes in the cluster. After this percentage is exceeded, cluster autoscaler halts operations.",
+              "description": "The default is 45. The maximum is 100 and the minimum is 0."
+            },
+            "new-pod-scale-up-delay": {
+              "type": "string",
+              "title": "Ignore unscheduled pods before they're a certain age.",
+              "description": "For scenarios like burst/batch scale where you don't want CA to act before the kubernetes scheduler could schedule all the pods, you can tell CA to ignore unscheduled pods before they're a certain age. The default is '0s'. Values must be an integer followed by a unit ('s' for seconds, 'm' for minutes, 'h' for hours, etc)."
+            },
+            "ok-total-unready-count": {
+              "type": "string",
+              "title": "The number of allowed unready nodes, irrespective of max-total-unready-percentage.",
+              "description": "This must be an integer. The default is 3."
+            },
+            "scan-interval": {
+              "type": "string",
+              "title": "How often cluster is reevaluated for scale up or down.",
+              "description": "The default is '10'. Values must be an integer number of seconds."
+            },
+            "scale-down-delay-after-add": {
+              "type": "string",
+              "title": "How long after scale up that scale down evaluation resumes",
+              "description": "The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+            },
+            "scale-down-delay-after-delete": {
+              "type": "string",
+              "title": "How long after node deletion that scale down evaluation resumes.",
+              "description": "The default is the scan-interval. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+            },
+            "scale-down-delay-after-failure": {
+              "type": "string",
+              "title": "How long after scale down failure that scale down evaluation resumes.",
+              "description": "The default is '3m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+            },
+            "scale-down-unneeded-time": {
+              "type": "string",
+              "title": "How long a node should be unneeded before it is eligible for scale down.",
+              "description": "The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+            },
+            "scale-down-unready-time": {
+              "type": "string",
+              "title": "How long an unready node should be unneeded before it is eligible for scale down",
+              "description": "The default is '20m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+            },
+            "scale-down-utilization-threshold": {
+              "type": "string",
+              "title": "Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down.",
+              "description": "The default is '0.5'."
+            },
+            "skip-nodes-with-local-storage": {
+              "type": "string",
+              "title": "If cluster autoscaler will skip deleting nodes with pods with local storage, for example, EmptyDir or HostPath.",
+              "description": "The default is true."
+            },
+            "skip-nodes-with-system-pods": {
+              "type": "string",
+              "title": "If cluster autoscaler will skip deleting nodes with pods from kube-system (except for DaemonSet or mirror pods)",
+              "description": "The default is true."
+            }
+          },
+          "description": "Parameters to be applied to the cluster-autoscaler when auto scaling is enabled for the provisioned cluster."
         }
       },
-      "description": "All properties of the provisioned cluster"
+      "description": "Properties of the provisioned cluster."
     },
-    "provisionedClusters": {
+    "provisionedCluster": {
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -1249,19 +1309,20 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
         }
       ],
-      "description": "The provisionedClusterInstances resource definition."
+      "description": "The provisioned cluster resource definition."
     },
-    "provisionedClustersListResult": {
+    "provisionedClusterListResult": {
       "type": "object",
-      "description": "A list of provisioned clusters resources.",
+      "description": "Lists the ProvisionedClusterInstance resource associated with the ConnectedCluster.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/provisionedClusters"
+            "$ref": "#/definitions/provisionedCluster"
           }
         },
         "nextLink": {
@@ -1272,55 +1333,98 @@
     },
     "AgentPoolUpdateProfile": {
       "type": "object",
-      "description": "AgentPool update configuration",
+      "description": "Profile for agent pool properties that can be updated",
       "properties": {
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "Count - Number of agents to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1.",
+          "description": "Number of nodes in the agent pool. The default value is 1.",
           "default": 1
         },
         "vmSize": {
           "type": "string",
-          "description": "VmSize - The size of the agent pool VMs."
+          "description": "The VM sku size of the agent pool node VMs."
+        },
+        "gpuCountPerNode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of GPUs attached to each node of the agent pool. The default value is 0."
+        },
+        "kubernetesVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Version of Kubernetes in use by the agent pool. This is inherited from the kubernetesVersion of the provisioned cluster."
         }
       }
     },
     "AgentPoolProfile": {
       "type": "object",
-      "description": "AgentPool configuration",
+      "description": "Profile for agent pool properties specified during creation",
       "properties": {
-        "availabilityZones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "AvailabilityZones - The list of Availability zones to use for nodes. Datacenter racks modelled as zones"
-        },
         "osType": {
           "$ref": "#/definitions/OSType"
         },
         "osSKU": {
           "$ref": "#/definitions/OSSKU"
         },
-        "nodeImageVersion": {
-          "type": "string",
-          "description": "The version of node image"
+        "nodeLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The node labels to be persisted across all nodes in agent pool."
+        },
+        "nodeTaints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of nodes for auto-scaling"
+        },
+        "minCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of nodes for auto-scaling"
+        },
+        "enableAutoScaling": {
+          "type": "boolean",
+          "description": "Whether to enable auto-scaler. Default value is false",
+          "default": false
+        },
+        "maxPods": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of pods that can run on a node."
         }
       }
     },
     "AgentPoolName": {
       "type": "object",
-      "description": "AgentPool Name",
+      "description": "Name of the default Agent Pool",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Unique name of the agent pool profile in the context of the subscription and resource group."
+          "description": "Unique name of the default agent pool in the context of the provisioned cluster. Default value is <clusterName>-nodepool1"
+        }
+      }
+    },
+    "ClusterVMAccessProfile": {
+      "type": "object",
+      "description": "The SSH restricted access profile for the VMs in the provisioned cluster.",
+      "properties": {
+        "authorizedIPRanges": {
+          "type": "string",
+          "description": "IP Address or CIDR for SSH access to VMs in the provisioned cluster"
         }
       }
     },
     "NamedAgentPoolProfile": {
-      "description": "Agent pool profile along with a name parameter",
+      "description": "Profile of the default agent pool along with a name parameter",
       "allOf": [
         {
           "x-ms-client-flatten": true,
@@ -1337,6 +1441,7 @@
       ]
     },
     "agentPoolProperties": {
+      "description": "Properties of the agent pool resource",
       "allOf": [
         {
           "x-ms-client-flatten": true,
@@ -1356,37 +1461,19 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the latest long running operation for the agent pool."
         },
         "status": {
           "type": "object",
           "properties": {
+            "currentState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The current state of the agent pool."
+            },
             "errorMessage": {
               "type": "string",
-              "description": "ErrorMessage - Error messages during creation of agent pool"
-            },
-            "operationStatus": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "operationId": {
-                  "type": "string"
-                },
-                "status": {
-                  "type": "string"
-                }
-              },
-              "description": "Contains Provisioning errors"
+              "description": "Error messages during an agent pool operation or steady state."
             },
             "readyReplicas": {
               "type": "array",
@@ -1396,7 +1483,7 @@
               "x-ms-identifiers": []
             }
           },
-          "description": "Defines the observed state of the agent pool"
+          "description": "The observed status of the agent pool."
         }
       },
       "description": "The agentPool resource provisioning status definition"
@@ -1409,58 +1496,28 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/agentPoolProperties"
         },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location"
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation"
         }
       },
-      "description": "The agentPool resource definition"
-    },
-    "agentPoolPatch": {
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
         }
-      },
-      "description": "The agentPool resource patch definition"
+      ],
+      "description": "The agentPool resource definition"
     },
     "agentPoolListResult": {
       "type": "object",
-      "description": "A list of agent pool resources.",
+      "description": "List of all agent pool resources associated with the provisioned cluster.",
       "properties": {
         "value": {
           "type": "array",
@@ -1478,7 +1535,7 @@
       "properties": {
         "azureHybridBenefit": {
           "type": "string",
-          "description": "Indicates whether Azure Hybrid Benefit is opted in",
+          "description": "Indicates whether Azure Hybrid Benefit is opted in. Default value is false",
           "enum": [
             "True",
             "False",
@@ -1495,7 +1552,7 @@
     },
     "LinuxProfile": {
       "type": "object",
-      "description": "LinuxProfile - Profile for Linux VMs in the container service cluster.",
+      "description": "The profile for Linux VMs in the provisioned cluster.",
       "properties": {
         "linuxProfile": {
           "description": "Profile for Linux VMs in the container service cluster.",
@@ -1516,40 +1573,39 @@
                 "properties": {
                   "keyData": {
                     "type": "string",
-                    "description": "KeyData - Certificate public key used to authenticate with VMs through SSH. The certificate must be in PEM format with or without headers."
+                    "description": "Certificate public key used to authenticate with VMs through SSH. The certificate must be in PEM format with or without headers."
                   }
                 }
               },
               "x-ms-identifiers": [],
-              "description": "PublicKeys - The list of SSH public keys used to authenticate with Linux-based VMs. Only expect one key specified."
+              "description": "The list of SSH public keys used to authenticate with VMs. A maximum of 1 key may be specified."
             }
           },
-          "description": "SSH - SSH configuration for Linux-based VMs running on Azure."
+          "description": "SSH configuration for VMs of the provisioned cluster."
         }
       },
-      "description": "LinuxProfile - Profile for Linux VMs in the container service cluster."
+      "description": "SSH profile for control plane and nodepool VMs of the provisioned cluster."
     },
     "NetworkProfile": {
       "type": "object",
       "properties": {
         "loadBalancerProfile": {
           "type": "object",
-          "description": "LoadBalancerProfile - Profile of the cluster load balancer.",
+          "description": "Profile of the HA Proxy load balancer.",
           "properties": {
             "count": {
               "type": "integer",
               "format": "int32",
-              "description": "Count - Number of load balancer VMs. The default value is 0.",
+              "description": "Number of HA Proxy load balancer VMs. The default value is 0.",
               "default": 0
             }
           }
         },
         "networkPolicy": {
           "type": "string",
-          "description": "NetworkPolicy - Network policy used for building Kubernetes network. Possible values include: 'calico', 'flannel'. Default is 'calico'",
+          "description": "Network policy used for building Kubernetes network. Possible values include: 'calico'.",
           "enum": [
-            "calico",
-            "flannel"
+            "calico"
           ],
           "default": "calico",
           "x-ms-enum": {
@@ -1559,57 +1615,80 @@
         },
         "podCidr": {
           "type": "string",
-          "description": "PodCidr - A CIDR notation IP range from which to assign pod IPs when kubenet is used."
+          "description": "A CIDR notation IP Address range from which to assign pod IPs."
         }
       },
-      "description": "NetworkProfile - Profile of network configuration."
+      "description": "The network configuration profile for the provisioned cluster."
     },
-    "ControlPlaneEndpointProfile": {
+    "StorageProfile": {
       "type": "object",
-      "description": "controlPlaneEndpoint - API server endpoint for the control plane",
       "properties": {
+        "smbCsiDriver": {
+          "$ref": "#/definitions/StorageProfileSmbCSIDriver",
+          "description": "SMB CSI Driver settings for the storage profile."
+        },
+        "nfsCsiDriver": {
+          "$ref": "#/definitions/StorageProfileNfsCSIDriver",
+          "description": "NFS CSI Driver settings for the storage profile."
+        }
+      },
+      "description": "The storage configuration profile for the provisioned cluster."
+    },
+    "StorageProfileNfsCSIDriver": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indicates whether to enable NFS CSI Driver. The default value is true."
+        }
+      },
+      "description": "NFS CSI Driver settings for the storage profile."
+    },
+    "StorageProfileSmbCSIDriver": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indicates whether to enable SMB CSI Driver. The default value is true."
+        }
+      },
+      "description": "SMB CSI Driver settings for the storage profile."
+    },
+    "ControlPlaneProfile": {
+      "type": "object",
+      "description": "The properties of the control plane nodes of the provisioned cluster",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of control plane nodes. The default value is 1, and the count should be an odd number",
+          "default": 1
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "VM sku size of the control plane nodes"
+        },
         "controlPlaneEndpoint": {
           "type": "object",
-          "description": "API server endpoint for the control plane",
+          "description": "IP Address of the Kubernetes API server",
           "properties": {
             "hostIP": {
               "type": "string",
-              "description": "Host IP address for API server"
-            },
-            "port": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Port for the API server"
+              "description": "IP address of the Kubernetes API server"
             }
           }
         }
       }
     },
-    "ControlPlaneProfile": {
-      "type": "object",
-      "description": "ControlPlaneProfile - The control plane properties for the provisioned cluster.",
-      "allOf": [
-        {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamedAgentPoolProfile"
-        },
-        {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ControlPlaneEndpointProfile"
-        },
-        {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LinuxProfile"
-        }
-      ]
-    },
     "CloudProviderProfile": {
       "type": "object",
-      "description": "CloudProviderProfile - The underlying cloud infra provider properties.",
+      "description": "The profile for the underlying cloud infrastructure provider for the provisioned cluster.",
       "properties": {
         "infraNetworkProfile": {
           "type": "object",
-          "description": "InfraNetworkProfile - List of infra network profiles for the provisioned cluster",
+          "description": "The profile for the infrastructure networks used by the provisioned cluster",
           "properties": {
             "vnetSubnetIds": {
               "type": "array",
@@ -1622,32 +1701,29 @@
                       "type": "Microsoft.AzureStackHCI/logicalNetworks"
                     },
                     {
-                      "type": "Microsoft.ConnectedVMwarevSphere/virtualNetworks"
-                    },
-                    {
                       "type": "Microsoft.HybridContainerService/virtualNetworks"
                     }
                   ]
                 }
               },
-              "description": "Array of references to azure resource corresponding to the Network object e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/logicalNetworks/{logicalNetworkName}"
+              "description": "List of ARM resource Ids (maximum 1) for the infrastructure network object e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/logicalNetworks/{logicalNetworkName}"
             }
           }
         }
       }
     },
     "AddonStatusProfile": {
-      "description": "Defines the addon status profile.",
+      "description": "The status profile of the addons and other kubernetes components",
       "type": "object",
       "readOnly": true,
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the addon"
+          "description": "Name of the addon or component"
         },
         "phase": {
           "type": "string",
-          "description": "Observed phase of the addon on the target cluster. Possible values include: 'pending', 'provisioning', 'provisioning {HelmChartInstalled}', 'provisioning {MSICertificateDownloaded}', 'provisioned', 'deleting', 'failed', 'upgrading'",
+          "description": "Observed phase of the addon or component on the provisioned cluster. Possible values include: 'pending', 'provisioning', 'provisioning {HelmChartInstalled}', 'provisioning {MSICertificateDownloaded}', 'provisioned', 'deleting', 'failed', 'upgrading'",
           "enum": [
             "pending",
             "provisioning",
@@ -1665,11 +1741,11 @@
         },
         "ready": {
           "type": "boolean",
-          "description": "Indicates whether the addon is ready"
+          "description": "Indicates whether the addon or component is ready"
         },
         "errorMessage": {
           "type": "string",
-          "description": "Error message while deploying the addon"
+          "description": "Observed error message from the addon or component"
         }
       }
     },
@@ -1681,7 +1757,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
           "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
         }
       ],
@@ -1692,14 +1768,14 @@
           "$ref": "#/definitions/hybridIdentityMetadataProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system data."
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
         }
       },
       "x-ms-azure-resource": true
     },
     "hybridIdentityMetadataProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Defines the resource properties for the hybrid identity metadata.",
       "type": "object",
       "properties": {
         "resourceUid": {
@@ -1707,7 +1783,7 @@
           "type": "string"
         },
         "publicKey": {
-          "description": "Onboarding public key for provisioning the Managed identity for the HybridAKS cluster.",
+          "description": "Onboarding public key for provisioning the Managed identity for the connected cluster.",
           "type": "string"
         },
         "provisioningState": {
@@ -1737,7 +1813,7 @@
     },
     "KubernetesVersionProfileList": {
       "type": "object",
-      "description": "A list of kubernetes version resources.",
+      "description": "List of supported kubernetes versions.",
       "properties": {
         "value": {
           "type": "array",
@@ -1756,7 +1832,7 @@
       "description": "The supported kubernetes versions.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
           "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
         }
       ],
@@ -1792,11 +1868,6 @@
           "description": "major.minor version of Kubernetes release",
           "readOnly": true
         },
-        "capabilities": {
-          "$ref": "#/definitions/KubernetesVersionCapabilities",
-          "description": "Capabilities on this kubernetes version",
-          "readOnly": true
-        },
         "isPreview": {
           "type": "boolean",
           "description": "Whether this version is in preview mode.",
@@ -1812,26 +1883,13 @@
         }
       }
     },
-    "KubernetesVersionCapabilities": {
-      "type": "object",
-      "description": "Capabilities on this kubernetes version",
-      "properties": {
-        "supportPlan": {
-          "type": "array",
-          "x-ms-identifiers": [],
-          "items": {
-            "$ref": "#/definitions/KubernetesSupportPlan"
-          }
-        }
-      }
-    },
     "KubernetesPatchVersions": {
       "type": "object",
       "description": "Kubernetes Patch Version profile",
       "properties": {
         "readiness": {
           "type": "array",
-          "description": "Whether the kubernetes version variant (Linux, Windows, Windows2022) is ready or not",
+          "description": "Indicates whether the kubernetes version image is ready or not",
           "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/KubernetesVersionReadiness"
@@ -1839,7 +1897,7 @@
         },
         "upgrades": {
           "type": "array",
-          "description": "Possible upgrade path for given patch version",
+          "description": "Possible upgrade paths for given patch version",
           "x-ms-identifiers": [],
           "items": {
             "type": "string"
@@ -1849,11 +1907,11 @@
     },
     "KubernetesVersionReadiness": {
       "type": "object",
-      "description": "Whether a particular kubernetes version's variant (CBLMariner, Windows, Windows2022) is ready or not ",
+      "description": "Indicates whether the kubernetes version image is ready or not",
       "properties": {
         "osType": {
           "type": "string",
-          "description": "The particular KubernetesVersion's Image's OS Type (Linux, Windows)",
+          "description": "The particular KubernetesVersion Image OS Type (Linux, Windows)",
           "readOnly": true,
           "enum": [
             "Windows",
@@ -1870,35 +1928,19 @@
         },
         "ready": {
           "type": "boolean",
-          "description": "Whether or not the given image is ready",
+          "description": "Whether the kubernetes version image is ready or not",
           "readOnly": true
         },
         "errorMessage": {
           "type": "string",
-          "description": "If image is not ready, the error message for version not being ready",
+          "description": "The error message for version not being ready",
           "readOnly": true
         }
       }
     },
-    "KubernetesSupportPlan": {
-      "type": "string",
-      "description": "Different support tiers for AKS managed clusters",
-      "enum": [
-        "KubernetesOfficial"
-      ],
-      "x-ms-enum": {
-        "name": "KubernetesSupportPlan",
-        "values": [
-          {
-            "value": "KubernetesOfficial",
-            "description": "Support for the version is the same as for the open source Kubernetes offering. Official Kubernetes open source community support versions for 1 year after release."
-          }
-        ]
-      }
-    },
     "VmSkuProfileList": {
       "type": "object",
-      "description": "A list of VM SKU resources.",
+      "description": "The list of supported VM SKUs.",
       "properties": {
         "value": {
           "type": "array",
@@ -1917,7 +1959,7 @@
       "description": "The list of supported VM SKUs.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
           "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
         }
       ],
@@ -1934,7 +1976,7 @@
             },
             "values": {
               "type": "array",
-              "description": "Array of HybridAKS Support VM Skus",
+              "description": "List of supported VM SKUs.",
               "items": {
                 "$ref": "#/definitions/VmSkuProperties"
               },
@@ -1946,18 +1988,18 @@
     },
     "VmSkuProperties": {
       "type": "object",
-      "description": "The profile for supported VM skus",
+      "description": "The profile for supported VM SKUs",
       "readOnly": true,
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "The resource type of the vm",
+          "description": "The type of resource the SKU applies to.",
           "readOnly": true
         },
         "capabilities": {
           "type": "array",
           "readOnly": true,
-          "description": "A name value pair to describe the specific vm's capability",
+          "description": "The list of name-value pairs to describe VM SKU capabilities like MemoryGB, vCPUs, etc.",
           "items": {
             "$ref": "#/definitions/VmSkuCapabilities"
           },
@@ -1966,43 +2008,43 @@
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the VM Family"
+          "description": "The name of the VM SKU"
         },
         "tier": {
           "type": "string",
           "readOnly": true,
-          "description": "The tier of the VM Family"
+          "description": "The tier of the VM SKU"
         },
         "size": {
           "type": "string",
           "readOnly": true,
-          "description": "The size of the VM Family"
+          "description": "The size of the VM SKU"
         }
       }
     },
     "VmSkuCapabilities": {
       "type": "object",
-      "description": "describes the vm sku capabilities object",
+      "description": "Describes the VM SKU capabilities like MemoryGB, vCPUs, etc.",
       "properties": {
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "An invariant to describe the feature"
+          "description": "Name of the VM SKU capability"
         },
         "value": {
           "type": "string",
           "readOnly": true,
-          "description": "An invariant if the feature is measured by quantity"
+          "description": "Value of the VM SKU capability"
         }
       }
     },
     "ExtendedLocation": {
       "type": "object",
-      "description": "Extended Location definition",
+      "description": "Extended location pointing to the underlying infrastructure",
       "properties": {
         "type": {
           "type": "string",
-          "description": "The extended location type.",
+          "description": "The extended location type. Allowed value: 'CustomLocation'",
           "enum": [
             "CustomLocation"
           ],
@@ -2013,7 +2055,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The extended location name."
+          "description": "ARM Id of the extended location."
         }
       }
     },
@@ -2025,13 +2067,12 @@
         "Succeeded",
         "Failed",
         "Canceled",
+        "Pending",
         "Creating",
         "Deleting",
         "Updating",
         "Upgrading",
-        "InProgress",
-        "Accepted",
-        "Created"
+        "Accepted"
       ],
       "x-ms-enum": {
         "modelAsString": true,
@@ -2046,11 +2087,6 @@
           "readOnly": true,
           "description": "The Kubernetes version (major.minor.patch)."
         },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Agent Pool name."
-        },
         "osType": {
           "readOnly": true,
           "$ref": "#/definitions/OSType"
@@ -2061,10 +2097,10 @@
             "$ref": "#/definitions/ProvisionedClusterPoolUpgradeProfileProperties"
           },
           "x-ms-identifiers": [],
-          "description": "List of orchestrator types and versions available for upgrade."
+          "description": "List of available kubernetes versions for upgrade."
         }
       },
-      "description": "The list of available upgrade versions."
+      "description": "The list of available kubernetes versions for upgrade."
     },
     "ProvisionedClusterPoolUpgradeProfileProperties": {
       "type": "object",
@@ -2090,20 +2126,11 @@
         },
         "controlPlaneProfile": {
           "$ref": "#/definitions/ProvisionedClusterPoolUpgradeProfile",
-          "description": "The list of available upgrade versions for the control plane."
-        },
-        "agentPoolProfiles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProvisionedClusterPoolUpgradeProfile"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of available upgrade versions for agent pools."
+          "description": "The list of available kubernetes version upgrades for the control plane."
         }
       },
       "required": [
-        "controlPlaneProfile",
-        "agentPoolProfiles"
+        "controlPlaneProfile"
       ],
       "description": "Control plane and agent pool upgrade profiles."
     },
@@ -2111,7 +2138,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
           "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
         }
       ],
@@ -2125,11 +2152,11 @@
       "required": [
         "properties"
       ],
-      "description": "The list of available upgrades for compute pools."
+      "description": "The list of available kubernetes version upgrades for the provisioned cluster."
     },
     "OSType": {
       "type": "string",
-      "description": "OsType - OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux. Possible values include: 'Linux', 'Windows'",
+      "description": "OSType to be used to specify OS type for the VMs. Choose from Linux and Windows. Default to Linux. Possible values include: 'Linux', 'Windows'",
       "enum": [
         "Linux",
         "Windows"
@@ -2171,13 +2198,13 @@
   "parameters": {
     "agentPoolNameParameter": {
       "name": "agentPoolName",
-      "description": "Parameter for the name of the agent pool in the provisioned cluster",
+      "description": "Parameter for the name of the agent pool in the provisioned cluster.",
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "pattern": "^[a-z][a-z0-9]{2,11}$",
       "x-ms-parameter-location": "method",
-      "maxLength": 64,
+      "maxLength": 12,
       "minLength": 3
     },
     "customLocationResourceUriParameter": {
@@ -2185,7 +2212,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The fully qualified Azure Resource manager identifier of the custom location resource.",
+      "description": "The fully qualified Azure Resource Manager identifier of the custom location resource.",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
     },
@@ -2194,7 +2221,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The fully qualified Azure Resource manager identifier of the connected cluster resource.",
+      "description": "The fully qualified Azure Resource Manager identifier of the connected cluster resource.",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
     }

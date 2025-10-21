@@ -3,7 +3,7 @@
   "info": {
     "title": "HybridContainerService",
     "description": "The Microsoft.HybridContainerService Rest API spec.",
-    "version": "2023-11-15-preview"
+    "version": "2022-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworksName}": {
       "get": {
         "operationId": "virtualNetworks_Retrieve",
         "x-ms-examples": {
@@ -46,29 +46,29 @@
         "description": "Gets the Hybrid AKS virtual network",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualNetworkNameParameter"
+            "$ref": "#/parameters/virtualNetworksNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the virtualNetwork resource.",
+            "description": "Retrieves the virtualNetworks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualNetwork"
+              "$ref": "#/definitions/virtualNetworks"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -88,23 +88,23 @@
         "description": "Puts the Hybrid AKS virtual network",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualNetworkNameParameter"
+            "$ref": "#/parameters/virtualNetworksNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "virtualNetworks",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/virtualNetwork"
+              "$ref": "#/definitions/virtualNetworks"
             }
           }
         ],
@@ -112,19 +112,19 @@
           "200": {
             "description": "Updates the virtualNetworks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualNetwork"
+              "$ref": "#/definitions/virtualNetworks"
             }
           },
           "201": {
             "description": "Creates the virtualNetworks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualNetwork"
+              "$ref": "#/definitions/virtualNetworks"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -136,34 +136,25 @@
             "$ref": "./examples/DeleteVirtualNetwork.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "summary": "Deletes the virtual network",
         "description": "Deletes the Hybrid AKS virtual network",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualNetworkNameParameter"
+            "$ref": "#/parameters/virtualNetworksNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+          "200": {
+            "description": "Deletes the virtualNetworks resource."
           },
           "204": {
             "description": "No content"
@@ -171,7 +162,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -191,16 +182,16 @@
         "description": "Patches the Hybrid AKS virtual network",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualNetworkNameParameter"
+            "$ref": "#/parameters/virtualNetworksNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "virtualNetworks",
@@ -215,21 +206,19 @@
           "200": {
             "description": "Updates the virtualNetworks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualNetwork"
+              "$ref": "#/definitions/virtualNetworks"
             }
           },
           "202": {
             "description": "Updates the virtualNetworks resource.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
+            "schema": {
+              "$ref": "#/definitions/virtualNetworks"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -247,13 +236,13 @@
         "description": "Lists the Hybrid AKS virtual networks by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -266,7 +255,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -287,10 +276,10 @@
         "description": "Lists the Hybrid AKS virtual networks by subscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -303,7 +292,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -314,7 +303,7 @@
     }
   },
   "definitions": {
-    "virtualNetworkProperties": {
+    "virtualNetworksProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -338,6 +327,16 @@
                 }
               },
               "description": "Infra network profile for HCI platform"
+            },
+            "networkCloud": {
+              "type": "object",
+              "properties": {
+                "networkId": {
+                  "type": "string",
+                  "description": "The ARM ID of Network Cloud Network Resource to Associate with this VirtualNetwork"
+                }
+              },
+              "description": "Infra network profile for the NetworkCloud platform"
             },
             "vmware": {
               "type": "object",
@@ -389,6 +388,7 @@
         },
         "dhcpServers": {
           "type": "array",
+          "readOnly": true,
           "description": "Address of the DHCP servers associated with the network",
           "items": {
             "type": "string"
@@ -410,8 +410,8 @@
           "description": "IP Address Prefix of the network"
         },
         "vlanID": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
+          "readOnly": true,
           "description": "VLAN Id used by the network"
         },
         "provisioningState": {
@@ -436,7 +436,7 @@
           "type": "object",
           "readOnly": true,
           "properties": {
-            "operationStatus": {
+            "provisioningStatus": {
               "type": "object",
               "properties": {
                 "error": {
@@ -455,7 +455,7 @@
                 },
                 "phase": {
                   "type": "string",
-                  "description": "Phase represents the current phase of the virtual network provisioning. E.g. Pending, Running, Terminating, Failed etc."
+                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
                 },
                 "status": {
                   "type": "string"
@@ -469,16 +469,16 @@
       },
       "description": "HybridAKSNetworkSpec defines the desired state of HybridAKSNetwork"
     },
-    "virtualNetwork": {
+    "virtualNetworks": {
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
-          "$ref": "#/definitions/virtualNetworkProperties"
+          "$ref": "#/definitions/virtualNetworksProperties"
         },
         "systemData": {
           "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "extendedLocation": {
           "type": "object",
@@ -496,7 +496,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "The virtualNetworks resource definition."
@@ -520,7 +520,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/virtualNetwork"
+            "$ref": "#/definitions/virtualNetworks"
           }
         },
         "nextLink": {
@@ -531,13 +531,12 @@
     }
   },
   "parameters": {
-    "virtualNetworkNameParameter": {
-      "name": "virtualNetworkName",
+    "virtualNetworksNameParameter": {
+      "name": "virtualNetworksName",
       "description": "Parameter for the name of the virtual network",
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
       "minLength": 3

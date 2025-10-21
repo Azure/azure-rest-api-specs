@@ -41,8 +41,8 @@ These settings apply only when `--tag=package-preview-2025-02-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-02-01-preview'
 input-file:
-  - Microsoft.HybridContainerService/preview/2025-02-01-preview/provisionedClusterInstances.json
-  - Microsoft.HybridContainerService/preview/2025-02-01-preview/virtualNetworks.json
+  - preview/2025-02-01-preview/provisionedClusterInstances.json
+  - preview/2025-02-01-preview/virtualNetworks.json
 ```
 
 ### Tag: package-2024-01
@@ -51,8 +51,8 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.HybridContainerService/stable/2024-01-01/provisionedClusterInstances.json
-  - Microsoft.HybridContainerService/stable/2024-01-01/virtualNetworks.json
+  - stable/2024-01-01/provisionedClusterInstances.json
+  - stable/2024-01-01/virtualNetworks.json
 ```
 ### Tag: package-preview-2023-11
 
@@ -60,8 +60,8 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
-  - Microsoft.HybridContainerService/preview/2023-11-15-preview/provisionedClusterInstances.json
-  - Microsoft.HybridContainerService/preview/2023-11-15-preview/virtualNetworks.json
+  - preview/2023-11-15-preview/provisionedClusterInstances.json
+  - preview/2023-11-15-preview/virtualNetworks.json
 suppressions:
   - code: TopLevelResourcesListBySubscription
     where: $.definitions.KubernetesVersionProfile
@@ -82,9 +82,9 @@ These settings apply only when `--tag=package-preview-2022-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/provisionedClusters.json
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/storageSpaces.json
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/virtualNetworks.json
+  - preview/2022-09-01-preview/provisionedClusters.json
+  - preview/2022-09-01-preview/storageSpaces.json
+  - preview/2022-09-01-preview/virtualNetworks.json
 ```
 
 ### Tag: package-2022-05-01-preview
@@ -93,9 +93,9 @@ These settings apply only when `--tag=package-2022-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-05-01-preview'
 input-file:
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/provisionedClusters.json
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/virtualNetworks.json
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/storageSpaces.json
+  - preview/2022-05-01-preview/provisionedClusters.json
+  - preview/2022-05-01-preview/virtualNetworks.json
+  - preview/2022-05-01-preview/storageSpaces.json
 ```
 
 ---
