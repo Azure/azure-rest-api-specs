@@ -32,6 +32,10 @@ union HyperVGeneration {
   @doc("Generation 2 (V2) hypervisor")
   V2: "V2",
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Not applicable/determined by platform")
+  NA: "NA",
+
   string,
 }
 
@@ -615,18 +619,6 @@ model LogicalNetworkArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l2Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l3Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/trunkedNetworks";
     },
     {
       type: "Microsoft.AzureStackHCI/virtualNetwork/subnets";

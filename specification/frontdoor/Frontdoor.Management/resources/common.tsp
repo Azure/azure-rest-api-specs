@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../models/commonmodelslib.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -21,6 +22,10 @@ enum Versions {
   @useDependency(Microsoft.Inventory.CommonTypes.Versions.v2024_01_01)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_01_01_preview: "2024-01-01-preview",
+
+  @useDependency(Microsoft.Inventory.CommonTypes.Versions.v2025_08_01)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2025_08_01_preview: "2025-08-01-preview",
 }
 
 model LocationInstanceParameters<T extends Foundations.Resource> {
