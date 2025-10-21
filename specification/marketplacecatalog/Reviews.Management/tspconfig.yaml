@@ -10,18 +10,16 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/Reviews/{version-status}/{version}/reviews.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Search"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "Azure.Search"
+    namespace: "Azure.ResourceManager.Marketplace"
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-search"
-    namespace: "com.azure.search"
-    service-name: "Search"
-    artifact-id: "azure-search"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-marketplace"
+    namespace: "com.azure.resourcemanager.marketplace"
+    service-name: "reviews"
     flavor: azure
-    clear-output-folder: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-reviews"
     is-modular-library: true
