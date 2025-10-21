@@ -37,5 +37,5 @@ These settings apply only when `--tag=package-2025-10-17-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-10-17-preview'
 input-file:
-  - preview/2025-10-17-preview/openapi.json
+  - preview/2025-10-17-preview/scimopenapi.json
 ```
