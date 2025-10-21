@@ -5,7 +5,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AccountKeyAuthTypeWorkspaceConnectionProperties.properties.credentials.description__added` | added | `Account key object for workspace connection credential.` |
-| `definitions.ApiKeyAuthWorkspaceConnectionProperties.properties.credentials.description__added` | added | `Api key object for workspace connection credential.` |
 | `definitions.AutoMLJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
 | `definitions.CapabilityHost.description__added` | added | `Azure Resource Manager resource envelope.` |
 | `definitions.CommandJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
@@ -1236,18 +1235,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.SynapseSparkProperties__added` | added | `{"type":"object","properties":{"autoScaleProperties":{"$ref":"#/definitions/AutoScaleProperties","de...` |
-
-### Changes for `TypeSpec.Http.NoContentResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['TypeSpec.Http.NoContentResponse__added']` | added | `{"type":"object","description":"There is no content to send for this request, but the headers may be...` |
-
-### Changes for `TypeSpec.Http.OkResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['TypeSpec.Http.OkResponse__added']` | added | `{"type":"object","description":"The request has succeeded."}` |
 
 ### Changes for `VirtualMachineSchemaProperties`
 
@@ -3273,7 +3260,6 @@ which requires UsernamePassword` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.responses.201.schema.$ref` | `#/definitions/OnlineEndpointTrackedResource` | `#/definitions/OnlineEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].get.responses.200.schema.$ref` | `#/definitions/OnlineDeploymentTrackedResource` | `#/definitions/OnlineDeployment` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].get.summary` | `Get Inference Deployment Deployment.` | `Get Inference Deployment.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].patch.parameters[1].name` | `endpointName` | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].patch.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].patch.responses.200.schema.$ref` | `#/definitions/OnlineDeploymentTrackedResource` | `#/definitions/OnlineDeployment` |

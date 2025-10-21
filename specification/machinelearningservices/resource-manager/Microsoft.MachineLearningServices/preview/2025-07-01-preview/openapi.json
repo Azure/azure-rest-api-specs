@@ -9480,7 +9480,7 @@
             }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -9495,8 +9495,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.NoContentResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -43088,10 +43087,6 @@
         }
       ],
       "x-ms-discriminator-value": "TruncationSelection"
-    },
-    "TypeSpec.Http.NoContentResponse": {
-      "type": "object",
-      "description": "There is no content to send for this request, but the headers may be useful."
     },
     "UnitOfMeasure": {
       "type": "string",

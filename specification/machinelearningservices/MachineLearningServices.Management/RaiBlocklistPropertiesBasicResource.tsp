@@ -114,7 +114,7 @@ interface RaiBlocklistPropertiesBasicResources {
   deleteBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,
     string[],
-    Response = NoContentResponse
+    Response = void
   >;
 }
 

@@ -14228,7 +14228,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}": {
       "get": {
         "operationId": "OnlineDeployments_Get",
-        "summary": "Get Inference Deployment.",
+        "summary": "Get Inference Deployment Deployment.",
         "description": "Get Inference Deployment Deployment.",
         "parameters": [
           {
@@ -16489,8 +16489,7 @@
       "description": "This connection type covers the generic ApiKey auth connection categories, for examples:\nAzureOpenAI:\nCategory:= AzureOpenAI\nAuthType:= ApiKey (as type discriminator)\nCredentials:= {ApiKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\nTarget:= {ApiBase}\n\nCognitiveService:\nCategory:= CognitiveService\nAuthType:= ApiKey (as type discriminator)\nCredentials:= {SubscriptionKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\nTarget:= ServiceRegion={serviceRegion}\n\nCognitiveSearch:\nCategory:= CognitiveSearch\nAuthType:= ApiKey (as type discriminator)\nCredentials:= {Key} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\nTarget:= {Endpoint}\n\nUse Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields",
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionApiKey",
-          "description": "Api key object for workspace connection credential."
+          "$ref": "#/definitions/WorkspaceConnectionApiKey"
         }
       },
       "allOf": [
@@ -32894,14 +32893,6 @@
         }
       ],
       "x-ms-discriminator-value": "TruncationSelection"
-    },
-    "TypeSpec.Http.NoContentResponse": {
-      "type": "object",
-      "description": "There is no content to send for this request, but the headers may be useful."
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UpdateWorkspaceQuotas": {
       "type": "object",
