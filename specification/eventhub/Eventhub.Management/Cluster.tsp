@@ -86,7 +86,6 @@ interface Clusters {
   /**
    * List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
    */
-  @list
   @get
   @action("namespaces")
   listNamespaces is ArmResourceActionSync<

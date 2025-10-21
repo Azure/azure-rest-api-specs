@@ -46,7 +46,7 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets list of current NetworkSecurityPerimeterConfiguration for Namespace
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     NetworkSecurityPerimeterConfiguration,
     Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>,
     Error = ErrorResponse
