@@ -16,7 +16,6 @@ namespace Search;
 
 @doc("The currently supported API versions for the Microsoft Marketplace Discovery APIs.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2025-05-01 service API version")
   `2025-05-01`,
 }
