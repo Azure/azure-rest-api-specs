@@ -8,14 +8,14 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
-    output-file: "{azure-resource-provider-folder}/Microsoft.OnlineExperimentation/{version-status}/{version}/onlineexperimentation.json"
-    emitter-output-dir: "{project-root}/../"
+    output-file: "{version-status}/{version}/onlineexperimentation.json"
+    emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "data-plane"
     examples-dir: "{project-root}/examples"
     omit-unreachable-types: true
     emit-lro-options: "none"
   "@typespec/openapi3":
-    emitter-output-dir: "{project-root}/../"
+    emitter-output-dir: "{project-root}"
     output-file: "{output-folder-base}/data-plane/OpenApi3/Microsoft.OnlineExperimentation/preview/{version}/onlineexperimentation.json"
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azonlineexperimentation"
