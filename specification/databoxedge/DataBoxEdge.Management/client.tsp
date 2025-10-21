@@ -15,3 +15,7 @@ using Microsoft.DataBoxEdge;
   "java"
 );
 @@clientName(StorageAccountCredentialProperties.userName, "username", "java");
+@@clientName(Microsoft.DataBoxEdge,
+  "DataBoxEdgeManagementClient",
+  "javascript"
+);
