@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2022-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-12-01-preview'
 input-file:
-  - Microsoft.VoiceServices/preview/2022-12-01-preview/openapi.json
+  - preview/2022-12-01-preview/openapi.json
 ```
 
 ### Tag: package-2023-01-31
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2023-01-31` is specified on the co
 
 ```yaml $(tag) == 'package-2023-01-31'
 input-file:
-  - Microsoft.VoiceServices/stable/2023-01-31/voiceservices.json
+  - stable/2023-01-31/voiceservices.json
 ```
 
 ### Tag: package-2023-04-03
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2023-04-03` is specified on the co
 
 ```yaml $(tag) == 'package-2023-04-03'
 input-file:
-  - Microsoft.VoiceServices/stable/2023-04-03/voiceservices.json
+  - stable/2023-04-03/voiceservices.json
 ```
 
 ### Tag: package-2023-09-01
@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-09-01'
 input-file:
-  - Microsoft.VoiceServices/stable/2023-09-01/voiceservices.json
+  - stable/2023-09-01/voiceservices.json
 ```
 
 ---
