@@ -91,8 +91,8 @@ interface Volumes {
       /**
        * Optional, returns only soft deleted volumes if set to true. If set to false or if not specified, returns only active volumes.
        */
-      @removed(Versions.v2025_09_01)
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @removed(Versions.v2025_09_01)
       @header
       @clientName("accessSoftDeletedResources", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
       @removed(Versions.v2025_09_01)
