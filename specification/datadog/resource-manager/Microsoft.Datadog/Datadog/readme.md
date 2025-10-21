@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-10'
 input-file:
-- Microsoft.Datadog/stable/2023-10-20/datadog.json
+- stable/2023-10-20/datadog.json
 ```
 ### Tag: package-2023-07
 
@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-2023-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-07'
 input-file:
-- Microsoft.Datadog/stable/2023-07-07/datadog.json
+- stable/2023-07-07/datadog.json
 ```
 
 ### Tag: package-2023-01
@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-01'
 input-file:
-- Microsoft.Datadog/stable/2023-01-01/datadog.json
+- stable/2023-01-01/datadog.json
 ```
 
 ### Tag: package-2022-08
@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-2022-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-08'
 input-file:
-- Microsoft.Datadog/stable/2022-08-01/datadog.json
+- stable/2022-08-01/datadog.json
 ```
 
 ### Tag: package-2022-06
@@ -69,7 +69,7 @@ These settings apply only when `--tag=package-2022-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-06'
 input-file:
-- Microsoft.Datadog/stable/2022-06-01/datadog.json
+- stable/2022-06-01/datadog.json
 ```
 
 ### Tag: package-2021-03
@@ -78,7 +78,7 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-- Microsoft.Datadog/stable/2021-03-01/datadog.json
+- stable/2021-03-01/datadog.json
 ```
 
 ### Tag: package-2020-02-preview
@@ -87,7 +87,7 @@ These settings apply only when `--tag=package-2020-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-02-preview'
 input-file:
-- Microsoft.Datadog/preview/2020-02-01-preview/datadog.json
+- preview/2020-02-01-preview/datadog.json
 ```
 
 # Code Generation

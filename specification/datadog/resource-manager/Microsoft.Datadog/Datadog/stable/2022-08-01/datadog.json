@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Datadog",
-    "version": "2020-02-01-preview"
+    "version": "2022-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -19,7 +19,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra ID OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -38,10 +38,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -54,7 +54,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -83,10 +83,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -106,7 +106,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -129,16 +129,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -151,7 +151,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -177,16 +177,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -199,7 +199,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -225,16 +225,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -251,7 +251,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -274,16 +274,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -296,7 +296,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -322,16 +322,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -344,7 +344,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -370,16 +370,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -392,7 +392,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -411,14 +411,14 @@
         "tags": [
           "MonitorsResource"
         ],
-        "summary": "List all operations provided by Microsoft.Datadog for the 2020-02-01-preview api version.",
+        "summary": "List all operations provided by Microsoft.Datadog for the 2022-08-01 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -431,7 +431,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -457,10 +457,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -473,7 +473,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -499,13 +499,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -518,7 +518,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -544,16 +544,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -566,7 +566,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -590,16 +590,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -625,7 +625,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -653,16 +653,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -688,7 +688,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -710,16 +710,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -735,7 +735,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -759,16 +759,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -781,7 +781,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -804,16 +804,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -826,7 +826,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -855,10 +855,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -871,7 +871,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -891,7 +891,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -912,10 +912,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -928,7 +928,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -941,7 +941,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -964,16 +964,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -986,7 +986,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1015,10 +1015,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -1031,7 +1031,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1057,7 +1057,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1082,10 +1082,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -1098,7 +1098,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1111,7 +1111,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1185,6 +1185,10 @@
         "properties": {
           "$ref": "#/definitions/DatadogAgreementProperties",
           "description": "Represents the properties of the resource."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -1238,39 +1242,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogApiKey"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
           "type": "string"
-        }
-      }
-    },
-    "ErrorResponseBody": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
-          }
-        }
-      }
-    },
-    "ResourceProviderDefaultErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody"
         }
       }
     },
@@ -1342,15 +1319,16 @@
       }
     },
     "DatadogHostListResponse": {
-      "description": "Response of a list operation.",
+      "description": "List operation response containing list of Datadog Hosts.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Results of a list operation.",
+          "description": "List operation results containing list of Datadog Hosts.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogHost"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1476,7 +1454,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1491,7 +1470,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the SKU.",
+          "description": "Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'linking'.",
           "type": "string"
         }
       }
@@ -1544,18 +1523,24 @@
       "readOnly": true
     },
     "DatadogOrganizationProperties": {
-      "description": "Datadog organization properties",
+      "description": "Specify the Datadog organization name. In the case of linking to existing organizations, Id, ApiKey, and Applicationkey is required as well.",
       "type": "object",
       "properties": {
         "name": {
           "description": "Name of the Datadog organization.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "id": {
           "description": "Id of the Datadog organization.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "linkingAuthCode": {
           "description": "The auth code used to linking to an existing datadog organization.",
@@ -1602,11 +1587,15 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "cspm": {
+          "description": "The configuration which describes the state of cloud security posture management. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
+          "type": "boolean"
         }
       }
     },
     "UserInfo": {
-      "description": "User info",
+      "description": "Includes name, email and optionally, phone number. User Information can't be null.",
       "type": "object",
       "properties": {
         "name": {
@@ -1675,7 +1664,7 @@
         "UserAssigned"
       ],
       "type": "string",
-      "description": "Identity type",
+      "description": "Specifies the identity type of the Datadog Monitor. At this time the only allowed value is 'SystemAssigned'.",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ManagedIdentityTypes"
@@ -1738,6 +1727,10 @@
         },
         "location": {
           "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -1764,6 +1757,10 @@
       "properties": {
         "monitoringStatus": {
           "$ref": "#/definitions/MonitoringStatus"
+        },
+        "cspm": {
+          "description": "The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
+          "type": "boolean"
         }
       }
     },
@@ -1844,7 +1841,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1857,7 +1855,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1873,6 +1872,10 @@
         },
         "metricRules": {
           "$ref": "#/definitions/MetricRules"
+        },
+        "automuting": {
+          "description": "Configuration to enable/disable auto-muting flag",
+          "type": "boolean"
         }
       }
     },
@@ -1898,6 +1901,10 @@
         },
         "properties": {
           "$ref": "#/definitions/MonitoringTagRulesProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -1973,6 +1980,10 @@
         },
         "properties": {
           "$ref": "#/definitions/DatadogSingleSignOnProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -1995,21 +2006,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The Microsoft Azure subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group to which the Datadog resource belongs.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "MonitorNameParameter": {
       "in": "path",
       "name": "monitorName",
