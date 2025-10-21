@@ -24,16 +24,16 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 directive:
   - suppress: SECRET_PROPERTY
     from:
-      - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2022-04-13-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2022-07-20-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2024-04-01-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2024-06-01-preview/vi.json
-      - Microsoft.VideoIndexer/preview/2024-09-23-preview/vi.json
-      - Microsoft.VideoIndexer/stable/2022-08-01/vi.json
-      - Microsoft.VideoIndexer/stable/2025-04-01/vi.json
+      - preview/2021-10-18-preview/vi.json
+      - preview/2021-10-27-preview/vi.json
+      - preview/2021-11-10-preview/vi.json
+      - preview/2022-04-13-preview/vi.json
+      - preview/2022-07-20-preview/vi.json
+      - preview/2024-04-01-preview/vi.json
+      - preview/2024-06-01-preview/vi.json
+      - preview/2024-09-23-preview/vi.json
+      - stable/2022-08-01/vi.json
+      - stable/2025-04-01/vi.json
 
     where:
       - $.definitions.AccessToken.properties.accessToken
@@ -61,7 +61,7 @@ These settings apply only when `--tag=2025-04-01` is specified on the command li
 ``` yaml $(tag) == 'package-2025-04-01'
 version-with-underscores: 2025_04_01
 input-file:
-  - Microsoft.VideoIndexer/stable/2025-04-01/vi.json
+  - stable/2025-04-01/vi.json
 ```
 
 ### Tag: package-2024-09-23-preview
@@ -71,7 +71,7 @@ These settings apply only when `--tag=2024-09-23-preview` is specified on the co
 ``` yaml $(tag) == 'package-2024-09-23-preview'
 version-with-underscores: 2024_09_23_preview
 input-file:
-  - Microsoft.VideoIndexer/preview/2024-09-23-preview/vi.json
+  - preview/2024-09-23-preview/vi.json
 ```
 
 ### Tag: package-2024-06-01-preview
@@ -81,7 +81,7 @@ These settings apply only when `--tag=2024-06-01-preview` is specified on the co
 ``` yaml $(tag) == 'package-2024-06-01-preview'
 version-with-underscores: 2024_06_01_preview
 input-file:
-  - Microsoft.VideoIndexer/preview/2024-06-01-preview/vi.json
+  - preview/2024-06-01-preview/vi.json
 ```
 
 ### Tag: package-2024-04-01-preview
@@ -91,7 +91,7 @@ These settings apply only when `--tag=2024-04-01-preview` is specified on the co
 ``` yaml $(tag) == 'package-2024-04-01-preview'
 version-with-underscores: 2024_04_01_preview
 input-file:
-  - Microsoft.VideoIndexer/preview/2024-04-01-preview/vi.json
+  - preview/2024-04-01-preview/vi.json
 ```
 
 ### Tag: package-2025-01-01
@@ -99,7 +99,7 @@ These settings apply only when `--tag=package-2025-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-01-01'
 input-file:
-  - Microsoft.VideoIndexer/stable/2025-01-01/vi.json
+  - stable/2025-01-01/vi.json
 ```
 
 ### Tag: package-2024-01
@@ -108,7 +108,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.VideoIndexer/stable/2024-01-01/vi.json
+  - stable/2024-01-01/vi.json
 ```
 ### Tag: package-2022-08-01
 
@@ -117,7 +117,7 @@ These settings apply only when `--tag=2022-08-01` is specified on the command li
 ``` yaml $(tag) == 'package-2022-08-01'
 version-with-underscores: 2022_08_01
 input-file:
-  - Microsoft.VideoIndexer/stable/2022-08-01/vi.json
+  - stable/2022-08-01/vi.json
 ```
 
 ### Tag: package-2022-07-20-preview
@@ -127,7 +127,7 @@ These settings apply only when `--tag=2022-07-20-preview` is specified on the co
 ``` yaml $(tag) == 'package-2022-07-20-preview'
 version-with-underscores: 2022_07_20_preview
 input-file:
-  - Microsoft.VideoIndexer/preview/2022-07-20-preview/vi.json
+  - preview/2022-07-20-preview/vi.json
 ```
 
 ### Tag: package-2022-04-13-preview
@@ -137,7 +137,7 @@ These settings apply only when `--tag=2022-04-13-preview` is specified on the co
 ``` yaml $(tag) == 'package-2022-04-13-preview'
 version-with-underscores: 2022_04_13_preview
 input-file:
-  - Microsoft.VideoIndexer/preview/2022-04-13-preview/vi.json
+  - preview/2022-04-13-preview/vi.json
 ```
 
 ### Tag: package-2021-11-10-preview
@@ -147,7 +147,7 @@ These settings apply only when `--tag=2021-11-10-preview` is specified on the co
 ``` yaml $(tag) == 'package-2021-11-10-preview'
 version-with-underscores: 2021_11_10_preview
 input-file:
-  - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
+  - preview/2021-11-10-preview/vi.json
 ```
 
 ### Tag: package-2021-10-27-preview
@@ -158,7 +158,7 @@ These settings apply only when `--tag=2021-10-27-preview` is specified on the co
 version: 2021-10-27-preview
 version-with-underscores: 2021_10_27_preview
 input-file:
-  - Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json
+  - preview/2021-10-27-preview/vi.json
 ```
 
 ### Tag: package-2021-10-18-preview
@@ -169,7 +169,7 @@ These settings apply only when `--tag=2021-10-18-preview` is specified on the co
 version: 2021-10-18-preview
 version-with-underscores: 2021_10_18_preview
 input-file:
-  - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
+  - preview/2021-10-18-preview/vi.json
 ```
 
 ---
