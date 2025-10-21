@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.DeviceUpdate/preview/2023-10-01-preview/deviceupdate.json
+  - preview/2023-10-01-preview/deviceupdate.json
 ```
 ### Tag: package-2020-09-01
 
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2020-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-09-01'
 input-file:
-  - Microsoft.DeviceUpdate/preview/2020-09-01/deviceupdate.json
+  - preview/2020-09-01/deviceupdate.json
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2021-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-  - Microsoft.DeviceUpdate/preview/2021-06-01-preview/deviceupdate.json
+  - preview/2021-06-01-preview/deviceupdate.json
 ```
 
 ### Tag: package-2022-07-01-preview
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2022-07-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-07-01-preview'
 input-file:
-  - Microsoft.DeviceUpdate/preview/2022-07-01-preview/deviceupdate.json
+  - preview/2022-07-01-preview/deviceupdate.json
 ```
 
 ### Tag: package-2022-10-01
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2022-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-10-01'
 input-file:
-  - Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
+  - stable/2022-10-01/deviceupdate.json
 ```
 
 ## Suppressions
@@ -82,13 +82,13 @@ directive:
     reason: The validation tools do not properly recognize 202 as a supported response code.
   - supress: R2010
     reason: Approved by SDK team.
-    from: Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
+    from: stable/2022-10-01/deviceupdate.json
   - supress: R2010
     reason: Approved by SDK team.
-    from: Microsoft.DeviceUpdate/preview/2022-07-01-preview/deviceupdate.json
+    from: preview/2022-07-01-preview/deviceupdate.json
   - supress: R2010
     reason: Approved by SDK team.
-    from: Microsoft.DeviceUpdate/preview/2021-06-01-preview/deviceupdate.json
+    from: preview/2021-06-01-preview/deviceupdate.json
 ```
 
 ---
@@ -129,7 +129,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
+  - $(this-folder)/stable/2022-10-01/deviceupdate.json
 
 ```
 
@@ -138,5 +138,5 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file:
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+#  - $(this-folder)/stable/2010-01-01/somefile.json
 ```
