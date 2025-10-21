@@ -53,6 +53,7 @@ interface RuleSets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     RuleSet,
+    OptionalRequestBody = true,
     Response = ArmResponse<RuleSet> | (ArmCreatedResponse<RuleSet> &
       ArmAsyncOperationHeader<FinalResult = RuleSet> &
       ArmLroLocationHeader<FinalResult = RuleSet>) | ErrorResponse
