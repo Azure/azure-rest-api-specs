@@ -78,26 +78,27 @@ To start, you just need to browse to the `azure-rest-api-specs` repo, select `<>
 
 ### 3. Creating a new TypeSpec project
 
-Please first review recommended folder structure detailed in [this document](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/directory-structure.md).
+Please first review recommended folder structure detailed in [this document](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md).
 
-1. Under `[reporoot]\specification`, create service folder directly.
-   - Select `(rest-api-spec repo) ARM` or `(rest-api-spec repo) Data-plane` and answer appropriate naming questions.
-   - If it's ARM service, the service folder would be `specification/{organization}/resource-manager/<RPNS>/{service}`.
-   - If it's Data Plane service, the service folder would be `specification/{organization}/data-plane/{service}`
-2. Create a new TypeSpec project based on Azure template with command:
+1. Under `[reporoot]\specifications`, create service folder directly.
+2. Create your service component folder under the service folder. For example, `Sphere.Management` or `Azure.OpenAI`.
+3. Create a new TypeSpec project based on Azure template with command:
 
     ```cli
        npx tsp init https://aka.ms/typespec/azure-init
     ```
-3. Compile the generated TypeSpec project with command:
+
+4. Select `(rest-api-spec repo) ARM` or `(rest-api-spec repo) Data-plane` and answer appropriate naming questions.
+5. Compile the generated TypeSpec project with command:
 
     ```cli
       npx tsp compile .
     ```
 
-    The generated swagger files should be correctly placed in the `{service}`folders following the naming conventions.
+    The generated swagger files should be correctly placed in `data-plane` or `resource-manager` folders following the
+     naming conventions.
 
-4. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec.
+6. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec.
 
 ### 4. Prepare and submit a Pull Request for reviewing
 
@@ -122,9 +123,11 @@ Please first review recommended folder structure detailed in [this document](htt
     - include `title` field and make sure it is descriptive and unique for each operation.
     - include `operationId`. This is used to match with declared operations in TypeSpec and correctly output in swagger.
 
-4. Add/update the `readme.md` file in the `{service}` folder to specify the version and location of the OpenAPI files. The `readme.md` is needed for both management-plane and data-plane services for REST API Docs generation.
+4. Add/update the `readme.md` file in either the 'resource-manager' or 'data-plane' folder to specify the version and
+ location of the OpenAPI files. The `readme.md` is needed for both management-plane and data-plane services for
+  REST API Docs generation.
 
-   Example:[sample-readme](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/widget/resource-manager/Microsoft.Widget/Widget/readme.md)
+   Example:[sample-readme](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/samplefiles/samplereadme.md)
 
 5. Generate swagger files:
    - sync with the target branch in the azure-rest-api-specs repo
@@ -134,9 +137,10 @@ Please first review recommended folder structure detailed in [this document](htt
       ```
 
    - in the root directory, run `npm install`
-   - in the project directory, `npx tsp compile`. This will generate swagger files under `{service}` folders.
+   - in the project directory, `npx tsp compile`. This will generate swagger files under `resource-manager` or
+    `data-plane` folders.
 
-6. Ensure all generated files under `{service}` have been added to PR.
+6. Ensure all generated files under `resource-manager` or `data-plane` have been added to PR.
 
 7. Send a pull request .
 
