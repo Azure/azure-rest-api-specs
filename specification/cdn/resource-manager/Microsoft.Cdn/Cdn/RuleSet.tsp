@@ -36,9 +36,10 @@ interface RuleSets {
    * Creates a new rule set within the specified profile.
    */
   @removed(Versions.v2025_12_01)
+  @renamedFrom(Versions.v2025_12_01, "create")
   @sharedRoute
   @put
-  create is Azure.ResourceManager.Legacy.CustomPatchAsync<
+  createV1 is Azure.ResourceManager.Legacy.CustomPatchAsync<
     RuleSet,
     PatchModel = void,
     Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>
@@ -50,7 +51,7 @@ interface RuleSets {
   @added(Versions.v2025_12_01)
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     RuleSet,
     OptionalRequestBody = true,
     Response = ArmResponse<RuleSet> | (ArmCreatedResponse<RuleSet> &
