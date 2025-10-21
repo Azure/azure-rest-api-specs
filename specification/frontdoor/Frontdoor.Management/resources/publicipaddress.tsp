@@ -2,7 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../microsoftinventory/commonmodelslib/common.tsp";
+import "../models/commonmodelslib.tsp";
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -13,6 +13,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.Frontdoor management service" })
+@versioned(Microsoft.Frontdoor.Versions)
 namespace Microsoft.Frontdoor;
 
 @parentResource(TenantLocationResource)
