@@ -350,7 +350,8 @@ union LogonType {
 @doc("The network profile of the machines in the pool.")
 model NetworkProfile {
   @doc("The subnet id on which to put all machines created in the pool.")
-  subnetId: string;
+  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  subnetId?: string;
 
   @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
