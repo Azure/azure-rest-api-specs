@@ -19,7 +19,7 @@ model SessionCodeExecutionRequest {
   @madeOptional(Versions.v2025_10_02_preview)
   code?: string;
 
-  /** Code execution timeout in seconds. */
+  /** Execution timeout in seconds. */
   timeoutInSeconds: int32;
 
   /** The maximum length of the output streams. Default value is 4096. */
