@@ -283,9 +283,9 @@ union ConversationPiiCategoriesExclude {
   @added(Versions.v2025_11_15_preview)
   CASocialInsuranceNumber: "CASocialInsuranceNumber",
 
-  /** US Medicare beneficiery ID category */
+  /** US Medicare beneficiary ID category */
   @added(Versions.v2025_11_15_preview)
-  USMedicareBeneficieryId: "USMedicareBeneficieryId",
+  USMedicareBeneficiaryId: "USMedicareBeneficiaryId",
 
   /** Github account category */
   @added(Versions.v2025_11_15_preview)
