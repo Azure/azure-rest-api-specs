@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-09-20` is specified on the co
 
 ```yaml $(tag) == 'package-2024-09-20'
 input-file:
-  - Microsoft.HealthDataAIServices/stable/2024-09-20/openapi.json
+  - stable/2024-09-20/openapi.json
 ```
 
 ---
