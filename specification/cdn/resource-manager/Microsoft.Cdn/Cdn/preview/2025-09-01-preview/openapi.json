@@ -7887,11 +7887,11 @@
         }
       },
       "put": {
-        "operationId": "RuleSets_CreateOrUpdate",
+        "operationId": "RuleSets_Create",
         "tags": [
           "RuleSets"
         ],
-        "description": "Creates or update a batch rule set within the specified profile along with the rules associate to it.",
+        "description": "Creates a new rule set within the specified profile.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -7918,15 +7918,6 @@
             "description": "Name of the rule set under the profile which is unique globally.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/RuleSet"
-            }
           }
         ],
         "responses": {
@@ -7937,19 +7928,11 @@
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Azure create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RuleSet"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -7964,11 +7947,11 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/RuleSet"
-        },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "RuleSets_Create": {
+            "$ref": "./examples/RuleSets_Create.json"
+          }
+        }
       },
       "delete": {
         "operationId": "RuleSets_Delete",
@@ -11304,75 +11287,6 @@
         }
       ],
       "x-ms-discriminator-value": "AzureFirstPartyManagedCertificate"
-    },
-    "BatchRuleProperties": {
-      "type": "object",
-      "description": "The JSON object that contains a rule with its name for batch mode operations.",
-      "properties": {
-        "ruleName": {
-          "type": "string",
-          "description": "Name of the rule.",
-          "minLength": 1,
-          "maxLength": 60,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,59}$"
-        },
-        "ruleSetName": {
-          "type": "string",
-          "description": "The name of the rule set containing the rule.",
-          "readOnly": true
-        },
-        "order": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied."
-        },
-        "conditions": {
-          "type": "array",
-          "description": "A list of conditions that must be matched for the actions to be executed",
-          "items": {
-            "$ref": "#/definitions/DeliveryRuleCondition"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "actions": {
-          "type": "array",
-          "description": "A list of actions that are executed when all the conditions of a rule are satisfied.",
-          "items": {
-            "$ref": "#/definitions/DeliveryRuleAction"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "matchProcessingBehavior": {
-          "type": "string",
-          "description": "If this rule is a match should the rules engine continue running the remaining rules or stop. If not present, defaults to Continue.",
-          "default": "Continue",
-          "enum": [
-            "Continue",
-            "Stop"
-          ],
-          "x-ms-enum": {
-            "name": "MatchProcessingBehavior",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Continue",
-                "value": "Continue"
-              },
-              {
-                "name": "Stop",
-                "value": "Stop"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "ruleName"
-      ]
     },
     "CacheBehavior": {
       "type": "string",
@@ -19901,21 +19815,6 @@
           "type": "string",
           "description": "The name of the profile which holds the rule set.",
           "readOnly": true
-        },
-        "batchMode": {
-          "type": "boolean",
-          "description": "Indicates whether rule set is in batch mode. When batch mode is enabled, rules will be processed in a batch along with the rule set.\nWhen batch mode is disabled, rules would need to be processed independently.\nThis property can only be set during rule set creation and cannot be updated later.\nFor switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.",
-          "readOnly": true
-        },
-        "rules": {
-          "type": "array",
-          "description": "A list of rules that are part of this rule set provided the rule set is in batch mode.\nThis property will be ignored if the rule set is not in batch mode.",
-          "items": {
-            "$ref": "#/definitions/BatchRuleProperties"
-          },
-          "x-ms-identifiers": [
-            "ruleName"
-          ]
         }
       },
       "allOf": [

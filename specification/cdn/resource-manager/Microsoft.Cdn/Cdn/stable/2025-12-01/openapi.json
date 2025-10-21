@@ -73,6 +73,12 @@
       "name": "Secrets"
     },
     {
+      "name": "KeyGroups"
+    },
+    {
+      "name": "DeploymentVersions"
+    },
+    {
       "name": "Endpoints"
     },
     {
@@ -86,6 +92,9 @@
     },
     {
       "name": "CdnWebApplicationFirewallPolicies"
+    },
+    {
+      "name": "KnowledgeSources"
     }
   ],
   "paths": {
@@ -2896,6 +2905,323 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions": {
+      "get": {
+        "operationId": "DeploymentVersions_ListByProfile",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Lists existing deployment versions by profile",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_ListByProfile": {
+            "$ref": "./examples/DeploymentVersions_ListByProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}": {
+      "get": {
+        "operationId": "DeploymentVersions_Get",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Get an existing DeploymentVersion with the specified version name under the specified subscription, resource group and profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Name of the DeploymentVersion under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_Get": {
+            "$ref": "./examples/DeploymentVersions_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeploymentVersions_Update",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Update an existing DeploymentVersion within a profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Name of the DeploymentVersion under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "deploymentVersionUpdateProperties",
+            "in": "body",
+            "description": "Deployment version properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_Update": {
+            "$ref": "./examples/DeploymentVersions_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}/approve": {
+      "post": {
+        "operationId": "DeploymentVersions_Approve",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Approve the deployment of the version",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Name of the DeploymentVersion under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersion"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_Approve": {
+            "$ref": "./examples/DeploymentVersions_Approve.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}/compare": {
+      "post": {
+        "operationId": "DeploymentVersions_Compare",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Compare the deployment version to another deployment version",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Name of the DeploymentVersion under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "compareDeploymentVersionsParameter",
+            "in": "body",
+            "description": "The deployment version to be compared to",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompareDeploymentVersionsParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CompareDeploymentVersionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_Compare": {
+            "$ref": "./examples/DeploymentVersions_Compare.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints": {
@@ -5761,6 +6087,361 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups": {
+      "get": {
+        "operationId": "KeyGroups_ListByProfile",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Lists existing AzureFrontDoor KeyGroups.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_ListByProfile": {
+            "$ref": "./examples/KeyGroups_ListByProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}": {
+      "get": {
+        "operationId": "KeyGroups_Get",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Gets an existing KeyGroup within a profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupName",
+            "in": "path",
+            "description": "Name of the KeyGroup under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Get": {
+            "$ref": "./examples/KeyGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "KeyGroups_CreateUpdate",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Creates or updates a new KeyGroup within the specified profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupName",
+            "in": "path",
+            "description": "Name of the KeyGroup under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroup",
+            "in": "body",
+            "description": "The KeyGroup properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'KeyGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'KeyGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Create": {
+            "$ref": "./examples/KeyGroups_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "KeyGroups_Update",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Updates an existing KeyGroup within the specified profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupName",
+            "in": "path",
+            "description": "Name of the KeyGroup under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupUpdateProperties",
+            "in": "body",
+            "description": "The KeyGroup properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyGroupUpdatePropertiesParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Update": {
+            "$ref": "./examples/KeyGroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "KeyGroups_Delete",
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Deletes an existing KeyGroup within profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "keyGroupName",
+            "in": "path",
+            "description": "Name of the KeyGroup under the profile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Delete": {
+            "$ref": "./examples/KeyGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationAbort": {
       "post": {
         "operationId": "Profiles_MigrationAbort",
@@ -8280,6 +8961,428 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}/knowledgeSources": {
+      "get": {
+        "operationId": "KnowledgeSources_ListByWebAgent",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Lists all knowledge sources within a web agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "webAgentName",
+            "in": "path",
+            "description": "The name of the web agent.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Knowledge Sources in a Web Agent": {
+            "$ref": "./examples/KnowledgeSourcesListByWebAgent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}/knowledgeSources/{knowledgeSourceName}": {
+      "get": {
+        "operationId": "KnowledgeSources_Get",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Gets a knowledge source with the specified name within a web agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "webAgentName",
+            "in": "path",
+            "description": "The name of the web agent.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          {
+            "name": "knowledgeSourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "KnowledgeSources_CreateOrUpdate",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Creates or updates a knowledge source with the specified name within a web agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "webAgentName",
+            "in": "path",
+            "description": "The name of the web agent.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          {
+            "name": "knowledgeSourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "knowledgeSource",
+            "in": "body",
+            "description": "Knowledge source to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'KnowledgeSource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "201": {
+            "description": "Resource 'KnowledgeSource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/KnowledgeSource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "KnowledgeSources_Update",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Updates an existing knowledge source with the specified name within a web agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "webAgentName",
+            "in": "path",
+            "description": "The name of the web agent.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          {
+            "name": "knowledgeSourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "knowledgeSourceUpdateParameters",
+            "in": "body",
+            "description": "Knowledge source parameters to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "KnowledgeSources_Delete",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Deletes a knowledge source with the specified name within a web agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "webAgentName",
+            "in": "path",
+            "description": "The name of the web agent.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          {
+            "name": "knowledgeSourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}/knowledgeSources/{knowledgeSourceName}/purge": {
+      "post": {
+        "operationId": "KnowledgeSources_Purge",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "description": "Remove the cache of a knowledge source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "webAgentName",
+            "in": "path",
+            "description": "The name of the web agent.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          {
+            "name": "knowledgeSourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Purge Knowledge Source Cache": {
+            "$ref": "./examples/KnowledgeSourcePurge.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -9221,6 +10324,27 @@
         ]
       }
     },
+    "ApprovalStatus": {
+      "type": "string",
+      "enum": [
+        "NotApproved",
+        "Approved"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApproved",
+            "value": "NotApproved"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved"
+          }
+        ]
+      }
+    },
     "AutoGeneratedDomainNameLabelScope": {
       "type": "string",
       "description": "Indicates the endpoint name reuse scope. The default value is TenantReuse.",
@@ -10021,6 +11145,36 @@
           }
         ]
       }
+    },
+    "CompareDeploymentVersionsParameter": {
+      "type": "object",
+      "description": "compare deployment versions request parameter",
+      "properties": {
+        "compareTo": {
+          "type": "string",
+          "description": "the deployment version name to be compared to"
+        }
+      },
+      "required": [
+        "compareTo"
+      ]
+    },
+    "CompareDeploymentVersionsResponse": {
+      "type": "object",
+      "description": "compare deployment versions response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The difference between two deployment versions",
+          "items": {
+            "$ref": "#/definitions/DeploymentVersionChange"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesDataItems": {
       "type": "object",
@@ -11556,6 +12710,54 @@
       ],
       "x-ms-discriminator-value": "UrlPath"
     },
+    "DeploymentRolloutStatus": {
+      "type": "string",
+      "description": "Deployment status of preview stage.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentRolloutStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
+      }
+    },
+    "DeploymentStages": {
+      "type": "object",
+      "description": "The preview and production deployment status of the deployment version under the profile",
+      "properties": {
+        "preview": {
+          "$ref": "#/definitions/DeploymentRolloutStatus",
+          "description": "Deployment status of preview stage.",
+          "readOnly": true
+        },
+        "production": {
+          "$ref": "#/definitions/DeploymentRolloutStatus",
+          "description": "Deployment status of production stage.",
+          "readOnly": true
+        }
+      }
+    },
     "DeploymentStatus": {
       "type": "string",
       "enum": [
@@ -11585,6 +12787,124 @@
             "value": "Failed"
           }
         ]
+      }
+    },
+    "DeploymentVersion": {
+      "type": "object",
+      "description": "Deployment version object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentVersionProperties",
+          "description": "The JSON object that contains the properties of the deployment version.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentVersionChange": {
+      "type": "object",
+      "description": "Deployment change under the profile",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/PreviewSupportedResourceType",
+          "description": "Resource type supported by preview."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource."
+        },
+        "resourceName": {
+          "type": "string"
+        }
+      },
+      "discriminator": "resourceType",
+      "required": [
+        "resourceType"
+      ]
+    },
+    "DeploymentVersionListResult": {
+      "type": "object",
+      "description": "The response of a DeploymentVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeploymentVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/DeploymentVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentVersionProperties": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the deployment version.",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AfdProvisioningState",
+          "description": "Provisioning status",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/DeploymentStatus",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of deployment version creation (UTC)",
+          "readOnly": true
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of deployment version approval (UTC)",
+          "readOnly": true
+        },
+        "approvalStatus": {
+          "$ref": "#/definitions/ApprovalStatus",
+          "readOnly": true
+        },
+        "stages": {
+          "$ref": "#/definitions/DeploymentStages",
+          "description": "The preview and production deployment status of the deployment version under the profile",
+          "readOnly": true
+        }
+      }
+    },
+    "DeploymentVersionUpdate": {
+      "type": "object",
+      "description": "Contains deployment version for creation or update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentVersionUpdateProperties",
+          "description": "Contains the properties of the deployment version.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeploymentVersionUpdateProperties": {
+      "type": "object",
+      "description": "Contains the properties of the deployment version.",
+      "properties": {
+        "description": {
+          "type": "string"
+        }
       }
     },
     "DestinationProtocol": {
@@ -12537,6 +13857,80 @@
         ]
       }
     },
+    "KeyGroup": {
+      "type": "object",
+      "description": "Contains a list of references of UrlSigningKey type secret objects.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KeyGroupProperties",
+          "description": "The JSON object that contains the properties of the key group to create.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "KeyGroupListResult": {
+      "type": "object",
+      "description": "The response of a KeyGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KeyGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/KeyGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KeyGroupProperties": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the key group to create.",
+      "properties": {
+        "keyReferences": {
+          "type": "array",
+          "description": "Names of UrlSigningKey type secret objects",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AfdProvisioningState",
+          "description": "Provisioning status",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/DeploymentStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "KeyGroupUpdatePropertiesParameters": {
+      "type": "object",
+      "description": "The JSON object containing properties of key group to create or update.",
+      "properties": {
+        "keyReferences": {
+          "type": "array",
+          "description": "Names of UrlSigningKey type secret objects",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "KeyVaultCertificateSourceParameters": {
       "type": "object",
       "description": "Describes the parameters for using a user's KeyVault certificate for securing custom domain.",
@@ -12636,6 +14030,205 @@
             "value": "KeyVaultSigningKeyParameters"
           }
         ]
+      }
+    },
+    "KnowledgeSource": {
+      "type": "object",
+      "description": "Defines a knowledge source resource for a web agent.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KnowledgeSourceProperties",
+          "description": "Properties of the knowledge source.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "KnowledgeSourceList": {
+      "type": "object",
+      "description": "Defines a list of knowledge sources. It contains a list of KnowledgeSource objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KnowledgeSource items on this page",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KnowledgeSourceProperties": {
+      "type": "object",
+      "description": "Defines properties of a knowledge source.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the knowledge source."
+        },
+        "sourceType": {
+          "$ref": "#/definitions/KnowledgeSourceType",
+          "description": "Format or origin of the knowledge source."
+        },
+        "url": {
+          "type": "string",
+          "description": "Endpoint or location of the knowledge source."
+        },
+        "updateFrequency": {
+          "$ref": "#/definitions/KnowledgeSourceUpdateFrequency",
+          "description": "Specifies the units of time for scheduling update intervals for the knowledge source."
+        },
+        "lastRefreshedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the knowledge source was updated.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/KnowledgeSourceProvisioningState",
+          "description": "Provisioning status of the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceType",
+        "url"
+      ]
+    },
+    "KnowledgeSourcePropertiesUpdateParameters": {
+      "type": "object",
+      "description": "Defines properties of a knowledge source that can be updated.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the knowledge source."
+        },
+        "url": {
+          "type": "string",
+          "description": "Endpoint or location of the knowledge source."
+        },
+        "updateFrequency": {
+          "$ref": "#/definitions/KnowledgeSourceUpdateFrequency",
+          "description": "Specifies the units of time for scheduling update intervals for the knowledge source."
+        }
+      }
+    },
+    "KnowledgeSourceProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the knowledge source.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceType": {
+      "type": "string",
+      "description": "Format or origin of the knowledge source.",
+      "enum": [
+        "SchemaOrgMarkup",
+        "RssFeeds",
+        "Sitemap"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SchemaOrgMarkup",
+            "value": "SchemaOrgMarkup"
+          },
+          {
+            "name": "RssFeeds",
+            "value": "RssFeeds"
+          },
+          {
+            "name": "Sitemap",
+            "value": "Sitemap"
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceUpdateFrequency": {
+      "type": "string",
+      "description": "Specifies the units of time for scheduling update intervals for the knowledge source.",
+      "enum": [
+        "EverySixHours",
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceUpdateFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EverySixHours",
+            "value": "EverySixHours"
+          },
+          {
+            "name": "Daily",
+            "value": "Daily"
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly"
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly"
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceUpdateParameters": {
+      "type": "object",
+      "description": "Properties required to update a knowledge source.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KnowledgeSourcePropertiesUpdateParameters",
+          "description": "Properties of the knowledge source to be updated.",
+          "x-ms-client-flatten": true
+        }
       }
     },
     "LoadBalancingSettingsParameters": {
@@ -14331,6 +15924,48 @@
           {
             "name": "RegEx",
             "value": "RegEx"
+          }
+        ]
+      }
+    },
+    "PreviewSupportedResourceType": {
+      "type": "string",
+      "description": "Resource type supported by preview.",
+      "enum": [
+        "Microsoft.Cdn/profiles/afdEndpoints/routes",
+        "Microsoft.Cdn/profiles/originGroups",
+        "Microsoft.Cdn/profiles/originGroups/origins",
+        "Microsoft.Cdn/profiles/ruleSets",
+        "Microsoft.Cdn/profiles/ruleSets/rules",
+        "Microsoft.Cdn/profiles/securityPolicies"
+      ],
+      "x-ms-enum": {
+        "name": "PreviewSupportedResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.Cdn/profiles/afdEndpoints/route",
+            "value": "Microsoft.Cdn/profiles/afdEndpoints/routes"
+          },
+          {
+            "name": "Microsoft.Cdn/profiles/originGroups",
+            "value": "Microsoft.Cdn/profiles/originGroups"
+          },
+          {
+            "name": "Microsoft.Cdn/profiles/originGroups/origins",
+            "value": "Microsoft.Cdn/profiles/originGroups/origins"
+          },
+          {
+            "name": "Microsoft.Cdn/profiles/ruleSets",
+            "value": "Microsoft.Cdn/profiles/ruleSets"
+          },
+          {
+            "name": "Microsoft.Cdn/profiles/ruleSets/rules",
+            "value": "Microsoft.Cdn/profiles/ruleSets/rules"
+          },
+          {
+            "name": "Microsoft.Cdn/profiles/securityPolicies",
+            "value": "Microsoft.Cdn/profiles/securityPolicies"
           }
         ]
       }
