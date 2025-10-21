@@ -212,7 +212,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Node.js
-
-See configuration in [readme.nodejs.md](./readme.nodejs.md)
