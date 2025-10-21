@@ -19,7 +19,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.EventHubs"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-eventhub"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-eventhub"
     namespace: "azure.mgmt.eventhub"
     generate-test: true
     generate-sample: true
@@ -30,7 +30,7 @@ options:
     service-name: "EventHub" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-eventhub"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-eventhub"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
