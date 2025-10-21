@@ -20,15 +20,17 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-# Resource Provider (RP) index - resource-manager
+### Resource Provider (RP) index
 
 > This readme is used by RPSaaS / ARM schema validation. It should enumerate every swagger file
-> that makes up this Resource Provider (operations + all service swagger files). 
-> IMPORTANT: do NOT use this readme as the AutoRest "default" SDK readme for a single package.
+> that makes up this Resource Provider. 
+> IMPORTANT: Do NOT use this readme as the AutoRest "default" SDK readme for a single package.
 > SDK generation is done from the per-service readme.md files under each <ServiceName>/ folder.
 
-## Input
-# List all swagger files across the RP here (operations + services)
+### Input
+
+List all swagger files across the RP.
+
 ```yaml
 input-file:
 - Microsoft.EntraidGovernance/preview/2025-06-13-preview/openapi.json
