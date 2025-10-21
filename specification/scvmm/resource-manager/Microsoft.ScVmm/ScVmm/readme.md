@@ -40,7 +40,7 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-03'
 input-file:
-  - Microsoft.ScVmm/stable/2025-03-13/scvmm.json
+  - stable/2025-03-13/scvmm.json
 ```
 ### Tag: package-2024-06
 
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2024-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-06'
 input-file:
-  - Microsoft.ScVmm/stable/2024-06-01/scvmm.json
+  - stable/2024-06-01/scvmm.json
 ```
 ### Tag: package-2023-10
 
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-10'
 input-file:
-  - Microsoft.ScVmm/stable/2023-10-07/scvmm.json
+  - stable/2023-10-07/scvmm.json
 ```
 ### Tag: package-preview-2023-04
 
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - Microsoft.ScVmm/preview/2023-04-01-preview/scvmm.json
+  - preview/2023-04-01-preview/scvmm.json
 suppressions:
   - code: ArmResourcePropertiesBag
     reason: MachineExtensionProperties is not patched our RP, it is patched by the Hybrid Compute RP. This is on a depreciation path anyways. VirtualMachines/* RTs will be removed from the next API version, we would be using VirtualMachineInstances/* instead.
@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2020-06-05-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-06-05-preview'
 input-file:
-  - Microsoft.ScVmm/preview/2020-06-05-preview/scvmm.json
+  - preview/2020-06-05-preview/scvmm.json
 ```
 
 ### Tag: package-2022-05-21-preview
@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-2022-05-21-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-05-21-preview'
 input-file:
-  - Microsoft.ScVmm/preview/2022-05-21-preview/scvmm.json
+  - preview/2022-05-21-preview/scvmm.json
 ```
 
 ---
