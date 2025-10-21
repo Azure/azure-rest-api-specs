@@ -159,7 +159,36 @@ The [`specification/common-types`] directory serves a special purpose in the rep
 - Provides standardized definitions for common Azure patterns
 
 **Important limitations:**
-If you need to share definitions beyond those available in [`specification/common-types`], you must duplicate them in each service's own folder. This requirement exists because each service must maintain independent control over the versioning lifecycle of any shared definitions they use.
+When you need to share definitions beyond those available in [`specification/common-types`], you must duplicate them in each service's own folder. This requirement ensures that each service maintains independent control over the versioning lifecycle of shared definitions.
+
+**Best practice for managing shared definitions:**
+To minimize the maintenance burden of duplicate copies, service teams can implement a shared ownership pattern:
+
+1. **Designate an owner service** - The service that creates or updates the shared models becomes the owner.
+2. **Create a `sharable/` folder** - The owner service creates this folder to make definitions available for copying.
+3. **Use `copyFrom*Sharable` folders** - Other services create these folders to indicate copied content that should not be edited directly.
+
+**Example structure:**
+
+```diff
+specification/compute/resource-manager/Microsoft.Compute/
+├── ComputeRP
++│   ├── sharable/
+│   ├── *.tsp
+│   ├── main.tsp
+│   ├── tspconfig.yaml
+│   ├── readme.md
+│   ├── preview/
+│   └── stable/
+├── RecommenderRP
++    ├── copyFromComputeSharable
+    ├── *.tsp
+    ├── main.tsp
+    ├── tspconfig.yaml
+    ├── readme.md
+    ├── preview/
+    └── stable/
+```
 
 ## Naming guidelines for `specification` folder contents
 
