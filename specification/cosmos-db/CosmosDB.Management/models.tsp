@@ -8613,7 +8613,8 @@ model ContinuousModeProperties {
 /**
  * A base CosmosDB data source/sink
  */
-model BaseCosmosDataTransferDataSourceSink is DataTransferDataSourceSink {
+@discriminator("component")
+model BaseCosmosDataTransferDataSourceSink extends DataTransferDataSourceSink {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   remoteAccountName?: string;
 }
