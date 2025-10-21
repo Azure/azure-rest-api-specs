@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-2023-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-01-01'
 input-file:
-  - Microsoft.StorageActions/stable/2023-01-01/storageactions.json
+  - stable/2023-01-01/storageactions.json
 ```
 
 ---
