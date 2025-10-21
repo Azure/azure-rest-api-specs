@@ -43,7 +43,8 @@ interface DiskAccesses {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     DiskAccess,
-    Response = ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskAccess> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot _: DiskAccess;
     })
   >;
@@ -56,7 +57,8 @@ interface DiskAccesses {
   update is ComputeCustomPatchAsync<
     DiskAccess,
     DiskAccessUpdate,
-    Response = ArmResponse<DiskAccess> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<DiskAccess> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskAccess> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot _: DiskAccess;
     })
   >;
