@@ -2238,12 +2238,6 @@ model ApplicationGroupProperties {
   showInFeed?: boolean;
 
   /**
-   * Tenant that the resource is being requested on behalf of.
-   */
-  @added(Versions.v2025_08_01_preview)
-  oboTenantId?: string;
-
-  /**
    * DeploymentScope type for ApplicationGroup.
    */
   @visibility(Lifecycle.Read)
@@ -2993,12 +2987,6 @@ model WorkspaceProperties {
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
-
-  /**
-   * Tenant that the resource is being requested on behalf of.
-   */
-  @added(Versions.v2025_08_01_preview)
-  oboTenantId?: string;
 
   /**
    * DeploymentScope type for Workspace.
