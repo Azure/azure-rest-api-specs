@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-flexibleserver-2025-08-01` is spec
 
 ``` yaml $(tag) == 'package-flexibleserver-2025-08-01'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/openapi.json
+  - Microsoft.DBforPostgreSQL/stable/2025-08-01/openapi.json
 suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: AdministratorsMicrosoftEntra.json
