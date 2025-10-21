@@ -39,9 +39,6 @@
   },
   "tags": [
     {
-      "name": "EdgeActionOperations"
-    },
-    {
       "name": "EdgeActions"
     },
     {
@@ -52,45 +49,6 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/edgeActionOperations": {
-      "get": {
-        "operationId": "EdgeActionOperations_ListBySubscription",
-        "tags": [
-          "EdgeActionOperations"
-        ],
-        "description": "List EdgeActionOperation resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeActionOperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.ResourceManager.ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List EdgeActionOperations by Subscription": {
-            "$ref": "./examples/EdgeActionOperations_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/edgeActions": {
       "get": {
         "operationId": "EdgeActions_ListBySubscription",
@@ -223,96 +181,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActionOperations": {
-      "get": {
-        "operationId": "EdgeActionOperations_ListByResourceGroup",
-        "tags": [
-          "EdgeActionOperations"
-        ],
-        "description": "List EdgeActionOperation resources by resource group",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceGroupParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeActionOperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.ResourceManager.ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List EdgeActionOperations by ResourceGroup": {
-            "$ref": "./examples/EdgeActionOperations_ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActionOperations/{operationId}": {
-      "get": {
-        "operationId": "EdgeActionOperations_Get",
-        "tags": [
-          "EdgeActionOperations"
-        ],
-        "description": "Get a EdgeActionOperation",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceGroupParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation id",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "[a-zA-Z0-9]+"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeActionOperation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.ResourceManager.ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get EdgeActionOperation": {
-            "$ref": "./examples/EdgeActionOperations_Get.json"
-          }
         }
       }
     },
@@ -1709,9 +1577,236 @@
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
       "properties": {
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ErrorDetail",
           "description": "The error object."
         }
+      }
+    },
+    "Azure.ResourceManager.Foundations.AzureEntityResource": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "etag"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.Foundations.ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Azure.ResourceManager.Foundations.ErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/Azure.ResourceManager.Foundations.ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.ExtensionResource": {
+      "type": "object",
+      "description": "The base extension resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.Foundations.ProxyResource": {
+      "type": "object",
+      "description": "The base proxy resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.Foundations.Resource": {
+      "type": "object",
+      "description": "Common properties for all Azure Resource Manager resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SystemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.createdByType",
+          "description": "The type of identity that created the resource.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The type of identity that created the resource.",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource.",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.createdByType",
+          "description": "The type of identity that last modified the resource.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.TrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.Foundations.createdByType": {
+      "type": "string",
+      "description": "The kind of entity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "createdByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The entity was created by a user."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "The entity was created by an application."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "The entity was created by a managed identity."
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "The entity was created by a key."
+          }
+        ]
       }
     },
     "Azure.ResourceManager.PrivateEndpoint": {
@@ -1743,7 +1838,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ProxyResource"
         }
       ]
     },
@@ -1858,7 +1953,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ProxyResource"
         }
       ]
     },
@@ -1929,7 +2024,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.TrackedResource"
         }
       ]
     },
@@ -1985,7 +2080,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.TrackedResource"
         }
       ]
     },
@@ -2141,88 +2236,6 @@
         "value"
       ]
     },
-    "EdgeActionOperation": {
-      "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EdgeActionOperationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "EdgeActionOperationListResult": {
-      "type": "object",
-      "description": "The response of a EdgeActionOperation list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EdgeActionOperation items on this page",
-          "items": {
-            "$ref": "#/definitions/EdgeActionOperation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "EdgeActionOperationProperties": {
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The resource id of the operation."
-        },
-        "operationId": {
-          "type": "string",
-          "description": "The GUID representing operationID."
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus",
-          "description": "The current status of the operation."
-        },
-        "operationType": {
-          "type": "string",
-          "description": "The operation type."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the operation (if completed)."
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorDetails",
-          "description": "Error details, if applicable."
-        }
-      },
-      "required": [
-        "resourceId",
-        "operationId",
-        "status",
-        "operationType"
-      ]
-    },
     "EdgeActionProperties": {
       "type": "object",
       "description": "Represents an edge action properties",
@@ -2278,7 +2291,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.TrackedResource"
         }
       ]
     },
@@ -2427,36 +2440,6 @@
     },
     "EmptyBody": {
       "type": "object"
-    },
-    "ErrorDetails": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed error message."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "OperationStatus": {
-      "type": "string",
-      "enum": [
-        "Running",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatus",
-        "modelAsString": true
-      }
     },
     "ProvisioningState": {
       "type": "string",

@@ -61,35 +61,36 @@ model EdgeActionExecutionFilter
   name: smallString;
 }
 
-model EdgeActionOperation is ProxyResource<EdgeActionOperationProperties> {
-  @path
-  @doc("The operation id")
-  @segment("edgeActionOperations")
-  @key("operationId")
-  @visibility("read")
-  name: smallString;
-}
+// REMOVED: EdgeActionOperation model and EdgeActionOperations interface - not in 2024-07-22-preview baseline
+// model EdgeActionOperation is ProxyResource<EdgeActionOperationProperties> {
+//   @path
+//   @doc("The operation id")
+//   @segment("edgeActionOperations")
+//   @key("operationId")
+//   @visibility("read")
+//   name: smallString;
+// }
 
-@armResourceOperations
-interface EdgeActionOperations {
-  @Autorest.example(
-    "./examples/EdgeActionOperations_Get.json",
-    "Get EdgeActionOperation"
-  )
-  get is ArmResourceRead<EdgeActionOperation>;
+// @armResourceOperations
+// interface EdgeActionOperations {
+//   @Autorest.example(
+//     "./examples/EdgeActionOperations_Get.json",
+//     "Get EdgeActionOperation"
+//   )
+//   get is ArmResourceRead<EdgeActionOperation>;
 
-  @Autorest.example(
-    "./examples/EdgeActionOperations_ListByResourceGroup.json",
-    "List EdgeActionOperations by ResourceGroup"
-  )
-  listByResourceGroup is ArmResourceListByParent<EdgeActionOperation>;
+//   @Autorest.example(
+//     "./examples/EdgeActionOperations_ListByResourceGroup.json",
+//     "List EdgeActionOperations by ResourceGroup"
+//   )
+//   listByResourceGroup is ArmResourceListByParent<EdgeActionOperation>;
 
-  @Autorest.example(
-    "./examples/EdgeActionOperations_ListBySubscription.json",
-    "List EdgeActionOperations by Subscription"
-  )
-  listBySubscription is ArmListBySubscription<EdgeActionOperation>;
-}
+//   @Autorest.example(
+//     "./examples/EdgeActionOperations_ListBySubscription.json",
+//     "List EdgeActionOperations by Subscription"
+//   )
+//   listBySubscription is ArmListBySubscription<EdgeActionOperation>;
+// }
 
 @armResourceOperations
 interface EdgeActions {
