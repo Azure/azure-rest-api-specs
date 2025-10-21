@@ -1,0 +1,3152 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "The Batch Scheduler Service",
+    "version": "2024-12-01-preview",
+    "description": "The batch service vNext scheduler service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{batchUrl}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "batchUrl",
+        "in": "path",
+        "description": "The endpoint hosting the requested resource. For example, https://{account}.{region}.batchscheduler.microsoft.com/jobs/{jobId}",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://batch.microsoft.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://batch.microsoft.com/.default": ""
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Jobs"
+    },
+    {
+      "name": "Tasks"
+    },
+    {
+      "name": "Autoscaler"
+    }
+  ],
+  "paths": {
+    "/autoscalers": {
+      "get": {
+        "operationId": "AutoscalerOperations_ListAutoscalers",
+        "tags": [
+          "Autoscaler"
+        ],
+        "summary": "Lists all of the Autoscalers that are associated with the specified Account.",
+        "description": "Resource list operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAutoscaler"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "put": {
+        "operationId": "AutoscalerOperations_AddAutoscaler",
+        "tags": [
+          "Autoscaler"
+        ],
+        "summary": "Adds an Autoscaler to the specified Account.",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "autoscaler",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscalerAddParameter"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/autoscalers/{autoscalerName}:update": {
+      "post": {
+        "operationId": "AutoscalerOperations_UpdateAutoscaler",
+        "tags": [
+          "Autoscaler"
+        ],
+        "summary": "Updates the properties of the specified Autoscaler.",
+        "description": "Resource action operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "autoscalerName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "autoscaler",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscalerUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/autoscalers/{autoscalerName}": {
+      "get": {
+        "operationId": "AutoscalerOperations_GetAutoscaler",
+        "tags": [
+          "Autoscaler"
+        ],
+        "summary": "Gets information about the specified Autoscaler.",
+        "description": "Resource read operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "autoscalerName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Autoscaler"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AutoscalerOperations_DeleteAutoscaler",
+        "tags": [
+          "Autoscaler"
+        ],
+        "summary": "Deletes an Autoscaler from the specified Account.",
+        "description": "Resource delete operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "autoscalerName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs": {
+      "get": {
+        "operationId": "JobOperations_ListJobs",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Lists all of the Jobs in the specified Account.",
+        "description": "Lists all of the Jobs in the specified Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedCloudJob"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/jobs/{jobName}": {
+      "get": {
+        "operationId": "JobOperations_GetJob",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Gets information about the specified Job.",
+        "description": "Gets information about the specified Job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudJob"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "JobOperations_AddJob",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Adds a Job to the specified Account.",
+        "description": "The Batch service supports two ways to control the work done as part of a Job. In the first approach, the user specifies a Job Manager Task. The Batch service launches this Task when it is ready to start the Job. The Job Manager Task controls all other Tasks that run under this Job, by using the Task APIs. In the second approach, the user directly controls the execution of Tasks under an active Job, by using the Task APIs. Also note: when naming Jobs, avoid including sensitive information such as user names or secret project names. This information may appear in telemetry logs accessible to Microsoft Support engineers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The ID of the Job. The ID must be unique within the Account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "job",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAddParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudJob"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "JobOperations_PatchJob",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Updates the properties of the specified Job.",
+        "description": "This replaces only the Job properties specified in the request. For example, if the Job has constraints, and a request does not specify the constraints element, then the Job keeps the existing constraints.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "name": "job",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobPatchParameter"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JobOperations_DeleteJob",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Deletes a Job.",
+        "description": "Deleting a Job also deletes all Tasks that are part of that Job, and all Job statistics. This also overrides the retention period for Task data; that is, if the Job contains Tasks which are still retained on Compute Nodes, the Batch services deletes those Tasks' working directories and all their contents.  When a Delete Job request is received, the Batch service sets the Job to the deleting state. All update operations on a Job that is in deleting state will fail with status code 409 (Conflict), with additional information indicating that the Job is being deleted",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/jobs/{jobName}:update": {
+      "post": {
+        "operationId": "JobOperations_UpdateJob",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Updates the properties of the specified Job.",
+        "description": "This fully replaces all the updatable properties of the Job. For example, if the Job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "job",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobName}:cancel": {
+      "post": {
+        "operationId": "JobOperations_CancelJob",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Cancels the specified Job, marking it as completed.",
+        "description": "When a Terminate Job request is received, the Batch service sets the Job to the terminating state. The Batch service then terminates any running Tasks associated with the Job and runs any required Job release Tasks. Then the Job moves into the completed state. If there are any Tasks in the Job in the active state, they will remain in the active state. Once a Job is terminated, new Tasks cannot be added and any remaining active Tasks will not be scheduled.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobName}:submit": {
+      "post": {
+        "operationId": "JobOperations_SubmitJob",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Submit the specified Job, marking it as running.",
+        "description": "Submit Job request is received, the Batch service sets the Job to the Running state.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobName}:addtaskcollection": {
+      "post": {
+        "operationId": "TaskOperations_AddTaskCollection",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Adds a collection of Tasks to the specified Job.",
+        "description": "Note that each Task must have a unique ID. The Batch service may not return the results for each Task in the same order the Tasks were submitted in this request. If the server times out or the connection is closed during the request, the request may have been partially or fully processed, or not at all. In such cases, the user should re-issue the request. Note that it is up to the user to correctly handle failures when re-issuing a request. For example, you should use the same Task IDs during a retry so that if the prior operation succeeded, the retry will not create extra Tasks unexpectedly. If the response contains any Tasks which failed to add, a client can retry the request. In a retry, it is most efficient to resubmit only Tasks that failed to add, and to omit Tasks that were successfully added on the first attempt. The maximum lifetime of a Task from addition to completion is 180 days. If a Task has not completed within 180 days of being added it will be terminated by the Batch service and left in whatever state it was in at that time.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the Job to which the Task collection is to be added.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "taskCollection",
+            "in": "body",
+            "description": "The Tasks to be added.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskAddCollectionParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TaskAddCollectionResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobName}/operations/{operationId}": {
+      "get": {
+        "operationId": "JobOperations_GetJobOperationStatus",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Gets status of a Job operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/CloudJob",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobName}/tasks": {
+      "get": {
+        "operationId": "TaskOperations_ListTasks",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Lists all of the Tasks that are associated with the specified Job.",
+        "description": "For multi-instance Tasks, information such as affinityId, executionInfo and nodeInfo refer to the primary Task. Use the list subtasks API to retrieve information about subtasks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedCloudTask"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/jobs/{jobName}/tasks/{taskName}": {
+      "get": {
+        "operationId": "TaskOperations_GetTask",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Gets information about the specified Task.",
+        "description": "For multi-instance Tasks, information such as affinityId, executionInfo andnodeInfo refer to the primary Task. Use the list subtasks API to retrieve information about subtasks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudTask"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "TaskOperations_AddTask",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Adds a Task to the specified Job.",
+        "description": "The maximum lifetime of a Task from addition to completion is 180 days. If a Task has not completed within 180 days of being added it will be terminated by the Batch service and left in whatever state it was in at that time.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the Job to which the Task collection is to be added.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The ID of the Task. The ID must be unique within the Job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "task",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskAddParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudTask"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TaskOperations_DeleteTask",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Deletes a Task from the specified Job.",
+        "description": "When a Task is deleted, all of the files in its directory on the Compute Node where it ran are also deleted (regardless of the retention time). For multi-instance Tasks, the delete Task operation applies synchronously to the primary task; subtasks and their files are then deleted asynchronously in the background.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/jobs/{jobName}/tasks/{taskName}:cancel": {
+      "post": {
+        "operationId": "TaskOperations_CancelTask",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Terminates the specified Task.",
+        "description": "When the Task has been terminated, it moves to the completed state. For multi-instance Tasks, the terminate Task operation applies synchronously to the primary task; subtasks are then terminated asynchronously in the background.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobName}/tasks/{taskName}:update": {
+      "post": {
+        "operationId": "TaskOperations_UpdateTask",
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Updates the properties of the specified task.",
+        "description": "This fully replaces all the updatable properties of the Task. For example, if the Task has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "job",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{jobName}/tasks/{taskName}/operations/{operationId}": {
+      "get": {
+        "operationId": "TaskOperations_GetTaskOperationStatus",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Gets status of a Task operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/CloudTask",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoUserScope": {
+      "type": "string",
+      "description": "AutoUserScope enums",
+      "enum": [
+        "task",
+        "pool"
+      ],
+      "x-ms-enum": {
+        "name": "AutoUserScope",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "task",
+            "value": "task",
+            "description": "Specifies that the service should create a new user for the Task."
+          },
+          {
+            "name": "pool",
+            "value": "pool",
+            "description": "Specifies that the Task runs as the common auto user Account which is created on every Compute Node in a Pool."
+          }
+        ]
+      }
+    },
+    "AutoUserSpecification": {
+      "type": "object",
+      "description": "Specifies the options for the auto user that runs an Azure Batch Task.",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/AutoUserScope",
+          "description": "The scope for the auto user. The default value is pool. If the pool is running Windows, a value of Task should be specified if stricter isolation between tasks is required, such as if the task mutates the registry in a way which could impact other tasks."
+        },
+        "elevationLevel": {
+          "$ref": "#/definitions/ElevationLevel",
+          "description": "The elevation level of the auto user. The default value is nonAdmin."
+        }
+      }
+    },
+    "Autoscaler": {
+      "type": "object",
+      "description": "An Azure Batch Autoscaler.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case)."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the Batch Autoscaler, like '/autoscaler/autoscalerName'."
+        },
+        "properties": {
+          "$ref": "#/definitions/AutoscalerProperties",
+          "description": "The properties of the Batch Autoscaler."
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "properties"
+      ]
+    },
+    "AutoscalerAddParameter": {
+      "type": "object",
+      "description": "An Azure Batch Autoscaler to add.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case)."
+        },
+        "scalers": {
+          "type": "array",
+          "description": "The list of pool autoscaler.",
+          "items": {
+            "$ref": "#/definitions/PoolAutoscaler"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "scalers"
+      ]
+    },
+    "AutoscalerProperties": {
+      "type": "object",
+      "description": "The properties of the Batch Autoscaler.",
+      "properties": {
+        "scalers": {
+          "type": "array",
+          "description": "The list of pool autoscaler.",
+          "items": {
+            "$ref": "#/definitions/PoolAutoscaler"
+          },
+          "x-ms-identifiers": []
+        },
+        "eTag": {
+          "type": "string",
+          "description": "This is an opaque string. You can use it to detect whether the Job has changed between requests. In particular, you can be pass the ETag when updating a Job to specify that your changes should take effect only if nobody else has modified the Job in the meantime."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the last time at which the Job level data, such as the Job state or priority, changed. It does not factor in task-level changes such as adding new Tasks or Tasks changing state."
+        }
+      },
+      "required": [
+        "scalers"
+      ]
+    },
+    "AutoscalerUpdateParameter": {
+      "type": "object",
+      "description": "The set of changes to be made to an Autoscaler.",
+      "properties": {
+        "scalers": {
+          "type": "array",
+          "description": "The list of pool autoscaler.",
+          "items": {
+            "$ref": "#/definitions/PoolAutoscaler"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "scalers"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Azure.Core.RequestIdResponseHeader": {
+      "type": "object",
+      "description": "Provides the 'x-ms-request-id' header to enable request correlation in responses."
+    },
+    "CloudJob": {
+      "type": "object",
+      "description": "An Azure Batch Job.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name is case-preserving and case-insensitive (that is, you may not have two names within an Account that differ only by case).",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9-]{1,64}$"
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID is like '/jobs/jobName'."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "Job property bag"
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "properties"
+      ]
+    },
+    "CloudTask": {
+      "type": "object",
+      "description": "Batch will retry Tasks when a recovery operation is triggered on a Node.   Examples of recovery operations include (but are not limited to) when an   unhealthy Node is rebooted or a Compute Node disappeared due to host failure.   Retries due to recovery operations are independent of and are not counted   against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal   retry due to a recovery operation may occur. Because of this, all Tasks should   be idempotent. This means Tasks need to tolerate being interrupted and   restarted without causing any corruption or duplicate data. The best practice   for long running Tasks is to use some form of checkpointing.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID is like '/jobs/jobName/tasks/taskName'."
+        },
+        "properties": {
+          "$ref": "#/definitions/TaskProperties",
+          "description": "Task property bag"
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "properties"
+      ]
+    },
+    "DependencyCondition": {
+      "type": "string",
+      "description": "The condition of the dependency.",
+      "enum": [
+        "succeeded",
+        "failed",
+        "completed",
+        "succeeded_any",
+        "failed_any",
+        "completed_any"
+      ],
+      "x-ms-enum": {
+        "name": "DependencyCondition",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "All tasks in the taskGroup are succeeded."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "All tasks in the taskGroup are failed."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "All tasks in the taskGroup are completed (succeeded or failed)."
+          },
+          {
+            "name": "succeeded_any",
+            "value": "succeeded_any",
+            "description": "Any one task in the taskGroup is succeeded."
+          },
+          {
+            "name": "failed_any",
+            "value": "failed_any",
+            "description": "Any one task in the taskGroup is failed."
+          },
+          {
+            "name": "completed_any",
+            "value": "completed_any",
+            "description": "Any one task in the taskGroup is completed (succeeded or failed)."
+          }
+        ]
+      }
+    },
+    "ElevationLevel": {
+      "type": "string",
+      "description": "ElevationLevel enums",
+      "enum": [
+        "nonAdmin",
+        "admin"
+      ],
+      "x-ms-enum": {
+        "name": "ElevationLevel",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "nonAdmin",
+            "value": "nonAdmin",
+            "description": "The user is a standard user without elevated access."
+          },
+          {
+            "name": "admin",
+            "value": "admin",
+            "description": "The user is a user with elevated access and operates with full Administrator permissions."
+          }
+        ]
+      }
+    },
+    "EnvironmentSetting": {
+      "type": "object",
+      "description": "An environment variable to be set on a Task process.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the environment variable."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the environment variable."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ErrorCategory": {
+      "type": "string",
+      "description": "ErrorCategory enums",
+      "enum": [
+        "userError",
+        "serverError"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCategory",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "userError",
+            "value": "userError",
+            "description": "The error is due to a user issue, such as misconfiguration."
+          },
+          {
+            "name": "serverError",
+            "value": "serverError",
+            "description": "The error is due to an internal server issue."
+          }
+        ]
+      }
+    },
+    "JobAddParameter": {
+      "type": "object",
+      "description": "An Azure Batch Job to add.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0."
+        },
+        "maxParallelTasks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.",
+          "default": -1
+        },
+        "jobPreparationTask": {
+          "$ref": "#/definitions/JobPreparationTask",
+          "description": "If a Job has a Job Preparation Task, the Batch service will run the Job Preparation Task on a Node before starting any Tasks of that Job on that Compute Node."
+        },
+        "jobReleaseTask": {
+          "$ref": "#/definitions/JobReleaseTask",
+          "description": "A Job Release Task cannot be specified without also specifying a Job Preparation Task for the Job. The Batch service runs the Job Release Task on the Nodes that have run the Job Preparation Task. The primary purpose of the Job Release Task is to undo changes to Compute Nodes made by the Job Preparation Task. Example activities include deleting local files, or shutting down services that were started as part of Job preparation."
+        },
+        "commonEnvironmentSettings": {
+          "type": "array",
+          "description": "Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
+          "items": {
+            "$ref": "#/definitions/EnvironmentSetting"
+          },
+          "x-ms-identifiers": []
+        },
+        "poolInfo": {
+          "$ref": "#/definitions/PoolInformation",
+          "description": "Specifies how a Job should be assigned to a Pool."
+        },
+        "metadata": {
+          "type": "array",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for theuse of user code.",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "The object specifies the task group and its dependencies",
+          "items": {
+            "$ref": "#/definitions/TaskGroupDependency"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "poolInfo"
+      ]
+    },
+    "JobPatchParameter": {
+      "type": "object",
+      "description": "The set of changes to be made to a Job.",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged."
+        },
+        "maxParallelTasks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
+        },
+        "poolInfo": {
+          "$ref": "#/definitions/PoolInformationUpdate",
+          "description": "You may change the Pool for a Job only when the Job is disabled. The Patch Job all will fail if you include the poolInfo element and the Job is not disabled. If you specify an autoPoolSpecification in the poolInfo, only the keepAlive property of the autoPoolSpecification can be updated, and then only if the autoPoolSpecification has a poolLifetimeOption of Job (other job properties can be updated as normal). If omitted, the Job continues to run on its current Pool."
+        },
+        "metadata": {
+          "type": "array",
+          "description": "If omitted, the existing Job metadata is left unchanged.",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "JobPreparationTask": {
+      "type": "object",
+      "description": "You can use Job Preparation to prepare a Node to run Tasks for the Job. Activities commonly performed in Job Preparation include: Downloading common resource files used by all the Tasks in the Job. The Job Preparation Task can download these common resource files to the shared location on the Node. (AZ_BATCH_NODE_ROOT_DIR/shared), or starting a local service on the Node so that all Tasks of that Job can communicate with it. If the Job Preparation Task fails (that is, exhausts its retry count before exiting with exit code 0), Batch will not run Tasks of this Job on the Node. The Compute Node remains ineligible to run Tasks of this Job until it is reimaged. The Compute Node remains active and can be used for other Jobs. The Job Preparation Task can run multiple times on the same Node. Therefore, you should write the Job Preparation Task to handle re-execution. If the Node is rebooted, the Job Preparation Task is run again on the Compute Node before scheduling any other Task of the Job, if rerunOnNodeRebootAfterSuccess is true or if the Job Preparation Task did not previously complete. If the Node is reimaged, the Job Preparation Task is run again before scheduling any Task of the Job. Batch will retry Tasks when a recovery operation is triggered on a Node. Examples of recovery operations include (but are not limited to) when an unhealthy Node is rebooted or a Compute Node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all Tasks should be idempotent. This means Tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running Tasks is to use some form of checkpointing.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
+        },
+        "definition": {
+          "$ref": "#/definitions/TaskDefinition",
+          "description": "The definition of the Task."
+        },
+        "constraints": {
+          "$ref": "#/definitions/TaskConstraints",
+          "description": "Execution constraints to apply to a Task."
+        },
+        "waitForSuccess": {
+          "type": "boolean",
+          "description": "If true and the Job Preparation Task fails on a Node, the Batch service retries the Job Preparation Task up to its maximum retry count (as specified in the constraints element). If the Task has still not completed successfully after all retries, then the Batch service will not schedule Tasks of the Job to the Node. The Node remains active and eligible to run Tasks of other Jobs. If false, the Batch service will not wait for the Job Preparation Task to complete. In this case, other Tasks of the Job can start executing on the Compute Node while the Job Preparation Task is still running; and even if the Job Preparation Task fails, new Tasks will continue to be scheduled on the Compute Node. The default value is true."
+        },
+        "rerunOnNodeRebootAfterSuccess": {
+          "type": "boolean",
+          "description": "The Job Preparation Task is always rerun if a Compute Node is reimaged, or if the Job Preparation Task did not complete (e.g. because the reboot occurred while the Task was running). Therefore, you should always write a Job Preparation Task to be idempotent and to behave correctly if run multiple times. The default value is true."
+        }
+      },
+      "required": [
+        "definition"
+      ]
+    },
+    "JobProperties": {
+      "type": "object",
+      "description": "The properties of an Azure Batch Job.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the Job."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the Job."
+        },
+        "state": {
+          "$ref": "#/definitions/JobState",
+          "description": "The state of the Job."
+        },
+        "stateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the Job entered its current state."
+        },
+        "previousState": {
+          "$ref": "#/definitions/JobState",
+          "description": "This property is not set if the Job is in its initial Active state."
+        },
+        "previousStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This property is not set if the Job is in its initial Active state."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0."
+        },
+        "maxParallelTasks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.",
+          "default": -1
+        },
+        "jobPreparationTask": {
+          "$ref": "#/definitions/JobPreparationTask",
+          "description": "The Job Preparation Task is a special Task run on each Compute Node before any other Task of the Job."
+        },
+        "jobReleaseTask": {
+          "$ref": "#/definitions/JobReleaseTask",
+          "description": "The Job Release Task is a special Task run at the end of the Job on each Compute Node that has run any other Task of the Job."
+        },
+        "poolInfo": {
+          "$ref": "#/definitions/PoolInformation",
+          "description": "Specifies how a Job should be assigned to the Pools."
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "The object specifies the task group and its dependencies",
+          "items": {
+            "$ref": "#/definitions/TaskGroupDependency"
+          },
+          "x-ms-identifiers": []
+        },
+        "commonEnvironmentSettings": {
+          "type": "array",
+          "description": "Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
+          "items": {
+            "$ref": "#/definitions/EnvironmentSetting"
+          },
+          "x-ms-identifiers": []
+        },
+        "metadata": {
+          "type": "array",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "eTag": {
+          "type": "string",
+          "description": "This is an opaque string. You can use it to detect whether the Job has changed between requests. In particular, you can be pass the ETag when updating a Job to specify that your changes should take effect only if nobody else has modified the Job in the meantime."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the last time at which the Job level data, such as the Job state or priority, changed. It does not factor in task-level changes such as adding new Tasks or Tasks changing state."
+        }
+      }
+    },
+    "JobReleaseTask": {
+      "type": "object",
+      "description": "The Job Release Task runs when the Job ends, because of one of the following: The user calls the Terminate Job API, or the Delete Job API while the Job is still active, the Job's maximum wall clock time constraint is reached, and the Job is still active, or the Job's Job Manager Task completed, and the Job is configured to terminate when the Job Manager completes. The Job Release Task runs on each Node where Tasks of the Job have run and the Job Preparation Task ran and completed. If you reimage a Node after it has run the Job Preparation Task, and the Job ends without any further Tasks of the Job running on that Node (and hence the Job Preparation Task does not re-run), then the Job Release Task does not run on that Compute Node. If a Node reboots while the Job Release Task is still running, the Job Release Task runs again when the Compute Node starts up. The Job is not marked as complete until all Job Release Tasks have completed. The Job Release Task runs in the background. It does not occupy a scheduling slot; that is, it does not count towards the taskSlotsPerNode limit specified on the Pool.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
+        },
+        "definition": {
+          "$ref": "#/definitions/TaskDefinition",
+          "description": "The definition of the Task."
+        },
+        "maxWallClockTime": {
+          "type": "string",
+          "format": "duration",
+          "description": "The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+        },
+        "retentionTime": {
+          "type": "string",
+          "format": "duration",
+          "description": "The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted."
+        }
+      },
+      "required": [
+        "definition"
+      ]
+    },
+    "JobState": {
+      "type": "string",
+      "description": "The state of the Job.",
+      "enum": [
+        "configurating",
+        "queued",
+        "running",
+        "failed",
+        "succeeded",
+        "cancelling",
+        "cancelled",
+        "deleting"
+      ],
+      "x-ms-enum": {
+        "name": "JobState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "configurating",
+            "value": "configurating",
+            "description": "After a job has been created and add tasks into it, then this job has been submitted to Batch."
+          },
+          {
+            "name": "queued",
+            "value": "queued",
+            "description": "Batch received the job and put its tasks into queue. In this moment, all tasks’ states are Queued state. If the user cancels the job in this state, then the job goes into CANCELLING state and then CANCELLED."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "when a task starts running, then mark this job as RUNNING state."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "When a task state changes from RUNNING to FAILED, then mark this job state to FAILED state."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "When all tasks state change from RUNNING to SUCCEED, then mark this job state to SUCCEED state."
+          },
+          {
+            "name": "cancelling",
+            "value": "cancelling",
+            "description": "The user has cancelled the Job, but the cancel operation is still in progress (for example, because Job Release Tasks are running)."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "All Tasks have cancelled, and the system will not accept any more Tasks or any further changes to the Job."
+          },
+          {
+            "name": "deleting",
+            "value": "deleting",
+            "description": "A user has requested that the Job be deleted, but the delete operation is still progress (for example, because the system is still cancelling running Tasks)."
+          }
+        ]
+      }
+    },
+    "JobUpdateParameter": {
+      "type": "object",
+      "description": "The set of changes to be made to a Job.",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, it is set to the default value 0."
+        },
+        "maxParallelTasks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.",
+          "default": -1
+        },
+        "poolInfo": {
+          "$ref": "#/definitions/PoolInformation",
+          "description": "You may change the Pool for a Job only when the Job is disabled. The Update Job call will fail if you include the poolInfo element and the Job is not disabled. If you specify an autoPoolSpecification in the poolInfo, only the keepAlive property of the autoPoolSpecification can be updated, and then only if the autoPoolSpecification has a poolLifetimeOption of Job (other job properties can be updated as normal)."
+        },
+        "metadata": {
+          "type": "array",
+          "description": "If omitted, it takes the default value of an empty list; in effect, any existing metadata is deleted.",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "poolInfo"
+      ]
+    },
+    "MetadataItem": {
+      "type": "object",
+      "description": "The Batch service does not assign any meaning to this metadata; it is solely for the use of user code.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metadata item."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the metadata item."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "NameValuePair": {
+      "type": "object",
+      "description": "Represents a name-value pair.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name in the name-value pair."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value in the name-value pair."
+        }
+      }
+    },
+    "PagedAutoscaler": {
+      "type": "object",
+      "description": "Paged collection of Autoscaler items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Autoscaler items on this page",
+          "items": {
+            "$ref": "#/definitions/Autoscaler"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedCloudJob": {
+      "type": "object",
+      "description": "Paged collection of CloudJob items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudJob items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedCloudTask": {
+      "type": "object",
+      "description": "Paged collection of CloudTask items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudTask items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudTask"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PoolAutoscaler": {
+      "type": "object",
+      "description": "The individual pool autoscaler. The pool autoscaler is responsible for scaling a single pool.",
+      "properties": {
+        "poolId": {
+          "type": "string",
+          "description": "The ID of the pool to autoscale."
+        },
+        "minNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of compute nodes to allocate for the pool."
+        },
+        "maxNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of compute nodes to allocate for the pool."
+        },
+        "nodeIdleTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If a node is idle for a certain time (number in seconds), ABS will drain it and tell RM to deallocate it."
+        }
+      },
+      "required": [
+        "poolId",
+        "minNodeCount",
+        "maxNodeCount"
+      ]
+    },
+    "PoolInformation": {
+      "type": "object",
+      "description": "Specifies how a Job should be assigned to the Pools.",
+      "properties": {
+        "poolIds": {
+          "type": "array",
+          "description": "The ID of one or more existing Pool.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "poolIds"
+      ]
+    },
+    "PoolInformationUpdate": {
+      "type": "object",
+      "description": "Specifies how a Job should be assigned to the Pools.",
+      "properties": {
+        "poolIds": {
+          "type": "array",
+          "description": "The ID of one or more existing Pool.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PreemptionPolicy": {
+      "type": "object",
+      "description": "Define task preemption behaviors",
+      "properties": {
+        "preemptible": {
+          "type": "boolean",
+          "description": "Whether the task can be preempted."
+        }
+      },
+      "required": [
+        "preemptible"
+      ]
+    },
+    "RequestIdResponseHeaderTrait": {
+      "type": "object",
+      "description": "Provides the 'x-ms-request-id' header to enable request correlation in responses.",
+      "properties": {
+        "requestId": {
+          "type": "object",
+          "description": "An opaque, globally-unique, server-generated string identifier for the request.",
+          "properties": {
+            "response": {
+              "$ref": "#/definitions/Azure.Core.RequestIdResponseHeader"
+            }
+          },
+          "required": [
+            "response"
+          ]
+        }
+      },
+      "required": [
+        "requestId"
+      ]
+    },
+    "ResourceFile": {
+      "type": "object",
+      "description": "A single file or multiple files to be downloaded to a Compute Node.",
+      "properties": {
+        "storageContainerUrl": {
+          "type": "string",
+          "description": "The URL of the blob container within Azure Blob Storage. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access."
+        },
+        "httpUrl": {
+          "type": "string",
+          "description": "The URL of the file to download. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access."
+        },
+        "blobPrefix": {
+          "type": "string",
+          "description": "The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded. The property is valid only when autoStorageContainerName or storageContainerUrl is used. This prefix can be a partial filename or a subdirectory. If a prefix is not specified, all the files in the container will be downloaded."
+        },
+        "filePath": {
+          "type": "string",
+          "description": "The location on the Compute Node to which to download the file(s), relative to the Task's working directory. If the httpUrl property is specified, the filePath is required and describes the path which the file will be downloaded to, including the filename. Otherwise, if the autoStorageContainerName or storageContainerUrl property is specified, filePath is optional and is the directory to download the files to. In the case where filePath is used as a directory, any directory structure already associated with the input data will be retained in full and appended to the specified filePath directory. The specified relative path cannot break out of the Task's working directory (for example by using '..')."
+        },
+        "fileMode": {
+          "type": "string",
+          "description": "The file permission mode attribute in octal format. This property applies only to files being downloaded to Linux Compute Nodes. It will be ignored if it is specified for a resourceFile which will be downloaded to a Windows Compute Node. If this property is not specified for a Linux Compute Node, then a default value of 0770 is applied to the file."
+        }
+      }
+    },
+    "ResourceRequirement": {
+      "type": "object",
+      "description": "The resource requirements to use for the Task.",
+      "properties": {
+        "cpu": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of CPU cores required by the Task."
+        },
+        "memory": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of memory required by the Task."
+        },
+        "poolId": {
+          "type": "string",
+          "description": "The pool id by the Task."
+        }
+      }
+    },
+    "TaskAddCollectionParameter": {
+      "type": "object",
+      "description": "A collection of Azure Batch Tasks to add.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each Task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer Tasks.",
+          "items": {
+            "$ref": "#/definitions/TaskAddParameter"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TaskAddCollectionResult": {
+      "type": "object",
+      "description": "The result of adding a collection of Tasks to a Job.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The results of the add Task collection operation.",
+          "items": {
+            "$ref": "#/definitions/TaskAddResult"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TaskAddParameter": {
+      "type": "object",
+      "description": "Batch will retry Tasks when a recovery operation is triggered on a Node. Examples of recovery operations include (but are not limited to) when an unhealthy Node is rebooted or a Compute Node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all Tasks should be idempotent. This means Tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running Tasks is to use some form of checkpointing.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
+        },
+        "taskGroup": {
+          "type": "string",
+          "description": "The TaskGroup belongs to."
+        },
+        "schedulerPolicy": {
+          "$ref": "#/definitions/TaskSchedulingPolicy",
+          "description": "The scheduler policy for the Task."
+        },
+        "definition": {
+          "$ref": "#/definitions/TaskDefinition",
+          "description": "The definition of the Task."
+        }
+      },
+      "required": [
+        "definition"
+      ]
+    },
+    "TaskAddResult": {
+      "type": "object",
+      "description": "Result for a single Task added as part of an add Task collection operation.",
+      "properties": {
+        "taskName": {
+          "type": "string",
+          "description": "The name of the Task for which this is the result."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "You can use this to detect whether the Task has changed between requests. In particular, you can be pass the ETag with an Update Task request to specify that your changes should take effect only if nobody else has modified the Job in the meantime."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified time of the Task."
+        },
+        "location": {
+          "type": "string",
+          "description": "The URL of the Task, if the Task was successfully added."
+        }
+      },
+      "required": [
+        "taskName"
+      ]
+    },
+    "TaskConstraints": {
+      "type": "object",
+      "description": "Execution constraints to apply to a Task.",
+      "properties": {
+        "maxWallClockTime": {
+          "type": "string",
+          "format": "duration",
+          "description": "If this is not specified, there is no time limit on how long the Task may run."
+        },
+        "retentionTime": {
+          "type": "string",
+          "format": "duration",
+          "description": "The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted."
+        },
+        "maxTaskRetryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)."
+        }
+      }
+    },
+    "TaskDefinition": {
+      "type": "object",
+      "description": "The definition of the Task.",
+      "properties": {
+        "commandLine": {
+          "type": "string",
+          "description": "  For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the\n  coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable\n  expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows\n  or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use\n  the Batch provided environment variable (https://docs.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
+        },
+        "resourceFiles": {
+          "type": "array",
+          "description": "For multi-instance Tasks, the resource files will only be downloaded to the Compute Node on which the primary Task is executed. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
+          "items": {
+            "$ref": "#/definitions/ResourceFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "environmentSettings": {
+          "type": "array",
+          "description": "A list of environment variable settings for the Task.",
+          "items": {
+            "$ref": "#/definitions/EnvironmentSetting"
+          },
+          "x-ms-identifiers": []
+        },
+        "userIdentity": {
+          "$ref": "#/definitions/UserIdentity",
+          "description": "If omitted, the Task runs as a non-administrative user unique to the Task."
+        }
+      },
+      "required": [
+        "commandLine"
+      ]
+    },
+    "TaskExecutionInformation": {
+      "type": "object",
+      "description": "Information about the execution of a Task.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the Task started running. 'Running' corresponds to the running state, so if the Task specifies resource files or Packages, then the start time reflects the time at which the Task started downloading or deploying these. If the Task has been restarted or retried, this is the most recent time at which the Task started running. This property is present only for Tasks that are in the running or completed state."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the Task completed. This property is set only if the Task is in the Completed state."
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The exit code of the program specified on the Task command line. This property is set only if the Task is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the Task (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
+        },
+        "failureInfo": {
+          "$ref": "#/definitions/TaskFailureInfo",
+          "description": "Information describing the Task failure, if any. This property is set only if the Task is in the completed state and encountered a failure."
+        },
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of times the Task has been retried by the Batch service. Task application failures (non-zero exit code) are retried, pre-processing errors (the Task could not be run) and file upload errors are not retried. The Batch service will retry the Task up to the limit specified by the constraints."
+        },
+        "lastRetryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent time at which a retry of the Task started running. This element is present only if the Task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the Task has been restarted for reasons other than retry; for example, if the Compute Node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not."
+        },
+        "requeueCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of times the Task has been requeued by the Batch service as the result of a user request. When the user removes Compute Nodes from a Pool (by resizing/shrinking the pool) or when the Job is being disabled, the user can specify that running Tasks on the Compute Nodes be requeued for execution. This count tracks how many times the Task has been requeued for these reasons."
+        },
+        "lastRequeueTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent time at which the Task has been requeued by the Batch service as the result of a user request. This property is set only if the requeueCount is nonzero."
+        }
+      },
+      "required": [
+        "retryCount",
+        "requeueCount"
+      ]
+    },
+    "TaskFailureInfo": {
+      "type": "object",
+      "description": "Information about a Task failure.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ErrorCategory",
+          "description": "The category of the Task error."
+        },
+        "code": {
+          "type": "string",
+          "description": "An identifier for the Task error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the Task error, intended to be suitable for display in a user interface."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details related to the error.",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "TaskGroupAndCondition": {
+      "type": "object",
+      "description": "The definition of the task group and condition.",
+      "properties": {
+        "taskGroupName": {
+          "type": "string",
+          "description": "The task group name."
+        },
+        "condition": {
+          "$ref": "#/definitions/DependencyCondition",
+          "description": "The condition that this task group depend on."
+        }
+      },
+      "required": [
+        "taskGroupName",
+        "condition"
+      ]
+    },
+    "TaskGroupDependency": {
+      "type": "object",
+      "description": "The definition of the task group dependency relationship.",
+      "properties": {
+        "taskGroupName": {
+          "type": "string",
+          "description": "The task group name."
+        },
+        "dependOn": {
+          "type": "array",
+          "description": "The upstreaming task group and its condition that this task group depend on.",
+          "items": {
+            "$ref": "#/definitions/TaskGroupAndCondition"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "taskGroupName",
+        "dependOn"
+      ]
+    },
+    "TaskProperties": {
+      "type": "object",
+      "description": "The properties of an Azure Batch Task.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "This is an opaque string. You can use it to detect whether the Task has changed between requests. In particular, you can be pass the ETag when updating a Task to specify that your changes should take effect only if nobody else has modified the Task in the meantime."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified time of the Task."
+        },
+        "taskGroup": {
+          "type": "string",
+          "description": "The TaskGroup belongs to."
+        },
+        "schedulerPolicy": {
+          "$ref": "#/definitions/TaskSchedulingPolicy",
+          "description": "The scheduler policy for the Task."
+        },
+        "definition": {
+          "$ref": "#/definitions/TaskDefinition",
+          "description": "The definition of the Task."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the Task."
+        },
+        "state": {
+          "$ref": "#/definitions/TaskState",
+          "description": "The state of the Task."
+        },
+        "stateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the Task entered its current state."
+        },
+        "previousState": {
+          "$ref": "#/definitions/TaskState",
+          "description": "This property is not set if the Task is in its initial Active state."
+        },
+        "previousStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This property is not set if the Task is in its initial Active state."
+        },
+        "executionInfo": {
+          "$ref": "#/definitions/TaskExecutionInformation",
+          "description": "Information about the execution of a Task."
+        }
+      },
+      "required": [
+        "definition"
+      ]
+    },
+    "TaskSchedulingPolicy": {
+      "type": "object",
+      "description": "The scheduling policy for the Task.",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0."
+        },
+        "resoruceRequirements": {
+          "$ref": "#/definitions/ResourceRequirement",
+          "description": "The resource requirements to use for the Task."
+        },
+        "constraints": {
+          "$ref": "#/definitions/TaskConstraints",
+          "description": "Execution constraints to apply to a Task."
+        },
+        "preemptionPolicy": {
+          "$ref": "#/definitions/PreemptionPolicy",
+          "description": "The task preemption behaviors."
+        }
+      },
+      "required": [
+        "resoruceRequirements"
+      ]
+    },
+    "TaskState": {
+      "type": "string",
+      "description": "The state of the Task.",
+      "enum": [
+        "active",
+        "preparing",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "TaskState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "active",
+            "value": "active",
+            "description": "The Task is queued and able to run, but is not currently assigned to a Compute Node. A Task enters this state when it is created, when it is enabled after being disabled, or when it is awaiting a retry after a failed run."
+          },
+          {
+            "name": "preparing",
+            "value": "preparing",
+            "description": "The Task has been assigned to a Compute Node, but is waiting for a required Job Preparation Task to complete on the Compute Node. If the Job Preparation Task succeeds, the Task will move to running. If the Job Preparation Task fails, the Task will return to active and will be eligible to be assigned to a different Compute Node."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The Task is running on a Compute Node. This includes task-level preparation such as downloading resource files or deploying Packages specified on the Task - it does not necessarily mean that the Task command line has started executing."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "The Task is no longer eligible to run, usually because the Task has finished successfully, or the Task has finished unsuccessfully and has exhausted its retry limit. A Task is also marked as completed if an error occurred launching the Task, or when the Task has been terminated."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The Task is no longer eligible to run, usually because the Task has finished successfully, or the Task has finished unsuccessfully and has exhausted its retry limit. A Task is also marked as completed if an error occurred launching the Task, or when the Task has been terminated."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "The Task is no longer eligible to run, usually because the Task has finished successfully, or the Task has finished unsuccessfully and has exhausted its retry limit. A Task is also marked as completed if an error occurred launching the Task, or when the Task has been terminated."
+          }
+        ]
+      }
+    },
+    "TaskUpdateParameter": {
+      "type": "object",
+      "description": "The set of changes to be made to a Task.",
+      "properties": {
+        "constraints": {
+          "$ref": "#/definitions/TaskConstraints",
+          "description": "If omitted, the Task is given the default constraints. For multi-instance Tasks, updating the retention time applies only to the primary Task and not subtasks."
+        }
+      }
+    },
+    "UserIdentity": {
+      "type": "object",
+      "description": "The definition of the user identity under which the Task is run. Specify either the userName or autoUser property, but not both.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The name of the user identity under which the Task is run. The userName and autoUser properties are mutually exclusive; you must specify one but not both."
+        },
+        "autoUser": {
+          "$ref": "#/definitions/AutoUserSpecification",
+          "description": "The auto user under which the Task is run. The userName and autoUser properties are mutually exclusive; you must specify one but not both."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
+      "name": "If-Modified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifModifiedSince"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
+      "name": "If-Unmodified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was not modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifUnmodifiedSince"
+    },
+    "Azure.Core.ExpandQueryParameter": {
+      "name": "expand",
+      "in": "query",
+      "description": "Expand the indicated resources into the response.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.FilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SelectQueryParameter": {
+      "name": "select",
+      "in": "query",
+      "description": "Select the specified fields to be included in the response.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
