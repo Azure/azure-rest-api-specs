@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2023-04-13` is specified on the co
 
 ```yaml $(tag) == 'package-2023-04-13'
 input-file:
-  - Microsoft.GraphServices/stable/2023-04-13/graphservicesprod.json
+  - stable/2023-04-13/graphservicesprod.json
 ```
 
 ### Tag: package-2022-09-22-preview
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2022-09-22-preview` is specified o
 ```yaml $(tag) == 'package-2022-09-22-preview'
 version: 2022-09-22-preview
 input-file:
-  - Microsoft.GraphServices/preview/2022-09-22-preview/graphservicesprod.json
+  - preview/2022-09-22-preview/graphservicesprod.json
 ```
 
 ---
