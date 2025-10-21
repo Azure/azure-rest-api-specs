@@ -20,39 +20,18 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-### Basic Information
+# Resource Provider (RP) index - resource-manager
 
-These are the global settings for the identitygovernance.
+> This readme is used by RPSaaS / ARM schema validation. It should enumerate every swagger file
+> that makes up this Resource Provider (operations + all service swagger files). 
+> IMPORTANT: do NOT use this readme as the AutoRest "default" SDK readme for a single package.
+> SDK generation is done from the per-service readme.md files under each <ServiceName>/ folder.
 
+## Input
+# List all swagger files across the RP here (operations + services)
 ```yaml
-openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2025-10-17-preview
-```
-
-### Tag: package-2025-10-17-preview
-
-These settings apply only when `--tag=package-2025-10-17-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-10-17-preview'
 input-file:
-  - Microsoft.EntraidGovernance/ScimApiConsumption/preview/2025-10-17-preview/scimopenapi.json
-```
-
-### Tag: package-2025-06-13-preview
-
-These settings apply only when `--tag=package-2025-06-13-preview` is specified on the command lines.
-
-```yaml $(tag) == 'package-2025-06-13-preview'
-input-file:
-  - Microsoft.EntraidGovernance/preview/2025-06-13-preview/openapi.json
-```
-
-### Tag: package-2025-02-01-preview
-
-These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command lines.
-
-```yaml $(tag) == 'package-2025-02-01-preview'
-input-file:
-  - Microsoft.EntraidGovernance/preview/2025-02-01-preview/openapi.json
+- Microsoft.EntraidGovernance/preview/2025-06-13-preview/openapi.json
+- Microsoft.EntraidGovernance/preview/2025-02-01-preview/openapi.json
+- Microsoft.EntraidGovernance/ScimApiConsumption/preview/2025-10-17-preview/scimopenapi.json
 ```
