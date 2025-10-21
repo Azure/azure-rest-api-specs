@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-02-27-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-02-27-preview'
 input-file:
-  - Microsoft.Sovereign/preview/2025-02-27-preview/sovereign.json
+  - preview/2025-02-27-preview/sovereign.json
 suppressions:
   - code: AvoidAnonymousTypes
     reason: This error is caused by typespec inbuilt managed identity model.
