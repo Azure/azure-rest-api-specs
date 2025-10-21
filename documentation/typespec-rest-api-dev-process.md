@@ -95,7 +95,7 @@ Please first review recommended folder structure detailed in [this document](htt
       npx tsp compile .
     ```
 
-    The generated swagger files should be correctly placed in the `{service}`folders following the naming conventions.
+    The generated OpenAPI files should be correctly placed in the `{service}`folders following the naming conventions.
 
 4. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec.
 
@@ -107,7 +107,7 @@ Please first review recommended folder structure detailed in [this document](htt
 
 3. Add or update 'examples' files for each operation of your OpenAPI file.
 
-   The [oav](https://github.com/Azure/oav) provides two ways to generate Swagger examples:
+   The [oav](https://github.com/Azure/oav) provides two ways to generate OpenAPI examples:
 
    1. Generating basic examples and then manually modify the values. It will generate two examples for each operation:
     one contains minimal properties set, the other contains the maximal properties set. Since the auto-generated
@@ -120,13 +120,13 @@ Please first review recommended folder structure detailed in [this document](htt
     Note, latest OAV tool should automatically generate the following. However, if you are generating the examples manually,
      please ensure you have:
     - include `title` field and make sure it is descriptive and unique for each operation.
-    - include `operationId`. This is used to match with declared operations in TypeSpec and correctly output in swagger.
+    - include `operationId`. This is used to match with declared operations in TypeSpec and correctly output in OpenAPI.
 
 4. Add/update the `readme.md` file in the `{service}` folder to specify the version and location of the OpenAPI files. The `readme.md` is needed for both management-plane and data-plane services for REST API Docs generation.
 
    Example:[sample-readme](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/widget/resource-manager/Microsoft.Widget/Widget/readme.md)
 
-5. Generate swagger files:
+5. Generate OpenAPI files:
    - sync with the target branch in the azure-rest-api-specs repo
 
       ```git
@@ -134,7 +134,7 @@ Please first review recommended folder structure detailed in [this document](htt
       ```
 
    - in the root directory, run `npm install`
-   - in the project directory, `npx tsp compile`. This will generate swagger files under `{service}` folders.
+   - in the project directory, `npx tsp compile`. This will generate OpenAPI files under `{service}` folders.
 
 6. Ensure all generated files under `{service}` have been added to PR.
 

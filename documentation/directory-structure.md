@@ -34,12 +34,7 @@ To better understand the directory structure, it's essential to familiarize your
 - **Service**: A customer-facing Azure service (e.g., Azure Key Vault, Azure Container Registry)
 - **Organization**: The Azure team or group responsible for one or more services
 - **Resource Provider Namespace (RPNS)**: The ARM namespace for resource management operations (e.g., `Microsoft.KeyVault`)
-- **API Version**: All Azure services use the YYYY-MM-DD(-preview) format for consistent versioning
-
-**Additional resources:**
-- [Uniform Versioning] - Azure service versioning guidelines for consistent service evolution
-- [Specification index] - Complete list of all specifications
-- [Resource Provider list] - Official list of ARM Resource Providers
+- **API Version**: All Azure services use the YYYY-MM-DD(-preview) format for consistent versioning.
 
 ## Overview of the folder structure
 
@@ -51,9 +46,11 @@ specification/
     ├── cspell.yaml                     # Spell-check configuration
     ├── resource-manager/               # ARM services
     │   └── <RPNS>/                    # Resource Provider Namespace
-    │       └── <service>/             # Individual service
+    │       ├── <service1>/             # Individual service
+    │       └── <service2>/             # Individual service
     └── data-plane/                    # Data-plane services
-        └── <service>/                 # Individual service
+        ├── <service1>/                 # Individual service
+        └── <service2>/                 # Individual service
 ```
 
 **Organization structure:**
@@ -249,6 +246,8 @@ We are actively working to migrate the entire repository to align with the new d
 
 ### Guidelines for service teams
 
+Refer to [Widget] as an example of the suggested folder structure and if any concerns, contact azversioning@service.microsoft.com for guidance.
+
 **For new services:**
 - Always use the recommended structure described in this document
 - Contact the Azure SDK team if you have questions about implementation
@@ -256,7 +255,7 @@ We are actively working to migrate the entire repository to align with the new d
 **For existing services:**
 - Contact the Azure SDK team if you need to add new services or want to migrate existing ones
 - When folder migration PRs are merged, they may conflict with ongoing PRs. Follow the [Conflict Resolve Guide] to handle these conflicts
-- When in doubt, contact azversioning@service.microsoft.com for guidance
+
 
 > [!WARNING]
 > **All violations described above are considered legacy and deprecated.** They are strongly discouraged for any new development and will be addressed through the ongoing migration efforts.
@@ -274,3 +273,4 @@ We are actively working to migrate the entire repository to align with the new d
 [Specification index]: https://azure.github.io/azure-sdk/releases/latest/all/specs.html
 [uniform versioning guideline]: https://github.com/Azure/azure-rest-api-specs/wiki/Azure-Service-Versioning-Guideline
 [Conflict Resolve Guide]: https://github.com/Azure/azure-rest-api-specs/wiki/Resolving-Folder-Migration-Conflicts:-A-Guide-for-PR-Authors
+[Widget]: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/widget
