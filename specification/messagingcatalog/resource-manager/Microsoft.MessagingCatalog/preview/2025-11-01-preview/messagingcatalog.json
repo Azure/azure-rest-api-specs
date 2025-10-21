@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.MessagingCatalog",
-    "version": "2024-10-01-preview",
+    "version": "2025-11-01-preview",
     "description": "Messaging Catalog management API.",
     "x-typespec-generated": [
       {
@@ -650,6 +650,85 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/updateFabricPrivateLinks": {
+      "post": {
+        "operationId": "MessagingCatalogs_UpdateFabricPrivateLinks",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FabricPrivateLinksRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FabricPrivateLinksResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_UpdateFabricPrivateLinks_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_UpdateFabricPrivateLinks_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_UpdateFabricPrivateLinks_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_UpdateFabricPrivateLinks_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -757,6 +836,66 @@
       },
       "required": [
         "associationId"
+      ]
+    },
+    "FabricPrivateLinksAction": {
+      "type": "string",
+      "description": "Fabric Private Links Actions",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "FabricPrivateLinksAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable private link."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable private link."
+          }
+        ]
+      }
+    },
+    "FabricPrivateLinksRequest": {
+      "type": "object",
+      "description": "A request to update Fabric Private Links on a Catalog.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/FabricPrivateLinksAction",
+          "description": "The action to perform on the Fabric Private Links."
+        },
+        "fabricFqdn": {
+          "type": "string",
+          "description": "The fully qualified domain name of the fabric dataplane endpoint."
+        }
+      },
+      "required": [
+        "action",
+        "fabricFqdn"
+      ]
+    },
+    "FabricPrivateLinksResponse": {
+      "type": "object",
+      "description": "An response of a Fabric Private Links request.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the Fabric Private Links request."
+        },
+        "privateFqdn": {
+          "type": "string",
+          "description": "The private FQDN of the messaging catalog is redirecting to."
+        }
+      },
+      "required": [
+        "status",
+        "privateFqdn"
       ]
     },
     "MessagingCatalog": {
