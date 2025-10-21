@@ -17,4 +17,3 @@ using Microsoft.ContainerRegistry;
 );
 
 @@clientName(Architecture.`386`, "THREE_HUNDRED_EIGHTY_SIX", "python");
-
