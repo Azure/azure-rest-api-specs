@@ -13,8 +13,13 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager profile.
  */
-model Profile extends TrackedResource {
-  properties?: ProfileProperties;
+model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
+  ...ResourceNameParameter<
+    Resource = Profile,
+    KeyName = "profileName",
+    SegmentName = "trafficmanagerprofiles",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

@@ -19,8 +19,13 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(Profile)
-model Endpoint extends ProxyResource {
-  properties?: EndpointProperties;
+model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
+  ...ResourceNameParameter<
+    Resource = Endpoint,
+    KeyName = "endpointName",
+    SegmentName = "{endpointType}",
+    NamePattern = ""
+  >;
 }
 
 alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<

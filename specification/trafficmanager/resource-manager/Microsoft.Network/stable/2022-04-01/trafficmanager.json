@@ -124,45 +124,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network": {
-      "get": {
-        "operationId": "Profiles_ListBySubscription",
-        "tags": [
-          "Profiles"
-        ],
-        "description": "Lists all Traffic Manager profiles within a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProfileListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListBySubscription": {
-            "$ref": "./examples/Profile-GET-BySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/checkTrafficManagerNameAvailabilityV2": {
       "post": {
         "operationId": "Profiles_checkTrafficManagerNameAvailabilityV2",
@@ -312,7 +273,46 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficmanagerprofiles": {
+      "get": {
+        "operationId": "Profiles_ListBySubscription",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Lists all Traffic Manager profiles within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription": {
+            "$ref": "./examples/Profile-GET-BySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}": {
       "get": {
         "operationId": "Profiles_Get",
         "tags": [
@@ -328,6 +328,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -371,6 +378,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -440,6 +454,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "The Traffic Manager profile parameters supplied to the Update operation.",
@@ -484,6 +505,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -510,7 +538,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/{endpointType}/{endpointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}": {
       "get": {
         "operationId": "Endpoints_Get",
         "description": "Gets a Traffic Manager endpoint.",
@@ -523,6 +551,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "endpointType",
@@ -586,6 +621,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "endpointType",
@@ -672,6 +714,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endpointType",
             "in": "path",
             "description": "The type of the Traffic Manager endpoint.",
@@ -738,6 +787,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endpointType",
             "in": "path",
             "description": "The type of the Traffic Manager endpoint.",
@@ -785,7 +841,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/heatMaps/{heatMapType}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}": {
       "get": {
         "operationId": "HeatMap_Get",
         "description": "Gets latest heatmap for Traffic Manager profile.",
@@ -798,6 +854,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "heatMapType",
@@ -1020,7 +1083,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1394,7 +1457,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
