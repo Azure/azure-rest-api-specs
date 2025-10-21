@@ -24,6 +24,7 @@ interface PriceSheetOperationGroup {
   @action("pricesheets/download")
   @post
   @armResourceCollectionAction
+  // TODO cannot rewrite as a template, since the action template of Extension needs ExtensionResource parameter
   downloadByBillingAccountPeriod(
     ...ApiVersionParameter,
 
@@ -609,37 +610,19 @@ interface ReservationTransactionsOperationGroup {
   @list
   @get
   @action("reservationTransactions")
-  listByBillingProfile(
-    ...ApiVersionParameter,
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing",
-
-    /**
-     * BillingAccount ID
-     */
-    @path
-    @segment("billingAccounts")
-    billingAccountId: string,
-
-    /**
-     * Azure Billing Profile ID.
-     */
-    @path
-    @segment("billingProfiles")
-    billingProfileId: string,
-
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /**
-     * Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for entire December 2020 month (i.e. will contain records for dates December 30 and 31)
-     */
-    @query("$filter")
-    $filter?: string,
-  ): ModernReservationTransactionsListResult | ErrorResponse;
+  listByBillingProfile is Extension.ListByTarget<
+    BillingProfileGroup,
+    ModernReservationTransaction,
+    Response = ModernReservationTransactionsListResult,
+    Parameters = {
+      /**
+       * Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for the entire December 2020 month (i.e. will contain records for dates December 30 and 31)
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Error = ErrorResponse
+  >;
 }
 
 alias ManagementGroup = Extension.ExternalResource<
