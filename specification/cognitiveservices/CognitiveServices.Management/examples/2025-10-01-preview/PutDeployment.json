@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "accountName": "accountName",
+    "api-version": "2025-10-01-preview",
+    "deployment": {
+      "properties": {
+        "deploymentState": "Running",
+        "model": {
+          "name": "ada",
+          "format": "OpenAI",
+          "version": "1"
+        },
+        "serviceTier": "Priority"
+      },
+      "sku": {
+        "name": "Standard",
+        "capacity": 1
+      }
+    },
+    "deploymentName": "deploymentName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "deploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+        "properties": {
+          "deploymentState": "Running",
+          "model": {
+            "name": "ada",
+            "format": "OpenAI",
+            "version": "1"
+          },
+          "provisioningState": "Succeeded",
+          "serviceTier": "Priority"
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "deploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+        "properties": {
+          "deploymentState": "Running",
+          "model": {
+            "name": "ada",
+            "format": "OpenAI",
+            "version": "1"
+          },
+          "provisioningState": "Accepted",
+          "serviceTier": "Priority"
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1
+        }
+      }
+    }
+  },
+  "operationId": "Deployments_CreateOrUpdate",
+  "title": "PutDeployment"
+}

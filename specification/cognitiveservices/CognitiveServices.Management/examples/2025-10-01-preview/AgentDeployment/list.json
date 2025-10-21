@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "accountName": "my-cognitive-services-account",
+    "api-version": "2025-10-01-preview",
+    "appName": "agent-app-1",
+    "projectName": "my-project",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "deployment-1",
+            "type": "Microsoft.CognitiveServices/accounts/projects/applications/deployments",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/deployments/deployment-1",
+            "properties": {
+              "agents": [
+                {
+                  "agentId": "agent-123",
+                  "agentName": "support-agent",
+                  "agentVersion": "1.0.0"
+                }
+              ],
+              "deploymentId": "550e8400-e29b-41d4-a716-446655440001",
+              "deploymentType": "Managed",
+              "displayName": "Production Deployment",
+              "protocols": [
+                {
+                  "version": "1.0",
+                  "protocol": "Agent"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "state": "Running"
+            },
+            "systemData": {
+              "createdAt": "2024-09-29T12:34:56.999Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-09-29T12:34:56.999Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AgentDeployments_List",
+  "title": "List Agent Deployments."
+}
