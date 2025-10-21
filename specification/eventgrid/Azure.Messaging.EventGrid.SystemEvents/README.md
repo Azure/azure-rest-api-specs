@@ -54,7 +54,7 @@ const MicrosoftCachePatchingCompletedExample: RedisPatchingCompletedEventData = 
 
 };
 
-/** Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event. */
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event.. */
 
 @example(MicrosoftCachePatchingCompletedExample)
 model RedisPatchingCompletedEventData {

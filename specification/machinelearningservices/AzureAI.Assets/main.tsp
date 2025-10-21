@@ -47,3 +47,5 @@ enum Versions {
   @doc("Azure Machine Learning Services api version 2024-05-01-preview.")
   `2024-05-01-preview`,
 }
+
+// This is a test comment to trigger pipeline

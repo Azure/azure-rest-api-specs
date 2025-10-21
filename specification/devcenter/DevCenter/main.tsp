@@ -64,3 +64,5 @@ enum APIVersions {
   @doc("The 2025-08-01-preview service API version")
   v2025_08_01_preview: "2025-08-01-preview",
 }
+
+// This is a test comment to trigger pipeline
