@@ -70,3 +70,5 @@ using Azure.Core;
 
 // Move restoreVolume operation to Management client for Go to maintain compatibility
 @@clientLocation(Microsoft.ElasticSan.restoreVolume, "Management", "go");
+
+@@clientName(Microsoft.ElasticSan, "ElasticSanMgmtClient", "python");
