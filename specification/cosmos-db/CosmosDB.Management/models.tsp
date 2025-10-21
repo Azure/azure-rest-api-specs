@@ -4434,7 +4434,7 @@ model MongoDBDatabaseResource {
   restoreParameters?: ResourceRestoreParameters;
 
   /**
-   * Enum to indicate the mode of resource creation.
+   * Enum to indicate the mode of account creation.
    */
   createMode?: CreateMode = CreateMode.Default;
 }
@@ -7703,6 +7703,7 @@ model ServiceResourceProperties {
   /**
    * Instance count for the service.
    */
+  @minValue(0)
   instanceCount?: int32;
 
   /**
@@ -7740,6 +7741,7 @@ model ServiceResourceCreateUpdateProperties {
   /**
    * Instance count for the service.
    */
+  @minValue(0)
   instanceCount?: int32;
 
   /**

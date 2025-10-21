@@ -9,20 +9,8 @@ using Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseAccountCreateUpdateParameters.properties);
 
-@@clientName(OperationDisplay.Provider, "provider");
-@@clientName(OperationDisplay.Resource, "resource");
-@@clientName(OperationDisplay.Operation, "operation");
-@@clientName(OperationDisplay.Description, "description");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GraphResourceCreateUpdateParameters.properties);
-
-@@clientName(SqlDatabaseGetPropertiesResource._colls, "colls");
-@@clientName(SqlDatabaseGetPropertiesResource._users, "users");
-
-@@clientName(ExtendedResourceProperties._rid, "rid");
-@@clientName(ExtendedResourceProperties._ts, "ts");
-@@clientName(ExtendedResourceProperties._etag, "etag");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDatabaseCreateUpdateParameters.properties);
@@ -94,43 +82,23 @@ using Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableSqlDatabaseGetResult.properties);
 
-@@clientName(RestorableSqlDatabasePropertiesResource._rid, "rid");
-
-@@clientName(RestorableSqlDatabasePropertiesResourceDatabase._colls, "colls");
-@@clientName(RestorableSqlDatabasePropertiesResourceDatabase._users, "users");
-@@clientName(RestorableSqlDatabasePropertiesResourceDatabase._self, "self");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableSqlContainerGetResult.properties);
-
-@@clientName(RestorableSqlContainerPropertiesResource._rid, "rid");
-
-@@clientName(RestorableSqlContainerPropertiesResourceContainer._self, "self");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableMongodbDatabaseGetResult.properties);
 
-@@clientName(RestorableMongodbDatabasePropertiesResource._rid, "rid");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableMongodbCollectionGetResult.properties);
-
-@@clientName(RestorableMongodbCollectionPropertiesResource._rid, "rid");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableGremlinDatabaseGetResult.properties);
 
-@@clientName(RestorableGremlinDatabasePropertiesResource._rid, "rid");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableGremlinGraphGetResult.properties);
 
-@@clientName(RestorableGremlinGraphPropertiesResource._rid, "rid");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableTableGetResult.properties);
-
-@@clientName(RestorableTablePropertiesResource._rid, "rid");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputPoolUpdate.properties);
