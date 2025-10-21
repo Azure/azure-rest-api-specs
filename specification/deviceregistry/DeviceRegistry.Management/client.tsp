@@ -155,6 +155,7 @@ using Microsoft.DeviceRegistry;
 @@clientName(StatusConfig, "DeviceRegistryStatusConfig", "csharp");
 @@clientName(StatusError, "DeviceRegistryStatusError", "csharp");
 @@clientName(NamespaceMigrateRequest, "DeviceRegistryNamespaceMigrateRequestContent", "csharp");
+@@clientName(BillingContainer.etag, "ETag", "csharp");
 
 // JavaScript Client configuration
 @@clientName(Microsoft.DeviceRegistry,
