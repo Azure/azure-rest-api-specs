@@ -447,3 +447,214 @@ using Azure.ClientGenerator.Core;
   "ToolChoiceFunctionSelection",
   "java"
 );
+
+@@clientName(VoiceLive.Modality, "InteractionModality", "java");
+@@clientName(VoiceLive.Animation, "AnimationOptions", "java");
+@@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "java");
+@@clientName(VoiceLive.AzureCustomVoice.custom_lexicon_url,
+  "CustomLexiconUri",
+  "java"
+);
+@@clientName(VoiceLive.IceServer.urls, "Uris", "java");
+@@clientName(VoiceLive.VideoCrop.bottom_right, "BottomRightInternal", "java");
+@@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "java");
+@@clientName(VoiceLive.Response, "SessionResponse", "java");
+@@clientName(VoiceLive.AgentConfig, "RespondingAgentOptions", "java");
+@@clientName(VoiceLive.FunctionTool, "VoiceLiveFunctionDefinition", "java");
+@@clientName(VoiceLive.Tool, "VoiceLiveToolDefinition", "java");
+@@clientName(VoiceLive.ContentPart, "VoiceLiveContentPart", "java");
+@@clientName(VoiceLive.MessageRole, "ResponseMessageRole", "java");
+@@clientName(VoiceLive.ResponseItem, "SessionResponseItem", "java");
+@@clientName(VoiceLive.ResponseMessageItem,
+  "SessionResponseMessageItem",
+  "java"
+);
+@@clientName(VoiceLive.ResponseStatus, "SessionResponseStatus", "java");
+@@clientName(VoiceLive.ResponseItemStatus,
+  "SessionResponseItemStatus",
+  "java"
+);
+@@clientName(VoiceLive.ServerEvent, "SessionUpdate", "java");
+@@clientName(VoiceLive.ServerEventSessionCreated,
+  "SessionUpdateSessionCreated",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventSessionUpdated,
+  "SessionUpdateSessionUpdated",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventSessionAvatarConnecting,
+  "SessionUpdateAvatarConnecting",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+  "SessionUpdateInputAudioBufferSpeechStarted",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStopped,
+  "SessionUpdateInputAudioBufferSpeechStopped",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventInputAudioBufferCleared,
+  "SessionUpdateInputAudioBufferCleared",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventInputAudioBufferCommitted,
+  "SessionUpdateInputAudioBufferCommitted",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseCreated,
+  "SessionUpdateResponseCreated",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseDone,
+  "SessionUpdateResponseDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAudioDelta,
+  "SessionUpdateResponseAudioDelta",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAudioDone,
+  "SessionUpdateResponseAudioDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAudioTranscriptDelta,
+  "SessionUpdateResponseAudioTranscriptDelta",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAudioTranscriptDone,
+  "SessionUpdateResponseAudioTranscriptDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta,
+  "SessionUpdateResponseAudioTimestampDelta",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDone,
+  "SessionUpdateResponseAudioTimestampDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseTextDelta,
+  "SessionUpdateResponseTextDelta",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseTextDone,
+  "SessionUpdateResponseTextDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseContentPartAdded,
+  "SessionUpdateResponseContentPartAdded",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseContentPartDone,
+  "SessionUpdateResponseContentPartDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseOutputItemAdded,
+  "SessionUpdateResponseOutputItemAdded",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseOutputItemDone,
+  "SessionUpdateResponseOutputItemDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+  "SessionUpdateResponseFunctionCallArgumentsDelta",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+  "SessionUpdateResponseFunctionCallArgumentsDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAnimationBlendshapeDelta,
+  "SessionUpdateResponseAnimationBlendshapeDelta",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAnimationBlendshapeDone,
+  "SessionUpdateResponseAnimationBlendshapeDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDelta,
+  "SessionUpdateResponseAnimationVisemeDelta",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDone,
+  "SessionUpdateResponseAnimationVisemeDone",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventConversationItemCreated,
+  "SessionUpdateConversationItemCreated",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventConversationItemDeleted,
+  "SessionUpdateConversationItemDeleted",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventConversationItemRetrieved,
+  "SessionUpdateConversationItemRetrieved",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventConversationItemTruncated,
+  "SessionUpdateConversationItemTruncated",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+  "SessionUpdateConversationItemInputAudioTranscriptionCompleted",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+  "SessionUpdateConversationItemInputAudioTranscriptionDelta",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+  "SessionUpdateConversationItemInputAudioTranscriptionFailed",
+  "java"
+);
+@@clientName(VoiceLive.ServerEventError, "SessionUpdateError", "java");
+@@clientName(VoiceLive.ServerEventErrorDetails,
+  "SessionUpdateErrorDetails",
+  "java"
+);
+@@clientName(VoiceLive.TokenUsage, "ResponseTokenStatistics", "java");
+@@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "java");
+@@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "java");
+@@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "java");
+@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms,
+  "TimeoutMs",
+  "java"
+);
+@@clientName(VoiceLive.AzureSemanticDetectionEn.timeout_ms,
+  "TimeoutMs",
+  "java"
+);
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms,
+  "TimeoutMs",
+  "java"
+);
+@@clientName(VoiceLive.ServerVad, "ServerVadTurnDetection", "java");
+@@clientName(VoiceLive.AzureSemanticVad,
+  "AzureSemanticVadTurnDetection",
+  "java"
+);
+@@clientName(VoiceLive.AzureSemanticVadEn,
+  "AzureSemanticVadTurnDetectionEn",
+  "java"
+);
+@@clientName(VoiceLive.AzureSemanticVadMultilingual,
+  "AzureSemanticVadTurnDetectionMultilingual",
+  "java"
+);
+@@clientName(VoiceLive.AzureSemanticDetection,
+  "AzureSemanticEouDetection",
+  "java"
+);
+@@clientName(VoiceLive.AzureSemanticDetectionEn,
+  "AzureSemanticEouDetectionEn",
+  "java"
+);
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual,
+  "AzureSemanticEouDetectionMultilingual",
+  "java"
+);
+@@clientName(VoiceLive.Background, "VideoBackground", "java");
