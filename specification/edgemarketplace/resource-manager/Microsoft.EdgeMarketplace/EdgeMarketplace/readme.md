@@ -43,9 +43,9 @@ These settings apply only when `--tag=package-2023-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-08-01-preview'
 input-file:
-  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/publishers.json
-  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/operations.json
-  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/offers.json
+  - preview/2023-08-01-preview/publishers.json
+  - preview/2023-08-01-preview/operations.json
+  - preview/2023-08-01-preview/offers.json
 ```
 
 ### Tag: package-2023-08-01
@@ -54,9 +54,9 @@ These settings apply only when `--tag=package-2023-08-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-08-01'
 input-file:
-  - Microsoft.EdgeMarketplace/stable/2023-08-01/publishers.json
-  - Microsoft.EdgeMarketplace/stable/2023-08-01/operations.json
-  - Microsoft.EdgeMarketplace/stable/2023-08-01/offers.json
+  - stable/2023-08-01/publishers.json
+  - stable/2023-08-01/operations.json
+  - stable/2023-08-01/offers.json
 ```
 
 ### Tag: package-2024-10-01
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2024-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-10-01'
 input-file:
-  - Microsoft.EdgeMarketplace/stable/2024-10-01/edgemarketplace.json
+  - stable/2024-10-01/edgemarketplace.json
 ```
 
 ---
