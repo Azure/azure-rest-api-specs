@@ -36,9 +36,9 @@ These settings apply only when `--tag=package-2023-07-07-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-07-07-preview'
 input-file:
-  - Microsoft.Scom/preview/2023-07-07-preview/scom.json
-  - Microsoft.Scom/preview/2023-07-07-preview/monitoredResources.json
-  - Microsoft.Scom/preview/2023-07-07-preview/managedGateways.json
+  - preview/2023-07-07-preview/scom.json
+  - preview/2023-07-07-preview/monitoredResources.json
+  - preview/2023-07-07-preview/managedGateways.json
 ```
 ---
 
@@ -51,7 +51,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
