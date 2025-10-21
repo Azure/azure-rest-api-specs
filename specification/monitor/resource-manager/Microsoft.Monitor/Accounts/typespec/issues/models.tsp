@@ -7,6 +7,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
 namespace Microsoft.Monitor;
@@ -173,6 +174,40 @@ union Status {
   string,
 }
 
+@added(Versions.v2025_10_03)
+@doc("A background details element")
+model BackgroundDetails {
+  @doc("The background details name")
+  name: string;
+
+  @doc("The background details value")
+  value: string;
+}
+
+@added(Versions.v2025_10_03)
+@doc("The issue background information")
+model Background {
+  @doc("The background type")
+  type?: string;
+
+  @doc("The background text")
+  text?: string;
+
+  @doc("The background details")
+  details?: BackgroundDetails[];
+}
+
+@added(Versions.v2025_10_03)
+@doc("The issue background visualization")
+model BackgroundVisualization {
+  @doc("The background visualization content, in Adaptive Card format")
+  visualization: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The background visualization origin")
+  origin: Origin;
+}
+
 @doc("The issue properties")
 model IssuePayload {
   @doc("The issue title")
@@ -194,6 +229,10 @@ model IssuePayload {
   @visibility(Lifecycle.Read)
   @doc("The number of investigations in the issue")
   investigationsCount: int32;
+
+  @added(Versions.v2025_10_03)
+  @doc("The issue background information")
+  background?: Background;
 }
 
 @doc("Properties of an alert which is related to the issue")
