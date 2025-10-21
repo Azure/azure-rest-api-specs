@@ -578,7 +578,7 @@ model BillingPlanInformation {
   nextPaymentDueDate?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   transactions?: PaymentDetail[];
 }
 
@@ -841,7 +841,7 @@ model Utilization {
   /**
    * The array of aggregates of a savings plan's utilization
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   aggregates?: UtilizationAggregates[];
 }
 
@@ -1062,14 +1062,14 @@ model SavingsPlanUpdateRequestProperties {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SavingsPlanUpdateValidateRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   benefits?: SavingsPlanUpdateRequestProperties[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SavingsPlanValidateResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   benefits?: SavingsPlanValidResponseProperty[];
 
   /**
