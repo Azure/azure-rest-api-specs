@@ -89,3 +89,6 @@ using Microsoft.ElasticSan;
 // VolumeGroups interface operations
 @@clientLocation(VolumeGroups.preBackup, Volumes);
 @@clientLocation(VolumeGroups.preRestore, Volumes);
+
+@@clientName(`x-ms-delete-snapshots`, "XMsDeleteSnapshots", "python");
+@@clientName(`x-ms-force-delete`, "XMsForceDelete", "python");
