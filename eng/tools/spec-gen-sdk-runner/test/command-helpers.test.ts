@@ -461,7 +461,7 @@ describe("commands.ts", () => {
             headSha: "abc123",
             prNumber: "123",
             labelAction: false,
-            isSpecGenSdkCheckRequired: false,
+            isSpecGenSdkCheckRequired: true,
             apiViewRequestData: [],
           },
           undefined,
