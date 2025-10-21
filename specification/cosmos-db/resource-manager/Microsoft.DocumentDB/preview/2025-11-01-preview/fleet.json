@@ -1205,6 +1205,16 @@
               "type": "integer",
               "format": "int32",
               "description": "Maximum throughput for the pool."
+            },
+            "dedicatedRUs": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Total dedicated throughput (RU/s) for fleetspace. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers across all accounts in the fleetspace for 1 region."
+            },
+            "maxConsumableRUs": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Maximum consumable throughput (RU/s) for fleetspace. Represents the maximum throughput that can be consumed by the fleetspace."
             }
           }
         }
