@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.OnlineExperimentation management service",
-    "version": "2025-08-01-preview",
+    "version": "2025-05-31-preview",
     "description": "Microsoft.OnlineExperimentation Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -44,12 +44,6 @@
     },
     {
       "name": "OnlineExperimentationWorkspaces"
-    },
-    {
-      "name": "PrivateEndpointConnections"
-    },
-    {
-      "name": "PrivateLinkResources"
     }
   ],
   "paths": {
@@ -62,20 +56,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -98,10 +92,10 @@
         "description": "Gets all online experimentation workspaces in the specified subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -114,12 +108,12 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List Online Experiment Workspaces in a subscription.": {
+          "List Online Experimentation Workspaces in a subscription.": {
             "$ref": "./examples/OnlineExperimentationWorkspaces_ListBySubscription.json"
           }
         },
@@ -137,13 +131,13 @@
         "description": "Gets all online experimentation workspaces in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -156,7 +150,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -179,13 +173,13 @@
         "description": "Gets an online experimentation workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -206,7 +200,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -224,13 +218,13 @@
         "description": "Create an online experimentation workspace, or update an existing workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -277,7 +271,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -287,9 +281,6 @@
           },
           "Create or update an OnlineExperimentationWorkspace with Free sku.": {
             "$ref": "./examples/OnlineExperimentationWorkspaces_CreateOrUpdate.json"
-          },
-          "Create or update an OnlineExperimentationWorkspace with public network access disabled.": {
-            "$ref": "./examples/OnlineExperimentationWorkspaces_CreateOrUpdateWithDisabledPublicNetworkAccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -305,13 +296,13 @@
         "description": "Patch an online experimentation workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -355,19 +346,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Update an Online Experiment Workspace.": {
-            "$ref": "./examples/OnlineExperimentationWorkspaces_Update.json"
-          },
           "Update an Online Experimentation Workspace with customer managed encryption key.": {
             "$ref": "./examples/OnlineExperimentationWorkspaces_UpdateWithEncryption.json"
           },
-          "Update an Online Experimentation Workspace with public network access.": {
-            "$ref": "./examples/OnlineExperimentationWorkspaces_UpdatePublicNetworkAccess.json"
+          "Update an Online Experimentation Workspace.": {
+            "$ref": "./examples/OnlineExperimentationWorkspaces_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -383,13 +371,13 @@
         "description": "Deletes an online experimentation workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -421,7 +409,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -434,352 +422,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OnlineExperimentation/workspaces/{workspaceName}/privateEndpointConnections": {
-      "get": {
-        "operationId": "PrivateEndpointConnections_List",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Gets all the private endpoint connections configured on an online experimentation workspace resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the OnlineExperimentationWorkspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the Private Endpoint Connections.": {
-            "$ref": "./examples/PrivateEndpointConnection_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OnlineExperimentation/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "operationId": "PrivateEndpointConnections_Get",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Gets the private endpoint connection details for an online experimentation workspace resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the OnlineExperimentationWorkspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the PrivateEndpointConnection",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Private Endpoint Connection": {
-            "$ref": "./examples/PrivateEndpointConnection_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PrivateEndpointConnections_Update",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Updates private endpoint connection status (Approval/Rejected) for an online experimentation workspace resource. This gets invoked by resource admin.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the OnlineExperimentationWorkspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the PrivateEndpointConnection",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates the Private Endpoint Connection.": {
-            "$ref": "./examples/PrivateEndpointConnection_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "PrivateEndpointConnections_Delete",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Deletes private endpoint connection for an online experimentation workspace resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the OnlineExperimentationWorkspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the PrivateEndpointConnection",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes the Private Endpoint Connection": {
-            "$ref": "./examples/PrivateEndpointConnection_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OnlineExperimentation/workspaces/{workspaceName}/privateLinkResources": {
-      "get": {
-        "operationId": "PrivateLinkResources_List",
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "description": "Gets the list of private link resources for an online experimentation workspace resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the OnlineExperimentationWorkspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkResource_List ": {
-            "$ref": "./examples/PrivateLinkResource_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OnlineExperimentation/workspaces/{workspaceName}/privateLinkResources/{privateLinkResourceName}": {
-      "get": {
-        "operationId": "PrivateLinkResources_Get",
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "description": "Gets a private link resource for an online experimentation workspace resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the OnlineExperimentationWorkspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
-          },
-          {
-            "name": "privateLinkResourceName",
-            "in": "path",
-            "description": "The name of the PrivateLinkResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-.]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Private Link Resource": {
-            "$ref": "./examples/PrivateLinkResource_Get.json"
-          }
-        }
       }
     }
   },
@@ -794,14 +436,14 @@
       "description": "Managed service identity (system assigned and/or user assigned identities)",
       "properties": {
         "type": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
+            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
         }
@@ -905,7 +547,7 @@
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "sku": {
@@ -915,7 +557,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -990,10 +632,6 @@
             "encryption": {
               "$ref": "#/definitions/ResourceEncryptionConfiguration",
               "description": "The encryption configuration for the online experimentation workspace resource."
-            },
-            "publicNetworkAccess": {
-              "$ref": "#/definitions/PublicNetworkAccessType",
-              "description": "Public Network Access Control for the online experimentation resource. Defaults to Enabled if set to null.\n- Enabled: The resource can be accessed from the public internet.\n- Disabled: The resource can only be accessed from a private endpoint."
             }
           }
         }
@@ -1061,18 +699,6 @@
           "type": "string",
           "format": "uri",
           "description": "The data plane endpoint for the online experimentation workspace resource.",
-          "readOnly": true
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccessType",
-          "description": "Public Network Access Control for the online experimentation resource. Defaults to Enabled if not set.\n- Enabled: The resource can be accessed from the public internet.\n- Disabled: The resource can only be accessed from a private endpoint."
-        },
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "The private endpoint connections associated with the online experimentation workspace resource.",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
           "readOnly": true
         }
       },
@@ -1180,102 +806,6 @@
           "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuName",
           "description": "The name of the SKU. Ex - F0, P0. It is typically a letter+number code"
         }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "description": "Private endpoint connection resource for an online experimentation workspace resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnectionListResult": {
-      "type": "object",
-      "description": "The response of a PrivateEndpointConnection list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateEndpointConnection items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateLinkResource items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PublicNetworkAccessType": {
-      "type": "string",
-      "description": "The public network access type for an online experimentation resource.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "PublicNetworkAccessType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled: The resource can be accessed from the public internet"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled: The resource can only be accessed from a private endpoint."
-          }
-        ]
       }
     },
     "ResourceEncryptionConfiguration": {

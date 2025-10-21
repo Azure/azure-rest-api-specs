@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-05-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-05-31-preview'
 input-file:
-  - Microsoft.OnlineExperimentation/preview/2025-05-31-preview/onlineexperimentation.json
+  - preview/2025-05-31-preview/onlineexperimentation.json
 ```
 
 ### Suppress non-TypeSpec SDK related linting rules
