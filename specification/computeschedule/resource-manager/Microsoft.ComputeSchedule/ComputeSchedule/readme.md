@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-04-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-04-15-preview'
 input-file:
-  - Microsoft.ComputeSchedule/preview/2025-04-15-preview/computeschedule.json
+  - preview/2025-04-15-preview/computeschedule.json
 suppressions:  
   - code: AvoidAdditionalProperties
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
-  - Microsoft.ComputeSchedule/stable/2025-05-01/computeschedule.json
+  - stable/2025-05-01/computeschedule.json
 suppressions:  
   - code: AvoidAdditionalProperties
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
@@ -75,7 +75,7 @@ These settings apply only when `--tag=package-2024-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-10-01'
 input-file:
-  - Microsoft.ComputeSchedule/stable/2024-10-01/computeschedule.json
+  - stable/2024-10-01/computeschedule.json
 ```
 
 
@@ -85,7 +85,7 @@ These settings apply only when `--tag=package-2024-08-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-15-preview'
 input-file:
-  - Microsoft.ComputeSchedule/preview/2024-08-15-preview/computeschedule.json
+  - preview/2024-08-15-preview/computeschedule.json
 ```
 
 ---
