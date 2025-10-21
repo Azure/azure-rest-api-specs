@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-09-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-30-preview'
 input-file:
-  - Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+  - preview/2024-09-30-preview/mysqldiscovery.json
 suppressions:
   - code: PathResourceTypeNameCamelCase
     from: mysqldiscovery.json
