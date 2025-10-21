@@ -61,7 +61,7 @@ These settings apply only when `--tag=package-2025-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-06-01'
 input-file:
-  - MongoDB.Atlas/stable/2025-06-01/openapi.json
+  - stable/2025-06-01/openapi.json
 ```
 
 ### Tag: package-2024-11-18-preview
@@ -70,5 +70,5 @@ These settings apply only when `--tag=package-2024-11-18-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-11-18-preview'
 input-file:
-  - MongoDB.Atlas/preview/2024-11-18-preview/openapi.json
+  - preview/2024-11-18-preview/openapi.json
 ```
