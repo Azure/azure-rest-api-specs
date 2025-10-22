@@ -92,34 +92,12 @@ model EdgeActionExecutionFilter
 
 @armResourceOperations
 interface EdgeActions {
-  @Autorest.example("./examples/EdgeActions_Get.json", "Get EdgeAction")
   get is ArmResourceRead<EdgeAction>;
-
-  @Autorest.example("./examples/EdgeActions_Create.json", "Create EdgeAction")
   create is ArmResourceCreateOrUpdateAsync<EdgeAction>;
-
-  @Autorest.example("./examples/EdgeActions_Update.json", "Update EdgeAction")
   update is ArmResourcePatchAsync<EdgeAction, EdgeActionProperties>;
-
-  @Autorest.example("./examples/EdgeActions_Delete.json", "Delete EdgeAction")
   delete is ArmResourceDeleteWithoutOkAsync<EdgeAction>;
-
-  @Autorest.example(
-    "./examples/EdgeActions_ListByResourceGroup.json",
-    "List EdgeActions by ResourceGroup"
-  )
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
-
-  @Autorest.example(
-    "./examples/EdgeActions_ListBySubscription.json",
-    "List EdgeActions by Subscription"
-  )
   listBySubscription is ArmListBySubscription<EdgeAction>;
-
-  @Autorest.example(
-    "./examples/EdgeActions_AddAttachment.json",
-    "Add Attachment to EdgeAction"
-  )
   addAttachment is ArmResourceActionAsync<
     EdgeAction,
     EdgeActionAttachment,
@@ -127,10 +105,6 @@ interface EdgeActions {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
-  @Autorest.example(
-    "./examples/EdgeActions_DeleteAttachment.json",
-    "Delete Attachment from EdgeAction"
-  )
   deleteAttachment is ArmResourceActionNoContentAsync<
     EdgeAction,
     EdgeActionAttachment
@@ -139,59 +113,20 @@ interface EdgeActions {
 
 @armResourceOperations
 interface EdgeActionVersions {
-  @Autorest.example(
-    "./examples/EdgeActionsVersions_Get.json",
-    "Get EdgeActionVersion"
-  )
   get is ArmResourceRead<EdgeActionVersion>;
-
-  @Autorest.example(
-    "./examples/EdgeActionsVersions_Create.json",
-    "Create EdgeActionVersion"
-  )
   create is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
-
-  @Autorest.example(
-    "./examples/EdgeActionsVersions_Update.json",
-    "Update EdgeActionVersion"
-  )
   update is ArmResourcePatchAsync<
     EdgeActionVersion,
     EdgeActionVersionProperties
   >;
-
-  @Autorest.example(
-    "./examples/EdgeActionsVersions_Delete.json",
-    "Delete EdgeActionVersion"
-  )
   delete is ArmResourceDeleteWithoutOkAsync<EdgeActionVersion>;
-
-  @Autorest.example(
-    "./examples/EdgeActionsVersions_ListByEdgeAction.json",
-    "List EdgeActionVersions by EdgeAction"
-  )
   listByResourceGroup is ArmResourceListByParent<EdgeActionVersion>;
-
-  @Autorest.example(
-    "./examples/EdgeActionVersions_ListBySubscription.json",
-    "List EdgeActionVersions by Subscription"
-  )
   listBySubscription is ArmListBySubscription<EdgeActionVersion>;
-
-  @Autorest.example(
-    "./examples/EdgeActionVersions_DeployVersionCode.json",
-    "Deploy Version Code"
-  )
   deployVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     VersionCode,
     EdgeActionVersionProperties
   >;
-
-  @Autorest.example(
-    "./examples/EdgeActionVersions_GetVersionCode.json",
-    "Get Version Code"
-  )
   getVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     void,
@@ -199,51 +134,18 @@ interface EdgeActionVersions {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
-  @Autorest.example(
-    "./examples/EdgeActionVersions_SwapDefault.json",
-    "Swap Default Version"
-  )
   swapDefault is ArmResourceActionNoContentAsync<EdgeActionVersion, void>;
 }
 
 @armResourceOperations
 interface EdgeActionExecutionFilters {
-  @Autorest.example(
-    "./examples/EdgeActionsExecutionFilters_Get.json",
-    "Get EdgeActionExecutionFilter"
-  )
   get is ArmResourceRead<EdgeActionExecutionFilter>;
-
-  @Autorest.example(
-    "./examples/EdgeActionsExecutionFilters_Create.json",
-    "Create EdgeActionExecutionFilter"
-  )
   create is ArmResourceCreateOrUpdateAsync<EdgeActionExecutionFilter>;
-
-  @Autorest.example(
-    "./examples/EdgeActionsExecutionFilters_Update.json",
-    "Update EdgeActionExecutionFilter"
-  )
   update is ArmResourcePatchAsync<
     EdgeActionExecutionFilter,
     EdgeActionExecutionFilterProperties
   >;
-
-  @Autorest.example(
-    "./examples/EdgeActionsExecutionFilters_Delete.json",
-    "Delete EdgeActionExecutionFilter"
-  )
   delete is ArmResourceDeleteWithoutOkAsync<EdgeActionExecutionFilter>;
-
-  @Autorest.example(
-    "./examples/EdgeActionsExecutionFilters_ListByEdgeAction.json",
-    "List EdgeActionExecutionFilters by EdgeAction"
-  )
   listByResourceGroup is ArmResourceListByParent<EdgeActionExecutionFilter>;
-
-  @Autorest.example(
-    "./examples/EdgeActionExecutionFilters_ListBySubscription.json",
-    "List EdgeActionExecutionFilters by Subscription"
-  )
   listBySubscription is ArmListBySubscription<EdgeActionExecutionFilter>;
 }
