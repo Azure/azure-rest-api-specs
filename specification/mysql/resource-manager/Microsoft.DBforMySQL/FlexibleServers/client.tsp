@@ -10,8 +10,8 @@ using Microsoft.DBforMySQL;
 );
 @@clientName(Microsoft.DBforMySQL, "MySQLManagementClient", "python");
 
-@@clientName(ServerVersion.`5.7`, "Five7", "javascript,go");
-@@clientName(ServerVersion.`8.0.21`, "Eight021", "javascript,go");
+@@clientName(ServerVersion.`5.7`, "Five7", "javascript,go, python");
+@@clientName(ServerVersion.`8.0.21`, "Eight021", "javascript,go, python");
 
 // Java SDK compatibility fixes for TypeSpec migration
 @@clientName(Microsoft.DBforMySQL.MySQLServerIdentity, "Identity", "java");
