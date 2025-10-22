@@ -21,7 +21,7 @@ union AnalyzeConversationTaskKind {
   Conversation: "Conversation",
 
   /** Conversation task kind */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   ConversationalAI: "ConversationalAI",
 }
 
@@ -33,7 +33,7 @@ union AnalyzeConversationTaskResultsKind {
   ConversationResult: "ConversationResult",
 
   /** Conversation result task kind */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   ConversationalAIResult: "ConversationalAIResult",
 }
 
@@ -246,7 +246,7 @@ union projectKind {
   Orchestration: "Orchestration",
 
   /** Conversation type */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   ConversationalAI: "ConversationalAI",
 }
 
@@ -682,7 +682,7 @@ union AnalyzeConversationLROTaskKind {
   ConversationalPIITask: "ConversationalPIITask",
 
   /** Custom Conversational Summarization Task */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_11_15_preview)
   CustomConversationalSummarizationTask: "CustomConversationalSummarizationTask",
 }
 
@@ -700,7 +700,7 @@ union AnalyzeConversationResultsKind {
   ConversationalPIIResults: "conversationalPIIResults",
 
   /** Custom Conversational Summarization Results */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_11_15_preview)
   CustomConversationalSummarizationResults: "customConversationalSummarizationResults",
 }
 
