@@ -5,7 +5,7 @@ import { simpleGit } from "simple-git";
 import { includesFolder } from "./path.js";
 
 // Enable simple-git debug logging to improve console output
-debug.enable("simple-git");
+debug.enable("simple-git,simple-git:*");
 
 /**
  * Get a list of changed files in a git repository
