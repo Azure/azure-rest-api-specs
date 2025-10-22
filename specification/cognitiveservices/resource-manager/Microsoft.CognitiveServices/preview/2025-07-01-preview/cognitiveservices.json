@@ -5023,7 +5023,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           },
           "default": {
@@ -5076,7 +5076,7 @@
             "description": "CapabilityHost definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           }
         ],
@@ -5084,13 +5084,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -9388,6 +9388,73 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "ProjectCapabilityHostResource": {
+      "description": "Azure Resource Manager resource envelope for Project CapabilityHost.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/ProjectCapabilityHost"
+        }
+      },
+      "x-ms-client-name": "ProjectCapabilityHost",
+      "additionalProperties": false
+    },
+    "ProjectCapabilityHost": {
+      "type": "object",
+      "properties": {
+        "aiServicesConnections": {
+          "description": "List of AI services connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "vectorStoreConnections": {
+          "description": "List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "storageConnections": {
+          "description": "List of connection names from those available in the account or project to be used as a storage resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "threadStorageConnections": {
+          "description": "List of connection names from those available in the account or project to be used for Thread storage.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the CapabilityHost.",
+          "$ref": "#/definitions/CapabilityHostProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-client-name": "ProjectCapabilityHostProperties",
       "additionalProperties": false
     },
     "ResourceBase": {
