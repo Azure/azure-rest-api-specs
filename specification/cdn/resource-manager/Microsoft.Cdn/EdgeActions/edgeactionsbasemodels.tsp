@@ -9,35 +9,71 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.Cdn;
 
+/** The SKU type for the edge action */
 model SkuType {
+  /** The name of the SKU */
   name: string;
+
+  /** The tier of the SKU */
   tier: string;
 }
 
-enum EdgeActionVersionDeploymentType {
-  zip,
-  file,
-  others,
+/** The deployment type for edge action versions */
+union EdgeActionVersionDeploymentType {
+  string,
+
+  /** ZIP file deployment */
+  zip: "zip",
+
+  /** Single file deployment */
+  file: "file",
+
+  /** Other deployment types */
+  others: "others",
 }
 
-enum EdgeActionVersionValidationStatus {
-  Succeeded,
-  Failed,
+/** The validation status for edge action versions */
+union EdgeActionVersionValidationStatus {
+  string,
+
+  /** Validation succeeded */
+  Succeeded: "Succeeded",
+
+  /** Validation failed */
+  Failed: "Failed",
 }
 
-enum EdgeActionIsDefaultVersion {
-  True,
-  False,
+/** Indicates whether this is the default version */
+union EdgeActionIsDefaultVersion {
+  string,
+
+  /** This is the default version */
+  True: "True",
+
+  /** This is not the default version */
+  False: "False",
 }
 
-enum OperationStatus {
-  Running,
-  Succeeded,
-  Failed,
-  Canceled,
+/** The status of an operation */
+union OperationStatus {
+  string,
+
+  /** Operation is running */
+  Running: "Running",
+
+  /** Operation succeeded */
+  Succeeded: "Succeeded",
+
+  /** Operation failed */
+  Failed: "Failed",
+
+  /** Operation was canceled */
+  Canceled: "Canceled",
 }
 
 @pattern("[a-zA-Z0-9]+")
@@ -58,25 +94,28 @@ scalar EdgeActionVersionId extends Azure.Core.armResourceIdentifier<[
   }
 ]>;
 
-@doc("The status of the current operation")
+/** The status of the current operation */
 @Azure.Core.lroStatus
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   @doc("The operation completed successfully")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("The operation failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("The operation was canceled")
-  Canceled,
+  Canceled: "Canceled",
 
   @doc("Initial provisioning in progress")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Upgrade in progress")
-  Upgrading,
+  Upgrading: "Upgrading",
 }
 
+/** Edge action attachment information */
 model EdgeActionAttachment {
   @doc("The edge action attachment id")
   @visibility(Lifecycle.Read)
@@ -87,6 +126,7 @@ model EdgeActionAttachment {
   attachedResourceId: AttachedResourceId;
 }
 
+/** Edge action attachment response */
 model EdgeActionAttachmentResponse {
   @doc("Non changing guid to identity edge action")
   @visibility(Lifecycle.Read)
@@ -95,6 +135,9 @@ model EdgeActionAttachmentResponse {
 
 @doc("Represents an edge action properties")
 model EdgeActionProperties {
+  @doc("The sku type of the edge action")
+  sku: SkuType;
+
   @doc("The provisioning state of the edge action")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -127,6 +170,7 @@ model EdgeActionVersionProperties {
   lastPackageUpdateTime: utcDateTime;
 }
 
+/** Properties for edge action execution filter */
 model EdgeActionExecutionFilterProperties {
   @doc("The referenced versionId of the edgeaction version")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -149,6 +193,7 @@ model EdgeActionExecutionFilterProperties {
   provisioningState?: ProvisioningState;
 }
 
+/** Version code information for edge action */
 model VersionCode {
   @doc("The version code deployment content ")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -159,8 +204,7 @@ model VersionCode {
   name: string;
 }
 
-model EmptyBody {}
-
+/** Edge action operation properties */
 model EdgeActionOperationProperties {
   @doc("The resource id of the operation.")
   resourceId: string;
@@ -184,6 +228,7 @@ model EdgeActionOperationProperties {
   error?: ErrorDetails;
 }
 
+/** Error details for operations */
 model ErrorDetails {
   @doc("Error code.")
   code: string;

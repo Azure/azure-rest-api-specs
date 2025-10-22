@@ -4,13 +4,6 @@ parameters:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
-  disable:
-    "@azure-tools/typespec-azure-core/no-enum": "Enums will be converted in future refactor"
-    "@azure-tools/typespec-azure-core/documentation-required": "Documentation will be added in future refactor"
-    "@azure-tools/typespec-azure-core/no-openapi": "Example decorators from legacy conversion"
-    "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property": "SKU property required for this resource"
-    "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint": "Operations interface not needed for this service"
-    "@azure-tools/typespec-azure-resource-manager/no-empty-model": "EmptyBody model used for specific response scenarios"
 output-dir: "{project-root}/../Cdn/preview/2025-09-01-preview"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -19,11 +12,8 @@ options:
     omit-unreachable-types: true
     emitter-output-dir: "{output-dir}"
     output-file: "edgeaction.json"
-    examples-dir: "{project-root}/examples"
     azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
-    emit-lro-options: "all"
     new-line: lf
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-edgeactions"
