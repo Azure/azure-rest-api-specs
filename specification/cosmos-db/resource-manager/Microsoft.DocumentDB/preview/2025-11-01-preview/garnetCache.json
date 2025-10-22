@@ -376,16 +376,6 @@
               },
               "description": "Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers. The resource id must be of the form '/subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.Network/virtualNetworks/<virtual network>/subnets/<subnet>'"
             },
-            "initialGarnetUsersObjectIds": {
-              "x-ms-mutability": [
-                "create"
-              ],
-              "description": "Entra user object IDs that will be granted access to the Garnet cluster. These users will be able to connect to the Garnet cluster and perform operations on it.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
             "endPoints": {
               "readOnly": true,
               "description": "endpoints for clients to connect to the cluster.",
@@ -403,6 +393,11 @@
                   }
                 }
               }
+            },
+            "replicationFactor": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Number of copies of data maintained by the cluster"
             },
             "nodeCount": {
               "type": "integer",
