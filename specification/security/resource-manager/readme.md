@@ -125,6 +125,7 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
+```
 
 ### Tag: package-preview-2025-10-01-preview
 
