@@ -139,7 +139,7 @@ interface RedTeams {
 
       @doc("The target, model/agent")
       @query
-      target?: string;
+      targetType?: string;
     },
     Array<AttackObjective>
   >;
