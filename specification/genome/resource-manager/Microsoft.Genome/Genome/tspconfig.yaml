@@ -1,9 +1,13 @@
 emit:
   - "@azure-tools/typespec-autorest"
 
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+
 parameters:
   "service-dir":
-    default: "{project-root}/../../../.."
+    default: "{project-root}/../../.."
 
 options:
   "@azure-tools/typespec-autorest":

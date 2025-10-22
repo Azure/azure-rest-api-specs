@@ -13,6 +13,7 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.CommonTypes;
 
 /** Microsoft Genome Resource Provider API */
 @armProviderNamespace
@@ -23,14 +24,17 @@ using Azure.ResourceManager;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Genome;
 
+/** Operations interface for the resource provider. */
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /** The available API versions. */
 enum Versions {
-  /** The 2025-10-07 API version. */
-  `2025-10-07`: "2025-10-07",
+  /** The 2021-08-01-preview API version. */
+  `2021-08-01-preview`: "2021-08-01-preview",
 }
 
 /** Genome account resource. */
-model GenomeAccount is TrackedResource<GenomeAccountProperties> {
+model GenomeAccount is Azure.ResourceManager.TrackedResource<GenomeAccountProperties> {
   /** The name of the genome account within the specified resource group. */
   @maxLength(24)
   @minLength(3)
@@ -40,17 +44,17 @@ model GenomeAccount is TrackedResource<GenomeAccountProperties> {
   @segment("accounts")
   name: string;
 
-  /** The name of the deployment environment (e.g., dev, test, ppe, prod) where the genome account resource is provisioned. */
-  environmentName: string;
-
   /** The Kind of the resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Standard ARM envelope property"
   kind?: string;
 
   /** The resource model definition representing SKU */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Standard ARM envelope property"
   sku?: Sku;
 
   /** Identity for the resource. */
-  identity?: Identity;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Standard ARM envelope property"
+  identity?: CommonTypes.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -62,7 +66,7 @@ interface GenomeAccounts {
   create is ArmResourceCreateOrUpdateAsync<GenomeAccount>;
 
   /** Update properties of an existing Genome account. */
-  update is ArmCustomPatchAsync<GenomeAccount, GenomeAccountUpdate>;
+  update is ArmTagsPatchSync<GenomeAccount>;
 
   /** Delete a Genome account. */
   delete is ArmResourceDeleteWithoutOkAsync<GenomeAccount>;

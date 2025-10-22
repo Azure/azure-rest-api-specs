@@ -1,31 +1,15 @@
 {
+  "operationId": "GenomeAccounts_BeginUpdate",
+  "title": "Update a Genome account",
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-123456789012",
     "resourceGroupName": "rg1",
     "accountName": "mygenomeaccount",
     "api-version": "2021-08-01-preview",
-    "resource": {
+    "properties": {
       "tags": {
         "project": "genomics-research",
         "cost-center": "12345"
-      },
-      "properties": {
-        "networkAcls": {
-          "defaultAction": "Deny",
-          "ipRules": [
-            {
-              "value": "203.0.113.0/24"
-            },
-            {
-              "value": "198.51.100.0/24"
-            }
-          ],
-          "virtualNetworkRules": [
-            {
-              "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
-            }
-          ]
-        }
       }
     }
   },
@@ -40,7 +24,6 @@
           "project": "genomics-research",
           "cost-center": "12345"
         },
-        "environmentName": "dev",
         "kind": "Standard",
         "sku": {
           "name": "Standard_S1",
@@ -54,6 +37,7 @@
         "properties": {
           "provisioningState": "Active",
           "endpoint": "https://mygenomeaccount.genome.azure.com",
+          "environmentName": "dev",
           "networkAcls": {
             "defaultAction": "Deny",
             "ipRules": [
@@ -80,12 +64,6 @@
             }
           }
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Genome/locations/westus2/operationStatuses/operation-id",
-        "Retry-After": "10"
       }
     }
   }

@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Genome;
 
@@ -87,6 +88,7 @@ model Identity {
   principalId?: string;
 
   /** The list of user assigned identities associated with the resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard ARM pattern"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -108,6 +110,15 @@ union ProvisioningState {
 
   /** Deleting */
   Deleting: "Deleting",
+
+  /** Succeeded */
+  Succeeded: "Succeeded",
+
+  /** Failed */
+  Failed: "Failed",
+
+  /** Canceled */
+  Canceled: "Canceled",
 }
 
 /** Network rule action type. */
@@ -197,6 +208,9 @@ model GenomeAccountProperties {
   @visibility(Lifecycle.Read)
   endpoint?: string;
 
+  /** The name of the deployment environment (e.g., dev, test, ppe, prod) where the genome account resource is provisioned. */
+  environmentName?: string;
+
   /** Network access control rules. */
   networkAcls?: NetworkRuleSet;
 
@@ -207,5 +221,6 @@ model GenomeAccountProperties {
 /** Parameters for updating a Genome Account. */
 model GenomeAccountUpdate {
   /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard tags pattern"
   tags?: Record<string>;
 }
