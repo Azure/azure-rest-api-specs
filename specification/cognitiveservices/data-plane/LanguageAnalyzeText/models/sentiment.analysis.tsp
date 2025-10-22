@@ -77,7 +77,7 @@ union TokenSentimentValue {
 /** Sentiment analysis results for the input documents. */
 model SentimentResponse is PreBuiltResult {
   /** The sentiment analysis results for each document in the input. */
-  @typeChangedFrom(Versions.v2025_05_15_preview, SentimentDocumentResult[])
+  @typeChangedFrom(Versions.v2025_11_15_preview, SentimentDocumentResult[])
   documents: SentimentDocumentResultWithDetectedLanguage[];
 }
 
