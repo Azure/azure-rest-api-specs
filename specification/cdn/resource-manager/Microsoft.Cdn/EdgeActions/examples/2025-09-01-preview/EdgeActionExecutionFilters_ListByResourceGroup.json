@@ -1,0 +1,36 @@
+{
+  "operationId": "EdgeActionExecutionFilters_ListByResourceGroup",
+  "title": "ListEdgeActionExecutionFilters_byResourceGroup",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "edgeActionName": "edgeAction1",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/edgeActionExecutionFilters/filter1",
+            "name": "filter1",
+            "type": "Microsoft.Cdn/edgeActions/edgeActionExecutionFilters",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "filterExpression": "request.url contains 'api'"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/edgeActionExecutionFilters/filter2",
+            "name": "filter2",
+            "type": "Microsoft.Cdn/edgeActions/edgeActionExecutionFilters",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "filterExpression": "request.method == 'GET'"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
