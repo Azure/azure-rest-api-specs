@@ -785,7 +785,7 @@ alias BodyParameter<
   #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
   @doc(TDoc)
   @friendlyName(TName)
-  @body
+  @bodyRoot
   body: T;
 };
 

@@ -85,7 +85,7 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
       isForced?: boolean;
     },
     Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: StaticSiteUserProvidedFunctionAppARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource> &
@@ -165,7 +165,7 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
       isForced?: boolean;
     },
     Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: StaticSiteUserProvidedFunctionAppARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource> &

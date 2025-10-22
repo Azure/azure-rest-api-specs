@@ -261,7 +261,7 @@ model ReferenceSentencePair {
 model TranslationResultV3 {
   ...CommonResultHeaders;
 
-  @body
+  @bodyRoot
   @doc("Array of the translated text elements.")
   result: TranslatedTextItem[];
 

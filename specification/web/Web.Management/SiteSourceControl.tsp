@@ -67,7 +67,7 @@ interface SiteSourceControls {
   getSourceControlSlot is SiteSourceControlOps.Read<
     SiteSourceControl,
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: SiteSourceControl;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -86,7 +86,7 @@ interface SiteSourceControls {
       ArmLroLocationHeader<FinalResult = SiteSourceControl> &
         Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: SiteSourceControl;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -103,7 +103,7 @@ interface SiteSourceControls {
     SiteSourceControl,
     PatchModel = SiteSourceControl,
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: SiteSourceControl;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -161,7 +161,7 @@ interface SiteSourceControlOperationGroup {
   getSourceControl is SiteSourceControlOperationGroupOps.Read<
     SiteSourceControl,
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: SiteSourceControl;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -180,7 +180,7 @@ interface SiteSourceControlOperationGroup {
       ArmLroLocationHeader<FinalResult = SiteSourceControl> &
         Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: SiteSourceControl;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -197,7 +197,7 @@ interface SiteSourceControlOperationGroup {
     SiteSourceControl,
     PatchModel = SiteSourceControl,
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: SiteSourceControl;
     }),
     OverrideErrorType = DefaultErrorResponse

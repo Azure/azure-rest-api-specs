@@ -165,7 +165,7 @@ interface Sites {
   createOrUpdate is SiteOps.CreateOrUpdateAsync<
     Site,
     Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: Site;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = Site> &
@@ -183,7 +183,7 @@ interface Sites {
     Site,
     PatchModel = SitePatchResource,
     Response = ArmResponse<Site> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: Site;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -849,7 +849,7 @@ interface Sites {
     Site,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
-      @body
+      @bodyRoot
       _: NetworkTrace[];
     }),
     Parameters = {
@@ -904,7 +904,7 @@ interface Sites {
     Site,
     void,
     ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
-      @body
+      @bodyRoot
       @OpenAPI.extension("x-ms-identifiers", #[])
       _?: NetworkTrace[];
     }),
@@ -973,7 +973,7 @@ interface Sites {
     Site,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
-      @body
+      @bodyRoot
       _: NetworkTrace[];
     }),
     Parameters = {
@@ -1262,7 +1262,7 @@ interface Sites {
     Site,
     void,
     ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
-      @body
+      @bodyRoot
       @OpenAPI.extension("x-ms-identifiers", #[])
       _?: NetworkTrace[];
     }),
@@ -1466,7 +1466,7 @@ interface WebApps {
   createOrUpdateSlot is WebAppOps.CreateOrUpdateAsync<
     Site,
     Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: Site;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = Site> &
@@ -1485,7 +1485,7 @@ interface WebApps {
     Site,
     PatchModel = SitePatchResource,
     Response = ArmResponse<Site> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: Site;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -2003,7 +2003,7 @@ interface WebApps {
     Site,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
-      @body
+      @bodyRoot
       _: NetworkTrace[];
     }),
     Parameters = {
@@ -2058,7 +2058,7 @@ interface WebApps {
     Site,
     void,
     ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
-      @body
+      @bodyRoot
       @OpenAPI.extension("x-ms-identifiers", #[])
       _?: NetworkTrace[];
     }),
@@ -2129,7 +2129,7 @@ interface WebApps {
     Site,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
-      @body
+      @bodyRoot
       _: NetworkTrace[];
     }),
     Parameters = {
@@ -2423,7 +2423,7 @@ interface WebApps {
     Site,
     void,
     ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
-      @body
+      @bodyRoot
       @OpenAPI.extension("x-ms-identifiers", #[])
       _?: NetworkTrace[];
     }),

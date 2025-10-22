@@ -56,7 +56,7 @@ interface Replicas {
     Replica,
     PatchModel = Replica,
     Response = Replica | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Replica>> & {
-      @body
+      @bodyRoot
       _: Replica;
     })
   >;

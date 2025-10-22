@@ -111,7 +111,7 @@ interface AppServicePlans {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServicePlan,
     Response = ArmResourceUpdatedResponse<AppServicePlan> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: AppServicePlan;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan> &
@@ -130,7 +130,7 @@ interface AppServicePlans {
     AppServicePlan,
     PatchModel = AppServicePlanPatchResource,
     Response = ArmResponse<AppServicePlan> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: AppServicePlan;
     }),
     Error = DefaultErrorResponse

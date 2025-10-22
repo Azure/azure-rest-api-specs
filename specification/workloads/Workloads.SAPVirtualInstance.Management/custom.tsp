@@ -31,7 +31,7 @@ op VirtualResourceActionSync<
   ...Parameters,
 
   @doc("The content of the action request")
-  @body
+  @bodyRoot
   body: Request,
 ): Response | Error;
 
@@ -67,7 +67,7 @@ op CustomizedArmResourceActionAsync<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   ...Parameters,
-  @body body?: Request,
+  @bodyRoot body?: Request,
 ): ArmAcceptedLroResponse<
   "Resource operation accepted.",
   LroHeaders

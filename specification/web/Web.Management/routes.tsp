@@ -29,7 +29,7 @@ op validateMove(
   /**
    * Object that represents the resource to move.
    */
-  @body
+  @bodyRoot
   moveResourceEnvelope: CsmMoveResourceEnvelope,
 ): DefaultErrorResponse | NoContentResponse;
 /**
@@ -48,7 +48,7 @@ op validate(
   /**
    * Request with the resources to validate.
    */
-  @body
+  @bodyRoot
   validateRequest: ValidateRequest,
 ): ArmResponse<ValidateResponse> | DefaultErrorResponse;
 
@@ -286,7 +286,7 @@ op move(
   /**
    * Object that represents the resource to move.
    */
-  @body
+  @bodyRoot
   moveResourceEnvelope: CsmMoveResourceEnvelope,
 ): NoContentResponse | DefaultErrorResponse;
 

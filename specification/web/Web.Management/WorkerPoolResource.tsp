@@ -80,7 +80,7 @@ interface WorkerPoolResources {
   createOrUpdateMultiRolePool is WorkerPoolResourceOps.CreateOrUpdateAsync<
     WorkerPoolResource,
     Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: WorkerPoolResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource> &
@@ -99,7 +99,7 @@ interface WorkerPoolResources {
     WorkerPoolResource,
     PatchModel = WorkerPoolResource,
     Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: WorkerPoolResource;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -224,7 +224,7 @@ interface AppServiceEnvironments {
   createOrUpdateWorkerPool is AppServiceEnvironmentOps.CreateOrUpdateAsync<
     WorkerPoolResource,
     Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: WorkerPoolResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource> &
@@ -243,7 +243,7 @@ interface AppServiceEnvironments {
     WorkerPoolResource,
     PatchModel = WorkerPoolResource,
     Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: WorkerPoolResource;
     }),
     OverrideErrorType = DefaultErrorResponse

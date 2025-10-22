@@ -47,7 +47,7 @@ interface StaticSiteCustomDomainOverviewARMResources {
   createOrUpdateStaticSiteCustomDomain is ArmResourceCreateOrReplaceAsync<
     StaticSiteCustomDomainOverviewARMResource,
     Response = ArmResourceUpdatedResponse<StaticSiteCustomDomainOverviewARMResource> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: StaticSiteCustomDomainOverviewARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteCustomDomainOverviewARMResource> &

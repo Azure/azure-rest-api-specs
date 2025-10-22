@@ -56,7 +56,7 @@ interface StaticSiteARMResources {
   createOrUpdateStaticSite is ArmResourceCreateOrReplaceAsync<
     StaticSiteARMResource,
     Response = ArmResourceUpdatedResponse<StaticSiteARMResource> | (ArmAcceptedLroResponse & {
-      @body
+      @bodyRoot
       _: StaticSiteARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource> &
@@ -75,7 +75,7 @@ interface StaticSiteARMResources {
     StaticSiteARMResource,
     PatchModel = StaticSitePatchResource,
     Response = ArmResponse<StaticSiteARMResource> | (AcceptedResponse & {
-      @body
+      @bodyRoot
       _: StaticSiteARMResource;
     }),
     Error = DefaultErrorResponse

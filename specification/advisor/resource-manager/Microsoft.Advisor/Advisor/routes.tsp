@@ -48,7 +48,7 @@ interface ConfigurationsOperationGroup {
     /**
      * The Azure Advisor configuration data structure.
      */
-    @body
+    @bodyRoot
     configContract: ConfigData,
   ): ArmResponse<ConfigData> | ArmDefaultErrorResponse;
 
@@ -97,7 +97,7 @@ interface ConfigurationsOperationGroup {
     /**
      * The Azure Advisor configuration data structure.
      */
-    @body
+    @bodyRoot
     configContract: ConfigData,
   ): ArmResponse<ConfigData> | ArmDefaultErrorResponse;
 }
