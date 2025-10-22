@@ -15,7 +15,7 @@ namespace Microsoft.DomainRegistration;
  */
 model Domain is Azure.ResourceManager.TrackedResource<DomainProperties> {
   ...ResourceNameParameter<
-    Resource = {},
+    Resource = Domain,
     KeyName = "domainName",
     SegmentName = "domains",
     NamePattern = "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
@@ -47,12 +47,11 @@ interface Domains {
    * Description for Creates or updates a domain.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Domain,
     PatchModel = DomainPatchResource,
-    Response = ArmResponse<Domain> | (AcceptedResponse & {
+    Response = ArmResponse<Domain> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
       @bodyRoot
       _: Domain;
     }),
@@ -95,12 +94,11 @@ interface Domains {
   /**
    * Description for Renew a domain.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renew is ArmResourceActionSync<
     Domain,
     void,
-    OkResponse | AcceptedResponse | NoContentResponse,
+    OkResponse | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = Domain>> | NoContentResponse,
     Error = DefaultErrorResponse
   >;
 

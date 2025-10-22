@@ -495,14 +495,12 @@ model DomainProperties {
   /**
    * Domain registration status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   registrationStatus?: DomainStatus;
 
   /**
    * Domain provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -827,131 +825,136 @@ model DomainPatchResource extends ProxyOnlyResource {
   /**
    * DomainPatchResource resource specific properties
    */
-  properties?: {
-    /**
-     * Administrative contact.
-     */
-    @visibility(Lifecycle.Create)
-    contactAdmin: Contact;
+  properties?: DomainPatchResourceProperties;
+}
 
-    /**
-     * Billing contact.
-     */
-    @visibility(Lifecycle.Create)
-    contactBilling: Contact;
+/**
+ * DomainPatchResource resource specific properties
+ */
+model DomainPatchResourceProperties {
+  /**
+   * Administrative contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactAdmin: Contact;
 
-    /**
-     * Registrant contact.
-     */
-    @visibility(Lifecycle.Create)
-    contactRegistrant: Contact;
+  /**
+   * Billing contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactBilling: Contact;
 
-    /**
-     * Technical contact.
-     */
-    @visibility(Lifecycle.Create)
-    contactTech: Contact;
+  /**
+   * Registrant contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactRegistrant: Contact;
 
-    /**
-     * Domain registration status.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @visibility(Lifecycle.Read)
-    registrationStatus?: DomainStatus;
+  /**
+   * Technical contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactTech: Contact;
 
-    /**
-     * Domain provisioning state.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @visibility(Lifecycle.Read)
-    provisioningState?: ProvisioningState;
+  /**
+   * Domain registration status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  registrationStatus?: DomainStatus;
 
-    /**
-     * Name servers.
-     */
-    @visibility(Lifecycle.Read)
-    nameServers?: string[];
+  /**
+   * Domain provisioning state.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 
-    /**
-     * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
-     */
-    privacy?: boolean;
+  /**
+   * Name servers.
+   */
+  @visibility(Lifecycle.Read)
+  nameServers?: string[];
 
-    /**
-     * Domain creation timestamp.
-     */
-    @visibility(Lifecycle.Read)
-    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-    createdTime?: utcDateTime;
+  /**
+   * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
+   */
+  privacy?: boolean;
 
-    /**
-     * Domain expiration timestamp.
-     */
-    @visibility(Lifecycle.Read)
-    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-    expirationTime?: utcDateTime;
+  /**
+   * Domain creation timestamp.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdTime?: utcDateTime;
 
-    /**
-     * Timestamp when the domain was renewed last time.
-     */
-    @visibility(Lifecycle.Read)
-    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-    lastRenewedTime?: utcDateTime;
+  /**
+   * Domain expiration timestamp.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationTime?: utcDateTime;
 
-    /**
-     * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
-     */
-    autoRenew?: boolean = true;
+  /**
+   * Timestamp when the domain was renewed last time.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastRenewedTime?: utcDateTime;
 
-    /**
-     * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.
-     */
-    @visibility(Lifecycle.Read)
-    readyForDnsRecordManagement?: boolean;
+  /**
+   * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
+   */
+  autoRenew?: boolean = true;
 
-    /**
-     * All hostnames derived from the domain and assigned to Azure resources.
-     */
-    @visibility(Lifecycle.Read)
-    @OpenAPI.extension("x-ms-identifiers", #["name"])
-    managedHostNames?: HostName[];
+  /**
+   * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.
+   */
+  @visibility(Lifecycle.Read)
+  readyForDnsRecordManagement?: boolean;
 
-    /**
-     * Legal agreement consent.
-     */
-    @visibility(Lifecycle.Create)
-    consent: DomainPurchaseConsent;
+  /**
+   * All hostnames derived from the domain and assigned to Azure resources.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  managedHostNames?: HostName[];
 
-    /**
-     * Reasons why domain is not renewable.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @visibility(Lifecycle.Read)
-    domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
+  /**
+   * Legal agreement consent.
+   */
+  @visibility(Lifecycle.Create)
+  consent: DomainPurchaseConsent;
 
-    /**
-     * Current DNS type
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    dnsType?: DnsType;
+  /**
+   * Reasons why domain is not renewable.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
 
-    /**
-     * Azure DNS Zone to use
-     */
-    dnsZoneId?: string;
+  /**
+   * Current DNS type
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  dnsType?: DnsType;
 
-    /**
-     * Target DNS type (would be used for migration)
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    targetDnsType?: DnsType;
+  /**
+   * Azure DNS Zone to use
+   */
+  dnsZoneId?: string;
 
-    /**
-     * Authorization code for the domain.
-     */
-    @visibility(Lifecycle.Create, Lifecycle.Read)
-    authCode?: string;
-  };
+  /**
+   * Target DNS type (would be used for migration)
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  targetDnsType?: DnsType;
+
+  /**
+   * Authorization code for the domain.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  authCode?: string;
 }
 
 /**
