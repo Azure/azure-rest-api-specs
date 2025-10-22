@@ -105,6 +105,10 @@ suppressions:
     reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
     where:
       - $.definitions["CapabilityHostResource"]
+  - code: NestedResourcesMustHaveListOperation
+    reason: Service-side code does not have a list operation for CapabilityHosts. CapabilityHost must be retrieved by name only.
+    where:
+      - $.definitions["ProjectCapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
