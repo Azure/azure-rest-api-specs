@@ -45,6 +45,7 @@ input-file:
   - Microsoft.DocumentDB/stable/2025-10-15/rbac.json
   - Microsoft.DocumentDB/stable/2025-10-15/restorable.json
   - Microsoft.DocumentDB/stable/2025-10-15/services.json
+  - Microsoft.DocumentDB/stable/2025-10-15/fleet.json
 ```
 
 ### Tag: package-preview-2025-05-01
