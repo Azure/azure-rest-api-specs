@@ -1248,7 +1248,6 @@ union RestorePointExpandOptions {
 /**
  * The state of snapshot which determines the access availability of the snapshot.
  */
-@added(Versions.v2025_04_01)
 union SnapshotAccessState {
   string,
 

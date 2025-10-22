@@ -242,38 +242,6 @@ union AvailabilityPolicyDiskDelay {
 }
 
 /**
- * The state of snapshot which determines the access availability of the snapshot.
- */
-union SnapshotAccessState {
-  string,
-
-  /**
-   * Default value.
-   */
-  Unknown: "Unknown",
-
-  /**
-   * The snapshot cannot be used for restore, copy or download to offline.
-   */
-  Pending: "Pending",
-
-  /**
-   * The snapshot can be used for restore, copy to different region, and download to offline.
-   */
-  Available: "Available",
-
-  /**
-   * The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded.
-   */
-  InstantAccess: "InstantAccess",
-
-  /**
-   * The snapshot can be used for restoring disks with fast performance, copied and downloaded.
-   */
-  AvailableWithInstantAccess: "AvailableWithInstantAccess",
-}
-
-/**
  * Policy for accessing the disk via network.
  */
 union NetworkAccessPolicy {
