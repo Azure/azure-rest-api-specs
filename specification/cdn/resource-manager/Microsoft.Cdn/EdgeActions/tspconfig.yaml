@@ -1,6 +1,9 @@
 parameters:
   "service-dir":
     default: "sdk/edgeactions"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 output-dir: "{project-root}/../Cdn/preview/2025-09-01-preview"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -12,6 +15,8 @@ options:
     examples-directory: "{output-dir}/examples"
     azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    arm-resource-flattening: true
+    emit-lro-options: "all"
     new-line: lf
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-edgeactions"
