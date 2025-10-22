@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - Microsoft.Easm/preview/2023-04-01-preview/easm.json
+  - preview/2023-04-01-preview/easm.json
 ```
 ### Tag: package-preview-2022-04-01
 
@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-preview-2022-04-01` is specified o
 
 ``` yaml $(tag) == 'package-preview-2022-04-01'
 input-file:
-  - Microsoft.Easm/preview/2022-04-01-preview/easm.json
+  - preview/2022-04-01-preview/easm.json
 ```
 
 ---
