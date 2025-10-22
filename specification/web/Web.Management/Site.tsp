@@ -2596,6 +2596,9 @@ interface WebApps {
 );
 @@doc(Sites.migrateStorage::parameters.body, "Migration migrationOptions.");
 @@doc(Sites.migrateMySql::parameters.body, "MySql migration options.");
+@@doc(Sites.listPublishingProfileXmlWithSecrets::parameters.body,
+  "Specifies publishingProfileOptions for publishing profile. For example, use {\" format\": \"FileZilla3\"} to get a FileZilla publishing profile."
+);
 @@doc(Sites.restoreFromBackupBlob::parameters.body,
   "Information on restore request ."
 );
@@ -2654,6 +2657,9 @@ interface WebApps {
 );
 @@doc(WebApps.createOrUpdateHostSecretSlot::parameters.body,
   "The key to create or update"
+);
+@@doc(WebApps.listPublishingProfileXmlWithSecretsSlot::parameters.body,
+  "Specifies publishingProfileOptions for publishing profile. For example, use {\" format\": \"FileZilla3\"} to get a FileZilla publishing profile."
 );
 @@doc(WebApps.restoreFromBackupBlobSlot::parameters.body,
   "Information on restore request ."
