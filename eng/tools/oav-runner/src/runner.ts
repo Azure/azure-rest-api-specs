@@ -162,6 +162,8 @@ export async function processFilesToSpecificationList(
 
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
 
+      console.log(`visibleSwaggerFiles:\n${visibleSwaggerFiles.map((f) => `  ${f}`).join("\n")}`);
+
       for (const swaggerFile of visibleSwaggerFiles) {
         if (!cachedSwaggerSpecs.has(swaggerFile)) {
           const swaggerModel = new Swagger(path.join(rootDirectory, swaggerFile));
