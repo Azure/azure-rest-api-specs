@@ -26,10 +26,15 @@
         "indexedSharePointParameters": {
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
           "containerName": "defaultSiteLibrary",
+          "query": "*.docx OR *.pdf",
           "ingestionParameters": {
             "disableImageVerbalization": false,
-            "ingestionPermissionOptions": [],
-            "contentExtractionMode": "minimal",
+            "ingestionPermissionOptions": [
+              "userIds",
+              "groupIds",
+              "rbacScope"
+            ],
+            "contentExtractionMode": "standard",
             "identity": {
               "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
               "userAssignedIdentity": "/my/userassigned/id"

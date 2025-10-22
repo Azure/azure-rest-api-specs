@@ -31,8 +31,12 @@
               "isADLSGen2": false,
               "ingestionParameters": {
                 "disableImageVerbalization": false,
-                "ingestionPermissionOptions": [],
-                "contentExtractionMode": "minimal",
+                "ingestionPermissionOptions": [
+                  "userIds",
+                  "groupIds",
+                  "rbacScope"
+                ],
+                "contentExtractionMode": "standard",
                 "identity": {
                   "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
                   "userAssignedIdentity": "/my/userassigned/id"
