@@ -105,6 +105,13 @@ union ConfigurationCheckConfigurationDeviation {
   /**
    * Indicates that there is a deviation between the actual and recommended/customized state.
    */
+  @doc("A configuration deviation between the actual state and the recommended/customized state.")
+  Yes: "Yes",
+
+  /**
+   * Indicates that there is no deviation, and the actual state matches the recommended/customized
+   * state.
+   */
   @doc("A configuration deviation between the actual state and the recommended/customized state is detected.")
   DeviationDetected: "DeviationDetected",
 
@@ -113,6 +120,13 @@ union ConfigurationCheckConfigurationDeviation {
    * state.
    */
   @doc("No deviation; the actual state matches the recommended/customized state.")
+  No: "No",
+
+  /**
+   * Indicates that there is no deviation detected, and the actual state matches the recommended/customized
+   * state.
+   */
+  @doc("No deviation detected; the actual state matches the recommended/customized state.")
   NoDeviation: "NoDeviation",
 
   /**

@@ -217,7 +217,9 @@
       "type": "string",
       "description": "Defines the deviation status for a configuration check configuration.",
       "enum": [
+        "Yes",
         "DeviationDetected",
+        "No",
         "NoDeviation",
         "EvaluationFailed",
         "EvaluationSkipped"
@@ -227,14 +229,24 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "Yes",
+            "value": "Yes",
+            "description": "A configuration deviation between the actual state and the recommended/customized state."
+          },
+          {
             "name": "DeviationDetected",
             "value": "DeviationDetected",
             "description": "A configuration deviation between the actual state and the recommended/customized state is detected."
           },
           {
+            "name": "No",
+            "value": "No",
+            "description": "No deviation; the actual state matches the recommended/customized state."
+          },
+          {
             "name": "NoDeviation",
             "value": "NoDeviation",
-            "description": "No deviation; the actual state matches the recommended/customized state."
+            "description": "No deviation detected; the actual state matches the recommended/customized state."
           },
           {
             "name": "EvaluationFailed",
