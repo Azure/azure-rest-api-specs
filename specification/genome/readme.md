@@ -78,7 +78,7 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-08'
 input-file:
-- Microsoft.Genome/preview/2021-08-01-preview/genome.json
+- specification/genome/resource-manager/Microsoft.Genome/preview/2021-08-01-preview/genome.json
 ```
 
 ---
@@ -97,6 +97,6 @@ batch:
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
-    from: Microsoft.Genome/preview/2021-08-01-preview/genome.json
+    from: specification/genome/resource-manager/Microsoft.Genome/preview/2021-08-01-preview/genome.json
     reason: Existing API
 ```
