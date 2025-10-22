@@ -10,7 +10,7 @@ using Search;
 namespace Customizations;
 
 @client({
-  name: "SearchIndexClient",
+  name: "SearchClient",
   service: Search,
 })
 @clientInitialization(Search.SearchIndexClientOptions)
@@ -57,7 +57,7 @@ namespace SearchIndexClient {
 }
 
 @client({
-  name: "SearchServiceClient",
+  name: "SearchIndexClient",
   service: Search,
 })
 @clientNamespace("Azure.Search.Documents.Indexes")
