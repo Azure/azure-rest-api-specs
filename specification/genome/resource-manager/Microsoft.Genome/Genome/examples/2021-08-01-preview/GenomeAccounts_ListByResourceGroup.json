@@ -1,8 +1,9 @@
 {
-  "operationId": "GenomeAccounts_ListBySubscription",
-  "title": "List Genome accounts by subscription",
+  "operationId": "GenomeAccounts_ListByResourceGroup",
+  "title": "List Genome accounts by resource group",
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "rg1",
     "api-version": "2021-08-01-preview"
   },
   "responses": {
@@ -42,12 +43,11 @@
             }
           },
           {
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg2/providers/Microsoft.Genome/accounts/genomeaccount2",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Genome/accounts/genomeaccount2",
             "name": "genomeaccount2",
             "type": "Microsoft.Genome/accounts",
             "location": "East US",
             "tags": {},
-            "environmentName": "prod",
             "kind": "Premium",
             "sku": {
               "name": "Premium_P1",
@@ -61,6 +61,7 @@
             "properties": {
               "provisioningState": "Active",
               "endpoint": "https://genomeaccount2.genome.azure.com",
+              "environmentName": "prod",
               "networkAcls": {
                 "defaultAction": "Deny",
                 "ipRules": [
@@ -78,34 +79,6 @@
                   "keyVaultUri": "https://myvault.vault.azure.net/",
                   "identityClientId": "55555555-5555-5555-5555-555555555555"
                 }
-              }
-            }
-          },
-          {
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg3/providers/Microsoft.Genome/accounts/genomeaccount3",
-            "name": "genomeaccount3",
-            "type": "Microsoft.Genome/accounts",
-            "location": "Central US",
-            "tags": {},
-            "environmentName": "test",
-            "kind": "Standard",
-            "sku": {
-              "name": "Standard_S2",
-              "tier": "Standard"
-            },
-            "identity": {
-              "type": "None"
-            },
-            "properties": {
-              "provisioningState": "Active",
-              "endpoint": "https://genomeaccount3.genome.azure.com",
-              "networkAcls": {
-                "defaultAction": "Allow",
-                "ipRules": [],
-                "virtualNetworkRules": []
-              },
-              "encryption": {
-                "keySource": "Microsoft.Storage"
               }
             }
           }
