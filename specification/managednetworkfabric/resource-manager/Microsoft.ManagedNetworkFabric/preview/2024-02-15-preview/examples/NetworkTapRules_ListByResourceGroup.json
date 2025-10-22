@@ -1,0 +1,130 @@
+{
+  "title": "NetworkTapRules_ListByResourceGroup_MaximumSet_Gen",
+  "operationId": "NetworkTapRules_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "annotation": "annotation",
+              "configurationType": "File",
+              "tapRulesUrl": "https://microsoft.com/a",
+              "matchConfigurations": [
+                {
+                  "matchConfigurationName": "config1",
+                  "sequenceNumber": 10,
+                  "ipAddressType": "IPv4",
+                  "matchConditions": [
+                    {
+                      "protocolTypes": [
+                        "TCP"
+                      ],
+                      "vlanMatchCondition": {
+                        "vlans": [
+                          "20-30"
+                        ],
+                        "innerVlans": [
+                          "30"
+                        ],
+                        "vlanGroupNames": [
+                          "example-vlanGroup"
+                        ]
+                      },
+                      "ipCondition": {
+                        "type": "SourceIP",
+                        "prefixType": "Prefix",
+                        "ipPrefixValues": [
+                          "10.20.20.20/12"
+                        ],
+                        "ipGroupNames": [
+                          "example-ipGroup"
+                        ]
+                      },
+                      "encapsulationType": "None",
+                      "portCondition": {
+                        "portType": "SourcePort",
+                        "layer4Protocol": "TCP",
+                        "ports": [
+                          "100"
+                        ],
+                        "portGroupNames": [
+                          "example-portGroup1"
+                        ]
+                      }
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "Drop",
+                      "truncate": "100",
+                      "isTimestampEnabled": "True",
+                      "destinationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup",
+                      "matchConfigurationName": "match1"
+                    }
+                  ]
+                }
+              ],
+              "dynamicMatchConfigurations": [
+                {
+                  "ipGroups": [
+                    {
+                      "name": "example-ipGroup",
+                      "ipAddressType": "IPv4",
+                      "ipPrefixes": [
+                        "10.20.3.1/20"
+                      ]
+                    }
+                  ],
+                  "vlanGroups": [
+                    {
+                      "name": "example-vlanGroup",
+                      "vlans": [
+                        "20-30"
+                      ]
+                    }
+                  ],
+                  "portGroups": [
+                    {
+                      "name": "example-portGroup",
+                      "ports": [
+                        "100-200"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "networkTapId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTaps/example-tap",
+              "pollingIntervalInSeconds": 30,
+              "lastSyncedTime": "2023-06-12T07:11:22.485Z",
+              "configurationState": "Succeeded",
+              "provisioningState": "Accepted",
+              "administrativeState": "Enabled"
+            },
+            "tags": {
+              "keyId": "keyValue"
+            },
+            "location": "eastuseuap",
+            "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-tapRule",
+            "name": "example-tapRule",
+            "type": "microsoft.managednetworkfabric/networkTapRules",
+            "systemData": {
+              "createdBy": "email@address.com",
+              "createdByType": "User",
+              "createdAt": "2023-06-09T04:51:41.251Z",
+              "lastModifiedBy": "UserId",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/aukskqxh"
+      }
+    }
+  }
+}

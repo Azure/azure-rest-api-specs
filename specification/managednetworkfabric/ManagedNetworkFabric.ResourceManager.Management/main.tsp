@@ -68,8 +68,6 @@ namespace Microsoft.ManagedNetworkFabric;
 
 @doc("API Versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-02-15-preview")
   v2024_02_15_preview: "2024-02-15-preview",
