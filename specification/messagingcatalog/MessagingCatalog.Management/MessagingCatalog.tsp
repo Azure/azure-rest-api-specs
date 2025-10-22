@@ -1,7 +1,9 @@
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/http";
 import "./models.tsp";
 
 using TypeSpec.Rest;
@@ -9,6 +11,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MessagingCatalog;
 /**
@@ -64,6 +67,7 @@ interface MessagingCatalogs {
    */
   listBySubscription is ArmListBySubscription<MessagingCatalog>;
 
+  @added(Versions.v2024_10_01_preview)
   associate is ArmResourceActionAsync<
     MessagingCatalog,
     Association,
@@ -71,15 +75,24 @@ interface MessagingCatalogs {
     BaseParameters<Association>
   >;
 
+  @added(Versions.v2024_10_01_preview)
   listAssociations is ArmResourceActionAsync<
     MessagingCatalog,
     AssociationListRequest,
     AssociationListResponse
   >;
 
+  @added(Versions.v2024_10_01_preview)
   removeAssociation is ArmResourceActionAsync<
     MessagingCatalog,
     AssociationRemoveRequest,
     AssociationDeleteResponse
+  >;
+
+  @added(Versions.v2025_11_01_preview)
+  updateFabricPrivateLinks is ArmResourceActionAsync<
+    MessagingCatalog,
+    FabricPrivateLinksRequest,
+    FabricPrivateLinksResponse
   >;
 }

@@ -5259,6 +5259,30 @@
         ]
       }
     },
+    "AutoFailover": {
+      "type": "string",
+      "description": "Enum for AutoFailover",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "AutoFailover",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable AutoFailover."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable AutoFailover."
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.ArmResponse<Azure.ResourceManager.CommonTypes.ErrorResponse>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -5884,6 +5908,10 @@
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
         },
+        "healthModelProperties": {
+          "$ref": "#/definitions/HealthModelPropertiesOfDrill",
+          "description": "HealthModel properties."
+        },
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
@@ -6163,6 +6191,11 @@
           "description": "Attention reason if the Status is 'NeedsAttention'.",
           "readOnly": true
         },
+        "advisorRecommendationTypeId": {
+          "type": "string",
+          "description": "Recommendation Type Id for the recommendation.",
+          "readOnly": true
+        },
         "advisorHaRecommendationId": {
           "type": "string",
           "format": "arm-id",
@@ -6375,12 +6408,17 @@
       "type": "object",
       "description": "Request body for Failover API.",
       "properties": {
+        "autoFailover": {
+          "$ref": "#/definitions/AutoFailover",
+          "description": "AutoFailover - whether to pause between Fault and Failover for manual input."
+        },
         "failoverProperties": {
           "$ref": "#/definitions/FailoverRequest",
           "description": "The failover properties."
         }
       },
       "required": [
+        "autoFailover",
         "failoverProperties"
       ]
     },
@@ -6766,6 +6804,10 @@
         "chaosExperimentProperties": {
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrillUpdate",
           "description": "Chaos Experiment properties."
+        },
+        "healthModelProperties": {
+          "$ref": "#/definitions/HealthModelPropertiesOfDrillUpdate",
+          "description": "HealthModel properties."
         },
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
@@ -7605,6 +7647,28 @@
         "identity",
         "healthModelId"
       ]
+    },
+    "HealthModelPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Health Model properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for Health Model operations."
+        },
+        "healthModelId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Health Model.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CloudHealth/healthmodels"
+              }
+            ]
+          }
+        }
+      }
     },
     "HealthStatus": {
       "type": "string",
