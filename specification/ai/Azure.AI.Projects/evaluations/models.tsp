@@ -70,6 +70,18 @@ model EvaluationRunOutputItemResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Eval jsonl file content class.")
+@added(Versions.v2025_11_15_preview)
+model EvalJsonlFileContent {
+  /** Expected schema: QueryResponseInlineMessage */
+  @doc("The eval jsonl file content item.")
+  item: EvalJsonlFileContentItem;
+
+  /** optional sample. */
+  sample?: {};
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("Abstract eval jsonl file content item class.")
 @discriminator("type")
 @added(Versions.v2025_11_15_preview)
@@ -170,13 +182,7 @@ model EvalJsonlFileContentSource {
   type: "file_content" = "file_content";
 
   /** The content of the jsonl file. */
-  content: {
-    /** Expected schema: QueryResponseInlineMessage */
-    item: {};
-
-    /** optional sample. */
-    sample?: {};
-  };
+  content: EvalJsonlFileContent;
 }
 
 /** Eval jsonl input data. */

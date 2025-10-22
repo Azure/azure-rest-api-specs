@@ -3624,7 +3624,7 @@
             "type": "string"
           },
           {
-            "name": "target",
+            "name": "targetType",
             "in": "query",
             "description": "The target, model/agent",
             "required": false,
@@ -6302,6 +6302,23 @@
       ],
       "x-ms-discriminator-value": "EvaluationComparison"
     },
+    "EvalJsonlFileContent": {
+      "type": "object",
+      "description": "Eval jsonl file content class.",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/EvalJsonlFileContentItem",
+          "description": "The eval jsonl file content item."
+        },
+        "sample": {
+          "type": "object",
+          "description": "optional sample."
+        }
+      },
+      "required": [
+        "item"
+      ]
+    },
     "EvalJsonlFileContentItem": {
       "type": "object",
       "description": "Abstract eval jsonl file content item class.",
@@ -6332,21 +6349,8 @@
           }
         },
         "content": {
-          "type": "object",
-          "description": "The content of the jsonl file.",
-          "properties": {
-            "item": {
-              "type": "object",
-              "description": "Expected schema: QueryResponseInlineMessage"
-            },
-            "sample": {
-              "type": "object",
-              "description": "optional sample."
-            }
-          },
-          "required": [
-            "item"
-          ]
+          "$ref": "#/definitions/EvalJsonlFileContent",
+          "description": "The content of the jsonl file."
         }
       },
       "required": [
