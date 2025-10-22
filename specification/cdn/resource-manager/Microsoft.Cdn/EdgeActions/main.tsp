@@ -16,14 +16,12 @@ using Azure.Core;
 @service(#{ title: "Microsoft.Cdn/EdgeAction" })
 @versioned(Versions)
 @armCommonTypesVersion("v6")
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations interface defined in main CDN swagger, not in EdgeActions-specific swagger"
 namespace Microsoft.Cdn;
 
 enum Versions {
   `2025-09-01-preview`,
 }
-
-// ARM Operations interface is required
-interface Operations extends Azure.ResourceManager.Operations {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU property required at envelope level for backwards compatibility with 2024-07-22-preview"
 model EdgeAction is TrackedResource<EdgeActionProperties> {
@@ -112,7 +110,7 @@ interface EdgeActions {
 }
 
 @armResourceOperations
-interface EdgeActionVersions {
+interface EdgeActionsVersions {
   get is ArmResourceRead<EdgeActionVersion>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
   update is ArmResourcePatchAsync<
@@ -120,8 +118,7 @@ interface EdgeActionVersions {
     EdgeActionVersionProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeActionVersion>;
-  listByResourceGroup is ArmResourceListByParent<EdgeActionVersion>;
-  listBySubscription is ArmListBySubscription<EdgeActionVersion>;
+  listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
   deployVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     VersionCode,
@@ -138,7 +135,7 @@ interface EdgeActionVersions {
 }
 
 @armResourceOperations
-interface EdgeActionExecutionFilters {
+interface EdgeActionsExecutionFilters {
   get is ArmResourceRead<EdgeActionExecutionFilter>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionExecutionFilter>;
   update is ArmResourcePatchAsync<
@@ -146,6 +143,5 @@ interface EdgeActionExecutionFilters {
     EdgeActionExecutionFilterProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeActionExecutionFilter>;
-  listByResourceGroup is ArmResourceListByParent<EdgeActionExecutionFilter>;
-  listBySubscription is ArmListBySubscription<EdgeActionExecutionFilter>;
+  listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;
 }

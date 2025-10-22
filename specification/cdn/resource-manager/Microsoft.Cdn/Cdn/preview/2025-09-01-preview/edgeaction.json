@@ -39,55 +39,16 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "EdgeActions"
     },
     {
-      "name": "EdgeActionVersions"
+      "name": "EdgeActionsVersions"
     },
     {
-      "name": "EdgeActionExecutionFilters"
+      "name": "EdgeActionsExecutionFilters"
     }
   ],
   "paths": {
-    "/providers/Microsoft.Cdn/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/edgeActions": {
       "get": {
         "operationId": "EdgeActions_ListBySubscription",
@@ -123,102 +84,6 @@
           },
           "ListEdgeActions_bySubscription": {
             "$ref": "./examples/EdgeActions_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/executionFilters": {
-      "get": {
-        "operationId": "EdgeActionExecutionFilters_ListBySubscription",
-        "tags": [
-          "EdgeActionExecutionFilters"
-        ],
-        "description": "List EdgeActionExecutionFilter resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "edgeActionName",
-            "in": "path",
-            "description": "The name of the Edge Action",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "[a-zA-Z0-9]+"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeActionExecutionFilterListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List EdgeActionExecutionFilters by Subscription": {
-            "$ref": "./examples/EdgeActionExecutionFilters_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions": {
-      "get": {
-        "operationId": "EdgeActionVersions_ListBySubscription",
-        "tags": [
-          "EdgeActionVersions"
-        ],
-        "description": "List EdgeActionVersion resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "edgeActionName",
-            "in": "path",
-            "description": "The name of the Edge Action",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "[a-zA-Z0-9]+"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeActionVersionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List EdgeActionVersions by Subscription": {
-            "$ref": "./examples/EdgeActionVersions_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -665,9 +530,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/executionFilters": {
       "get": {
-        "operationId": "EdgeActionExecutionFilters_ListByResourceGroup",
+        "operationId": "EdgeActionsExecutionFilters_ListByEdgeAction",
         "tags": [
-          "EdgeActionExecutionFilters"
+          "EdgeActionsExecutionFilters"
         ],
         "description": "List EdgeActionExecutionFilter resources by EdgeAction",
         "parameters": [
@@ -704,11 +569,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ListEdgeActionExecutionFilters_byResourceGroup": {
-            "$ref": "./examples/EdgeActionExecutionFilters_ListByResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -716,9 +576,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/executionFilters/{executionFilter}": {
       "get": {
-        "operationId": "EdgeActionExecutionFilters_Get",
+        "operationId": "EdgeActionsExecutionFilters_Get",
         "tags": [
-          "EdgeActionExecutionFilters"
+          "EdgeActionsExecutionFilters"
         ],
         "description": "Get a EdgeActionExecutionFilter",
         "parameters": [
@@ -763,17 +623,12 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetEdgeActionExecutionFilters": {
-            "$ref": "./examples/EdgeActionExecutionFilters_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "EdgeActionExecutionFilters_Create",
+        "operationId": "EdgeActionsExecutionFilters_Create",
         "tags": [
-          "EdgeActionExecutionFilters"
+          "EdgeActionsExecutionFilters"
         ],
         "description": "Create a EdgeActionExecutionFilter",
         "parameters": [
@@ -845,20 +700,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "CreateEdgeActionExecutionFilters": {
-            "$ref": "./examples/EdgeActionExecutionFilters_Create.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "EdgeActionExecutionFilters_Update",
+        "operationId": "EdgeActionsExecutionFilters_Update",
         "tags": [
-          "EdgeActionExecutionFilters"
+          "EdgeActionsExecutionFilters"
         ],
         "description": "Update a EdgeActionExecutionFilter",
         "parameters": [
@@ -927,20 +777,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "UpdateEdgeActionExecutionFilters": {
-            "$ref": "./examples/EdgeActionExecutionFilters_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "EdgeActionExecutionFilters_Delete",
+        "operationId": "EdgeActionsExecutionFilters_Delete",
         "tags": [
-          "EdgeActionExecutionFilters"
+          "EdgeActionsExecutionFilters"
         ],
         "description": "Delete a EdgeActionExecutionFilter",
         "parameters": [
@@ -997,11 +842,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "DeleteEdgeActionExecutionFilters": {
-            "$ref": "./examples/EdgeActionExecutionFilters_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1010,9 +850,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions": {
       "get": {
-        "operationId": "EdgeActionVersions_ListByResourceGroup",
+        "operationId": "EdgeActionsVersions_ListByEdgeAction",
         "tags": [
-          "EdgeActionVersions"
+          "EdgeActionsVersions"
         ],
         "description": "List EdgeActionVersion resources by EdgeAction",
         "parameters": [
@@ -1049,11 +889,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ListEdgeActionVersions_byResourceGroup": {
-            "$ref": "./examples/EdgeActionVersions_ListByResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1061,9 +896,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}": {
       "get": {
-        "operationId": "EdgeActionVersions_Get",
+        "operationId": "EdgeActionsVersions_Get",
         "tags": [
-          "EdgeActionVersions"
+          "EdgeActionsVersions"
         ],
         "description": "Get a EdgeActionVersion",
         "parameters": [
@@ -1111,9 +946,9 @@
         }
       },
       "put": {
-        "operationId": "EdgeActionVersions_Create",
+        "operationId": "EdgeActionsVersions_Create",
         "tags": [
-          "EdgeActionVersions"
+          "EdgeActionsVersions"
         ],
         "description": "Create a EdgeActionVersion",
         "parameters": [
@@ -1191,9 +1026,9 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "EdgeActionVersions_Update",
+        "operationId": "EdgeActionsVersions_Update",
         "tags": [
-          "EdgeActionVersions"
+          "EdgeActionsVersions"
         ],
         "description": "Update a EdgeActionVersion",
         "parameters": [
@@ -1268,9 +1103,9 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "EdgeActionVersions_Delete",
+        "operationId": "EdgeActionsVersions_Delete",
         "tags": [
-          "EdgeActionVersions"
+          "EdgeActionsVersions"
         ],
         "description": "Delete a EdgeActionVersion",
         "parameters": [
@@ -1335,9 +1170,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/deployVersionCode": {
       "post": {
-        "operationId": "EdgeActionVersions_DeployVersionCode",
+        "operationId": "EdgeActionsVersions_DeployVersionCode",
         "tags": [
-          "EdgeActionVersions"
+          "EdgeActionsVersions"
         ],
         "description": "A long-running resource action.",
         "parameters": [
@@ -1406,11 +1241,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "DeployVersionCode": {
-            "$ref": "./examples/EdgeActionVersions_DeployVersionCode.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1419,9 +1249,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/getVersionCode": {
       "post": {
-        "operationId": "EdgeActionVersions_GetVersionCode",
+        "operationId": "EdgeActionsVersions_GetVersionCode",
         "tags": [
-          "EdgeActionVersions"
+          "EdgeActionsVersions"
         ],
         "description": "A long-running resource action.",
         "parameters": [
@@ -1481,11 +1311,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GetVersionCode": {
-            "$ref": "./examples/EdgeActionVersions_GetVersionCode.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1494,9 +1319,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault": {
       "post": {
-        "operationId": "EdgeActionVersions_SwapDefault",
+        "operationId": "EdgeActionsVersions_SwapDefault",
         "tags": [
-          "EdgeActionVersions"
+          "EdgeActionsVersions"
         ],
         "description": "A long-running resource action.",
         "parameters": [
@@ -1551,11 +1376,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Swap Default Version": {
-            "$ref": "./examples/EdgeActionVersions_SwapDefault.json"
           }
         },
         "x-ms-long-running-operation-options": {
