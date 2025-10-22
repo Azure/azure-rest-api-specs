@@ -4,6 +4,7 @@ import "./models-shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace TextTranslation;
@@ -60,7 +61,12 @@ model GetSupportedLanguagesResult {
   transliteration?: Record<TransliterationLanguage>;
 
   @doc("Languages that support dictionary API.")
+  @removed(APIVersion.v2025_10_01_preview)
   dictionary?: Record<SourceDictionaryLanguage>;
+
+  @doc("LLM models supported.")
+  @added(APIVersion.v2025_10_01_preview)
+  models?: Record<string>;
 }
 
 alias BaseLanguage = {
@@ -116,6 +122,7 @@ model LanguageScript {
 }
 
 @doc("Properties ot the source dictionary language")
+@removed(APIVersion.v2025_10_01_preview)
 model SourceDictionaryLanguage {
   ...BaseLanguage;
 
@@ -127,6 +134,7 @@ model SourceDictionaryLanguage {
 }
 
 @doc("Properties of the target dictionary language")
+@removed(APIVersion.v2025_10_01_preview)
 model TargetDictionaryLanguage {
   ...BaseLanguage;
 

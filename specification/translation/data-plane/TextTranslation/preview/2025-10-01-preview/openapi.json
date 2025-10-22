@@ -332,11 +332,11 @@
             "$ref": "#/definitions/TransliterationLanguage"
           }
         },
-        "dictionary": {
+        "models": {
           "type": "object",
-          "description": "Languages that support dictionary API.",
+          "description": "LLM models supported.",
           "additionalProperties": {
-            "$ref": "#/definitions/SourceDictionaryLanguage"
+            "type": "string"
           }
         }
       }
@@ -476,65 +476,6 @@
       "required": [
         "source",
         "target"
-      ]
-    },
-    "SourceDictionaryLanguage": {
-      "type": "object",
-      "description": "Properties ot the source dictionary language",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Display name of the language in the locale requested via Accept-Language header."
-        },
-        "nativeName": {
-          "type": "string",
-          "description": "Display name of the language in the locale native for this language."
-        },
-        "dir": {
-          "$ref": "#/definitions/LanguageDirectionality",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
-        },
-        "translations": {
-          "type": "array",
-          "description": "List of languages with alterative translations and examples for the query expressed in the source language.",
-          "items": {
-            "$ref": "#/definitions/TargetDictionaryLanguage"
-          }
-        }
-      },
-      "required": [
-        "name",
-        "nativeName",
-        "dir",
-        "translations"
-      ]
-    },
-    "TargetDictionaryLanguage": {
-      "type": "object",
-      "description": "Properties of the target dictionary language",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Display name of the language in the locale requested via Accept-Language header."
-        },
-        "nativeName": {
-          "type": "string",
-          "description": "Display name of the language in the locale native for this language."
-        },
-        "dir": {
-          "$ref": "#/definitions/LanguageDirectionality",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
-        },
-        "code": {
-          "type": "string",
-          "description": "Language code identifying the target language."
-        }
-      },
-      "required": [
-        "name",
-        "nativeName",
-        "dir",
-        "code"
       ]
     },
     "TextType": {
@@ -705,7 +646,7 @@
         },
         "deploymentName": {
           "type": "string",
-          "description": "Default is ‘general’, which uses NMT system.\n‘abc-inc-gpt-4o’, and ‘abc-inc-gpt-4o-mini’ are examples of deployment names which use GPT-4o uses or \nGPT-4o-mini model. ‘gpt-4o’ uses GPT-4o model. \n\n‘<custom model id>’ uses the custom NMT model tuned by customer.\n‘best’ system determines which is the best model to use for the request. This intelligence could be introduced\nin future. Customer should have deployed it in their resource.\n",
+          "description": "Default is 'general', which uses NMT system.\n'abc-inc-gpt-4o', and 'abc-inc-gpt-4o-mini' are examples of deployment names which use GPT-4o uses or\nGPT-4o-mini model. 'gpt-4o' uses GPT-4o model.\n\n'<custom model id>' uses the custom NMT model tuned by customer.\n'best' system determines which is the best model to use for the request. This intelligence could be introduced\nin future. Customer should have deployed it in their resource.\n",
           "default": "general"
         },
         "allowFallback": {

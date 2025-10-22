@@ -152,12 +152,12 @@ model TranslateTarget {
   profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
   @doc("""
-    Default is ‘general’, which uses NMT system.
-    ‘abc-inc-gpt-4o’, and ‘abc-inc-gpt-4o-mini’ are examples of deployment names which use GPT-4o uses or 
-    GPT-4o-mini model. ‘gpt-4o’ uses GPT-4o model. 
+    Default is 'general', which uses NMT system.
+    'abc-inc-gpt-4o', and 'abc-inc-gpt-4o-mini' are examples of deployment names which use GPT-4o uses or
+    GPT-4o-mini model. 'gpt-4o' uses GPT-4o model.
     
-    ‘<custom model id>’ uses the custom NMT model tuned by customer.
-    ‘best’ system determines which is the best model to use for the request. This intelligence could be introduced
+    '<custom model id>' uses the custom NMT model tuned by customer.
+    'best' system determines which is the best model to use for the request. This intelligence could be introduced
     in future. Customer should have deployed it in their resource.
     
     """)
