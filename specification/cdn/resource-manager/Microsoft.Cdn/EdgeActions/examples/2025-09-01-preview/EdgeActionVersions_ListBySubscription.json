@@ -1,0 +1,30 @@
+{
+  "operationId": "EdgeActionVersions_ListBySubscription",
+  "title": "List EdgeActionVersions by Subscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "edgeActionName": "myEdgeAction",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/versions/1.0",
+            "name": "1.0",
+            "type": "Microsoft.Cdn/edgeActions/versions",
+            "location": "global",
+            "properties": {
+              "deploymentType": "Production",
+              "validationStatus": "Valid",
+              "isDefaultVersion": "True",
+              "lastPackageUpdateTime": "2025-01-15T10:30:00Z",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
