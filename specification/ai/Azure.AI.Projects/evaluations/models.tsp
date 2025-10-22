@@ -69,9 +69,18 @@ model EvaluationRunOutputItemResult {
   properties: Record<unknown>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Abstract eval jsonl file content item class.")
+@discriminator("type")
+@added(Versions.v2025_11_15_preview)
+model EvalJsonlFileContentItem {
+  @doc("Type of the eval jsonl file content item.")
+  type: string;
+}
+
 /** Query and response excepted input messsage defintion. */
 @added(Versions.v2025_11_15_preview)
-model QueryResponseInlineMessage {
+model QueryResponseInlineMessage extends EvalJsonlFileContentItem {
   /** The object type, which is always query_response_inline_message. */
   type: "azure_ai_query_response_inline_message";
 
@@ -103,7 +112,7 @@ model CustomInference {
 
 /** Query and response excepted input messsage defintion. */
 @added(Versions.v2025_11_15_preview)
-model EvaluatorMessage {
+model EvaluatorMessage extends EvalJsonlFileContentItem {
   /** The object type, which is always query_response_inline_message. */
   type: "azure_ai_evaluator_messages";
 

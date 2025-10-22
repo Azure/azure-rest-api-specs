@@ -6302,6 +6302,20 @@
       ],
       "x-ms-discriminator-value": "EvaluationComparison"
     },
+    "EvalJsonlFileContentItem": {
+      "type": "object",
+      "description": "Abstract eval jsonl file content item class.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the eval jsonl file content item."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "EvalJsonlFileContentSource": {
       "type": "object",
       "description": "OpenAI definition: Eval inline file content or jsonl input data.",
@@ -7351,16 +7365,6 @@
       "type": "object",
       "description": "Query and response excepted input messsage defintion.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type, which is always query_response_inline_message.",
-          "enum": [
-            "azure_ai_evaluator_messages"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "query": {
           "type": "array",
           "description": "The input query string provided by the user or system. Can be image url.",
@@ -7391,9 +7395,14 @@
         }
       },
       "required": [
-        "type",
         "query"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvalJsonlFileContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_evaluator_messages"
     },
     "EvaluatorMetric": {
       "type": "object",
@@ -8768,16 +8777,6 @@
       "type": "object",
       "description": "Query and response excepted input messsage defintion.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type, which is always query_response_inline_message.",
-          "enum": [
-            "azure_ai_query_response_inline_message"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "query": {
           "type": "string",
           "description": "The input query string provided by the user or system. Can be image url."
@@ -8806,9 +8805,14 @@
         }
       },
       "required": [
-        "type",
         "query"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvalJsonlFileContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_query_response_inline_message"
     },
     "RecurrenceSchedule": {
       "type": "object",
