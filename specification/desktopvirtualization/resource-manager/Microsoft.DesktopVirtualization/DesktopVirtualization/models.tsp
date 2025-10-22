@@ -2181,13 +2181,13 @@ model SessionHostManagementPatchProperties {
    * Parameters for a hostpool update.
    */
   update?: HostPoolUpdateConfigurationPatchProperties;
-  
+
   /**
    * Parameters that apply when session hosts are provisioned.
    */
   @added(Versions.v2025_04_01_preview)
   provisioning?: SessionHostProvisioningConfigurationPatchProperties;
-  
+
   /**
    * The policy that should be applied when the Session Host provisioning operation fails.
    */
