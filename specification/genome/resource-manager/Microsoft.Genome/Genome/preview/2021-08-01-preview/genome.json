@@ -56,20 +56,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -92,10 +92,10 @@
         "description": "List all Genome accounts.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -108,7 +108,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -131,13 +131,13 @@
         "description": "List all Genome accounts belonging to a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -150,7 +150,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -173,13 +173,13 @@
         "description": "Get details of a Genome account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "accountName",
@@ -202,7 +202,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -220,13 +220,13 @@
         "description": "Provision a new Genome account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "accountName",
@@ -275,7 +275,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -297,13 +297,13 @@
         "description": "Update properties of an existing Genome account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "accountName",
@@ -321,7 +321,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GenomeAccountTagsUpdate"
+              "$ref": "#/definitions/GenomeAccountUpdate"
             }
           }
         ],
@@ -335,7 +335,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -353,13 +353,13 @@
         "description": "Delete a Genome account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "accountName",
@@ -393,7 +393,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -410,6 +410,43 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Encryption": {
       "type": "object",
       "description": "Encryption configuration.",
@@ -419,29 +456,8 @@
           "description": "Properties of KeyVault"
         },
         "keySource": {
-          "type": "string",
-          "description": "Key source for encryption",
-          "default": "Microsoft.KeyVault",
-          "enum": [
-            "Microsoft.Genome",
-            "Microsoft.KeyVault"
-          ],
-          "x-ms-enum": {
-            "name": "KeySource",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "MicrosoftGenome",
-                "value": "Microsoft.Genome",
-                "description": "Microsoft.Genome"
-              },
-              {
-                "name": "MicrosoftKeyVault",
-                "value": "Microsoft.KeyVault",
-                "description": "Microsoft.KeyVault"
-              }
-            ]
-          }
+          "$ref": "#/definitions/KeySource",
+          "description": "Key source for encryption"
         }
       }
     },
@@ -462,13 +478,13 @@
           "description": "The resource model definition representing SKU"
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Identity for the resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -521,18 +537,32 @@
         }
       }
     },
-    "GenomeAccountTagsUpdate": {
+    "GenomeAccountUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in GenomeAccount resources.",
+      "description": "Genome account resource.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/GenomeAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuUpdate",
+          "description": "The resource model definition representing SKU"
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "Identity for the resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "IpRule": {
       "type": "object",
@@ -546,6 +576,30 @@
       "required": [
         "value"
       ]
+    },
+    "KeySource": {
+      "type": "string",
+      "description": "Key source for encryption.",
+      "enum": [
+        "Microsoft.Genome",
+        "Microsoft.KeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "KeySource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftGenome",
+            "value": "Microsoft.Genome",
+            "description": "Encryption managed by the Genome service"
+          },
+          {
+            "name": "MicrosoftKeyVault",
+            "value": "Microsoft.KeyVault",
+            "description": "Encryption managed by Azure Key Vault"
+          }
+        ]
+      }
     },
     "KeyVaultProperties": {
       "type": "object",
@@ -583,12 +637,12 @@
           {
             "name": "Allow",
             "value": "Allow",
-            "description": "Allow"
+            "description": "Allow network access"
           },
           {
             "name": "Deny",
             "value": "Deny",
-            "description": "Deny"
+            "description": "Deny network access"
           }
         ]
       }
@@ -640,42 +694,42 @@
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "Provisioning"
+            "description": "Resource is being provisioned"
           },
           {
             "name": "Active",
             "value": "Active",
-            "description": "Active"
+            "description": "Resource is active and ready for use"
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Updating"
+            "description": "Resource is being updated"
           },
           {
             "name": "Suspended",
             "value": "Suspended",
-            "description": "Suspended"
+            "description": "Resource has been suspended"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deleting"
+            "description": "Resource is being deleted"
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "Operation completed successfully"
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "Operation failed to complete"
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled"
+            "description": "Operation was canceled"
           }
         ]
       },
@@ -753,6 +807,33 @@
         ]
       }
     },
+    "SkuUpdate": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
     "VirtualNetworkRule": {
       "type": "object",
       "description": "Virtual network rule for network access control.",
@@ -765,14 +846,38 @@
           "type": "string",
           "description": "Gets the state of virtual network rule."
         },
-        "ignoreMissingVnetServiceEndpoint": {
-          "type": "boolean",
-          "description": "Ignore missing vnet service endpoint or not."
+        "vnetServiceEndpointBehavior": {
+          "$ref": "#/definitions/VnetServiceEndpointBehavior",
+          "description": "Virtual network service endpoint behavior."
         }
       },
       "required": [
         "id"
       ]
+    },
+    "VnetServiceEndpointBehavior": {
+      "type": "string",
+      "description": "Virtual network service endpoint behavior.",
+      "enum": [
+        "Ignore",
+        "Require"
+      ],
+      "x-ms-enum": {
+        "name": "VnetServiceEndpointBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ignore",
+            "value": "Ignore",
+            "description": "Ignore missing virtual network service endpoint"
+          },
+          {
+            "name": "Require",
+            "value": "Require",
+            "description": "Require virtual network service endpoint to be present"
+          }
+        ]
+      }
     }
   },
   "parameters": {}

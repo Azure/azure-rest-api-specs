@@ -21,7 +21,7 @@ using Azure.ResourceManager.CommonTypes;
   title: "Microsoft Genome Resource Provider API",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Genome;
 
 /** Operations interface for the resource provider. */
@@ -66,7 +66,7 @@ interface GenomeAccounts {
   create is ArmResourceCreateOrUpdateAsync<GenomeAccount>;
 
   /** Update properties of an existing Genome account. */
-  update is ArmTagsPatchSync<GenomeAccount>;
+  update is ArmResourcePatchSync<GenomeAccount, GenomeAccountUpdate>;
 
   /** Delete a Genome account. */
   delete is ArmResourceDeleteWithoutOkAsync<GenomeAccount>;

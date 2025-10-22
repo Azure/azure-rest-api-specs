@@ -96,28 +96,28 @@ model Identity {
 union ProvisioningState {
   string,
 
-  /** Provisioning */
+  /** Resource is being provisioned */
   Provisioning: "Provisioning",
 
-  /** Active */
+  /** Resource is active and ready for use */
   Active: "Active",
 
-  /** Updating */
+  /** Resource is being updated */
   Updating: "Updating",
 
-  /** Suspended */
+  /** Resource has been suspended */
   Suspended: "Suspended",
 
-  /** Deleting */
+  /** Resource is being deleted */
   Deleting: "Deleting",
 
-  /** Succeeded */
+  /** Operation completed successfully */
   Succeeded: "Succeeded",
 
-  /** Failed */
+  /** Operation failed to complete */
   Failed: "Failed",
 
-  /** Canceled */
+  /** Operation was canceled */
   Canceled: "Canceled",
 }
 
@@ -125,11 +125,22 @@ union ProvisioningState {
 union NetworkRuleAction {
   string,
 
-  /** Allow */
+  /** Allow network access */
   Allow: "Allow",
 
-  /** Deny */
+  /** Deny network access */
   Deny: "Deny",
+}
+
+/** Virtual network service endpoint behavior. */
+union VnetServiceEndpointBehavior {
+  string,
+
+  /** Ignore missing virtual network service endpoint */
+  Ignore: "Ignore",
+
+  /** Require virtual network service endpoint to be present */
+  Require: "Require",
 }
 
 /** IP rule for network access control. */
@@ -146,8 +157,8 @@ model VirtualNetworkRule {
   /** Gets the state of virtual network rule. */
   state?: string;
 
-  /** Ignore missing vnet service endpoint or not. */
-  ignoreMissingVnetServiceEndpoint?: boolean;
+  /** Virtual network service endpoint behavior. */
+  vnetServiceEndpointBehavior?: VnetServiceEndpointBehavior;
 }
 
 /** Network access control rules. */
@@ -167,10 +178,10 @@ model NetworkRuleSet {
 union KeySource {
   string,
 
-  /** Microsoft.Genome */
+  /** Encryption managed by the Genome service */
   MicrosoftGenome: "Microsoft.Genome",
 
-  /** Microsoft.KeyVault */
+  /** Encryption managed by Azure Key Vault */
   MicrosoftKeyVault: "Microsoft.KeyVault",
 }
 
@@ -195,7 +206,7 @@ model Encryption {
   keyVaultProperties?: KeyVaultProperties;
 
   /** Key source for encryption */
-  keySource?: KeySource = KeySource.MicrosoftKeyVault;
+  keySource?: KeySource;
 }
 
 /** Properties of Genome account. */
@@ -223,4 +234,7 @@ model GenomeAccountUpdate {
   /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard tags pattern"
   tags?: Record<string>;
+
+  /** Managed identity configuration for the genome account. */
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
