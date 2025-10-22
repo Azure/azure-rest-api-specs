@@ -21,6 +21,8 @@ interface DomainsOperationGroup {
   @summary("Check if a domain is available for registration.")
   @autoRoute
   @action("checkDomainAvailability")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Domains_CheckAvailability")
   checkAvailability is ArmProviderActionSync<
     Request = NameIdentifier,
     Response = DomainAvailabilityCheckResult,
@@ -35,6 +37,8 @@ interface DomainsOperationGroup {
   @summary("Generate a single sign-on request for the domain management portal.")
   @autoRoute
   @action("generateSsoRequest")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Domains_GetControlCenterSsoRequest")
   getControlCenterSsoRequest is ArmProviderActionSync<
     Response = DomainControlCenterSsoRequest,
     Scope = SubscriptionActionScope,
@@ -49,6 +53,8 @@ interface DomainsOperationGroup {
   @autoRoute
   @action("listDomainRecommendations")
   @list
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Domains_ListRecommendations")
   listRecommendations is ArmProviderActionSync<
     Request = DomainRecommendationSearchParameters,
     Response = NameIdentifierCollection,

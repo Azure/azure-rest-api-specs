@@ -6,32 +6,16 @@ using Microsoft.DomainRegistration;
 
 @@clientName(Domains.createOrUpdate::parameters.resource, "domain");
 @@clientName(Domains.update::parameters.properties, "domain");
-@@clientLocation(DomainOwnershipIdentifiers.getOwnershipIdentifier, "Domains");
-@@clientLocation(DomainOwnershipIdentifiers.createOrUpdateOwnershipIdentifier,
-  "Domains"
-);
 @@clientName(DomainOwnershipIdentifiers.createOrUpdateOwnershipIdentifier::parameters.resource,
   "domainOwnershipIdentifier"
 );
-@@clientLocation(DomainOwnershipIdentifiers.updateOwnershipIdentifier,
-  "Domains"
-);
 @@clientName(DomainOwnershipIdentifiers.updateOwnershipIdentifier::parameters.properties,
   "domainOwnershipIdentifier"
-);
-@@clientLocation(DomainOwnershipIdentifiers.deleteOwnershipIdentifier,
-  "Domains"
-);
-@@clientLocation(DomainOwnershipIdentifiers.listOwnershipIdentifiers,
-  "Domains"
 );
 
 @@clientName(TopLevelDomains.listAgreements::parameters.body,
   "agreementOption"
 );
-@@clientLocation(DomainsOperationGroup.checkAvailability, "Domains");
-@@clientLocation(DomainsOperationGroup.getControlCenterSsoRequest, "Domains");
-@@clientLocation(DomainsOperationGroup.listRecommendations, "Domains");
 
 @@clientName(DomainsOperationGroup.listRecommendations::parameters.body,
   "parameters"
