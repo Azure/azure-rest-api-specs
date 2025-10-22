@@ -93,7 +93,7 @@ interface KnowledgeSources {
    * Remove the cache of a knowledge source.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  purge is ArmResourceActionAsync<
+  rebuild is ArmResourceActionAsync<
     KnowledgeSource,
     void,
     OkResponse,
