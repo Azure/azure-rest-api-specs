@@ -869,7 +869,7 @@ union ArchiveStatus {
 @Xml.name("Blob")
 model BlobItemInternal {
   /** The name of the blob. */
-  @Xml.name("Name") name: BlobName;
+  @Xml.name("Name") name: string;
 
   /** Whether the blob is deleted. */
   @Xml.name("Deleted") deleted: boolean;
