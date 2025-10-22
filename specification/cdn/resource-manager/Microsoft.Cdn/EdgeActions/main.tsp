@@ -12,9 +12,10 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.Core;
 
 @armProviderNamespace("Microsoft.Cdn")
-@service({
+@service(#{
   title: "Microsoft.Cdn/EdgeAction",
 })
 @versioned(Versions)
@@ -22,7 +23,6 @@ using Azure.ResourceManager;
 namespace Microsoft.Cdn;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-09-01-preview`,
 }
 
@@ -33,7 +33,7 @@ model EdgeAction is TrackedResource<EdgeActionProperties> {
   @doc("The name of the Edge Action")
   @segment("edgeActions")
   @key("edgeActionName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: smallString;
 
   @doc("The sku type of the edge action")
@@ -46,7 +46,7 @@ model EdgeActionVersion is TrackedResource<EdgeActionVersionProperties> {
   @doc("The name of the Edge Action version")
   @segment("versions")
   @key("version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: smallString;
 }
 
@@ -57,7 +57,7 @@ model EdgeActionExecutionFilter
   @doc("The name of the execution filter")
   @segment("executionFilters")
   @key("executionFilter")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: smallString;
 }
 
@@ -67,7 +67,7 @@ model EdgeActionExecutionFilter
 //   @doc("The operation id")
 //   @segment("edgeActionOperations")
 //   @key("operationId")
-//   @visibility("read")
+//   @visibility(Lifecycle.Read)
 //   name: smallString;
 // }
 

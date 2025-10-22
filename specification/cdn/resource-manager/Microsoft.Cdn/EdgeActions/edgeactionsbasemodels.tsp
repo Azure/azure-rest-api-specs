@@ -46,19 +46,19 @@ enum OperationStatus {
 @maxLength(50)
 scalar smallString extends string;
 
-scalar AttachedResourceId
-  extends ResourceIdentifier<[
-    {
-      type: "Microsoft.Cdn/Profiles/afdEndpoints/routes",
-    }
-  ]>;
+@doc("ARM resource identifier for attached routes")
+scalar AttachedResourceId extends Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.Cdn/Profiles/afdEndpoints/routes";
+  }
+]>;
 
-scalar EdgeActionVersionId
-  extends ResourceIdentifier<[
-    {
-      type: "Microsoft.Cdn/edgeActions/versions",
-    }
-  ]>;
+@doc("ARM resource identifier for edge action versions")
+scalar EdgeActionVersionId extends Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.Cdn/edgeActions/versions";
+  }
+]>;
 
 @doc("The status of the current operation")
 @Azure.Core.lroStatus
@@ -81,83 +81,83 @@ enum ProvisioningState {
 
 model EdgeActionAttachment {
   @doc("The edge action attachment id")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The attached resource Id")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   attachedResourceId: AttachedResourceId;
 }
 
 model EdgeActionAttachmentResponse {
   @doc("Non changing guid to identity edge action")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   edgeActionId: string;
 }
 
 @doc("Represents an edge action properties")
 model EdgeActionProperties {
   @doc("The provisioning state of the edge action")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("A list of attachments for the edge action")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attachments: EdgeActionAttachment[];
 }
 
 @doc("Represents an edge action version")
 model EdgeActionVersionProperties {
   @doc("The deployment type")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   deploymentType: EdgeActionVersionDeploymentType;
 
   @doc("The validation status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validationStatus: EdgeActionVersionValidationStatus;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The active state")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isDefaultVersion: EdgeActionIsDefaultVersion;
 
   @doc("The last update time in UTC for package update")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastPackageUpdateTime: utcDateTime;
 }
 
 model EdgeActionExecutionFilterProperties {
   @doc("The referenced versionId of the edgeaction version")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   versionId: EdgeActionVersionId;
 
   @doc("The last update time in UTC for the execution filter")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdateTime: utcDateTime;
 
   @doc("Custom Header Key associated with the execution filter")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   executionFilterIdentifierHeaderName: string;
 
   @doc("Custom Header Value associated with the execution filter")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   executionFilterIdentifierHeaderValue: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 model VersionCode {
   @doc("The version code deployment content ")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   content: string;
 
   @doc("The version code name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
 }
 
