@@ -62,7 +62,7 @@ interface CsmDeploymentStatuses {
   getProductionSiteDeploymentStatus is CsmDeploymentStatusOps.Read<
     CsmDeploymentStatus,
     Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedResponse & {
-      @bodyRoot
+      @body
       _: CsmDeploymentStatus;
     }),
     OverrideErrorType = DefaultErrorResponse
@@ -121,7 +121,7 @@ interface CsmDeploymentStatusOperationGroup {
   getSlotSiteDeploymentStatusSlot is CsmDeploymentStatusOperationGroupOps.Read<
     CsmDeploymentStatus,
     Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedResponse & {
-      @bodyRoot
+      @body
       _: CsmDeploymentStatus;
     }),
     OverrideErrorType = DefaultErrorResponse

@@ -12,7 +12,7 @@ interface Locations {
     ...ResourceInstanceParameters<Location>,
 
     @doc("Optionally, check for a specific SKU")
-    @bodyRoot
+    @body
     sku?: Foundations.Sku,
   ): ArmResponse<Trial> | ErrorResponse;
 

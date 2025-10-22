@@ -62,7 +62,7 @@ interface AppServiceEnvironmentResources {
         Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource>> &
       Azure.Core.Foundations.RetryAfterHeader & {
-        @bodyRoot
+        @body
         _: AppServiceEnvironmentResource;
       }),
     Error = DefaultErrorResponse
@@ -79,7 +79,7 @@ interface AppServiceEnvironmentResources {
     AppServiceEnvironmentResource,
     PatchModel = AppServiceEnvironmentPatchResource,
     Response = ArmResponse<AppServiceEnvironmentResource> | ArmResourceCreatedSyncResponse<AppServiceEnvironmentResource> | (AcceptedResponse & {
-      @bodyRoot
+      @body
       _: AppServiceEnvironmentResource;
     }),
     Error = DefaultErrorResponse
@@ -149,7 +149,7 @@ interface AppServiceEnvironmentResources {
     AppServiceEnvironmentResource,
     VirtualNetworkProfile,
     ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
+      @body
       _: WebAppCollection;
     }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WebAppCollection>,
@@ -281,7 +281,7 @@ interface AppServiceEnvironmentResources {
     AppServiceEnvironmentResource,
     void,
     ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
+      @body
       _: WebAppCollection;
     }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
@@ -333,7 +333,7 @@ interface AppServiceEnvironmentResources {
     AppServiceEnvironmentResource,
     void,
     ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
+      @body
       _: WebAppCollection;
     }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,

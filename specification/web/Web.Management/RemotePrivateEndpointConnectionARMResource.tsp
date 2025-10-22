@@ -72,7 +72,7 @@ interface RemotePrivateEndpointConnectionARMResources {
   approveOrRejectPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
-      @bodyRoot
+      @body
       _: RemotePrivateEndpointConnectionARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
@@ -153,7 +153,7 @@ interface StaticSites {
   approveOrRejectPrivateEndpointConnection is StaticSiteOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
-      @bodyRoot
+      @body
       _: RemotePrivateEndpointConnectionARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
@@ -235,7 +235,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   approveOrRejectPrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
-      @bodyRoot
+      @body
       _: RemotePrivateEndpointConnectionARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
@@ -322,7 +322,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   approveOrRejectPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
-      @bodyRoot
+      @body
       _: RemotePrivateEndpointConnectionARMResource;
     }),
     LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &

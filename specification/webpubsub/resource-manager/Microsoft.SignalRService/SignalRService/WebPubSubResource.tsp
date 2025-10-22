@@ -116,7 +116,7 @@ interface WebPubSubResources {
     WebPubSubResource,
     RegenerateKeyParameters,
     Response = WebPubSubKeys | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebPubSubKeys>> & {
-      @bodyRoot
+      @body
       _: WebPubSubKeys;
     })
   >;

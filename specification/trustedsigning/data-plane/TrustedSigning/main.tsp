@@ -176,7 +176,7 @@ model ExtendedKeyUsage {
 @doc("Public root certificate from the certificate chain.")
 model BytesBody<ContentType> {
   @doc("The root certificate of the certificate chain of this profile.")
-  @bodyRoot
+  @body
   body: bytes;
 
   @doc("The content type of the x509 cert.")
@@ -192,7 +192,7 @@ alias BodyParameter<
   #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
   @doc(TDoc)
   @friendlyName(TName)
-  @bodyRoot
+  @body
   body: T;
 };
 

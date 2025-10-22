@@ -34,7 +34,7 @@ namespace WebPubSub {
       /**
        * Target groups and connection filter.
        */
-      @bodyRoot
+      @body
       groupsToAdd: AddToGroupsRequest;
     },
     void
@@ -148,7 +148,7 @@ namespace WebPubSub {
       /**
        * Target groups and connection filter.
        */
-      @bodyRoot
+      @body
       groupsToRemove: RemoveFromGroupsRequest;
     },
     void
@@ -205,7 +205,7 @@ namespace WebPubSub {
       /**
        * The payload body.
        */
-      @bodyRoot
+      @body
       message: bytes;
     },
     void
@@ -317,7 +317,7 @@ namespace WebPubSub {
       /**
        * The payload body.
        */
-      @bodyRoot
+      @body
       message: bytes;
     },
     void
@@ -481,7 +481,7 @@ namespace WebPubSub {
       /**
        * The payload body.
        */
-      @bodyRoot
+      @body
       message: bytes;
     },
     void
@@ -866,7 +866,7 @@ namespace WebPubSub {
       /**
        * The payload body.
        */
-      @bodyRoot
+      @body
       message: bytes;
     },
     void
