@@ -12,11 +12,11 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations interface defined in main CDN swagger, not in EdgeActions-specific swagger"
 @armProviderNamespace
 @service(#{ title: "Microsoft.Cdn/EdgeAction" })
 @versioned(Versions)
 @armCommonTypesVersion("v6")
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations interface defined in main CDN swagger, not in EdgeActions-specific swagger"
 namespace Microsoft.Cdn;
 
 enum Versions {
