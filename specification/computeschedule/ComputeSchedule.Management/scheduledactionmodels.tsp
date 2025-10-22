@@ -93,7 +93,7 @@ model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 @doc("Request model to attach a list of scheduled action resources.")
 model ResourceAttachRequest {
   @doc("List of resources to be attached/patched")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resources: Array<ScheduledActionResource>;
 }
 
@@ -108,7 +108,7 @@ model ResourceDetachRequest {
 @doc("Request model perform a resource operation in a list of resources")
 model ResourcePatchRequest {
   @doc("The list of resources we watch to patch")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resources: Array<ScheduledActionResource>;
 }
 
@@ -139,7 +139,7 @@ model ResourceOperationResponse {
   totalResources: int32;
 
   @doc("The resource status of for each resource")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 
@@ -193,7 +193,7 @@ model ScheduledActionResourceOperationResponse {
   totalResources: int32;
 
   @doc("The resource status of for each resource")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 

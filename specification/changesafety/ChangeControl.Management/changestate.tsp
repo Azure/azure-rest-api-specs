@@ -107,7 +107,6 @@ model ChangeStateProperties {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
   @added(Versions.v2025_07_01_preview)
   @doc("Referenced stagemap snapshot.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read)
   stageMapSnapshot?: Array<string | StageMap>;
 
@@ -136,7 +135,7 @@ model ChangeStateProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Collection of payloads defining what will be deployed.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @added(Versions.v2025_07_01_preview)
   @removed(Versions.v2025_09_01_preview)
   changeDefinitions: ChangeDefinition[];

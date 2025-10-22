@@ -1,13 +1,13 @@
 import "./managedRules.tsp";
 
-using OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.AppSecurity;
 
 @doc("Defines managed rules customization (including exclusions and overrides)")
 model ManagedRulesCustomization {
   @doc("List of exclusions to be applied to the managed rules inspection. If not specified, then no exclusions are applied")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   exclusions?: ManagedRulesExclusion[] = #[];
 
   @doc("List of managed rule set overrides. If not specified, then no overrides are applied")

@@ -86,7 +86,7 @@ model ProxyAccountProperties {
 @doc("Proxy account authentication properties")
 model ProxyAccountAuthenticationProperties {
   @doc("Certificate-based authentication properties")
-  @extension("x-ms-identifiers", #["subjectName"])
+  @identifiers(#["subjectName"])
   certificates?: CertificateProperties[];
 }
 
@@ -142,11 +142,11 @@ model ThrottlingAccountProperties {
 @doc("Account authentication properties")
 model AccountAuthenticationProperties {
   @doc("Certificate-based authentication properties")
-  @extension("x-ms-identifiers", #["subjectName"])
+  @identifiers(#["subjectName"])
   certificates?: CertificateProperties[];
 
   @doc("Microsoft Entra-based authentication properties")
-  @extension("x-ms-identifiers", #["tenantId", "objectId"])
+  @identifiers(#["tenantId", "objectId"])
   entra?: EntraProperties[];
 }
 

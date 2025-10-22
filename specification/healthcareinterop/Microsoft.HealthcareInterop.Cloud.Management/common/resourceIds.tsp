@@ -52,6 +52,12 @@ alias OneLakeConnectorResourceId = Azure.Core.armResourceIdentifier<[
   }
 ]>;
 
+alias DdmsConnectorResourceId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.HealthcareInterop/ddmsConnectors";
+  }
+]>;
+
 alias ConnectedClusterResourceId = Azure.Core.armResourceIdentifier<[
   {
     type: "Microsoft.Kubernetes/connectedClusters";
