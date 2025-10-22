@@ -317,21 +317,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "js",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique Identifier for Data Product",
+            "description": "ghi",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Unique Identifier for Data Asset",
+            "description": "hssd",
             "required": true,
             "type": "string"
           }
@@ -340,10 +340,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RuleEntity"
-              }
+              "$ref": "#/definitions/PagedRuleParameters"
             }
           },
           "default": {
@@ -363,9 +360,12 @@
           "CreateRules_DataAsset": {
             "$ref": "./examples/Rules_Get.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
-      "post": {
+      "put": {
         "operationId": "CreateRules",
         "description": "Create Rules for Assets",
         "parameters": [
@@ -375,28 +375,28 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset).",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique Identifier for Data Product",
+            "description": "Represents description of the rule.",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Unique Identifier for Data Asset",
+            "description": "Represents the type of rule.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Rule entity",
+            "description": "Updated data product payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RuleEntity"
@@ -405,7 +405,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Represents a business/data quality rule entity.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/RuleEntityResponse"
             }
@@ -441,21 +441,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "js",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique Identifier for Data Product",
+            "description": "ghi",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Unique Identifier for Data Asset",
+            "description": "hssd",
             "required": true,
             "type": "string"
           },
@@ -471,7 +471,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RuleEntity"
+              "$ref": "#/definitions/RuleParameters"
             }
           },
           "default": {
@@ -493,9 +493,12 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "operationId": "UpdateRule",
         "description": "Update a rule",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -503,21 +506,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "js",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique Identifier for Data Product",
+            "description": "ghi",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Unique Identifier for Data Asset",
+            "description": "hssd",
             "required": true,
             "type": "string"
           },
@@ -529,12 +532,12 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
-            "description": "Body Rule Entity",
-            "required": false,
+            "description": "The resource instance.",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/RuleEntity"
+              "$ref": "#/definitions/RuleEntitiesUpdate"
             }
           }
         ],
@@ -542,7 +545,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RuleEntity"
+              "$ref": "#/definitions/RuleEntities"
             }
           },
           "default": {
@@ -574,21 +577,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "js",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique Identifier for Data Product",
+            "description": "ghi",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Unique Identifier for Data Asset",
+            "description": "hssd",
             "required": true,
             "type": "string"
           },
@@ -1264,7 +1267,7 @@
             "type": "string"
           },
           {
-            "name": "$skipToken",
+            "name": "skipToken",
             "in": "query",
             "description": "token",
             "required": false,
@@ -1600,8 +1603,8 @@
         }
       }
     },
-    "/business-domains/{businessDomainId}/runs/{runId}/cancel": {
-      "post": {
+    "/business-domains/{businessDomainId}/runs/{runId}:cancel": {
+      "put": {
         "operationId": "CancelScanByRunId",
         "description": "Cancel Scan",
         "parameters": [
@@ -1667,7 +1670,7 @@
             "type": "string"
           },
           {
-            "name": "$skipToken",
+            "name": "skipToken",
             "in": "query",
             "description": "token",
             "required": false,
@@ -2893,6 +2896,27 @@
         "outcomeId"
       ]
     },
+    "PagedRuleParameters": {
+      "type": "object",
+      "description": "Paged collection of RuleParameters items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RuleParameters items on this page",
+          "items": {
+            "$ref": "#/definitions/RuleParameters"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProfileEntity": {
       "type": "object",
       "description": "Profile Entity",
@@ -3007,57 +3031,57 @@
         }
       }
     },
+    "RuleEntities": {
+      "type": "object",
+      "description": "abc",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Unique Identifier for Rule",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "ruleEntity": {
+          "$ref": "#/definitions/RuleEntity",
+          "description": "ruleEntity"
+        }
+      },
+      "required": [
+        "ruleId",
+        "ruleEntity"
+      ]
+    },
+    "RuleEntitiesUpdate": {
+      "type": "object",
+      "description": "abc",
+      "properties": {
+        "ruleEntity": {
+          "$ref": "#/definitions/RuleEntityUpdate",
+          "description": "ruleEntity"
+        }
+      }
+    },
     "RuleEntity": {
       "type": "object",
       "description": "Represents a business/data quality rule entity.",
       "properties": {
-        "name": {
+        "businessDomainId": {
           "type": "string",
           "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
         },
-        "description": {
+        "dataProductId": {
           "type": "string",
           "description": "Represents description of the rule."
         },
-        "type": {
+        "dataAssetId": {
           "type": "string",
           "description": "Represents the type of rule."
-        },
-        "status": {
-          "type": "string",
-          "description": "Represents the status of the rule."
-        },
-        "typeProperties": {
-          "$ref": "#/definitions/TypeProperties",
-          "description": "Holds additional properties related to rule type."
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of the rule."
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the related BusinessDomain entity."
-        },
-        "dataProduct": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataProduct entity."
-        },
-        "dataAsset": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataAsset entity."
-        },
-        "score": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the rule's score."
         }
       },
       "required": [
-        "name",
-        "type",
-        "status",
-        "id"
+        "businessDomainId",
+        "dataAssetId"
       ]
     },
     "RuleEntityBulkResponse": {
@@ -3180,6 +3204,44 @@
         "type",
         "status",
         "id"
+      ]
+    },
+    "RuleEntityUpdate": {
+      "type": "object",
+      "description": "Represents a business/data quality rule entity.",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Represents description of the rule."
+        },
+        "dataAssetId": {
+          "type": "string",
+          "description": "Represents the type of rule."
+        }
+      }
+    },
+    "RuleParameters": {
+      "type": "object",
+      "description": "abc",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Unique Identifier for Rule",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "response": {
+          "$ref": "#/definitions/RuleEntity",
+          "description": "response"
+        }
+      },
+      "required": [
+        "ruleId"
       ]
     },
     "ScanDTO": {
