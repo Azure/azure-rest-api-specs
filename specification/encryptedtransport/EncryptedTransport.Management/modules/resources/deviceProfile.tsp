@@ -24,7 +24,7 @@ model DeviceProfile is TrackedResource<DeviceProfileProperties> {
   @key("deviceProfileName")
   @visibility(Lifecycle.Read)
   @segment("deviceProfiles")
-  @pattern("^[a-zA-Z0-9]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,64}$")
   @path
   name: string;
 }
@@ -32,12 +32,12 @@ model DeviceProfile is TrackedResource<DeviceProfileProperties> {
 @doc("Device Profile Properties")
 model DeviceProfileProperties {
   @doc("File name such as eud-rhel94-image-0_1_0.vhd corresponding to the device profile image.")
-  @pattern("^[A-Za-z0-9-]+\\.[A-Za-z]+$")
+  @pattern("^[A-Za-z0-9-]{3,60}\\.[A-Za-z]+$")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   imageId: string;
 
   @doc("User-friendly name describing the device profile, for example 'Dell Image with Audio and Camera'.")
-  @pattern("^[a-zA-Z0-9 ]{3,60}$")
+  @pattern("^[a-zA-Z0-9 ]{3,64}$")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   profileName: string;
 
