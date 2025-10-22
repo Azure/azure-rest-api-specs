@@ -81,18 +81,20 @@ union OperationStatus {
 scalar smallString extends string;
 
 @doc("ARM resource identifier for attached routes")
-scalar AttachedResourceId extends Azure.Core.armResourceIdentifier<[
-  {
-    type: "Microsoft.Cdn/Profiles/afdEndpoints/routes";
-  }
-]>;
+scalar AttachedResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cdn/Profiles/afdEndpoints/routes",
+    }
+  ]>;
 
 @doc("ARM resource identifier for edge action versions")
-scalar EdgeActionVersionId extends Azure.Core.armResourceIdentifier<[
-  {
-    type: "Microsoft.Cdn/edgeActions/versions";
-  }
-]>;
+scalar EdgeActionVersionId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cdn/edgeActions/versions",
+    }
+  ]>;
 
 /** The status of the current operation */
 @Azure.Core.lroStatus
@@ -135,9 +137,6 @@ model EdgeActionAttachmentResponse {
 
 @doc("Represents an edge action properties")
 model EdgeActionProperties {
-  @doc("The sku type of the edge action")
-  sku: SkuType;
-
   @doc("The provisioning state of the edge action")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
