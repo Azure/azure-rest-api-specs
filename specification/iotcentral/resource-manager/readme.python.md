@@ -27,4 +27,6 @@ directive:
   - from: iotcentral.json
     where: $.definitions.NetworkRuleSets["properties"]["applyToIoTCentral"]
     transform: $['default'] = 'False'
+modelerfour:
+  lenient-model-deduplication: true
 ```
