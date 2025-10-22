@@ -9295,7 +9295,11 @@
           "description": "Name of the rule.",
           "minLength": 1,
           "maxLength": 60,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,59}$"
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,59}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "ruleSetName": {
           "type": "string",
@@ -16379,7 +16383,10 @@
         "batchMode": {
           "type": "boolean",
           "description": "Indicates whether rule set is in batch mode. When batch mode is enabled, rules will be processed in a batch along with the rule set.\nWhen batch mode is disabled, rules would need to be processed independently.\nThis property can only be set during rule set creation and cannot be updated later.\nFor switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "rules": {
           "type": "array",
