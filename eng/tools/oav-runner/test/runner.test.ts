@@ -78,4 +78,28 @@ describe("file processing", () => {
     const result = await processFilesToSpecificationList(ROOT, changedFiles);
     expect(result).toEqual(expected);
   });
+
+  it("should skip examples outside preview and stable", async () => {
+    const changedFiles = [
+      // TypeSpec examples.  Should be silently ignored.
+      "specification/serviceB/data-plane/service.B/examples/2025-06-01/CreateResource.json",
+      "specification/serviceB/data-plane/service.B/examples/2025-07-01-preview/CreateResource.json",
+    ];
+    const expected: string[] = [];
+
+    const result = await processFilesToSpecificationList(ROOT, changedFiles);
+    expect(result).toEqual(expected);
+  });
+
+  it("should handle examples in a subdirectory", async () => {
+    const changedFiles = [
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/subdir/ListResources.json",
+    ];
+    const expected = [
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+    ];
+
+    const result = await processFilesToSpecificationList(ROOT, changedFiles);
+    expect(result).toEqual(expected);
+  });
 });
