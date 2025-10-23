@@ -9,6 +9,7 @@ import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 @service(#{ title: "Azure Speech BatchTranscription API" })
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
