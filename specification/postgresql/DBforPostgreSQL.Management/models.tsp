@@ -76,6 +76,17 @@ union BackupType {
 union HighAvailabilityMode {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ZoneRedundant: "ZoneRedundant",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SameZone: "SameZone",
+}
+
+/**
+ * Modes of high availability supported for this compute.
+ */
+union PostgreSqlFlexibleServerHighAvailabilityMode {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ZoneRedundant: "ZoneRedundant",
@@ -873,6 +884,21 @@ union RecommendationType {
 }
 
 /**
+ * Type for this recommendation.
+ */
+union TuningOptionRecommendationType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  CreateIndex: "CreateIndex",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  DropIndex: "DropIndex",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ReIndex: "ReIndex",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  AnalyzeTable: "AnalyzeTable",
+}
+
+/**
  * Type of endpoint for the virtual endpoints.
  */
 union VirtualEndpointType {
@@ -1649,7 +1675,7 @@ model BackupStoreDetails {
   /**
    * List of SAS uri of storage containers where backup data is to be streamed/copied.
    */
-  sasUriList: string[];
+  sasUriList: secretString[];
 }
 
 /**
@@ -2144,6 +2170,7 @@ model MigrationSecretParameters {
   /**
    * Credentials of administrator users for source and target servers.
    */
+  @secret
   adminCredentials: AdminCredentials;
 
   /**
@@ -2285,6 +2312,7 @@ model MigrationSecretParametersForPatch {
   /**
    * Credentials of administrator users for source and target servers.
    */
+  @secret
   adminCredentials?: AdminCredentialsForPatch;
 
   /**
@@ -2858,7 +2886,7 @@ model HighAvailability {
   /**
    * High availability mode for a server.
    */
-  mode?: HighAvailabilityMode = HighAvailabilityMode.Disabled;
+  mode?: PostgreSqlFlexibleServerHighAvailabilityMode = PostgreSqlFlexibleServerHighAvailabilityMode.Disabled;
 
   /**
    * Possible states of the standby server created when high availability is set to SameZone or ZoneRedundant.
@@ -3100,7 +3128,7 @@ model HighAvailabilityForPatch {
   /**
    * High availability mode for a server.
    */
-  mode?: HighAvailabilityMode;
+  mode?: PostgreSqlFlexibleServerHighAvailabilityMode;
 
   /**
    * Possible states of the standby server created when high availability is set to SameZone or ZoneRedundant.
@@ -3481,6 +3509,9 @@ model CustomErrorResponse {
   @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
   requestId?: string;
 }
+
+@secret
+scalar secretString extends string;
 
 model OperationList is Azure.Core.Page<Operation>;
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);

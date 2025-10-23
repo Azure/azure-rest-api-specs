@@ -4895,7 +4895,7 @@
           "type": "array",
           "description": "List of SAS uri of storage containers where backup data is to be streamed/copied.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/secretString"
           }
         }
       },
@@ -6003,7 +6003,7 @@
             "SameZone"
           ],
           "x-ms-enum": {
-            "name": "HighAvailabilityMode",
+            "name": "PostgreSqlFlexibleServerHighAvailabilityMode",
             "modelAsString": true,
             "values": [
               {
@@ -6038,7 +6038,7 @@
       "description": "High availability properties of a server.",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/HighAvailabilityMode",
+          "$ref": "#/definitions/PostgreSqlFlexibleServerHighAvailabilityMode",
           "description": "High availability mode for a server."
         },
         "state": {
@@ -6057,7 +6057,6 @@
       "type": "string",
       "description": "Modes of high availability supported for this compute.",
       "enum": [
-        "Disabled",
         "ZoneRedundant",
         "SameZone"
       ],
@@ -6065,10 +6064,6 @@
         "name": "HighAvailabilityMode",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled"
-          },
           {
             "name": "ZoneRedundant",
             "value": "ZoneRedundant"
@@ -6838,7 +6833,9 @@
       "properties": {
         "adminCredentials": {
           "$ref": "#/definitions/AdminCredentials",
-          "description": "Credentials of administrator users for source and target servers."
+          "format": "password",
+          "description": "Credentials of administrator users for source and target servers.",
+          "x-ms-secret": true
         },
         "sourceServerUsername": {
           "type": "string",
@@ -6867,7 +6864,9 @@
       "properties": {
         "adminCredentials": {
           "$ref": "#/definitions/AdminCredentialsForPatch",
-          "description": "Credentials of administrator users for source and target servers."
+          "format": "password",
+          "description": "Credentials of administrator users for source and target servers.",
+          "x-ms-secret": true
         },
         "sourceServerUsername": {
           "type": "string",
@@ -7469,6 +7468,33 @@
           {
             "name": "Disabled",
             "value": "Disabled"
+          }
+        ]
+      }
+    },
+    "PostgreSqlFlexibleServerHighAvailabilityMode": {
+      "type": "string",
+      "description": "Modes of high availability supported for this compute.",
+      "enum": [
+        "Disabled",
+        "ZoneRedundant",
+        "SameZone"
+      ],
+      "x-ms-enum": {
+        "name": "PostgreSqlFlexibleServerHighAvailabilityMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          },
+          {
+            "name": "ZoneRedundant",
+            "value": "ZoneRedundant"
+          },
+          {
+            "name": "SameZone",
+            "value": "SameZone"
           }
         ]
       }
@@ -9298,6 +9324,11 @@
           }
         ]
       }
+    },
+    "secretString": {
+      "type": "string",
+      "format": "password",
+      "x-ms-secret": true
     }
   },
   "parameters": {}
