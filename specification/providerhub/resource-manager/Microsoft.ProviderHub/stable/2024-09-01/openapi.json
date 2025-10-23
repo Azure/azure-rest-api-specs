@@ -96,7 +96,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationsDefinitionArrayResponseWithContinuation"
             }
           },
           "default": {
@@ -5896,6 +5896,28 @@
       "required": [
         "name",
         "display"
+      ]
+    },
+    "OperationsDefinitionArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The value.",
+          "items": {
+            "$ref": "#/definitions/OperationsDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get to the next set of results, if there are any."
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "OperationsDefinitionDisplay": {

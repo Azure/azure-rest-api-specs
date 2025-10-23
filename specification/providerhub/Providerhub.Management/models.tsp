@@ -5096,3 +5096,19 @@ model GroupConnectivityInformation {
    */
   redirectMapId?: string;
 }
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model OperationsDefinitionArrayResponseWithContinuation {  
+  /**  
+   * The value. 
+   */  
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value: OperationsDefinition[];  
+  
+  /**  
+   * The URL to get to the next set of results, if there are any. 
+   */  
+  @nextLink
+  nextLink?: string;  
+}
