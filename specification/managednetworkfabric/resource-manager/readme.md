@@ -60,6 +60,8 @@ suppressions:
     reason: This will be fixed in the next major version
   - code: LatestVersionOfCommonTypesMustBeUsed
     reason: This will be fixed in the next major version
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Removed deprecated APIs in the new API version
 ```
 
 ### Tag: package-2023-06-15
@@ -89,6 +91,9 @@ input-file:
   - Microsoft.ManagedNetworkFabric/stable/2023-06-15/Operations.json
   - Microsoft.ManagedNetworkFabric/stable/2023-06-15/RoutePolicies.json
   - Microsoft.ManagedNetworkFabric/stable/2023-06-15/common.json
+suppressions:
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Removed deprecated APIs in the new API version
 ```
 
 ### Tag: package-2023-02-01-preview
@@ -113,6 +118,7 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/Operations.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/RoutePolicies.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/common.json
+
 ```
 
 ---
