@@ -1,11 +1,16 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/openapi";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.BatchTranscription;
 
