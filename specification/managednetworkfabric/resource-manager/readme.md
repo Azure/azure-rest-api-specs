@@ -118,7 +118,9 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/Operations.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/RoutePolicies.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/common.json
-
+suppressions:
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Removed deprecated APIs in the new API version
 ```
 
 ---
