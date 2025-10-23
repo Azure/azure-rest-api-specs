@@ -1,19 +1,20 @@
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
-@doc("The optional execution id header.")
+/** The optional execution id header. */
 model ExecutionOperationIdHeader {
+  /** The id of this execution operation. */
   @header
-  @doc("The id of this execution operation.")
   operationId?: string;
 }
 
-@doc("Session identifier query parameter.")
+/** Session identifier query parameter. */
 model SessionIdentifier {
-  @doc("The user-assigned identifier of the session.")
+  /** The user-assigned identifier of the session. */
   @query
   @minLength(1)
   @maxLength(256)
@@ -21,23 +22,32 @@ model SessionIdentifier {
   identifier: string;
 }
 
-@doc("Session code execution identifier path parameter.")
+/** Session code execution identifier path parameter. */
 model CodeExecutionIdentifier {
-  @doc("The identifier of code execution.")
+  /** The identifier of code execution. */
   @path
   executionId: string;
 }
 
-@doc("The session resource file path parameter.")
+/** The session resource file path parameter. */
 model SessionResourceFilePathQueryParameter {
-  @doc("The path of the file after uploaded.")
+  /** The path of the file after uploaded. */
   @query
   path?: string;
 }
 
-@doc("The session resource file name parameter.")
+/** The session resource file recursive list parameter. */
+@added(Versions.v2025_10_02_preview)
+model SessionResourceFileRecursiveListParameter {
+  /** Whether to recursively list files. Default to false that would only list files in the current directory. */
+  @query
+  @added(Versions.v2025_10_02_preview)
+  recursive?: boolean;
+}
+
+/** The session resource file name parameter. */
 model SessionResourceFileNamePathParameter {
-  @doc("The name of the file.")
+  /** The name of the file. */
   @path
   name: string;
 }
