@@ -3079,22 +3079,53 @@
       "type": "object",
       "description": "Represents a business/data quality rule entity.",
       "properties": {
-        "businessDomainId": {
+        "name": {
           "type": "string",
           "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
         },
-        "dataProductId": {
+        "description": {
           "type": "string",
           "description": "Represents description of the rule."
         },
-        "dataAssetId": {
+        "type": {
           "type": "string",
           "description": "Represents the type of rule."
+        },
+        "status": {
+          "type": "string",
+          "description": "Represents the status of the rule."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Holds additional properties related to rule type."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the rule."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataProduct entity."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataAsset entity."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the rule's score."
         }
       },
       "required": [
-        "businessDomainId",
-        "dataAssetId"
+        "name",
+        "type",
+        "status",
+        "id"
       ]
     },
     "RuleEntityBulkResponse": {
@@ -3170,17 +3201,46 @@
       "type": "object",
       "description": "Represents a business/data quality rule entity.",
       "properties": {
-        "businessDomainId": {
+        "name": {
           "type": "string",
           "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
         },
-        "dataProductId": {
+        "description": {
           "type": "string",
           "description": "Represents description of the rule."
         },
-        "dataAssetId": {
+        "type": {
           "type": "string",
           "description": "Represents the type of rule."
+        },
+        "status": {
+          "type": "string",
+          "description": "Represents the status of the rule."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Holds additional properties related to rule type."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the rule."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataProduct entity."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataAsset entity."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the rule's score."
         }
       }
     },
