@@ -388,7 +388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -444,7 +444,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -507,7 +507,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -599,7 +599,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -887,7 +887,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1117,7 +1117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1173,7 +1173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1256,7 +1256,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -9986,6 +9986,9 @@
           "Create a VM with Disk Controller Type": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithDiskControllerType.json"
           },
+          "Create a VM with FIPS 140-3 Enabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFips1403Enabled.json"
+          },
           "Create a VM with HibernationEnabled": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithHibernationEnabled.json"
           },
@@ -12291,7 +12294,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -12329,6 +12332,10 @@
         "hibernationEnabled": {
           "type": "boolean",
           "description": "The flag that enables or disables hibernation capability on the VM."
+        },
+        "enableFips1403Encryption": {
+          "type": "boolean",
+          "description": "The flag enables the usage of FIPS 140-3 compliant cryptography on the protectedSettings of an extension. Learn more at: https://aka.ms/linuxagentfipssupport."
         }
       }
     },
@@ -13256,14 +13263,12 @@
         "diskIOPSReadWrite": {
           "type": "integer",
           "format": "int64",
-          "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.",
-          "readOnly": true
+          "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS."
         },
         "diskMBpsReadWrite": {
           "type": "integer",
           "format": "int64",
-          "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.",
-          "readOnly": true
+          "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS."
         },
         "detachOption": {
           "$ref": "#/definitions/DiskDetachOptionTypes",
@@ -13981,6 +13986,10 @@
         "id": {
           "type": "string",
           "description": "Disk restore point Id."
+        },
+        "snapshotAccessState": {
+          "$ref": "#/definitions/SnapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot."
         },
         "replicationStatus": {
           "$ref": "#/definitions/DiskRestorePointReplicationStatus",
@@ -16584,6 +16593,10 @@
             "$ref": "#/definitions/RestorePoint"
           },
           "readOnly": true
+        },
+        "instantAccess": {
+          "type": "boolean",
+          "description": "This property determines whether instant access snapshot is enabled for restore points created under this restore point collection for Premium SSD v2 or Ultra disk. Instant access snapshot for Premium SSD v2 or Ultra disk is instantaneously available for restoring disk with fast restore performance."
         }
       }
     },
@@ -16736,6 +16749,11 @@
           "$ref": "#/definitions/RestorePointInstanceView",
           "description": "The restore point instance view.",
           "readOnly": true
+        },
+        "instantAccessDurationMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property determines the time in minutes the snapshot is retained as instant access for restoring Premium SSD v2 or Ultra disk with fast restore performance in this restore point."
         }
       }
     },
@@ -17601,6 +17619,48 @@
           "format": "int32",
           "description": "Specifies the rank (a.k.a priority) associated with the VM Size."
         }
+      }
+    },
+    "SnapshotAccessState": {
+      "type": "string",
+      "description": "The state of snapshot which determines the access availability of the snapshot.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Available",
+        "InstantAccess",
+        "AvailableWithInstantAccess"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Default value."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The snapshot cannot be used for restore, copy or download to offline."
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The snapshot can be used for restore, copy to different region, and download to offline."
+          },
+          {
+            "name": "InstantAccess",
+            "value": "InstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded."
+          },
+          {
+            "name": "AvailableWithInstantAccess",
+            "value": "AvailableWithInstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance, copied and downloaded."
+          }
+        ]
       }
     },
     "SpotRestorePolicy": {
