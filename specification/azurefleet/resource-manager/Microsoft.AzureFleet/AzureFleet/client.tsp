@@ -386,3 +386,19 @@ using Microsoft.AzureFleet;
   "csharp"
 );
 @@clientName(VMCategory, "ComputeFleetVmCategory", "csharp");
+@@clientName(CapacityType, "ComputeFleetCapacityType", "csharp");
+@@clientName(FleetMode, "ComputeFleetMode", "csharp");
+@@clientName(VirtualMachine, "ComputeFleetVirtualMachine", "csharp");
+@@clientName(VMOperationStatus, "ComputeFleetVmOperationStatus", "csharp");
+@@clientName(ZoneAllocationPolicy,
+  "ComputeFleetZoneAllocationPolicy",
+  "csharp"
+);
+@@clientName(ZoneDistributionStrategy,
+  "ComputeFleetZoneDistributionStrategy",
+  "csharp"
+);
+@@clientName(Fleets.listVirtualMachines::parameters.$skiptoken,
+  "skipToken",
+  "csharp"
+);
