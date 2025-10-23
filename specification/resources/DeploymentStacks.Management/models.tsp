@@ -27,6 +27,7 @@ model DeploymentStack
   tags?: Record<string>;
   
   /** The Managed Identity configuration for a deployment stack. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Consistent with deployments defining it at the top level."
   @added(Versions.v2025_07_01)
   identity?: DeploymentIdentity;
 }
@@ -533,7 +534,7 @@ model DeploymentExternalInputDefinition
    * Configuration for the external input.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Value type is determined by the user."
-  config: unknown;
+  config?: unknown;
 }
 
 /**
@@ -870,6 +871,9 @@ model DeploymentStackValidateProperties {
   validationLevel?: ValidationLevel;
 }
 
+/**
+ * The deployment identity type.
+ */
 @added(Versions.v2025_07_01)
 union DeploymentIdentityType {
   string,
@@ -895,5 +899,6 @@ model DeploymentIdentity
   /**
    * The set of user assigned identities associated with the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of the object are identity IDs."
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
