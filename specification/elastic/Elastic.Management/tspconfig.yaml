@@ -13,10 +13,10 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Elastic"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Elastic"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-elastic"
     namespace: "azure.mgmt.elastic"
