@@ -42,6 +42,7 @@ interface VersionedOperations<
   @Rest.action("versions")
   @Rest.actionSeparator("/")
   @Http.get
+  @list
   listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
     TEntityType,
     TListVersionsParameters,
@@ -58,7 +59,10 @@ interface VersionedOperations<
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
-  @doc("Get the specific version of the {name}", TEntityType)
+  @doc(
+    "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
+    TEntityType
+  )
   getVersion is Azure.Core.Foundations.ResourceOperation<
     TEntityType,
     {
@@ -71,7 +75,10 @@ interface VersionedOperations<
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
-  @doc("Delete the specific version of the {name}", TEntityType)
+  @doc(
+    "Delete the specific version of the {name}. The service returns 204 No Content if the {name} was deleted successfully or if the {name} does not exist.",
+    TEntityType
+  )
   @Http.delete
   deleteVersion is Azure.Core.Foundations.ResourceOperation<
     TEntityType,

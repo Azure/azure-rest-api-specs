@@ -163,6 +163,7 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_List")
+  @list
   list is VirtualMachineScaleSetVMSOps.List<
     VirtualMachineScaleSetVM,
     Parameters = {
@@ -229,14 +230,9 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_Reimage")
   reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
-    {
-      /**
-       * Parameters for the Reimaging Virtual machine in ScaleSet.
-       */
-      @bodyRoot
-      vmScaleSetVMReimageInput?: VirtualMachineScaleSetVMReimageParameters;
-    },
-    OkResponse
+    Request = VirtualMachineScaleSetVMReimageParameters,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**

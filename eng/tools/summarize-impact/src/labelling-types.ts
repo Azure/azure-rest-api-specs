@@ -1,4 +1,7 @@
-export type PRType = "resource-manager" | "data-plane";
+export enum PRType {
+  DataPlane = "data-plane",
+  ResourceManager = "resource-manager",
+}
 
 /**
  * The LabelContext is used by prSummary.ts / summary() and downstream invocations.
@@ -52,9 +55,8 @@ export class Label {
    */
   shouldBePresent: boolean | undefined = undefined;
 
-  constructor(name: string, presentLabels?: Set<string>) {
+  constructor(name: string) {
     this.name = name;
-    this.present = presentLabels?.has(this.name) ?? undefined;
   }
 
   /**

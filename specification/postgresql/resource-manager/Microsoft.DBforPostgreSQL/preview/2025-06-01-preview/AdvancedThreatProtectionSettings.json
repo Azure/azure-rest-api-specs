@@ -203,7 +203,17 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ThreatProtectionState",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Advanced threat protection is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "Advanced threat protection is disabled."
+              }
+            ]
           }
         },
         "creationTime": {
@@ -262,7 +272,13 @@
       ],
       "x-ms-enum": {
         "name": "ThreatProtectionName",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Default",
+            "description": "Default advanced threat protection settings."
+          }
+        ]
       },
       "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*",
       "x-ms-parameter-location": "method"
