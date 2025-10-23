@@ -1,0 +1,175 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureStackHCI",
+    "version": "2025-11-01-preview",
+    "description": "Azure Stack HCI service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PlatformUpdates"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates/{platformUpdateName}": {
+      "get": {
+        "operationId": "PlatformUpdates_Get",
+        "tags": [
+          "PlatformUpdates"
+        ],
+        "description": "Get a platform update.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "platformUpdateName",
+            "in": "path",
+            "description": "The name of the PlatformUpdate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlatformUpdates_Get_MaximumSet": {
+            "$ref": "./examples/PlatformUpdates_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PlatformPayload": {
+      "type": "object",
+      "description": "Represents details of a specific platform update payload.",
+      "properties": {
+        "payloadUrl": {
+          "type": "string",
+          "description": "Represents url of a platform update payload."
+        },
+        "payloadHash": {
+          "type": "string",
+          "description": "Represents hash of a platform update payload."
+        }
+      },
+      "required": [
+        "payloadUrl",
+        "payloadHash"
+      ]
+    },
+    "PlatformUpdate": {
+      "type": "object",
+      "description": "Represents a platform update resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlatformUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PlatformUpdateDetails": {
+      "type": "object",
+      "description": "Represents details of a specific platform update.",
+      "properties": {
+        "validatedSolutionRecipeVersion": {
+          "type": "string",
+          "description": "Represents validated solution recipe version of a platform update."
+        },
+        "platformVersion": {
+          "type": "string",
+          "description": "Represents version of a platform update."
+        },
+        "platformPayloads": {
+          "type": "array",
+          "description": "Represents the platform payloads of a platform update.",
+          "items": {
+            "$ref": "#/definitions/PlatformPayload"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "validatedSolutionRecipeVersion",
+        "platformVersion",
+        "platformPayloads"
+      ]
+    },
+    "PlatformUpdateProperties": {
+      "type": "object",
+      "description": "Represents properties of a platform update resource.",
+      "properties": {
+        "platformUpdateDetails": {
+          "type": "array",
+          "description": "Represents applicable platform updates.",
+          "items": {
+            "$ref": "#/definitions/PlatformUpdateDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "platformUpdateDetails"
+      ]
+    }
+  },
+  "parameters": {}
+}
