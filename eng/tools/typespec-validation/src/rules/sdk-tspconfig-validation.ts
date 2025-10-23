@@ -297,15 +297,6 @@ export class TspConfigJavaAzEmitterOutputDirMatchPatternSubRule extends Tspconfi
   constructor() {
     super("@azure-tools/typespec-java", "emitter-output-dir", new RegExp(/^azure(-\w+)+$/));
   }
-
-  protected validate(config: any): RuleResult {
-    const option = this.tryFindOption(config);
-    if (option === undefined) {
-      // at present, we don't require service use emitter-output-dir
-      return { success: true };
-    }
-    return super.validate(config);
-  }
 }
 
 export class TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
@@ -315,15 +306,6 @@ export class TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule extends Tspcon
       "emitter-output-dir",
       new RegExp(/^azure-resourcemanager(-\w+)+$/),
     );
-  }
-
-  protected validate(config: any): RuleResult {
-    const option = this.tryFindOption(config);
-    if (option === undefined) {
-      // at present, we don't require service use emitter-output-dir
-      return { success: true };
-    }
-    return super.validate(config);
   }
 
   protected skip(_: any, folder: string) {
@@ -428,7 +410,12 @@ export class TspConfigGoModuleMatchPatternSubRule extends TspconfigEmitterOption
   protected validate(config: any): RuleResult {
     const module = config?.options?.[this.emitterName]?.["module"];
     const containingModule = config?.options?.[this.emitterName]?.["containing-module"];
-    if (module === undefined && containingModule === undefined) return { success: false };
+    if (module === undefined && containingModule === undefined) {
+      return this.createFailedResult(
+        `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
+        `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
+      );
+    }
     if (module === undefined) return { success: true };
     return super.validate(config);
   }
@@ -445,7 +432,12 @@ export class TspConfigGoContainingModuleMatchPatternSubRule extends TspconfigEmi
   protected validate(config: any): RuleResult {
     const module = config?.options?.[this.emitterName]?.["module"];
     const containingModule = config?.options?.[this.emitterName]?.["containing-module"];
-    if (module === undefined && containingModule === undefined) return { success: false };
+    if (module === undefined && containingModule === undefined) {
+      return this.createFailedResult(
+        `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
+        `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
+      );
+    }
     if (containingModule === undefined) return { success: true };
     return super.validate(config);
   }
@@ -719,7 +711,7 @@ export class SdkTspConfigValidationRule implements Rule {
         : "";
 
     return {
-      success: true, // Always return success to avoid blocking PRs, errors are reported in stdOutput
+      success,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
