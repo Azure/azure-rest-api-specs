@@ -60,10 +60,12 @@
             "description": "Request successful. Resource does not exist."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
-          "200": {
-            "description": "Delete successful."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -315,6 +317,7 @@
   },
   "definitions": {
     "VirtualNetworkAppliancePropertiesFormat": {
+      "type": "object",
       "properties": {
         "bandwidthInGbps": {
           "type": "string",
@@ -346,6 +349,7 @@
       "description": "VirtualNetworkAppliance properties."
     },
     "VirtualNetworkAppliance": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -366,6 +370,7 @@
       "description": "A virtual network appliance in a resource group."
     },
     "VirtualNetworkApplianceIpConfiguration": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -395,6 +400,7 @@
       "description": "The virtual network appliance ip configuration."
     },
     "VirtualNetworkApplianceIpConfigurationProperties": {
+      "type": "object",
       "properties": {
         "privateIPAddress": {
           "type": "string",
@@ -421,6 +427,7 @@
       "description": "Properties of virtual network appliance IP configuration."
     },
     "VirtualNetworkApplianceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -443,6 +450,7 @@
       "name": "virtualNetworkApplianceName",
       "in": "path",
       "required": true,
+      "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$",
       "type": "string",
       "description": "The name of the virtual network appliance."
     },
