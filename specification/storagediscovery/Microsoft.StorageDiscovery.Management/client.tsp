@@ -24,3 +24,11 @@ using Microsoft.StorageDiscovery;
   "StorageDiscoveryProvisioningState",
   "csharp"
 );
+@@clientName(StorageDiscoveryResourceType,
+  "StorageDiscoveryResourceKind",
+  "csharp"
+);
+@@clientName(StorageDiscoveryWorkspacePropertiesUpdate,
+  "StorageDiscoveryWorkspacePatchProperties",
+  "csharp"
+);

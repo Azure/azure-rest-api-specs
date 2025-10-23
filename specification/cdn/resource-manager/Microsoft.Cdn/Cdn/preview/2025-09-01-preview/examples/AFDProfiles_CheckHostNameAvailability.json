@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "checkHostNameAvailabilityInput": {
+      "hostName": "www.someDomain.net"
+    },
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "The hostname 'www.someDomain.net' is already owned by another profile.",
+        "nameAvailable": false,
+        "reason": "Conflict"
+      }
+    }
+  },
+  "operationId": "AFDProfiles_CheckHostNameAvailability",
+  "title": "AFDProfiles_CheckHostNameAvailability"
+}

@@ -3,7 +3,6 @@ export type ImpactAssessment = {
   dataPlaneRequired: boolean;
   suppressionReviewRequired: boolean;
   isNewApiVersion: boolean;
-  rpaasExceptionRequired: boolean;
   rpaasRpNotInPrivateRepo: boolean;
   rpaasChange: boolean;
   newRP: boolean;

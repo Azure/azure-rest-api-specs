@@ -4,7 +4,7 @@ import "./WebModels/AssessedSqlInstanceV3.tsp";
 import "./WebModels/AssessedSqlDatabaseV3.tsp";
 import "./WebModels/AssessedSqlMachineV3.tsp";
 import "./WebModels/SqlAssessmentV3Summary.tsp";
-import "../Common/DataModels/DownloadUrl.tsp";
+import "./Normalized Contract/DataModels/DownloadUrl.tsp";
 import "./WebModels/SqlGraphAssessmentOptions.tsp";
 import "./WebModels/SqlGraphAssessmentOptions.tsp";
 
