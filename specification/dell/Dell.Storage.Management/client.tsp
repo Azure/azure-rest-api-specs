@@ -6,7 +6,7 @@ using Azure.Core;
 using LiftrBase;
 using LiftrBase.Storage;
 
-@@clientName(Dell.Storage, "DellStorageMgmt", "python");
+@@clientName(Dell.Storage, "DellStorageMgmtClient", "python");
 @@clientName(Dell.Storage, "DellStorageMgmtClient", "java");
 
 // CSharp
