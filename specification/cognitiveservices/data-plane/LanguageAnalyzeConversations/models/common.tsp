@@ -401,7 +401,7 @@ model AnalyzeConversationTaskResult {
 
 /** A conversational AI task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationalAITask extends AnalyzeConversationTask {
   /** Task kind. */
   kind: AnalyzeConversationTaskKind.ConversationalAI;
@@ -415,7 +415,7 @@ model ConversationalAITask extends AnalyzeConversationTask {
 
 /** The input ConversationItem and its optional parameters */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationalAIAnalysisInput {
   /** List of multiple conversations */
   conversations: TextConversation[];
@@ -604,7 +604,7 @@ model EntitySubtype extends BaseExtraInformation {
   value?: string;
 
   @doc("List of entity tags. Tags express similarities between entity categories for the extracted entity type.")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_11_15_preview)
   tags?: Array<EntityTag>;
 }
 
@@ -632,7 +632,7 @@ model RegexKey extends BaseExtraInformation {
 
 /** The abstract base class for entity resolutions. */
 @doc("Tags express similarities between entity categories for the extracted entity type.")
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EntityTag {
   @doc("The name of the tag.")
   name: string;
@@ -864,7 +864,7 @@ model AnalyzeConversationJobsInput {
   tasks: Array<AnalyzeConversationLROTask>;
 
   /** Optional duration in seconds after which the job will be canceled if not completed. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   cancelAfter?: float32;
 }
 
@@ -1072,7 +1072,7 @@ model ConversationItemLevelTiming is AudioTiming;
 
 /** Input parameters base for a Conversation task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationalAIInputParameters {
   /** The name of the project to use. */
   projectName: string;
@@ -1110,7 +1110,7 @@ model ConversationTaskParameters {
 
 /** The results of a ConversationalAI task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
   /** The results of a Conversational AI task. */
   kind: AnalyzeConversationTaskResultsKind.ConversationalAIResult;
@@ -1121,7 +1121,7 @@ model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
 
 /** Represents the conversational analysis response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationalAIResult {
   /** Multiple multi-turn conversations analyzed. */
   conversations: ConversationalAIAnalysis[];
@@ -1132,7 +1132,7 @@ model ConversationalAIResult {
 
 /** Multiple multi-turn conversations analyzed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationalAIAnalysis {
   /** The ID of the conversation. */
   id: string;
@@ -1146,7 +1146,7 @@ model ConversationalAIAnalysis {
 
 /** The intent classification result for this conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationalAIIntent {
   /** The name of the detected intent. */
   name: string;
@@ -1162,7 +1162,7 @@ model ConversationalAIIntent {
 }
 
 /** The ranges of conversation items where this intent was identified. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationItemRange {
   /** The starting index of the intent occurrence within the conversation. */
   offset: int32;
@@ -1173,7 +1173,7 @@ model ConversationItemRange {
 
 /** The entity associated with this intent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ConversationalAIEntity {
   /** The entity name or category. */
   name: string;
