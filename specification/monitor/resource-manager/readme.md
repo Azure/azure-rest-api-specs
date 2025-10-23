@@ -4,6 +4,8 @@
 
 This is the AutoRest configuration file for MonitorClient.
 
+<!-- SDK Generation: Trigger .NET SDK generation for package-2024-03-01-preview (Query-Based Metric Alerts) -->
+
 ---
 
 ## Getting Started
