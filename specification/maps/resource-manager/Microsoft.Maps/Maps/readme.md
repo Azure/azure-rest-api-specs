@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-preview-2025-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2025-10'
 input-file:
-  - Microsoft.Maps/preview/2025-10-01-preview/maps-management.json
+  - preview/2025-10-01-preview/maps-management.json
 ```
 ### Tag: package-preview-2024-07
 
