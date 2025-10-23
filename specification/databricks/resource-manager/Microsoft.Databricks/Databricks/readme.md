@@ -280,9 +280,9 @@ These settings apply only when `--tag=package-2025-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
-  - Microsoft.Databricks/preview/2025-08-01-preview/databricks.json
-  - Microsoft.Databricks/preview/2025-08-01-preview/vnetpeering.json
-  - Microsoft.Databricks/preview/2025-08-01-preview/accessconnector.json
+  - preview/2025-08-01-preview/databricks.json
+  - preview/2025-08-01-preview/vnetpeering.json
+  - preview/2025-08-01-preview/accessconnector.json
 ```
 
 ---
