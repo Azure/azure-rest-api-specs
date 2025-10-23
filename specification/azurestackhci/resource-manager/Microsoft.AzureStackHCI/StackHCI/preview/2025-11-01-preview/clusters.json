@@ -983,6 +983,37 @@
           },
           "readOnly": true
         },
+        "supportStatus": {
+          "description": "Indicates whether the cluster is under support.",
+          "type": "string",
+          "enum": [
+            "InSupport",
+            "OutOfSupport",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "SupportStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "InSupport",
+                "value": "InSupport",
+                "description": "The cluster is under support."
+              },
+              {
+                "name": "OutOfSupport",
+                "value": "OutOfSupport",
+                "description": "The cluster is out of support."
+              },
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "The support status is not specified."
+              }
+            ]
+          },
+          "readOnly": true
+        },
         "cloudId": {
           "description": "Unique, immutable resource id.",
           "type": "string",
