@@ -46,6 +46,7 @@ interface RaiBlocklistItemPropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistItemPropertiesBasicResource> &
@@ -65,6 +66,7 @@ interface RaiBlocklistItemPropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     }
   >;
@@ -82,6 +84,7 @@ interface RaiBlocklistItemPropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiBlocklistItemPropertiesBasicResourceArmPaginatedResult>

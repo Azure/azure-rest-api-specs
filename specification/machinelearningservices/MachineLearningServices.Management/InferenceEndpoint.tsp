@@ -97,6 +97,7 @@ interface InferenceEndpoints {
    */
   @patch(#{ implicitOptionality: false })
   @summary("Update InferenceEndpoint (asynchronous).")
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
     PatchModel = void,

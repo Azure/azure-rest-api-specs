@@ -81,6 +81,7 @@ interface RaiPolicyPropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiPolicyPropertiesBasicResource> &
@@ -100,6 +101,7 @@ interface RaiPolicyPropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     }
   >;
@@ -117,6 +119,7 @@ interface RaiPolicyPropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
@@ -174,6 +177,7 @@ interface RaiPolicy {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiPolicyPropertiesBasicResource> &
@@ -191,6 +195,7 @@ interface RaiPolicy {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     }
   >;
@@ -208,6 +213,7 @@ interface RaiPolicy {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>

@@ -82,6 +82,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource> &
@@ -101,6 +102,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     }
   >;
@@ -118,6 +120,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>
@@ -187,6 +190,7 @@ interface EndpointDeployment {
        * Api version used by proxy call
        */
       @query("proxy-api-version")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     }
   >;

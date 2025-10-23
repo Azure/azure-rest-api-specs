@@ -80,6 +80,7 @@ interface QuotasOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PTUQuotaOperationGroup {
   /**
    * List available MaaS PTU quota.
