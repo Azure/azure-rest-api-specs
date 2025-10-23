@@ -778,13 +778,13 @@ model PipelineProperties {
    * Connections associated with pipeline
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   connections?: ReadPipelineConnection[];
 
   /**
    * Subscribers of this resource
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subscribers?: Subscriber[];
 
   /**
@@ -1018,14 +1018,12 @@ model FlowProperties {
    * Type of FlowProfile to use for transfer via the flow.
    */
   @added(Versions.v2025_05_30_preview)
-  @visibility(Lifecycle.Read)
   flowProfile?: FlowProfileMetadata;
 
   /**
    * The Flow's data class.
    */
   @added(Versions.v2025_05_30_preview)
-  @visibility(Lifecycle.Read)
   flowDataType?: DataClass;
 
   /**
@@ -1204,7 +1202,7 @@ model ApiFlowOptions {
    * Optional and for advanced used only. A list of authentication methods to use when accessing the Azure Data Transfer API Flow. If not provided, the default S2S authentication using Entra (API Flow Managed Identity) and RBAC will be applied.
    */
   @added(Versions.v2025_05_30_preview)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   authentication?: Authentication[];
 
   /**
@@ -1227,7 +1225,7 @@ model RemoteEndpointSettings {
   /**
    * Optional and for advanced used only. A list of authentication methods to use when accessing the remote endpoint. If not provided, the default S2S authentication using Entra (API Flow Managed Identity) and RBAC will be applied.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   authentication?: Authentication[];
 }
 
@@ -1527,7 +1525,7 @@ model ListFlowsByPipelineResult {
   /**
    * List flows by pipeline result by connection
    */
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: ListFlowsByPipelineConnection[];
 }
 
