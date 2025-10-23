@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Traits.Private;
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.BatchTranscription;
 
