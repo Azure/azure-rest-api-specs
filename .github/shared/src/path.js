@@ -1,6 +1,6 @@
 // @ts-check
 
-import { resolve, sep } from "path";
+import { basename, dirname, resolve } from "path";
 
 /**
  *
@@ -9,7 +9,21 @@ import { resolve, sep } from "path";
  * @returns {boolean} True if path contains the named folder
  */
 export function includesFolder(path, folder) {
-  return resolve(path).split(sep).includes(folder);
+  let current = resolve(path);
+
+  while (true) {
+    const parent = dirname(current);
+
+    if (basename(current) === folder) {
+      // Found the target folder
+      return true;
+    } else if (parent === current) {
+      // Reached the filesystem root (folder not found)
+      return false;
+    } else {
+      current = parent;
+    }
+  }
 }
 
 /**
@@ -18,15 +32,20 @@ export function includesFolder(path, folder) {
  * @returns {string} Portion of the resolved path up to (but not including) the first occurrence of the named folder
  */
 export function untilFolder(path, folder) {
-  // Example: /a/b/c.txt -> ["", "a", "b", "c"] (note leading empty string)
-  const segments = resolve(path).split(sep);
+  let current = resolve(path);
 
-  const index = segments.indexOf(folder);
+  while (true) {
+    const parent = dirname(current);
 
-  if (index === -1) {
-    // If path doesn't contain the folder, return an empty string
-    return "";
-  } else {
-    return segments.slice(0, index).join(sep);
+    if (basename(current) === folder) {
+      // Found the target folder.  Return everything before it.
+      return parent;
+    } else if (parent === current) {
+      // Reached the filesystem root (folder not found).  Return empty string.
+      return "";
+    } else {
+      // Keep walking upward
+      current = parent;
+    }
   }
 }
