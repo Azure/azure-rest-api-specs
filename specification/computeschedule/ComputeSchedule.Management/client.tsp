@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ComputeSchedule;
 
-@@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmt", "python");
+@@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "python");
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "java");
 @@clientNamespace(Microsoft.ComputeSchedule,
   "com.azure.resourcemanager.computeschedule",
