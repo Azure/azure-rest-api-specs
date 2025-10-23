@@ -15,7 +15,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/widgets.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-contoso-widgetmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-contoso-widgetmanager"
     namespace: "azure.contoso.widgetmanager"
     generate-test: true
     generate-sample: true
@@ -31,9 +31,10 @@ options:
     namespace: Azure.Template.Contoso
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "contoso-widgetmanager-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/contoso-widgetmanager"
+    is-modular-library: true
     package-details:
-      name: "@azure-rest/contoso-widgetmanager"
+      name: "@azure/contoso-widgetmanager"
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-contoso-widgetmanager"
