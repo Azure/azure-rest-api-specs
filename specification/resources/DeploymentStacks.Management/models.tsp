@@ -25,6 +25,10 @@ model DeploymentStack
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is the expected type"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
   tags?: Record<string>;
+  
+  /** The Managed Identity configuration for a deployment stack. */
+  @added(Versions.v2025_07_01)
+  identity?: DeploymentIdentity;
 }
 
 @@doc(DeploymentStack.properties, "Deployment stack properties.");
@@ -864,4 +868,32 @@ model DeploymentStackValidateProperties {
    */
   @added(Versions.v2025_07_01)
   validationLevel?: ValidationLevel;
+}
+
+@added(Versions.v2025_07_01)
+union DeploymentIdentityType {
+  string,
+
+  /** The identity is removed. */
+  None: "None",
+  
+  /** The identity is assigned by the user. */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * The Managed Identity configuration for a deployment.
+ */
+@added(Versions.v2025_07_01)
+model DeploymentIdentity
+{
+  /**
+   * The identity type.
+   */
+  type: DeploymentIdentityType;
+  
+  /**
+   * The set of user assigned identities associated with the resource.
+   */
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
