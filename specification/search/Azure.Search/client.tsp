@@ -993,7 +993,7 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@clientName(VectorQuery.k, "kNearestNeighbors");
 @@clientName(SearchDocumentsResult.value, "results");
-@@clientName(SearchRequest.count, "includeTotalResultCount");
+@@clientName(SearchRequest.count, "includeTotalCount");
 @@clientName(SearchRequest.highlight, "highlightFields");
 @@clientName(SearchRequest.search, "searchText");
 @@clientName(SearchRequest.orderby, "orderBy");
@@ -1021,6 +1021,13 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexerSkillset.indexProjections, "indexProjection");
 @@clientName(ListSkillsetsResult.value, "skillsets");
 @@clientName(ListSynonymMapsResult.value, "synonymMaps");
+@@clientName(AnalyzeRequest, "AnalyzeTextOptions");
+@@clientName(AnalyzeRequest.analyzer, "analyzerName");
+@@clientName(AnalyzeRequest.tokenizer, "tokenizerName");
+@@clientName(AnalyzeRequest.normalizer, "normalizerName");
+@@clientName(SearchIndexerDataSource, "SearchIndexerDataSourceConnection");
+@@clientName(SearchRequest.speller, "querySpeller");
+@@clientName(SearchRequest.semanticConfiguration, "semanticConfigurationName");
 @@clientName(SearchIndex.semantic, "semanticSearch");
 @@clientName(SearchField.dimensions, "vectorSearchDimensions");
 @@clientName(SearchField.vectorSearchProfile, "vectorSearchProfileName");
