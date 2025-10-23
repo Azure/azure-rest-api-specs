@@ -123,6 +123,7 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSets.performMaintenance::parameters.body,
   "vmInstanceIDs"
 );
+@@clientName(VirtualMachineScaleSets.scaleOut::parameters.body, "parameters");
 @@clientName(VirtualMachineScaleSets.powerOff::parameters.body,
   "vmInstanceIDs"
 );
@@ -327,3 +328,9 @@ using Microsoft.Compute;
 
 // @@clientName(VirtualMachineScaleSetVMExtension.vmName, "name");
 @@clientName(VirtualMachineScaleSetVMExtension.vmType, "type");
+@@clientName(AvailabilitySets.convertToVirtualMachineScaleSet::parameters.body,
+  "parameters"
+);
+@@clientName(VirtualMachines.migrateToVMScaleSet::parameters.body,
+  "parameters"
+);

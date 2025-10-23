@@ -1,12 +1,18 @@
 {
   "parameters": {
-    "api-version": "2025-05-01-preview",
+    "subscriptionId": "58c3f667-7a62-4bfd-a658-846493e9a493",
+    "resourceGroup": "resourceGroup",
+    "configurationName": "default",
     "configContract": {
       "properties": {
+        "lowCpuThreshold": "5",
+        "duration": "7",
+        "exclude": true,
         "digests": [
           {
             "name": "digestConfigName",
             "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+            "frequency": 30,
             "categories": [
               "HighAvailability",
               "Security",
@@ -14,31 +20,29 @@
               "Cost",
               "OperationalExcellence"
             ],
-            "frequency": 30,
-            "state": "Active",
-            "language": "en"
+            "language": "en",
+            "state": "Active"
           }
-        ],
-        "duration": "7",
-        "exclude": true,
-        "lowCpuThreshold": "5"
+        ]
       }
     },
-    "configurationName": "default",
-    "resourceGroup": "resourceGroup",
-    "subscriptionId": "58c3f667-7a62-4bfd-a658-846493e9a493"
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "default",
-        "type": "Microsoft.Advisor/configurations",
         "id": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
+        "type": "Microsoft.Advisor/configurations",
+        "name": "default",
         "properties": {
+          "lowCpuThreshold": "5",
+          "duration": "7",
+          "exclude": true,
           "digests": [
             {
               "name": "digestConfigName",
               "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+              "frequency": 30,
               "categories": [
                 "HighAvailability",
                 "Security",
@@ -46,14 +50,10 @@
                 "Cost",
                 "OperationalExcellence"
               ],
-              "frequency": 30,
-              "state": "Active",
-              "language": "en"
+              "language": "en",
+              "state": "Active"
             }
-          ],
-          "duration": "7",
-          "exclude": true,
-          "lowCpuThreshold": "5"
+          ]
         }
       }
     }

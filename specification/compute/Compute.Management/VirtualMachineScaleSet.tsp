@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Versioning;
 
 namespace Microsoft.Compute;
 /**
@@ -65,6 +67,13 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /**
+   * Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. This property cannot be changed once VMSS is provisioned. Minimum api-version: 2025-04-01.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  placement?: Placement;
 }
 
 @armResourceOperations
@@ -167,13 +176,9 @@ interface VirtualMachineScaleSets {
    */
   approveRollingUpgrade is ComputeResourceActionNoResponseContentAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    Error = CloudError
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Error = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -190,12 +195,7 @@ interface VirtualMachineScaleSets {
    */
   deallocate is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
+    Request = VirtualMachineScaleSetVMInstanceIDs,
     Response = OkResponse,
     Parameters = {
       /**
@@ -203,7 +203,8 @@ interface VirtualMachineScaleSets {
        */
       @query("hibernate")
       hibernate?: boolean;
-    }
+    },
+    OptionalRequestBody = true
   >;
 
   /**
@@ -291,13 +292,9 @@ interface VirtualMachineScaleSets {
    */
   performMaintenance is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    Response = OkResponse
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -306,20 +303,16 @@ interface VirtualMachineScaleSets {
   @action("poweroff")
   powerOff is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse,
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
     Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
       @query("skipShutdown")
       skipShutdown?: boolean;
-    }
+    },
+    OptionalRequestBody = true
   >;
 
   /**
@@ -336,13 +329,9 @@ interface VirtualMachineScaleSets {
    */
   redeploy is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -350,14 +339,9 @@ interface VirtualMachineScaleSets {
    */
   reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * Parameters for Reimaging VM ScaleSet.
-       */
-      @bodyRoot
-      vmScaleSetReimageInput?: VirtualMachineScaleSetReimageParameters;
-    },
-    OkResponse
+    Request = VirtualMachineScaleSetReimageParameters,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -366,13 +350,9 @@ interface VirtualMachineScaleSets {
   @action("reimageall")
   reimageAll is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -380,13 +360,9 @@ interface VirtualMachineScaleSets {
    */
   restart is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -415,13 +391,9 @@ interface VirtualMachineScaleSets {
    */
   start is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -457,6 +429,17 @@ interface VirtualMachineScaleSets {
   cancel is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
+    Response = OkResponse
+  >;
+
+  /**
+   * Scales out one or more virtual machines in a VM scale set.
+   */
+  @added(Versions.v2025_04_01)
+  @action("scaleOut")
+  scaleOut is ComputeResourceActionAsync<
+    VirtualMachineScaleSet,
+    VMScaleSetScaleOutInput,
     Response = OkResponse
   >;
 }
@@ -509,4 +492,7 @@ interface VirtualMachineScaleSets {
 );
 @@doc(VirtualMachineScaleSets.start::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
+);
+@@doc(VirtualMachineScaleSets.scaleOut::parameters.body,
+  "The input object for ScaleOut API."
 );

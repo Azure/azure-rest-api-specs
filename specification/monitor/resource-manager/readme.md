@@ -32,10 +32,50 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-01-01-preview
+tag: package-2025-08
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
+```
+
+### Tag: package-2025-08
+
+These settings apply only when `--tag=package-2025-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08'
+input-file:
+  - Microsoft.Insights/stable/2024-03-11/dataCollectionEndpoints_API.json
+  - Microsoft.Insights/stable/2024-03-11/dataCollectionRuleAssociations_API.json
+  - Microsoft.Insights/stable/2024-03-11/dataCollectionRules_API.json
+  - Microsoft.Insights/PrivateLinkScopes/preview/2023-06-01-preview/privateLinkScopes_API.json
+  - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
+  - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+  - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+  - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+  - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
+  - Microsoft.Insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
+  - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+  - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+  - Microsoft.Insights/stable/2024-02-01/metrics_API.json
+  - Microsoft.Insights/preview/2023-01-01-preview/activityLogAlerts_API.json
+  - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+  - Microsoft.Insights/preview/2025-01-01-preview/scheduledQueryRule_API.json
+  - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+  - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
+  - Microsoft.Insights/stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
+  - Microsoft.Insights/stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
+  - Microsoft.Insights/stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
+  - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
+  - Microsoft.Monitor/Accounts/preview/2025-05-03-preview/azuremonitorworkspace.json
+  - Microsoft.Monitor/Operations/preview/2025-05-03-preview/operations.json
+
+suppressions:
+  - code: GuidUsage
+    reason: The IDs of investigation entities are GUIDs.
+    from: azuremonitorworkspace.json
+    where:
+     - $.definitions["Azure.Core.uuid"].format
+
 ```
 
 ### Tag: package-2025-01-01-preview
