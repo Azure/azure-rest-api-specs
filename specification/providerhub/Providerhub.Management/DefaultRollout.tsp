@@ -85,10 +85,11 @@ interface NewRegionFrontloadReleaseOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
-        @segment("providers/microsoft.ProviderHub/providerRegistrations")
+        @segment("providerRegistrations")
         @key
         providerNamespace: string,
       },

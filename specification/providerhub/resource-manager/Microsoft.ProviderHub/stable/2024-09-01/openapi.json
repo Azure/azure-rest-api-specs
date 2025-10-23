@@ -1331,6 +1331,176 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}": {
+      "get": {
+        "operationId": "NewRegionFrontloadRelease_Get",
+        "tags": [
+          "NewRegionFrontloadRelease"
+        ],
+        "description": "Gets a new region frontload release.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "releaseName",
+            "in": "path",
+            "description": "The name of the release.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NewRegionFrontloadRelease_Get": {
+            "$ref": "./examples/NewRegionFrontloadRelease_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NewRegionFrontloadRelease_CreateOrUpdate",
+        "tags": [
+          "NewRegionFrontloadRelease"
+        ],
+        "description": "Creates or updates a new region frontload release.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "releaseName",
+            "in": "path",
+            "description": "The name of the release.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FrontloadPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NewRegionFrontloadRelease_CreateOrUpdate": {
+            "$ref": "./examples/NewRegionFrontloadRelease_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}/stop": {
+      "post": {
+        "operationId": "NewRegionFrontloadRelease_Stop",
+        "tags": [
+          "NewRegionFrontloadRelease"
+        ],
+        "description": "Stops a new region frontload release.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "releaseName",
+            "in": "path",
+            "description": "The name of the release.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NewRegionFrontloadRelease_Stop": {
+            "$ref": "./examples/NewRegionFrontloadRelease_Stop.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/notificationRegistrations": {
       "get": {
         "operationId": "NotificationRegistrations_ListByProviderRegistration",
@@ -2297,177 +2467,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}": {
-      "get": {
-        "operationId": "NewRegionFrontloadRelease_Get",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Gets a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_Get": {
-            "$ref": "./examples/NewRegionFrontloadRelease_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "NewRegionFrontloadRelease_CreateOrUpdate",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Creates or updates a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FrontloadPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "201": {
-            "description": "Azure create operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_CreateOrUpdate": {
-            "$ref": "./examples/NewRegionFrontloadRelease_CreateOrUpdate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}/stop": {
-      "post": {
-        "operationId": "NewRegionFrontloadRelease_Stop",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Stops a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_Stop": {
-            "$ref": "./examples/NewRegionFrontloadRelease_Stop.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus": {
       "get": {
         "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond",
         "tags": [
@@ -2534,7 +2534,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus/{sku}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus/{sku}": {
       "get": {
         "operationId": "Skus_GetNestedResourceTypeSecond",
         "tags": [
@@ -2752,7 +2752,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus": {
       "get": {
         "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst",
         "tags": [
@@ -2812,7 +2812,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus/{sku}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus/{sku}": {
       "get": {
         "operationId": "Skus_GetNestedResourceTypeFirst",
         "tags": [
@@ -3009,7 +3009,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus": {
       "get": {
         "operationId": "Skus_ListByResourceTypeRegistrations",
         "tags": [
@@ -3062,7 +3062,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus/{sku}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus/{sku}": {
       "get": {
         "operationId": "Skus_Get",
         "tags": [

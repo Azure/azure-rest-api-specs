@@ -29,10 +29,11 @@ interface SkuResourceOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** the provider namespace */
         @path
-        @segment("providers/microsoft.ProviderHub/providerRegistrations")
+        @segment("providerRegistrations")
         @key
         providerNamespace: string,
 
@@ -87,10 +88,11 @@ interface SkusOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** the provider namespace */
         @path
-        @segment("providers/microsoft.ProviderHub/providerRegistrations")
+        @segment("providerRegistrations")
         @key
         providerNamespace: string,
 
@@ -151,10 +153,11 @@ interface SkuResourceOperationGroupOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** the provider namespace */
         @path
-        @segment("providers/microsoft.ProviderHub/providerRegistrations")
+        @segment("providerRegistrations")
         @key
         providerNamespace: string,
 
