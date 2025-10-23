@@ -28,10 +28,10 @@
     ]
   },
   "produces": [
-    "application/xml"
+    "application/json"
   ],
   "consumes": [
-    "application/xml"
+    "application/json"
   ],
   "security": [
     {
@@ -972,6 +972,9 @@
       "put": {
         "operationId": "Blob_StartCopyFromUrl",
         "description": "The Start Copy From URL operation copies a blob or an internet resource to a new blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -1441,6 +1444,9 @@
       "delete": {
         "operationId": "Blob_Delete",
         "description": "If the storage account's soft delete feature is disabled then, when a blob is deleted, it is permanently removed from the storage account. If the storage account's soft delete feature is enabled, then, when a blob is deleted, it is marked for deletion and becomes inaccessible immediately. However, the blob service retains the blob or snapshot for the number of days specified by the DeleteRetentionPolicy section of [Storage service properties] (Set-Blob-Service-Properties.md). After the specified number of days has passed, the blob's data is permanently removed from the storage account. Note that you continue to be charged for the soft-deleted blob's storage until it is permanently removed. Use the List Blobs API and specify the \\\"include=deleted\\\" query parameter to discover which blobs and snapshots have been soft deleted. You can then use the Undelete Blob API to restore a soft-deleted blob. All other operations on a soft-deleted blob or snapshot causes the service to return an HTTP status code of 404 (ResourceNotFound).",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -1652,6 +1658,9 @@
       "head": {
         "operationId": "Blob_GetProperties",
         "description": "The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2251,6 +2260,9 @@
       "put": {
         "operationId": "Container_Create",
         "description": "Creates a new container under the specified account. If the container with the same name already exists, the operation fails.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2400,6 +2412,9 @@
       "get": {
         "operationId": "Container_GetProperties",
         "description": "returns all user-defined metadata and system properties for the specified container. The data returned does not include the container's list of blobs",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2643,6 +2658,9 @@
       "delete": {
         "operationId": "Container_Delete",
         "description": "operation marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2752,6 +2770,9 @@
       "put": {
         "operationId": "Container_SetMetadata",
         "description": "operation sets one or more user-defined name-value pairs for the specified container.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2874,6 +2895,9 @@
       "get": {
         "operationId": "Container_GetAccessPolicy",
         "description": "gets the permissions for the specified container. The permissions indicate whether container data may be accessed publicly.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3006,6 +3030,12 @@
       "put": {
         "operationId": "Container_SetAccessPolicy",
         "description": "sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3166,6 +3196,9 @@
       "put": {
         "operationId": "Container_Restore",
         "description": "Restores a previously-deleted container.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3270,6 +3303,9 @@
       "put": {
         "operationId": "Container_Rename",
         "description": "Renames an existing container.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3483,6 +3519,9 @@
       "get": {
         "operationId": "Container_FilterBlobs",
         "description": "The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3628,6 +3667,9 @@
       "put": {
         "operationId": "Container_AcquireLease",
         "description": "The Acquire Lease operation requests a new lease on a container. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3778,6 +3820,9 @@
       "put": {
         "operationId": "Container_ReleaseLease",
         "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the container.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3915,6 +3960,9 @@
       "put": {
         "operationId": "Container_RenewLease",
         "description": "The Renew Lease operation renews an existing lease.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4056,6 +4104,9 @@
       "put": {
         "operationId": "Container_BreakLease",
         "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4199,6 +4250,9 @@
       "put": {
         "operationId": "Container_ChangeLease",
         "description": "The Change Lease operation is used to change the ID of an existing lease.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4348,6 +4402,9 @@
       "get": {
         "operationId": "Container_ListBlobFlatSegment",
         "description": "The List Blobs operation returns a list of the blobs under the specified container.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4548,6 +4605,9 @@
       "get": {
         "operationId": "Container_ListBlobHierarchySegment",
         "description": "The List Blobs operation returns a list of the blobs under the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4755,6 +4815,9 @@
       "get": {
         "operationId": "Container_GetAccountInfo",
         "description": "Returns the sku name and account kind",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4931,6 +4994,9 @@
       "put": {
         "operationId": "Blob_Undelete",
         "description": "Undelete a blob that was previously soft deleted",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5029,6 +5095,9 @@
       "put": {
         "operationId": "Blob_SetExpiry",
         "description": "Set the expiration time of a blob",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5185,6 +5254,9 @@
       "put": {
         "operationId": "Blob_SetProperties",
         "description": "The Set HTTP Headers operation sets system properties on the blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5396,6 +5468,9 @@
       "put": {
         "operationId": "Blob_SetImmutabilityPolicy",
         "description": "Set the immutability policy of a blob",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5590,6 +5665,9 @@
       "delete": {
         "operationId": "Blob_DeleteImmutabilityPolicy",
         "description": "The Delete Immutability Policy operation deletes the immutability policy on the blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5703,6 +5781,9 @@
       "put": {
         "operationId": "Blob_SetLegalHold",
         "description": "The Set Legal Hold operation sets a legal hold on the blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5828,6 +5909,9 @@
       "put": {
         "operationId": "Blob_SetMetadata",
         "description": "The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6055,6 +6139,9 @@
       "put": {
         "operationId": "Blob_AcquireLease",
         "description": "The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6239,6 +6326,9 @@
       "put": {
         "operationId": "Blob_ReleaseLease",
         "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6410,6 +6500,9 @@
       "put": {
         "operationId": "Blob_RenewLease",
         "description": "The Renew Lease operation renews an existing lease.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6585,6 +6678,9 @@
       "put": {
         "operationId": "Blob_ChangeLease",
         "description": "The Change Lease operation is used to change the ID of an existing lease.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6768,6 +6864,9 @@
       "put": {
         "operationId": "Blob_BreakLease",
         "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6945,6 +7044,9 @@
       "put": {
         "operationId": "Blob_CreateSnapshot",
         "description": "The Create Snapshot operation creates a read-only snapshot of a blob",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -7168,6 +7270,9 @@
       "put": {
         "operationId": "Blob_CopyFromUrl",
         "description": "The Copy From URL operation copies a blob or an internet resource to a new blob. It will not return a response until the copy is complete.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -7661,6 +7766,9 @@
       "put": {
         "operationId": "Blob_AbortCopyFromUrl",
         "description": "The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -7789,6 +7897,9 @@
       "put": {
         "operationId": "Blob_SetTier",
         "description": "The Set Tier operation sets the tier on a block blob. The operation is allowed on a page blob or block blob, but not on an append blob. A block blob's tier determines Hot/Cool/Archive storage type. This operation does not update the blob's ETag.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8072,6 +8183,9 @@
       "get": {
         "operationId": "Blob_GetAccountInfo",
         "description": "Returns the sku name and account kind",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8258,6 +8372,9 @@
       "get": {
         "operationId": "Blob_GetTags",
         "description": "The Get Blob Tags operation enables users to get tags on a blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8424,6 +8541,12 @@
       "put": {
         "operationId": "Blob_SetTags",
         "description": "The Set Tags operation enables users to set tags on a blob.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8607,6 +8730,9 @@
       "put": {
         "operationId": "AppendBlob_Create",
         "description": "The Create operation creates a new append blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8966,6 +9092,9 @@
       "put": {
         "operationId": "PageBlob_UploadPages",
         "description": "The Upload Pages operation writes a range of pages to a page blob",
+        "produces": [
+          "application/xml"
+        ],
         "consumes": [
           "application/octet-stream"
         ],
@@ -9306,6 +9435,9 @@
       "put": {
         "operationId": "PageBlob_ClearPages",
         "description": "The Clear Pages operation clears a range of pages from a page blob",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -9584,6 +9716,9 @@
       "put": {
         "operationId": "PageBlob_UploadPagesFromUrl",
         "description": "The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -9970,6 +10105,9 @@
       "get": {
         "operationId": "PageBlob_GetPageRanges",
         "description": "The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10166,6 +10304,9 @@
       "get": {
         "operationId": "PageBlob_GetPageRangesDiff",
         "description": "The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10377,6 +10518,9 @@
       "put": {
         "operationId": "PageBlob_Resize",
         "description": "The Resize operation increases the size of the page blob to the specified size.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10594,6 +10738,9 @@
       "put": {
         "operationId": "PageBlob_SetSequenceNumber",
         "description": "The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10800,6 +10947,9 @@
       "put": {
         "operationId": "PageBlob_CopyIncremental",
         "description": "The Copy Incremental operation copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. The copied snapshots are complete copies of the original snapshot and can be read or copied from as usual. This API is supported since REST version 2016-05-31.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10997,6 +11147,9 @@
       "put": {
         "operationId": "AppendBlob_AppendBlock",
         "description": "The Append Block operation commits a new block of data to the end of an append blob.",
+        "produces": [
+          "application/xml"
+        ],
         "consumes": [
           "application/octet-stream"
         ],
@@ -11310,6 +11463,9 @@
       "put": {
         "operationId": "AppendBlob_AppendBlockFromUrl",
         "description": "The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -11678,6 +11834,9 @@
       "put": {
         "operationId": "AppendBlob_Seal",
         "description": "The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -11840,6 +11999,9 @@
       "put": {
         "operationId": "BlockBlob_Upload",
         "description": "The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation.",
+        "produces": [
+          "application/xml"
+        ],
         "consumes": [
           "application/octet-stream"
         ],
@@ -12361,6 +12523,9 @@
       "put": {
         "operationId": "BlockBlob_PutBlobFromUrl",
         "description": "The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -12919,6 +13084,9 @@
       "put": {
         "operationId": "BlockBlob_StageBlock",
         "description": "The Stage Block operation creates a new block to be committed as part of a blob",
+        "produces": [
+          "application/xml"
+        ],
         "consumes": [
           "application/octet-stream"
         ],
@@ -13163,6 +13331,9 @@
       "put": {
         "operationId": "BlockBlob_StageBlockFromUrl",
         "description": "The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -13453,6 +13624,12 @@
       "put": {
         "operationId": "BlockBlob_CommitBlockList",
         "description": "The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -13931,6 +14108,9 @@
       "get": {
         "operationId": "BlockBlob_GetBlockList",
         "description": "The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -14105,6 +14285,9 @@
         "description": "The Query operation enables users to select/project on blob data by providing simple query expressions.",
         "produces": [
           "application/octet-stream",
+          "application/xml"
+        ],
+        "consumes": [
           "application/xml"
         ],
         "parameters": [
@@ -14958,6 +15141,9 @@
       "get": {
         "operationId": "FilterBlobs",
         "description": "The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -15096,6 +15282,9 @@
       "get": {
         "operationId": "ListContainersSegment",
         "description": "The List Containers Segment operation returns a list of the containers under the specified account",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -15235,6 +15424,9 @@
       "get": {
         "operationId": "GetAccountInfo",
         "description": "Returns the sku name and account kind.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -15404,6 +15596,12 @@
       "put": {
         "operationId": "SetProperties",
         "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -15489,6 +15687,9 @@
       "get": {
         "operationId": "GetProperties",
         "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -15568,6 +15769,9 @@
       "get": {
         "operationId": "GetStatistics",
         "description": "Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -15652,6 +15856,12 @@
       "post": {
         "operationId": "GetUserDelegationKey",
         "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -15747,28 +15957,25 @@
       "type": "object",
       "description": "Represents an access policy.",
       "properties": {
-        "Start": {
+        "start": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The date-time the policy is active.",
-          "x-ms-client-name": "start"
+          "description": "The date-time the policy is active."
         },
-        "Expiry": {
+        "expiry": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The date-time the policy expires.",
-          "x-ms-client-name": "expiry"
+          "description": "The date-time the policy expires."
         },
-        "Permission": {
+        "permission": {
           "type": "string",
-          "description": "The permissions for acl the policy.",
-          "x-ms-client-name": "permission"
+          "description": "The permissions for acl the policy."
         }
       },
       "required": [
-        "Start",
-        "Expiry",
-        "Permission"
+        "start",
+        "expiry",
+        "permission"
       ]
     },
     "AccessTier": {
@@ -15955,63 +16162,49 @@
       "type": "object",
       "description": "Represents the Apache Arrow configuration.",
       "properties": {
-        "Schema": {
+        "schema": {
           "type": "array",
           "description": "The Apache Arrow schema",
           "items": {
             "$ref": "#/definitions/ArrowField"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-client-name": "schema"
+          }
         }
       },
       "required": [
-        "Schema"
+        "schema"
       ]
     },
     "ArrowField": {
       "type": "object",
       "description": "Represents an Apache Arrow field.",
       "properties": {
-        "Type": {
+        "type": {
           "type": "string",
-          "description": "The arrow field type.",
-          "x-ms-client-name": "type"
+          "description": "The arrow field type."
         },
-        "Name": {
+        "name": {
           "type": "string",
-          "description": "The arrow field name.",
-          "x-ms-client-name": "name"
+          "description": "The arrow field name."
         },
-        "Precision": {
+        "precision": {
           "type": "integer",
           "format": "int32",
-          "description": "The arrow field precision.",
-          "x-ms-client-name": "precision"
+          "description": "The arrow field precision."
         },
-        "Scale": {
+        "scale": {
           "type": "integer",
           "format": "int32",
-          "description": "The arrow field scale.",
-          "x-ms-client-name": "scale"
+          "description": "The arrow field scale."
         }
       },
       "required": [
-        "Type"
-      ],
-      "xml": {
-        "name": "Field"
-      }
+        "type"
+      ]
     },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
-      "description": "Universally Unique Identifier",
-      "xml": {
-        "name": "uuid"
-      }
+      "description": "Universally Unique Identifier"
     },
     "BlobCopySourceTags": {
       "type": "string",
@@ -16095,51 +16288,39 @@
       "type": "object",
       "description": "The blob flat list segment.",
       "properties": {
-        "Blob": {
+        "blobItems": {
           "type": "array",
           "description": "The blob items.",
           "items": {
             "$ref": "#/definitions/BlobItemInternal"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "blobItems"
+          }
         }
       },
       "required": [
-        "Blob"
+        "blobItems"
       ]
     },
     "BlobHierarchyListSegment": {
       "type": "object",
       "description": "Represents an array of blobs.",
       "properties": {
-        "Blob": {
+        "blobItems": {
           "type": "array",
           "description": "The blob items",
           "items": {
             "$ref": "#/definitions/BlobItemInternal"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "blobItems"
+          }
         },
-        "BlobPrefix": {
+        "blobPrefixes": {
           "type": "array",
           "description": "The blob prefixes.",
           "items": {
             "$ref": "#/definitions/BlobPrefix"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "blobPrefixes"
+          }
         }
       },
       "required": [
-        "Blob"
+        "blobItems"
       ]
     },
     "BlobImmutabilityPolicyMode": {
@@ -16176,78 +16357,61 @@
       "type": "object",
       "description": "An Azure Storage Blob",
       "properties": {
-        "Name": {
+        "name": {
           "$ref": "#/definitions/BlobName",
-          "description": "The name of the blob.",
-          "x-ms-client-name": "name"
+          "description": "The name of the blob."
         },
-        "Deleted": {
+        "deleted": {
           "type": "boolean",
-          "description": "Whether the blob is deleted.",
-          "x-ms-client-name": "deleted"
+          "description": "Whether the blob is deleted."
         },
-        "Snapshot": {
+        "snapshot": {
           "type": "string",
-          "description": "The snapshot of the blob.",
-          "x-ms-client-name": "snapshot"
+          "description": "The snapshot of the blob."
         },
-        "VersionId": {
+        "versionId": {
           "type": "string",
-          "description": "The version id of the blob.",
-          "x-ms-client-name": "versionId"
+          "description": "The version id of the blob."
         },
-        "IsCurrentVersion": {
+        "isCurrentVersion": {
           "type": "boolean",
-          "description": "Whether the blob is the current version.",
-          "x-ms-client-name": "isCurrentVersion"
+          "description": "Whether the blob is the current version."
         },
-        "Properties": {
+        "properties": {
           "$ref": "#/definitions/BlobPropertiesInternal",
-          "description": "The properties of the blob.",
-          "x-ms-client-name": "properties"
+          "description": "The properties of the blob."
         },
-        "Metadata": {
+        "metadata": {
           "$ref": "#/definitions/BlobMetadata",
-          "description": "The metadata of the blob.",
-          "x-ms-client-name": "metadata"
+          "description": "The metadata of the blob."
         },
-        "BlobTags": {
+        "blobTags": {
           "$ref": "#/definitions/BlobTags",
-          "description": "The tags of the blob.",
-          "x-ms-client-name": "blobTags"
+          "description": "The tags of the blob."
         },
-        "ObjectReplicationMetadata": {
+        "objectReplicationMetadata": {
           "$ref": "#/definitions/ObjectReplicationMetadata",
-          "description": "The object replication metadata of the blob.",
-          "x-ms-client-name": "objectReplicationMetadata"
+          "description": "The object replication metadata of the blob."
         },
-        "HasVersionsOnly": {
+        "hasVersionsOnly": {
           "type": "boolean",
-          "description": "Whether the blog has versions only.",
-          "x-ms-client-name": "hasVersionsOnly"
+          "description": "Whether the blob has versions only."
         }
       },
       "required": [
-        "Name",
-        "Deleted",
-        "Snapshot",
-        "Properties"
-      ],
-      "xml": {
-        "name": "Blob"
-      }
+        "name",
+        "deleted",
+        "snapshot",
+        "properties"
+      ]
     },
     "BlobMetadata": {
       "type": "object",
       "description": "The blob metadata.",
       "properties": {
-        "Encrypted": {
+        "encrypted": {
           "type": "string",
-          "description": "Whether the blob metadata is encrypted.",
-          "xml": {
-            "attribute": true
-          },
-          "x-ms-client-name": "encrypted"
+          "description": "Whether the blob metadata is encrypted."
         }
       },
       "additionalProperties": {
@@ -16258,20 +16422,13 @@
       "type": "object",
       "description": "Represents a blob name.",
       "properties": {
-        "Encoded": {
+        "encoded": {
           "type": "boolean",
-          "description": "Whether the blob name is encoded.",
-          "xml": {
-            "attribute": true
-          },
-          "x-ms-client-name": "encoded"
+          "description": "Whether the blob name is encoded."
         },
         "content": {
           "type": "string",
-          "description": "The blob name.",
-          "xml": {
-            "x-ms-text": true
-          }
+          "description": "The blob name."
         }
       }
     },
@@ -16279,287 +16436,231 @@
       "type": "object",
       "description": "Represents a blob prefix.",
       "properties": {
-        "Name": {
+        "name": {
           "$ref": "#/definitions/BlobName",
-          "description": "The blob name.",
-          "x-ms-client-name": "name"
+          "description": "The blob name."
         }
       },
       "required": [
-        "Name"
+        "name"
       ]
     },
     "BlobPropertiesInternal": {
       "type": "object",
       "description": "The properties of a blob.",
       "properties": {
-        "Creation-Time": {
+        "creationTime": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The date-time the blob was created in RFC1123 format.",
-          "x-ms-client-name": "creationTime"
+          "description": "The date-time the blob was created in RFC1123 format."
         },
-        "Last-Modified": {
+        "lastModified": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The date-time the blob was last modified in RFC1123 format.",
-          "x-ms-client-name": "lastModified"
+          "description": "The date-time the blob was last modified in RFC1123 format."
         },
-        "Etag": {
+        "eTag": {
           "type": "string",
-          "description": "The blog ETag.",
-          "x-ms-client-name": "eTag"
+          "description": "The blob ETag."
         },
-        "Content-Length": {
+        "contentLength": {
           "type": "integer",
           "format": "int64",
-          "description": "The content length of the blob.",
-          "x-ms-client-name": "contentLength"
+          "description": "The content length of the blob."
         },
-        "Content-Type": {
+        "contentType": {
           "type": "string",
-          "description": "The content type of the blob.",
-          "x-ms-client-name": "contentType"
+          "description": "The content type of the blob."
         },
-        "Content-Encoding": {
+        "contentEncoding": {
           "type": "string",
-          "description": "The content encoding of the blob.",
-          "x-ms-client-name": "contentEncoding"
+          "description": "The content encoding of the blob."
         },
-        "Content-Language": {
+        "contentLanguage": {
           "type": "string",
-          "description": "The content language of the blob.",
-          "x-ms-client-name": "contentLanguage"
+          "description": "The content language of the blob."
         },
-        "Content-MD5": {
+        "contentMd5": {
           "type": "string",
           "format": "byte",
-          "description": "The content MD5 of the blob.",
-          "x-ms-client-name": "contentMd5"
+          "description": "The content MD5 of the blob."
         },
-        "Content-Disposition": {
+        "contentDisposition": {
           "type": "string",
-          "description": "The content disposition of the blob.",
-          "x-ms-client-name": "contentDisposition"
+          "description": "The content disposition of the blob."
         },
-        "Cache-Control": {
+        "cacheControl": {
           "type": "string",
-          "description": "The cache control of the blob.",
-          "x-ms-client-name": "cacheControl"
+          "description": "The cache control of the blob."
         },
-        "x-ms-blob-sequence-number": {
+        "blobSequenceNumber": {
           "type": "integer",
           "format": "int64",
-          "description": "The sequence number of the blob.",
-          "x-ms-client-name": "blobSequenceNumber"
+          "description": "The sequence number of the blob."
         },
-        "BlobType": {
+        "blobType": {
           "$ref": "#/definitions/BlobType",
-          "description": "The blob type.",
-          "x-ms-client-name": "blobType"
+          "description": "The blob type."
         },
-        "LeaseStatus": {
+        "leaseStatus": {
           "$ref": "#/definitions/LeaseStatus",
-          "description": "The lease status of the blob.",
-          "x-ms-client-name": "leaseStatus"
+          "description": "The lease status of the blob."
         },
-        "LeaseState": {
+        "leaseState": {
           "$ref": "#/definitions/LeaseState",
-          "description": "The lease state of the blob.",
-          "x-ms-client-name": "leaseState"
+          "description": "The lease state of the blob."
         },
-        "LeaseDuration": {
+        "leaseDuration": {
           "$ref": "#/definitions/LeaseDuration",
-          "description": "The lease duration of the blob.",
-          "x-ms-client-name": "leaseDuration"
+          "description": "The lease duration of the blob."
         },
-        "CopyId": {
+        "copyId": {
           "type": "string",
-          "description": "The copy ID of the blob.",
-          "x-ms-client-name": "copyId"
+          "description": "The copy ID of the blob."
         },
-        "CopyStatus": {
+        "copyStatus": {
           "$ref": "#/definitions/CopyStatus",
-          "description": "The copy status of the blob.",
-          "x-ms-client-name": "copyStatus"
+          "description": "The copy status of the blob."
         },
-        "CopySource": {
+        "copySource": {
           "type": "string",
-          "description": "The copy source of the blob.",
-          "x-ms-client-name": "copySource"
+          "description": "The copy source of the blob."
         },
-        "CopyProgress": {
+        "copyProgress": {
           "type": "string",
-          "description": "The copy progress of the blob.",
-          "x-ms-client-name": "copyProgress"
+          "description": "The copy progress of the blob."
         },
-        "CopyCompletionTime": {
+        "copyCompletionTime": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The copy completion time of the blob.",
-          "x-ms-client-name": "copyCompletionTime"
+          "description": "The copy completion time of the blob."
         },
-        "CopyStatusDescription": {
+        "copyStatusDescription": {
           "type": "string",
-          "description": "The copy status description of the blob.",
-          "x-ms-client-name": "copyStatusDescription"
+          "description": "The copy status description of the blob."
         },
-        "ServerEncrypted": {
+        "serverEncrypted": {
           "type": "boolean",
-          "description": "Whether the blog is encrypted on the server.",
-          "x-ms-client-name": "serverEncrypted"
+          "description": "Whether the blob is encrypted on the server."
         },
-        "IncrementalCopy": {
+        "incrementalCopy": {
           "type": "boolean",
-          "description": "Whether the blog is incremental copy.",
-          "x-ms-client-name": "incrementalCopy"
+          "description": "Whether the blob is incremental copy."
         },
-        "DestinationSnapshot": {
+        "destinationSnapshot": {
           "type": "string",
-          "description": "The name of the destination snapshot.",
-          "x-ms-client-name": "destinationSnapshot"
+          "description": "The name of the destination snapshot."
         },
-        "DeletedTime": {
+        "deletedTime": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The time the blob was deleted.",
-          "x-ms-client-name": "deletedTime"
+          "description": "The time the blob was deleted."
         },
-        "RemainingRetentionDays": {
+        "remainingRetentionDays": {
           "type": "integer",
           "format": "int32",
-          "description": "The remaining retention days of the blob.",
-          "x-ms-client-name": "remainingRetentionDays"
+          "description": "The remaining retention days of the blob."
         },
-        "AccessTier": {
+        "accessTier": {
           "$ref": "#/definitions/AccessTier",
-          "description": "The access tier of the blob.",
-          "x-ms-client-name": "accessTier"
+          "description": "The access tier of the blob."
         },
-        "AccessTierInferred": {
+        "accessTierInferred": {
           "type": "boolean",
-          "description": "Whether the access tier is inferred.",
-          "x-ms-client-name": "accessTierInferred"
+          "description": "Whether the access tier is inferred."
         },
-        "ArchiveStatus": {
+        "archiveStatus": {
           "$ref": "#/definitions/ArchiveStatus",
-          "description": "The archive status of the blob.",
-          "x-ms-client-name": "archiveStatus"
+          "description": "The archive status of the blob."
         },
-        "CustomerProvidedKeySha256": {
+        "customerProvidedKeySha256": {
           "type": "string",
-          "description": "Customer provided key sha256",
-          "x-ms-client-name": "customerProvidedKeySha256"
+          "description": "Customer provided key sha256"
         },
-        "EncryptionScope": {
+        "encryptionScope": {
           "type": "string",
-          "description": "The encryption scope of the blob.",
-          "x-ms-client-name": "encryptionScope"
+          "description": "The encryption scope of the blob."
         },
-        "AccessTierChangeTime": {
+        "accessTierChangeTime": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The access tier change time of the blob.",
-          "x-ms-client-name": "accessTierChangeTime"
+          "description": "The access tier change time of the blob."
         },
-        "TagCount": {
+        "tagCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of tags for the blob.",
-          "x-ms-client-name": "tagCount"
+          "description": "The number of tags for the blob."
         },
-        "Expiry-Time": {
+        "expiryTime": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The expire time of the blob.",
-          "x-ms-client-name": "expiryTime"
+          "description": "The expire time of the blob."
         },
-        "Sealed": {
+        "sealed": {
           "type": "boolean",
-          "description": "Whether the blob is sealed.",
-          "x-ms-client-name": "sealed"
+          "description": "Whether the blob is sealed."
         },
-        "RehydratePriority": {
+        "rehydratePriority": {
           "$ref": "#/definitions/RehydratePriority",
-          "description": "The rehydrate priority of the blob.",
-          "x-ms-client-name": "rehydratePriority"
+          "description": "The rehydrate priority of the blob."
         },
-        "LastAccessTime": {
+        "lastAccessTime": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The last access time of the blob.",
-          "x-ms-client-name": "lastAccessTime"
+          "description": "The last access time of the blob."
         },
-        "ImmutabilityPolicyUntilDate": {
+        "immutabilityPolicyUntilDate": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The immutability policy until time of the blob.",
-          "x-ms-client-name": "immutabilityPolicyUntilDate"
+          "description": "The immutability policy until time of the blob."
         },
-        "ImmutabilityPolicyMode": {
+        "immutabilityPolicyMode": {
           "$ref": "#/definitions/BlobImmutabilityPolicyMode",
-          "description": "The immutability policy mode of the blob.",
-          "x-ms-client-name": "immutabilityPolicyMode"
+          "description": "The immutability policy mode of the blob."
         },
-        "LegalHold": {
+        "legalHold": {
           "type": "boolean",
-          "description": "Whether the blob is under legal hold.",
-          "x-ms-client-name": "legalHold"
+          "description": "Whether the blob is under legal hold."
         }
       },
       "required": [
-        "Last-Modified",
-        "Etag"
-      ],
-      "xml": {
-        "name": "Properties"
-      }
+        "lastModified",
+        "eTag"
+      ]
     },
     "BlobTag": {
       "type": "object",
       "description": "The blob tags.",
       "properties": {
-        "Key": {
+        "key": {
           "type": "string",
-          "description": "The key of the tag.",
-          "x-ms-client-name": "key"
+          "description": "The key of the tag."
         },
-        "Value": {
+        "value": {
           "type": "string",
-          "description": "The value of the tag.",
-          "x-ms-client-name": "value"
+          "description": "The value of the tag."
         }
       },
       "required": [
-        "Key",
-        "Value"
-      ],
-      "xml": {
-        "name": "Tag"
-      }
+        "key",
+        "value"
+      ]
     },
     "BlobTags": {
       "type": "object",
       "description": "Represents blob tags.",
       "properties": {
-        "TagSet": {
+        "blobTagSet": {
           "type": "array",
           "description": "Represents the blob tags.",
           "items": {
             "$ref": "#/definitions/BlobTag"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-client-name": "blobTagSet"
+          }
         }
       },
       "required": [
-        "TagSet"
-      ],
-      "xml": {
-        "name": "Tags"
-      }
+        "blobTagSet"
+      ]
     },
     "BlobType": {
       "type": "string",
@@ -16595,48 +16696,38 @@
       "type": "object",
       "description": "Represents a single block in a block blob. It describes the block's ID and size.",
       "properties": {
-        "Name": {
+        "name": {
           "$ref": "#/definitions/base64Bytes",
-          "description": "The base64 encoded block ID.",
-          "x-ms-client-name": "name"
+          "description": "The base64 encoded block ID."
         },
-        "Size": {
+        "size": {
           "type": "integer",
           "format": "int64",
-          "description": "The block size in bytes.",
-          "x-ms-client-name": "size"
+          "description": "The block size in bytes."
         }
       },
       "required": [
-        "Name",
-        "Size"
+        "name",
+        "size"
       ]
     },
     "BlockList": {
       "type": "object",
       "description": "Contains the committed and uncommitted blocks in a block blob.",
       "properties": {
-        "CommittedBlocks": {
+        "committedBlocks": {
           "type": "array",
           "description": "The list of committed blocks.",
           "items": {
             "$ref": "#/definitions/Block"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-client-name": "committedBlocks"
+          }
         },
-        "UncommittedBlocks": {
+        "uncommittedBlocks": {
           "type": "array",
           "description": "The list of uncommitted blocks.",
           "items": {
             "$ref": "#/definitions/Block"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-client-name": "uncommittedBlocks"
+          }
         }
       }
     },
@@ -16674,183 +16765,145 @@
       "type": "object",
       "description": "The Block lookup list.",
       "properties": {
-        "Committed": {
+        "committed": {
           "type": "array",
           "description": "The committed blocks",
           "items": {
             "$ref": "#/definitions/base64Bytes"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "committed"
+          }
         },
-        "Uncommitted": {
+        "uncommitted": {
           "type": "array",
           "description": "The uncommitted blocks",
           "items": {
             "$ref": "#/definitions/base64Bytes"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "uncommitted"
+          }
         },
-        "Latest": {
+        "latest": {
           "type": "array",
           "description": "The latest blocks",
           "items": {
             "$ref": "#/definitions/base64Bytes"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "latest"
+          }
         }
-      },
-      "xml": {
-        "name": "BlockList"
       }
     },
     "ClearRange": {
       "type": "object",
       "description": "The clear range.",
       "properties": {
-        "Start": {
+        "start": {
           "type": "integer",
           "format": "int64",
-          "description": "The start of the byte range.",
-          "x-ms-client-name": "start"
+          "description": "The start of the byte range."
         },
-        "End": {
+        "end": {
           "type": "integer",
           "format": "int64",
-          "description": "The end of the byte range.",
-          "x-ms-client-name": "end"
+          "description": "The end of the byte range."
         }
       },
       "required": [
-        "Start",
-        "End"
+        "start",
+        "end"
       ]
     },
     "ContainerItem": {
       "type": "object",
       "description": "An Azure Storage container.",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string",
-          "description": "The name of the container.",
-          "x-ms-client-name": "name"
+          "description": "The name of the container."
         },
-        "Deleted": {
+        "delete": {
           "type": "boolean",
-          "description": "Whether the container is deleted.",
-          "x-ms-client-name": "delete"
+          "description": "Whether the container is deleted."
         },
-        "Version": {
+        "version": {
           "type": "string",
-          "description": "The version of the container.",
-          "x-ms-client-name": "version"
+          "description": "The version of the container."
         },
-        "Properties": {
+        "properties": {
           "$ref": "#/definitions/ContainerProperties",
-          "description": "The properties of the container.",
-          "x-ms-client-name": "properties"
+          "description": "The properties of the container."
         },
-        "Metadata": {
+        "metadata": {
           "type": "object",
           "description": "The metadata of the container.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-name": "metadata"
+          }
         }
       },
       "required": [
-        "Name",
-        "Properties"
-      ],
-      "xml": {
-        "name": "Container"
-      }
+        "name",
+        "properties"
+      ]
     },
     "ContainerProperties": {
       "type": "object",
       "description": "The properties of a container.",
       "properties": {
-        "Last-Modified": {
+        "lastModified": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The date-time the container was last modified in RFC1123 format.",
-          "x-ms-client-name": "lastModified"
+          "description": "The date-time the container was last modified in RFC1123 format."
         },
-        "ETag": {
+        "eTag": {
           "type": "string",
-          "description": "The ETag of the container.",
-          "x-ms-client-name": "eTag"
+          "description": "The ETag of the container."
         },
-        "LeaseStatus": {
+        "leaseStatus": {
           "$ref": "#/definitions/LeaseStatus",
-          "description": "The lease status of the container.",
-          "x-ms-client-name": "leaseStatus"
+          "description": "The lease status of the container."
         },
-        "LeaseState": {
+        "leaseState": {
           "$ref": "#/definitions/LeaseState",
-          "description": "The lease state of the container.",
-          "x-ms-client-name": "leaseState"
+          "description": "The lease state of the container."
         },
-        "LeaseDuration": {
+        "leaseDuration": {
           "$ref": "#/definitions/LeaseDuration",
-          "description": "The lease duration of the container.",
-          "x-ms-client-name": "leaseDuration"
+          "description": "The lease duration of the container."
         },
-        "PublicAccess": {
+        "publicAccess": {
           "$ref": "#/definitions/PublicAccessType",
-          "description": "The public access type of the container.",
-          "x-ms-client-name": "publicAccess"
+          "description": "The public access type of the container."
         },
-        "HasImmutabilityPolicy": {
+        "hasImmutabilityPolicy": {
           "type": "boolean",
-          "description": "Whether it has an immutability policy.",
-          "x-ms-client-name": "hasImmutabilityPolicy"
+          "description": "Whether it has an immutability policy."
         },
-        "HasLegalHold": {
+        "hasLegalHold": {
           "type": "boolean",
-          "description": "The has legal hold status of the container.",
-          "x-ms-client-name": "hasLegalHold"
+          "description": "The has legal hold status of the container."
         },
-        "DefaultEncryptionScope": {
+        "defaultEncryptionScope": {
           "type": "string",
-          "description": "The default encryption scope of the container.",
-          "x-ms-client-name": "defaultEncryptionScope"
+          "description": "The default encryption scope of the container."
         },
-        "DenyEncryptionScopeOverride": {
+        "denyEncryptionScopeOverride": {
           "type": "boolean",
-          "description": "Whether to prevent encryption scope override.",
-          "x-ms-client-name": "denyEncryptionScopeOverride"
+          "description": "Whether to prevent encryption scope override."
         },
-        "DeletedTime": {
+        "deletedTime": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The deleted time of the container.",
-          "x-ms-client-name": "deletedTime"
+          "description": "The deleted time of the container."
         },
-        "RemainingRetentionDays": {
+        "remainingRetentionDays": {
           "type": "integer",
           "format": "int32",
-          "description": "The remaining retention days of the container.",
-          "x-ms-client-name": "remainingRetentionDays"
+          "description": "The remaining retention days of the container."
         },
-        "ImmutableStorageWithVersioningEnabled": {
+        "immutableStorageWithVersioningEnabled": {
           "type": "boolean",
-          "description": "Whether immutable storage with versioning is enabled.",
-          "x-ms-client-name": "immutableStorageWithVersioningEnabled"
+          "description": "Whether immutable storage with versioning is enabled."
         }
       },
       "required": [
-        "Last-Modified",
-        "ETag"
+        "lastModified",
+        "eTag"
       ]
     },
     "CopyStatus": {
@@ -16893,40 +16946,35 @@
       "type": "object",
       "description": "CORS is an HTTP feature that enables a web application running under one domain to access resources in another domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs in another domain",
       "properties": {
-        "AllowedOrigins": {
+        "allowedOrigins": {
           "type": "string",
-          "description": "The allowed origins.",
-          "x-ms-client-name": "allowedOrigins"
+          "description": "The allowed origins."
         },
-        "AllowedMethods": {
+        "allowedMethods": {
           "type": "string",
-          "description": "The allowed methods.",
-          "x-ms-client-name": "allowedMethods"
+          "description": "The allowed methods."
         },
-        "AllowedHeaders": {
+        "allowedHeaders": {
           "type": "string",
-          "description": "The allowed headers.",
-          "x-ms-client-name": "allowedHeaders"
+          "description": "The allowed headers."
         },
-        "ExposedHeaders": {
+        "exposedHeaders": {
           "type": "string",
-          "description": "The exposed headers.",
-          "x-ms-client-name": "exposedHeaders"
+          "description": "The exposed headers."
         },
-        "MaxAgeInSeconds": {
+        "maxAgeInSeconds": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum age in seconds.",
-          "minimum": 0,
-          "x-ms-client-name": "maxAgeInSeconds"
+          "minimum": 0
         }
       },
       "required": [
-        "AllowedOrigins",
-        "AllowedMethods",
-        "AllowedHeaders",
-        "ExposedHeaders",
-        "MaxAgeInSeconds"
+        "allowedOrigins",
+        "allowedMethods",
+        "allowedHeaders",
+        "exposedHeaders",
+        "maxAgeInSeconds"
       ]
     },
     "DeleteSnapshotsOptionType": {
@@ -16957,30 +17005,25 @@
       "type": "object",
       "description": "Represents the delimited text configuration.",
       "properties": {
-        "ColumnSeparator": {
+        "columnSeparator": {
           "type": "string",
-          "description": "The string used to separate columns.",
-          "x-ms-client-name": "columnSeparator"
+          "description": "The string used to separate columns."
         },
-        "FieldQuote": {
+        "fieldQuote": {
           "type": "string",
-          "description": "The string used to quote a specific field.",
-          "x-ms-client-name": "fieldQuote"
+          "description": "The string used to quote a specific field."
         },
-        "RecordSeparator": {
+        "recordSeparator": {
           "type": "string",
-          "description": "The string used to separate records.",
-          "x-ms-client-name": "recordSeparator"
+          "description": "The string used to separate records."
         },
-        "EscapeChar": {
+        "escapeChar": {
           "type": "string",
-          "description": "The string used to escape a quote character in a field.",
-          "x-ms-client-name": "escapeChar"
+          "description": "The string used to escape a quote character in a field."
         },
-        "HasHeaders": {
+        "headersPresent": {
           "type": "boolean",
-          "description": "Represents whether the data has headers.",
-          "x-ms-client-name": "headersPresent"
+          "description": "Represents whether the data has headers."
         }
       }
     },
@@ -17024,81 +17067,61 @@
       "type": "object",
       "description": "The filter blob item.",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string",
-          "description": "The name of the blob.",
-          "x-ms-client-name": "name"
+          "description": "The name of the blob."
         },
-        "ContainerName": {
+        "containerName": {
           "type": "string",
-          "description": "The properties of the blob.",
-          "x-ms-client-name": "containerName"
+          "description": "The properties of the blob."
         },
         "tags": {
           "$ref": "#/definitions/BlobTags",
           "description": "The metadata of the blob."
         },
-        "VersionId": {
+        "versionId": {
           "type": "string",
-          "description": "The version ID of the blob.",
-          "x-ms-client-name": "versionId"
+          "description": "The version ID of the blob."
         },
-        "IsCurrentVersion": {
+        "isCurrentVersion": {
           "type": "boolean",
-          "description": "Whether it is the current version of the blob",
-          "x-ms-client-name": "isCurrentVersion"
+          "description": "Whether it is the current version of the blob"
         }
       },
       "required": [
-        "Name",
-        "ContainerName"
-      ],
-      "xml": {
-        "name": "Blob"
-      }
+        "name",
+        "containerName"
+      ]
     },
     "FilterBlobSegment": {
       "type": "object",
       "description": "The result of a Filter Blobs API call",
       "properties": {
-        "ServiceEndpoint": {
+        "serviceEndpoint": {
           "type": "string",
-          "description": "The service endpoint.",
-          "xml": {
-            "attribute": true
-          },
-          "x-ms-client-name": "serviceEndpoint"
+          "description": "The service endpoint."
         },
-        "Where": {
+        "where": {
           "type": "string",
-          "description": "The filter for the blobs.",
-          "x-ms-client-name": "where"
+          "description": "The filter for the blobs."
         },
-        "Blobs": {
+        "blobs": {
           "type": "array",
           "description": "The blob segment.",
           "items": {
             "$ref": "#/definitions/FilterBlobItem"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-client-name": "blobs"
+          }
         },
-        "NextMarker": {
+        "nextMarker": {
           "type": "string",
-          "description": "The next marker of the blobs.",
-          "x-ms-client-name": "nextMarker"
+          "description": "The next marker of the blobs."
         }
       },
       "required": [
-        "ServiceEndpoint",
-        "Where",
-        "Blobs"
-      ],
-      "xml": {
-        "name": "EnumerationResults"
-      }
+        "serviceEndpoint",
+        "where",
+        "blobs"
+      ]
     },
     "FilterBlobsIncludeItem": {
       "type": "string",
@@ -17128,21 +17151,19 @@
       "type": "object",
       "description": "Geo-Replication information for the Secondary Storage Service",
       "properties": {
-        "Status": {
+        "status": {
           "$ref": "#/definitions/GeoReplicationStatusType",
-          "description": "The status of the secondary location",
-          "x-ms-client-name": "status"
+          "description": "The status of the secondary location"
         },
-        "LastSyncTime": {
+        "lastSyncTime": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads.",
-          "x-ms-client-name": "lastSyncTime"
+          "description": "A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads."
         }
       },
       "required": [
-        "Status",
-        "LastSyncTime"
+        "status",
+        "lastSyncTime"
       ]
     },
     "GeoReplicationStatusType": {
@@ -17203,10 +17224,9 @@
       "type": "object",
       "description": "Represents the JSON text configuration.",
       "properties": {
-        "RecordSeparator": {
+        "recordSeparator": {
           "type": "string",
-          "description": "The string used to separate records.",
-          "x-ms-client-name": "recordSeparator"
+          "description": "The string used to separate records."
         }
       }
     },
@@ -17214,20 +17234,18 @@
       "type": "object",
       "description": "Key information",
       "properties": {
-        "Start": {
+        "start": {
           "type": "string",
-          "description": "The date-time the key is active.",
-          "x-ms-client-name": "start"
+          "description": "The date-time the key is active."
         },
-        "Expiry": {
+        "expiry": {
           "type": "string",
-          "description": "The date-time the key expires.",
-          "x-ms-client-name": "expiry"
+          "description": "The date-time the key expires."
         }
       },
       "required": [
-        "Start",
-        "Expiry"
+        "start",
+        "expiry"
       ]
     },
     "LeaseDuration": {
@@ -17324,118 +17342,85 @@
       "type": "object",
       "description": "An enumeration of blobs.",
       "properties": {
-        "ServiceEndpoint": {
+        "serviceEndpoint": {
           "type": "string",
-          "description": "The service endpoint.",
-          "xml": {
-            "attribute": true
-          },
-          "x-ms-client-name": "serviceEndpoint"
+          "description": "The service endpoint."
         },
-        "ContainerName": {
+        "containerName": {
           "type": "string",
-          "description": "The container name.",
-          "xml": {
-            "attribute": true
-          },
-          "x-ms-client-name": "containerName"
+          "description": "The container name."
         },
-        "Prefix": {
+        "prefix": {
           "type": "string",
-          "description": "The prefix of the blobs.",
-          "x-ms-client-name": "prefix"
+          "description": "The prefix of the blobs."
         },
-        "Marker": {
+        "marker": {
           "type": "string",
-          "description": "The marker of the blobs.",
-          "x-ms-client-name": "marker"
+          "description": "The marker of the blobs."
         },
-        "MaxResults": {
+        "maxResults": {
           "type": "integer",
           "format": "int32",
-          "description": "The max results of the blobs.",
-          "x-ms-client-name": "maxResults"
+          "description": "The max results of the blobs."
         },
-        "Blobs": {
+        "segment": {
           "$ref": "#/definitions/BlobFlatListSegment",
-          "description": "The blob segment.",
-          "x-ms-client-name": "segment"
+          "description": "The blob segment."
         },
-        "NextMarker": {
+        "nextMarker": {
           "type": "string",
-          "description": "The next marker of the blobs.",
-          "x-ms-client-name": "nextMarker"
+          "description": "The next marker of the blobs."
         }
       },
       "required": [
-        "ServiceEndpoint",
-        "ContainerName",
-        "Blobs"
-      ],
-      "xml": {
-        "name": "EnumerationResults"
-      }
+        "serviceEndpoint",
+        "containerName",
+        "segment"
+      ]
     },
     "ListBlobsHierarchySegmentResponse": {
       "type": "object",
       "description": "An enumeration of blobs",
       "properties": {
-        "ServiceEndpoint": {
+        "serviceEndpoint": {
           "type": "string",
-          "description": "The service endpoint.",
-          "xml": {
-            "attribute": true
-          },
-          "x-ms-client-name": "serviceEndpoint"
+          "description": "The service endpoint."
         },
-        "ContainerName": {
+        "containerName": {
           "type": "string",
-          "description": "The container name.",
-          "xml": {
-            "attribute": true
-          },
-          "x-ms-client-name": "containerName"
+          "description": "The container name."
         },
-        "Delimiter": {
+        "delimiter": {
           "type": "string",
-          "description": "The delimiter of the blobs.",
-          "x-ms-client-name": "delimiter"
+          "description": "The delimiter of the blobs."
         },
-        "Prefix": {
+        "prefix": {
           "type": "string",
-          "description": "The prefix of the blobs.",
-          "x-ms-client-name": "prefix"
+          "description": "The prefix of the blobs."
         },
-        "Marker": {
+        "marker": {
           "type": "string",
-          "description": "The marker of the blobs.",
-          "x-ms-client-name": "marker"
+          "description": "The marker of the blobs."
         },
-        "MaxResults": {
+        "maxResults": {
           "type": "integer",
           "format": "int32",
-          "description": "The max results of the blobs.",
-          "x-ms-client-name": "maxResults"
+          "description": "The max results of the blobs."
         },
-        "Blobs": {
+        "segment": {
           "$ref": "#/definitions/BlobHierarchyListSegment",
-          "description": "The blob segment.",
-          "x-ms-client-name": "segment"
+          "description": "The blob segment."
         },
-        "NextMarker": {
+        "nextMarker": {
           "type": "string",
-          "description": "The next marker of the blobs.",
-          "x-ms-client-name": "nextMarker"
+          "description": "The next marker of the blobs."
         }
       },
       "required": [
-        "ServiceEndpoint",
-        "ContainerName",
-        "Blobs"
-      ],
-      "xml": {
-        "name": "EnumerationResults"
-      }
+        "serviceEndpoint",
+        "containerName",
+        "segment"
+      ]
     },
     "ListBlobsIncludeItem": {
       "type": "string",
@@ -17543,40 +17528,29 @@
       "type": "object",
       "description": "The list container segment response",
       "properties": {
-        "ServiceEndpoint": {
+        "serviceEndpoint": {
           "type": "string",
-          "description": "The service endpoint.",
-          "xml": {
-            "attribute": true
-          },
-          "x-ms-client-name": "serviceEndpoint"
+          "description": "The service endpoint."
         },
-        "Prefix": {
+        "prefix": {
           "type": "string",
-          "description": "The prefix of the containers.",
-          "x-ms-client-name": "prefix"
+          "description": "The prefix of the containers."
         },
-        "Marker": {
+        "marker": {
           "type": "string",
-          "description": "The marker of the containers.",
-          "x-ms-client-name": "marker"
+          "description": "The marker of the containers."
         },
-        "MaxResults": {
+        "maxResults": {
           "type": "integer",
           "format": "int32",
-          "description": "The max results of the containers.",
-          "x-ms-client-name": "maxResults"
+          "description": "The max results of the containers."
         },
-        "Containers": {
+        "containerItems": {
           "type": "array",
           "description": "The container segment.",
           "items": {
             "$ref": "#/definitions/ContainerItem"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-client-name": "containerItems"
+          }
         },
         "NextMarker": {
           "type": "string",
@@ -17584,78 +17558,66 @@
         }
       },
       "required": [
-        "ServiceEndpoint",
-        "Containers"
-      ],
-      "xml": {
-        "name": "EnumerationResults"
-      }
+        "serviceEndpoint",
+        "containerItems"
+      ]
     },
     "Logging": {
       "type": "object",
       "description": "Azure Analytics Logging settings.",
       "properties": {
-        "Version": {
+        "version": {
           "type": "string",
-          "description": "The version of the logging properties.",
-          "x-ms-client-name": "version"
+          "description": "The version of the logging properties."
         },
-        "Delete": {
+        "delete": {
           "type": "boolean",
-          "description": "Whether delete operation is logged.",
-          "x-ms-client-name": "delete"
+          "description": "Whether delete operation is logged."
         },
-        "Read": {
+        "read": {
           "type": "boolean",
-          "description": "Whether read operation is logged.",
-          "x-ms-client-name": "read"
+          "description": "Whether read operation is logged."
         },
-        "Write": {
+        "write": {
           "type": "boolean",
-          "description": "Whether write operation is logged.",
-          "x-ms-client-name": "write"
+          "description": "Whether write operation is logged."
         },
-        "RetentionPolicy": {
+        "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
-          "description": "The retention policy of the logs.",
-          "x-ms-client-name": "retentionPolicy"
+          "description": "The retention policy of the logs."
         }
       },
       "required": [
-        "Version",
-        "Delete",
-        "Read",
-        "Write",
-        "RetentionPolicy"
+        "version",
+        "delete",
+        "read",
+        "write",
+        "retentionPolicy"
       ]
     },
     "Metrics": {
       "type": "object",
       "description": "The metrics properties.",
       "properties": {
-        "Version": {
+        "version": {
           "type": "string",
-          "description": "The version of the metrics properties.",
-          "x-ms-client-name": "version"
+          "description": "The version of the metrics properties."
         },
-        "Enabled": {
+        "enabled": {
           "type": "boolean",
-          "description": "Whether it is enabled.",
-          "x-ms-client-name": "enabled"
+          "description": "Whether it is enabled."
         },
-        "IncludeAPIs": {
+        "includeApis": {
           "type": "boolean",
-          "description": "Whether to include API in the metrics.",
-          "x-ms-client-name": "includeApis"
+          "description": "Whether to include API in the metrics."
         },
-        "RetentionPolicy": {
+        "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
-          "description": "The retention policy of the metrics.",
-          "x-ms-client-name": "retentionPolicy"
+          "description": "The retention policy of the metrics."
         }
       },
       "required": [
-        "Enabled"
+        "enabled"
       ]
     },
     "ObjectReplicationMetadata": {
@@ -17663,41 +17625,29 @@
       "description": "The object replication metadata.",
       "additionalProperties": {
         "type": "string"
-      },
-      "xml": {
-        "name": "OrMetadata"
       }
     },
     "PageList": {
       "type": "object",
       "description": "Represents a page list.",
       "properties": {
-        "PageRange": {
+        "pageRange": {
           "type": "array",
           "description": "The page ranges.",
           "items": {
             "$ref": "#/definitions/PageRange"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "pageRange"
+          }
         },
-        "ClearRange": {
+        "clearRange": {
           "type": "array",
           "description": "The clear ranges.",
           "items": {
             "$ref": "#/definitions/ClearRange"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "clearRange"
+          }
         },
-        "NextMarker": {
+        "nextMarker": {
           "type": "string",
-          "description": "The next marker.",
-          "x-ms-client-name": "nextMarker"
+          "description": "The next marker."
         }
       }
     },
@@ -17705,22 +17655,20 @@
       "type": "object",
       "description": "The page range.",
       "properties": {
-        "Start": {
+        "start": {
           "type": "integer",
           "format": "int64",
-          "description": "The start of the byte range.",
-          "x-ms-client-name": "start"
+          "description": "The start of the byte range."
         },
-        "End": {
+        "end": {
           "type": "integer",
           "format": "int64",
-          "description": "The end of the byte range.",
-          "x-ms-client-name": "end"
+          "description": "The end of the byte range."
         }
       },
       "required": [
-        "Start",
-        "End"
+        "start",
+        "end"
       ]
     },
     "ParquetConfiguration": {
@@ -17834,64 +17782,55 @@
       "type": "object",
       "description": "The query format settings.",
       "properties": {
-        "Type": {
+        "type": {
           "$ref": "#/definitions/QueryType",
-          "description": "The query type.",
-          "x-ms-client-name": "type"
+          "description": "The query type."
         },
-        "DelimitedTextConfiguration": {
+        "delimitedTextConfiguration": {
           "$ref": "#/definitions/DelimitedTextConfiguration",
-          "description": "The delimited text configuration.",
-          "x-ms-client-name": "delimitedTextConfiguration"
+          "description": "The delimited text configuration."
         },
-        "JsonTextConfiguration": {
+        "jsonTextConfiguration": {
           "$ref": "#/definitions/JsonTextConfiguration",
-          "description": "The JSON text configuration.",
-          "x-ms-client-name": "jsonTextConfiguration"
+          "description": "The JSON text configuration."
         },
-        "ArrowConfiguration": {
+        "arrowConfiguration": {
           "$ref": "#/definitions/ArrowConfiguration",
-          "description": "The Apache Arrow configuration.",
-          "x-ms-client-name": "arrowConfiguration"
+          "description": "The Apache Arrow configuration."
         },
-        "ParquetConfiguration": {
+        "parquetTextConfiguration": {
           "$ref": "#/definitions/ParquetConfiguration",
-          "description": "The Parquet configuration.",
-          "x-ms-client-name": "parquetTextConfiguration"
+          "description": "The Parquet configuration."
         }
       },
       "required": [
-        "Type"
+        "type"
       ]
     },
     "QueryRequest": {
       "type": "object",
       "description": "Groups the set of query request settings.",
       "properties": {
-        "QueryType": {
+        "queryType": {
           "$ref": "#/definitions/QueryRequestType",
-          "description": "Required. The type of the provided query expression.",
-          "x-ms-client-name": "queryType"
+          "description": "Required. The type of the provided query expression."
         },
-        "Expression": {
+        "expression": {
           "type": "string",
-          "description": "The query expression in SQL. The maximum size of the query expression is 256KiB.",
-          "x-ms-client-name": "expression"
+          "description": "The query expression in SQL. The maximum size of the query expression is 256KiB."
         },
-        "InputSerialization": {
+        "inputSerialization": {
           "$ref": "#/definitions/QuerySerialization",
-          "description": "The input serialization settings.",
-          "x-ms-client-name": "inputSerialization"
+          "description": "The input serialization settings."
         },
-        "OutputSerialization": {
+        "outputSerialization": {
           "$ref": "#/definitions/QuerySerialization",
-          "description": "The output serialization settings.",
-          "x-ms-client-name": "outputSerialization"
+          "description": "The output serialization settings."
         }
       },
       "required": [
-        "QueryType",
-        "Expression"
+        "queryType",
+        "expression"
       ]
     },
     "QueryRequestType": {
@@ -17916,14 +17855,13 @@
       "type": "object",
       "description": "The query serialization settings.",
       "properties": {
-        "Format": {
+        "format": {
           "$ref": "#/definitions/QueryFormat",
-          "description": "The query format.",
-          "x-ms-client-name": "format"
+          "description": "The query format."
         }
       },
       "required": [
-        "Format"
+        "format"
       ]
     },
     "QueryType": {
@@ -17960,9 +17898,6 @@
             "description": "The query format type is Parquet."
           }
         ]
-      },
-      "xml": {
-        "name": "Type"
       }
     },
     "RehydratePriority": {
@@ -17993,26 +17928,23 @@
       "type": "object",
       "description": "The retention policy.",
       "properties": {
-        "Enabled": {
+        "enabled": {
           "type": "boolean",
-          "description": "Whether to enable the retention policy.",
-          "x-ms-client-name": "enabled"
+          "description": "Whether to enable the retention policy."
         },
-        "Days": {
+        "days": {
           "type": "integer",
           "format": "int32",
           "description": "The number of days to retain the logs.",
-          "minimum": 1,
-          "x-ms-client-name": "days"
+          "minimum": 1
         },
-        "AllowPermanentDelete": {
+        "allowPermanentDelete": {
           "type": "boolean",
-          "description": "Whether to allow permanent delete.",
-          "x-ms-client-name": "allowPermanentDelete"
+          "description": "Whether to allow permanent delete."
         }
       },
       "required": [
-        "Enabled"
+        "enabled"
       ]
     },
     "SequenceNumberActionType": {
@@ -18049,20 +17981,18 @@
       "type": "object",
       "description": "The signed identifier.",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string",
-          "description": "The unique ID for the signed identifier.",
-          "x-ms-client-name": "id"
+          "description": "The unique ID for the signed identifier."
         },
-        "AccessPolicy": {
+        "accessPolicy": {
           "$ref": "#/definitions/AccessPolicy",
-          "description": "The access policy for the signed identifier.",
-          "x-ms-client-name": "accessPolicy"
+          "description": "The access policy for the signed identifier."
         }
       },
       "required": [
-        "Id",
-        "AccessPolicy"
+        "id",
+        "accessPolicy"
       ]
     },
     "SignedIdentifiers": {
@@ -18118,60 +18048,51 @@
       "type": "object",
       "description": "The properties that enable an account to host a static website",
       "properties": {
-        "Enabled": {
+        "enabled": {
           "type": "boolean",
-          "description": "Indicates whether this account is hosting a static website",
-          "x-ms-client-name": "enabled"
+          "description": "Indicates whether this account is hosting a static website"
         },
-        "IndexDocument": {
+        "indexDocument": {
           "type": "string",
-          "description": "The index document.",
-          "x-ms-client-name": "indexDocument"
+          "description": "The index document."
         },
-        "ErrorDocument404Path": {
+        "errorDocument404Path": {
           "type": "string",
-          "description": "The error document.",
-          "x-ms-client-name": "errorDocument404Path"
+          "description": "The error document."
         },
-        "DefaultIndexDocumentPath": {
+        "defaultIndexDocumentPath": {
           "type": "string",
-          "description": "Absolute path of the default index page",
-          "x-ms-client-name": "defaultIndexDocumentPath"
+          "description": "Absolute path of the default index page"
         }
       },
       "required": [
-        "Enabled"
+        "enabled"
       ]
     },
     "StorageError": {
       "type": "object",
       "description": "The error response.",
       "properties": {
-        "Code": {
+        "code": {
           "type": "string",
-          "description": "The error code.",
-          "x-ms-client-name": "code"
+          "description": "The error code."
         },
-        "Message": {
+        "message": {
           "type": "string",
-          "description": "The error message.",
-          "x-ms-client-name": "message"
+          "description": "The error message."
         },
-        "CopySourceStatusCode": {
+        "copySourceStatusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "Copy source status code",
-          "x-ms-client-name": "copySourceStatusCode"
+          "description": "Copy source status code"
         },
-        "CopySourceErrorCode": {
+        "copySourceErrorCode": {
           "type": "string",
-          "description": "Copy source error code",
-          "x-ms-client-name": "copySourceErrorCode"
+          "description": "Copy source error code"
         },
-        "CopySourceErrorMessage": {
+        "copySourceErrorMessage": {
           "type": "string",
-          "description": "Copy source error message",
-          "x-ms-client-name": "copySourceErrorMessage"
+          "description": "Copy source error message"
         }
       }
     },
@@ -18179,46 +18100,36 @@
       "type": "object",
       "description": "The service properties.",
       "properties": {
-        "Logging": {
+        "logging": {
           "$ref": "#/definitions/Logging",
-          "description": "The logging properties.",
-          "x-ms-client-name": "logging"
+          "description": "The logging properties."
         },
-        "HourMetrics": {
+        "hourMetrics": {
           "$ref": "#/definitions/Metrics",
-          "description": "The hour metrics properties.",
-          "x-ms-client-name": "hourMetrics"
+          "description": "The hour metrics properties."
         },
-        "MinuteMetrics": {
+        "minuteMetrics": {
           "$ref": "#/definitions/Metrics",
-          "description": "The minute metrics properties.",
-          "x-ms-client-name": "minuteMetrics"
+          "description": "The minute metrics properties."
         },
-        "Cors": {
+        "cors": {
           "type": "array",
           "description": "The CORS properties.",
           "items": {
             "$ref": "#/definitions/CorsRule"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-client-name": "cors"
+          }
         },
-        "DefaultServiceVersion": {
+        "defaultServiceVersion": {
           "type": "string",
-          "description": "The default service version.",
-          "x-ms-client-name": "defaultServiceVersion"
+          "description": "The default service version."
         },
-        "DeleteRetentionPolicy": {
+        "deleteRetentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
-          "description": "The delete retention policy.",
-          "x-ms-client-name": "deleteRetentionPolicy"
+          "description": "The delete retention policy."
         },
-        "StaticWebsite": {
+        "staticWebsite": {
           "$ref": "#/definitions/StaticWebsite",
-          "description": "The static website properties.",
-          "x-ms-client-name": "staticWebsite"
+          "description": "The static website properties."
         }
       }
     },
@@ -18226,10 +18137,9 @@
       "type": "object",
       "description": "Stats for the storage service.",
       "properties": {
-        "GeoReplication": {
+        "geoReplication": {
           "$ref": "#/definitions/GeoReplication",
-          "description": "The geo replication stats.",
-          "x-ms-client-name": "geoReplication"
+          "description": "The geo replication stats."
         }
       }
     },
@@ -18237,50 +18147,43 @@
       "type": "object",
       "description": "A user delegation key.",
       "properties": {
-        "SignedOid": {
+        "signedOid": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The Azure Active Directory object ID in GUID format.",
-          "x-ms-client-name": "signedOid"
+          "description": "The Azure Active Directory object ID in GUID format."
         },
-        "SignedTid": {
+        "signedTid": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The Azure Active Directory tenant ID in GUID format.",
-          "x-ms-client-name": "signedTid"
+          "description": "The Azure Active Directory tenant ID in GUID format."
         },
-        "SignedStart": {
+        "signedStart": {
           "type": "string",
-          "description": "The date-time the key is active.",
-          "x-ms-client-name": "signedStart"
+          "description": "The date-time the key is active."
         },
-        "SignedExpiry": {
+        "signedExpiry": {
           "type": "string",
-          "description": "The date-time the key expires.",
-          "x-ms-client-name": "signedExpiry"
+          "description": "The date-time the key expires."
         },
-        "SignedService": {
+        "signedService": {
           "type": "string",
-          "description": "Abbreviation of the Azure Storage service that accepts the key.",
-          "x-ms-client-name": "signedService"
+          "description": "Abbreviation of the Azure Storage service that accepts the key."
         },
-        "SignedVersion": {
+        "signedVersion": {
           "type": "string",
-          "description": "The service version that created the key.",
-          "x-ms-client-name": "signedVersion"
+          "description": "The service version that created the key."
         },
-        "Value": {
+        "value": {
           "$ref": "#/definitions/base64Bytes",
-          "description": "The key as a base64 string.",
-          "x-ms-client-name": "value"
+          "description": "The key as a base64 string."
         }
       },
       "required": [
-        "SignedOid",
-        "SignedTid",
-        "SignedStart",
-        "SignedExpiry",
-        "SignedService",
-        "SignedVersion",
-        "Value"
+        "signedOid",
+        "signedTid",
+        "signedStart",
+        "signedExpiry",
+        "signedService",
+        "signedVersion",
+        "value"
       ]
     },
     "base64Bytes": {
