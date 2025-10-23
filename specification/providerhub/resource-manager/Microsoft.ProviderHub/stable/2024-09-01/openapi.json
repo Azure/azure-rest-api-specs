@@ -2393,7 +2393,7 @@
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Azure create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DefaultRollout"
             },
@@ -2416,12 +2416,7 @@
           "NewRegionFrontloadRelease_CreateOrUpdate": {
             "$ref": "./examples/NewRegionFrontloadRelease_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/FrontloadPayload"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}/stop": {
@@ -3430,15 +3425,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {

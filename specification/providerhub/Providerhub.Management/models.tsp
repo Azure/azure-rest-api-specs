@@ -11,11 +11,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.ProviderHub;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ArmCreatedResponse {
-  ...ArmResourceCreatedResponse<DefaultRollout>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

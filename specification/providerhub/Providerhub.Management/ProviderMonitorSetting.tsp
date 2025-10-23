@@ -38,10 +38,15 @@ interface ProviderMonitorSettings {
   /**
    * Updates the provider monitor setting properties as specified in the request body. Update fails if the specified provider monitor setting does not already exist.
    */
-  @patch(#{ implicitOptionality: false })
   #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  update is ArmCustomPatchSync<ProviderMonitorSetting, PatchModel = {}>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    ProviderMonitorSetting,
+    PatchModel = {
+      @body body: void;
+    }
+  >;
 
   /**
    * Deletes a provider monitor setting.
