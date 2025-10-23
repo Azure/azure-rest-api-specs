@@ -21,15 +21,22 @@ describe("file processing", () => {
   it("should process a larger set of files and return a list of expected resolved swagger files", async () => {
     const changedFiles = [
       "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/CreateResource.json",
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/DeleteResource.json",
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/GetResource.json",
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/GetRoot.json",
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/subdir/ListResources.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/CreateResource.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/DeleteResource.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/GetResource.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/GetRoot.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/ListResources.json",
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/subdir/ListResources.json",
     ];
     const expected = [
       "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
     ];
 
@@ -39,9 +46,11 @@ describe("file processing", () => {
 
   it("should process the correct swagger file given only changed example files", async () => {
     const changedFiles = [
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/CreateResource.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/CreateResource.json",
     ];
     const expected = [
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
     ];
 
@@ -93,9 +102,11 @@ describe("file processing", () => {
 
   it("should handle examples in a subdirectory", async () => {
     const changedFiles = [
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/subdir/ListResources.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/subdir/ListResources.json",
     ];
     const expected = [
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
     ];
 
