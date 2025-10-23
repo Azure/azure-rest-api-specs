@@ -6,7 +6,6 @@ using Http;
 
 @@clientName(DataBoxEdgeSku, "AvailableDataBoxEdgeSku", "csharp");
 
-// Java specific mitigations for breaking changes
 @@clientName(SSLStatus, "SslStatus", "java");
 @@clientName(NetworkAdapterDHCPStatus, "NetworkAdapterDhcpStatus", "java");
 @@clientName(NetworkAdapterRDMAStatus, "NetworkAdapterRdmaStatus", "java");
