@@ -16,9 +16,11 @@ namespace Azure.Contoso.WidgetManager;
 
 @doc("Versions info.")
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2022-11-01-preview version.")
   v2022_11_01_Preview: "2022-11-01-preview",
 
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2022-12-01 version.")
   v2022_12_01: "2022-12-01",
 }
