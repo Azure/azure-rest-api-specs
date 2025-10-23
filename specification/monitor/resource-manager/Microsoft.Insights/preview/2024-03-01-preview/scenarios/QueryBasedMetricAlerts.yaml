@@ -1,0 +1,106 @@
+scope: ResourceGroup
+variables:
+  subscriptionId:
+    type: string
+    prefix: subscription
+  resourceGroupName:
+    type: string
+    prefix: rg
+  location:
+    type: string
+    value: eastus
+  ruleName:
+    type: string
+    prefix: queryAlert
+  actionGroupName:
+    type: string
+    prefix: actionGroup
+  monitorAccountName:
+    type: string
+    prefix: monitorAccount
+  managedIdentityName:
+    type: string
+    prefix: identity
+
+scenarios:
+  - scenario: QueryBasedMetricAlertLifecycle
+    description: Test the complete lifecycle of a query-based metric alert
+    steps:
+      # Step 1: Create a managed identity for the alert
+      - step: CreateManagedIdentity
+        exampleFile: ../../../../../managed-identity/resource-manager/Microsoft.ManagedIdentity/stable/2023-01-31/examples/UserAssignedIdentityCreate.json
+        
+      # Step 2: Create an action group
+      - step: CreateActionGroup
+        exampleFile: ../../../../../monitor/resource-manager/Microsoft.Insights/stable/2023-01-01/examples/createOrUpdateActionGroup.json
+        
+      # Step 3: Create a monitor account (scope for the alert)
+      - step: CreateMonitorAccount
+        exampleFile: ../../../../../monitor/resource-manager/Microsoft.Monitor/Accounts/preview/2025-05-03-preview/examples/AzureMonitorWorkspaceCreate.json
+
+      # Step 4: Create a query-based metric alert
+      - step: CreateQueryBasedMetricAlert
+        operationId: MetricAlerts_CreateOrUpdate
+        exampleFile: ./examples/createOrUpdateMetricAlertQuery.json
+        requestUpdate:
+          - replace: /parameters/parameters/identity/userAssignedIdentities
+            value:
+              '{{CreateManagedIdentity.response.body.id}}': {}
+          - replace: /parameters/parameters/properties/scopes/0
+            value: '{{CreateMonitorAccount.response.body.id}}'
+          - replace: /parameters/parameters/properties/actions/0/actionGroupId
+            value: '{{CreateActionGroup.response.body.id}}'
+
+      # Step 5: Get the created alert
+      - step: GetQueryBasedMetricAlert
+        operationId: MetricAlerts_Get
+        exampleFile: ./examples/getMetricAlertQuery.json
+        variables:
+          ruleName: '{{CreateQueryBasedMetricAlert.request.parameters.ruleName}}'
+
+      # Step 6: List alerts by resource group
+      - step: ListMetricAlertsByResourceGroup
+        operationId: MetricAlerts_ListByResourceGroup
+        exampleFile: ./examples/listMetricAlert.json
+
+      # Step 7: Get alert status
+      - step: GetMetricAlertStatus
+        operationId: MetricAlerts_ListStatus
+        exampleFile: ./examples/getMetricAlertStatus.json
+        variables:
+          ruleName: '{{CreateQueryBasedMetricAlert.request.parameters.ruleName}}'
+
+      # Step 8: Update the alert (modify description)
+      - step: UpdateQueryBasedMetricAlert
+        operationId: MetricAlerts_Update
+        exampleFile: ./examples/patchMetricAlert.json
+        requestUpdate:
+          - replace: /parameters/parameters/properties/description
+            value: 'Updated description for query-based metric alert'
+
+      # Step 9: Delete the alert
+      - step: DeleteQueryBasedMetricAlert
+        operationId: MetricAlerts_Delete
+        exampleFile: ./examples/deleteMetricAlert.json
+        variables:
+          ruleName: '{{CreateQueryBasedMetricAlert.request.parameters.ruleName}}'
+          
+  - scenario: QueryBasedMetricAlertWithMultipleResources
+    description: Test query-based metric alert with multiple resource scopes
+    steps:
+      # Step 1: Create query-based metric alert with multiple resources
+      - step: CreateMultiResourceQueryAlert
+        operationId: MetricAlerts_CreateOrUpdate
+        exampleFile: ./examples/createOrUpdateMetricAlertQueryMultiResource.json
+
+      # Step 2: Get the alert
+      - step: GetMultiResourceQueryAlert
+        operationId: MetricAlerts_Get
+        variables:
+          ruleName: '{{CreateMultiResourceQueryAlert.request.parameters.ruleName}}'
+
+      # Step 3: Delete the alert
+      - step: DeleteMultiResourceQueryAlert
+        operationId: MetricAlerts_Delete
+        variables:
+          ruleName: '{{CreateMultiResourceQueryAlert.request.parameters.ruleName}}'
