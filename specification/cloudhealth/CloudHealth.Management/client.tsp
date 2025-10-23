@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.CloudHealth;
 
-@@clientName(Microsoft.CloudHealth, "CloudHealthMgmt", "python");
+@@clientName(Microsoft.CloudHealth, "CloudHealthMgmtClient", "python");
 
 // CSharp
 @@clientName(AuthenticationSetting,
