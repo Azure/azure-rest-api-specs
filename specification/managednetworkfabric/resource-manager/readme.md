@@ -38,6 +38,10 @@ These settings apply only when `--tag=package-2024-06-15-preview` is specified o
 input-file:
   - Microsoft.ManagedNetworkFabric/preview/2024-06-15-preview/managednetworkfabric.json
 suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: This will be fixed in the next major version
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    reason: This will be fixed in the next major version
   - code: AvoidAnonymousTypes
     reason: This error is caused by typespec inbuilt managed identity model.
   - code: MISSING_APIS_IN_DEFAULT_TAG
