@@ -55,7 +55,7 @@ interface ManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header
+      @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     }
   >;
@@ -78,7 +78,7 @@ interface ManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header
+      @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     },
     Response = ArmResourceUpdatedResponse<ManagementGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
@@ -92,6 +92,7 @@ interface ManagementGroups {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     Extension.Tenant,
@@ -102,7 +103,7 @@ interface ManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header
+      @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     }
   >;
@@ -124,7 +125,7 @@ interface ManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header
+      @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     },
     Response = (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
@@ -168,7 +169,6 @@ interface ManagementGroups {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("HierarchySettings_List")
   @list
   @get
   @action("settings")

@@ -635,7 +635,8 @@ model DescendantInfoProperties {
   /**
    * The ID of the parent management group.
    */
-  parent?: DescendantParentGroupInfo;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  parent?: DescendantParentGroupInfo | null;
 }
 
 /**

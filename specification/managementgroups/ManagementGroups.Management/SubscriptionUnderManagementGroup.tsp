@@ -41,7 +41,7 @@ interface SubscriptionUnderManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header
+      @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     }
   >;
@@ -62,7 +62,7 @@ interface SubscriptionUnderManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header
+      @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     },
     Response = ArmResourceUpdatedResponse<SubscriptionUnderManagementGroup>
@@ -82,7 +82,7 @@ interface SubscriptionUnderManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header
+      @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     }
   >;
