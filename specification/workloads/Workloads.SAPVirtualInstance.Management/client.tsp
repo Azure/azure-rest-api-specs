@@ -4,7 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Workloads;
 
-@@clientName(Microsoft.Workloads, "WorkloadsSapVirtualInstanceMgmt", "python");
+@@clientName(Microsoft.Workloads,
+  "WorkloadsSapVirtualInstanceMgmtClient",
+  "python"
+);
 @@clientName(Microsoft.Workloads,
   "WorkloadsSapVirtualInstanceMgmtClient",
   "java"
