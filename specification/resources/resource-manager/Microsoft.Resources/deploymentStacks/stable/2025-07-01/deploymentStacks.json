@@ -2160,50 +2160,6 @@
         "kind"
       ]
     },
-    "DeploymentIdentity": {
-      "type": "object",
-      "description": "The Managed Identity configuration for a deployment.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DeploymentIdentityType",
-          "description": "The identity type."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The set of user assigned identities associated with the resource.",
-          "additionalProperties": {
-            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "DeploymentIdentityType": {
-      "type": "string",
-      "description": "The deployment identity type.",
-      "enum": [
-        "None",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "DeploymentIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "The identity is removed."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "The identity is assigned by the user."
-          }
-        ]
-      }
-    },
     "DeploymentParameter": {
       "type": "object",
       "description": "Deployment parameter for the template.",
@@ -2252,10 +2208,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "identity": {
-          "$ref": "#/definitions/DeploymentIdentity",
-          "description": "The Managed Identity configuration for a deployment stack."
         }
       },
       "allOf": [
