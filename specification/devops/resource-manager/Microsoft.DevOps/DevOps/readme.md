@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-07-13-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-07-13-preview'
 input-file:
-  - Microsoft.DevOps/preview/2020-07-13-preview/devops.json
+  - ./preview/2020-07-13-preview/devops.json
 ```
 
 ### Tag: package-2019-07-01-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2019-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2019-07-01-preview'
 input-file:
-  - Microsoft.DevOps/preview/2019-07-01-preview/devops.json
+  - ./preview/2019-07-01-preview/devops.json
 ```
 
 ---
