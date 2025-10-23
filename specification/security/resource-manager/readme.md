@@ -113,12 +113,6 @@ These settings apply only when `--tag=package-preview-2025-11-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-11-01-preview'
 input-file:
   - Microsoft.Security/preview/2025-11-01-preview/securityConnectorsDevOps.json
-suppressions:
-  - code: GetCollectionOnlyHasValueAndNextLink
-    from: securityConnectorsDevOps.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
-    reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
 ```
 
 ### Tag: package-preview-2025-10-01-preview
