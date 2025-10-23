@@ -1,0 +1,35 @@
+{
+  "title": "PrivateNetworkAddresses_Get",
+  "operationId": "PrivateNetworkAddresses_Get",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "location": "eastus",
+    "ipAddress": "eastus-10.107.4.18"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "ipVersion": "IPv4",
+          "ipAddress": "10.107.4.18",
+          "state": "Active",
+          "cloud": "Public",
+          "region": "eastus",
+          "isReuse": false,
+          "ownership": {
+            "serviceTreeId": "3ee34980-9971-6859-1a1e-4659983d6955",
+            "subscriptionId": "1e71ff75-c78c-6352-31e4-f0acc65b62c2"
+          },
+          "assignedResource": {
+            "resourceType": "Logical",
+            "resourceId": "/subscriptions/1e71ff75-c78c-6352-31e4-f0acc65b62c2/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/providers/Microsoft.Frontdoor/locations/eastus/privateNetworkAddresses/eastus-10.107.4.18",
+        "name": "eastus-10.107.4.18",
+        "type": "Microsoft.Frontdoor/locations/privateNetworkAddresses"
+      }
+    }
+  }
+}

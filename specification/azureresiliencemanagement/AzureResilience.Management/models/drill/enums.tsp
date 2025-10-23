@@ -370,3 +370,17 @@ union ForceInclusionAndUpdate {
   @doc("Disable ForceInclusionAndUpdate.")
   Disable: "Disable",
 }
+
+/**
+ * Enum for AutoFailover
+ */
+@doc("Enum for AutoFailover")
+union AutoFailover {
+  string,
+
+  @doc("Enable AutoFailover.")
+  Enable: "Enable",
+
+  @doc("Disable AutoFailover.")
+  Disable: "Disable",
+}
