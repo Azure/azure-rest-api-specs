@@ -103,4 +103,18 @@ interface Issue {
     RelatedResources,
     RelatedResources
   >;
+
+  @added(Versions.v2025_10_03)
+  @doc("Fetch the background visualization of the issue")
+  fetchBackgroundVisualization is ArmResourceActionSync<
+    IssueResource,
+    void,
+    BackgroundVisualization
+  >;
+  @added(Versions.v2025_10_03)
+  @doc("Set the background visualization for the issue")
+  setBackgroundVisualization is ArmResourceActionNoContentSync<
+    IssueResource,
+    BackgroundVisualization
+  >;
 }
