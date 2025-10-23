@@ -1,0 +1,42 @@
+{
+  "operationId": "KnowledgeSources_Create",
+  "title": "SearchServiceCreateKnowledgeSourceAzureBlob",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "knowledgeSource": {
+      "name": "myblobknowledgesource",
+      "description": "Azure Blob knowledge source for documents",
+      "kind": "azureBlob",
+      "azureBlobParameters": {
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=mykey;EndpointSuffix=core.windows.net",
+        "containerName": "documents",
+        "identity": {
+          "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myblobknowledgesource",
+        "description": "Azure Blob knowledge source for documents",
+        "kind": "azureBlob",
+        "azureBlobParameters": {
+          "containerName": "documents",
+          "identity": {
+            "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
+          },
+          "createdResources": {
+            "datasource": "myblobknowledgesource-datasource",
+            "index": "myblobknowledgesource-index",
+            "indexer": "myblobknowledgesource-indexer"
+          }
+        },
+        "@odata.etag": "0x8D9A1234567890D"
+      }
+    }
+  }
+}
