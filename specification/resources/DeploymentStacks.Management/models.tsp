@@ -25,7 +25,7 @@ model DeploymentStack
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is the expected type"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
   tags?: Record<string>;
-  
+
   /** The Managed Identity configuration for a deployment stack. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Consistent with deployments defining it at the top level."
   @added(Versions.v2025_07_01)
@@ -261,12 +261,12 @@ model DeploymentStackSharedProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this object are determined by the template"
   parameters?: Record<DeploymentParameter>;
-  
+
   /**
    * The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both.
    */
   parametersLink?: DeploymentStacksParametersLink;
-    
+
   /**
    * The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.
    */
@@ -282,10 +282,10 @@ model DeploymentStackSharedProperties {
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Create, Lifecycle.Update)
   externalInputs?: Record<DeploymentExternalInput>;
-  
+
   /**
    * External input definitions, used by external tooling to define expected external input values.
-   */ 
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of the object are determined by the deployment template."
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Create, Lifecycle.Update)
@@ -452,7 +452,7 @@ model DeploymentParameter {
    * Azure Key Vault parameter reference.
    */
   reference?: KeyVaultParameterReference;
-  
+
   /**
    * Input expression to the parameter.
    */
@@ -510,8 +510,7 @@ model DeploymentStacksParametersLink {
  * Deployment external input for parameterization.
  */
 @added(Versions.v2025_07_01)
-model DeploymentExternalInput
-{
+model DeploymentExternalInput {
   /**
    * External input value.
    */
@@ -523,13 +522,12 @@ model DeploymentExternalInput
  * Deployment external input definition for parameterization.
  */
 @added(Versions.v2025_07_01)
-model DeploymentExternalInputDefinition
-{
+model DeploymentExternalInputDefinition {
   /**
    * The kind of external input.
    */
   kind: string;
-  
+
   /**
    * Configuration for the external input.
    */
@@ -880,7 +878,7 @@ union DeploymentIdentityType {
 
   /** The identity is removed. */
   None: "None",
-  
+
   /** The identity is assigned by the user. */
   UserAssigned: "UserAssigned",
 }
@@ -889,13 +887,12 @@ union DeploymentIdentityType {
  * The Managed Identity configuration for a deployment.
  */
 @added(Versions.v2025_07_01)
-model DeploymentIdentity
-{
+model DeploymentIdentity {
   /**
    * The identity type.
    */
   type: DeploymentIdentityType;
-  
+
   /**
    * The set of user assigned identities associated with the resource.
    */

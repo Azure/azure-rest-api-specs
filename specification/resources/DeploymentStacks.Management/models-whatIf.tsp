@@ -39,7 +39,9 @@ alias DeploymentStacksWhatIfResultNameParameter = ResourceNameParameter<
 
 @@maxLength(DeploymentStacksWhatIfResult.name, 90);
 @@minLength(DeploymentStacksWhatIfResult.name, 1);
-@@doc(DeploymentStacksWhatIfResult.name, "Name of the deployment stack what-if result.");
+@@doc(DeploymentStacksWhatIfResult.name,
+  "Name of the deployment stack what-if result."
+);
 
 /**
  * DeploymentStack WhatIfResult Properties
@@ -54,7 +56,7 @@ model DeploymentStacksWhatIfResultProperties is DeploymentStacksError {
   deploymentStackResourceId: string;
 
   /**
-   * The timestamp for when the deployment stack was last modified. This can be used to determine if the what-if data is still current. 
+   * The timestamp for when the deployment stack was last modified. This can be used to determine if the what-if data is still current.
    */
   @visibility(Lifecycle.Read)
   deploymentStackLastModified: utcDateTime;
@@ -328,7 +330,7 @@ union DeploymentStacksWhatIfChangeType {
   /**
    * The resource is not supported by What-If.
    */
-  Unsupported: "unsupported"
+  Unsupported: "unsupported",
 }
 
 /**
