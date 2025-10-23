@@ -4,29 +4,35 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Microsoft.Compute;
 
-@@clientName(Microsoft.Compute, "RecommenderMgmt", "python");
+@@clientName(Microsoft.Compute, "RecommenderMgmtClient", "python");
 @@clientName(Microsoft.Compute,
   "ComputeRecommenderManagementClient",
   "javascript"
 );
-@@alternateType(Microsoft.Compute.SpotPlacementScoresInput.desiredLocations,
+@@alternateType(SpotPlacementScoresInput.desiredLocations,
   azureLocation[],
   "csharp"
 );
-@@alternateType(Microsoft.Compute.SpotPlacementScoresResponse.desiredLocations,
+@@clientName(SpotPlacementScoresInput,
+  "ComputeRecommenderGenerateContent",
+  "csharp"
+);
+@@alternateType(SpotPlacementScoresResponse.desiredLocations,
   azureLocation[],
   "csharp"
 );
-@@alternateType(Microsoft.Compute.PlacementScore.region,
-  azureLocation,
+@@clientName(SpotPlacementScoresResponse,
+  "ComputeRecommenderGenerateResult",
   "csharp"
 );
-@@clientName(Microsoft.Compute.PlacementScore,
-  "ComputeRecommenderPlacementScore",
+@@alternateType(PlacementScore.region, azureLocation, "csharp");
+@@clientName(PlacementScore, "ComputeRecommenderPlacementScore", "csharp");
+@@clientName(ResourceSize, "ComputeRecommenderResourceSize", "csharp");
+@@clientName(ComputeDiagnosticBase, "ComputeRecommenderDiagnostic", "csharp");
+@@clientName(DiagnosticProperties,
+  "ComputeRecommenderDiagnosticProperties",
   "csharp"
 );
-@@clientName(Microsoft.Compute.ResourceSize,
-  "ComputeRecommenderResourceSize",
-  "csharp"
-);
+@@clientName(ComputeDiagnosticBases.post, "generate", "csharp");
