@@ -30,6 +30,8 @@ interface CertificateOrdersDiagnostics {
   /**
    * Description for Microsoft.CertificateRegistration call to get a detector response from App Lens.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("CertificateOrdersDiagnostics_GetAppServiceCertificateOrderDetectorResponse")
   getAppServiceCertificateOrderDetectorResponse is ArmResourceRead<
     DetectorResponse,
     Parameters = {
@@ -58,6 +60,8 @@ interface CertificateOrdersDiagnostics {
   /**
    * Description for Microsoft.CertificateRegistration to get the list of detectors for this RP.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("CertificateOrdersDiagnostics_ListAppServiceCertificateOrderDetectorResponse")
   listAppServiceCertificateOrderDetectorResponse is ArmResourceListByParent<
     DetectorResponse,
     Response = ArmResponse<DetectorResponseCollection>,

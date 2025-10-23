@@ -25,7 +25,6 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-#suppress "@azure-tools/typespec-client-generator-core/client-location-duplicate" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "CertificateRegistrationProvider API Client" })
 @versioned(Versions)
