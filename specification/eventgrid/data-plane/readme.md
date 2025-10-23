@@ -117,35 +117,8 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.Storage/stable/2018-01-01/Storage.json
-- Microsoft.EventHub/stable/2018-01-01/EventHub.json
-- Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
-- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
-- Microsoft.DataBox/stable/2018-01-01/DataBox.json
-- Microsoft.Devices/stable/2018-01-01/IotHub.json
-- Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
-- Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
-- Microsoft.Media/stable/2018-01-01/MediaServices.json
-- Microsoft.Maps/stable/2018-01-01/Maps.json
-- Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
-- Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
-- Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
-- Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
-- Microsoft.Cache/stable/2018-01-01/RedisCache.json
-- Microsoft.Web/stable/2018-01-01/Web.json
-- Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
-- Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
-- Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
-- Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
-- Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-- Microsoft.ResourceNotifications/stable/2018-01-01/common.json
-- Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
-- Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
-- Microsoft.ResourceNotifications/stable/2018-01-01/ContainerServiceEventResources.json
-- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
-- Microsoft.ApiCenter/stable/2018-01-01/ApiCenter.json
-- Microsoft.Edge/stable/2018-01-01/Edge.json
+- Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
 ```
 
 ### Tag: package-2023-11-01
@@ -154,31 +127,8 @@ These settings apply only when `--tag=package-2023-11-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-11-01'
 input-file:
-- Microsoft.Storage/stable/2018-01-01/Storage.json
-- Microsoft.EventHub/stable/2018-01-01/EventHub.json
-- Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2023-11-01/EventGrid.json
-- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
-- Microsoft.DataBox/stable/2018-01-01/DataBox.json
-- Microsoft.Devices/stable/2018-01-01/IotHub.json
-- Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
-- Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
-- Microsoft.Media/stable/2018-01-01/MediaServices.json
-- Microsoft.Maps/stable/2018-01-01/Maps.json
-- Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
-- Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
-- Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
-- Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
-- Microsoft.Cache/stable/2018-01-01/RedisCache.json
-- Microsoft.Web/stable/2018-01-01/Web.json
-- Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
-- Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
-- Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
-- Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
-- Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-- Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
-- Microsoft.Edge/stable/2018-01-01/Edge.json
-
+- Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
 ```
 
 ### Tag: package-2024-01-01
@@ -197,16 +147,6 @@ These settings apply only when `--tag=package-2018-01-01-generated` is specified
 input-file:
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
-```
-
-### Suppression
-
-```yaml
-suppressions:
-  - code: AvoidAnonymousTypes
-    where: $.definitions.ApiManagementCircuitBreakerProperties.properties.rules.additionalProperties
-  - code: AdditionalPropertiesObject
-    where: $.definitions.ApiManagementCircuitBreakerProperties.properties.rules.additionalProperties
 ```
 
 ---
@@ -269,31 +209,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Storage/stable/2018-01-01/Storage.json
-  - $(this-folder)/Microsoft.EventHub/stable/2018-01-01/EventHub.json
-  - $(this-folder)/Microsoft.Resources/stable/2018-01-01/Resources.json
   - $(this-folder)/Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
-  - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/DataBox.json
-  - $(this-folder)/Microsoft.Devices/stable/2018-01-01/IotHub.json
-  - $(this-folder)/Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
-  - $(this-folder)/Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
-  - $(this-folder)/Microsoft.Media/stable/2018-01-01/MediaServices.json
-  - $(this-folder)/Microsoft.Maps/stable/2018-01-01/Maps.json
-  - $(this-folder)/Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
-  - $(this-folder)/Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
-  - $(this-folder)/Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
-  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
-  - $(this-folder)/Microsoft.Cache/stable/2018-01-01/RedisCache.json
-  - $(this-folder)/Microsoft.Web/stable/2018-01-01/Web.json
-  - $(this-folder)/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
-  - $(this-folder)/Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
-  - $(this-folder)/Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/common.json
-  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
-  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
-  - $(this-folder)/Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
-  - $(this-folder)/Microsoft.Edge/stable/2018-01-01/Edge.json
+  - $(this-folder)/Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
+  - $(this-folder)/Microsoft.EventGrid/stable/2023-11-01/EventGrid.json
+  - $(this-folder)/Microsoft.EventGrid/stable/2024-01-01/GeneratedSystemEvents.json
+  - $(this-folder)/Microsoft.EventGrid/stable/2024-06-01/EventGrid.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

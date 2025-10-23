@@ -4,7 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceNetworking;
 
-@@clientName(Microsoft.ServiceNetworking, "ServiceNetworkingMgmt", "python");
+@@clientName(Microsoft.ServiceNetworking,
+  "ServiceNetworkingMgmtClient",
+  "python"
+);
 @@clientName(Microsoft.ServiceNetworking,
   "ServiceNetworkingManagementClient",
   "javascript"
@@ -58,6 +61,11 @@ using Microsoft.ServiceNetworking;
 @@clientName(ProvisioningState, "ServiceNetworkingProvisioningState", "csharp");
 @@clientName(TrafficControllerProperties.provisioningState,
   "TrafficControllerProvisioningState",
+  "csharp"
+);
+@@clientName(IpAccessRule, "ServiceNetworkingIPAccessRule", "csharp");
+@@clientName(IpAccessRuleAction,
+  "ServiceNetworkingIPAccessRuleAction",
   "csharp"
 );
 @@clientName(Versions.v2023_11_01,
