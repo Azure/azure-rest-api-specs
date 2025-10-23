@@ -39,6 +39,13 @@ These settings apply only when `--tag=package-2025-12` is specified on the comma
 ```yaml $(tag) == 'package-2025-12'
 input-file:
   - stable/2025-12-01/openapi.json
+suppressions:
+  - code: RepeatedPathInfo
+    reason: These errors are from the previous API versions
+  - code: EnumInsteadOfBoolean
+    reason: Preexisting API design.
+  - code: ProvisioningStateMustBeReadOnly
+    reason: These errors are from the previous API versions
 ```
 
 ### Tag: package-preview-2025-09
