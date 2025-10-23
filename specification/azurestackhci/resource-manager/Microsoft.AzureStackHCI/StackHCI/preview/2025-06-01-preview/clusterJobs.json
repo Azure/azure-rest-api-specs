@@ -510,6 +510,12 @@
             ]
           },
           "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment."
+        },
+        "sdnPrefix": {
+          "type": "string",
+          "maxLength": 8,
+          "pattern": "^(?!.*--)(?!.*-$)[A-Za-z0-9-]{1,8}$",
+          "description": "A string identifier used to construct the Network Controller (NC) REST resource name. This prefix helps group and distinguish SDN-managed network components and must follow specific formatting rules: Must not be empty or contain only whitespace. Must be 8 characters or fewer. Allowed characters: letters (A–Z, a–z), digits (0–9), and hyphens (-). Cannot end with a hyphen. Cannot contain consecutive hyphens."
         }
       },
       "required": [
