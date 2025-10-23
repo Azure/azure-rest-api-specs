@@ -1,12 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Network;
 
@@ -207,7 +206,7 @@ model InboundEndpointProperties {
   /**
    * IP configurations for the inbound endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipConfigurations: IpConfiguration[];
 
   /**
@@ -340,7 +339,7 @@ model ForwardingRuleProperties {
   /**
    * DNS servers to forward the DNS query to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDnsServers: TargetDnsServer[];
 
   /**
@@ -395,7 +394,7 @@ model ForwardingRulePatchProperties {
   /**
    * DNS servers to forward the DNS query to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDnsServers?: TargetDnsServer[];
 
   /**
@@ -540,8 +539,22 @@ model DnsSecurityRuleProperties {
   /**
    * DNS resolver policy domains lists that the DNS security rule applies to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  dnsResolverDomainLists: SubResource[];
+  @removed(Versions.v2025_10_01_preview)
+  @renamedFrom(Versions.v2025_10_01_preview, "dnsResolverDomainLists")
+  @identifiers(#[])
+  oldDnsResolverDomainLists: SubResource[];
+
+  /**
+   * DNS resolver policy domains lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  dnsResolverDomainLists?: SubResource[] = #[];
+
+  /**
+   * Managed domain lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  managedDomainLists?: ManagedDomainList[] = #[];
 
   /**
    * The state of DNS security rule.
@@ -596,8 +609,13 @@ model DnsSecurityRulePatchProperties {
   /**
    * DNS resolver policy domains lists that the DNS security rule applies to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dnsResolverDomainLists?: SubResource[];
+
+  /**
+   * Managed domain lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  managedDomainLists?: ManagedDomainList[];
 
   /**
    * The state of DNS security rule.
@@ -722,4 +740,17 @@ model DnsResolverDomainListBulkProperties {
    * The action to take in the request, Upload or Download.
    */
   action: Action;
+}
+
+/**
+ * Describes Managed Domain List options for DNS security rules.
+ */
+@added(Versions.v2025_10_01_preview)
+union ManagedDomainList {
+  string,
+
+  /**
+   * Domain list managed by Azure DNS Threat Intelligence.
+   */
+  AzureDnsThreatIntel: "AzureDnsThreatIntel",
 }

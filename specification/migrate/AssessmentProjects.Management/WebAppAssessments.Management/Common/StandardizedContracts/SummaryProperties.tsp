@@ -24,27 +24,27 @@ model SummaryProperties {
 
   @doc("The source details list.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sources?: SourceDetails[];
 
   @doc("The target details list.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targets?: TargetDetails[];
 
   @doc("The target source mapping.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetSourceMapping?: TargetSourcePair[];
 
   @doc("The cost components.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   costComponents?: CostDetailsCommon[];
 
   @doc("The cost components.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   savingsComponents?: SavingsDetailsCommon[];
 }
 
@@ -110,17 +110,17 @@ model TargetSourcePair {
 
   @doc("The management details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   managementDetails?: ManagementDetails[];
 
   @doc("The cost details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   costDetails?: CostDetailsCommon[];
 
   @doc("The savings details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   savingsDetails?: SavingsDetailsCommon[];
 
   @doc("The confidence score.")
@@ -132,7 +132,7 @@ model TargetSourcePair {
 model MigrationDetails {
   @doc("The readiness summary.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   readinessSummary?: NameValuePair<CloudSuitabilityCommon, int32>[];
 
   @doc("The migration type")
@@ -148,6 +148,6 @@ model ManagementDetails {
 
   @doc("The management suitability summary.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   readinessSummary?: NameValuePair<CloudSuitabilityCommon, int32>[];
 }
