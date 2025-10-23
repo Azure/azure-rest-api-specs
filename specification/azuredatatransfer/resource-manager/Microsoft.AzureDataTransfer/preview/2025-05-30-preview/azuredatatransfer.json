@@ -117,10 +117,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FlowProfileMetadata"
-              }
+              "$ref": "#/definitions/FlowProfilesListResult"
             }
           },
           "default": {
@@ -4066,6 +4063,19 @@
         ]
       }
     },
+    "FlowProfilesListResult": {
+      "type": "object",
+      "description": "The flow profiles list result",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "FlowProfileMetadata array.",
+          "items": {
+            "$ref": "#/definitions/FlowProfileMetadata"
+          }
+        }
+      }
+    },
     "FlowProperties": {
       "type": "object",
       "description": "Properties of flow",
@@ -4143,13 +4153,11 @@
         },
         "flowProfile": {
           "$ref": "#/definitions/FlowProfileMetadata",
-          "description": "Type of FlowProfile to use for transfer via the flow.",
-          "readOnly": true
+          "description": "Type of FlowProfile to use for transfer via the flow."
         },
         "flowDataType": {
           "$ref": "#/definitions/DataClass",
-          "description": "The Flow's data class.",
-          "readOnly": true
+          "description": "The Flow's data class."
         },
         "flowType": {
           "$ref": "#/definitions/FlowType",
@@ -4965,13 +4973,11 @@
         },
         "flowProfile": {
           "$ref": "#/definitions/FlowProfileMetadata",
-          "description": "Type of FlowProfile to use for transfer via the flow.",
-          "readOnly": true
+          "description": "Type of FlowProfile to use for transfer via the flow."
         },
         "flowDataType": {
           "$ref": "#/definitions/DataClass",
-          "description": "The Flow's data class.",
-          "readOnly": true
+          "description": "The Flow's data class."
         },
         "flowType": {
           "$ref": "#/definitions/FlowType",
