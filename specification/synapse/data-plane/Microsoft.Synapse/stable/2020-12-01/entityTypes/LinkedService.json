@@ -1213,6 +1213,19 @@
           "type": "object",
           "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
         },
+        "clusterAuthType": {
+          "x-ms-enum": {
+            "name": "HDInsightClusterAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "BasicAuth",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "type": "string",
+          "description": "HDInsight cluster authentication type."
+        },
         "userName": {
           "type": "object",
           "description": "HDInsight cluster user name. Type: string (or Expression with resultType string)."
@@ -1240,6 +1253,10 @@
         "fileSystem": {
           "type": "object",
           "description": "Specify the FileSystem if the main storage for the HDInsight is ADLS Gen2. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "description": "The credential reference containing MI authentication information for the HDInsight cluster.",
+          "$ref": "../artifacts.json#/definitions/CredentialReference"
         }
       },
       "required": [
@@ -6725,6 +6742,19 @@
           "type": "object",
           "description": "The resource group where the cluster belongs. Type: string (or Expression with resultType string)."
         },
+        "clusterResourceGroupAuthType": {
+          "description": "HDInsight On-demand cluster resource group authentication type.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipalKey",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "HDInsightOndemandClusterResourceGroupAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "clusterNamePrefix": {
           "type": "object",
           "description": "The prefix of cluster name, postfix will be distinct with timestamp. Type: string (or Expression with resultType string)."
@@ -7723,6 +7753,10 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "useUtcTimestamps": {
+          "type": "object",
+          "description": "Indicates whether to use UTC timezone for timestamp data types. Type: boolean."
         }
       },
       "required": [

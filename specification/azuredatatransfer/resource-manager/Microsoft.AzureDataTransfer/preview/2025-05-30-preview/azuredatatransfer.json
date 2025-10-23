@@ -117,10 +117,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FlowProfileMetadata"
-              }
+              "$ref": "#/definitions/FlowProfilesListResult"
             }
           },
           "default": {
@@ -4066,6 +4063,19 @@
         ]
       }
     },
+    "FlowProfilesListResult": {
+      "type": "object",
+      "description": "The flow profiles list result",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "FlowProfileMetadata array.",
+          "items": {
+            "$ref": "#/definitions/FlowProfileMetadata"
+          }
+        }
+      }
+    },
     "FlowProperties": {
       "type": "object",
       "description": "Properties of flow",
@@ -4143,13 +4153,11 @@
         },
         "flowProfile": {
           "$ref": "#/definitions/FlowProfileMetadata",
-          "description": "Type of FlowProfile to use for transfer via the flow.",
-          "readOnly": true
+          "description": "Type of FlowProfile to use for transfer via the flow."
         },
         "flowDataType": {
           "$ref": "#/definitions/DataClass",
-          "description": "The Flow's data class.",
-          "readOnly": true
+          "description": "The Flow's data class."
         },
         "flowType": {
           "$ref": "#/definitions/FlowType",
@@ -4612,8 +4620,15 @@
           "description": "Specifies whether the filter is an allow list or deny list. For more detail, please refer to the FilterType model."
         },
         "filters": {
-          "$ref": "#/definitions/MimeTypeFilter",
-          "description": "Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model."
+          "type": "array",
+          "description": "Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model.",
+          "items": {
+            "$ref": "#/definitions/MimeTypeFilter"
+          },
+          "x-ms-identifiers": [
+            "media",
+            "extensions"
+          ]
         }
       }
     },
@@ -4958,13 +4973,11 @@
         },
         "flowProfile": {
           "$ref": "#/definitions/FlowProfileMetadata",
-          "description": "Type of FlowProfile to use for transfer via the flow.",
-          "readOnly": true
+          "description": "Type of FlowProfile to use for transfer via the flow."
         },
         "flowDataType": {
           "$ref": "#/definitions/DataClass",
-          "description": "The Flow's data class.",
-          "readOnly": true
+          "description": "The Flow's data class."
         },
         "flowType": {
           "$ref": "#/definitions/FlowType",
