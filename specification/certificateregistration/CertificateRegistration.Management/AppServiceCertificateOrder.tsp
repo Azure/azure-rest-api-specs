@@ -24,25 +24,6 @@ model AppServiceCertificateOrder
 }
 
 @armResourceOperations
-interface AppServiceCertificateOrderOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        /**
-         * The name of the certificate order.
-         */
-        @path
-        @segment("certificateOrders")
-        name: string,
-      }
-    > {}
-
-@armResourceOperations
 interface AppServiceCertificateOrders {
   /**
    * Description for Get a certificate order.
@@ -163,22 +144,32 @@ interface AppServiceCertificateOrders {
   /**
    * Description for Retrieve the list of certificate actions.
    */
-  retrieveCertificateActions is AppServiceCertificateOrderOps.ActionSync<
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "certificateOrderName",
+    "name"
+  )
+  retrieveCertificateActions is ArmResourceActionSync<
     AppServiceCertificateOrder,
     void,
     ArmResponse<CertificateOrderAction[]>,
-    OverrideErrorType = DefaultErrorResponse
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Description for Retrieve email history.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "certificateOrderName",
+    "name"
+  )
   @action("retrieveEmailHistory")
-  retrieveCertificateEmailHistory is AppServiceCertificateOrderOps.ActionSync<
+  retrieveCertificateEmailHistory is ArmResourceActionSync<
     AppServiceCertificateOrder,
     void,
     ArmResponse<CertificateEmail[]>,
-    OverrideErrorType = DefaultErrorResponse
+    Error = DefaultErrorResponse
   >;
 }
 
