@@ -54,6 +54,7 @@ interface ManagementGroups {
       /**
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `Cache-Control`?: string = "no-cache";
     }
@@ -66,6 +67,8 @@ interface ManagementGroups {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceAsync<
     Extension.Tenant,
     ManagementGroup,
@@ -74,10 +77,11 @@ interface ManagementGroups {
       /**
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `Cache-Control`?: string = "no-cache";
     },
-    Response = ArmResourceUpdatedResponse<ManagementGroup> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<ManagementGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
       @bodyRoot
       _: AzureAsyncOperationResults;
     })
@@ -87,6 +91,7 @@ interface ManagementGroups {
    * Update a management group.
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     Extension.Tenant,
@@ -96,6 +101,7 @@ interface ManagementGroups {
       /**
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `Cache-Control`?: string = "no-cache";
     }
@@ -109,6 +115,7 @@ interface ManagementGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is Extension.DeleteWithoutOkAsync<
     Extension.Tenant,
     ManagementGroup,
@@ -116,10 +123,11 @@ interface ManagementGroups {
       /**
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `Cache-Control`?: string = "no-cache";
     },
-    Response = (ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AzureAsyncOperationResults;
@@ -137,7 +145,7 @@ interface ManagementGroups {
     Extension.Tenant,
     ManagementGroup,
     void,
-    ArmResponse<ResourceListResult<DescendantInfo>>,
+    ArmResponse<DescendantListResult>,
     Parameters = {
       /**
        * Page continuation token is only used if a previous operation returned a partial result.

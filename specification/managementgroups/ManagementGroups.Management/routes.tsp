@@ -23,6 +23,7 @@ interface ManagementGroupsOperationGroup {
   @operationId("ManagementGroups_List")
   @autoRoute
   @get
+  @list
   @action("managementGroups")
   list is ArmProviderActionSync<
     Response = ManagementGroupListResult,
@@ -30,6 +31,7 @@ interface ManagementGroupsOperationGroup {
       /**
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `Cache-Control`?: string = "no-cache";
 
@@ -73,9 +75,10 @@ interface EntitiesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Entities_List")
   @autoRoute
+  @list
   @action("getEntities")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<EntityInfo>,
+    Response = EntityListResult,
     Parameters = {
       /**
        * Page continuation token is only used if a previous operation returned a partial result.
@@ -135,6 +138,7 @@ interface EntitiesOperationGroup {
       /**
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `Cache-Control`?: string = "no-cache";
     }

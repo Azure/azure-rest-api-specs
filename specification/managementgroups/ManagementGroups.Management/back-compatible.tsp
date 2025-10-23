@@ -77,3 +77,7 @@ using Microsoft.Management;
 @@clientLocation(ManagementGroupsOperationGroup.list, ManagementGroups);
 
 @@clientLocation(EntitiesOperationGroup.list, "Entities");
+
+@@clientName(checkNameAvailability::parameters.body,
+  "checkNameAvailabilityRequest"
+);

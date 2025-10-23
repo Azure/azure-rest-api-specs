@@ -1039,3 +1039,7 @@ model EntityHierarchyItemProperties {
    */
   children?: EntityHierarchyItem[];
 }
+
+model EntityListResult is Azure.Core.Page<EntityInfo>;
+
+model DescendantListResult is Azure.Core.Page<DescendantInfo>;
