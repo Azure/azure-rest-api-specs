@@ -73,7 +73,7 @@
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SoftDeletedDatabaseAccount"
+              "$ref": "#/definitions/SoftDeletedDatabaseAccountGetResult"
             }
           },
           "202": {
@@ -122,7 +122,7 @@
           "200": {
             "description": "The soft-deleted database account properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/SoftDeletedDatabaseAccount"
+              "$ref": "#/definitions/SoftDeletedDatabaseAccountGetResult"
             }
           },
           "default": {
@@ -211,7 +211,7 @@
     }
   },
   "definitions": {
-    "SoftDeletedDatabaseAccount": {
+    "SoftDeletedDatabaseAccountGetResult": {
       "description": "A soft-deleted Azure Cosmos DB database account.",
       "type": "object",
       "allOf": [
@@ -236,16 +236,6 @@
           "description": "The name of the original database account.",
           "readOnly": true
         },
-        "accountId": {
-          "type": "string",
-          "description": "The unique identifier of the original database account.",
-          "readOnly": true
-        },
-        "accountType": {
-          "type": "string",
-          "description": "The type of the original database account.",
-          "readOnly": true
-        },
         "creationTime": {
           "type": "string",
           "format": "date-time",
@@ -258,106 +248,16 @@
           "description": "The time when the database account was soft-deleted.",
           "readOnly": true
         },
-        "scheduledPurgeTime": {
+        "purgeTime": {
           "type": "string",
           "format": "date-time",
           "description": "The time when the database account is scheduled to be automatically purged.",
           "readOnly": true
         },
-        "canUndelete": {
-          "type": "boolean",
-          "description": "Indicates whether the soft-deleted database account can be restored.",
+        "apiType": {
+          "type": "string",
+          "description": "The API type of the original database account.",
           "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The primary location of the original database account.",
-          "readOnly": true
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/RestoreParameters",
-          "description": "Parameters required for restoring the soft-deleted database account."
-        }
-      }
-    },
-    "RestoreParameters": {
-      "description": "Parameters for restoring a soft-deleted database account.",
-      "type": "object",
-      "properties": {
-        "restoreMode": {
-          "type": "string",
-          "description": "The restore mode for the database account.",
-          "enum": [
-            "PointInTime"
-          ],
-          "x-ms-enum": {
-            "name": "RestoreMode",
-            "modelAsString": true
-          }
-        },
-        "restoreSource": {
-          "type": "string",
-          "description": "The source database account from which to restore."
-        },
-        "restoreTimestampInUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp to which the database account should be restored."
-        },
-        "databasesToRestore": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatabaseRestoreResource"
-          },
-          "description": "List of specific databases to restore."
-        },
-        "gremlinDatabasesToRestore": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GremlinDatabaseRestoreResource"
-          },
-          "description": "List of specific Gremlin databases to restore."
-        },
-        "tablesToRestore": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of specific tables to restore."
-        }
-      }
-    },
-    "DatabaseRestoreResource": {
-      "description": "Specific database restore resource.",
-      "type": "object",
-      "properties": {
-        "databaseName": {
-          "type": "string",
-          "description": "The name of the database to restore."
-        },
-        "collectionNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The names of the collections to restore."
-        }
-      }
-    },
-    "GremlinDatabaseRestoreResource": {
-      "description": "Specific Gremlin database restore resource.",
-      "type": "object",
-      "properties": {
-        "databaseName": {
-          "type": "string",
-          "description": "The name of the Gremlin database to restore."
-        },
-        "graphNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The names of the graphs to restore."
         }
       }
     },
@@ -408,7 +308,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SoftDeletedDatabaseAccount"
+            "$ref": "#/definitions/SoftDeletedDatabaseAccountGetResult"
           },
           "description": "List of soft-deleted database accounts."
         }
