@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-09'
 input-file:
-- Microsoft.Migrate/preview/2018-09-01-preview/migrate.json
+- preview/2018-09-01-preview/migrate.json
 ```
 
 # Code Generation
@@ -68,7 +68,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
 ```
 
