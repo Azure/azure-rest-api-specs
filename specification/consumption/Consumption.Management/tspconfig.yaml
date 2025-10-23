@@ -12,18 +12,18 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-consumption"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-consumption"
     namespace: "azure.mgmt.consumption"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-consumption"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-consumption"
     namespace: "com.azure.resourcemanager.consumption"
     service-name: "Consumption" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-consumption"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-consumption"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
