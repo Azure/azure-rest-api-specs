@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "MyResourceGroup",
+    "profileName": "MyProfile",
+    "parameters": {
+      "properties": {
+        "enabledState": "Enabled"
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile",
+        "name": "MyProfile",
+        "type": "Microsoft.Network/NetworkExperimentprofiles",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "enabledState": "Enabled",
+          "resourceState": "Creating"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2025-10-01"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile",
+        "name": "MyProfile",
+        "type": "Microsoft.Network/NetworkExperimentprofiles",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "enabledState": "Enabled",
+          "resourceState": "Creating"
+        }
+      }
+    }
+  }
+}

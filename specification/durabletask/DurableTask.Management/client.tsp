@@ -8,7 +8,7 @@ using Microsoft.DurableTask;
   "com.azure.resourcemanager.durabletask",
   "java"
 );
-@@clientName(Microsoft.DurableTask, "DurableTaskMgmt", "python");
+@@clientName(Microsoft.DurableTask, "DurableTaskMgmtClient", "python");
 @@clientName(Microsoft.DurableTask, "DurableTaskManagementClient", "java");
 
 // csharp
