@@ -42,8 +42,7 @@ input-file:
 suppressions:
   - code: RepeatedPathInfo
     reason: These errors are from the previous API versions
-  - code: EnumInsteadOfBoolean
-    reason: Preexisting API design.
+    line: 6778
   - code: ProvisioningStateMustBeReadOnly
     reason: These errors are from the previous API versions
 ```
