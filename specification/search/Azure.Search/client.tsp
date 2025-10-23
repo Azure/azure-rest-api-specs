@@ -1081,6 +1081,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchRequest.speller, "querySpeller");
 @@clientName(SearchRequest.semanticConfiguration, "semanticConfigurationName");
 @@clientName(SearchIndex.semantic, "semanticSearch");
+@@clientName(SearchField.analyzer, "analyzerName");
+@@clientName(SearchField.searchAnalyzer, "searchAnalyzerName");
+@@clientName(SearchField.indexAnalyzer, "indexAnalyzerName");
+@@clientName(SearchField.normalizer, "normalizerName");
+@@clientName(SearchField.synonymMaps, "synonymMapNames");
 @@clientName(SearchField.dimensions, "vectorSearchDimensions");
 @@clientName(SearchField.vectorSearchProfile, "vectorSearchProfileName");
 @@clientName(SearchField.vectorEncoding, "vectorEncodingFormat");
