@@ -76,6 +76,10 @@ model DrillResourceProperties {
   @visibility(Lifecycle.Read)
   attentionReason?: DrillResourceAttentionReason;
 
+  @doc("Recommendation Type Id for the recommendation.")
+  @visibility(Lifecycle.Read)
+  advisorRecommendationTypeId?: string;
+
   @doc("Associated Advisor Recommendation link, if HA is not enabled on this resource.")
   @visibility(Lifecycle.Read)
   advisorHaRecommendationId?: armResourceIdentifier<[
