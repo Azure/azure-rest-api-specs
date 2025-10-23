@@ -17,9 +17,7 @@ using Azure.ResourceManager.CommonTypes;
 
 /** Microsoft Genome Resource Provider API */
 @armProviderNamespace
-@service(#{
-  title: "Microsoft Genome Resource Provider API",
-})
+@service(#{ title: "Microsoft Genome Resource Provider API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Genome;
@@ -34,7 +32,8 @@ enum Versions {
 }
 
 /** Genome account resource. */
-model GenomeAccount is Azure.ResourceManager.TrackedResource<GenomeAccountProperties> {
+model GenomeAccount
+  is Azure.ResourceManager.TrackedResource<GenomeAccountProperties> {
   /** The name of the genome account within the specified resource group. */
   @maxLength(24)
   @minLength(3)

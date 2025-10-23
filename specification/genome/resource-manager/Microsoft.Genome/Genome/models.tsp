@@ -64,7 +64,7 @@ union ResourceIdentityType {
   UserAssigned: "UserAssigned",
 
   /** SystemAssigned, UserAssigned */
-  "SystemAssigned, UserAssigned": "SystemAssigned, UserAssigned",
+  `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
 }
 
 /** User-assigned managed identity. */
