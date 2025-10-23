@@ -29,10 +29,11 @@ interface DefaultRolloutOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
-        @segment("providers/microsoft.ProviderHub/providerRegistrations")
+        @segment("providerRegistrations")
         @key
         providerNamespace: string,
       },
@@ -112,7 +113,10 @@ interface NewRegionFrontloadRelease {
   /**
    * Creates or updates a new region frontload release.
    */
-  createOrUpdate is NewRegionFrontloadReleaseOps.CreateOrUpdateSync<FrontloadPayload, Response = DefaultRollout | ArmCreatedResponse>;
+  createOrUpdate is NewRegionFrontloadReleaseOps.CreateOrUpdateSync<
+    FrontloadPayload,
+    Response = DefaultRollout | ArmCreatedResponse
+  >;
 
   /**
    * Stops a new region frontload release.
