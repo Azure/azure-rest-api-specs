@@ -13,12 +13,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/deviceregistry.json"
     use-read-only-status-schema: true
     omit-unreachable-types: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.DeviceRegistry"
-    api-version: "2024-11-01"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2025-10-01"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-deviceregistry"
     namespace: "com.azure.resourcemanager.deviceregistry"

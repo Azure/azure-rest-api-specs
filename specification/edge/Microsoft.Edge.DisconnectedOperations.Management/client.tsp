@@ -6,7 +6,7 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.Edge;
 
-@@clientName(Microsoft.Edge, "DisconnectedOperationsMgmt", "python");
+@@clientName(Microsoft.Edge, "DisconnectedOperationsMgmtClient", "python");
 
 @@clientName(Artifact, "DisconnectedOperationsArtifact", "csharp");
 @@clientName(Image, "DisconnectedOperationsImage", "csharp");

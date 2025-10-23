@@ -2,26 +2,44 @@
 
 > see https://aka.ms/autorest
 
-Configuration for generating Translation Text SDK.
+This is the AutoRest configuration file for Translation Text SDK.
 
-The current release is `release_3_0`.
+> `autorest`
+
+To see additional help and options, run:
+
+> `autorest --help`
+---
+
+The current release is `package-2025-10-01-preview`.
 
 ``` yaml
-tag: release_3_0
+tag: package-2025-10-01-preview
 add-credentials: true
 openapi-type: data-plane
 ```
 
-# Releases
+## Releases
 
 ### Release 3.0
+
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_0'
 input-file: stable/3.0/openapi.json
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+### Release 2025-10-01-preview
+
+These settings apply only when `--tag=package-2025-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-10-01-preview'
+version: package-2025-10-01-preview
+input-file:
+  - preview/2025-10-01-preview/openapi.json
+```
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -34,9 +52,10 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/3.0/openapi.json
+  - $(this-folder)/preview/2025-10-01-preview/openapi.json
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
