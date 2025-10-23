@@ -13,19 +13,19 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
     service-dir: "sdk/machinelearning"
-    package-dir: "azure-mgmt-guestconfig"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-guestconfig"
     namespace: "azure.mgmt.guestconfig"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-guestconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-guestconfiguration"
     namespace: "com.azure.resourcemanager.guestconfiguration"
     service-name: "GuestConfiguration" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/guestconfiguration
-    package-dir: "arm-guestconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-guestconfiguration"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -33,8 +33,8 @@ options:
       name: "@azure/arm-guestconfiguration"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/guestconfiguration"
-    package-dir: "armguestconfiguration"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armguestconfiguration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armguestconfiguration"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

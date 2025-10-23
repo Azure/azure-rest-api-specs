@@ -291,6 +291,19 @@ model InteractiveNotificationContent extends NotificationContent {
   interactiveMessage: InteractiveMessage;
 }
 
+@added(Versions.c2025_09_01_Preview)
+@doc("A request to send a read receipt update from Business to User.")
+model ReadReceiptContent {
+  @doc("The id of the message this read receipt refers to.")
+  messageId: string;
+
+  @doc("The Channel Registration ID for the Business Identifier.")
+  channelRegistrationId: uuid;
+
+  @doc("Whether this status update includes a typing indicator. This field defaults to false when not provided.")
+  typingIndicator?: boolean;
+}
+
 @added(Versions.c2025_01_15_Preview)
 @doc("The Interactive message content to which user can read and respond.")
 model InteractiveMessage {
@@ -651,6 +664,16 @@ model Notifications {
   id: string;
 }
 
+@resource("messages/readreceipts")
+@doc("A notification.")
+model ReadReceipts {
+  @key
+  @visibility(Lifecycle.Read)
+  @invisible(Lifecycle) // The ID is only used as a key parameter.
+  @doc("The ID is only used as a key parameter.")
+  id: string;
+}
+
 @resource("messages/channels")
 @doc("A communication channel.")
 model CommunicationChannel {
@@ -735,6 +758,14 @@ model NotificationMessagesSendRequestBody {
   @doc("Details of the message to send.")
   @bodyRoot
   body: NotificationContent;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("Read Receipt send request body.")
+model ReadReceiptSendRequestBody {
+  @doc("Details of the read receipt update to send.")
+  @bodyRoot
+  readReceiptContent: ReadReceiptContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
@@ -1068,18 +1099,17 @@ model TemplateConversationMessageContent extends ConversationMessageContent {
 @doc("Azure Communication Messages Versions")
 enum Versions {
   @doc("Azure Communication Messages 2024-02-01 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
 
   @doc("Azure Communication Messages 2024-08-30 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_08_30: "2024-08-30",
 
   @doc("Azure Communication Messages 2025-01-15-preview api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_01_15_Preview: "2025-01-15-preview",
 
   @doc("Azure Communication Messages 2025-04-01-preview api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_04_01_Preview: "2025-04-01-preview",
+
+  @doc("Azure Communication Messages 2025-09-01-preview api version")
+  c2025_09_01_Preview: "2025-09-01-preview",
 }

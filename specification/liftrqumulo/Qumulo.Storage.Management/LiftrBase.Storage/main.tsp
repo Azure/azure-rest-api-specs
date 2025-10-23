@@ -21,7 +21,6 @@ namespace LiftrBase.Storage;
 @doc("Supported versions for LiftrBase.Storage resource model")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2_preview: "2024-02-01-preview",

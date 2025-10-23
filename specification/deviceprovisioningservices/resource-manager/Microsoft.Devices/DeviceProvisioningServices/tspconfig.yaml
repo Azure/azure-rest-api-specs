@@ -19,26 +19,26 @@ options:
     namespace: "Azure.ResourceManager.DeviceProvisioningServices"
   "@azure-tools/typespec-python":
     service-dir: "sdk/iothub"
-    package-dir: "azure-mgmt-iothubprovisioningservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-iothubprovisioningservices"
     namespace: "azure.mgmt.iothubprovisioningservices"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-deviceprovisioningservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-deviceprovisioningservices"
     namespace: "com.azure.resourcemanager.deviceprovisioningservices"
-    service-name: "DeviceProvisioningServices" # human-readable service name, whitespace allowed
+    service-name: "IotDps"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-deviceprovisioningservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-deviceprovisioningservices"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-deviceprovisioningservices"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/deviceprovisioningservices"
-    package-dir: "armdeviceprovisioningservices"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdeviceprovisioningservices"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdeviceprovisioningservices"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

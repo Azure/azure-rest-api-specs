@@ -15,7 +15,7 @@ options:
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/schemaregistry.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-schemaregistry"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-schemaregistry"
     namespace: "azure.schemaregistry"
     package-version: 1.3.0b4
     generate-packaging-files: false
@@ -23,12 +23,12 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-data-schemaregistry"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-data-schemaregistry"
     namespace: com.azure.data.schemaregistry
     partial-update: true
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "schema-registry"
+    emitter-output-dir: "{output-dir}/{service-dir}/schema-registry"
     generate-metadata: false
     is-modular-library: false
     package-details:
