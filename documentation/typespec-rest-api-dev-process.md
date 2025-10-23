@@ -1,4 +1,4 @@
-# Azure Rest API, SDK development process with TypeSpec
+# Azure REST API, SDK development process with TypeSpec
 
 ## Table Of Content
 
@@ -10,7 +10,7 @@
 
 ### 1. Introduction
 
-This document describes the processes of developing Azure Rest APIs and SDKs with TypeSpec language. The steps below
+This document describes the processes of developing Azure REST APIs and SDKs with TypeSpec language. The steps below
  assumes that you are developing TypeSpec API specifications in the `azure-rest-api-specs` and `azure-rest-api-specs-pr`repos.
 
 If you are developing within your own ADO repo first and then submitting into `azure-rest-api-specs` repos for review and
@@ -18,7 +18,7 @@ If you are developing within your own ADO repo first and then submitting into `a
 
 ### 2. Repo setup & prerequisites
 
-- The main repos for Azure rest-api are [azure-rest-api-specs](https://github.com/azure/azure-rest-api-specs) and [azure-rest-api-specs-pr](https://github.com/azure/azure-rest-api-specs-pr)
+- The main repos for Azure REST APIs are [azure-rest-api-specs](https://github.com/azure/azure-rest-api-specs) and [azure-rest-api-specs-pr](https://github.com/azure/azure-rest-api-specs-pr)
  repos. The `-pr` repo contains `RPSaaSMaster` and `RPSaaSDev` branches for ProviderHub based ARM service specs.
 
 #### 2.1 With local machine development
@@ -43,7 +43,7 @@ If you are developing within your own ADO repo first and then submitting into `a
      npx tsp --version
   ```
 
-- One-time set up: Install TypeSpec VisualStudio or VSCode extensions to get syntex highlighting, tool tips in IDE:
+- One-time set up: Install TypeSpec VisualStudio or VS Code extensions to get syntex highlighting, tool tips in IDE:
   
   ```npm
     npx tsp code install
@@ -55,22 +55,22 @@ If you are developing within your own ADO repo first and then submitting into `a
       npx tsp vs install
     ```
 
-#### 2.2  VSCode with local docker .devcontainer
+#### 2.2  VS Code with local docker .devcontainer
 
 All prerequisites have been installed in the dev container. You should to have `Docker Desktop` and `WSL2` running if
  you are on Windows machine.
 
 To start, you just need to install `Dev Containers` VS code extension, then open the repo path.
 
-- VSCode will detect the .devcontainer and prompt you to reopen the workspace.
+- VS Code will detect the .devcontainer and prompt you to reopen the workspace.
 
 - Alternatively, you can use Command Palette -> Dev Containers: Reopen in Container.
   
-Once VSCode reopened in Container, you can run any of the program below in the VSCode integrated terminal.
+Once VS Code reopened in Container, you can run any of the program below in the VS Code integrated terminal.
 
-#### 2.2 VSCode in browser via github codespaces
+#### 2.2 VS Code in browser via GitHub codespaces
 
-Github codespaces leverage the same dev container in the repo. The difference is it is hosted in cloud with VSCode in
+GitHub codespaces leverage the same dev container in the repo. The difference is it is hosted in cloud with VS Code in
  browser.
 
 To start, you just need to browse to the `azure-rest-api-specs` repo, select `<> Code` drop down and follow `Codespaces`
