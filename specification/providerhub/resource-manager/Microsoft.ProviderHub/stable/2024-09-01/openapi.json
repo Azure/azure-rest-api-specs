@@ -73,6 +73,9 @@
       "name": "SkuResourceOperationGroup"
     },
     {
+      "name": "SkuResourceOperationGroupThird"
+    },
+    {
       "name": "AuthorizedApplications"
     },
     {
@@ -1979,6 +1982,319 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/resourcetypeRegistrations/{nestedResourceTypeThird}/skus": {
+      "get": {
+        "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird",
+        "tags": [
+          "SkuResourceOperationGroupThird"
+        ],
+        "description": "Gets the list of skus for the given resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeSecond",
+            "in": "path",
+            "description": "The second child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeThird",
+            "in": "path",
+            "description": "The third child resource type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird": {
+            "$ref": "./examples/Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/resourcetypeRegistrations/{nestedResourceTypeThird}/skus/{sku}": {
+      "get": {
+        "operationId": "Skus_GetNestedResourceTypeThird",
+        "tags": [
+          "SkuResourceOperationGroupThird"
+        ],
+        "description": "Gets the sku details for the given resource type and sku name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeSecond",
+            "in": "path",
+            "description": "The second child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeThird",
+            "in": "path",
+            "description": "The third child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_GetNestedResourceTypeThird": {
+            "$ref": "./examples/Skus_GetNestedResourceTypeThird.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Skus_CreateOrUpdateNestedResourceTypeThird",
+        "tags": [
+          "SkuResourceOperationGroupThird"
+        ],
+        "description": "Creates or updates the resource type skus in the given resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeSecond",
+            "in": "path",
+            "description": "The second child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeThird",
+            "in": "path",
+            "description": "The third child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SkuResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_CreateOrUpdateNestedResourceTypeThird": {
+            "$ref": "./examples/Skus_CreateOrUpdateNestedResourceTypeThird.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Skus_DeleteNestedResourceTypeThird",
+        "tags": [
+          "SkuResourceOperationGroupThird"
+        ],
+        "description": "Deletes a resource type sku.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeSecond",
+            "in": "path",
+            "description": "The second child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeThird",
+            "in": "path",
+            "description": "The third child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_DeleteNestedResourceTypeThird": {
+            "$ref": "./examples/Skus_DeleteNestedResourceTypeThird.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}": {

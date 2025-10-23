@@ -223,6 +223,88 @@ interface SkuResourceOperationGroup {
     Response = ArmResponse<SkuResourceArrayResponseWithContinuation>
   >;
 }
+@armResourceOperations
+interface SkuResourceOperationGroupOpsThird
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+
+        /** the provider namespace */
+        @path
+        @segment("providers")
+        @key
+        providerNamespaceProviderhub: "Microsoft.ProviderHub",
+
+        /** the provider namespace */
+        @path
+        @segment("providerRegistrations")
+        @key
+        providerNamespace: string,
+
+        /** The resource type. */
+        @path
+        @segment("resourcetypeRegistrations")
+        @key
+        resourceType: string,
+
+        /** The first child resource type. */
+        @path
+        @segment("resourcetypeRegistrations")
+        @key
+        nestedResourceTypeFirst: string,
+
+        /** The second child resource type. */
+        @path
+        @segment("resourcetypeRegistrations")
+        @key
+        nestedResourceTypeSecond: string,
+
+        /** The third child resource type. */
+        @path
+        @segment("resourcetypeRegistrations")
+        @key
+        nestedResourceTypeThird: string,
+      },
+      {},
+      {
+        /** The SKU. */
+        @path
+        @segment("skus")
+        @key
+        sku: string,
+      }
+    > {}
+
+@armResourceOperations
+interface SkuResourceOperationGroupThird {
+  /**
+   * Gets the sku details for the given resource type and sku name.
+   */
+  getNestedResourceTypeThird is SkuResourceOperationGroupOpsThird.Read<SkuResource>;
+
+  /**
+   * Creates or updates the resource type skus in the given resource type.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  createOrUpdateNestedResourceTypeThird is SkuResourceOperationGroupOpsThird.CreateOrUpdateSync<
+    SkuResource,
+    Response = ArmResourceUpdatedResponse<SkuResource>
+  >;
+
+  /**
+   * Deletes a resource type sku.
+   */
+  deleteNestedResourceTypeThird is SkuResourceOperationGroupOpsThird.DeleteSync<SkuResource>;
+
+  /**
+   * Gets the list of skus for the given resource type.
+   */
+  listByResourceTypeRegistrationsNestedResourceTypeThird is SkuResourceOperationGroupOpsThird.List<
+    SkuResource,
+    Response = ArmResponse<SkuResourceArrayResponseWithContinuation>
+  >;
+}
 
 @@doc(SkuResource.name, "The SKU.");
 @@doc(SkuResource.properties, "");

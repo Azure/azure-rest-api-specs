@@ -89,3 +89,16 @@ using Microsoft.ProviderHub;
 );
 
 @@clientName(ProviderMonitorSettings.create::parameters.resource, "properties");
+
+@@clientLocation(SkuResourceOperationGroupThird.listByResourceTypeRegistrationsNestedResourceTypeThird,
+  "Skus"
+);
+@@clientLocation(SkuResourceOperationGroupThird.deleteNestedResourceTypeThird,
+  "Skus"
+);
+@@clientLocation(SkuResourceOperationGroupThird.createOrUpdateNestedResourceTypeThird,
+  "Skus"
+);
+@@clientLocation(SkuResourceOperationGroupThird.getNestedResourceTypeThird,
+  "Skus"
+);
