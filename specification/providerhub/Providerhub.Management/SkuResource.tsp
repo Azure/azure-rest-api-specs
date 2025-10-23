@@ -57,13 +57,11 @@ interface SkuResources {
   /**
    * Gets the sku details for the given resource type and sku name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is SkuResourceOps.Read<SkuResource>;
 
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is SkuResourceOps.CreateOrUpdateSync<
     SkuResource,
@@ -73,13 +71,11 @@ interface SkuResources {
   /**
    * Deletes a resource type sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is SkuResourceOps.DeleteSync<SkuResource>;
 
   /**
    * Gets the list of skus for the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByResourceTypeRegistrations is SkuResourceOps.List<
     SkuResource,
     Response = ArmResponse<SkuResourceArrayResponseWithContinuation>
@@ -195,13 +191,11 @@ interface SkuResourceOperationGroup {
   /**
    * Gets the sku details for the given resource type and sku name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getNestedResourceTypeSecond is SkuResourceOperationGroupOps.Read<SkuResource>;
 
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateNestedResourceTypeSecond is SkuResourceOperationGroupOps.CreateOrUpdateSync<
     SkuResource,
@@ -211,13 +205,11 @@ interface SkuResourceOperationGroup {
   /**
    * Deletes a resource type sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteNestedResourceTypeSecond is SkuResourceOperationGroupOps.DeleteSync<SkuResource>;
 
   /**
    * Gets the list of skus for the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByResourceTypeRegistrationsNestedResourceTypeSecond is SkuResourceOperationGroupOps.List<
     SkuResource,
     Response = ArmResponse<SkuResourceArrayResponseWithContinuation>

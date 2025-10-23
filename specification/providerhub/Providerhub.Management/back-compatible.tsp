@@ -18,7 +18,7 @@ using Microsoft.ProviderHub;
   "properties"
 );
 @@clientLocation(ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
-  "NewRegionFrontloadRelease"
+  NewRegionFrontloadRelease
 );
 @@clientName(ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
   "GenerateManifest"
@@ -41,19 +41,19 @@ using Microsoft.ProviderHub;
 );
 
 @@clientLocation(OperationsPutContents.listByProviderRegistration,
-  "Operations"
+  Operations
 );
-@@clientLocation(OperationsPutContents.createOrUpdate, "Operations");
+@@clientLocation(OperationsPutContents.createOrUpdate, Operations);
 @@clientName(OperationsPutContents.createOrUpdate::parameters.resource,
   "OperationsPutContent"
 );
-@@clientLocation(OperationsPutContents.delete, "Operations");
+@@clientLocation(OperationsPutContents.delete, Operations);
 
-@@clientLocation(SkuResources.get, "Skus");
-@@clientLocation(SkuResources.createOrUpdate, "Skus");
+@@clientLocation(SkuResources.get, Skus);
+@@clientLocation(SkuResources.createOrUpdate, Skus);
 @@clientName(SkuResources.createOrUpdate::parameters.resource, "properties");
-@@clientLocation(SkuResources.delete, "Skus");
-@@clientLocation(SkuResources.listByResourceTypeRegistrations, "Skus");
+@@clientLocation(SkuResources.delete, Skus);
+@@clientLocation(SkuResources.listByResourceTypeRegistrations, Skus);
 @@clientName(Skus.createOrUpdateNestedResourceTypeFirst::parameters.resource,
   "properties"
 );
@@ -70,18 +70,18 @@ using Microsoft.ProviderHub;
 @@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeSecond,
   "Skus"
 );
-@@clientLocation(SkuResourceOperationGroup.getNestedResourceTypeSecond, "Skus");
+@@clientLocation(SkuResourceOperationGroup.getNestedResourceTypeSecond, Skus);
 @@clientLocation(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond,
-  "Skus"
+  Skus
 );
 @@clientName(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond::parameters.resource,
   "properties"
 );
 @@clientLocation(SkuResourceOperationGroup.deleteNestedResourceTypeSecond,
-  "Skus"
+  Skus
 );
 @@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeSecond,
-  "Skus"
+  Skus
 );
 
 @@clientName(AuthorizedApplications.createOrUpdate::parameters.resource,
@@ -91,14 +91,14 @@ using Microsoft.ProviderHub;
 @@clientName(ProviderMonitorSettings.create::parameters.resource, "properties");
 
 @@clientLocation(SkuResourceOperationGroupThird.listByResourceTypeRegistrationsNestedResourceTypeThird,
-  "Skus"
+  Skus
 );
 @@clientLocation(SkuResourceOperationGroupThird.deleteNestedResourceTypeThird,
-  "Skus"
+  Skus
 );
 @@clientLocation(SkuResourceOperationGroupThird.createOrUpdateNestedResourceTypeThird,
-  "Skus"
+  Skus
 );
 @@clientLocation(SkuResourceOperationGroupThird.getNestedResourceTypeThird,
-  "Skus"
+  Skus
 );

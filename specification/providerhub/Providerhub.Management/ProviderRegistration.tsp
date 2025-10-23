@@ -100,7 +100,6 @@ interface ProviderRegistrations {
   /**
    * Deletes resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteResources is ArmResourceActionAsyncBase<
     ProviderRegistration,
     ResourceManagementAction,
@@ -122,7 +121,6 @@ interface ProviderRegistrations {
   /**
    * Generates the new region frontload manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("generateNewRegionFrontloadManifest")
   newRegionFrontloadReleaseGenerateManifest is ArmResourceActionSync<
     ProviderRegistration,

@@ -32,7 +32,6 @@ using TypeSpec.Versioning;
 /**
  * Microsoft ProviderHub
  */
-#suppress "@azure-tools/typespec-client-generator-core/client-location-duplicate" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "ProviderHub" })
 @versioned(Versions)
