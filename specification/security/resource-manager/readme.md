@@ -114,12 +114,6 @@ These settings apply only when `--tag=package-preview-2025-11-01-preview` is spe
 input-file:
   - Microsoft.Security/preview/2025-11-01-preview/securityConnectorsDevOps.json
 suppressions:
-  - code: LroLocationHeader
-    from: securityConnectorsDevOps.json
-    reason: False positive. Per ResourceProvider specification SecurityConnectors DevOps uses Azure-AsyncOperation header instead of Location header
-  - code: ResourceNameRestriction
-    from: securityConnectorsDevOps.json
-    reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
   - code: GetCollectionOnlyHasValueAndNextLink
     from: securityConnectorsDevOps.json
     where:
