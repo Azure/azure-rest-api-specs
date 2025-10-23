@@ -21,55 +21,6 @@ union OS {
 }
 
 /**
- * The provisioning state of this agent pool
- */
-union ProvisioningState {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Canceled: "Canceled",
-}
-
-/**
- * The type of identity that created the resource.
- */
-union CreatedByType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Key: "Key",
-}
-
-/**
- * The type of identity that last modified the resource.
- */
-union LastModifiedByType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Key: "Key",
-}
-
-/**
  * The current status of the run.
  */
 union RunStatus {
@@ -173,17 +124,6 @@ union BaseImageDependencyType {
 }
 
 /**
- * The current status of trigger.
- */
-union TriggerStatus {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Enabled: "Enabled",
-}
-
-/**
  * The type of source control service.
  */
 union SourceControlType {
@@ -262,17 +202,6 @@ union SecretObjectType {
 }
 
 /**
- * The identity type.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum ResourceIdentityType {
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned, UserAssigned`,
-  None,
-}
-
-/**
  * The properties of agent pool.
  */
 model AgentPoolProperties {
@@ -301,84 +230,6 @@ model AgentPoolProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-/**
- * An Azure resource.
- */
-model Resource {
-  /**
-   * The resource ID.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The location of the resource. This cannot be changed after the resource is created.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
-/**
- * Metadata pertaining to creation and last modification of the resource.
- */
-model SystemData {
-  /**
-   * The identity that created the resource.
-   */
-  createdBy?: string;
-
-  /**
-   * The type of identity that created the resource.
-   */
-  createdByType?: CreatedByType;
-
-  /**
-   * The timestamp of resource creation (UTC).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdAt?: utcDateTime;
-
-  /**
-   * The identity that last modified the resource.
-   */
-  lastModifiedBy?: string;
-
-  /**
-   * The type of identity that last modified the resource.
-   */
-  lastModifiedByType?: LastModifiedByType;
-
-  /**
-   * The timestamp of resource modification (UTC).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedAt?: utcDateTime;
 }
 
 /**
@@ -766,35 +617,6 @@ model AgentProperties {
 }
 
 /**
- * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.
- */
-model ProxyResource {
-  /**
-   * The resource ID.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
-/**
  * The properties of a response to source upload request.
  */
 model SourceUploadDefinition {
@@ -832,52 +654,6 @@ model RunGetLogResult {
    * The link to logs in registry for a run on a azure container registry.
    */
   logArtifactLink?: string;
-}
-
-/**
- * Managed identity for the resource.
- */
-model IdentityProperties {
-  /**
-   * The principal ID of resource identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The tenant ID of resource.
-   */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /**
-   * The identity type.
-   */
-  type?: ResourceIdentityType;
-
-  /**
-   * The list of user identities associated with the resource. The user identity
-   * dictionary key references will be ARM resource ids in the form:
-   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/
-   *     providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserIdentityProperties>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model UserIdentityProperties {
-  /**
-   * The principal id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
 }
 
 /**
@@ -2092,14 +1868,3 @@ model EncodedTaskStepUpdateParameters extends TaskStepUpdateParameters {
    */
   type: "EncodedTask";
 }
-
-model Registry is Azure.ResourceManager.TrackedResource<never> {
-  ...ResourceNameParameter<
-    Resource = Registry,
-    KeyName = "registryName",
-    SegmentName = "registries",
-    NamePattern = "^[a-zA-Z0-9]*$"
-  >;
-}
-@@maxLength(Registry.name, 50);
-@@minLength(Registry.name, 5);

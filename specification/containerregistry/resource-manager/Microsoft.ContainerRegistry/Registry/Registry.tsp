@@ -147,6 +147,47 @@ interface Registries {
     Response = RegistryNameStatus,
     Scope = SubscriptionActionScope
   >;
+
+  /**
+   * Schedules a new run based on the request parameters and add it to the run queue.
+   */
+  @autoRoute
+  scheduleRun is ArmProviderActionSync<
+    Request = RunRequest,
+    Response = Run,
+    Scope = Extension.ResourceGroup,
+    Parameters = {
+      /**
+       * The name of the container registry.
+       */
+      @maxLength(50)
+      @minLength(5)
+      @pattern("^[a-zA-Z0-9]*$")
+      @path
+      @segment("registries")
+      registryName: string;
+    }
+  >;
+  /**
+   * Get the upload location for the user to be able to upload the source.
+   */
+  @autoRoute
+  @action("listBuildSourceUploadUrl")
+  getBuildSourceUploadUrl is ArmProviderActionSync<
+    Response = SourceUploadDefinition,
+    Scope = Extension.ResourceGroup,
+    Parameters = {
+      /**
+       * The name of the container registry.
+       */
+      @maxLength(50)
+      @minLength(5)
+      @pattern("^[a-zA-Z0-9]*$")
+      @path
+      @segment("registries")
+      registryName: string;
+    }
+  >;
 }
 
 @@maxLength(Registry.name, 50);
