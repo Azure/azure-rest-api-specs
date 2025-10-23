@@ -24,6 +24,11 @@ namespace Microsoft.HealthDataAIServices {
     "HealthDataAIServicesProvisioningState",
     "csharp"
   );
+  @@clientName(PrivateLinkResource,
+    "HealthDataAIServicesPrivateLinkResourceData",
+    "csharp"
+  );
+
   @@clientName(Versions.v2024_09_20,
     "$DO_NOT_NORMALIZE$V2024_09_20",
     "javascript"
