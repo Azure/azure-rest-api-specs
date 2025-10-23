@@ -73,4 +73,10 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_04_01_preview: "2025-04-01-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2025-10-01-preview.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_10_01_preview: "2025-10-01-preview",
 }
