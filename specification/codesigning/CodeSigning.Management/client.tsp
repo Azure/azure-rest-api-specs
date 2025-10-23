@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.CodeSigning;
 using Azure.Core;
 
-@@clientName(Microsoft.CodeSigning, "TrustedSigningMgmt", "python");
+@@clientName(Microsoft.CodeSigning, "TrustedSigningMgmtClient", "python");
 @@clientName(Microsoft.CodeSigning, "TrustedSigningManagementClient", "java");
 
 @@clientName(AccountSku, "TrustedSigningAccountSku", "csharp");
