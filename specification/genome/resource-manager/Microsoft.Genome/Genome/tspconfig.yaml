@@ -20,3 +20,36 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     omit-unreachable-types: true
     use-read-only-status-schema: true
+
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    namespace: "Azure.ResourceManager.Genome"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Genome"
+    clear-output-folder: true
+
+  "@azure-tools/typespec-java":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-genome"
+    namespace: "com.azure.resourcemanager.genome"
+
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-genome"
+    package-details:
+      name: "@azure/arm-genome"
+    experimental-extensible-enums: true
+
+  "@azure-tools/typespec-python":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-genome"
+    namespace: "azure.mgmt.genome"
+    generate-sample: true
+    generate-test: true
+
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/armgenome"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/genome/armgenome"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
