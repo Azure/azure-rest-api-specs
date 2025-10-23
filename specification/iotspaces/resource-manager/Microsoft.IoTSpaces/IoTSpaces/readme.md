@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2017-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-10-preview'
 input-file:
-- Microsoft.IoTSpaces/preview/2017-10-01-preview/iotspaces.json
+- preview/2017-10-01-preview/iotspaces.json
 ```
 
 ---
@@ -69,16 +69,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 
 
