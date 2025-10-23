@@ -15,3 +15,5 @@ using Microsoft.ContainerRegistry;
 @@clientName(Tasks.update::parameters.properties, "taskUpdateParameters");
 
 @@clientName(Registries.scheduleRun::parameters.body, "runRequest");
+
+@@clientName(Architecture.`386`, "ThreeHundredEightySix", "go");
