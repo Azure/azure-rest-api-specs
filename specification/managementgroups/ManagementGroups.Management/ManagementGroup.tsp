@@ -30,7 +30,7 @@ interface ManagementGroups {
    *
    */
   get is Extension.Read<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     ManagementGroup,
     Parameters = {
       /**
@@ -67,7 +67,7 @@ interface ManagementGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceAsync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     ManagementGroup,
     Request = CreateManagementGroupRequest,
     Parameters = {
@@ -89,7 +89,7 @@ interface ManagementGroups {
    */
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     ManagementGroup,
     PatchModel = PatchManagementGroupRequest,
     Parameters = {
@@ -110,7 +110,7 @@ interface ManagementGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is Extension.DeleteWithoutOkAsync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     ManagementGroup,
     Parameters = {
       /**
@@ -134,7 +134,7 @@ interface ManagementGroups {
   @get
   @action("descendants")
   getDescendants is Extension.ActionSync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     ManagementGroup,
     void,
     ArmResponse<ResourceListResult<DescendantInfo>>,
@@ -165,7 +165,7 @@ interface ManagementGroups {
   @get
   @action("settings")
   list is Extension.ActionSync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     ManagementGroup,
     void,
     ArmResponse<HierarchySettingsList>

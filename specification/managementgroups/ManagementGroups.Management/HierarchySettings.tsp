@@ -34,7 +34,7 @@ interface HierarchySettingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HierarchySettings_Get")
-  get is Extension.Read<Extension.ManagementGroup, HierarchySettings>;
+  get is Extension.Read<Extension.Tenant, HierarchySettings>;
 
   /**
    * Creates or updates the hierarchy settings defined at the Management Group level.
@@ -44,7 +44,7 @@ interface HierarchySettingsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("HierarchySettings_CreateOrUpdate")
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     HierarchySettings,
     Request = CreateOrUpdateSettingsRequest,
     Response = ArmResourceUpdatedResponse<HierarchySettings>
@@ -58,7 +58,7 @@ interface HierarchySettingsOperationGroup {
   @operationId("HierarchySettings_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     HierarchySettings,
     PatchModel = CreateOrUpdateSettingsRequest
   >;
@@ -71,7 +71,7 @@ interface HierarchySettingsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("HierarchySettings_Delete")
   delete is Extension.DeleteSync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     HierarchySettings,
     Response = ArmDeletedResponse
   >;

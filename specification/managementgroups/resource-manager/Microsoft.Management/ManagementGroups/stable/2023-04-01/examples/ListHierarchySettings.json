@@ -6,20 +6,22 @@
   "responses": {
     "200": {
       "body": {
+        "@nextLink": null,
         "value": [
           {
-            "id": "/providers/Microsoft.Management/managementGroups/root/settings/default",
-            "type": "Microsoft.Management/managementGroups/settings",
             "name": "root",
+            "type": "Microsoft.Management/managementGroups/settings",
+            "id": "/providers/Microsoft.Management/managementGroups/root/settings/default",
             "properties": {
-              "tenantId": "20000000-0000-0000-0000-000000000000",
               "defaultManagementGroup": "/providers/Microsoft.Management/managementGroups/DefaultGroup",
-              "requireAuthorizationForGroupCreation": true
+              "requireAuthorizationForGroupCreation": true,
+              "tenantId": "20000000-0000-0000-0000-000000000000"
             }
           }
-        ],
-        "@nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "HierarchySettings_List",
+  "title": "ListGroupSettings"
 }

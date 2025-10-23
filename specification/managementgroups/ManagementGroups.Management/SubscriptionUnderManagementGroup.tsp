@@ -34,7 +34,7 @@ interface SubscriptionUnderManagementGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagementGroupSubscriptions_GetSubscription")
   getSubscription is Extension.Read<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     SubscriptionUnderManagementGroup,
     Parameters = {
       /**
@@ -53,7 +53,7 @@ interface SubscriptionUnderManagementGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("ManagementGroupSubscriptions_Create")
   create is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     SubscriptionUnderManagementGroup,
     Request = void,
     Parameters = {
@@ -73,7 +73,7 @@ interface SubscriptionUnderManagementGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagementGroupSubscriptions_Delete")
   delete is Extension.DeleteSync<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     SubscriptionUnderManagementGroup,
     Parameters = {
       /**
@@ -91,7 +91,7 @@ interface SubscriptionUnderManagementGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagementGroupSubscriptions_GetSubscriptionsUnderManagementGroup")
   getSubscriptionsUnderManagementGroup is Extension.ListByTarget<
-    Extension.ManagementGroup,
+    Extension.Tenant,
     SubscriptionUnderManagementGroup,
     Parameters = {
       /**
