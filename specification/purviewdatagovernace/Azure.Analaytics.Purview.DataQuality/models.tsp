@@ -21,10 +21,10 @@ union AssetMetadataObserverType {
 }
 
 /**
- * abc
+ * Rule Parameters
  */
 @parentResource(DataAsset)
-@resource("global-rules")
+@resource("rules")
 model RuleParameters {
   /**
    * Unique Identifier for Rule
@@ -34,16 +34,16 @@ model RuleParameters {
   ruleId: string;
 
   /**
-   * response
+   * Rule Entity response
    */
   response?: RuleEntity;
 }
 
 /**
- * abc
+ * Rule Entities
  */
 @parentResource(DataAsset)
-@resource("global-rules")
+@resource("rules")
 model RuleEntities {
   /**
    * Unique Identifier for Rule
@@ -59,12 +59,12 @@ model RuleEntities {
 }
 
 /**
- * abc
+ * Business Domain
  */
 @resource("business-domains")
 model BusinessDomain {
   /**
-   * js
+   * Get Business Domain
    */
   @key
   @visibility(Lifecycle.Create)
@@ -72,13 +72,13 @@ model BusinessDomain {
 }
 
 /**
- * def
+ * Data Product
  */
 @parentResource(BusinessDomain)
 @resource("data-products")
 model DataProduct {
   /**
-   * ghi
+   * Get Data Product
    */
   @key
   @visibility(Lifecycle.Create)
@@ -86,13 +86,13 @@ model DataProduct {
 }
 
 /**
- * ajd
+ * Data Asset
  */
 @parentResource(DataProduct)
 @resource("data-assets")
 model DataAsset {
   /**
-   * hssd
+   * Get Data Asset
    */
   @key
   @visibility(Lifecycle.Create)
@@ -104,19 +104,19 @@ model DataAsset {
  */
 model DataAssetRuleResourceId {
   /**
-   * abc
+   * Get Business Domain
    */
   @path
   businessDomainId: string;
 
   /**
-   * bcd
+   * Get Data Product
    */
   @path
   dataProductId: string;
 
   /**
-   * jsh
+   * Get Data Asset
    */
   @path
   dataAssetId: string;
