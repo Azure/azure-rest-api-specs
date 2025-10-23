@@ -54,7 +54,9 @@ export function readFileContent(filePath: string): string {
 }
 
 export function mergeFiles(folderPath: string): OpenAPI2Document {
-  const files = readFilesFromDirectory(folderPath, "example");
+  const files = fs.statSync(folderPath).isDirectory()
+    ? readFilesFromDirectory(folderPath, "example")
+    : [folderPath];
   const mergedContent: OpenAPI2Document = {
     swagger: "2.0",
     info: { title: "placeholder", version: "placeholder" },
