@@ -44,6 +44,48 @@
     }
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates": {
+      "get": {
+        "operationId": "PlatformUpdates_ListByLocation",
+        "tags": [
+          "PlatformUpdates"
+        ],
+        "description": "List PlatformUpdate resources by location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformUpdateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlatformUpdates_ListByLocation_MaximumSet": {
+            "$ref": "./examples/PlatformUpdates_ListByLocation_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates/{platformUpdateName}": {
       "get": {
         "operationId": "PlatformUpdates_Get",
@@ -124,6 +166,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "PlatformUpdateListResult": {
+      "type": "object",
+      "description": "The response of a PlatformUpdate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PlatformUpdate items on this page",
+          "items": {
+            "$ref": "#/definitions/PlatformUpdate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PlatformUpdateDetails": {
