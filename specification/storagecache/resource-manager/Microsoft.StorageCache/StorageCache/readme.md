@@ -38,8 +38,8 @@ These settings apply only when `--tag=package-2026-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-03-01'
 input-file:
-  - Microsoft.StorageCache/stable/2026-03-01/amlfilesystem.json
-  - Microsoft.StorageCache/stable/2026-03-01/storagecache.json
+  - stable/2026-03-01/amlfilesystem.json
+  - stable/2026-03-01/storagecache.json
 ```
 
 ### Tag: package-2025-07-01
