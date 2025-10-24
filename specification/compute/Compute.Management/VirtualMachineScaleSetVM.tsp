@@ -230,14 +230,9 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_Reimage")
   reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
-    {
-      /**
-       * Parameters for the Reimaging Virtual machine in ScaleSet.
-       */
-      @bodyRoot
-      vmScaleSetVMReimageInput?: VirtualMachineScaleSetVMReimageParameters;
-    },
-    OkResponse
+    Request = VirtualMachineScaleSetVMReimageParameters,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**

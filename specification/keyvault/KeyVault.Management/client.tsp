@@ -193,6 +193,10 @@ using Azure.Core;
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
 @@usage(Vault, Usage.input, "java");
+@@clientName(ManagedHSMSecurityDomainProperties,
+  "ManagedHsmSecurityDomainProperties",
+  "java"
+);
 
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "python");
