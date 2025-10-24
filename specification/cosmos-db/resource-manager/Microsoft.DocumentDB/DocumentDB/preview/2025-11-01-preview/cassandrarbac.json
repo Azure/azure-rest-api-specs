@@ -34,21 +34,21 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleDefinitions/{roleDefinitionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleDefinitions/{roleDefinitionId}": {
       "get": {
-        "operationId": "MongoMIResources_GetMongoMIRoleDefinition",
+        "operationId": "CassandraResources_GetCassandraRoleDefinition",
         "x-ms-examples": {
-          "CosmosDBMongoMIRoleDefinitionGet": {
-            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleDefinitionGet.json"
+          "CosmosDBCassandraRoleDefinitionGet": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleDefinitionGet.json"
           }
         },
-        "description": "Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Definition with the given Id.",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Definition with the given Id.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
@@ -57,39 +57,39 @@
             "$ref": "#/parameters/roleDefinitionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The Role Definition was successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleDefinitionResource"
+              "$ref": "#/definitions/CassandraRoleDefinitionResource"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "operationId": "MongoMIResources_CreateUpdateMongoMIRoleDefinition",
+        "operationId": "CassandraResources_CreateUpdateCassandraRoleDefinition",
         "x-ms-examples": {
-          "CosmosDBMongoMIRoleDefinitionCreateUpdate": {
-            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleDefinitionCreateUpdate.json"
+          "CosmosDBCassandraRoleDefinitionCreateUpdate": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleDefinitionCreateUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
-        "description": "Creates or updates an Azure Cosmos DB MongoMI Role Definition.",
+        "description": "Creates or updates an Azure Cosmos DB Cassandra Role Definition.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
@@ -98,15 +98,15 @@
             "$ref": "#/parameters/roleDefinitionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "createUpdateMongoMIRoleDefinitionParameters",
+            "name": "createUpdateCassandraRoleDefinitionParameters",
             "in": "body",
             "required": true,
             "description": "The properties required to create or update a Role Definition.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleDefinitionResource"
+              "$ref": "#/definitions/CassandraRoleDefinitionResource"
             }
           }
         ],
@@ -114,7 +114,7 @@
           "200": {
             "description": "The Role Definition create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleDefinitionResource"
+              "$ref": "#/definitions/CassandraRoleDefinitionResource"
             }
           },
           "202": {
@@ -133,26 +133,26 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "operationId": "MongoMIResources_DeleteMongoMIRoleDefinition",
+        "operationId": "CassandraResources_DeleteCassandraRoleDefinition",
         "x-ms-examples": {
-          "CosmosDBMongoMIRoleDefinitionDelete": {
-            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleDefinitionDelete.json"
+          "CosmosDBCassandraRoleDefinitionDelete": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleDefinitionDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
-        "description": "Deletes an existing Azure Cosmos DB MongoMI Role Definition.",
+        "description": "Deletes an existing Azure Cosmos DB Cassandra Role Definition.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
@@ -161,7 +161,7 @@
             "$ref": "#/parameters/roleDefinitionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -187,69 +187,69 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleDefinitions": {
       "get": {
-        "operationId": "MongoMIResources_ListMongoMIRoleDefinitions",
+        "operationId": "CassandraResources_ListCassandraRoleDefinitions",
         "x-ms-examples": {
-          "CosmosDBMongoMIRoleDefinitionList": {
-            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleDefinitionList.json"
+          "CosmosDBCassandraRoleDefinitionList": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleDefinitionList.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "description": "Retrieves the list of all Azure Cosmos DB MongoMI Role Definitions.",
+        "description": "Retrieves the list of all Azure Cosmos DB Cassandra Role Definitions.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The list operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleDefinitionListResult"
+              "$ref": "#/definitions/CassandraRoleDefinitionListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleAssignments/{roleAssignmentId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleAssignments/{roleAssignmentId}": {
       "get": {
-        "operationId": "MongoMIResources_GetMongoMIRoleAssignment",
+        "operationId": "CassandraResources_GetCassandraRoleAssignment",
         "x-ms-examples": {
-          "CosmosDBMongoMIRoleAssignmentGet": {
-            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleAssignmentGet.json"
+          "CosmosDBCassandraRoleAssignmentGet": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleAssignmentGet.json"
           }
         },
-        "description": "Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Assignment with the given Id.",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Assignment with the given Id.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
@@ -258,39 +258,39 @@
             "$ref": "#/parameters/roleAssignmentIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The Role Assignment was successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleAssignmentResource"
+              "$ref": "#/definitions/CassandraRoleAssignmentResource"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "operationId": "MongoMIResources_CreateUpdateMongoMIRoleAssignment",
+        "operationId": "CassandraResources_CreateUpdateCassandraRoleAssignment",
         "x-ms-examples": {
-          "CosmosDBMongoMIRoleAssignmentCreateUpdate": {
-            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleAssignmentCreateUpdate.json"
+          "CosmosDBCassandraRoleAssignmentCreateUpdate": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleAssignmentCreateUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
-        "description": "Creates or updates an Azure Cosmos DB MongoMI Role Assignment.",
+        "description": "Creates or updates an Azure Cosmos DB Cassandra Role Assignment.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
@@ -299,15 +299,15 @@
             "$ref": "#/parameters/roleAssignmentIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "createUpdateMongoMIRoleAssignmentParameters",
+            "name": "createUpdateCassandraRoleAssignmentParameters",
             "in": "body",
             "required": true,
             "description": "The properties required to create or update a Role Assignment.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleAssignmentResource"
+              "$ref": "#/definitions/CassandraRoleAssignmentResource"
             }
           }
         ],
@@ -315,7 +315,7 @@
           "200": {
             "description": "The Role Assignment create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleAssignmentResource"
+              "$ref": "#/definitions/CassandraRoleAssignmentResource"
             }
           },
           "202": {
@@ -334,26 +334,26 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "operationId": "MongoMIResources_DeleteMongoMIRoleAssignment",
+        "operationId": "CassandraResources_DeleteCassandraRoleAssignment",
         "x-ms-examples": {
-          "CosmosDBMongoMIRoleAssignmentDelete": {
-            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleAssignmentDelete.json"
+          "CosmosDBCassandraRoleAssignmentDelete": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleAssignmentDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
-        "description": "Deletes an existing Azure Cosmos DB MongoMI Role Assignment.",
+        "description": "Deletes an existing Azure Cosmos DB Cassandra Role Assignment.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
@@ -362,7 +362,7 @@
             "$ref": "#/parameters/roleAssignmentIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -388,49 +388,49 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleAssignments": {
       "get": {
-        "operationId": "MongoMIResources_ListMongoMIRoleAssignments",
+        "operationId": "CassandraResources_ListCassandraRoleAssignments",
         "x-ms-examples": {
-          "CosmosDBMongoMIRoleAssignmentList": {
-            "$ref": "./examples/mongoMIrbac/CosmosDBMongoMIRoleAssignmentList.json"
+          "CosmosDBCassandraRoleAssignmentList": {
+            "$ref": "./examples/cassandrarbac/CosmosDBCassandraRoleAssignmentList.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "description": "Retrieves the list of all Azure Cosmos DB MongoMI Role Assignments.",
+        "description": "Retrieves the list of all Azure Cosmos DB Cassandra Role Assignments.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The list operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleAssignmentListResult"
+              "$ref": "#/definitions/CassandraRoleAssignmentListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -438,7 +438,7 @@
     }
   },
   "definitions": {
-    "MongoMIRoleDefinitionResourceProperties": {
+    "CassandraRoleDefinitionResourceProperties": {
       "type": "object",
       "properties": {
         "id": {
@@ -466,7 +466,7 @@
           "items": {
             "type": "string"
           },
-          "description": "A set of fully qualified Scopes at or below which MongoMI Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist."
+          "description": "A set of fully qualified Scopes at or below which Cassandra Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist."
         },
         "permissions": {
           "type": "array",
@@ -476,21 +476,21 @@
           "description": "The set of operations allowed through this Role Definition."
         }
       },
-      "description": "Azure Cosmos DB MongoMI Role Definition resource object."
+      "description": "Azure Cosmos DB Cassandra Role Definition resource object."
     },
-    "MongoMIRoleDefinitionResource": {
-      "description": "Parameters to create and update an Azure Cosmos DB MongoMI Role Definition.",
+    "CassandraRoleDefinitionResource": {
+      "description": "Parameters to create and update an Azure Cosmos DB Cassandra Role Definition.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update an Azure Cosmos DB MongoMI Role Definition.",
-          "$ref": "#/definitions/MongoMIRoleDefinitionResourceProperties"
+          "description": "Properties to create and update an Azure Cosmos DB Cassandra Role Definition.",
+          "$ref": "#/definitions/CassandraRoleDefinitionResourceProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -518,14 +518,14 @@
       },
       "description": "The set of data plane operations permitted through this Role Definition."
     },
-    "MongoMIRoleDefinitionListResult": {
+    "CassandraRoleDefinitionListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/MongoMIRoleDefinitionResource"
+            "$ref": "#/definitions/CassandraRoleDefinitionResource"
           },
           "description": "List of Role Definitions and their properties."
         },
@@ -537,7 +537,7 @@
       },
       "description": "The relevant Role Definitions."
     },
-    "MongoMIRoleAssignmentResourceProperties": {
+    "CassandraRoleAssignmentResourceProperties": {
       "type": "object",
       "properties": {
         "roleDefinitionId": {
@@ -546,11 +546,11 @@
         },
         "scope": {
           "type": "string",
-          "description": "The data plane resource path for which access is being granted through this MongoMI Role Assignment."
+          "description": "The data plane resource path for which access is being granted through this Cassandra Role Assignment."
         },
         "principalId": {
           "type": "string",
-          "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this MongoMI Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
+          "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this Cassandra Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
         },
         "provisioningState": {
           "type": "string",
@@ -558,32 +558,32 @@
           "readOnly": true
         }
       },
-      "description": "Azure Cosmos DB MongoMI Role Assignment resource object."
+      "description": "Azure Cosmos DB Cassandra Role Assignment resource object."
     },
-    "MongoMIRoleAssignmentResource": {
-      "description": "Parameters to create and update an Azure Cosmos DB MongoMI Role Assignment.",
+    "CassandraRoleAssignmentResource": {
+      "description": "Parameters to create and update an Azure Cosmos DB Cassandra Role Assignment.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update an Azure Cosmos DB MongoMI Role Assignment.",
-          "$ref": "#/definitions/MongoMIRoleAssignmentResourceProperties"
+          "description": "Properties to create and update an Azure Cosmos DB Cassandra Role Assignment.",
+          "$ref": "#/definitions/CassandraRoleAssignmentResourceProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "MongoMIRoleAssignmentListResult": {
+    "CassandraRoleAssignmentListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/MongoMIRoleAssignmentResource"
+            "$ref": "#/definitions/CassandraRoleAssignmentResource"
           },
           "description": "List of Role Assignments and their properties"
         },
