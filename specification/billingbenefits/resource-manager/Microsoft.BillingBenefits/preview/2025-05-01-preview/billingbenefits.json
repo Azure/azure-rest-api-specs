@@ -3752,17 +3752,7 @@
     },
     "Duration": {
       "type": "string",
-      "description": "Duration for which the benefit is active.",
-      "enum": [
-        "P1M",
-        "P1Y",
-        "P3Y",
-        "P5Y"
-      ],
-      "x-ms-enum": {
-        "name": "Term",
-        "modelAsString": true
-      }
+      "description": "Duration for which the benefit is active. Will be in format P{int}M or P{int}Y."
     },
     "DisplayName": {
       "type": "string",
@@ -6201,6 +6191,9 @@
         },
         "benefitResourceId": {
           "$ref": "#/definitions/BenefitResourceId"
+        },
+        "resourceId": {
+          "$ref": "#/definitions/ResourceId"
         }
       }
     },
