@@ -40,7 +40,8 @@ interface Pools {
     Response = ArmResourceUpdatedResponse<Pool> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -65,7 +66,8 @@ interface Pools {
     Response = ArmResourceUpdatedResponse<Pool> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -85,7 +87,8 @@ interface Pools {
     Response = ArmResourceUpdatedResponse<Pool> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -94,7 +97,8 @@ interface Pools {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Pool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -133,7 +137,8 @@ interface Pools {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<ListPoolsResult>
+    Response = ArmResponse<ListPoolsResult>,
+    Error = CloudError
   >;
 
   /**
@@ -145,7 +150,8 @@ interface Pools {
     Response = ArmResponse<Pool> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -157,7 +163,8 @@ interface Pools {
     Response = ArmResponse<Pool> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

@@ -34,7 +34,7 @@ interface BatchAccounts {
   /**
    * Gets information about the specified Batch account.
    */
-  get is ArmResourceRead<BatchAccount>;
+  get is ArmResourceRead<BatchAccount, Error = CloudError>;
 
   /**
    * Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.
@@ -43,7 +43,9 @@ interface BatchAccounts {
   create is ArmResourceCreateOrReplaceAsync<
     BatchAccount,
     Response = ArmResourceUpdatedResponse<BatchAccount> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -52,7 +54,8 @@ interface BatchAccounts {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     BatchAccount,
-    PatchModel = BatchAccountUpdateParameters
+    PatchModel = BatchAccountUpdateParameters,
+    Error = CloudError
   >;
 
   /**
@@ -61,18 +64,22 @@ interface BatchAccounts {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchAccount,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * Gets information about the Batch accounts associated with the specified resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<BatchAccount>;
+  listByResourceGroup is ArmResourceListByParent<
+    BatchAccount,
+    Error = CloudError
+  >;
 
   /**
    * Gets information about the Batch accounts associated with the subscription.
    */
-  list is ArmListBySubscription<BatchAccount>;
+  list is ArmListBySubscription<BatchAccount, Error = CloudError>;
 
   /**
    * Synchronizes access keys for the auto-storage account configured for the specified Batch account, only if storage key authentication is being used.
@@ -81,7 +88,8 @@ interface BatchAccounts {
   synchronizeAutoStorageKeys is ArmResourceActionSync<
     BatchAccount,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -91,7 +99,8 @@ interface BatchAccounts {
   regenerateKey is ArmResourceActionSync<
     BatchAccount,
     BatchAccountRegenerateKeyParameters,
-    ArmResponse<BatchAccountKeys>
+    ArmResponse<BatchAccountKeys>,
+    Error = CloudError
   >;
 
   /**
@@ -101,7 +110,8 @@ interface BatchAccounts {
   getKeys is ArmResourceActionSync<
     BatchAccount,
     void,
-    ArmResponse<BatchAccountKeys>
+    ArmResponse<BatchAccountKeys>,
+    Error = CloudError
   >;
 
   /**
@@ -113,12 +123,14 @@ interface BatchAccounts {
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     BatchAccount,
     void,
-    ArmResponse<OutboundEnvironmentEndpointCollection>
+    ArmResponse<OutboundEnvironmentEndpointCollection>,
+    Error = CloudError
   >;
 }
 
 @@maxLength(BatchAccount.name, 24);
 @@minLength(BatchAccount.name, 3);
+@@pattern(BatchAccount.name, "^[a-z0-9]+$");
 @@doc(BatchAccount.name, "The name of the Batch account.");
 @@doc(BatchAccount.properties, "The properties associated with the account.");
 @@doc(BatchAccounts.create::parameters.resource,

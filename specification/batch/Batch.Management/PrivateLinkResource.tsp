@@ -30,7 +30,7 @@ interface PrivateLinkResources {
   /**
    * Gets information about the specified private link resource.
    */
-  get is ArmResourceRead<PrivateLinkResource>;
+  get is ArmResourceRead<PrivateLinkResource, Error = CloudError>;
 
   /**
    * Lists all of the private link resources in the specified account.
@@ -44,7 +44,8 @@ interface PrivateLinkResources {
       @query("maxresults")
       maxresults?: int32;
     },
-    Response = ArmResponse<ListPrivateLinkResourcesResult>
+    Response = ArmResponse<ListPrivateLinkResourcesResult>,
+    Error = CloudError
   >;
 }
 

@@ -30,7 +30,7 @@ interface ApplicationPackages {
   /**
    * Gets information about the specified application package.
    */
-  get is ArmResourceRead<ApplicationPackage>;
+  get is ArmResourceRead<ApplicationPackage, Error = CloudError>;
 
   /**
    * Creates an application package record. The record contains a storageUrl where the package should be uploaded to.  Once it is uploaded the `ApplicationPackage` needs to be activated using `ApplicationPackageActive` before it can be used. If the auto storage account was configured to use storage keys, the URL returned will contain a SAS.
@@ -38,13 +38,14 @@ interface ApplicationPackages {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceSync<
     ApplicationPackage,
-    Response = ArmResourceUpdatedResponse<ApplicationPackage>
+    Response = ArmResourceUpdatedResponse<ApplicationPackage>,
+    Error = CloudError
   >;
 
   /**
    * Deletes an application package record and its associated binary file.
    */
-  delete is ArmResourceDeleteSync<ApplicationPackage>;
+  delete is ArmResourceDeleteSync<ApplicationPackage, Error = CloudError>;
 
   /**
    * Lists all of the application packages in the specified application.
@@ -58,7 +59,8 @@ interface ApplicationPackages {
       @query("maxresults")
       maxresults?: int32;
     },
-    Response = ArmResponse<ListApplicationPackagesResult>
+    Response = ArmResponse<ListApplicationPackagesResult>,
+    Error = CloudError
   >;
 
   /**
@@ -67,7 +69,8 @@ interface ApplicationPackages {
   activate is ArmResourceActionSync<
     ApplicationPackage,
     ActivateApplicationPackageParameters,
-    ArmResponse<ApplicationPackage>
+    ArmResponse<ApplicationPackage>,
+    Error = CloudError
   >;
 }
 

@@ -36,7 +36,8 @@ interface Certificates {
     Response = ArmResponse<Certificate> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -62,7 +63,8 @@ interface Certificates {
     Response = ArmResourceUpdatedResponse<Certificate> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -83,7 +85,8 @@ interface Certificates {
     Response = ArmResponse<Certificate> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -93,7 +96,8 @@ interface Certificates {
   #deprecated "true"
   delete is ArmResourceDeleteWithoutOkAsync<
     Certificate,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -121,7 +125,8 @@ interface Certificates {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<ListCertificatesResult>
+    Response = ArmResponse<ListCertificatesResult>,
+    Error = CloudError
   >;
 
   /**
@@ -137,7 +142,8 @@ interface Certificates {
     Response = ArmResponse<Certificate> & {
       @header("ETag")
       etag?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

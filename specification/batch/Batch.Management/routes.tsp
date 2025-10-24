@@ -62,7 +62,8 @@ interface LocationOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = CloudError
   >;
   /**
    * Checks whether the Batch account name is available in the specified region.
@@ -79,6 +80,7 @@ interface LocationOperationGroup {
       @path
       @segment("locations")
       locationName: string;
-    }
+    },
+    Error = CloudError
   >;
 }

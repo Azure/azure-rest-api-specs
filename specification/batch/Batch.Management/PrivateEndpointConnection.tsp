@@ -30,7 +30,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets information about the specified private endpoint connection.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is ArmResourceRead<PrivateEndpointConnection, Error = CloudError>;
 
   /**
    * Updates the properties of an existing private endpoint connection.
@@ -45,14 +45,15 @@ interface PrivateEndpointConnections {
        */
       @header("If-Match")
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Deletes the specified private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection, Error = CloudError>;
 
   /**
    * Lists all of the private endpoint connections in the specified account.
@@ -66,7 +67,8 @@ interface PrivateEndpointConnections {
       @query("maxresults")
       maxresults?: int32;
     },
-    Response = ArmResponse<ListPrivateEndpointConnectionsResult>
+    Response = ArmResponse<ListPrivateEndpointConnectionsResult>,
+    Error = CloudError
   >;
 }
 

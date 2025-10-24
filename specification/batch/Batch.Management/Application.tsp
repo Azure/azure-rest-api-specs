@@ -30,7 +30,7 @@ interface Applications {
   /**
    * Gets information about the specified application.
    */
-  get is ArmResourceRead<Application>;
+  get is ArmResourceRead<Application, Error = CloudError>;
 
   /**
    * Adds an application to the specified Batch account.
@@ -38,19 +38,24 @@ interface Applications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceSync<
     Application,
-    Response = ArmResourceUpdatedResponse<Application>
+    Response = ArmResourceUpdatedResponse<Application>,
+    Error = CloudError
   >;
 
   /**
    * Updates settings for the specified application.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Application, PatchModel = Application>;
+  update is ArmCustomPatchSync<
+    Application,
+    PatchModel = Application,
+    Error = CloudError
+  >;
 
   /**
    * Deletes an application.
    */
-  delete is ArmResourceDeleteSync<Application>;
+  delete is ArmResourceDeleteSync<Application, Error = CloudError>;
 
   /**
    * Lists all of the applications in the specified account.
@@ -64,7 +69,8 @@ interface Applications {
       @query("maxresults")
       maxresults?: int32;
     },
-    Response = ArmResponse<ListApplicationsResult>
+    Response = ArmResponse<ListApplicationsResult>,
+    Error = CloudError
   >;
 }
 

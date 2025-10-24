@@ -30,12 +30,12 @@ interface DetectorResponses {
   /**
    * Gets information about the given detector for a given Batch account.
    */
-  getDetector is ArmResourceRead<DetectorResponse>;
+  getDetector is ArmResourceRead<DetectorResponse, Error = CloudError>;
 
   /**
    * Gets information about the detectors available for a given Batch account.
    */
-  listDetectors is ArmResourceListByParent<DetectorResponse>;
+  listDetectors is ArmResourceListByParent<DetectorResponse, Error = CloudError>;
 }
 
 @@doc(DetectorResponse.name, "The name of the detector.");
