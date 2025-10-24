@@ -233,3 +233,20 @@ export function convertRawErrorToUnifiedMsg(
   };
   return JSON.stringify(result);
 }
+
+/**
+ * Check if the PR targets a production branch.
+ * The production branches are defined at https://aka.ms/azsdk/pr-brch-deep
+ * @param targetRepo The repository name, e.g. "azure-rest-api-specs" or "azure-rest-api-specs-pr".
+ * @param targetBranch The target branch of the PR.
+ * @returns {boolean} True if the PR targets a production branch, false otherwise.
+ */
+export function checkPrTargetsProductionBranch(targetRepo: string, targetBranch: string): boolean {
+  const targetsPublicProductionBranch =
+    targetRepo.endsWith("azure-rest-api-specs") && targetBranch === "main";
+
+  const targetsPrivateProductionBranch =
+    targetRepo.endsWith("azure-rest-api-specs-pr") && targetBranch === "RPSaaSMaster";
+
+  return targetsPublicProductionBranch || targetsPrivateProductionBranch;
+}

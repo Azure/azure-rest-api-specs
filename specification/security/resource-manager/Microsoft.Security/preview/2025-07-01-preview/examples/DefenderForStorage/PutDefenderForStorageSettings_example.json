@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount",
+    "settingName": "current",
+    "defenderForStorageSetting": {
+      "properties": {
+        "isEnabled": true,
+        "malwareScanning": {
+          "onUpload": {
+            "isEnabled": true,
+            "capGBPerMonth": 10000,
+            "filters": {
+              "excludeBlobsWithPrefix": [
+                "unscanned-container",
+                "sample-container/logs"
+              ],
+              "excludeBlobsWithSuffix": [
+                ".log",
+                ".jpg"
+              ],
+              "excludeBlobsLargerThan": 1024
+            }
+          },
+          "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
+          "blobScanResultsOptions": "BlobIndexTags",
+          "automatedResponse": "BlobSoftDelete"
+        },
+        "sensitiveDataDiscovery": {
+          "isEnabled": true
+        },
+        "overrideSubscriptionLevelSettings": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
+        "type": "Microsoft.Security/defenderForStorageSettings",
+        "name": "current",
+        "properties": {
+          "isEnabled": true,
+          "malwareScanning": {
+            "onUpload": {
+              "isEnabled": true,
+              "capGBPerMonth": 10000,
+              "filters": {
+                "excludeBlobsWithPrefix": [
+                  "sample-container/logs",
+                  "single-excluded-container/",
+                  "excluded-containers"
+                ],
+                "excludeBlobsWithSuffix": [
+                  ".log",
+                  ".jpg"
+                ],
+                "excludeBlobsLargerThan": 1024
+              }
+            },
+            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
+            "blobScanResultsOptions": "BlobIndexTags",
+            "automatedResponse": "BlobSoftDelete",
+            "operationStatus": {
+              "code": "Succeeded"
+            }
+          },
+          "sensitiveDataDiscovery": {
+            "isEnabled": true,
+            "operationStatus": {
+              "code": "Succeeded"
+            }
+          },
+          "overrideSubscriptionLevelSettings": true
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
+        "type": "Microsoft.Security/defenderForStorageSettings",
+        "name": "current",
+        "properties": {
+          "isEnabled": true,
+          "malwareScanning": {
+            "onUpload": {
+              "isEnabled": false,
+              "capGBPerMonth": -1
+            },
+            "blobScanResultsOptions": "BlobIndexTags",
+            "automatedResponse": "None",
+            "operationStatus": {
+              "code": "PartialSuccess",
+              "message": "Failed to setup data scanner."
+            }
+          },
+          "sensitiveDataDiscovery": {
+            "isEnabled": false,
+            "operationStatus": {
+              "code": "PartialSuccess",
+              "message": "Failed to setup data scanner."
+            }
+          },
+          "overrideSubscriptionLevelSettings": true
+        }
+      }
+    }
+  }
+}

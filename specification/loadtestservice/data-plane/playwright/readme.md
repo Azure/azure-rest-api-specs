@@ -28,7 +28,20 @@ These are the global settings for Microsoft Playwright Service.
 title: PlaywrightServiceClient
 description: Microsoft Playwright Service Client
 openapi-type: data-plane
-tag: package-2025-07-01-preview
+tag: package-2025-09-01
+```
+### Tag: package-2025-09-01
+These settings apply only when `--tag=2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - stable/2025-09-01/playwright.json
+suppressions:
+  - code: ValidResponseCodeRequired
+    from: playwright.json
+    reason: Need 302 response code as a product requirement to redirect the client for script execution on remote browsers provided by the service.
+    where:
+      - $.paths["/playwrightworkspaces/{workspaceId}/browsers"].get.responses
 ```
 
 ### Tag: package-2025-07-01-preview

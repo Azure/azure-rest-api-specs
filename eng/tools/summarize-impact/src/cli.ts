@@ -1,29 +1,15 @@
-#!/usr/bin/env node
-
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { setOutput } from "@azure-tools/specs-shared/error-reporting";
-import { evaluateImpact } from "./impact.js";
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
+import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { Octokit } from "@octokit/rest";
-import fs from "fs";
+import { writeFile } from "fs/promises";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { join, resolve } from "path";
+import { resolve } from "path";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
-
-export async function getRoot(inputPath: string): Promise<string> {
-  try {
-    const gitRoot = await getRootFolder(inputPath);
-    return resolve(gitRoot.trim());
-  } catch (error) {
-    console.error(
-      `Error: Unable to determine the root folder of the git repository.`,
-      `Please ensure you are running this command within a git repository OR providing a targeted directory that is within a git repo.`,
-    );
-    process.exit(1);
-  }
-}
 
 export async function main() {
   const config: ParseArgsConfig = {
@@ -76,6 +62,7 @@ export async function main() {
       isDraft: {
         type: "boolean",
         multiple: false,
+        default: false,
       },
     },
     allowPositionals: true,
@@ -86,9 +73,13 @@ export async function main() {
   // todo: refactor these opts
   const sourceDirectory = opts.sourceDirectory as string;
   const targetDirectory = opts.targetDirectory as string;
-  const sourceGitRoot = await getRoot(sourceDirectory);
-  const targetGitRoot = await getRoot(targetDirectory);
-  const fileList = await getChangedFilesStatuses({ cwd: sourceGitRoot, paths: ["specification"] });
+  const sourceGitRoot = await getRootFolder(sourceDirectory);
+  const targetGitRoot = await getRootFolder(targetDirectory);
+  const fileList = await getChangedFilesStatuses({
+    cwd: sourceGitRoot,
+    logger: defaultLogger,
+    paths: ["specification"],
+  });
   const sha = opts.sha as string;
   const sourceBranch = opts.sourceBranch as string;
   const targetBranch = opts.targetBranch as string;
@@ -102,17 +93,13 @@ export async function main() {
     ...(process.env.GITHUB_TOKEN && { auth: process.env.GITHUB_TOKEN }),
   });
 
-  const labels = (
-    await github.paginate(github.rest.issues.listLabelsOnIssue, {
-      owner,
-      repo,
-      issue_number: Number(prNumber),
-      per_page: 100,
-    })
-  ).map((label: any) => label.name);
+  // this is a request to get the list of RPaaS folders from azure-rest-api-specs -> main branch -> dump specification folder names
+  const mainSpecFolders = await getRPaaSFolderList(github, owner, repo);
 
   const labelContext: LabelContext = {
-    present: new Set(labels),
+    // summarize-impact only triggers on PR code changes, not label changes.  Since this code cannot depend
+    // on the state of any labels at the time it runs, initialize the "present" set of labels to empty.
+    present: new Set(),
     toAdd: new Set(),
     toRemove: new Set(),
   };
@@ -128,21 +115,13 @@ export async function main() {
     isDraft,
   });
 
-  let impact = await evaluateImpact(prContext, labelContext);
+  let impact = await evaluateImpact(prContext, labelContext, mainSpecFolders);
 
-  // sets by default are not serializable, so we need to convert them to arrays
-  // before we can write them to the output file.
-  function setReplacer(_key: string, value: any) {
-    if (value instanceof Set) {
-      return [...value];
-    }
-    return value;
-  }
-
-  console.log("Evaluated impact: ", JSON.stringify(impact, setReplacer, 2));
+  console.log("Evaluated impact: ", JSON.stringify(impact, null, 2));
 
   // Write to a temp file that can get picked up later.
-  const summaryFile = join(process.cwd(), "summary.json");
-  fs.writeFileSync(summaryFile, JSON.stringify(impact, setReplacer, 2));
+  // Intentionally doesn't use GITHUB_STEP_SUMMARY, since it's not a markdown summary for GH UI
+  const summaryFile = resolve("summary.json");
+  await writeFile(summaryFile, JSON.stringify(impact, null, 2));
   setOutput("summary", summaryFile);
 }
