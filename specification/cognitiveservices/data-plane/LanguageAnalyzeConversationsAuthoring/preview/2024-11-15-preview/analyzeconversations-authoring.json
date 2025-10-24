@@ -915,7 +915,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
       "post": {
         "operationId": "ConversationAuthoringDeployment_DeleteDeploymentFromResources",
-        "description": "Deletes a project deployment from the specified assigned resources.",
+        "description": "Deletes a deployment from the specified project-assigned resources.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -938,7 +938,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The options for deleting the deployment.",
+            "description": "The Language or AIService resource list for deleting the deployment.\\r\\n            The deployment will only be deleted from the specified resources, and will remain for the rest.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationAuthoringDeleteDeploymentOptions"
@@ -2094,7 +2094,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
         "operationId": "ConversationAuthoringListDeploymentResources",
-        "description": "Lists the deployments resources assigned to the project.",
+        "description": "Lists the Language or AIService resources assigned to the project.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2150,7 +2150,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
       "post": {
         "operationId": "ConversationAuthoringProject_AssignDeploymentResources",
-        "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
+        "description": "Assign new Language or AIService Azure resources to a project to allowing deployment to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2166,7 +2166,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The new project resources info.",
+            "description": "The new project resources to be assigned.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationAuthoringAssignDeploymentResourcesOptions"
@@ -2208,7 +2208,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
       "post": {
         "operationId": "ConversationAuthoringProject_UnassignDeploymentResources",
-        "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
+        "description": "Unassign resources from a project. This disallows deployment to these resources.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2224,7 +2224,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The info for the deployment resources to be deleted.",
+            "description": "The list of Language or AIService Azure resource IDs to be unassigned.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions"
@@ -2266,7 +2266,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
         "operationId": "ConversationAuthoringProject_GetAssignDeploymentResourcesStatus",
-        "description": "Gets the status of an existing assign deployment resources job.",
+        "description": "Gets the status of an existing assign project resources job.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2317,7 +2317,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}": {
       "get": {
         "operationId": "ConversationAuthoringProject_GetUnassignDeploymentResourcesStatus",
-        "description": "Gets the status of an existing unassign deployment resources job.",
+        "description": "Gets the status of an existing unassign project resources job.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2779,11 +2779,11 @@
   "definitions": {
     "AnalyzeConversationAuthoringAssignDeploymentResourcesOptions": {
       "type": "object",
-      "description": "Represents the options for assigning Azure resources to a project.",
+      "description": "Represents the payload for assigning Azure resources to a project.",
       "properties": {
         "resourcesMetadata": {
           "type": "array",
-          "description": "Represents the metadata for the resources to be assigned.",
+          "description": "Represents the metadata for the project resources to be assigned.",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationAuthoringResourceMetadata"
           }
@@ -2795,16 +2795,16 @@
     },
     "AnalyzeConversationAuthoringAssignedDeploymentResource": {
       "type": "object",
-      "description": "Represents the assigned deployment resource.",
+      "description": "Represents the assigned project resource.",
       "properties": {
         "azureResourceId": {
           "type": "string",
-          "description": "The resource ID.",
+          "description": "The Azure resource ID of the language or AI resource.",
           "readOnly": true
         },
         "region": {
           "type": "string",
-          "description": "The resource region."
+          "description": "The Azure resource region."
         }
       },
       "required": [
@@ -3123,7 +3123,7 @@
         },
         "assignedResourceIds": {
           "type": "array",
-          "description": "Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "description": "Represents the Language or AIService resource IDs that if provided,\\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
             "type": "string"
           }
@@ -3305,7 +3305,7 @@
     },
     "AnalyzeConversationAuthoringDeploymentResourcesJobState": {
       "type": "object",
-      "description": "Represents the state of a deployment resources job.",
+      "description": "Represents the state of a project resources job.",
       "properties": {
         "jobId": {
           "type": "string",
