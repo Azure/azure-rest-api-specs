@@ -4,12 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Peering;
 
@@ -19,7 +17,6 @@ interface CdnPeeringPrefixesOperationGroup {
    * Lists all of the advertised prefixes for the specified peering location
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CdnPeeringPrefixes_List")
   @autoRoute
   @list
   @get
@@ -69,7 +66,6 @@ interface LegacyPeeringsOperationGroup {
    * Lists all of the legacy peerings under the given subscription matching the specified kind and location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LegacyPeerings_List")
   @autoRoute
   @get
   @list
@@ -111,7 +107,6 @@ interface LookingGlassOperationGroup {
    * Run looking glass functionality
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LookingGlass_Invoke")
   @autoRoute
   @action("lookingGlass")
   invoke is ArmProviderActionSync<
@@ -152,7 +147,6 @@ interface PeeringLocationsOperationGroup {
    * Lists all of the available peering locations for the specified kind of peering.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PeeringLocations_List")
   @autoRoute
   @get
   @list
@@ -182,7 +176,6 @@ interface PeeringServiceCountriesOperationGroup {
    * Lists all of the available countries for peering service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PeeringServiceCountries_List")
   @autoRoute
   @get
   @list
@@ -199,7 +192,6 @@ interface PeeringServiceLocationsOperationGroup {
    * Lists all of the available locations for peering service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PeeringServiceLocations_List")
   @autoRoute
   @get
   @list
@@ -223,7 +215,6 @@ interface PeeringServiceProvidersOperationGroup {
    * Lists all of the available peering service locations for the specified kind of peering.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PeeringServiceProviders_List")
   @autoRoute
   @get
   @list
@@ -240,7 +231,6 @@ interface PeeringServicesOperationGroup {
    * Initialize Peering Service for Connection Monitor functionality
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PeeringServices_InitializeConnectionMonitor")
   @autoRoute
   initializeConnectionMonitor is ArmProviderActionSync<
     Response = OkResponse,

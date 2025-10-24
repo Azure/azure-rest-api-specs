@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./PeeringService.tsp";
@@ -8,7 +7,6 @@ import "./PeeringService.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Peering;
 /**
@@ -31,7 +29,6 @@ interface PeeringServicePrefixes {
    * Gets an existing prefix with the specified name under the given subscription, resource group and peering service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Prefixes_Get")
   get is ArmResourceRead<
     PeeringServicePrefix,
     Parameters = {
@@ -47,21 +44,18 @@ interface PeeringServicePrefixes {
    * Creates a new prefix with the specified name under the given subscription, resource group and peering service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Prefixes_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<PeeringServicePrefix>;
 
   /**
    * Deletes an existing prefix with the specified name under the given subscription, resource group and peering service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Prefixes_Delete")
   delete is ArmResourceDeleteSync<PeeringServicePrefix>;
 
   /**
    * Lists all prefixes under the given subscription, resource group and peering service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Prefixes_ListByPeeringService")
   listByPeeringService is ArmResourceListByParent<
     PeeringServicePrefix,
     Parameters = {

@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Peering.tsp";
@@ -8,7 +7,6 @@ import "./Peering.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Peering;
 /**
@@ -31,28 +29,24 @@ interface PeeringRegisteredAsns {
    * Gets an existing registered ASN with the specified name under the given subscription, resource group and peering.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegisteredAsns_Get")
   get is ArmResourceRead<PeeringRegisteredAsn>;
 
   /**
    * Creates a new registered ASN with the specified name under the given subscription, resource group and peering.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegisteredAsns_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<PeeringRegisteredAsn>;
 
   /**
    * Deletes an existing registered ASN with the specified name under the given subscription, resource group and peering.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegisteredAsns_Delete")
   delete is ArmResourceDeleteSync<PeeringRegisteredAsn>;
 
   /**
    * Lists all registered ASNs under the given subscription, resource group and peering.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegisteredAsns_ListByPeering")
   listByPeering is ArmResourceListByParent<PeeringRegisteredAsn>;
 }
 

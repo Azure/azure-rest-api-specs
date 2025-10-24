@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Peering;
 /**
@@ -71,7 +69,6 @@ interface Peerings {
    * Lists the prefixes received over the specified peering under the given subscription and resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ReceivedRoutes_ListByPeering")
   @list
   @get
   @action("receivedRoutes")
@@ -116,7 +113,6 @@ interface Peerings {
    * Lists all of the RP unbilled prefixes for the specified peering
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RpUnbilledPrefixes_List")
   @list
   @get
   @action("rpUnbilledPrefixes")
