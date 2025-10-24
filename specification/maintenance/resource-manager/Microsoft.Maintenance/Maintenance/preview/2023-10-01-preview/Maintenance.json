@@ -1,0 +1,2871 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MaintenanceManagementClient",
+    "version": "2023-10-01-preview",
+    "description": "Azure Maintenance Management Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "MaintenanceConfigurations"
+    },
+    {
+      "name": "MaintenanceConfigurationOperationGroup"
+    },
+    {
+      "name": "ApplyUpdates"
+    },
+    {
+      "name": "ApplyUpdateOperationGroup"
+    },
+    {
+      "name": "ConfigurationAssignments"
+    },
+    {
+      "name": "ConfigurationAssignmentOperationGroup"
+    },
+    {
+      "name": "ConfigurationAssignmentsForSubscriptions"
+    },
+    {
+      "name": "ConfigurationAssignmentsForResourceGroup"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Maintenance/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List available operations",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/applyUpdates": {
+      "get": {
+        "operationId": "ApplyUpdates_List",
+        "tags": [
+          "ApplyUpdateOperationGroup"
+        ],
+        "description": "Get Configuration records within a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_List": {
+            "$ref": "./examples/ApplyUpdates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments": {
+      "get": {
+        "operationId": "ConfigurationAssignmentsWithinSubscription_List",
+        "tags": [
+          "ConfigurationAssignmentsForSubscriptions"
+        ],
+        "description": "[UNSUPPORTED] Get configuration assignment within a subscription. This API is not implemented yet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsResultWithinSubscription_List": {
+            "$ref": "./examples/ConfigurationAssignmentsResultWithinSubscription_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+      "get": {
+        "operationId": "ConfigurationAssignmentsForSubscriptions_Get",
+        "tags": [
+          "ConfigurationAssignmentsForSubscriptions"
+        ],
+        "description": "Get configuration assignment for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_GetParent": {
+            "$ref": "./examples/ConfigurationAssignmentsForSubscriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationAssignmentsForSubscriptions_CreateOrUpdate",
+        "tags": [
+          "ConfigurationAssignmentsForSubscriptions"
+        ],
+        "description": "Register configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignment",
+            "in": "body",
+            "description": "The configurationAssignment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigurationAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigurationAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsForSubscriptions_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationAssignmentsForSubscriptions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ConfigurationAssignmentsForSubscriptions_Update",
+        "tags": [
+          "ConfigurationAssignmentsForSubscriptions"
+        ],
+        "description": "Register configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignment",
+            "in": "body",
+            "description": "The configurationAssignment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsForSubscriptions_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationAssignmentsForSubscriptions_UpdateForResource.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationAssignmentsForSubscriptions_Delete",
+        "tags": [
+          "ConfigurationAssignmentsForSubscriptions"
+        ],
+        "description": "Unregister configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsForSubscriptions_Delete": {
+            "$ref": "./examples/ConfigurationAssignmentsForSubscriptions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/maintenanceConfigurations": {
+      "get": {
+        "operationId": "MaintenanceConfigurations_List",
+        "tags": [
+          "MaintenanceConfigurationOperationGroup"
+        ],
+        "description": "Get Configuration records within a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurations_List": {
+            "$ref": "./examples/MaintenanceConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/publicMaintenanceConfigurations": {
+      "get": {
+        "operationId": "PublicMaintenanceConfigurations_List",
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "description": "Get Public Maintenance Configuration records",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicMaintenanceConfigurations_List": {
+            "$ref": "./examples/PublicMaintenanceConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/{resourceName}": {
+      "get": {
+        "operationId": "PublicMaintenanceConfigurations_Get",
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "description": "Get Public Maintenance Configuration record",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the MaintenanceConfiguration",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicMaintenanceConfigurations_GetForResource": {
+            "$ref": "./examples/PublicMaintenanceConfigurations_GetForResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}": {
+      "get": {
+        "operationId": "ApplyUpdates_GetParent",
+        "tags": [
+          "ApplyUpdates"
+        ],
+        "description": "Track maintenance updates to resource with parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applyUpdateName",
+            "in": "path",
+            "description": "The name of the ApplyUpdate",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_GetParent": {
+            "$ref": "./examples/ApplyUpdates_GetParent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments": {
+      "get": {
+        "operationId": "ConfigurationAssignments_ListParent",
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "description": "List configurationAssignments for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_ListParent": {
+            "$ref": "./examples/ConfigurationAssignments_ListParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+      "get": {
+        "operationId": "ConfigurationAssignments_GetParent",
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "description": "Get configuration assignment for resource..",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_GetParent": {
+            "$ref": "./examples/ConfigurationAssignments_GetParent.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationAssignments_CreateOrUpdateParent",
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "description": "Register configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignment",
+            "in": "body",
+            "description": "The configurationAssignment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigurationAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigurationAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_CreateOrUpdateParent": {
+            "$ref": "./examples/ConfigurationAssignments_CreateOrUpdateParent.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationAssignments_DeleteParent",
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "description": "Unregister configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_DeleteParent": {
+            "$ref": "./examples/ConfigurationAssignments_DeleteParent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}": {
+      "get": {
+        "operationId": "ApplyUpdates_Get",
+        "tags": [
+          "ApplyUpdateOperationGroup"
+        ],
+        "description": "Track maintenance updates to resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applyUpdateName",
+            "in": "path",
+            "description": "The name of the ApplyUpdate",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_Get": {
+            "$ref": "./examples/ApplyUpdates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApplyUpdates_CreateOrUpdateOrCancel",
+        "tags": [
+          "ApplyUpdateOperationGroup"
+        ],
+        "description": "Apply maintenance updates to resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applyUpdateName",
+            "in": "path",
+            "description": "The name of the ApplyUpdate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applyUpdate",
+            "in": "body",
+            "description": "The ApplyUpdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApplyUpdate' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "201": {
+            "description": "Resource 'ApplyUpdate' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_CreateOrUpdateOnly_NoCancellation": {
+            "$ref": "./examples/ApplyUpdates_CreateOrUpdateOnly_NoCancellation.json"
+          },
+          "ApplyUpdates_CreateOrUpdateOrCancel": {
+            "$ref": "./examples/ApplyUpdates_CreateOrUpdate_CancelMaintenance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+      "get": {
+        "operationId": "ConfigurationAssignments_Get",
+        "tags": [
+          "ConfigurationAssignmentOperationGroup"
+        ],
+        "description": "Get configuration assignment for resource..",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_Get": {
+            "$ref": "./examples/ConfigurationAssignments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationAssignments_CreateOrUpdate",
+        "tags": [
+          "ConfigurationAssignmentOperationGroup"
+        ],
+        "description": "Register configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignment",
+            "in": "body",
+            "description": "The configurationAssignment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigurationAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigurationAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationAssignments_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationAssignments_Delete",
+        "tags": [
+          "ConfigurationAssignmentOperationGroup"
+        ],
+        "description": "Unregister configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource parent name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_Delete": {
+            "$ref": "./examples/ConfigurationAssignments_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates": {
+      "get": {
+        "operationId": "ApplyUpdateForResourceGroup_List",
+        "summary": "Get Configuration records within a subscription and resource group",
+        "description": "Get Configuration records within a subscription and resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdatesResourceGroup_List": {
+            "$ref": "./examples/ApplyUpdatesResourceGroup_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+      "get": {
+        "operationId": "ConfigurationAssignmentsForResourceGroup_Get",
+        "tags": [
+          "ConfigurationAssignmentsForResourceGroup"
+        ],
+        "description": "Get configuration assignment for resource..",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^.+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsForResourceGroup_Get": {
+            "$ref": "./examples/ConfigurationAssignmentsForResourceGroup_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationAssignmentsForResourceGroup_CreateOrUpdate",
+        "tags": [
+          "ConfigurationAssignmentsForResourceGroup"
+        ],
+        "description": "Register configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^.+$"
+          },
+          {
+            "name": "configurationAssignment",
+            "in": "body",
+            "description": "The configurationAssignment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigurationAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigurationAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsForResourceGroup_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationAssignmentsForResourceGroup_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ConfigurationAssignmentsForResourceGroup_Update",
+        "tags": [
+          "ConfigurationAssignmentsForResourceGroup"
+        ],
+        "description": "Register configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^.+$"
+          },
+          {
+            "name": "configurationAssignment",
+            "in": "body",
+            "description": "The configurationAssignment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsForResourceGroup_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationAssignmentsForResourceGroup_UpdateForResource.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationAssignmentsForResourceGroup_Delete",
+        "tags": [
+          "ConfigurationAssignmentsForResourceGroup"
+        ],
+        "description": "Unregister configuration for resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "The name of the ConfigurationAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^.+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsForResourceGroup_Delete": {
+            "$ref": "./examples/ConfigurationAssignmentsForResourceGroup_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations": {
+      "get": {
+        "operationId": "MaintenanceConfigurationsForResourceGroup_List",
+        "tags": [
+          "MaintenanceConfigurationOperationGroup"
+        ],
+        "description": "Get Configuration records within a subscription and resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurationsResourceGroup_List": {
+            "$ref": "./examples/MaintenanceConfigurationsResourceGroup_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations/{resourceName}": {
+      "get": {
+        "operationId": "MaintenanceConfigurations_Get",
+        "tags": [
+          "MaintenanceConfigurationOperationGroup"
+        ],
+        "description": "Get Configuration record",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the MaintenanceConfiguration",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurations_GetForResource": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource.json"
+          },
+          "MaintenanceConfigurations_GetForResource_GuestOSPatchLinux": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchLinux.json"
+          },
+          "MaintenanceConfigurations_GetForResource_GuestOSPatchWindows": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchWindows.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MaintenanceConfigurations_CreateOrUpdate",
+        "tags": [
+          "MaintenanceConfigurationOperationGroup"
+        ],
+        "description": "Create or Update configuration record",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the MaintenanceConfiguration",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configuration",
+            "in": "body",
+            "description": "The configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MaintenanceConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'MaintenanceConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurations_CreateOrUpdateForResource": {
+            "$ref": "./examples/MaintenanceConfigurations_CreateOrUpdateForResource.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "MaintenanceConfigurations_Update",
+        "tags": [
+          "MaintenanceConfigurationOperationGroup"
+        ],
+        "description": "Patch configuration record",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the MaintenanceConfiguration",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configuration",
+            "in": "body",
+            "description": "The configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurations_UpdateForResource": {
+            "$ref": "./examples/MaintenanceConfigurations_UpdateForResource.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MaintenanceConfigurations_Delete",
+        "tags": [
+          "MaintenanceConfigurationOperationGroup"
+        ],
+        "description": "Delete Configuration record",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the MaintenanceConfiguration",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurations_DeleteForResource": {
+            "$ref": "./examples/MaintenanceConfigurations_DeleteForResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default": {
+      "put": {
+        "operationId": "ApplyUpdates_CreateOrUpdateParent",
+        "summary": "Apply Updates to resource with parent",
+        "description": "Apply maintenance updates to resource with parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_CreateOrUpdateParent": {
+            "$ref": "./examples/ApplyUpdates_CreateOrUpdateParent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/updates": {
+      "get": {
+        "operationId": "Updates_ListParent",
+        "summary": "Get Updates to resource",
+        "description": "Get updates to resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListUpdatesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates_ListParent": {
+            "$ref": "./examples/Updates_ListParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default": {
+      "put": {
+        "operationId": "ApplyUpdates_CreateOrUpdate",
+        "summary": "Apply Updates to resource",
+        "description": "Apply maintenance updates to resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_CreateOrUpdate": {
+            "$ref": "./examples/ApplyUpdates_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments": {
+      "get": {
+        "operationId": "ConfigurationAssignments_List",
+        "summary": "Get Configuration records within a subscription and resource group",
+        "description": "Get Configuration records within a subscription and resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_List": {
+            "$ref": "./examples/ConfigurationAssignments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/updates": {
+      "get": {
+        "operationId": "Updates_List",
+        "summary": "Get Updates to resource",
+        "description": "Get updates to resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListUpdatesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates_List": {
+            "$ref": "./examples/Updates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge": {
+      "post": {
+        "operationId": "ScheduledEvent_Acknowledge",
+        "summary": "Post Scheduled Event Acknowledgement",
+        "description": "Post Scheduled Event Acknowledgement",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduledEventId",
+            "in": "path",
+            "description": "Scheduled Event Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledEventApproveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledEvents_Acknowledge": {
+            "$ref": "./examples/ScheduledEvents_Acknowledge.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplyUpdate": {
+      "type": "object",
+      "description": "Apply Update request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplyUpdateProperties",
+          "description": "Properties of the apply update",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplyUpdateProperties": {
+      "type": "object",
+      "description": "Properties for apply update",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resourceId"
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Update time"
+        }
+      }
+    },
+    "ConfigurationAssignment": {
+      "type": "object",
+      "description": "Configuration Assignment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationAssignmentProperties",
+          "description": "Properties of the configuration assignment",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConfigurationAssignmentFilterProperties": {
+      "type": "object",
+      "description": "Azure query for the update configuration.",
+      "properties": {
+        "resourceTypes": {
+          "type": "array",
+          "description": "List of allowed resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceGroups": {
+          "type": "array",
+          "description": "List of allowed resource groups.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "osTypes": {
+          "type": "array",
+          "description": "List of allowed operating systems.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of locations to scope the query to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tagSettings": {
+          "$ref": "#/definitions/TagSettingsProperties",
+          "description": "Tag settings for the VM."
+        }
+      }
+    },
+    "ConfigurationAssignmentProperties": {
+      "type": "object",
+      "description": "Properties for configuration assignment",
+      "properties": {
+        "maintenanceConfigurationId": {
+          "type": "string",
+          "description": "The maintenance configuration Id"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The unique resourceId"
+        },
+        "filter": {
+          "$ref": "#/definitions/ConfigurationAssignmentFilterProperties",
+          "description": "Properties of the configuration assignment"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "An error response details received from the Azure Maintenance service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        }
+      }
+    },
+    "ImpactType": {
+      "type": "string",
+      "description": "The impact type",
+      "enum": [
+        "None",
+        "Freeze",
+        "Restart",
+        "Redeploy"
+      ],
+      "x-ms-enum": {
+        "name": "ImpactType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Pending updates has no impact on resource."
+          },
+          {
+            "name": "Freeze",
+            "value": "Freeze",
+            "description": "Pending updates can freeze network or disk io operation on resource."
+          },
+          {
+            "name": "Restart",
+            "value": "Restart",
+            "description": "Pending updates can cause resource to restart."
+          },
+          {
+            "name": "Redeploy",
+            "value": "Redeploy",
+            "description": "Pending updates can redeploy resource."
+          }
+        ]
+      }
+    },
+    "InputLinuxParameters": {
+      "type": "object",
+      "description": "Input properties for patching a Linux machine.",
+      "properties": {
+        "packageNameMasksToExclude": {
+          "type": "array",
+          "description": "Package names to be excluded for patching.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageNameMasksToInclude": {
+          "type": "array",
+          "description": "Package names to be included for patching.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "Classification category of patches to be patched. Allowed values are 'Critical', 'Security', and 'Other'.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InputPatchConfiguration": {
+      "type": "object",
+      "description": "Input configuration for a patch run",
+      "properties": {
+        "rebootSetting": {
+          "type": "string",
+          "description": "Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed.",
+          "default": "IfRequired",
+          "enum": [
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "RebootOptions",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "IfRequired",
+                "value": "IfRequired"
+              },
+              {
+                "name": "Never",
+                "value": "Never"
+              },
+              {
+                "name": "Always",
+                "value": "Always"
+              }
+            ]
+          }
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/InputWindowsParameters",
+          "description": "Input parameters specific to patching a Windows machine. For Linux machines, do not pass this property."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/InputLinuxParameters",
+          "description": "Input parameters specific to patching Linux machine. For Windows machines, do not pass this property."
+        }
+      }
+    },
+    "InputWindowsParameters": {
+      "type": "object",
+      "description": "Input properties for patching a Windows machine.",
+      "properties": {
+        "kbNumbersToExclude": {
+          "type": "array",
+          "description": "Windows KBID to be excluded for patching.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kbNumbersToInclude": {
+          "type": "array",
+          "description": "Windows KBID to be included for patching.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "Classification category of patches to be patched. Allowed values are 'Critical', 'Security', 'UpdateRollup', 'FeaturePack', 'ServicePack', 'Definition', 'Tools', and 'Updates'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeKbsRequiringReboot": {
+          "type": "boolean",
+          "description": "Exclude patches which need reboot"
+        }
+      }
+    },
+    "ListApplyUpdate": {
+      "type": "object",
+      "description": "Response for ApplyUpdate list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of apply updates",
+          "items": {
+            "$ref": "#/definitions/ApplyUpdate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      }
+    },
+    "ListConfigurationAssignmentsResult": {
+      "type": "object",
+      "description": "Response for ConfigurationAssignments list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of configuration Assignments",
+          "items": {
+            "$ref": "#/definitions/ConfigurationAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      }
+    },
+    "ListMaintenanceConfigurationsResult": {
+      "type": "object",
+      "description": "Response for MaintenanceConfigurations list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of maintenance Configurations",
+          "items": {
+            "$ref": "#/definitions/MaintenanceConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      }
+    },
+    "ListUpdatesResult": {
+      "type": "object",
+      "description": "Response for Updates list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The pending updates",
+          "items": {
+            "$ref": "#/definitions/Update"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      }
+    },
+    "MaintenanceConfiguration": {
+      "type": "object",
+      "description": "Maintenance configuration record type",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceConfigurationProperties",
+          "description": "Gets or sets properties of the resource",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets location of the resource"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets tags of the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MaintenanceConfigurationProperties": {
+      "type": "object",
+      "description": "Properties for maintenance configuration",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Gets or sets namespace of the resource"
+        },
+        "extensionProperties": {
+          "type": "object",
+          "description": "Gets or sets extensionProperties of the maintenanceConfiguration",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "maintenanceScope": {
+          "$ref": "#/definitions/MaintenanceScope",
+          "description": "Gets or sets maintenanceScope of the configuration"
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Definition of a MaintenanceWindow",
+          "x-ms-client-flatten": true
+        },
+        "visibility": {
+          "$ref": "#/definitions/Visibility",
+          "description": "Gets or sets the visibility of the configuration. The default value is 'Custom'"
+        },
+        "installPatches": {
+          "$ref": "#/definitions/InputPatchConfiguration",
+          "description": "The input parameters to be passed to the patch run operation."
+        }
+      }
+    },
+    "MaintenanceError": {
+      "type": "object",
+      "description": "An error response received from the Azure Maintenance service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "Details of the error"
+        }
+      }
+    },
+    "MaintenanceScope": {
+      "type": "string",
+      "description": "Gets or sets maintenanceScope of the configuration",
+      "enum": [
+        "Host",
+        "Resource",
+        "OSImage",
+        "Extension",
+        "InGuestPatch",
+        "SQLDB",
+        "SQLManagedInstance"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Host",
+            "value": "Host",
+            "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
+          },
+          {
+            "name": "Resource",
+            "value": "Resource",
+            "description": "This maintenance scope controls the default update maintenance of the Azure Resource"
+          },
+          {
+            "name": "OSImage",
+            "value": "OSImage",
+            "description": "This maintenance scope controls os image installation on VM/VMSS"
+          },
+          {
+            "name": "Extension",
+            "value": "Extension",
+            "description": "This maintenance scope controls extension installation on VM/VMSS"
+          },
+          {
+            "name": "InGuestPatch",
+            "value": "InGuestPatch",
+            "description": "This maintenance scope controls installation of windows and linux packages on VM/VMSS"
+          },
+          {
+            "name": "SQLDB",
+            "value": "SQLDB",
+            "description": "This maintenance scope controls installation of SQL server platform updates."
+          },
+          {
+            "name": "SQLManagedInstance",
+            "value": "SQLManagedInstance",
+            "description": "This maintenance scope controls installation of SQL managed instance platform update."
+          }
+        ]
+      }
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Definition of a MaintenanceWindow",
+      "properties": {
+        "startDateTime": {
+          "type": "string",
+          "description": "Effective start date of the maintenance window in YYYY-MM-DD hh:mm format. The start date can be set to either the current date or future date. The window will be created in the time zone provided and adjusted to daylight savings according to that time zone."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "description": "Effective expiration date of the maintenance window in YYYY-MM-DD hh:mm format. The window will be created in the time zone provided and adjusted to daylight savings according to that time zone. Expiration date must be set to a future date. If not provided, it will be set to the maximum datetime 9999-12-31 23:59:59."
+        },
+        "duration": {
+          "type": "string",
+          "description": "Duration of the maintenance window in HH:mm format. If not provided, default value will be used based on maintenance scope provided. Example: 05:00."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Name of the timezone. List of timezones can be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell. Example: Pacific Standard Time, UTC, W. Europe Standard Time, Korea Standard Time, Cen. Australia Standard Time."
+        },
+        "recurEvery": {
+          "type": "string",
+          "description": "Rate at which a Maintenance window is expected to recur. The rate can be expressed as daily, weekly, or monthly schedules. Daily schedule are formatted as recurEvery: [Frequency as integer]['Day(s)']. If no frequency is provided, the default frequency is 1. Daily schedule examples are recurEvery: Day, recurEvery: 3Days.  Weekly schedule are formatted as recurEvery: [Frequency as integer]['Week(s)'] [Optional comma separated list of weekdays Monday-Sunday]. Weekly schedule examples are recurEvery: 3Weeks, recurEvery: Week Saturday,Sunday. Monthly schedules are formatted as [Frequency as integer]['Month(s)'] [Comma separated list of month days] or [Frequency as integer]['Month(s)'] [Week of Month (First, Second, Third, Fourth, Last)] [Weekday Monday-Sunday] [Optional Offset(No. of days)]. Offset value must be between -6 to 6 inclusive. Monthly schedule examples are recurEvery: Month, recurEvery: 2Months, recurEvery: Month day23,day24, recurEvery: Month Last Sunday, recurEvery: Month Fourth Monday, recurEvery: Month Last Sunday Offset-3, recurEvery: Month Third Sunday Offset6."
+        }
+      }
+    },
+    "OperationsListResult": {
+      "type": "object",
+      "description": "Result of the List Operations operation",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of operations."
+        },
+        "value": {
+          "type": "array",
+          "description": "A collection of operations",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ScheduledEventApproveResponse": {
+      "type": "object",
+      "description": "Response of scheduled event acknowledge",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Successfully Approved"
+        }
+      }
+    },
+    "TagOperators": {
+      "type": "string",
+      "description": "Filter VMs by Any or All specified tags.",
+      "enum": [
+        "All",
+        "Any"
+      ],
+      "x-ms-enum": {
+        "name": "TagOperators",
+        "modelAsString": false
+      }
+    },
+    "TagSettingsProperties": {
+      "type": "object",
+      "description": "Tag filter information for the VM.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Dictionary of tags with its list of values.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "filterOperator": {
+          "$ref": "#/definitions/TagOperators",
+          "description": "Filter VMs by Any or All specified tags."
+        }
+      }
+    },
+    "Update": {
+      "type": "object",
+      "description": "Maintenance update on a resource",
+      "properties": {
+        "maintenanceScope": {
+          "$ref": "#/definitions/MaintenanceScope",
+          "description": "The impact area"
+        },
+        "impactType": {
+          "$ref": "#/definitions/ImpactType",
+          "description": "The impact type"
+        },
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status"
+        },
+        "impactDurationInSec": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of impact in seconds"
+        },
+        "notBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when Azure will start force updates if not self-updated by customer before this time"
+        },
+        "properties": {
+          "$ref": "#/definitions/UpdateProperties",
+          "description": "Properties of the apply update",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdateProperties": {
+      "type": "object",
+      "description": "Properties for update",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resourceId"
+        }
+      }
+    },
+    "UpdateStatus": {
+      "type": "string",
+      "description": "The status",
+      "enum": [
+        "Pending",
+        "InProgress",
+        "Completed",
+        "RetryNow",
+        "RetryLater",
+        "NoUpdatesPending",
+        "Cancel",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "There are pending updates to be installed."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Updates installation are in progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "All updates are successfully applied."
+          },
+          {
+            "name": "RetryNow",
+            "value": "RetryNow",
+            "description": "Updates installation failed but are ready to retry again."
+          },
+          {
+            "name": "RetryLater",
+            "value": "RetryLater",
+            "description": "Updates installation failed and should be retried later."
+          },
+          {
+            "name": "NoUpdatesPending",
+            "value": "NoUpdatesPending",
+            "description": "No updates are pending."
+          },
+          {
+            "name": "Cancel",
+            "value": "Cancel",
+            "description": "Cancel the schedule and stop creating PMR for resources part of it. Applicable to Maintenance Configuration resource type only."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Send the Cancelled response to the user if request came to cancel the schedule. Applicable to Maintenance Configuration resource type only."
+          }
+        ]
+      }
+    },
+    "Visibility": {
+      "type": "string",
+      "description": "Gets or sets the visibility of the configuration. The default value is 'Custom'",
+      "enum": [
+        "Custom",
+        "Public"
+      ],
+      "x-ms-enum": {
+        "name": "Visibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Only visible to users with permissions."
+          },
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "Visible to all users."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

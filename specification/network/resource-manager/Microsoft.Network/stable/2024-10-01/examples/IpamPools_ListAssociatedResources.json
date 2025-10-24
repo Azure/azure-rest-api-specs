@@ -1,0 +1,32 @@
+{
+  "title": "List Associated Resource in the Pool",
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "TestNetworkManager",
+    "poolName": "TestPool"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testVnet",
+            "poolId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool",
+            "description": "",
+            "addressPrefixes": [
+              "10.0.0.0/24"
+            ],
+            "reservedPrefixes": [],
+            "totalNumberOfIPAddresses": "256",
+            "numberOfReservedIPAddresses": "0",
+            "createdAt": "2020-09-09T20:00:00.0000000Z",
+            "reservationExpiresAt": null
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/listAssociatedResources?api-version=2024-10-01"
+      }
+    }
+  }
+}

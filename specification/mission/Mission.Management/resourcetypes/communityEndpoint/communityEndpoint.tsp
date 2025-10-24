@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-using OpenAPI;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -72,7 +72,7 @@ model CommunityEndpointDestinationRule {
 
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
 

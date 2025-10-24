@@ -1,9 +1,9 @@
 import "../Common/SqlEnums.tsp";
 import "../Common/CommonModels.tsp";
-import "../../Common/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
-import "../../Common/ArmModels/AzureResourceProperties.tsp";
-import "../../Common/StandardizedContracts/CommonEnums.tsp";
-import "../../Common/Enums/Enums.tsp";
+import "../Normalized Contract/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
+import "../Normalized Contract/ArmModels/AzureResourceProperties.tsp";
+import "../Normalized Contract/StandardizedContracts/CommonEnums.tsp";
+import "../Normalized Contract/Enums/Enums.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

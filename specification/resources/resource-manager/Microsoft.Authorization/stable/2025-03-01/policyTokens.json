@@ -49,10 +49,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -71,8 +71,51 @@
               "$ref": "#/definitions/PolicyTokenResponse"
             }
           },
-          "202": {
-            "description": "Accepted and the request for acquiring the policy token is being processed asynchronously."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/acquirePolicyToken": {
+      "post": {
+        "tags": [
+          "PolicyTokens"
+        ],
+        "operationId": "PolicyTokens_AcquireAtManagementGroup",
+        "summary": "Acquires a policy token at management group level.",
+        "description": "This operation acquires a policy token in the given management group for the given request body.",
+        "x-ms-examples": {
+          "Acquire a policy token at management group level": {
+            "$ref": "./examples/acquirePolicyTokenAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenRequest"
+            },
+            "description": "The policy token properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully acquired the policy token.",
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -80,10 +123,6 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -314,6 +353,16 @@
         }
       },
       "description": "The policy log info."
+    }
+  },
+  "parameters": {
+    "ManagementGroupNameParameter": {
+      "name": "managementGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the management group.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

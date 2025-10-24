@@ -59,11 +59,19 @@ describe("file processing", () => {
 
   it("should handle deleted files without error", async () => {
     const changedFiles = [
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
-      // non-existent file. Should not throw and quietly omit
+      // existing spec
+      "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
+      // existing example
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/CreateResource.json",
+      // non-existent spec. Should not throw and quietly omit
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspecDeleted.json",
+      // non-existent example. Should not throw and quietly omit
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/CreateResourceDeleted.json",
+      // non-existent example and containing version folder. Should not throw and quietly omit
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01-deleted/examples/CreateResource.json",
     ];
     const expected = [
+      "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
     ];
 
