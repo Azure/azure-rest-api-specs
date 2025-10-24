@@ -27,7 +27,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/previewAlertRule": {
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/previewAlertRule": {
       "post": {
         "tags": [
           "PreviewAlertRule"
@@ -36,7 +36,7 @@
         "operationId": "PreviewAlertRule",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ResourceUriParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -74,21 +74,6 @@
     }
   },
   "definitions": {
-    "LogAlertRuleResolveConfiguration": {
-      "type": "object",
-      "description": "TBD. Relevant only for rules of the kind LogAlert.",
-      "properties": {
-        "autoResolved": {
-          "type": "boolean",
-          "description": "The flag that indicates whether or not to auto resolve a fired alert."
-        },
-        "timeToResolve": {
-          "type": "string",
-          "format": "duration",
-          "description": "The duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format."
-        }
-      }
-    },
     "LogAlertRuleProperties": {
       "type": "object",
       "properties": {
@@ -152,20 +137,6 @@
         "criteria": {
           "$ref": "#/definitions/LogAlertRuleCriteria",
           "description": "The rule criteria that defines the conditions of the scheduled query rule."
-        },
-        "muteActionsDuration": {
-          "type": "string",
-          "format": "duration",
-          "description": "Mute actions for the chosen period of time (in ISO 8601 duration format) after the alert is fired. Relevant only for rules of the kind LogAlert."
-        },
-        "autoMitigate": {
-          "type": "boolean",
-          "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of the kind LogAlert."
-        },
-        "resolveConfiguration": {
-          "type": "object",
-          "$ref": "#/definitions/LogAlertRuleResolveConfiguration",
-          "description": "Defines the configuration for resolving fired alerts. Relevant only for rules of the kind LogAlert."
         }
       },
       "description": "scheduled query rule Definition"
@@ -504,10 +475,10 @@
         "properties": {
           "type": "object",
           "properties": {
-            "lookbackPeriod": {
+            "timespan": {
               "type": "string",
               "format": "duration",
-              "description": "Specifies the lookback of the preview in ISO 8601 duration format."
+              "description": "Specifies the timespan of the preview in ISO 8601 duration format."
             },
             "scheduledQueryRuleProperties": {
               "$ref": "#/definitions/LogAlertRuleResource",
@@ -515,7 +486,7 @@
             }
           },
           "required": [
-            "lookbackPeriod"
+            "timespan"
           ]
         }
       },
@@ -523,6 +494,17 @@
         "location",
         "properties"
       ]
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
