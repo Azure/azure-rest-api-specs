@@ -20,7 +20,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.PortalServicesCopilot"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-portalservicescopilot"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-portalservicescopilot"
     namespace: "azure.mgmt.portalservicescopilot"
     generate-test: true
     generate-sample: true
@@ -31,7 +31,7 @@ options:
     service-name: "Portal Services Copilot"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-portalservicescopilot"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-portalservicescopilot"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
@@ -47,6 +47,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-name: "Azure.ResourceManager.PortalServicesCopilot"
     namespace: "{package-name}"
 linter:

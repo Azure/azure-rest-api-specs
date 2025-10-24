@@ -13,14 +13,14 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/sdk/selfhelp/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: true
-    namespace: "Azure.ResourceManager.Help"
+    namespace: "Azure.ResourceManager.SelfHelp"
   "@azure-tools/typespec-python":
     service-dir: "sdk/selfhelp"
-    package-dir: "azure-mgmt-selfhelp"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-selfhelp"
     namespace: "azure.mgmt.selfhelp"
     generate-test: true
     generate-sample: true
@@ -32,7 +32,7 @@ options:
     service-name: "Self Help" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-selfhelp"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-selfhelp"
     "service-dir": "sdk/selfhelp"
     is-modular-library: true
     flavor: "azure"
