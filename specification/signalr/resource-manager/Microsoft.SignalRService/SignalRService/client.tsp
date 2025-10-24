@@ -118,15 +118,15 @@ op SignalRPrivateEndpointConnectionsDeleteCustomized(
 
 @@override(PrivateEndpointConnections.get,
   SignalRPrivateEndpointConnectionsGetCustomized,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 @@override(PrivateEndpointConnections.update,
   SignalRPrivateEndpointConnectionsUpdateCustomized,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 @@override(PrivateEndpointConnections.delete,
   SignalRPrivateEndpointConnectionsDeleteCustomized,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -222,15 +222,15 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 
 @@override(SignalRSharedPrivateLinkResources.createOrUpdate,
   SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 @@override(SignalRSharedPrivateLinkResources.get,
   SignalRSharedPrivateLinkResourcesGetCustomized,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 @@override(SignalRSharedPrivateLinkResources.delete,
   SignalRSharedPrivateLinkResourcesDeleteCustomized,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // Resolve model naming breaking changes from Swagger directive migration

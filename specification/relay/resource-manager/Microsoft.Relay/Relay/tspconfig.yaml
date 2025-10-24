@@ -14,13 +14,13 @@ options:
     arm-resource-flattening: true
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-relay"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-relay"
     namespace: "azure.mgmt.relay"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-relay"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-relay"
     namespace: "com.azure.resourcemanager.relay"
     service-name: "Relay" # human-readable service name, whitespace allowed
     flavor: azure
@@ -28,7 +28,7 @@ options:
       - resource: AuthorizationRule
         collection: Namespaces
   "@azure-tools/typespec-ts":
-    package-dir: "arm-relay"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-relay"
     flavor: "azure"
     experimental-extensible-enums: true
     typespec-title-map:

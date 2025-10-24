@@ -13,7 +13,7 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-dns"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dns"
     namespace: "azure.mgmt.dns"
     generate-test: true
     generate-sample: true
@@ -24,7 +24,7 @@ options:
     service-name: "Dns" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-dns"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-dns"
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:

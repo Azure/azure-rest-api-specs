@@ -12,8 +12,8 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Microsoft.BlobStorage/{version-status}/{version}/generated_blob.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-storage-blob"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-blob"
+    package-name: "azure-storage-blob"
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
@@ -23,7 +23,7 @@ options:
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "azure-storage-blob-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-blob-rest"
     generate-metadata: true
     generate-test: true
     package-details:
@@ -35,7 +35,7 @@ options:
     namespace: com.azure.storage.blob
     flavor: azure
   "@azure-tools/typespec-rust":
-    emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure_storage_blob"
     crate-name: "azure_storage_blob"
     crate-version: "0.1.0"
     flavor: azure

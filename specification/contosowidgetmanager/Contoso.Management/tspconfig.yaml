@@ -16,7 +16,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.Contoso"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-contoso"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-contoso"
     namespace: "azure.mgmt.contoso"
     generate-test: true
     generate-sample: true
@@ -27,7 +27,7 @@ options:
     service-name: "Contoso" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-contoso"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-contoso"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

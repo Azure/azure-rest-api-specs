@@ -17,9 +17,9 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.SecretsStoreExtension"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/sdk/secretsstoreextension/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-secretsstoreextension"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-secretsstoreextension"
     service-dir: "sdk/secretsstoreextension"
     namespace: "azure.mgmt.secretsstoreextension"
     flavor: "azure"
@@ -33,7 +33,7 @@ options:
     flavor: "azure"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-secretsstoreextension"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-secretsstoreextension"
     flavor: "azure"
     package-details:
       name: "@azure/arm-secretsstoreextension"

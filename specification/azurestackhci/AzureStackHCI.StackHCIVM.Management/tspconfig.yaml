@@ -14,7 +14,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/StackHCIVM/{version-status}/{version}/stackhcivm.json"
   "@azure-tools/typespec-python":
     service-dir: "sdk/azurestackhci"
-    package-dir: "azure-mgmt-azurestackhcivm"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-azurestackhcivm"
     namespace: "azure.mgmt.azurestackhcivm"
     flavor: "azure"
     generate-test: true
@@ -43,7 +43,7 @@ options:
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-azurestackhcivm"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-azurestackhcivm"
     flavor: azure
     package-details:
       name: "@azure/arm-azurestackhcivm"
