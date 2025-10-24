@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
-@@clientName(Informatica.DataManagement, "InformaticaDataMgmt", "python");
+@@clientName(Informatica.DataManagement, "InformaticaDataMgmtClient", "python");
 @@clientName(Informatica.DataManagement,
   "InformaticaDataManagementClient",
   "java"

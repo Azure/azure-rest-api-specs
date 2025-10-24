@@ -4,7 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceNetworking;
 
-@@clientName(Microsoft.ServiceNetworking, "ServiceNetworkingMgmt", "python");
+@@clientName(Microsoft.ServiceNetworking,
+  "ServiceNetworkingMgmtClient",
+  "python"
+);
 @@clientName(Microsoft.ServiceNetworking,
   "ServiceNetworkingManagementClient",
   "javascript"

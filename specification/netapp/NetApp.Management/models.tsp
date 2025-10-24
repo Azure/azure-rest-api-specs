@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -9,6 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
 
@@ -618,6 +620,7 @@ model RegionInfo {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+@clientName("AvailabilityZoneMapping", "csharp")
 model RegionInfoAvailabilityZoneMappingsItem {
   /**
    * Logical availability zone.

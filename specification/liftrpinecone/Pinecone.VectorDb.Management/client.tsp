@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Pinecone.VectorDb;
 
-@@clientName(Pinecone.VectorDb, "PineconeVectorDbMgmt", "python");
+@@clientName(Pinecone.VectorDb, "PineconeVectorDbMgmtClient", "python");
 @@clientName(Pinecone.VectorDb, "PineconeVectorDbMgmtClient", "java");
 
 // csharp
