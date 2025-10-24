@@ -205,7 +205,7 @@ export function resourceManager(file) {
  */
 export function preview(file) {
   // Folder name "preview" should match case for consistency across specs
-  return typeof file === "string" && includesFolder(file, "preview");
+  return typeof file === "string" && includesSegment(file, "preview");
 }
 
 /**
@@ -214,7 +214,7 @@ export function preview(file) {
  */
 export function stable(file) {
   // Folder name "stable" should match case for consistency across specs
-  return typeof file === "string" && includesFolder(file, "stable");
+  return typeof file === "string" && includesSegment(file, "stable");
 }
 
 /**
