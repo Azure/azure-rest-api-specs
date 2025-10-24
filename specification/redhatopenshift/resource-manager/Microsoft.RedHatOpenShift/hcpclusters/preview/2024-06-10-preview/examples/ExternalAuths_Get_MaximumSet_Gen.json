@@ -1,0 +1,84 @@
+{
+  "title": "ExternalAuths_Get_MaximumSet",
+  "operationId": "ExternalAuths_Get",
+  "parameters": {
+    "api-version": "2024-06-10-preview",
+    "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D",
+    "resourceGroupName": "rgopenapi",
+    "hcpOpenShiftClusterName": "hcpCluster-name",
+    "externalAuthName": "my-cool-auth"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "condition": {
+            "type": "Available",
+            "status": "True",
+            "lastTransitionTime": "2025-07-03T17:28:03.180Z",
+            "reason": "A good reason",
+            "message": "An even better message."
+          },
+          "issuer": {
+            "url": "https://microsoft.com/a",
+            "audiences": [
+              "audience1",
+              "audience2",
+              "audience3",
+              "audience4",
+              "audience5"
+            ],
+            "ca": "lrakpuqodeqscdauefb"
+          },
+          "clients": [
+            {
+              "component": {
+                "name": "my-cool-component",
+                "authClientNamespace": "my-cool-namespace"
+              },
+              "clientId": "vobxtzobefgl",
+              "extraScopes": [
+                "ejmvezdxvoozyiickteiqnvpxqciep"
+              ],
+              "type": "Confidential"
+            }
+          ],
+          "claim": {
+            "mappings": {
+              "username": {
+                "claim": "utlmketyrdxmwijowjzbuqyawuoqrlriryuknigayeviriulgjvuwvxjrsrhpmvavyyxzapgkfeyedcklnoddeviibefgvubvecffqgdhntammtlwjsjemhsqhafmmorskpuwbtjgkoggxq",
+                "prefix": "ojmwi",
+                "prefixPolicy": "mdbghfytgejdqobfllqmajtc"
+              },
+              "groups": {
+                "claim": "icvcoadhpyprqygxyvqhewaycjdtzrwjzbjgmyralburdaolouyvkymfpetymlcwpqsoteryaatoapieizbsnttmkkxsrhyaacnucznujhgmxkmnmgtcjntjsmuabplpoyxberrjdikkkqqiqfnlvwngpbfajzhxzdgqicoconqtrrstzzumdurgfsheypcm",
+                "prefix": "kjlxhbjdvwarcwdu"
+              }
+            },
+            "validationRules": [
+              {
+                "type": "RequiredClaim",
+                "requiredClaim": {
+                  "claim": "ciapdmvrnfitudpx",
+                  "requiredValue": "mqzzjiozgxfgflhdrnwawpke"
+                }
+              }
+            ]
+          }
+        },
+        "id": "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/resourceGroupName/providers/Microsoft.RedHatOpenShift/resourceType/resourceName",
+        "name": "cabt",
+        "type": "x",
+        "systemData": {
+          "createdBy": "lsrkqcuijqfp",
+          "createdByType": "User",
+          "createdAt": "2024-03-27T14:57:32.578Z",
+          "lastModifiedBy": "tgpmwu",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-03-27T14:57:32.578Z"
+        }
+      }
+    }
+  }
+}
