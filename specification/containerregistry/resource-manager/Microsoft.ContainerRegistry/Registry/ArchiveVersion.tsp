@@ -1,0 +1,167 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "./models.tsp";
+import "./Archive.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ContainerRegistry;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface ArchiveVersionOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the container registry.
+         */
+        @path
+        @segment("registries")
+        @pattern("^[a-zA-Z0-9]*$")
+        @minLength(5)
+        @maxLength(50)
+        @doc("The name of the container registry.")
+        registryName: string,
+
+        /**
+         * The package type.
+         */
+        @path
+        @segment("packages")
+        @minLength(3)
+        @maxLength(50)
+        @pattern("^[a-zA-Z]*$")
+        @doc("The package type.")
+        packageType: string,
+
+        /**
+         * The name of the archive resource.
+         */
+        @path
+        @segment("archives")
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(5)
+        @maxLength(200)
+        @doc("The name of the archive resource.")
+        archiveName: string,
+      },
+      {
+        /**
+         * The name of the archive version resource.
+         */
+        @path
+        @segment("versions")
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(5)
+        @maxLength(200)
+        @doc("The name of the archive version resource.")
+        archiveVersionName: string,
+      }
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface ArchiveVersionListOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the container registry.
+         */
+        @path
+        @segment("registries")
+        @pattern("^[a-zA-Z0-9]*$")
+        @minLength(5)
+        @maxLength(50)
+        @doc("The name of the container registry.")
+        registryName: string,
+
+        /**
+         * The package type.
+         */
+        @path
+        @segment("packages")
+        @minLength(3)
+        @maxLength(50)
+        @pattern("^[a-zA-Z]*$")
+        @doc("The package type.")
+        packageType: string,
+
+        /**
+         * The name of the archive resource.
+         */
+        @path
+        @segment("archives")
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(5)
+        @maxLength(200)
+        @doc("The name of the archive resource.")
+        archiveName: string,
+      },
+      {}
+    > {}
+/**
+ * An object that represents an export pipeline for a container registry.
+ */
+@removed(Versions.v2025_11_01)
+@parentResource(Archive)
+model ArchiveVersion
+  is Azure.ResourceManager.ProxyResource<ArchiveVersionProperties> {
+  ...ResourceNameParameter<
+    Resource = ArchiveVersion,
+    KeyName = "archiveVersionName",
+    SegmentName = "versions",
+    NamePattern = "^[a-zA-Z0-9-]*$"
+  >;
+}
+
+@removed(Versions.v2025_11_01)
+@armResourceOperations
+interface ArchiveVersions {
+  /**
+   * Gets the properties of the archive version.
+   */
+  get is ArchiveVersionOperationOps.Read<ArchiveVersion>;
+
+  /**
+   * Creates a archive version for a container registry with the specified parameters.
+   */
+  create is ArchiveVersionOperationOps.CreateOrUpdateAsync<
+    ArchiveVersion,
+    Request = void
+  >;
+
+  /**
+   * Deletes a archive version from a container registry.
+   */
+  delete is ArchiveVersionOperationOps.DeleteWithoutOkAsync<ArchiveVersion>;
+
+  /**
+   * Lists all archive versions for the specified container registry, repository type and archive name.
+   */
+  @action("versions")
+  @list
+  list is ArchiveVersionListOps.Read<
+    ArchiveVersion,
+    Response = ArmResponse<ArchiveVersionListResult>
+  >;
+}
+
+@@maxLength(ArchiveVersion.name, 200);
+@@minLength(ArchiveVersion.name, 5);
+@@doc(ArchiveVersion.name, "The name of the archive version resource.");
+@@doc(ArchiveVersion.properties, "The properties of the archive.");
