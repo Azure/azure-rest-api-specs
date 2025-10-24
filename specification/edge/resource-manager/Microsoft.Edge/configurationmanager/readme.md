@@ -38,8 +38,18 @@ These are the global settings for the configurationmanager.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-06-01
+tag: package-2025-08-01
 ```
+
+### Tag: package-2025-08-01
+
+These settings apply only when `--tag=package-2025-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-01'
+input-file:
+  - stable/2025-08-01/configurationmanager.json
+```
+
 ### Tag: package-2025-06-01
 
 These settings apply only when `--tag=package-2025-06-01` is specified on the command line.
@@ -98,3 +108,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

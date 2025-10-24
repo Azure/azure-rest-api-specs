@@ -1,6 +1,14 @@
 name: "Swagger LintDiff - Analyze Code"
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
 
 permissions:
   contents: read
@@ -42,7 +50,7 @@ jobs:
             const { join } = await import('path');
 
             // TODO: Logger
-            const changedFiles = await getChangedFiles({ cwd: 'after'});
+            const changedFiles = await getChangedFiles({ cwd: 'after', paths: ['specification'] });
             console.log('Changed files:', changedFiles);
 
             const filePath = join(process.cwd(), 'changed-files.txt');
@@ -53,7 +61,9 @@ jobs:
       - name: Run LintDiff
         id: run-lintdiff
         run: |
-          echo "summary=$GITHUB_STEP_SUMMARY" >> $GITHUB_OUTPUT
+          set -x
+
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
 
           npm exec --no -- lint-diff \
             --before before \
@@ -61,11 +71,11 @@ jobs:
             --changed-files-path changed-files.txt \
             --base-branch ${{ github.event.pull_request.base.ref }} \
             --compare-sha ${{ github.event.pull_request.head.sha }} \
-            --out-file $GITHUB_STEP_SUMMARY
+            --out-file "$GITHUB_STEP_SUMMARY"
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
-          NODE_OPTIONS: "--max-old-space-size=8192"
+          NODE_OPTIONS: "--max-old-space-size=16384"
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact

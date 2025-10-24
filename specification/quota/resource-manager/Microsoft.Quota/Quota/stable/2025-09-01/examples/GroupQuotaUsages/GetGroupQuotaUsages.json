@@ -1,0 +1,48 @@
+{
+  "operationId": "GroupQuotaUsages_List",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "groupQuotaName": "groupquota1",
+    "location": "westus",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "resourceProviderName": "Microsoft.Compute"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://yourLinkHere.com",
+        "value": [
+          {
+            "name": "standardddv4family",
+            "type": "Microsoft.Quota/groupQuotas/locationSUsages",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSUsages/eastus/resources/standardddv4family",
+            "properties": {
+              "name": {
+                "localizedValue": "standard DDv4 Family vCPUs",
+                "value": "standardddv4family"
+              },
+              "limit": 100,
+              "unit": "count",
+              "usages": 30
+            }
+          },
+          {
+            "name": "standardav2family",
+            "type": "Microsoft.Quota/groupQuotas/locationSUsages",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSUsages/eastus/resources/standardav2family",
+            "properties": {
+              "name": {
+                "localizedValue": "standard Av2 Family vCPUs",
+                "value": "standardav2family"
+              },
+              "limit": 150,
+              "unit": "count",
+              "usages": 70
+            }
+          }
+        ]
+      }
+    }
+  },
+  "title": "GroupQuotasUsages_List"
+}

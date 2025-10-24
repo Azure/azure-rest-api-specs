@@ -1,11 +1,13 @@
 // @ts-check
 
+import { randomUUID } from "crypto";
 import { readdir } from "fs/promises";
 import { dirname, isAbsolute, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
+import { Duration } from "../src/time.js";
 import { repoRoot } from "./repo.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
@@ -16,6 +18,15 @@ describe("SpecModel", () => {
     expect(specModel.folder).toBe(resolve("foo"));
 
     await expect(specModel.getReadmes()).rejects.toThrowError(/no such file or directory/i);
+  });
+
+  it("returns cached spec model", async () => {
+    const path = randomUUID();
+
+    const specModel1 = new SpecModel(path);
+    const specModel2 = new SpecModel(path);
+
+    expect(specModel1).toBe(specModel2);
   });
 
   it("returns spec model", async () => {
@@ -107,7 +118,7 @@ describe("SpecModel", () => {
 
     const tag = globalConfig["tag"];
 
-    // @ts-ignore
+    // @ts-expect-error testing runtime behavior of invalid types
     expect(tag).not.toBeTypeOf(Date);
 
     expect(tag).toBeTypeOf("string");
@@ -128,6 +139,16 @@ describe("SpecModel", () => {
     await expect(
       mapAsync([...readmes.values()], async (r) => await r.getTags()),
     ).rejects.toThrowError(/multiple.*tag/i);
+
+    await expect(specModel.toJSONAsync()).rejects.toThrowError(/multiple.*tag/i);
+
+    await expect(specModel.toJSONAsync({ embedErrors: true })).resolves.toMatchObject({
+      readmes: [
+        {
+          error: expect.stringMatching(/multiple.*tag/i),
+        },
+      ],
+    });
   });
 
   describe("getAffectedReadmeTags", () => {
@@ -197,9 +218,32 @@ describe("SpecModel", () => {
       );
       const specModel = new SpecModel(folder, options);
 
-      expect(
+      await expect(
         specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
       ).rejects.toThrowError(/is not a valid JSON Schema/i);
+
+      await expect(specModel.toJSONAsync({ includeRefs: true })).rejects.toThrowError(
+        /is not a valid JSON Schema/i,
+      );
+
+      await expect(
+        specModel.toJSONAsync({ embedErrors: true, includeRefs: true }),
+      ).resolves.toMatchObject({
+        readmes: [
+          {
+            tags: [
+              {
+                inputFiles: [
+                  {
+                    error: expect.stringMatching(/is not a valid JSON Schema/i),
+                  },
+                ],
+                name: "package-2021-11-01",
+              },
+            ],
+          },
+        ],
+      });
     });
   });
 
@@ -222,7 +266,7 @@ describe("SpecModel", () => {
       const swaggerPath = resolve(folder, "data-plane/not-found.json");
 
       await expect(specModel.getAffectedSwaggers(swaggerPath)).rejects.toThrowError(
-        /no affected swaggers/i,
+        /not found in specModel/i,
       );
     });
 
@@ -295,52 +339,48 @@ describe("SpecModel", () => {
 // the '.skip' from the describe block. Put '.skip' back in when done or this
 // test may fail unexpectedly in the future.
 describe.skip("Parse readmes", () => {
-  it(
-    "Does not produce exceptions",
-    { timeout: 30 * 60 * 1000 /* 30 minutes */ },
-    async ({ expect }) => {
-      const excludeFolders = [
-        "authorization", // specification/authorization/resource-manager/readme.md defines has duplicate tags including 'package-2020-10-01'
-        "azureactivedirectory", // specification/azureactivedirectory/resource-manager/readme.md has duplicate tags including 'package-preview-2020-07'
-        "cost-management", // specification/cost-management/resource-manager/readme.md has duplicate tags including 'package-2019-01'
-        "migrate", // specification/migrate/resource-manager/readme.md has duplicate tags including 'package-migrate-2023-04'
-        "quota", // specification/quota/resource-manager/readme.md has duplicate tags including 'package-2023-02-01'
-        "redisenterprise", // specification/redisenterprise/resource-manager/readme.md has duplicate tags including 'package-2024-02'
-        "security", // specification/security/resource-manager/readme.md has duplicate tags including 'package-2021-07-preview-only'
-        "confidentialledger", // data-plane/readme.md tag 'package-2022-04-20-preview-ledger' points to a swagger file that doesn't exist
-        "network", // network takes a long time to evaluate
-        "servicenetworking", // servicenetworking includes a swagger file which references a file that doesn't exist
-      ];
+  it("Does not produce exceptions", { timeout: 30 * Duration.Minute }, async ({ expect }) => {
+    const excludeFolders = [
+      "authorization", // specification/authorization/resource-manager/readme.md defines has duplicate tags including 'package-2020-10-01'
+      "azureactivedirectory", // specification/azureactivedirectory/resource-manager/readme.md has duplicate tags including 'package-preview-2020-07'
+      "cost-management", // specification/cost-management/resource-manager/readme.md has duplicate tags including 'package-2019-01'
+      "migrate", // specification/migrate/resource-manager/readme.md has duplicate tags including 'package-migrate-2023-04'
+      "quota", // specification/quota/resource-manager/readme.md has duplicate tags including 'package-2023-02-01'
+      "redisenterprise", // specification/redisenterprise/resource-manager/readme.md has duplicate tags including 'package-2024-02'
+      "security", // specification/security/resource-manager/readme.md has duplicate tags including 'package-2021-07-preview-only'
+      "confidentialledger", // data-plane/readme.md tag 'package-2022-04-20-preview-ledger' points to a swagger file that doesn't exist
+      "network", // network takes a long time to evaluate
+      "servicenetworking", // servicenetworking includes a swagger file which references a file that doesn't exist
+    ];
 
-      // List all folders under specification/
-      const folders = await readdir(join(repoRoot, "specification"), {
-        withFileTypes: true,
-      });
-      const services = folders
-        .filter((f) => f.isDirectory() && !excludeFolders.includes(f.name))
-        .map((f) => f.name);
-      for (const folder of services) {
-        // Folders are listed in alphabetical order, when running this function
-        // iteratively over all service folders, a value can be placed in in this
-        // condition to skip folders that appear before a given folder. This means
-        // you won't have to wait for tests to run over all folders that have
-        // previously passed.
-        if (folder < "000") {
-          console.log(`Skipping service: ${folder}`);
-          continue;
-        }
-
-        console.log(`Testing service: ${folder}`);
-        const specModel = new SpecModel(`specification/${folder}`, options);
-
-        expect(specModel).toBeDefined();
+    // List all folders under specification/
+    const folders = await readdir(join(repoRoot, "specification"), {
+      withFileTypes: true,
+    });
+    const services = folders
+      .filter((f) => f.isDirectory() && !excludeFolders.includes(f.name))
+      .map((f) => f.name);
+    for (const folder of services) {
+      // Folders are listed in alphabetical order, when running this function
+      // iteratively over all service folders, a value can be placed in in this
+      // condition to skip folders that appear before a given folder. This means
+      // you won't have to wait for tests to run over all folders that have
+      // previously passed.
+      if (folder < "000") {
+        console.log(`Skipping service: ${folder}`);
+        continue;
       }
-    },
-  );
+
+      console.log(`Testing service: ${folder}`);
+      const specModel = new SpecModel(`specification/${folder}`, options);
+
+      expect(specModel).toBeDefined();
+    }
+  });
 
   it(
     "runs properly against specific services",
-    { timeout: 30 * 60 * 1000 /* 30 minutes */ },
+    { timeout: 30 * Duration.Minute },
     async ({ expect }) => {
       const folders = [
         // Fill in services to test here
@@ -431,22 +471,27 @@ describe("getSwaggers", () => {
   });
 
   it("should work with swagger fixtures", async () => {
-    const folder = resolve(
-      __dirname,
-      "fixtures/swagger/specification/servicelinker/resource-manager",
-    );
+    const folder = resolve(__dirname, "fixtures/swagger");
 
     const specModel = new SpecModel(folder, options);
     const swaggers = await specModel.getSwaggers();
-    // Should return an array (may be empty if no valid readmes in this fixture)
-    expect(swaggers.length).toBe(5);
 
-    // If swaggers are found, they should have the expected structure
-    for (const swagger of swaggers) {
-      expect(swagger.path).toBeDefined();
-      expect(swagger.versionKind).toBeDefined();
-    }
-    expect(swaggers[0].path).contains(folder);
-    expect(swaggers[0].versionKind).toBe("stable");
+    // Expected paths as complete normalized paths
+    const expectedSwaggerPaths = [
+      "specification/common-types/resource-management/v2/types.json",
+      "specification/common-types/resource-management/v3/types.json",
+      "specification/common-types/resource-management/v3/types.json",
+      "specification/common-types/resource-management/v3/types.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/test.json",
+    ];
+
+    // Sort swaggers by path to ensure consistent order
+    expect(swaggers.sort((a, b) => a.path.localeCompare(b.path)).map((s) => s.path)).toEqual(
+      expectedSwaggerPaths.map((p) => resolve(folder, p)),
+    );
   });
 });

@@ -1,0 +1,1952 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure-ContainerStorageRP",
+    "version": "2023-07-01-preview",
+    "description": "Azure Container Storage Resource Provider API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Pools"
+    },
+    {
+      "name": "Volumes"
+    },
+    {
+      "name": "Snapshots"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ContainerStorage/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerStorage/pools": {
+      "get": {
+        "operationId": "Pools_ListBySubscription",
+        "tags": [
+          "Pools"
+        ],
+        "description": "List Pool resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListBySubscription_AzureDisk": {
+            "$ref": "./examples/Pools_ListBySubscription_AzureDisk.json"
+          },
+          "Pools_ListBySubscription_ElasticSan": {
+            "$ref": "./examples/Pools_ListBySubscription_ElasticSan.json"
+          },
+          "Pools_ListBySubscription_Ephemeral": {
+            "$ref": "./examples/Pools_ListBySubscription_Ephemeral.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools": {
+      "get": {
+        "operationId": "Pools_ListByResourceGroup",
+        "tags": [
+          "Pools"
+        ],
+        "description": "List Pool resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListByResourceGroup_AzureDisk": {
+            "$ref": "./examples/Pools_ListByResourceGroup_AzureDisk.json"
+          },
+          "Pools_ListByResourceGroup_ElasticSan": {
+            "$ref": "./examples/Pools_ListByResourceGroup_ElasticSan.json"
+          },
+          "Pools_ListByResourceGroup_Ephemeral": {
+            "$ref": "./examples/Pools_ListByResourceGroup_Ephemeral.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}": {
+      "get": {
+        "operationId": "Pools_Get",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Get a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Get_AzureDisk": {
+            "$ref": "./examples/Pools_Get_AzureDisk.json"
+          },
+          "Pools_Get_ElasticSan": {
+            "$ref": "./examples/Pools_Get_ElasticSan.json"
+          },
+          "Pools_Get_Ephemeral": {
+            "$ref": "./examples/Pools_Get_Ephemeral.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Pools_CreateOrUpdate",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Create a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Pool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "201": {
+            "description": "Resource 'Pool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_CreateOrUpdate_AzureDisk": {
+            "$ref": "./examples/Pools_CreateOrUpdate_AzureDisk.json"
+          },
+          "Pools_CreateOrUpdate_ElasticSan": {
+            "$ref": "./examples/Pools_CreateOrUpdate_ElasticSan.json"
+          },
+          "Pools_CreateOrUpdate_Ephemeral": {
+            "$ref": "./examples/Pools_CreateOrUpdate_Ephemeral.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Pools_Update",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Update a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Update_AzureDisk": {
+            "$ref": "./examples/Pools_Update_AzureDisk.json"
+          },
+          "Pools_Update_ElasticSan": {
+            "$ref": "./examples/Pools_Update_ElasticSan.json"
+          },
+          "Pools_Update_Ephemeral": {
+            "$ref": "./examples/Pools_Update_Ephemeral.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Pools_Delete",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Delete a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Delete": {
+            "$ref": "./examples/Pools_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/snapshots": {
+      "get": {
+        "operationId": "Snapshots_ListByPool",
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "List Snapshot resources by Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_ListByPool": {
+            "$ref": "./examples/Snapshots_ListByPool.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/snapshots/{snapshotName}": {
+      "get": {
+        "operationId": "Snapshots_Get",
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Get a Snapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "snapshotName",
+            "in": "path",
+            "description": "Volume Snapshot Resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Get": {
+            "$ref": "./examples/Snapshots_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Snapshots_CreateOrUpdate",
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Create a Snapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "snapshotName",
+            "in": "path",
+            "description": "Volume Snapshot Resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Snapshot' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "201": {
+            "description": "Resource 'Snapshot' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_CreateOrUpdate": {
+            "$ref": "./examples/Snapshots_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Snapshots_Delete",
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Delete a Snapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "snapshotName",
+            "in": "path",
+            "description": "Volume Snapshot Resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Delete": {
+            "$ref": "./examples/Snapshots_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes": {
+      "get": {
+        "operationId": "Volumes_ListByPool",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "List Volume resources by Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VolumeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_ListByPool": {
+            "$ref": "./examples/Volumes_ListByPool.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes/{volumeName}": {
+      "get": {
+        "operationId": "Volumes_Get",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Get a Volume",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "Volume Resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Get": {
+            "$ref": "./examples/Volumes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Volumes_CreateOrUpdate",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Create a Volume",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "Volume Resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Volume' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "201": {
+            "description": "Resource 'Volume' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_CreateOrUpdate": {
+            "$ref": "./examples/Volumes_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Volumes_Update",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Update a Volume",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "Volume Resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VolumeUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Update": {
+            "$ref": "./examples/Volumes_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Volumes_Delete",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Delete a Volume",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "Volume Resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 253,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Delete": {
+            "$ref": "./examples/Volumes_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Assignment": {
+      "type": "object",
+      "description": "Assignment Properties",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AssignmentStatus",
+          "description": "Indicates if the assignment is in a usable state",
+          "readOnly": true
+        },
+        "id": {
+          "$ref": "#/definitions/AssignmentId",
+          "description": "Resource id for the assigned resource",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "AssignmentId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/managedClusters"
+          }
+        ]
+      }
+    },
+    "AssignmentStatus": {
+      "type": "object",
+      "description": "Status of the assignment resource",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AssignmentStatusState",
+          "description": "State of the assignment resource"
+        },
+        "message": {
+          "type": "string",
+          "description": "Reason for the status"
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "AssignmentStatusState": {
+      "type": "string",
+      "description": "Status of the assignment resource",
+      "enum": [
+        "Assigning",
+        "Assigned",
+        "Unassigning",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AssignmentStatusState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Assigning",
+            "value": "Assigning",
+            "description": "The assignment of the pool to the resource is in progress"
+          },
+          {
+            "name": "Assigned",
+            "value": "Assigned",
+            "description": "The assignment to the pool was successful."
+          },
+          {
+            "name": "Unassigning",
+            "value": "Unassigning",
+            "description": "The pool is being unassigned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation of assigning or unassigning the pool failed."
+          }
+        ]
+      }
+    },
+    "AzureDisk": {
+      "type": "object",
+      "description": "Azure Disk Pool Properties",
+      "properties": {
+        "resourceGroup": {
+          "type": "string",
+          "description": "Managed resource group for the pool.",
+          "readOnly": true
+        },
+        "skuName": {
+          "$ref": "#/definitions/AzureDiskSkuName",
+          "description": "Sku name",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption specifies the encryption configuration for the Azure Disk pool",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "disks": {
+          "type": "array",
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        }
+      }
+    },
+    "AzureDiskSkuName": {
+      "type": "string",
+      "description": "SKU of the underlying managed disk",
+      "enum": [
+        "Premium_LRS",
+        "Standard_LRS",
+        "StandardSSD_LRS",
+        "UltraSSD_LRS",
+        "Premium_ZRS",
+        "PremiumV2_LRS",
+        "StandardSSD_ZRS"
+      ],
+      "x-ms-enum": {
+        "name": "AzureDiskSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium_LRS SKU"
+          },
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard_LRS SKU"
+          },
+          {
+            "name": "StandardSSD_LRS",
+            "value": "StandardSSD_LRS",
+            "description": "StandardSSD_LRS SKU"
+          },
+          {
+            "name": "UltraSSD_LRS",
+            "value": "UltraSSD_LRS",
+            "description": "UltraSSD_LRS SKU"
+          },
+          {
+            "name": "Premium_ZRS",
+            "value": "Premium_ZRS",
+            "description": "Premium_ZRS SKU"
+          },
+          {
+            "name": "PremiumV2_LRS",
+            "value": "PremiumV2_LRS",
+            "description": "PremiumV2_LRS SKU"
+          },
+          {
+            "name": "StandardSSD_ZRS",
+            "value": "StandardSSD_ZRS",
+            "description": "StandardSSD_ZRS SKU"
+          }
+        ]
+      }
+    },
+    "AzureDiskUpdate": {
+      "type": "object",
+      "description": "Azure Disk Pool Properties",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        }
+      }
+    },
+    "Disk": {
+      "type": "object",
+      "description": "Model for disk for that pool is using",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID is the disk identifier visible to the OS. It is typically the WWN or disk ID in formats such as eui.e8238fa6bf530001001b448b45263379 or 0x5002cf6cbc5dd460"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Reference is the location of the disk in an external system."
+        }
+      },
+      "required": [
+        "id",
+        "reference"
+      ]
+    },
+    "DiskPoolProperties": {
+      "type": "object",
+      "description": "Properties shared between the azureDisk and ephemeralDisk",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        }
+      }
+    },
+    "ElasticSan": {
+      "type": "object",
+      "description": "Elastic San Pool Properties",
+      "properties": {
+        "resourceGroup": {
+          "type": "string",
+          "description": "Managed resource group for the pool.",
+          "readOnly": true
+        },
+        "skuName": {
+          "$ref": "#/definitions/ElasticSanSkuName",
+          "description": "Sku name",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption specifies the encryption configuration for the Azure Disk pool",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ElasticSanSkuName": {
+      "type": "string",
+      "description": "ElasticSAN SKUs",
+      "enum": [
+        "Premium_LRS",
+        "Premium_ZRS"
+      ],
+      "x-ms-enum": {
+        "name": "ElasticSanSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium_LRS SKU"
+          },
+          {
+            "name": "Premium_ZRS",
+            "value": "Premium_ZRS",
+            "description": "Premium_ZRS SKU"
+          }
+        ]
+      }
+    },
+    "ElasticSanUpdate": {
+      "type": "object",
+      "description": "Elastic San Pool Properties"
+    },
+    "ElasticSanVolumeProperties": {
+      "type": "object",
+      "description": "Properties of the ElasticSAN iSCSI target",
+      "properties": {
+        "targetIqn": {
+          "type": "string",
+          "description": "iSCSI Target IQN (iSCSI Qualified Name); example: \"iqn.2005-03.org.iscsi:server\""
+        },
+        "targetPortalHostname": {
+          "type": "string",
+          "description": "iSCSI Target Portal Host Name"
+        },
+        "targetPortalPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "iSCSI Target Portal Port"
+        }
+      },
+      "required": [
+        "targetIqn",
+        "targetPortalHostname",
+        "targetPortalPort"
+      ]
+    },
+    "Encryption": {
+      "type": "object",
+      "description": "Encryption key properties for the pool.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key vault key."
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The URI of the key vault."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "required": [
+        "keyName",
+        "keyVaultUri"
+      ]
+    },
+    "EphemeralDisk": {
+      "type": "object",
+      "description": "Ephemeral Disk Pool Properties",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of data copies. Default 3.",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 3
+        },
+        "disks": {
+          "type": "array",
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        }
+      }
+    },
+    "Pool": {
+      "type": "object",
+      "description": "Pool resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PoolProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PoolListResult": {
+      "type": "object",
+      "description": "The response of a Pool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Pool items on this page",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PoolProperties": {
+      "type": "object",
+      "description": "Pool Properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceOperationalStatus",
+          "description": "The operational status of the resource",
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "description": "List of availability zones that resources can be created in.",
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/Zone"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "Resources represent the resources the pool should have."
+        },
+        "poolType": {
+          "$ref": "#/definitions/PoolType",
+          "description": "Type of the Pool: ephemeralDisk, azureDisk, or elasticsan."
+        },
+        "reclaimPolicy": {
+          "$ref": "#/definitions/ReclaimPolicy",
+          "description": "ReclaimPolicy defines what happens to the backend storage when StoragePool is deleted",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "assignments": {
+          "type": "array",
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For ElasticSAN there can be many.",
+          "items": {
+            "$ref": "#/definitions/Assignment"
+          }
+        }
+      },
+      "required": [
+        "poolType"
+      ]
+    },
+    "PoolType": {
+      "type": "object",
+      "description": "Type of the Pool: ephemeralDisk, azureDisk, or elasticsan",
+      "properties": {
+        "azureDisk": {
+          "$ref": "#/definitions/AzureDisk",
+          "description": "Disk Pool Properties"
+        },
+        "elasticSan": {
+          "$ref": "#/definitions/ElasticSan",
+          "description": "Elastic San Pool Properties"
+        },
+        "ephemeralDisk": {
+          "$ref": "#/definitions/EphemeralDisk",
+          "description": "Ephemeral Pool Properties"
+        }
+      }
+    },
+    "PoolTypeUpdate": {
+      "type": "object",
+      "description": "Type of the Pool: ephemeralDisk, azureDisk, or elasticsan",
+      "properties": {
+        "azureDisk": {
+          "$ref": "#/definitions/AzureDiskUpdate",
+          "description": "Disk Pool Properties"
+        },
+        "elasticSan": {
+          "$ref": "#/definitions/ElasticSanUpdate",
+          "description": "Elastic San Pool Properties"
+        },
+        "ephemeralDisk": {
+          "$ref": "#/definitions/EphemeralDisk",
+          "description": "Ephemeral Pool Properties"
+        }
+      }
+    },
+    "PoolUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Pool.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PoolUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PoolUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Pool.",
+      "properties": {
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "Resources represent the resources the pool should have."
+        },
+        "poolType": {
+          "$ref": "#/definitions/PoolTypeUpdate",
+          "description": "Type of the Pool: ephemeralDisk, azureDisk, or elasticsan."
+        },
+        "assignments": {
+          "type": "array",
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For ElasticSAN there can be many.",
+          "items": {
+            "$ref": "#/definitions/Assignment"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
+    },
+    "ReclaimPolicy": {
+      "type": "string",
+      "description": "Reclaim policy",
+      "enum": [
+        "Delete",
+        "Retain"
+      ],
+      "x-ms-enum": {
+        "name": "ReclaimPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete resource"
+          },
+          {
+            "name": "Retain",
+            "value": "Retain",
+            "description": "Retain resource"
+          }
+        ]
+      }
+    },
+    "Requests": {
+      "type": "object",
+      "description": "Requests for capacity for the pool.",
+      "properties": {
+        "storage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Requested capacity of the pool in GiB.",
+          "default": 1024,
+          "minimum": 1024,
+          "maximum": 65536
+        }
+      }
+    },
+    "ResourceOperationStatusState": {
+      "type": "string",
+      "description": "State of the resource.",
+      "enum": [
+        "Pending",
+        "Available",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceOperationStatusState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The resource is pending."
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The resource is available."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The resource is unavailable."
+          }
+        ]
+      }
+    },
+    "ResourceOperationalStatus": {
+      "type": "object",
+      "description": "Status of the resource",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ResourceOperationStatusState",
+          "description": "state of the resource"
+        },
+        "message": {
+          "type": "string",
+          "description": "Reason for state."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "Resources": {
+      "type": "object",
+      "description": "Resource Requests for the pool.",
+      "properties": {
+        "requests": {
+          "$ref": "#/definitions/Requests",
+          "description": "Requests for capacity for the pool."
+        }
+      }
+    },
+    "Snapshot": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SnapshotProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SnapshotListResult": {
+      "type": "object",
+      "description": "The response of a Snapshot list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Snapshot items on this page",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SnapshotProperties": {
+      "type": "object",
+      "description": "Volume Snapshot Properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceOperationalStatus",
+          "description": "The status of the resource.",
+          "readOnly": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Reference to the source volume",
+          "minLength": 3,
+          "maxLength": 253,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "Volume": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VolumeProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VolumeListResult": {
+      "type": "object",
+      "description": "The response of a Volume list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Volume items on this page",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VolumeProperties": {
+      "type": "object",
+      "description": "Volume Properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceOperationalStatus",
+          "description": "The status of the resource.",
+          "readOnly": true
+        },
+        "labels": {
+          "type": "object",
+          "description": "String KV pairs indicating labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "capacityGiB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Requested capacity in GiB",
+          "minimum": 1,
+          "maximum": 65536
+        },
+        "volumeType": {
+          "$ref": "#/definitions/VolumeType",
+          "description": "Properties of the volume",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "labels",
+        "capacityGiB"
+      ]
+    },
+    "VolumeType": {
+      "type": "object",
+      "description": "Properties of the volume",
+      "properties": {
+        "elasticSan": {
+          "$ref": "#/definitions/ElasticSanVolumeProperties",
+          "description": "Properties of the ElasticSAN iSCSI target",
+          "readOnly": true
+        }
+      }
+    },
+    "VolumeUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Volume.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VolumeUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VolumeUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Volume.",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "description": "String KV pairs indicating labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "capacityGiB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Requested capacity in GiB",
+          "minimum": 1,
+          "maximum": 65536
+        }
+      }
+    },
+    "Zone": {
+      "type": "string",
+      "description": "Availability Zones",
+      "enum": [
+        "1",
+        "2",
+        "3"
+      ],
+      "x-ms-enum": {
+        "name": "Zone",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zone1",
+            "value": "1",
+            "description": "First availability zone."
+          },
+          {
+            "name": "Zone2",
+            "value": "2",
+            "description": "Second availability zone."
+          },
+          {
+            "name": "Zone3",
+            "value": "3",
+            "description": "Third availability zone."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "migrationMode": "Offline",
+    "migrationName": "examplemigration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "f2354e72-2828-4a19-ad20-b4cd9e2673c1",
+          "currentStatus": {
+            "state": "Succeeded",
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {
+                "exampledatabase": {
+                  "databaseName": "exampledatabase",
+                  "migrationState": "Succeeded",
+                  "startedOn": "2025-06-01T18:30:22.123456Z",
+                  "endedOn": "2025-06-01T20:30:22.123456Z",
+                  "fullLoadErroredTables": 0,
+                  "fullLoadQueuedTables": 0,
+                  "fullLoadLoadingTables": 0,
+                  "fullLoadCompletedTables": 10,
+                  "cdcUpdateCounter": 0,
+                  "cdcDeleteCounter": 0,
+                  "cdcInsertCounter": 0,
+                  "appliedChanges": 0,
+                  "incomingChanges": 0,
+                  "latency": 0
+                }
+              },
+              "validationDetails": {
+                "status": "Succeeded",
+                "validationStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+                "validationEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "SourceVersionValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "ServerParametersValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "exampledatabase",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "migrationMode": "Offline",
+          "migrationWindowEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
+          "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "dbsToMigrate": [
+            "exampledatabase"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "triggerCutover": "True",
+          "migrateRoles": "False",
+          "migrationOption": "ValidateAndMigrate"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}

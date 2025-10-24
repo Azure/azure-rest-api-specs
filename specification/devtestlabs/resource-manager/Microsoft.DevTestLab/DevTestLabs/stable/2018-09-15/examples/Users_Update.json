@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "name": "{userName}",
+    "api-version": "2018-09-15",
+    "labName": "{devtestlabName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "user": {
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "{userName}",
+      "type": "Microsoft.DevTestLab/labs/users",
+      "body": {
+        "properties": {
+          "createdDate": "2018-10-01T18:40:48.1739018-07:00",
+          "identity": {
+            "appId": "{appId}",
+            "objectId": "{objectId}",
+            "principalId": "{principalId}",
+            "principalName": "{principalName}",
+            "tenantId": "{tenantId}"
+          },
+          "provisioningState": "Succeeded",
+          "secretStore": {
+            "keyVaultId": "{keyVaultId}",
+            "keyVaultUri": "users/{userName}"
+          },
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        }
+      },
+      "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}",
+      "location": "{location}",
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "operationId": "Users_Update",
+  "title": "Users_Update"
+}

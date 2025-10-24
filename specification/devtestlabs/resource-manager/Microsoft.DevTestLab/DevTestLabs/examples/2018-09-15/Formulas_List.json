@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{formulaName}",
+            "type": "Microsoft.DevTestLab/labs/formulas",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/formulas/{formulaName}",
+            "properties": {
+              "description": "Formula used to create a Linux VM",
+              "author": "user@contoso.com",
+              "creationDate": "2018-12-22T19:13:35.9922091+00:00",
+              "formulaContent": {
+                "location": "{location}",
+                "properties": {
+                  "allowClaim": false,
+                  "artifacts": [
+                    {
+                      "artifactId": "/artifactsources/{artifactSourceName}/artifacts/linux-install-nodejs",
+                      "parameters": []
+                    }
+                  ],
+                  "disallowPublicIpAddress": true,
+                  "galleryImageReference": {
+                    "offer": "0001-com-ubuntu-server-groovy",
+                    "osType": "Linux",
+                    "publisher": "canonical",
+                    "sku": "20_10",
+                    "version": "latest"
+                  },
+                  "isAuthenticationWithSshKey": false,
+                  "labSubnetName": "Dtl{labName}Subnet",
+                  "labVirtualNetworkId": "/virtualnetworks/dtl{labName}",
+                  "networkInterface": {
+                    "sharedPublicIpAddressConfiguration": {
+                      "inboundNatRules": [
+                        {
+                          "backendPort": 22,
+                          "transportProtocol": "Tcp"
+                        }
+                      ]
+                    }
+                  },
+                  "notes": "Ubuntu Server 20.10",
+                  "size": "Standard_B1ms",
+                  "storageType": "Standard",
+                  "userName": "user"
+                }
+              },
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "uniqueIdentifier": "7a7d20ab-8a50-46fb-8dc6-7c6c1443a01b"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Formulas_List",
+  "title": "Formulas_List"
+}

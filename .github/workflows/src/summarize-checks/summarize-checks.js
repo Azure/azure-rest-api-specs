@@ -19,21 +19,32 @@
 */
 
 // #region imports/constants
-import { extractInputs } from "../context.js";
-// eslint-disable-next-line no-unused-vars
+import { execFile } from "../../../shared/src/exec.js";
+import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.js";
+import { intersect } from "../../../shared/src/set.js";
+import { byDate, invert } from "../../../shared/src/sort.js";
 import { commentOrUpdate } from "../comment.js";
-import { PER_PAGE_MAX } from "../github.js";
-import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./label-rules.js";
+import { extractInputs } from "../context.js";
+import {
+  brChRevApproval,
+  getViolatedRequiredLabelsRules,
+  processImpactAssessment,
+  verRevApproval,
+} from "./labelling.js";
 
 import {
   brchTsg,
-  diagramTsg,
   checkAndDiagramTsg,
   defaultTsg,
+  diagramTsg,
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
+
+import fs from "fs/promises";
+import os from "os";
+import path from "path";
 
 /**
  * @typedef {Object} CheckMetadata
@@ -47,12 +58,80 @@ import {
  * @typedef {Object} CheckRunData
  * @property {string} name
  * @property {string} status
- * @property {string} conclusion
+ * @property {string | null} conclusion
  * @property {CheckMetadata} checkInfo
  */
 
 /**
- * @typedef {import("./label-rules.js").RequiredLabelRule} RequiredLabelRule
+ * @typedef {Object} WorkflowRunArtifact
+ * @property {string} name
+ * @property {number} id
+ * @property {string} url
+ * @property {string} archive_download_url
+ */
+
+/**
+ * @typedef {Object} WorkflowRunInfo
+ * @property {string} name
+ * @property {number} id
+ * @property {number} databaseId
+ * @property {string} url
+ * @property {number} workflowId
+ * @property {string} status
+ * @property {string} conclusion
+ * @property {string} createdAt
+ * @property {string} updatedAt
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckRun
+ * @property {string} name
+ * @property {string} status
+ * @property {string} conclusion
+ * @property {boolean} isRequired
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckSuite
+ * @property {GraphQLCheckRun[]} nodes
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckSuites
+ * @property {GraphQLCheckSuite[]} nodes
+ */
+
+/**
+ * @typedef {Object} GraphQLCommit
+ * @property {GraphQLCheckSuites} checkSuites
+ */
+
+/**
+ * @typedef {Object} GraphQLResource
+ * @property {GraphQLCheckSuites} checkSuites
+ */
+
+/**
+ * @typedef {Object} GraphQLResponse
+ * @property {GraphQLResource} resource
+ * @property {Object} rateLimit
+ * @property {number} rateLimit.limit
+ * @property {number} rateLimit.cost
+ * @property {number} rateLimit.used
+ * @property {number} rateLimit.remaining
+ * @property {string} rateLimit.resetAt
+ */
+
+/**
+ * @typedef {import("./labelling.js").RequiredLabelRule} RequiredLabelRule
+ */
+
+/**
+ * @typedef {Object} CheckRunResult
+ * @property {string} name
+ * @property {string} summary
+ * @property {"pending" | keyof typeof CheckConclusion} result
+ * @property {string} [target_url]
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -63,6 +142,7 @@ const FYI_CHECK_NAMES = [
   "Swagger PrettierCheck",
 ];
 const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
+const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 
 /** @type {CheckMetadata[]} */
@@ -209,14 +289,21 @@ const EXCLUDED_CHECK_NAMES = [];
  * @returns {Promise<void>}
  */
 export default async function summarizeChecks({ github, context, core }) {
-  logGitHubRateLimitInfo(github, core);
   let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
+
+  if (!issue_number) {
+    core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
+    return;
+  }
+
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
+  // Default target is this run itself
+  const target_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
   await summarizeChecksImpl(
     github,
-    context,
     core,
     owner,
     repo,
@@ -224,12 +311,34 @@ export default async function summarizeChecks({ github, context, core }) {
     head_sha,
     context.eventName,
     targetBranch,
+    target_url,
   );
 }
 
 /**
+ * @param {typeof import("@actions/core")} core
+ * @param {CheckRunData[]} requiredCheckRuns
+ * @param {CheckRunData[]} fyiCheckRuns
+ */
+export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
+  core.info(
+    `Observed ${requiredCheckRuns.length} required check runs ${requiredCheckRuns.length > 0 ? ":" : "."}`,
+  );
+  requiredCheckRuns.forEach((x) => {
+    core.info(
+      `Required check "${x.name}" with status "${x.status}" and conclusion "${x.conclusion}"`,
+    );
+  });
+  core.info(
+    `Observed ${fyiCheckRuns.length} FYI check runs ${fyiCheckRuns.length > 0 ? ":" : "."}`,
+  );
+  fyiCheckRuns.forEach((x) => {
+    core.info(`FYI check "${x.name}" with status "${x.status}" and conclusion "${x.conclusion}"`);
+  });
+}
+
+/**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github').context } context
  * @param {typeof import("@actions/core")} core
  * @param {string} owner
  * @param {string} repo
@@ -237,11 +346,11 @@ export default async function summarizeChecks({ github, context, core }) {
  * @param {string} head_sha
  * @param {string} event_name
  * @param {string} targetBranch
+ * @param {string} target_url
  * @returns {Promise<void>}
  */
 export async function summarizeChecksImpl(
   github,
-  context,
   core,
   owner,
   repo,
@@ -249,48 +358,20 @@ export async function summarizeChecksImpl(
   head_sha,
   event_name,
   targetBranch,
+  target_url,
 ) {
-  core.info(
-    `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`,
-  );
+  core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner: owner,
-    repo: repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
+  core.summary.addRaw("PR: ");
+  core.summary.addLink(prUrl, prUrl);
+  core.summary.write();
+  core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
-  /** @type {string[]} */
-  let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
+  let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
-  // handle our label trigger first, we may bail out early if it's a label action we're reacting to
-  // this also implies that if a label action is performed before any workflows complete, we shouldn't
-  // accidentally update the next steps to merge with the results of the workflows that haven't completed yet.
-  if (event_name in ["labeled", "unlabeled"]) {
-    // if anything goes wrong with label actions, the invocation will end within handleLabeledEvent due to localized error handling
-    const [labelsToAdd, labelsToRemove] = await handleLabeledEvent(
-      github,
-      context,
-      core,
-      owner,
-      repo,
-      issue_number,
-      event_name,
-      labelNames,
-    );
-
-    // adjust labelNames based on labelsToAdd/labelsToRemove
-    labelNames = labelNames.filter((name) => !labelsToRemove.includes(name));
-    for (const label of labelsToAdd) {
-      if (!labelNames.includes(label)) {
-        labelNames.push(label);
-      }
-    }
-  }
-
-  /** @type {[CheckRunData[], CheckRunData[]]} */
-  const [requiredCheckRuns, fyiCheckRuns] = await getCheckRunTuple(
+  /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
+  const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
     github,
     core,
     owner,
@@ -300,186 +381,225 @@ export async function summarizeChecksImpl(
     EXCLUDED_CHECK_NAMES,
   );
 
-  const commentBody = await createNextStepsComment(
+  outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
+
+  if (impactAssessment) {
+    core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
+    targetBranch = impactAssessment.targetBranch;
+  } else {
+    core.info(
+      `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
+        `No labels will be added or removed in this run, and only "pending" status check will be set.`,
+    );
+  }
+
+  let labelContext = await updateLabels(labelNames, impactAssessment);
+
+  core.info(
+    `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
+      `The following labels were present: [${Array.from(labelContext.present).join(", ")}]` +
+      `Removing labels [${Array.from(labelContext.toRemove).join(", ")}] then \n` +
+      `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
+  );
+
+  for (const label of labelContext.toRemove) {
+    core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+    await github.rest.issues.removeLabel({
+      owner: owner,
+      repo: repo,
+      issue_number: issue_number,
+      name: label,
+    });
+  }
+
+  if (labelContext.toAdd.size > 0) {
+    core.info(
+      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+    );
+    await github.rest.issues.addLabels({
+      owner: owner,
+      repo: repo,
+      issue_number: issue_number,
+      labels: Array.from(labelContext.toAdd),
+    });
+  }
+
+  // adjust labelNames based on labelsToAdd/labelsToRemove
+  labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
+  for (const label of labelContext.toAdd) {
+    if (!labelNames.includes(label)) {
+      labelNames.push(label);
+    }
+  }
+
+  const [commentBody, automatedChecksMet] = await createNextStepsComment(
     core,
     repo,
     labelNames,
     targetBranch,
     requiredCheckRuns,
     fyiCheckRuns,
+    impactAssessment !== undefined,
+    target_url,
   );
+
+  automatedChecksMet.target_url = target_url;
 
   core.info(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
+  core.summary.addRaw(`\n${commentBody}\n\n`);
+  core.summary.write();
+
   // this will remain commented until we're comfortable with the change.
-  // await commentOrUpdate(
-  //   { github, context, core },
-  //   owner,
-  //   repo,
-  //   issue_number,
-  //   commentName,
-  //   commentBody
-  // )
+  await commentOrUpdate(
+    github,
+    core,
+    owner,
+    repo,
+    issue_number,
+    commentBody,
+    NEXT_STEPS_COMMENT_ID,
+  );
+
+  // finally, update the "Automated merging requirements met" commit status
+  await updateCommitStatus(github, core, owner, repo, head_sha, automatedChecksMet);
+
+  core.info(
+    `Summarize checks has identified that status of "${AUTOMATED_CHECK_NAME}" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
+  );
+  core.summary.addHeading("Automated Checks Met", 2);
+  core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
+  core.summary.write();
+}
+
+/**
+ * Updates or creates a commit status with the given status
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} head_sha
+ * @param {CheckRunResult} checkResult
+ * @returns {Promise<void>}
+ */
+export async function updateCommitStatus(github, core, owner, repo, head_sha, checkResult) {
+  // Map CheckRunResult status to commit status state
+  /** @type {"pending" | "success" | "failure" | "error"} */
+  let state;
+
+  const validStates = [CheckConclusion.SUCCESS, CheckConclusion.FAILURE, "pending"];
+  if (validStates.includes(checkResult.result.toLowerCase())) {
+    state = /** @type {"pending" | "success" | "failure"} */ (checkResult.result.toLowerCase());
+  } else {
+    state = "error"; // fallback for unexpected values
+  }
+
+  // Create commit status instead of check run
+  await github.rest.repos.createCommitStatus({
+    owner,
+    repo,
+    sha: head_sha,
+    state: state,
+    description:
+      checkResult.summary.length > 140
+        ? checkResult.summary.substring(0, 137) + "..."
+        : checkResult.summary,
+    context: checkResult.name,
+    target_url: checkResult.target_url,
+  });
+
+  core.info(
+    `Created commit status for ${checkResult.name} with state: ${state} and description: ${checkResult.summary}`,
+  );
 }
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<void>}
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} issue_number
+ * @return {Promise<string[]>}
  */
-export async function logGitHubRateLimitInfo(github, core) {
-  try {
-    const { data: rateLimit } = await github.rest.rateLimit.get();
-    const { data: user } = await github.rest.users.getAuthenticated();
-    core.info(`GitHub RateLimit Info for user ${user.login}: ${JSON.stringify(rateLimit)}`);
-  } catch (e) {
-    core.error(`GitHub RateLimit Info: error emitting. Exception: ${e}`);
-  }
-}
-
-/**
- * A GraphQL query to GitHub API that returns all check runs for given commit, with "isRequired" field for given PR.
- *
- * If you want to see example response, copy the query body into this:
- * https://docs.github.com/en/graphql/overview/explorer
- * Example inputs:
- * resourceUrl: "https://github.com/test-repo-billy/azure-rest-api-specs/commit/c2789c5bde1b3f4fa34f76a8eeaaed479df23c4d"
- * prNumber: 2996
- *
- * Reference:
- * https://docs.github.com/en/graphql/reference/queries#resource
- * https://docs.github.com/en/graphql/guides/using-global-node-ids#3-do-a-direct-node-lookup-in-graphql
- * https://docs.github.com/en/graphql/reference/objects#checkrun
- * Rate limit:
- * https://docs.github.com/en/graphql/overview/resource-limitations#rate-limit
- * https://docs.github.com/en/graphql/reference/objects#ratelimit
- *
- * Note: here, for "checkRuns(first: ..)", maybe we should add a filter that filters to LATEST, per:
- * https://docs.github.com/en/graphql/reference/input-objects#checkrunfilter
- * https://docs.github.com/en/graphql/reference/enums#checkruntype
- **/
-/**
- * Returns a GraphQL query string for the given resource URL and PR number.
- *
- * @param {string} owner - The URL of the GitHub resource (commit).
- * @param {string} repo - The URL of the GitHub resource (commit).
- * @param {string} sha - targeted commit. context.pr!.headInfo.sha
- * @param {number} prNumber - The pull request number.
- * @returns {string} The GraphQL query string.
- */
-function getGraphQLQuery(owner, repo, sha, prNumber) {
-  const resourceUrl = `https://github.com/${owner}/${repo}/commit/${sha}`;
-
-  return `
-    {
-      resource(url: "${resourceUrl}") {
-        ... on Commit {
-          checkSuites(first: 20) {
-            nodes {
-              checkRuns(first: 30) {
-                nodes {
-                  name
-                  status
-                  conclusion
-                  isRequired(pullRequestNumber: ${prNumber})
-                }
-              }
-            }
-          }
-        }
-      }
-      rateLimit {
-        limit
-        cost
-        used
-        remaining
-        resetAt
-      }
-    }
-  `;
+export async function getExistingLabels(github, owner, repo, issue_number) {
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner,
+    repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  return labels.map((label) => label.name);
 }
 
 // #endregion
 // #region label update
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github').context } context
- * @param {typeof import("@actions/core")} core
- * @param {string} owner
- * @param {string} repo
- * @param {number} issue_number
- * @param {string} event_name
- * @param {string[]} known_labels
- * @returns {Promise<[string[], string[]]>}
+ * @param {Set<string>} labelsToAdd
+ * @param {Set<string>} labelsToRemove
  */
-// @ts-ignore: 'github' is currently unused but will be used after necessary changes
-export async function handleLabeledEvent(
-  github,
-  context,
-  core,
-  owner,
-  repo,
-  issue_number,
-  event_name,
-  known_labels,
-) {
-  // logic for this event is based on code directly ripped from pipelinebot:
-  // private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
-  // todo: further enhance with labelling actions from `PR Summary` check.
-  const changedLabel = context.payload.label?.name;
-  const labelsToAdd = new Set();
-  const labelsToRemove = new Set();
+function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
+  const intersection = [...intersect(labelsToAdd, labelsToRemove)];
+  if (intersection.length > 0) {
+    console.warn(
+      "ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! " +
+        `labelsToAdd: [${[...labelsToAdd].join(", ")}]. ` +
+        `labelsToRemove: [${[...labelsToRemove].join(", ")}]. ` +
+        `intersection: [${intersection.join(", ")}].`,
+    );
+  }
+}
 
-  if (event_name === "labeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-    }
-    if (changedLabel == "ARMSignedOff") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-      if (known_labels.indexOf("ARMChangesRequested") !== -1) {
-        labelsToRemove.add("ARMChangesRequested");
-      }
-    }
+// * @param {string} eventName
+// * @param {string | undefined } changedLabel
+/**
+ * @param {string[]} existingLabels
+ * @param {import("./labelling.js").ImpactAssessment | undefined} impactAssessment
+ * @returns {import("./labelling.js").LabelContext}
+ */
+export function updateLabels(existingLabels, impactAssessment) {
+  // logic for this function originally present in:
+  //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
+  //  - public/rest-api-specs-scripts/src/prSummary.ts
+  // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
 
-    for (const label of labelsToRemove) {
-      core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-      // await github.rest.issues.removeLabel({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   name: label,
-      // });
-    }
-  } else if (event_name === "unlabeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToAdd.add("WaitForARMFeedback");
-      }
-    }
+  /** @type {import("./labelling.js").LabelContext} */
+  const labelContext = {
+    present: new Set(existingLabels),
+    toAdd: new Set(),
+    toRemove: new Set(),
+  };
 
-    if (labelsToAdd.size > 0) {
-      core.info(
-        `Adding labels: ${Array.from(labelsToAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-      );
-      // await github.rest.issues.addLabels({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   labels: Array.from(labelsToAdd),
-      // });
-    }
+  if (impactAssessment) {
+    // will further update the label context if necessary
+    processImpactAssessment(labelContext, impactAssessment);
   }
 
-  return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
+  warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
+  return labelContext;
 }
 
 // #endregion
 // #region checks
+/**
+ * Extracts required status check context names from GitHub branch rules response.
+ * @param {import('@octokit/rest').RestEndpointMethodTypes['repos']['getBranchRules']['response']} checkResponseObj - The GitHub branch rules API response object
+ * @returns {string[]} Array of required status check context names (e.g., ["license/cla", "Swagger LintDiff"])
+ */
+export function getRequiredChecksFromBranchRuleOutput(checkResponseObj) {
+  const requiredChecks = [];
+
+  // Look through all rules for required_status_checks type
+  for (const rule of checkResponseObj.data) {
+    if (rule.type === "required_status_checks" && rule.parameters?.required_status_checks) {
+      for (const statusCheck of rule.parameters.required_status_checks) {
+        requiredChecks.push(statusCheck.context);
+      }
+    }
+  }
+
+  return requiredChecks;
+}
+
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
@@ -488,7 +608,7 @@ export async function handleLabeledEvent(
  * @param {string} head_sha - The commit SHA to check.
  * @param {number} prNumber - The pull request number.
  * @param {string[]} excludedCheckNames
- * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
+ * @returns {Promise<[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]>}
  */
 export async function getCheckRunTuple(
   github,
@@ -501,34 +621,202 @@ export async function getCheckRunTuple(
 ) {
   // This function was originally a version of getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns
   // but has been simplified for clarity and purpose.
-  /** @type {CheckRunData[]} */
-  let reqCheckRuns = [];
-  /** @type {CheckRunData[]} */
-  let fyiCheckRuns = [];
+  /** @type {string[]} */
+  let requiredCheckNames = [];
 
-  const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
-  core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
+  /** @type {number | undefined} */
+  let impactAssessmentWorkflowRun = undefined;
 
-  [reqCheckRuns, fyiCheckRuns] = extractRunsFromGraphQLResponse(response);
+  /** @type { import("./labelling.js").ImpactAssessment | undefined } */
+  let impactAssessment = undefined;
+
+  const allCheckRuns = await github.paginate(github.rest.checks.listForRef, {
+    owner: owner,
+    repo: repo,
+    ref: head_sha,
+    per_page: PER_PAGE_MAX,
+  });
+
+  const allCommitStatuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
+    owner: owner,
+    repo: repo,
+    ref: head_sha,
+    per_page: PER_PAGE_MAX,
+  });
+
+  // Process allCheckRuns and allCommitStatuses into unified CheckRunData array
+  // all checks will be considered as "FYI" until we have an impact assessment, so we can
+  // determine the target branch, and from there pull branch protect rulesets to ensure we
+  // are marking the required checks correctly.
+  /** @type {Array<CheckRunData & {_originalData: any, _source: string}>} */
+  const allChecks = [];
+
+  allCheckRuns.forEach((checkRun) => {
+    allChecks.push({
+      name: checkRun.name,
+      status: checkRun.status,
+      conclusion: checkRun.conclusion || null,
+      checkInfo: getCheckInfo(checkRun.name),
+      // Store original object for date sorting
+      _originalData: checkRun,
+      _source: "checkRun",
+    });
+  });
+
+  allCommitStatuses.forEach((status) => {
+    // Map commit status state to check run conclusion
+    let conclusion = null;
+    let checkStatus = "completed";
+
+    switch (status.state) {
+      case "success":
+        conclusion = "success";
+        break;
+      case "failure":
+        conclusion = "failure";
+        break;
+      case "error":
+        conclusion = "failure";
+        break;
+      case "pending":
+        checkStatus = "in_progress";
+        conclusion = null;
+        break;
+    }
+
+    allChecks.push({
+      name: status.context,
+      status: checkStatus,
+      conclusion: conclusion,
+      checkInfo: getCheckInfo(status.context),
+      // Store original object for date sorting and data access
+      _originalData: status,
+      _source: "commitStatus",
+    });
+  });
+
+  // Group by name and take the latest for each
+  const checksByName = new Map();
+
+  allChecks.forEach((check) => {
+    const name = check.name;
+    if (!checksByName.has(name)) {
+      checksByName.set(name, []);
+    }
+    checksByName.get(name).push(check);
+  });
+
+  // For each group, sort by date (newest first) and take the first one
+  const unifiedCheckRuns = [];
+  for (const [, checks] of checksByName) {
+    // Sort by date - newest first using invert(byDate(...))
+    const sortedChecks = checks.sort(
+      invert(
+        byDate((check) => {
+          if (check._source === "checkRun") {
+            // Check runs have started_at, completed_at, etc. Use the most recent available date
+            return (
+              check._originalData.completed_at ||
+              check._originalData.started_at ||
+              check._originalData.created_at
+            );
+          } else {
+            // Commit statuses have created_at and updated_at
+            return check._originalData.updated_at || check._originalData.created_at;
+          }
+        }),
+      ),
+    );
+
+    const latestCheck = sortedChecks[0];
+
+    if (
+      latestCheck.name === IMPACT_CHECK_NAME &&
+      latestCheck.status === "completed" &&
+      latestCheck.conclusion === "success"
+    ) {
+      const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+        owner,
+        repo,
+        head_sha: head_sha,
+        check_suite_id: latestCheck._originalData.check_suite.id,
+        per_page: PER_PAGE_MAX,
+      });
+
+      if (workflowRuns.length === 0) {
+        core.warning(
+          `No workflow runs found for check suite ID: ${latestCheck._originalData.check_suite.id}`,
+        );
+      } else {
+        // Sort by updated_at to get the most recent run
+        const sortedRuns = workflowRuns.sort(
+          (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+        );
+        impactAssessmentWorkflowRun = sortedRuns[0].id;
+
+        if (workflowRuns.length > 1) {
+          core.info(
+            `Found ${workflowRuns.length} workflow runs for check suite ID: ${latestCheck._originalData.check_suite.id}, using most recent: ${sortedRuns[0].id}`,
+          );
+        }
+      }
+    }
+
+    // Create clean CheckRunData without temporary properties
+    unifiedCheckRuns.push({
+      name: latestCheck.name,
+      status: latestCheck.status,
+      conclusion: latestCheck.conclusion,
+      checkInfo: latestCheck.checkInfo,
+    });
+  }
 
   core.info(
-    `RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, ` +
-      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}`,
-  );
-  const filteredReqCheckRuns = reqCheckRuns.filter(
-    /**
-     * @param {CheckRunData} checkRun
-     */
-    (checkRun) => !excludedCheckNames.includes(checkRun.name),
-  );
-  const filteredFyiCheckRuns = fyiCheckRuns.filter(
-    /**
-     * @param {CheckRunData} checkRun
-     */
-    (checkRun) => !excludedCheckNames.includes(checkRun.name),
+    `Processed ${allCheckRuns.length} check runs and ${allCommitStatuses.length} commit statuses into ${unifiedCheckRuns.length} unified checks`,
   );
 
-  return [filteredReqCheckRuns, filteredFyiCheckRuns];
+  if (impactAssessmentWorkflowRun) {
+    core.info(
+      `Impact Assessment Workflow Run ID is present: ${impactAssessmentWorkflowRun}. Downloading job summary artifact`,
+    );
+    impactAssessment = await getImpactAssessment(
+      github,
+      core,
+      owner,
+      repo,
+      impactAssessmentWorkflowRun,
+    );
+
+    const branchRules = await github.rest.repos.getBranchRules({
+      owner: owner,
+      repo: repo,
+      branch: impactAssessment.targetBranch,
+    });
+
+    if (branchRules) {
+      requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules).filter(
+        // "Automated merging requirements met" may be required in repo settings, to ensure PRs cannot be merged unless
+        // it's passing.  However, it must be excluded from our list of requiredCheckNames, since it's status is set
+        // by our own workflow.  If this check isn't excluded, it creates a deadlock where it can never be set.
+        (checkName) => checkName !== AUTOMATED_CHECK_NAME,
+      );
+    }
+  } else {
+    requiredCheckNames = [IMPACT_CHECK_NAME];
+  }
+
+  const filteredReqCheckRuns = unifiedCheckRuns.filter(
+    (checkRun) =>
+      !excludedCheckNames.includes(checkRun.name) && requiredCheckNames.includes(checkRun.name),
+  );
+  const filteredFyiCheckRuns = unifiedCheckRuns.filter(
+    (checkRun) =>
+      !excludedCheckNames.includes(checkRun.name) &&
+      !requiredCheckNames.includes(checkRun.name) &&
+      FYI_CHECK_NAMES.includes(checkRun.name),
+  );
+
+  return [filteredReqCheckRuns, filteredFyiCheckRuns, impactAssessment];
 }
 
 /**
@@ -553,61 +841,22 @@ export function checkRunIsSuccessful(checkRun) {
 }
 
 /**
- * @param {any} response - GraphQL response data
- * @returns {[CheckRunData[], CheckRunData[]]}
+ * Get metadata for a specific check from our index.
+ * @param {string} checkName
+ * @returns {CheckMetadata}
  */
-function extractRunsFromGraphQLResponse(response) {
-  /** @type {CheckRunData[]} */
-  const reqCheckRuns = [];
-  /** @type {CheckRunData[]} */
-  const fyiCheckRuns = [];
-
-  // Define the automated merging requirements check name
-
-  if (response.resource?.checkSuites?.nodes) {
-    response.resource.checkSuites.nodes.forEach(
-      /** @param {{ checkRuns?: { nodes?: any[] } }} checkSuiteNode */
-      (checkSuiteNode) => {
-        if (checkSuiteNode.checkRuns?.nodes) {
-          checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
-            // We have some specific guidance for some of the required checks.
-            const checkInfo =
-              CHECK_METADATA.find((metadata) => metadata.name === checkRunNode.name) ||
-              /** @type {CheckMetadata} */ ({
-                precedence: 1000,
-                name: checkRunNode.name,
-                suppressionLabels: [],
-                troubleshootingGuide: defaultTsg,
-              });
-
-            if (checkRunNode.isRequired) {
-              reqCheckRuns.push({
-                name: checkRunNode.name,
-                status: checkRunNode.status,
-                conclusion: checkRunNode.conclusion,
-                checkInfo: checkInfo,
-              });
-            }
-            // Note the "else" here. It means that:
-            // A GH check will be bucketed into "failing FYI check run" if:
-            // - It is failing
-            // - AND is is NOT marked as 'required' in GitHub branch policy
-            // - AND it is marked as 'FYI' in this file's FYI_CHECK_NAMES array
-            else if (FYI_CHECK_NAMES.includes(checkRunNode.name)) {
-              fyiCheckRuns.push({
-                name: checkRunNode.name,
-                status: checkRunNode.status,
-                conclusion: checkRunNode.conclusion,
-                checkInfo: checkInfo,
-              });
-            }
-          });
-        }
-      },
-    );
-  }
-  return [reqCheckRuns, fyiCheckRuns];
+export function getCheckInfo(checkName) {
+  return (
+    CHECK_METADATA.find((metadata) => metadata.name === checkName) ||
+    /** @type {CheckMetadata} */ ({
+      precedence: 1000,
+      name: checkName,
+      suppressionLabels: [],
+      troubleshootingGuide: defaultTsg,
+    })
+  );
 }
+
 // #endregion
 // #region next steps
 /**
@@ -618,7 +867,9 @@ function extractRunsFromGraphQLResponse(response) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
- * @returns {Promise<string>}
+ * @param {boolean} assessmentCompleted
+ * @param {string} target_url
+ * @returns {Promise<[string, CheckRunResult]>}
  */
 export async function createNextStepsComment(
   core,
@@ -627,29 +878,40 @@ export async function createNextStepsComment(
   targetBranch,
   requiredRuns,
   fyiRuns,
+  assessmentCompleted,
+  target_url,
 ) {
   // select just the metadata that we need about the runs.
-  const requiredCheckInfos = requiredRuns
+  const failingCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
-  const requiredCheckInfosPresent = requiredRuns.some((run) => {
+
+  // determine if required runs have any in-progress or queued runs
+  // if there are any, we consider the requirements not met.
+  // if there are NO required runs, we also consider this to be a "requirements met" situation.
+  // there is a possibility that this will be a false positive, but it is better than
+  // assuming that the requirements are not met when they actually are.
+  const requiredCheckInfosPresent = requiredRuns.every((run) => {
     const status = run.status.toLowerCase();
-    return status !== "queued" && status !== "in_progress";
+    return status === "completed";
   });
+
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  const commentBody = await buildNextStepsToMergeCommentBody(
+  const [commentBody, automatedChecksMet] = await buildNextStepsToMergeCommentBody(
     core,
     labels,
     `${repo}/${targetBranch}`,
     requiredCheckInfosPresent,
-    requiredCheckInfos,
+    failingCheckInfos,
     fyiCheckInfos,
+    assessmentCompleted,
+    target_url,
   );
 
-  return commentBody;
+  return [commentBody, automatedChecksMet];
 }
 
 /**
@@ -659,7 +921,9 @@ export async function createNextStepsComment(
  * @param {boolean} requiredCheckInfosPresent
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
- * @returns {Promise<string>}
+ * @param {boolean} assessmentCompleted
+ * @param {string} target_url
+ * @returns {Promise<[string, CheckRunResult]>}
  */
 async function buildNextStepsToMergeCommentBody(
   core,
@@ -668,33 +932,37 @@ async function buildNextStepsToMergeCommentBody(
   requiredCheckInfosPresent,
   failingReqChecksInfo,
   failingFyiChecksInfo,
+  assessmentCompleted,
+  target_url,
 ) {
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
 
   const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
-  // this is the first place of adjusted logic. I am treating `requirementsMet` as `no failed required checks`.
-  // I do this because the `automatedMergingRequirementsMetCheckRun` WILL NOT BE PRESENT in the new world.
-  // The new world we will simply pull all the required checks and if any are failing then we are blocked. If there are
-  // no failed checks we can't yet say that everything is met, because a check MIGHT run in the future. To prevent
-  // this "no checks run" accidentally evaluating as success, we need to ensure that we have at least one failing check
-  // in the required checks to consider the requirements met
+  // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
   const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
-  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent;
+  // we consider requirements met if there are:
+  // - no blockers (which includes violated labelling rules in its definition) (anyBlockerPresent)
+  // - that none of the required checks are in_progress or queued (requiredCheckInfosPresent)
+  // - and that the assessment is completed. If it is not, we assume we are still evaluating the requirements. Not having
+  //   the assessment completed is a blocker, as we may end up having violated labelling rules that would be detected only after
+  //   it is completed.
+  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent && assessmentCompleted;
 
   // Compose the body based on the current state
-  const commentBody = getCommentBody(
+  const [commentBody, automatedChecksMet] = getCommentBody(
     requirementsMet,
     anyBlockerPresent,
     anyFyiPresent,
     failingReqChecksInfo,
     failingFyiChecksInfo,
     violatedReqLabelsRules,
+    target_url,
   );
 
-  return commentTitle + commentBody;
+  return [commentTitle + commentBody, automatedChecksMet];
 }
 
 /**
@@ -705,7 +973,8 @@ async function buildNextStepsToMergeCommentBody(
  * @param {CheckMetadata[]} failingReqChecksInfo - Failing required checks info
  * @param {CheckMetadata[]} failingFyiChecksInfo - Failing FYI checks info
  * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
- * @returns {string} The body content HTML
+ * @param {string} target_url - The target URL for the automated checks met run which will be set at the outset of summarize-checks
+ * @returns {[string, CheckRunResult]} The body content HTML and the CheckRunResult that automated checks met should be set to.
  */
 function getCommentBody(
   requirementsMet,
@@ -714,12 +983,21 @@ function getCommentBody(
   failingReqChecksInfo,
   failingFyiChecksInfo,
   violatedRequiredLabelsRules,
+  target_url,
 ) {
+  /** @type {"pending" | keyof typeof CheckConclusion} */
+  let status = "pending";
+  let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
+
+  // Generate the comment body using the original logic for backwards compatibility
   let bodyProper = "";
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
+      summaryData =
+        "❌ This PR cannot be merged because some requirements are not met. See the details.";
+      status = "FAILURE";
     }
 
     if (anyBlockerPresent && anyFyiPresent) {
@@ -728,19 +1006,43 @@ function getCommentBody(
 
     if (anyFyiPresent) {
       bodyProper += getFyiPresentBody(failingFyiChecksInfo);
-      if (!anyBlockerPresent) {
+      if (!anyBlockerPresent && requirementsMet) {
         bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
+        summaryData =
+          `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
+          `but soon these requirements will be blocking.` +
+          `<br/>See <code>Next Steps to merge</code> comment on this PR for details on how to address them.` +
+          `<br/>If you want to proceed with merging this PR without fixing them, refer to ` +
+          `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
+        status = "SUCCESS";
       }
     }
   } else if (requirementsMet) {
     bodyProper =
       `✅ All automated merging requirements have been met! ` +
       `To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
+    summaryData =
+      `✅ All automated merging requirements have been met.` +
+      `<br/>To merge this PR, refer to ` +
+      `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.` +
+      "<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).";
+    status = "SUCCESS";
   } else {
     bodyProper =
       "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+    // dont need to update the status of the check, as pending is the default state.
   }
-  return bodyProper;
+
+  bodyProper += `<br /><br />Comment generated by <a href="${target_url}">summarize-checks</a> workflow run.`;
+
+  /** @type {CheckRunResult} */
+  const automatedChecksMet = {
+    name: AUTOMATED_CHECK_NAME,
+    summary: summaryData,
+    result: status,
+  };
+
+  return [bodyProper, automatedChecksMet];
 }
 
 /**
@@ -823,5 +1125,68 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
       .join("");
   }
   return violatedReqLabelsNextStepsText;
+}
+// #endregion
+
+// #region artifact downloading
+/**
+ * Downloads the job-summary artifact for a given workflow run.
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} runId - The workflow run databaseId
+ * @returns {Promise<import("./labelling.js").ImpactAssessment>} The parsed job summary data
+ */
+export async function getImpactAssessment(github, core, owner, repo, runId) {
+  // List artifacts for provided workflow run
+  const jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+    owner,
+    repo,
+    run_id: runId,
+    name: "job-summary",
+    per_page: PER_PAGE_MAX,
+  });
+
+  // If multiple artifacts with same name, select latest updated
+  const jobSummaryArtifact = jobSummaryArtifacts.sort(
+    invert(byDate((a) => a.updated_at || "1970")),
+  )[0];
+
+  if (!jobSummaryArtifact) {
+    throw new Error(
+      `Unable to find job-summary artifact for run ID: ${runId}. This should never happen, as this section of code should only run with a valid runId.`,
+    );
+  }
+
+  // Download the artifact as a zip archive
+  const download = await github.rest.actions.downloadArtifact({
+    owner,
+    repo,
+    artifact_id: jobSummaryArtifact.id,
+    archive_format: "zip",
+  });
+
+  core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
+
+  // Write zip buffer to temp file and extract JSON
+  const tmpZip = path.join(process.env.RUNNER_TEMP || os.tmpdir(), `job-summary-${runId}.zip`);
+  // Convert ArrayBuffer to Buffer
+  // Convert ArrayBuffer (download.data) to Node Buffer
+  const arrayBuffer = /** @type {ArrayBuffer} */ (download.data);
+  const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
+  await fs.writeFile(tmpZip, zipBuffer);
+
+  // Extract JSON content from zip archive
+  // Could replace with library like 'fflate' instead of 'exec unzip', but
+  // this would require 'npm i', while 'unzip' is pre-installed.
+  const { stdout: jsonContent } = await execFile("unzip", ["-p", tmpZip]);
+
+  await fs.unlink(tmpZip);
+
+  /** @type {import("./labelling.js").ImpactAssessment} */
+  // todo: we need to zod this to ensure the structure is correct, however we do not have zod installed at time of run
+  const impact = JSON.parse(jsonContent);
+  return impact;
 }
 // #endregion

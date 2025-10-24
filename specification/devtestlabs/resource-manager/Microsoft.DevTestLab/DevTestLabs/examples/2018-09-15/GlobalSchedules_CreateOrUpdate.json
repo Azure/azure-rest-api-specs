@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "name": "labvmautostart",
+    "api-version": "2018-09-15",
+    "resourceGroupName": "resourceGroupName",
+    "schedule": {
+      "properties": {
+        "status": "Enabled",
+        "taskType": "LabVmsStartupTask",
+        "timeZoneId": "Hawaiian Standard Time",
+        "weeklyRecurrence": {
+          "time": "0700",
+          "weekdays": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ]
+        }
+      }
+    },
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "LabVmAutoStart",
+        "type": "microsoft.devtestlab/labs/schedules",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/schedules/labvmautostart",
+        "location": "{location}",
+        "properties": {
+          "createdDate": "2020-12-29T22:54:54.9335182+00:00",
+          "notificationSettings": {
+            "status": "Disabled",
+            "timeInMinutes": 0
+          },
+          "provisioningState": "Succeeded",
+          "status": "Enabled",
+          "taskType": "LabVmsStartupTask",
+          "timeZoneId": "Hawaiian Standard Time",
+          "uniqueIdentifier": "{id}",
+          "weeklyRecurrence": {
+            "time": "0700",
+            "weekdays": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ]
+          }
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "LabVmAutoStart",
+        "type": "microsoft.devtestlab/labs/schedules",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/schedules/labvmautostart",
+        "location": "{location}",
+        "properties": {
+          "createdDate": "2020-12-29T22:54:54.9335182+00:00",
+          "notificationSettings": {
+            "status": "Disabled",
+            "timeInMinutes": 0
+          },
+          "provisioningState": "Succeeded",
+          "status": "Enabled",
+          "taskType": "LabVmsStartupTask",
+          "timeZoneId": "Hawaiian Standard Time",
+          "uniqueIdentifier": "{id}",
+          "weeklyRecurrence": {
+            "time": "0700",
+            "weekdays": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ]
+          }
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "GlobalSchedules_CreateOrUpdate",
+  "title": "GlobalSchedules_CreateOrUpdate"
+}

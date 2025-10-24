@@ -1,0 +1,2448 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Confidential Ledger",
+    "version": "2024-12-09-preview",
+    "description": "Write and retrieve ledger entries against the Confidential Ledger service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{ledgerEndpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "ledgerEndpoint",
+        "in": "path",
+        "description": "The Confidential Ledger URL, for example https://contoso.confidentialledger.azure.com.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/app/collections": {
+      "get": {
+        "operationId": "ListCollections",
+        "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
+        "description": "Collection ids are user-created collections of ledger entries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedCollections"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Collections": {
+            "$ref": "./examples/ListCollections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "collections"
+        }
+      }
+    },
+    "/app/enclaveQuotes": {
+      "get": {
+        "operationId": "GetEnclaveQuotes",
+        "summary": "Gets quotes for all nodes of the Confidential Ledger.",
+        "description": "A quote is an SGX enclave measurement that can be used to verify the validity\nof a node and its enclave.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerEnclaves"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Enclave Quotes": {
+            "$ref": "./examples/GetEnclaveQuotes.json"
+          }
+        }
+      }
+    },
+    "/app/governance/constitution": {
+      "get": {
+        "operationId": "GetConstitution",
+        "summary": "Gets the constitution used for governance.",
+        "description": "The constitution is a script that assesses and applies proposals from\nconsortium members.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Constitution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Constitution": {
+            "$ref": "./examples/GetConstitution.json"
+          }
+        }
+      }
+    },
+    "/app/governance/members": {
+      "get": {
+        "operationId": "ListConsortiumMembers",
+        "summary": "Lists the consortium members.",
+        "description": "Consortium members can manage the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Consortium Members": {
+            "$ref": "./examples/ListConsortiumMembers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "members"
+        }
+      }
+    },
+    "/app/ledgerUsers": {
+      "get": {
+        "operationId": "ListLedgerUsers",
+        "summary": "Gets details on a list of users.",
+        "description": "All users' object IDs and multiple roles will be returned.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedLedgerUsers"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Ledger Users": {
+            "$ref": "./examples/ListLedgerUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "ledgerUsers"
+        }
+      }
+    },
+    "/app/ledgerUsers/{userId}": {
+      "get": {
+        "operationId": "GetLedgerUser",
+        "summary": "Gets a user with multiple roles.",
+        "description": "Gets a user with multiple roles.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUserMultipleRoles"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Ledger User": {
+            "$ref": "./examples/GetLedgerUser.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CreateOrUpdateLedgerUser",
+        "summary": "Adds a user or updates a user's fields.",
+        "description": "A JSON merge patch is applied for existing users",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userMultipleRoles",
+            "in": "body",
+            "description": "Details about a Confidential Ledger user with multiple roles.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LedgerUserMultipleRoles"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUserMultipleRoles"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Or Update Ledger User": {
+            "$ref": "./examples/CreateOrUpdateLedgerUser.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteLedgerUser",
+        "summary": "Deletes a user with multiple roles from the Confidential Ledger.",
+        "description": "Deletes a user with multiple roles from the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Ledger User": {
+            "$ref": "./examples/DeleteLedgerUser.json"
+          }
+        }
+      }
+    },
+    "/app/roles": {
+      "get": {
+        "operationId": "GetUserDefinedRole",
+        "summary": "Gets role actions for user defined roles",
+        "description": "user defined roles allow users to define and manage app specific AuthZ policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "roleName",
+            "in": "query",
+            "description": "user defined role name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedRole"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get User Defined Role": {
+            "$ref": "./examples/GetUserDefinedRole.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateUserDefinedRole",
+        "summary": "Creates new roles and their actions",
+        "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserDefinedRoles"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Created User Defined Role": {
+            "$ref": "./examples/CreateUserDefinedRole.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateUserDefinedRole",
+        "summary": "Patch replaces the allowed action on existing roles,if the desire is to remove\nan existing action, the role must be deleted and recreated.",
+        "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserDefinedRoles"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update User Defined Role": {
+            "$ref": "./examples/UpdateUserDefinedRole.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteUserDefinedRole",
+        "summary": "Deletes user defined roles",
+        "description": "A user defined role allows the users to create and manage their own role\nactions using the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "roleName",
+            "in": "query",
+            "description": "user defined role name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete User Defined Role": {
+            "$ref": "./examples/DeleteUserDefinedRole.json"
+          }
+        }
+      }
+    },
+    "/app/transactions": {
+      "get": {
+        "operationId": "ListLedgerEntries",
+        "summary": "Gets ledger entries from a collection corresponding to a range.",
+        "description": "A collection id may optionally be specified. Only entries in the specified (or\ndefault) collection will be returned.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "query",
+            "description": "The collection id.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fromTransactionId",
+            "in": "query",
+            "description": "Specify the first transaction ID in a range.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "toTransactionId",
+            "in": "query",
+            "description": "Specify the last transaction ID in a range.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Single tag.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedLedgerEntries"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Ledger Entries": {
+            "$ref": "./examples/ListLedgerEntries.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "entries"
+        }
+      },
+      "post": {
+        "operationId": "CreateLedgerEntry",
+        "summary": "Writes a ledger entry.",
+        "description": "A collection id may optionally be specified.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "query",
+            "description": "The collection id.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Comma separated tags.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "entry",
+            "in": "body",
+            "description": "Ledger entry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LedgerEntry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LedgerWriteResult"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Ledger Entry": {
+            "$ref": "./examples/CreateLedgerEntry.json"
+          }
+        }
+      }
+    },
+    "/app/transactions/{transactionId}": {
+      "get": {
+        "operationId": "GetLedgerEntry",
+        "summary": "Gets the ledger entry at the specified transaction id. A collection id may\noptionally be specified to indicate the collection from which to fetch the\nvalue.",
+        "description": "To return older ledger entries, the relevant sections of the ledger must be\nread from disk and validated. To prevent blocking within the enclave, the\nresponse will indicate whether the entry is ready and part of the response, or\nif the loading is still ongoing.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "query",
+            "description": "The collection id.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "description": "Identifies a write transaction.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LedgerQueryResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Ledger Entry": {
+            "$ref": "./examples/GetLedgerEntry.json"
+          }
+        }
+      }
+    },
+    "/app/transactions/{transactionId}/receipt": {
+      "get": {
+        "operationId": "GetReceipt",
+        "summary": "Gets a receipt certifying ledger contents at a particular transaction id.",
+        "description": "Gets a receipt certifying ledger contents at a particular transaction id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "description": "Identifies a write transaction.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransactionReceipt"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Receipt": {
+            "$ref": "./examples/GetReceipt.json"
+          }
+        }
+      }
+    },
+    "/app/transactions/{transactionId}/status": {
+      "get": {
+        "operationId": "GetTransactionStatus",
+        "summary": "Gets the status of an entry identified by a transaction id.",
+        "description": "Gets the status of an entry identified by a transaction id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "description": "Identifies a write transaction.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransactionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Transaction Status": {
+            "$ref": "./examples/GetTransactionStatus.json"
+          }
+        }
+      }
+    },
+    "/app/transactions/current": {
+      "get": {
+        "operationId": "GetCurrentLedgerEntry",
+        "summary": "Gets the current value available in the ledger.",
+        "description": "A collection id may optionally be specified.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "query",
+            "description": "The collection id.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LedgerEntry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Current Ledger Entry": {
+            "$ref": "./examples/GetCurrentLedgerEntry.json"
+          }
+        }
+      }
+    },
+    "/app/userDefinedEndpoints": {
+      "get": {
+        "operationId": "GetUserDefinedEndpoint",
+        "summary": "Gets a user defined endpoint.",
+        "description": "Returns the user defined endpoint in the ACL instance",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Bundle"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get User Defined Endpoint": {
+            "$ref": "./examples/GetUserDefinedEndpoint.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateUserDefinedEndpoint",
+        "summary": "Creates a user defined endpoint.",
+        "description": "Creates the user defined endpoint in the ACL instance",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "bundle",
+            "in": "body",
+            "description": "Specify a user defined endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Bundle"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create User Defined Endpoint": {
+            "$ref": "./examples/CreateUserDefinedEndpoint.json"
+          }
+        }
+      }
+    },
+    "/app/userDefinedEndpoints/modules": {
+      "get": {
+        "operationId": "GetUserDefinedEndpointsModule",
+        "summary": "Module for user defined endpoints.",
+        "description": "It gets the module for the user defined endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "module_name",
+            "in": "query",
+            "description": "module name of the user defined endpoint",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "moduleName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModuleDef"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get User Defined Endpoints Module": {
+            "$ref": "./examples/GetUserDefinedEndpointsModule.json"
+          }
+        }
+      }
+    },
+    "/app/userDefinedEndpoints/runtimeOptions": {
+      "get": {
+        "operationId": "GetRuntimeOptions",
+        "summary": "Runtime options for user defined endpoints.",
+        "description": "It returns the runtime options",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JsRuntimeOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Runtime Options": {
+            "$ref": "./examples/GetRuntimeOptions.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateRuntimeOptions",
+        "summary": "Runtime options for user defined endpoints.",
+        "description": "Updates the runtime options.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jsRuntimeOptions",
+            "in": "body",
+            "description": "JS Runtime options",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsRuntimeOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JsRuntimeOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Runtime Options": {
+            "$ref": "./examples/UpdateRuntimeOptions.json"
+          }
+        }
+      }
+    },
+    "/app/userDefinedFunctions": {
+      "get": {
+        "operationId": "ListUserDefinedFunctions",
+        "summary": "Retrieves a list of user defined functions present in the Confidential Ledger",
+        "description": "User defined functions stored in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUserDefinedFunctions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List User Defined Functions": {
+            "$ref": "./examples/ListUserDefinedFunctions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "functions"
+        }
+      }
+    },
+    "/app/userDefinedFunctions/{functionId}": {
+      "get": {
+        "operationId": "GetUserDefinedFunction",
+        "summary": "Gets a user defined function.",
+        "description": "Returns the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "functionId",
+            "in": "path",
+            "description": "Identifies a user defined function.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get User Defined Function": {
+            "$ref": "./examples/GetUserDefinedFunction.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateUserDefinedFunction",
+        "summary": "Creates a user defined function.",
+        "description": "Creates the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "functionId",
+            "in": "path",
+            "description": "Identifies a user defined function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userDefinedFunction",
+            "in": "body",
+            "description": "Specify a user defined function of a Confidential Ledger.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Or Update Ledger User Defined Function": {
+            "$ref": "./examples/CreateOrUpdateUserDefinedFunction.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteUserDefinedFunction",
+        "summary": "Deletes a user defined function from the Confidential Ledger.",
+        "description": "Deletes a user defined function from the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "functionId",
+            "in": "path",
+            "description": "Identifies a user defined function.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete User Defined Function": {
+            "$ref": "./examples/DeleteUserDefinedFunction.json"
+          }
+        }
+      }
+    },
+    "/app/userDefinedFunctions/{functionId}:execute": {
+      "post": {
+        "operationId": "ExecuteUserDefinedFunction",
+        "summary": "Executes a user defined function.",
+        "description": "Executes the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "functionId",
+            "in": "path",
+            "description": "Identifies a user defined function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userDefinedFunctionExecutionProperties",
+            "in": "body",
+            "description": "Specify user defined function execution properties.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunctionExecutionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunctionExecutionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute User Defined Function": {
+            "$ref": "./examples/ExecuteUserDefinedFunction.json"
+          }
+        }
+      }
+    },
+    "/app/users": {
+      "get": {
+        "operationId": "ListUsers",
+        "summary": "Gets details on a list of users.",
+        "description": "All users' object IDs and single role per user will be returned.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUsers"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Users": {
+            "$ref": "./examples/ListUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "ledgerUsers"
+        }
+      }
+    },
+    "/app/users/{userId}": {
+      "get": {
+        "operationId": "GetUser",
+        "summary": "Gets a user.",
+        "description": "Gets a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get User": {
+            "$ref": "./examples/GetUser.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CreateOrUpdateUser",
+        "summary": "Adds a user or updates a user's fields.",
+        "description": "A JSON merge patch is applied for existing users",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userDetails",
+            "in": "body",
+            "description": "Details about a Confidential Ledger user.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LedgerUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Or Update User": {
+            "$ref": "./examples/CreateOrUpdateUser.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteUser",
+        "summary": "Deletes a user from the Confidential Ledger.",
+        "description": "Deletes a user from the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete User": {
+            "$ref": "./examples/DeleteUser.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationClaim": {
+      "type": "object",
+      "description": "A claim of a ledger application.",
+      "properties": {
+        "digest": {
+          "$ref": "#/definitions/ClaimDigest",
+          "description": "An application claim in digested form."
+        },
+        "kind": {
+          "$ref": "#/definitions/ApplicationClaimKind",
+          "description": "Represents the kind of an application claim."
+        },
+        "ledgerEntry": {
+          "$ref": "#/definitions/LedgerEntryClaim",
+          "description": "An application claim derived from ledger entry data."
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "ApplicationClaimKind": {
+      "type": "string",
+      "description": "Represents the kind of an application claim.",
+      "enum": [
+        "LedgerEntry",
+        "ClaimDigest"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationClaimKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LedgerEntry",
+            "value": "LedgerEntry",
+            "description": "Claim derived from a ledger entry"
+          },
+          {
+            "name": "ClaimDigest",
+            "value": "ClaimDigest",
+            "description": "Claim in digested form"
+          }
+        ]
+      }
+    },
+    "ApplicationClaimProtocol": {
+      "type": "string",
+      "description": "Represents the protocol to be used to compute the digest of a claim from the\ngiven claim data.",
+      "enum": [
+        "LedgerEntryV1"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationClaimProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LedgerEntryV1",
+            "value": "LedgerEntryV1",
+            "description": "Ledger Entry V1 protocol"
+          }
+        ]
+      }
+    },
+    "Bundle": {
+      "type": "object",
+      "description": "bundle for the user defined endpoints",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata information for the bundle."
+        },
+        "modules": {
+          "type": "array",
+          "description": "Any object",
+          "items": {
+            "$ref": "#/definitions/ModuleDef"
+          }
+        }
+      },
+      "required": [
+        "metadata",
+        "modules"
+      ]
+    },
+    "ClaimDigest": {
+      "type": "object",
+      "description": "An application claim in digested form.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The digest of the application claim, in hexadecimal form."
+        },
+        "protocol": {
+          "$ref": "#/definitions/ApplicationClaimProtocol",
+          "description": "Represents the protocol to be used to compute the digest of a claim from the\ngiven claim data."
+        }
+      },
+      "required": [
+        "protocol"
+      ]
+    },
+    "Collection": {
+      "type": "object",
+      "description": "Identifier for collections.",
+      "properties": {
+        "collectionId": {
+          "type": "string",
+          "description": "Identifier for the collection."
+        }
+      },
+      "required": [
+        "collectionId"
+      ]
+    },
+    "ConfidentialLedgerCommon.ConfidentialLedgerError": {
+      "type": "object",
+      "description": "An error response from Confidential Ledger.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerErrorBody",
+          "description": "An error response from Confidential Ledger.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfidentialLedgerCommon.ConfidentialLedgerErrorBody": {
+      "type": "object",
+      "description": "An error response from Confidential Ledger.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfidentialLedgerEnclaves": {
+      "type": "object",
+      "description": "Information about the enclaves running the Confidential Ledger.",
+      "properties": {
+        "currentNodeId": {
+          "type": "string",
+          "description": "Id of the Confidential Ledger node responding to the request."
+        },
+        "enclaveQuotes": {
+          "type": "object",
+          "description": "Dictionary of enclave quotes, indexed by node id.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnclaveQuote"
+          }
+        }
+      },
+      "required": [
+        "currentNodeId",
+        "enclaveQuotes"
+      ]
+    },
+    "ConfidentialLedgerQueryState": {
+      "type": "string",
+      "description": "State of a ledger query.",
+      "enum": [
+        "Loading",
+        "Ready"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialLedgerQueryState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Loading",
+            "value": "Loading",
+            "description": "The query is still loading"
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The query is ready"
+          }
+        ]
+      }
+    },
+    "ConfidentialLedgerUserRoleName": {
+      "type": "string",
+      "description": "Represents an assignable role.",
+      "enum": [
+        "Administrator",
+        "Contributor",
+        "Reader"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialLedgerUserRoleName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Administrator",
+            "value": "Administrator",
+            "description": "Administrator role"
+          },
+          {
+            "name": "Contributor",
+            "value": "Contributor",
+            "description": "Contributor role"
+          },
+          {
+            "name": "Reader",
+            "value": "Reader",
+            "description": "Reader role"
+          }
+        ]
+      }
+    },
+    "Consortium": {
+      "type": "object",
+      "description": "List of members in the consortium.",
+      "properties": {
+        "members": {
+          "type": "array",
+          "description": "Members in the consortium.",
+          "items": {
+            "$ref": "#/definitions/ConsortiumMember"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Path from which to retrieve the next page of results."
+        }
+      },
+      "required": [
+        "members"
+      ]
+    },
+    "ConsortiumMember": {
+      "type": "object",
+      "description": "Describes a member of the consortium.",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "description": "PEM-encoded certificate associated with the member."
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier assigned to the member."
+        }
+      },
+      "required": [
+        "certificate",
+        "id"
+      ]
+    },
+    "Constitution": {
+      "type": "object",
+      "description": "The governance script for the application.",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "description": "SHA256 digest of the constitution script."
+        },
+        "script": {
+          "type": "string",
+          "description": "Contents of the constitution."
+        }
+      },
+      "required": [
+        "digest",
+        "script"
+      ]
+    },
+    "EnclaveQuote": {
+      "type": "object",
+      "description": "Contains the enclave quote.",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "ID assigned to this node."
+        },
+        "mrenclave": {
+          "type": "string",
+          "description": "MRENCLAVE value of the code running in the enclave."
+        },
+        "quoteVersion": {
+          "type": "string",
+          "description": "Version of the quote presented."
+        },
+        "raw": {
+          "type": "string",
+          "description": "Raw SGX quote, parsable by tools like Open Enclave's oeverify."
+        }
+      },
+      "required": [
+        "nodeId",
+        "quoteVersion",
+        "raw"
+      ]
+    },
+    "EndpointProperties": {
+      "type": "object",
+      "description": "Endpoint properties.",
+      "properties": {
+        "authn_policies": {
+          "type": "array",
+          "description": "Authentication policies for the endpoint.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "x-ms-client-name": "authnPolicies"
+        },
+        "forwarding_required": {
+          "$ref": "#/definitions/ForwardingRequired",
+          "description": "Indicates whether request forwarding is required for this endpoint.",
+          "x-ms-client-name": "forwardingRequired"
+        },
+        "interpreter_reuse": {
+          "$ref": "#/definitions/InterpreterReusePolicy",
+          "description": "Policy for interpreter reuse.",
+          "x-ms-client-name": "interpreterReuse"
+        },
+        "js_function": {
+          "type": "string",
+          "description": "The JavaScript function.",
+          "x-ms-client-name": "jsFunction"
+        },
+        "js_module": {
+          "type": "string",
+          "description": "The JavaScript module.",
+          "x-ms-client-name": "jsModule"
+        },
+        "mode": {
+          "$ref": "#/definitions/Mode",
+          "description": "The operation mode for this endpoint."
+        },
+        "openapi": {
+          "type": "object",
+          "description": "Anything",
+          "additionalProperties": {}
+        },
+        "openapi_hidden": {
+          "type": "boolean",
+          "description": "Openapi hidden",
+          "x-ms-client-name": "openapiHidden"
+        },
+        "redirection_strategy": {
+          "$ref": "#/definitions/RedirectionStrategy",
+          "description": "Redirection strategy",
+          "x-ms-client-name": "redirectionStrategy"
+        }
+      },
+      "required": [
+        "authn_policies",
+        "forwarding_required"
+      ]
+    },
+    "ForwardingRequired": {
+      "type": "string",
+      "description": "Indicates whether request forwarding is required for this operation.",
+      "enum": [
+        "sometimes",
+        "always",
+        "never"
+      ],
+      "x-ms-enum": {
+        "name": "ForwardingRequired",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "sometimes",
+            "value": "sometimes",
+            "description": "Forwarding is required sometimes"
+          },
+          {
+            "name": "always",
+            "value": "always",
+            "description": "Forwarding is always required"
+          },
+          {
+            "name": "never",
+            "value": "never",
+            "description": "Forwarding is never required"
+          }
+        ]
+      }
+    },
+    "InterpreterReusePolicy": {
+      "type": "object",
+      "description": "Policy for interpreter reuse.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key for the interpreter reuse policy."
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "JsRuntimeOptions": {
+      "type": "object",
+      "description": "JS runtime options for user defined endpoints and functions",
+      "properties": {
+        "log_exception_details": {
+          "type": "boolean",
+          "description": "Whether to log exception details in the runtime.",
+          "x-ms-client-name": "logExceptionDetails"
+        },
+        "max_cached_interpreters": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of cached interpreters.",
+          "minimum": 0,
+          "x-ms-client-name": "maxCachedInterpreters"
+        },
+        "max_execution_time_ms": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum execution time in milliseconds.",
+          "minimum": 0,
+          "x-ms-client-name": "maxExecutionTimeMs"
+        },
+        "max_heap_bytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum heap size in bytes.",
+          "minimum": 0,
+          "x-ms-client-name": "maxHeapBytes"
+        },
+        "max_stack_bytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum stack size in bytes.",
+          "minimum": 0,
+          "x-ms-client-name": "maxStackBytes"
+        },
+        "return_exception_details": {
+          "type": "boolean",
+          "description": "Whether to return exception details in the response.",
+          "x-ms-client-name": "returnExceptionDetails"
+        }
+      }
+    },
+    "LedgerEntry": {
+      "type": "object",
+      "description": "An entry in the ledger.",
+      "properties": {
+        "contents": {
+          "type": "string",
+          "description": "Contents of the ledger entry."
+        },
+        "collectionId": {
+          "type": "string",
+          "description": "The collection identifier for this ledger entry.",
+          "readOnly": true
+        },
+        "transactionId": {
+          "type": "string",
+          "description": "A unique identifier for the state of the ledger. If returned as part of a\nLedgerEntry, it indicates the state from which the entry was read.",
+          "readOnly": true
+        },
+        "preHooks": {
+          "type": "array",
+          "description": "List of user defined function hooks to be executed before the ledger entry is\nwritten.",
+          "items": {
+            "$ref": "#/definitions/UserDefinedFunctionHook"
+          }
+        },
+        "postHooks": {
+          "type": "array",
+          "description": "List of user defined function hooks to be executed after the ledger entry is\nwritten.",
+          "items": {
+            "$ref": "#/definitions/UserDefinedFunctionHook"
+          }
+        }
+      },
+      "required": [
+        "contents"
+      ]
+    },
+    "LedgerEntryClaim": {
+      "type": "object",
+      "description": "An application claim derived from ledger entry data.",
+      "properties": {
+        "collectionId": {
+          "type": "string",
+          "description": "Identifier of a collection."
+        },
+        "contents": {
+          "type": "string",
+          "description": "Contents of a ledger entry."
+        },
+        "secretKey": {
+          "type": "string",
+          "description": "Base64-encoded secret key."
+        },
+        "protocol": {
+          "$ref": "#/definitions/ApplicationClaimProtocol",
+          "description": "Represents the protocol to be used to compute the digest of a claim from the\ngiven claim data."
+        }
+      },
+      "required": [
+        "protocol"
+      ]
+    },
+    "LedgerQueryResult": {
+      "type": "object",
+      "description": "The result of querying for a ledger entry from an older transaction id. The\nledger entry is available in the response only if the returned state is Ready.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ConfidentialLedgerQueryState",
+          "description": "State of a ledger query."
+        },
+        "entry": {
+          "$ref": "#/definitions/LedgerEntry",
+          "description": "The ledger entry found as a result of the query. This is only available if the\nquery is in Ready state."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "LedgerUser": {
+      "type": "object",
+      "description": "Details about a Confidential Ledger user.",
+      "properties": {
+        "assignedRole": {
+          "$ref": "#/definitions/ConfidentialLedgerUserRoleName",
+          "description": "Represents an assignable role."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Identifier for the user. This must either be an AAD object id or a certificate\nfingerprint.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "assignedRole"
+      ]
+    },
+    "LedgerUserMultipleRoles": {
+      "type": "object",
+      "description": "Details about a Confidential Ledger user.",
+      "properties": {
+        "assignedRoles": {
+          "type": "array",
+          "description": "Represents an assignable role.",
+          "items": {
+            "$ref": "#/definitions/ConfidentialLedgerUserRoleName"
+          }
+        },
+        "userId": {
+          "type": "string",
+          "description": "Identifier for the user. This must either be an AAD object id or a certificate\nfingerprint.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "assignedRoles"
+      ]
+    },
+    "LedgerWriteResult": {
+      "type": "object",
+      "description": "Returned as a result of a write to the Confidential Ledger, the transaction id\nin the response indicates when the write will become durable.",
+      "properties": {
+        "collectionId": {
+          "type": "string",
+          "description": "The collection identifier of the ledger entry."
+        }
+      },
+      "required": [
+        "collectionId"
+      ]
+    },
+    "MerkleProofElement": {
+      "type": "object",
+      "description": "An item in the Merkle proof.",
+      "properties": {
+        "left": {
+          "type": "string",
+          "description": "The left hash value in the Merkle proof element."
+        },
+        "right": {
+          "type": "string",
+          "description": "The right hash value in the Merkle proof element."
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Metadata for endpoints.",
+      "properties": {
+        "endpoints": {
+          "type": "object",
+          "description": "A map of path to method endpoints for the path",
+          "additionalProperties": {
+            "$ref": "#/definitions/MethodToEndpointProperties"
+          }
+        }
+      },
+      "required": [
+        "endpoints"
+      ]
+    },
+    "MethodToEndpointProperties": {
+      "type": "object",
+      "description": "Maps methods to their corresponding endpoint properties.",
+      "properties": {
+        "get": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "Properties for GET method endpoint."
+        },
+        "put": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "Properties for PUT method endpoint."
+        },
+        "patch": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "Properties for PATCH method endpoint."
+        },
+        "delete": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "Properties for DELETE method endpoint."
+        }
+      }
+    },
+    "Mode": {
+      "type": "string",
+      "description": "Represents the operation mode of the endpoint.",
+      "enum": [
+        "readwrite",
+        "readonly",
+        "historical"
+      ],
+      "x-ms-enum": {
+        "name": "Mode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "readwrite",
+            "value": "readwrite",
+            "description": "Read-write mode"
+          },
+          {
+            "name": "readonly",
+            "value": "readonly",
+            "description": "Read-only mode"
+          },
+          {
+            "name": "historical",
+            "value": "historical",
+            "description": "Historical mode"
+          }
+        ]
+      }
+    },
+    "ModuleDef": {
+      "type": "object",
+      "description": "Module definition",
+      "properties": {
+        "module": {
+          "type": "string",
+          "description": "Module"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name"
+        }
+      },
+      "required": [
+        "module",
+        "name"
+      ]
+    },
+    "PagedCollections": {
+      "type": "object",
+      "description": "Paginated collections returned in response to a query.",
+      "properties": {
+        "collections": {
+          "type": "array",
+          "description": "Collection identifiers.",
+          "items": {
+            "$ref": "#/definitions/Collection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Path from which to retrieve the next page of results."
+        }
+      },
+      "required": [
+        "collections"
+      ]
+    },
+    "PagedLedgerEntries": {
+      "type": "object",
+      "description": "Paginated ledger entries returned in response to a query.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ConfidentialLedgerQueryState",
+          "description": "State of a ledger query."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Path from which to retrieve the next page of results."
+        },
+        "entries": {
+          "type": "array",
+          "description": "Array of ledger entries.",
+          "items": {
+            "$ref": "#/definitions/LedgerEntry"
+          }
+        }
+      },
+      "required": [
+        "state",
+        "entries"
+      ]
+    },
+    "PagedLedgerUsers": {
+      "type": "object",
+      "description": "Paginated users returned in response to a query.",
+      "properties": {
+        "ledgerUsers": {
+          "type": "array",
+          "description": "Ledger users with details.",
+          "items": {
+            "$ref": "#/definitions/LedgerUserMultipleRoles"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Path from which to retrieve the next page of results."
+        }
+      }
+    },
+    "PagedUserDefinedFunctions": {
+      "type": "object",
+      "description": "Paginated user defined functions returned in response to a query.",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "description": "User-defined functions.",
+          "items": {
+            "$ref": "#/definitions/UserDefinedFunction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Path from which to retrieve the next page of results."
+        }
+      },
+      "required": [
+        "functions"
+      ]
+    },
+    "PagedUsers": {
+      "type": "object",
+      "description": "Paginated users returned in response to a query.",
+      "properties": {
+        "ledgerUsers": {
+          "type": "array",
+          "description": "Ledger users.",
+          "items": {
+            "$ref": "#/definitions/LedgerUser"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Path from which to retrieve the next page of results."
+        }
+      }
+    },
+    "ReceiptContents": {
+      "type": "object",
+      "description": "The contents of a receipt",
+      "properties": {
+        "cert": {
+          "type": "string",
+          "description": "Certificate"
+        },
+        "leaf": {
+          "type": "string",
+          "description": "Leaf"
+        },
+        "leafComponents": {
+          "$ref": "#/definitions/ReceiptLeafComponents",
+          "description": "Leaf components of the receipt"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "Node identifier"
+        },
+        "proof": {
+          "type": "array",
+          "description": "Proof",
+          "items": {
+            "$ref": "#/definitions/ReceiptElement"
+          }
+        },
+        "root": {
+          "type": "string",
+          "description": "Root"
+        },
+        "serviceEndorsements": {
+          "type": "array",
+          "description": "Service endorsements",
+          "items": {
+            "type": "string"
+          }
+        },
+        "signature": {
+          "type": "string",
+          "description": "The signature of the receipt"
+        }
+      },
+      "required": [
+        "nodeId",
+        "proof",
+        "signature"
+      ]
+    },
+    "ReceiptElement": {
+      "type": "object",
+      "description": "Receipt element",
+      "properties": {
+        "left": {
+          "type": "string",
+          "description": "Left"
+        },
+        "right": {
+          "type": "string",
+          "description": "Right"
+        }
+      }
+    },
+    "ReceiptLeafComponents": {
+      "type": "object",
+      "description": "Components that make up a receipt leaf node.",
+      "properties": {
+        "claimsDigest": {
+          "type": "string",
+          "description": "Claims digest"
+        },
+        "commitEvidence": {
+          "type": "string",
+          "description": "Commit evidence"
+        },
+        "writeSetDigest": {
+          "type": "string",
+          "description": "TWrite set digest"
+        }
+      }
+    },
+    "RedirectionStrategy": {
+      "type": "string",
+      "description": "Represents the redirection strategy for the endpoint.",
+      "enum": [
+        "none",
+        "to_primary",
+        "to_backup"
+      ],
+      "x-ms-enum": {
+        "name": "RedirectionStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "No redirection strategy"
+          },
+          {
+            "name": "to_primary",
+            "value": "to_primary",
+            "description": "Redirect to primary"
+          },
+          {
+            "name": "to_backup",
+            "value": "to_backup",
+            "description": "Redirect to backup"
+          }
+        ]
+      }
+    },
+    "Role": {
+      "type": "object",
+      "description": "Definition for roles",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "name of the user defined role"
+        },
+        "roleActions": {
+          "type": "array",
+          "description": "role actions",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RoleAssignment": {
+      "type": "object",
+      "description": "Object for assigning a role to a user.",
+      "properties": {
+        "roleName": {
+          "$ref": "#/definitions/ConfidentialLedgerUserRoleName",
+          "description": "Represents an assignable role."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the role."
+        }
+      },
+      "required": [
+        "roleName"
+      ]
+    },
+    "TransactionReceipt": {
+      "type": "object",
+      "description": "A receipt certifying the transaction at the specified id.",
+      "properties": {
+        "applicationClaims": {
+          "type": "array",
+          "description": "List of application claims.",
+          "items": {
+            "$ref": "#/definitions/ApplicationClaim"
+          }
+        },
+        "receipt": {
+          "$ref": "#/definitions/ReceiptContents",
+          "description": "The receipt contents for the transaction."
+        },
+        "state": {
+          "$ref": "#/definitions/ConfidentialLedgerQueryState",
+          "description": "State of a ledger query."
+        },
+        "transactionId": {
+          "type": "string",
+          "description": "A unique identifier for the state of the ledger. If returned as part of a\nLedgerEntry, it indicates the state from which the entry was read."
+        }
+      },
+      "required": [
+        "state",
+        "transactionId"
+      ]
+    },
+    "TransactionState": {
+      "type": "string",
+      "description": "Represents the state of the transaction.",
+      "enum": [
+        "Committed",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "TransactionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Committed",
+            "value": "Committed",
+            "description": "The transaction is committed"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The transaction is pending"
+          }
+        ]
+      }
+    },
+    "TransactionStatus": {
+      "type": "object",
+      "description": "Response returned to a query for the transaction status",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/TransactionState",
+          "description": "Represents the state of the transaction."
+        },
+        "transactionId": {
+          "type": "string",
+          "description": "A unique identifier for the state of the ledger. If returned as part of a\nLedgerEntry, it indicates the state from which the entry was read."
+        }
+      },
+      "required": [
+        "state",
+        "transactionId"
+      ]
+    },
+    "UserDefinedFunction": {
+      "type": "object",
+      "description": "A user defined function in the ledger.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code of the user defined function in JavaScript."
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the user defined function.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "UserDefinedFunctionExecutionError": {
+      "type": "object",
+      "description": "The error object of a user defined function execution. This is returned only\nwhen the user defined function execution throws an exception.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Message indicating the error thrown when executing the function."
+        }
+      }
+    },
+    "UserDefinedFunctionExecutionProperties": {
+      "type": "object",
+      "description": "The properties for executing a user defined function.",
+      "properties": {
+        "arguments": {
+          "type": "array",
+          "description": "Runtime arguments of the user defined function. Defaults to an empty list.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exportedFunctionName": {
+          "type": "string",
+          "description": "Name of the exported function to execute in the code of the user defined\nfunction. Defaults to main."
+        },
+        "runtimeOptions": {
+          "$ref": "#/definitions/JsRuntimeOptions",
+          "description": "JS runtime options for user defined endpoints and functions"
+        }
+      }
+    },
+    "UserDefinedFunctionExecutionResponse": {
+      "type": "object",
+      "description": "The result of a user defined function execution.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionError",
+          "description": "The error object of a user defined function execution. This is returned only\nwhen the user defined function execution throws an exception."
+        },
+        "result": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionResult",
+          "description": "The result object of a user defined function execution. This is returned only\nwhen the user defined function executes successfully."
+        },
+        "status": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionStatus",
+          "description": "Represents the status of a user defined function execution."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "UserDefinedFunctionExecutionResult": {
+      "type": "object",
+      "description": "The result object of a user defined function execution. This is returned only\nwhen the user defined function executes successfully.",
+      "properties": {
+        "returnValue": {
+          "type": "string",
+          "description": "String-encoded value returned by the user defined function execution. If the\nfunction does not return any value, this is set to an empty string."
+        }
+      }
+    },
+    "UserDefinedFunctionExecutionStatus": {
+      "type": "string",
+      "description": "Represents the status of a user defined function execution.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "UserDefinedFunctionExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The function execution completed successfully"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The function execution failed"
+          }
+        ]
+      }
+    },
+    "UserDefinedFunctionHook": {
+      "type": "object",
+      "description": "Hook for a user defined function execution.",
+      "properties": {
+        "functionId": {
+          "type": "string",
+          "description": "ID of the user defined function to execute."
+        },
+        "properties": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionProperties",
+          "description": "The properties for executing a user defined function."
+        }
+      },
+      "required": [
+        "functionId"
+      ]
+    },
+    "UserDefinedRole": {
+      "type": "object",
+      "description": "User defined role",
+      "properties": {
+        "role": {
+          "type": "array",
+          "description": "User defined role",
+          "items": {
+            "$ref": "#/definitions/Role"
+          }
+        }
+      },
+      "required": [
+        "role"
+      ]
+    },
+    "UserDefinedRoles": {
+      "type": "object",
+      "description": "Roles",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "description": "Roles",
+          "items": {
+            "$ref": "#/definitions/Role"
+          }
+        }
+      },
+      "required": [
+        "roles"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

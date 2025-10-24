@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: configurations
-    namespace: azure.mgmt.configurations
-    package-name: azure-mgmt-configurations
-az-output-folder: $(azure-cli-extension-folder)/src/configurations
-python-sdk-output-folder: "$(az-output-folder)/azext_configurations/vendored_sdks/configurations"
+    extensions: edgesiteconfiguration
+    namespace: azure.mgmt.edgesiteconfiguration
+    package-name: azure-mgmt-edgesiteconfiguration
+az-output-folder: $(azure-cli-extension-folder)/src/edgesiteconfiguration
+python-sdk-output-folder: "$(az-output-folder)/azext_edgesiteconfiguration/vendored_sdks/edgesiteconfiguration"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,8 @@ python-sdk-output-folder: "$(az-output-folder)/azext_configurations/vendored_sdk
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: configurations
-  namespace: azure.mgmt.configurations
-  package-name: azure-mgmt-configurations
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/configurations
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/configurations"
-``` 
+  extensions: edgesiteconfiguration
+  namespace: azure.mgmt.edgesiteconfiguration
+  package-name: azure-mgmt-edgesiteconfiguration
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/edgesiteconfiguration
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/edgesiteconfiguration"

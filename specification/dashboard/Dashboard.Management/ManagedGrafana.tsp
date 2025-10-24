@@ -13,11 +13,8 @@ namespace Microsoft.Dashboard;
 /**
  * The grafana resource type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(ManagedGrafanaProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model ManagedGrafana extends Azure.ResourceManager.Foundations.TrackedResource {
+model ManagedGrafana
+  is Azure.ResourceManager.ProxyResource<ManagedGrafanaProperties, true> {
   ...ResourceNameParameter<
     Resource = ManagedGrafana,
     KeyName = "workspaceName",
@@ -31,11 +28,15 @@ model ManagedGrafana extends Azure.ResourceManager.Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ResourceSku;
 
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: ManagedGrafanaProperties;
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }

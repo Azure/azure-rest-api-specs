@@ -2,9 +2,6 @@
   Definitions of elements defined for different TCP receivers.
 */
 
-using TypeSpec.Versioning;
-using OpenAPI;
-
 namespace Microsoft.Monitor;
 
 @doc("Base receiver using TCP as transport protocol.")

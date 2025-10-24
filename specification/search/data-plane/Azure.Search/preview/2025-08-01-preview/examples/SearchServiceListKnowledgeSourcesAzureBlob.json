@@ -1,0 +1,64 @@
+{
+  "operationId": "KnowledgeSources_List",
+  "title": "SearchServiceListKnowledgeSourcesAzureBlob",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "ks-preview-test",
+            "kind": "azureBlob",
+            "description": "Description of the knowledge source.",
+            "encryptionKey": {
+              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+              "keyVaultUri": "https://myKeyVault.vault.azure.net",
+              "accessCredentials": {
+                "applicationId": "00000000-0000-0000-0000-000000000000",
+                "applicationSecret": "<applicationSecret>"
+              }
+            },
+            "azureBlobParameters": {
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+              "containerName": "test-container",
+              "folderPath": "test-path",
+              "identity": {
+                "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+                "userAssignedIdentity": "/my/userassigned/id"
+              },
+              "embeddingModel": {
+                "name": "openai",
+                "kind": "azureOpenAI",
+                "azureOpenAIParameters": {
+                  "resourceUri": "https://test-sample.openai.azure.com",
+                  "deploymentId": "model",
+                  "apiKey": "<redacted>",
+                  "modelName": "text-embedding-3-large"
+                }
+              },
+              "chatCompletionModel": {
+                "kind": "azureOpenAI",
+                "azureOpenAIParameters": {
+                  "resourceUri": "https://test-sample.openai.azure.com",
+                  "deploymentId": "myDeployment",
+                  "apiKey": "<redacted>",
+                  "modelName": "gpt-4o-mini"
+                }
+              },
+              "ingestionSchedule": {
+                "interval": "P1D",
+                "startTime": "2024-06-06T00:01:50.265Z"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

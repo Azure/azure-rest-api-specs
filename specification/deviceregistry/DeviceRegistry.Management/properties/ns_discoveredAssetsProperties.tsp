@@ -19,11 +19,24 @@ model NamespaceDiscoveredAssetProperties {
   @doc("Reference to the device that provides data for this asset. Must provide device name & endpoint on the device to use.")
   deviceRef: DeviceRef;
 
+  @doc("Human-readable display name.")
+  @added(Versions.v2025_10_01)
+  displayName?: string;
+
   @doc("URIs or type definition IDs.")
   assetTypeRefs?: string[];
 
+  @doc("Human-readable description of the asset.")
+  @added(Versions.v2025_10_01)
+  description?: string;
+
   @doc("Identifier used to detect changes in the asset.")
   discoveryId: string;
+
+  @doc("Asset ID provided by the customer.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_10_01)
+  externalAssetId?: string;
 
   @doc("An integer that is incremented each time the resource is modified.")
   version: int64;
@@ -85,8 +98,15 @@ model NamespaceDiscoveredAssetProperties {
   datasets?: NamespaceDiscoveredDataset[];
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
+  @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_10_01)
   @Azure.ResourceManager.identifiers(#[])
   events?: NamespaceDiscoveredEvent[];
+
+  @doc("Array of event groups that are part of the asset. Each event group can have per-event group configuration.")
+  @added(Versions.v2025_10_01)
+  @Azure.ResourceManager.identifiers(#[])
+  eventGroups?: NamespaceDiscoveredEventGroup[];
 
   @doc("Array of streams that are part of the asset. Each stream can have a per-stream configuration.")
   @identifiers(#[])
@@ -155,13 +175,43 @@ model NamespaceDiscoveredDatasetDataPoint is NamespaceDiscoveredDataPoint {
 @added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredEventDataPoint is NamespaceDiscoveredDataPoint;
 
+@doc("Defines the discovered event group properties.")
+@added(Versions.v2025_10_01)
+model NamespaceDiscoveredEventGroup {
+  @doc("The name of the event group.")
+  name: string;
+
+  @doc("The address of the notifier of the event group in the asset (e.g. URL) so that a client can access the event group on the asset.")
+  dataSource?: string;
+
+  @doc("Stringified JSON that contains connector-specific configuration for the event group. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize.")
+  eventGroupConfiguration?: string;
+
+  @doc("Destinations for events. Default destinations when destinations is not defined at the event level.")
+  @identifiers(#[])
+  defaultDestinations?: EventDestination[];
+
+  @doc("URI or type definition ID.")
+  typeRef?: string;
+
+  @doc("Array of events that are part of the event group.")
+  @identifiers(#[])
+  events?: NamespaceDiscoveredEvent[];
+}
+
 @doc("Defines the event properties.")
 @added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredEvent {
   @doc("The name of the event.")
   name: string;
 
+  @doc("Reference to a data source for a given event.")
+  @added(Versions.v2025_10_01)
+  dataSource?: string;
+
   @doc("The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset.")
+  @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_10_01)
   eventNotifier: string;
 
   @doc("Stringified JSON that contains connector-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize.")
@@ -175,6 +225,7 @@ model NamespaceDiscoveredEvent {
   typeRef?: string;
 
   @doc("Array of data points that are part of the event. Each data point can have a per-data point configuration.")
+  @removed(Versions.v2025_10_01)
   @identifiers(#[])
   dataPoints?: NamespaceDiscoveredEventDataPoint[];
 
@@ -213,6 +264,10 @@ model NamespaceDiscoveredManagementGroup {
 
   @doc("URI or type definition ID.")
   typeRef?: string;
+
+  @doc("Reference to a data source for a given management group.")
+  @added(Versions.v2025_10_01)
+  dataSource?: string;
 
   @doc("Default MQTT topic path on which a client will receive the request for all actions that are part of the management group.")
   defaultTopic?: string;
