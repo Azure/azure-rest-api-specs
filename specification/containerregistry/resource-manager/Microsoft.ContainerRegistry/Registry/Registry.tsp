@@ -103,7 +103,6 @@ interface Registries {
   /**
    * Gets the quota usages for the specified container registry.
    */
-  @list
   @get
   listUsages is ArmResourceActionSync<
     Registry,
