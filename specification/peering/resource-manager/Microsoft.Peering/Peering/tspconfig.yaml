@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/peering"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,7 +12,39 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-peering"
+    namespace: "azure.mgmt.peering"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-peering"
+    namespace: "com.azure.resourcemanager.peering"
+    service-name: "Peering"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-peering"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-peering"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/peering"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpeering"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpeering"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.Peering"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
