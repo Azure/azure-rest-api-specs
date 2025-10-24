@@ -22,7 +22,7 @@ describe("file processing", () => {
   });
 
   it("should process a larger set of files and return a list of expected resolved swagger files", async () => {
-    // Simulate a chagne to each file under "fixtures"
+    // Simulate a change to each file under "fixtures"
     const changedFiles = (await readdir(ROOT, { recursive: true })).sort();
 
     await expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves
