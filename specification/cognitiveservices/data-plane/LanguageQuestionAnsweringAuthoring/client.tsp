@@ -28,6 +28,8 @@ interface QuestionAnsweringAuthoringClientOperations {
   getExportStatus is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.getExportStatus;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"
+  // Preserve previous Python method name to avoid breaking change: begin_import_assets
+  @clientName("begin_import_assets", "python")
   `import` is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.`import`;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"

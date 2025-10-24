@@ -24,21 +24,21 @@ interface QuestionAnsweringProjects {
    * Gets all projects for a user.
    */
   listProjects is LanguageOperations.ResourceList<
-    QuestionAnsweringProjectMetadata,
+    QuestionAnsweringProject,
     ListProjectsQueryParams
   >;
 
   /**
    * Get the requested project metadata.
    */
-  getProjectDetails is LanguageOperations.ResourceRead<QuestionAnsweringProjectMetadata>;
+  getProjectDetails is LanguageOperations.ResourceRead<QuestionAnsweringProject>;
 
   /**
    * Create or update a project.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   createProject is ResourceCreateOrUpdateWithJsonContentType<
-    QuestionAnsweringProjectMetadata,
+    QuestionAnsweringProject,
     {},
     ServiceTraits,
     ErrorResponse
@@ -92,7 +92,7 @@ interface QuestionAnsweringProjects {
        * Knowledge base Import or Export format.
        */
       @query("format")
-      format?: format = format.json;
+      fileFormat?: format = format.json;
 
       /**
        * Kind of the asset of the project.
@@ -134,7 +134,7 @@ interface QuestionAnsweringProjects {
        * Knowledge base Import or Export format.
        */
       @query("format")
-      format?: format = format.json;
+      fileFormat?: format = format.json;
 
       /**
        * Kind of the asset of the project.
