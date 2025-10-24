@@ -1,0 +1,503 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectorsCheckRequirements": {
+      "post": {
+        "x-ms-examples": {
+          "Check requirements for TI.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsThreatIntelligence.json"
+          },
+          "Check requirements for TI Taxii.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsThreatIntelligenceTaxii.json"
+          },
+          "Check requirements for AAD.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectory.json"
+          },
+          "Check requirements for AAD - no license.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectoryNoLicense.json"
+          },
+          "Check requirements for AAD - no authorization.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectoryNoAuthorization.json"
+          },
+          "Check requirements for ASC.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsAzureSecurityCenter.json"
+          },
+          "Check requirements for Mcas.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftCloudAppSecurity.json"
+          },
+          "Check requirements for Mdatp.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMdatp.json"
+          },
+          "Check requirements for OfficeATP.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsOfficeATP.json"
+          },
+          "Check requirements for Dynamics365.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsDynamics365.json"
+          },
+          "Check requirements for MicrosoftThreatProtection.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatProtection.json"
+          },
+          "Check requirements for MicrosoftThreatIntelligence.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatIntelligence.json"
+          }
+        },
+        "tags": [
+          "Check Data Connector Requirements"
+        ],
+        "description": "Get requirements state for a data connector type.",
+        "operationId": "DataConnectorsCheckRequirements_Post",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorsCheckRequirementsBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorRequirementsState"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DataConnectorsCheckRequirementsBody": {
+      "description": "The parameters for requirements check message",
+      "in": "body",
+      "name": "DataConnectorsCheckRequirements",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/DataConnectorsCheckRequirements"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "AADCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents AAD (Azure Active Directory) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AADCheckRequirementsProperties",
+          "description": "AAD (Azure Active Directory) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureActiveDirectory"
+    },
+    "AADCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "AAD (Azure Active Directory) requirements check properties.",
+      "type": "object"
+    },
+    "AATPCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents AATP (Azure Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AATPCheckRequirementsProperties",
+          "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureAdvancedThreatProtection"
+    },
+    "AATPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
+      "type": "object"
+    },
+    "ASCCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents ASC (Azure Security Center) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ASCCheckRequirementsProperties",
+          "description": "ASC (Azure Security Center) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureSecurityCenter"
+    },
+    "ASCCheckRequirementsProperties": {
+      "description": "ASC (Azure Security Center) requirements check properties.",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscription id to connect to, and get the data from.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AwsCloudTrailCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Amazon Web Services CloudTrail requirements check request.",
+      "type": "object",
+      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
+    },
+    "DataConnectorsCheckRequirements": {
+      "description": "Data connector requirements properties.",
+      "properties": {
+        "kind": {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorKind",
+          "description": "Describes the kind of connector to be checked."
+        }
+      },
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "DataConnectorAuthorizationState": {
+      "description": "Describes the state of user's authorization for a connector kind.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorAuthorizationState",
+        "values": [
+          {
+            "value": "Valid"
+          },
+          {
+            "value": "Invalid"
+          }
+        ]
+      }
+    },
+    "DataConnectorLicenseState": {
+      "description": "Describes the state of user's license for a connector kind.",
+      "enum": [
+        "Valid",
+        "Invalid",
+        "Unknown"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorLicenseState",
+        "values": [
+          {
+            "value": "Valid"
+          },
+          {
+            "value": "Invalid"
+          },
+          {
+            "value": "Unknown"
+          }
+        ]
+      }
+    },
+    "DataConnectorRequirementsState": {
+      "description": "Data connector requirements status.",
+      "properties": {
+        "authorizationState": {
+          "description": "Authorization state for this connector",
+          "$ref": "#/definitions/DataConnectorAuthorizationState"
+        },
+        "licenseState": {
+          "description": "License state for this connector",
+          "$ref": "#/definitions/DataConnectorLicenseState"
+        }
+      },
+      "type": "object"
+    },
+    "Dynamics365CheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Dynamics365 requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Dynamics365CheckRequirementsProperties",
+          "description": "Dynamics365 requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Dynamics365"
+    },
+    "Dynamics365CheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Dynamics365 requirements check properties.",
+      "type": "object"
+    },
+    "MCASCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents MCAS (Microsoft Cloud App Security) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MCASCheckRequirementsProperties",
+          "description": "MCAS (Microsoft Cloud App Security) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftCloudAppSecurity"
+    },
+    "MCASCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MCAS (Microsoft Cloud App Security) requirements check properties.",
+      "type": "object"
+    },
+    "MDATPCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MDATPCheckRequirementsProperties",
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
+    },
+    "MDATPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.",
+      "type": "object"
+    },
+    "MSTICheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTICheckRequirementsProperties",
+          "description": "Microsoft Threat Intelligence requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTICheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence requirements check properties.",
+      "type": "object"
+    },
+    "MtpCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents MTP (Microsoft Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MTPCheckRequirementsProperties",
+          "description": "MTP (Microsoft Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatProtection"
+    },
+    "MTPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MTP (Microsoft Threat Protection) requirements check properties.",
+      "type": "object"
+    },
+    "OfficeATPCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents OfficeATP (Office 365 Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeATPCheckRequirementsProperties",
+          "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficeATP"
+    },
+    "OfficeATPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
+      "type": "object"
+    },
+    "TICheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Threat Intelligence Platforms data connector check requirements",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TICheckRequirementsProperties",
+          "description": "Threat Intelligence Platforms data connector check required properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "TICheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Threat Intelligence Platforms data connector required properties.",
+      "properties": {},
+      "type": "object"
+    },
+    "TiTaxiiCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Threat Intelligence TAXII data connector check requirements",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TiTaxiiCheckRequirementsProperties",
+          "description": "Threat Intelligence TAXII check required properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
+    },
+    "TiTaxiiCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Threat Intelligence TAXII data connector required properties.",
+      "type": "object"
+    }
+  }
+}
