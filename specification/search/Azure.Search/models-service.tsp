@@ -1,9 +1,11 @@
 ﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core.Legacy;
 
 namespace Search;
 
@@ -3203,6 +3205,7 @@ model SearchResourceEncryptionKey {
   keyVaultUri: string;
 
   @doc("Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.")
+  @flattenProperty
   accessCredentials?: AzureActiveDirectoryApplicationCredentials;
 
   @doc("An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared.")
@@ -4462,6 +4465,22 @@ union KnowledgeSourceKind {
 
   @doc("A knowledge source that read and ingest data from Azure Blob Storage to a Search Index.")
   AzureBlob: "azureBlob",
+
+  @doc("A knowledge source that reads data from indexed SharePoint.")
+  @added(Versions.v2025_11_01_preview)
+  IndexedSharePoint: "indexedSharePoint",
+
+  @doc("A knowledge source that reads data from indexed OneLake.")
+  @added(Versions.v2025_11_01_preview)
+  IndexedOneLake: "indexedOneLake",
+
+  @doc("A knowledge source that reads data from the web.")
+  @added(Versions.v2025_11_01_preview)
+  Web: "web",
+
+  @doc("A knowledge source that reads data from remote SharePoint.")
+  @added(Versions.v2025_11_01_preview)
+  RemoteSharePoint: "remoteSharePoint",
 }
 
 @doc("Knowledge Source targeting a search index.")
