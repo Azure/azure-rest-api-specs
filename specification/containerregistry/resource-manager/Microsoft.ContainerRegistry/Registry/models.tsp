@@ -2390,7 +2390,6 @@ model RegistryUsageListResult {
   /**
    * The list of container registry quota usages.
    */
-  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: RegistryUsage[];
 }
