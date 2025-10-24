@@ -105,3 +105,11 @@ using Microsoft.Peering;
 @@clientLocation(PeeringServicesOperationGroup.initializeConnectionMonitor,
   PeeringServices
 );
+
+@@clientLocation(CheckServiceProviderAvailabilityOperationGroup.checkServiceProviderAvailability,
+  "CheckServiceProviderAvailability"
+);
+
+@@clientName(CheckServiceProviderAvailabilityOperationGroup.checkServiceProviderAvailability::parameters.body,
+  "checkServiceProviderAvailabilityInput"
+);

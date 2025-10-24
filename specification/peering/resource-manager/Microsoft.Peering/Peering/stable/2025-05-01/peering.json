@@ -141,6 +141,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/checkServiceProviderAvailability": {
+      "post": {
+        "operationId": "CheckServiceProviderAvailability_CheckServiceProviderAvailability",
+        "description": "Checks if the peering service provider is present within 1000 miles of customer's location",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "checkServiceProviderAvailabilityInput",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckServiceProviderAvailabilityInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckServiceProviderAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/initializeConnectionMonitor": {
       "post": {
         "operationId": "PeeringServices_InitializeConnectionMonitor",
@@ -2589,6 +2630,44 @@
           "description": "The BGP Community",
           "readOnly": true
         }
+      }
+    },
+    "CheckServiceProviderAvailabilityInput": {
+      "type": "object",
+      "description": "Class for CheckServiceProviderAvailabilityInput",
+      "properties": {
+        "peeringServiceLocation": {
+          "type": "string",
+          "description": "Gets or sets the peering service location."
+        },
+        "peeringServiceProvider": {
+          "type": "string",
+          "description": "Gets or sets the peering service provider."
+        }
+      }
+    },
+    "CheckServiceProviderAvailabilityResponse": {
+      "type": "string",
+      "description": "Response for checking service provider availability",
+      "enum": [
+        "Available",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "CheckServiceProviderAvailabilityResponse",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "available"
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "unavailable"
+          }
+        ]
       }
     },
     "Command": {
