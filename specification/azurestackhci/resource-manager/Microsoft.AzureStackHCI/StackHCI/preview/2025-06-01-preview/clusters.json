@@ -928,7 +928,12 @@
         },
         "sdnProperties": {
           "description": "Software Defined Networking Properties of the cluster",
-          "$ref": "#/definitions/SdnProperties"
+          "$ref": "./hciCommon.json#/definitions/SdnProperties"
+        },
+        "arcGatewayProperties": {
+          "description": "Azure Arc Gateway properties of the cluster.",
+          "$ref": "#/definitions/ArcGatewayProperties",
+          "readOnly": true
         },
         "localAvailabilityZones": {
           "type": "array",
@@ -961,38 +966,6 @@
         "desiredProperties": {
           "description": "Desired properties of the cluster.",
           "$ref": "#/definitions/ClusterDesiredProperties"
-        }
-      }
-    },
-    "AksClusterProperties": {
-      "type": "object",
-      "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.",
-      "properties": {
-        "aksImageDownload": {
-          "type": "string",
-          "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AksImageDownload",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "AKS Image should be downloaded."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "AKS Image should not be downloaded."
-              }
-            ]
-          },
-          "readOnly": true
         }
       }
     },
@@ -1497,10 +1470,6 @@
           "type": "string",
           "description": "Name of the on-prem cluster connected to this resource.",
           "readOnly": true
-        },
-        "aksClusterProperties": {
-          "$ref": "#/definitions/AksClusterProperties",
-          "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios."
         }
       }
     },
@@ -1806,23 +1775,35 @@
       "additionalProperties": false,
       "readOnly": true
     },
-    "SdnProperties": {
+    "ArcGatewayProperties": {
       "type": "object",
-      "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
+      "description": "Azure Arc Gateway properties of the cluster.",
       "properties": {
-        "sdnStatus": {
-          "$ref": "./hciCommon.json#/definitions/SdnStatus",
-          "readOnly": true
-        },
-        "sdnDomainName": {
+        "arcGatewayStatus": {
           "type": "string",
-          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
-          "readOnly": true
-        },
-        "sdnApiAddress": {
-          "type": "string",
-          "description": "Represents the API address for the SDN deployment.",
-          "readOnly": true
+          "description": "Status of the Azure Arc Gateway on the cluster.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ArcGatewayStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Azure Arc Gateway is enabled on the cluster."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Azure Arc Gateway is disabled on the cluster."
+              }
+            ]
+          }
         }
       }
     },
@@ -1842,6 +1823,7 @@
             "Disabled"
           ],
           "default": "Disabled",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ConfidentialVmStatus",
             "modelAsString": true,
@@ -1862,8 +1844,7 @@
                 "description": "Confidential VM support is disabled. None of the nodes in the cluster are CVM capable."
               }
             ]
-          },
-          "readOnly": true
+          }
         }
       }
     }
