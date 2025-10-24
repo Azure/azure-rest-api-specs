@@ -1,3 +1,4 @@
+import { readdir } from "fs/promises";
 import path from "path";
 import { describe, expect, it } from "vitest";
 import { processFilesToSpecificationList } from "../src/runner.js";
@@ -7,41 +8,31 @@ const ROOT = path.resolve(__dirname, "..", "test", "fixtures");
 describe("file processing", () => {
   it("should process a basic set of files and return a list of swagger files only", async () => {
     const changedFiles = [
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
       "specification/serviceB/data-plane/service.B/readme.md",
     ];
-    const expected = [
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
-    ];
 
-    const result = await processFilesToSpecificationList(ROOT, changedFiles);
-    expect(result).toEqual(expected);
+    expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves.toMatchInlineSnapshot(`
+      [
+        "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
+        "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      ]
+    `);
   });
 
   it("should process a larger set of files and return a list of expected resolved swagger files", async () => {
-    const changedFiles = [
-      "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/CreateResource.json",
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/DeleteResource.json",
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/GetResource.json",
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/GetRoot.json",
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/subdir/ListResources.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/CreateResource.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/DeleteResource.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/GetResource.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/GetRoot.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/subdir/ListResources.json",
-    ];
-    const expected = [
-      "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
-    ];
+    // Simulate a chagne to each file under "fixtures"
+    const changedFiles = (await readdir(ROOT, { recursive: true })).sort();
 
-    const result = await processFilesToSpecificationList(ROOT, changedFiles);
-    expect(result).toEqual(expected);
+    await expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves
+      .toMatchInlineSnapshot(`
+      [
+        "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
+        "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
+        "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      ]
+    `);
   });
 
   it("should process the correct swagger file given only changed example files", async () => {
@@ -49,21 +40,22 @@ describe("file processing", () => {
       "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/CreateResource.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/CreateResource.json",
     ];
-    const expected = [
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
-    ];
 
-    const result = await processFilesToSpecificationList(ROOT, changedFiles);
-    expect(result).toEqual(expected);
+    await expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves
+      .toMatchInlineSnapshot(`
+      [
+        "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
+        "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      ]
+    `);
   });
 
   it("should process the correct swagger file given only changed readme file", async () => {
     const changedFiles = ["specification/serviceB/data-plane/service.B/readme.md"];
-    const expected: string[] = [];
 
-    const result = await processFilesToSpecificationList(ROOT, changedFiles);
-    expect(result).toEqual(expected);
+    await expect(
+      processFilesToSpecificationList(ROOT, changedFiles),
+    ).resolves.toMatchInlineSnapshot(`[]`);
   });
 
   it("should handle deleted files without error", async () => {
@@ -79,13 +71,14 @@ describe("file processing", () => {
       // non-existent example and containing version folder. Should not throw and quietly omit
       "specification/serviceB/data-plane/service.B/stable/2025-06-01-deleted/examples/CreateResource.json",
     ];
-    const expected = [
-      "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
-    ];
 
-    const result = await processFilesToSpecificationList(ROOT, changedFiles);
-    expect(result).toEqual(expected);
+    await expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves
+      .toMatchInlineSnapshot(`
+      [
+        "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
+        "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      ]
+    `);
   });
 
   it("should skip examples outside preview and stable", async () => {
@@ -94,10 +87,10 @@ describe("file processing", () => {
       "specification/serviceB/data-plane/service.B/examples/2025-06-01/CreateResource.json",
       "specification/serviceB/data-plane/service.B/examples/2025-07-01-preview/CreateResource.json",
     ];
-    const expected: string[] = [];
 
-    const result = await processFilesToSpecificationList(ROOT, changedFiles);
-    expect(result).toEqual(expected);
+    await expect(
+      processFilesToSpecificationList(ROOT, changedFiles),
+    ).resolves.toMatchInlineSnapshot(`[]`);
   });
 
   it("should handle examples in a subdirectory", async () => {
@@ -105,12 +98,13 @@ describe("file processing", () => {
       "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/subdir/ListResources.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/subdir/ListResources.json",
     ];
-    const expected = [
-      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
-    ];
 
-    const result = await processFilesToSpecificationList(ROOT, changedFiles);
-    expect(result).toEqual(expected);
+    await expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves
+      .toMatchInlineSnapshot(`
+      [
+        "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
+        "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      ]
+    `);
   });
 });
