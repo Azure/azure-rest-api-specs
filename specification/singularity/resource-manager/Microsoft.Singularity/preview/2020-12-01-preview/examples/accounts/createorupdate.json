@@ -1,0 +1,49 @@
+{
+  "operationId": "Network_CreateOrUpdate",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "resourceGroupName": "myresourceGroupName",
+    "accountName": "myaccountName",
+    "networkResourceName": "mynetworkResourceName",
+    "body": {
+      "properties": {
+        "properties": {
+          "kind": "DelegatedSubnet"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Singularity/accounts",
+        "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/networks/mynetworkResourceName",
+        "name": "myNetworkResourceDescription",
+        "properties": {
+          "properties": {
+            "kind": "DelegatedSubnet",
+            "provisioningState": "Succeeded",
+            "status": "Unknown"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.Singularity/accounts",
+        "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/networks/mynetworkResourceName",
+        "name": "myNetworkResourceDescription",
+        "properties": {
+          "properties": {
+            "kind": "DelegatedSubnet",
+            "provisioningState": "Succeeded",
+            "status": "Unknown"
+          }
+        }
+      }
+    },
+    "202": { }
+  }
+}

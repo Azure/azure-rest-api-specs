@@ -1,0 +1,42 @@
+{
+  "operationId": "Account_ListByResourceGroup",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "resourceGroupName": "myresourceGroupName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "location": "EastUS",
+            "type": "Microsoft.Singularity/accounts",
+            "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts",
+            "name": "myAccountResourceDescriptionList",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "description": "User-friendly description of an account.",
+              "status": "Creating",
+              "idleResourcesHandlingPolicy": {
+                "idleResourcesHandlingMode": "AutoSuspend"
+              },
+              "statusDetails": "Gives additional information about the current status of an account.",
+              "locations": [
+                {
+                  "name": "Name of the account location.",
+                  "failoverPriority": 1,
+                  "isZoneRedundant": true
+                }
+              ],
+              "networkSettings": {
+                "subnetId": "The resource id of the delegated subnet."
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
