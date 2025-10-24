@@ -14,18 +14,13 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager endpoint.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Profile)
-model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
-  ...ResourceNameParameter<
-    Resource = Endpoint,
-    KeyName = "endpointName",
-    SegmentName = "{endpointType}",
-    NamePattern = ""
-  >;
+model Endpoint extends ProxyResource {
+  properties?: EndpointProperties;
 }
 
 alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -35,6 +30,13 @@ alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<Endpoint>;
     ...ParentKeysOf<Endpoint>;
+
+    /**
+     * The name of the Traffic Manager profile.
+     */
+    @path
+    @segment("trafficmanagerprofiles")
+    profileName: string;
   },
   {
     /**
