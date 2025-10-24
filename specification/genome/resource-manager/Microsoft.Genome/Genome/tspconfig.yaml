@@ -22,15 +22,17 @@ options:
     use-read-only-status-schema: true
 
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    namespace: "Azure.ResourceManager.Genome"
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Genome"
     clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.Genome"
 
   "@azure-tools/typespec-java":
-    flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-genome"
     namespace: "com.azure.resourcemanager.genome"
+    service-name: "Genome"
+    flavor: azure
 
   "@azure-tools/typespec-ts":
     flavor: azure
@@ -47,8 +49,11 @@ options:
     generate-test: true
 
   "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/genome"
     emitter-output-dir: "{output-dir}/{service-dir}/armgenome"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/genome/armgenome"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armgenome"
+    fix-const-stuttering: true
+    flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
