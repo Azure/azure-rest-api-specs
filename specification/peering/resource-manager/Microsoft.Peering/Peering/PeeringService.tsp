@@ -19,7 +19,7 @@ model PeeringService
     Resource = PeeringService,
     KeyName = "peeringServiceName",
     SegmentName = "peeringServices",
-    NamePattern = ""
+    NamePattern = "[A-Za-z0-9_.-]{1,63}"
   >;
 
   /**

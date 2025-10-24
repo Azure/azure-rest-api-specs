@@ -21,7 +21,7 @@ model PeeringRegisteredAsn
     Resource = PeeringRegisteredAsn,
     KeyName = "registeredAsnName",
     SegmentName = "registeredAsns",
-    NamePattern = ""
+    NamePattern = "[A-Za-z0-9_.-]{1,63}"
   >;
 }
 

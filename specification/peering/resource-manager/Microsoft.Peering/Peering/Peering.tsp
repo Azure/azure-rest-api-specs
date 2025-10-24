@@ -18,7 +18,7 @@ model Peering is Azure.ResourceManager.TrackedResource<PeeringProperties> {
     Resource = Peering,
     KeyName = "peeringName",
     SegmentName = "peerings",
-    NamePattern = ""
+    NamePattern = "[A-Za-z0-9_.-]{1,63}"
   >;
 
   /**

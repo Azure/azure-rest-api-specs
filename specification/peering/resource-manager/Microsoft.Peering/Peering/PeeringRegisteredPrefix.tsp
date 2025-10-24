@@ -21,7 +21,7 @@ model PeeringRegisteredPrefix
     Resource = PeeringRegisteredPrefix,
     KeyName = "registeredPrefixName",
     SegmentName = "registeredPrefixes",
-    NamePattern = ""
+    NamePattern = "[A-Za-z0-9_.-]{1,63}"
   >;
 }
 

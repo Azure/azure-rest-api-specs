@@ -21,6 +21,7 @@ interface CdnPeeringPrefixesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CdnPeeringPrefixes_List")
   @autoRoute
+  @list
   @get
   @action("cdnPeeringPrefixes")
   list is ArmProviderActionSync<
@@ -71,6 +72,7 @@ interface LegacyPeeringsOperationGroup {
   @operationId("LegacyPeerings_List")
   @autoRoute
   @get
+  @list
   @action("legacyPeerings")
   list is ArmProviderActionSync<
     Response = ResourceListResult<Peering>,
@@ -153,6 +155,7 @@ interface PeeringLocationsOperationGroup {
   @operationId("PeeringLocations_List")
   @autoRoute
   @get
+  @list
   @action("peeringLocations")
   list is ArmProviderActionSync<
     Response = ResourceListResult<PeeringLocation>,
@@ -182,6 +185,7 @@ interface PeeringServiceCountriesOperationGroup {
   @operationId("PeeringServiceCountries_List")
   @autoRoute
   @get
+  @list
   @action("peeringServiceCountries")
   list is ArmProviderActionSync<
     Response = ResourceListResult<PeeringServiceCountry>,
@@ -198,6 +202,7 @@ interface PeeringServiceLocationsOperationGroup {
   @operationId("PeeringServiceLocations_List")
   @autoRoute
   @get
+  @list
   @action("peeringServiceLocations")
   list is ArmProviderActionSync<
     Response = ResourceListResult<PeeringServiceLocation>,
@@ -221,6 +226,7 @@ interface PeeringServiceProvidersOperationGroup {
   @operationId("PeeringServiceProviders_List")
   @autoRoute
   @get
+  @list
   @action("peeringServiceProviders")
   list is ArmProviderActionSync<
     Response = ResourceListResult<PeeringServiceProvider>,
@@ -237,7 +243,7 @@ interface PeeringServicesOperationGroup {
   @operationId("PeeringServices_InitializeConnectionMonitor")
   @autoRoute
   initializeConnectionMonitor is ArmProviderActionSync<
-    Response = void,
+    Response = OkResponse,
     Scope = SubscriptionActionScope
   >;
 }

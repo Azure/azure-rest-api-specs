@@ -21,7 +21,7 @@ model PeeringServicePrefix
     Resource = PeeringServicePrefix,
     KeyName = "prefixName",
     SegmentName = "prefixes",
-    NamePattern = ""
+    NamePattern = "[A-Za-z0-9_.-]{1,63}"
   >;
 }
 

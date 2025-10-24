@@ -19,7 +19,7 @@ model PeerAsn is Azure.ResourceManager.ProxyResource<PeerAsnProperties> {
     Resource = PeerAsn,
     KeyName = "peerAsnName",
     SegmentName = "peerAsns",
-    NamePattern = ""
+    NamePattern = "[A-Za-z0-9_.-]{1,63}"
   >;
 }
 

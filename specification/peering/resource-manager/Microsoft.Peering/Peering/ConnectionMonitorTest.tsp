@@ -21,7 +21,7 @@ model ConnectionMonitorTest
     Resource = ConnectionMonitorTest,
     KeyName = "connectionMonitorTestName",
     SegmentName = "connectionMonitorTests",
-    NamePattern = ""
+    NamePattern = "[A-Za-z0-9_.-]{1,63}"
   >;
 }
 

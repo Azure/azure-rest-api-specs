@@ -138,6 +138,9 @@
           "List all the cdn peering prefixes advertised at a particular peering location": {
             "$ref": "./examples/ListCdnPeeringPrefixes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -195,8 +198,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -342,6 +345,9 @@
           "List legacy peerings": {
             "$ref": "./examples/ListLegacyPeerings.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -505,7 +511,8 @@
             "in": "path",
             "description": "The peer ASN name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -546,7 +553,8 @@
             "in": "path",
             "description": "The peer ASN name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "peerAsn",
@@ -602,7 +610,8 @@
             "in": "path",
             "description": "The peer ASN name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -744,6 +753,9 @@
           "List exchange peering locations": {
             "$ref": "./examples/ListExchangePeeringLocations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -777,6 +789,9 @@
           "List peering service countries": {
             "$ref": "./examples/ListPeeringServiceCountriesBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -817,6 +832,9 @@
           "List peering service locations": {
             "$ref": "./examples/ListPeeringServiceLocationsBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -850,6 +868,9 @@
           "List peering service providers": {
             "$ref": "./examples/ListPeeringServiceProviders.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -995,7 +1016,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -1039,7 +1061,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "peeringService",
@@ -1098,7 +1121,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "tags",
@@ -1151,7 +1175,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -1197,7 +1222,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -1246,14 +1272,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "connectionMonitorTestName",
             "in": "path",
             "description": "The name of the connection monitor test",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -1297,14 +1325,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "connectionMonitorTestName",
             "in": "path",
             "description": "The name of the connection monitor test",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "connectionMonitorTest",
@@ -1363,14 +1393,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "connectionMonitorTestName",
             "in": "path",
             "description": "The name of the connection monitor test",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -1416,7 +1448,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "$expand",
@@ -1472,14 +1505,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "prefixName",
             "in": "path",
             "description": "The name of the prefix.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "$expand",
@@ -1530,14 +1565,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "prefixName",
             "in": "path",
             "description": "The name of the prefix.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "peeringServicePrefix",
@@ -1596,14 +1633,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "prefixName",
             "in": "path",
             "description": "The name of the prefix.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -1691,7 +1730,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -1735,7 +1775,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "peering",
@@ -1800,7 +1841,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "tags",
@@ -1853,7 +1895,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -1899,7 +1942,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "prefix",
@@ -1983,7 +2027,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -2032,14 +2077,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredAsnName",
             "in": "path",
             "description": "The name of the registered ASN.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -2083,14 +2130,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredAsnName",
             "in": "path",
             "description": "The name of the registered ASN.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredAsn",
@@ -2149,14 +2198,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredAsnName",
             "in": "path",
             "description": "The name of the registered ASN.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -2202,7 +2253,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -2251,14 +2303,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredPrefixName",
             "in": "path",
             "description": "The name of the registered prefix.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -2302,14 +2356,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredPrefixName",
             "in": "path",
             "description": "The name of the registered prefix.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredPrefix",
@@ -2368,14 +2424,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredPrefixName",
             "in": "path",
             "description": "The name of the registered prefix.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -2421,14 +2479,16 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "registeredPrefixName",
             "in": "path",
             "description": "The name of the registered prefix.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
         ],
         "responses": {
@@ -2474,7 +2534,8 @@
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
             "name": "consolidate",
