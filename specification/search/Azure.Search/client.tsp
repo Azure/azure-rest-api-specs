@@ -313,6 +313,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(KnowledgeAgentAzureOpenAiModel, Access.public);
 @@usage(KnowledgeAgentAzureOpenAiModel, Usage.input);
 
+@@access(SearchClient.Documents.searchGet, Access.internal);
+@@access(SearchClient.Documents.autocompleteGet, Access.internal);
+@@access(SearchClient.Documents.suggestGet, Access.internal);
+
 @@clientNamespace(Search.ErrorResponse, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorDetail, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorAdditionalInfo, "Azure.Search.Documents");
@@ -1007,7 +1011,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexClient.SynonymMaps.delete, "deleteSynonymMap");
 @@clientName(SearchIndexClient.SynonymMaps.create, "createSynonymMap");
 @@clientName(SearchIndexClient.SynonymMaps.createOrUpdate, "createOrUpdateSynonymMap");
-@@clientName(SearchIndexClient.Root.getServiceStatistics, "listIndexStatsSummary");
+@@clientName(SearchIndexClient.Root.getIndexStatsSummary, "listIndexStatsSummary");
 @@clientName(SearchIndexClient.Aliases.list, "listAliases");
 @@clientName(SearchIndexClient.Aliases.get, "getAlias");
 @@clientName(SearchIndexClient.Aliases.delete, "deleteAlias");
@@ -1053,6 +1057,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SuggestRequest.fuzzy, "useFuzzyMatching");
 @@clientName(SuggestRequest.orderby, "orderBy");
 @@clientName(SuggestRequest.search, "searchText");
+@@clientName(Search.IndexBatch, "IndexDocumentsBatch");
 @@clientName(IndexBatch.value, "actions");
 @@clientName(IndexDocumentsResult.value, "results");
 @@clientName(IndexingResult.status, "succeeded");
