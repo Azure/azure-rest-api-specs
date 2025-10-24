@@ -37,9 +37,7 @@ interface Documents {
   @post
   searchPost is SearchIndexOperation<
     {
-      @doc("The definition of the Search request.")
-      @body
-      searchRequest: SearchRequest;
+      ...SearchRequest;
     },
     SearchDocumentsResult
   >;
@@ -87,9 +85,7 @@ interface Documents {
   @post
   suggestPost is SearchIndexOperation<
     {
-      @doc("The Suggest request.")
-      @body
-      suggestRequest: SuggestRequest;
+      ...SuggestRequest;
     },
     SuggestDocumentsResult
   >;
@@ -163,9 +159,7 @@ interface Documents {
   @post
   autocompletePost is SearchIndexOperation<
     {
-      @doc("The definition of the Autocomplete request.")
-      @body
-      autocompleteRequest: AutocompleteRequest;
+      ...AutocompleteRequest;
     },
     AutocompleteResult
   >;
