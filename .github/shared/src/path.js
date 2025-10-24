@@ -4,18 +4,18 @@ import { basename, dirname, resolve } from "path";
 
 /**
  *
- * @param {string} path
- * @param {string} segment
- * @returns {boolean} True if path contains the named segment (file or folder)
+ * @param {string} path Absolute or relative path
+ * @param {string} segment File or folder
+ * @returns {boolean} True if resolved path contains segment
  */
 export function includesSegment(path, segment) {
   return untilLastSegment(path, segment) !== "";
 }
 
 /**
- * @param {string} path
- * @param {string} segment
- * @returns {string} Portion of the resolved path up to (but excluding) the last occurrence of the named segment (file or folder)
+ * @param {string} path Absolute or relative path
+ * @param {string} segment File or folder
+ * @returns {string} Portion of resolved path up to (but excluding) the last occurrence of segment
  */
 export function untilLastSegment(path, segment) {
   let current = resolve(path);
