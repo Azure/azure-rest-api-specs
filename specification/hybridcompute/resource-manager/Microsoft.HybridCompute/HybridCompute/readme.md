@@ -84,8 +84,8 @@ These settings apply only when `--tag=package-preview-2025-09-16-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-09-16-preview'
 input-file:
-  - Microsoft.HybridCompute/preview/2025-09-16-preview/HybridCompute.json
-  - Microsoft.HybridCompute/preview/2025-09-16-preview/privateLinkScopes.json
+  - preview/2025-09-16-preview/HybridCompute.json
+  - preview/2025-09-16-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-preview-2025-08-21-preview
@@ -94,8 +94,8 @@ These settings apply only when `--tag=package-preview-2025-08-21-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-08-21-preview'
 input-file:
-  - Microsoft.HybridCompute/preview/2025-08-21-preview/HybridCompute.json
-  - Microsoft.HybridCompute/preview/2025-08-21-preview/privateLinkScopes.json
+  - preview/2025-08-21-preview/HybridCompute.json
+  - preview/2025-08-21-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-preview-2025-06-01
@@ -104,8 +104,8 @@ These settings apply only when `--tag=package-preview-2025-06-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-06-01'
 input-file:
-  - Microsoft.HybridCompute/preview/2025-06-01/HybridCompute.json
-  - Microsoft.HybridCompute/preview/2025-06-01/privateLinkScopes.json
+  - preview/2025-06-01/HybridCompute.json
+  - preview/2025-06-01/privateLinkScopes.json
 ```
 
 ### Tag: package-preview-2025-02-19
