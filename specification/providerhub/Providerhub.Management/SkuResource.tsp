@@ -224,12 +224,7 @@ interface SkuResourceOperationGroupOpsThird
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespaceProviderhub: "Microsoft.ProviderHub",
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** the provider namespace */
         @path
