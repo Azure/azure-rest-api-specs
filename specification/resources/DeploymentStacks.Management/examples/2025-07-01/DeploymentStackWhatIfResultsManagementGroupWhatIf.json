@@ -1,15 +1,15 @@
 {
-  "operationId": "DeploymentStacksWhatIfResultsAtSubscription_WhatIf",
-  "title": "Get a detailed subscription Deployment stack what-if result",
+  "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_WhatIf",
+  "title": "Get a detailed management group Deployment stack what-if result",
   "parameters": {
     "api-version": "2025-07-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "managementGroupId": "myMg",
     "deploymentStackWhatIfResultName": "changedDeploymentStackWhatIfResult"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStackWhatIfResults/changedDeploymentStackWhatIfResult",
+        "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStackWhatIfResults/changedDeploymentStackWhatIfResult",
         "type": "Microsoft.Resources/deploymentStacksWhatIfResults",
         "name": "changedDeploymentStackWhatIfResult",
         "location": "eastus",
@@ -22,7 +22,7 @@
           "lastModifiedAt": "2025-02-02T02:03:01.1974346Z"
         },
         "properties": {
-          "deploymentStackResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacks/deploymentStack2",
+          "deploymentStackResourceId": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/deploymentStack2",
           "deploymentStackLastModified": "2025-01-03T03:01:01.3141592Z",
           "retentionInterval": "P7D",
           "correlationId": "00000000-0000-0000-0000-000000000000",
@@ -42,8 +42,9 @@
           "provisioningState": "succeeded",
           "changes": {
             "resourceChanges": [
+
               {
-                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyAssignments/anotherPolicyAssignment",
+                "resourceId": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Authorization/policyAssignments/anotherPolicyAssignment",
                 "managementStatusChange": {
                   "before": "notManaged",
                   "after": "managed"
@@ -57,13 +58,13 @@
                   "properties": {
                     "displayName": "anotherPolicyAssignment",
                     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/myPolicyDefinition",
-                    "scope": "/subscriptions/00000000-0000-0000-0000-000000000000",
+                    "scope": "/providers/Microsoft.Management/managementGroups/myMg",
                     "enforcementMode": "Default"
                   }
                 }
               },
               {
-                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyAssignments/updatedPolicyAssignment",
+                "resourceId": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Authorization/policyAssignments/updatedPolicyAssignment",
                 "managementStatusChange": {
                   "before": "managed",
                   "after": "managed"
@@ -72,28 +73,28 @@
                 "changeCertainty": "definite",
                 "before": {
                   "apiVersion": "2019-06-01",
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyAssignments/updatedPolicyAssignment",
+                  "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/updatedPolicyAssignment",
                   "type": "Microsoft.Authorization/policyAssignments",
                   "name": "updatedPolicyAssignment",
                   "location": "westus2",
                   "properties": {
-                    "policyDefinitionId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyDefinitions/updatedPolicyDefinition",
-                    "scope": "/subscriptions/00000000-0000-0000-0000-000000000000",
+                    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyDefinitions/updatedPolicyDefinition",
+                    "scope": "/subscriptions/00000000-0000-0000-0000-000000000001",
                     "enforcementMode": "Default"
                   }
                 },
                 "after": {
-                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyAssignments/updatedPolicyAssignment",
+                  "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/updatedPolicyAssignment",
                   "changeType": "Modify",
                   "before": {
                     "apiVersion": "2019-06-01",
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyAssignments/updatedPolicyAssignment",
+                    "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/updatedPolicyAssignment",
                     "type": "Microsoft.Authorization/policyAssignments",
                     "name": "updatedPolicyAssignment",
                     "location": "westus2",
                     "properties": {
-                      "policyDefinitionId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyDefinitions/updatedPolicyDefinition",
-                      "scope": "/subscriptions/00000000-0000-0000-0000-000000000000",
+                      "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyDefinitions/updatedPolicyDefinition",
+                      "scope": "/subscriptions/00000000-0000-0000-0000-000000000001",
                       "enforcementMode": "DoNotEnforce"
                     }
                   },
