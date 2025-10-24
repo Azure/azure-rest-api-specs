@@ -157,7 +157,6 @@ enum HeatMapType {
 /**
  * Class representing a Traffic Manager endpoint properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 model EndpointProperties {
   /**
    * The Azure Resource URI of the of the endpoint. Not applicable to endpoints of type 'ExternalEndpoints'.
@@ -293,7 +292,6 @@ model Resource {
   /**
    * The name of the resource
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 
   /**
@@ -419,7 +417,6 @@ model ProfileListResult {
 /**
  * Class representing the Traffic Manager profile properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 model ProfileProperties {
   /**
    * The status of the Traffic Manager profile.
@@ -568,7 +565,6 @@ model MonitorConfigExpectedStatusCodeRangesItem {
  * The resource model definition for a ARM tracked top level resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 model TrackedResource extends Resource {
@@ -589,7 +585,6 @@ model TrackedResource extends Resource {
 /**
  * Class representing the properties of the Geographic hierarchy used with the Geographic traffic routing method.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 model GeographicHierarchyProperties {
   /**
    * The region at the root of the hierarchy from all the regions in the hierarchy can be retrieved.
@@ -620,7 +615,6 @@ model Region {
 /**
  * Class representing a Traffic Manager HeatMap properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 model HeatMapProperties {
   /**
    * The beginning of the time window for this HeatMap, inclusive.
@@ -711,7 +705,6 @@ model QueryExperience {
 /**
  * Class representing a Traffic Manager Real User Metrics key response.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 model UserMetricsProperties {
   /**
    * The key returned by the User Metrics operation.

@@ -13,15 +13,12 @@ namespace Microsoft.Network;
 /**
  * Class representing Traffic Manager User Metrics.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
-model UserMetricsModel
-  is Azure.ResourceManager.ProxyResource<UserMetricsProperties> {
-  ...ResourceNameParameter<
-    Resource = UserMetricsModel,
-    KeyName = "trafficManagerUserMetricsKey",
-    SegmentName = "trafficManagerUserMetricsKeys",
-    NamePattern = ""
-  >;
+model UserMetricsModel extends ProxyResource {
+  properties?: UserMetricsProperties;
 }
 
 alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
