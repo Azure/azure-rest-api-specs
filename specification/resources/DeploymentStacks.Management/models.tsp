@@ -258,6 +258,11 @@ model DeploymentStackSharedProperties {
   parameters?: Record<DeploymentParameter>;
 
   /**
+   * The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both.
+   */
+  parametersLink?: DeploymentStacksParametersLink;
+
+  /**
    * The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of the object are determined by the deployment template."
@@ -266,9 +271,20 @@ model DeploymentStackSharedProperties {
   extensionConfigs?: Record<DeploymentExtensionConfig>;
 
   /**
-   * The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both.
+   * External input values, used by external tooling for parameter evaluation.
    */
-  parametersLink?: DeploymentStacksParametersLink;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of the object link to externalInputDefinitions."
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  externalInputs?: Record<DeploymentExternalInput>;
+
+  /**
+   * External input definitions, used by external tooling to define expected external input values.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of the object are determined by the deployment template."
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  externalInputDefinitions?: Record<DeploymentExternalInputDefinition>;
 
   /**
    * Defines the behavior of resources that are no longer managed after the Deployment stack is updated or deleted.
@@ -431,6 +447,13 @@ model DeploymentParameter {
    * Azure Key Vault parameter reference.
    */
   reference?: KeyVaultParameterReference;
+
+  /**
+   * Input expression to the parameter.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  expression?: string;
 }
 
 /**
@@ -476,6 +499,35 @@ model DeploymentStacksParametersLink {
    * If included, must match the ContentVersion in the template.
    */
   contentVersion?: string;
+}
+
+/**
+ * Deployment external input for parameterization.
+ */
+@added(Versions.v2025_07_01)
+model DeploymentExternalInput {
+  /**
+   * External input value.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Value type is determined by the user."
+  value: unknown;
+}
+
+/**
+ * Deployment external input definition for parameterization.
+ */
+@added(Versions.v2025_07_01)
+model DeploymentExternalInputDefinition {
+  /**
+   * The kind of external input.
+   */
+  kind: string;
+
+  /**
+   * Configuration for the external input.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Value type is determined by the user."
+  config?: unknown;
 }
 
 /**

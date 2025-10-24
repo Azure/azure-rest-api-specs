@@ -280,8 +280,6 @@ model StorageMoverUpdateParameters {
   /**
    * The resource specific properties for the Storage Mover resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageMoverUpdateProperties;
 
   /**
@@ -401,7 +399,7 @@ model UploadLimitSchedule {
   /**
    * The set of weekly repeating recurrences of the WAN-link upload limit schedule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   weeklyRecurrences?: UploadLimitWeeklyRecurrence[];
 }
 
@@ -484,9 +482,7 @@ model AgentPropertiesErrorDetails {
  * The Agent resource.
  */
 model AgentUpdateParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AgentUpdateProperties;
 }
 
@@ -596,8 +592,6 @@ model ProjectUpdateParameters {
   /**
    * Project properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProjectUpdateProperties;
 }
 
@@ -710,7 +704,7 @@ model JobDefinitionProperties {
   sourceTargetMap?: {
     @visibility(Lifecycle.Read)
     @added(Versions.v2025_07_01)
-    @OpenAPI.extension("x-ms-identifiers", #[])
+    @identifiers(#[])
     value?: SourceTargetMap[];
   };
 
@@ -832,8 +826,6 @@ model JobDefinitionUpdateParameters {
   /**
    * Job definition properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: JobDefinitionUpdateProperties;
 }
 

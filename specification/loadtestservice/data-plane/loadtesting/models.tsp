@@ -332,8 +332,20 @@ union TestKind {
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
 union CreatedByType {
   string,
-  @doc("Entity was created by a user.") "User",
-  @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
+
+  @doc("Entity was created by a user.")
+  "User",
+
+  @doc("Entity was created by a scheduled trigger.")
+  "ScheduledTrigger",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by Azure DevOps pipelines.")
+  "AzurePipelines",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by GitHub Workflows.")
+  "GitHubWorkflows",
 }
 
 @doc("Test file info.")
@@ -426,6 +438,11 @@ model Test {
   @doc("Resource Ids of the managed identity built in to load test engines. Required if engineBuiltInIdentityType is UserAssigned.")
   @added(APIVersions.v2024_12_01_preview)
   engineBuiltInIdentityIds?: string[];
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Estimated virtual user hours for the test.")
+  @visibility(Lifecycle.Read)
+  estimatedVirtualUserHours?: float64;
 
   ...SystemMetaData;
 }
@@ -542,6 +559,10 @@ model AutoStopCriteria {
   @doc("Time window during which the error percentage should be evaluated in seconds.")
   @encode(DurationKnownEncoding.seconds, int32)
   errorRateTimeWindowInSeconds?: duration = duration.fromISO("PT60S");
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Maximum number of virtual users per load testing engine, at which the test run should be automatically stopped.")
+  maximumVirtualUsersPerEngine?: int32 = 5000;
 }
 
 @doc("Configurations for the load test.")
@@ -894,14 +915,64 @@ model TestRun {
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
   createdByType?: CreatedByType;
 
+  @visibility(Lifecycle.Read)
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("The URI pointing to the entity that created the test run.")
+  createdByUri?: url;
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Estimated virtual user hours for the test run.")
+  @visibility(Lifecycle.Read)
+  estimatedVirtualUserHours?: float64;
+
   ...SystemMetaData;
+}
+
+@doc("Represents insights for the test run.")
+@added(APIVersions.v2025_03_01_preview)
+model TestRunInsights {
+  @doc("The columns of the insights.")
+  @visibility(Lifecycle.Read)
+  columns?: TestRunInsightColumn[];
+
+  @doc("The rows of the insights.")
+  @visibility(Lifecycle.Read)
+  rows?: Record<string>[];
+
+  @doc("The version of the insights.")
+  @visibility(Lifecycle.Read)
+  version?: int64;
+
+  @doc("The status of the insights.")
+  @visibility(Lifecycle.Read)
+  status?: Foundations.OperationState;
+}
+
+@doc("Represents a column of the test run insight")
+@added(APIVersions.v2025_03_01_preview)
+model TestRunInsightColumn {
+  @doc("Name of the column.")
+  name: string;
+
+  @doc("The data type of the column.")
+  dataType: string;
 }
 
 @doc("Error details if there is any failure in load test run")
 model ErrorDetails {
+  @doc("Error code if there is any failure in load test run.")
+  @visibility(Lifecycle.Read)
+  @added(APIVersions.v2025_03_01_preview)
+  code?: string;
+
   @doc("Error details in case test run was not successfully run.")
   @visibility(Lifecycle.Read)
   message?: string;
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("A dictionary for storing additional error information for better context. Each key is a property name (e.g., \"Description\", \"Resolution\", \"Category\", \"Region\"), and its value is an array of strings with relevant details.")
+  @visibility(Lifecycle.Read)
+  properties?: Record<string[]>;
 }
 
 @doc("Test run statistics.")
@@ -1053,6 +1124,23 @@ model ArtifactsContainerInfo {
 
   @doc("Expiry time of the container (RFC 3339 literal format)")
   expireDateTime?: utcDateTime;
+}
+
+@doc("Request to clone an existing test into a new test.")
+@added(APIVersions.v2025_03_01_preview)
+model CloneTestRequest {
+  @doc("Unique identifier for the new test that will be created.")
+  @pattern("^[a-z0-9_-]*$")
+  newTestId: string;
+
+  @doc("Display Name override for the newly created test.")
+  @maxLength(50)
+  @minLength(2)
+  displayName?: string;
+
+  @doc("Description override for the newly created test.")
+  @maxLength(100)
+  description?: string;
 }
 
 @doc("Represents collection of metric namespaces.")
@@ -1297,6 +1385,11 @@ model ListTestRunQueryParams {
   @query(#{ explode: false })
   @added(APIVersions.v2024_07_01_preview)
   createdByTypes?: string[];
+
+  @doc("Comma-separated list of test IDs. If you are using testIds, do not send a value for testId.")
+  @query(#{ explode: false })
+  @added(APIVersions.v2025_03_01_preview)
+  testIds?: string[];
 }
 
 @doc("Parameters for list test operation")
@@ -1384,6 +1477,38 @@ union RequestDataLevel {
 
   @doc("Request data will be collected in case of failed requests")
   ERRORS: "ERRORS",
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("Kind of the long running operation.")
+union OperationKind {
+  string,
+
+  @doc("Operation represents a clone test operation")
+  CloneTest: "CloneTest",
+
+  @doc("Operation represents a test run insights generation operation")
+  GenerateTestRunInsights: "GenerateTestRunInsights",
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("Status of a long running operation.")
+@resource("operations")
+model OperationStatus {
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("The unique ID of the operation.")
+  @key("operationId")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("The state of the operation.")
+  status: Foundations.OperationState;
+
+  @doc("The kind of the operation.")
+  kind: OperationKind;
+
+  @doc("Error object that describes the error when status is \"Failed\".")
+  error?: Foundations.Error;
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &

@@ -495,7 +495,8 @@ union BatchNodeDeallocationOption {
   @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Remove Compute Nodes when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 
-  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Remove Compute Nodes when all Task retention periods have expired.")
+  #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
+  @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Remove Compute Nodes when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
 
@@ -512,7 +513,8 @@ union BatchNodeDeallocateOption {
   @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Deallocate the Compute Node when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 
-  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Deallocate the Compute Node when all Task retention periods have expired.")
+  #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
+  @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Deallocate the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
 
@@ -688,7 +690,8 @@ union BatchNodeRebootKind {
   @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Restart the Compute Node when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 
-  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Restart the Compute Node when all Task retention periods have expired.")
+  #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
+  @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Restart the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
 
@@ -705,7 +708,8 @@ union BatchNodeReimageOption {
   @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Reimage the Compute Node when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 
-  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Reimage the Compute Node when all Task retention periods have expired.")
+  #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
+  @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Reimage the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
 

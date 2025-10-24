@@ -2142,6 +2142,34 @@
         }
       }
     },
+    "DeploymentExternalInput": {
+      "type": "object",
+      "description": "Deployment external input for parameterization.",
+      "properties": {
+        "value": {
+          "description": "External input value."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentExternalInputDefinition": {
+      "type": "object",
+      "description": "Deployment external input definition for parameterization.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of external input."
+        },
+        "config": {
+          "description": "Configuration for the external input."
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
     "DeploymentParameter": {
       "type": "object",
       "description": "Deployment parameter for the template.",
@@ -2156,6 +2184,14 @@
         "reference": {
           "$ref": "#/definitions/KeyVaultParameterReference",
           "description": "Azure Key Vault parameter reference."
+        },
+        "expression": {
+          "type": "string",
+          "description": "Input expression to the parameter.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -2243,6 +2279,10 @@
             "$ref": "#/definitions/DeploymentParameter"
           }
         },
+        "parametersLink": {
+          "$ref": "#/definitions/DeploymentStacksParametersLink",
+          "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
+        },
         "extensionConfigs": {
           "type": "object",
           "description": "The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.",
@@ -2254,9 +2294,27 @@
             "create"
           ]
         },
-        "parametersLink": {
-          "$ref": "#/definitions/DeploymentStacksParametersLink",
-          "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
+        "externalInputs": {
+          "type": "object",
+          "description": "External input values, used by external tooling for parameter evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExternalInput"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "externalInputDefinitions": {
+          "type": "object",
+          "description": "External input definitions, used by external tooling to define expected external input values.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExternalInputDefinition"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "actionOnUnmanage": {
           "$ref": "#/definitions/ActionOnUnmanage",
@@ -3137,6 +3195,10 @@
             "$ref": "#/definitions/DeploymentParameter"
           }
         },
+        "parametersLink": {
+          "$ref": "#/definitions/DeploymentStacksParametersLink",
+          "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
+        },
         "extensionConfigs": {
           "type": "object",
           "description": "The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.",
@@ -3148,9 +3210,27 @@
             "create"
           ]
         },
-        "parametersLink": {
-          "$ref": "#/definitions/DeploymentStacksParametersLink",
-          "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
+        "externalInputs": {
+          "type": "object",
+          "description": "External input values, used by external tooling for parameter evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExternalInput"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "externalInputDefinitions": {
+          "type": "object",
+          "description": "External input definitions, used by external tooling to define expected external input values.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExternalInputDefinition"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "actionOnUnmanage": {
           "$ref": "#/definitions/ActionOnUnmanage",

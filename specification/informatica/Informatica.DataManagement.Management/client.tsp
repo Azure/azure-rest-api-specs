@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
-@@clientName(Informatica.DataManagement, "InformaticaDataMgmt", "python");
+@@clientName(Informatica.DataManagement, "InformaticaDataMgmtClient", "python");
 @@clientName(Informatica.DataManagement,
   "InformaticaDataManagementClient",
   "java"
@@ -98,4 +98,9 @@ namespace Informatica.DataManagement {
   );
 
   @@usage(ServerlessRuntimeNetworkProfileUpdate, Usage.output);
+
+  @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
 }
