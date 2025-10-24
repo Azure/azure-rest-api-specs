@@ -38,6 +38,18 @@ union CheckNameResourceTypes {
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots",
+
+  /**
+   * ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead.
+   */
+  @added(Versions.v2025_09_01)
+  `Microsoft.NetApp/netAppAccounts/backupVaults/backups`: "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+
+  /**
+   * ANF Backup under a Backup Vault
+   */
+  @added(Versions.v2025_09_01)
+  `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
 }
 
 /**
@@ -64,6 +76,18 @@ union CheckQuotaNameResourceTypes {
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots",
+
+  /**
+   * ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead.
+   */
+  @added(Versions.v2025_09_01)
+  `Microsoft.NetApp/netAppAccounts/backupVaults/backups`: "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+
+  /**
+   * ANF Backup under a Backup Vault
+   */
+  @added(Versions.v2025_09_01)
+  `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
 }
 
 /**
@@ -220,10 +244,28 @@ union KeySource {
 }
 
 /**
+ * The encryption keySource (provider) for ANF Elastic resources. Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault
+ */
+@added(Versions.v2025_09_01_preview)
+union ElasticKeySource {
+  string,
+
+  /**
+   * Microsoft-managed key encryption
+   */
+  `Microsoft.NetApp`: "Microsoft.NetApp",
+
+  /**
+   * Customer-managed key encryption
+   */
+  `Microsoft.KeyVault`: "Microsoft.KeyVault",
+}
+
+/**
  * Gets the status of the VolumeQuotaRule at the time the operation was called.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@renamedFrom(Versions.v2025_07_01_preview, "ProvisioningState")
+@renamedFrom(Versions.v2025_09_01_preview, "ProvisioningState")
 union NetAppProvisioningState {
   string,
 
@@ -241,6 +283,12 @@ union NetAppProvisioningState {
    * Patching
    */
   Patching: "Patching",
+
+  /**
+   * Resource is updating
+   */
+  @added(Versions.v2025_09_01)
+  Updating: "Updating",
 
   /**
    * Deleting
@@ -607,6 +655,24 @@ model UsageProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RegionInfo {
+  /**
+   * Provides storage to network proximity information in the region.
+   */
+  storageToNetworkProximity?: RegionStorageToNetworkProximity;
+
+  /**
+   * Provides logical availability zone mappings for the subscription for a region.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["availabilityZone"])
+  availabilityZoneMappings?: RegionInfoAvailabilityZoneMappingsItem[];
+}
+
+/**
+ * Provides region specific information.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_09_01_preview)
+model ElasticRegionInfo {
   /**
    * Provides storage to network proximity information in the region.
    */
