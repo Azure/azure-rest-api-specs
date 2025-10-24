@@ -174,7 +174,7 @@ model NotificationContent {
   @doc("The native external platform user identifiers of the recipient.")
   to: string[];
 
-  @doc("The type discriminator describing a notification type.")
+  @doc("The type discriminator describing a message type.")
   kind: CommunicationMessageKind;
 }
 
@@ -226,7 +226,7 @@ model ImageNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30)
 @doc("A request to send a document notification.")
 model DocumentNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
+  @doc("Message notification type is document.")
   kind: CommunicationMessageKind.document;
 
   @doc("Optional text content.")
@@ -241,7 +241,7 @@ model DocumentNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30)
 @doc("A request to send a video notification.")
 model VideoNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
+  @doc("Message notification type is video.")
   kind: CommunicationMessageKind.video;
 
   @doc("Optional text content.")
@@ -289,6 +289,19 @@ model InteractiveNotificationContent extends NotificationContent {
 
   @doc("The interactive message content.")
   interactiveMessage: InteractiveMessage;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("A request to send a read receipt update from Business to User.")
+model ReadReceiptContent {
+  @doc("The id of the message this read receipt refers to.")
+  messageId: string;
+
+  @doc("The Channel Registration ID for the Business Identifier.")
+  channelRegistrationId: uuid;
+
+  @doc("Whether this status update includes a typing indicator. This field defaults to false when not provided.")
+  typingIndicator?: boolean;
 }
 
 @added(Versions.c2025_01_15_Preview)
@@ -651,6 +664,16 @@ model Notifications {
   id: string;
 }
 
+@resource("messages/readreceipts")
+@doc("A notification.")
+model ReadReceipts {
+  @key
+  @visibility(Lifecycle.Read)
+  @invisible(Lifecycle) // The ID is only used as a key parameter.
+  @doc("The ID is only used as a key parameter.")
+  id: string;
+}
+
 @resource("messages/channels")
 @doc("A communication channel.")
 model CommunicationChannel {
@@ -699,10 +722,35 @@ model MessageTemplateItem {
   kind: CommunicationMessagesChannel;
 }
 
-alias ListTemplatesQueryParams = ListQueryParametersTrait<{
+alias CommonListParams = {
   @doc("Number of objects to return per page.")
   @query
-  maxpagesize?: int32;
+  @renamedFrom(Versions.c2025_04_01_Preview, "maxpagesize")
+  maxPageSize?: int32;
+};
+
+alias ListTemplatesQueryParams = ListQueryParametersTrait<{
+  ...CommonListParams;
+}>;
+
+alias ListConversationsQueryParams = ListQueryParametersTrait<{
+  ...CommonListParams;
+
+  @query
+  @doc("The participant user ID")
+  participantId?: string;
+
+  @query
+  @doc("The id of channel")
+  channelId?: uuid;
+}>;
+
+alias ListConversationThreadQueryParams = ListQueryParametersTrait<{
+  ...CommonListParams;
+
+  @query
+  @doc("The participant user ID")
+  participantId?: string;
 }>;
 
 @doc("Notification messages send request body.")
@@ -712,17 +760,356 @@ model NotificationMessagesSendRequestBody {
   body: NotificationContent;
 }
 
+@added(Versions.c2025_09_01_Preview)
+@doc("Read Receipt send request body.")
+model ReadReceiptSendRequestBody {
+  @doc("Details of the read receipt update to send.")
+  @bodyRoot
+  readReceiptContent: ReadReceiptContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("The options of the outbound delivery strategy for messages sent by participants in a conversation.")
+union OutboundDeliveryStrategyKind {
+  string,
+
+  @doc("Delivery strategy for internal only.")
+  internalOnly: "internalOnly",
+
+  @doc("Delivery strategy for all participants.")
+  allParticipants: "allParticipants",
+}
+
+@clientName("ConversationMessage", "csharp")
+@added(Versions.c2025_04_01_Preview)
+@doc("Details of a message.")
+model Message {
+  @doc("Content of the message.")
+  content: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@discriminator("kind")
+@resource("participants") // participants add/remove
+@parentResource(Conversation)
+@doc("Advanced Messaging conversation participant.")
+model ConversationParticipant {
+  @key("participantId")
+  @visibility(Lifecycle.Read)
+  @doc("Participant Identifier.")
+  id: string; // 8:acs:xxx
+
+  @doc("Participant display name.")
+  displayName?: string;
+
+  @doc("The type discriminator describing a participant type.")
+  kind: ParticipantKind;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Internal conversation participant.")
+model InternalConversationParticipant extends ConversationParticipant {
+  @doc("Participant type is internal.")
+  kind: ParticipantKind.internal;
+
+  @doc("The internal platform identifiers for the participant.")
+  contact: Contact;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("External conversation participant.")
+model ExternalConversationParticipant extends ConversationParticipant {
+  @doc("Participant type is external.")
+  kind: ParticipantKind.external;
+
+  @doc("List of external platform identifiers for the participant.")
+  contacts: Contact[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("The type of a participant in a threaded conversation.")
+union ParticipantKind {
+  string,
+
+  @doc("A participant internal to Azure Communication Services.")
+  internal: "internal",
+
+  @doc("A participant on other platforms")
+  external: "external",
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Request payload for sending a conversation message.")
+model SendConversationMessageOptions {
+  @doc("Details of a send conversation message request.")
+  request: ConversationMessageContent;
+
+  @doc("The options of the outbound delivery strategy for messages sent by participants in a conversation.\r\nSupports internalOnly, allChannels.")
+  outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Result of the send conversation message operation.")
+model SendConversationMessageResult {
+  @doc("A server-generated Advanced Messaging conversation message id.")
+  messageId: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@resource("messages/conversations")
+@doc("Request payload for creating a conversation.")
+model CreateConversationRequest {
+  @key
+  @visibility(Lifecycle.Create)
+  @doc("The conversation details.")
+  conversation: Conversation;
+
+  @doc("An initial message within the conversation.")
+  initialMessage?: Message;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Response for the create conversation operation.")
+model CreateConversationResult {
+  @doc("Server-generated conversation ID.")
+  id: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@resource("messages/conversations")
+@doc("A conversation.")
+@clientName("CommunicationConversation")
+model Conversation {
+  @key("conversationId")
+  @visibility(Lifecycle.Read) // this model is only used as a parameter
+  @doc("The conversation ID.")
+  id: string;
+
+  @doc("The conversation topic.")
+  topic?: string;
+
+  @doc("List of delivery channel IDs.")
+  deliveryChannelIds?: string[];
+
+  @added(Versions.c2025_04_01_Preview)
+  @doc("Outbound delivery strategy for the conversation.")
+  outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
+
+  @added(Versions.c2025_04_01_Preview)
+  @doc("List of participants involved in the conversation.")
+  participants?: ConversationParticipant[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Conversation message send request body.")
+model ConversationThreadSendRequestBody {
+  @doc("Details of the conversation message to send.")
+  @bodyRoot
+  options: SendConversationMessageOptions;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Add participants to a conversation request body.")
+model AddParticipantsRequestBody {
+  @doc("Details of the payload for adding participants to a conversation.")
+  @bodyRoot
+  options: AddParticipantsOptions;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Remove participants request body.")
+model RemoveParticipantsRequestBody {
+  @doc("Details of the request body for removing participants from a conversation.")
+  @bodyRoot
+  options: RemoveParticipantsOptions;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Response for the add participants operation.")
+model AddParticipantsResult {
+  @doc("List of Ids with Errors if failed to be added")
+  invalidParticipants: UpdateParticipantsResult[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Response for the remove participants operation.")
+model RemoveParticipantsResult {
+  @doc("List of Ids with Errors if failed to be added")
+  invalidParticipants: UpdateParticipantsResult[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Response for the remove participants operation.")
+model UpdateParticipantsResult {
+  @doc("Participant User Id.")
+  id: string;
+
+  @doc("Error of the participant operation.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@resource("messages")
+@parentResource(Conversation)
+@doc("The conversation message as returned from the service.")
+model ConversationMessageItem {
+  @key("messageId")
+  @visibility(Lifecycle.Read)
+  @doc("Message ID.")
+  id: string;
+
+  @doc("Message sequence ID.")
+  sequenceId?: int64;
+
+  @doc("Payload of a threaded conversation message.")
+  message: ConversationMessageContent;
+
+  @doc("The display name of the message sender.")
+  senderDisplayName?: string;
+
+  @doc("The communication identifier of the message sender.")
+  senderCommunicationIdentifier: string;
+
+  @doc("Timestamp when the message is sent.")
+  createdOn: utcDateTime;
+}
+
+@clientName("ConversationContact", "csharp")
+@discriminator("kind")
+@added(Versions.c2025_04_01_Preview)
+@doc("Details of an external platform contact.")
+model Contact {
+  @doc("External platform identifier.")
+  id: string;
+
+  @doc("Type of message platform (e.g., WhatsApp).")
+  kind: MessagePlatformKind;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Communication Contact.")
+model CommunicationContact extends Contact {
+  @doc("Contact type is communication.")
+  kind: MessagePlatformKind.communication;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Bot Contact.")
+model BotContact extends Contact {
+  @doc("Contact type is bot.")
+  kind: MessagePlatformKind.bot;
+
+  @doc("Bot App Id of the Bot Contact.")
+  botAppId: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("WhatsApp Contact.")
+model WhatsAppContact extends Contact {
+  @doc("Contact type is whatsApp.")
+  kind: MessagePlatformKind.whatsApp;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Defines the type of message platform.")
+union MessagePlatformKind {
+  string,
+
+  @doc("Azure Communication platform.")
+  communication: "communication",
+
+  @doc("Bot platform.")
+  bot: "bot",
+
+  @doc("WhatsApp platform.")
+  whatsApp: "whatsApp",
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Request payload for adding participants to a conversation.")
+model AddParticipantsOptions {
+  @doc("List of participants to add.")
+  participants: ConversationParticipant[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Request payload for removing participants from a conversation.")
+model RemoveParticipantsOptions {
+  @doc("The participant IDs to remove.")
+  participantIds: string[];
+}
+
+@doc("Result of the get conversation messages AI Analysis operation.")
+model GetConversationThreadAnalysisResult {
+  @doc("The AI summary of the conversation messages.")
+  summary: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@discriminator("kind")
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("Details of the conversation message content.")
+model ConversationMessageContent {
+  #suppress "@azure-tools/typespec-azure-core/spread-discriminated-model" ""
+  ...NotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send a text conversation message.")
+model TextConversationMessageContent extends ConversationMessageContent {
+  ...TextNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send an image conversation message.")
+model ImageConversationMessageContent extends ConversationMessageContent {
+  ...ImageNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send a document conversation message.")
+model DocumentConversationMessageContent extends ConversationMessageContent {
+  ...DocumentNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send a video conversation message.")
+model VideoConversationMessageContent extends ConversationMessageContent {
+  ...VideoNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send an audio conversation message.")
+model AudioConversationMessageContent extends ConversationMessageContent {
+  ...AudioNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send a template conversation message.")
+model TemplateConversationMessageContent extends ConversationMessageContent {
+  ...TemplateNotificationContent;
+}
+
 @doc("Azure Communication Messages Versions")
 enum Versions {
   @doc("Azure Communication Messages 2024-02-01 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
 
   @doc("Azure Communication Messages 2024-08-30 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_08_30: "2024-08-30",
 
   @doc("Azure Communication Messages 2025-01-15-preview api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_01_15_Preview: "2025-01-15-preview",
+
+  @doc("Azure Communication Messages 2025-04-01-preview api version")
+  c2025_04_01_Preview: "2025-04-01-preview",
+
+  @doc("Azure Communication Messages 2025-09-01-preview api version")
+  c2025_09_01_Preview: "2025-09-01-preview",
 }

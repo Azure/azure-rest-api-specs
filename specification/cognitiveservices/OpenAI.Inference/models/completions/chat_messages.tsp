@@ -150,6 +150,7 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
   role: ChatRole.system;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @doc("The contents of the system message.")
   @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, string)
   content: string | ChatMessageTextContentItem[];
@@ -169,6 +170,7 @@ model ChatRequestDeveloperMessage extends ChatRequestMessage {
 
   /** An array of content parts with a defined type. For developer messages, only type `text` is supported. */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   content: string | ChatMessageTextContentItem[];
 
   /** An optional name for the participant. Provides the model information to differentiate between participants of the same role. */
@@ -182,6 +184,7 @@ model ChatRequestUserMessage extends ChatRequestMessage {
   role: ChatRole.user;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @doc("The contents of the user message, with available input types varying by selected model.")
   @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, ChatMessageContent)
   @typeChangedFrom(
@@ -202,6 +205,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @doc("The content of the message.")
   @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, string | null)
   content:
@@ -245,6 +249,7 @@ model ChatRequestToolMessage extends ChatRequestMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @doc("The content of the message.")
   @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, string | null)
   content: string | ChatMessageTextContentItem[] | null;

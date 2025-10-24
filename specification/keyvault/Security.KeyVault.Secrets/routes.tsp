@@ -4,9 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
@@ -32,9 +30,9 @@ op setSecret is KeyVaultOperation<
     /**
      * The parameters for setting the secret.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretSetParameters;
   },
   SecretBundle
@@ -63,9 +61,10 @@ op deleteSecret is KeyVaultOperation<
  * The UPDATE operation changes specified attributes of an existing stored secret. Attributes that are not specified in the request are left unchanged. The value of a secret itself cannot be changed. This operation requires the secrets/set permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("Updates the attributes associated with a specified secret in a given key vault.")
 @route("/secrets/{secret-name}/{secret-version}")
-@patch
+@patch(#{ implicitOptionality: true })
 op updateSecret is KeyVaultOperation<
   {
     /**
@@ -80,14 +79,14 @@ op updateSecret is KeyVaultOperation<
      */
     @path("secret-version")
     @clientName("version", "go")
-    secretVersion: string;
+    secretVersion?: string;
 
     /**
      * The parameters for update secret operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretUpdateParameters;
   },
   SecretBundle
@@ -97,6 +96,7 @@ op updateSecret is KeyVaultOperation<
  * The GET operation is applicable to any secret stored in Azure Key Vault. This operation requires the secrets/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("Get a specified secret from a given key vault.")
 @route("/secrets/{secret-name}/{secret-version}")
 @get
@@ -114,7 +114,14 @@ op getSecret is KeyVaultOperation<
      */
     @path("secret-version")
     @clientName("version", "go")
-    secretVersion: string;
+    secretVersion?: string;
+
+    /**
+     * The media type (MIME type) of the certificate. If a supported format is specified, the certificate content is converted to the requested format. Currently, only PFX to PEM conversion is supported. If an unsupported format is specified, the request is rejected. If not specified, the certificate is returned in its original format without conversion.
+     */
+    @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+    @query("outContentType")
+    outContentType?: ContentType;
   },
   SecretBundle
 >;
@@ -127,6 +134,7 @@ op getSecret is KeyVaultOperation<
 @summary("List secrets in a specified key vault.")
 @route("/secrets")
 @get
+@list
 op getSecrets is KeyVaultOperation<
   {
     /**
@@ -148,6 +156,7 @@ op getSecrets is KeyVaultOperation<
 @summary("List all versions of the specified secret.")
 @route("/secrets/{secret-name}/versions")
 @get
+@list
 op getSecretVersions is KeyVaultOperation<
   {
     /**
@@ -176,6 +185,7 @@ op getSecretVersions is KeyVaultOperation<
 @summary("Lists deleted secrets for the specified vault.")
 @route("/deletedsecrets")
 @get
+@list
 op getDeletedSecrets is KeyVaultOperation<
   {
     /**
@@ -278,9 +288,9 @@ op restoreSecret is KeyVaultOperation<
     /**
      * The parameters to restore the secret.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretRestoreParameters;
   },
   SecretBundle

@@ -1,8 +1,11 @@
+import "./AVSExample.tsp";
+
 /** Describes the schema of the Azure VMware Solution events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdating event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAVSPrivateCloudUpdatingExample)
 model AvsPrivateCloudUpdatingEventData extends AvsPrivateCloudEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdated event. */
@@ -30,6 +33,7 @@ model AvsClusterUpdatingEventData extends AvsClusterEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAVSClusterUpdatedExample)
 model AvsClusterUpdatedEventData extends AvsClusterEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterFailed event. */
@@ -47,6 +51,7 @@ model AvsScriptExecutionStartedEventData extends AvsScriptExecutionEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsScriptExecutionFinishedEventData extends AvsScriptExecutionEventData {
   /** Named outputs of completed execution, if any. */
+  @visibility(Lifecycle.Read)
   namedOutputs: Record<string>;
 }
 
@@ -57,6 +62,7 @@ model AvsScriptExecutionCancelledEventData
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionFailed event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAVSScriptExecutionFailedExample)
 model AvsScriptExecutionFailedEventData extends AvsScriptExecutionEventData {
   /** Failure reason of an event. */
   failureMessage?: string;
@@ -74,12 +80,15 @@ model AvsClusterEventData {
   operationId: string;
 
   /** Hosts added to the cluster in this event, if any. */
+  @visibility(Lifecycle.Read)
   addedHostNames?: string[];
 
   /** Hosts removed from the cluster in this event, if any. */
+  @visibility(Lifecycle.Read)
   removedHostNames?: string[];
 
   /** Hosts in Maintenance mode in the cluster, if any. */
+  @visibility(Lifecycle.Read)
   inMaintenanceHostNames?: string[];
 }
 
@@ -92,5 +101,6 @@ model AvsScriptExecutionEventData {
   cmdletId: string;
 
   /** Stdout outputs from the execution, if any. */
+  @visibility(Lifecycle.Read)
   output?: string[];
 }

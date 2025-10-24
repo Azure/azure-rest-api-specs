@@ -114,6 +114,7 @@ model DocumentClassifierAnalyzeRequestParams {
 @doc("Analyze from stream request parameters.")
 model AnalyzeFromStreamRequestParams {
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with existing clients"
   @doc("Input content type.")
   @header
   contentType:
@@ -312,6 +313,7 @@ interface DocumentModels {
   @doc("List batch document analysis results.")
   @route("/documentModels/{modelId}/analyzeBatchResults")
   @get
+  @list
   listAnalyzeBatchResults is DocumentIntelligenceOperation<
     {
       @doc("Unique document model name.")

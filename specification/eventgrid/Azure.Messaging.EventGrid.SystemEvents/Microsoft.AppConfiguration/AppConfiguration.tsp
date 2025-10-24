@@ -1,7 +1,10 @@
+import "./AppConfigurationExample.tsp";
 /** Describes the schema of the Azure App Configuration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 // need to figure out an alternative to this method --- should we pass in docstring here or should we just copy/paste and see what happens
+
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event. */
+@example(MicrosoftAppConfigurationKeyValueModifiedExample)
 model AppConfigurationKeyValueModifiedEventData {
   /** The key used to identify the key-value that was modified. */
   key: string;
@@ -18,6 +21,7 @@ model AppConfigurationKeyValueModifiedEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event. */
+@example(MicrosoftAppConfigurationKeyValueDeletedExample)
 model AppConfigurationKeyValueDeletedEventData {
   /** The key used to identify the key-value that was deleted. */
   key: string;
@@ -46,10 +50,12 @@ model AppConfigurationSnapshotEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAppConfigurationSnapshotCreatedExample)
 model AppConfigurationSnapshotCreatedEventData
   extends AppConfigurationSnapshotEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAppConfigurationSnapshotModifiedExample)
 model AppConfigurationSnapshotModifiedEventData
   extends AppConfigurationSnapshotEventData {}

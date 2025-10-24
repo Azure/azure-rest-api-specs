@@ -7,28 +7,14 @@ on:
   # If an upstream workflow if completed, get only the artifacts from that workflow, and update labels
   workflow_run:
     workflows:
-      ["ARM Auto SignOff (Preview)", "SDK Suppressions", "TypeSpec Requirement"]
+      [
+        "ARM Auto SignOff",
+        "SDK Breaking Change Labels",
+        "SDK Suppressions",
+        "TypeSpec Requirement",
+        "Breaking Change - Add Label Artifacts",
+      ]
     types: [completed]
-  workflow_dispatch:
-    inputs:
-      owner:
-        description: The account owner of the repository. The name is not case sensitive.
-        required: true
-        type: string
-      repo:
-        description: The name of the repository without the .git extension. The name is not case sensitive.
-        required: true
-        type: string
-      # simulate pull_request trigger
-      issue_number:
-        description: The number that identifies the issue.
-        required: false
-        type: number
-      # simulate workflow_run trigger
-      run_id:
-        description: The unique identifier of the workflow run.
-        required: false
-        type: number
 
 permissions:
   actions: read
@@ -39,9 +25,6 @@ jobs:
   update-labels:
     name: Update Labels
 
-    # Only process labels from successful workflows
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
     runs-on: ubuntu-24.04
 
     steps:
@@ -51,14 +34,24 @@ jobs:
             .github
 
       - name: Update Labels
+        id: update-labels
         uses: actions/github-script@v7
-        env:
-          OWNER: ${{ inputs.owner }}
-          REPO: ${{ inputs.repo }}
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
-          RUN_ID: ${{ inputs.run_id }}
         with:
           script: |
             const { default: updateLabels } =
               await import('${{ github.workspace }}/.github/workflows/src/update-labels.js');
             await updateLabels({ github, context, core });
+
+      - if: ${{ always() && steps.update-labels.outputs.head_sha }}
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.update-labels.outputs.head_sha }}
+
+      - if: ${{ always() && steps.update-labels.outputs.issue_number }}
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.update-labels.outputs.issue_number }}

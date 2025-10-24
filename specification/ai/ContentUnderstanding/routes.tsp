@@ -1,10 +1,11 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "./models.tsp";
 
 using Azure.Core;
-using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -23,7 +24,7 @@ alias ServiceTraits = Traits.NoRepeatableRequests &
   Traits.SupportsClientRequestId;
 alias Operations = ResourceOperations<ServiceTraits>;
 
-interface Analyzers {
+interface ContentAnalyzers {
   @doc("Get the status of an analyzer creation operation.")
   getOperationStatus is Operations.GetResourceOperationStatus<
     ContentAnalyzer,
@@ -31,7 +32,7 @@ interface Analyzers {
   >;
 
   @doc("Create a new analyzer asynchronously.")
-  @pollingOperation(Analyzers.getOperationStatus)
+  @pollingOperation(ContentAnalyzers.getOperationStatus)
   createOrReplace is Operations.LongRunningResourceCreateOrReplace<ContentAnalyzer>;
 
   @doc("Update analyzer properties.")
@@ -47,9 +48,9 @@ interface Analyzers {
   list is Operations.ResourceList<ContentAnalyzer>;
 
   @doc("Extract content and fields from input.")
-  @pollingOperation(Analyzers.getResult)
   @sharedRoute
   @action("analyze")
+  @pollingOperation(ContentAnalyzers.getResult)
   analyze is Operations.LongRunningResourceAction<
     ContentAnalyzer,
     AnalyzeRequest,
@@ -57,9 +58,9 @@ interface Analyzers {
   >;
 
   @doc("Extract content and fields from input.")
-  @pollingOperation(Analyzers.getResult)
   @sharedRoute
   @action("analyze")
+  @pollingOperation(ContentAnalyzers.getResult)
   analyzeBinary is Operations.LongRunningResourceAction<
     ContentAnalyzer,
     AnalyzeBinaryRequest,
@@ -68,17 +69,19 @@ interface Analyzers {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @doc("Get the result of an analysis operation.")
-  @route("/analyzers/{analyzerId}/results/{operationId}")
+  // This operation is marked as internal because client generators automatically handle
+  // the polling pattern for long-running operations. When users call analyze(), the
+  // generated SDK returns a poller that internally uses this endpoint to check status
+  // and retrieve results, eliminating the need for manual operation ID management.
+  @access(Access.internal)
+  @route("/analyzerResults/{operationId}")
   getResult is Foundations.GetOperationStatus<
-    {
-      @doc("Analyzer identifier.")
-      @path
-      analyzerId: string;
-    },
+    GetResultParameters,
     AnalyzeResult
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @removed(Versions.v2025_05_01_preview)
   @doc("Get an image associated with the result of an analysis operation.")
   @route("/analyzers/{analyzerId}/results/{operationId}/images/{imageId}")
   @get
@@ -107,4 +110,46 @@ interface Analyzers {
     },
     ServiceTraits
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2025_05_01_preview)
+  @doc("Get a file associated with the result of an analysis operation.")
+  @route("/analyzerResults/{operationId}/files/{+path}")
+  @get
+  getResultFile is Foundations.Operation<
+    {
+      @doc("Operation identifier.")
+      @path
+      operationId: string;
+
+      @doc("File path.")
+      @path
+      path: string;
+    },
+    {
+      @doc("Response content type.")
+      @header
+      contentType: string;
+
+      @doc("Result file content.")
+      @bodyRoot
+      data: bytes;
+    },
+    ServiceTraits
+  >;
+
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  // @added(Versions.v2025_05_01_preview)
+  // @doc("Mark the result of an analysis operation for deletion.")
+  // @route("/analyzerResults/{operationId}")
+  // @delete
+  // deleteResult is Foundations.Operation<
+  //   {
+  //     @doc("Operation identifier.")
+  //     @path
+  //     operationId: string;
+  //   },
+  //   TypeSpec.Http.NoContentResponse,
+  //   ServiceTraits
+  // >;
 }

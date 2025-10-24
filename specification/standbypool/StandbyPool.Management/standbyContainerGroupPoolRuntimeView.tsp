@@ -11,12 +11,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./service.tsp";
 import "./standbyContainerGroupPool.tsp";
 
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 
@@ -39,7 +37,7 @@ model StandbyContainerGroupPoolRuntimeViewResource
 model StandbyContainerGroupPoolRuntimeViewResourceProperties {
   @doc("A list containing the counts of container groups in each possible state, as known by the StandbyPool resource provider.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   instanceCountSummary: ContainerGroupInstanceCountSummary[];
 
   @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
@@ -65,7 +63,7 @@ model ContainerGroupInstanceCountSummary {
   zone?: int64;
 
   @doc("The count of pooled resources in each state.")
-  @extension("x-ms-identifiers", #["state"])
+  @identifiers(#["state"])
   @removed(Microsoft.StandbyPool.Versions.`2025-03-01`)
   @renamedFrom(
     Microsoft.StandbyPool.Versions.`2025-03-01`,
@@ -74,7 +72,7 @@ model ContainerGroupInstanceCountSummary {
   oldinstanceCountsByState: PoolResourceStateCount[];
 
   @doc("The count of pooled container groups in each state for the given zone.")
-  @extension("x-ms-identifiers", #["state"])
+  @identifiers(#["state"])
   @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
   instanceCountsByState: PoolContainerGroupStateCount[];
 }

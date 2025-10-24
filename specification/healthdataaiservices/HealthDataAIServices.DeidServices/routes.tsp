@@ -8,7 +8,6 @@ import "./models_text_flow.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 

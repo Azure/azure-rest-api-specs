@@ -24,16 +24,29 @@ interface DevBoxes {
   @doc("Gets a pool.")
   getPool is StandardResourceOperations.ResourceRead<Pool>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
+  @doc("Aligns all Dev Boxes in the pool with the current configuration.")
+  @pollingOperation(OperationStatuses.get)
+  @action("align")
+  @added(APIVersions.v2025_04_01_preview)
+  alignPool is DevCenterOps.LongRunningResourceAction<
+    Pool,
+    PoolAlignBody,
+    OperationStatus
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
   @get
+  @list
   listAllDevBoxes is Azure.Core.Foundations.Operation<{}, DevBoxListResult>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
   @doc("Lists Dev Boxes in the Dev Center for a particular user.")
   @route("/users/{userId}/devboxes")
   @get
+  @list
   listAllDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       ...UserIdParameter;
@@ -46,6 +59,7 @@ interface DevBoxes {
   @doc("Lists all schedules within a pool that are configured by your project administrator.")
   @route("/projects/{projectName}/pools/{poolName}/schedules")
   @get
+  @list
   listSchedulesByPool is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -68,6 +82,7 @@ interface DevBoxes {
   @doc("Lists all schedules within a project that are configured by your project administrator.")
   @route("/projects/{projectName}/schedules")
   @added(APIVersions.v2024_02_01)
+  @list
   listSchedulesByProject is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -82,6 +97,7 @@ interface DevBoxes {
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
+  @list
   listDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -163,6 +179,17 @@ interface DevBoxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
+  @doc("Approves the creation of a Dev Box.")
+  @pollingOperation(OperationStatuses.get)
+  @action("approve")
+  @added(APIVersions.v2025_04_01_preview)
+  approveDevBox is DevCenterOps.LongRunningResourceAction<
+    DevBox,
+    {},
+    OperationStatus
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
   @doc("Starts a Dev Box.")
   @pollingOperation(OperationStatuses.get)
   @action("start")
@@ -198,10 +225,10 @@ interface DevBoxes {
   @doc("Aligns a Dev Box to the pools current pool configuration.")
   @pollingOperation(OperationStatuses.get)
   @action("align")
-  @added(APIVersions.v2025_03_01_preview)
+  @added(APIVersions.v2025_04_01_preview)
   alignDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
-    {},
+    PoolAlignBody,
     OperationStatus
   >;
 
@@ -218,7 +245,7 @@ interface DevBoxes {
 
   @doc("Lets a user set their own active hours for their Dev Box, overriding the defaults set at the pool level.")
   @action("setActiveHours")
-  @added(APIVersions.v2025_03_01_preview)
+  @added(APIVersions.v2025_04_01_preview)
   setActiveHours is StandardResourceOperations.ResourceAction<
     DevBox,
     {
@@ -325,6 +352,7 @@ interface DevBoxes {
   @route("/projects/{projectName}/customizationTasks")
   @get
   @added(APIVersions.v2024_05_01_preview)
+  @list
   listCustomizationTaskDefinitionsByProject is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -406,12 +434,24 @@ interface DevBoxes {
 
   @doc("Delays all actions.")
   @action("delay")
+  @list
   delayActions is StandardResourceOperations.ResourceCollectionAction<
     DevBoxAction,
     {
       ...DelayUntilQueryParameter;
     },
     DevBoxActionsDelayMultipleResult
+  >;
+
+  @doc("Creates an action to schedule the deletion of a Dev Box")
+  @added(APIVersions.v2025_08_01_preview)
+  @action("scheduleDelete")
+  scheduleDeleteAction is StandardResourceOperations.ResourceAction<
+    DevBox,
+    {
+      ...DeleteAtQueryParameter;
+    },
+    NoContentResponse
   >;
 
   @doc("Lists operations on the Dev Box which have occurred within the past 90 days.")
@@ -477,6 +517,99 @@ interface DevBoxes {
   @action("captureSnapshot")
   captureSnapshot is DevCenterOps.LongRunningResourceAction<
     DevBox,
+    {},
+    OperationStatus
+  >;
+
+  @doc("Lists addons for this Dev Box.")
+  @added(APIVersions.v2025_04_01_preview)
+  listDevBoxAddons is StandardResourceOperations.ResourceList<DevBoxAddOn>;
+
+  @doc("Gets a Dev Box addon by Dev Box addon id.")
+  @added(APIVersions.v2025_04_01_preview)
+  getDevBoxAddon is StandardResourceOperations.ResourceRead<DevBoxAddOn>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  @doc("Creates a Dev Box addon.")
+  @added(APIVersions.v2025_04_01_preview)
+  @finalOperation(DevBoxes.getDevBoxAddon)
+  @pollingOperation(OperationStatuses.get)
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{addOnName}")
+  @put
+  createOrReplaceDevBoxAddOn is Azure.Core.Foundations.Operation<
+    {
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
+      ...DevBoxAddOnNameParameter;
+
+      @doc("Represents the body request of a Dev Box addon creation.")
+      @bodyRoot
+      body: DevBoxAddOn;
+    },
+    DevBoxAddOn | {
+      @statusCode statusCode: 201;
+
+      @header("Location")
+      location: string;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
+      @added(APIVersions.v2025_04_01_preview)
+      @bodyRoot
+      body?: DevBoxAddOn;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  @doc("Deletes a Dev Box addon.")
+  @added(APIVersions.v2025_04_01_preview)
+  @pollingOperation(OperationStatuses.get)
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{addOnName}")
+  @delete
+  deleteDevBoxAddOn is Azure.Core.Foundations.Operation<
+    {
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
+      ...DevBoxAddOnNameParameter;
+    },
+    {
+      @statusCode statusCode: 202;
+
+      @header("Location")
+      location: string;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
+      @bodyRoot body: OperationStatus;
+    } | {
+      @statusCode statusCode: 204;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  @doc("Enable a Dev Box addon.")
+  @added(APIVersions.v2025_04_01_preview)
+  @pollingOperation(OperationStatuses.get)
+  @action("enable")
+  enableDevBoxAddOn is DevCenterOps.LongRunningResourceAction<
+    DevBoxAddOn,
+    {},
+    OperationStatus
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  @doc("Disable a Dev Box addon.")
+  @added(APIVersions.v2025_04_01_preview)
+  @pollingOperation(OperationStatuses.get)
+  @action("disable")
+  disableDevBoxAddOn is DevCenterOps.LongRunningResourceAction<
+    DevBoxAddOn,
     {},
     OperationStatus
   >;

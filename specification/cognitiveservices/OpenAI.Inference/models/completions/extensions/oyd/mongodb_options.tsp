@@ -60,6 +60,7 @@ model MongoDBChatExtensionParameters {
    * Note that content and vector field mappings are required for MongoDB.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   fields_mapping: {
     content_fields: string[];
     vector_fields: string[];
@@ -70,6 +71,7 @@ model MongoDBChatExtensionParameters {
   };
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @doc("""
     The vectorization source to use with the MongoDB chat extension.
     """)

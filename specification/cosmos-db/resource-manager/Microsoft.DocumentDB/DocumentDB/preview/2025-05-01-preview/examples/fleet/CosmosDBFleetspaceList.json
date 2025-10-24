@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
+            "name": "fleetspace1",
+            "type": "Microsoft.DocumentDB/fleets/fleetspaces",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "throughputPoolConfiguration": {
+                "minThroughput": 100000,
+                "maxThroughput": 500000,
+                "serviceTier": "BusinessCritical",
+                "dataRegions": [
+                  "westus2"
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace2",
+            "name": "fleetspace2",
+            "type": "Microsoft.DocumentDB/fleets/fleetspaces",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "throughputPoolConfiguration": {
+                "minThroughput": 200000,
+                "maxThroughput": 600000,
+                "serviceTier": "GeneralPurpose",
+                "dataRegions": [
+                  "eastus"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

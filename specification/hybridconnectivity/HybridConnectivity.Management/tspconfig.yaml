@@ -16,40 +16,34 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: "azure"
     namespace: "Azure.ResourceManager.HybridConnectivity"
     clear-output-folder: true
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-hybridconnectivity"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-hybridconnectivity"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.hybridconnectivity"
     service-name: "Hybrid Connectivity"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-hybridconnectivity"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hybridconnectivity"
+    namespace: "azure.mgmt.hybridconnectivity"
+    flavor: "azure"
     generate-test: true
     generate-sample: true
-    flavor: "azure"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    examples-directory: "{project-root}/examples"
-    typespecTitleMap:
+    flavor: azure
+    experimental-extensible-enums: true
+    typespec-title-map:
       HybridConnectivityManagementAPIClient: HybridConnectivityManagementAPI
-    generateSample: true
-    package-dir: "arm-hybridconnectivity"
-    flavor: "azure"
-    packageDetails:
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hybridconnectivity"
+    package-details:
       name: "@azure/arm-hybridconnectivity"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/hybridconnectivity"
-    package-dir: "armhybridconnectivity"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhybridconnectivity"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhybridconnectivity"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -57,3 +51,4 @@ options:
     head-as-boolean: true
     inject-spans: true
     remove-unreferenced-types: true
+    factory-gather-all-params: false

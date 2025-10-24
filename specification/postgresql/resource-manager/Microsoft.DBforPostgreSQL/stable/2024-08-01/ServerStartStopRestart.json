@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PostgreSQLServerManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2024-08-01"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -41,14 +41,14 @@
         ],
         "operationId": "Servers_Restart",
         "x-ms-examples": {
-          "ServerRestart": {
+          "Restart PostgreSQL database engine in a flexible server.": {
             "$ref": "./examples/ServerRestart.json"
           },
-          "ServerRestartWithFailover": {
+          "Restart PostgreSQL database engine in a flexible server with a forced failover to standby server.": {
             "$ref": "./examples/ServerRestartWithFailover.json"
           }
         },
-        "description": "Restarts a server.",
+        "description": "Restarts PostgreSQL database engine in a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -68,7 +68,7 @@
             "schema": {
               "$ref": "#/definitions/RestartParameter"
             },
-            "description": "The parameters for restarting a server."
+            "description": "Parameters to restart a flexible server."
           }
         ],
         "responses": {
@@ -103,11 +103,11 @@
         ],
         "operationId": "Servers_Start",
         "x-ms-examples": {
-          "ServerStart": {
+          "Start a stopped flexible server.": {
             "$ref": "./examples/ServerStart.json"
           }
         },
-        "description": "Starts a server.",
+        "description": "Starts a stopped flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -154,11 +154,11 @@
         ],
         "operationId": "Servers_Stop",
         "x-ms-examples": {
-          "ServerStop": {
+          "Stop a flexible server.": {
             "$ref": "./examples/ServerStop.json"
           }
         },
-        "description": "Stops a server.",
+        "description": "Stops a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -205,7 +205,7 @@
       "properties": {
         "restartWithFailover": {
           "type": "boolean",
-          "description": "Indicates whether to restart the server with failover."
+          "description": "Indicates if restart the PostgreSQL database engine should failover or switch over from primary to standby. This only works if flexible server has high availability enabled."
         },
         "failoverMode": {
           "type": "string",
@@ -222,7 +222,7 @@
           }
         }
       },
-      "description": "Represents server restart parameters."
+      "description": "PostgreSQL database engine restart parameters."
     }
   },
   "parameters": {}

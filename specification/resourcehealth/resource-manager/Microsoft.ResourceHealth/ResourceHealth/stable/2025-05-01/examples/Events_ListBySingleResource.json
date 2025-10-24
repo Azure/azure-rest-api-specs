@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "resourceUri": "subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.Compute/virtualMachines/rhctestenvV1PI",
+    "api-version": "2025-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ",
+            "name": "BC_1-FXZ",
+            "type": "/providers/Microsoft.ResourceHealth/events",
+            "properties": {
+              "eventType": "ServiceIssue",
+              "eventSource": "ResourceHealth",
+              "status": "Active",
+              "title": "ACTIVE: Virtual machines in West US",
+              "summary": "An outage alert is being investigated. More information will be provided as it is known.",
+              "header": "Your service might have been impacted by an Azure service issue",
+              "article": {
+                "articleContent": "<html>An outage alert is being investigated. More information will be provided as it is known</html>"
+              },
+              "links": [
+                {
+                  "type": "Hyperlink",
+                  "displayText": {
+                    "value": "Request RCA",
+                    "localizedValue": "Request RCA"
+                  },
+                  "extensionName": "Microsoft_Azure_Health",
+                  "bladeName": "RequestRCABlade",
+                  "parameters": {
+                    "trackingId": "BC_1-FXZ",
+                    "rcaRequested": "False"
+                  }
+                },
+                {
+                  "type": "Button",
+                  "displayText": {
+                    "value": "Sign up for updates",
+                    "localizedValue": "Sign up for updates"
+                  },
+                  "extensionName": "Microsoft_Azure_Health",
+                  "bladeName": "AzureHealthBrowseBlade",
+                  "parameters": {
+                    "trackingId": "BC_1-FXZ"
+                  }
+                }
+              ],
+              "level": "Warning",
+              "eventLevel": "Warning",
+              "isEventSensitive": false,
+              "impactStartTime": "2025-05-12T14:45:48.1203530Z",
+              "impactMitigationTime": "2025-05-14T15:43:48.1203530Z",
+              "impact": [
+                {
+                  "impactedService": "Virtual Machines",
+                  "impactedServiceGuid": "fd8065f5-ffd0-4756-8788-e6a11bf36257",
+                  "impactedRegions": [
+                    {
+                      "impactedRegion": "West US",
+                      "status": "Active",
+                      "impactedSubscriptions": [
+                        "{subscriptionId}"
+                      ],
+                      "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+                      "updates": [
+                        {
+                          "summary": "Update 3 - An outage alert is being investigated. More information will be provided as it is known.",
+                          "updateDateTime": "2025-05-13T15:43:48.1203530Z",
+                          "eventTags": [
+                            "Final PIR"
+                          ]
+                        },
+                        {
+                          "summary": "Update 2 - An outage alert is being investigated. More information will be provided as it is known.",
+                          "updateDateTime": "2025-05-13T10:32:48.1203530Z",
+                          "eventTags": [
+                            "False Positive",
+                            "Preliminary PIR"
+                          ]
+                        },
+                        {
+                          "summary": "Update 1 - An outage alert is being investigated. More information will be provided as it is known.",
+                          "updateDateTime": "2025-05-12T15:00:48.1203530Z",
+                          "eventTags": [
+                            "Action Recommended"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "eventTags": [
+                "Action Recommended",
+                "False Positive",
+                "Preliminary PIR",
+                "Final PIR"
+              ],
+              "recommendedActions": {
+                "message": "Recommended actions title",
+                "actions": [
+                  {
+                    "groupId": 23243,
+                    "actionText": "action 1"
+                  },
+                  {
+                    "groupId": 23432,
+                    "actionText": "action 2"
+                  }
+                ],
+                "localeCode": "en"
+              },
+              "faqs": [
+                {
+                  "question": "This is a question",
+                  "answer": "This is an answer",
+                  "localeCode": "en"
+                }
+              ],
+              "isHIR": false,
+              "enableMicrosoftSupport": true,
+              "enableChatWithUs": false,
+              "priority": 2,
+              "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+              "hirStage": "active"
+            }
+          }
+        ],
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}"
+      }
+    }
+  }
+}

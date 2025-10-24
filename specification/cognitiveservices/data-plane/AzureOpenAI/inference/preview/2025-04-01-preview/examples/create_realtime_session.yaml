@@ -1,0 +1,33 @@
+title: Create an ephemeral token for a Realtime API session.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2025-04-01-preview
+  body:
+    model: gpt-4o-realtime-preview
+    modalities:
+      - audio
+      - text
+    instructions: You are a friendly assistant.
+responses:
+  "200":
+    body:
+      id: sess_001
+      object: realtime.session
+      model: gpt-4o-realtime-preview
+      modalities:
+        - audio
+        - text
+      instructions: You are a friendly assistant.
+      voice: alloy
+      input_audio_format: pcm16
+      output_audio_format: pcm16
+      input_audio_transcription:
+        model: whisper-1
+      turn_detection: null
+      tools: []
+      tool_choice: none
+      temperature: 0.7
+      max_response_output_tokens: 200
+      client_secret:
+        value: ek_abc123
+        expires_at: 1234567890

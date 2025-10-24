@@ -1,0 +1,610 @@
+{
+  "description": "A batch query that returns query results.",
+  "parameters": {
+    "body": {
+      "requests": [
+        {
+          "path": "/query",
+          "method": "POST",
+          "body": {
+            "query": "AppRequests | take 2"
+          },
+          "id": "1",
+          "workspace": "d2d0e126-fa1e-4b0a-b647-250cdd471e68"
+        },
+        {
+          "path": "/query",
+          "method": "POST",
+          "body": {
+            "query": "AppRequests | take 3"
+          },
+          "id": "2",
+          "workspace": "d2d0e126-fa1e-4b0a-b647-250cdd471e68"
+        }
+      ]
+    }
+  },
+  "title": "A batch query",
+  "responses": {
+    "200": {
+      "body": {
+        "responses": [
+          {
+            "body": {
+              "tables": [
+                {
+                  "name": "PrimaryResult",
+                  "columns": [
+                    {
+                      "name": "TenantId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "TimeGenerated",
+                      "type": "datetime"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Source",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Url",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Success",
+                      "type": "bool"
+                    },
+                    {
+                      "name": "ResultCode",
+                      "type": "string"
+                    },
+                    {
+                      "name": "DurationMs",
+                      "type": "real"
+                    },
+                    {
+                      "name": "PerformanceBucket",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Properties",
+                      "type": "dynamic"
+                    },
+                    {
+                      "name": "Measurements",
+                      "type": "dynamic"
+                    },
+                    {
+                      "name": "OperationName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "OperationId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "OperationLinks",
+                      "type": "dynamic"
+                    },
+                    {
+                      "name": "ParentId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "SyntheticSource",
+                      "type": "string"
+                    },
+                    {
+                      "name": "SessionId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "UserId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "UserAuthenticatedId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "UserAccountId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "AppVersion",
+                      "type": "string"
+                    },
+                    {
+                      "name": "AppRoleName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "AppRoleInstance",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientType",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientModel",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientOS",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientIP",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientCity",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientStateOrProvince",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientCountryOrRegion",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientBrowser",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ResourceGUID",
+                      "type": "string"
+                    },
+                    {
+                      "name": "IKey",
+                      "type": "string"
+                    },
+                    {
+                      "name": "SDKVersion",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ItemCount",
+                      "type": "int"
+                    },
+                    {
+                      "name": "ReferencedItemId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ReferencedType",
+                      "type": "string"
+                    },
+                    {
+                      "name": "SourceSystem",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Type",
+                      "type": "string"
+                    },
+                    {
+                      "name": "_ResourceId",
+                      "type": "string"
+                    }
+                  ],
+                  "rows": [
+                    [
+                      "d2d0e126-fa1e-4b0a-b647-250cdd471e68",
+                      "2021-06-02T00:18:13.317Z",
+                      "a3273b160f86b5c4",
+                      "",
+                      "ServiceBus.process",
+                      "",
+                      true,
+                      "200",
+                      0,
+                      "<250ms",
+                      "{\"x-opt-enqueued-time\":\"1622593091\"}",
+                      null,
+                      "ServiceBus.process",
+                      "e5d21caf619d4ef564a4b5920cadce47",
+                      null,
+                      "c6864f9d3649f302",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "srikanta",
+                      "PC",
+                      "",
+                      "",
+                      "0.0.0.0",
+                      "Edmonds",
+                      "Washington",
+                      "United States",
+                      "",
+                      "fc5f5a5d-d6d1-47f9-be1b-aa57185ec6be",
+                      "b4f83947-968d-4e2f-82ad-804be07697ae",
+                      "java:3.1.1-BETA.2",
+                      1,
+                      "",
+                      "",
+                      "Azure",
+                      "AppRequests",
+                      "/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourcegroups/srnagar-azuresdkgroup/providers/microsoft.insights/components/srnagarappinsights"
+                    ],
+                    [
+                      "d2d0e126-fa1e-4b0a-b647-250cdd471e68",
+                      "2021-06-02T00:19:13.44Z",
+                      "bebb49e7a1344c07",
+                      "",
+                      "ServiceBus.process",
+                      "",
+                      true,
+                      "200",
+                      0,
+                      "<250ms",
+                      "{\"x-opt-enqueued-time\":\"1622593091\"}",
+                      null,
+                      "ServiceBus.process",
+                      "d76c6dec50d2c12267d7d3a246a0c237",
+                      null,
+                      "b68fff4775c77214",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "srikanta",
+                      "PC",
+                      "",
+                      "",
+                      "0.0.0.0",
+                      "Edmonds",
+                      "Washington",
+                      "United States",
+                      "",
+                      "fc5f5a5d-d6d1-47f9-be1b-aa57185ec6be",
+                      "b4f83947-968d-4e2f-82ad-804be07697ae",
+                      "java:3.1.1-BETA.2",
+                      1,
+                      "",
+                      "",
+                      "Azure",
+                      "AppRequests",
+                      "/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourcegroups/srnagar-azuresdkgroup/providers/microsoft.insights/components/srnagarappinsights"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "id": "1",
+            "status": 200
+          },
+          {
+            "body": {
+              "tables": [
+                {
+                  "name": "PrimaryResult",
+                  "columns": [
+                    {
+                      "name": "TenantId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "TimeGenerated",
+                      "type": "datetime"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Source",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Url",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Success",
+                      "type": "bool"
+                    },
+                    {
+                      "name": "ResultCode",
+                      "type": "string"
+                    },
+                    {
+                      "name": "DurationMs",
+                      "type": "real"
+                    },
+                    {
+                      "name": "PerformanceBucket",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Properties",
+                      "type": "dynamic"
+                    },
+                    {
+                      "name": "Measurements",
+                      "type": "dynamic"
+                    },
+                    {
+                      "name": "OperationName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "OperationId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "OperationLinks",
+                      "type": "dynamic"
+                    },
+                    {
+                      "name": "ParentId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "SyntheticSource",
+                      "type": "string"
+                    },
+                    {
+                      "name": "SessionId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "UserId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "UserAuthenticatedId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "UserAccountId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "AppVersion",
+                      "type": "string"
+                    },
+                    {
+                      "name": "AppRoleName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "AppRoleInstance",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientType",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientModel",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientOS",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientIP",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientCity",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientStateOrProvince",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientCountryOrRegion",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ClientBrowser",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ResourceGUID",
+                      "type": "string"
+                    },
+                    {
+                      "name": "IKey",
+                      "type": "string"
+                    },
+                    {
+                      "name": "SDKVersion",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ItemCount",
+                      "type": "int"
+                    },
+                    {
+                      "name": "ReferencedItemId",
+                      "type": "string"
+                    },
+                    {
+                      "name": "ReferencedType",
+                      "type": "string"
+                    },
+                    {
+                      "name": "SourceSystem",
+                      "type": "string"
+                    },
+                    {
+                      "name": "Type",
+                      "type": "string"
+                    },
+                    {
+                      "name": "_ResourceId",
+                      "type": "string"
+                    }
+                  ],
+                  "rows": [
+                    [
+                      "d2d0e126-fa1e-4b0a-b647-250cdd471e68",
+                      "2021-06-02T16:31:25.383Z",
+                      "08bf242cdc68504c",
+                      "",
+                      "ServiceBus.process",
+                      "",
+                      true,
+                      "200",
+                      0,
+                      "<250ms",
+                      "{\"x-opt-enqueued-time\":\"1622651483\"}",
+                      null,
+                      "ServiceBus.process",
+                      "65d9eb1ccf85b1b7ed1e2ea6bb72f563",
+                      null,
+                      "146140ce8493a6ed",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "srikanta",
+                      "PC",
+                      "",
+                      "",
+                      "0.0.0.0",
+                      "Edmonds",
+                      "Washington",
+                      "United States",
+                      "",
+                      "fc5f5a5d-d6d1-47f9-be1b-aa57185ec6be",
+                      "b4f83947-968d-4e2f-82ad-804be07697ae",
+                      "java:3.1.1-BETA.2",
+                      1,
+                      "",
+                      "",
+                      "Azure",
+                      "AppRequests",
+                      "/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourcegroups/srnagar-azuresdkgroup/providers/microsoft.insights/components/srnagarappinsights"
+                    ],
+                    [
+                      "d2d0e126-fa1e-4b0a-b647-250cdd471e68",
+                      "2021-06-02T16:32:25.492Z",
+                      "9f4cd78c10d57b4f",
+                      "",
+                      "ServiceBus.process",
+                      "",
+                      true,
+                      "200",
+                      0,
+                      "<250ms",
+                      "{\"x-opt-enqueued-time\":\"1622651483\"}",
+                      null,
+                      "ServiceBus.process",
+                      "ae054fe7b7ac3adf8b841ebbe1ecb912",
+                      null,
+                      "14eab103a1969665",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "srikanta",
+                      "PC",
+                      "",
+                      "",
+                      "0.0.0.0",
+                      "Edmonds",
+                      "Washington",
+                      "United States",
+                      "",
+                      "fc5f5a5d-d6d1-47f9-be1b-aa57185ec6be",
+                      "b4f83947-968d-4e2f-82ad-804be07697ae",
+                      "java:3.1.1-BETA.2",
+                      1,
+                      "",
+                      "",
+                      "Azure",
+                      "AppRequests",
+                      "/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourcegroups/srnagar-azuresdkgroup/providers/microsoft.insights/components/srnagarappinsights"
+                    ],
+                    [
+                      "d2d0e126-fa1e-4b0a-b647-250cdd471e68",
+                      "2021-06-02T16:33:25.585Z",
+                      "ea7e09d4baa4e4ce",
+                      "",
+                      "ServiceBus.process",
+                      "",
+                      true,
+                      "200",
+                      0,
+                      "<250ms",
+                      "{\"x-opt-enqueued-time\":\"1622651483\"}",
+                      null,
+                      "ServiceBus.process",
+                      "ba6162e3ccd803086944750b82600a3a",
+                      null,
+                      "b60455183860caaf",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "srikanta",
+                      "PC",
+                      "",
+                      "",
+                      "0.0.0.0",
+                      "Edmonds",
+                      "Washington",
+                      "United States",
+                      "",
+                      "fc5f5a5d-d6d1-47f9-be1b-aa57185ec6be",
+                      "b4f83947-968d-4e2f-82ad-804be07697ae",
+                      "java:3.1.1-BETA.2",
+                      1,
+                      "",
+                      "",
+                      "Azure",
+                      "AppRequests",
+                      "/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourcegroups/srnagar-azuresdkgroup/providers/microsoft.insights/components/srnagarappinsights"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "id": "2",
+            "status": 200
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Query_Batch"
+}

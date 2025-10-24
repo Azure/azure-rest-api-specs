@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "encryptionSetName": "EncryptionWestUsSystemAssigned",
+    "body": {
+      "location": "westus",
+      "properties": {
+        "devboxDisksEncryptionEnableStatus": "Enabled",
+        "keyEncryptionKeyUrl": "https://contosovaultwestus.vault.azure.net/keys/contosokek",
+        "keyEncryptionKeyIdentity": {
+          "type": "SystemAssigned",
+          "userAssignedIdentityResourceId": "SystemAssigned"
+        }
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/encryptionSets/EncryptionWestUsSystemAssigned",
+        "name": "EncryptionWestUsSystemAssigned",
+        "type": "Microsoft.DevCenter/devcenters/encryptionSets",
+        "properties": {
+          "devboxDisksEncryptionEnableStatus": "Enabled",
+          "keyEncryptionKeyUrl": "https://contosovaultwestus.vault.azure.net/keys/contosokek",
+          "keyEncryptionKeyIdentity": {
+            "type": "SystemAssigned",
+            "userAssignedIdentityResourceId": "SystemAssigned"
+          },
+          "provisioningState": "Accepted"
+        },
+        "location": "westus",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "2111b8fc-e123-485a-b408-bf1153189494",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "systemData": {
+          "createdBy": "User1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/encryptionSets/EncryptionWestUsSystemAssigned",
+        "name": "EncryptionWestUsSystemAssigned",
+        "type": "Microsoft.DevCenter/devcenters/encryptionSets",
+        "properties": {
+          "devboxDisksEncryptionEnableStatus": "Enabled",
+          "keyEncryptionKeyUrl": "https://contosovaultwestus.vault.azure.net/keys/contosokek",
+          "keyEncryptionKeyIdentity": {
+            "type": "SystemAssigned",
+            "userAssignedIdentityResourceId": "SystemAssigned"
+          },
+          "provisioningState": "Accepted"
+        },
+        "location": "westus",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "2111b8fc-e123-485a-b408-bf1153189494",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "systemData": {
+          "createdBy": "User1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+        }
+      }
+    }
+  }
+}

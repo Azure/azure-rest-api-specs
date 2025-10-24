@@ -1,6 +1,14 @@
 name: TypeSpec Validation
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
 
 permissions:
   contents: read
@@ -24,5 +32,8 @@ jobs:
           # step as failed. 
           $ErrorActionPreference = 'Continue'
 
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+          # Only "main" and "RPSaaSMaster" should validate all specs if core files change
+          $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
+
+          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
         shell: pwsh

@@ -1,10 +1,8 @@
 parameters:
-  - name: SpecRepoCommit
-    type: string
-    default: '$(Build.SourceBranch)'
-  - name: SdkRepoCommit
+  - name: SdkRepoBranch
     type: string
     default: 'main'
+    displayName: 'SDK repository branch'
   - name: ConfigType
     type: string
     values:
@@ -16,23 +14,37 @@ parameters:
     type: string
     default: 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'
     displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
-  - name: SkipPullRequestCreation
+  - name: ApiVersion
+    type: string
+    default: ''
+    displayName: 'API version'
+  - name: SdkReleaseType
+    type: string
+    values:
+      - 'beta'
+      - 'stable'
+    default: 'beta'
+    displayName: 'SDK release type'
+  - name: CreatePullRequest
     type: boolean
     default: false
-    
+    displayName: 'Create SDK pull request'
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
+    displayName: 'Release plan work item id'
+
 trigger: none
-pr:
-  branches:
-    include:
-      - user/spec-gen-pipeline-testing
 
 extends:
   template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
   parameters:
     SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
     SdkRepoUrl: $(SdkRepoUrl)
-    SpecRepoCommit: ${{ parameters.SpecRepoCommit }}
-    SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
+    SdkRepoBranch: ${{ parameters.SdkRepoBranch }}
     ConfigType: ${{ parameters.ConfigType }}
     ConfigPath: ${{ parameters.ConfigPath }}
-    SkipPullRequestCreation: ${{ parameters.SkipPullRequestCreation }}
+    ApiVersion: ${{ parameters.ApiVersion }}
+    SdkReleaseType: ${{ parameters.SdkReleaseType }}
+    CreatePullRequest: ${{ parameters.CreatePullRequest }}
+    ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}

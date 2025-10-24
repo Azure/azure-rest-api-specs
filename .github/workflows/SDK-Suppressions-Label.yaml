@@ -2,6 +2,13 @@ name: SDK Suppressions
 
 on:
   pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
     branches:
       - main
       - RPSaaSMaster
@@ -24,18 +31,6 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Get GitHub PullRequest Changed Files
-        shell: pwsh
-        id: get-changedFiles
-        run: |
-          . eng/scripts/ChangedFiles-Functions.ps1
-          $changedFiles = @(Get-ChangedFiles)
-          $changedFilesArray = $changedFiles -split ' '
-          $yamlFilesArray = $changedFilesArray | Where-Object { $_ -match 'sdk-suppressions\.yaml$' }
-          $yamlFiles = $yamlFilesArray -join ' '
-          echo "PR Changed sdk-suppressions.yaml files: $yamlFiles"
-          Add-Content -Path $env:GITHUB_OUTPUT -Value "changedFiles=$yamlFiles"
-
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
         id: fetch-pullRequest-context
@@ -45,33 +40,32 @@ jobs:
             if (!pr) {
               throw new Error("This workflow must run in the context of a pull request.");
             }
-            console.log("This action trigger by ", context.eventName);
+            console.log("This action trigger by", context.eventName);
             core.setOutput("prLabels", pr.labels.map(label => label.name));
           result-encoding: string
 
-      - name: Run Get suppressions label script
+      - name: Run Get suppressions Label Script
         id: run-suppressions-script
         env:
           OUTPUT_FILE: "output.json"
-          GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
           GITHUB_PULL_REQUEST_LABELS: ${{ steps.fetch-pullRequest-context.outputs.prLabels }}
         run: |
-          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD "$GITHUB_PULL_REQUEST_CHANGE_FILES" "$GITHUB_PULL_REQUEST_LABELS"
+          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD "$GITHUB_PULL_REQUEST_LABELS"
 
-          OUTPUT=$(cat $OUTPUT_FILE)
+          OUTPUT=$(cat "$OUTPUT_FILE")
           echo "Script output labels: $OUTPUT"
 
           labelsToAdd=$(echo "$OUTPUT" | sed -n 's/.*"labelsToAdd":\[\([^]]*\)\].*/\1/p' | tr -d '" ')
           labelsToRemove=$(echo "$OUTPUT" | sed -n 's/.*"labelsToRemove":\[\([^]]*\)\].*/\1/p' | tr -d '" ')
 
-          for label in $(echo $labelsToAdd | tr ',' '\n'); do
+          for label in $(echo "$labelsToAdd" | tr ',' '\n'); do
             echo "Label to add: $label"
-            echo "$label=true" >> $GITHUB_OUTPUT
+            echo "$label=true" >> "$GITHUB_OUTPUT"
           done
 
-          for label in $(echo $labelsToRemove | tr ',' '\n'); do
+          for label in $(echo "$labelsToRemove" | tr ',' '\n'); do
             echo "Label to remove: $label"
-            echo "$label=false" >> $GITHUB_OUTPUT
+            echo "$label=false" >> "$GITHUB_OUTPUT"
           done
 
       # No Action or Add/Remove label ​​according to step run-suppressions-script output

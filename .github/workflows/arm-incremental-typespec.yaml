@@ -1,0 +1,63 @@
+name: ARM Incremental TypeSpec
+
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
+    paths:
+      # Always trigger on changes to WF itself
+      - ".github/**"
+      # Only trigger if PR includes at least one changed RM file, since this is only way WF can return "true"
+      # All consumers of workflow must treat "skipped" as equal to "completed false"
+      - "**/resource-manager/**"
+
+permissions:
+  contents: read
+
+jobs:
+  arm-incremental-typespec:
+    name: ARM Incremental TypeSpec
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Required to detect changed files in PR
+          fetch-depth: 2
+          # Check only needs to view contents of changed files as a string, so can use
+          # "git show" on specific files instead of cloning whole repo
+          sparse-checkout: |
+            .github
+
+      - name: Setup Node 20 and install deps
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          # actions/github-script@v7 uses Node 20
+          node-version: 20.x
+          # "--no-audit": improves performance
+          # "--omit dev": not needed at runtime, improves performance
+          install-command: "npm ci --no-audit --omit dev"
+          working-directory: ./.github
+
+      # Output is "true" if PR contains only incremental changes to an existing TypeSpec RP
+      - id: incremental-typespec
+        name: ARM Incremental TypeSpec
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const { default: incrementalTypeSpec } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-incremental-typespec.js');
+            return await incrementalTypeSpec({ github, context, core });
+
+      - name: Upload artifact with results
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "incremental-typespec"
+          value: ${{ steps.incremental-typespec.outputs.result }}

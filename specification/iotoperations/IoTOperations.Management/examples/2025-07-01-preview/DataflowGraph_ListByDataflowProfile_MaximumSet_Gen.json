@@ -1,0 +1,119 @@
+{
+  "title": "DataflowGraph_ListByDataflowProfile_MaximumSet",
+  "operationId": "DataflowGraph_ListByDataflowProfile",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-123",
+    "dataflowProfileName": "resource-123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "mode": "Enabled",
+              "requestDiskPersistence": "Enabled",
+              "nodes": [
+                {
+                  "nodeType": "Source",
+                  "name": "temperature",
+                  "sourceSettings": {
+                    "endpointRef": "default",
+                    "dataSources": [
+                      "telemetry/temperature"
+                    ]
+                  }
+                },
+                {
+                  "nodeType": "Graph",
+                  "name": "my-graph",
+                  "graphSettings": {
+                    "registryEndpointRef": "my-registry-endpoint",
+                    "artifact": "my-wasm-module:1.4.3",
+                    "configuration": [
+                      {
+                        "key": "key1",
+                        "value": "value1"
+                      },
+                      {
+                        "key": "key2",
+                        "value": "value2"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "nodeType": "Destination",
+                  "name": "alert",
+                  "destinationSettings": {
+                    "endpointRef": "default",
+                    "dataDestination": "telemetry/temperature/alert"
+                  }
+                },
+                {
+                  "nodeType": "Destination",
+                  "name": "fabric",
+                  "destinationSettings": {
+                    "endpointRef": "fabric",
+                    "dataDestination": "my-table",
+                    "outputSchemaSettings": {
+                      "schemaRef": "aio-sr://namespace/alert-parquet:1",
+                      "serializationFormat": "Parquet"
+                    }
+                  }
+                }
+              ],
+              "nodeConnections": [
+                {
+                  "from": {
+                    "name": "temperature",
+                    "schema": {
+                      "serializationFormat": "Avro",
+                      "schemaRef": "aio-sr://namespace/temperature:1"
+                    }
+                  },
+                  "to": {
+                    "name": "my-graph"
+                  }
+                },
+                {
+                  "from": {
+                    "name": "my-graph.alert-output",
+                    "schema": {
+                      "serializationFormat": "Avro",
+                      "schemaRef": "aio-sr://namespace/alert:1"
+                    }
+                  },
+                  "to": {
+                    "name": "fabric"
+                  }
+                },
+                {
+                  "from": {
+                    "name": "my-graph.normal-output",
+                    "schema": {
+                      "serializationFormat": "Avro",
+                      "schemaRef": "aio-sr://namespace/alert:1"
+                    }
+                  },
+                  "to": {
+                    "name": "fabric"
+                  }
+                }
+              ]
+            },
+            "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/resource-123/dataflowProfiles/resource-123/dataflowGraphs/resource-123",
+            "extendedLocation": {
+              "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+              "type": "CustomLocation"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

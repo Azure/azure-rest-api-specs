@@ -1,0 +1,143 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "endpoint": "https://resourcename.communication.azure.com",
+    "reservationId": "65c18c7f-8074-4efb-a572-e0df127a9964",
+    "reservation": {
+      "phoneNumbers": {
+        "11234561230": {
+          "countryCode": "US",
+          "capabilities": {
+            "calling": "outbound",
+            "sms": "none"
+          },
+          "phoneNumberType": "geographic",
+          "assignmentType": "person"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "65c18c7f-8074-4efb-a572-e0df127a9964",
+        "expiresAt": "2023-08-23T22:29:17.092Z",
+        "phoneNumbers": {
+          "11234561230": {
+            "id": "11234561230",
+            "countryCode": "US",
+            "phoneNumber": "+11234561230",
+            "capabilities": {
+              "calling": "outbound",
+              "sms": "none"
+            },
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "cost": {
+              "amount": 1,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            },
+            "status": "reserved",
+            "isAgreementToNotResellRequired": false
+          }
+        },
+        "status": "active"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "65c18c7f-8074-4efb-a572-e0df127a9964",
+        "expiresAt": "2023-08-23T22:29:17.092Z",
+        "phoneNumbers": {
+          "11234567890": {
+            "id": "11234567890",
+            "countryCode": "US",
+            "phoneNumber": "+11234567890",
+            "capabilities": {
+              "calling": "outbound",
+              "sms": "none"
+            },
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "cost": {
+              "amount": 1,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            },
+            "status": "reserved",
+            "isAgreementToNotResellRequired": false
+          },
+          "11234561230": {
+            "id": "11234561230",
+            "countryCode": "US",
+            "phoneNumber": "+11234561230",
+            "capabilities": {
+              "calling": "outbound",
+              "sms": "none"
+            },
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "cost": {
+              "amount": 1,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            },
+            "status": "reserved",
+            "isAgreementToNotResellRequired": false
+          }
+        },
+        "status": "active"
+      }
+    },
+    "207": {
+      "body": {
+        "id": "65c18c7f-8074-4efb-a572-e0df127a9964",
+        "expiresAt": "2023-08-23T22:29:17.092Z",
+        "phoneNumbers": {
+          "11234567890": {
+            "id": "11234567890",
+            "countryCode": "US",
+            "phoneNumber": "+11234567890",
+            "capabilities": {
+              "calling": "outbound",
+              "sms": "none"
+            },
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "cost": {
+              "amount": 1,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            },
+            "status": "reserved",
+            "isAgreementToNotResellRequired": false
+          },
+          "11234561230": {
+            "id": "11234561230",
+            "countryCode": "US",
+            "phoneNumber": "+11234561230",
+            "capabilities": {
+              "calling": "outbound",
+              "sms": "none"
+            },
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "cost": {
+              "amount": 1,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            },
+            "status": "error",
+            "error": {
+              "code": "FailedToReserveNumber",
+              "message": "Failed to add the number to the reservation."
+            },
+            "isAgreementToNotResellRequired": false
+          }
+        },
+        "status": "active"
+      }
+    }
+  }
+}

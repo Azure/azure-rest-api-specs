@@ -72,6 +72,18 @@ union Status {
   string,
 }
 
+@added(Versions.v2025_06_01_preview)
+@doc("Type of Logical Network")
+union LogicalNetworkTypeEnum {
+  @doc("Logical Network of type Workload")
+  Workload: "Workload",
+
+  @doc("Logical Network of type Infrastructure")
+  Infrastructure: "Infrastructure",
+
+  string,
+}
+
 @doc("The type of extendedLocation.")
 union ExtendedLocationTypes {
   @doc("Custom extended location type")
@@ -601,9 +613,9 @@ model GalleryImageVersion {
   @doc("This is the version of the gallery image.")
   name?: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Describes the properties of a gallery image version.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryImageVersionProperties;
 }
 
@@ -703,6 +715,11 @@ model LogicalNetworkProperties {
   @doc("The observed state of logical networks")
   @visibility(Lifecycle.Read)
   status?: LogicalNetworkStatus;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Type of the Logical Network")
+  @visibility(Lifecycle.Read)
+  networkType?: LogicalNetworkTypeEnum;
 }
 
 @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
@@ -713,9 +730,9 @@ model LogicalNetworkPropertiesDhcpOptions {
 
 @doc("Properties of the subnet.")
 model Subnet {
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the subnet.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SubnetProperties;
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -766,9 +783,9 @@ model RouteTable {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "deprecated" "LEGACY flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "LEGACY flattening"
   @doc("Properties of the route table.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteTableProperties;
 }
 
@@ -781,9 +798,9 @@ model RouteTableProperties {
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattened property"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattened property"
   @doc("Properties of the route.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteProperties;
 
   @doc("Name - name of the subnet")
@@ -837,7 +854,7 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 
   @doc("A collection of references to logical networks that are currently using this NSG")
@@ -1230,6 +1247,10 @@ model VirtualHardDiskProperties {
   @doc("The observed state of virtual hard disks")
   @visibility(Lifecycle.Read)
   status?: VirtualHardDiskStatus;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.")
+  maxShares?: int64;
 }
 
 @doc("The observed state of virtual hard disks")
@@ -1250,6 +1271,14 @@ model VirtualHardDiskStatus {
   @added(Versions.v2024_05_01_preview)
   @doc("The upload status of the virtual hard disk")
   uploadStatus?: VirtualHardDiskUploadStatus;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("ARM IDs of the VMs that are consuming the VHD.")
+  managedBy?: string[];
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Unique Guid identifying the resource.")
+  uniqueId?: string;
 }
 
 @doc("VHD Status provisioning status")
@@ -1405,6 +1434,11 @@ model VirtualMachineInstanceProperties {
   @doc("Name of the host node that the VM is on.")
   @visibility(Lifecycle.Read)
   hostNodeName?: string;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Name of the host node that the VM is on.")
+  @visibility(Lifecycle.Read)
+  hostNodeIpAddress?: string;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
@@ -1471,7 +1505,7 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
@@ -1709,6 +1743,7 @@ model GuestAgentInstallStatus {
   agentVersion?: string;
 
   @doc("Details about the error state.")
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
@@ -1779,7 +1814,7 @@ model StorageProfileUpdate {
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 

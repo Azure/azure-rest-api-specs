@@ -59,18 +59,22 @@ union EmbeddingEncodingFormat {
   """)
 model EmbeddingsResult {
   @doc("Unique identifier for the embeddings result.")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Embedding values for the prompts submitted in the request.")
+  @visibility(Lifecycle.Read)
   data: EmbeddingItem[];
 
   @doc("Usage counts for tokens input using the embeddings API.")
+  @visibility(Lifecycle.Read)
   usage: EmbeddingsUsage;
 
   @doc("The object type of the embeddings result. Will always be `list`.")
   object: "list";
 
   @doc("The model ID used to generate this result.")
+  @visibility(Lifecycle.Read)
   `model`: string;
 }
 
@@ -80,9 +84,11 @@ model EmbeddingItem {
     List of embedding values for the input prompt. These represent a measurement of the
     vector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector.
     """)
+  @visibility(Lifecycle.Read)
   embedding: float32[];
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
+  @visibility(Lifecycle.Read)
   index: int32;
 
   @doc("The object type of this embeddings item. Will always be `embedding`.")
@@ -92,12 +98,14 @@ model EmbeddingItem {
 @doc("Measurement of the amount of tokens used in this request and response.")
 model EmbeddingsUsage {
   @doc("Number of tokens in the request.")
+  @visibility(Lifecycle.Read)
   prompt_tokens: int32;
 
   @doc("""
     Total number of tokens transacted in this request/response. Should equal the
     number of tokens in the request.
     """)
+  @visibility(Lifecycle.Read)
   total_tokens: int32;
 }
 

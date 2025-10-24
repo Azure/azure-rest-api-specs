@@ -2,8 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/keyvault"
   "dependencies":
-    "additionalDirectories":
-      - "specification/keyvault/Security.KeyVault.Common/"
     default: ""
 
 emit:
@@ -22,43 +20,46 @@ options:
   "@azure-tools/typespec-python":
     flavor: azure
     "basic-setup-py": true
-    "package-version": "4.9.0b1"
-    "package-dir": "azure-keyvault-secrets"
     "package-name": "azure-keyvault-secrets"
-    "output-path": "./azure/keyvault/secrets/_generated"
+    "package-pprint-name": "Key Vault Secrets"
+    "package-version": "4.9.0"
+    "namespace": "azure.keyvault.secrets._generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-secrets"
   "@azure-tools/typespec-java":
+    api-version: "7.6"
     flavor: azure
-    "package-dir": "azure-security-keyvault-secrets"
-    "namespace": "com.azure.security.keyvault.secrets"
-    "models-subpackage": "implementation.models"
-    "customization-class": "swagger/src/main/java/SecretsCustomizations.java"
-    "partial-update": true
-    "generate-tests": false
-    "generate-samples": false
-    "include-api-view-properties": false
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-secrets"
+    namespace: "com.azure.security.keyvault.secrets"
+    models-subpackage: "implementation.models"
+    customization-class: "customizations/src/main/java/SecretsCustomizations.java"
+    use-eclipse-language-server: false
+    generate-tests: false
+    generate-samples: false
+    include-api-view-properties: false
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
-    package-dir: "keyvault-secrets"
-    generateMetadata: true
-    generateTest: false
+    emitter-output-dir: "{output-dir}/{service-dir}/keyvault-secrets"
+    generate-metadata: true
     src-folder: "src/generated"
-    experimentalExtensibleEnums: true
-    isModularLibrary: true
-    packageDetails:
+    experimental-extensible-enums: true
+    is-modular-library: true
+    package-details:
       name: "@azure/keyvault-secrets"
       description: "Azure Key Vault Secrets"
     flavor: azure
   "@azure-tools/typespec-go":
-    service-dir: "sdk/security/keyvault"
-    package-dir: "azsecrets"
     module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets"
-    module-version: "0.0.1"
-    emitter-output-dir: "{project-root}"
-    override-client-name: "Client"
+    service-dir: "sdk/security/keyvault"
+    emitter-output-dir: "{output-dir}/{service-dir}/azsecrets"
+    go-generate: build.go
     single-client: true
     inject-spans: true
+    generate-fakes: true
   "@azure-tools/typespec-rust":
     crate-name: "azure_security_keyvault_secrets"
     crate-version: "0.0.1"
-    emitter-output-dir: "{project-root}/generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/keyvault/Security.KeyVault.Common/"

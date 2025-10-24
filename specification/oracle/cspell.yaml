@@ -19,6 +19,7 @@ words:
   - dbsystemshapename
   - dnsprivateviewocid
   - ecpu
+  - ecpus
   - exacc
   - exadata
   - exadatainfra
@@ -37,11 +38,23 @@ words:
   - tcps
   - tpurgent
   - vmbm
-  - vmcluster
   - vmdb
   - vnic
 overrides:
   - filename: '**/specification/oracle/resource-manager/Oracle.Database/**/*.json'
     words:
+      - ecpus
+      - exadb
+      - exascale
+      - singlenode
       - systemversionname
+      - basedb
+      - dbversionsname
+  - filename: '**/specification/oracle/Oracle.Database.Management/**/*.tsp'
+    words:
+      - exadb
+      - exascale
+      - vmcluster
+      - basedb
+      - dbversionsname
 

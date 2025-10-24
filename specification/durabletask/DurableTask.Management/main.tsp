@@ -3,11 +3,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.DurableTask" })
@@ -18,11 +16,17 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("API Versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-10-01-preview")
   v2024_10_01_Preview: "2024-10-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2025-04-01-preview")
+  v2025_04_01_Preview: "2025-04-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2025-11-01")
+  v2025_11_01: "2025-11-01",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -58,7 +62,8 @@ model SchedulerProperties {
 @added(Versions.v2024_10_01_Preview)
 model SchedulerSku {
   @doc("The name of the SKU")
-  name: string;
+  @typeChangedFrom(Versions.v2025_11_01, string)
+  name: SchedulerSkuName;
 
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
   capacity?: int32;
@@ -66,6 +71,19 @@ model SchedulerSku {
   @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility(Lifecycle.Read)
   redundancyState?: RedundancyState;
+}
+
+@added(Versions.v2025_11_01)
+@doc("The name of the Stock Keeping Unit (SKU) of a Durable Task Scheduler")
+union SchedulerSkuName {
+  string,
+
+  @doc("Dedicated SKU")
+  Dedicated: "Dedicated",
+
+  @doc("Consumption SKU")
+  @added(Versions.v2025_04_01_Preview)
+  Consumption: "Consumption",
 }
 
 @doc("A Task Hub resource belonging to the scheduler")
@@ -100,6 +118,59 @@ model TaskHubProperties {
   @doc("URL of the durable task scheduler dashboard")
   @visibility(Lifecycle.Read)
   dashboardUrl?: url;
+}
+
+@doc("A retention policy resource belonging to the scheduler")
+@added(Versions.v2025_04_01_Preview)
+@parentResource(Scheduler)
+@singleton
+model RetentionPolicy
+  is Azure.ResourceManager.ProxyResource<RetentionPolicyProperties> {
+  ...ResourceNameParameter<
+    RetentionPolicy,
+    "retentionPolicyName",
+    "retentionPolicies"
+  >;
+}
+
+@doc("The retention policy settings for the resource")
+@added(Versions.v2025_04_01_Preview)
+model RetentionPolicyProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation")
+  provisioningState?: ProvisioningState;
+
+  @doc("The orchestration retention policies")
+  @identifiers(#["retentionPeriodInDays", "orchestrationState"])
+  retentionPolicies?: RetentionPolicyDetails[];
+}
+
+@doc("The properties of a retention policy")
+@added(Versions.v2025_04_01_Preview)
+model RetentionPolicyDetails {
+  @doc("The retention period in days after which the orchestration will be purged automatically")
+  retentionPeriodInDays: int32;
+
+  @doc("The orchestration state to which this policy applies. If omitted, the policy applies to all purgeable orchestration states.")
+  orchestrationState?: PurgeableOrchestrationState;
+}
+
+@doc("Purgeable orchestration state to be used in retention policies")
+@added(Versions.v2025_04_01_Preview)
+union PurgeableOrchestrationState {
+  string,
+
+  @doc("The orchestration is completed")
+  Completed: "Completed",
+
+  @doc("The orchestration is failed")
+  Failed: "Failed",
+
+  @doc("The orchestration is terminated")
+  Terminated: "Terminated",
+
+  @doc("The orchestration is canceled")
+  Canceled: "Canceled",
 }
 
 @doc("The status of the current operation")
@@ -145,7 +216,8 @@ model SchedulerPropertiesUpdate {
 @doc("The SKU (Stock Keeping Unit) properties to be updated")
 model SchedulerSkuUpdate {
   @doc("The name of the SKU")
-  name?: string;
+  @typeChangedFrom(Versions.v2025_11_01, string)
+  name?: SchedulerSkuName;
 
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
   capacity?: int32;
@@ -186,4 +258,22 @@ interface TaskHubs {
   delete is ArmResourceDeleteWithoutOkAsync<TaskHub>;
   @doc("List Task Hubs")
   listByScheduler is ArmResourceListByParent<TaskHub>;
+}
+
+@added(Versions.v2025_04_01_Preview)
+@armResourceOperations(RetentionPolicy)
+interface RetentionPolicies {
+  @doc("Get a Retention Policy")
+  @errorsDoc("Not found error: resource does not exist")
+  get is ArmResourceRead<RetentionPolicy>;
+  @doc("Create or Update a Retention Policy")
+  @errorsDoc("Validation error: required parameters are missing")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<RetentionPolicy>;
+  @doc("Update a Retention Policy")
+  @errorsDoc("Validation error: required parameters are missing")
+  update is ArmResourcePatchAsync<RetentionPolicy, RetentionPolicyProperties>;
+  @doc("Delete a Retention Policy")
+  delete is ArmResourceDeleteWithoutOkAsync<RetentionPolicy>;
+  @doc("List Retention Policies")
+  listByScheduler is ArmResourceListByParent<RetentionPolicy>;
 }

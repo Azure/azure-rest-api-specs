@@ -30,6 +30,7 @@ model Fleet is TrackedResource<FleetProperties> {
 
   ...EntityTagProperty;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
@@ -56,6 +57,11 @@ model FleetProperties {
   @added(Versions.v2024_02_02_preview)
   @added(Versions.v2024_04_01)
   hubProfile?: FleetHubProfile;
+
+  @added(Versions.v2025_03_01)
+  @visibility(Lifecycle.Read)
+  @doc("Status information for the fleet.")
+  status?: FleetStatus;
 }
 
 @doc("The FleetHubProfile configures the fleet hub.")
@@ -155,6 +161,7 @@ model FleetPatch {
   // ...EtagResponseEnvelope;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
@@ -176,8 +183,20 @@ model FleetCredentialResult {
 model FleetCredentialResults {
   @visibility(Lifecycle.Read)
   @doc("Array of base64-encoded Kubernetes configuration files.")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   kubeconfigs?: FleetCredentialResult[];
+}
+
+@added(Versions.v2025_03_01)
+@doc("Status information for the fleet.")
+model FleetStatus {
+  @visibility(Lifecycle.Read)
+  @doc("The last operation ID for the fleet.")
+  lastOperationId?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The last operation error for the fleet.")
+  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @armResourceOperations
@@ -201,6 +220,7 @@ interface Fleets {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
   @sharedRoute
   @removed(Versions.v2023_06_15_preview)
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Fleet,
     FleetPatch,
@@ -216,6 +236,7 @@ interface Fleets {
     #{ `final-state-via`: "original-uri" }
   )
   @sharedRoute
+  @patch(#{ implicitOptionality: true })
   updateAsync is ArmCustomPatchAsync<
     Fleet,
     FleetPatch,

@@ -26,7 +26,16 @@ These are the global settings for the CodeSigning API.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-09-30-preview
+tag: package-2025-10-13
+```
+
+### Tag: package-2025-10-13
+
+These settings apply only when `--tag=package-2025-10-13` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-13'
+input-file:
+- Microsoft.CodeSigning/stable/2025-10-13/codeSigningAccount.json
 ```
 
 ### Tag: package-2024-09-30-preview
@@ -60,10 +69,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-cli-extensions
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-typescript
 ```
 
@@ -75,10 +82,6 @@ See configuration in [readme.az.md](./readme.az.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
@@ -86,10 +89,6 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## Typescript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## 
 

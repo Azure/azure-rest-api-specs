@@ -1,9 +1,11 @@
 import "@typespec/versioning";
+import "./EventHubExample.tsp";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure EventHub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.EventHub.CaptureFileCreated event. */
+@example(MicrosoftEventHubCaptureFileCreatedExample)
 model EventHubCaptureFileCreatedEventData {
   /** The path to the capture file. */
   fileUrl: string;

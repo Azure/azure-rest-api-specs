@@ -263,7 +263,7 @@ model MetadataSchemaProperties {
   schema: string;
 
   @doc("The assignees")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   assignedTo?: MetadataAssignment[];
 }
 
@@ -319,11 +319,11 @@ model ApiProperties {
 
   @doc("The set of external documentation")
   @maxItems(20)
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   externalDocumentation?: ExternalDocumentation[];
 
   @doc("The set of contacts")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   contacts?: Contact[];
 
   @doc("The license information for the API.")

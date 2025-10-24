@@ -29,6 +29,7 @@ function Get-ReadmeWithNewTag($readmeContent, $tagContent) {
     return $readmeContent -replace '(?s)(### tag: package.*)', "$tagContent`n`$1"
 }
 
+
 function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionStatus ) {
     # Get the current tag date
     $currentTag = $readmeContent -match '(?m)^(tag:\s*)(package-)(.*)(?<apiVersion>(?<date>\d{4}-\d{2}(-\d{2})?)|(?<version>\d+\.\d+))'
@@ -54,7 +55,10 @@ function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionS
         }
     }
 
-    $tagVersion = $newApiVersion -match '(?<apiVersion>(?<date>\d{4}-\d{2}(-\d{2})?)|(?<version>\d+\.\d+)(-preview(\.\d+)?)?)'
+    # Extract the new API version, supporting two formats:
+    # - Date format: YYYY-MM(-DD)?(-preview)? e.g. 2024-01, 2024-01-01, 2024-01-preview
+    # - Semantic versioning: X.Y(-preview)? or X.Y(-preview.\d+)? e.g. 7.6, 7.6-preview, 7.6-preview.1
+    $tagVersion = $newApiVersion -match '(?<apiVersion>(?<date>\d{4}-\d{2}(-\d{2})?)(-preview)?|(?<version>\d+\.\d+(-preview(\.\d+)?)?))'
     $tagVersion = $Matches['apiVersion']
     if ($newApiVersionStatus -eq "preview") {
         $tagVersion = "preview-" + $tagVersion

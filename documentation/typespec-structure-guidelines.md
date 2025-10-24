@@ -79,9 +79,13 @@ To differentiate between folders defining a service, an SDK, or both, refer to t
 
 Services should **not** have a `package.json` directly in the TypeSpec project directory. Instead, they should use the `package.json` in the root directory of the repo for installing any required dependencies. This root-level `package.json` should only depend on the `@azure-tools/typespec-autorest` and `@azure-tools/typespec-apiview` emitters.
 
-SDK language-specific emitters won't have direct dependencies in the spec repo. Instead, they will come from the language SDK repo itself for generation. For more information, see the example [emitter-package.json](https://github.com/Azure/azure-sdk-for-net/blob/main/eng/emitter-package.json) and [TypeSpec-Project-Scripts](https://github.com/Azure/azure-sdk-tools/blob/main/doc/common/TypeSpec-Project-Scripts.md).
+SDK language-specific emitters won't have direct dependencies in the spec repo. Instead, they will come from the language SDK repo itself for generation. For more information, see the example [emitter-package.json](https://github.com/Azure/azure-sdk-for-net/blob/main/eng/emitter-package.json).
 
-Services aiming to generate an SDK need to provide emitter configuration for all the SDK emitters in the `tspconfig.yaml` file. See this [example](..\specification\contosowidgetmanager\Contoso.WidgetManager\tspconfig.yaml).
+Services aiming to generate an SDK need to provide emitter configuration for all the SDK emitters in
+ the `tspconfig.yaml` file. See the following samples for more details:
+
+- [management plane sample](https://aka.ms/azsdk/tspconfig-sample-mpg)
+- [data plane sample](https://aka.ms/azsdk/tspconfig-sample-dpg)
 
 ## Libraries for service groups
 

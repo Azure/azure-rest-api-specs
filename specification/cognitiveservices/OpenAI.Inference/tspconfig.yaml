@@ -16,25 +16,35 @@ options:
     emit-lro-options: "none"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.OpenAI"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.OpenAI"
     clear-output-folder: true
     model-namespace: false
     generate-protocol-methods: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    generate-protocol-methods: false
+    namespace: Azure.AI.OpenAI
+    model-namespace: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-openai"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-openai"
+    namespace: "com.azure.ai.openai"
+    service-version-exclude-preview: false
     partial-update: true
     enable-sync-stack: true
     generate-tests: false
     generate-samples: false
     customization-class: customization/src/main/java/OpenAICustomizations.java
+    use-eclipse-language-server: false
+    custom-types-subpackage: "implementation.models"
+    custom-types: "UploadFileRequest"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "openai"
-    generateMetadata: false
-    generateTest: false
-    isModularLibrary: true
-    packageDetails:
+    emitter-output-dir: "{output-dir}/{service-dir}/openai"
+    generate-metadata: false
+    generate-test: false
+    is-modular-library: true
+    package-details:
       name: "@azure/openai"
     flavor: azure

@@ -1,0 +1,64 @@
+{
+  "title": "Create/Update NSP logging configuration",
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1",
+    "loggingConfigurationName": "instance",
+    "parameters": {
+      "properties": {
+        "enabledLogCategories": [
+          "NspPublicInboundPerimeterRulesDenied",
+          "NspPublicOutboundPerimeterRulesDenied"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "instance",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations/instance",
+        "type": "Microsoft.Network/networkSecurityPerimeters/loggingConfigurations",
+        "properties": {
+          "enabledLogCategories": [
+            "NspPublicInboundPerimeterRulesDenied",
+            "NspPublicOutboundPerimeterRulesDenied"
+          ],
+          "version": "0"
+        },
+        "systemData": {
+          "createdBy": "user",
+          "createdByType": "User",
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "instance",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations/instance",
+        "type": "Microsoft.Network/networkSecurityPerimeters/loggingConfigurations",
+        "properties": {
+          "enabledLogCategories": [
+            "NspPublicInboundPerimeterRulesDenied",
+            "NspPublicOutboundPerimeterRulesDenied"
+          ],
+          "version": "0"
+        },
+        "systemData": {
+          "createdBy": "user",
+          "createdByType": "User",
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+        }
+      }
+    }
+  }
+}

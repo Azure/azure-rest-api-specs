@@ -1213,6 +1213,19 @@
           "type": "object",
           "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
         },
+        "clusterAuthType": {
+          "x-ms-enum": {
+            "name": "HDInsightClusterAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "BasicAuth",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "type": "string",
+          "description": "HDInsight cluster authentication type."
+        },
         "userName": {
           "type": "object",
           "description": "HDInsight cluster user name. Type: string (or Expression with resultType string)."
@@ -1240,6 +1253,10 @@
         "fileSystem": {
           "type": "object",
           "description": "Specify the FileSystem if the main storage for the HDInsight is ADLS Gen2. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "description": "The credential reference containing MI authentication information for the HDInsight cluster.",
+          "$ref": "../artifacts.json#/definitions/CredentialReference"
         }
       },
       "required": [
@@ -1513,7 +1530,7 @@
     },
     "AmazonRdsForOracleLinkedService": {
       "x-ms-discriminator-value": "AmazonRdsForOracle",
-      "description": "AmazonRdsForOracle database.",
+      "description": "AmazonRdsForOracle database. This linked service has supported version property. The Version 1.0 is scheduled for deprecation while your pipeline will continue to run after EOL but without any bug fix or new features.",
       "type": "object",
       "allOf": [
         {
@@ -1536,21 +1553,81 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Only used for Version 1.0.",
           "type": "object"
+        },
+        "server": {
+          "type": "object",
+          "description": "The location of AmazonRdsForOracle database you want to connect to, the supported forms include connector descriptor, Easy Connect (Plus) Naming and Oracle Net Services Name (Only self-hosted IR). Type: string. Only used for Version 2.0."
+        },
+        "authenticationType": {
+          "type": "string",
+          "enum": [
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "AmazonRdsForOracleAuthenticationType",
+            "modelAsString": true
+          },
+          "description": "Authentication type for connecting to the AmazonRdsForOracle database. Only used for Version 2.0."
+        },
+        "username": {
+          "type": "object",
+          "description": "The AmazonRdsForOracle database username. Type: string. Only used for Version 2.0."
         },
         "password": {
           "$ref": "../artifacts.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of password in connection string."
         },
+        "encryptionClient": {
+          "type": "object",
+          "description": "Specifies the encryption client behavior. Supported values are accepted, rejected, requested or required, default value is required. Type: string. Only used for Version 2.0."
+        },
+        "encryptionTypesClient": {
+          "type": "object",
+          "description": "Specifies the encryption algorithms that client can use. Supported values are AES128, AES192, AES256, 3DES112, 3DES168, default value is (AES256). Type: string. Only used for Version 2.0."
+        },
+        "cryptoChecksumClient": {
+          "type": "object",
+          "description": "Specifies the desired data integrity behavior when this client connects to a server. Supported values are accepted, rejected, requested or required, default value is required. Type: string. Only used for Version 2.0."
+        },
+        "cryptoChecksumTypesClient": {
+          "type": "object",
+          "description": "Specifies the crypto-checksum algorithms that client can use. Supported values are SHA1, SHA256, SHA384, SHA512, default value is (SHA512). Type: string. Only used for Version 2.0."
+        },
+        "initialLobFetchSize": {
+          "type": "object",
+          "description": "Specifies the amount that the source initially fetches for LOB columns, default value is 0. Type: integer. Only used for Version 2.0."
+        },
+        "fetchSize": {
+          "type": "object",
+          "description": "Specifies the number of bytes that the driver allocates to fetch the data in one database round-trip, default value is 10485760. Type: integer. Only used for Version 2.0."
+        },
+        "statementCacheSize": {
+          "type": "object",
+          "description": "Specifies the number of cursors or statements to be cached for each database connection, default value is 0. Type: integer. Only used for Version 2.0."
+        },
+        "initializationString": {
+          "type": "object",
+          "description": "Specifies a command that is issued immediately after connecting to the database to manage session settings. Type: string. Only used for Version 2.0."
+        },
+        "enableBulkLoad": {
+          "type": "object",
+          "description": "Specifies whether to use bulk copy or batch insert when loading data into the database, default value is true. Type: boolean. Only used for Version 2.0."
+        },
+        "supportV1DataTypes": {
+          "type": "object",
+          "description": "Specifies whether to use the Version 1.0 data type mappings. Do not set this to true unless you want to keep backward compatibility with Version 1.0's data type mappings, default value is false. Type: boolean. Only used for Version 2.0."
+        },
+        "fetchTswtzAsTimestamp": {
+          "type": "object",
+          "description": "Specifies whether the driver returns column value with the TIMESTAMP WITH TIME ZONE data type as DateTime or string. This setting is ignored if supportV1DataTypes is not true, default value is true. Type: boolean. Only used for Version 2.0."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "AzureMySqlLinkedService": {
       "x-ms-discriminator-value": "AzureMySql",
@@ -3030,6 +3107,18 @@
         },
         "servicePrincipalKey": {
           "description": "Specify the application's key.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "description": "The service principal credential type for authentication.'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. If not specified, 'ServicePrincipalKey' is in use. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
@@ -5227,6 +5316,10 @@
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
           "type": "object"
         },
+        "enableServerCertificateValidation": {
+          "description": "Specifies whether the connections to the server will validate server certificate, the default value is True. Only used for Version 2.0",
+          "type": "object"
+        },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
           "type": "object"
@@ -5367,8 +5460,23 @@
           "description": "The password corresponding to the user name when using UsernameAndPassword.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
+        "thriftTransportProtocol": {
+          "description": "The transport protocol to use in the Thrift layer (for V2 only). Default value is Binary.",
+          "type": "string",
+          "enum": [
+            "Binary",
+            "HTTP"
+          ],
+          "x-ms-enum": {
+            "name": "ImpalaThriftTransportProtocol"
+          }
+        },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
+          "type": "object"
+        },
+        "enableServerCertificateValidation": {
+          "description": "Specify whether to enable server SSL certificate validation when you connect.Always use System Trust Store (for V2 only). The default value is true.",
           "type": "object"
         },
         "trustedCertPath": {
@@ -5920,7 +6028,7 @@
     },
     "QuickBooksLinkedService": {
       "x-ms-discriminator-value": "QuickBooks",
-      "description": "QuickBooks server linked service.",
+      "description": "QuickBooks server linked service. This linked service has supported version property. The Version 1.0 is scheduled for deprecation while your pipeline will continue to run after EOL but without any bug fix or new features.",
       "type": "object",
       "allOf": [
         {
@@ -5955,19 +6063,23 @@
           "type": "object"
         },
         "consumerKey": {
-          "description": "The consumer key for OAuth 1.0 authentication.",
+          "description": "The consumer key for OAuth 2.0 authentication.",
           "type": "object"
         },
         "consumerSecret": {
-          "description": "The consumer secret for OAuth 1.0 authentication.",
+          "description": "The consumer secret for OAuth 2.0 authentication.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "accessToken": {
-          "description": "The access token for OAuth 1.0 authentication.",
+          "description": "The access token for OAuth 2.0 authentication.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "accessTokenSecret": {
-          "description": "The access token secret for OAuth 1.0 authentication.",
+          "description": "The access token secret is deprecated for OAuth 1.0 authentication. Only used for version 1.0.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "refreshToken": {
+          "description": "The refresh token for OAuth 2.0 authentication.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
@@ -5983,9 +6095,7 @@
         "endpoint",
         "companyId",
         "consumerKey",
-        "consumerSecret",
-        "accessToken",
-        "accessTokenSecret"
+        "consumerSecret"
       ]
     },
     "ServiceNowLinkedService": {
@@ -6205,6 +6315,10 @@
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
+          "type": "object"
+        },
+        "enableServerCertificateValidation": {
+          "description": "Specifies whether the connections to the server will validate server certificate, the default value is True. Only used for Version 2.0",
           "type": "object"
         },
         "trustedCertPath": {
@@ -6628,6 +6742,19 @@
           "type": "object",
           "description": "The resource group where the cluster belongs. Type: string (or Expression with resultType string)."
         },
+        "clusterResourceGroupAuthType": {
+          "description": "HDInsight On-demand cluster resource group authentication type.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipalKey",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "HDInsightOndemandClusterResourceGroupAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "clusterNamePrefix": {
           "type": "object",
           "description": "The prefix of cluster name, postfix will be distinct with timestamp. Type: string (or Expression with resultType string)."
@@ -6958,6 +7085,10 @@
         "credential": {
           "$ref": "../artifacts.json#/definitions/CredentialReference",
           "description": "The credential reference containing authentication information."
+        },
+        "dataSecurityMode": {
+          "type": "object",
+          "description": "The data security mode for the Databricks Cluster. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -7598,9 +7729,18 @@
           "type": "object",
           "description": "The scope of the application registered in Azure Active Directory for AADServicePrincipal authentication."
         },
+        "role": {
+          "type": "object",
+          "description": "The default access control role to use in the Snowflake session. Type: string (or Expression with resultType string)."
+        },
         "host": {
           "type": "object",
-          "description": "The host name of the Snowflake account."
+          "x-ms-format": "dfe-string",
+          "description": "The host name of the Snowflake account. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "privateKey": {
           "$ref": "../artifacts.json#/definitions/SecretBase",
@@ -7613,6 +7753,10 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "useUtcTimestamps": {
+          "type": "object",
+          "description": "Indicates whether to use UTC timezone for timestamp data types. Type: boolean."
         }
       },
       "required": [
@@ -7757,6 +7901,19 @@
           "type": "object",
           "description": "The ID of Microsoft Fabric Lakehouse artifact. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "LakehouseAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "servicePrincipalId": {
           "type": "object",
           "description": "The ID of the application used to authenticate against Microsoft Fabric Lakehouse. Type: string (or Expression with resultType string)."
@@ -7780,6 +7937,10 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -7957,6 +8118,19 @@
           "type": "object",
           "description": "The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "WarehouseAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "servicePrincipalId": {
           "type": "object",
           "description": "The ID of the application used to authenticate against Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
@@ -7980,11 +8154,35 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
         "artifactId",
         "endpoint"
+      ]
+    },
+    "ServiceNowV2LinkedService": {
+      "x-ms-discriminator-value": "ServiceNowV2",
+      "description": "ServiceNowV2 server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ServiceNowV2 server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceNowV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
       ]
     },
     "ServiceNowV2LinkedServiceTypeProperties": {

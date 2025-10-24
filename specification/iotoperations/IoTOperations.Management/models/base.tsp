@@ -1,6 +1,9 @@
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
 
+using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.IoTOperations;
 
@@ -26,6 +29,7 @@ union ExtendedLocationType {
 }
 
 @doc("The enum defining status of resource.")
+@lroStatus
 union ProvisioningState {
   string,
   ResourceProvisioningState,
@@ -42,6 +46,31 @@ union ProvisioningState {
   @doc("Resource has been Accepted.")
   Accepted: "Accepted",
 }
+
+@doc("The health state of the resource.")
+@added(Versions.`2025-10-01`)
+union ResourceHealthState {
+  string,
+
+  @doc("Resource is Available and functioning as expected.")
+  Available,
+
+  @doc("Resource health is degraded.")
+  Degraded,
+
+  @doc("Resource is not functioning as expected.")
+  Unavailable,
+
+  @doc("Resource state is unknown.")
+  Unknown,
+}
+
+alias ResourceHealth = {
+  @doc("The health state of the resource.")
+  @added(Versions.`2025-10-01`)
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthState = Unknown;
+};
 
 @doc("Mode properties")
 union OperationalMode {
@@ -80,7 +109,7 @@ model MetricProperties {
 @doc("Diagnostic Self tracing properties")
 model SelfTracing {
   @doc("The toggle to enable/disable self tracing.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("The self tracing interval.")
   @minValue(1)
@@ -104,7 +133,7 @@ model BatchingConfiguration {
 @doc("Tls properties")
 model TlsProperties {
   @doc("Mode for TLS.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("Trusted CA certificate config map.")
   trustedCaCertificateConfigMapRef?: string;
@@ -164,14 +193,6 @@ union CertManagerIssuerKind {
   ClusterIssuer: "ClusterIssuer",
 }
 
-alias SystemAssignedManagedIdentity = "SystemAssignedManagedIdentity";
-alias UserAssignedManagedIdentity = "UserAssignedManagedIdentity";
-alias AccessToken = "AccessToken";
-alias Sasl = "Sasl";
-alias X509Certificate = "X509Certificate";
-alias Anonymous = "Anonymous";
-alias ServiceAccountToken = "ServiceAccountToken";
-
 @doc("Managed Identity Method")
 union ManagedIdentityMethod {
   string,
@@ -227,5 +248,21 @@ scalar SchemaRegistryID
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.DeviceRegistry/schemaRegistries",
+    }
+  ]>;
+
+@added(Versions.`2025-07-01-preview`)
+scalar SecretProviderClassID
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SecretSyncController/azureKeyVaultSecretProviderClasses",
+    }
+  ]>;
+
+@added(Versions.`2025-07-01-preview`)
+scalar AzureDeviceRegistryNamespaceID
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces",
     }
   ]>;

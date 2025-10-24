@@ -11,15 +11,15 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/export.json"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Terraform"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Terraform"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/terraform"
-    package-dir: "armterraform"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armterraform"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armterraform"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -27,26 +27,21 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-terraform"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-terraform"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.terraform"
     service-name: "Azure Terraform"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-terraform"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-terraform"
+    namespace: "azure.mgmt.terraform"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    package-dir: "arm-terraform"
-    flavor: "azure"
-    packageDetails:
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-terraform"
+    flavor: azure
+    package-details:
       name: "@azure/arm-terraform"
 linter:
   extends:

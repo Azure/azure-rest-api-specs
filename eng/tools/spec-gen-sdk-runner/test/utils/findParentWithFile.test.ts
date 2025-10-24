@@ -1,13 +1,13 @@
-import { describe, test, expect } from "vitest";
-import { findParentWithFile } from "../../src/utils.js";
-import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { typespecProjectRegex } from "../../src/change-files.js";
+import { fileURLToPath } from "node:url";
+import { describe, expect, test } from "vitest";
+import { typespecProjectRegex } from "../../src/spec-helpers.js";
+import { findParentWithFile } from "../../src/utils.js";
 
 describe("findParentWithFile", () => {
   // Get the absolute path to the repo root
   const currentFilePath = fileURLToPath(import.meta.url);
-  const repoRoot = path.resolve(path.dirname(currentFilePath), "../../../../../");
+  const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
   test("finds file in current directory", () => {
     const result = findParentWithFile(
@@ -25,6 +25,11 @@ describe("findParentWithFile", () => {
       repoRoot,
     );
     expect(result).toBe("specification/contosowidgetmanager/Contoso.WidgetManager");
+  });
+
+  test("handles single segment path", () => {
+    const result = findParentWithFile(".", typespecProjectRegex, repoRoot);
+    expect(result).toBeUndefined();
   });
 
   test("stops at specified boundary", () => {

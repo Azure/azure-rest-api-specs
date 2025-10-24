@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param (
+  [switch]$IgnoreCoreFiles = $false,
   [switch]$CheckAll = $false,
   [int]$Shard = 0,
   [int]$TotalShards = 1,
@@ -17,10 +18,11 @@ if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) {
 . $PSScriptRoot/Suppressions-Functions.ps1
 . $PSScriptRoot/Array-Functions.ps1
 
-$typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
+$typespecFolders, $checkingAllSpecs = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
   -HeadCommitish:$HeadCommitish `
-  -CheckAll:$CheckAll
+  -CheckAll:$CheckAll `
+  -IgnoreCoreFiles:$IgnoreCoreFiles
 
 if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) { 
   $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
@@ -33,11 +35,11 @@ foreach ($typespecFolder in $typespecFolders) {
 
 $typespecFoldersWithFailures = @()
 if ($typespecFolders) {
-  $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
+  $typespecFolders = $typespecFolders.Split('', [System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
     LogGroupStart "Validating $typespecFolder"
 
-    if ($checkedAll) {
+    if ($checkingAllSpecs) {
       $suppression = Get-Suppression "TypeSpecValidationAll" $typespecFolder
       if ($suppression) {
         $reason = $suppression["reason"] ?? "<no reason specified>"
@@ -47,14 +49,17 @@ if ($typespecFolders) {
       }
     }
 
-    LogInfo "npm exec --no -- tsv $typespecFolder"
+    # Example: '{"checkingAllSpecs"=true}'
+    $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
+
+    LogInfo "npm exec --no -- tsv $typespecFolder ""$context"""
 
     if ($DryRun) {
       LogGroupEnd
       continue
     }
 
-    npm exec --no -- tsv $typespecFolder 2>&1 | Write-Host
+    npm exec --no -- tsv $typespecFolder "$context" 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
@@ -69,7 +74,8 @@ if ($typespecFolders) {
     }
     LogGroupEnd
   }
-} else {
+}
+else {
   if ($CheckAll) {
     LogError "TypeSpec Validation - All did not validate any specs"
     LogJobFailure

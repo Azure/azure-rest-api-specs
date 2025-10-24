@@ -7,11 +7,19 @@ suppressions:
         - Field `Etag` of struct `BaseAdminRule` has been removed
         - Field `Etag` of struct `DefaultAdminRule` has been removed
         - Field `Etag` of struct `SecurityAdminConfiguration` has been removed
+        - Function `*ConnectionMonitorsClient.BeginQuery` has been removed
+        - Function `*ConnectionMonitorsClient.BeginStart` has been removed
+        - Type of `LoadBalancerHealthPerRulePerBackendAddress.NetworkInterfaceIPConfigurationID` has been changed from `*InterfaceIPConfiguration` to `*string`
   azure-sdk-for-js:
     - package: '@azure/arm-network'
       breaking-changes:
         - Interface AdminRuleCollection no longer has parameter systemData
         - Interface BaseAdminRule no longer has parameter systemData
         - Interface SecurityAdminConfiguration no longer has parameter systemData
+        - Removed operation ConnectionMonitors.beginQuery
+        - Removed operation ConnectionMonitors.beginQueryAndWait
+        - Removed operation ConnectionMonitors.beginStart
+        - Removed operation ConnectionMonitors.beginStartAndWait
+        - Type of parameter networkInterfaceIPConfigurationId of interface LoadBalancerHealthPerRulePerBackendAddress is changed from NetworkInterfaceIPConfiguration to string
 
         

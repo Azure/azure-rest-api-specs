@@ -175,6 +175,12 @@ model SecretBundle {
    */
   @visibility(Lifecycle.Read)
   managed?: boolean;
+
+  /**
+   * The version of the previous certificate, if applicable. Applies only to certificates created after June 1, 2025. Certificates created before this date are not retroactively updated.
+   */
+  @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  previousVersion?: string;
 }
 
 /**
@@ -227,12 +233,11 @@ model SecretUpdateParameters {
 /**
  * The secret list result.
  */
-@pagedResult
 model SecretListResult {
   /**
    * A response message containing a list of secrets in the key vault along with a link to the next page of secrets.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: SecretItem[];
 
@@ -278,12 +283,11 @@ model SecretItem {
 /**
  * The deleted secret list result
  */
-@pagedResult
 model DeletedSecretListResult {
   /**
    * A response message containing a list of deleted secrets in the key vault along with a link to the next page of deleted secrets.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: DeletedSecretItem[];
 
@@ -353,4 +357,18 @@ model SecretProperties {
    * The media type (MIME type).
    */
   contentType?: string;
+}
+
+/**
+ * The media type (MIME type).
+ */
+@Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+union ContentType {
+  string,
+
+  /** The PKCS#12 file format. */
+  PFX: "application/x-pkcs12",
+
+  /** The PEM file format. */
+  PEM: "application/x-pem-file",
 }

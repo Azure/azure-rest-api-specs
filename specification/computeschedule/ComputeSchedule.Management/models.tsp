@@ -91,18 +91,6 @@ union OperationState {
   string,
 }
 
-// ------------------ Common Values ---------------
-alias Params = {
-  ...ApiVersionParameter;
-  ...SubscriptionIdParameter;
-
-  @path
-  @minLength(1)
-  @segment("locations")
-  @doc("The location name.")
-  locationparameter: string;
-};
-
 // ------------------ Models ---------------
 @doc("The schedule details for the user request")
 model Schedule {
@@ -132,6 +120,24 @@ model Schedule {
 model Resources {
   @doc("The resource ids used for the request")
   ids: Array<armResourceIdentifier>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+@doc("Resource creation data model")
+model ResourceProvisionPayload {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("JSON object that contains VM properties that are common across all VMs in this batch (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
+  baseProfile?: Record<unknown>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("JSON array, that contains VM properties that should to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
+  resourceOverrides?: Record<unknown>[];
+
+  @doc("Number of VMs to be created")
+  resourceCount: int32;
+
+  @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
+  resourcePrefix?: string;
 }
 
 @doc("The retry policy for the user request")
@@ -260,7 +266,7 @@ model OperationErrorsResult {
   @doc("The completion time of the operation if the operation was completed")
   completedAt?: offsetDateTime;
 
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("A list of errors associated with the operationid")
   operationErrors?: Array<OperationErrorDetails>;
 
@@ -299,7 +305,7 @@ model DeallocateResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the deallocate request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -332,7 +338,7 @@ model StartResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -365,7 +371,7 @@ model HibernateResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the Hibernate request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -407,6 +413,71 @@ model ExecuteStartRequest {
   correlationid: string;
 }
 
+@doc("The ExecuteCreateRequest request for create operations")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model ExecuteCreateRequest {
+  @doc("resource creation payload")
+  resourceConfigParameters: ResourceProvisionPayload;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("CorrelationId item")
+  correlationid?: string;
+}
+
+@doc("The response from a create request")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model CreateResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the create request eg virtual machines")
+  type: string;
+
+  @doc("The location of the start request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: azureLocation;
+
+  @identifiers(#["resourceId"])
+  @doc("The results from the start request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
+@doc("The response from a delete request")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model DeleteResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the delete request eg virtual machines")
+  type: string;
+
+  @doc("The location of the start request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: azureLocation;
+
+  @identifiers(#["resourceId"])
+  @doc("The results from the start request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
+@doc("The ExecuteDeleteRequest for delete VM operation")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model ExecuteDeleteRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @doc("CorrelationId item")
+  correlationid?: string;
+
+  @doc("Forced delete resource item")
+  forceDeletion?: boolean;
+}
+
 // ----------- GetOperationStatus ---------
 @doc("This is the request to get operation status using operationids")
 model GetOperationStatusRequest {
@@ -419,7 +490,7 @@ model GetOperationStatusRequest {
 
 @doc("This is the response from a get operations status request")
 model GetOperationStatusResponse {
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("An array of resource operations based on their operation ids")
   results: Array<ResourceOperation>;
 }
@@ -436,7 +507,7 @@ model CancelOperationsRequest {
 
 @doc("This is the response from a cancel operations request")
 model CancelOperationsResponse {
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
 }
@@ -450,7 +521,7 @@ model GetOperationErrorsRequest {
 
 @doc("This is the response from a get operations errors request")
 model GetOperationErrorsResponse {
-  @extension("x-ms-identifiers", #["operationId"])
+  @identifiers(#["operationId"])
   @doc("An array of operationids and their corresponding errors if any")
   results: Array<OperationErrorsResult>;
 }

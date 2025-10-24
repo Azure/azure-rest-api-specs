@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "name": "{virtualNetworkName}",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{virtualNetworkName}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+        "properties": {
+          "allowedSubnets": [
+            {
+              "allowPublicIp": "Allow",
+              "labSubnetName": "{virtualNetworkName}Subnet",
+              "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet"
+            }
+          ],
+          "createdDate": "2018-10-01T13:01:44.6005134-07:00",
+          "externalProviderResourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
+          "provisioningState": "Succeeded",
+          "subnetOverrides": [
+            {
+              "labSubnetName": "{virtualNetworkName}Subnet",
+              "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet",
+              "sharedPublicIpAddressConfiguration": {
+                "allowedPorts": [
+                  {
+                    "backendPort": 3389,
+                    "transportProtocol": "Tcp"
+                  },
+                  {
+                    "backendPort": 22,
+                    "transportProtocol": "Tcp"
+                  }
+                ]
+              },
+              "useInVmCreationPermission": "Allow",
+              "usePublicIpAddressPermission": "Allow"
+            }
+          ],
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworks_Get",
+  "title": "VirtualNetworks_Get"
+}

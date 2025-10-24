@@ -11,19 +11,22 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-assets.json"
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-ai-resources-autogen"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-resources-autogen"
+    namespace: "azure.ai.resources.autogen"
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    generateMetadata: true
-    generateTest: true
-    azureSdkForJs: true
-    package-dir: "ai-resources-autogen"
-    packageDetails:
-      name: "@azure/ai-resources-autogen"
+    generate-metadata: true
+    is-modular-library: false
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-resources-autogen-rest"
+    package-details:
+      name: "@azure-rest/ai-resources-autogen"
     flavor: azure
+  "@azure-tools/typespec-csharp":
+    namespace: "azure.ai.resources.autogen"
+    flavor: azure
+    clear-output-folder": true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

@@ -5,19 +5,24 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 namespace Microsoft.HybridConnectivity;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ServiceConfigurationResourcePatch.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResourcePatch.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(EndpointAccessResource.relay);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EndpointAccessResource.relay
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IngressGatewayResource.relay);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IngressGatewayResource.ingress);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.relay
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.ingress
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IngressProfileProperties.aadProfile);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressProfileProperties.aadProfile
+);
 
 @@clientName(EndpointResources.createOrUpdate::parameters.resource,
   "EndpointResource"
@@ -34,8 +39,9 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(ServiceConfigurationResources.createOrupdate::parameters.resource,
   "ServiceConfigurationResource"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ServiceConfigurationResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResource.properties
+);
 
 @@clientName(EndpointResource, "HybridConnectivityEndpoint", "csharp");
 @@clientName(ServiceConfigurationResource,
@@ -84,6 +90,73 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(EndpointResources, "Endpoints", "javascript");
 
-@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
+@@clientName(Microsoft.HybridConnectivity,
+  "HybridConnectivityMgmtClient",
+  "python"
+);
 @@alternateType(AADProfileProperties.serverId, uuid, "csharp");
 @@alternateType(AADProfileProperties.tenantId, uuid, "csharp");
+@@clientName(InventoryResource, "PublicCloudInventory", "csharp");
+@@clientName(SolutionConfiguration,
+  "PublicCloudConnectorSolutionConfiguration",
+  "csharp"
+);
+@@clientName(SolutionTypeResource,
+  "PublicCloudConnectorSolutionType",
+  "csharp"
+);
+@@clientName(HostType, "PublicCloudHostType", "csharp");
+@@alternateType(GenerateAwsTemplateRequest.connectorId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(HostType.AWS, "Aws", "csharp");
+@@clientName(InventoryProperties, "PublicCloudInventoryProperties", "csharp");
+@@alternateType(InventoryProperties.azureResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(SolutionConfigurationProperties,
+  "PublicCloudConnectorSolutionConfigurationProperties",
+  "csharp"
+);
+@@clientName(SolutionConfigurationProperties.lastSyncTime,
+  "LastSyncedOn",
+  "csharp"
+);
+@@clientName(SolutionConfigurationStatus,
+  "PublicCloudConnectorSolutionConfigurationStatus",
+  "csharp"
+);
+@@clientName(SolutionSettings,
+  "PublicCloudConnectorSolutionSettings",
+  "csharp"
+);
+@@clientName(SolutionTypeSettings,
+  "PublicCloudConnectorSolutionTypeSettings",
+  "csharp"
+);
+@@clientName(SolutionTypeProperties,
+  "PublicCloudConnectorSolutionTypeProperties",
+  "csharp"
+);
+@@clientName(SolutionTypeSettingsProperties,
+  "PublicCloudConnectorSolutionTypeSettingsProperties",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.Foundations.OperationStatusResult,
+  "HybridConnectivityOperationStatus",
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.Foundations.OperationStatusResult.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "PublicCloudResourceProvisioningState",
+  "csharp"
+);
+@@clientName(GenerateAwsTemplateResponse,
+  "GenerateAwsTemplateResult",
+  "csharp"
+);

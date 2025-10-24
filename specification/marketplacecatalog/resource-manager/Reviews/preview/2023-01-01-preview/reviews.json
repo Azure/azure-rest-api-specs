@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Rating And Reviews API",
+    "version": "2023-01-01-preview",
+    "description": "Microsoft Marketplace Rating And Reviews API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "RatingAndReviewsOperations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/checkUserHasReview": {
+      "post": {
+        "operationId": "RatingAndReviews_CheckUserHasReview",
+        "tags": [
+          "RatingAndReviewsOperations"
+        ],
+        "description": "Check user has review.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "uniqueProductId",
+            "in": "path",
+            "description": "Unique Product Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserHasReview"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RatingAndReviews_CheckUserHasReview": {
+            "$ref": "./examples/RatingAndReviews_CheckUserHasReview.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UserHasReview": {
+      "type": "object",
+      "description": "Response to check user has already submitted a review for the product.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserHasReviewProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UserHasReviewProperties": {
+      "type": "object",
+      "description": "Response of the check user has review operation.",
+      "properties": {
+        "hasReview": {
+          "type": "boolean",
+          "description": "Indicates whether user has already submitted a review."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "The date and time when the review was last updated."
+        }
+      },
+      "required": [
+        "hasReview",
+        "updatedAt"
+      ]
+    }
+  },
+  "parameters": {}
+}

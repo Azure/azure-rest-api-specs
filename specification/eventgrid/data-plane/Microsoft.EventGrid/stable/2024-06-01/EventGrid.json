@@ -569,14 +569,15 @@
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "succeededLockTokens": {
           "type": "array",
           "description": "Array of lock tokens for the successfully acknowledged cloud events.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -605,8 +606,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -633,7 +633,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -767,7 +767,7 @@
           "items": {
             "$ref": "#/definitions/ReceiveDetails"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -784,14 +784,15 @@
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "succeededLockTokens": {
           "type": "array",
           "description": "Array of lock tokens for the successfully rejected cloud events.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -809,14 +810,15 @@
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "succeededLockTokens": {
           "type": "array",
           "description": "Array of lock tokens for the successfully released cloud events.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -834,14 +836,15 @@
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "succeededLockTokens": {
           "type": "array",
           "description": "Array of lock tokens for the successfully renewed locks.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [

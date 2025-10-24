@@ -16,19 +16,14 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/verifiedid.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
-    azure-sdk-for-js: true
-    is-modular-library: true
-    generate-metadata: true
-    hierarchy-client: false
     experimental-extensible-enums: true
-    enable-operation-group: true
-    package-dir: "arm-verifiedid"
-    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-verifiedid"
+    flavor: azure
     package-details:
       name: "@azure/arm-verifiedid"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-verifiedid"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-verifiedid"
+    namespace: "azure.mgmt.verifiedid"
     flavor: "azure"
     generate-test: true
     generate-sample: true

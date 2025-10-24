@@ -15,7 +15,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 
@@ -38,7 +37,6 @@ model StandbyVirtualMachinePoolResourceProperties {
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
   @doc("Specifies the desired state of virtual machines in the pool.")
-  @extension("x-ms-identifiers", #["vmState"])
   virtualMachineState: VirtualMachineState;
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")

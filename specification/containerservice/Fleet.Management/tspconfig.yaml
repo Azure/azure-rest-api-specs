@@ -19,8 +19,32 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/fleet/{version-status}/{version}/fleets.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/containerservice"
+    package-dir: "azure-mgmt-containerservicefleet"
+    namespace: "azure.mgmt.containerservicefleet"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-containerservicefleet"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservicefleet"
     namespace: "com.azure.resourcemanager.containerservicefleet"
     service-name: "Container Service Fleet"
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/containerservicefleet"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerservicefleet"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerservicefleet/v3"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/containerservice"
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservicefleet"
+    package-details:
+      name: "@azure/arm-containerservicefleet"

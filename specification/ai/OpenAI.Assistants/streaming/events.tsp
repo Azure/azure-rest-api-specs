@@ -24,13 +24,12 @@ namespace Azure.AI.OpenAI.Assistants;
   """)
 union AssistantStreamEvent {
   string,
-
-    | ThreadStreamEvent
-    | RunStreamEvent
-    | RunStepStreamEvent
-    | MessageStreamEvent
-    | ErrorEvent
-    | DoneEvent,
+  ThreadStreamEvent,
+  RunStreamEvent,
+  RunStepStreamEvent,
+  MessageStreamEvent,
+  ErrorEvent,
+  DoneEvent,
 }
 
 /** Thread operation related streaming events */

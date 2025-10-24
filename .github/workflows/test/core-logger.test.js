@@ -12,6 +12,15 @@ describe("CoreLogger", () => {
     expect(core.debug).toBeCalledWith("test debug");
   });
 
+  it("error", async () => {
+    const core = createMockCore();
+    const logger = new CoreLogger(core);
+
+    logger.error("test error");
+
+    expect(core.error).toBeCalledWith("test error");
+  });
+
   it("info", async () => {
     const core = createMockCore();
     const logger = new CoreLogger(core);
@@ -30,5 +39,14 @@ describe("CoreLogger", () => {
     expect(logger.isDebug()).toBe(true);
 
     expect(core.isDebug).toBeCalled();
+  });
+
+  it("warning", async () => {
+    const core = createMockCore();
+    const logger = new CoreLogger(core);
+
+    logger.warning("test warning");
+
+    expect(core.warning).toBeCalledWith("test warning");
   });
 });
