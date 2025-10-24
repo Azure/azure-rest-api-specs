@@ -7,6 +7,10 @@ import { basename, dirname, resolve } from "path";
  * @param {string} path Absolute or relative path
  * @param {string} segment File or folder
  * @returns {boolean} True if resolved path contains segment
+ *
+ * @example
+ * includesSegment("stable/2025-01-01/examples/foo.json", "examples")
+ * // -> true
  */
 export function includesSegment(path, segment) {
   return untilLastSegment(path, segment) !== "";
@@ -16,6 +20,10 @@ export function includesSegment(path, segment) {
  * @param {string} path Absolute or relative path
  * @param {string} segment File or folder
  * @returns {string} Portion of resolved path up to (but excluding) the last occurrence of segment
+ *
+ * @example
+ * untilLastSegment("stable/2025-01-01/examples/foo.json", "examples")
+ * // -> "{cwd}/stable/2025-01-01"
  */
 export function untilLastSegment(path, segment) {
   let current = resolve(path);
