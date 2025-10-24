@@ -312,7 +312,7 @@ model AtlasEntity {
   homeId?: string;
 
   @doc("The collection ID of the entity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   collectionId?: string;
 
   @doc("Whether it is a shell entity")
@@ -583,7 +583,7 @@ model BulkImportResult {
 @doc("Business metadata to send to the service")
 model BusinessMetadataOptions {
   @doc("InputStream of file")
-  file: bytes;
+  file: HttpPart<bytes>;
 }
 
 @doc("ImportInfo")
@@ -1122,7 +1122,7 @@ model SearchResultValue {
   description?: string;
 
   @doc("The endorsement of the asset.")
-  endorsement?: string;
+  endorsement?: string[];
 
   @doc("The owner of the record.")
   owner?: string;
@@ -1282,7 +1282,7 @@ model SuggestResultValue {
   description?: string;
 
   @doc("The endorsement of the asset.")
-  endorsement?: string;
+  endorsement?: string[];
 
   @doc("The owner of the record.")
   owner?: string;
@@ -1989,6 +1989,7 @@ alias BodyParameter<
   TName extends valueof string = "body",
   TDoc extends valueof string = "Body parameter."
 > = {
+  #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
   @doc(TDoc)
   @friendlyName(TName)
   @bodyRoot

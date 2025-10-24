@@ -203,6 +203,9 @@
             "description": "The name of the policy assignment to get."
           },
           {
+            "$ref": "#/parameters/PolicyAssignmentExpandParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -319,6 +322,9 @@
             "$ref": "#/parameters/PolicyAssignmentsFilterParameter"
           },
           {
+            "$ref": "#/parameters/PolicyAssignmentExpandParameter"
+          },
+          {
             "$ref": "#/parameters/TopParameter"
           },
           {
@@ -407,6 +413,9 @@
             "$ref": "#/parameters/PolicyAssignmentsFilterParameter"
           },
           {
+            "$ref": "#/parameters/PolicyAssignmentExpandParameter"
+          },
+          {
             "$ref": "#/parameters/TopParameter"
           },
           {
@@ -454,6 +463,9 @@
             "$ref": "#/parameters/PolicyAssignmentsFilterParameter"
           },
           {
+            "$ref": "#/parameters/PolicyAssignmentExpandParameter"
+          },
+          {
             "$ref": "#/parameters/TopParameter"
           },
           {
@@ -495,6 +507,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/PolicyAssignmentsFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyAssignmentExpandParameter"
           },
           {
             "$ref": "#/parameters/TopParameter"
@@ -647,6 +662,9 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "$ref": "#/parameters/PolicyAssignmentExpandParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -741,6 +759,16 @@
         "definitionVersion": {
           "type": "string",
           "description": "The version of the policy definition to use."
+        },
+        "latestDefinitionVersion": {
+          "type": "string",
+          "description": "The latest version of the policy definition available. This is only present if requested via the $expand query parameter.",
+          "readOnly": true
+        },
+        "effectiveDefinitionVersion": {
+          "type": "string",
+          "description": "The effective version of the policy definition in use. This is only present if requested via the $expand query parameter.",
+          "readOnly": true
         },
         "scope": {
           "type": "string",
@@ -1032,6 +1060,14 @@
       "type": "string",
       "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.",
       "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyAssignmentExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
       "x-ms-parameter-location": "method"
     },
     "TopParameter": {

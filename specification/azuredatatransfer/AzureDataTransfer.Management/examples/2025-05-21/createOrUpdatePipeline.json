@@ -1,0 +1,32 @@
+{
+  "operationId": "Pipelines_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "pipeline": {
+      "location": "East US",
+      "properties": {
+        "remoteCloud": "testdc"
+      }
+    },
+    "pipelineName": "testPipeline",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Creates or updates the pipeline resource",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/pipelines",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline",
+        "location": "East US"
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/pipelines",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline",
+        "location": "East US"
+      }
+    }
+  }
+}

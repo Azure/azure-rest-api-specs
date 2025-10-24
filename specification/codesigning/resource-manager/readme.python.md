@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-trustedsigning
 namespace: azure.mgmt.trustedsigning
-package-version: 1.0.0b1
+package-version: 1.0.0b2
 clear-output-folder: true
 ```
 

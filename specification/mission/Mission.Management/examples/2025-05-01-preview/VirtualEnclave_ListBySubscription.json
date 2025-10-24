@@ -1,0 +1,131 @@
+{
+  "title": "VirtualEnclave_ListBySubscription",
+  "operationId": "VirtualEnclave_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "1a2e532b-9900-414c-8600-cfc6126628d7",
+              "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+              "userAssignedIdentities": {
+                "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+                  "principalId": "f4aa4954-a564-4933-a7e1-502019d807c2",
+                  "clientId": "b82bf757-ee7f-4632-9df1-5e52a720fdd2"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "enclaveVirtualNetwork": {
+                "networkSize": "small",
+                "customCidrRange": "10.0.0.0/24",
+                "subnetConfigurations": [
+                  {
+                    "subnetName": "test",
+                    "subnetResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.KeyVault/vaults/TestMyKeyVault1",
+                    "networkPrefixSize": 26,
+                    "addressPrefix": "10.0.0.0/26",
+                    "networkSecurityGroupResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.KeyVault/vaults/TestMyKeyVault1",
+                    "subnetDelegation": null
+                  }
+                ],
+                "allowSubnetCommunication": true
+              },
+              "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
+              "enclaveDefaultSettings": {
+                "keyVaultResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.KeyVault/vaults/TestMyKeyVault1",
+                "storageAccountResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Storage/storageAccounts/TestMyStorageAccount",
+                "logAnalyticsResourceIdCollection": [
+                  "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.OperationalInsights/workspaces/TestMyLogA1",
+                  "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.OperationalInsights/workspaces/TestMyLogA2"
+                ],
+                "diagnosticDestination": "Both"
+              },
+              "resourceCollection": [
+                "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg"
+              ],
+              "maintenanceModeConfiguration": {
+                "mode": "Off",
+                "principals": [
+                  {
+                    "id": "355a6bb0-abc0-4cba-000d-12a345b678c9",
+                    "type": "User"
+                  }
+                ],
+                "justification": "Off"
+              },
+              "bastionEnabled": true,
+              "enclaveRoleAssignments": [
+                {
+                  "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+                  "principals": [
+                    {
+                      "id": "355a6bb0-abc0-4cba-000d-12a345b678c9",
+                      "type": "User"
+                    },
+                    {
+                      "id": "355a6bb0-abc0-4cba-000d-12a345b678c0",
+                      "type": "User"
+                    }
+                  ]
+                },
+                {
+                  "roleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+                  "principals": [
+                    {
+                      "id": "355a6bb0-abc0-4cba-000d-12a345b678c9",
+                      "type": "User"
+                    }
+                  ]
+                }
+              ],
+              "workloadRoleAssignments": [
+                {
+                  "roleDefinitionId": "d73bb868-a0df-4d4d-bd69-98a00b01fccb",
+                  "principals": [
+                    {
+                      "id": "01234567-89ab-ef01-2345-0123456789ab",
+                      "type": "Group"
+                    }
+                  ]
+                },
+                {
+                  "roleDefinitionId": "fb879df8-f326-4884-b1cf-06f3ad86be52",
+                  "principals": [
+                    {
+                      "id": "01234567-89ab-ef01-2345-0123456789ab",
+                      "type": "Group"
+                    }
+                  ]
+                }
+              ]
+            },
+            "tags": {
+              "Tag1": "Value1"
+            },
+            "location": "westcentralus",
+            "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/virtualenclaves/TestMyEnclave",
+            "name": "TestMyEnclave",
+            "type": "microsoft.mission/virtualenclaves",
+            "systemData": {
+              "createdBy": "myAlias",
+              "createdByType": "User",
+              "createdAt": "2023-03-17T20:43:17.760Z",
+              "lastModifiedBy": "myAlias",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-03-17T20:43:17.760Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

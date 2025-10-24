@@ -1,0 +1,204 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus",
+    "api-version": "2025-02-01-preview",
+    "attributeBasedVMSizeRecommenderInput": {
+      "regularPriorityProfile": {
+        "targetCapacity": 100,
+        "capacityUnitType": "VMInstanceCount"
+      },
+      "spotPriorityProfile": {
+        "targetCapacity": 1,
+        "capacityUnitType": "VMInstanceCount",
+        "maxPricePerVM": 0.2
+      },
+      "recommendationProperties": {
+        "restrictionsFilter": "QuotaAndOfferRestrictions"
+      },
+      "resourceProperties": {
+        "vmAttributes": {
+          "vCpuCount": {
+            "Min": 0,
+            "Max": 32
+          },
+          "memoryInGiB": {
+            "Min": 0,
+            "Max": 160
+          },
+          "vmCategories": [
+            "General Purpose"
+          ],
+          "architectureTypes": [
+            "x64",
+            "Arm64"
+          ],
+          "osTypes": [
+            "Linux"
+          ],
+          "cpuManufacturers": [
+            "Intel",
+            "AMD"
+          ],
+          "localStorageSupport": "included",
+          "ultraSSDSupport": "included",
+          "localStorageDiskTypes": [
+            "SSD",
+            "HDD"
+          ],
+          "localStorageInGiB": {
+            "Min": 0,
+            "Max": 100
+          },
+          "dataDiskCount": {
+            "Min": 0,
+            "Max": 4
+          },
+          "hibernationSupport": "included",
+          "hyperVGenerations": [
+            "Gen1",
+            "Gen2"
+          ],
+          "networkInterfaceCount": {
+            "Min": 0,
+            "Max": 40
+          },
+          "networkBandwidthInMbps": {
+            "Min": 0,
+            "Max": 10000
+          },
+          "confidentialVMSupport": "included",
+          "burstableSupport": "included",
+          "acceleratorSupport": "included",
+          "acceleratedNetworkingSupport": "included",
+          "rdmaSupport": "included",
+          "rdmaNetworkInterfaceCount": {
+            "Min": 0,
+            "Max": 10
+          },
+          "allowedVMSizes": [
+            "Standard_D2lds_v5",
+            "Standard_D2as_v4"
+          ],
+          "excludeVMSizes": []
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "recommendedVMSizes": {
+          "regularVMSizes": [
+            {
+              "name": "Standard_D2lds_v5",
+              "size": "D2lds_v5",
+              "family": "D",
+              "attributes": {
+                "vCpu": 2,
+                "memoryInGiB": 4,
+                "cpuArchitecture": "x64",
+                "cpuManufacturer": [
+                  "Intel"
+                ],
+                "networkBandwidthInMbps": 2000,
+                "localStorageSupport": true,
+                "localStorageType": "SSD",
+                "localStorageInGiB": 75,
+                "dataDiskCount": 4,
+                "networkInterfaceCount": 2
+              },
+              "restrictions": {
+                "offerRestrictions": null,
+                "quotaRestrictions": [
+                  {
+                    "type": "VMFamilyVCpu"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Standard_D2as_v4",
+              "size": "D2as_v4",
+              "family": "D",
+              "attributes": {
+                "vCpu": 2,
+                "memoryInGiB": 8,
+                "cpuArchitecture": "x64",
+                "cpuManufacturer": [
+                  "AMD"
+                ],
+                "networkBandwidthInMbps": 2000,
+                "localStorageSupport": true,
+                "localStorageType": "SSD",
+                "localStorageInGiB": 16,
+                "dataDiskCount": 4,
+                "networkInterfaceCount": 2
+              },
+              "restrictions": {
+                "offerRestrictions": null,
+                "quotaRestrictions": [
+                  {
+                    "type": "VMFamilyVCpu"
+                  }
+                ]
+              }
+            }
+          ],
+          "spotVMSizes": [
+            {
+              "name": "Standard_D2lds_v5",
+              "size": "D2lds_v5",
+              "family": "D",
+              "attributes": {
+                "vCpu": 2,
+                "memoryInGiB": 4,
+                "cpuArchitecture": "x64",
+                "cpuManufacturer": [
+                  "Intel"
+                ],
+                "networkBandwidthInMbps": 2000,
+                "localStorageSupport": true,
+                "localStorageType": "SSD",
+                "localStorageInGiB": 75,
+                "dataDiskCount": 4,
+                "networkInterfaceCount": 2
+              },
+              "restrictions": {
+                "offerRestrictions": null,
+                "quotaRestrictions": null
+              }
+            },
+            {
+              "name": "Standard_D2as_v4",
+              "size": "D2as_v4",
+              "family": "D",
+              "attributes": {
+                "vCpu": 2,
+                "memoryInGiB": 8,
+                "cpuArchitecture": "x64",
+                "cpuManufacturer": [
+                  "AMD"
+                ],
+                "networkBandwidthInMbps": 2000,
+                "localStorageSupport": true,
+                "localStorageType": "SSD",
+                "localStorageInGiB": 16,
+                "dataDiskCount": 4,
+                "networkInterfaceCount": 2
+              },
+              "restrictions": {
+                "offerRestrictions": null,
+                "quotaRestrictions": null
+              }
+            }
+          ]
+        }
+      },
+      "headers": {
+        "x-ms-request-id": "57b891ab-1fb7-4f5a-b002-71eb6854961f",
+        "location": "https://management.azure.com/subscriptions/be23ca13-8eb4-4d0e-be10-b00451817956/providers/Microsoft.Compute/locations/eastus/vmSizeRecommendations/vmAttributeBased/generate?api-version=2025-02-01-preview"
+      }
+    }
+  }
+}

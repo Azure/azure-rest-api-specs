@@ -10,8 +10,13 @@ namespace LiftrBase;
 @doc("Supported versions for LiftrBase resource model")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v1_preview: "2023-06-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+  v2024_08_27_preview: "2024-08-27-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+  v2024_08_27: "2024-08-27",
 }
 
 @doc("Marketplace subscription status of a resource.")
@@ -29,6 +34,19 @@ union MarketplaceSubscriptionStatus {
 
   @doc("Customer has cancelled the subscription")
   Unsubscribed: "Unsubscribed",
+}
+
+@added(Versions.v2024_08_27_preview)
+@added(Versions.v2024_08_27)
+@doc("Subscription renewal mode")
+union RenewalMode {
+  string,
+
+  @doc("Automatic renewal")
+  Auto: "Auto",
+
+  @doc("Manual renewal")
+  Manual: "Manual",
 }
 
 @doc("A string that represents a URI.")
@@ -65,6 +83,17 @@ model OfferDetails {
 
   @doc("Plan Display Name for the marketplace offer")
   termId?: string;
+
+  @added(Versions.v2024_08_27_preview)
+  @added(Versions.v2024_08_27)
+  @doc("Subscription renewal mode")
+  renewalMode?: RenewalMode;
+
+  @added(Versions.v2024_08_27_preview)
+  @added(Versions.v2024_08_27)
+  @doc("Current subscription end date and time")
+  @visibility(Lifecycle.Read)
+  endDate?: utcDateTime;
 }
 
 @doc("Reusable representation of an email address.")
@@ -92,14 +121,14 @@ model UserDetails {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   marketplace: MarketplaceDetails;
 
   @doc("Details of the user.")
   user: UserDetails;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -117,7 +146,7 @@ model SingleSignOnProperties {
   @doc("List of AAD domains fetched from Microsoft Graph for user.")
   aadDomains?: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource")
   provisioningState?: ResourceProvisioningState;
 }

@@ -41,9 +41,9 @@ modelerfour:
 ### Suppression
 
 
-### Tag: package-2024-05
+### Tag: package-preview-2024-05
 
-These settings apply only when `--tag=package-2024-05` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
@@ -143,7 +143,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-python

@@ -1,8 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "./models.tsp";
 import "../shared/models.tsp";
+import "../shared/parameters.tsp";
 
 using Azure.Core;
+using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -16,6 +19,14 @@ interface DevCenter {
   @doc("Gets a project.")
   getProject is StandardResourceOperations.ResourceRead<Project>;
 
+  @summary("Gets a list of Dev Box creations that are pending approval.")
+  @doc("Gets a list of Dev Box creations that are pending approval.")
+  @added(APIVersions.v2025_04_01_preview)
+  listApprovals is StandardResourceOperations.ResourceList<
+    Approval,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "no @key for ProjectAbility model"
   //There is no @key for ProjectAbility model
   @doc("Gets the signed-in user's permitted abilities in a project.")
@@ -24,22 +35,8 @@ interface DevCenter {
   @added(APIVersions.v2024_05_01_preview)
   getProjectAbilities is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("""
-          The AAD object id of the user. If value is 'me', the identity is taken from the
-          authentication context.
-        """)
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
     },
     ProjectAbilities
   >;

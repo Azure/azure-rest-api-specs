@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "resourceUri": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz",
+    "recommendationId": "c5532a76-8605-4328-ad27-f37ae87c086c",
+    "trackedProperties": {
+      "properties": {
+        "trackedProperties": {
+          "state": "Postponed",
+          "postponedTime": "2023-10-01T00:00:00Z"
+        }
+      }
+    },
+    "api-version": "2024-11-18-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz/providers/Microsoft.Advisor/recommendations/c5532a76-8605-4328-ad27-f37ae87c086c",
+        "name": "c5532a76-8605-4328-ad27-f37ae87c086c",
+        "type": "Microsoft.Advisor/recommendations",
+        "properties": {
+          "category": "Security",
+          "impact": "Medium",
+          "impactedField": "Microsoft.Compute/virtualMachines",
+          "impactedValue": "armavset",
+          "lastUpdated": "2017-02-24T22:24:43.3216408Z",
+          "risk": "Warning",
+          "shortDescription": {
+            "problem": "Monitoring agent should be installed on your machines",
+            "solution": "Monitoring agent should be installed on your machines"
+          },
+          "remediation": {
+            "additionalProperties": {
+              "httpMethod": "POST",
+              "uri": "uri",
+              "details": "link to document"
+            }
+          },
+          "resourceMetadata": {
+            "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz",
+            "source": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz/providers/Microsoft.Security/assessments/7d5f6ba5-307e-452e-b3c4-7d636f722055",
+            "action": {
+              "additionalProperties": {
+                "actionType": "Document",
+                "link": "https://link3",
+                "caption": "Enable Soft Delete to protect blob data",
+                "description": "Enable Soft Delete to protect blob data"
+              },
+              "metadata": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Compute/virtualMachines/xyz"
+              }
+            },
+            "singular": "Virtual machine",
+            "plural": "Virtual machines"
+          },
+          "actions": [
+            {
+              "additionalProperties": {
+                "actionType": "Document",
+                "link": "https://link1",
+                "caption": "Enable Soft Delete to protect blob data",
+                "description": "Enable Soft Delete to protect blob data"
+              },
+              "metadata": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444"
+              }
+            }
+          ],
+          "description": "After enabling Soft Delete, deleted data transitions to a soft deleted state instead of being permanently deleted. When data is overwritten, a soft deleted snapshot is generated to save the state of the overwritten data. You can configure the amount of time soft deleted data is recoverable before it permanently expires.",
+          "label": "Enable Soft Delete",
+          "learnMoreLink": "https://link2",
+          "potentialBenefits": "Save and recover your data when blobs or blob snapshots are accidentally overwritten or deleted",
+          "tracked": true,
+          "trackedProperties": {
+            "state": "Postponed",
+            "postponedTime": "2023-10-01T00:00:00Z",
+            "priority": "High"
+          },
+          "resourceWorkload": {
+            "id": "0560dbdb-f207-4690-b4ba-1fc0c3a0f082",
+            "name": "Critical VM Workload"
+          },
+          "review": {
+            "id": "/subscriptions/a5481ee1-95df-47d0-85d4-dd3f0dfa19bc/providers/Microsoft.Advisor/assessments/MCWAR1",
+            "name": "Monthly WAF Review 09/23"
+          },
+          "sourceSystem": "CxObserve",
+          "notes": "This is a note"
+        }
+      }
+    }
+  }
+}

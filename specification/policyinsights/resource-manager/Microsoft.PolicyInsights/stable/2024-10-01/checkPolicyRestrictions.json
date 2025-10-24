@@ -1,0 +1,474 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CheckPolicyRestrictionsClient",
+    "version": "2024-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions": {
+      "post": {
+        "operationId": "PolicyRestrictions_CheckAtSubscriptionScope",
+        "description": "Checks what restrictions Azure Policy will place on a resource within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckRestrictionsRequest"
+            },
+            "description": "The check policy restrictions parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The restrictions that will be placed on the resource by Azure Policy.",
+            "schema": {
+              "$ref": "#/definitions/CheckRestrictionsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check policy restrictions at subscription scope": {
+            "$ref": "./examples/PolicyRestrictions_CheckAtSubscriptionScope.json"
+          },
+          "Check policy restrictions at subscription scope including audit effect": {
+            "$ref": "./examples/PolicyRestrictions_CheckAtSubscriptionScopeIncludeAuditEffect.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions": {
+      "post": {
+        "operationId": "PolicyRestrictions_CheckAtResourceGroupScope",
+        "description": "Checks what restrictions Azure Policy will place on a resource within a resource group. Use this when the resource group the resource will be created in is already known.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckRestrictionsRequest"
+            },
+            "description": "The check policy restrictions parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The restrictions that will be placed on the resource by Azure Policy.",
+            "schema": {
+              "$ref": "#/definitions/CheckRestrictionsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check policy restrictions at resource group scope": {
+            "$ref": "./examples/PolicyRestrictions_CheckAtResourceGroupScope.json"
+          },
+          "Check policy restrictions at resource group scope including audit effect": {
+            "$ref": "./examples/PolicyRestrictions_CheckAtResourceGroupScopeIncludeAuditEffect.json"
+          }
+        }
+      }
+    },
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions": {
+      "post": {
+        "operationId": "PolicyRestrictions_CheckAtManagementGroupScope",
+        "description": "Checks what restrictions Azure Policy will place on resources within a management group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckManagementGroupRestrictionsRequest"
+            },
+            "description": "The check policy restrictions parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The restrictions that will be placed on the resource by Azure Policy.",
+            "schema": {
+              "$ref": "#/definitions/CheckRestrictionsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2024-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check policy restrictions at management group scope": {
+            "$ref": "./examples/PolicyRestrictions_CheckAtManagementGroupScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CheckRestrictionsRequest": {
+      "description": "The check policy restrictions parameters describing the resource that is being evaluated.",
+      "properties": {
+        "resourceDetails": {
+          "description": "The information about the resource that will be evaluated.",
+          "$ref": "#/definitions/CheckRestrictionsResourceDetails"
+        },
+        "pendingFields": {
+          "description": "The list of fields and values that should be evaluated for potential restrictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PendingField"
+          }
+        },
+        "includeAuditEffect": {
+          "description": "Whether to include policies with the 'audit' effect in the results. Defaults to false.",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "resourceDetails"
+      ]
+    },
+    "CheckManagementGroupRestrictionsRequest": {
+      "type": "object",
+      "description": "The check policy restrictions parameters describing the resource that is being evaluated.",
+      "properties": {
+        "resourceDetails": {
+          "description": "The information about the resource that will be evaluated.",
+          "$ref": "#/definitions/CheckRestrictionsResourceDetails"
+        },
+        "pendingFields": {
+          "description": "The list of fields and values that should be evaluated for potential restrictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PendingField"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CheckRestrictionsResourceDetails": {
+      "description": "The information about the resource that will be evaluated.",
+      "properties": {
+        "resourceContent": {
+          "description": "The resource content. This should include whatever properties are already known and can be a partial set of all resource properties.",
+          "type": "object"
+        },
+        "apiVersion": {
+          "description": "The api-version of the resource content.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "The scope where the resource is being created. For example, if the resource is a child resource this would be the parent resource's resource ID.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceContent"
+      ]
+    },
+    "PendingField": {
+      "description": "A field that should be evaluated against Azure Policy to determine restrictions.",
+      "properties": {
+        "field": {
+          "description": "The name of the field. This can be a top-level property like 'name' or 'type' or an Azure Policy field alias.",
+          "type": "string"
+        },
+        "values": {
+          "description": "The list of potential values for the field that should be evaluated against Azure Policy.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "field"
+      ]
+    },
+    "CheckRestrictionsResult": {
+      "description": "The result of a check policy restrictions evaluation on a resource.",
+      "properties": {
+        "fieldRestrictions": {
+          "description": "The restrictions that will be placed on various fields in the resource by policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldRestrictions"
+          },
+          "readOnly": true
+        },
+        "contentEvaluationResult": {
+          "description": "Evaluation results for the provided partial resource content.",
+          "properties": {
+            "policyEvaluations": {
+              "description": "Policy evaluation results against the given resource content. This will indicate if the partial content that was provided will be denied as-is.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PolicyEvaluationResult"
+              }
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "FieldRestrictions": {
+      "description": "The restrictions that will be placed on a field in the resource by policy.",
+      "properties": {
+        "field": {
+          "description": "The name of the field. This can be a top-level property like 'name' or 'type' or an Azure Policy field alias.",
+          "type": "string",
+          "readOnly": true
+        },
+        "restrictions": {
+          "description": "The restrictions placed on that field by policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldRestriction"
+          }
+        }
+      }
+    },
+    "FieldRestriction": {
+      "description": "The restrictions on a field imposed by a specific policy.",
+      "properties": {
+        "result": {
+          "description": "The type of restriction that is imposed on the field.",
+          "type": "string",
+          "enum": [
+            "Required",
+            "Removed",
+            "Deny",
+            "Audit"
+          ],
+          "x-ms-enum": {
+            "name": "FieldRestrictionResult",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Required",
+                "description": "The field and/or values are required by policy."
+              },
+              {
+                "value": "Removed",
+                "description": "The field will be removed by policy."
+              },
+              {
+                "value": "Deny",
+                "description": "The field and/or values will be denied by policy."
+              },
+              {
+                "value": "Audit",
+                "description": "The field and/or values will be audited by policy."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "defaultValue": {
+          "description": "The value that policy will set for the field if the user does not provide a value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "values": {
+          "description": "The values that policy either requires or denies for the field.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "policy": {
+          "description": "The details of the policy that is causing the field restriction.",
+          "$ref": "#/definitions/PolicyReference",
+          "readOnly": true
+        },
+        "policyEffect": {
+          "description": "The effect of the policy that is causing the field restriction. http://aka.ms/policyeffects",
+          "type": "string",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for the restriction.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyEvaluationResult": {
+      "description": "The result of a non-compliant policy evaluation against the given resource content.",
+      "properties": {
+        "policyInfo": {
+          "description": "The details of the policy that was evaluated.",
+          "$ref": "#/definitions/PolicyReference",
+          "readOnly": true
+        },
+        "evaluationResult": {
+          "description": "The result of the policy evaluation against the resource. This will typically be 'NonCompliant' but may contain other values if errors were encountered.",
+          "type": "string",
+          "readOnly": true
+        },
+        "evaluationDetails": {
+          "description": "The detailed results of the policy expressions and values that were evaluated.",
+          "$ref": "#/definitions/CheckRestrictionEvaluationDetails",
+          "readOnly": true
+        },
+        "effectDetails": {
+          "description": "The details of the effect that was applied to the resource.",
+          "$ref": "#/definitions/PolicyEffectDetails",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyReference": {
+      "description": "Resource identifiers for a policy.",
+      "properties": {
+        "policyDefinitionId": {
+          "description": "The resource identifier of the policy definition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySetDefinitionId": {
+          "description": "The resource identifier of the policy set definition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyDefinitionReferenceId": {
+          "description": "The reference identifier of a specific policy definition within a policy set definition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyAssignmentId": {
+          "description": "The resource identifier of the policy assignment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyEffectDetails": {
+      "type": "object",
+      "description": "The details of the effect that was applied to the resource.",
+      "properties": {
+        "policyEffect": {
+          "description": "The effect that was applied to the resource. http://aka.ms/policyeffects",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CheckRestrictionEvaluationDetails": {
+      "type": "object",
+      "description": "Policy evaluation details.",
+      "properties": {
+        "evaluatedExpressions": {
+          "description": "Details of the evaluated expressions.",
+          "type": "array",
+          "items": {
+            "$ref": "../../stable/2024-10-01/policyStates.json#/definitions/ExpressionEvaluationDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "ifNotExistsDetails": {
+          "description": "Evaluation details of IfNotExists effect.",
+          "type": "object",
+          "$ref": "../../stable/2024-10-01/policyStates.json#/definitions/IfNotExistsEvaluationDetails"
+        },
+        "reason": {
+          "description": "The reason for the evaluation result.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "managementGroupsNamespaceParameter": {
+      "name": "managementGroupsNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Microsoft.Management"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementGroupsNamespaceType",
+        "modelAsString": false
+      },
+      "description": "The namespace for Microsoft Management RP; only \"Microsoft.Management\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Management group ID.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

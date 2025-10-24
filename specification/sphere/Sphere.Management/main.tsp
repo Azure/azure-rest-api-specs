@@ -21,9 +21,7 @@ using TypeSpec.Versioning;
  * Azure Sphere resource management API.
  */
 @armProviderNamespace
-@service({
-  title: "AzureSphereProviderClient",
-})
+@service(#{ title: "AzureSphereProviderClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.AzureSphere;
@@ -35,7 +33,5 @@ enum Versions {
   /**
    * The 2024-04-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_04_01: "2024-04-01",
 }

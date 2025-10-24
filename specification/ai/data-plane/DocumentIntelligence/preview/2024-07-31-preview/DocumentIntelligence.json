@@ -1,0 +1,4950 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Document Intelligence (formerly Form Recognizer)",
+    "version": "2024-07-31-preview",
+    "description": "Extracts content, layout, and structured data from documents.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/documentintelligence",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The Document Intelligence service endpoint.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/documentClassifiers": {
+      "get": {
+        "operationId": "DocumentClassifiers_ListClassifiers",
+        "description": "List all document classifiers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDocumentClassifierDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Document Classifiers": {
+            "$ref": "./examples/GetDocumentClassifiers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/documentClassifiers/{classifierId}": {
+      "get": {
+        "operationId": "DocumentClassifiers_GetClassifier",
+        "description": "Gets detailed document classifier information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "classifierId",
+            "in": "path",
+            "description": "Unique document classifier name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentClassifierDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Document Classifier": {
+            "$ref": "./examples/GetDocumentClassifier.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DocumentClassifiers_DeleteClassifier",
+        "description": "Deletes document classifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "classifierId",
+            "in": "path",
+            "description": "Unique document classifier name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Document Classifier": {
+            "$ref": "./examples/DeleteDocumentClassifier.json"
+          }
+        }
+      }
+    },
+    "/documentClassifiers/{classifierId}:analyze": {
+      "post": {
+        "operationId": "DocumentClassifiers_ClassifyDocumentFromStream",
+        "description": "Classifies document with document classifier.",
+        "consumes": [
+          "application/octet-stream",
+          "application/pdf",
+          "image/jpeg",
+          "image/png",
+          "image/tiff",
+          "image/bmp",
+          "image/heif",
+          "text/html",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DocumentClassifierAnalyzeRequestParams.classifierId"
+          },
+          {
+            "$ref": "#/parameters/DocumentClassifierAnalyzeRequestParams.stringIndexType"
+          },
+          {
+            "$ref": "#/parameters/DocumentClassifierAnalyzeRequestParams.split"
+          },
+          {
+            "$ref": "#/parameters/DocumentClassifierAnalyzeRequestParams.pages"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeFromStreamRequestParams.input"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of AnalyzeResultOperation"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Classify Document from Url": {
+            "$ref": "./examples/ClassifyDocument_Stream.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/documentClassifiers/{classifierId}:copyTo": {
+      "post": {
+        "operationId": "DocumentClassifiers_CopyClassifierTo",
+        "description": "Copies document classifier to the target resource, region, and classifierId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "classifierId",
+            "in": "path",
+            "description": "Unique document classifier name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "name": "copyToRequest",
+            "in": "body",
+            "description": "Copy to request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassifierCopyAuthorization"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of DocumentClassifierCopyToOperationDetails"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy Document Classifier To": {
+            "$ref": "./examples/CopyDocumentClassifierTo.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/documentClassifiers/{classifierId}/analyzeResults/{resultId}": {
+      "get": {
+        "operationId": "DocumentClassifiers_GetClassifyResult",
+        "description": "Gets the result of document classifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "classifierId",
+            "in": "path",
+            "description": "Unique document classifier name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeResultOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Classify Document Result": {
+            "$ref": "./examples/GetClassifyDocumentResult.json"
+          }
+        }
+      }
+    },
+    "/documentClassifiers:authorizeCopy": {
+      "post": {
+        "operationId": "DocumentClassifiers_AuthorizeClassifierCopy",
+        "description": "Generates authorization to copy a document classifier to this location with\nspecified classifierId and optional description.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "authorizeCopyRequest",
+            "in": "body",
+            "description": "Authorize copy request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizeClassifierCopyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClassifierCopyAuthorization"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Authorize Copy of Document Classifier": {
+            "$ref": "./examples/AuthorizeCopyDocumentClassifier.json"
+          }
+        }
+      }
+    },
+    "/documentClassifiers:build": {
+      "post": {
+        "operationId": "DocumentClassifiers_BuildClassifier",
+        "description": "Builds a custom document classifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "buildRequest",
+            "in": "body",
+            "description": "Build request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildDocumentClassifierRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of DocumentClassifierBuildOperationDetails"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Build Document Classifier": {
+            "$ref": "./examples/BuildDocumentClassifier.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/documentModels": {
+      "get": {
+        "operationId": "DocumentModels_ListModels",
+        "description": "List all document models",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDocumentModelDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Document Models": {
+            "$ref": "./examples/GetDocumentModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/documentModels/{modelId}:analyze": {
+      "post": {
+        "operationId": "DocumentModels_AnalyzeDocumentFromStream",
+        "description": "Analyzes document with document model.",
+        "consumes": [
+          "application/octet-stream",
+          "application/pdf",
+          "image/jpeg",
+          "image/png",
+          "image/tiff",
+          "image/bmp",
+          "image/heif",
+          "text/html",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.modelId"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.pages"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.locale"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.stringIndexType"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.features"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.queryFields"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.outputContentFormat"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.output"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeFromStreamRequestParams.input"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of AnalyzeResultOperation"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Document from Url": {
+            "$ref": "./examples/AnalyzeDocument_Stream.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/documentModels/{modelId}:analyzeBatch": {
+      "post": {
+        "operationId": "DocumentModels_AnalyzeBatchDocuments",
+        "description": "Analyzes batch documents with document model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.modelId"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.pages"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.locale"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.stringIndexType"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.features"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.queryFields"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.outputContentFormat"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.output"
+          },
+          {
+            "name": "analyzeBatchRequest",
+            "in": "body",
+            "description": "Analyze batch request parameters.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeBatchDocumentsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of AnalyzeBatchResultOperation"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Batch Documents": {
+            "$ref": "./examples/AnalyzeBatchDocuments.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/documentModels/{modelId}": {
+      "get": {
+        "operationId": "DocumentModels_GetModel",
+        "description": "Gets detailed document model information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Unique document model name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentModelDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Custom Document Model": {
+            "$ref": "./examples/GetDocumentModel_Custom.json"
+          },
+          "Get Prebuilt Document Model": {
+            "$ref": "./examples/GetDocumentModel_Prebuilt.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DocumentModels_DeleteModel",
+        "description": "Deletes document model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Unique document model name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Document Model": {
+            "$ref": "./examples/DeleteDocumentModel.json"
+          }
+        }
+      }
+    },
+    "/documentModels/{modelId}:copyTo": {
+      "post": {
+        "operationId": "DocumentModels_CopyModelTo",
+        "description": "Copies document model to the target resource, region, and modelId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Unique document model name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "name": "copyToRequest",
+            "in": "body",
+            "description": "Copy to request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyAuthorization"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of DocumentModelCopyToOperationDetails"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy Document Model To": {
+            "$ref": "./examples/CopyDocumentModelTo.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/documentModels/{modelId}/analyzeBatchResults/{resultId}": {
+      "get": {
+        "operationId": "DocumentModels_GetAnalyzeBatchResult",
+        "description": "Gets the result of batch document analysis.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Unique document model name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze batch operation result ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeBatchResultOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analyze Batch Documents Result": {
+            "$ref": "./examples/GetAnalyzeBatchDocumentsResult.json"
+          }
+        }
+      }
+    },
+    "/documentModels/{modelId}/analyzeResults/{resultId}": {
+      "get": {
+        "operationId": "DocumentModels_GetAnalyzeResult",
+        "description": "Gets the result of document analysis.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Unique document model name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeResultOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analyze Document Result": {
+            "$ref": "./examples/GetAnalyzeDocumentResult.json"
+          }
+        }
+      }
+    },
+    "/documentModels/{modelId}/analyzeResults/{resultId}/figures/{figureId}": {
+      "get": {
+        "operationId": "DocumentModels_GetAnalyzeResultFigure",
+        "description": "Gets the generated cropped image of specified figure from document analysis.",
+        "produces": [
+          "image/png",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Unique document model name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "figureId",
+            "in": "path",
+            "description": "Figure ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analyze Document Result Figure": {
+            "$ref": "./examples/GetAnalyzeDocumentResultFigure.json"
+          }
+        }
+      }
+    },
+    "/documentModels/{modelId}/analyzeResults/{resultId}/pdf": {
+      "get": {
+        "operationId": "DocumentModels_GetAnalyzeResultPdf",
+        "description": "Gets the generated searchable PDF output from document analysis.",
+        "produces": [
+          "application/pdf",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Unique document model name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analyze Document Result PDF": {
+            "$ref": "./examples/GetAnalyzeDocumentResultFPdf.json"
+          }
+        }
+      }
+    },
+    "/documentModels:authorizeCopy": {
+      "post": {
+        "operationId": "DocumentModels_AuthorizeModelCopy",
+        "description": "Generates authorization to copy a document model to this location with\nspecified modelId and optional description.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "authorizeCopyRequest",
+            "in": "body",
+            "description": "Authorize copy request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizeCopyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CopyAuthorization"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Authorize Copy of Document Model": {
+            "$ref": "./examples/AuthorizeCopyDocumentModel.json"
+          }
+        }
+      }
+    },
+    "/documentModels:build": {
+      "post": {
+        "operationId": "DocumentModels_BuildModel",
+        "description": "Builds a custom document analysis model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "buildRequest",
+            "in": "body",
+            "description": "Build request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildDocumentModelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of DocumentModelBuildOperationDetails"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Build Document Model": {
+            "$ref": "./examples/BuildDocumentModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/documentModels:compose": {
+      "post": {
+        "operationId": "DocumentModels_ComposeModel",
+        "description": "Creates a new document model from document types of existing document models.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "composeRequest",
+            "in": "body",
+            "description": "Compose request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComposeDocumentModelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of DocumentModelComposeOperationDetails"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Compose Document Model": {
+            "$ref": "./examples/ComposeDocumentModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/info": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetResourceInfo",
+        "description": "Return information about the current resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResourceDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Resource Details": {
+            "$ref": "./examples/GetResourceDetails.json"
+          }
+        }
+      }
+    },
+    "/operations": {
+      "get": {
+        "operationId": "MiscellaneousOperations_ListOperations",
+        "description": "Lists all operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedOperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/operations/{operationId}": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetDocumentModelBuildOperation",
+        "description": "Gets operation info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentModelBuildOperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation - Document Model Build": {
+            "$ref": "./examples/GetOperation_DocumentModelBuild.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/documentClassifiers/{classifierId}:analyze?_overload=classifyDocument": {
+      "post": {
+        "operationId": "DocumentClassifiers_ClassifyDocument",
+        "description": "Classifies document with document classifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DocumentClassifierAnalyzeRequestParams.classifierId"
+          },
+          {
+            "$ref": "#/parameters/DocumentClassifierAnalyzeRequestParams.stringIndexType"
+          },
+          {
+            "$ref": "#/parameters/DocumentClassifierAnalyzeRequestParams.split"
+          },
+          {
+            "$ref": "#/parameters/DocumentClassifierAnalyzeRequestParams.pages"
+          },
+          {
+            "name": "classifyRequest",
+            "in": "body",
+            "description": "Classify request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassifyDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of AnalyzeResultOperation"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Classify Document from Url": {
+            "$ref": "./examples/ClassifyDocument_Url.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/documentModels/{modelId}:analyze?_overload=analyzeDocument": {
+      "post": {
+        "operationId": "DocumentModels_AnalyzeDocument",
+        "description": "Analyzes document with document model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.modelId"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.pages"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.locale"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.stringIndexType"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.features"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.queryFields"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.outputContentFormat"
+          },
+          {
+            "$ref": "#/parameters/DocumentModelAnalyzeRequestParams.output"
+          },
+          {
+            "name": "analyzeRequest",
+            "in": "body",
+            "description": "Analyze request parameters.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of AnalyzeResultOperation"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Document from Base64": {
+            "$ref": "./examples/AnalyzeDocument_Base64.json"
+          },
+          "Analyze Document from Url": {
+            "$ref": "./examples/AnalyzeDocument_Url.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/operations/{operationId}?_overload=getDocumentModelComposeOperation": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetDocumentModelComposeOperation",
+        "description": "Gets operation info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentModelComposeOperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation - Document Model Compose": {
+            "$ref": "./examples/GetOperation_DocumentModelCompose.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}?_overload=getDocumentModelCopyToOperation": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetDocumentModelCopyToOperation",
+        "description": "Gets operation info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentModelCopyToOperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation - Document Model Copy To": {
+            "$ref": "./examples/GetOperation_DocumentModelCopyTo.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}?_overload=getDocumentClassifierCopyToOperation": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetDocumentClassifierCopyToOperation",
+        "description": "Gets operation info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentClassifierCopyToOperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation - Document Classifier Copy To": {
+            "$ref": "./examples/GetOperation_DocumentClassifierCopyTo.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}?_overload=getDocumentClassifierBuildOperation": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetDocumentClassifierBuildOperation",
+        "description": "Gets operation info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentClassifierBuildOperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation - Document Classifier Build": {
+            "$ref": "./examples/GetOperation_DocumentClassifierBuild.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}?_overload=getOperation": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetOperation",
+        "description": "Gets operation info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/GetOperation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddressValue": {
+      "type": "object",
+      "description": "Address field value.",
+      "properties": {
+        "houseNumber": {
+          "type": "string",
+          "description": "House or building number."
+        },
+        "poBox": {
+          "type": "string",
+          "description": "Post office box number."
+        },
+        "road": {
+          "type": "string",
+          "description": "Street name."
+        },
+        "city": {
+          "type": "string",
+          "description": "Name of city, town, village, etc."
+        },
+        "state": {
+          "type": "string",
+          "description": "First-level administrative division."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code used for mail sorting."
+        },
+        "countryRegion": {
+          "type": "string",
+          "description": "Country/region."
+        },
+        "streetAddress": {
+          "type": "string",
+          "description": "Street-level address, excluding city, state, countryRegion, and postalCode."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Apartment or office number"
+        },
+        "cityDistrict": {
+          "type": "string",
+          "description": "Districts or boroughs within a city, such as Brooklyn in New York City or City\nof Westminster in London."
+        },
+        "stateDistrict": {
+          "type": "string",
+          "description": "Second-level administrative division used in certain locales."
+        },
+        "suburb": {
+          "type": "string",
+          "description": "Unofficial neighborhood name, like Chinatown."
+        },
+        "house": {
+          "type": "string",
+          "description": "Build name, such as World Trade Center."
+        },
+        "level": {
+          "type": "string",
+          "description": "Floor number, such as 3F."
+        }
+      }
+    },
+    "AnalyzeBatchDocumentsRequest": {
+      "type": "object",
+      "description": "Batch document analysis parameters.",
+      "properties": {
+        "azureBlobSource": {
+          "$ref": "#/definitions/AzureBlobContentSource",
+          "description": "Azure Blob Storage location containing the batch documents.  Either\nazureBlobSource or azureBlobFileListSource must be specified."
+        },
+        "azureBlobFileListSource": {
+          "$ref": "#/definitions/AzureBlobFileListContentSource",
+          "description": "Azure Blob Storage file list specifying the batch documents.  Either\nazureBlobSource or azureBlobFileListSource must be specified."
+        },
+        "resultContainerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Azure Blob Storage container URL where analyze result files will be stored."
+        },
+        "resultPrefix": {
+          "type": "string",
+          "description": "Blob name prefix of result files."
+        },
+        "overwriteExisting": {
+          "type": "boolean",
+          "description": "Overwrite existing analyze result files?",
+          "default": false
+        }
+      },
+      "required": [
+        "resultContainerUrl"
+      ]
+    },
+    "AnalyzeBatchOperationDetail": {
+      "type": "object",
+      "description": "Operation detail for a document in a batch analysis.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Analyze status.  succeeded, failed, or skipped"
+        },
+        "sourceUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the source document."
+        },
+        "resultUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the analyze result JSON."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Encountered error."
+        }
+      },
+      "required": [
+        "status",
+        "sourceUrl"
+      ]
+    },
+    "AnalyzeBatchResult": {
+      "type": "object",
+      "description": "Batch document analysis result.",
+      "properties": {
+        "succeededCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents that completed with status succeeded."
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents that completed with status failed."
+        },
+        "skippedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents that completed with status skipped."
+        },
+        "details": {
+          "type": "array",
+          "description": "Operation detail for each document in the batch.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeBatchOperationDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "succeededCount",
+        "failedCount",
+        "skippedCount",
+        "details"
+      ]
+    },
+    "AnalyzeBatchResultOperation": {
+      "type": "object",
+      "description": "Status and result of the analyze batch operation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status.  notStarted, running, completed, or failed"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the operation was submitted."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the status was last updated."
+        },
+        "percentCompleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Operation progress (0-100).",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Encountered error during batch document analysis."
+        },
+        "result": {
+          "$ref": "#/definitions/AnalyzeBatchResult",
+          "description": "Batch document analysis result."
+        }
+      },
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ]
+    },
+    "AnalyzeDocumentRequest": {
+      "type": "object",
+      "description": "Document analysis parameters.",
+      "properties": {
+        "urlSource": {
+          "type": "string",
+          "format": "uri",
+          "description": "Document URL to analyze.  Either urlSource or base64Source must be specified."
+        },
+        "base64Source": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64 encoding of the document to analyze.  Either urlSource or base64Source\nmust be specified."
+        }
+      }
+    },
+    "AnalyzeResult": {
+      "type": "object",
+      "description": "Document analysis result.",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "API version used to produce this result."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Document model ID used to produce this result.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Method used to compute string offset and length."
+        },
+        "contentFormat": {
+          "$ref": "#/definitions/ContentFormat",
+          "description": "Format of the analyze result top-level content."
+        },
+        "content": {
+          "type": "string",
+          "description": "Concatenate string representation of all textual and visual elements in reading\norder."
+        },
+        "pages": {
+          "type": "array",
+          "description": "Analyzed pages.",
+          "items": {
+            "$ref": "#/definitions/DocumentPage"
+          },
+          "x-ms-identifiers": []
+        },
+        "paragraphs": {
+          "type": "array",
+          "description": "Extracted paragraphs.",
+          "items": {
+            "$ref": "#/definitions/DocumentParagraph"
+          },
+          "x-ms-identifiers": []
+        },
+        "tables": {
+          "type": "array",
+          "description": "Extracted tables.",
+          "items": {
+            "$ref": "#/definitions/DocumentTable"
+          },
+          "x-ms-identifiers": []
+        },
+        "figures": {
+          "type": "array",
+          "description": "Extracted figures.",
+          "items": {
+            "$ref": "#/definitions/DocumentFigure"
+          }
+        },
+        "sections": {
+          "type": "array",
+          "description": "Extracted sections.",
+          "items": {
+            "$ref": "#/definitions/DocumentSection"
+          },
+          "x-ms-identifiers": []
+        },
+        "keyValuePairs": {
+          "type": "array",
+          "description": "Extracted key-value pairs.",
+          "items": {
+            "$ref": "#/definitions/DocumentKeyValuePair"
+          },
+          "x-ms-identifiers": []
+        },
+        "styles": {
+          "type": "array",
+          "description": "Extracted font styles.",
+          "items": {
+            "$ref": "#/definitions/DocumentStyle"
+          },
+          "x-ms-identifiers": []
+        },
+        "languages": {
+          "type": "array",
+          "description": "Detected languages.",
+          "items": {
+            "$ref": "#/definitions/DocumentLanguage"
+          },
+          "x-ms-identifiers": []
+        },
+        "documents": {
+          "type": "array",
+          "description": "Extracted documents.",
+          "items": {
+            "$ref": "#/definitions/Document"
+          },
+          "x-ms-identifiers": []
+        },
+        "warnings": {
+          "type": "array",
+          "description": "List of warnings encountered.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "apiVersion",
+        "modelId",
+        "stringIndexType",
+        "content",
+        "pages"
+      ]
+    },
+    "AnalyzeResultOperation": {
+      "type": "object",
+      "description": "Status and result of the analyze operation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status.  notStarted, running, succeeded, or failed"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the analyze operation was submitted."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the status was last updated."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Encountered error during document analysis."
+        },
+        "analyzeResult": {
+          "$ref": "#/definitions/AnalyzeResult",
+          "description": "Document analysis result."
+        }
+      },
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ]
+    },
+    "AuthorizeClassifierCopyRequest": {
+      "type": "object",
+      "description": "Request body to authorize document classifier copy.",
+      "properties": {
+        "classifierId": {
+          "type": "string",
+          "description": "Unique document classifier name.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Document classifier description.",
+          "maxLength": 4096
+        },
+        "tags": {
+          "type": "object",
+          "description": "List of key-value tag attributes associated with the document classifier.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "classifierId"
+      ]
+    },
+    "AuthorizeCopyRequest": {
+      "type": "object",
+      "description": "Request body to authorize document model copy.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "Unique document model name.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Document model description.",
+          "maxLength": 4096
+        },
+        "tags": {
+          "type": "object",
+          "description": "List of key-value tag attributes associated with the document model.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "modelId"
+      ]
+    },
+    "AzureBlobContentSource": {
+      "type": "object",
+      "description": "Azure Blob Storage content.",
+      "properties": {
+        "containerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Azure Blob Storage container URL."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Blob name prefix."
+        }
+      },
+      "required": [
+        "containerUrl"
+      ]
+    },
+    "AzureBlobFileListContentSource": {
+      "type": "object",
+      "description": "File list in Azure Blob Storage.",
+      "properties": {
+        "containerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Azure Blob Storage container URL."
+        },
+        "fileList": {
+          "type": "string",
+          "description": "Path to a JSONL file within the container specifying a subset of documents."
+        }
+      },
+      "required": [
+        "containerUrl",
+        "fileList"
+      ]
+    },
+    "BoundingRegion": {
+      "type": "object",
+      "description": "Bounding polygon on a specific page of the input.",
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "1-based page number of page containing the bounding region.",
+          "minimum": 1
+        },
+        "polygon": {
+          "type": "array",
+          "description": "Bounding polygon on the page, or the entire page if not specified.\nCoordinates specified relative to the top-left of the page. The numbers\nrepresent the x, y values of the polygon vertices, clockwise from the left\n(-180 degrees inclusive) relative to the element orientation.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "required": [
+        "pageNumber",
+        "polygon"
+      ]
+    },
+    "BuildDocumentClassifierRequest": {
+      "type": "object",
+      "description": "Request body to build a new custom document classifier.",
+      "properties": {
+        "classifierId": {
+          "type": "string",
+          "description": "Unique document classifier name.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Document classifier description.",
+          "maxLength": 4096
+        },
+        "baseClassifierId": {
+          "type": "string",
+          "description": "Base classifierId on top of which to train the classifier.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "docTypes": {
+          "type": "object",
+          "description": "List of document types to classify against.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ClassifierDocumentTypeDetails"
+          }
+        },
+        "allowOverwrite": {
+          "type": "boolean",
+          "description": "Allow overwriting an existing classifier with the same name.",
+          "default": false
+        }
+      },
+      "required": [
+        "classifierId",
+        "docTypes"
+      ]
+    },
+    "BuildDocumentModelRequest": {
+      "type": "object",
+      "description": "Request body to build a new custom document model.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "Unique document model name.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Document model description.",
+          "maxLength": 4096
+        },
+        "buildMode": {
+          "$ref": "#/definitions/DocumentBuildMode",
+          "description": "Custom document model build mode."
+        },
+        "azureBlobSource": {
+          "$ref": "#/definitions/AzureBlobContentSource",
+          "description": "Azure Blob Storage location containing the training data.  Either\nazureBlobSource or azureBlobFileListSource must be specified."
+        },
+        "azureBlobFileListSource": {
+          "$ref": "#/definitions/AzureBlobFileListContentSource",
+          "description": "Azure Blob Storage file list specifying the training data.  Either\nazureBlobSource or azureBlobFileListSource must be specified."
+        },
+        "tags": {
+          "type": "object",
+          "description": "List of key-value tag attributes associated with the document model.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "maxTrainingHours": {
+          "type": "number",
+          "format": "float",
+          "description": "Max number of V100-equivalent GPU hours to use for model training.  Default=0.5.",
+          "default": 0.5
+        },
+        "allowOverwrite": {
+          "type": "boolean",
+          "description": "Allow overwriting an existing model with the same name.",
+          "default": false
+        }
+      },
+      "required": [
+        "modelId",
+        "buildMode"
+      ]
+    },
+    "ClassifierCopyAuthorization": {
+      "type": "object",
+      "description": "Authorization to copy a document classifier to the specified target resource and\nclassifierId.",
+      "properties": {
+        "targetResourceId": {
+          "type": "string",
+          "description": "ID of the target Azure resource where the document classifier should be copied to."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "Location of the target Azure resource where the document classifier should be copied\nto."
+        },
+        "targetClassifierId": {
+          "type": "string",
+          "description": "Identifier of the target document classifier.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "targetClassifierLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the copied document classifier in the target account."
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "Token used to authorize the request."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date/time when the access token expires."
+        }
+      },
+      "required": [
+        "targetResourceId",
+        "targetResourceRegion",
+        "targetClassifierId",
+        "targetClassifierLocation",
+        "accessToken",
+        "expirationDateTime"
+      ]
+    },
+    "ClassifierDocumentTypeDetails": {
+      "type": "object",
+      "description": "Classifier document type info.",
+      "properties": {
+        "sourceKind": {
+          "$ref": "#/definitions/ContentSourceKind",
+          "description": "Type of training data source."
+        },
+        "azureBlobSource": {
+          "$ref": "#/definitions/AzureBlobContentSource",
+          "description": "Azure Blob Storage location containing the training data for a classifier\ndocument type.  Either azureBlobSource or azureBlobFileListSource must be\nspecified."
+        },
+        "azureBlobFileListSource": {
+          "$ref": "#/definitions/AzureBlobFileListContentSource",
+          "description": "Azure Blob Storage file list specifying the training data for a classifier\ndocument type.  Either azureBlobSource or azureBlobFileListSource must be\nspecified."
+        }
+      }
+    },
+    "ClassifyDocumentRequest": {
+      "type": "object",
+      "description": "Document classification parameters.",
+      "properties": {
+        "urlSource": {
+          "type": "string",
+          "format": "uri",
+          "description": "Document URL to classify.  Either urlSource or base64Source must be specified."
+        },
+        "base64Source": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64 encoding of the document to classify.  Either urlSource or base64Source\nmust be specified."
+        }
+      }
+    },
+    "ComposeDocumentModelRequest": {
+      "type": "object",
+      "description": "Request body to create a composed document model from component document models.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "Unique document model name.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Document model description.",
+          "maxLength": 4096
+        },
+        "classifierId": {
+          "type": "string",
+          "description": "Custom classifier to split and classify the input file."
+        },
+        "split": {
+          "type": "string",
+          "description": "File splitting behavior.",
+          "default": "none",
+          "enum": [
+            "auto",
+            "none",
+            "perPage"
+          ],
+          "x-ms-enum": {
+            "name": "SplitMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "auto",
+                "value": "auto",
+                "description": "Automatically split file into documents."
+              },
+              {
+                "name": "none",
+                "value": "none",
+                "description": "Treat the entire file as a single document."
+              },
+              {
+                "name": "perPage",
+                "value": "perPage",
+                "description": "Treat each page in the file as a separate document."
+              }
+            ]
+          }
+        },
+        "docTypes": {
+          "type": "object",
+          "description": "Dictionary mapping supported docTypes to the corresponding document models.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DocumentTypeDetails"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "List of key-value tag attributes associated with the document model.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "modelId",
+        "classifierId",
+        "docTypes"
+      ]
+    },
+    "ContentFormat": {
+      "type": "string",
+      "description": "Format of the content in analyzed result.",
+      "enum": [
+        "text",
+        "markdown"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Plain text representation of the document content without any formatting."
+          },
+          {
+            "name": "markdown",
+            "value": "markdown",
+            "description": "Markdown representation of the document content with section headings, tables,\netc."
+          }
+        ]
+      }
+    },
+    "ContentSourceKind": {
+      "type": "string",
+      "description": "Type of content source.",
+      "enum": [
+        "url",
+        "base64",
+        "azureBlob",
+        "azureBlobFileList"
+      ],
+      "x-ms-enum": {
+        "name": "ContentSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "url",
+            "value": "url",
+            "description": "Content at a specific URL."
+          },
+          {
+            "name": "base64",
+            "value": "base64",
+            "description": "Content represented via Base64 encoding."
+          },
+          {
+            "name": "azureBlob",
+            "value": "azureBlob",
+            "description": "Files in a path within an Azure Blob Storage container."
+          },
+          {
+            "name": "azureBlobFileList",
+            "value": "azureBlobFileList",
+            "description": "A file list specifying individual files in an Azure Blob Storage container."
+          }
+        ]
+      }
+    },
+    "CopyAuthorization": {
+      "type": "object",
+      "description": "Authorization to copy a document model to the specified target resource and\nmodelId.",
+      "properties": {
+        "targetResourceId": {
+          "type": "string",
+          "description": "ID of the target Azure resource where the document model should be copied to."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "Location of the target Azure resource where the document model should be copied\nto."
+        },
+        "targetModelId": {
+          "type": "string",
+          "description": "Identifier of the target document model.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "targetModelLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the copied document model in the target account."
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "Token used to authorize the request."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date/time when the access token expires."
+        }
+      },
+      "required": [
+        "targetResourceId",
+        "targetResourceRegion",
+        "targetModelId",
+        "targetModelLocation",
+        "accessToken",
+        "expirationDateTime"
+      ]
+    },
+    "CurrencyValue": {
+      "type": "object",
+      "description": "Currency field value.",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Currency amount."
+        },
+        "currencySymbol": {
+          "type": "string",
+          "description": "Currency symbol label, if any."
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "Resolved currency code (ISO 4217), if any."
+        }
+      },
+      "required": [
+        "amount"
+      ]
+    },
+    "CustomDocumentModelsDetails": {
+      "type": "object",
+      "description": "Details regarding custom document models.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of custom document models in the current resource."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of custom document models supported in the current resource."
+        }
+      },
+      "required": [
+        "count",
+        "limit"
+      ]
+    },
+    "Document": {
+      "type": "object",
+      "description": "An object describing the location and semantic content of a document.",
+      "properties": {
+        "docType": {
+          "type": "string",
+          "description": "Document type.",
+          "minLength": 2,
+          "maxLength": 64
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the document.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the document in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "fields": {
+          "type": "object",
+          "description": "Dictionary of named field values.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DocumentField"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the document.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "docType",
+        "spans",
+        "confidence"
+      ]
+    },
+    "DocumentAnalysisFeature": {
+      "type": "string",
+      "description": "Document analysis features to enable.",
+      "enum": [
+        "ocrHighResolution",
+        "languages",
+        "barcodes",
+        "formulas",
+        "keyValuePairs",
+        "styleFont",
+        "queryFields"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentAnalysisFeature",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ocrHighResolution",
+            "value": "ocrHighResolution",
+            "description": "Perform OCR at a higher resolution to handle documents with fine print."
+          },
+          {
+            "name": "languages",
+            "value": "languages",
+            "description": "Enable the detection of the text content language."
+          },
+          {
+            "name": "barcodes",
+            "value": "barcodes",
+            "description": "Enable the detection of barcodes in the document."
+          },
+          {
+            "name": "formulas",
+            "value": "formulas",
+            "description": "Enable the detection of mathematical expressions in the document."
+          },
+          {
+            "name": "keyValuePairs",
+            "value": "keyValuePairs",
+            "description": "Enable the detection of general key value pairs (form fields) in the document."
+          },
+          {
+            "name": "styleFont",
+            "value": "styleFont",
+            "description": "Enable the recognition of various font styles."
+          },
+          {
+            "name": "queryFields",
+            "value": "queryFields",
+            "description": "Enable the extraction of additional fields via the queryFields query parameter."
+          }
+        ]
+      }
+    },
+    "DocumentBarcode": {
+      "type": "object",
+      "description": "A barcode object.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DocumentBarcodeKind",
+          "description": "Barcode kind."
+        },
+        "value": {
+          "type": "string",
+          "description": "Barcode value."
+        },
+        "polygon": {
+          "type": "array",
+          "description": "Bounding polygon of the barcode, with coordinates specified relative to the\ntop-left of the page. The numbers represent the x, y values of the polygon\nvertices, clockwise from the left (-180 degrees inclusive) relative to the\nelement orientation.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "span": {
+          "$ref": "#/definitions/DocumentSpan",
+          "description": "Location of the barcode in the reading order concatenated content."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the barcode.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "span",
+        "confidence"
+      ]
+    },
+    "DocumentBarcodeKind": {
+      "type": "string",
+      "description": "Barcode kind.",
+      "enum": [
+        "QRCode",
+        "PDF417",
+        "UPCA",
+        "UPCE",
+        "Code39",
+        "Code128",
+        "EAN8",
+        "EAN13",
+        "DataBar",
+        "Code93",
+        "Codabar",
+        "DataBarExpanded",
+        "ITF",
+        "MicroQRCode",
+        "Aztec",
+        "DataMatrix",
+        "MaxiCode"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentBarcodeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QRCode",
+            "value": "QRCode",
+            "description": "QR code, as defined in ISO/IEC 18004:2015."
+          },
+          {
+            "name": "PDF417",
+            "value": "PDF417",
+            "description": "PDF417, as defined in ISO 15438."
+          },
+          {
+            "name": "UPCA",
+            "value": "UPCA",
+            "description": "GS1 12-digit Universal Product Code."
+          },
+          {
+            "name": "UPCE",
+            "value": "UPCE",
+            "description": "GS1 6-digit Universal Product Code."
+          },
+          {
+            "name": "Code39",
+            "value": "Code39",
+            "description": "Code 39 barcode, as defined in ISO/IEC 16388:2007."
+          },
+          {
+            "name": "Code128",
+            "value": "Code128",
+            "description": "Code 128 barcode, as defined in ISO/IEC 15417:2007."
+          },
+          {
+            "name": "EAN8",
+            "value": "EAN8",
+            "description": "GS1 8-digit International Article Number (European Article Number)."
+          },
+          {
+            "name": "EAN13",
+            "value": "EAN13",
+            "description": "GS1 13-digit International Article Number (European Article Number)."
+          },
+          {
+            "name": "DataBar",
+            "value": "DataBar",
+            "description": "GS1 DataBar barcode."
+          },
+          {
+            "name": "Code93",
+            "value": "Code93",
+            "description": "Code 93 barcode, as defined in ANSI/AIM BC5-1995."
+          },
+          {
+            "name": "Codabar",
+            "value": "Codabar",
+            "description": "Codabar barcode, as defined in ANSI/AIM BC3-1995."
+          },
+          {
+            "name": "DataBarExpanded",
+            "value": "DataBarExpanded",
+            "description": "GS1 DataBar Expanded barcode."
+          },
+          {
+            "name": "ITF",
+            "value": "ITF",
+            "description": "Interleaved 2 of 5 barcode, as defined in ANSI/AIM BC2-1995."
+          },
+          {
+            "name": "MicroQRCode",
+            "value": "MicroQRCode",
+            "description": "Micro QR code, as defined in ISO/IEC 23941:2022."
+          },
+          {
+            "name": "Aztec",
+            "value": "Aztec",
+            "description": "Aztec code, as defined in ISO/IEC 24778:2008."
+          },
+          {
+            "name": "DataMatrix",
+            "value": "DataMatrix",
+            "description": "Data matrix code, as defined in ISO/IEC 16022:2006."
+          },
+          {
+            "name": "MaxiCode",
+            "value": "MaxiCode",
+            "description": "MaxiCode, as defined in ISO/IEC 16023:2000."
+          }
+        ]
+      }
+    },
+    "DocumentBuildMode": {
+      "type": "string",
+      "description": "Custom document model build mode.",
+      "enum": [
+        "template",
+        "neural",
+        "generative"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentBuildMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "template",
+            "value": "template",
+            "description": "Target documents with similar visual templates."
+          },
+          {
+            "name": "neural",
+            "value": "neural",
+            "description": "Support documents with diverse visual templates."
+          },
+          {
+            "name": "generative",
+            "value": "generative",
+            "description": "Enable documents of all types using generative AI techniques."
+          }
+        ]
+      }
+    },
+    "DocumentCaption": {
+      "type": "object",
+      "description": "A caption object describing a table or figure.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of the caption."
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the caption.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the caption in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the caption.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        }
+      },
+      "required": [
+        "content",
+        "spans"
+      ]
+    },
+    "DocumentClassifierBuildOperationDetails": {
+      "type": "object",
+      "description": "Get Operation response object.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/DocumentClassifierDetails",
+          "description": "Operation result upon success."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "documentClassifierBuild"
+    },
+    "DocumentClassifierCopyToOperationDetails": {
+      "type": "object",
+      "description": "Get Operation response object.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/DocumentClassifierDetails",
+          "description": "Operation result upon success."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "documentClassifierCopyTo"
+    },
+    "DocumentClassifierDetails": {
+      "type": "object",
+      "description": "Document classifier info.",
+      "properties": {
+        "classifierId": {
+          "type": "string",
+          "description": "Unique document classifier name.",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Document classifier description.",
+          "maxLength": 4096
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the document classifier was created."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the document classifier will expire."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "API version used to create this document classifier."
+        },
+        "baseClassifierId": {
+          "type": "string",
+          "description": "Base classifierId on top of which the classifier was trained.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "docTypes": {
+          "type": "object",
+          "description": "List of document types to classify against.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ClassifierDocumentTypeDetails"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "List of warnings encountered while building the classifier.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "classifierId",
+        "createdDateTime",
+        "apiVersion",
+        "docTypes"
+      ]
+    },
+    "DocumentElement": {
+      "type": "string",
+      "description": "An JSON pointer referencing an element of the document, such as paragraph,\ntable, section, etc."
+    },
+    "DocumentField": {
+      "type": "object",
+      "description": "An object representing the content and location of a field value.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DocumentFieldType",
+          "description": "Data type of the field value."
+        },
+        "valueString": {
+          "type": "string",
+          "description": "String value."
+        },
+        "valueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date value in YYYY-MM-DD format (ISO 8601)."
+        },
+        "valueTime": {
+          "type": "string",
+          "format": "time",
+          "description": "Time value in hh:mm:ss format (ISO 8601)."
+        },
+        "valuePhoneNumber": {
+          "type": "string",
+          "description": "Phone number value in E.164 format (ex. +19876543210)."
+        },
+        "valueNumber": {
+          "type": "number",
+          "format": "double",
+          "description": "Floating point value."
+        },
+        "valueInteger": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Integer value."
+        },
+        "valueSelectionMark": {
+          "$ref": "#/definitions/DocumentSelectionMarkState",
+          "description": "Selection mark value."
+        },
+        "valueSignature": {
+          "$ref": "#/definitions/DocumentSignatureType",
+          "description": "Presence of signature."
+        },
+        "valueCountryRegion": {
+          "type": "string",
+          "description": "3-letter country code value (ISO 3166-1 alpha-3)."
+        },
+        "valueArray": {
+          "type": "array",
+          "description": "Array of field values.",
+          "items": {
+            "$ref": "#/definitions/DocumentField"
+          },
+          "x-ms-identifiers": []
+        },
+        "valueObject": {
+          "type": "object",
+          "description": "Dictionary of named field values.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DocumentField"
+          }
+        },
+        "valueCurrency": {
+          "$ref": "#/definitions/CurrencyValue",
+          "description": "Currency value."
+        },
+        "valueAddress": {
+          "$ref": "#/definitions/AddressValue",
+          "description": "Address value."
+        },
+        "valueBoolean": {
+          "type": "boolean",
+          "description": "Boolean value."
+        },
+        "valueSelectionGroup": {
+          "type": "array",
+          "description": "Selection group value.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "Field content."
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the field.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the field in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the field.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DocumentFieldSchema": {
+      "type": "object",
+      "description": "Description of the field semantic schema using a JSON Schema style syntax.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DocumentFieldType",
+          "description": "Semantic data type of the field value."
+        },
+        "description": {
+          "type": "string",
+          "description": "Field description.",
+          "maxLength": 4096
+        },
+        "example": {
+          "type": "string",
+          "description": "Example field content."
+        },
+        "items": {
+          "$ref": "#/definitions/DocumentFieldSchema",
+          "description": "Field type schema of each array element."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Named sub-fields of the object field.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DocumentFieldSchema"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DocumentFieldType": {
+      "type": "string",
+      "description": "Semantic data type of the field value.",
+      "enum": [
+        "string",
+        "date",
+        "time",
+        "phoneNumber",
+        "number",
+        "integer",
+        "selectionMark",
+        "countryRegion",
+        "signature",
+        "array",
+        "object",
+        "currency",
+        "address",
+        "boolean",
+        "selectionGroup"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentFieldType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "string",
+            "value": "string",
+            "description": "Plain text."
+          },
+          {
+            "name": "date",
+            "value": "date",
+            "description": "Date, normalized to ISO 8601 (YYYY-MM-DD) format."
+          },
+          {
+            "name": "time",
+            "value": "time",
+            "description": "Time, normalized to ISO 8601 (hh:mm:ss) format."
+          },
+          {
+            "name": "phoneNumber",
+            "value": "phoneNumber",
+            "description": "Phone number, normalized to E.164 (+{CountryCode}{SubscriberNumber}) format."
+          },
+          {
+            "name": "number",
+            "value": "number",
+            "description": "Floating point number, normalized to double precision floating point."
+          },
+          {
+            "name": "integer",
+            "value": "integer",
+            "description": "Integer number, normalized to 64-bit signed integer."
+          },
+          {
+            "name": "selectionMark",
+            "value": "selectionMark",
+            "description": "Is field selected?"
+          },
+          {
+            "name": "countryRegion",
+            "value": "countryRegion",
+            "description": "Country/region, normalized to ISO 3166-1 alpha-3 format (ex. USA)."
+          },
+          {
+            "name": "signature",
+            "value": "signature",
+            "description": "Is signature present?"
+          },
+          {
+            "name": "array",
+            "value": "array",
+            "description": "List of subfields of the same type."
+          },
+          {
+            "name": "object",
+            "value": "object",
+            "description": "Named list of subfields of potentially different types."
+          },
+          {
+            "name": "currency",
+            "value": "currency",
+            "description": "Currency amount with optional currency symbol and unit."
+          },
+          {
+            "name": "address",
+            "value": "address",
+            "description": "Parsed address."
+          },
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "Boolean value, normalized to true or false."
+          },
+          {
+            "name": "selectionGroup",
+            "value": "selectionGroup",
+            "description": "Array of selected string values."
+          }
+        ]
+      }
+    },
+    "DocumentFigure": {
+      "type": "object",
+      "description": "An object representing a figure in the document.",
+      "properties": {
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the figure.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the figure in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the figure, excluding any caption or footnotes.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        },
+        "caption": {
+          "$ref": "#/definitions/DocumentCaption",
+          "description": "Caption associated with the figure."
+        },
+        "footnotes": {
+          "type": "array",
+          "description": "List of footnotes associated with the figure.",
+          "items": {
+            "$ref": "#/definitions/DocumentFootnote"
+          },
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "description": "Figure ID."
+        }
+      },
+      "required": [
+        "spans"
+      ]
+    },
+    "DocumentFootnote": {
+      "type": "object",
+      "description": "A footnote object describing a table or figure.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of the footnote."
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the footnote.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the footnote in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the footnote.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        }
+      },
+      "required": [
+        "content",
+        "spans"
+      ]
+    },
+    "DocumentFormula": {
+      "type": "object",
+      "description": "A formula object.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DocumentFormulaKind",
+          "description": "Formula kind."
+        },
+        "value": {
+          "type": "string",
+          "description": "LaTex expression describing the formula."
+        },
+        "polygon": {
+          "type": "array",
+          "description": "Bounding polygon of the formula, with coordinates specified relative to the\ntop-left of the page. The numbers represent the x, y values of the polygon\nvertices, clockwise from the left (-180 degrees inclusive) relative to the\nelement orientation.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "span": {
+          "$ref": "#/definitions/DocumentSpan",
+          "description": "Location of the formula in the reading order concatenated content."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the formula.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "span",
+        "confidence"
+      ]
+    },
+    "DocumentFormulaKind": {
+      "type": "string",
+      "description": "Formula kind.",
+      "enum": [
+        "inline",
+        "display"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentFormulaKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inline",
+            "value": "inline",
+            "description": "A formula embedded within the content of a paragraph."
+          },
+          {
+            "name": "display",
+            "value": "display",
+            "description": "A formula in display mode that takes up an entire line."
+          }
+        ]
+      }
+    },
+    "DocumentKeyValueElement": {
+      "type": "object",
+      "description": "An object representing the field key or value in a key-value pair.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Concatenated content of the key-value element in reading order."
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the key-value element.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the key-value element in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "content",
+        "spans"
+      ]
+    },
+    "DocumentKeyValuePair": {
+      "type": "object",
+      "description": "An object representing a form field with distinct field label (key) and field\nvalue (may be empty).",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/DocumentKeyValueElement",
+          "description": "Field label of the key-value pair."
+        },
+        "value": {
+          "$ref": "#/definitions/DocumentKeyValueElement",
+          "description": "Field value of the key-value pair."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the key-value pair.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "key",
+        "confidence"
+      ]
+    },
+    "DocumentLanguage": {
+      "type": "object",
+      "description": "An object representing the detected language for a given text span.",
+      "properties": {
+        "locale": {
+          "type": "string",
+          "description": "Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\")\nor BCP 47 language tag (ex. \"zh-Hans\")."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the text elements in the concatenated content the language applies\nto.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly identifying the language.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "locale",
+        "spans",
+        "confidence"
+      ]
+    },
+    "DocumentLine": {
+      "type": "object",
+      "description": "A content line object consisting of an adjacent sequence of content elements,\nsuch as words and selection marks.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Concatenated content of the contained elements in reading order."
+        },
+        "polygon": {
+          "type": "array",
+          "description": "Bounding polygon of the line, with coordinates specified relative to the\ntop-left of the page. The numbers represent the x, y values of the polygon\nvertices, clockwise from the left (-180 degrees inclusive) relative to the\nelement orientation.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the line in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "content",
+        "spans"
+      ]
+    },
+    "DocumentModelBuildOperationDetails": {
+      "type": "object",
+      "description": "Get Operation response object.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/DocumentModelDetails",
+          "description": "Operation result upon success."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "documentModelBuild"
+    },
+    "DocumentModelComposeOperationDetails": {
+      "type": "object",
+      "description": "Get Operation response object.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/DocumentModelDetails",
+          "description": "Operation result upon success."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "documentModelCompose"
+    },
+    "DocumentModelCopyToOperationDetails": {
+      "type": "object",
+      "description": "Get Operation response object.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/DocumentModelDetails",
+          "description": "Operation result upon success."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "documentModelCopyTo"
+    },
+    "DocumentModelDetails": {
+      "type": "object",
+      "description": "Document model info.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "Unique document model name.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Document model description.",
+          "maxLength": 4096
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the document model was created.",
+          "readOnly": true
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the document model will expire.",
+          "readOnly": true
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "API version used to create this document model.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "List of key-value tag attributes associated with the document model.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "buildMode": {
+          "$ref": "#/definitions/DocumentBuildMode",
+          "description": "Custom document model build mode.",
+          "readOnly": true
+        },
+        "azureBlobSource": {
+          "$ref": "#/definitions/AzureBlobContentSource",
+          "description": "Azure Blob Storage location containing the training data.  Either\nazureBlobSource or azureBlobFileListSource must be specified.",
+          "readOnly": true
+        },
+        "azureBlobFileListSource": {
+          "$ref": "#/definitions/AzureBlobFileListContentSource",
+          "description": "Azure Blob Storage file list specifying the training data.  Either\nazureBlobSource or azureBlobFileListSource must be specified.",
+          "readOnly": true
+        },
+        "classifierId": {
+          "type": "string",
+          "description": "For composed models, the custom classifier to split and classify the input file."
+        },
+        "split": {
+          "type": "string",
+          "description": "For composed models, the file splitting behavior.",
+          "default": "none",
+          "enum": [
+            "auto",
+            "none",
+            "perPage"
+          ],
+          "x-ms-enum": {
+            "name": "SplitMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "auto",
+                "value": "auto",
+                "description": "Automatically split file into documents."
+              },
+              {
+                "name": "none",
+                "value": "none",
+                "description": "Treat the entire file as a single document."
+              },
+              {
+                "name": "perPage",
+                "value": "perPage",
+                "description": "Treat each page in the file as a separate document."
+              }
+            ]
+          }
+        },
+        "docTypes": {
+          "type": "object",
+          "description": "Supported document types.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DocumentTypeDetails"
+          },
+          "readOnly": true
+        },
+        "warnings": {
+          "type": "array",
+          "description": "List of warnings encountered while building the model.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "trainingHours": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of V100-equivalent GPU hours consumed for model training.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "modelId",
+        "createdDateTime"
+      ]
+    },
+    "DocumentPage": {
+      "type": "object",
+      "description": "Content and layout elements extracted from a page from the input.",
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "1-based page number in the input document.",
+          "minimum": 1
+        },
+        "angle": {
+          "type": "number",
+          "format": "float",
+          "description": "The general orientation of the content in clockwise direction, measured in\ndegrees between (-180, 180].",
+          "maximum": 180
+        },
+        "width": {
+          "type": "number",
+          "format": "float",
+          "description": "The width of the image/PDF in pixels/inches, respectively.",
+          "minimum": 0
+        },
+        "height": {
+          "type": "number",
+          "format": "float",
+          "description": "The height of the image/PDF in pixels/inches, respectively.",
+          "minimum": 0
+        },
+        "unit": {
+          "$ref": "#/definitions/LengthUnit",
+          "description": "The unit used by the width, height, and polygon properties. For images, the\nunit is \"pixel\". For PDF, the unit is \"inch\"."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the page in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "words": {
+          "type": "array",
+          "description": "Extracted words from the page.",
+          "items": {
+            "$ref": "#/definitions/DocumentWord"
+          },
+          "x-ms-identifiers": []
+        },
+        "selectionMarks": {
+          "type": "array",
+          "description": "Extracted selection marks from the page.",
+          "items": {
+            "$ref": "#/definitions/DocumentSelectionMark"
+          },
+          "x-ms-identifiers": []
+        },
+        "lines": {
+          "type": "array",
+          "description": "Extracted lines from the page, potentially containing both textual and visual\nelements.",
+          "items": {
+            "$ref": "#/definitions/DocumentLine"
+          },
+          "x-ms-identifiers": []
+        },
+        "barcodes": {
+          "type": "array",
+          "description": "Extracted barcodes from the page.",
+          "items": {
+            "$ref": "#/definitions/DocumentBarcode"
+          },
+          "x-ms-identifiers": []
+        },
+        "formulas": {
+          "type": "array",
+          "description": "Extracted formulas from the page.",
+          "items": {
+            "$ref": "#/definitions/DocumentFormula"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "pageNumber",
+        "spans"
+      ]
+    },
+    "DocumentParagraph": {
+      "type": "object",
+      "description": "A paragraph object consisting with contiguous lines generally with common\nalignment and spacing.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ParagraphRole",
+          "description": "Semantic role of the paragraph."
+        },
+        "content": {
+          "type": "string",
+          "description": "Concatenated content of the paragraph in reading order."
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the paragraph.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the paragraph in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "content",
+        "spans"
+      ]
+    },
+    "DocumentSection": {
+      "type": "object",
+      "description": "An object representing a section in the document.",
+      "properties": {
+        "spans": {
+          "type": "array",
+          "description": "Location of the section in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the section.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        }
+      },
+      "required": [
+        "spans"
+      ]
+    },
+    "DocumentSelectionMark": {
+      "type": "object",
+      "description": "A selection mark object representing check boxes, radio buttons, and other\nelements indicating a selection.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/DocumentSelectionMarkState",
+          "description": "State of the selection mark."
+        },
+        "polygon": {
+          "type": "array",
+          "description": "Bounding polygon of the selection mark, with coordinates specified relative\nto the top-left of the page. The numbers represent the x, y values of the\npolygon vertices, clockwise from the left (-180 degrees inclusive) relative\nto the element orientation.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "span": {
+          "$ref": "#/definitions/DocumentSpan",
+          "description": "Location of the selection mark in the reading order concatenated content."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the selection mark.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "state",
+        "span",
+        "confidence"
+      ]
+    },
+    "DocumentSelectionMarkState": {
+      "type": "string",
+      "description": "State of the selection mark.",
+      "enum": [
+        "selected",
+        "unselected"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentSelectionMarkState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "selected",
+            "value": "selected",
+            "description": "The selection mark is selected, often indicated by a check ✓ or cross X inside\nthe selection mark."
+          },
+          {
+            "name": "unselected",
+            "value": "unselected",
+            "description": "The selection mark is not selected."
+          }
+        ]
+      }
+    },
+    "DocumentSignatureType": {
+      "type": "string",
+      "description": "Presence of signature.",
+      "enum": [
+        "signed",
+        "unsigned"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentSignatureType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "signed",
+            "value": "signed",
+            "description": "A signature is detected."
+          },
+          {
+            "name": "unsigned",
+            "value": "unsigned",
+            "description": "No signatures are detected."
+          }
+        ]
+      }
+    },
+    "DocumentSpan": {
+      "type": "object",
+      "description": "Contiguous region of the concatenated content property, specified as an offset\nand length.",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Zero-based index of the content represented by the span.",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of characters in the content represented by the span.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "offset",
+        "length"
+      ]
+    },
+    "DocumentStyle": {
+      "type": "object",
+      "description": "An object representing observed text styles.",
+      "properties": {
+        "isHandwritten": {
+          "type": "boolean",
+          "description": "Is content handwritten?"
+        },
+        "similarFontFamily": {
+          "type": "string",
+          "description": "Visually most similar font from among the set of supported font families, with\nfallback fonts following CSS convention (ex. 'Arial, sans-serif')."
+        },
+        "fontStyle": {
+          "$ref": "#/definitions/FontStyle",
+          "description": "Font style."
+        },
+        "fontWeight": {
+          "$ref": "#/definitions/FontWeight",
+          "description": "Font weight."
+        },
+        "color": {
+          "type": "string",
+          "description": "Foreground color in #rrggbb hexadecimal format.",
+          "pattern": "^#[0-9a-f]{6}$"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "Background color in #rrggbb hexadecimal format..",
+          "pattern": "^#[0-9a-f]{6}$"
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the text elements in the concatenated content the style applies to.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly identifying the style.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "spans",
+        "confidence"
+      ]
+    },
+    "DocumentTable": {
+      "type": "object",
+      "description": "A table object consisting table cells arranged in a rectangular layout.",
+      "properties": {
+        "rowCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of rows in the table.",
+          "minimum": 1
+        },
+        "columnCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of columns in the table.",
+          "minimum": 1
+        },
+        "cells": {
+          "type": "array",
+          "description": "Cells contained within the table.",
+          "items": {
+            "$ref": "#/definitions/DocumentTableCell"
+          },
+          "x-ms-identifiers": []
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the table.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the table in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "caption": {
+          "$ref": "#/definitions/DocumentCaption",
+          "description": "Caption associated with the table."
+        },
+        "footnotes": {
+          "type": "array",
+          "description": "List of footnotes associated with the table.",
+          "items": {
+            "$ref": "#/definitions/DocumentFootnote"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "rowCount",
+        "columnCount",
+        "cells",
+        "spans"
+      ]
+    },
+    "DocumentTableCell": {
+      "type": "object",
+      "description": "An object representing the location and content of a table cell.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Table cell kind.",
+          "default": "content",
+          "enum": [
+            "content",
+            "rowHeader",
+            "columnHeader",
+            "stubHead",
+            "description"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentTableCellKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "content",
+                "value": "content",
+                "description": "Contains the main content/data."
+              },
+              {
+                "name": "rowHeader",
+                "value": "rowHeader",
+                "description": "Describes the content of the row."
+              },
+              {
+                "name": "columnHeader",
+                "value": "columnHeader",
+                "description": "Describes the content of the column."
+              },
+              {
+                "name": "stubHead",
+                "value": "stubHead",
+                "description": "Describes the row headers, usually located at the top left corner of a table."
+              },
+              {
+                "name": "description",
+                "value": "description",
+                "description": "Describes the content in (parts of) the table."
+              }
+            ]
+          }
+        },
+        "rowIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Row index of the cell."
+        },
+        "columnIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Column index of the cell."
+        },
+        "rowSpan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of rows spanned by this cell.",
+          "default": 1,
+          "minimum": 1
+        },
+        "columnSpan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of columns spanned by this cell.",
+          "default": 1,
+          "minimum": 1
+        },
+        "content": {
+          "type": "string",
+          "description": "Concatenated content of the table cell in reading order."
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the table cell.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the table cell in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the table cell.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        }
+      },
+      "required": [
+        "rowIndex",
+        "columnIndex",
+        "content",
+        "spans"
+      ]
+    },
+    "DocumentTypeDetails": {
+      "type": "object",
+      "description": "Document type info.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Document model description.",
+          "maxLength": 4096
+        },
+        "buildMode": {
+          "$ref": "#/definitions/DocumentBuildMode",
+          "description": "Custom document model build mode."
+        },
+        "fieldSchema": {
+          "type": "object",
+          "description": "Description of the document semantic schema using a JSON Schema style syntax.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DocumentFieldSchema"
+          }
+        },
+        "fieldConfidence": {
+          "type": "object",
+          "description": "Estimated confidence for each field.",
+          "additionalProperties": {
+            "format": "float",
+            "type": "number"
+          }
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Document model to use for analyzing documents with specified type.",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$"
+        },
+        "confidenceThreshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Only perform analysis if docType confidence is above threshold."
+        },
+        "features": {
+          "type": "array",
+          "description": "List of optional analysis features.",
+          "items": {
+            "$ref": "#/definitions/DocumentAnalysisFeature"
+          }
+        },
+        "queryFields": {
+          "type": "array",
+          "description": "List of additional fields to extract.  Ex. \"NumberOfGuests,StoreNumber\"",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxDocumentsToAnalyze": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of documents of specified type to analyze.  Default=all."
+        }
+      }
+    },
+    "DocumentWord": {
+      "type": "object",
+      "description": "A word object consisting of a contiguous sequence of characters.  For non-space\ndelimited languages, such as Chinese, Japanese, and Korean, each character is\nrepresented as its own word.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Text content of the word."
+        },
+        "polygon": {
+          "type": "array",
+          "description": "Bounding polygon of the word, with coordinates specified relative to the\ntop-left of the page. The numbers represent the x, y values of the polygon\nvertices, clockwise from the left (-180 degrees inclusive) relative to the\nelement orientation.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "span": {
+          "$ref": "#/definitions/DocumentSpan",
+          "description": "Location of the word in the reading order concatenated content."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the word.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "content",
+        "span",
+        "confidence"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response object.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error info."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "FontStyle": {
+      "type": "string",
+      "description": "Font style.",
+      "enum": [
+        "normal",
+        "italic"
+      ],
+      "x-ms-enum": {
+        "name": "FontStyle",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "normal",
+            "value": "normal",
+            "description": "Characters are represented normally."
+          },
+          {
+            "name": "italic",
+            "value": "italic",
+            "description": "Characters are visually slanted to the right."
+          }
+        ]
+      }
+    },
+    "FontWeight": {
+      "type": "string",
+      "description": "Font weight.",
+      "enum": [
+        "normal",
+        "bold"
+      ],
+      "x-ms-enum": {
+        "name": "FontWeight",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "normal",
+            "value": "normal",
+            "description": "Characters are represented normally."
+          },
+          {
+            "name": "bold",
+            "value": "bold",
+            "description": "Characters are represented with thicker strokes."
+          }
+        ]
+      }
+    },
+    "InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "LengthUnit": {
+      "type": "string",
+      "description": "The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".",
+      "enum": [
+        "pixel",
+        "inch"
+      ],
+      "x-ms-enum": {
+        "name": "LengthUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pixel",
+            "value": "pixel",
+            "description": "Length unit for image files."
+          },
+          {
+            "name": "inch",
+            "value": "inch",
+            "description": "Length unit for PDF files."
+          }
+        ]
+      }
+    },
+    "OperationDetails": {
+      "type": "object",
+      "description": "Operation info.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Operation ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status.  notStarted, running, completed, or failed"
+        },
+        "percentCompleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Operation progress (0-100).",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the operation was created."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the status was last updated."
+        },
+        "kind": {
+          "$ref": "#/definitions/OperationKind",
+          "description": "Type of operation."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the resource targeted by this operation."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "API version used to create this operation."
+        },
+        "tags": {
+          "type": "object",
+          "description": "List of key-value tag attributes associated with the document model.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Encountered error."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "operationId",
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "kind",
+        "resourceLocation"
+      ]
+    },
+    "OperationKind": {
+      "type": "string",
+      "description": "Type of operation.",
+      "enum": [
+        "documentModelBuild",
+        "documentModelCompose",
+        "documentModelCopyTo",
+        "documentClassifierCopyTo",
+        "documentClassifierBuild"
+      ],
+      "x-ms-enum": {
+        "name": "OperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "documentModelBuild",
+            "value": "documentModelBuild",
+            "description": "Build a new custom document model."
+          },
+          {
+            "name": "documentModelCompose",
+            "value": "documentModelCompose",
+            "description": "Compose a new custom document model from existing models."
+          },
+          {
+            "name": "documentModelCopyTo",
+            "value": "documentModelCopyTo",
+            "description": "Copy an existing document model to potentially a different resource, region, or\nsubscription."
+          },
+          {
+            "name": "documentClassifierCopyTo",
+            "value": "documentClassifierCopyTo",
+            "description": "Copy an existing document classifier to potentially a different resource, region, or\nsubscription."
+          },
+          {
+            "name": "documentClassifierBuild",
+            "value": "documentClassifierBuild",
+            "description": "Build a new custom classifier model."
+          }
+        ]
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Operation status.",
+      "enum": [
+        "notStarted",
+        "running",
+        "failed",
+        "succeeded",
+        "completed",
+        "canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notStarted",
+            "value": "notStarted",
+            "description": "The operation has not started yet."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "The operation has succeeded."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "The operation has completed."
+          },
+          {
+            "name": "canceled",
+            "value": "canceled",
+            "description": "The operation has been canceled."
+          }
+        ]
+      }
+    },
+    "PagedDocumentClassifierDetails": {
+      "type": "object",
+      "description": "Paged collection of DocumentClassifierDetails items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DocumentClassifierDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/DocumentClassifierDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDocumentModelDetails": {
+      "type": "object",
+      "description": "Paged collection of DocumentModelDetails items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DocumentModelDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/DocumentModelDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedOperationDetails": {
+      "type": "object",
+      "description": "Paged collection of OperationDetails items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperationDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/OperationDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ParagraphRole": {
+      "type": "string",
+      "description": "Semantic role of the paragraph.",
+      "enum": [
+        "pageHeader",
+        "pageFooter",
+        "pageNumber",
+        "title",
+        "sectionHeading",
+        "footnote",
+        "formulaBlock"
+      ],
+      "x-ms-enum": {
+        "name": "ParagraphRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pageHeader",
+            "value": "pageHeader",
+            "description": "Text near the top edge of the page."
+          },
+          {
+            "name": "pageFooter",
+            "value": "pageFooter",
+            "description": "Text near the bottom edge of the page."
+          },
+          {
+            "name": "pageNumber",
+            "value": "pageNumber",
+            "description": "Page number."
+          },
+          {
+            "name": "title",
+            "value": "title",
+            "description": "Top-level title describing the entire document."
+          },
+          {
+            "name": "sectionHeading",
+            "value": "sectionHeading",
+            "description": "Sub heading describing a section of the document."
+          },
+          {
+            "name": "footnote",
+            "value": "footnote",
+            "description": "A note usually placed after the main content on a page."
+          },
+          {
+            "name": "formulaBlock",
+            "value": "formulaBlock",
+            "description": "A block of formulas, often with shared alignment."
+          }
+        ]
+      }
+    },
+    "ResourceDetails": {
+      "type": "object",
+      "description": "General information regarding the current resource.",
+      "properties": {
+        "customDocumentModels": {
+          "$ref": "#/definitions/CustomDocumentModelsDetails",
+          "description": "Details regarding custom document models."
+        }
+      },
+      "required": [
+        "customDocumentModels"
+      ]
+    },
+    "StringIndexType": {
+      "type": "string",
+      "description": "Method used to compute string offset and length.",
+      "enum": [
+        "textElements",
+        "unicodeCodePoint",
+        "utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "textElements",
+            "value": "textElements",
+            "description": "User-perceived display character, or grapheme cluster, as defined by Unicode\n8.0.0."
+          },
+          {
+            "name": "unicodeCodePoint",
+            "value": "unicodeCodePoint",
+            "description": "Character unit represented by a single unicode code point.  Used by Python 3."
+          },
+          {
+            "name": "utf16CodeUnit",
+            "value": "utf16CodeUnit",
+            "description": "Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,\nJava, and .NET."
+          }
+        ]
+      }
+    },
+    "Warning": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of warning codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the warning."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "parameters": {
+    "AnalyzeFromStreamRequestParams.input": {
+      "name": "input",
+      "in": "body",
+      "description": "Input content.",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "DocumentClassifierAnalyzeRequestParams.classifierId": {
+      "name": "classifierId",
+      "in": "path",
+      "description": "Unique document classifier name.",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentClassifierAnalyzeRequestParams.pages": {
+      "name": "pages",
+      "in": "query",
+      "description": "List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"",
+      "required": false,
+      "type": "string",
+      "pattern": "^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentClassifierAnalyzeRequestParams.split": {
+      "name": "split",
+      "in": "query",
+      "description": "Document splitting mode.",
+      "required": false,
+      "type": "string",
+      "default": "none",
+      "enum": [
+        "auto",
+        "none",
+        "perPage"
+      ],
+      "x-ms-enum": {
+        "name": "SplitMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Automatically split file into documents."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Treat the entire file as a single document."
+          },
+          {
+            "name": "perPage",
+            "value": "perPage",
+            "description": "Treat each page in the file as a separate document."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentClassifierAnalyzeRequestParams.stringIndexType": {
+      "name": "stringIndexType",
+      "in": "query",
+      "description": "Method used to compute string offset and length.",
+      "required": false,
+      "type": "string",
+      "default": "textElements",
+      "enum": [
+        "textElements",
+        "unicodeCodePoint",
+        "utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "textElements",
+            "value": "textElements",
+            "description": "User-perceived display character, or grapheme cluster, as defined by Unicode\n8.0.0."
+          },
+          {
+            "name": "unicodeCodePoint",
+            "value": "unicodeCodePoint",
+            "description": "Character unit represented by a single unicode code point.  Used by Python 3."
+          },
+          {
+            "name": "utf16CodeUnit",
+            "value": "utf16CodeUnit",
+            "description": "Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,\nJava, and .NET."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentModelAnalyzeRequestParams.features": {
+      "name": "features",
+      "in": "query",
+      "description": "List of optional analysis features.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ocrHighResolution",
+          "languages",
+          "barcodes",
+          "formulas",
+          "keyValuePairs",
+          "styleFont",
+          "queryFields"
+        ],
+        "x-ms-enum": {
+          "name": "DocumentAnalysisFeature",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "ocrHighResolution",
+              "value": "ocrHighResolution",
+              "description": "Perform OCR at a higher resolution to handle documents with fine print."
+            },
+            {
+              "name": "languages",
+              "value": "languages",
+              "description": "Enable the detection of the text content language."
+            },
+            {
+              "name": "barcodes",
+              "value": "barcodes",
+              "description": "Enable the detection of barcodes in the document."
+            },
+            {
+              "name": "formulas",
+              "value": "formulas",
+              "description": "Enable the detection of mathematical expressions in the document."
+            },
+            {
+              "name": "keyValuePairs",
+              "value": "keyValuePairs",
+              "description": "Enable the detection of general key value pairs (form fields) in the document."
+            },
+            {
+              "name": "styleFont",
+              "value": "styleFont",
+              "description": "Enable the recognition of various font styles."
+            },
+            {
+              "name": "queryFields",
+              "value": "queryFields",
+              "description": "Enable the extraction of additional fields via the queryFields query parameter."
+            }
+          ]
+        }
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentModelAnalyzeRequestParams.locale": {
+      "name": "locale",
+      "in": "query",
+      "description": "Locale hint for text recognition and document analysis.  Value may contain only\nthe language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentModelAnalyzeRequestParams.modelId": {
+      "name": "modelId",
+      "in": "path",
+      "description": "Unique document model name.",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentModelAnalyzeRequestParams.output": {
+      "name": "output",
+      "in": "query",
+      "description": "Additional outputs to generate during analysis.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "pdf",
+          "figures"
+        ],
+        "x-ms-enum": {
+          "name": "AnalyzeOutputOption",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "pdf",
+              "value": "pdf",
+              "description": "Generate searchable PDF output."
+            },
+            {
+              "name": "figures",
+              "value": "figures",
+              "description": "Generate cropped images of detected figures."
+            }
+          ]
+        }
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentModelAnalyzeRequestParams.outputContentFormat": {
+      "name": "outputContentFormat",
+      "in": "query",
+      "description": "Format of the analyze result top-level content.",
+      "required": false,
+      "type": "string",
+      "default": "text",
+      "enum": [
+        "text",
+        "markdown"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Plain text representation of the document content without any formatting."
+          },
+          {
+            "name": "markdown",
+            "value": "markdown",
+            "description": "Markdown representation of the document content with section headings, tables,\netc."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentModelAnalyzeRequestParams.pages": {
+      "name": "pages",
+      "in": "query",
+      "description": "List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"",
+      "required": false,
+      "type": "string",
+      "pattern": "^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentModelAnalyzeRequestParams.queryFields": {
+      "name": "queryFields",
+      "in": "query",
+      "description": "List of additional fields to extract.  Ex. \"NumberOfGuests,StoreNumber\"",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentModelAnalyzeRequestParams.stringIndexType": {
+      "name": "stringIndexType",
+      "in": "query",
+      "description": "Method used to compute string offset and length.",
+      "required": false,
+      "type": "string",
+      "default": "textElements",
+      "enum": [
+        "textElements",
+        "unicodeCodePoint",
+        "utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "textElements",
+            "value": "textElements",
+            "description": "User-perceived display character, or grapheme cluster, as defined by Unicode\n8.0.0."
+          },
+          {
+            "name": "unicodeCodePoint",
+            "value": "unicodeCodePoint",
+            "description": "Character unit represented by a single unicode code point.  Used by Python 3."
+          },
+          {
+            "name": "utf16CodeUnit",
+            "value": "utf16CodeUnit",
+            "description": "Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,\nJava, and .NET."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

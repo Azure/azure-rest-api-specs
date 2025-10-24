@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-04-24",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "configurationName": "default",
+    "resource": {
+      "properties": {
+        "singleSignOnUrl": "https://www.dynatrace.io",
+        "aadDomains": [
+          "mpliftrdt20210811outlook.onmicrosoft.com"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/singleSignOnConfigurations/default",
+        "properties": {
+          "singleSignOnUrl": "https://www.dynatrace.io/IAmSomeHash",
+          "aadDomains": [
+            "mpliftrdt20210811outlook.onmicrosoft.com"
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/singleSignOnConfigurations/default",
+        "properties": {
+          "singleSignOnUrl": "https://www.dynatrace.io/IAmSomeHash",
+          "aadDomains": [
+            "mpliftrdt20210811outlook.onmicrosoft.com"
+          ]
+        }
+      }
+    }
+  }
+}

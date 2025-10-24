@@ -5,9 +5,12 @@ import "./routes/common.tsp";
 import "./routes/audio_speech.tsp";
 import "./routes/audio_transcription.tsp";
 import "./routes/audio_translation.tsp";
+import "./routes/batches.tsp";
 import "./routes/completions.tsp";
 import "./routes/images.tsp";
 import "./routes/embeddings.tsp";
+import "./routes/files.tsp";
+import "./routes/uploads.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -22,9 +25,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-@service({
-  title: "Azure OpenAI API",
-})
+@service(#{ title: "Azure OpenAI API" })
 @server(
   "{endpoint}/openai",
   "Azure OpenAI APIs for completions and search",
@@ -41,27 +42,19 @@ using TypeSpec.Versioning;
 namespace Azure.OpenAI;
 
 enum ServiceApiVersions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_12_01: "2022-12-01",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_05_15: "2023-05-15",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_06_01_Preview: "2023-06-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_07_01_Preview: "2023-07-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_02_01: "2024-02-01",
   v2024_02_15_Preview: "2024-02-15-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_01_Preview: "2024-03-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_04_01_Preview: "2024-04-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_05_01_Preview: "2024-05-01-preview",
+  v2024_06_01: "2024-06-01",
+  v2024_07_01_Preview: "2024-07-01-preview",
+  v2024_08_01_Preview: "2024-08-01-preview",
+  v2024_09_01_Preview: "2024-09-01-preview",
+  v2024_10_01_Preview: "2024-10-01-preview",
+  v2025_01_01_Preview: "2025-01-01-preview",
 }

@@ -15,7 +15,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 
@@ -26,7 +25,7 @@ model StandbyContainerGroupPoolResource
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("standbyContainerGroupPoolName")
   @segment("standbyContainerGroupPools")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Name of the standby container group pool")
   @path
   name: string;
@@ -41,8 +40,12 @@ model StandbyContainerGroupPoolResourceProperties {
   @doc("Specifies container group properties of standby container group pools.")
   containerGroupProperties: ContainerGroupProperties;
 
+  @doc("Specifies zones of standby container group pools.")
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  zones?: string[];
+
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -113,9 +116,13 @@ interface StandbyContainerGroupPools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyContainerGroupPoolResource>;
-  update is ArmResourcePatchSync<
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
     StandbyContainerGroupPoolResource,
-    StandbyContainerGroupPoolResourceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyContainerGroupPoolResource,
+      StandbyContainerGroupPoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyContainerGroupPoolResource>;
   listBySubscription is ArmListBySubscription<StandbyContainerGroupPoolResource>;

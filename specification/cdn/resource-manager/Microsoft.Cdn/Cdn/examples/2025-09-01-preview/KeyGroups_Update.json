@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "keyGroupUpdateProperties": {
+      "keyReferences": [
+        {
+          "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret1"
+        },
+        {
+          "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret2"
+        },
+        {
+          "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret3"
+        }
+      ]
+    },
+    "keyGroupName": "kg1",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kg1",
+        "type": "Microsoft.Cdn/profiles/keygroups",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keyGroups/kg1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "keyReferences": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret2"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret3"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "kg1",
+        "type": "Microsoft.Cdn/profiles/keygroups",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keyGroups/kg1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "keyReferences": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret2"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret3"
+            }
+          ],
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "KeyGroups_Update",
+  "title": "KeyGroups_Update"
+}

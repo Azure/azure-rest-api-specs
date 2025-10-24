@@ -11,19 +11,16 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AzurePlaywrightService")
-@service({
-  title: "Microsoft AzurePlaywrightService Management API",
-})
+@service(#{ title: "Microsoft AzurePlaywrightService Management API" })
 @doc("Microsoft.AzurePlaywrightService Resource Provider Management API.")
 @versioned(Versions)
 namespace Microsoft.AzurePlaywrightService;
 
 @doc("Microsoft.AzurePlaywrightService Management API Versions.")
 enum Versions {
-  /** 2024-02-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  /** 2024-12-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2024-02-01-preview`,
+  `2024-12-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -42,7 +39,7 @@ model Account is TrackedResource<AccountProperties> {
 
 @doc("Account resource properties.")
 model AccountProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Playwright testing dashboard URI for the account resource.")
   dashboardUri?: url;
 
@@ -53,9 +50,12 @@ model AccountProperties {
   scalableExecution?: EnablementStatus = EnablementStatus.Enabled;
 
   @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
-  reporting?: EnablementStatus = EnablementStatus.Disabled;
+  reporting?: EnablementStatus = EnablementStatus.Enabled;
 
-  @visibility("read")
+  @doc("When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.")
+  localAuth?: EnablementStatus = EnablementStatus.Disabled;
+
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -98,6 +98,16 @@ interface Accounts
     Account,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  delete is ArmResourceDeleteWithoutOkAsync<Account>;
+
+  update is ArmCustomPatchSync<
+    Account,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Account,
+      OmitDefaults<AccountProperties>
+    >
+  >;
 }
 
 @doc("The location of subscription quota resource.")
@@ -107,7 +117,7 @@ model Location {
   @key("location")
   @path
   @segment("locations")
-  @visibility("query", "read", "update")
+  @visibility(Lifecycle.Query, Lifecycle.Read, Lifecycle.Update)
   name: string;
 }
 
@@ -128,6 +138,9 @@ union QuotaNames {
 
   @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
   "ScalableExecution",
+
+  @doc("The quota details for reporting feature. When enabled, Playwright client will be able to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
+  Reporting: "Reporting",
 }
 
 @doc("The subscription quota resource properties.")
@@ -135,7 +148,11 @@ model QuotaProperties {
   @doc("The subscription quota resource free-trial properties.")
   freeTrial?: FreeTrialProperties;
 
-  @visibility("read")
+  @doc("Indicates the offering type for the subscription.")
+  @visibility(Lifecycle.Read)
+  offeringType?: OfferingType;
+
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -143,11 +160,11 @@ model QuotaProperties {
 @doc("The subscription quota resource free-trial properties.")
 model FreeTrialProperties {
   @doc("The Playwright service account id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accountId: string;
 
   @doc("The free-trial state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state: FreeTrialState;
 }
 
@@ -167,7 +184,7 @@ model AccountQuotaProperties {
   @doc("The Playwright service account quota resource free-trial properties.")
   freeTrial?: AccountFreeTrialProperties;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -175,23 +192,23 @@ model AccountQuotaProperties {
 @doc("The Playwright service account quota resource free-trial properties.")
 model AccountFreeTrialProperties {
   @doc("The free-trial createdAt utcDateTime.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdAt: utcDateTime;
 
   @doc("The free-trial expiryAt utcDateTime.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expiryAt: utcDateTime;
 
   @doc("The free-trial allocated limit value eg. allocated free minutes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allocatedValue: int32;
 
   @doc("The free-trial used value eg. used free minutes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   usedValue: int32;
 
   @doc("The free-trial percentage used.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minValue(0)
   @maxValue(100)
   percentageUsed: float32;
@@ -212,6 +229,23 @@ union FreeTrialState {
 
   @doc("The free-trial is Not Registered.")
   "NotRegistered",
+}
+
+@doc("Offering type state.")
+union OfferingType {
+  string,
+
+  @doc("The offeringType is NotApplicable.")
+  "NotApplicable",
+
+  @doc("The offeringType is PrivatePreview.")
+  "PrivatePreview",
+
+  @doc("The offeringType is PublicPreview.")
+  "PublicPreview",
+
+  @doc("The offeringType is GeneralAvailability.")
+  "GeneralAvailability",
 }
 
 @armResourceOperations

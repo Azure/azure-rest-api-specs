@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-01-02",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "Empty"
+        },
+        "diskSizeGB": 1024,
+        "availabilityPolicy": {
+          "actionOnDiskDelay": "AutomaticReattach"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2025-01-02"
+      },
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 1024,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 1024,
+          "availabilityPolicy": {
+            "actionOnDiskDelay": "AutomaticReattach"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "create a managed disk with availability policy."
+}

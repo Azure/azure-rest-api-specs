@@ -7,4 +7,6 @@
 import "./service.tsp";
 import "./standbyVMPool.tsp";
 import "./standbyVM.tsp";
+import "./standbyVirtualMachinePoolRuntimeView.tsp";
 import "./standbyContainerGroupPool.tsp";
+import "./standbyContainerGroupPoolRuntimeView.tsp";

@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/programmableconnectivity"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -11,18 +10,30 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Communication.ProgrammableConnectivity"
+    emitter-output-dir: "{output-dir}/sdk/communication/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.Communication.ProgrammableConnectivity"
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/sdk/communication/{namespace}"
+    namespace: Azure.Communication.ProgrammableConnectivity
+    model-namespace: false
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-programmableconnectivity"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-programmableconnectivity"
+    namespace: "azure.programmableconnectivity"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-ts":
+    generate-metadata: true
+    is-modular-library: false
+    emitter-output-dir: "{output-dir}/{service-dir}/programmableconnectivity-rest"
+    package-details:
+      name: "@azure-rest/programmableconnectivity"
     flavor: azure
 linter:
   extends:

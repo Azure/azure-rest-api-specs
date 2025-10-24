@@ -17,7 +17,7 @@ model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
   @path
   @key("networkSecurityGroupName")
   @segment("networkSecurityGroups")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -46,7 +46,7 @@ interface NetworkSecurityGroups {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkSecurityGroup>;
 
   @doc("Gets all network security groups in a resource group.")
-  list is ArmResourceListByParent<NetworkSecurityGroup>;
+  listByResourceGroup is ArmResourceListByParent<NetworkSecurityGroup>;
 
   @doc("Gets all network security groups in a subscription.")
   listAll is ArmListBySubscription<NetworkSecurityGroup>;

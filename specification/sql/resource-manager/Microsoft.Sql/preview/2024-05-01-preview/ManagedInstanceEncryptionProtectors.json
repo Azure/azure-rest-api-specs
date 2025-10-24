@@ -1,0 +1,350 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/encryptionProtector": {
+      "get": {
+        "tags": [
+          "ManagedInstanceEncryptionProtectors"
+        ],
+        "description": "Gets a list of managed instance encryption protectors",
+        "operationId": "ManagedInstanceEncryptionProtectors_ListByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instance encryption protector.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceEncryptionProtectorListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidUpsertKeyType - Service-managed TDE keys are managed by the service. Service-managed TDE keys don't support Create or Update by the user.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 InvalidEncryptionProtectorName - The encryption protector key name is not supported.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List encryption protectors by managed instance": {
+            "$ref": "./examples/ManagedInstanceEncryptionProtectorList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/encryptionProtector/{encryptionProtectorName}": {
+      "get": {
+        "tags": [
+          "ManagedInstanceEncryptionProtectors"
+        ],
+        "description": "Gets a managed instance encryption protector.",
+        "operationId": "ManagedInstanceEncryptionProtectors_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector to be retrieved.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified managed instance encryption protector.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceEncryptionProtector"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidUpsertKeyType - Service-managed TDE keys are managed by the service. Service-managed TDE keys don't support Create or Update by the user.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 InvalidEncryptionProtectorName - The encryption protector key name is not supported.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the encryption protector": {
+            "$ref": "./examples/ManagedInstanceEncryptionProtectorGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedInstanceEncryptionProtectors"
+        ],
+        "description": "Updates an existing encryption protector.",
+        "operationId": "ManagedInstanceEncryptionProtectors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector to be updated.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested encryption protector resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceEncryptionProtector"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the encryption protector.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceEncryptionProtector"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidUpsertKeyType - Service-managed TDE keys are managed by the service. Service-managed TDE keys don't support Create or Update by the user.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 InvalidEncryptionProtectorName - The encryption protector key name is not supported.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 AkvHostNotResolvingFromNode - AKV host '{0}' is not resolvable from SQL, on server '{1}'.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 MissingKeyVaultUriForRestore - Azure Key Vault key URI '{0}' is required to successfully restore the database '{1}' under server '{2}'.\n\n * 400 AzureKeyVaultKeyUsedOnGeoPrimary - The operation could not be completed because the Azure Key Vault Key name {0} is currently set as encryption protector on geo-primary.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 or 3072 and Key Type is RSA or RSA-HSM.\n\n * 400 UmiMissingAkvPermissions - PrimaryUserAssignedIdentityId provided by user does not have access to KeyId provided\n\n * 400 SameKeyUriNotFoundOnRemoteServer - Secondary server does not have the key material from the same key vault as the primary server's encryption protector with key auto-rotation enabled.\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 SecurityAzureKeyVaultGeoChainError - Creating secondary of secondary (a process known as chaining) is not supported when enabling Transparent Data Encryption using Azure Key Vault (BYOK).\n\n * 400 PerDatabaseCMKDWNotSupported - Database-level CMK in preview is not supported for Datawarehouse edition.\n\n * 400 BlockSystemAssignedIdentityForCrossTenantCMK - Cross tenant CMK can only be configured when the server is configured with a User Assigned Managed Identity. Refer to https://aka.ms/sqltdebyokumi to configure User Assigned Managed Identity.\n\n * 400 CannotDropDatabaseAKVError - The database {0} on server {1} cannot be safely dropped because it is encrypted with a customer managed key that is no longer accessible to take the last backup before drop. Please restore Azure Key Vault Access on the server and revalidate the keys to make this database accessible and then proceed with the drop. For details see https://aka.ms/tdecmkrestorability\n\n * 400 CreateDatabaseAttemptedWithRotationInProgress - The create database operation can not be performed at this time due to ongoing Transparent Data Encryption (TDE) key rotation on the server. Please try the operation again later.\n\n * 400 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 400 PerDatabaseCMKRestoreNotSupported - Database restore is not supported when Database-level CMK is configured in preview.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 PerDatabaseCMKHSNotSupported - Database-level CMK in preview is not supported for Hyperscale edition.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 CMKOperationNotAllowed - User tried to perform an operation on the server when the server did not have Azure Key Vault Access.\n\n * 400 AkvEndpointNotReachableFromNode - AKV endpoint '{0}' is not reachable from SQL, on server '{1}'.\n\n * 400 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 400 AzureKeyVaultKeyNameCurrentlyInUse - The operation could not be completed because the Azure Key Vault Key name {0} is currently in use.\n\n * 400 AzureKeyVaultKeyThumbprintIsDifferent - The operation could not be completed because the Azure Key Vault Key material is different than the current encryption protector key.\n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 OldGenerationOfAKVKeyBeingUsedError - Using an old version of AKV key as TDE protector is not allowed. Please use the latest version of the AKV key as the encryption protector\n\n * 400 PerDatabaseCMKMissingIdentityOnGeoSecondaryDatabase - Per Database CMK identity not setup on the target database.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 400 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerKeyNotFound - The requested server key was not found on the current subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 EncryptionProtectorChangeInProgress - Cannot update database encryption key protector while protector change is already in progress\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information .\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update the encryption protector to key vault": {
+            "$ref": "./examples/ManagedInstanceEncryptionProtectorCreateOrUpdateKeyVault.json"
+          },
+          "Update the encryption protector to service managed": {
+            "$ref": "./examples/ManagedInstanceEncryptionProtectorCreateOrUpdateServiceManaged.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/encryptionProtector/{encryptionProtectorName}/revalidate": {
+      "post": {
+        "tags": [
+          "ManagedInstanceEncryptionProtectors"
+        ],
+        "description": "Revalidates an existing encryption protector.",
+        "operationId": "ManagedInstanceEncryptionProtectors_Revalidate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector to be updated.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully revalidated the encryption protector."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidUpsertKeyType - Service-managed TDE keys are managed by the service. Service-managed TDE keys don't support Create or Update by the user.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 InvalidEncryptionProtectorName - The encryption protector key name is not supported.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 AkvHostNotResolvingFromNode - AKV host '{0}' is not resolvable from SQL, on server '{1}'.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 MissingKeyVaultUriForRestore - Azure Key Vault key URI '{0}' is required to successfully restore the database '{1}' under server '{2}'.\n\n * 400 AzureKeyVaultKeyUsedOnGeoPrimary - The operation could not be completed because the Azure Key Vault Key name {0} is currently set as encryption protector on geo-primary.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 or 3072 and Key Type is RSA or RSA-HSM.\n\n * 400 UmiMissingAkvPermissions - PrimaryUserAssignedIdentityId provided by user does not have access to KeyId provided\n\n * 400 SameKeyUriNotFoundOnRemoteServer - Secondary server does not have the key material from the same key vault as the primary server's encryption protector with key auto-rotation enabled.\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 SecurityAzureKeyVaultGeoChainError - Creating secondary of secondary (a process known as chaining) is not supported when enabling Transparent Data Encryption using Azure Key Vault (BYOK).\n\n * 400 PerDatabaseCMKDWNotSupported - Database-level CMK in preview is not supported for Datawarehouse edition.\n\n * 400 BlockSystemAssignedIdentityForCrossTenantCMK - Cross tenant CMK can only be configured when the server is configured with a User Assigned Managed Identity. Refer to https://aka.ms/sqltdebyokumi to configure User Assigned Managed Identity.\n\n * 400 CannotDropDatabaseAKVError - The database {0} on server {1} cannot be safely dropped because it is encrypted with a customer managed key that is no longer accessible to take the last backup before drop. Please restore Azure Key Vault Access on the server and revalidate the keys to make this database accessible and then proceed with the drop. For details see https://aka.ms/tdecmkrestorability\n\n * 400 CreateDatabaseAttemptedWithRotationInProgress - The create database operation can not be performed at this time due to ongoing Transparent Data Encryption (TDE) key rotation on the server. Please try the operation again later.\n\n * 400 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 400 PerDatabaseCMKRestoreNotSupported - Database restore is not supported when Database-level CMK is configured in preview.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 PerDatabaseCMKHSNotSupported - Database-level CMK in preview is not supported for Hyperscale edition.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 CMKOperationNotAllowed - User tried to perform an operation on the server when the server did not have Azure Key Vault Access.\n\n * 400 AkvEndpointNotReachableFromNode - AKV endpoint '{0}' is not reachable from SQL, on server '{1}'.\n\n * 400 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 400 AzureKeyVaultKeyNameCurrentlyInUse - The operation could not be completed because the Azure Key Vault Key name {0} is currently in use.\n\n * 400 AzureKeyVaultKeyThumbprintIsDifferent - The operation could not be completed because the Azure Key Vault Key material is different than the current encryption protector key.\n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 OldGenerationOfAKVKeyBeingUsedError - Using an old version of AKV key as TDE protector is not allowed. Please use the latest version of the AKV key as the encryption protector\n\n * 400 PerDatabaseCMKMissingIdentityOnGeoSecondaryDatabase - Per Database CMK identity not setup on the target database.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 400 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerKeyNotFound - The requested server key was not found on the current subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 EncryptionProtectorChangeInProgress - Cannot update database encryption key protector while protector change is already in progress\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information .\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Revalidates the encryption protector": {
+            "$ref": "./examples/ManagedInstanceEncryptionProtectorRevalidate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceEncryptionProtector": {
+      "description": "The managed instance encryption protector.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceEncryptionProtectorProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedInstanceEncryptionProtectorListResult": {
+      "description": "A list of managed instance encryption protectors.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceEncryptionProtector"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceEncryptionProtectorProperties": {
+      "description": "Properties for an encryption protector execution.",
+      "required": [
+        "serverKeyType"
+      ],
+      "type": "object",
+      "properties": {
+        "serverKeyName": {
+          "description": "The name of the managed instance key.",
+          "type": "string"
+        },
+        "serverKeyType": {
+          "description": "The encryption protector type like 'ServiceManaged', 'AzureKeyVault'.",
+          "enum": [
+            "ServiceManaged",
+            "AzureKeyVault"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerKeyType",
+            "modelAsString": true
+          }
+        },
+        "uri": {
+          "description": "The URI of the server key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "description": "Thumbprint of the server key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "autoRotationEnabled": {
+          "description": "Key auto rotation opt-in flag. Either true or false.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

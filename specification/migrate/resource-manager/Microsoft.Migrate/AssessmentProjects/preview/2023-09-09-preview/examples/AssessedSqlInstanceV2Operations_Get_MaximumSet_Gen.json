@@ -1,0 +1,474 @@
+{
+  "title": "AssessedSqlInstanceV2Operations_Get",
+  "operationId": "AssessedSqlInstanceV2Operations_Get",
+  "parameters": {
+    "api-version": "2023-09-09-preview",
+    "subscriptionId": "4bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "resourceGroupName": "rgmigrate",
+    "projectName": "fci-test6904project",
+    "groupName": "test_fci_hadr",
+    "assessmentName": "test_swagger_1",
+    "assessedSqlInstanceName": "3c6574cf-b4e1-4fdc-93db-6bbcc570dda2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/bansalankit-rg/providers/Microsoft.Migrate/assessmentprojects/fci-ankit-test6904project/groups/test_fci_hadr/sqlAssessments/test_swagger_1/assessedSqlInstances/3c6574cf-b4e1-4fdc-93db-6bbcc570dda2",
+        "name": "3c6574cf-b4e1-4fdc-93db-6bbcc570dda2",
+        "systemData": {
+          "createdAt": "0001-01-01T00:00:00",
+          "createdBy": null,
+          "createdByType": null,
+          "lastModifiedAt": "0001-01-01T00:00:00",
+          "lastModifiedBy": null,
+          "lastModifiedByType": null
+        },
+        "type": "Microsoft.Migrate/assessmentprojects/groups/sqlAssessments/assessedSqlInstances",
+        "properties": {
+          "azureSqlVMSuitabilityDetails": {
+            "azureSqlSku": {
+              "virtualMachineSize": {
+                "azureVmFamily": "Dasv4_series",
+                "cores": 2,
+                "azureSkuName": "Standard_D2as_v4",
+                "availableCores": 2,
+                "maxNetworkInterfaces": 0
+              },
+              "dataDiskSizes": [
+                {
+                  "recommendedSizeInGib": 8.0,
+                  "recommendedThroughputInMbps": 25.0,
+                  "recommendedIops": 120.0,
+                  "diskType": "Premium",
+                  "diskSize": "Premium_P2",
+                  "diskRedundancy": "LRS",
+                  "storageCost": 1.56
+                }
+              ],
+              "logDiskSizes": [
+                {
+                  "recommendedSizeInGib": 8.0,
+                  "recommendedThroughputInMbps": 25.0,
+                  "recommendedIops": 120.0,
+                  "diskType": "Premium",
+                  "diskSize": "Premium_P2",
+                  "diskRedundancy": "LRS",
+                  "storageCost": 1.56
+                }
+              ],
+              "azureSqlTargetType": "AzureSqlVirtualMachine"
+            },
+            "replicaAzureSqlSku": [],
+            "sharedResources": {
+              "sharedDataDisks": [],
+              "sharedLogDisks": [],
+              "sharedTempDbDisks": [],
+              "numberOfMounts": 0,
+              "quorumWitness": null
+            },
+            "monthlyComputeCost": 32.94432,
+            "monthlyStorageCost": 3.12,
+            "costComponents": [
+              {
+                "name": "MonthlySecurityCost",
+                "value": 0.0,
+                "description": null
+              }
+            ],
+            "securitySuitability": "Unknown",
+            "shouldProvisionReplicas": false,
+            "skuReplicationMode": "NotApplicable",
+            "migrationGuidelines": [
+              {
+                "guidelineId": "MigrateDataFromSourceSqlServerToVM",
+                "migrationGuidelineCategory": "FailoverCluterInstanceGuideLine",
+                "migrationGuidelineContext": []
+              },
+              {
+                "guidelineId": "MigrateNonReplicatedDatabasesAndAutoSeedSecondaryIfNeeded",
+                "migrationGuidelineCategory": "AvailabilityGroupGuideline",
+                "migrationGuidelineContext": []
+              },
+              {
+                "guidelineId": "MigratePrimaryReplicaAndAllOtherReplicasToIaaS",
+                "migrationGuidelineCategory": "AvailabilityGroupGuideline",
+                "migrationGuidelineContext": []
+              }
+            ],
+            "recommendationReasonings": [
+              {
+                "reasoningId": "VirtualMachineCpuScalingFactorRequirementUnavailable",
+                "reasoningString": null,
+                "reasoningCategory": "CpuType",
+                "contextParameters": [
+                  {
+                    "contextKey": "AllocatedCores",
+                    "contextValue": "2"
+                  },
+                  {
+                    "contextKey": "TargetCoresRecommended",
+                    "contextValue": "2"
+                  }
+                ]
+              },
+              {
+                "reasoningId": "MeetsVirtualMachineMemoryRequirement",
+                "reasoningString": null,
+                "reasoningCategory": "MemoryType",
+                "contextParameters": [
+                  {
+                    "contextKey": "BufferPoolSizeInGB",
+                    "contextValue": "4"
+                  },
+                  {
+                    "contextKey": "RAMRecommendedInGB",
+                    "contextValue": "8"
+                  }
+                ]
+              },
+              {
+                "reasoningId": "MeetsVirtualMachineStorageRequirement",
+                "reasoningString": null,
+                "reasoningCategory": "StorageType",
+                "contextParameters": [
+                  {
+                    "contextKey": "CommaSeperatedManagedDisks",
+                    "contextValue": "2 PremiumSSD(P2)"
+                  }
+                ]
+              },
+              {
+                "reasoningId": "MeetsVirtualMachineFamilyRequirement",
+                "reasoningString": null,
+                "reasoningCategory": "ServiceTier",
+                "contextParameters": [
+                  {
+                    "contextKey": "VirtualMachineSize",
+                    "contextValue": "standardDASv4Family"
+                  }
+                ]
+              }
+            ],
+            "migrationTargetPlatform": "AzureSqlVirtualMachine",
+            "suitability": "Suitable",
+            "migrationIssues": [
+              {
+                "issueId": "PerformanceDataMissing",
+                "issueCategory": "Internal",
+                "impactedObjects": []
+              },
+              {
+                "issueId": "PerfBasedFallbackToAsOnPremises",
+                "issueCategory": "Warning",
+                "impactedObjects": [
+                  {
+                    "objectName": "MSSQLSERVER",
+                    "objectType": "SqlInstance"
+                  }
+                ]
+              }
+            ]
+          },
+          "memoryInUseInMB": 4096.0,
+          "hasScanOccurred": true,
+          "recommendedAzureSqlTargetType": "AzureSqlVirtualMachine",
+          "recommendedSuitability": "SuitableForSqlVM",
+          "azureSqlMISuitabilityDetails": {
+            "azureSqlSku": {
+              "azureSqlServiceTier": "BusinessCritical",
+              "azureSqlComputeTier": "Provisioned",
+              "azureSqlHardwareGeneration": "Gen5",
+              "storageMaxSizeInMB": 32768.0,
+              "predictedDataSizeInMB": 112.0,
+              "predictedLogSizeInMB": 112.0,
+              "cores": 4,
+              "azureSqlTargetType": "AzureSqlManagedInstance"
+            },
+            "replicaAzureSqlSku": [],
+            "sharedResources": {
+              "sharedDataDisks": [],
+              "sharedLogDisks": [],
+              "sharedTempDbDisks": [],
+              "numberOfMounts": 0,
+              "quorumWitness": null
+            },
+            "monthlyComputeCost": 475.999296,
+            "monthlyStorageCost": 0.0,
+            "costComponents": [
+              {
+                "name": "MonthlySecurityCost",
+                "value": 0.0,
+                "description": null
+              }
+            ],
+            "securitySuitability": "Unknown",
+            "shouldProvisionReplicas": false,
+            "skuReplicationMode": "NotApplicable",
+            "migrationGuidelines": [],
+            "recommendationReasonings": [
+              {
+                "reasoningId": "InstanceCpuScalingFactorRequirementUnavailable",
+                "reasoningString": null,
+                "reasoningCategory": "CpuType",
+                "contextParameters": [
+                  {
+                    "contextKey": "AllocatedCores",
+                    "contextValue": "2"
+                  },
+                  {
+                    "contextKey": "TargetCoresRecommended",
+                    "contextValue": "4"
+                  }
+                ]
+              },
+              {
+                "reasoningId": "MeetsInstanceStorageRequirement",
+                "reasoningString": null,
+                "reasoningCategory": "StorageType",
+                "contextParameters": [
+                  {
+                    "contextKey": "TotalStorageConsumedByDataFilesInGB",
+                    "contextValue": "0.109"
+                  },
+                  {
+                    "contextKey": "TotalStorageConsumedByLogFilesInGB",
+                    "contextValue": "0.109"
+                  },
+                  {
+                    "contextKey": "TotalRecommendedStorageInGB",
+                    "contextValue": "32"
+                  },
+                  {
+                    "contextKey": "IncrementsInStorageInGB",
+                    "contextValue": "32"
+                  },
+                  {
+                    "contextKey": "MaxAvailableStorageInGB",
+                    "contextValue": "1024"
+                  }
+                ]
+              },
+              {
+                "reasoningId": "MeetsAlwaysOnInstanceReplicaRequirementWithoutSecondaries",
+                "reasoningString": null,
+                "reasoningCategory": "AlwaysOnAG",
+                "contextParameters": [
+                  {
+                    "contextKey": "AlwaysOnDatabaseServiceTier",
+                    "contextValue": "BusinessCritical"
+                  }
+                ]
+              },
+              {
+                "reasoningId": "MeetsProvisionedComputeTierRequirement",
+                "reasoningString": null,
+                "reasoningCategory": "ComputeTier",
+                "contextParameters": [
+                  {
+                    "contextKey": "ComputeTier",
+                    "contextValue": "Provisioned"
+                  }
+                ]
+              },
+              {
+                "reasoningId": "MeetsServiceTierRequirement",
+                "reasoningString": null,
+                "reasoningCategory": "ServiceTier",
+                "contextParameters": [
+                  {
+                    "contextKey": "ServiceTier",
+                    "contextValue": "BusinessCritical"
+                  }
+                ]
+              }
+            ],
+            "migrationTargetPlatform": "AzureSqlManagedInstance",
+            "suitability": "ReadinessUnknown",
+            "migrationIssues": [
+              {
+                "issueId": "SuitabilityReportMissing",
+                "issueCategory": "Internal",
+                "impactedObjects": []
+              },
+              {
+                "issueId": "PerformanceDataMissing",
+                "issueCategory": "Internal",
+                "impactedObjects": []
+              },
+              {
+                "issueId": "PerfBasedFallbackToAsOnPremises",
+                "issueCategory": "Warning",
+                "impactedObjects": [
+                  {
+                    "objectName": "MSSQLSERVER",
+                    "objectType": "SqlInstance"
+                  }
+                ]
+              }
+            ]
+          },
+          "azureSqlDBSuitabilityDetails": {
+            "azureSqlSku": null,
+            "replicaAzureSqlSku": [],
+            "sharedResources": null,
+            "monthlyComputeCost": 833.165424,
+            "monthlyStorageCost": 24.69,
+            "costComponents": [
+              {
+                "name": "MonthlySecurityCost",
+                "value": 0.0,
+                "description": null
+              }
+            ],
+            "securitySuitability": "Unknown",
+            "shouldProvisionReplicas": false,
+            "skuReplicationMode": "NotApplicable",
+            "migrationGuidelines": [],
+            "recommendationReasonings": [],
+            "migrationTargetPlatform": "AzureSqlDatabase",
+            "suitability": "ReadinessUnknown",
+            "migrationIssues": [
+              {
+                "issueId": "SuitabilityReportMissing",
+                "issueCategory": "Internal",
+                "impactedObjects": []
+              },
+              {
+                "issueId": "PerformanceDataMissing",
+                "issueCategory": "Internal",
+                "impactedObjects": []
+              },
+              {
+                "issueId": "PerfBasedFallbackToAsOnPremises",
+                "issueCategory": "Warning",
+                "impactedObjects": [
+                  {
+                    "objectName": "MSSQLSERVER",
+                    "objectType": "SqlInstance"
+                  }
+                ]
+              }
+            ]
+          },
+          "storageTypeBasedDetails": [
+            {
+              "storageType": "Rows",
+              "diskSizeInMB": 112.0,
+              "megabytesPerSecondOfRead": 0.0,
+              "megabytesPerSecondOfWrite": 0.0,
+              "numberOfReadOperationsPerSecond": 0.0,
+              "numberOfWriteOperationsPerSecond": 0.0
+            },
+            {
+              "storageType": "Log",
+              "diskSizeInMB": 112.0,
+              "megabytesPerSecondOfRead": 0.0,
+              "megabytesPerSecondOfWrite": 0.0,
+              "numberOfReadOperationsPerSecond": 0.0,
+              "numberOfWriteOperationsPerSecond": 0.0
+            }
+          ],
+          "productSupportStatus": {
+            "currentVersion": null,
+            "servicePackStatus": "Unknown",
+            "esuStatus": "Unknown",
+            "supportStatus": "Extended",
+            "eta": 34,
+            "currentEsuYear": "Unknown",
+            "mainstreamEndDate": "2021-07-13T00:00:00Z",
+            "extendedSupportEndDate": "2026-07-14T00:00:00Z",
+            "extendedSecurityUpdateYear1EndDate": "0001-01-01T00:00:00",
+            "extendedSecurityUpdateYear2EndDate": "0001-01-01T00:00:00",
+            "extendedSecurityUpdateYear3EndDate": "0001-01-01T00:00:00"
+          },
+          "fciMetadata": null,
+          "availabilityReplicaSummary": {
+            "numberOfSynchronousReadReplicas": 0,
+            "numberOfSynchronousNonReadReplicas": 0,
+            "numberOfAsynchronousReadReplicas": 0,
+            "numberOfAsynchronousNonReadReplicas": 0,
+            "numberOfPrimaryReplicas": 6
+          },
+          "isClustered": false,
+          "isHighAvailabilityEnabled": true,
+          "recommendedTargetReasonings": [
+            {
+              "reasoningId": "RecommendedWithWarningsForSQLVM",
+              "reasoningString": null,
+              "reasoningCategory": "RecommendedTargetReasoning",
+              "contextParameters": [
+                {
+                  "contextKey": "MigrationIssuesCount",
+                  "contextValue": "0"
+                },
+                {
+                  "contextKey": "MigrationWarningsCount",
+                  "contextValue": "1"
+                },
+                {
+                  "contextKey": "RecommendedCost",
+                  "contextValue": "36.06432"
+                }
+              ]
+            },
+            {
+              "reasoningId": "RecommendedCost",
+              "reasoningString": null,
+              "reasoningCategory": "RecommendedTargetReasoning",
+              "contextParameters": [
+                {
+                  "contextKey": "RecommendedCost",
+                  "contextValue": "36.06432"
+                }
+              ]
+            }
+          ],
+          "sizingCriterion": "AsOnPremises",
+          "machineArmId": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/bansalankit-rg/providers/Microsoft.Migrate/assessmentprojects/fci-ankit-test6904project/machines/184b8433-6991-45db-9f57-3dd3f6397a60",
+          "machineName": "SQLAGVM02",
+          "instanceName": "MSSQLSERVER",
+          "sqlInstanceSdsArmId": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourcegroups/bansalankit-rg/providers/microsoft.offazure/mastersites/fci-ankit-test6065mastersite/sqlsites/fci-ankit-test6065sqlsites/sqlservers/13c17b85-8842-4d50-a640-df0e45e56670",
+          "sqlEdition": "Enterprise Edition: Core-based Licensing (64-bit)",
+          "sqlVersion": "SQL Server 2016",
+          "numberOfCoresAllocated": 2,
+          "percentageCoresUtilization": 100.0,
+          "logicalDisks": [
+            {
+              "diskId": "s:",
+              "diskSizeInMB": 104.0,
+              "megabytesPerSecondOfRead": 0.0,
+              "megabytesPerSecondOfWrite": 0.0,
+              "numberOfReadOperationsPerSecond": 0.0,
+              "numberOfWriteOperationsPerSecond": 0.0
+            },
+            {
+              "diskId": "l:",
+              "diskSizeInMB": 104.0,
+              "megabytesPerSecondOfRead": 0.0,
+              "megabytesPerSecondOfWrite": 0.0,
+              "numberOfReadOperationsPerSecond": 0.0,
+              "numberOfWriteOperationsPerSecond": 0.0
+            },
+            {
+              "diskId": "c:",
+              "diskSizeInMB": 16.0,
+              "megabytesPerSecondOfRead": 0.0,
+              "megabytesPerSecondOfWrite": 0.0,
+              "numberOfReadOperationsPerSecond": 0.0,
+              "numberOfWriteOperationsPerSecond": 0.0
+            }
+          ],
+          "databaseSummary": {
+            "numberOfUserDatabases": 6,
+            "totalDatabaseSizeInMB": 224.0,
+            "largestDatabaseSizeInMB": 144.0,
+            "totalDiscoveredUserDatabases": 7
+          },
+          "confidenceRatingInPercentage": 0.0,
+          "createdTimestamp": "2023-09-08T05:22:34.9353438Z",
+          "updatedTimestamp": "2023-09-08T05:22:35.9666076Z"
+        }
+      }
+    }
+  }
+}

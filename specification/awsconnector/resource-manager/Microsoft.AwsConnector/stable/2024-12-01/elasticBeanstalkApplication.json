@@ -1,0 +1,620 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ElasticBeanstalkApplications"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/elasticBeanstalkApplications": {
+      "get": {
+        "operationId": "ElasticBeanstalkApplications_ListBySubscription",
+        "tags": [
+          "ElasticBeanstalkApplications"
+        ],
+        "description": "List ElasticBeanstalkApplication resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkApplications_ListBySubscription": {
+            "$ref": "./examples/ElasticBeanstalkApplications_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticBeanstalkApplications": {
+      "get": {
+        "operationId": "ElasticBeanstalkApplications_ListByResourceGroup",
+        "tags": [
+          "ElasticBeanstalkApplications"
+        ],
+        "description": "List ElasticBeanstalkApplication resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkApplications_ListByResourceGroup": {
+            "$ref": "./examples/ElasticBeanstalkApplications_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticBeanstalkApplications/{name}": {
+      "get": {
+        "operationId": "ElasticBeanstalkApplications_Get",
+        "tags": [
+          "ElasticBeanstalkApplications"
+        ],
+        "description": "Get a ElasticBeanstalkApplication",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticBeanstalkApplication",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkApplication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkApplications_Get": {
+            "$ref": "./examples/ElasticBeanstalkApplications_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ElasticBeanstalkApplications_CreateOrReplace",
+        "tags": [
+          "ElasticBeanstalkApplications"
+        ],
+        "description": "Create a ElasticBeanstalkApplication. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticBeanstalkApplication",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkApplication"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ElasticBeanstalkApplication' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkApplication"
+            }
+          },
+          "201": {
+            "description": "Resource 'ElasticBeanstalkApplication' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkApplication"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkApplications_CreateOrReplace": {
+            "$ref": "./examples/ElasticBeanstalkApplications_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ElasticBeanstalkApplications_Update",
+        "tags": [
+          "ElasticBeanstalkApplications"
+        ],
+        "description": "Update a ElasticBeanstalkApplication",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticBeanstalkApplication",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkApplicationTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkApplication"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkApplications_Update": {
+            "$ref": "./examples/ElasticBeanstalkApplications_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ElasticBeanstalkApplications_Delete",
+        "tags": [
+          "ElasticBeanstalkApplications"
+        ],
+        "description": "Delete a ElasticBeanstalkApplication",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticBeanstalkApplication",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkApplications_Delete": {
+            "$ref": "./examples/ElasticBeanstalkApplications_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationResourceLifecycleConfig": {
+      "type": "object",
+      "description": "Definition of ApplicationResourceLifecycleConfig",
+      "properties": {
+        "serviceRole": {
+          "type": "string",
+          "description": "The ARN of an IAM service role that Elastic Beanstalk has permission to assume. The ServiceRole property is required the first time that you provide a ResourceLifecycleConfig for the application. After you provide it once, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again. You can, however, specify it in subsequent updates to change the Service Role to another value."
+        },
+        "versionLifecycleConfig": {
+          "$ref": "#/definitions/ApplicationVersionLifecycleConfig",
+          "description": "Defines lifecycle settings for application versions."
+        }
+      }
+    },
+    "ApplicationVersionLifecycleConfig": {
+      "type": "object",
+      "description": "Definition of ApplicationVersionLifecycleConfig",
+      "properties": {
+        "maxAgeRule": {
+          "$ref": "#/definitions/MaxAgeRule",
+          "description": "Specify a max age rule to restrict the length of time that application versions are retained for an application."
+        },
+        "maxCountRule": {
+          "$ref": "#/definitions/MaxCountRule",
+          "description": "Specify a max count rule to restrict the number of application versions that are retained for an application."
+        }
+      }
+    },
+    "AwsElasticBeanstalkApplicationProperties": {
+      "type": "object",
+      "description": "Definition of awsElasticBeanstalkApplication",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "A name for the Elastic Beanstalk application. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the application name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Your description of the application."
+        },
+        "resourceLifecycleConfig": {
+          "$ref": "#/definitions/ApplicationResourceLifecycleConfig",
+          "description": "Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions."
+        }
+      }
+    },
+    "ElasticBeanstalkApplication": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticBeanstalkApplicationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticBeanstalkApplicationListResult": {
+      "type": "object",
+      "description": "The response of a ElasticBeanstalkApplication list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ElasticBeanstalkApplication items on this page",
+          "items": {
+            "$ref": "#/definitions/ElasticBeanstalkApplication"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ElasticBeanstalkApplicationProperties": {
+      "type": "object",
+      "description": "Definition of ElasticBeanstalkApplication",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsElasticBeanstalkApplicationProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticBeanstalkApplicationTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ElasticBeanstalkApplication resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MaxAgeRule": {
+      "type": "object",
+      "description": "Definition of MaxAgeRule",
+      "properties": {
+        "deleteSourceFromS3": {
+          "type": "boolean",
+          "description": "Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Specify true to apply the rule, or false to disable it."
+        },
+        "maxAgeInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specify the number of days to retain an application versions."
+        }
+      }
+    },
+    "MaxCountRule": {
+      "type": "object",
+      "description": "Definition of MaxCountRule",
+      "properties": {
+        "deleteSourceFromS3": {
+          "type": "boolean",
+          "description": "Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Specify true to apply the rule, or false to disable it."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specify the maximum number of application versions to retain."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

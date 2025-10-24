@@ -15,9 +15,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armProviderNamespace
-@service({
-  title: "Microsoft.IoTOperationsOrchestrator management service.",
-})
+@service(#{ title: "Microsoft.IoTOperationsOrchestrator management service." })
 @doc("Microsoft.IoTOperationsOrchestrator Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.IoTOperationsOrchestrator;
@@ -25,7 +23,6 @@ namespace Microsoft.IoTOperationsOrchestrator;
 /** Api versions */
 enum Versions {
   /** 2023-10-04-preview preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-10-04-preview`,
 }
 

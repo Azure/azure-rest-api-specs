@@ -238,14 +238,109 @@ test("yaml not array", () => {
   expect(() =>
     getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "foo"),
   ).toThrowErrorMatchingInlineSnapshot(
-    `[ZodValidationError: Validation error: Expected array, received string]`,
+    `[Error: ✖ Invalid input: expected array, received string]`,
   );
 });
 
 test("yaml array not suppression", () => {
-  expect(() =>
-    getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"),
-  ).toThrowErrorMatchingInlineSnapshot(
-    `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].reason"]`,
+  expect(() => getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"))
+    .toThrowErrorMatchingInlineSnapshot(`
+    [Error: ✖ Invalid input: expected string, received undefined
+      → at [0].tool
+    ✖ Invalid input: expected string, received undefined
+      → at [0].reason]
+  `);
+});
+
+test("suppression with rules", () => {
+  let suppressions: Suppression[] = getSuppressionsFromYaml(
+    "TestTool",
+    "foo",
+    "suppressions.yaml",
+    `
+- tool: TestTool
+  path: foo
+  rules: [my-rule]
+  sub-rules:
+    - my.option.a
+    - my.option.b
+  reason: test
+    `,
   );
+  expect(suppressions).toStrictEqual([
+    {
+      tool: "TestTool",
+      if: undefined,
+      paths: ["foo"],
+      rules: ["my-rule"],
+      subRules: ["my.option.a", "my.option.b"],
+      reason: "test",
+    },
+  ]);
+});
+
+test.each([
+  { context: { foo: false, bar: false }, expected: ["no-if", "process-version"] },
+  {
+    context: { foo: true, bar: false },
+    expected: ["no-if", "if-foo", "if-foo-or-bar", "process-version"],
+  },
+  {
+    context: { foo: false, bar: true },
+    expected: ["no-if", "if-bar", "if-foo-or-bar", "process-version"],
+  },
+  {
+    context: { foo: true, bar: true },
+    expected: ["no-if", "if-foo", "if-bar", "if-foo-or-bar", "if-foo-and-bar", "process-version"],
+  },
+])("if($context)", ({ context, expected }) => {
+  const suppressionYaml = `
+- tool: TestTool
+  path: "**"
+  reason: no-if
+- tool: TestTool
+  path: "**"
+  if: foo
+  reason: if-foo
+- tool: TestTool
+  path: "**"
+  if: bar
+  reason: if-bar
+- tool: TestTool
+  path: "**"
+  if: foo || bar
+  reason: if-foo-or-bar
+- tool: TestTool
+  path: "**"
+  if: foo && bar
+  reason: if-foo-and-bar
+- tool: TestTool
+  path: "**"
+  if: require("process").version.startsWith("v")
+  reason: process-version
+`;
+
+  let suppressions: Suppression[] = getSuppressionsFromYaml(
+    "TestTool",
+    "test-path",
+    "suppressions.yaml",
+    suppressionYaml,
+    context,
+  );
+
+  expect(suppressions.map((s) => s.reason).sort()).toEqual(expected.sort());
+});
+
+test.each([
+  ["invalid javascript", "Unexpected identifier 'javascript'"],
+  ["1(1)", "1 is not a function"],
+])("if: %s", (ifExpression, expectedException) => {
+  expect(() =>
+    getSuppressionsFromYaml(
+      "TestTool",
+      "test-path",
+      "suppressions.yaml",
+      `- tool: TestTool\n  if: "${ifExpression}"\n  path: "**"\n  reason: test`,
+    ),
+  ).throws(expectedException);
 });

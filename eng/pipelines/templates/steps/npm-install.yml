@@ -1,20 +1,21 @@
 parameters:
-- name: NodeVersion
-  type: string
-  default: 20.x
-steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: ${{ parameters.NodeVersion }}
-    displayName: "Use Node ${{ parameters.NodeVersion }}"
+  - name: NodeVersion
+    type: string
+    default: $(NodeVersion)
+  - name: WorkingDirectory
+    type: string
+    default: $(Build.SourcesDirectory)
 
-  - script: npm --version --loglevel info
-    displayName: npm --version
+steps:
+  - template: /eng/pipelines/templates/steps/use-node-version.yml
+    parameters:
+      NodeVersion: ${{ parameters.NodeVersion }}
 
   - script: npm ci
     displayName: npm ci
+    workingDirectory: ${{ parameters.WorkingDirectory }}
 
-  - script: npm ls -a
+  - script: npm ls -a || true
     displayName: npm ls -a
     condition: succeededOrFailed()
-    continueOnError: true
+    workingDirectory: ${{ parameters.WorkingDirectory }}

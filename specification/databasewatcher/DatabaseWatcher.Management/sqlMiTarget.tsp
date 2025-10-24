@@ -15,7 +15,7 @@ model SqlMiTargetProperties extends TargetProperties {
   @doc("The Azure SQL Managed Instance target.")
   targetType: "SqlMi";
 
-  @doc("The Azure ResourceId of an Azure SQL Managed Instance target.")
+  @doc("The Azure resource ID of an Azure SQL Managed Instance target.")
   sqlMiResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Sql/managedInstances";

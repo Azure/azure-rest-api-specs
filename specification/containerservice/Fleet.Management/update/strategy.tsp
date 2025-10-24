@@ -27,7 +27,7 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
   @minLength(1)
   @maxLength(50)
   @path
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -41,11 +41,11 @@ union FleetUpdateStrategyProvisioningState {
 
 @doc("The properties of the UpdateStrategy.")
 model FleetUpdateStrategyProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the UpdateStrategy resource.")
   provisioningState?: FleetUpdateStrategyProvisioningState;
 
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("Defines the update sequence of the clusters.")
   strategy: UpdateRunStrategy;
 }
@@ -67,11 +67,10 @@ interface FleetUpdateStrategies {
 
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
@@ -79,5 +78,6 @@ interface FleetUpdateStrategies {
       IfMatchParameters<FleetUpdateStrategy>
   >;
 
-  listByParent is ArmResourceListByParent<FleetUpdateStrategy>;
+  /** List FleetUpdateStrategy resources by Fleet */
+  listByFleet is ArmResourceListByParent<FleetUpdateStrategy>;
 }

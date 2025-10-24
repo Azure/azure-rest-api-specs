@@ -1,15 +1,21 @@
+import { Stats } from "fs";
 import { access, constants, lstat, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
+import { createRequire } from "module";
 import { dirname, join, resolve, sep } from "path";
 import { sep as posixSep } from "path/posix";
+import vm from "vm";
 import { parse as yamlParse } from "yaml";
-import { z } from "zod";
-import { fromError } from "zod-validation-error";
+import * as z from "zod";
 
 export interface Suppression {
   tool: string;
+  // String of JavaScript CJS code, executed in a prepared context, that determines if a suppression should be included
+  if?: string;
   // Output only exposes "paths".  For input, if "path" is defined, it is inserted at the start of "paths".
   paths: string[];
+  rules?: string[];
+  subRules?: string[];
   reason: string;
 }
 
@@ -17,9 +23,12 @@ const suppressionSchema = z.array(
   z
     .object({
       tool: z.string(),
+      if: z.string().optional(),
       // For now, input allows "path" alongside "paths".  Lather, may deprecate "path".
       path: z.string().optional(),
       paths: z.array(z.string()).optional(),
+      rules: z.array(z.string()).optional(),
+      "sub-rules": z.array(z.string()).optional(),
       reason: z.string(),
     })
     .refine((data) => data.path || data.paths?.[0], {
@@ -34,15 +43,19 @@ const suppressionSchema = z.array(
       }
       return {
         tool: s.tool,
+        if: s.if,
         paths: paths,
+        rules: s.rules,
+        subRules: s["sub-rules"],
         reason: s.reason,
       } as Suppression;
     }),
 );
 
 /**
- * Returns the suppressions for a tool applicable to a path.  Walks up the directory tree to the first file named
+ * Returns the suppressions for a tool applicable to a path.  Walks up the directory tree to find all files named
  * "suppressions.yaml", parses and validates the contents, and returns the suppressions matching the tool and path.
+ * Suppressions are ordered by file (closest to path is first), then within the file (closest to top is first).
  *
  * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
  * @param path Path to file or directory under analysis.
@@ -62,23 +75,32 @@ const suppressionSchema = z.array(
  * );
  * ```
  */
-export async function getSuppressions(tool: string, path: string): Promise<Suppression[]> {
+export async function getSuppressions(
+  tool: string,
+  path: string,
+  context: Record<string, any> = {},
+): Promise<Suppression[]> {
   path = resolve(path);
 
   // If path doesn't exist, throw instead of returning "[]" to prevent confusion
   await access(path, constants.R_OK);
 
-  let suppressionsFile: string | undefined = await findSuppressionsYaml(path);
-  if (suppressionsFile) {
-    return getSuppressionsFromYaml(
-      tool,
-      path,
-      suppressionsFile,
-      await readFile(suppressionsFile, { encoding: "utf8" }),
+  let suppressionsFiles: string[] = await findSuppressionsFiles(path);
+  let suppressions: Suppression[] = [];
+
+  for (let suppressionsFile of suppressionsFiles) {
+    suppressions = suppressions.concat(
+      getSuppressionsFromYaml(
+        tool,
+        path,
+        suppressionsFile,
+        await readFile(suppressionsFile, { encoding: "utf8" }),
+        context,
+      ),
     );
-  } else {
-    return [];
   }
+
+  return suppressions;
 }
 
 /**
@@ -113,6 +135,7 @@ export function getSuppressionsFromYaml(
   path: string,
   suppressionsFile: string,
   suppressionsYaml: string,
+  context: Record<string, any> = {},
 ): Suppression[] {
   path = resolve(path);
   suppressionsFile = resolve(suppressionsFile);
@@ -125,42 +148,59 @@ export function getSuppressionsFromYaml(
     // Throws if parsedYaml doesn't match schema
     suppressions = suppressionSchema.parse(parsedYaml);
   } catch (err) {
-    throw fromError(err);
+    let finalErr = err;
+    if (err instanceof z.ZodError) {
+      finalErr = new Error(z.prettifyError(err), { cause: err });
+    }
+    throw finalErr;
   }
 
-  return suppressions
-    .filter((s) => s.tool === tool)
-    .filter((s) => {
-      // Minimatch only allows forward-slashes in patterns and input
-      const pathPosix: string = path.split(sep).join(posixSep);
+  // Make "require" available inside sandbox for CJS imports
+  const sandbox = { ...context, require: createRequire(import.meta.url) };
 
-      return s.paths.some((suppressionPath) => {
-        const pattern: string = join(dirname(suppressionsFile), suppressionPath)
-          .split(sep)
-          .join(posixSep);
-        return minimatch(pathPosix, pattern);
-      });
-    });
+  return (
+    suppressions
+      // Tool name
+      .filter((s) => s.tool === tool)
+      // Path
+      .filter((s) => {
+        // Minimatch only allows forward-slashes in patterns and input
+        const pathPosix: string = path.split(sep).join(posixSep);
+
+        return s.paths.some((suppressionPath) => {
+          const pattern: string = join(dirname(suppressionsFile), suppressionPath)
+            .split(sep)
+            .join(posixSep);
+          return minimatch(pathPosix, pattern);
+        });
+      })
+      // If
+      .filter((s) => s.if === undefined || vm.runInNewContext(s.if, sandbox))
+  );
 }
 
 /**
- * Returns absolute path to suppressions.yaml applying to input (or "undefined" if none found).
- * Walks up directory tree until first file matching "suppressions.yaml".
+ * Returns absolute paths to all suppressions.yaml files applying to input (or "undefined" if none found).
+ * Walks up directory tree, returning all files matching "suppressions.yaml", in order (may be empty);
  *
  * @param path Path to file under analysis.
  *
  * @example
  * ```
- * // Prints '/home/user/specs/specification/foo/suppressions.yaml':
+ * // Prints
+ * //   '/home/user/specs/specification/foo/suppressions.yaml'
+ * //   '/home/user/specs/specification/suppressions.yaml
  * console.log(findSuppressionsYaml(
  *   "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"
  * ));
  * ```
  */
-async function findSuppressionsYaml(path: string): Promise<string | undefined> {
+async function findSuppressionsFiles(path: string): Promise<string[]> {
+  const suppressionsFiles: string[] = [];
+
   path = resolve(path);
 
-  const stats = await lstat(path);
+  const stats: Stats = await lstat(path);
   let currentDirectory: string = stats.isDirectory() ? path : dirname(path);
 
   while (true) {
@@ -168,15 +208,19 @@ async function findSuppressionsYaml(path: string): Promise<string | undefined> {
     try {
       // Throws if file cannot be read
       await access(suppressionsFile, constants.R_OK);
-      return suppressionsFile;
+      suppressionsFiles.push(suppressionsFile);
     } catch {
-      const parentDirectory: string = dirname(currentDirectory);
-      if (parentDirectory !== currentDirectory) {
-        currentDirectory = parentDirectory;
-      } else {
-        // Reached fs root but no "suppressions.yaml" found
-        return;
-      }
+      // File does not exist (or cannot be read), so skip this directory and check the parent
+    }
+
+    const parentDirectory: string = dirname(currentDirectory);
+    if (parentDirectory !== currentDirectory) {
+      currentDirectory = parentDirectory;
+    } else {
+      // Reached fs root
+      break;
     }
   }
+
+  return suppressionsFiles;
 }

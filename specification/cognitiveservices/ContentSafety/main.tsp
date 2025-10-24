@@ -9,9 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@service({
-  title: "ContentSafety Service",
-})
+@service(#{ title: "ContentSafety Service" })
 @versioned(ContentSafety.Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
@@ -38,12 +36,6 @@ using Azure.Core;
 namespace ContentSafety;
 
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_10_01: "2023-10-01",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_10_15_Preview: "2023-10-15-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_02_15_Preview: "2024-02-15-preview",
+  v2024_09_01: "2024-09-01",
 }

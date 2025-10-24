@@ -570,8 +570,7 @@
           "description": "Array of blocklistItems to add.",
           "items": {
             "$ref": "#/definitions/TextBlocklistItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -587,8 +586,7 @@
           "description": "Array of blocklistItems have been added.",
           "items": {
             "$ref": "#/definitions/TextBlocklistItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -601,7 +599,7 @@
       "properties": {
         "image": {
           "$ref": "#/definitions/ImageData",
-          "description": "The image needs to be analyzed."
+          "description": "The image to be analyzed."
         },
         "categories": {
           "type": "array",
@@ -643,8 +641,7 @@
           "description": "Analysis result for categories.",
           "items": {
             "$ref": "#/definitions/ImageCategoriesAnalysis"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -657,7 +654,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.",
+          "description": "The text to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.",
           "maxLength": 10000
         },
         "categories": {
@@ -717,16 +714,14 @@
           "description": "The blocklist match details.",
           "items": {
             "$ref": "#/definitions/TextBlocklistMatch"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "categoriesAnalysis": {
           "type": "array",
           "description": "Analysis result for categories.",
           "items": {
             "$ref": "#/definitions/TextCategoriesAnalysis"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -754,8 +749,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -782,7 +776,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -814,7 +808,7 @@
     },
     "ImageCategory": {
       "type": "string",
-      "description": "Image analyze category.",
+      "description": "The harm category supported in Image content analysis.",
       "enum": [
         "Hate",
         "SelfHarm",
@@ -823,7 +817,29 @@
       ],
       "x-ms-enum": {
         "name": "ImageCategory",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Image - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Image - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Image - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Image - Violence."
+          }
+        ]
       }
     },
     "ImageData": {
@@ -851,8 +867,7 @@
           "description": "The TextBlocklist items on this page",
           "items": {
             "$ref": "#/definitions/TextBlocklist"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -873,8 +888,7 @@
           "description": "The TextBlocklistItem items on this page",
           "items": {
             "$ref": "#/definitions/TextBlocklistItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -964,7 +978,7 @@
         },
         "text": {
           "type": "string",
-          "description": "BlocklistItem content.",
+          "description": "BlocklistItem content. The length is counted using Unicode code point.",
           "maxLength": 128
         }
       },
@@ -1019,7 +1033,7 @@
     },
     "TextCategory": {
       "type": "string",
-      "description": "Text analyze category.",
+      "description": "The harm category supported in Text content analysis.",
       "enum": [
         "Hate",
         "SelfHarm",
@@ -1028,7 +1042,29 @@
       ],
       "x-ms-enum": {
         "name": "TextCategory",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Text - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Text - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Text - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Text - Violence."
+          }
+        ]
       }
     }
   },

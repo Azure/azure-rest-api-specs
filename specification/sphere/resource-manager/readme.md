@@ -36,15 +36,6 @@ modelerfour:
   flatten-models: false
 ```
 
-### Tag: package-2022-09-01-preview
-
-These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-09-01-preview'
-input-file:
-- Microsoft.AzureSphere/preview/2022-09-01-preview/azuresphere.json
-```
-
 ### Tag: package-2024-04-01
 
 These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
@@ -63,11 +54,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -101,10 +91,6 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
@@ -121,7 +107,6 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.AzureSphere/preview/2022-09-01-preview/azuresphere.json
   - $(this-folder)/Microsoft.AzureSphere/stable/2024-04-01/azuresphere.json
 ```
 

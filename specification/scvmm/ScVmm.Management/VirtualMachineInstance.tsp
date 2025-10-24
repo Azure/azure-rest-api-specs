@@ -1,7 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "./custom.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -16,7 +18,7 @@ model VirtualMachineInstance
   /** Name of the virtual machine instance. */
   @key
   @segment("virtualMachineInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
@@ -25,7 +27,7 @@ model VirtualMachineInstance
 
   /** Gets or sets the extended location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -36,7 +38,8 @@ model VirtualMachineInstanceUpdate
     "properties"
   >> {
   /** The update properties of the VirtualMachineInstance. */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineInstanceUpdateProperties;
 }
 
@@ -65,24 +68,22 @@ interface VirtualMachineInstances {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** The operation to update a virtual machine instance. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Updates a virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
     VirtualMachineInstanceUpdate
   >;
   /** The operation to delete a virtual machine instance. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Deletes an virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
@@ -97,10 +98,10 @@ interface VirtualMachineInstances {
   >;
   /** Lists all of the virtual machine instances within the specified parent resource. */
   @summary("Implements List virtual machine instances.")
-  listByArm is ArmResourceListByParent<VirtualMachineInstance>;
+  list is ArmResourceListByParent<VirtualMachineInstance>;
   /** The operation to power off (stop) a virtual machine instance. */
   @summary("Implements the operation to stop a virtual machine.")
-  stop is ArmResourceActionNoResponseContentAsync<
+  stop is CustomizedArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     StopVirtualMachineOptions
   >;

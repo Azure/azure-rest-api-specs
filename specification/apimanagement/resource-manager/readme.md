@@ -28,10 +28,209 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2023-09
+tag: package-preview-2024-10-01-preview
 ```
 
+### Tag: package-preview-2024-10-01-preview
 
+These settings apply only when `--tag=package-preview-2024-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10-01-preview'
+input-file:
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apigateway.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimallpolicies.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimapis.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimauthorizationproviders.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimbackends.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimcaches.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimcontenttypes.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimdeletedservices.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimdocumentations.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimgatewayConfigConnections.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimgroups.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimissues.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimloggers.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimnamedvalues.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimoutbounddependency.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimpolicyfragments.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimpolicyrestrictions.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimpolicyrestrictionsvalidation.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimportalconfigs.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimclientApplications.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimportalrevisions.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimprivatelink.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimproducts.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimquotas.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimregions.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimschema.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimsettings.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimskus.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimtags.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimtenant.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimworkspacebackends.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimworkspacecertificates.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimworkspacediagnostics.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimworkspacelinks.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimworkspaceloggers.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimworkspaces.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/definitions.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/operationStatuses.json
+```
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apigateway.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimallpolicies.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimapis.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimauthorizationproviders.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimbackends.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimcaches.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimcontenttypes.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimdeletedservices.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimdocumentations.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimgatewayConfigConnections.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimgroups.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimissues.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimloggers.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimnamedvalues.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimoutbounddependency.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimpolicyfragments.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimpolicyrestrictions.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimpolicyrestrictionsvalidation.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimportalconfigs.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimportalrevisions.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimprivatelink.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimproducts.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimquotas.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimregions.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimschema.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimsettings.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimskus.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimtags.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimtenant.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimworkspacebackends.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimworkspacecertificates.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimworkspacediagnostics.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimworkspacelinks.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimworkspaceloggers.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/apimworkspaces.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/definitions.json
+  - Microsoft.ApiManagement/preview/2024-06-01-preview/operationStatuses.json
+```
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05'
+input-file:
+  - Microsoft.ApiManagement/stable/2024-05-01/apigateway.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimallpolicies.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimanagement.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimapis.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimapisByTags.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimapiversionsets.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimauthorizationproviders.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimauthorizationservers.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimbackends.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimcaches.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimcontenttypes.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimdeletedservices.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimdeployment.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimdiagnostics.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimdocumentations.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimemailtemplates.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimgatewayConfigConnections.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimgateways.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimgroups.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimidentityprovider.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimissues.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimloggers.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimnamedvalues.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimnetworkstatus.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimnotifications.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimoutbounddependency.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimpolicies.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimpolicyfragments.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimpolicyrestrictions.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimpolicyrestrictionsvalidation.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimportalconfigs.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimportalrevisions.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimportalsettings.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimprivatelink.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimproducts.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimproductsByTags.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimquotas.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimregions.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimreports.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimschema.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimsettings.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimskus.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimsubscriptions.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimtagresources.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimtags.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimtenant.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimusers.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimworkspacebackends.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimworkspacecertificates.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimworkspacediagnostics.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimworkspacelinks.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimworkspaceloggers.json
+  - Microsoft.ApiManagement/stable/2024-05-01/apimworkspaces.json
+  - Microsoft.ApiManagement/stable/2024-05-01/definitions.json
+  - Microsoft.ApiManagement/stable/2024-05-01/operationStatuses.json
+```
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
@@ -978,7 +1177,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
@@ -990,20 +1189,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_api_management']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ApiManagement
-  output-folder: $(csharp-sdks-folder)/apimanagement/Microsoft.Azure.Management.ApiManagement/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

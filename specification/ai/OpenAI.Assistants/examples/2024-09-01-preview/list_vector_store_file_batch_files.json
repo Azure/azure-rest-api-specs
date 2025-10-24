@@ -1,0 +1,46 @@
+{
+  "title": "Returns a list of vector store files of a given batch.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-09-01-preview",
+    "vectorStoreId": "vs_abc123",
+    "batchId": "batch-abc123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "list",
+        "data": [
+          {
+            "id": "file-abc123",
+            "usage_bytes": 1234,
+            "status": "completed",
+            "last_error": null,
+            "object": "vector_store.file",
+            "created_at": 1699061776,
+            "vector_store_id": "vs_abc123",
+            "chunking_strategy": {
+              "type": "other"
+            }
+          },
+          {
+            "id": "file-abc456",
+            "usage_bytes": 1234,
+            "status": "completed",
+            "last_error": null,
+            "object": "vector_store.file",
+            "created_at": 1699061776,
+            "vector_store_id": "vs_abc123",
+            "chunking_strategy": {
+              "type": "other"
+            }
+          }
+        ],
+        "first_id": "file-abc123",
+        "last_id": "file-abc456",
+        "has_more": false
+      }
+    }
+  },
+  "operationId": "ListVectorStoreFileBatchFiles"
+}

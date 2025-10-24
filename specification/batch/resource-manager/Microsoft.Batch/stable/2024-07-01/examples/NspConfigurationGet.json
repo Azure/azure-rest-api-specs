@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "networkSecurityPerimeterConfigurationName": "00000000-0000-0000-0000-000000000000.sampleassociation",
+    "api-version": "2024-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/networkSecurityPerimeterConfigurations/00000000-0000-0000-0000-000000000000.sampleassociation",
+        "name": "00000000-0000-0000-0000-000000000000.sampleassociation",
+        "type": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterConfigurations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "provisioningIssues": [],
+          "networkSecurityPerimeter": {
+            "id": "/subscriptions/perimeterSubscriptionId/resourceGroups/perimeterResourceGroupName/providers/Microsoft.Network/networkSecurityPerimeters/perimeterName",
+            "perimeterGuid": "00000000-0000-0000-0000-000000000000",
+            "location": "perimeterLocation"
+          },
+          "resourceAssociation": {
+            "name": "sampleassociation",
+            "accessMode": "Learning"
+          },
+          "profile": {
+            "name": "profileName",
+            "accessRulesVersion": 1,
+            "accessRules": [
+              {
+                "name": "accessRule1",
+                "properties": {
+                  "direction": "Inbound",
+                  "addressPrefixes": [
+                    "10.11.0.0/16",
+                    "10.10.1.0/24"
+                  ],
+                  "fullyQualifiedDomainNames": [],
+                  "subscriptions": [],
+                  "networkSecurityPerimeters": [],
+                  "emailAddresses": [],
+                  "phoneNumbers": []
+                }
+              },
+              {
+                "name": "accessRule2",
+                "properties": {
+                  "direction": "Outbound",
+                  "addressPrefixes": [],
+                  "fullyQualifiedDomainNames": [
+                    "paasrp1.contoso.org",
+                    "paasrp2.contoso.org"
+                  ],
+                  "subscriptions": [],
+                  "networkSecurityPerimeters": [],
+                  "emailAddresses": [],
+                  "phoneNumbers": []
+                }
+              }
+            ],
+            "diagnosticSettingsVersion": 1,
+            "enabledLogCategories": [
+              "logCategory1",
+              "logCategory2"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

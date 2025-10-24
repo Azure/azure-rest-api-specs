@@ -13,25 +13,31 @@ using TypeSpec.Versioning;
 using LiftrBase.Data;
 
 @armProviderNamespace
-@service({
-  title: "Astronomer.Astro",
-})
+@service(#{ title: "Astronomer.Astro" })
 @versioned(Astronomer.Astro.Versions)
 namespace Astronomer.Astro;
 
 @doc("Supported API versions for the Astronomer.Astro resource provider.")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v1_preview)
   v1_preview: "2023-08-01-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v1_preview)
   v1: "2023-08-01",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v2024_08_27_preview, LiftrBase.Data.Versions.v2024_08_27_preview")
+  @useDependency(LiftrBase.Versions.v2024_08_27_preview)
+  @useDependency(LiftrBase.Data.Versions.v2024_08_27_preview)
+  v2024_08_27_preview: "2024-08-27-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v2024_08_27, LiftrBase.Data.Versions.v2024_08_27")
+  @useDependency(LiftrBase.Versions.v2024_08_27)
+  @useDependency(LiftrBase.Data.Versions.v2024_08_27)
+  v2024_08_27: "2024-08-27",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -47,7 +53,8 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   @path
   name: string;
 
-  ...Legacy.ManagedServiceIdentityV4Property;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 @armResourceOperations
@@ -59,7 +66,14 @@ interface Organizations {
     OrganizationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    OrganizationResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      OrganizationResource,
+      OrganizationProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;

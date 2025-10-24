@@ -15,17 +15,14 @@ namespace SplitIO {
 }
 
 @armProviderNamespace
-@service({
-  title: "Split.IO Experimentation",
-})
+@service(#{ title: "Split.IO Experimentation" })
 @versioned(SplitIO.Experimentation.Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace SplitIO.Experimentation {
   @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
   enum Versions {
-    @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-    v1_preview: "2024-03-01-preview",
+    @doc("2024-07-01-preview api version")
+    v24_07_preview: "2024-07-01-preview",
   }
 
   interface Operations extends Azure.ResourceManager.Operations {}
@@ -33,8 +30,8 @@ namespace SplitIO.Experimentation {
   @doc("Properties of the experimentation workspace")
   model ExperimentationWorkspaceProperties {
     @doc("Provisioning state of the resource.")
-    @visibility("read")
-    provisioningState?: ExperimentationWorkspaceProvisioningState;
+    @visibility(Lifecycle.Read)
+    provisioningState?: ResourceProvisioningState;
 
     @doc("Access policy for an experimentation workspace.")
     accessPolicy: AccessPolicy;
@@ -43,29 +40,32 @@ namespace SplitIO.Experimentation {
     dataSource?: DataSource;
   }
 
-  @doc("The experimentation workspace resource provisioning state")
-  union ExperimentationWorkspaceProvisioningState {
-    string,
-    ResourceProvisioningState,
-
-    @doc("Accepted provisioning state.")
-    Accepted: "Accepted",
-
-    @doc("Created provisioning state.")
-    Created: "Created",
-
-    @doc("Deleting provisioning state.")
-    Deleting: "Deleting",
-  }
-
   @doc("Access policy for an experimentation workspace.")
   model AccessPolicy {
     @doc("Application id used for access to the experimentation workspace.")
     applicationId: string;
 
+    @added(Versions.v24_07_preview)
+    @doc("A default role given to a user calling the Split.IO data plane when the user has no assigned role.")
+    defaultRole?: DataPlaneRole;
+
     @doc("Endpoint used for access to the experimentation workspace.")
-    @visibility("read")
-    dataPlaneEndpoint?: string;
+    @visibility(Lifecycle.Read)
+    dataPlaneEndpoint?: url;
+  }
+
+  @doc("Role required for data plane access.")
+  union DataPlaneRole {
+    /** None data plane role is assigned to user by default. */
+    None: "None",
+
+    /** ExperimentationDataReader data plane role is assigned to user by default. */
+    ExperimentationDataReader: "ExperimentationDataReader",
+
+    /** ExperimentationDataOwner data plane role is assigned to user by default. */
+    ExperimentationDataOwner: "ExperimentationDataOwner",
+
+    string,
   }
 
   @doc("Data source that telemetry data required for experimentation will be retrieved from.")
@@ -119,12 +119,7 @@ namespace SplitIO.Experimentation {
   @armResourceOperations
   interface ExperimentationWorkspaces {
     get is ArmResourceRead<ExperimentationWorkspace>;
-    #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-    @Azure.Core.useFinalStateVia("azure-async-operation")
-    create is ArmResourceCreateOrUpdateAsync<
-      ExperimentationWorkspace,
-      LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-    >;
+    create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
     update is ArmResourcePatchAsync<
       ExperimentationWorkspace,
       ExperimentationWorkspaceProperties
@@ -140,14 +135,14 @@ namespace SplitIO.Experimentation {
     @secret
     token: string;
 
-    @doc("The resource of Split.IO data plane authentication token.")
+    @doc("The application ID URI of Split.IO data plane authentication application.")
     resource: string;
   }
 
   @doc("The exchange token result that contains the bearer token which is used for Split.IO data plane authentication.")
   model ExchangeTokenResult {
     @doc("The bearer token that is used for Split.IO data plane authentication.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     @secret
     token: string;
   }
@@ -172,7 +167,7 @@ namespace SplitIO.Experimentation {
       @maxLength(50)
       workspaceName: string,
 
-      @doc("The id of the Split.IO data plane authentication application.")
+      @doc("The id of the Split.IO data plane authentication application in Guid format.")
       @path
       applicationId: string,
 

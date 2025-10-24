@@ -1,0 +1,409 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Service B",
+    "version": "1.0.0",
+    "description": "API for Service B data plane operations"
+  },
+  "host": "service.b",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Status"],
+        "summary": "Get Service Status",
+        "description": "Returns the current status of the service.",
+        "operationId": "Service_GetStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns service status information.",
+            "schema": {
+              "$ref": "#/definitions/ServiceStatus"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get service status": {
+            "$ref": "./examples/GetRoot.json"
+          }
+        }
+      }
+    },
+    "/resources": {
+      "get": {
+        "tags": ["Resources"],
+        "summary": "List Resources",
+        "description": "Lists all resources in the service.",
+        "operationId": "Resources_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items",
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Return only the first n items",
+            "type": "integer",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of resources",
+            "schema": {
+              "$ref": "#/definitions/ResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List resources": {
+            "$ref": "./examples/ListResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": ["Resources"],
+        "summary": "Create a Resource",
+        "description": "Creates a new resource in the service.",
+        "operationId": "Resources_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns the created resource",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create resource": {
+            "$ref": "./examples/CreateResource.json"
+          }
+        }
+      }
+    },
+    "/resources/{resourceId}": {
+      "get": {
+        "tags": ["Resources"],
+        "summary": "Get Resource",
+        "description": "Gets a specific resource by its ID.",
+        "operationId": "Resources_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "ID of the resource to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the requested resource",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          },
+          "404": {
+            "description": "Not Found - The resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get resource": {
+            "$ref": "./examples/GetResource.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Resources"],
+        "summary": "Delete Resource",
+        "description": "Deletes a specific resource by its ID.",
+        "operationId": "Resources_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "ID of the resource to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content - The resource was successfully deleted"
+          },
+          "404": {
+            "description": "Not Found - The resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete resource": {
+            "$ref": "./examples/DeleteResource.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServiceStatus": {
+      "description": "Represents the status of the service",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the service",
+          "type": "string",
+          "enum": ["OK", "Degraded", "Unavailable"],
+          "x-ms-enum": {
+            "name": "ServiceStatusEnum",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message providing details about the service status",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the service",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "Represents a resource in Service B",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique identifier of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The properties of the resource",
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "Description of the resource",
+              "type": "string"
+            },
+            "status": {
+              "description": "The status of the resource",
+              "type": "string",
+              "enum": ["Active", "Inactive", "Provisioning", "Failed"],
+              "x-ms-enum": {
+                "name": "ResourceStatusEnum",
+                "modelAsString": true
+              }
+            },
+            "tags": {
+              "description": "Tags associated with the resource",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "createdAt": {
+              "description": "The timestamp when the resource was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "lastModifiedAt": {
+              "description": "The timestamp when the resource was last modified",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "ResourceCreateRequest": {
+      "description": "Request body for creating a resource",
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "description": "The name of the resource",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The properties of the resource",
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "Description of the resource",
+              "type": "string"
+            },
+            "tags": {
+              "description": "Tags associated with the resource",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ResourceList": {
+      "description": "A paged list of resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Resource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of results, if there are any",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Error code",
+              "type": "string"
+            },
+            "message": {
+              "description": "Error message",
+              "type": "string"
+            },
+            "target": {
+              "description": "Error target",
+              "type": "string"
+            },
+            "details": {
+              "description": "Error details",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetail"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "Error detail",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        },
+        "target": {
+          "description": "Error target",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation",
+      "required": true,
+      "type": "string",
+      "default": "2025-06-01"
+    }
+  }
+}

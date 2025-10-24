@@ -19,6 +19,12 @@ The TypeSpec and generated API specification for the Azure Communication Job Rou
    vsts-npm-auth -config .npmrc
    ```
 
+   Update existing packages
+
+   ```console
+   npm update --force
+   ```
+
 3. Install TypeSpec compiler and libraries:
 
    ```console

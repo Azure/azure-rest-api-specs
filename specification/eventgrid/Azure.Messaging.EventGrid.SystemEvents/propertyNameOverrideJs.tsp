@@ -1,8 +1,10 @@
+import "./Microsoft.ApiManagement/ApiManagement.tsp";
 import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/HealthResources.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
@@ -45,10 +47,7 @@ using Microsoft.EventGrid.SystemEvents;
   "toCommunicationIdentifier",
   "javascript"
 );
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "javascript"
-);
+
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "javascript"
@@ -61,14 +60,7 @@ using Microsoft.EventGrid.SystemEvents;
   "completedOn",
   "javascript"
 );
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri",
-  "javascript"
-);
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "javascript"
-);
+
 @@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
   "javascript"
@@ -135,6 +127,32 @@ using Microsoft.EventGrid.SystemEvents;
 );
 @@clientName(AcsChatMessageEventInThreadBaseProperties,
   "AcsChatMessageEventInThreadBase",
+  "javascript"
+);
+@@clientName(AcsCallingEventProperties, "AcsCallingEvent", "javascript");
+@@clientName(AcsCallParticipantEventData,
+  "AcsCallParticipantEvent",
+  "javascript"
+);
+@@clientName(AcsCallParticipantProperties, "AcsCallParticipant", "javascript");
+@@clientName(AcsCallGroupProperties, "AcsCallGroup", "javascript");
+@@clientName(AcsCallRoomProperties, "AcsCallRoom", "javascript");
+@@clientName(AcsCallEndedByProperties, "AcsCallEndedBy", "javascript");
+@@clientName(AcsCallEndReasonProperties, "AcsCallEndReason", "javascript");
+@@clientName(ApiManagementCircuitBreakerProperties,
+  "ApiManagementCircuitBreaker",
+  "javascript"
+);
+@@clientName(ApiManagementGatewayProperties,
+  "ApiManagementGateway",
+  "javascript"
+);
+@@clientName(ApiManagementNearExpiryGatewayTokenProperties,
+  "ApiManagementNearExpiryGatewayToken",
+  "javascript"
+);
+@@clientName(ApiManagementExpiredGatewayTokenProperties,
+  "ApiManagementExpiredGatewayToken",
   "javascript"
 );
 @@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,

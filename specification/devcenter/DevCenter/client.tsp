@@ -6,7 +6,7 @@ using TypeSpec.Versioning;
 using DevCenterService;
 using Azure.ClientGenerator.Core;
 
-@useDependency(APIVersions.v2023_04_01)
+@useDependency(APIVersions.v2024_09_01_preview)
 namespace SdkCustomizations;
 
 @client({
@@ -32,6 +32,7 @@ interface DevBoxesClientOperations {
   listAllDevBoxesByUser is DevCenterService.DevBoxes.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxes.listDevBoxesByUser;
   getDevBox is DevCenterService.DevBoxes.getDevBoxByUser;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @convenientAPI(false, "csharp") // https://github.com/Azure/azure-rest-api-specs/issues/28083
   createDevBox is DevCenterService.DevBoxes.createDevBox;
   deleteDevBox is DevCenterService.DevBoxes.deleteDevBox;

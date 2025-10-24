@@ -1,0 +1,146 @@
+{
+  "parameters": {
+    "serverName": "mysqltestserver",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "sku": {
+        "name": "Standard_D2ds_v4",
+        "tier": "GeneralPurpose"
+      },
+      "properties": {
+        "administratorLogin": "cloudsa",
+        "administratorLoginPassword": "your_password",
+        "availabilityZone": "1",
+        "version": "5.7",
+        "createMode": "Default",
+        "storage": {
+          "storageSizeGB": 100,
+          "iops": 600,
+          "autoGrow": "Disabled",
+          "storageRedundancy": "LocalRedundancy"
+        },
+        "backup": {
+          "backupRetentionDays": 7,
+          "backupIntervalHours": 24,
+          "geoRedundantBackup": "Disabled"
+        },
+        "highAvailability": {
+          "mode": "ZoneRedundant",
+          "standbyAvailabilityZone": "3"
+        },
+        "databasePort": 8888
+      },
+      "location": "southeastasia",
+      "tags": {
+        "num": "1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storage": {
+            "storageSizeGB": 100,
+            "iops": 600,
+            "autoGrow": "Enabled",
+            "storageSku": "Premium_LRS",
+            "storageRedundancy": "LocalRedundancy"
+          },
+          "version": "5.7",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "mysqltestserver.database.mysql.azure.com",
+          "availabilityZone": "1",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "None",
+          "replicaCapacity": 10,
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
+          },
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "state": "Healthy",
+            "standbyAvailabilityZone": "3"
+          },
+          "databasePort": 8888
+        },
+        "location": "Southeast Asia",
+        "tags": {
+          "num": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
+        "name": "mysqltestserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storage": {
+            "storageSizeGB": 100,
+            "iops": 600,
+            "autoGrow": "Enabled",
+            "storageSku": "Premium_LRS",
+            "storageRedundancy": "LocalRedundancy"
+          },
+          "version": "5.7",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "mysqltestserver.database.mysql.azure.com",
+          "availabilityZone": "1",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "None",
+          "replicaCapacity": 10,
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
+          },
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "state": "Healthy",
+            "standbyAvailabilityZone": "3"
+          },
+          "databasePort": 8888
+        },
+        "location": "Southeast Asia",
+        "tags": {
+          "num": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
+        "name": "mysqltestserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "api-version": "2024-09-01",
+    "properties": {
+      "properties": {
+        "providerType": "Internal",
+        "providerVersion": "2.0",
+        "serviceName": "root",
+        "services": [
+          {
+            "serviceName": "tags",
+            "status": "Inactive"
+          }
+        ],
+        "crossTenantTokenValidation": "EnsureSecureValidation",
+        "management": {
+          "incidentRoutingService": "Contoso Resource Provider",
+          "incidentRoutingTeam": "Contoso Triage",
+          "incidentContactEmail": "helpme@contoso.com",
+          "serviceTreeInfos": [
+            {
+              "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+              "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+              "readiness": "InDevelopment"
+            }
+          ],
+          "expeditedRolloutSubmitters": [
+            "SPARTA-PlatformServiceOperator"
+          ],
+          "expeditedRolloutMetadata": {
+            "enabled": false,
+            "expeditedRolloutIntent": "Hotfix"
+          },
+          "errorResponseMessageOptions": {
+            "serverFailureResponseMessageType": "OutageReporting"
+          },
+          "canaryManifestOwners": [
+            "SPARTA-PlatformServiceAdmin"
+          ],
+          "pcCode": "P1234",
+          "profitCenterProgramId": "1234"
+        },
+        "capabilities": [
+          {
+            "quotaId": "CSP_2015-05-01",
+            "effect": "Allow"
+          },
+          {
+            "quotaId": "CSP_MG_2017-12-01",
+            "effect": "Allow"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
+        "name": "Microsoft.Contoso",
+        "type": "Microsoft.ProviderHub/providerRegistrations",
+        "properties": {
+          "namespace": "Microsoft.Contoso",
+          "providerAuthorizations": [
+            {
+              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+            },
+            {
+              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k2",
+              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b3",
+              "managedByAuthorization": {
+                "managedByResourceRoleDefinitionId": "9e3af657-a8ff-583c-a75c-2fe7c4bcb635",
+                "allowManagedByInheritance": true,
+                "additionalAuthorizations": [
+                  {
+                    "applicationId": "3e5aaca6-6470-4be4-8a17-24ab9519414b",
+                    "roleDefinitionId": "1e86f807-6ec0-40b3-8b5f-686b7e43a0a2"
+                  }
+                ]
+              },
+              "allowedThirdPartyExtensions": [
+                {
+                  "name": "name"
+                }
+              ],
+              "groupingTag": "GroupingTag"
+            }
+          ],
+          "resourceProviderAuthorizationRules": {
+            "asyncOperationPollingRules": {
+              "authorizationActions": [
+                "Microsoft.Contoso/classicAdministrators/operationStatuses/read"
+              ]
+            }
+          },
+          "management": {
+            "manifestOwners": [
+              "manifestOwners-group"
+            ],
+            "authorizationOwners": [
+              "authorizationOwners-group"
+            ],
+            "incidentRoutingService": "",
+            "incidentRoutingTeam": "",
+            "incidentContactEmail": "helpme@contoso.com",
+            "serviceTreeInfos": [
+              {
+                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "readiness": "InDevelopment"
+              }
+            ],
+            "resourceAccessPolicy": "NotSpecified",
+            "expeditedRolloutSubmitters": [
+              "SPARTA-PlatformServiceOperator"
+            ],
+            "expeditedRolloutMetadata": {
+              "enabled": false,
+              "expeditedRolloutIntent": "Hotfix"
+            },
+            "errorResponseMessageOptions": {
+              "serverFailureResponseMessageType": "OutageReporting"
+            },
+            "canaryManifestOwners": [
+              "SPARTA-PlatformServiceAdmin"
+            ],
+            "pcCode": "P1234",
+            "profitCenterProgramId": "1234"
+          },
+          "capabilities": [
+            {
+              "quotaId": "CSP_2015-05-01",
+              "effect": "Allow"
+            },
+            {
+              "quotaId": "CSP_MG_2017-12-01",
+              "effect": "Allow"
+            }
+          ],
+          "metadata": {
+            "onboardedVia": "ProviderHub"
+          },
+          "providerVersion": "2.0",
+          "providerType": "Internal, Hidden",
+          "serviceName": "root",
+          "services": [
+            {
+              "serviceName": "tags",
+              "status": "Inactive"
+            }
+          ],
+          "crossTenantTokenValidation": "EnsureSecureValidation",
+          "provisioningState": "Succeeded",
+          "providerHubMetadata": {
+            "directRpRoleDefinitionId": "1x86y807-6zx0-40y3-8z5x-686y7z43x0y2"
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+        }
+      }
+    },
+    "201": {
+      "description": "Successfully created the provider registration.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
+        "name": "Microsoft.Contoso",
+        "type": "Microsoft.ProviderHub/providerRegistrations",
+        "properties": {
+          "namespace": "Microsoft.Contoso",
+          "providerAuthorizations": [
+            {
+              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+            },
+            {
+              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k2",
+              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b3",
+              "managedByAuthorization": {
+                "managedByResourceRoleDefinitionId": "9e3af657-a8ff-583c-a75c-2fe7c4bcb635",
+                "allowManagedByInheritance": true,
+                "additionalAuthorizations": [
+                  {
+                    "applicationId": "3e5aaca6-6470-4be4-8a17-24ab9519414b",
+                    "roleDefinitionId": "1e86f807-6ec0-40b3-8b5f-686b7e43a0a2"
+                  }
+                ]
+              },
+              "allowedThirdPartyExtensions": [
+                {
+                  "name": "name"
+                }
+              ],
+              "groupingTag": "GroupingTag"
+            }
+          ],
+          "resourceProviderAuthorizationRules": {
+            "asyncOperationPollingRules": {
+              "authorizationActions": [
+                "Microsoft.Contoso/classicAdministrators/operationStatuses/read"
+              ]
+            }
+          },
+          "management": {
+            "manifestOwners": [
+              "manifestOwners-group"
+            ],
+            "authorizationOwners": [
+              "authorizationOwners-group"
+            ],
+            "incidentRoutingService": "",
+            "incidentRoutingTeam": "",
+            "incidentContactEmail": "helpme@contoso.com",
+            "serviceTreeInfos": [
+              {
+                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "readiness": "InDevelopment"
+              }
+            ],
+            "resourceAccessPolicy": "NotSpecified",
+            "expeditedRolloutSubmitters": [
+              "SPARTA-PlatformServiceOperator"
+            ],
+            "expeditedRolloutMetadata": {
+              "enabled": false,
+              "expeditedRolloutIntent": "Hotfix"
+            },
+            "errorResponseMessageOptions": {
+              "serverFailureResponseMessageType": "OutageReporting"
+            },
+            "canaryManifestOwners": [
+              "SPARTA-PlatformServiceAdmin"
+            ],
+            "pcCode": "P1234",
+            "profitCenterProgramId": "1234"
+          },
+          "capabilities": [
+            {
+              "quotaId": "CSP_2015-05-01",
+              "effect": "Allow"
+            },
+            {
+              "quotaId": "CSP_MG_2017-12-01",
+              "effect": "Allow"
+            }
+          ],
+          "metadata": {
+            "onboardedVia": "ProviderHub"
+          },
+          "providerVersion": "2.0",
+          "providerType": "Internal, Hidden",
+          "serviceName": "root",
+          "services": [
+            {
+              "serviceName": "tags",
+              "status": "Inactive"
+            }
+          ],
+          "crossTenantTokenValidation": "EnsureSecureValidation",
+          "provisioningState": "Succeeded",
+          "providerHubMetadata": {
+            "directRpRoleDefinitionId": "1x86y807-6zx0-40y3-8z5x-686y7z43x0y2"
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+        }
+      }
+    }
+  }
+}

@@ -75,12 +75,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatCompletionsOptions"
-            }
+            "$ref": "#/parameters/GetChatCompletionsBody"
           }
         ],
         "responses": {
@@ -126,13 +121,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompletionsOptions"
-            }
+            "$ref": "#/parameters/GetCompletionsBody"
           }
         ],
         "responses": {
@@ -178,13 +167,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmbeddingsOptions"
-            }
+            "$ref": "#/parameters/GetEmbeddingsBody"
           }
         ],
         "responses": {
@@ -223,13 +206,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageGenerationOptions"
-            }
+            "$ref": "#/parameters/GetImageGenerationsBody"
           }
         ],
         "responses": {
@@ -333,8 +310,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -361,7 +337,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -504,8 +480,7 @@
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/ChatChoice"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "model": {
           "type": "string",
@@ -517,8 +492,7 @@
           "items": {
             "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
-          "x-ms-client-name": "promptFilterResults",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "promptFilterResults"
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -528,8 +502,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "ChatCompletionsOptions": {
@@ -541,16 +514,14 @@
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
           "items": {
             "$ref": "#/definitions/ChatRequestMessage"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "functions": {
           "type": "array",
           "description": "A list of functions the model may generate JSON inputs for.",
           "items": {
             "$ref": "#/definitions/FunctionDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "function_call": {
           "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
@@ -559,7 +530,7 @@
         "max_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tokens to generate.",
+          "description": "The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).\n\nThis value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.",
           "x-ms-client-name": "maxTokens"
         },
         "temperature": {
@@ -622,6 +593,10 @@
       "required": [
         "messages"
       ]
+    },
+    "ChatMessageContent": {
+      "type": "string",
+      "x-nullable": false
     },
     "ChatRequestAssistantMessage": {
       "type": "object",
@@ -719,6 +694,7 @@
       "description": "A request chat message representing user input to the assistant.",
       "properties": {
         "content": {
+          "$ref": "#/definitions/ChatMessageContent",
           "description": "The contents of the user message, with available input types varying by selected model."
         },
         "name": {
@@ -815,14 +791,9 @@
           "x-ms-client-name": "contentFilterResults"
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/CompletionsLogProbabilityModel",
           "description": "The log probabilities model for tokens associated with this completions choice.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CompletionsLogProbabilityModel"
-            }
-          ]
+          "x-nullable": true
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
@@ -857,16 +828,14 @@
           "items": {
             "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
-          "x-ms-client-name": "promptFilterResults",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "promptFilterResults"
         },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/Choice"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -876,8 +845,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "CompletionsFinishReason": {
@@ -948,8 +916,7 @@
               "x-nullable": true
             }
           },
-          "x-ms-client-name": "topLogprobs",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "topLogprobs"
         },
         "text_offset": {
           "type": "array",
@@ -1255,8 +1222,7 @@
           "description": "Embedding values for the prompts submitted in the request.",
           "items": {
             "$ref": "#/definitions/EmbeddingItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "$ref": "#/definitions/EmbeddingsUsage",
@@ -1460,8 +1426,7 @@
           "description": "The images generated by the operation.",
           "items": {
             "$ref": "#/definitions/ImageGenerationData"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1480,6 +1445,46 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GetChatCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ChatCompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetEmbeddingsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EmbeddingsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetImageGenerationsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Represents the request data used to generate images.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ImageGenerationOptions"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

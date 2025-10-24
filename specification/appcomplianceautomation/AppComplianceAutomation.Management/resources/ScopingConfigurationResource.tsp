@@ -22,8 +22,9 @@ namespace Microsoft.AppComplianceAutomation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ScopingConfigurationProperties
 )
@@ -31,7 +32,7 @@ model ScopingConfigurationResource
   extends Azure.ResourceManager.Foundations.ProxyResource {
   @key("scopingConfigurationName")
   @segment("scopingConfigurations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The scoping configuration of the specific report.")
   @pattern("^[a-zA-Z0-9_]*$")
   @path
@@ -40,8 +41,8 @@ model ScopingConfigurationResource
   /**
    * ScopingConfiguration property.
    */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: ScopingConfigurationProperties;
 }
 
@@ -51,28 +52,28 @@ interface ScopingConfiguration {
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_Get")
   get is ArmResourceRead<ScopingConfigurationResource>;
 
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ScopingConfigurationResource>;
 
   /**
    * Clean the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_Delete")
   delete is ArmResourceDeleteSync<ScopingConfigurationResource>;
 
   /**
    * Returns a list format of the singleton scopingConfiguration for a specified report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_List")
   list is ArmResourceListByParent<ScopingConfigurationResource>;
 }
@@ -81,16 +82,11 @@ interface ScopingConfiguration {
   "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name."
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(ScopingConfiguration.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
 );
-
-@@OpenAPI.extension(ScopingConfiguration.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
-
 @@clientName(ScopingConfiguration.createOrUpdate::parameters.resource,
-  "parameters"
+  "properties"
 );

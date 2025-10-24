@@ -1,0 +1,83 @@
+{
+  "operationId": "AnalyzeText",
+  "title": "SuccessfulEntityRecognitionInferenceOptionsRequest",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2024-11-01",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "EntityRecognition",
+      "parameters": {
+        "modelVersion": "latest",
+        "inferenceOptions": {
+          "excludeNormalizedValues": true
+        }
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "1",
+            "language": "en",
+            "text": "When I was 5 years old I had $90.00 dollars to my name."
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "EntityRecognitionResults",
+        "results": {
+          "documents": [
+            {
+              "entities": [
+                {
+                  "text": "5 years old",
+                  "category": "Numeric",
+                  "type": "Age",
+                  "offset": 11,
+                  "length": 11,
+                  "confidenceScore": 0.99,
+                  "tags": [
+                    {
+                      "name": "Numeric",
+                      "confidenceScore": 0.99
+                    },
+                    {
+                      "name": "Age",
+                      "confidenceScore": 0.99
+                    }
+                  ]
+                },
+                {
+                  "text": "$90.00",
+                  "category": "Numeric",
+                  "type": "Currency",
+                  "offset": 29,
+                  "length": 14,
+                  "confidenceScore": 0.99,
+                  "tags": [
+                    {
+                      "name": "Numeric",
+                      "confidenceScore": 0.99
+                    },
+                    {
+                      "name": "Currency",
+                      "confidenceScore": 0.99
+                    }
+                  ]
+                }
+              ],
+              "id": "1",
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2023-09-01"
+        }
+      }
+    }
+  }
+}

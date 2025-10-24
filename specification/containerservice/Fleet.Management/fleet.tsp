@@ -25,11 +25,12 @@ model Fleet is TrackedResource<FleetProperties> {
   @key("fleetName")
   @path
   @segment("fleets")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
@@ -42,7 +43,7 @@ model FleetProperties {
   // omitting it for now as response headers do not impact SDK generation.
   //  ...EtagResponseEnvelope;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: FleetProvisioningState;
 
@@ -56,12 +57,17 @@ model FleetProperties {
   @added(Versions.v2024_02_02_preview)
   @added(Versions.v2024_04_01)
   hubProfile?: FleetHubProfile;
+
+  @added(Versions.v2025_03_01)
+  @visibility(Lifecycle.Read)
+  @doc("Status information for the fleet.")
+  status?: FleetStatus;
 }
 
 @doc("The FleetHubProfile configures the fleet hub.")
 model FleetHubProfile {
   @doc("DNS prefix used to create the FQDN for the Fleet hub.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][a-zA-Z0-9-]{0,52}[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(54)
@@ -69,24 +75,24 @@ model FleetHubProfile {
 
   @added(Versions.v2023_06_15_preview)
   @doc("The access profile for the Fleet hub API server.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   apiServerAccessProfile?: APIServerAccessProfile;
 
   @added(Versions.v2023_06_15_preview)
   @doc("The agent profile for the Fleet hub.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   agentProfile?: AgentProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The FQDN of the Fleet hub.")
   fqdn?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Kubernetes version of the Fleet hub.")
   kubernetesVersion?: string;
 
   @added(Versions.v2023_08_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
 }
@@ -101,30 +107,34 @@ scalar SubnetResourceId
 #suppress "@azure-tools/typespec-azure-core/casing-style" "match existing AKS APIServerAccessProfile"
 @doc("Access profile for the Fleet hub API server.")
 model APIServerAccessProfile {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Whether to create the Fleet hub as a private cluster or not.")
   enablePrivateCluster?: boolean;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)
+  @added(Versions.v2024_05_02_preview)
   @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
   enableVnetIntegration?: boolean;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)
+  @added(Versions.v2024_05_02_preview)
   @doc("The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.")
   subnetId?: SubnetResourceId;
 }
 
 @doc("Agent profile for the Fleet hub.")
 model AgentProfile {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The ID of the subnet which the Fleet hub node will join on startup. If this is not specified, a vnet and subnet will be generated and used.")
   subnetId?: SubnetResourceId;
 
   @added(Versions.v2023_08_15_preview)
   @doc("The virtual machine size of the Fleet hub.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   vmSize?: string;
 }
 
@@ -151,6 +161,7 @@ model FleetPatch {
   // ...EtagResponseEnvelope;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
@@ -159,21 +170,33 @@ model FleetPatch {
 
 @doc("One credential result item.")
 model FleetCredentialResult {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the credential.")
   name?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Base64-encoded Kubernetes configuration file.")
   value?: bytes;
 }
 
 @doc("The Credential results response.")
 model FleetCredentialResults {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Array of base64-encoded Kubernetes configuration files.")
-  @extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   kubeconfigs?: FleetCredentialResult[];
+}
+
+@added(Versions.v2025_03_01)
+@doc("Status information for the fleet.")
+model FleetStatus {
+  @visibility(Lifecycle.Read)
+  @doc("The last operation ID for the fleet.")
+  lastOperationId?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The last operation error for the fleet.")
+  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @armResourceOperations
@@ -182,7 +205,7 @@ interface Fleets {
   get is ArmResourceRead<Fleet>;
 
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next update"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "changing the operation-id on an existing operation is an SDK breaking change"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "changing the operation-id on an existing operation is an SDK breaking change"
   @doc("Creates or updates a Fleet.")
   @operationId("Fleets_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -197,6 +220,7 @@ interface Fleets {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
   @sharedRoute
   @removed(Versions.v2023_06_15_preview)
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Fleet,
     FleetPatch,
@@ -204,16 +228,15 @@ interface Fleets {
       IfMatchParameters<Fleet>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Use operationId to keep same name as deprecated sync operation"
   @added(Versions.v2023_06_15_preview)
   @operationId("Fleets_Update")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "original-uri",
-    }
+    #{ `final-state-via`: "original-uri" }
   )
   @sharedRoute
+  @patch(#{ implicitOptionality: true })
   updateAsync is ArmCustomPatchAsync<
     Fleet,
     FleetPatch,

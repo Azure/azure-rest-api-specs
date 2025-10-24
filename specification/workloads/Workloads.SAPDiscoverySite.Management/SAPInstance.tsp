@@ -17,7 +17,7 @@ model SAPInstance is TrackedResource<SAPInstanceProperties> {
   @path
   @key("sapInstanceName")
   @segment("sapInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -42,7 +42,7 @@ interface SAPInstances {
   /**
    * Updates the SAP Instance resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<SAPInstance>;
 
   /**
@@ -56,5 +56,5 @@ interface SAPInstances {
    * Lists the SAP Instance resources for the given SAP Migration discovery site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
-  list is ArmResourceListByParent<SAPInstance>;
+  ListBySapDiscoverySite is ArmResourceListByParent<SAPInstance>;
 }

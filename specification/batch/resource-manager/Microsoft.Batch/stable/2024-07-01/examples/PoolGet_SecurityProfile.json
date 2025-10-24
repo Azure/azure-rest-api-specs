@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2024-07-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8DB554F8E08BCF4\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8DB554F8E08BCF4\"",
+        "properties": {
+          "lastModified": "2023-06-14T07:03:58.3231917Z",
+          "creationTime": "2023-06-14T07:03:58.3231917Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-06-14T07:03:58.3231917Z",
+          "allocationState": "Steady",
+          "allocationStateTransitionTime": "2023-06-14T07:04:57.3413444Z",
+          "vmSize": "STANDARD_D4S_V3",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "UbuntuServer",
+                "sku": "18_04-lts-gen2",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.ubuntu 18.04",
+              "securityProfile": {
+                "securityType": "trustedLaunch",
+                "encryptionAtHost": true,
+                "uefiSettings": {
+                  "vTpmEnabled": false
+                }
+              }
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT15M"
+            }
+          },
+          "resizeOperationStatus": {
+            "targetDedicatedNodes": 1,
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2023-06-14T07:03:58.3231917Z"
+          },
+          "currentDedicatedNodes": 1,
+          "currentLowPriorityNodes": 0,
+          "currentNodeCommunicationMode": "Classic"
+        }
+      }
+    }
+  }
+}

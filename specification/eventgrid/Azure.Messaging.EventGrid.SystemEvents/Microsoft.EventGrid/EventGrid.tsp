@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -55,12 +57,12 @@ model SubscriptionValidationEventData {
   /** The validation code sent by Azure Event Grid to validate an event subscription.
    * To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
-  validationCode?: string;
+  validationCode: string;
 
   /** The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).
    * To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
-  validationUrl?: string;
+  validationUrl: string;
 }
 
 /**
@@ -71,7 +73,7 @@ SubscriptionValidationResponse can be used to build the response.
 */
 model SubscriptionValidationResponse {
   /** The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription. */
-  validationResponse?: string;
+  validationResponse: string;
 }
 
 /** 
@@ -80,7 +82,7 @@ Microsoft.EventGrid.SubscriptionDeletedEvent event.
 */
 model SubscriptionDeletedEventData {
   /** The Azure resource ID of the deleted event subscription. */
-  eventSubscriptionId?: string;
+  eventSubscriptionId: string;
 }
 
 /** Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event. */
@@ -89,20 +91,24 @@ model SubscriptionDeletedEventData {
 model EventGridMQTTClientCreatedOrUpdatedEventData
   extends EventGridMQTTClientEventData {
   /** Configured state of the client. The value could be Enabled or Disabled */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   state: EventGridMQTTClientState;
 
   /** Time the client resource is created based on the provider's UTC time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   createdOn: utcDateTime;
 
   /** 
-Time the client resource is last updated based on the provider's UTC time. If
-the client resource was never updated, this value is identical to the value of
-the 'createdOn' property.
-*/
+  Time the client resource is last updated based on the provider's UTC time. If
+  the client resource was never updated, this value is identical to the value of
+  the 'createdOn' property.
+  */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   updatedOn: utcDateTime;
 
   /** The key-value attributes that are assigned to the client resource. */
+  @visibility(Lifecycle.Read)
   attributes: Record<string>;
 }
 
@@ -114,13 +120,13 @@ Unique identifier for the MQTT client that the client presents to the service
 for authentication. This case-sensitive string can be up to 128 characters
 long, and supports UTF-8 characters.
 */
-  clientAuthenticationName?: string;
+  clientAuthenticationName: string;
 
   /** Name of the client resource in the Event Grid namespace. */
   clientName?: string;
 
   /** Name of the Event Grid namespace where the MQTT client was created or updated. */
-  namespaceName?: string;
+  namespaceName: string;
 }
 
 /** Event data for Microsoft.EventGrid.MQTTClientDeleted event. */
@@ -138,14 +144,15 @@ model EventGridMQTTClientSessionConnectedEventData
 Unique identifier for the MQTT client's session. This case-sensitive string can
 be up to 128 characters long, and supports UTF-8 characters.
 */
-  clientSessionName?: string;
+  clientSessionName: string;
 
   /**
 A number that helps indicate order of MQTT client session connected or
 disconnected events. Latest event will have a sequence number that is higher
 than the previous event.
 */
-  sequenceNumber?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  sequenceNumber: int64;
 }
 
 /** Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event. */
@@ -157,18 +164,20 @@ model EventGridMQTTClientSessionDisconnectedEventData
 Unique identifier for the MQTT client's session. This case-sensitive string can
 be up to 128 characters long, and supports UTF-8 characters.
 */
-  clientSessionName?: string;
+  clientSessionName: string;
 
   /**
 A number that helps indicate order of MQTT client session connected or
 disconnected events. Latest event will have a sequence number that is higher
 than the previous event.
 */
-  sequenceNumber?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  sequenceNumber: int64;
 
   /**
 Reason for the disconnection of the MQTT client's session. The value could be
 one of the values in the disconnection reasons table.
 */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   disconnectionReason: EventGridMQTTClientDisconnectionReason;
 }

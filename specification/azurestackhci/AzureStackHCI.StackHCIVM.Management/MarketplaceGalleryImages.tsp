@@ -12,9 +12,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The marketplace gallery image resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 model MarketplaceGalleryImage
   is TrackedResource<MarketplaceGalleryImageProperties> {
   @doc("Name of the marketplace gallery image")
@@ -22,7 +22,7 @@ model MarketplaceGalleryImage
   @path
   @key("marketplaceGalleryImageName")
   @segment("marketplaceGalleryImages")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -43,14 +43,14 @@ interface MarketplaceGalleryImages {
   >;
 
   @doc("The operation to update a marketplace gallery image.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to delete a marketplace gallery image.")
   delete is ArmResourceDeleteWithoutOkAsync<MarketplaceGalleryImage>;
 
   @doc("Lists all of the marketplace gallery images in the specified resource group. Use the nextLink property in the response to get the next page of marketplace gallery images.")
-  list is ArmResourceListByParent<MarketplaceGalleryImage>;
+  listByResourceGroup is ArmResourceListByParent<MarketplaceGalleryImage>;
 
   @doc("Lists all of the marketplace gallery images in the specified subscription. Use the nextLink property in the response to get the next page of marketplace gallery images.")
   listAll is ArmListBySubscription<MarketplaceGalleryImage>;

@@ -1,0 +1,33 @@
+parameters:
+  endpoint: https://aoairesource.openai.azure.com
+  api-key: "{api key}"
+  api-version: 2024-08-01-preview
+  fineTuningJob:
+    hyperparameters:
+    suffix:
+    seed:
+    model: curie
+    trainingFile: file-181a1cbdcdcf4677ada87f63a0928099
+    validationFile:
+  Content-Type: application/json
+responses:
+  201:
+    headers:
+      Location: https://aoairesource.openai.azure.com/openai/fine_tuning/jobs/ft-72a2792ef7d24ba7b82c7fe4a37e379f
+    body:
+      hyperparameters:
+        n_epochs: -1
+      suffix:
+      seed:
+      status: pending
+      model: curie
+      fine_tuned_model:
+      training_file: file-181a1cbdcdcf4677ada87f63a0928099
+      validation_file:
+      result_files:
+      finished_at:
+      organisation_id:
+      error:
+      id: ft-72a2792ef7d24ba7b82c7fe4a37e379f
+      created_at: 1646126127
+      object: fine_tuning.job

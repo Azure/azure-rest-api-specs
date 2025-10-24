@@ -1,6 +1,8 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./alertRuleResources.tsp";
+import "./healthValidation.tsp";
 import "./sqlDbDatabaseTarget.tsp";
 import "./sqlDbElasticPoolTarget.tsp";
 import "./sqlMiTarget.tsp";
@@ -8,9 +10,7 @@ import "./sqlVmTarget.tsp";
 import "./sharedPrivateLinkResource.tsp";
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Using invalid versions of ManagedIdentity"
-@service({
-  title: "Microsoft.DatabaseWatcher",
-})
+@service(#{ title: "Microsoft.DatabaseWatcher" })
 @versioned(Microsoft.DatabaseWatcher.Versions)
 @armProviderNamespace
 namespace Microsoft.DatabaseWatcher;
@@ -27,9 +27,19 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("Versions info.")
 enum Versions {
   @doc("The 2023-09-01-preview version.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_09_01_preview: "2023-09-01-preview",
+
+  @doc("The 2024-07-17-preview version.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_07_19_preview: "2024-07-19-preview",
+
+  @doc("The 2024-10-01-preview version.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_10_01_preview: "2024-10-01-preview",
+
+  @doc("The 2025-01-02 version.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_01_02: "2025-01-02",
 }
 @doc("The DatabaseWatcherProviderHub resource.")
 model Watcher is TrackedResource<WatcherProperties> {
@@ -40,7 +50,8 @@ model Watcher is TrackedResource<WatcherProperties> {
   @segment("watchers")
   name: string;
 
-  ...Legacy.ManagedServiceIdentityV4Property;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("The RP specific properties of the resource.")
@@ -49,17 +60,25 @@ model WatcherProperties {
   datastore?: Datastore;
 
   @doc("The monitoring collection status of the watcher.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: WatcherStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource watcher.")
   provisioningState?: DatabaseWatcherProvisioningState;
+
+  @doc("The resource ID of a user-assigned managed identity that will be assigned to a new alert rule.")
+  @added(Versions.v2024_07_19_preview)
+  defaultAlertRuleIdentityResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @doc("The properties of a data store.")
 model Datastore {
-  @doc("The Azure ResourceId of an Azure Data Explorer cluster.")
+  @doc("The Azure resource ID of an Azure Data Explorer cluster.")
   adxClusterResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
@@ -112,26 +131,32 @@ interface Watchers {
     Watcher,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchAsync<Watcher, WatcherProperties>;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    Watcher,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Watcher,
+      WatcherProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Watcher>;
   listByResourceGroup is ArmResourceListByParent<Watcher>;
   listBySubscription is ArmListBySubscription<Watcher>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("The action to start monitoring all targets configured for a database watcher.")
   @action
   @post
   @armResourceAction(Watcher)
-  @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   start(
     ...ResourceInstanceParameters<Watcher>,
   ): ArmAcceptedLroResponse | ArmResponse<Watcher> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("The action to stop monitoring all targets configured for a database watcher.")
   @action
   @post
@@ -139,9 +164,7 @@ interface Watchers {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   stop(
     ...ResourceInstanceParameters<Watcher>,

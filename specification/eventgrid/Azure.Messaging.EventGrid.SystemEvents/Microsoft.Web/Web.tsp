@@ -1,10 +1,14 @@
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
+
 /** Describes the schema of the Azure App Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   // /** sku of app service plan. */
   /** Detail of action on the app. */
   model AppEventTypeDetail {
     /** Type of action of the operation. */
-    action: AppAction;
+    action?: AppAction;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppUpdated event. */
@@ -70,10 +74,10 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event. */
   model WebAppServicePlanUpdatedEventData {
     /** Detail of action on the app service plan. */
-    appServicePlanEventTypeDetail: AppServicePlanEventTypeDetail;
+    appServicePlanEventTypeDetail?: AppServicePlanEventTypeDetail;
 
     /** sku of app service plan. */
-    sku: WebAppServicePlanUpdatedEventDataSku;
+    sku?: WebAppServicePlanUpdatedEventDataSku;
 
     /** name of the app service plan that had this event. */
     name?: string;
@@ -142,13 +146,13 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Detail of action on the app service plan. */
   model AppServicePlanEventTypeDetail {
     /** Kind of environment where app service plan is. */
-    stampKind: StampKind;
+    stampKind?: StampKind;
 
     /** Type of action on the app service plan. */
-    action: AppServicePlanAction;
+    action?: AppServicePlanAction;
 
     /** Asynchronous operation status of the operation on the app service plan. */
-    status: AsyncStatus;
+    status?: AsyncStatus;
   }
 
   /** Asynchronous operation status of the operation on the app service plan. */
@@ -167,7 +171,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   alias WebAppBaseEventData = {
     /** Detail of action on the app. */
-    appEventTypeDetail: AppEventTypeDetail;
+    appEventTypeDetail?: AppEventTypeDetail;
 
     /** name of the web site that had this event. */
     name?: string;

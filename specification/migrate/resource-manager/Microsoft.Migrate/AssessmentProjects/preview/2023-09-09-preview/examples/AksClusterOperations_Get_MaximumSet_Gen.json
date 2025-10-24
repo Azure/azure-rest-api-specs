@@ -1,0 +1,54 @@
+{
+  "title": "AksClusterOperations_Get",
+  "operationId": "AksClusterOperations_Get",
+  "parameters": {
+    "api-version": "2023-09-09-preview",
+    "subscriptionId": "D6F60DF4-CE70-4E39-8217-B8FBE7CA85AA",
+    "resourceGroupName": "rgaksswagger",
+    "projectName": "testproject",
+    "assessmentName": "testaksassessment",
+    "clusterName": "testaksassessment-cluster"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "name": "testaksassessment-cluster",
+          "nodePools": [
+            {
+              "id": "testaksassessmentCostDetail",
+              "name": "testaksassessmentCostDetail",
+              "clusterName": "testaksassessment-cluster",
+              "mode": "User",
+              "osType": "Linux",
+              "armSkuName": "StandardDS_v2",
+              "nodeCount": 1,
+              "podCount": 1,
+              "monthlyCost": 10,
+              "podApproxMonthlyCost": 10
+            }
+          ],
+          "region": "Unknown",
+          "userNodePoolCount": 0,
+          "userNodeCount": 6,
+          "systemNodePoolCount": 16,
+          "systemNodeCount": 18,
+          "podCount": 26,
+          "monthlyCost": 14
+        },
+        "eTag": "00000000-0000-0000-a616-12d4724c01d9",
+        "id": "/subscriptions/D6F60DF4-CE70-4E39-8217-B8FBE7CA85AA/resourceGroups/rgaksswagger/providers/Microsoft.Migrate/assessmentProjects/testproject/aksAssessments/testaksassessment/clusters/testaksassessment-cluster",
+        "name": "testaksassessment-cluster",
+        "type": "AKSAssessmentCluster",
+        "systemData": {
+          "createdBy": "User",
+          "createdByType": "User",
+          "createdAt": "2023-11-07T06:51:24.108Z",
+          "lastModifiedBy": "User",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-11-07T06:51:24.108Z"
+        }
+      }
+    }
+  }
+}

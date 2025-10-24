@@ -20,22 +20,19 @@ using TypeSpec.Http;
     }
   ]>
 )
-@service({
-  title: "Document Intelligence (formerly Form Recognizer)",
-})
+@service(#{ title: "Document Intelligence (formerly Form Recognizer)" })
 @server(
   "{endpoint}/documentintelligence",
   "Extracts content, layout, and structured data from documents.",
   {
     @doc("The Document Intelligence service endpoint.")
-    endpoint: string,
+    endpoint: url,
   }
 )
 namespace DocumentIntelligence;
 
 @doc("Service API versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-02-29-preview version of the DocumentIntelligence service.")
-  v2024_02_29_preview: "2024-02-29-preview",
+  @doc("The 2024-11-30 GA version of the DocumentIntelligence service.")
+  v2024_11_30: "2024-11-30",
 }

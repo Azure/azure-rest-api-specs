@@ -1049,45 +1049,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/globalCommunicationsSites/{globalCommunicationsSiteName}": {
-      "get": {
-        "tags": [
-          "Global Communications Site"
-        ],
-        "operationId": "GlobalCommunicationsSites_Get",
-        "description": "Gets the specified global communications site in a specified resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/globalCommunicationsSiteNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns the resulting GlobalCommunicationsSite.",
-            "schema": {
-              "$ref": "#/definitions/GlobalCommunicationsSite"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Global Communications Site": {
-            "$ref": "./examples/GlobalCommunicationsSiteGet.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1643,17 +1604,6 @@
       "name": "l2ConnectionName",
       "in": "path",
       "description": "L2 Connection name.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[A-Za-z][A-Za-z0-9-_]+$",
-      "minLength": 2,
-      "maxLength": 64,
-      "x-ms-parameter-location": "method"
-    },
-    "globalCommunicationsSiteNameParameter": {
-      "name": "globalCommunicationsSiteName",
-      "in": "path",
-      "description": "Global communications Site name.",
       "required": true,
       "type": "string",
       "pattern": "^[A-Za-z][A-Za-z0-9-_]+$",

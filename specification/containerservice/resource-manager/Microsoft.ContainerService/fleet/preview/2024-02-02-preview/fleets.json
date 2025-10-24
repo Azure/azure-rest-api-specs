@@ -2070,6 +2070,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetMemberUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -2799,6 +2800,7 @@
         "Stopped",
         "Skipped",
         "Failed",
+        "Pending",
         "Completed"
       ],
       "x-ms-enum": {
@@ -2834,6 +2836,11 @@
             "name": "Failed",
             "value": "Failed",
             "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is pending."
           },
           {
             "name": "Completed",

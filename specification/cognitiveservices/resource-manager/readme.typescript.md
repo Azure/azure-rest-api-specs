@@ -10,3 +10,11 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/cognitiveservices/arm-cognitiveservices"
   generate-metadata: true
 ```
+
+```yaml
+directive:
+  from: swagger-document
+  where: $.definitions.RaiBlocklistItemsBulkDeleteRequest
+  transform: >
+    $["type"]="array"
+```

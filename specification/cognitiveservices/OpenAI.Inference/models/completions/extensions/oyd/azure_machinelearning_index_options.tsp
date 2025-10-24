@@ -9,6 +9,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
+@removed(ServiceApiVersions.v2024_08_01_Preview)
 @doc("""
   A specific representation of configurable options for Azure Machine Learning vector index when using it as an Azure
   OpenAI chat extension.
@@ -26,9 +27,20 @@ model AzureMachineLearningIndexChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
+@removed(ServiceApiVersions.v2024_08_01_Preview)
 @doc("Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.")
 model AzureMachineLearningIndexChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
+
+  @doc("""
+    The authentication method to use when accessing the defined data source.
+    Each data source type supports a specific set of available authentication methods; please see the documentation of
+    the data source for supported mechanisms.
+    If not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)
+    authentication.
+    """)
+  @clientName("Authentication", "csharp")
+  authentication?: OnYourDataAuthenticationOptions;
 
   @doc("The resource ID of the Azure Machine Learning project.")
   @clientName("ProjectResourceId", "csharp")

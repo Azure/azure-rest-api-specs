@@ -1,12 +1,12 @@
 function Get-NewTagSection($apiVersion, $resourceProvider, $apiVersionStatus, $specFiles) {
 
-    $tagVersion = $apiVersion -match '(?<date>\d{4}-\d{2})-\d{2}' 
-    $tagVersion = $Matches['date']
+    $tagVersion = $apiVersion -match '(?<version>(\d{4}-\d{2}-\d{2}|\d+\.\d+)(-preview(\.\d+)?)?)'
+    $tagVersion = $Matches['version']
     $baseDir = "$resourceProvider/$apiVersionStatus/$apiVersion"
-    
-    if ($apiVersionStatus -eq "preview") { 
-        $tagVersion = "preview-" + $tagVersion  
-    }  
+
+    if ($apiVersionStatus -eq "preview") {
+        $tagVersion = "preview-" + $tagVersion
+    }
 
     $content = @"
 ### Tag: package-$tagVersion
@@ -29,25 +29,41 @@ function Get-ReadmeWithNewTag($readmeContent, $tagContent) {
     return $readmeContent -replace '(?s)(### tag: package.*)', "$tagContent`n`$1"
 }
 
+
 function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionStatus ) {
     # Get the current tag date
-    $currentTag = $readmeContent -match '(?m)^(tag:\s*)(package-)(.*)(?<version>\d{4}-\d{2})(.*)'
-    $currentTag = $Matches['version']
-    $latestVersionDate = [datetime]($currentTag -replace '-preview', '')
+    $currentTag = $readmeContent -match '(?m)^(tag:\s*)(package-)(.*)(?<apiVersion>(?<date>\d{4}-\d{2}(-\d{2})?)|(?<version>\d+\.\d+))'
+    if ($currentTag = $Matches['date']) {
+        $latestVersionDate = [datetime]($currentTag -replace '-preview', '')
 
-    # Convert the new OpenAPI version to a date
-    $newVersionDate = [datetime]($newApiVersion -replace '-preview', '')
+        # Convert the new OpenAPI version to a date
+        $newVersionDate = [datetime]($newApiVersion -replace '-preview', '')
 
-    # Compare two dates
-    if ($latestVersionDate -gt $newVersionDate) {
-        Write-Warning "The new version is not newer than the current default version in the readme file."  
+        # Compare two dates
+        if ($latestVersionDate -gt $newVersionDate) {
+            Write-Warning "The new version is not newer than the current default version in the readme file."
+        }
+    } elseif ($currentTag = $Matches['version']) {
+        $latestVersion = [version]($currentTag -replace '-preview', '')
+
+        # Convert the new OpenAPI version to a date
+        $newVersion = [Version]($newApiVersion -replace '-preview', '')
+
+        # Compare two semvers
+        if ($latestVersion -gt $newVersion) {
+            Write-Warning "The new version is not newer than the current default version in the readme file."
+        }
     }
-    $tagVersion = $newApiVersion -match '\d{4}-\d{2}'
-    $tagVersion = $Matches[0]
+
+    # Extract the new API version, supporting two formats:
+    # - Date format: YYYY-MM(-DD)?(-preview)? e.g. 2024-01, 2024-01-01, 2024-01-preview
+    # - Semantic versioning: X.Y(-preview)? or X.Y(-preview.\d+)? e.g. 7.6, 7.6-preview, 7.6-preview.1
+    $tagVersion = $newApiVersion -match '(?<apiVersion>(?<date>\d{4}-\d{2}(-\d{2})?)(-preview)?|(?<version>\d+\.\d+(-preview(\.\d+)?)?))'
+    $tagVersion = $Matches['apiVersion']
     if ($newApiVersionStatus -eq "preview") {
         $tagVersion = "preview-" + $tagVersion
     }
-    return $readmeContent -replace '(?m)^(tag:\s*)(package-.*)', "tag: package-$tagVersion" 
+    return $readmeContent -replace '(?m)^(tag:\s*)(package-.*)', "tag: package-$tagVersion"
 }
 
 function New-GitAddAndCommit {

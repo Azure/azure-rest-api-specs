@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616",
+    "resourceGroupName": "res4228",
+    "accountName": "sto4445",
+    "storageTaskAssignmentName": "myassignment1",
+    "api-version": "2025-01-01",
+    "parameters": {
+      "properties": {
+        "enabled": true,
+        "description": "My Storage task assignment",
+        "executionContext": {
+          "target": {
+            "prefix": [
+              "prefix1",
+              "prefix2"
+            ],
+            "excludePrefix": []
+          },
+          "trigger": {
+            "type": "RunOnce",
+            "parameters": {
+              "startOn": "2022-11-15T21:52:47.8145095Z"
+            }
+          }
+        },
+        "report": {
+          "prefix": "container1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment1",
+        "name": "myassignment1",
+        "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments",
+        "properties": {
+          "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask1",
+          "enabled": true,
+          "description": "My Storage task assignment",
+          "executionContext": {
+            "target": {
+              "prefix": [
+                "prefix1",
+                "prefix2"
+              ],
+              "excludePrefix": []
+            },
+            "trigger": {
+              "type": "RunOnce",
+              "parameters": {
+                "startOn": "2022-11-15T21:52:47.8145095Z"
+              }
+            }
+          },
+          "report": {
+            "prefix": "container1"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.Storage/locations/eastus/ActionsRPOperationStatuses/00000000-0000-0000-0000-000000000000*00000?api-version=2025-01-01",
+        "location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-01-01"
+      }
+    }
+  }
+}

@@ -48,6 +48,48 @@ model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
   type: "json_object";
 }
 
+@added(ServiceApiVersions.v2024_08_01_Preview)
+@doc("""
+  A response format for Chat Completions that restricts responses to emitting JSON that conforms to a provided JSON
+  Schema for Structured Outputs.
+  """)
+model ChatCompletionsJsonSchemaResponseFormat
+  extends ChatCompletionsResponseFormat {
+  @doc("The discriminated object type, which is always 'json_schema' for this format.")
+  type: "json_schema";
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  json_schema: {
+    /** A description of what the response format is for, used by the model to determine how to respond in the format. */
+    description?: string;
+
+    /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
+    name: string;
+
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+    schema?: unknown;
+
+    @doc("""
+      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).
+      """)
+    strict?: boolean | null = false;
+  };
+}
+
+/**
+ * Options for streaming response. Only set this when you set `stream: true`.
+ */
+@added(ServiceApiVersions.v2024_09_01_Preview)
+model ChatCompletionStreamOptions {
+  /**
+   * If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.
+   */
+  @encodedName("application/json", "include_usage")
+  includeUsage?: boolean;
+}
+
 @doc("""
   The configuration information for a chat completions request.
   Completions support a wide variety of tasks and generate text that continues from or "completes"
@@ -77,9 +119,21 @@ model ChatCompletionsOptions {
   @added(ServiceApiVersions.v2023_07_01_Preview)
   functionCall?: FunctionCallConfig;
 
-  @doc("The maximum number of tokens to generate.")
+  /**
+   * The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).
+   *
+   * This value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  #deprecated "Field deprecated since v2024-09-01-preview service version."
   @encodedName("application/json", "max_tokens")
   maxTokens?: int32;
+
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens.
+   */
+  @encodedName("application/json", "max_completion_tokens")
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  maxCompletionTokens?: int32;
 
   @doc("""
     The sampling temperature to use that controls the apparent creativity of generated completions.
@@ -158,6 +212,14 @@ model ChatCompletionsOptions {
   @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
+  /**
+   * Options for streaming response. Only set this when you set `stream: true`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @encodedName("application/json", "stream_options")
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  streamOptions?: ChatCompletionStreamOptions | null;
+
   @doc("""
     The model name to provide as part of this completions request.
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
@@ -216,12 +278,158 @@ model ChatCompletionsOptions {
   @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
   tools?: ChatCompletionsToolDefinition[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
   @encodedName("application/json", "tool_choice")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
     If specified, the model will configure which of the provided tools it can use for the chat completions response.
     """)
   toolChoice?: ChatCompletionsToolSelection;
+
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean = true;
+
+  /** Whether or not to store the output of this chat completion request for use in our model distillation or evaluation products. */
+  @added(ServiceApiVersions.v2025_01_01_Preview)
+  store?: boolean;
+
+  /** Developer-defined tags and values used for filtering completions in the stored completions dashboard. */
+  @added(ServiceApiVersions.v2025_01_01_Preview)
+  metadata?: Record<string>;
+
+  /**
+   * This option is only valid for o1 models,
+   *
+   * Constrains effort on reasoning for reasoning models (see https://platform.openai.com/docs/guides/reasoning).
+   *
+   * Currently supported values are `low`, `medium`, and `high`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  @added(ServiceApiVersions.v2025_01_01_Preview)
+  @encodedName("application/json", "reasoning_effort")
+  reasoningEffort?: ReasoningEffortValue = ReasoningEffortValue.medium;
+
+  /**
+   * The security context identifies and authenticates users and applications in your multi-tenant AI system, helping security teams investigate and mitigate incidents.
+   */
+  @added(ServiceApiVersions.v2025_01_01_Preview)
+  @encodedName("application/json", "user_security_context")
+  userSecurityContext?: UserSecurityContext;
+
+  /**
+   * Output types that you would like the model to generate for this request.
+   * Most models are capable of generating text, which is the default: `["text"]`
+   * The `gpt-4o-audio-preview` model can also be used to generate audio. To
+   * request that this model generate both text and audio responses, you can
+   * use: `["text", "audio"]`
+   */
+  @added(ServiceApiVersions.v2025_01_01_Preview)
+  modalities?: ChatCompletionModality[] = #[ChatCompletionModality.text];
+
+  /**
+   * Configuration for a Predicted Output, which can greatly improve response times
+   * when large parts of the model response are known ahead of time. This is most
+   * common when you are regenerating a file with only minor changes to most of the content.
+   */
+  @added(ServiceApiVersions.v2025_01_01_Preview)
+  prediction?: PredictionContent;
+
+  /**
+   * Parameters for audio output. Required when audio output is requested
+   * with `modalities: ["audio"]`
+   */
+  @added(ServiceApiVersions.v2025_01_01_Preview)
+  audio?: AudioOutputParameters;
+}
+
+/** Values for the reasoning */
+@added(ServiceApiVersions.v2025_01_01_Preview)
+union ReasoningEffortValue {
+  string,
+
+  /** The reasoning effort is low. */
+  low: "low",
+
+  /** The reasoning effort is medium. */
+  medium: "medium",
+
+  /** The reasoning effort is high. */
+  high: "high",
+}
+
+/** Values to specified the required modality for the model to use. */
+@added(ServiceApiVersions.v2025_01_01_Preview)
+union ChatCompletionModality {
+  string,
+
+  /** The model is to generate text output. */
+  text: "text",
+
+  /** The model is to generate audio output. */
+  audio: "audio",
+}
+
+/** The types of predicted content */
+union PredictionContentType {
+  string,
+
+  /** Predicted content is of type content */
+  content: "content",
+}
+
+/** Static predicted output content, such as the content of a text file that is being regenerated. */
+@added(ServiceApiVersions.v2025_01_01_Preview)
+model PredictionContent {
+  /**
+   * The type of the predicted content you want to provide. This type is
+   * currently always `content`.
+   */
+  type: PredictionContentType.content;
+
+  /**
+   * The content that should be matched when generating a model response.
+   * If generated tokens would match this content, the entire model response
+   * can be returned much more quickly.
+   */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  content: string | ChatMessageTextContentItem[];
+}
+
+/**
+ * Describes the parameters for audio output.
+ */
+@added(ServiceApiVersions.v2025_01_01_Preview)
+model AudioOutputParameters {
+  /** Specifies the voice type. */
+  voice: SpeechVoice;
+
+  /** Specifies the output audio format. */
+  format: OutputAudioFormat;
+}
+
+/** The output audio format. */
+@added(ServiceApiVersions.v2025_01_01_Preview)
+union OutputAudioFormat {
+  string,
+
+  /** The output audio format is WAV. */
+  wav: "wav",
+
+  /** The output audio format is MP3. */
+  mp3: "mp3",
+
+  /** The output audio format is FLAC. */
+  flac: "flac",
+
+  /** The output audio format is OPUS. */
+  opus: "opus",
+
+  /** The output audio format is PCM16. */
+  pcm16: "pcm16",
 }
 
 @doc("""
@@ -248,13 +456,15 @@ model ChatChoice {
   @encodedName("application/json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
-  // Note: this property is currently speculative via observation and not yet documented anywhere.
+  // Note: this property was briefly present for gpt-4-vision-preview; it's retained here for posterity for the
+  // lifetime of the service API versions impacted.
 
   @doc("""
     The reason the model stopped generating tokens, together with any applicable details.
     This structured representation replaces 'finish_reason' for some models.
     """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
+  @removed(ServiceApiVersions.v2024_07_01_Preview)
   @encodedName("application/json", "finish_details")
   finishDetails?: ChatFinishDetails;
 
@@ -327,7 +537,7 @@ model ChatCompletions {
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
-  usage: CompletionsUsage;
+  usage?: CompletionsUsage;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -369,6 +579,13 @@ model ChatChoiceLogProbabilityInfo {
     The list of log probability information entries for the choice's message content tokens, as requested via the 'logprobs' option.
     """)
   content: ChatTokenLogProbabilityResult[] | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  @doc("""
+    The list of log probability information entries for the choice's message refusal message tokens, as requested via the 'logprobs' option.
+    """)
+  refusal: ChatTokenLogProbabilityResult[] | null;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -400,4 +617,18 @@ model ChatTokenLogProbabilityInfo {
     A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be null if there is no bytes representation for the token.
     """)
   bytes: int32[] | null;
+}
+
+/**
+ * Get chat completions request body.
+ */
+@added(ServiceApiVersions.v2023_05_15)
+model GetChatCompletionsBody {
+  /**
+   * The configuration information for a chat completions request.
+   * Completions support a wide variety of tasks and generate text that continues from or "completes"
+   * provided prompt data.
+   */
+  @bodyRoot
+  body: ChatCompletionsOptions;
 }

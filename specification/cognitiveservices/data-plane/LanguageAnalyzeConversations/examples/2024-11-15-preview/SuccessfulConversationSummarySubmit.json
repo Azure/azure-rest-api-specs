@@ -1,0 +1,63 @@
+{
+  "operationId": "AnalyzeConversationsSubmitJob",
+  "title": "SuccessfulConversationSummarySubmit",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2024-11-15-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}",
+    "body": {
+      "displayName": "Analyze conversations from Contoso meeting",
+      "analysisInput": {
+        "conversations": [
+          {
+            "id": "20220101meeting",
+            "language": "en",
+            "modality": "text",
+            "domain": "generic",
+            "conversationItems": [
+              {
+                "participantId": "user",
+                "role": "customer",
+                "id": "1",
+                "text": "Hi!"
+              },
+              {
+                "participantId": "agent",
+                "role": "agent",
+                "id": "2",
+                "text": "Hello, how can I help you?"
+              },
+              {
+                "participantId": "user",
+                "role": "customer",
+                "id": "3",
+                "text": "I am having trouble issuing a return of a game on my xbox: call of duty"
+              }
+            ]
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "taskName": "analyze 1",
+          "kind": "ConversationalSummarizationTask",
+          "parameters": {
+            "modelVersion": "latest",
+            "summaryAspects": [
+              "issue",
+              "resolution"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2024-11-15-preview"
+      }
+    }
+  }
+}

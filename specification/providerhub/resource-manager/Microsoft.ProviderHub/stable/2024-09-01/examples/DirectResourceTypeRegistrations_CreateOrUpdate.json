@@ -1,0 +1,507 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "resourceType": "employees",
+    "api-version": "2024-09-01",
+    "properties": {
+      "properties": {
+        "routingType": "Default",
+        "regionality": "Regional",
+        "additionalOptions": "ProtectedAsyncOperationPolling",
+        "endpoints": [
+          {
+            "apiVersions": [
+              "2020-06-01-preview"
+            ],
+            "locations": [
+              "West US",
+              "East US",
+              "North Europe"
+            ],
+            "requiredFeatures": [
+              "<feature flag>"
+            ]
+          }
+        ],
+        "resourceConcurrencyControlOptions": {
+          "put": {
+            "policy": "SynchronizeBeginExtension"
+          },
+          "patch": {
+            "policy": "SynchronizeBeginExtension"
+          },
+          "post": {
+            "policy": "SynchronizeBeginExtension"
+          }
+        },
+        "swaggerSpecifications": [
+          {
+            "apiVersions": [
+              "2020-06-01-preview"
+            ],
+            "swaggerSpecFolderUri": "https://github.com/Azure/azure-rest-api-specs/blob/feature/azure/contoso/specification/contoso/resource-manager/Microsoft.SampleRP/"
+          }
+        ],
+        "resourceGraphConfiguration": {
+          "enabled": true,
+          "apiVersion": "2019-01-01"
+        },
+        "management": {
+          "manifestOwners": [
+            "SPARTA-PlatformServiceAdministrator"
+          ],
+          "authorizationOwners": [
+            "RPAAS-PlatformServiceAdministrator"
+          ],
+          "incidentRoutingService": "",
+          "incidentRoutingTeam": "",
+          "incidentContactEmail": "helpme@contoso.com",
+          "serviceTreeInfos": [
+            {
+              "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+              "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+              "readiness": "InDevelopment"
+            }
+          ],
+          "resourceAccessPolicy": "NotSpecified"
+        },
+        "metadata": {},
+        "notifications": [
+          {
+            "notificationType": "SubscriptionNotification",
+            "skipNotifications": "Disabled"
+          }
+        ],
+        "openApiConfiguration": {
+          "validation": {
+            "allowNoncompliantCollectionResponse": true
+          }
+        },
+        "requestHeaderOptions": {
+          "optOutHeaders": "SystemDataCreatedByLastModifiedBy"
+        },
+        "templateDeploymentPolicy": {
+          "capabilities": "Preflight",
+          "preflightOptions": "ValidationRequests, DeploymentRequests",
+          "preflightNotifications": "None"
+        },
+        "allowEmptyRoleAssignments": false,
+        "policyExecutionType": "BypassPolicies",
+        "availabilityZoneRule": {
+          "availabilityZonePolicy": "MultiZoned"
+        },
+        "dstsConfiguration": {
+          "serviceName": "prds-shim",
+          "serviceDnsName": "prds.sparta.azure.com"
+        },
+        "asyncTimeoutRules": [
+          {
+            "actionName": "Microsoft.ClassicCompute/domainNames/write",
+            "timeout": "PT12H"
+          }
+        ],
+        "commonApiVersions": [
+          "2021-01-01"
+        ],
+        "apiProfiles": [
+          {
+            "profileVersion": "2018-03-01-hybrid",
+            "apiVersion": "2018-02-01"
+          },
+          {
+            "profileVersion": "2019-03-01-hybrid",
+            "apiVersion": "2016-06-01"
+          }
+        ],
+        "linkedOperationRules": [
+          {
+            "linkedOperation": "CrossSubscriptionResourceMove",
+            "linkedAction": "Blocked"
+          },
+          {
+            "linkedOperation": "CrossResourceGroupResourceMove",
+            "linkedAction": "Validate"
+          }
+        ],
+        "legacyName": "legacyName",
+        "legacyNames": [
+          "legacyName"
+        ],
+        "allowedTemplateDeploymentReferenceActions": [
+          "ListKeys",
+          "ListSAS"
+        ],
+        "legacyPolicy": {
+          "disallowedLegacyOperations": [
+            "Create"
+          ],
+          "disallowedConditions": [
+            {
+              "disallowedLegacyOperations": [
+                "Create",
+                "Delete"
+              ],
+              "feature": "Microsoft.RP/ArmOnlyJobCollections"
+            }
+          ]
+        },
+        "manifestLink": "https://azure.com",
+        "capacityRule": {
+          "capacityPolicy": "Restricted",
+          "skuAlias": "incorrectAlias"
+        },
+        "marketplaceOptions": {
+          "addOnPlanConversionAllowed": true
+        },
+        "allowedResourceNames": [
+          {
+            "name": "name1",
+            "getActionVerb": "list"
+          },
+          {
+            "name": "name2"
+          }
+        ],
+        "resourceCache": {
+          "enableResourceCache": true,
+          "resourceCacheExpirationTimespan": "PT2M"
+        },
+        "resourceQueryManagement": {
+          "filterOption": "EnableSubscriptionFilterOnTenant"
+        },
+        "supportsTags": true,
+        "resourceManagementOptions": {
+          "batchProvisioningSupport": {
+            "supportedOperations": "Get, Delete"
+          },
+          "deleteDependencies": [
+            {
+              "linkedProperty": "properties.edgeProfile.subscription.id"
+            }
+          ]
+        },
+        "groupingTag": "groupingTag",
+        "addResourceListTargetLocations": true,
+        "resourceTypeCommonAttributeManagement": {
+          "commonApiVersionsMergeMode": "Merge"
+        },
+        "routingRule": {
+          "hostResourceType": "servers/databases"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Successfully updated the resource type.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees",
+        "name": "Microsoft.Contoso/employees",
+        "type": "Microsoft.ProviderHub/providerRegistrations/resourceTypeRegistrations",
+        "properties": {
+          "routingType": "Default",
+          "regionality": "Regional",
+          "additionalOptions": "ProtectedAsyncOperationPolling",
+          "endpoints": [
+            {
+              "apiVersions": [
+                "2018-11-01-preview",
+                "2020-01-01-preview",
+                "2019-01-01"
+              ],
+              "locations": [
+                "East Asia",
+                "East US",
+                "North Europe",
+                "Southeast Asia",
+                "East US 2 EUAP",
+                "Central US EUAP",
+                "West Europe",
+                "West US",
+                "West Central US",
+                "West US 2"
+              ],
+              "requiredFeatures": [
+                "Microsoft.Contoso/RPaaSSampleApp"
+              ]
+            }
+          ],
+          "swaggerSpecifications": [
+            {
+              "apiVersions": [
+                "2018-11-01-preview",
+                "2020-01-01-preview",
+                "2019-01-01"
+              ],
+              "swaggerSpecFolderUri": "https://github.com/Azure/azure-rest-api-specs/blob/feature/azure/contoso/specification/contoso/resource-manager/Microsoft.SampleRP/"
+            }
+          ],
+          "enableAsyncOperation": false,
+          "provisioningState": "Succeeded",
+          "enableThirdPartyS2S": false,
+          "resourceDeletionPolicy": "CascadeDeleteProxyOnlyChildren",
+          "resourceConcurrencyControlOptions": {
+            "put": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "patch": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "post": {
+              "policy": "SynchronizeBeginExtension"
+            }
+          },
+          "resourceGraphConfiguration": {
+            "enabled": true,
+            "apiVersion": "2019-01-01"
+          },
+          "management": {
+            "manifestOwners": [
+              "SPARTA-PlatformServiceAdministrator"
+            ],
+            "incidentRoutingService": "",
+            "incidentRoutingTeam": "",
+            "incidentContactEmail": "helpme@contoso.com",
+            "serviceTreeInfos": [
+              {
+                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "readiness": "InDevelopment"
+              }
+            ],
+            "resourceAccessPolicy": "NotSpecified"
+          },
+          "metadata": {},
+          "notifications": [
+            {
+              "notificationType": "SubscriptionNotification",
+              "skipNotifications": "Disabled"
+            }
+          ],
+          "openApiConfiguration": {
+            "validation": {
+              "allowNoncompliantCollectionResponse": true
+            }
+          },
+          "requestHeaderOptions": {
+            "optOutHeaders": "SystemDataCreatedByLastModifiedBy"
+          },
+          "templateDeploymentPolicy": {
+            "capabilities": "Preflight",
+            "preflightOptions": "ValidationRequests, DeploymentRequests",
+            "preflightNotifications": "None"
+          },
+          "allowEmptyRoleAssignments": false,
+          "policyExecutionType": "BypassPolicies",
+          "availabilityZoneRule": {
+            "availabilityZonePolicy": "MultiZoned"
+          },
+          "dstsConfiguration": {
+            "serviceName": "prds-shim",
+            "serviceDnsName": "prds.sparta.azure.com"
+          },
+          "asyncTimeoutRules": [
+            {
+              "actionName": "Microsoft.ClassicCompute/domainNames/write",
+              "timeout": "PT12H"
+            }
+          ],
+          "commonApiVersions": [
+            "2021-01-01"
+          ],
+          "apiProfiles": [
+            {
+              "profileVersion": "2018-03-01-hybrid",
+              "apiVersion": "2018-02-01"
+            },
+            {
+              "profileVersion": "2019-03-01-hybrid",
+              "apiVersion": "2016-06-01"
+            }
+          ],
+          "linkedOperationRules": [
+            {
+              "linkedOperation": "CrossSubscriptionResourceMove",
+              "linkedAction": "Blocked"
+            },
+            {
+              "linkedOperation": "CrossResourceGroupResourceMove",
+              "linkedAction": "Validate"
+            }
+          ],
+          "legacyName": "legacyName",
+          "legacyNames": [
+            "legacyName"
+          ],
+          "allowedTemplateDeploymentReferenceActions": [
+            "ListKeys",
+            "ListSAS"
+          ],
+          "legacyPolicy": {
+            "disallowedLegacyOperations": [
+              "Create"
+            ],
+            "disallowedConditions": [
+              {
+                "disallowedLegacyOperations": [
+                  "Create",
+                  "Delete"
+                ],
+                "feature": "Microsoft.RP/ArmOnlyJobCollections"
+              }
+            ]
+          },
+          "manifestLink": "https://azure.com",
+          "capacityRule": {
+            "capacityPolicy": "Restricted",
+            "skuAlias": "incorrectAlias"
+          },
+          "marketplaceOptions": {
+            "addOnPlanConversionAllowed": true
+          },
+          "allowedResourceNames": [
+            {
+              "name": "name1",
+              "getActionVerb": "list"
+            },
+            {
+              "name": "name2"
+            }
+          ],
+          "resourceCache": {
+            "enableResourceCache": true,
+            "resourceCacheExpirationTimespan": "PT2M"
+          },
+          "resourceQueryManagement": {
+            "filterOption": "EnableSubscriptionFilterOnTenant"
+          },
+          "supportsTags": true,
+          "resourceManagementOptions": {
+            "batchProvisioningSupport": {
+              "supportedOperations": "Get, Delete"
+            },
+            "deleteDependencies": [
+              {
+                "linkedProperty": "properties.edgeProfile.subscription.id"
+              }
+            ]
+          },
+          "groupingTag": "groupingTag",
+          "addResourceListTargetLocations": true,
+          "resourceTypeCommonAttributeManagement": {
+            "commonApiVersionsMergeMode": "Merge"
+          },
+          "routingRule": {
+            "hostResourceType": "servers/databases"
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+        }
+      }
+    },
+    "201": {
+      "description": "Successfully created the resource type.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees",
+        "name": "Microsoft.Contoso/employees",
+        "type": "Microsoft.ProviderHub/providerRegistrations/resourceTypeRegistrations",
+        "properties": {
+          "routingType": "Default",
+          "regionality": "Regional",
+          "endpoints": [
+            {
+              "apiVersions": [
+                "2018-11-01-preview",
+                "2020-01-01-preview",
+                "2019-01-01"
+              ],
+              "locations": [
+                "East Asia",
+                "East US",
+                "North Europe",
+                "Southeast Asia",
+                "East US 2 EUAP",
+                "Central US EUAP",
+                "West Europe",
+                "West US",
+                "West Central US",
+                "West US 2"
+              ],
+              "requiredFeatures": [
+                "Microsoft.Contoso/RPaaSSampleApp"
+              ]
+            }
+          ],
+          "swaggerSpecifications": [
+            {
+              "apiVersions": [
+                "2018-11-01-preview",
+                "2020-01-01-preview",
+                "2019-01-01"
+              ],
+              "swaggerSpecFolderUri": "https://github.com/Azure/azure-rest-api-specs/blob/feature/azure/contoso/specification/contoso/resource-manager/Microsoft.SampleRP/"
+            }
+          ],
+          "enableAsyncOperation": false,
+          "provisioningState": "Succeeded",
+          "enableThirdPartyS2S": false,
+          "resourceConcurrencyControlOptions": {
+            "put": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "patch": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "post": {
+              "policy": "SynchronizeBeginExtension"
+            }
+          },
+          "resourceGraphConfiguration": {
+            "enabled": true,
+            "apiVersion": "2019-01-01"
+          },
+          "management": {
+            "manifestOwners": [
+              "SPARTA-PlatformServiceAdministrator"
+            ],
+            "incidentRoutingService": "",
+            "incidentRoutingTeam": "",
+            "incidentContactEmail": "helpme@contoso.com",
+            "serviceTreeInfos": [
+              {
+                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "readiness": "InDevelopment"
+              }
+            ],
+            "resourceAccessPolicy": "NotSpecified"
+          },
+          "metadata": {},
+          "openApiConfiguration": {
+            "validation": {
+              "allowNoncompliantCollectionResponse": true
+            }
+          },
+          "requestHeaderOptions": {
+            "optOutHeaders": "SystemDataCreatedByLastModifiedBy"
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+        }
+      }
+    }
+  }
+}

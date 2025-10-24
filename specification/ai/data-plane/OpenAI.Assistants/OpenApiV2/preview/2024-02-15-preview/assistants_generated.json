@@ -111,7 +111,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -165,6 +165,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of assistants.": {
+            "$ref": "./examples/list_assistants.json"
+          }
         }
       },
       "post": {
@@ -174,7 +179,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The request details to use when creating a new assistant.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantCreationOptions"
@@ -187,6 +192,11 @@
             "schema": {
               "$ref": "#/definitions/Assistant"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create an assistant with a model and instructions.": {
+            "$ref": "./examples/create_assistant.json"
           }
         }
       }
@@ -211,6 +221,11 @@
               "$ref": "#/definitions/Assistant"
             }
           }
+        },
+        "x-ms-examples": {
+          "Retrieves an assistant.": {
+            "$ref": "./examples/get_assistant.json"
+          }
         }
       },
       "post": {
@@ -227,7 +242,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The request details to use when modifying an existing assistant.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantOptions"
@@ -240,6 +255,11 @@
             "schema": {
               "$ref": "#/definitions/Assistant"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Modifies an assistant.": {
+            "$ref": "./examples/update_assistant.json"
           }
         }
       },
@@ -261,6 +281,11 @@
             "schema": {
               "$ref": "#/definitions/AssistantDeletionStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an assistant.": {
+            "$ref": "./examples/delete_assistant.json"
           }
         }
       }
@@ -316,6 +341,11 @@
             "schema": {
               "$ref": "#/definitions/FileListResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a list of files filtered by purpose": {
+            "$ref": "./examples/list_file.json"
           }
         }
       },
@@ -387,6 +417,11 @@
               "$ref": "#/definitions/OpenAIFile"
             }
           }
+        },
+        "x-ms-examples": {
+          "Uploads a file": {
+            "$ref": "./examples/upload_file.json"
+          }
         }
       }
     },
@@ -410,6 +445,11 @@
               "$ref": "#/definitions/OpenAIFile"
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a file": {
+            "$ref": "./examples/get_file.json"
+          }
         }
       },
       "delete": {
@@ -431,6 +471,11 @@
               "$ref": "#/definitions/FileDeletionStatus"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete a previously uploaded file.": {
+            "$ref": "./examples/delete_file.json"
+          }
         }
       }
     },
@@ -438,6 +483,9 @@
       "get": {
         "operationId": "GetFileContent",
         "description": "Returns information about a specific file. Does not retrieve file content.",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -451,9 +499,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the content of a file": {
+            "$ref": "./examples/get_file_content.json"
           }
         }
       }
@@ -466,7 +518,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The details used to create a new assistant thread.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantThreadCreationOptions"
@@ -479,6 +531,11 @@
             "schema": {
               "$ref": "#/definitions/AssistantThread"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a thread.": {
+            "$ref": "./examples/create_thread.json"
           }
         }
       }
@@ -503,6 +560,11 @@
               "$ref": "#/definitions/AssistantThread"
             }
           }
+        },
+        "x-ms-examples": {
+          "Retrieves a thread.": {
+            "$ref": "./examples/get_thread.json"
+          }
         }
       },
       "post": {
@@ -519,7 +581,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The details used to update an existing assistant thread.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantThreadOptions"
@@ -532,6 +594,11 @@
             "schema": {
               "$ref": "#/definitions/AssistantThread"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Modifies a thread.": {
+            "$ref": "./examples/update_thread.json"
           }
         }
       },
@@ -553,6 +620,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadDeletionStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a thread.": {
+            "$ref": "./examples/delete_thread.json"
           }
         }
       }
@@ -616,7 +688,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -670,6 +742,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "List Messages": {
+            "$ref": "./examples/list_messages.json"
+          }
         }
       },
       "post": {
@@ -682,6 +759,15 @@
             "description": "The ID of the thread to create the new message on.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThreadMessageOptions"
+            }
           }
         ],
         "responses": {
@@ -690,6 +776,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadMessage"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a message.": {
+            "$ref": "./examples/create_message.json"
           }
         }
       }
@@ -720,6 +811,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadMessage"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a message.": {
+            "$ref": "./examples/get_message.json"
           }
         }
       },
@@ -766,6 +862,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadMessage"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Modify a message.": {
+            "$ref": "./examples/update_message.json"
           }
         }
       }
@@ -829,7 +930,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -883,6 +984,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of runs belonging to a thread.": {
+            "$ref": "./examples/list_runs.json"
+          }
         }
       },
       "post": {
@@ -897,9 +1003,9 @@
             "type": "string"
           },
           {
-            "name": "createRunOptions",
+            "name": "body",
             "in": "body",
-            "description": "The details for the run to create.",
+            "description": "The details used when creating a new run of an assistant thread.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateRunOptions"
@@ -912,6 +1018,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a run.": {
+            "$ref": "./examples/create_run.json"
           }
         }
       }
@@ -942,6 +1053,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a run.": {
+            "$ref": "./examples/get_run.json"
           }
         }
       },
@@ -989,6 +1105,11 @@
               "$ref": "#/definitions/ThreadRun"
             }
           }
+        },
+        "x-ms-examples": {
+          "Modifies a run.": {
+            "$ref": "./examples/update_run.json"
+          }
         }
       }
     },
@@ -1018,6 +1139,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancels a run that is `in_progress`.\n": {
+            "$ref": "./examples/cancel_run.json"
           }
         }
       }
@@ -1088,7 +1214,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1142,6 +1268,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of run steps belonging to a run.": {
+            "$ref": "./examples/list_run_steps.json"
+          }
         }
       }
     },
@@ -1179,6 +1310,11 @@
               "$ref": "#/definitions/RunStep"
             }
           }
+        },
+        "x-ms-examples": {
+          "Retrieves a run step.": {
+            "$ref": "./examples/get_run_step.json"
+          }
         }
       }
     },
@@ -1214,8 +1350,7 @@
                   "items": {
                     "$ref": "#/definitions/ToolOutput"
                   },
-                  "x-ms-client-name": "toolOutputs",
-                  "x-ms-identifiers": []
+                  "x-ms-client-name": "toolOutputs"
                 },
                 "stream": {
                   "type": "boolean",
@@ -1236,6 +1371,11 @@
               "$ref": "#/definitions/ThreadRun"
             }
           }
+        },
+        "x-ms-examples": {
+          "When a run has the `status: \"requires_action\"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.\n": {
+            "$ref": "./examples/submit_tool_outputs_to_run.json"
+          }
         }
       }
     },
@@ -1247,7 +1387,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The details used when creating and immediately running a new assistant thread.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateAndRunThreadOptions"
@@ -1260,6 +1400,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a thread and run it in one request.": {
+            "$ref": "./examples/create_thread_and_run.json"
           }
         }
       }
@@ -1315,8 +1460,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "object",
@@ -1368,8 +1512,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "object",
@@ -1506,8 +1649,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "stream": {
           "type": "boolean",
@@ -1557,8 +1699,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "stream": {
           "type": "boolean",
@@ -1941,8 +2082,7 @@
           "description": "A list of annotations associated with this text.",
           "items": {
             "$ref": "#/definitions/MessageTextAnnotation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2318,14 +2458,9 @@
           "x-ms-client-name": "stepDetails"
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepError",
           "description": "If applicable, information about the last error encountered by this run step.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         },
         "created_at": {
@@ -2363,14 +2498,9 @@
           "x-ms-client-name": "failedAt"
         },
         "usage": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepCompletionUsage",
           "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepCompletionUsage"
-            }
-          ]
+          "x-nullable": true
         },
         "metadata": {
           "type": "object",
@@ -2484,8 +2614,7 @@
           "description": "The outputs produced by the code interpreter tool back to the model in response to the tool call.",
           "items": {
             "$ref": "#/definitions/RunStepCodeInterpreterToolCallOutput"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2877,14 +3006,9 @@
           "description": "The status of the message."
         },
         "incomplete_details": {
-          "type": "object",
+          "$ref": "#/definitions/MessageIncompleteDetails",
           "description": "On an incomplete message, details about why the message is incomplete.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MessageIncompleteDetails"
-            }
-          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "completed_at": {
@@ -2910,8 +3034,7 @@
           "description": "The list of content items associated with the assistant thread message.",
           "items": {
             "$ref": "#/definitions/MessageContent"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "assistant_id": {
           "type": "string",
@@ -2950,6 +3073,32 @@
         "metadata"
       ]
     },
+    "ThreadMessageOptions": {
+      "type": "object",
+      "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/MessageRole",
+          "description": "The role of the entity that is creating the message. Allowed values include:\n- `user`: Indicates the message is sent by an actual user and should be used in most cases to represent user-generated messages.\n- `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into\nthe conversation."
+        },
+        "content": {
+          "type": "string",
+          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via\na separate call to the create message API."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
     "ThreadRun": {
       "type": "object",
       "description": "Data representing a single evaluation run of an assistant thread.",
@@ -2983,25 +3132,15 @@
           "description": "The status of the assistant thread run."
         },
         "required_action": {
-          "type": "object",
+          "$ref": "#/definitions/RequiredAction",
           "description": "The details of the action required for the assistant thread run to continue.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RequiredAction"
-            }
-          ],
           "x-ms-client-name": "requiredAction"
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/RunError",
           "description": "The last error, if any, encountered by this assistant thread run.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         },
         "model": {
@@ -3018,8 +3157,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "created_at": {
           "type": "integer",
@@ -3069,14 +3207,9 @@
           "x-ms-client-name": "incompleteDetails"
         },
         "usage": {
-          "type": "object",
+          "$ref": "#/definitions/RunCompletionUsage",
           "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunCompletionUsage"
-            }
-          ]
+          "x-nullable": true
         },
         "metadata": {
           "type": "object",
@@ -3166,8 +3299,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "object",

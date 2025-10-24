@@ -4,12 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./models/models.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using OpenAPI;
-using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Microsoft.AppComplianceAutomation;
 
@@ -80,11 +75,12 @@ interface ProviderActions {
     ListInUseStorageAccountsResponse
   >;
 }
-
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(ArmProviderActionAsync::parameters.body,
   "application/json",
   "parameters"
 );
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(ArmProviderActionSync::parameters.body,
   "application/json",
   "parameters"
