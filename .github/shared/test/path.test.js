@@ -2,7 +2,7 @@
 
 import { sep } from "path";
 import { describe, expect, it } from "vitest";
-import { includesFolder } from "../src/path.js";
+import { includesFolder, untilFolder } from "../src/path.js";
 
 const cwd = process.cwd();
 const cwdSegments = cwd.split(sep);
@@ -16,10 +16,16 @@ describe("path", () => {
     ["foo/bar", "foo", true],
     ["foo/bar", cwdSegments[cwdSegments.length - 1], true],
     ["foo/bar", "qux", false],
-  ])("includesFolder(%s, %s) => %s", (path, folder, result) => {
-    console.log();
-    expect(includesFolder(path, folder)).toEqual(result);
+  ])("includesFolder(%o, %o) => %o", (path, folder, expected) => {
+    expect(includesFolder(path, folder)).toEqual(expected);
   });
 
-  // TODO: Add tests for untilFolder using cwdSegments
+  it.each([
+    ["/a/b/c/d.txt", "c", "/a/b"],
+    ["/a/b/c/d.txt", "b", "/a"],
+    ["/a/b/c/d.txt", "a", "/"],
+    ["/a/b/c/d.txt", "z", ""],
+  ])("untilFolder(%o, %o) => %o", (path, folder, expected) => {
+    expect(untilFolder(path, folder)).toEqual(expected);
+  });
 });
