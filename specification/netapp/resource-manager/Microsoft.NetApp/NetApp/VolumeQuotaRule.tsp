@@ -40,7 +40,7 @@ model VolumeQuotaRulesProperties {
    * Gets the status of the VolumeQuotaRule at the time the operation was called.
    */
   @removed(Versions.v2025_08_01)
-  @renamedFrom(Versions.v2025_08_01, "ProvisioningState")
+  @renamedFrom(Versions.v2025_08_01, "provisioningState")
   @visibility(Lifecycle.Read)
   provisioningStateOld?: ProvisioningState;
 
