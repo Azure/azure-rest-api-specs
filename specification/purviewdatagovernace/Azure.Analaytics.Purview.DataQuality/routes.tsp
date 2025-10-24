@@ -2,8 +2,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/http";
+import "@typespec/versioning";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -13,6 +15,19 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 alias DataQualityOperation = Azure.Core.ResourceOperations<ServiceTraits>;
+
+/** Version information */
+enum Versions {
+  /** API version 2025-09-01-preview */
+  v2025_09_01_preview: "2025-09-01-preview"
+}
+
+@versioned(Versions)
+@service(#{
+  title: "Purview Data Quality API"
+})
+namespace PurviewDataQuality {
+
 /**
  * Create Rules for Assets
  */
@@ -66,35 +81,35 @@ op getRule is DataQualityOperation.ResourceRead<RuleParameters>;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules")
 @put
-op createBulkRules is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Unique Identifier for Business Domain
-     */
-    @path
-    businessDomainId: string;
+op createBulkRules is DataQualityOperation.ResourceCreateOrReplace<RuleEntities>;
+//   {
+//     /**
+//      * Unique Identifier for Business Domain
+//      */
+//     @path
+//     businessDomainId: string;
 
-    /**
-     * Unique Identifier for Data Product
-     */
-    @path
-    dataProductId: string;
+//     /**
+//      * Unique Identifier for Data Product
+//      */
+//     @path
+//     dataProductId: string;
 
-    /**
-     * Unique Identifier for Data Asset
-     */
-    @path
-    dataAssetId: string;
+//     /**
+//      * Unique Identifier for Data Asset
+//      */
+//     @path
+//     dataAssetId: string;
 
-    /**
-     * Body Rule Entity
-     */
-    #suppress "@azure-tools/typespec-azure-core/request-body-problem"
-    @bodyRoot
-    body?: RuleEntity[];
-  },
-  RuleEntityListResponse
->;
+//     /**
+//      * Body Rule Entity
+//      */
+//     #suppress "@azure-tools/typespec-azure-core/request-body-problem"
+//     @bodyRoot
+//     body?: RuleEntity[];
+//   },
+//   RuleEntityListResponse
+// >;
 
 /**
  * Create Asset Metadata Observer
@@ -104,34 +119,34 @@ op createBulkRules is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
 @put
-op createAssetMetaData is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Unique Identifier for Business Domain
-     */
-    @path
-    businessDomainId: string;
+op createAssetMetaData is DataQualityOperation.ResourceCreateOrReplace<RuleEntities>;
+//   {
+//     /**
+//      * Unique Identifier for Business Domain
+//      */
+//     @path
+//     businessDomainId: string;
 
-    /**
-     * Unique Identifier for Data Product
-     */
-    @path
-    dataProductId: string;
+//     /**
+//      * Unique Identifier for Data Product
+//      */
+//     @path
+//     dataProductId: string;
 
-    /**
-     * Unique Identifier for Data Asset
-     */
-    @path
-    dataAssetId: string;
+//     /**
+//      * Unique Identifier for Data Asset
+//      */
+//     @path
+//     dataAssetId: string;
 
-    /**
-     * Asset Meta data observer
-     */
-    @bodyRoot
-    body?: AssetMetadataObserver;
-  },
-  AssetMetadataObserverResponse
->;
+//     /**
+//      * Asset Meta data observer
+//      */
+//     @bodyRoot
+//     body?: AssetMetadataObserver;
+//   },
+//   AssetMetadataObserverResponse
+// >;
 
 /**
  * Get Observer
@@ -141,28 +156,28 @@ op createAssetMetaData is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
 @get
-op getObserver is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Unique Identifier for Business Domain
-     */
-    @path
-    businessDomainId: string;
+op getObserver is DataQualityOperation.ResourceRead<RuleParameters>;
+//   {
+//     /**
+//      * Unique Identifier for Business Domain
+//      */
+//     @path
+//     businessDomainId: string;
 
-    /**
-     * Unique Identifier for Data Product
-     */
-    @path
-    dataProductId: string;
+//     /**
+//      * Unique Identifier for Data Product
+//      */
+//     @path
+//     dataProductId: string;
 
-    /**
-     * Unique Identifier for Data Asset
-     */
-    @path
-    dataAssetId: string;
-  },
-  AssetMetadataObserver
->;
+//     /**
+//      * Unique Identifier for Data Asset
+//      */
+//     @path
+//     dataAssetId: string;
+//   },
+//   AssetMetadataObserver
+// >;
 
 /**
  * Update Observer

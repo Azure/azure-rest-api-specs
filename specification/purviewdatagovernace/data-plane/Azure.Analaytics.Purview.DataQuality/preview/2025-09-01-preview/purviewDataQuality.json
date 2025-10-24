@@ -53,125 +53,6 @@
   "tags": [],
   "paths": {
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata": {
-      "get": {
-        "operationId": "GetObserver",
-        "description": "Get Observer",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique Identifier for Business Domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Unique Identifier for Data Product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Unique Identifier for Data Asset",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AssetMetadataObserver"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AssetMetaData_Get": {
-            "$ref": "./examples/AssetMetaData_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "CreateAssetMetaData",
-        "description": "Create Asset Metadata Observer",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique Identifier for Business Domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Unique Identifier for Data Product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Unique Identifier for Data Asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Asset Meta data observer",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/AssetMetadataObserver"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Represents metadata observer entity for a data asset.",
-            "schema": {
-              "$ref": "#/definitions/AssetMetadataObserverResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AssetMetaData_Create": {
-            "$ref": "./examples/AssetMetaData_Create.json"
-          }
-        }
-      },
       "patch": {
         "operationId": "UpdateObserver",
         "description": "Update Observer",
@@ -237,7 +118,148 @@
         }
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules": {
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}": {
+      "get": {
+        "operationId": "GetObserver",
+        "description": "Get Observer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleParameters"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Get": {
+            "$ref": "./examples/AssetMetaData_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateAssetMetaData",
+        "description": "Create Asset Metadata Observer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Create": {
+            "$ref": "./examples/AssetMetaData_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}": {
       "put": {
         "operationId": "CreateBulkRules",
         "description": "Create Bulk Rules for Assets",
@@ -248,42 +270,52 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "Get Business Domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique Identifier for Data Product",
+            "description": "Get Data Product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Unique Identifier for Data Asset",
+            "description": "Get Data Asset",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "Body Rule Entity",
-            "required": false,
+            "description": "The resource instance.",
+            "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RuleEntity"
-              }
+              "$ref": "#/definitions/RuleEntities"
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Rule entity response",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RuleEntityListResponse"
+              "$ref": "#/definitions/RuleEntities"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
             }
           },
           "default": {
@@ -2230,69 +2262,6 @@
         }
       }
     },
-    "AssetMetadataObserverResponse": {
-      "type": "object",
-      "description": "Represents metadata observer entity for a data asset.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "id"
-        },
-        "name": {
-          "type": "string",
-          "description": "name"
-        },
-        "dataAsset": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "created at"
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "created by"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "last modified by"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "last modified"
-        },
-        "executionData": {
-          "type": "object",
-          "description": "Dictionary of <any>",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "isDeleted": {
-          "type": "boolean",
-          "description": "isDeleted"
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
-        },
-        "dataProduct": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "eTag"
-        },
-        "type": {
-          "$ref": "#/definitions/AssetMetadataObserverType",
-          "description": "type"
-        }
-      }
-    },
     "AssetMetadataObserverType": {
       "type": "string",
       "description": "AssetMetaDataObserverType",
@@ -2609,6 +2578,31 @@
           "description": "Identifier of the datasource."
         }
       }
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "Details about an error that occurred",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "details": {
+          "type": "object",
+          "description": "Additional details about the error",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "JobConfigDTO": {
       "type": "object",
@@ -3128,75 +3122,6 @@
         "id"
       ]
     },
-    "RuleEntityBulkResponse": {
-      "type": "object",
-      "description": "Represents a business/data quality rule entity.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
-        },
-        "description": {
-          "type": "string",
-          "description": "Represents description of the rule."
-        },
-        "type": {
-          "type": "string",
-          "description": "Represents the type of rule."
-        },
-        "status": {
-          "type": "string",
-          "description": "Represents the status of the rule."
-        },
-        "typeProperties": {
-          "$ref": "#/definitions/TypeProperties",
-          "description": "Holds additional properties related to rule type."
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of the rule."
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the related BusinessDomain entity."
-        },
-        "dataProduct": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataProduct entity."
-        },
-        "dataAsset": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataAsset entity."
-        },
-        "score": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the rule's score."
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "status",
-        "id"
-      ]
-    },
-    "RuleEntityListResponse": {
-      "type": "object",
-      "description": "Rule entity response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Value RuleEntity",
-          "items": {
-            "$ref": "#/definitions/RuleEntityBulkResponse"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "RuleEntityUpdate": {
       "type": "object",
       "description": "Represents a business/data quality rule entity.",
@@ -3285,6 +3210,10 @@
         "statuslro": {
           "$ref": "#/definitions/LroStatus",
           "description": "lro status"
+        },
+        "statusMonitor": {
+          "$ref": "#/definitions/StatusMonitor",
+          "description": "Monitoring information for the scan status"
         }
       },
       "required": [
@@ -3660,6 +3589,80 @@
           "description": "ETag for concurrency control."
         }
       }
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status of a rule or operation",
+      "enum": [
+        "Active",
+        "Suspended",
+        "Completed",
+        "Failed",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The rule or operation is active and running"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The rule or operation is currently suspended"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The rule or operation has completed successfully"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The rule or operation has failed"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The rule or operation is currently in progress"
+          }
+        ]
+      }
+    },
+    "StatusMonitor": {
+      "type": "object",
+      "description": "Model for monitoring the status of rules and operations",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Current status of the rule or operation"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last status update"
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Detailed message about the current status"
+        },
+        "progressPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percentage of completion for in-progress operations"
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "Error details if the status is Failed"
+        }
+      },
+      "required": [
+        "status",
+        "lastUpdated"
+      ]
     },
     "TypeProperties": {
       "type": "object",

@@ -100,6 +100,78 @@ model DataAsset {
 }
 
 /**
+ * Status of a rule or operation
+ */
+union Status {
+  string,
+
+  /** The rule or operation is active and running */
+  Active: "Active",
+
+  /** The rule or operation is currently suspended */
+  Suspended: "Suspended",
+
+  /** The rule or operation has completed successfully */
+  Completed: "Completed",
+
+  /** The rule or operation has failed */
+  Failed: "Failed",
+
+  /** The rule or operation is currently in progress */
+  InProgress: "InProgress",
+}
+
+/**
+ * Model for monitoring the status of rules and operations
+ */
+model StatusMonitor {
+  /**
+   * Current status of the rule or operation
+   */
+  status: Status;
+
+  /**
+   * Timestamp of the last status update
+   */
+  lastUpdated: utcDateTime;
+
+  /**
+   * Detailed message about the current status
+   */
+  statusMessage?: string;
+
+  /**
+   * Percentage of completion for in-progress operations
+   */
+  progressPercentage?: int32;
+
+  /**
+   * Error details if the status is Failed
+   */
+  errorDetails?: ErrorDetails;
+}
+
+/**
+ * Details about an error that occurred
+ */
+model ErrorDetails {
+  /**
+   * Error code
+   */
+  code: string;
+
+  /**
+   * Error message
+   */
+  message: string;
+
+  /**
+   * Additional details about the error
+   */
+  details?: Record<string>;
+}
+
+/**
  * Resource ID parameters for hierarchical path binding
  */
 model DataAssetRuleResourceId {
@@ -1080,6 +1152,11 @@ model ScanDTOResponse {
    */
   @lroStatus
   statuslro: LroStatus;
+
+  /**
+   * Monitoring information for the scan status
+   */
+  statusMonitor?: StatusMonitor;
 }
 
 /**
