@@ -330,7 +330,7 @@
         },
         "x-ms-examples": {
           "GetExpressRouteCircuitAuthorization": {
-            "$ref": "./examples/ExpressRouteCircuitAuthorizationGet.json"
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationGetUsingPost.json"
           }
         }
       }
@@ -380,7 +380,7 @@
         },
         "x-ms-examples": {
           "ListExpressRouteCircuitAuthorization": {
-            "$ref": "./examples/ExpressRouteCircuitAuthorizationList.json"
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationListUsingPost.json"
           }
         }
       }
@@ -430,13 +430,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Create Accepted"
-          },
-          "201": {
-            "description": "Create successful. The operation returns the resulting ExpressRouteCircuitAuthorization resource.",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-            }
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
           },
           "200": {
             "description": "Update successful. The operation returns the resulting ExpressRouteCircuitAuthorization resource.",
@@ -457,7 +455,7 @@
         },
         "x-ms-examples": {
           "CreateExpressRouteCircuitAuthorization": {
-            "$ref": "./examples/ExpressRouteCircuitAuthorizationCreate.json"
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationCreateUsingPost.json"
           }
         }
       }

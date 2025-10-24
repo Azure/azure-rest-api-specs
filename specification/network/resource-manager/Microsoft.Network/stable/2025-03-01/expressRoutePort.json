@@ -918,7 +918,7 @@
         },
         "x-ms-examples": {
           "GetExpressRoutePortAuthorization": {
-            "$ref": "./examples/ExpressRoutePortAuthorizationGet.json"
+            "$ref": "./examples/ExpressRoutePortAuthorizationGetUsingPost.json"
           }
         }
       }
@@ -968,7 +968,7 @@
         },
         "x-ms-examples": {
           "ListExpressRoutePortAuthorization": {
-            "$ref": "./examples/ExpressRoutePortAuthorizationList.json"
+            "$ref": "./examples/ExpressRoutePortAuthorizationListUsingPost.json"
           }
         }
       }
@@ -1018,12 +1018,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Create Accepted"
-          },
-          "201": {
-            "description": "Create successful. The operation returns the resulting ExpressRoutePortAuthorization resource.",
-            "schema": {
-              "$ref": "#/definitions/ExpressRoutePortAuthorization"
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "200": {
@@ -1045,7 +1044,7 @@
         },
         "x-ms-examples": {
           "CreateExpressRoutePortAuthorization": {
-            "$ref": "./examples/ExpressRoutePortAuthorizationCreate.json"
+            "$ref": "./examples/ExpressRoutePortAuthorizationCreateUsingPost.json"
           }
         }
       }
