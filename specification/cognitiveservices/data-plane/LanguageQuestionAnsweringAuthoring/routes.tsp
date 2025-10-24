@@ -91,8 +91,8 @@ interface QuestionAnsweringProjects {
       /**
        * Knowledge base Import or Export format.
        */
-      @query("file_format")
-      file_format?: format = format.json;
+      @query("format")
+      fileFormat?: format = format.json;
 
       /**
        * Kind of the asset of the project.
@@ -133,8 +133,8 @@ interface QuestionAnsweringProjects {
       /**
        * Knowledge base Import or Export format.
        */
-      @query("file_format")
-      file_format?: format = format.json;
+      @query("format")
+      fileFormat?: format = format.json;
 
       /**
        * Kind of the asset of the project.
