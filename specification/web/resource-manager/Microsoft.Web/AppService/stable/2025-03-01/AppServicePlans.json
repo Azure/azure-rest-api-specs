@@ -1886,34 +1886,22 @@
     "ServerFarmInstanceDetails": {
       "description": "Represents instance details for an app service plan.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "ServerFarmInstanceDetails resource specific properties",
-          "type": "object",
-          "properties": {
-            "serverFarmName": {
-              "description": "The server farm name.",
-              "type": "string"
-            },
-            "instances": {
-              "description": "The list of server farm instances.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ServerFarmInstance"
-              }
-            },
-            "instanceCount": {
-              "format": "int32",
-              "description": "The total number of instances.",
-              "type": "integer"
-            }
-          },
-          "x-ms-client-flatten": true
+        "serverFarmName": {
+          "description": "The server farm name.",
+          "type": "string"
+        },
+        "instances": {
+          "description": "The list of server farm instances.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerFarmInstance"
+          }
+        },
+        "instanceCount": {
+          "format": "int32",
+          "description": "The total number of instances.",
+          "type": "integer"
         }
       }
     },
