@@ -195,6 +195,11 @@ union DenyStatusMode {
    * No denyAssignments have been applied.
    */
   None: "none",
+
+  /**
+   * The denyAssignment status is unknown.
+   */
+  Unknown: "unknown",
 }
 
 /**
