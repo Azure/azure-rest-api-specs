@@ -26,15 +26,14 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault-generated"
-    namespace: "com.azure.resourcemanager.keyvault.generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault"
+    namespace: "com.azure.resourcemanager.keyvault"
     service-name: "KeyVault" # human-readable service name, whitespace allowed
     flavor: azure
     enable-sync-stack: false
-    # emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault"
-    # namespace: "com.azure.resourcemanager.keyvault"
-    # premium: true
-    # customization-class: customization/src/main/java/KeyVaultCustomization.java
+    premium: true
+    customization-class: customization/src/main/java/KeyVaultCustomization.java
+    uuid-as-string: false
     rename-model:
       TrackedResource: Resource
     client-side-validations: true

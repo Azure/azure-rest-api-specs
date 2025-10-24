@@ -1,0 +1,86 @@
+{
+  "operationId": "ElasticSans_Get",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "elasticSanName": "elasticsanname",
+    "resourceGroupName": "resourcegroupname",
+    "subscriptionId": "subscriptionid"
+  },
+  "title": "ElasticSans_Get_MinimumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vfoatmakv",
+        "type": "Microsoft.ElasticSan/ElasticSans",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}",
+        "location": "France Central",
+        "properties": {
+          "autoScaleProperties": {
+            "scaleUpProperties": {
+              "autoScalePolicyEnforcement": "None",
+              "capacityUnitScaleUpLimitTiB": 17,
+              "increaseCapacityUnitByTiB": 4,
+              "unusedSizeTiB": 24
+            }
+          },
+          "availabilityZones": [
+            "1"
+          ],
+          "baseSizeTiB": 15,
+          "extendedCapacitySizeTiB": 6,
+          "privateEndpointConnections": [
+            {
+              "name": "{privateEndpointConnectionName}",
+              "type": "Microsoft.ElasticSan/elasticSans/privateEndpointConnections",
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateEndpointConnections/{privateEndpointConnectionName}",
+              "properties": {
+                "groupIds": [
+                  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}"
+                ],
+                "privateEndpoint": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None",
+                  "status": "Pending"
+                },
+                "provisioningState": "Succeeded"
+              },
+              "systemData": {
+                "createdAt": "2023-07-03T09:59:45.919Z",
+                "createdBy": "otfifnrahdshqombvtg",
+                "createdByType": "User",
+                "lastModifiedAt": "2023-07-03T09:59:45.919Z",
+                "lastModifiedBy": "jnaxavnlhrboshtidtib",
+                "lastModifiedByType": "User"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
+          "sku": {
+            "name": "Premium_LRS",
+            "tier": "Premium"
+          },
+          "totalIops": 22,
+          "totalMBps": 4,
+          "totalSizeTiB": 27,
+          "totalVolumeSizeGiB": 15,
+          "volumeGroupCount": 24
+        },
+        "systemData": {
+          "createdAt": "2023-07-03T09:59:45.919Z",
+          "createdBy": "otfifnrahdshqombvtg",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-07-03T09:59:45.919Z",
+          "lastModifiedBy": "jnaxavnlhrboshtidtib",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key5002": "lhag"
+        }
+      }
+    }
+  }
+}
