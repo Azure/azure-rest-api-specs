@@ -1,0 +1,173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureStackHCI",
+    "version": "2025-11-01-preview",
+    "description": "Azure Stack HCI service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "UpdateContents"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/updateContents/{updateContentName}": {
+      "get": {
+        "operationId": "UpdateContents_Get",
+        "tags": [
+          "UpdateContents"
+        ],
+        "description": "Gets content for an update.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "updateContentName",
+            "in": "path",
+            "description": "The name of the UpdateContent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateContent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContents_Get_MaximumSet": {
+            "$ref": "./examples/UpdateContents_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContentPayload": {
+      "type": "object",
+      "description": "Represents details of a specific update content payload.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Represents url of a update payload."
+        },
+        "hash": {
+          "type": "string",
+          "description": "Represents hash of a update payload."
+        },
+        "hashAlgorithm": {
+          "type": "string",
+          "description": "Represents hash algorithm of a update payload."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Represents identifier of a update payload."
+        },
+        "packageSizeInBytes": {
+          "type": "string",
+          "description": "Represents size in bytes of a update payload."
+        },
+        "group": {
+          "type": "string",
+          "description": "Represents the group of a update payload."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Represents the file name of a update payload."
+        }
+      },
+      "required": [
+        "url",
+        "hash",
+        "hashAlgorithm",
+        "identifier",
+        "packageSizeInBytes",
+        "group",
+        "fileName"
+      ]
+    },
+    "UpdateContent": {
+      "type": "object",
+      "description": "Represents a update content.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateContentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpdateContentProperties": {
+      "type": "object",
+      "description": "Represents properties of a update content resource.",
+      "properties": {
+        "updatePayloads": {
+          "type": "array",
+          "description": "Represents the payloads of a update content resource.",
+          "items": {
+            "$ref": "#/definitions/ContentPayload"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "updatePayloads"
+      ]
+    }
+  },
+  "parameters": {}
+}

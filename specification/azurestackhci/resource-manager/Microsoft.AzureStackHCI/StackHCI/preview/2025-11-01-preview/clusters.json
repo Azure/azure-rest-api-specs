@@ -531,6 +531,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/changeRing": {
+      "post": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_ChangeRing",
+        "description": "Changes ring of a cluster",
+        "x-ms-examples": {
+          "Change cluster ring": {
+            "$ref": "./examples/ChangeClusterRing.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "changeRingRequest",
+            "in": "body",
+            "description": "Change ring request payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/triggerLogCollection": {
       "post": {
         "tags": [
@@ -983,8 +1041,44 @@
           },
           "readOnly": true
         },
+        "supportStatus": {
+          "description": "Indicates whether the cluster is under support.",
+          "type": "string",
+          "enum": [
+            "InSupport",
+            "OutOfSupport",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "SupportStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "InSupport",
+                "value": "InSupport",
+                "description": "The cluster is under support."
+              },
+              {
+                "name": "OutOfSupport",
+                "value": "OutOfSupport",
+                "description": "The cluster is out of support."
+              },
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "The support status is not specified."
+              }
+            ]
+          },
+          "readOnly": true
+        },
         "cloudId": {
           "description": "Unique, immutable resource id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ring": {
+          "description": "The ring to which this cluster belongs to.",
           "type": "string",
           "readOnly": true
         },
@@ -2100,6 +2194,25 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RemoteSupportRequestProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ChangeRingRequestProperties": {
+      "type": "object",
+      "properties": {
+        "targetRing": {
+          "type": "string",
+          "description": "The target ring for the cluster."
+        }
+      },
+      "additionalProperties": false
+    },
+    "ChangeRingRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeRingRequestProperties"
         }
       },
       "additionalProperties": false

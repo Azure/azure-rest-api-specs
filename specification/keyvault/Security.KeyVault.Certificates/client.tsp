@@ -225,6 +225,8 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(AdministratorDetails.EmailAddress, "Email", "go");
 
 @@clientName(SubjectAlternativeNames.upns, "UserPrincipalNames", "go");
+@@clientName(SubjectAlternativeNames.uris, "URIs", "go");
+@@clientName(SubjectAlternativeNames.ipAddresses, "IPAddresses", "go");
 @@clientName(X509CertificateProperties.ekus, "EnhancedKeyUsage", "go");
 
 @@clientName(CertificateBundle.cer, "CER", "go");
