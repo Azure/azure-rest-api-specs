@@ -1,0 +1,532 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ResourceNotifications Management Service",
+    "version": "2025-08-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}": {
+      "put": {
+        "operationId": "NotificationsSessions_CreateNotificationSession",
+        "description": "Create a notification session.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "notificationSessionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateNotificationSessionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSessionResource"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSessionResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a notification session": {
+            "$ref": "./examples/NotificationsSessions_CreateNotificationSession.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:getSessionDetails": {
+      "post": {
+        "operationId": "NotificationsSessions_GetSessionDetails",
+        "description": "Get session details.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "notificationSessionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetSessionDetailsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetSessionDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get session details with connection information": {
+            "$ref": "./examples/NotificationsSessions_GetSessionDetails.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:closeSession": {
+      "post": {
+        "operationId": "NotificationsSessions_CloseSession",
+        "description": "Close the session.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "notificationSessionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloseSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Close a notification session": {
+            "$ref": "./examples/NotificationsSessions_CloseSession.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceNotifications/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloseSessionResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "CreateNotificationSessionRequest": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "maxDurationMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1440
+        },
+        "configuration": {
+          "type": "string"
+        }
+      }
+    },
+    "GetSessionDetailsRequest": {
+      "type": "object",
+      "properties": {
+        "durationInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 240
+        }
+      }
+    },
+    "GetSessionDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "encodedNotificationSession": {
+          "type": "string"
+        },
+        "connectionDetails": {
+          "$ref": "#/definitions/NotificationSessionConnectionDetails"
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "NotificationSessionConnectionDetails": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "NotificationSessionProperties": {
+      "type": "object",
+      "properties": {
+        "configuration": {
+          "type": "string",
+          "description": "Arbitrary configuration payload (string encoded)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the notification session.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "maxDurationMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum duration in minutes.",
+          "minimum": 1,
+          "maximum": 1440,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the session.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/NotificationSessionStatus",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp.",
+          "readOnly": true
+        },
+        "notificationSessionId": {
+          "type": "string",
+          "description": "Unique identifier of the notification session.",
+          "readOnly": true
+        }
+      }
+    },
+    "NotificationSessionResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NotificationSessionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NotificationSessionStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Paused",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationSessionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active"
+          },
+          {
+            "name": "Paused",
+            "value": "Paused"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "TenantLocationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantLocationResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TenantLocationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}
