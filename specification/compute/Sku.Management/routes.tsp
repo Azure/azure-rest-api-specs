@@ -9,7 +9,6 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
@@ -21,6 +20,7 @@ interface ResourceSkus {
   @get
   @action("skus")
   @autoRoute
+  @list
   list is ArmProviderActionSync<
     Response = ResourceSkusResult,
     Scope = SubscriptionActionScope,

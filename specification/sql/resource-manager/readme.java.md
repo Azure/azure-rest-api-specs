@@ -9,4 +9,13 @@ modelerfour:
   lenient-model-deduplication: true
 rename-model: SecurityAlertsPolicyState:SecurityAlertPolicyState
 enable-sync-stack: false
+directive:
+  - from: SqlVulnerabilityAssessmentsSettings.json
+    where-operation: SqlVulnerabilityAssessmentsSettings_CreateOrUpdate
+    transform: >
+      $.parameters[2]["x-ms-enum"].name= "SqlVulnerabilityAssessmentName"
+  - from: SqlVulnerabilityAssessmentsSettings.json
+    where-operation: SqlVulnerabilityAssessments_Delete
+    transform: >
+      $.parameters[2]["x-ms-enum"].name = "SqlVulnerabilityAssessmentName"
 ```

@@ -37,7 +37,7 @@ jobs:
         run: |
           # Get token for Azure DevOps resource
           ADO_TOKEN=$(az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query "accessToken" -o tsv)
-          echo "ADO_TOKEN=$ADO_TOKEN" >> $GITHUB_ENV
+          echo "ADO_TOKEN=$ADO_TOKEN" >> "$GITHUB_ENV"
 
       - name: Get label and action
         id: get-label-and-action
@@ -58,10 +58,14 @@ jobs:
           # Convert "add/remove" to "true/false"
           value: "${{ fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' }}"
 
-      - if: |
-          ((fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' ||
-          fromJson(steps.get-label-and-action.outputs.result).labelAction == 'remove') &&
-          fromJson(steps.get-label-and-action.outputs.result).issueNumber > 0)
+      - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).headSha }}
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "head-sha"
+          value: "${{ fromJson(steps.get-label-and-action.outputs.result).headSha }}"
+
+      - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).issueNumber > 0 }}
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:

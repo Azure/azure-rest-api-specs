@@ -83,6 +83,7 @@ interface Connections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listPendingConnections")
   @operationId("ListPendingConnections_List")
+  @list
   list is ArmResourceActionSync<
     Connection,
     void,
@@ -95,6 +96,7 @@ interface Connections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listPendingFlows")
   @operationId("ListPendingFlows_List")
+  @list
   listPendingFlowsList is ArmResourceActionSync<
     Connection,
     void,

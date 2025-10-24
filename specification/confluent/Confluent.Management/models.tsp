@@ -2,9 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -13,12 +13,11 @@ namespace Microsoft.Confluent;
 /**
  * Result of GET request to list Confluent operations.
  */
-@Azure.Core.pagedResult
 model OperationListResult {
   /**
    * List of Confluent operations supported by the Microsoft.Confluent provider.
    */
-  @Azure.Core.items
+  @pageItems
   value: OperationResult[];
 
   /**
@@ -126,6 +125,14 @@ union ConnectorClass {
   AZUREBLOBSOURCE: "AZUREBLOBSOURCE",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AZUREBLOBSINK: "AZUREBLOBSINK",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  AZURECOSMOSV2SINK: "AZURECOSMOSV2SINK",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  AZURECOSMOSV2SOURCE: "AZURECOSMOSV2SOURCE",
 }
 
 /**
@@ -329,7 +336,7 @@ model ErrorResponseBody {
    * Error detail
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: ErrorResponseBody[];
 }
 
@@ -1532,7 +1539,7 @@ model ListRegionsSuccessResponse {
   /**
    * List of regions supported by confluent
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   data?: RegionRecord[];
 }
 
@@ -2029,6 +2036,12 @@ model AzureCosmosDBSinkConnectorServiceInfo
   cosmosIdStrategy?: string;
 
   /**
+   * Azure Cosmos write config details
+   */
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  cosmosWriteDetails?: string;
+
+  /**
    * The connector service type.
    */
   connectorServiceType: "AzureCosmosDBSinkConnector";
@@ -2074,6 +2087,12 @@ model AzureCosmosDBSourceConnectorServiceInfo
    * The connector service type.
    */
   connectorServiceType: "AzureCosmosDBSourceConnector";
+
+  /**
+   * Azure Cosmos Database Include all the containers in the database.
+   */
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  cosmosIncludeAllContainers?: string;
 }
 
 /**
@@ -2142,6 +2161,12 @@ model KafkaAzureBlobStorageSinkConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
+
+  /**
    * Kafka topics list
    */
   topics?: string[];
@@ -2208,6 +2233,12 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
+
+  /**
    * Kafka topics Regex pattern
    */
   topicRegex?: string;
@@ -2262,6 +2293,12 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
 
   /**
    * Kafka topics list
@@ -2331,6 +2368,12 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
+
+  /**
    * Kafka topics Regex pattern
    */
   topicRegex?: string;
@@ -2384,6 +2427,12 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
 
   /**
    * Kafka topics list

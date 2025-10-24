@@ -1082,6 +1082,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1147,6 +1151,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2218,13 +2226,28 @@
       "type": "object",
       "description": "The grafana resource type.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedGrafanaProperties",
+          "description": "Properties specific to the grafana resource."
+        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The Sku of the grafana resource."
         },
-        "properties": {
-          "$ref": "#/definitions/ManagedGrafanaProperties",
-          "description": "Properties specific to the grafana resource."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -2233,7 +2256,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2986,7 +3009,8 @@
             "value": "NotSpecified"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ResourceSku": {
       "type": "object",

@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "name": "{vmName}",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "labVirtualMachine": {},
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{vmName}",
+        "type": "Microsoft.DevTestLab/labs/virtualMachines",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}",
+        "location": "{location}",
+        "properties": {
+          "allowClaim": true,
+          "artifactDeploymentStatus": {
+            "artifactsApplied": 0,
+            "totalArtifacts": 0
+          },
+          "computeId": "/subscriptions/{subscriptionId}/resourceGroups/{labName}-{vmName}-{randomSuffix}/providers/Microsoft.Compute/virtualMachines/{vmName}",
+          "createdByUser": "",
+          "createdByUserId": "",
+          "createdDate": "2018-10-01T16:53:02.4830866-07:00",
+          "dataDiskParameters": [],
+          "disallowPublicIpAddress": true,
+          "galleryImageReference": {
+            "offer": "UbuntuServer",
+            "osType": "Linux",
+            "publisher": "Canonical",
+            "sku": "16.04-LTS",
+            "version": "Latest"
+          },
+          "labSubnetName": "{virtualNetworkName}Subnet",
+          "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+          "networkInterface": {},
+          "osType": "Linux",
+          "ownerObjectId": "",
+          "ownerUserPrincipalName": "",
+          "provisioningState": "Succeeded",
+          "size": "Standard_A2_v2",
+          "storageType": "Standard",
+          "uniqueIdentifier": "{uniqueIdentifier}",
+          "userName": "{userName}",
+          "virtualMachineCreationSource": "FromGalleryImage"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_Update",
+  "title": "VirtualMachines_Update"
+}

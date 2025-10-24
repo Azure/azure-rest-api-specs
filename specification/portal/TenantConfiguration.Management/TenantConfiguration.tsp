@@ -63,6 +63,7 @@ interface ListTenantConfigurationViolationsOperations {
   @armResourceCollectionAction
   @post
   @operationId("ListTenantConfigurationViolations_List")
+  @list
   list(...ApiVersionParameter): ArmResponse<ViolationsList> | ErrorResponse;
 }
 
