@@ -160,7 +160,8 @@ export async function processFilesToSpecificationList(
     // we need to find the swagger file that references it
     if (example(file) && (preview(file) || stable(file))) {
       /*
-        examples exist in the same directory as the swagger file that references them:
+        The `examples` folder is traditionally populated with example.json files related to the owning spec.
+        However, these examples might be contained within subdirectories of the examples folder.
 
         path/to/swagger/2024-01-01/examples/example.json <-- this is an example file path
         path/to/swagger/2024-01-01/swagger.json <-- we need to identify this file if it references the example
