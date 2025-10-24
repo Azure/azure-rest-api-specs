@@ -82,7 +82,7 @@ model AccountProperties {
   /**
    * LDAP Configuration for the account.
    */
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2025_09_01_preview)
   ldapConfiguration?: LdapConfiguration;
 }
 
