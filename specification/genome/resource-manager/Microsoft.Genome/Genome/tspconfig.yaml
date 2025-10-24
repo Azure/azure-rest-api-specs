@@ -22,11 +22,12 @@ options:
     use-read-only-status-schema: true
 
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    model-namespace: true
+    model-namespace: false
     namespace: "Azure.ResourceManager.Genome"
+    use-model-reader-writer: true
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-genome"
