@@ -6,11 +6,6 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.BatchTranscription;
 
-@@clientNamespace(Azure.Ai.Speech.BatchTranscription,
-  "Azure.AI.Speech.BatchTranscription",
-  "csharp"
-);
-
 // TypeScript uses PascalCase for service names to match namespace conventions
 @@clientNamespace(Azure.Ai.Speech.BatchTranscription,
   "Azure.AI.Speech.BatchTranscription",
