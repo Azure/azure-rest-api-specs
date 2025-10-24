@@ -92,7 +92,6 @@ interface Profiles {
   >;
 }
 
-@@doc(Profile.name, "The name of the Traffic Manager profile.");
 @@doc(Profile.properties, "The properties of the Traffic Manager profile.");
 @@doc(Profiles.createOrUpdate::parameters.resource,
   "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation."

@@ -66,7 +66,6 @@ interface UserMetricsModels {
   >;
 }
 
-@@doc(UserMetricsModel.name, "");
 @@doc(UserMetricsModel.properties,
   "The properties of the Traffic Manager User Metrics."
 );

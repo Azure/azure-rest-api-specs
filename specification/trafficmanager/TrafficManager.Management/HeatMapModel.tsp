@@ -76,7 +76,6 @@ interface HeatMapModels {
   >;
 }
 
-@@doc(HeatMapModel.name, "");
 @@doc(HeatMapModel.properties,
   "The properties of the Traffic Manager HeatMap."
 );

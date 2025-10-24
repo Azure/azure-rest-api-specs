@@ -46,7 +46,6 @@ interface TrafficManagerGeographicHierarchies {
   getDefault is TrafficManagerGeographicHierarchyOps.Read<TrafficManagerGeographicHierarchy>;
 }
 
-@@doc(TrafficManagerGeographicHierarchy.name, "");
 @@doc(TrafficManagerGeographicHierarchy.properties,
   "The properties of the Geographic Hierarchy resource."
 );
