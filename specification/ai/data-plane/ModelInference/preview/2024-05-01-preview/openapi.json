@@ -393,8 +393,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -421,7 +420,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -496,8 +495,7 @@
           "items": {
             "$ref": "#/definitions/ChatChoice"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -624,8 +622,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ChatRequestMessage"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "frequency_penalty": {
           "type": "number",
@@ -687,8 +684,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ChatCompletionsToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "tool_choice": {
           "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
@@ -1503,8 +1499,7 @@
           "items": {
             "$ref": "#/definitions/EmbeddingItem"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "usage": {
           "$ref": "#/definitions/EmbeddingsUsage",
@@ -1655,8 +1650,7 @@
           "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",
           "items": {
             "$ref": "#/definitions/ImageEmbeddingInput"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "dimensions": {
           "type": "integer",
@@ -1816,8 +1810,7 @@
           "items": {
             "$ref": "#/definitions/StreamingChatChoiceUpdate"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",

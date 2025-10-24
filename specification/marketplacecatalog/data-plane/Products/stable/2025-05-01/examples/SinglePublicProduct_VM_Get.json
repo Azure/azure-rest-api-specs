@@ -1,0 +1,352 @@
+{
+  "title": "Example of request to get single VM product details",
+  "operationId": "GetProduct",
+  "parameters": {
+    "uniqueProductId": "testpublisher.publisher-enterprise-linux-2025",
+    "language": "en",
+    "api-version": "2025-05-01",
+    "market": "US",
+    "storefront": "azure",
+    "locations": [
+      "eastus",
+      "westus2",
+      "northeurope"
+    ],
+    "includeStopSoldPlans": false,
+    "hideKeys": [],
+    "excludeSkuDetails": false,
+    "includeFutureAvailabilities": false,
+    "skuId": null,
+    "X-API-Key": "your-api-key-here"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "displayName": "Enterprise Linux Server 2025",
+        "popularity": 4.2,
+        "categoryIds": [
+          "compute",
+          "virtualization",
+          "linux"
+        ],
+        "industryIds": [
+          "technology",
+          "manufacturing",
+          "retail"
+        ],
+        "publisherId": "testpublisher",
+        "azureBenefit": "Eligible",
+        "badges": [
+          "PreferredSolution"
+        ],
+        "publisherType": "ThirdParty",
+        "publishingStage": "Public",
+        "uniqueProductId": "testpublisher.publisher-enterprise-linux-2025",
+        "productType": "VirtualMachine",
+        "productSubType": "LinuxServer",
+        "productFamily": "Compute",
+        "operatingSystems": [
+          "linux.ubuntu.22.04",
+          "linux.rhel.9"
+        ],
+        "pricingTypes": [
+          "Payg",
+          "Ri"
+        ],
+        "publisherDisplayName": "Enterprise Software Solutions",
+        "longSummary": "Enterprise Linux Server 2025 is a high-performance, secure virtual machine solution optimized for enterprise workloads. Built on the latest Linux distributions, it offers enhanced security features, automated patching, and performance monitoring capabilities. Ideal for running mission-critical applications, containerized workloads, and scalable microservices.",
+        "summary": "High-performance Linux VM with advanced security features and enterprise support",
+        "videos": [
+          {
+            "caption": "Product Overview",
+            "uri": "https://example.com/videos/linux-server-demo",
+            "videoPurpose": "Overview",
+            "previewImage": {
+              "caption": "Overview Thumbnail",
+              "uri": "https://example.com/videos/thumbnails/overview.png",
+              "imagePurpose": "Thumbnail"
+            }
+          }
+        ],
+        "images": [
+          {
+            "context": "screenshots",
+            "items": [
+              {
+                "id": "dashboard",
+                "uri": "https://example.com/vm/dashboard.png",
+                "type": "Screenshot"
+              },
+              {
+                "id": "monitoring",
+                "uri": "https://example.com/vm/monitoring.png",
+                "type": "Screenshot"
+              }
+            ]
+          }
+        ],
+        "links": [
+          {
+            "id": "documentation",
+            "displayName": "Documentation",
+            "uri": "https://docs.example.com/enterprise-linux"
+          },
+          {
+            "id": "quickstart",
+            "displayName": "Quick Start Guide",
+            "uri": "https://docs.example.com/enterprise-linux/quickstart"
+          }
+        ],
+        "linkedAddIns": [
+          "monitoring-agent:latest",
+          "backup-agent:latest"
+        ],
+        "linkedAddInsTypes": {
+          "monitoring": "Performance Monitoring",
+          "backup": "Automated Backup"
+        },
+        "additionalProductProperties": {
+          "patchingSchedule": "Weekly",
+          "backupRetention": "30 days",
+          "monitoringInterval": "5 minutes"
+        },
+        "smallIconUri": "https://example.com/vm/icons/small.png",
+        "description": "Enterprise Linux Server 2025 delivers a robust virtual machine platform designed for modern enterprise workloads. Key features include:\n\n- High-Performance Computing: Optimized kernel configurations for maximum performance\n- Enhanced Security: Built-in security features including SELinux and automated security updates\n- Monitoring & Analytics: Integrated performance monitoring and diagnostic tools\n- Enterprise Support: 24/7 technical support with guaranteed response times\n- Compliance Ready: Pre-configured security baselines for various compliance standards\n- Automatic Updates: Scheduled security patches and system updates\n- Resource Optimization: Advanced resource scheduling and power management\n\nIdeal for organizations requiring a secure, reliable, and high-performance Linux environment.",
+        "ratingBuckets": [
+          "AboveFour"
+        ],
+        "ratingAverage": 4.2,
+        "ratingCount": 156,
+        "activeDirectoryAppId": "someId",
+        "plans": [
+          {
+            "planId": "standard-gen2",
+            "uniquePlanId": "testpublisher.publisher-enterprise-linux-2025-standard-gen2",
+            "displayName": "Standard Gen2",
+            "vmArchitectureType": "X64Gen2",
+            "cspState": "OptIn",
+            "metadata": {
+              "generation": "Gen2",
+              "altStackReference": "standard-gen1"
+            },
+            "altStackReference": "standard-gen1",
+            "stackType": "Gen2",
+            "altArchitectureReference": "standard-gen1-x64",
+            "categoryIds": [
+              "compute",
+              "enterprise"
+            ],
+            "hasProtectedArtifacts": false,
+            "pricingTypes": [
+              "Payg",
+              "Ri"
+            ],
+            "vmSecuritytypes": [
+              "Trusted",
+              "Confidential"
+            ],
+            "summary": "Enterprise-grade VM with Gen2 architecture and enhanced security",
+            "description": "Standard Gen2 configuration optimized for enterprise workloads with advanced security features",
+            "skuId": "ent-std-gen2",
+            "planType": "VirtualMachine",
+            "displayRank": "1",
+            "isPrivate": false,
+            "id": "vm-plan-std-gen2",
+            "version": "1.0.0",
+            "isHidden": false,
+            "isStopSell": false,
+            "isQuantifiable": true,
+            "isHiddenPrivateOffer": false,
+            "certifications": [
+              {
+                "id": "azure-certified",
+                "displayName": "Azure Certified VM",
+                "uri": "https://example.com/certifications/azure-vm"
+              }
+            ],
+            "customerInstruction": "Select appropriate VM size based on your workload requirements",
+            "planLabels": [
+              "standard",
+              "gen2",
+              "enterprise"
+            ],
+            "hasRi": true,
+            "skuType": "Standard",
+            "skuTitle": "Enterprise Linux Standard Gen2",
+            "location": "eastus",
+            "armRegionName": "eastus",
+            "cloud": "Public",
+            "locationType": "Region",
+            "region": "East US",
+            "skuGroupId": "enterprise-linux-group",
+            "zone": "Zone 1",
+            "feature": "Standard",
+            "serviceType": "VirtualMachine",
+            "skuAttributes": [
+              {
+                "key": "vmSize",
+                "value": "Standard_D2s_v3"
+              },
+              {
+                "key": "cores",
+                "value": "2"
+              },
+              {
+                "key": "ram",
+                "value": "8GB"
+              },
+              {
+                "key": "diskType",
+                "value": "Premium_LRS"
+              },
+              {
+                "key": "networkAccelerated",
+                "value": "true"
+              }
+            ],
+            "skuProperties": {
+              "category": "Compute",
+              "dataDiskType": "Premium_LRS",
+              "diskType": "Premium_LRS",
+              "numberOfCores": "2",
+              "ram": "8GB",
+              "vCpu": "2",
+              "armSkuName": "Standard_D2s_v3",
+              "accessTier": "Standard"
+            },
+            "offeringProperties": [
+              {
+                "productCode": "ENTLINUX-STD-GEN2",
+                "termId": "hourly",
+                "meterType": "compute",
+                "billingMeterId": "vm-compute-meter",
+                "offeringId": "enterprise-linux-std-offering",
+                "type": "Consumption"
+              }
+            ],
+            "billingComponents": [
+              {
+                "billingTag": "compute",
+                "customMeterIds": {
+                  "standard": [
+                    1001,
+                    1002
+                  ]
+                }
+              }
+            ],
+            "availabilities": [
+              {
+                "id": "std-gen2-payg",
+                "actions": [
+                  "Purchase",
+                  "Trial"
+                ],
+                "meter": {
+                  "meterId": "std-gen2-compute",
+                  "partNumber": "ENTLINUX-STD-GEN2",
+                  "consumptionResourceId": "enterprise-linux-vm",
+                  "price": {
+                    "currencyCode": "USD",
+                    "isPiRequired": true,
+                    "listPrice": 0.12,
+                    "msrp": 0.15
+                  },
+                  "type": "compute",
+                  "includedQuantityProperties": []
+                },
+                "pricingAudience": "Direct-Commercial",
+                "hasFreeTrials": true,
+                "consumptionUnitType": "Hour",
+                "displayRank": 1
+              }
+            ]
+          }
+        ],
+        "supportedProducts": [
+          "azure-monitor",
+          "azure-backup",
+          "azure-security-center"
+        ],
+        "applicableProducts": [
+          "azure-kubernetes-service",
+          "azure-container-apps"
+        ],
+        "lastModifiedDateTime": "2025-05-01T10:00:00.0000000+00:00",
+        "locations": [
+          "eastus",
+          "westus2",
+          "northeurope"
+        ],
+        "serviceFamily": "Compute",
+        "service": "Virtual Machines",
+        "productId": "enterprise-linux-2025",
+        "hasRiPlans": true,
+        "hasMarketplaceFootprint": true,
+        "attributes": [
+          {
+            "key": "vmSize",
+            "value": "Standard_D2s_v3"
+          },
+          {
+            "key": "cores",
+            "value": "2"
+          },
+          {
+            "key": "ram",
+            "value": "8GB"
+          },
+          {
+            "key": "diskType",
+            "value": "Premium_LRS"
+          }
+        ],
+        "language": "en",
+        "hasStandardContractAmendments": true,
+        "offerId": "enterprise-linux-server",
+        "standardContractAmendmentsRevisionId": "2025-05-01-rev1",
+        "universalAmendmentUrl": "https://example.com/legal/universal-amendment",
+        "isPrivate": false,
+        "isStopSell": false,
+        "legalTermsUri": "https://example.com/legal/terms",
+        "cspLegalTermsUri": "https://example.com/legal/csp-terms",
+        "legalTermsType": "EA",
+        "privacyPolicyUri": "https://example.com/privacy",
+        "supportUri": "https://support.example.com/enterprise-linux",
+        "uiDefinitionUri": "https://example.com/vm/ui-definition",
+        "pricingDetailsUri": "https://example.com/vm/pricing",
+        "mediumIconUri": "https://example.com/vm/icons/medium.png",
+        "largeIconUri": "https://example.com/vm/icons/large.png",
+        "wideIconUri": "https://example.com/vm/icons/wide.png",
+        "isReseller": false,
+        "productOwnershipSellingMotion": "3PP",
+        "disableSendEmailOnPurchase": false,
+        "isCoreVm": false,
+        "marketingMaterial": {
+          "path": "https://example.com/vm/resources",
+          "learnUri": "https://learn.example.com/vm"
+        },
+        "screenshotUris": [
+          "https://example.com/vm/screenshots/dashboard.png",
+          "https://example.com/vm/screenshots/monitoring.png",
+          "https://example.com/vm/screenshots/security.png"
+        ],
+        "artifacts": [
+          {
+            "name": "VM Image",
+            "uri": "https://example.com/vm/artifacts/image",
+            "artifactType": "Template"
+          }
+        ],
+        "startingPrice": {
+          "market": "US",
+          "termUnits": "P1M",
+          "meterUnits": "Hour",
+          "minTermPrice": 0.12,
+          "minMeterPrice": 0.12,
+          "currency": "USD"
+        }
+      }
+    }
+  }
+}

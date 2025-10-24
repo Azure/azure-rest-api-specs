@@ -1,0 +1,160 @@
+{
+  "operationId": "VolumeGroups_Create",
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "elasticSanName": "elasticsanname",
+    "parameters": {},
+    "resourceGroupName": "resourcegroupname",
+    "subscriptionId": "subscriptionid",
+    "volumeGroupName": "volumegroupname"
+  },
+  "title": "VolumeGroups_Create_MinimumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "identity": {
+          "type": "None",
+          "principalId": "ihsiwrwdofymkhquaxcrtfmmrsygw",
+          "tenantId": "gtkzkjsy",
+          "userAssignedIdentities": {
+            "key7482": {
+              "clientId": "jaczsquolgxwpznljbmdupn",
+              "principalId": "vfdzizicxcfcqecgsmshz"
+            }
+          }
+        },
+        "properties": {
+          "deleteRetentionPolicy": {
+            "policyState": "Disabled",
+            "retentionPeriodDays": 0
+          },
+          "encryption": "EncryptionAtRestWithPlatformKey",
+          "encryptionProperties": {
+            "identity": {
+              "userAssignedIdentity": "im"
+            },
+            "keyVaultProperties": {
+              "currentVersionedKeyExpirationTimestamp": "2023-08-23T12:16:11.388Z",
+              "currentVersionedKeyIdentifier": "rnpxhtzkquzyoepwbwktbwb",
+              "keyName": "sftaiernmrzypnrkpakrrawxcbsqzc",
+              "keyVaultUri": "https://microsoft.com/axmblwp",
+              "keyVersion": "c",
+              "lastKeyRotationTimestamp": "2023-08-23T12:16:11.388Z"
+            }
+          },
+          "enforceDataIntegrityCheckForIscsi": true,
+          "networkAcls": {
+            "virtualNetworkRules": [
+              {
+                "action": "Allow",
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}"
+              }
+            ]
+          },
+          "privateEndpointConnections": [
+            {
+              "name": "gewxykc",
+              "type": "ailymcedgvxbqklmqtlty",
+              "id": "opcjchensdf",
+              "properties": {
+                "groupIds": [
+                  "bolviufgqnyid"
+                ],
+                "privateEndpoint": {
+                  "id": "ehxmltubeltzmgcqxocakaansat"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "nahklgxicbqjbbvcdrkljqdhprruys",
+                  "actionsRequired": "sairafcqpvucoy",
+                  "status": "Pending"
+                },
+                "provisioningState": "Invalid"
+              },
+              "systemData": {
+                "createdAt": "2023-08-23T12:16:10.057Z",
+                "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
+                "createdByType": "User",
+                "lastModifiedAt": "2023-08-23T12:16:10.057Z",
+                "lastModifiedBy": "bcclmbseed",
+                "lastModifiedByType": "User"
+              }
+            }
+          ],
+          "protocolType": "Iscsi",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2023-08-23T12:16:10.057Z",
+          "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-08-23T12:16:10.057Z",
+          "lastModifiedBy": "bcclmbseed",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "identity": {
+          "type": "None",
+          "principalId": "ihsiwrwdofymkhquaxcrtfmmrsygw",
+          "tenantId": "gtkzkjsy",
+          "userAssignedIdentities": {
+            "key7482": {
+              "clientId": "jaczsquolgxwpznljbmdupn",
+              "principalId": "vfdzizicxcfcqecgsmshz"
+            }
+          }
+        },
+        "properties": {
+          "deleteRetentionPolicy": {
+            "policyState": "Enabled",
+            "retentionPeriodDays": 14
+          },
+          "encryption": "EncryptionAtRestWithPlatformKey",
+          "encryptionProperties": {
+            "identity": {
+              "userAssignedIdentity": "im"
+            },
+            "keyVaultProperties": {
+              "currentVersionedKeyExpirationTimestamp": "2023-08-23T12:16:11.388Z",
+              "currentVersionedKeyIdentifier": "rnpxhtzkquzyoepwbwktbwb",
+              "keyName": "sftaiernmrzypnrkpakrrawxcbsqzc",
+              "keyVaultUri": "https://microsoft.com/axmblwp",
+              "keyVersion": "c",
+              "lastKeyRotationTimestamp": "2023-08-23T12:16:11.388Z"
+            }
+          },
+          "enforceDataIntegrityCheckForIscsi": true,
+          "networkAcls": {
+            "virtualNetworkRules": [
+              {
+                "action": "Allow",
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}"
+              }
+            ]
+          },
+          "protocolType": "Iscsi",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2023-08-23T12:16:10.057Z",
+          "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-08-23T12:16:10.057Z",
+          "lastModifiedBy": "bcclmbseed",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

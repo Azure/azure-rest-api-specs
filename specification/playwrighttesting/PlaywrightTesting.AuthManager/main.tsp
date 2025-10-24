@@ -53,7 +53,6 @@ namespace Microsoft.PlaywrightTesting.AuthManager;
 @doc("The PlaywrightTesting Auth Manager service version.")
 enum Versions {
   @doc("Version 2024-12-01")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Microsoft.PlaywrightTesting.Shared.Versions.v1_0)
   `2024-12-01`,
 }

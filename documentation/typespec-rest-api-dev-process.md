@@ -95,7 +95,7 @@ Please first review recommended folder structure detailed in [this document](htt
       npx tsp compile .
     ```
 
-    The generated swagger files should be correctly placed in `data-plane` or `resource-manager` folders follwoing the
+    The generated swagger files should be correctly placed in `data-plane` or `resource-manager` folders following the
      naming conventions.
 
 6. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec.

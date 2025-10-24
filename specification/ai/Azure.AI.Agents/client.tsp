@@ -46,6 +46,12 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Messages.getMessage, "get", "python");
 @@clientName(Azure.AI.Agents.Messages.updateMessage, "update", "python");
 
+@@access(Azure.AI.Agents.Messages.delete, Access.internal, "csharp, python");
+@@clientName(Azure.AI.Agents.Messages.delete,
+  "InternalDeleteMessage",
+  "csharp"
+);
+
 // --------------------------------------------------------------------------------
 // Threads sub-client
 // --------------------------------------------------------------------------------
@@ -73,6 +79,8 @@ using Azure.AI.Agents;
 );
 
 // nested Runs interface
+@@access(Azure.AI.Agents.Runs.createRun, Access.internal, "csharp");
+@@clientName(Azure.AI.Agents.Runs.createRun, "InternalCreateRun", "csharp");
 @@clientName(Azure.AI.Agents.Runs.createRun, "create", "python");
 @@clientName(Azure.AI.Agents.Runs.listRuns, "list", "python");
 @@clientName(Azure.AI.Agents.Runs.getRun, "get", "python");
@@ -392,6 +400,7 @@ using Azure.AI.Agents;
   "UriCitation",
   "csharp"
 );
+@@usage(MessageDeltaTextUrlCitationDetails, Usage.json);
 @@clientName(MessageDeltaTextUrlCitationDetails,
   "MessageDeltaTextUriCitationDetails",
   "csharp"

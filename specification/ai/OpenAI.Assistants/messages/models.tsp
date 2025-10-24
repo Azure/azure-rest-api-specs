@@ -112,7 +112,8 @@ model MessageAttachment {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
 union MessageAttachmentToolDefinition {
-  CodeInterpreterToolDefinition | FileSearchToolDefinition,
+  CodeInterpreterToolDefinition,
+  FileSearchToolDefinition,
 }
 
 // Message content types: "text" | "image_file"

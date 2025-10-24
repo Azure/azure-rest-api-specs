@@ -73,20 +73,20 @@
       "in": "query",
       "type": "string",
       "enum": [
-        "metric",
-        "imperial"
+        "imperial",
+        "metric"
       ],
       "x-ms-enum": {
         "name": "WeatherDataUnit",
         "modelAsString": true,
         "values": [
           {
-            "value": "metric",
-            "description": "Return data in metric units. Some example units of metric system are Celsius and kilometer."
+            "value": "imperial",
+            "description": "Return data using imperial units such as Fahrenheit (F) for temperature and mile (mi) for distance."
           },
           {
-            "value": "imperial",
-            "description": "Return data in imperial units. Some example units of imperial system are Fahrenheit and mile."
+            "value": "metric",
+            "description": "Return data using metric units such as Celsius (C) for temperature and kilometer (km) for distance."
           }
         ]
       },
@@ -104,16 +104,16 @@
     "RequiredWeatherBasinId": {
       "name": "basinId",
       "type": "string",
-      "description": "Basin identifier",
+      "description": "The `basinId` enum categorizes the different ocean basins where tropical storms can originate. Each basin is assigned a unique identifier to help specify the location of the storm's origin.",
       "required": true,
       "in": "query",
       "enum": [
         "AL",
-        "EP",
-        "SI",
-        "NI",
         "CP",
+        "EP",
+        "NI",
         "NP",
+        "SI",
         "SP"
       ],
       "x-ms-enum": {
@@ -122,31 +122,31 @@
         "values": [
           {
             "value": "AL",
-            "description": "Atlantic"
-          },
-          {
-            "value": "EP",
-            "description": "Eastern Pacific"
-          },
-          {
-            "value": "SI",
-            "description": "Southwest Indian Ocean"
-          },
-          {
-            "value": "NI",
-            "description": "North Indian Ocean"
+            "description": "**The Atlantic Ocean**. Crucial for tracking hurricanes that affect the Americas and the Caribbean. It is one of the most active regions for tropical storms."
           },
           {
             "value": "CP",
-            "description": "Central Pacific"
+            "description": "**The Central Pacific Ocean**. This basin is used for storms affecting Hawaii and surrounding areas."
+          },
+          {
+            "value": "EP",
+            "description": "**The Eastern Pacific Ocean**. This basin tracks storms impacting the western coast of the Americas, including Mexico and Central America. It is adjacent to the Central Pacific basin."
+          },
+          {
+            "value": "NI",
+            "description": "**The North Indian Ocean**. This basin covers storms impacting South Asia, including countries like India and Bangladesh, which are frequently affected by cyclones."
           },
           {
             "value": "NP",
-            "description": "Northwest Pacific"
+            "description": "**The Northwest Pacific Ocean**. This basin is important for tracking typhoons that affect East Asia, including countries like China, Japan, and the Philippines. It is the most active tropical storm regions globally."
+          },
+          {
+            "value": "SI",
+            "description": "**The South Indian Ocean**. This basin, positioned south of the equator, covers cyclones impacting Madagascar, Africa, and surrounding regions."
           },
           {
             "value": "SP",
-            "description": "South Pacific"
+            "description": "**The South Pacific Ocean**. This basin, positioned south of the equator, is relevant for cyclones affecting Australia and the South Pacific islands."
           }
         ]
       },
@@ -155,15 +155,15 @@
     "OptionalWeatherBasinId": {
       "name": "basinId",
       "type": "string",
-      "description": "Basin identifier",
+      "description": "The `basinId` enum categorizes the different ocean basins where tropical storms can originate. Each basin is assigned a unique identifier to help specify the location of the storm's origin.",
       "in": "query",
       "enum": [
         "AL",
-        "EP",
-        "SI",
-        "NI",
         "CP",
+        "EP",
+        "NI",
         "NP",
+        "SI",
         "SP"
       ],
       "x-ms-enum": {
@@ -172,31 +172,31 @@
         "values": [
           {
             "value": "AL",
-            "description": "Atlantic"
-          },
-          {
-            "value": "EP",
-            "description": "Eastern Pacific"
-          },
-          {
-            "value": "SI",
-            "description": "Southwest Indian Ocean"
-          },
-          {
-            "value": "NI",
-            "description": "North Indian Ocean"
+            "description": "**The Atlantic Ocean**. Crucial for tracking hurricanes that affect the Americas and the Caribbean. It is one of the most active regions for tropical storms."
           },
           {
             "value": "CP",
-            "description": "Central Pacific"
+            "description": "**The Central Pacific Ocean**. This basin is used for storms affecting Hawaii and surrounding areas."
+          },
+          {
+            "value": "EP",
+            "description": "**The Eastern Pacific Ocean**. This basin tracks storms impacting the western coast of the Americas, including Mexico and Central America. It is adjacent to the Central Pacific basin."
+          },
+          {
+            "value": "NI",
+            "description": "**The North Indian Ocean**. This basin covers storms impacting South Asia, including countries like India and Bangladesh, which are frequently affected by cyclones."
           },
           {
             "value": "NP",
-            "description": "Northwest Pacific"
+            "description": "**The Northwest Pacific Ocean**. This basin is important for tracking typhoons that affect East Asia, including countries like China, Japan, and the Philippines. It is the most active tropical storm regions globally."
+          },
+          {
+            "value": "SI",
+            "description": "**The South Indian Ocean**. This basin, positioned south of the equator, covers cyclones impacting Madagascar, Africa, and surrounding regions."
           },
           {
             "value": "SP",
-            "description": "South Pacific"
+            "description": "**The South Pacific Ocean**. This basin, positioned south of the equator, is relevant for cyclones affecting Australia and the South Pacific islands."
           }
         ]
       },
@@ -928,7 +928,7 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many days from now we would like to know about the air quality. Available values are 1, 2, 3, 4, 5, 6, and 7. Default value is 1.",
+            "description": "Defines the duration for the air quality forecast, with options ranging from 1 to 7 days. The default duration is 1 day.",
             "default": 1,
             "in": "query",
             "type": "integer",
@@ -1026,7 +1026,7 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many hours from now we would like to know about the air quality. Available values are 1, 12, 24, 48, 72, 96. Default value is 1 hour.",
+            "description": "Defines the duration, in hours, for the air quality forecast. Available values are 1, 12, 24, 48, 72, and 96. The default value is 1 hour.",
             "default": 1,
             "in": "query",
             "type": "integer",
@@ -1266,7 +1266,7 @@
     "IconCode": {
       "type": "integer",
       "format": "int32",
-      "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#weather-icons) for details.",
+      "description": "Numeric value representing an image that corresponds to the current weather condition described by the `Phrase` property. For more information, see [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.",
       "enum": [
         1,
         2,
@@ -1523,7 +1523,7 @@
     "UnitType": {
       "type": "integer",
       "format": "int32",
-      "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#unit-types) for details.",
+      "description": "An integer representing the unit type.  For example, 17 for Celsius, 18 for Fahrenheit. Can be used for unit translation. For a complete list, see [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#unit-types).",
       "enum": [
         0,
         1,
@@ -1642,12 +1642,12 @@
           {
             "value": 17,
             "name": "Celsius",
-            "description": "celsius"
+            "description": "Celsius"
           },
           {
             "value": 18,
             "name": "Fahrenheit",
-            "description": "fahrenheit"
+            "description": "Fahrenheit"
           },
           {
             "value": 19,
@@ -1679,25 +1679,17 @@
     },
     "PrecipitationType": {
       "type": "string",
-      "description": "Specifies the type of precipitation (\"Rain\" \"Snow\" \"Ice\" or \"Mix\"). If dbz is zero, precipitationType is not present in the response.",
+      "description": "Specifies the type of precipitation. Valid values are Rain, Snow, Ice, or Mix. This property is included in the response when dBZ is greater than zero.",
       "enum": [
-        "Rain",
-        "Snow",
         "Ice",
-        "Mix"
+        "Mix",
+        "Rain",
+        "Snow"
       ],
       "x-ms-enum": {
         "name": "PrecipitationType",
         "modelAsString": true,
         "values": [
-          {
-            "value": "Rain",
-            "description": "Rain"
-          },
-          {
-            "value": "Snow",
-            "description": "Snow"
-          },
           {
             "value": "Ice",
             "description": "Ice"
@@ -1705,6 +1697,14 @@
           {
             "value": "Mix",
             "description": "Mix"
+          },
+          {
+            "value": "Rain",
+            "description": "Rain"
+          },
+          {
+            "value": "Snow",
+            "description": "Snow"
           }
         ]
       }
@@ -1782,7 +1782,7 @@
     "HazardIndex": {
       "type": "integer",
       "format": "int32",
-      "description": "A severity/hazard index.\n  * `0` - No hazard.\n  * `1` - Be informed, be aware.\n  * `2` - Pay attention, be prepared.\n  * `3` - Take action.\n  * `4` - Life threatening, emergency.",
+      "description": "The aggregated severity/hazard index for each waypoint, which can be used to color-code route segments to indicate driver safety.\n  * `0` - No hazard.\n  * `1` - Be informed, be aware.\n  * `2` - Pay attention, be prepared.\n  * `3` - Take action.\n  * `4` - Life threatening, emergency.",
       "enum": [
         0,
         1,
@@ -2038,15 +2038,15 @@
         },
         "threshold": {
           "type": "string",
-          "description": "Key that specifies the threshold value. Along with precipitationType, can be used to determine the simplifiedColor. If dbz is zero, not present in the response."
+          "description": "Key that specifies the threshold value. Along with precipitationType, can be used to determine the simplifiedColor. If dBZ is zero, not present in the response."
         },
         "color": {
           "$ref": "#/definitions/ColorValue",
-          "description": "The full spectrum color that maps to the dBZ (decibel relative to Z). If dbz is zero, color is not present in the response."
+          "description": "The full spectrum color that maps to the dBZ (decibel relative to Z). If dBZ is zero, color is not present in the response."
         },
         "simplifiedColor": {
           "$ref": "#/definitions/ColorValue",
-          "description": "The band color that maps to the precipitation type and threshold. If dbz is zero, not present in the response."
+          "description": "The band color that maps to the precipitation type and threshold. If dBZ is zero, not present in the response."
         },
         "precipitationType": {
           "$ref": "#/definitions/PrecipitationType"
@@ -2125,7 +2125,7 @@
           "description": "Date and time of the beginning of the forecast quarter displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "quarter": {
-          "description": "Quarter of the day.",
+          "description": "Divides the day into four 6-hour quarters. Valid values are 0-3:<ul><li>0: Morning (7am - 1pm)</li><li>1: Afternoon (1pm - 7pm)</li><li>2: Evening (7pm - 1am)</li><li>3: Overnight (1am - 7am)</li></ul>",
           "type": "integer",
           "format": "int32",
           "enum": [
@@ -3053,52 +3053,52 @@
     },
     "LatestStatusKeyword": {
       "type": "string",
-      "description": "Keyword for the latest status of the alert.",
+      "description": "A predefined list of eight keywords used to describe the current status of a severe weather alert.",
       "enum": [
-        "New",
-        "Extend",
         "Cancel",
+        "Continue",
         "Correct",
         "Expire",
-        "Upgrade",
-        "Continue",
-        "Update"
+        "Extend",
+        "New",
+        "Update",
+        "Upgrade"
       ],
       "x-ms-enum": {
         "name": "LatestStatusKeyword",
         "modelAsString": true,
         "values": [
           {
-            "value": "New",
-            "description": "\"New\" - the status of an alert upon initial issuance."
-          },
-          {
-            "value": "Extend",
-            "description": "\"Extend\" - the alert has been extended in time, in area, or both since its initial issuance."
-          },
-          {
             "value": "Cancel",
-            "description": "\"Cancel\" - the alert has been canceled prior to its original expiration time."
-          },
-          {
-            "value": "Correct",
-            "description": "\"Correct\" - the alert has been modified to correct a previous error."
-          },
-          {
-            "value": "Expire",
-            "description": "\"Expire\" - the alert has expired and is no longer active."
-          },
-          {
-            "value": "Upgrade",
-            "description": "\"Upgrade\" - the alert has been upgraded to a higher class or category since its initial issuance."
+            "description": "Indicates that the alert has been canceled before its originally scheduled expiration time."
           },
           {
             "value": "Continue",
-            "description": "\"Continue\" - the alert has been updated since its initial issuance, but no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`."
+            "description": "Indicates that the alert has been updated since its initial issuance, but no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`."
+          },
+          {
+            "value": "Correct",
+            "description": "Indicates that the alert has been modified to correct a previous error."
+          },
+          {
+            "value": "Expire",
+            "description": "Indicates that the alert has expired and is no longer active."
+          },
+          {
+            "value": "Extend",
+            "description": "Indicates that the alert has been extended in duration, area, or both since its initial issuance."
+          },
+          {
+            "value": "New",
+            "description": "The status of an alert when first issued."
           },
           {
             "value": "Update",
-            "description": "\"Update\" - the alert has been updated since its initial issuance."
+            "description": "Indicates that the alert has been modified since its initial issuance."
+          },
+          {
+            "value": "Upgrade",
+            "description": "Indicates that the alert has been elevated to a higher class or category since first issued."
           }
         ]
       }
@@ -3214,11 +3214,11 @@
       "description": "Basin identifier",
       "enum": [
         "AL",
-        "EP",
-        "SI",
-        "NI",
         "CP",
+        "EP",
+        "NI",
         "NP",
+        "SI",
         "SP"
       ],
       "x-ms-enum": {
@@ -3227,31 +3227,31 @@
         "values": [
           {
             "value": "AL",
-            "description": "Atlantic"
-          },
-          {
-            "value": "EP",
-            "description": "Eastern Pacific"
-          },
-          {
-            "value": "SI",
-            "description": "Southwest Indian Ocean"
-          },
-          {
-            "value": "NI",
-            "description": "North Indian Ocean"
+            "description": "**The Atlantic Ocean**. Crucial for tracking hurricanes that affect the Americas and the Caribbean. It is one of the most active regions for tropical storms."
           },
           {
             "value": "CP",
-            "description": "Central Pacific"
+            "description": "**The Central Pacific Ocean**. This basin is used for storms affecting Hawaii and surrounding areas."
+          },
+          {
+            "value": "EP",
+            "description": "**The Eastern Pacific Ocean**. This basin tracks storms impacting the western coast of the Americas, including Mexico and Central America. It is adjacent to the Central Pacific basin."
+          },
+          {
+            "value": "NI",
+            "description": "**The North Indian Ocean**. This basin covers storms impacting South Asia, including countries like India and Bangladesh, which are frequently affected by cyclones."
           },
           {
             "value": "NP",
-            "description": "Northwest Pacific"
+            "description": "**The Northwest Pacific Ocean**. This basin is important for tracking typhoons that affect East Asia, including countries like China, Japan, and the Philippines. It is the most active tropical storm regions globally."
+          },
+          {
+            "value": "SI",
+            "description": "**The South Indian Ocean**. This basin, positioned south of the equator, covers cyclones impacting Madagascar, Africa, and surrounding regions."
           },
           {
             "value": "SP",
-            "description": "South Pacific"
+            "description": "**The South Pacific Ocean**. This basin, positioned south of the equator, is relevant for cyclones affecting Australia and the South Pacific islands."
           }
         ]
       }
@@ -3677,7 +3677,7 @@
     },
     "PollutantType": {
       "type": "string",
-      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "description": "Specifies the six types of pollutants tracked by the Azure Maps Weather service.",
       "enum": [
         "CO",
         "NO2",
@@ -3692,34 +3692,34 @@
         "values": [
           {
             "value": "CO",
-            "description": "Carbon monoxide (\"CO\")"
+            "description": "Carbon monoxide"
           },
           {
             "value": "NO2",
-            "description": "Nitrogen dioxide (\"NO2\")"
+            "description": "Nitrogen dioxide"
           },
           {
             "value": "O3",
-            "description": "Ozone (\"O3\")"
+            "description": "Ozone"
           },
           {
             "value": "PM2.5",
-            "description": "Particulate matter 2.5 (\"PM2.5\")"
+            "description": "Particulate matter 2.5"
           },
           {
             "value": "PM10",
-            "description": "Particulate matter 10 (\"PM10\")"
+            "description": "Particulate matter 10"
           },
           {
             "value": "SO2",
-            "description": "Sulfur dioxide (\"SO2\")"
+            "description": "Sulfur dioxide"
           }
         ]
       }
     },
     "DominantPollutant": {
       "type": "string",
-      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "description": "Identifies the pollutant with the highest concentration.",
       "enum": [
         "Carbon Monoxide",
         "Nitrogen Dioxide",
@@ -3734,27 +3734,27 @@
         "values": [
           {
             "value": "Carbon Monoxide",
-            "description": "Carbon monoxide (\"CO\")"
+            "description": "Carbon monoxide (CO) is a colorless, odorless, and tasteless but highly toxic gas produced by the incomplete combustion of carbon-containing fuels. Common sources include vehicle exhaust, gas stoves, furnaces, and wood fires."
           },
           {
             "value": "Nitrogen Dioxide",
-            "description": "Nitrogen dioxide (\"NO2\")"
+            "description": "Nitrogen dioxide (NO2) is a significant atmospheric pollutant. It is regulated and subject to recommended limit guidelines set by the World Health Organization (WHO)."
           },
           {
             "value": "Ozone",
-            "description": "Ozone (\"O3\")"
+            "description": "Ozone (O3) is a key component of photochemical smog, the brown, harmful haze that envelops many large cities, resulting from a photochemical reaction between sunlight and certain specific pollutants."
           },
           {
             "value": "Particulate Matter 2.5",
-            "description": "Particulate matter 2.5 (\"PM2.5\")"
+            "description": "Particulate matter 2.5 (PM2.5) refers to fine particles with diameters that are generally 2.5 micrometers and smaller. These particles are more than 100 times thinner than a human hair and can remain suspended in the air for extended periods"
           },
           {
             "value": "Particulate Matter 10",
-            "description": "Particulate matter 10 (\"PM10\")"
+            "description": "Particulate matter 10 (PM10) refers to particles with diameters that are generally 10 micrometers and smaller. These particles can include dust, pollen, soot, smoke, and liquid droplets."
           },
           {
             "value": "Sulfur Dioxide",
-            "description": "Sulfur dioxide (\"SO2\")"
+            "description": "Sulfur dioxide (SO2) is a heavy, colorless inorganic gas with a pungent, irritating odor. It is mainly produced by burning fossil fuels at power plants and industrial facilities, but it can also be emitted from natural sources such as volcanoes."
           }
         ]
       }

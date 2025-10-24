@@ -12,15 +12,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
+import "./FlowProfile.tsp";
 import "./Connection.tsp";
 import "./Pipeline.tsp";
 import "./Flow.tsp";
 import "./ProviderActions.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -39,16 +36,22 @@ enum Versions {
   /**
    * The 2025-04-11-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_04_11_preview: "2025-04-11-preview",
 
   /**
    * The 2025-05-21 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_05_21: "2025-05-21",
+
+  /**
+   * The 2025-05-30-preview API version.
+   */
+  v2025_05_30_preview: "2025-05-30-preview",
+
+  /**
+   * The 2025-10-10-preview API version.
+   */
+  v2025_10_10_preview: "2025-10-10-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

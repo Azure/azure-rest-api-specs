@@ -464,12 +464,18 @@ function New-TypeSpecAPIViewTokens {
     LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
       # Skip Baseline APIView Token for new projects
-      if (!(Test-Path -Path $typeSpecProject)) {
+      if (!(Test-Path -Path (Join-Path $typeSpecProject "tspconfig.yaml"))) {
         Write-Host "TypeSpec project $typeSpecProject is not found in pull request target branch. API review will not have a baseline revision."
       }
       else {
         $tokenDirectory = Join-Path $typeSpecAPIViewArtifactsDirectory $(Split-Path $typeSpecProject -Leaf)
-        Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory | Out-Null
+        try {
+          Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory | Out-Null
+        }
+        catch {
+          Write-Host "Failed to generate Baseline APIView Token for project $typeSpecProject. Error: $_"
+          Write-Host "Skipping Baseline API review generation for $typeSpecProject"
+        }
       }
     }
   }

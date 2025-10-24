@@ -60,6 +60,7 @@ model ChatCompletionsJsonSchemaResponseFormat
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   json_schema: {
     /** A description of what the response format is for, used by the model to determine how to respond in the format. */
     description?: string;
@@ -394,6 +395,7 @@ model PredictionContent {
    * can be returned much more quickly.
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   content: string | ChatMessageTextContentItem[];
 }
 

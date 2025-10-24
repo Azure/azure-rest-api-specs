@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "compareDeploymentVersionsParameter": {
+      "compareTo": "VersionName2"
+    },
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "versionName": "dv1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "currentProperties": {
+              "cacheConfiguration": {
+                "compressionSettings": {
+                  "contentTypesToCompress": [
+                    "text/html",
+                    "application/octet-stream"
+                  ],
+                  "isCompressionEnabled": true
+                },
+                "queryParameters": null,
+                "queryStringCachingBehavior": "IgnoreQueryString"
+              },
+              "customDomains": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+                }
+              ],
+              "enabledState": "Enabled",
+              "forwardingProtocol": "MatchRequest",
+              "httpsRedirect": "Enabled",
+              "linkToDefaultDomain": "Enabled",
+              "originGroup": {
+                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+              },
+              "originPath": null,
+              "patternsToMatch": [
+                "/*"
+              ],
+              "ruleSets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+                }
+              ],
+              "supportedProtocols": [
+                "Https"
+              ]
+            },
+            "previousProperties": {
+              "cacheConfiguration": {
+                "compressionSettings": {
+                  "contentTypesToCompress": [
+                    "text/html",
+                    "application/octet-stream"
+                  ],
+                  "isCompressionEnabled": true
+                },
+                "queryParameters": null,
+                "queryStringCachingBehavior": "IgnoreQueryString"
+              },
+              "customDomains": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+                }
+              ],
+              "enabledState": "Enabled",
+              "forwardingProtocol": "MatchRequest",
+              "httpsRedirect": "Enabled",
+              "linkToDefaultDomain": "Enabled",
+              "originGroup": {
+                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+              },
+              "originPath": null,
+              "patternsToMatch": [
+                "/*"
+              ],
+              "ruleSets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+                }
+              ],
+              "supportedProtocols": [
+                "Https",
+                "Http"
+              ]
+            },
+            "resourceId": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
+            "resourceName": "route1",
+            "resourceType": "Microsoft.Cdn/profiles/afdEndpoints/routes"
+          },
+          {
+            "currentProperties": {
+              "healthProbeSettings": {
+                "probeIntervalInSeconds": 10,
+                "probePath": "/path1",
+                "probeProtocol": "Http",
+                "probeRequestType": "HEAD"
+              },
+              "loadBalancingSettings": {
+                "additionalLatencyInMilliseconds": 1000,
+                "sampleSize": 3,
+                "successfulSamplesRequired": 3
+              },
+              "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+            },
+            "previousProperties": null,
+            "resourceId": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+            "resourceName": "origingroup1",
+            "resourceType": "Microsoft.Cdn/profiles/originGroups"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DeploymentVersions_Compare",
+  "title": "DeploymentVersions_Compare"
+}

@@ -1,11 +1,10 @@
-import { join } from "path";
-import { execNpmExec, isExecError, ExecError } from "@azure-tools/specs-shared/exec";
+import { ExecError, execNpmExec, isExecError } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
+import { join } from "path";
 
-import { getPathToDependency, isFailure } from "./util.js";
-import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
-import { ReadmeAffectedTags } from "./lintdiff-types.js";
+import { AutoRestMessage, AutorestRunResult, ReadmeAffectedTags } from "./lintdiff-types.js";
 import { getOpenapiType } from "./markdown-utils.js";
+import { getPathToDependency, isFailure } from "./util.js";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 

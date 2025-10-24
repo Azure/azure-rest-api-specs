@@ -68,6 +68,22 @@ model LivenessSessionData {
   @minValue(60)
   @maxValue(86400)
   authTokenTimeToLiveInSeconds?: int32 = 600;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maximum value is 3.")
+  numberOfClientAttemptsAllowed?: HttpPart<numberOfClientAttemptsAllowed>; // = 1;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Unique Guid per each end-user. This is to provide rate limiting and anti-hammering. If 'userCorrelationIdSetInClient' is true in this request, this 'userCorrelationId' must be null.")
+  userCorrelationId?: string;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Whether or not to allow client to set their own 'userCorrelationId' via the Vision SDK. Default is false, and 'userCorrelationId' must be set in this request body.")
+  userCorrelationIdSetInClient?: boolean;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Specify the expected IP address or CIDR block of the client that runs the liveness check.")
+  expectedClientIpAddress?: string;
 }
 
 @doc("Session data returned for enumeration.")
@@ -361,6 +377,14 @@ model LivenessSessionCommonData {
 
   @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
   modelVersion?: LivenessModel;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Denotes if the abuse monitoring feature was enabled during this session.")
+  isAbuseMonitoringEnabled?: HttpPart<boolean>;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The expected IP address or CIDR block of the client that runs the liveness check.")
+  expectedClientIpAddress?: string;
 }
 
 @added(Versions.v1_2)
@@ -410,6 +434,14 @@ model LivenessSessionAttempt {
 
   @doc("The error of the liveness call, will be null if there is result.")
   error?: LivenessError;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The client information gathered during the liveness attempt.")
+  clientInformation?: ClientInformation[];
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The abuse monitoring result for the liveness attempt.")
+  abuseMonitoringResult?: AbuseMonitoringResult;
 }
 
 @added(Versions.v1_2)
@@ -426,6 +458,14 @@ model LivenessWithVerifySessionAttempt {
 
   @doc("The error of the liveness with verify call, will be null if there is result.")
   error?: LivenessError;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The client information gathered during the liveness attempt.")
+  clientInformation?: ClientInformation[];
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The abuse monitoring result for the liveness attempt.")
+  abuseMonitoringResult?: AbuseMonitoringResult;
 }
 
 @added(Versions.v1_2)
@@ -480,6 +520,36 @@ model LivenessError {
 
   @doc("Targets used for liveness classification.")
   targets: LivenessDecisionTargets;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("The client information gathered during the liveness attempt.")
+model ClientInformation {
+  @doc("The client ip address seen during the liveness attempt.")
+  ip: string;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("The abuse monitoring result for the liveness attempt.")
+model AbuseMonitoringResult {
+  @doc("Denotes if abuse detection triggered during this liveness attempt.")
+  isAbuseDetected: HttpPart<boolean>;
+
+  @doc("Denotes if abuse detection triggered during this liveness attempt.")
+  otherFlaggedSessions: OtherFlaggedSessions[];
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("The other sessions flagged as abuse based on the information gathered during this attempt.")
+model OtherFlaggedSessions {
+  @doc("The attempt ID, start from 1.")
+  attemptId: int32;
+
+  @doc("The unique session ID of the flagged session.")
+  sessionId: string;
+
+  @doc("The image ID from the flagged session.")
+  sessionImageId?: string;
 }
 
 @added(Versions.v1_2)
@@ -538,6 +608,37 @@ model CreateLivenessWithVerifySessionContent {
 
   @doc("Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.")
   authTokenTimeToLiveInSeconds?: HttpPart<authTokenLifetimeInSeconds>; // = 600;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maximum value is 3.")
+  numberOfClientAttemptsAllowed?: HttpPart<numberOfClientAttemptsAllowed>; // = 1;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("Settings for liveness abuse monitoring.")
+model LivenessAbuseMonitoringSetting {
+  /** Whether liveness abuse monitoring is enabled */
+  enabled: HttpPart<boolean>;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("Response model for client assets access token.")
+model ClientAssetsAccessTokenResponse {
+  @doc("The expiry time of the access token.")
+  expiry: utcDateTime;
+
+  @doc("The access token for client assets.")
+  accessToken: string;
+
+  @doc("The base64 encoded access token.")
+  base64AccessToken: string;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("Response model for settings.")
+model Settings {
+  /** Liveness abuse monitoring settings */
+  livenessAbuseMonitoring: LivenessAbuseMonitoringSetting;
 }
 
 @minValue(60)
@@ -547,3 +648,7 @@ scalar authTokenLifetimeInSeconds extends int32;
 @minValue(0)
 @maxValue(1)
 scalar confidenceScore extends float32;
+
+@minValue(1)
+@maxValue(3)
+scalar numberOfClientAttemptsAllowed extends int32;

@@ -51,4 +51,16 @@ interface Evaluations {
     },
     ResourceCreatedResponse<AgentEvaluation>
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Cancel an evaluation run by name")
+  @post
+  cancel is EvaluationsOperations.ResourceAction<
+    Evaluation,
+    {},
+    Http.NoContentResponse
+  >;
+
+  @doc("Delete an evaluation run by name")
+  delete is EvaluationsOperations.ResourceDelete<Evaluation>;
 }

@@ -32,14 +32,6 @@ input-file:
   - stable/v2.1/Ocr.json
 ```
 
-### Release 3.0-preview
-These settings apply only when `--tag=release_3_0_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_0_preview'
-input-file:
-  - preview/v3.0-preview/Ocr.json
-```
-
 ### Release 3.0
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
@@ -49,14 +41,6 @@ input-file:
   - stable/v3.0/Ocr.json
 ```
 
-### Release 3.1-preview.2
-These settings apply only when `--tag=release_3_1_preview_2` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_1_preview_2'
-input-file:
-  - preview/v3.1-preview.2/Ocr.json
-```
-
 ### Release 3.1
 These settings apply only when `--tag=release_3_1` is specified on the command line.
 
@@ -64,14 +48,6 @@ These settings apply only when `--tag=release_3_1` is specified on the command l
 input-file:
   - stable/v3.1/ComputerVision.json
   - stable/v3.1/Ocr.json
-```
-
-### Release 3.2-preview.2
-These settings apply only when `--tag=release_3_2_preview_2` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_2_preview_2'
-input-file:
-  - preview/v3.2-preview.2/Ocr.json
 ```
 
 ### Release 3.2
@@ -183,11 +159,8 @@ input-file:
   - $(this-folder)/stable/v2.0/Ocr.json
   - $(this-folder)/stable/v2.1/ComputerVision.json
   - $(this-folder)/stable/v2.1/Ocr.json
-  - $(this-folder)/preview/v3.0-preview/Ocr.json
   - $(this-folder)/stable/v3.0/ComputerVision.json
   - $(this-folder)/stable/v3.0/Ocr.json
-  - $(this-folder)/preview/v3.1-preview.2/Ocr.json
-  - $(this-folder)/preview/v3.2-preview.2/Ocr.json
   - $(this-folder)/stable/v3.2/ComputerVision.json
   - $(this-folder)/stable/v3.2/Ocr.json
 

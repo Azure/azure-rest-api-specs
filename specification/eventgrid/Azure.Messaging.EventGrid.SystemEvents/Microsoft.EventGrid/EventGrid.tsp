@@ -100,14 +100,15 @@ model EventGridMQTTClientCreatedOrUpdatedEventData
   createdOn: utcDateTime;
 
   /** 
-Time the client resource is last updated based on the provider's UTC time. If
-the client resource was never updated, this value is identical to the value of
-the 'createdOn' property.
-*/
+  Time the client resource is last updated based on the provider's UTC time. If
+  the client resource was never updated, this value is identical to the value of
+  the 'createdOn' property.
+  */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   updatedOn: utcDateTime;
 
   /** The key-value attributes that are assigned to the client resource. */
+  @visibility(Lifecycle.Read)
   attributes: Record<string>;
 }
 
@@ -122,7 +123,7 @@ long, and supports UTF-8 characters.
   clientAuthenticationName: string;
 
   /** Name of the client resource in the Event Grid namespace. */
-  clientName: string;
+  clientName?: string;
 
   /** Name of the Event Grid namespace where the MQTT client was created or updated. */
   namespaceName: string;

@@ -16,8 +16,6 @@ describe("Tag", () => {
     const swagger = [...tag.inputFiles.values()][0];
     expect(swagger.path).toBe(resolve("swagger"));
 
-    await expect(swagger.getRefs()).rejects.toThrowError(
-      /Failed to resolve file for swagger/i,
-    );
+    await expect(swagger.getRefs()).rejects.toThrowError(/Failed to resolve file for swagger/i);
   });
 });

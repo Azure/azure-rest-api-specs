@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "name": "{diskName}",
+    "api-version": "2018-09-15",
+    "disk": {
+      "properties": {
+        "diskSizeGiB": 1023,
+        "diskType": "Standard",
+        "leasedByLabVmId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/vmName"
+      }
+    },
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "userName": "{userId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{diskName}",
+        "type": "Microsoft.DevTestLab/labs/users/disks",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/l{labName}/users/{userId}/disks/{diskName}",
+        "properties": {
+          "createdDate": "2021-01-04T20:21:02.0182357+00:00",
+          "diskSizeGiB": 1023,
+          "diskType": "Standard",
+          "diskUri": "",
+          "hostCaching": "None",
+          "leasedByLabVmId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/vmName",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "b7183ac5-1097-4513-b597-4d9d23e0a820"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{diskName}",
+        "type": "Microsoft.DevTestLab/labs/users/disks",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/l{labName}/users/{userId}/disks/{diskName}",
+        "properties": {
+          "createdDate": "2021-01-04T20:21:02.0182357+00:00",
+          "diskSizeGiB": 1023,
+          "diskType": "Standard",
+          "diskUri": "",
+          "hostCaching": "None",
+          "leasedByLabVmId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/vmName",
+          "provisioningState": "Creating",
+          "uniqueIdentifier": "b7183ac5-1097-4513-b597-4d9d23e0a820"
+        }
+      }
+    }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Disks_CreateOrUpdate"
+}

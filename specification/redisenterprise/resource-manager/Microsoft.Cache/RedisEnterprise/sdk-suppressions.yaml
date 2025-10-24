@@ -1,0 +1,21 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/redisenterprise/armredisenterprise
+      breaking-changes:
+        - Function `*DatabasesClient.BeginFlush` parameter(s) have been changed from `(context.Context, string, string, string, FlushParameters, *DatabasesClientBeginFlushOptions)` to `(context.Context, string, string, string, *DatabasesClientBeginFlushOptions)`
+        - Type of `Cluster.Properties` has been changed from `*ClusterProperties` to `*ClusterCreateProperties`
+        - Type of `ClusterUpdate.Properties` has been changed from `*ClusterProperties` to `*ClusterUpdateProperties`
+        - Type of `Database.Properties` has been changed from `*DatabaseProperties` to `*DatabaseCreateProperties`
+        - Type of `DatabaseUpdate.Properties` has been changed from `*DatabaseProperties` to `*DatabaseUpdateProperties`
+        - Struct `ClusterProperties` has been removed
+        - Struct `ClusterPropertiesEncryption` has been removed
+        - Struct `ClusterPropertiesEncryptionCustomerManagedKeyEncryption` has been removed
+        - Struct `ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity` has been removed
+        - Struct `DatabaseProperties` has been removed
+        - Struct `DatabasePropertiesGeoReplication` has been removed
+  azure-sdk-for-python:
+    - package: azure-mgmt-redisenterprise
+      breaking-changes:
+        - Deleted or renamed model `ClusterPropertiesEncryption`
+        - Deleted or renamed model `ClusterPropertiesEncryptionCustomerManagedKeyEncryption`
+        - Deleted or renamed model `ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity`

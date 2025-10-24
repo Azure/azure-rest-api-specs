@@ -36,6 +36,7 @@ union FunctionCallPreset {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+#suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
 alias FunctionCallConfig = FunctionCallPreset | FunctionName;
 
 @doc("""

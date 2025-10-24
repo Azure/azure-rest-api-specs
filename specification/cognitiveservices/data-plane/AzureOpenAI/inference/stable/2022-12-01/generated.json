@@ -174,8 +174,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -202,7 +201,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -264,8 +263,7 @@
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/Choice"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -340,8 +338,7 @@
               "x-nullable": true
             }
           },
-          "x-ms-client-name": "topLogprobs",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "topLogprobs"
         },
         "text_offset": {
           "type": "array",
@@ -518,8 +515,7 @@
           "description": "Embedding values for the prompts submitted in the request.",
           "items": {
             "$ref": "#/definitions/EmbeddingItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "$ref": "#/definitions/EmbeddingsUsage",

@@ -1,0 +1,77 @@
+name: "Breaking Change(Cross-Version) - Analyze Code"
+
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  validateBreakingChange:
+    name: "Breaking Change(Cross-Version) - Analyze Code"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Setup .NET 6 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "6.0.x"
+
+      - name: Breaking Change(Cross-Version) - Analyze Code
+        id: breaking-change-cross-version-analyze-code
+        run: |
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
+          npm exec --no -- openapi-diff-runner \
+            --run-type "CrossVersion" \
+            --spec-repo-path "$GITHUB_WORKSPACE" \
+            --pr-source-branch "$GITHUB_HEAD_REF" \
+            --pr-target-branch "$GITHUB_BASE_REF" \
+            --head-commit "${{ github.event.pull_request.head.sha }}" \
+            --pr-number "${{ github.event.pull_request.number }}" \
+            --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
+            --target-repo "$GITHUB_REPOSITORY"
+
+      # Upload artifact for 'BreakingChangeReviewRequired' label
+      - if: |
+          always() && 
+          (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '')
+        name: Upload artifact with BreakingChangeReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName }}"
+          value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
+
+      # Upload artifact for 'VersioningReviewRequired' label
+      - if: |
+          always() && 
+          (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '')
+        name: Upload artifact with VersioningReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
+          value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.breaking-change-cross-version-analyze-code.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.breaking-change-cross-version-analyze-code.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore

@@ -37,6 +37,7 @@ model SecretSyncProperties {
   serviceAccountName: string;
 
   @doc("Type specifies the type of the Kubernetes secret object, e.g. \"Opaque\" or\"kubernetes.io/tls\". The controller must have permission to create secrets of the specified type.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kubernetesSecretType: KubernetesSecretType;
 
   @doc("ForceSynchronization can be used to force the secret synchronization. The secret synchronization is triggered by changing the value in this field. This field is not used to resolve synchronization conflicts.")
@@ -46,7 +47,7 @@ model SecretSyncProperties {
 
   @doc("An array of SecretObjectData that maps secret data from the external secret provider to the Kubernetes secret. Each entry specifies the source secret in the external provider and the corresponding key in the Kubernetes secret.")
   @minItems(1)
-  @identifiers(#[])
+  @identifiers(#["targetKey"])
   objectSecretMapping: KubernetesSecretObjectMapping[];
 
   @visibility(Lifecycle.Read)

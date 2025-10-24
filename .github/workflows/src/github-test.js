@@ -6,7 +6,7 @@ import { pathToFileURL } from "url";
 import { inspect } from "util";
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export default async function importAllModules({ core }) {
   const workspace = process.env.GITHUB_WORKSPACE;
@@ -18,10 +18,7 @@ export default async function importAllModules({ core }) {
 
   // find all files matching "**/src/**/*.js", sorted for readability
   const scriptFiles = (await readdir(githubDir, { recursive: true }))
-    .filter(
-      (f) =>
-        normalize(f).split(sep).includes("src") && basename(f).endsWith(".js"),
-    )
+    .filter((f) => normalize(f).split(sep).includes("src") && basename(f).endsWith(".js"))
     .sort();
 
   core.info("Script Files:");

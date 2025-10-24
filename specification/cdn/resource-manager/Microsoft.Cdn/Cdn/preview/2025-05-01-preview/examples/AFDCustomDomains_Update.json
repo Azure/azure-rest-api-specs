@@ -1,0 +1,117 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "customDomainName": "domain1",
+    "customDomainUpdateProperties": {
+      "properties": {
+        "tlsSettings": {
+          "certificateType": "ManagedCertificate",
+          "cipherSuiteSetType": "Customized",
+          "minimumTlsVersion": "TLS12",
+          "customizedCipherSuiteSet": {
+            "cipherSuiteSetForTls12": [
+              "ECDHE_RSA_AES128_GCM_SHA256"
+            ],
+            "cipherSuiteSetForTls13": [
+              "TLS_AES_128_GCM_SHA256",
+              "TLS_AES_256_GCM_SHA384"
+            ]
+          }
+        },
+        "azureDnsZone": {
+          "id": ""
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/domain1",
+        "name": "domain1",
+        "type": "Microsoft.Cdn/profiles/customdomains",
+        "properties": {
+          "profileName": "profile1",
+          "hostName": "www.contoso.com",
+          "tlsSettings": {
+            "certificateType": "ManagedCertificate",
+            "cipherSuiteSetType": "Customized",
+            "minimumTlsVersion": "TLS12",
+            "customizedCipherSuiteSet": {
+              "cipherSuiteSetForTls12": [
+                "ECDHE_RSA_AES128_GCM_SHA256"
+              ],
+              "cipherSuiteSetForTls13": [
+                "TLS_AES_128_GCM_SHA256",
+                "TLS_AES_256_GCM_SHA384"
+              ]
+            },
+            "secret": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
+            }
+          },
+          "azureDnsZone": {
+            "id": ""
+          },
+          "preValidatedCustomDomainResourceId": {
+            "id": ""
+          },
+          "validationProperties": {
+            "validationToken": "8c9912db-c615-4eeb-8465",
+            "expirationDate": "2009-06-15T13:45:43.0000000Z"
+          },
+          "domainValidationState": "Approved",
+          "provisioningState": "Updating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-05-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/domain1",
+        "name": "domain1",
+        "type": "Microsoft.Cdn/profiles/customdomains",
+        "properties": {
+          "profileName": "profile1",
+          "hostName": "www.contoso.com",
+          "tlsSettings": {
+            "certificateType": "ManagedCertificate",
+            "cipherSuiteSetType": "Customized",
+            "minimumTlsVersion": "TLS12",
+            "customizedCipherSuiteSet": {
+              "cipherSuiteSetForTls12": [
+                "ECDHE_RSA_AES128_GCM_SHA256"
+              ],
+              "cipherSuiteSetForTls13": [
+                "TLS_AES_128_GCM_SHA256",
+                "TLS_AES_256_GCM_SHA384"
+              ]
+            },
+            "secret": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
+            }
+          },
+          "azureDnsZone": {
+            "id": ""
+          },
+          "preValidatedCustomDomainResourceId": {
+            "id": ""
+          },
+          "validationProperties": {
+            "validationToken": "8c9912db-c615-4eeb-8465",
+            "expirationDate": "2009-06-15T13:45:43.0000000Z"
+          },
+          "domainValidationState": "Approved",
+          "provisioningState": "Updating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}

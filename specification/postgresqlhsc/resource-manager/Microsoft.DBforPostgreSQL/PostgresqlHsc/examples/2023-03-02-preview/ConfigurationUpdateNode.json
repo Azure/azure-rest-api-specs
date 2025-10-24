@@ -1,0 +1,72 @@
+{
+  "operationId": "Configurations_UpdateOnNode",
+  "parameters": {
+    "api-version": "2023-03-02-preview",
+    "clusterName": "testcluster",
+    "configurationName": "array_nulls",
+    "parameters": {
+      "properties": {
+        "value": "off"
+      }
+    },
+    "resourceGroupName": "TestResourceGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "title": "Update single configuration of nodes",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "array_nulls",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations/node",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/configurations/array_nulls",
+        "properties": {
+          "description": "Enables input of NULL elements in arrays.",
+          "allowedValues": "on,off",
+          "dataType": "Boolean",
+          "defaultValue": "on",
+          "provisioningState": "InProgress",
+          "requiresRestart": false,
+          "source": "user-override",
+          "value": "off"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "array_nulls",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations/node",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/configurations/array_nulls",
+        "properties": {
+          "description": "Enables input of NULL elements in arrays.",
+          "allowedValues": "on,off",
+          "dataType": "Boolean",
+          "defaultValue": "on",
+          "provisioningState": "InProgress",
+          "requiresRestart": false,
+          "source": "user-override",
+          "value": "off"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview"
+      }
+    }
+  }
+}

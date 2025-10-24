@@ -32,6 +32,7 @@ import { fetchWithRetry } from "./retries.js";
  * @param {typeof import("@actions/core")} params.core
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
  * @param {boolean} [params.fallbackToFailedArtifact]
+ * @param {string} [params.token]
  * @returns {Promise<{artifactData: string}>}
  */
 export async function getAzurePipelineArtifact({
@@ -42,19 +43,22 @@ export async function getAzurePipelineArtifact({
   core,
   retryOptions = {},
   fallbackToFailedArtifact = false,
+  token = undefined,
 }) {
   let apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
 
+  const headers = {
+    "Content-Type": "application/json",
+    ...(token && { Authorization: `Bearer ${token}` }),
+  };
   let artifactData = "";
   // Use Node.js fetch with retry to call the API
   let response = await fetchWithRetry(
     apiUrl,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     },
     retryOptions,
   );
@@ -71,6 +75,7 @@ export async function getAzurePipelineArtifact({
         artifactName,
         core,
         retryOptions,
+        headers,
       });
     }
   }
@@ -81,9 +86,7 @@ export async function getAzurePipelineArtifact({
     const artifacts = /** @type {Artifacts} */ (await response.json());
     core.info(`Artifacts found: ${JSON.stringify(artifacts)}`);
     if (!artifacts.resource || !artifacts.resource.downloadUrl) {
-      throw new Error(
-        `Download URL not found for the artifact ${artifactName}`,
-      );
+      throw new Error(`Download URL not found for the artifact ${artifactName}`);
     }
 
     let downloadUrl = artifacts.resource.downloadUrl;
@@ -98,20 +101,19 @@ export async function getAzurePipelineArtifact({
     // Step 2: Fetch Artifact Content (as a Buffer) with retry
     const artifactResponse = await fetchWithRetry(
       downloadUrl,
-      {},
-      { logger: core.info },
+      {
+        method: "GET",
+        headers,
+      },
+      retryOptions,
     );
     if (!artifactResponse.ok) {
-      throw new Error(
-        `Failed to fetch artifact: ${artifactResponse.statusText}`,
-      );
+      throw new Error(`Failed to fetch artifact: ${artifactResponse.statusText}`);
     }
 
     artifactData = await artifactResponse.text();
   } else {
-    core.error(
-      `Failed to fetch artifacts: ${response.status}, ${response.statusText}`,
-    );
+    core.error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
     const errorText = await response.text();
     core.error(`Error details: ${errorText}`);
   }
@@ -129,9 +131,7 @@ export function getAdoBuildInfoFromUrl(buildUrl) {
   const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
   const match = buildUrl.match(buildUrlRegex);
   if (!match) {
-    throw new Error(
-      `Could not extract build ID or project URL from the URL: ${buildUrl}`,
-    );
+    throw new Error(`Could not extract build ID or project URL from the URL: ${buildUrl}`);
   }
   return { projectUrl: match[1], buildId: match[2] };
 }
@@ -143,6 +143,7 @@ export function getAdoBuildInfoFromUrl(buildUrl) {
  * @param {string} params.artifactName
  * @param {typeof import("@actions/core")} params.core
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
+ * @param {Object} [params.headers]
  * @returns {Promise<Response>}
  */
 export async function fetchFailedArtifact({
@@ -151,6 +152,7 @@ export async function fetchFailedArtifact({
   artifactName,
   core,
   retryOptions = {},
+  headers,
 }) {
   // fallback to fetch the failed artifact
   let apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?api-version=7.0`;
@@ -159,28 +161,29 @@ export async function fetchFailedArtifact({
     apiUrl,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     },
     retryOptions,
   );
   if (!response.ok) {
-    throw new Error(
-      `Failed to fetch artifacts: ${response.status}, ${response.statusText}`,
-    );
+    throw new Error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
   }
   /** @type {ListArtifactsResponse} */
-  const listArtifactResponse = /** @type {ListArtifactsResponse} */ (
-    await response.json()
-  );
+  const listArtifactResponse = /** @type {ListArtifactsResponse} */ (await response.json());
   core.info(`Artifacts found: ${JSON.stringify(listArtifactResponse)}`);
   // Use filter to get matching artifacts and sort them in descending alphabetical order
   const artifactsList = listArtifactResponse.value
     .filter((artifact) => artifact.name.includes(artifactName))
     .sort((a, b) => b.name.localeCompare(a.name)); // Descending order (Z to A)
   if (artifactsList.length === 0) {
-    throw new Error(`No artifacts found with name containing ${artifactName}`);
+    const message = `No artifacts found with name containing ${artifactName}`;
+    core.warning(message);
+    // Return a Response-like object using the global Response constructor
+    return new Response(message, {
+      status: 404,
+      statusText: message,
+      headers: { "Content-Type": "text/plain" },
+    });
   }
   artifactName = artifactsList[0].name;
   apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
@@ -189,9 +192,7 @@ export async function fetchFailedArtifact({
     apiUrl,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     },
     retryOptions,
   );

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "cacheName": "cache1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "cache1/default",
+            "type": "Microsoft.Cache/Redis/PatchSchedules",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/patchSchedules/default",
+            "location": "East US",
+            "properties": {
+              "scheduleEntries": [
+                {
+                  "dayOfWeek": "Monday",
+                  "maintenanceWindow": "PT5H",
+                  "startHourUtc": 12
+                },
+                {
+                  "dayOfWeek": "Tuesday",
+                  "startHourUtc": 12
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PatchSchedules_ListByRedisResource",
+  "title": "RedisCachePatchSchedulesList"
+}

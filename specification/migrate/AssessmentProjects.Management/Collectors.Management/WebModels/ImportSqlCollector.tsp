@@ -1,4 +1,4 @@
-import "../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../Common/ArmModels/AzureResourceProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

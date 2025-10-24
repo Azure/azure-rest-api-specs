@@ -1,8 +1,9 @@
-import { beforeEach, test, describe, expect, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   compareLintDiffViolations,
   generateAutoRestErrorReport,
   generateLintDiffReport,
+  getAutoRestFailedMessage,
   getDocUrl,
   getFile,
   getFileLink,
@@ -11,11 +12,11 @@ import {
   iconFor,
 } from "../src/generateReport.js";
 import {
-  Source,
-  LintDiffViolation,
-  BeforeAfter,
-  AutorestRunResult,
   AutoRestMessage,
+  AutorestRunResult,
+  BeforeAfter,
+  LintDiffViolation,
+  Source,
 } from "../src/lintdiff-types.js";
 import { isWindows } from "./test-util.js";
 
@@ -28,8 +29,8 @@ vi.mock("node:fs/promises", async () => {
   };
 });
 
-import { readFile } from "fs/promises";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { readFile } from "fs/promises";
 
 vi.mock("../src/util.js", async () => {
   const original = await vi.importActual("../src/util.js");
@@ -48,6 +49,36 @@ describe("iconFor", () => {
     { input: "info", expected: ":warning:" },
   ])(`iconFor($input) returns $expected`, ({ input, expected }) => {
     expect(iconFor(input)).toEqual(expected);
+  });
+});
+
+describe("getAutoRestFailedMessage", () => {
+  test("returns empty string when result is null", () => {
+    expect(getAutoRestFailedMessage(null)).toEqual("");
+  });
+
+  test("returns empty string when result has no error", () => {
+    const result: AutorestRunResult = {
+      error: null,
+      rootPath: "",
+      readme: new Readme("file.md"),
+      tag: "default",
+      stdout: "",
+      stderr: "",
+    };
+    expect(getAutoRestFailedMessage(result)).toEqual("");
+  });
+
+  test("returns 'Autorest Failed' when result has an error", () => {
+    const result: AutorestRunResult = {
+      error: new Error("Autorest failed"),
+      rootPath: "",
+      readme: new Readme("file.md"),
+      tag: "default",
+      stdout: "",
+      stderr: "",
+    };
+    expect(getAutoRestFailedMessage(result)).toEqual("Autorest Failed");
   });
 });
 
@@ -147,16 +178,16 @@ describe("getDocUrl", () => {
 
 describe("getFileLink", () => {
   test("does not include #L if line is null", () => {
-    expect(getFileLink("abc123", "file.json", null)).not.toContain("#L");
+    expect(getFileLink("repo/path", "abc123", "file.json", null)).not.toContain("#L");
   });
 
   test("includes #L if line is not null", () => {
-    expect(getFileLink("abc123", "file.json", 1)).toContain("#L1");
+    expect(getFileLink("repo/path", "abc123", "file.json", 1)).toContain("#L1");
   });
 
   test("returns the correct link with preceeding forward slash", () => {
-    expect(getFileLink("abc123", "/file.json", 1)).toEqual(
-      "https://github.com/Azure/azure-rest-api-specs/blob/abc123/file.json#L1",
+    expect(getFileLink("repo/path", "abc123", "/file.json", 1)).toEqual(
+      "https://github.com/repo/path/blob/abc123/file.json#L1",
     );
   });
 });
@@ -387,19 +418,20 @@ describe("generateLintDiffReport", () => {
       outFile,
       "baseBranch",
       "compareSha",
+      "repo/path",
     );
     expect(actual).toBe(false);
     expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
       "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
       | --- | --- | --- |
-      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+      | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
       **[must fix]The following errors/warnings are intorduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
-      | :x: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
+      | :x: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/repo/path/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
 
       "
     `);
@@ -445,12 +477,13 @@ describe("generateLintDiffReport", () => {
       outFile,
       "baseBranch",
       "compareSha",
+      "repo/path",
     );
     expect(actual).toBe(false);
     expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
       "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
       | --- | --- | --- |
-      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+      | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
       **[must fix]The following errors/warnings are intorduced by current PR:**
@@ -462,6 +495,65 @@ describe("generateLintDiffReport", () => {
       "
     `);
   });
+
+  test.skipIf(isWindows())(
+    "passes and displays warning if before has errors",
+    async ({ expect }) => {
+      const afterViolation = {
+        extensionName: "@microsoft.azure/openapi-validator",
+        level: "warning",
+        code: "SomeCode",
+        message: "A warning occurred",
+        source: [],
+        details: {},
+      };
+
+      const beforeResult = {
+        error: new Error("Autorest failed"),
+        stdout: "",
+        stderr: "",
+        rootPath: "",
+        readme: new Readme("file1.md"),
+        tag: "",
+      } as AutorestRunResult;
+      const afterResult = {
+        error: null,
+        stdout: JSON.stringify(afterViolation),
+        stderr: "",
+        rootPath: "",
+        readme: new Readme("file1.md"),
+        tag: "",
+      } as AutorestRunResult;
+
+      const runCorrelations = new Map<string, BeforeAfter>([
+        ["file1.md", { before: beforeResult, after: afterResult }],
+      ]);
+
+      const outFile = "test-output-fatal.md";
+      const actual = await generateLintDiffReport(
+        runCorrelations,
+        new Set<string>([
+          "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+        ]),
+        outFile,
+        "baseBranch",
+        "compareSha",
+        "repo/path",
+      );
+      expect(actual).toBe(true);
+      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+      "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
+      | --- | --- | --- |
+      | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) Autorest Failed|
+
+
+      > [!WARNING]
+      > Autorest failed checking before state of file1.md 
+
+      "
+    `);
+    },
+  );
 
   test.skipIf(isWindows())(
     "passes if new violations do not include an error (warnings only)",
@@ -511,20 +603,21 @@ describe("generateLintDiffReport", () => {
         outFile,
         "baseBranch",
         "compareSha",
+        "repo/path",
       );
       expect(actual).toBe(true);
 
       expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
         "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
         | --- | --- | --- |
-        | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+        | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
         **[must fix]The following errors/warnings are intorduced by current PR:**
 
         | Rule | Message | Related RPC [For API reviewers] |
         | ---- | ------- | ------------------------------- |
-        | :warning: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
+        | :warning: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/repo/path/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
 
         "
       `);

@@ -8,6 +8,11 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
+@@clientName(Microsoft.ContainerService,
+  "ContainerServiceFleetMgmtClient",
+  "python"
+);
+
 @@clientName(Microsoft.ContainerService.APIServerAccessProfile,
   "ApiServerAccessProfile",
   "java"
@@ -18,16 +23,35 @@ using Azure.ClientGenerator.Core;
 @@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
   "ManagedServiceIdentity"
 );
-
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.TrackedResource.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.ProxyResource.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
+  "SYSTEM_ASSIGNED_USER_ASSIGNED",
+  "python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
+@@clientName(Microsoft.ContainerService.FleetMembers.updateAsync,
+  "begin_update",
+  "python"
+);
+@@clientName(Microsoft.ContainerService.Fleets.create,
+  "begin_create_or_update",
+  "python"
+);
+@@clientName(Microsoft.ContainerService.Fleets.updateAsync,
+  "begin_update",
+  "python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.TrackedResource.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.ProxyResource.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
 );
 @@clientName(Microsoft.ContainerService,
   "ContainerServiceFleetClient",

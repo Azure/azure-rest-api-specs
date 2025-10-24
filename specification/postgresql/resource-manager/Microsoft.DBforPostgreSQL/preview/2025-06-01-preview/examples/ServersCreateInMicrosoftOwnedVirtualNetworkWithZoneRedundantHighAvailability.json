@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "parameters": {
+      "location": "eastus",
+      "sku": {
+        "tier": "GeneralPurpose",
+        "name": "Standard_D4ds_v5"
+      },
+      "properties": {
+        "administratorLogin": "exampleadministratorlogin",
+        "administratorLoginPassword": "examplepassword",
+        "version": "17",
+        "availabilityZone": "1",
+        "createMode": "Create",
+        "storage": {
+          "storageSizeGB": 512,
+          "autoGrow": "Disabled",
+          "tier": "P20"
+        },
+        "backup": {
+          "backupRetentionDays": 7,
+          "geoRedundantBackup": "Enabled"
+        },
+        "network": {
+          "publicNetworkAccess": "Enabled"
+        },
+        "highAvailability": {
+          "mode": "ZoneRedundant"
+        }
+      },
+      "tags": {
+        "InCustomerVnet": "false",
+        "InMicrosoftVnet": "true"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/azureAsyncOperation/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa?api-version=2025-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2025-06-01-preview"
+      }
+    }
+  }
+}

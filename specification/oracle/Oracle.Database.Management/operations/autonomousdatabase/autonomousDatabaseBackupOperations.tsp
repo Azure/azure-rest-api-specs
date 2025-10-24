@@ -1,9 +1,11 @@
 import "../../models/autonomousdatabase/autonomousDatabaseBackup.tsp";
 import "../commons.tsp";
+import "@typespec/http";
 
 using Azure.ResourceManager;
 using Autorest;
 using TypeSpec.Versioning;
+using Http;
 
 namespace Oracle.Database;
 
@@ -18,9 +20,13 @@ interface AutonomousDatabaseBackups
     "./examples/autonomousDatabaseBackup_patch.json",
     "Patch Autonomous Database Backup."
   )
-  update is ArmResourcePatchAsync<
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
     AutonomousDatabaseBackup,
-    AutonomousDatabaseBackupProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AutonomousDatabaseBackup,
+      AutonomousDatabaseBackupProperties
+    >
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"

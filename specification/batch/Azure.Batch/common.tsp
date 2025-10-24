@@ -13,6 +13,7 @@ namespace Azure.Batch;
 // Batch operation definitions
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
+@list
 op ListOperation<
   TFilter extends TypeSpec.Reflection.Model,
   TResponse

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "privateZoneName": "0.0.127.in-addr.arpa",
+    "recordType": "PTR",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/PTR?api-version=2024-06-01&$skipToken=skipToken",
+        "value": [
+          {
+            "name": "1",
+            "type": "Microsoft.Network/privateDnsZones/PTR",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/0.0.127.in-addr.arpa/PTR/1",
+            "properties": {
+              "fqdn": "1.0.0.127.in-addr.arpa.",
+              "isAutoRegistered": false,
+              "metadata": {
+                "key1": "value1"
+              },
+              "ptrRecords": [
+                {
+                  "ptrdname": "localhost"
+                }
+              ],
+              "ttl": 3600
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RecordSets_ListByType",
+  "title": "GET Private DNS Zone PTR Record Sets"
+}

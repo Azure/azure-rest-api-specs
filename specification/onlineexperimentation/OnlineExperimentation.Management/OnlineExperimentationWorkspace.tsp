@@ -2,11 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
 import "@typespec/openapi";
+import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Http;
 
 namespace Microsoft.OnlineExperimentation;
 
@@ -45,6 +47,7 @@ model OnlineExperimentationWorkspacePatch {
   /**
    * Updatable properties of the online experimentation workspace resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
   properties?: {
     /**
      * The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.
@@ -86,6 +89,7 @@ interface OnlineExperimentationWorkspaces {
   /**
    * Patch an online experimentation workspace.
    */
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     OnlineExperimentationWorkspace,
     OnlineExperimentationWorkspacePatch

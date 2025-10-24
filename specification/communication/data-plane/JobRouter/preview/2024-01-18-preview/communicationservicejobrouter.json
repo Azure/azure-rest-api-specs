@@ -2201,8 +2201,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -2229,7 +2228,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -2350,8 +2349,7 @@
           "description": "Queue selector attachments used to resolve a queue for a job.",
           "items": {
             "$ref": "#/definitions/QueueSelectorAttachment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "prioritizationRule": {
           "$ref": "#/definitions/RouterRule",
@@ -2362,8 +2360,7 @@
           "description": "Worker selector attachments used to attach worker selectors to a job.",
           "items": {
             "$ref": "#/definitions/WorkerSelectorAttachment"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2388,8 +2385,7 @@
           "description": "Queue selector attachments used to resolve a queue for a job.",
           "items": {
             "$ref": "#/definitions/QueueSelectorAttachment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "prioritizationRule": {
           "$ref": "#/definitions/RouterRuleCreateOrUpdate",
@@ -2400,8 +2396,7 @@
           "description": "Worker selector attachments used to attach worker selectors to a job.",
           "items": {
             "$ref": "#/definitions/WorkerSelectorAttachment"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2455,8 +2450,7 @@
           "description": "The queue selectors to attach.",
           "items": {
             "$ref": "#/definitions/RouterQueueSelector"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2483,8 +2477,7 @@
           "description": "The worker selectors to attach.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -3105,8 +3098,7 @@
           "description": "Updated WorkerSelectors.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
@@ -3419,8 +3411,7 @@
           "description": "A collection of queue selectors that will be applied if this allocation is selected.",
           "items": {
             "$ref": "#/definitions/RouterQueueSelector"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -3556,8 +3547,7 @@
           "description": "A collection of manually specified worker selectors, which a worker must satisfy in order to process this job.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "attachedWorkerSelectors": {
           "type": "array",
@@ -3565,8 +3555,7 @@
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "labels": {
           "type": "object",
@@ -3591,8 +3580,7 @@
           "description": "Notes attached to a job, sorted by timestamp.",
           "items": {
             "$ref": "#/definitions/RouterJobNote"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "scheduledAt": {
           "type": "string",
@@ -3678,8 +3666,7 @@
           "description": "A collection of manually specified worker selectors, which a worker must satisfy in order to process this job.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "labels": {
           "type": "object",
@@ -3696,8 +3683,7 @@
           "description": "Notes attached to a job, sorted by timestamp.",
           "items": {
             "$ref": "#/definitions/RouterJobNote"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "matchingMode": {
           "$ref": "#/definitions/JobMatchingModeCreateOrUpdate",
@@ -4107,8 +4093,7 @@
           "description": "Collection of channel(s) this worker can handle and their impact on the workers capacity.",
           "items": {
             "$ref": "#/definitions/RouterChannel"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "offers": {
           "type": "array",
@@ -4116,8 +4101,7 @@
           "items": {
             "$ref": "#/definitions/RouterJobOffer"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "assignedJobs": {
           "type": "array",
@@ -4125,8 +4109,7 @@
           "items": {
             "$ref": "#/definitions/RouterWorkerAssignment"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "loadRatio": {
           "type": "number",
@@ -4210,8 +4193,7 @@
           "description": "Collection of channel(s) this worker can handle and their impact on the workers capacity.",
           "items": {
             "$ref": "#/definitions/RouterChannel"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "availableForOffers": {
           "type": "boolean",
@@ -4649,8 +4631,7 @@
           "description": "A collection of percentage based weighted allocations.",
           "items": {
             "$ref": "#/definitions/QueueWeightedAllocation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -4672,8 +4653,7 @@
           "description": "A collection of percentage based weighted allocations.",
           "items": {
             "$ref": "#/definitions/WorkerWeightedAllocation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -4756,8 +4736,7 @@
           "description": "A collection of worker selectors that will be applied if this allocation is selected.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [

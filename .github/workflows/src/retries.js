@@ -31,13 +31,8 @@ export async function retry(fn, options = {}) {
       lastError = error;
 
       if (attempt < maxRetries) {
-        const delayMs = Math.min(
-          initialDelayMs * Math.pow(2, attempt),
-          maxDelayMs,
-        );
-        logger(
-          `Request failed, retrying in ${delayMs}ms... (${attempt + 1}/${maxRetries})`,
-        );
+        const delayMs = Math.min(initialDelayMs * Math.pow(2, attempt), maxDelayMs);
+        logger(`Request failed, retrying in ${delayMs}ms... (${attempt + 1}/${maxRetries})`);
         if (error instanceof Error) {
           logger(`Error: ${error.message}`);
         }

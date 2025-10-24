@@ -27,7 +27,35 @@ These are the global settings for the dynatrace.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-04-27
+tag: package-2024-04-24
+```
+
+### Tag: package-2024-04-24
+
+These settings apply only when `--tag=package-2024-04-24` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-24'
+input-file:
+  - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+suppressions:
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: BodyTopLevelProperties
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixing this causes breaking changes.
+    - code: PatchBodyParametersSchema
+      from: dynatrace.json
+      reason: Empty object can still be passed, properties are not mandatory for the update schema.
+    - code: RequiredPropertiesMissingInResourceModel
+      from: dynatrace.json
+      reason: It is similar to any other model. We believe this is a false positive.
+    - code: OperationIdNounVerb
+      from: dynatrace.json
+      reason: False positive.
 ```
 
 ### Tag: package-2023-04-27
@@ -85,6 +113,32 @@ suppressions:
     from: Dynatrace.Observability/preview/2021-06-01-preview/dynatrace.json
     where: $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
     reason: Secrets are OK to return in a POST response.
+
+directive:
+  - suppress: ProvisioningStateMustBeReadOnly
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+  - suppress: UnSupportedPatchProperties
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: Breaking change to remove provisioningState property.
+  - suppress: BodyTopLevelProperties
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - suppress: PatchBodyParametersSchema
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: Empty object can still be passed, properties are not mandatory for the update schema.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: It is similar to any other model. We believe this is a false positive.
+  - suppress: OperationIdNounVerb
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: False positive.
 ```
 
 ## Go

@@ -1,0 +1,76 @@
+{
+  "operationId": "DeploymentSafeguards_Create",
+  "title": "Creates a DeploymentSafeguards resource with a long running operation.",
+  "parameters": {
+    "api-version": "2025-05-02-preview",
+    "resourceUri": "subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+    "resource": {
+      "properties": {
+        "level": "Warn",
+        "podSecurityStandardsLevel": "Baseline"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "23ujdflewrj3=",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01"
+      },
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1/providers/Microsoft.ContainerService/deploymentSafeguards/default",
+        "name": "default",
+        "type": "Microsoft.ContainerService/deploymentSafeguards",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        },
+        "eTag": "23ujdflewrj3=",
+        "properties": {
+          "level": "Warn",
+          "systemExcludedNamespaces": [
+            "kube-system",
+            "gatekeeper-system"
+          ],
+          "podSecurityStandardsLevel": "Baseline",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "23ujdflewrj3=",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01"
+      },
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1/providers/Microsoft.ContainerService/deploymentSafeguards/default",
+        "name": "default",
+        "type": "Microsoft.ContainerService/deploymentSafeguards",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        },
+        "eTag": "23ujdflewrj3=",
+        "properties": {
+          "level": "Warn",
+          "systemExcludedNamespaces": [
+            "kube-system",
+            "gatekeeper-system"
+          ],
+          "podSecurityStandardsLevel": "Baseline",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

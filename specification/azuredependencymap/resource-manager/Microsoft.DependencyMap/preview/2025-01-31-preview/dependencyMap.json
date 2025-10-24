@@ -284,7 +284,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/MapsResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -356,7 +357,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MapsResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -604,7 +606,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DiscoverySourceResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -684,7 +687,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DiscoverySourceResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -793,9 +797,19 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExportDependenciesOperationResult"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -820,7 +834,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExportDependenciesOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1143,6 +1158,56 @@
         }
       }
     },
+    "ExportDependenciesAdditionalInfo": {
+      "type": "object",
+      "description": "Additional information about the exported dependencies data.",
+      "properties": {
+        "availableDaysCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of days for which data was available in the exported results."
+        }
+      }
+    },
+    "ExportDependenciesOperationResult": {
+      "type": "object",
+      "description": "Model representing the result of the export dependencies asynchronous operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The status URL of export dependencies operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name of the operation status. It must match the last segment of 'id' field."
+        },
+        "status": {
+          "type": "string",
+          "description": "The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "Contains error details if status is Failed/Canceled."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/ExportDependenciesResultProperties",
+          "description": "Properties for export dependencies. These should only be set if the status is Succeeded."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
     "ExportDependenciesRequest": {
       "type": "object",
       "description": "ExportDependencies request model",
@@ -1155,10 +1220,55 @@
           "$ref": "#/definitions/DependencyMapVisualizationFilter",
           "description": "Filters for ExportDependencies"
         }
-      },
-      "required": [
-        "focusedMachineId"
-      ]
+      }
+    },
+    "ExportDependenciesResultProperties": {
+      "type": "object",
+      "description": "Model representing properties returned upon successful completion of the export dependencies asynchronous operation.",
+      "properties": {
+        "exportedDataSasUri": {
+          "type": "string",
+          "description": "The SAS URI of the blob containing the exported dependencies data."
+        },
+        "statusCode": {
+          "$ref": "#/definitions/ExportDependenciesStatusCode",
+          "description": "A status code returned by the service with additional context about the export dependencies operation."
+        },
+        "additionalInfo": {
+          "$ref": "#/definitions/ExportDependenciesAdditionalInfo",
+          "description": "Additional information about the exported data."
+        }
+      }
+    },
+    "ExportDependenciesStatusCode": {
+      "type": "string",
+      "description": "Status codes for export dependencies operation",
+      "enum": [
+        "NoMatch",
+        "CompleteMatch",
+        "PartialMatch"
+      ],
+      "x-ms-enum": {
+        "name": "ExportDependenciesStatusCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoMatch",
+            "value": "NoMatch",
+            "description": "Operation completed but no data was found for the requested time range"
+          },
+          {
+            "name": "CompleteMatch",
+            "value": "CompleteMatch",
+            "description": "Operation completed with data found for the entire requested time range"
+          },
+          {
+            "name": "PartialMatch",
+            "value": "PartialMatch",
+            "description": "Operation completed with data found for a portion of the requested time range"
+          }
+        ]
+      }
     },
     "GetConnectionsForProcessOnFocusedMachineRequest": {
       "type": "object",

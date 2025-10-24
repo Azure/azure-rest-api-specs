@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-05-preview
+tag: package-2025-05-preview
 ```
 
 ### Tag: package-2017-04
@@ -246,6 +246,15 @@ input-file:
 - Microsoft.EventHub/preview/2024-05-01-preview/eventhubs.json
 - Microsoft.EventHub/preview/2024-05-01-preview/SchemaRegistry.json
 - Microsoft.EventHub/preview/2024-05-01-preview/ApplicationGroups.json
+```
+
+### Tag: package-2025-05-preview
+
+These settings apply only when `--tag=package-2025-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-preview'
+input-file:
+- Microsoft.EventHub/preview/2025-05-01-preview/openapi.json
 ```
 
 ## Suppression

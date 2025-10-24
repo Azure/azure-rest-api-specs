@@ -6,7 +6,7 @@
 
 ## Write in Typespec
 
-Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file, you need to add `@@usage(EventGrid.YourEventName, Usage.output)` and `@@access(EventGrid.YourEventName, Access.public)`.
+Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file, you need to add `@@usage(EventGrid.YourEventName, Usage.output | Usage.json)` and `@@access(EventGrid.YourEventName, Access.public)`.
 
 #### Example Event
 
@@ -23,13 +23,17 @@ model AcsChatMessageReceivedEventData {
 
   /** Optional. Field may not be present in some events. */
   optionalProperty ?: string;
+
+  /** Array properties must be decorated as read-only */
+  @visibility(Lifecycle.Read)
+  arrayProperty: string[]
 }
 ~~~
 
 Adding `@usage` and `@access` to `client.tsp`:
 ~~~ markdown
 
-@@usage(EventGrid.AcsChatMessageReceivedEventData, Usage.output);
+@@usage(EventGrid.AcsChatMessageReceivedEventData, Usage.output | Usage.json);
 @@access(EventGrid.AcsChatMessageReceivedEventData, Access.public)
 ~~~
 
@@ -78,5 +82,4 @@ More on `@example` can be found [here](https://typespec.io/docs/standard-library
     - Under `/Azure.Messaging.EventGrid.SystemEvents/`:
         - Run `tsp compile .`
 1) Verify the generated swaggers `/data-plane/Microsoft.EventGrid/2018-01-01/GeneratedSystemEvents.json` and `/data-plane/Microsoft.EventGrid/2024-01-01/GeneratedSystemEvents.json` accurately depicts your system events.
-1) Copy the delta from `/data-plane/Microsoft.EventGrid/2018-01-01/GeneratedSystemEvents.json` into your resource provider-specific swagger, e.g. `data-plane/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json`. Make any manual adjustments as needed.
 1) Final PR must contain the TypeSpec and the Swagger generated from the TypeSpec.

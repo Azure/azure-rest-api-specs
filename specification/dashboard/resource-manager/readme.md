@@ -28,7 +28,16 @@ These are the global settings for the Dashboard API.
 title: DashboardManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11-01-preview
+tag: package-2025-08-01
+```
+
+### Tag: package-2025-08-01
+
+These settings apply only when `--tag=package-2025-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-08-01'
+input-file:
+    - Microsoft.Dashboard/stable/2025-08-01/grafana.json
 ```
 
 ### Tag: package-2024-11-01-preview
@@ -116,6 +125,5 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-java
   - repo: azure-powershell
 ```

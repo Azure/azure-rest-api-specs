@@ -1,0 +1,159 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "assessmentSettings": {
+          "enable": true,
+          "runImmediately": true,
+          "schedule": {
+            "dayOfWeek": "Sunday",
+            "enable": true,
+            "monthlyOccurrence": null,
+            "startTime": "23:17",
+            "weeklyInterval": 1
+          }
+        },
+        "autoBackupSettings": {
+          "backupScheduleType": "Manual",
+          "backupSystemDbs": true,
+          "enable": true,
+          "enableEncryption": true,
+          "fullBackupFrequency": "Daily",
+          "fullBackupStartTime": 6,
+          "fullBackupWindowHours": 11,
+          "logBackupFrequency": 10,
+          "password": "<Password>",
+          "retentionPeriod": 17,
+          "storageAccessKey": "<primary storage access key>",
+          "storageAccountUrl": "https://teststorage.blob.core.windows.net/",
+          "storageContainerName": "testcontainer"
+        },
+        "autoPatchingSettings": {
+          "dayOfWeek": "Sunday",
+          "enable": true,
+          "maintenanceWindowDuration": 60,
+          "maintenanceWindowStartingHour": 2
+        },
+        "enableAutomaticUpgrade": true,
+        "keyVaultCredentialSettings": {
+          "enable": false
+        },
+        "leastPrivilegeMode": "Enabled",
+        "serverConfigurationsManagementSettings": {
+          "additionalFeaturesServerConfigurations": {
+            "isRServicesEnabled": false
+          },
+          "azureAdAuthenticationSettings": {
+            "clientId": "11111111-2222-3333-4444-555555555555"
+          },
+          "sqlConnectivityUpdateSettings": {
+            "connectivityType": "PRIVATE",
+            "port": 1433,
+            "sqlAuthUpdatePassword": "<password>",
+            "sqlAuthUpdateUserName": "sqllogin"
+          },
+          "sqlInstanceSettings": {
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "isIfiEnabled": true,
+            "isLpimEnabled": true,
+            "isOptimizeForAdHocWorkloadsEnabled": true,
+            "maxDop": 8,
+            "maxServerMemoryMB": 128,
+            "minServerMemoryMB": 0
+          },
+          "sqlStorageUpdateSettings": {
+            "diskConfigurationType": "NEW",
+            "diskCount": 1,
+            "startingDeviceId": 2
+          },
+          "sqlWorkloadTypeUpdateSettings": {
+            "sqlWorkloadType": "OLTP"
+          }
+        },
+        "sqlImageSku": "Enterprise",
+        "sqlServerLicenseType": "PAYG",
+        "storageConfigurationSettings": {
+          "diskConfigurationType": "NEW",
+          "enableStorageConfigBlade": true,
+          "sqlDataSettings": {
+            "defaultFilePath": "F:\\folderpath\\",
+            "luns": [
+              0
+            ],
+            "useStoragePool": false
+          },
+          "sqlLogSettings": {
+            "defaultFilePath": "G:\\folderpath\\",
+            "luns": [
+              1
+            ],
+            "useStoragePool": false
+          },
+          "sqlSystemDbOnDataDisk": true,
+          "sqlTempDbSettings": {
+            "dataFileCount": 8,
+            "dataFileSize": 256,
+            "dataGrowth": 512,
+            "defaultFilePath": "D:\\TEMP",
+            "logFileSize": 256,
+            "logGrowth": 512,
+            "luns": [
+              2
+            ],
+            "useStoragePool": false
+          },
+          "storageWorkloadType": "OLTP"
+        },
+        "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "additionalVmPatch": "WU",
+          "enableAutomaticUpgrade": true,
+          "leastPrivilegeMode": "Enabled",
+          "osType": "Windows",
+          "provisioningState": "Updating",
+          "sqlImageOffer": "SQL2022-WS2022",
+          "sqlImageSku": "Enterprise",
+          "sqlManagement": "Full",
+          "sqlServerLicenseType": "PAYG",
+          "virtualMachineIdentitySettings": {
+            "type": "SystemAssigned"
+          },
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "enableAutomaticUpgrade": true,
+          "leastPrivilegeMode": "NotSet",
+          "provisioningState": "Provisioning",
+          "sqlImageSku": "Unknown",
+          "sqlServerLicenseType": "PAYG",
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+        }
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachines_CreateOrUpdate",
+  "title": "Creates or updates a SQL virtual machine with max parameters."
+}

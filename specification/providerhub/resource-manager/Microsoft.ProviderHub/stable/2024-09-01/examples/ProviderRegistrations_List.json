@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "api-version": "2024-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
+            "name": "Microsoft.Contoso",
+            "type": "Microsoft.ProviderHub/providerRegistrations",
+            "properties": {
+              "namespace": "microsoft.contoso",
+              "providerAuthorizations": [
+                {
+                  "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+                  "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+                }
+              ],
+              "resourceProviderAuthorizationRules": {
+                "asyncOperationPollingRules": {
+                  "authorizationActions": [
+                    "Microsoft.Contoso/classicAdministrators/operationStatuses/read"
+                  ]
+                }
+              },
+              "providerHubMetadata": {
+                "providerAuthentication": {
+                  "allowedAudiences": [
+                    "https://management.core.windows.net/"
+                  ]
+                },
+                "directRpRoleDefinitionId": "1x86y807-6zx0-40y3-8z5x-686y7z43x0y2"
+              },
+              "crossTenantTokenValidation": "EnsureSecureValidation",
+              "management": {
+                "manifestOwners": [
+                  "manifestOwners-group"
+                ],
+                "authorizationOwners": [
+                  "authorizationOwners-group"
+                ],
+                "incidentRoutingService": "",
+                "incidentRoutingTeam": "",
+                "incidentContactEmail": "helpme@contoso.com",
+                "serviceTreeInfos": [
+                  {
+                    "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                    "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                    "readiness": "InDevelopment"
+                  }
+                ],
+                "resourceAccessPolicy": "NotSpecified",
+                "pcCode": "P1234",
+                "profitCenterProgramId": "1234"
+              },
+              "providerType": "Internal, Hidden",
+              "serviceName": "root",
+              "services": [
+                {
+                  "serviceName": "tags",
+                  "status": "Inactive"
+                }
+              ],
+              "providerVersion": "2.0",
+              "capabilities": [
+                {
+                  "quotaId": "CSP_2015-05-01",
+                  "effect": "Allow"
+                },
+                {
+                  "quotaId": "CSP_MG_2017-12-01",
+                  "effect": "Allow"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

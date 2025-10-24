@@ -1,0 +1,1517 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DnsManagementClient",
+    "description": "The DNS Management Client.",
+    "version": "2017-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}": {
+      "patch": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_Update",
+        "description": "Updates a record set within a DNS zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the record set, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record set has been updated.",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch A recordset": {
+            "$ref": "./examples/PatchARecordset.json"
+          },
+          "Patch AAAA recordset": {
+            "$ref": "./examples/PatchAAAARecordset.json"
+          },
+          "Patch CAA recordset": {
+            "$ref": "./examples/PatchCaaRecordset.json"
+          },
+          "Patch CNAME recordset": {
+            "$ref": "./examples/PatchCNAMERecordset.json"
+          },
+          "Patch MX recordset": {
+            "$ref": "./examples/PatchMXRecordset.json"
+          },
+          "Patch NS recordset": {
+            "$ref": "./examples/PatchNSRecordset.json"
+          },
+          "Patch PTR recordset": {
+            "$ref": "./examples/PatchPTRRecordset.json"
+          },
+          "Patch SOA recordset": {
+            "$ref": "./examples/PatchSOARecordset.json"
+          },
+          "Patch SRV recordset": {
+            "$ref": "./examples/PatchSRVRecordset.json"
+          },
+          "Patch TXT recordset": {
+            "$ref": "./examples/PatchTXTRecordset.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_CreateOrUpdate",
+        "description": "Creates or updates a record set within a DNS zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the record set, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created).",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The record set has been created.",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "200": {
+            "description": "The record set has been updated.",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create A recordset": {
+            "$ref": "./examples/CreateOrUpdateARecordset.json"
+          },
+          "Create AAAA recordset": {
+            "$ref": "./examples/CreateOrUpdateAAAARecordset.json"
+          },
+          "Create CAA recordset": {
+            "$ref": "./examples/CreateOrUpdateCaaRecordset.json"
+          },
+          "Create CNAME recordset": {
+            "$ref": "./examples/CreateOrUpdateCNAMERecordset.json"
+          },
+          "Create MX recordset": {
+            "$ref": "./examples/CreateOrUpdateMXRecordset.json"
+          },
+          "Create NS recordset": {
+            "$ref": "./examples/CreateOrUpdateNSRecordset.json"
+          },
+          "Create PTR recordset": {
+            "$ref": "./examples/CreateOrUpdatePTRRecordset.json"
+          },
+          "Create SOA recordset": {
+            "$ref": "./examples/CreateOrUpdateSOARecordset.json"
+          },
+          "Create SRV recordset": {
+            "$ref": "./examples/CreateOrUpdateSRVRecordset.json"
+          },
+          "Create TXT recordset": {
+            "$ref": "./examples/CreateOrUpdateTXTRecordset.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_Delete",
+        "description": "Deletes a record set from a DNS zone. This operation cannot be undone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the record set, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set. Record sets of type SOA cannot be deleted (they are deleted when the DNS zone is deleted).",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The record set was not found."
+          },
+          "200": {
+            "description": "The record set has been deleted."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete A recordset": {
+            "$ref": "./examples/DeleteARecordset.json"
+          },
+          "Delete AAAA recordset": {
+            "$ref": "./examples/DeleteAAAARecordset.json"
+          },
+          "Delete CAA recordset": {
+            "$ref": "./examples/DeleteCaaRecordset.json"
+          },
+          "Delete CNAME recordset": {
+            "$ref": "./examples/DeleteARecordset.json"
+          },
+          "Delete MX recordset": {
+            "$ref": "./examples/DeleteARecordset.json"
+          },
+          "Delete NS recordset": {
+            "$ref": "./examples/DeleteARecordset.json"
+          },
+          "Delete PTR recordset": {
+            "$ref": "./examples/DeletePTRRecordset.json"
+          },
+          "Delete SRV recordset": {
+            "$ref": "./examples/DeleteSRVRecordset.json"
+          },
+          "Delete TXT recordset": {
+            "$ref": "./examples/DeleteTXTRecordset.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_Get",
+        "description": "Gets a record set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the record set, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get A recordset": {
+            "$ref": "./examples/GetARecordset.json"
+          },
+          "Get AAAA recordset": {
+            "$ref": "./examples/GetAAAARecordset.json"
+          },
+          "Get CAA recordset": {
+            "$ref": "./examples/GetCaaRecordset.json"
+          },
+          "Get CNAME recordset": {
+            "$ref": "./examples/GetCNAMERecordset.json"
+          },
+          "Get MX recordset": {
+            "$ref": "./examples/GetMXRecordset.json"
+          },
+          "Get NS recordset": {
+            "$ref": "./examples/GetNSRecordset.json"
+          },
+          "Get PTR recordset": {
+            "$ref": "./examples/GetPTRRecordset.json"
+          },
+          "Get SOA recordset": {
+            "$ref": "./examples/GetSOARecordset.json"
+          },
+          "Get SRV recordset": {
+            "$ref": "./examples/GetSRVRecordset.json"
+          },
+          "Get TXT recordset": {
+            "$ref": "./examples/GetTXTRecordset.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}": {
+      "get": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_ListByType",
+        "description": "Lists the record sets of a specified type in a DNS zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of record sets to enumerate.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "name": "$recordsetnamesuffix",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/RecordSetListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List A recordsets": {
+            "$ref": "./examples/ListARecordset.json"
+          },
+          "List AAAA recordsets": {
+            "$ref": "./examples/ListAAAARecordset.json"
+          },
+          "List CAA recordsets": {
+            "$ref": "./examples/ListCaaRecordset.json"
+          },
+          "List CNAME recordsets": {
+            "$ref": "./examples/ListCNAMERecordset.json"
+          },
+          "List MX recordsets": {
+            "$ref": "./examples/ListMXRecordset.json"
+          },
+          "List NS recordsets": {
+            "$ref": "./examples/ListNSRecordset.json"
+          },
+          "List PTR recordsets": {
+            "$ref": "./examples/ListPTRRecordset.json"
+          },
+          "List SOA recordsets": {
+            "$ref": "./examples/ListSOARecordset.json"
+          },
+          "List SRV recordsets": {
+            "$ref": "./examples/ListSRVRecordset.json"
+          },
+          "List TXT recordsets": {
+            "$ref": "./examples/ListTXTRecordset.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets": {
+      "get": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_ListByDnsZone",
+        "description": "Lists all record sets in a DNS zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "name": "$recordsetnamesuffix",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/RecordSetListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List recordsets by zone": {
+            "$ref": "./examples/ListRecordSetsByZone.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/all": {
+      "get": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_ListAllByDnsZone",
+        "description": "Lists all record sets in a DNS zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "name": "$recordsetnamesuffix",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>",
+            "x-ms-client-name": "recordSetNameSuffix"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/RecordSetListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List recordsets by zone": {
+            "$ref": "./examples/ListRecordSetsByZone.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}": {
+      "put": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_CreateOrUpdate",
+        "description": "Creates or updates a DNS zone. Does not modify DNS records within the zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS zone has been updated.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          },
+          "201": {
+            "description": "The DNS zone has been created.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create zone": {
+            "$ref": "./examples/CreateOrUpdateZone.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_Delete",
+        "description": "Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The DNS zone was not found."
+          },
+          "202": {
+            "description": "The DNS zone delete operation has been accepted and will complete asynchronously."
+          },
+          "200": {
+            "description": "The DNS zone has been deleted."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete zone": {
+            "$ref": "./examples/DeleteZone.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_Get",
+        "description": "Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get zone": {
+            "$ref": "./examples/GetZone.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_Update",
+        "description": "Updates a DNS zone. Does not modify DNS records within the zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ZoneUpdate"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS zone has been updated.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch zone": {
+            "$ref": "./examples/PatchZone.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones": {
+      "get": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_ListByResourceGroup",
+        "description": "Lists the DNS zones within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List zones by resource group": {
+            "$ref": "./examples/ListZonesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones": {
+      "get": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_List",
+        "description": "Lists the DNS zones in all resource groups in a subscription.",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of DNS zones to return. If not specified, returns up to 100 zones."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List zones by subscription": {
+            "$ref": "./examples/ListZonesBySubscription.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ARecord": {
+      "properties": {
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address of this A record."
+        }
+      },
+      "description": "An A record."
+    },
+    "AaaaRecord": {
+      "properties": {
+        "ipv6Address": {
+          "type": "string",
+          "description": "The IPv6 address of this AAAA record."
+        }
+      },
+      "description": "An AAAA record."
+    },
+    "MxRecord": {
+      "properties": {
+        "preference": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The preference value for this MX record."
+        },
+        "exchange": {
+          "type": "string",
+          "description": "The domain name of the mail host for this MX record."
+        }
+      },
+      "description": "An MX record."
+    },
+    "NsRecord": {
+      "properties": {
+        "nsdname": {
+          "type": "string",
+          "description": "The name server name for this NS record."
+        }
+      },
+      "description": "An NS record."
+    },
+    "PtrRecord": {
+      "properties": {
+        "ptrdname": {
+          "type": "string",
+          "description": "The PTR target domain name for this PTR record."
+        }
+      },
+      "description": "A PTR record."
+    },
+    "SrvRecord": {
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority value for this SRV record."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight value for this SRV record."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port value for this SRV record."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target domain name for this SRV record."
+        }
+      },
+      "description": "An SRV record."
+    },
+    "TxtRecord": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The text value of this TXT record."
+        }
+      },
+      "description": "A TXT record."
+    },
+    "CnameRecord": {
+      "properties": {
+        "cname": {
+          "type": "string",
+          "description": "The canonical name for this CNAME record."
+        }
+      },
+      "description": "A CNAME record."
+    },
+    "SoaRecord": {
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The domain name of the authoritative name server for this SOA record."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email contact for this SOA record."
+        },
+        "serialNumber": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The serial number for this SOA record."
+        },
+        "refreshTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The refresh value for this SOA record."
+        },
+        "retryTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The retry time for this SOA record."
+        },
+        "expireTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expire time for this SOA record."
+        },
+        "minimumTTL": {
+          "type": "integer",
+          "format": "int64",
+          "x-ms-client-name": "minimumTtl",
+          "description": "The minimum value for this SOA record. By convention this is used to determine the negative caching duration."
+        }
+      },
+      "description": "An SOA record."
+    },
+    "CaaRecord": {
+      "properties": {
+        "flags": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The flags for this CAA record as an integer between 0 and 255."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The tag for this CAA record."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value for this CAA record."
+        }
+      },
+      "description": "A CAA record."
+    },
+    "RecordSetProperties": {
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The metadata attached to the record set."
+        },
+        "TTL": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The TTL (time-to-live) of the records in the record set."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Fully qualified domain name of the record set.",
+          "readOnly": true
+        },
+        "ARecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ARecord"
+          },
+          "description": "The list of A records in the record set."
+        },
+        "AAAARecords": {
+          "type": "array",
+          "x-ms-client-name": "AaaaRecords",
+          "items": {
+            "$ref": "#/definitions/AaaaRecord"
+          },
+          "description": "The list of AAAA records in the record set."
+        },
+        "MXRecords": {
+          "type": "array",
+          "x-ms-client-name": "MxRecords",
+          "items": {
+            "$ref": "#/definitions/MxRecord"
+          },
+          "description": "The list of MX records in the record set."
+        },
+        "NSRecords": {
+          "type": "array",
+          "x-ms-client-name": "NsRecords",
+          "items": {
+            "$ref": "#/definitions/NsRecord"
+          },
+          "description": "The list of NS records in the record set."
+        },
+        "PTRRecords": {
+          "type": "array",
+          "x-ms-client-name": "PtrRecords",
+          "items": {
+            "$ref": "#/definitions/PtrRecord"
+          },
+          "description": "The list of PTR records in the record set."
+        },
+        "SRVRecords": {
+          "type": "array",
+          "x-ms-client-name": "SrvRecords",
+          "items": {
+            "$ref": "#/definitions/SrvRecord"
+          },
+          "description": "The list of SRV records in the record set."
+        },
+        "TXTRecords": {
+          "type": "array",
+          "x-ms-client-name": "TxtRecords",
+          "items": {
+            "$ref": "#/definitions/TxtRecord"
+          },
+          "description": "The list of TXT records in the record set."
+        },
+        "CNAMERecord": {
+          "$ref": "#/definitions/CnameRecord",
+          "x-ms-client-name": "CnameRecord",
+          "description": "The CNAME record in the  record set."
+        },
+        "SOARecord": {
+          "$ref": "#/definitions/SoaRecord",
+          "x-ms-client-name": "SoaRecord",
+          "description": "The SOA record in the record set."
+        },
+        "caaRecords": {
+          "type": "array",
+          "x-ms-client-name": "CaaRecords",
+          "items": {
+            "$ref": "#/definitions/CaaRecord"
+          },
+          "description": "The list of CAA records in the record set."
+        }
+      },
+      "description": "Represents the properties of the records in the record set."
+    },
+    "RecordSet": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the record set.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the record set.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the record set.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the record set."
+        },
+        "properties": {
+          "$ref": "#/definitions/RecordSetProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the record set."
+        }
+      },
+      "description": "Describes a DNS record set (a collection of DNS records with the same name and type).",
+      "x-ms-azure-resource": true
+    },
+    "RecordSetUpdateParameters": {
+      "properties": {
+        "RecordSet": {
+          "$ref": "#/definitions/RecordSet",
+          "description": "Specifies information about the record set being updated."
+        }
+      },
+      "description": "Parameters supplied to update a record set."
+    },
+    "RecordSetListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecordSet"
+          },
+          "description": "Information about the record sets in the response."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response to a record set List operation."
+    },
+    "ZoneProperties": {
+      "properties": {
+        "maxNumberOfRecordSets": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "maxNumberOfRecordsPerRecordSet": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of records per record set that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "numberOfRecordSets": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "nameServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "zoneType": {
+          "type": "string",
+          "enum": [
+            "Public",
+            "Private"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneType",
+            "modelAsString": false
+          },
+          "default": "Public",
+          "description": "The type of this DNS zone (Public or Private)."
+        }
+      },
+      "description": "Represents the properties of the zone."
+    },
+    "Zone": {
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "The etag of the zone."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ZoneProperties",
+          "description": "The properties of the zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a DNS zone."
+    },
+    "ZoneUpdate": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Describes a request to update a DNS zone."
+    },
+    "ZoneListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Zone"
+          },
+          "description": "Information about the DNS zones."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response to a Zone List or ListAll operation."
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id."
+        }
+      },
+      "x-ms-external": true,
+      "description": "A reference to a another resource"
+    },
+    "CloudError": {
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Cloud error body."
+        }
+      },
+      "description": "An error response from the service."
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the service."
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{labName}",
+            "type": "Microsoft.DevTestLab/labs",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}",
+            "location": "{location}",
+            "properties": {
+              "announcement": {
+                "enabled": "Disabled",
+                "expired": false,
+                "markdown": "",
+                "title": ""
+              },
+              "createdDate": "2018-10-02T10:23:20.9573599-07:00",
+              "environmentPermission": "Reader",
+              "labStorageType": "Standard",
+              "mandatoryArtifactsResourceIdsLinux": [],
+              "mandatoryArtifactsResourceIdsWindows": [],
+              "premiumDataDisks": "Disabled",
+              "provisioningState": "Succeeded",
+              "support": {
+                "enabled": "Disabled",
+                "markdown": ""
+              },
+              "uniqueIdentifier": "{uniqueIdentifier}",
+              "vaultName": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/{keyVaultName}"
+            },
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Labs_ListByResourceGroup",
+  "title": "Labs_ListByResourceGroup"
+}

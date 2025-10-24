@@ -1,0 +1,33 @@
+parameters:
+  "service-dir":
+    default: "sdk/cognitivelanguage"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/analyzetext.json"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.AI.Language.Text"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-textanalytics"
+    package-name: "azure-ai-textanalytics"
+    package-dir: "azure-ai-textanalytics"
+    namespace: "azure.ai.textanalytics"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.AI.Language.Text
+    model-namespace: false

@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "migrationName": "examplemigration",
+    "migrationMode": "Offline"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "currentStatus": {
+            "state": "InProgress",
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps",
+              "dbDetails": {}
+            }
+          },
+          "migrationMode": "Offline",
+          "sourceDbServerResourceId": "examplesource:5432@exampleadministratorlogin",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.12345Z",
+          "triggerCutover": "True",
+          "migrateRoles": "False",
+          "targetDbServerMetadata": {
+            "location": "East US",
+            "version": "17",
+            "storageMb": 131072,
+            "sku": {
+              "name": "Standard_D4ds_v4",
+              "tier": "GeneralPurpose"
+            }
+          },
+          "migrationOption": "ValidateAndMigrate",
+          "sourceType": "OnPremises",
+          "sslMode": "Prefer"
+        },
+        "location": "East US",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+      }
+    },
+    "204": {}
+  }
+}

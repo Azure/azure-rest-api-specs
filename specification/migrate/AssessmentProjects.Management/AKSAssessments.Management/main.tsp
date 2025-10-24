@@ -7,6 +7,7 @@ import "@typespec/openapi";
 
 import "./aksroutes.tsp";
 import "./AKSApiVersions.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -15,10 +16,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations interface is intentionally excluded"
 @armProviderNamespace
 @service(#{ title: "Azure Migrate Assessment Service" })
 @versioned(AKSApiVersions)
 @doc("Azure Migrate Resource Provider management API.")
 namespace Microsoft.Migrate;
-
-interface Operations extends Azure.ResourceManager.Operations {}

@@ -60,13 +60,11 @@ model AcsCallEndedEventData extends AcsCallingEventProperties {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantAddedEventData
-  extends AcsCallParticipantEventProperties {}
+model AcsCallParticipantAddedEventData extends AcsCallParticipantEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantRemovedEventData
-  extends AcsCallParticipantEventProperties {}
+model AcsCallParticipantRemovedEventData extends AcsCallParticipantEventData {}
 
 // @example(MicrosoftCommunicationChatMessageReceivedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
@@ -185,6 +183,7 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   editTime: utcDateTime;
 
   /** The thread metadata */
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 
   /** The updated thread properties */
@@ -646,15 +645,19 @@ model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   jobPriority?: int32;
 
   /** Router Worker Offer Accepted Worker Labels */
+  @visibility(Lifecycle.Read)
   workerLabels: Record<string>;
 
   /** Router Worker Offer Accepted Worker Tags */
+  @visibility(Lifecycle.Read)
   workerTags: Record<string>;
 
   /** Router Worker Offer Accepted Job Labels */
+  @visibility(Lifecycle.Read)
   jobLabels: Record<string>;
 
   /** Router Worker Offer Accepted Job Tags */
+  @visibility(Lifecycle.Read)
   jobTags: Record<string>;
 }
 
@@ -694,6 +697,7 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   jobPriority?: int32;
 
   /** Router Worker Offer Issued Worker Labels */
+  @visibility(Lifecycle.Read)
   workerLabels: Record<string>;
 
   /** Router Worker Offer Issued Time in UTC */
@@ -707,12 +711,15 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   expiresOn: utcDateTime;
 
   /** Router Worker Offer Issued Worker Tags */
+  @visibility(Lifecycle.Read)
   workerTags: Record<string>;
 
   /** Router Worker Offer Issued Job Labels */
+  @visibility(Lifecycle.Read)
   jobLabels: Record<string>;
 
   /** Router Worker Offer Issued Job Tags */
+  @visibility(Lifecycle.Read)
   jobTags: Record<string>;
 }
 
@@ -745,9 +752,11 @@ model AcsRouterWorkerRegisteredEventData {
   totalCapacity?: int32;
 
   /** Router Worker Registered Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Worker Registered Tags */
+  @visibility(Lifecycle.Read)
   tags: Record<string>;
 }
 
@@ -759,9 +768,11 @@ model AcsRouterJobEventData extends AcsRouterEventData {
   queueId?: string;
 
   /** Router Job events Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Jobs events Tags */
+  @visibility(Lifecycle.Read)
   tags: Record<string>;
 }
 
@@ -806,6 +817,7 @@ model AcsRouterQueueDetails {
   name?: string;
 
   /** Router Queue Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 }
 
@@ -858,6 +870,7 @@ alias AcsChatMessageBaseEventData = {
   messageBody: string;
 
   /** The chat message metadata */
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 };
 
@@ -870,6 +883,7 @@ alias AcsChatThreadBaseEventData = {
   properties: Record<unknown>;
 
   /** The thread metadata */
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 
   /** The list of properties of participants who are part of the thread */
@@ -899,6 +913,7 @@ alias AcsChatThreadPropertiesBaseEventData = {
   properties: Record<unknown>;
 
   /** The thread metadata */
+  @visibility(Lifecycle.Read)
   metadata: Record<string>;
 };
 
@@ -942,10 +957,10 @@ union recordingFormatType {
   "Wav",
 
   /** MP3 format */
-  "Mp3",
+  Mp3: "Mp3",
 
   /** MP4 format */
-  "Mp4",
+  Mp4: "Mp4",
 
   string,
 }
@@ -1065,7 +1080,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
 /** Schema of common properties of all participant events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantEventProperties extends AcsCallingEventProperties {
+model AcsCallParticipantEventData extends AcsCallingEventProperties {
   /** The user of the call participant */
   user?: AcsCallParticipantProperties;
 
@@ -1086,7 +1101,7 @@ model AcsCallParticipantProperties {
   communicationIdentifier?: CommunicationIdentifierModel;
 
   /** The role of the participant */
-  role?: AcsCallParticipantRoleKind;
+  role?: AcsCallParticipantKind;
 }
 
 /** Schema of common properties of all calling events */
@@ -1135,6 +1150,7 @@ model AcsCallEndedByProperties {
   communicationIdentifier: CommunicationIdentifierModel;
 
   /** The type of call ended by. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   type: AcsCallEndedByKind;
 
   /** The name of the call ended by. */
@@ -1205,6 +1221,7 @@ model AcsChatThreadParticipantProperties {
   participantCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The metadata of the user */
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 }
 
@@ -1266,9 +1283,11 @@ model AcsRecordingChunkInfoProperties {
 /** Custom Context of Incoming Call */
 model AcsIncomingCallCustomContext {
   /** Sip Headers for incoming call */
+  @visibility(Lifecycle.Read)
   sipHeaders: Record<string>;
 
   /** Voip Headers for incoming call */
+  @visibility(Lifecycle.Read)
   voipHeaders: Record<string>;
 }
 
@@ -1317,6 +1336,9 @@ union CommunicationIdentifierModelKind {
 
   /** Microsoft Teams User */
   "microsoftTeamsUser",
+
+  /** Microsoft Teams App */
+  "microsoftTeamsApp",
 
   string,
 }
@@ -1374,9 +1396,11 @@ model AcsRouterWorkerUpdatedEventData {
   totalCapacity?: int32;
 
   /** Router Worker Updated Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Worker Updated Tags */
+  @visibility(Lifecycle.Read)
   tags: Record<string>;
 
   /** Router Worker Properties Updated */
@@ -1616,8 +1640,8 @@ union AcsCallEndedByKind {
   string,
 }
 
-/** Call participant role kind. */
-union AcsCallParticipantRoleKind {
+/** Call participant kind. */
+union AcsCallParticipantKind {
   /** Attendee */
   "Attendee",
 

@@ -1,0 +1,117 @@
+{
+  "title": "Messages_CreateMessage_MaximumSet",
+  "operationId": "Messages_CreateMessage",
+  "parameters": {
+    "api-version": "v1",
+    "threadId": "thread_abc123",
+    "body": {
+      "role": "user",
+      "content": {
+        "blocks": [
+          {
+            "type": "text",
+            "text": "Please analyze the attached data and provide insights."
+          },
+          {
+            "type": "image_file",
+            "image_file": {
+              "file_id": "file_abc123"
+            }
+          }
+        ]
+      },
+      "attachments": [
+        {
+          "file_id": "file_abc123",
+          "tools": [
+            {
+              "type": "code_interpreter"
+            },
+            {
+              "type": "file_search"
+            }
+          ]
+        },
+        {
+          "data_source": {
+            "uri": "https://example.com/dataset.csv",
+            "type": "uri_asset"
+          },
+          "tools": [
+            {
+              "type": "file_search"
+            }
+          ]
+        }
+      ],
+      "metadata": {
+        "user_id": "user_12345",
+        "session_id": "session_abc123",
+        "priority": "high"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "msg_abc123",
+        "object": "thread.message",
+        "created_at": 1736869300,
+        "thread_id": "thread_abc123",
+        "status": "completed",
+        "incomplete_details": {
+          "reason": "content_filter"
+        },
+        "completed_at": 1736869305,
+        "incomplete_at": 25,
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": {
+              "value": "Please analyze the attached data and provide insights.",
+              "annotations": []
+            }
+          },
+          {
+            "type": "image_file",
+            "image_file": {
+              "file_id": "file_abc123"
+            }
+          }
+        ],
+        "assistant_id": "flbyv",
+        "run_id": "mdwsaqyplfhtadedzuatxvld",
+        "attachments": [
+          {
+            "file_id": "file_abc123",
+            "tools": [
+              {
+                "type": "code_interpreter"
+              },
+              {
+                "type": "file_search"
+              }
+            ]
+          },
+          {
+            "data_source": {
+              "uri": "https://example.com/dataset.csv",
+              "type": "uri_asset"
+            },
+            "tools": [
+              {
+                "type": "file_search"
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "user_id": "user_12345",
+          "session_id": "session_abc123",
+          "priority": "high"
+        }
+      }
+    }
+  }
+}
