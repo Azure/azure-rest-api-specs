@@ -1,5 +1,5 @@
-import { readdir } from "fs/promises";
 import path from "path";
+import { simpleGit } from "simple-git";
 import { describe, expect, it } from "vitest";
 import { processFilesToSpecificationList } from "../src/runner.js";
 
@@ -22,8 +22,9 @@ describe("file processing", () => {
   });
 
   it("should process a larger set of files and return a list of expected resolved swagger files", async () => {
-    // Simulate a change to each file under "fixtures"
-    const changedFiles = (await readdir(ROOT, { recursive: true })).sort();
+    // Simulate a change to each file under "fixtures".
+    // Use simpleGit() instead of readdir(), since we always want git-style (POSIX) paths
+    const changedFiles = (await simpleGit(ROOT).raw(["ls-files"])).trim().split("\n").sort();
 
     await expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves
       .toMatchInlineSnapshot(`
