@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2024-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-06'
 input-file:
-  - Microsoft.AppComplianceAutomation/stable/2024-06-27/appcomplianceautomation.json
+  - stable/2024-06-27/appcomplianceautomation.json
 ```
 ### Tag: package-2022-11-16-preview
 
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2022-11-16-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-11-16-preview'
 input-file:
-  - Microsoft.AppComplianceAutomation/preview/2022-11-16-preview/appcomplianceautomation.json
+  - preview/2022-11-16-preview/appcomplianceautomation.json
 ```
 
 ---
