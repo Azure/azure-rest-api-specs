@@ -4,7 +4,9 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
+import * as z from "zod";
 import { mapAsync } from "./array.js";
+import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
 
@@ -17,6 +19,21 @@ import { Tag } from "./tag.js";
  * Regex to match tag names in readme.md yaml code blocks
  */
 export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?(["'])(.*?)\1/;
+
+// Example: "foo.json"
+const jsonFileSchema = z.string().regex(/\.json$/i);
+
+// Examples:
+// {}
+// {"input-file": "foo.json"}
+// {"input-file": ["foo.json", "bar.json"]}
+const inputFileSchema = z.object({
+  "input-file": z
+    // May be undefined, a single json filename, or an array of json filenames
+    .optional(z.union([jsonFileSchema, z.array(jsonFileSchema)]))
+    // Normalize single string to array of string.  Don't change 'undefined'.
+    .transform((value) => (typeof value === "string" ? [value] : value)),
+});
 
 export class Readme {
   /**
@@ -53,12 +70,14 @@ export class Readme {
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
    */
-  constructor(path, options) {
-    this.#path = resolve(options?.specModel?.folder ?? "", path);
+  constructor(path, options = {}) {
+    const { content, logger, specModel } = options;
 
-    this.#content = options?.content;
-    this.#logger = options?.logger;
-    this.#specModel = options?.specModel;
+    this.#path = resolve(specModel?.folder ?? "", path);
+
+    this.#content = content;
+    this.#logger = logger;
+    this.#specModel = specModel;
   }
 
   /**
@@ -127,11 +146,31 @@ export class Readme {
         const obj = /** @type {any} */ (yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA }));
 
         if (!obj) {
-          this.#logger?.debug(`No yaml object found for tag ${tagName} in ${this.#path}`);
+          this.#logger?.debug(`No YAML object found for tag ${tagName} in ${this.#path}`);
           continue;
         }
 
-        if (!obj["input-file"]) {
+        let parsedObj;
+        try {
+          parsedObj = inputFileSchema.parse(obj);
+        } catch (error) {
+          if (error instanceof z.ZodError) {
+            throw new SpecModelError(
+              `Unable to parse input-file YAML for tag ${tagName} in ${this.#path}`,
+              {
+                source: this.#path,
+                readme: this.#path,
+                tag: tagName,
+                cause: error,
+              },
+            );
+          } /* v8 ignore start: defensive rethrow */ else {
+            throw error;
+          }
+          /* v8 ignore end */
+        }
+
+        if (!parsedObj["input-file"]) {
           // The yaml block does not contain an input-file key
           continue;
         }
@@ -149,10 +188,7 @@ export class Readme {
           throw new Error(message);
         }
 
-        // It's possible for input-file to be a string or an array
-        const inputFilePaths = Array.isArray(obj["input-file"])
-          ? obj["input-file"]
-          : [obj["input-file"]];
+        const inputFilePaths = parsedObj["input-file"];
 
         const swaggerPathsResolved = inputFilePaths
           .map((p) => Readme.#normalizeSwaggerPath(p))
@@ -207,7 +243,9 @@ export class Readme {
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync(options) {
+  async toJSONAsync(options = {}) {
+    const { relativePaths } = options;
+
     return await embedError(async () => {
       const tags = await mapAsync(
         [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
@@ -216,7 +254,7 @@ export class Readme {
 
       return {
         path:
-          options?.relativePaths && this.#specModel
+          relativePaths && this.#specModel
             ? relative(this.#specModel.folder, this.#path)
             : this.#path,
         globalConfig: await this.getGlobalConfig(),

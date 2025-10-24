@@ -60,11 +60,13 @@ export class Swagger {
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {Tag} [options.tag]
    */
-  constructor(path, options) {
-    const rootDir = dirname(options?.tag?.readme?.path ?? "");
+  constructor(path, options = {}) {
+    const { logger, tag } = options;
+
+    const rootDir = dirname(tag?.readme?.path ?? "");
     this.#path = resolve(rootDir, path);
-    this.#logger = options?.logger;
-    this.#tag = options?.tag;
+    this.#logger = logger;
+    this.#tag = tag;
   }
 
   /**
@@ -202,14 +204,16 @@ export class Swagger {
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync(options) {
+  async toJSONAsync(options = {}) {
+    const { includeRefs, relativePaths } = options;
+
     return await embedError(
       async () => ({
         path:
-          options?.relativePaths && this.#tag?.readme?.specModel
+          relativePaths && this.#tag?.readme?.specModel
             ? relative(this.#tag?.readme?.specModel.folder, this.#path)
             : this.#path,
-        refs: options?.includeRefs
+        refs: includeRefs
           ? await mapAsync(
               [...(await this.getRefs()).values()].sort((a, b) => a.path.localeCompare(b.path)),
               async (s) =>

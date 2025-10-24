@@ -32,10 +32,12 @@ export class Tag {
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {Readme} [options.readme]
    */
-  constructor(name, inputFilePaths, options) {
+  constructor(name, inputFilePaths, options = {}) {
+    const { logger, readme } = options;
+
     this.#name = name;
-    this.#logger = options?.logger;
-    this.#readme = options?.readme;
+    this.#logger = logger;
+    this.#readme = readme;
 
     this.#inputFiles = new Map(
       inputFilePaths.map((p) => {
@@ -70,7 +72,7 @@ export class Tag {
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync(options) {
+  async toJSONAsync(options = {}) {
     return await embedError(
       async () => ({
         name: this.#name,

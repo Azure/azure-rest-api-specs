@@ -680,7 +680,7 @@ model RedisProperties extends RedisCreateProperties {
    * List of the Redis instances associated with the cache
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["shardId"])
+  @identifiers(#["shardId"])
   instances?: RedisInstanceDetails[];
 
   /**
@@ -923,7 +923,7 @@ model ScheduleEntries {
    * List of patch schedules for a Redis cache.
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "NOTFIXING: PropertyNameConflict - assuming not fixing it is the way to keep best back compatibility with existing APIs"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scheduleEntries: ScheduleEntry[];
 }
 
@@ -1104,7 +1104,7 @@ model OperationListResult {
    * List of operations supported by the resource provider.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value: Operation[];
 
   /**
@@ -1113,7 +1113,4 @@ model OperationListResult {
   @nextLink
   nextLink?: string;
 }
-@@OpenAPI.extension(NotificationListResponse.value,
-  "x-ms-identifiers",
-  #["name", "timestamp"]
-);
+@@identifiers(NotificationListResponse.value, #["name", "timestamp"]);
