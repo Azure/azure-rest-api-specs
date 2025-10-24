@@ -9684,6 +9684,67 @@
         }
       }
     },
+    "NetAppProvisioningState": {
+      "type": "string",
+      "description": "Gets the status of the VolumeQuotaRule at the time the operation was called.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Patching",
+        "Updating",
+        "Deleting",
+        "Moving",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "NetAppProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Patching",
+            "value": "Patching",
+            "description": "Patching"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "Moving"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "NetworkSiblingSet": {
       "type": "object",
       "description": "Describes the contents of a network sibling set.",
@@ -10124,67 +10185,6 @@
         "size",
         "serviceLevel"
       ]
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "Gets the status of the VolumeQuotaRule at the time the operation was called.",
-      "enum": [
-        "Accepted",
-        "Creating",
-        "Patching",
-        "Updating",
-        "Deleting",
-        "Moving",
-        "Failed",
-        "Succeeded"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Accepted"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "Creating"
-          },
-          {
-            "name": "Patching",
-            "value": "Patching",
-            "description": "Patching"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Deleting"
-          },
-          {
-            "name": "Moving",
-            "value": "Moving",
-            "description": "Moving"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Succeeded"
-          }
-        ]
-      },
-      "readOnly": true
     },
     "QosType": {
       "type": "string",
@@ -12694,7 +12694,7 @@
       "description": "Volume Quota Rule properties",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/NetAppProvisioningState",
           "description": "Gets the status of the VolumeQuotaRule at the time the operation was called.",
           "readOnly": true
         },

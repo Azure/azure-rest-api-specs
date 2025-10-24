@@ -7,6 +7,7 @@ import "./Volume.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -38,6 +39,15 @@ model VolumeQuotaRulesProperties {
   /**
    * Gets the status of the VolumeQuotaRule at the time the operation was called.
    */
+  @removed(Versions.v2025_08_01)
+  @renamedFrom(Versions.v2025_08_01, "ProvisioningState")
+  @visibility(Lifecycle.Read)
+  provisioningStateOld?: ProvisioningState;
+
+  /**
+   * Gets the status of the VolumeQuotaRule at the time the operation was called.
+   */
+  @added(Versions.v2025_08_01)
   @visibility(Lifecycle.Read)
   provisioningState?: NetAppProvisioningState;
 
