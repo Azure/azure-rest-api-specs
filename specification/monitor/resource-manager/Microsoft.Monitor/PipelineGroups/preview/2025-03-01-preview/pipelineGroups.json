@@ -237,6 +237,15 @@
           }
         },
         "x-ms-examples": {
+          "Create a PipelineGroup instance demonstrating different TLS modes including disabled TLS for development": {
+            "$ref": "./examples/PipelineGroupCreateWithTlsModes.json"
+          },
+          "Create a PipelineGroup instance using Azure Key Vault certificates with combined PEM format for Bring Your Own Certificate": {
+            "$ref": "./examples/PipelineGroupCreateWithAKVCertificates.json"
+          },
+          "Create a PipelineGroup instance using OTLP receiver with Bring Your Own Certificate mutual TLS configuration": {
+            "$ref": "./examples/PipelineGroupCreateWithBYOCTls.json"
+          },
           "Create a PipelineGroup instance using UDP receiver": {
             "$ref": "./examples/PipelineGroupCreateUdp.json"
           },
@@ -659,6 +668,71 @@
           }
         ]
       }
+    },
+    "CertificateSource": {
+      "type": "object",
+      "description": "Configuration for certificate source location.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CertificateSourceType",
+          "description": "The type of certificate source."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the certificate source."
+        },
+        "subLocation": {
+          "type": "string",
+          "description": "Sub-location within the certificate source."
+        }
+      },
+      "required": [
+        "type",
+        "location",
+        "subLocation"
+      ]
+    },
+    "CertificateSourceType": {
+      "type": "string",
+      "description": "The type of certificate source.",
+      "enum": [
+        "kubernetesSecret",
+        "kubernetesConfigMap"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KubernetesSecret",
+            "value": "kubernetesSecret",
+            "description": "Certificate stored in a Kubernetes secret."
+          },
+          {
+            "name": "KubernetesConfigMap",
+            "value": "kubernetesConfigMap",
+            "description": "Certificate stored in a Kubernetes configmap."
+          }
+        ]
+      }
+    },
+    "CertificateWithKey": {
+      "type": "object",
+      "description": "TLS certificate and private key pair.",
+      "properties": {
+        "certificate": {
+          "$ref": "#/definitions/CertificateSource",
+          "description": "Source configuration for the TLS certificate."
+        },
+        "privateKey": {
+          "$ref": "#/definitions/PrivateKeySource",
+          "description": "Source configuration for the private key. Private keys must be stored in Kubernetes secrets for security reasons."
+        }
+      },
+      "required": [
+        "certificate",
+        "privateKey"
+      ]
     },
     "ConcurrencyConfiguration": {
       "type": "object",
@@ -1110,6 +1184,14 @@
           "$ref": "#/definitions/ExecutionPlacement",
           "description": "Constraints for guiding the execution environment of the pipeline group."
         },
+        "tlsConfigurations": {
+          "type": "array",
+          "description": "TLS configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/TlsConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.",
@@ -1171,6 +1253,14 @@
         "executionPlacement": {
           "$ref": "#/definitions/ExecutionPlacement",
           "description": "Constraints for guiding the execution environment of the pipeline group."
+        },
+        "tlsConfigurations": {
+          "type": "array",
+          "description": "TLS configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/TlsConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1231,6 +1321,47 @@
         "capability",
         "operator"
       ]
+    },
+    "PrivateKeySource": {
+      "type": "object",
+      "description": "Configuration for private key source location.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PrivateKeySourceType",
+          "description": "The type of private key source. Only kubernetesSecret is supported for security reasons."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the private key source."
+        },
+        "subLocation": {
+          "type": "string",
+          "description": "Sub-location within the private key source."
+        }
+      },
+      "required": [
+        "type",
+        "location",
+        "subLocation"
+      ]
+    },
+    "PrivateKeySourceType": {
+      "type": "string",
+      "description": "The type of private key source.",
+      "enum": [
+        "kubernetesSecret"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateKeySourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KubernetesSecret",
+            "value": "kubernetesSecret",
+            "description": "Private key stored in a Kubernetes secret. This is the only supported type for security reasons."
+          }
+        ]
+      }
     },
     "Processor": {
       "type": "object",
@@ -1350,6 +1481,10 @@
           "type": "string",
           "description": "The name of receiver.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "tlsConfiguration": {
+          "type": "string",
+          "description": "Reference to a named TLS configuration. If not specified, default TLS configuration is used."
         },
         "syslog": {
           "$ref": "#/definitions/SyslogReceiver",
@@ -1612,6 +1747,59 @@
       },
       "required": [
         "url"
+      ]
+    },
+    "TlsConfiguration": {
+      "type": "object",
+      "description": "TLS configuration that can be referenced by receivers.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the TLS configuration.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "mode": {
+          "type": "string",
+          "description": "The TLS security mode for receivers using this configuration. Default is 'mutualTls'.",
+          "default": "mutualTls",
+          "enum": [
+            "disabled",
+            "serverOnly",
+            "mutualTls"
+          ],
+          "x-ms-enum": {
+            "name": "TlsMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "disabled",
+                "description": "No TLS encryption - plain text communication."
+              },
+              {
+                "name": "ServerOnly",
+                "value": "serverOnly",
+                "description": "Server-side TLS only - encrypts communication but doesn't validate client certificates."
+              },
+              {
+                "name": "MutualTls",
+                "value": "mutualTls",
+                "description": "Mutual TLS - encrypts communication and validates both server and client certificates."
+              }
+            ]
+          }
+        },
+        "tlsCertificate": {
+          "$ref": "#/definitions/CertificateWithKey",
+          "description": "TLS certificate and its private key."
+        },
+        "clientCa": {
+          "$ref": "#/definitions/CertificateSource",
+          "description": "Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used. Ignored when mode is 'disabled' or 'serverOnly'."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "TransformLanguageProcessor": {
