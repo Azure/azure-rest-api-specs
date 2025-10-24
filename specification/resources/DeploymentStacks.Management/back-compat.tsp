@@ -6,8 +6,8 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Resources.DeploymentStacks;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compat with old swagger"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeploymentStack.properties);
+#suppress "deprecated" "Required for backwards compatibility with legacy swagger"
+@@flattenProperty(DeploymentStack.properties);
 
 @@clientName(DeploymentStacksAtResourceGroup.createOrUpdate::parameters.resource,
   "deploymentStack"
