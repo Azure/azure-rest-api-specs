@@ -7398,6 +7398,19 @@
           "x-ms-format": "dfe-string",
           "description": "The resource group where the cluster belongs. Type: string (or Expression with resultType string)."
         },
+        "clusterResourceGroupAuthType": {
+          "description": "HDInsight On-demand cluster resource group authentication type.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipalKey",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "HDInsightOndemandClusterResourceGroupAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "clusterNamePrefix": {
           "type": "object",
           "x-ms-format": "dfe-string",
