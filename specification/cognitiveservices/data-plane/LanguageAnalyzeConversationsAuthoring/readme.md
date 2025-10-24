@@ -57,9 +57,9 @@ These settings apply only when `--tag=release_2025-05-15-preview` is specified o
 
 ``` yaml $(tag) == 'release_2025-05-15-preview'
 input-file:
-  - preview/2025-05-15-preview/analyzeconversations.json
+  - preview/2025-05-15-preview/analyzeconversations-authoring.json
 title:
-  Microsoft Cognitive Language Service - Conversations
+  Microsoft Cognitive Language Service - Conversations Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -70,9 +70,9 @@ These settings apply only when `--tag=release_2024-11-15-preview` is specified o
 
 ``` yaml $(tag) == 'release_2024-11-15-preview'
 input-file:
-  - preview/2024-11-15-preview/analyzeconversations.json
+  - preview/2024-11-15-preview/analyzeconversations-authoring.json
 title:
-  Microsoft Cognitive Language Service - Conversations
+  Microsoft Cognitive Language Service - Conversations Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
