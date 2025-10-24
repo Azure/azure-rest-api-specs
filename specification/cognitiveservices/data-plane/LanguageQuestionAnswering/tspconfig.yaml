@@ -12,6 +12,13 @@ options:
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/questionanswering.json"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Language.QuestionAnswering.Inference"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.AI.Language.QuestionAnswering"
+    flavor: azure
+    generate-sample-project: false
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-language-questionanswering"
     package-name: "azure-ai-language-questionanswering"
