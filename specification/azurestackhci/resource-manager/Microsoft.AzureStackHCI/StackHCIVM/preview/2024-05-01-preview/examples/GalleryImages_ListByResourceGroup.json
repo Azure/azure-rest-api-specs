@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test-gallery-image",
+            "type": "Microsoft.AzureStackHCI/galleryImages",
+            "extendedLocation": {
+              "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+              "type": "CustomLocation"
+            },
+            "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/galleryImages/test-gallery-image",
+            "location": "West US2",
+            "properties": {
+              "cloudInitDataSource": "NoCloud",
+              "containerId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-storage-container",
+              "hyperVGeneration": "V2",
+              "osType": "Linux",
+              "provisioningState": "Accepted",
+              "status": {
+                "downloadStatus": {
+                  "downloadSizeInMB": 9383
+                },
+                "progressPercentage": 100,
+                "provisioningStatus": {
+                  "operationId": "79cfc696-44f5-4a68-a620-21850f7e9fb0",
+                  "status": "Succeeded"
+                }
+              },
+              "version": {
+                "properties": {
+                  "storageProfile": {
+                    "osDiskImage": {
+                      "sizeInMB": 30270
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GalleryImages_ListByResourceGroup",
+  "title": "ListGalleryImageByResourceGroup"
+}

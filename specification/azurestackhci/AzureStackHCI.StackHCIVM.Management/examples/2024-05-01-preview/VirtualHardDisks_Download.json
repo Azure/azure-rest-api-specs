@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "virtualHardDiskName": "test-vhd",
+    "resource": {
+      "extendedLocation": {
+        "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+        "type": "CustomLocation"
+      },
+      "location": "West US2",
+      "properties": {
+        "downloadUrl": "https://YourStorageAccountName.blob.core.windows.net/YourContainerName/YourVHDBlobName.vhd?<sas-token>"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-vhd",
+        "type": "Microsoft.AzureStackHCI/virtualHardDisks",
+        "extendedLocation": {
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd",
+        "location": "West US2",
+        "properties": {
+          "blockSizeBytes": 0,
+          "diskFileFormat": "vhdx",
+          "diskSizeGB": 32,
+          "dynamic": true,
+          "hyperVGeneration": "V2",
+          "logicalSectorBytes": 512,
+          "physicalSectorBytes": 512,
+          "provisioningState": "Accepted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-vhd",
+        "type": "Microsoft.AzureStackHCI/virtualHardDisks",
+        "extendedLocation": {
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd",
+        "location": "West US2",
+        "properties": {
+          "blockSizeBytes": 0,
+          "diskFileFormat": "vhdx",
+          "diskSizeGB": 32,
+          "dynamic": true,
+          "hyperVGeneration": "V2",
+          "logicalSectorBytes": 512,
+          "physicalSectorBytes": 512,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualHardDisks_Download",
+  "title": "DownloadVirtualHardDisk"
+}

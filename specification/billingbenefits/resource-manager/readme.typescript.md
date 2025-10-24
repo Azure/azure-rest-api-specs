@@ -3,7 +3,7 @@
 These settings apply only when `--typescript` is specified on the command line.
 Please also specify `--typescript-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
 
-``` yaml $(typescript)
+```yaml $(typescript)
 typescript:
   azure-arm: true
   package-name: "@azure/arm-billingbenefits"
@@ -12,9 +12,9 @@ typescript:
   clear-output-folder: true
   generate-metadata: true
 
-directive: 
-- from: swagger-document
-  where: $.parameters.ExpandParameter
-  transform: >
-    $["x-ms-parameter-location"] = "method";
+directive:
+  - from: swagger-document
+    where: $.parameters.ExpandParameter
+    transform: >
+      $["x-ms-parameter-location"] = "method";
 ```

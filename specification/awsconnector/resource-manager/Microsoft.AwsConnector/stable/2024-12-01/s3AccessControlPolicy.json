@@ -1,0 +1,700 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "S3AccessControlPolicies"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/s3AccessControlPolicies": {
+      "get": {
+        "operationId": "S3AccessControlPolicies_ListBySubscription",
+        "tags": [
+          "S3AccessControlPolicies"
+        ],
+        "description": "List S3AccessControlPolicy resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/S3AccessControlPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "S3AccessControlPolicies_ListBySubscription": {
+            "$ref": "./examples/S3AccessControlPolicies_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/s3AccessControlPolicies": {
+      "get": {
+        "operationId": "S3AccessControlPolicies_ListByResourceGroup",
+        "tags": [
+          "S3AccessControlPolicies"
+        ],
+        "description": "List S3AccessControlPolicy resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/S3AccessControlPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "S3AccessControlPolicies_ListByResourceGroup": {
+            "$ref": "./examples/S3AccessControlPolicies_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/s3AccessControlPolicies/{name}": {
+      "get": {
+        "operationId": "S3AccessControlPolicies_Get",
+        "tags": [
+          "S3AccessControlPolicies"
+        ],
+        "description": "Get a S3AccessControlPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of S3AccessControlPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/S3AccessControlPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "S3AccessControlPolicies_Get": {
+            "$ref": "./examples/S3AccessControlPolicies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "S3AccessControlPolicies_CreateOrReplace",
+        "tags": [
+          "S3AccessControlPolicies"
+        ],
+        "description": "Create a S3AccessControlPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of S3AccessControlPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/S3AccessControlPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'S3AccessControlPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/S3AccessControlPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'S3AccessControlPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/S3AccessControlPolicy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "S3AccessControlPolicies_CreateOrReplace": {
+            "$ref": "./examples/S3AccessControlPolicies_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "S3AccessControlPolicies_Update",
+        "tags": [
+          "S3AccessControlPolicies"
+        ],
+        "description": "Update a S3AccessControlPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of S3AccessControlPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/S3AccessControlPolicyTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/S3AccessControlPolicy"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "S3AccessControlPolicies_Update": {
+            "$ref": "./examples/S3AccessControlPolicies_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "S3AccessControlPolicies_Delete",
+        "tags": [
+          "S3AccessControlPolicies"
+        ],
+        "description": "Delete a S3AccessControlPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of S3AccessControlPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "S3AccessControlPolicies_Delete": {
+            "$ref": "./examples/S3AccessControlPolicies_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsS3AccessControlPolicyProperties": {
+      "type": "object",
+      "description": "Definition of awsS3AccessControlPolicy",
+      "properties": {
+        "grants": {
+          "type": "array",
+          "description": "<p>A list of grants.</p>",
+          "items": {
+            "$ref": "#/definitions/Grant"
+          },
+          "x-ms-identifiers": []
+        },
+        "owner": {
+          "$ref": "#/definitions/Owner",
+          "description": "<p>Container for the bucket owner's display name and ID.</p>"
+        }
+      }
+    },
+    "Grant": {
+      "type": "object",
+      "description": "Definition of Grant",
+      "properties": {
+        "grantee": {
+          "$ref": "#/definitions/Grantee",
+          "description": "<p>The person being granted permissions.</p>"
+        },
+        "permission": {
+          "$ref": "#/definitions/PermissionEnumValue",
+          "description": "<p>Specifies the permission given to the grantee.</p>"
+        }
+      }
+    },
+    "Grantee": {
+      "type": "object",
+      "description": "Definition of Grantee",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "<p>Screen name of the grantee.</p>"
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "<p>Email address of the grantee.</p> <note> <p>Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: </p> <ul> <li> <p>US East (N. Virginia)</p> </li> <li> <p>US West (N. California)</p> </li> <li> <p> US West (Oregon)</p> </li> <li> <p> Asia Pacific (Singapore)</p> </li> <li> <p>Asia Pacific (Sydney)</p> </li> <li> <p>Asia Pacific (Tokyo)</p> </li> <li> <p>Europe (Ireland)</p> </li> <li> <p>South America (São Paulo)</p> </li> </ul> <p>For a list of all the Amazon S3 supported Regions and endpoints, see <a href='https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region'>Regions and Endpoints</a> in the Amazon Web Services General Reference.</p> </note>"
+        },
+        "id": {
+          "type": "string",
+          "description": "<p>The canonical user ID of the grantee.</p>"
+        },
+        "type": {
+          "$ref": "#/definitions/TypeEnumValue",
+          "description": "<p>Type of grantee</p>"
+        },
+        "uri": {
+          "type": "string",
+          "description": "<p>URI of the grantee group.</p>"
+        }
+      }
+    },
+    "Owner": {
+      "type": "object",
+      "description": "Definition of Owner",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "<p>Container for the display name of the owner. This value is only supported in the following Amazon Web Services Regions:</p> <ul> <li> <p>US East (N. Virginia)</p> </li> <li> <p>US West (N. California)</p> </li> <li> <p>US West (Oregon)</p> </li> <li> <p>Asia Pacific (Singapore)</p> </li> <li> <p>Asia Pacific (Sydney)</p> </li> <li> <p>Asia Pacific (Tokyo)</p> </li> <li> <p>Europe (Ireland)</p> </li> <li> <p>South America (São Paulo)</p> </li> </ul> <note> <p>This functionality is not supported for directory buckets.</p> </note>"
+        },
+        "id": {
+          "type": "string",
+          "description": "<p>Container for the ID of the owner.</p>"
+        }
+      }
+    },
+    "Permission": {
+      "type": "string",
+      "description": "Permission enum",
+      "enum": [
+        "FULL_CONTROL",
+        "READ",
+        "READ_ACP",
+        "WRITE",
+        "WRITE_ACP"
+      ],
+      "x-ms-enum": {
+        "name": "Permission",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FULL_CONTROL",
+            "value": "FULL_CONTROL",
+            "description": "Permission enum FULL_CONTROL"
+          },
+          {
+            "name": "READ",
+            "value": "READ",
+            "description": "Permission enum READ"
+          },
+          {
+            "name": "READ_ACP",
+            "value": "READ_ACP",
+            "description": "Permission enum READ_ACP"
+          },
+          {
+            "name": "WRITE",
+            "value": "WRITE",
+            "description": "Permission enum WRITE"
+          },
+          {
+            "name": "WRITE_ACP",
+            "value": "WRITE_ACP",
+            "description": "Permission enum WRITE_ACP"
+          }
+        ]
+      }
+    },
+    "PermissionEnumValue": {
+      "type": "object",
+      "description": "Definition of PermissionEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/Permission",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "S3AccessControlPolicy": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/S3AccessControlPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "S3AccessControlPolicyListResult": {
+      "type": "object",
+      "description": "The response of a S3AccessControlPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The S3AccessControlPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/S3AccessControlPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "S3AccessControlPolicyProperties": {
+      "type": "object",
+      "description": "Definition of S3AccessControlPolicy",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsS3AccessControlPolicyProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "S3AccessControlPolicyTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in S3AccessControlPolicy resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Type": {
+      "type": "string",
+      "description": "Type enum",
+      "enum": [
+        "AmazonCustomerByEmail",
+        "CanonicalUser",
+        "Group"
+      ],
+      "x-ms-enum": {
+        "name": "Type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AmazonCustomerByEmail",
+            "value": "AmazonCustomerByEmail",
+            "description": "Type enum AmazonCustomerByEmail"
+          },
+          {
+            "name": "CanonicalUser",
+            "value": "CanonicalUser",
+            "description": "Type enum CanonicalUser"
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Type enum Group"
+          }
+        ]
+      }
+    },
+    "TypeEnumValue": {
+      "type": "object",
+      "description": "Definition of TypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/Type",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

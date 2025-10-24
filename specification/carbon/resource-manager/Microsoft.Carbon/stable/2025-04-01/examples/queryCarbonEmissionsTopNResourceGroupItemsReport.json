@@ -1,0 +1,134 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReports",
+  "title": "QueryCarbonEmission Top N ResourceGroup Report",
+  "parameters": {
+    "api-version": "2025-04-01",
+    "queryParameters": {
+      "reportType": "TopItemsSummaryReport",
+      "subscriptionList": [
+        "00000000-0000-0000-0000-000000000000",
+        "00000000-0000-0000-0000-000000000001,",
+        "00000000-0000-0000-0000-000000000002",
+        "00000000-0000-0000-0000-000000000003",
+        "00000000-0000-0000-0000-000000000004",
+        "00000000-0000-0000-0000-000000000005",
+        "00000000-0000-0000-0000-000000000006",
+        "00000000-0000-0000-0000-000000000007",
+        "00000000-0000-0000-0000-000000000008"
+      ],
+      "carbonScopeList": [
+        "Scope1",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-05-01",
+        "end": "2024-05-01"
+      },
+      "categoryType": "ResourceGroup",
+      "topItems": 5
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for top n resource group report.",
+      "body": {
+        "subscriptionAccessDecisionList": [
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000001",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000002",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000003",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000004",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000005",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000006",
+            "decision": "Denied"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000007",
+            "decision": "Denied"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000008",
+            "decision": "Denied",
+            "denialReason": "Carbon Optimization Reader permisison required"
+          }
+        ],
+        "value": [
+          {
+            "dataType": "ResourceGroupTopItemsSummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgGroup1",
+            "resourceGroupUrl": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup1",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "ResourceGroup"
+          },
+          {
+            "dataType": "ResourceGroupTopItemsSummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgGroup2",
+            "resourceGroupUrl": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup2",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "ResourceGroup"
+          },
+          {
+            "dataType": "ResourceGroupTopItemsSummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgGroup3",
+            "resourceGroupUrl": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup3",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "ResourceGroup"
+          },
+          {
+            "dataType": "ResourceGroupTopItemsSummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgGroup4",
+            "resourceGroupUrl": "/subscriptions/00000000-0000-0000-0000-000000000002/resourceGroups/rgGroup4",
+            "subscriptionId": "00000000-0000-0000-0000-000000000002",
+            "categoryType": "ResourceGroup"
+          },
+          {
+            "dataType": "ResourceGroupTopItemsSummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgGroup5",
+            "resourceGroupUrl": "/subscriptions/00000000-0000-0000-0000-000000000002/resourceGroups/rgGroup5",
+            "subscriptionId": "00000000-0000-0000-0000-000000000002",
+            "categoryType": "ResourceGroup"
+          }
+        ]
+      }
+    }
+  }
+}

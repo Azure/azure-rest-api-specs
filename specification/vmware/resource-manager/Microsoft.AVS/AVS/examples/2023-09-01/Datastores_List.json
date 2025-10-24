@@ -1,0 +1,58 @@
+{
+  "title": "Datastores_List",
+  "operationId": "Datastores_List",
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "clusterName": "cluster1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/datastores/datastore1",
+            "name": "datastore1",
+            "properties": {
+              "netAppVolume": {
+                "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/ResourceGroup1/providers/Microsoft.NetApp/netAppAccounts/NetAppAccount1/capacityPools/CapacityPool1/volumes/NFSVol1"
+              },
+              "provisioningState": "Succeeded",
+              "status": "Accessible"
+            },
+            "type": "Microsoft.AVS/privateClouds/clusters/datastores"
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/datastores/datastore2",
+            "name": "datastore2",
+            "properties": {
+              "diskPoolVolume": {
+                "targetId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/ResourceGroup1/providers/Microsoft.StoragePool/diskPools/DiskPool1/targets/Target1",
+                "lunName": "lun0",
+                "mountOption": "MOUNT",
+                "path": "/vmfs/devices/disks/naa.6001405f75f6bdf7f6f49db8b4b21723"
+              },
+              "provisioningState": "Succeeded",
+              "status": "Accessible"
+            },
+            "type": "Microsoft.AVS/privateClouds/clusters/datastores"
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/datastores/datastore2",
+            "name": "datastore2",
+            "properties": {
+              "elasticSanVolume": {
+                "targetId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/ResourceGroup1/providers/Microsoft.ElasticSan/elasticSans/ElasticSan1/volumeGroups/VolumeGroup1/volumes/Volume1"
+              },
+              "provisioningState": "Succeeded",
+              "status": "Accessible"
+            },
+            "type": "Microsoft.AVS/privateClouds/clusters/datastores"
+          }
+        ]
+      }
+    }
+  }
+}

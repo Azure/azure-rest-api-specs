@@ -1,0 +1,34 @@
+{
+  "operationId": "SavedFilters_ListSavedFilter",
+  "title": "SavedFilters_ListSavedFilter",
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace",
+    "filterName": "ThisisaSavedFilter"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalElements": 2,
+        "value": [
+          {
+            "id": "ThisisaSavedFilter",
+            "name": "ThisisaSavedFilter",
+            "displayName": "ThisisaSavedFilter",
+            "filter": "state IN (\"confirmed\")",
+            "description": "This is a saved filter"
+          },
+          {
+            "id": "ThisisaSavedFilter2",
+            "name": "ThisisaSavedFilter2",
+            "displayName": "ThisisaSavedFilter2",
+            "filter": "type IN (\"host\")",
+            "description": "This is a saved filter"
+          }
+        ]
+      }
+    }
+  }
+}

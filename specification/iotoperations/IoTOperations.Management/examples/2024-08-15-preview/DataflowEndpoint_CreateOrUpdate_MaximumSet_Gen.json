@@ -1,0 +1,476 @@
+{
+  "title": "DataflowEndpoint_CreateOrUpdate",
+  "operationId": "DataflowEndpoint_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-08-15-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "dataflowEndpointName": "resource-name123",
+    "resource": {
+      "properties": {
+        "endpointType": "DataExplorer",
+        "dataExplorerSettings": {
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "psxomrfbhoflycm"
+            },
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+              "scope": "zop",
+              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+            }
+          },
+          "database": "yqcdpjsifm",
+          "host": "<cluster>.<region>.kusto.windows.net",
+          "batching": {
+            "latencySeconds": 9312,
+            "maxMessages": 9028
+          }
+        },
+        "dataLakeStorageSettings": {
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "accessTokenSettings": {
+              "secretRef": "sevriyphcvnlrnfudqzejecwa"
+            },
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "psxomrfbhoflycm"
+            },
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+              "scope": "zop",
+              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+            }
+          },
+          "host": "<account>.blob.core.windows.net",
+          "batching": {
+            "latencySeconds": 9312,
+            "maxMessages": 9028
+          }
+        },
+        "fabricOneLakeSettings": {
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "psxomrfbhoflycm"
+            },
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+              "scope": "zop",
+              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+            }
+          },
+          "names": {
+            "lakehouseName": "wpeathi",
+            "workspaceName": "nwgmitkbljztgms"
+          },
+          "oneLakePathType": "Files",
+          "host": "https://<host>.fabric.microsoft.com",
+          "batching": {
+            "latencySeconds": 9312,
+            "maxMessages": 9028
+          }
+        },
+        "kafkaSettings": {
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "psxomrfbhoflycm"
+            },
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+              "scope": "zop",
+              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+            },
+            "saslSettings": {
+              "saslType": "Plain",
+              "secretRef": "visyxoztqnylvbyokhtmpdkwes"
+            },
+            "x509CertificateSettings": {
+              "secretRef": "afwizrystfslkfqd"
+            }
+          },
+          "consumerGroupId": "ukkzcjiyenhxokat",
+          "host": "pwcqfiqclcgneolpewnyavoulbip",
+          "batching": {
+            "mode": "Enabled",
+            "latencyMs": 3679,
+            "maxBytes": 8887,
+            "maxMessages": 2174
+          },
+          "copyMqttProperties": "Enabled",
+          "compression": "None",
+          "kafkaAcks": "Zero",
+          "partitionStrategy": "Default",
+          "tls": {
+            "mode": "Enabled",
+            "trustedCaCertificateConfigMapRef": "tectjjvukvelsreihwadh"
+          },
+          "cloudEventAttributes": "PassThrough"
+        },
+        "localStorageSettings": {
+          "persistentVolumeClaimRef": "jjwqwvd"
+        },
+        "mqttSettings": {
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "psxomrfbhoflycm"
+            },
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+              "scope": "zop",
+              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+            },
+            "serviceAccountTokenSettings": {
+              "audience": "ejbklrbxgjaqleoycgpje"
+            },
+            "x509CertificateSettings": {
+              "secretRef": "afwizrystfslkfqd"
+            }
+          },
+          "clientIdPrefix": "kkljsdxdirfhwxtkavldekeqhv",
+          "host": "nyhnxqnbspstctl",
+          "protocol": "Mqtt",
+          "keepAliveSeconds": 0,
+          "retain": "Keep",
+          "maxInflightMessages": 0,
+          "qos": 1,
+          "sessionExpirySeconds": 0,
+          "tls": {
+            "mode": "Enabled",
+            "trustedCaCertificateConfigMapRef": "tectjjvukvelsreihwadh"
+          },
+          "cloudEventAttributes": "PassThrough"
+        }
+      },
+      "extendedLocation": {
+        "name": "qmbrfwcpwwhggszhrdjv",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "endpointType": "DataExplorer",
+          "dataExplorerSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              }
+            },
+            "database": "yqcdpjsifm",
+            "host": "<cluster>.<region>.kusto.windows.net",
+            "batching": {
+              "latencySeconds": 1228,
+              "maxMessages": 171
+            }
+          },
+          "dataLakeStorageSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "accessTokenSettings": {
+                "secretRef": "sevriyphcvnlrnfudqzejecwa"
+              },
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              }
+            },
+            "host": "<account>.blob.core.windows.net",
+            "batching": {
+              "latencySeconds": 1228,
+              "maxMessages": 171
+            }
+          },
+          "fabricOneLakeSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              }
+            },
+            "names": {
+              "lakehouseName": "wpeathi",
+              "workspaceName": "nwgmitkbljztgms"
+            },
+            "oneLakePathType": "Files",
+            "host": "https://<host>.fabric.microsoft.com",
+            "batching": {
+              "latencySeconds": 1228,
+              "maxMessages": 171
+            }
+          },
+          "kafkaSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              },
+              "saslSettings": {
+                "saslType": "Plain",
+                "secretRef": "visyxoztqnylvbyokhtmpdkwes"
+              },
+              "x509CertificateSettings": {
+                "secretRef": "afwizrystfslkfqd"
+              }
+            },
+            "consumerGroupId": "ukkzcjiyenhxokat",
+            "host": "pwcqfiqclcgneolpewnyavoulbip",
+            "batching": {
+              "mode": "Enabled",
+              "latencyMs": 3679,
+              "maxBytes": 8887,
+              "maxMessages": 2174
+            },
+            "copyMqttProperties": "Enabled",
+            "compression": "None",
+            "kafkaAcks": "Zero",
+            "partitionStrategy": "Default",
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "tectjjvukvelsreihwadh"
+            },
+            "cloudEventAttributes": "PassThrough"
+          },
+          "localStorageSettings": {
+            "persistentVolumeClaimRef": "jjwqwvd"
+          },
+          "mqttSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              },
+              "serviceAccountTokenSettings": {
+                "audience": "ejbklrbxgjaqleoycgpje"
+              },
+              "x509CertificateSettings": {
+                "secretRef": "afwizrystfslkfqd"
+              }
+            },
+            "clientIdPrefix": "kkljsdxdirfhwxtkavldekeqhv",
+            "host": "nyhnxqnbspstctl",
+            "protocol": "Mqtt",
+            "keepAliveSeconds": 0,
+            "retain": "Keep",
+            "maxInflightMessages": 0,
+            "qos": 1,
+            "sessionExpirySeconds": 0,
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "tectjjvukvelsreihwadh"
+            },
+            "cloudEventAttributes": "PassThrough"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "zyhxscudobzfacetvgyjiav",
+        "type": "iay",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "endpointType": "DataExplorer",
+          "dataExplorerSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              }
+            },
+            "database": "yqcdpjsifm",
+            "host": "<cluster>.<region>.kusto.windows.net",
+            "batching": {
+              "latencySeconds": 1228,
+              "maxMessages": 171
+            }
+          },
+          "dataLakeStorageSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "accessTokenSettings": {
+                "secretRef": "sevriyphcvnlrnfudqzejecwa"
+              },
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              }
+            },
+            "host": "<account>.blob.core.windows.net",
+            "batching": {
+              "latencySeconds": 1228,
+              "maxMessages": 171
+            }
+          },
+          "fabricOneLakeSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              }
+            },
+            "names": {
+              "lakehouseName": "wpeathi",
+              "workspaceName": "nwgmitkbljztgms"
+            },
+            "oneLakePathType": "Files",
+            "host": "https://<host>.fabric.microsoft.com",
+            "batching": {
+              "latencySeconds": 1228,
+              "maxMessages": 171
+            }
+          },
+          "kafkaSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              },
+              "saslSettings": {
+                "saslType": "Plain",
+                "secretRef": "visyxoztqnylvbyokhtmpdkwes"
+              },
+              "x509CertificateSettings": {
+                "secretRef": "afwizrystfslkfqd"
+              }
+            },
+            "consumerGroupId": "ukkzcjiyenhxokat",
+            "host": "pwcqfiqclcgneolpewnyavoulbip",
+            "batching": {
+              "mode": "Enabled",
+              "latencyMs": 3679,
+              "maxBytes": 8887,
+              "maxMessages": 2174
+            },
+            "copyMqttProperties": "Enabled",
+            "compression": "None",
+            "kafkaAcks": "Zero",
+            "partitionStrategy": "Default",
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "tectjjvukvelsreihwadh"
+            },
+            "cloudEventAttributes": "PassThrough"
+          },
+          "localStorageSettings": {
+            "persistentVolumeClaimRef": "jjwqwvd"
+          },
+          "mqttSettings": {
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {
+                "audience": "psxomrfbhoflycm"
+              },
+              "userAssignedManagedIdentitySettings": {
+                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+                "scope": "zop",
+                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+              },
+              "serviceAccountTokenSettings": {
+                "audience": "ejbklrbxgjaqleoycgpje"
+              },
+              "x509CertificateSettings": {
+                "secretRef": "afwizrystfslkfqd"
+              }
+            },
+            "clientIdPrefix": "kkljsdxdirfhwxtkavldekeqhv",
+            "host": "nyhnxqnbspstctl",
+            "protocol": "Mqtt",
+            "keepAliveSeconds": 0,
+            "retain": "Keep",
+            "maxInflightMessages": 0,
+            "qos": 1,
+            "sessionExpirySeconds": 0,
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "tectjjvukvelsreihwadh"
+            },
+            "cloudEventAttributes": "PassThrough"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "zyhxscudobzfacetvgyjiav",
+        "type": "iay",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}

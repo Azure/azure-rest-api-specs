@@ -1,0 +1,154 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "monitorName": "mySapMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myProviderInstance1",
+            "type": "Microsoft.Workloads/monitors/providerInstances",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance1",
+            "properties": {
+              "health": {
+                "healthState": "Healthy",
+                "impactingReasons": "None"
+              },
+              "providerSettings": {
+                "dbName": "db",
+                "dbPasswordUri": "",
+                "dbUsername": "user",
+                "hostname": "name",
+                "instanceNumber": "00",
+                "providerType": "SapHana",
+                "sapSid": "SID",
+                "sqlPort": "0000",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslHostNameInCertificate": "xyz.domain.com",
+                "sslPreference": "ServerCertificate"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "myProviderInstance2",
+            "type": "Microsoft.Workloads/monitors/providerInstances",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance1",
+            "properties": {
+              "health": {
+                "healthState": "Healthy",
+                "impactingReasons": "None"
+              },
+              "providerSettings": {
+                "providerType": "SapNetWeaver",
+                "sapClientId": "111",
+                "sapHostFileEntries": [
+                  "127.0.0.1 name fqdn"
+                ],
+                "sapHostname": "name",
+                "sapInstanceNr": "00",
+                "sapPasswordUri": "",
+                "sapPortNumber": "1234",
+                "sapSid": "SID",
+                "sapUsername": "username",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "myProviderInstance4",
+            "type": "Microsoft.Workloads/monitors/providerInstances",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance1",
+            "properties": {
+              "health": {
+                "healthState": "Healthy",
+                "impactingReasons": "None"
+              },
+              "providerSettings": {
+                "dbPort": "5912",
+                "dbUsername": "user",
+                "hostname": "hostname",
+                "providerType": "MsSqlServer",
+                "sapSid": "sid",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "myProviderInstance3",
+            "type": "Microsoft.Workloads/monitors/providerInstances",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance1",
+            "properties": {
+              "health": {
+                "healthState": "Healthy",
+                "impactingReasons": "None"
+              },
+              "providerSettings": {
+                "prometheusUrl": "http://192.168.0.0:9090/metrics",
+                "providerType": "PrometheusOS",
+                "sapSid": "SID",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "myProviderInstance3",
+            "type": "Microsoft.Workloads/monitors/providerInstances",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance1",
+            "properties": {
+              "health": {
+                "healthState": "Healthy",
+                "impactingReasons": "None"
+              },
+              "providerSettings": {
+                "clusterName": "clusterName",
+                "hostname": "hostname",
+                "prometheusUrl": "http://192.168.0.0:9090/metrics",
+                "providerType": "PrometheusHaCluster",
+                "sid": "sid",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "myProviderInstance3",
+            "type": "Microsoft.Workloads/monitors/providerInstances",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance1",
+            "properties": {
+              "health": {
+                "healthState": "Healthy",
+                "impactingReasons": "None"
+              },
+              "providerSettings": {
+                "dbName": "OPA",
+                "dbPasswordUri": "",
+                "dbPort": "5912",
+                "dbUsername": "Db2OPA",
+                "hostname": "vmname.azure.com",
+                "providerType": "Db2",
+                "sapSid": "SID",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProviderInstances_ListByMonitor",
+  "title": "List all SAP monitors providers in a subscription"
+}

@@ -1,0 +1,46 @@
+{
+  "operationId": "Assets_GetDeltaDetails",
+  "title": "Assets_GetDeltaDetails",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace",
+    "body": {
+      "deltaDetailType": "added",
+      "priorDays": 30,
+      "kind": "domain",
+      "date": "2024-03-17"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalElements": 3,
+        "value": [
+          {
+            "kind": "domain",
+            "name": "hondawallofdreams.ca",
+            "createdAt": "2024-02-23T18:33:06Z",
+            "updatedAt": "2024-02-23T18:33:06Z",
+            "state": "confirmed"
+          },
+          {
+            "kind": "domain",
+            "name": "hondawallofdreamsfr.ca",
+            "createdAt": "2024-02-16T16:14:40Z",
+            "updatedAt": "2024-02-16T16:14:40Z",
+            "state": "confirmed"
+          },
+          {
+            "kind": "domain",
+            "name": "parkerhonda.com",
+            "createdAt": "2024-03-02T07:29:01Z",
+            "updatedAt": "2024-03-09T09:19:23Z",
+            "state": "confirmed"
+          }
+        ]
+      }
+    }
+  }
+}

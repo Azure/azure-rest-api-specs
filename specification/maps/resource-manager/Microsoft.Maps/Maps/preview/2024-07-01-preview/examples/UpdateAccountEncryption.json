@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myMapsAccount",
+    "MapsAccountUpdateParameters": {
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName": null
+        }
+      },
+      "properties": {
+        "encryption": {
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "identityType": "systemAssignedIdentity",
+              "userAssignedIdentityResourceId": null
+            },
+            "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount",
+        "name": "myMapsAccount",
+        "type": "Microsoft.Maps/accounts",
+        "location": "eastus",
+        "kind": "Gen2",
+        "sku": {
+          "name": "G2",
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2021-07-02T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-07-02T01:01:01.1075056Z"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "77f72dac-e0aa-484e-9acd-e5e7075310ef",
+          "tenantId": "06006684-60c1-4954-a20c-ffd8fbea7276",
+          "userAssignedIdentities": {
+            "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName": {
+              "clientId": "b602d315-01b5-4265-af23-859edc4f2431",
+              "principalId": "ac287332-364a-41d9-a567-9ad86b9fc299"
+            }
+          }
+        },
+        "properties": {
+          "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593",
+          "provisioningState": "Updating",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "systemAssignedIdentity"
+              },
+              "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
+            }
+          }
+        }
+      }
+    }
+  }
+}

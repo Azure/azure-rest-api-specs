@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "connectedClusterResourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster",
+    "api-version": "2024-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default",
+        "name": "test-hybridakscluster",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances",
+        "extendedLocation": {
+          "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "controlPlane": {
+            "count": 1,
+            "vmSize": "Standard_A4_v2"
+          },
+          "kubernetesVersion": "v1.20.5",
+          "networkProfile": {
+            "networkPolicy": "calico",
+            "podCidr": "10.244.0.0/16"
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "default-nodepool-1",
+              "count": 1,
+              "vmSize": "Standard_A4_v2",
+              "osType": "Linux"
+            }
+          ],
+          "linuxProfile": {
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCY......."
+                }
+              ]
+            }
+          },
+          "cloudProviderProfile": {
+            "infraNetworkProfile": {
+              "vnetSubnetIds": [
+                "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.AzureStackHCI/logicalNetworks/test-vnet-static"
+              ]
+            }
+          },
+          "licenseProfile": {
+            "azureHybridBenefit": "NotApplicable"
+          }
+        }
+      }
+    }
+  }
+}

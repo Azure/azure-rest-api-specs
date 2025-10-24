@@ -1,0 +1,269 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "includeTermTemplate": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "enumDefs": [
+          {
+            "category": "ENUM",
+            "guid": "0ddc2fcf-ad17-4d06-984a-ffb2ffb2a941",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1604728877305,
+            "updateTime": 1604728877305,
+            "version": 1,
+            "name": "glossary_term_status_value",
+            "description": "glossary_term_status_value",
+            "typeVersion": "1.0",
+            "lastModifiedTS": "1",
+            "elementDefs": [
+              {
+                "value": "Approved",
+                "ordinal": 0
+              },
+              {
+                "value": "Alert",
+                "ordinal": 1
+              },
+              {
+                "value": "Expired",
+                "ordinal": 2
+              },
+              {
+                "value": "Draft",
+                "ordinal": 3
+              }
+            ]
+          }
+        ],
+        "structDefs": [
+          {
+            "category": "STRUCT",
+            "guid": "a8892bd7-59d6-47d8-b80d-ba4c7631098f",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1604729507664,
+            "updateTime": 1604729507664,
+            "version": 1,
+            "name": "blob_soft_deleted_state",
+            "description": "blob_soft_deleted_state",
+            "typeVersion": "1.0",
+            "serviceType": "Azure Blob Storage",
+            "lastModifiedTS": "1",
+            "attributeDefs": [
+              {
+                "name": "deleted",
+                "typeName": "boolean",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              },
+              {
+                "name": "deletedTime",
+                "typeName": "date",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              },
+              {
+                "name": "remainingRetentionDays",
+                "typeName": "long",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              }
+            ]
+          }
+        ],
+        "classificationDefs": [
+          {
+            "category": "CLASSIFICATION",
+            "guid": "bd97460e-e5db-4701-8158-5b4062cf8a10",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1604730971448,
+            "updateTime": 1604730971448,
+            "version": 1,
+            "name": "MICROSOFT.GOVERNMENT.CHILE.CDI_NUMBER",
+            "description": "Chile Identity Card Number",
+            "typeVersion": "1.0",
+            "options": {
+              "displayName": "Chile Identity Card Number"
+            },
+            "attributeDefs": [],
+            "superTypes": [],
+            "entityTypes": [],
+            "subTypes": []
+          }
+        ],
+        "entityDefs": [
+          {
+            "category": "ENTITY",
+            "guid": "7c53da5d-2797-4e8a-9b89-dd9b3b26ffa8",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1604730605047,
+            "updateTime": 1604730605047,
+            "version": 1,
+            "name": "sap_ecc_data_element",
+            "description": "sap_ecc_data_element",
+            "typeVersion": "1.0",
+            "serviceType": "SAP ECC",
+            "lastModifiedTS": "1",
+            "attributeDefs": [
+              {
+                "name": "dataType",
+                "typeName": "string",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              },
+              {
+                "name": "length",
+                "typeName": "int",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              },
+              {
+                "name": "decimalPlaces",
+                "typeName": "int",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              },
+              {
+                "name": "documentation",
+                "typeName": "string",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+              }
+            ],
+            "superTypes": [
+              "Asset"
+            ],
+            "subTypes": [],
+            "relationshipAttributeDefs": [
+              {
+                "name": "package",
+                "typeName": "sap_ecc_package",
+                "isOptional": false,
+                "cardinality": "SINGLE",
+                "valuesMinCount": -1,
+                "valuesMaxCount": -1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "relationshipTypeName": "sap_ecc_package_data_elements",
+                "isLegacyAttribute": false
+              },
+              {
+                "name": "table_fields",
+                "typeName": "array<sap_ecc_table_field>",
+                "isOptional": true,
+                "cardinality": "SET",
+                "valuesMinCount": -1,
+                "valuesMaxCount": -1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "relationshipTypeName": "sap_ecc_table_field_data_element",
+                "isLegacyAttribute": false
+              },
+              {
+                "name": "domain",
+                "typeName": "sap_ecc_domain",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": -1,
+                "valuesMaxCount": -1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "relationshipTypeName": "sap_ecc_data_element_domain",
+                "isLegacyAttribute": false
+              },
+              {
+                "name": "meanings",
+                "typeName": "array<AtlasGlossaryTerm>",
+                "isOptional": true,
+                "cardinality": "SET",
+                "valuesMinCount": -1,
+                "valuesMaxCount": -1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "relationshipTypeName": "AtlasGlossarySemanticAssignment",
+                "isLegacyAttribute": false
+              }
+            ]
+          }
+        ],
+        "relationshipDefs": [
+          {
+            "category": "RELATIONSHIP",
+            "guid": "6284b865-cbb3-4236-83ed-059a407f06fb",
+            "createdBy": "ExampleCreator",
+            "updatedBy": "ExampleUpdator",
+            "createTime": 1604729078159,
+            "updateTime": 1604729323080,
+            "version": 2,
+            "name": "storm_topology_nodes",
+            "description": "storm_topology_nodes",
+            "typeVersion": "1.1",
+            "serviceType": "storm",
+            "lastModifiedTS": "2",
+            "attributeDefs": [],
+            "relationshipCategory": "ASSOCIATION",
+            "endDef1": {
+              "type": "storm_topology",
+              "name": "nodes",
+              "isContainer": false,
+              "cardinality": "SET",
+              "isLegacyAttribute": true
+            },
+            "endDef2": {
+              "type": "storm_node",
+              "name": "topolgies",
+              "isContainer": false,
+              "cardinality": "SET",
+              "isLegacyAttribute": false
+            }
+          }
+        ]
+      }
+    }
+  }
+}

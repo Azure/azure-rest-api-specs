@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2023-08-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "wnp2",
+    "parameters": {
+      "properties": {
+        "orchestratorVersion": "1.23.8",
+        "count": 3,
+        "vmSize": "Standard_D4s_v3",
+        "osType": "Windows",
+        "osSKU": "Windows2022",
+        "windowsProfile": {
+          "disableOutboundNat": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/wnp2",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "wnp2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "orchestratorVersion": "1.23.8",
+          "currentOrchestratorVersion": "1.23.8",
+          "count": 3,
+          "vmSize": "Standard_D4s_v3",
+          "maxPods": 110,
+          "osType": "Windows",
+          "osSKU": "Windows2022",
+          "windowsProfile": {
+            "disableOutboundNat": true
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/wnp2",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "wnp2",
+        "properties": {
+          "provisioningState": "Creating",
+          "orchestratorVersion": "1.23.8",
+          "currentOrchestratorVersion": "1.23.8",
+          "count": 3,
+          "vmSize": "Standard_D4s_v3",
+          "maxPods": 110,
+          "osType": "Windows",
+          "osSKU": "Windows2022",
+          "windowsProfile": {
+            "disableOutboundNat": true
+          }
+        }
+      }
+    }
+  }
+}

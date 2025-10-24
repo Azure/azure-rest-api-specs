@@ -1,0 +1,64 @@
+parameters:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
+  "service-directory-name":
+    default: "communication"
+  "service-dir":
+    default: "sdk/communication"
+  "python-output-dir":
+    default: "azure/communication/messages/_generated"
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    output-file: "{azure-resource-provider-folder}/Messages/{version-status}/{version}/communicationservicesmessages.json"
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: true
+  "@azure-tools/typespec-csharp":
+    clear-output-folder: true
+    model-namespace: false
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    save-inputs: true
+    namespace: Azure.Communication.Messages
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Communication.Messages
+    model-namespace: false
+  "@azure-tools/typespec-python":
+    package-pprint-name: '"Communication Messages"'
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-messages"
+    namespace: "azure.communication.messages"
+    package-version: 1.0.0
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    api-version: "2025-01-15-preview"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-messages"
+    namespace: com.azure.communication.messages
+    partial-update: true
+    service-name: Messages
+    custom-types-subpackage: "models.channels"
+    custom-types: "WhatsAppButtonActionBindings,WhatsAppListActionBindings,WhatsAppUrlActionBindings,WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem"
+    customization-class: customization/src/main/java/MessagesSdkCustomization.java
+    use-eclipse-language-server: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/communication-messages-rest"
+    is-modular-library: false
+    package-details:
+      name: "@azure-rest/communication-messages"
+      description: "Azure client library for Azure Communication Messages services"
+    flavor: azure

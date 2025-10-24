@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2024-08-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbRoleDefinitions/myRoleDefinitionId",
+            "name": "myRoleDefinitionId",
+            "type": "Microsoft.DocumentDB/databaseAccounts/mongodbRoleDefinitions",
+            "properties": {
+              "roleName": "myRoleName",
+              "type": "CustomRole",
+              "databaseName": "sales",
+              "privileges": [
+                {
+                  "resource": {
+                    "db": "sales",
+                    "collection": "coll"
+                  },
+                  "actions": [
+                    "find",
+                    "insert"
+                  ]
+                }
+              ],
+              "roles": [
+                {
+                  "db": "sales",
+                  "role": "myReadRole"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

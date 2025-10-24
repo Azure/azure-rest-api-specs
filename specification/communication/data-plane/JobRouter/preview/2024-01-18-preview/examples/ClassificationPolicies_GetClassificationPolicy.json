@@ -1,0 +1,47 @@
+{
+  "title": "Retrieves an existing classification policy by Id",
+  "operationId": "JobRouterAdministrationOperations_GetClassificationPolicy",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "classificationPolicyId": "MainClassificationPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "MainClassificationPolicy",
+        "name": "Main",
+        "fallbackQueueId": "MainQueue",
+        "queueSelectorAttachments": [
+          {
+            "kind": "conditional",
+            "condition": {
+              "kind": "expression",
+              "language": "powerFx",
+              "expression": "1 = 1"
+            },
+            "queueSelectors": [
+              {
+                "key": "foo",
+                "labelOperator": "equal",
+                "value": "bar"
+              }
+            ]
+          }
+        ],
+        "prioritizationRule": {
+          "kind": "static",
+          "value": "2"
+        },
+        "workerSelectorAttachments": [
+          {
+            "kind": "passThrough",
+            "key": "language",
+            "labelOperator": "equal"
+          }
+        ],
+        "etag": "etag"
+      }
+    }
+  }
+}

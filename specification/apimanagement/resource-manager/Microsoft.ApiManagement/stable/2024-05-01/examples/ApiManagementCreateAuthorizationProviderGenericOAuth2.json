@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "authorizationProviderId": "eventbrite",
+    "parameters": {
+      "properties": {
+        "displayName": "eventbrite",
+        "identityProvider": "oauth2",
+        "oauth2": {
+          "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+          "grantTypes": {
+            "authorizationCode": {
+              "clientId": "clientid",
+              "clientSecret": "clientsecretvalue",
+              "scopes": null,
+              "authorizationUrl": "https://www.eventbrite.com/oauth/authorize",
+              "refreshUrl": "https://www.eventbrite.com/oauth/token",
+              "tokenUrl": "https://www.eventbrite.com/oauth/token"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/eventbrite",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "name": "eventbrite",
+        "properties": {
+          "displayName": "eventbrite",
+          "identityProvider": "oauth2",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+            "grantTypes": {
+              "authorizationCode": {
+                "clientId": "clientid",
+                "scopes": null,
+                "authorizationUrl": "https://www.eventbrite.com/oauth/authorize",
+                "refreshUrl": "https://www.eventbrite.com/oauth/token",
+                "tokenUrl": "https://www.eventbrite.com/oauth/token"
+              }
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/eventbrite",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "name": "eventbrite",
+        "properties": {
+          "displayName": "eventbrite",
+          "identityProvider": "oauth2",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+            "grantTypes": {
+              "authorizationCode": {
+                "clientId": "clientid",
+                "scopes": null,
+                "authorizationUrl": "https://www.eventbrite.com/oauth/authorize",
+                "refreshUrl": "https://www.eventbrite.com/oauth/token",
+                "tokenUrl": "https://www.eventbrite.com/oauth/token"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

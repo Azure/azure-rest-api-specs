@@ -1,0 +1,43 @@
+{
+  "title": "Filter query",
+  "description": "A filtering query on resources.",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "Resources | project id, name, type, location | where type =~ 'Microsoft.Compute/virtualMachines' | limit 3"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "count": 3,
+        "resultTruncated": "false",
+        "facets": [],
+        "data": [
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Compute/virtualMachines/myVm1",
+            "name": "myVm1",
+            "type": "microsoft.compute/virtualmachines",
+            "location": "centralus"
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Compute/virtualMachines/myVirtualMachine",
+            "name": "myVirtualMachine",
+            "type": "microsoft.compute/virtualmachines",
+            "location": "eastus"
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG3/providers/Microsoft.Compute/virtualMachines/testVm",
+            "name": "testVm",
+            "type": "microsoft.compute/virtualmachines",
+            "location": "eastus"
+          }
+        ]
+      }
+    }
+  }
+}

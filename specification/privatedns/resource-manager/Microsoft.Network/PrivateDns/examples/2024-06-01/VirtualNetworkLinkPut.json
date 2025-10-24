@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "parameters": {
+      "location": "Global",
+      "properties": {
+        "registrationEnabled": false,
+        "virtualNetwork": {
+          "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
+        }
+      },
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "privateZoneName": "privatezone1.com",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId",
+    "virtualNetworkLinkName": "virtualNetworkLink1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "virtualNetworkLink1",
+        "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/virtualNetworkLinks/virtualNetworkLink1",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "registrationEnabled": false,
+          "virtualNetwork": {
+            "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
+          },
+          "virtualNetworkLinkState": "Completed"
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "virtualNetworkLink1",
+        "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/virtualNetworkLinks/virtualNetworkLink1",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "registrationEnabled": false,
+          "virtualNetwork": {
+            "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
+          },
+          "virtualNetworkLinkState": "Completed"
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationStatuses/asyncOperationId?api-version=2024-06-01",
+        "Location": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationResults/asyncOperationId?api-version=2024-06-01",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "VirtualNetworkLinks_CreateOrUpdate",
+  "title": "PUT Private DNS Zone Virtual Network Link"
+}

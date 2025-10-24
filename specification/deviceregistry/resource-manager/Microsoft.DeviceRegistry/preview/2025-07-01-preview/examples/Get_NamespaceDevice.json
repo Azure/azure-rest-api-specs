@@ -1,0 +1,44 @@
+{
+  "title": "Get_NamespaceDevice",
+  "operationId": "NamespaceDevices_Get",
+  "description": "Get a Device from a Namespace",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "deviceName": "my-device-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/devices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+        "name": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+        "type": "Microsoft.DeviceRegistry/namespaces/devices",
+        "location": "North Europe",
+        "etag": "\"c80325f9-0000-0800-0000-66fcb0290000\"",
+        "tags": {
+          "sensor": "temperature,humidity"
+        },
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-10-02T02:30:01.6394987Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-02T02:30:01.6394987Z"
+        },
+        "properties": {
+          "externalDeviceId": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+          "enabled": true,
+          "attributes": {
+            "deviceType": "sensor",
+            "deviceOwner": "IT",
+            "deviceCategory": 16
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

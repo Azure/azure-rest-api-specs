@@ -20,8 +20,8 @@
       {
         "name": "endpoint",
         "in": "path",
-        "required": true,
         "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus.api.cognitive.microsoft.com).",
+        "required": true,
         "type": "string"
       }
     ]
@@ -75,12 +75,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatCompletionsOptions"
-            }
+            "$ref": "#/parameters/GetChatCompletionsBody"
           }
         ],
         "responses": {
@@ -97,8 +92,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -126,12 +121,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompletionsOptions"
-            }
+            "$ref": "#/parameters/GetCompletionsBody"
           }
         ],
         "responses": {
@@ -148,8 +138,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -177,12 +167,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmbeddingsOptions"
-            }
+            "$ref": "#/parameters/GetEmbeddingsBody"
           }
         ],
         "responses": {
@@ -199,8 +184,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -221,12 +206,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageGenerationOptions"
-            }
+            "$ref": "#/parameters/GetImageGenerationsBody"
           }
         ],
         "responses": {
@@ -250,8 +230,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -294,8 +274,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -330,8 +310,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -358,7 +337,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -454,7 +433,7 @@
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
         "message": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
         },
         "index": {
@@ -469,12 +448,12 @@
           "x-ms-client-name": "finishReason"
         },
         "delta": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
         },
         "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
-          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it \nhas been detected, as well as the severity level (very_low, low, medium, high-scale that \ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "$ref": "#/definitions/ContentFilterResultsForChoice",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
           "x-ms-client-name": "contentFilterResults"
         }
       },
@@ -501,17 +480,19 @@
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/ChatChoice"
-          },
-          "x-ms-identifiers": []
+          }
         },
-        "prompt_annotations": {
+        "model": {
+          "type": "string",
+          "description": "The model name used for this completions request."
+        },
+        "prompt_filter_results": {
           "type": "array",
-          "description": "Content filtering results for zero or more prompts in the request. In a streaming request, \nresults for different prompts may arrive at different times or in different orders.",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
           "items": {
-            "$ref": "#/definitions/PromptFilterResult"
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
-          "x-ms-client-name": "promptFilterResults",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "promptFilterResults"
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -521,8 +502,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "ChatCompletionsOptions": {
@@ -533,17 +513,15 @@
           "type": "array",
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/ChatRequestMessage"
+          }
         },
         "functions": {
           "type": "array",
           "description": "A list of functions the model may generate JSON inputs for.",
           "items": {
             "$ref": "#/definitions/FunctionDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "function_call": {
           "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
@@ -552,7 +530,7 @@
         "max_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tokens to generate.",
+          "description": "The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).\n\nThis value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.",
           "x-ms-client-name": "maxTokens"
         },
         "temperature": {
@@ -616,26 +594,140 @@
         "messages"
       ]
     },
-    "ChatMessage": {
+    "ChatMessageContent": {
+      "type": "string",
+      "x-nullable": false
+    },
+    "ChatRequestAssistantMessage": {
       "type": "object",
-      "description": "A single, role-attributed message within a chat completion interaction.",
+      "description": "A request chat message representing response or action from the assistant.",
       "properties": {
-        "role": {
-          "$ref": "#/definitions/ChatRole",
-          "description": "The role associated with this message payload."
-        },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload.",
+          "description": "The content of the message.",
           "x-nullable": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the author of this message. `name` is required if role is `function`, and it should be the name of the\nfunction whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of\n64 characters."
+          "description": "An optional name for the participant."
         },
         "function_call": {
           "$ref": "#/definitions/FunctionCall",
-          "description": "The name and arguments of a function that should be called, as generated by the model.",
+          "description": "The function call that must be resolved and have its output appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "x-ms-client-name": "functionCall"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestFunctionMessage": {
+      "type": "object",
+      "description": "A request chat message representing requested output from a configured function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function that was called to produce output."
+        },
+        "content": {
+          "type": "string",
+          "description": "The output of the function as requested by the function call.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "name",
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ChatRequestMessage": {
+      "type": "object",
+      "description": "An abstract representation of a chat message as provided in a request.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with this message."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ChatMessageContent",
+          "description": "The contents of the user message, with available input types varying by selected model."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "function_call": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The function call that must be resolved and have its output appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
           "x-ms-client-name": "functionCall"
         }
       },
@@ -694,19 +786,14 @@
           "description": "The ordered index associated with this completions choice."
         },
         "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
-          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it \nhas been detected, as well as the severity level (very_low, low, medium, high-scale that \ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "$ref": "#/definitions/ContentFilterResultsForChoice",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
           "x-ms-client-name": "contentFilterResults"
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/CompletionsLogProbabilityModel",
           "description": "The log probabilities model for tokens associated with this completions choice.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CompletionsLogProbabilityModel"
-            }
-          ]
+          "x-nullable": true
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
@@ -735,22 +822,20 @@
           "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
-        "prompt_annotations": {
+        "prompt_filter_results": {
           "type": "array",
-          "description": "Content filtering results for zero or more prompts in the request. In a streaming request, \nresults for different prompts may arrive at different times or in different orders.",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
           "items": {
-            "$ref": "#/definitions/PromptFilterResult"
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
-          "x-ms-client-name": "promptFilterResults",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "promptFilterResults"
         },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/Choice"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -760,8 +845,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "CompletionsFinishReason": {
@@ -825,10 +909,14 @@
           "type": "array",
           "description": "A mapping of tokens to maximum log probability values in this completions data.",
           "items": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": {
+              "format": "float",
+              "type": "number",
+              "x-nullable": true
+            }
           },
-          "x-ms-client-name": "topLogprobs",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "topLogprobs"
         },
         "text_offset": {
           "type": "array",
@@ -897,6 +985,10 @@
           "type": "integer",
           "format": "int32",
           "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix that comes after a completion of inserted text"
         },
         "echo": {
           "type": "boolean",
@@ -973,35 +1065,35 @@
       "type": "object",
       "description": "Information about filtered content severity level and if it has been filtered or not.",
       "properties": {
-        "severity": {
-          "$ref": "#/definitions/ContentFilterSeverity",
-          "description": "Ratings for the intensity and risk level of filtered content."
-        },
         "filtered": {
           "type": "boolean",
           "description": "A value indicating whether or not the content has been filtered."
+        },
+        "severity": {
+          "$ref": "#/definitions/ContentFilterSeverity",
+          "description": "Ratings for the intensity and risk level of filtered content."
         }
       },
       "required": [
-        "severity",
-        "filtered"
+        "filtered",
+        "severity"
       ]
     },
-    "ContentFilterResults": {
+    "ContentFilterResultDetailsForPrompt": {
       "type": "object",
-      "description": "Information about the content filtering category, if it has been detected.",
+      "description": "Information about content filtering evaluated against input data to Azure OpenAI.",
       "properties": {
         "sexual": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including \n those portrayed as an assault or a forced sexual violent act against one’s will, \n prostitution, pornography, and abuse."
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
         },
         "violence": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language related to physical actions intended to hurt, injure, damage, or \nkill someone or something; describes weapons, etc."
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
         },
         "hate": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language attacks or uses that include pejorative or discriminatory language \nwith reference to a person or identity group on the basis of certain differentiating \nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
         },
         "self_harm": {
           "$ref": "#/definitions/ContentFilterResult",
@@ -1013,6 +1105,54 @@
           "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
         }
       }
+    },
+    "ContentFilterResultsForChoice": {
+      "type": "object",
+      "description": "Information about content filtering evaluated against generated model output.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
+        }
+      }
+    },
+    "ContentFilterResultsForPrompt": {
+      "type": "object",
+      "description": "Content filtering results for a single prompt in the request.",
+      "properties": {
+        "prompt_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of this prompt in the set of prompt results",
+          "x-ms-client-name": "promptIndex"
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResultDetailsForPrompt",
+          "description": "Content filtering results for this prompt",
+          "x-ms-client-name": "contentFilterResults"
+        }
+      },
+      "required": [
+        "prompt_index",
+        "content_filter_results"
+      ]
     },
     "ContentFilterSeverity": {
       "type": "string",
@@ -1030,22 +1170,22 @@
           {
             "name": "safe",
             "value": "safe",
-            "description": "Content may be related to violence, self-harm, sexual, or hate categories but the terms \nare used in general, journalistic, scientific, medical, and similar professional contexts, \nwhich are appropriate for most audiences."
+            "description": "Content may be related to violence, self-harm, sexual, or hate categories but the terms\nare used in general, journalistic, scientific, medical, and similar professional contexts,\nwhich are appropriate for most audiences."
           },
           {
             "name": "low",
             "value": "low",
-            "description": "Content that expresses prejudiced, judgmental, or opinionated views, includes offensive \nuse of language, stereotyping, use cases exploring a fictional world (for example, gaming,\nliterature) and depictions at low intensity."
+            "description": "Content that expresses prejudiced, judgmental, or opinionated views, includes offensive\nuse of language, stereotyping, use cases exploring a fictional world (for example, gaming,\nliterature) and depictions at low intensity."
           },
           {
             "name": "medium",
             "value": "medium",
-            "description": "Content that uses offensive, insulting, mocking, intimidating, or demeaning language \ntowards specific identity groups, includes depictions of seeking and executing harmful \ninstructions, fantasies, glorification, promotion of harm at medium intensity."
+            "description": "Content that uses offensive, insulting, mocking, intimidating, or demeaning language\ntowards specific identity groups, includes depictions of seeking and executing harmful\ninstructions, fantasies, glorification, promotion of harm at medium intensity."
           },
           {
             "name": "high",
             "value": "high",
-            "description": "Content that displays explicit and severe harmful instructions, actions, \ndamage, or abuse; includes endorsement, glorification, or promotion of severe \nharmful acts, extreme or illegal forms of harm, radicalization, or non-consensual \npower exchange or abuse."
+            "description": "Content that displays explicit and severe harmful instructions, actions,\ndamage, or abuse; includes endorsement, glorification, or promotion of severe\nharmful acts, extreme or illegal forms of harm, radicalization, or non-consensual\npower exchange or abuse."
           }
         ]
       }
@@ -1082,8 +1222,7 @@
           "description": "Embedding values for the prompts submitted in the request.",
           "items": {
             "$ref": "#/definitions/EmbeddingItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "$ref": "#/definitions/EmbeddingsUsage",
@@ -1172,17 +1311,37 @@
           "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
         },
         "parameters": {
-          "description": "The parameters the functions accepts, described as a JSON Schema object."
+          "description": "The parameters the function accepts, described as a JSON Schema object."
         }
       },
       "required": [
         "name"
       ]
     },
+    "ImageGenerationData": {
+      "type": "object",
+      "description": "A representation of a single generated image, provided as either base64-encoded data or as a URL from which the image\nmay be retrieved.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL that provides temporary access to download the generated image."
+        },
+        "b64_json": {
+          "type": "string",
+          "description": "The complete data for an image, represented as a base64-encoded string.",
+          "x-ms-client-name": "base64Data"
+        }
+      }
+    },
     "ImageGenerationOptions": {
       "type": "object",
       "description": "Represents the request data used to generate images.",
       "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be\ninferred as a default."
+        },
         "prompt": {
           "type": "string",
           "description": "A description of the desired images."
@@ -1190,17 +1349,58 @@
         "n": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of images to generate (defaults to 1).",
+          "description": "The number of images to generate.\nDall-e-2 models support values between 1 and 10.\nDall-e-3 models only support a value of 1.",
           "default": 1
         },
         "size": {
-          "$ref": "#/definitions/ImageSize",
-          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
-          "default": "1024x1024"
+          "type": "string",
+          "description": "The desired dimensions for generated images.\nDall-e-2 models support 256x256, 512x512, or 1024x1024.\nDall-e-3 models support 1024x1024, 1792x1024, or 1024x1792.",
+          "default": "1024x1024",
+          "enum": [
+            "256x256",
+            "512x512"
+          ],
+          "x-ms-enum": {
+            "name": "ImageSize",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "size256x256",
+                "value": "256x256",
+                "description": "Very small image size of 256x256 pixels.\nOnly supported with dall-e-2 models."
+              },
+              {
+                "name": "size512x512",
+                "value": "512x512",
+                "description": "A smaller image size of 512x512 pixels.\nOnly supported with dall-e-2 models."
+              }
+            ]
+          }
         },
         "response_format": {
-          "$ref": "#/definitions/ImageGenerationResponseFormat",
-          "description": "  The format in which image generation response items should be presented.\n  Azure OpenAI only supports URL response items.",
+          "type": "string",
+          "description": "The format in which image generation response items should be presented.",
+          "default": "url",
+          "enum": [
+            "url",
+            "b64_json"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationResponseFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "url",
+                "value": "url",
+                "description": "Image generation response items should provide a URL from which the image may be retrieved."
+              },
+              {
+                "name": "base64",
+                "value": "b64_json",
+                "description": "Image generation response items should provide image data as a base64-encoded string."
+              }
+            ]
+          },
           "x-ms-client-name": "responseFormat"
         },
         "user": {
@@ -1212,96 +1412,26 @@
         "prompt"
       ]
     },
-    "ImageGenerationResponseFormat": {
-      "type": "string",
-      "description": "The format in which the generated images are returned.",
-      "enum": [
-        "url",
-        "b64_json"
-      ],
-      "x-ms-enum": {
-        "name": "ImageGenerationResponseFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Url",
-            "value": "url",
-            "description": "Image generation response items should provide a URL from which the image may be retrieved."
-          },
-          {
-            "name": "Base64",
-            "value": "b64_json",
-            "description": "Image generation response items should provide image data as a base64-encoded string."
-          }
-        ]
-      }
-    },
     "ImageGenerations": {
       "type": "object",
-      "description": "The result of the operation if the operation succeeded.",
+      "description": "The result of a successful image generation operation.",
       "properties": {
         "created": {
           "type": "integer",
           "format": "unixtime",
-          "description": "A timestamp when this job or item was created (in unix epochs)."
+          "description": "A timestamp representing when this operation was started.\nExpressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000."
         },
         "data": {
-          "description": "The images generated by the operator."
+          "type": "array",
+          "description": "The images generated by the operation.",
+          "items": {
+            "$ref": "#/definitions/ImageGenerationData"
+          }
         }
       },
       "required": [
         "created",
         "data"
-      ]
-    },
-    "ImageSize": {
-      "type": "string",
-      "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
-      "enum": [
-        "256x256",
-        "512x512",
-        "1024x1024"
-      ],
-      "x-ms-enum": {
-        "name": "ImageSize",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Size256x256",
-            "value": "256x256",
-            "description": "Image size of 256x256."
-          },
-          {
-            "name": "Size512x512",
-            "value": "512x512",
-            "description": "Image size of 512x512."
-          },
-          {
-            "name": "Size1024x1024",
-            "value": "1024x1024",
-            "description": "Image size of 1024x1024."
-          }
-        ]
-      }
-    },
-    "PromptFilterResult": {
-      "type": "object",
-      "description": "Content filtering results for a single prompt in the request.",
-      "properties": {
-        "prompt_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The index of this prompt in the set of prompt results",
-          "x-ms-client-name": "promptIndex"
-        },
-        "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
-          "description": "Content filtering results for this prompt",
-          "x-ms-client-name": "contentFilterResults"
-        }
-      },
-      "required": [
-        "prompt_index"
       ]
     }
   },
@@ -1315,6 +1445,46 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GetChatCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ChatCompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetEmbeddingsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EmbeddingsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetImageGenerationsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Represents the request data used to generate images.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ImageGenerationOptions"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

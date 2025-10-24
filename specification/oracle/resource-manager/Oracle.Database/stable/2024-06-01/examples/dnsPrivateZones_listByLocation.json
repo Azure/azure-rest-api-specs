@@ -1,0 +1,48 @@
+{
+  "operationId": "DnsPrivateZones_listByLocation",
+  "title": "DnsPrivateZones_listByLocation",
+  "parameters": {
+    "api-version": "2024-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Oracle.Database/locations/eastus/dnsPrivateZones/zone1",
+            "type": "Oracle.Database/locations/dnsPrivateZones",
+            "properties": {
+              "ocid": "zone-id-1",
+              "isProtected": false,
+              "lifecycleState": "Active",
+              "self": "https://api.example.com/zone1",
+              "serial": 12345,
+              "version": "1.0.0.0",
+              "viewId": "view-id-1",
+              "zoneType": "Primary",
+              "timeCreated": "2023-10-26T12:34:56Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Oracle.Database/locations/eastus/dnsPrivateZones/zone2",
+            "type": "Oracle.Database/locations/dnsPrivateZones",
+            "properties": {
+              "ocid": "zone-id-2",
+              "isProtected": true,
+              "lifecycleState": "Creating",
+              "self": "https://api.example.com/zone2",
+              "serial": 54321,
+              "version": "2.0.0.0",
+              "viewId": "view-id-2",
+              "zoneType": "Secondary",
+              "timeCreated": "2023-10-27T09:45:00Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

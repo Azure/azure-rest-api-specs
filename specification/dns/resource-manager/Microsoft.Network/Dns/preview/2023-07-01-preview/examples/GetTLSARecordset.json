@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "recordType": "TLSA",
+    "relativeRecordSetName": "record1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/TLSA",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TLSA/record1",
+        "properties": {
+          "TLSARecords": [
+            {
+              "certAssociationData": "6EC8A4B7F511454D84DCC055213B8D195E8ADA751FE14300AFE32D54B162438B",
+              "matchingType": 1,
+              "selector": 1,
+              "usage": 3
+            }
+          ],
+          "TTL": 3600,
+          "fqdn": "record1.zone1",
+          "metadata": {
+            "key1": "value1"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Get",
+  "title": "Get TLSA recordset"
+}

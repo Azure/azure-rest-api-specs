@@ -1,0 +1,403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}": {
+      "put": {
+        "tags": [
+          "VirtualEndpoints"
+        ],
+        "operationId": "VirtualEndpoints_Create",
+        "x-ms-examples": {
+          "Create a pair of virtual endpoints for a flexible server.": {
+            "$ref": "./examples/VirtualEndpointCreate.json"
+          }
+        },
+        "description": "Creates a pair of virtual endpoints for a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualEndpointNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualEndpointResource"
+            },
+            "description": "Parameters required to create or update a pair of virtual endpoints."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualEndpointResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualEndpoints"
+        ],
+        "operationId": "VirtualEndpoints_Update",
+        "x-ms-examples": {
+          "Update a pair of virtual endpoints for a flexible server.": {
+            "$ref": "./examples/VirtualEndpointUpdate.json"
+          }
+        },
+        "description": "Updates a pair of virtual endpoints for a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualEndpointNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualEndpointResourceForPatch"
+            },
+            "description": "Parameters required to update a pair of virtual endpoints."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualEndpoints"
+        ],
+        "operationId": "VirtualEndpoints_Delete",
+        "x-ms-examples": {
+          "Delete a pair of virtual endpoints.": {
+            "$ref": "./examples/VirtualEndpointDelete.json"
+          }
+        },
+        "description": "Deletes a pair of virtual endpoints.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualEndpoints"
+        ],
+        "operationId": "VirtualEndpoints_Get",
+        "x-ms-examples": {
+          "Get information about a pair of virtual endpoints.": {
+            "$ref": "./examples/VirtualEndpointsGet.json"
+          }
+        },
+        "description": "Gets information about a pair of virtual endpoints.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints": {
+      "get": {
+        "tags": [
+          "VirtualEndpoints"
+        ],
+        "operationId": "VirtualEndpoints_ListByServer",
+        "x-ms-examples": {
+          "List pair of virtual endpoints associated to a flexible server.": {
+            "$ref": "./examples/VirtualEndpointsListByServer.json"
+          }
+        },
+        "description": "Lists pair of virtual endpoints associated to a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualEndpointsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualEndpointResourceProperties": {
+      "type": "object",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of endpoint for the virtual endpoints.",
+          "enum": [
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualEndpointType",
+            "modelAsString": true
+          }
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Flexible server that one of the virtual endpoints can refer to."
+          },
+          "description": "List of flexible servers that one of the virtual endpoints can refer to."
+        },
+        "virtualEndpoints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Virtual endpoints for a flexible server."
+          },
+          "description": "List of virtual endpoints for a flexible server.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of a pair of virtual endpoints."
+    },
+    "VirtualEndpointResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualEndpointResourceForPatch"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Pair of virtual endpoints for a flexible server."
+    },
+    "VirtualEndpointResourceForPatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualEndpointResourceProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the pair of virtual endpoints."
+        }
+      },
+      "description": "Pair of virtual endpoints for a flexible server."
+    },
+    "VirtualEndpointsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualEndpointResource"
+          },
+          "description": "List of virtual endpoints."
+        },
+        "nextLink": {
+          "description": "Link used to get the next page of results.",
+          "type": "string"
+        }
+      },
+      "description": "List of virtual endpoints."
+    }
+  },
+  "parameters": {
+    "VirtualEndpointNameParameter": {
+      "name": "virtualEndpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Base name of the virtual endpoints.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,62}(?<!-)$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

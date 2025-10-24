@@ -1,0 +1,201 @@
+{
+  "parameters": {
+    "serverName": "pgtestsvc4",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-11-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "tuningOption": "index"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "initialRecommendedTime": "2024-05-31T08:13:55.382539Z",
+              "lastRecommendedTime": "2024-05-31T19:14:34.412442Z",
+              "timesRecommended": 2,
+              "improvedQueryIds": [
+                -5265741861999699191,
+                -632598438706436788,
+                234118651516953391
+              ],
+              "recommendationReason": "Column \"customer\".\"c_custkey\" appear in Join On clause(s) in query -5265741861999699191; Column \"customer\".\"c_custkey\" appear in Join On clause(s) in query -632598438706436788; Column \"customer\".\"c_custkey\" appear in Join On clause(s) in query 234118651516953391;",
+              "recommendationType": "CreateIndex",
+              "implementationDetails": {
+                "method": "SQL",
+                "script": "create index concurrently c_custkey_idx on public.customer(c_custkey)"
+              },
+              "analyzedWorkload": {
+                "startTime": "2024-05-31T07:14:34.4124138Z",
+                "endTime": "2024-05-31T19:14:34.4124138Z",
+                "queryCount": 25
+              },
+              "estimatedImpact": [
+                {
+                  "dimensionName": "IndexSize",
+                  "unit": "MB",
+                  "absoluteValue": 2.890625
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -5265741861999699191,
+                  "absoluteValue": 56.754249304855463
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": 234118651516953391,
+                  "absoluteValue": 43.678262458967993
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -632598438706436788,
+                  "absoluteValue": 10.176593636567572
+                }
+              ],
+              "details": {
+                "databaseName": "ecommerce",
+                "schema": "public",
+                "table": "customer",
+                "indexType": "BTREE",
+                "indexName": "c_custkey_idx",
+                "indexColumns": "\"customer\".\"c_custkey\""
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/tuningOptions/index/recommendations/14",
+            "name": "CreateIndex_ecommerce_public_c_custkey_idx",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/index"
+          },
+          {
+            "properties": {
+              "initialRecommendedTime": "2024-05-31T08:13:55.382539Z",
+              "lastRecommendedTime": "2024-05-31T19:14:34.412442Z",
+              "timesRecommended": 2,
+              "improvedQueryIds": [
+                -5265741861999699191,
+                -5259344436787615838,
+                -2174336608863105762,
+                -1887467119476231661,
+                234118651516953391
+              ],
+              "recommendationReason": "Column \"lineitem\".\"l_orderkey\" appear in Join On clause(s) in query -5265741861999699191; Column \"lineitem\".\"l_orderkey\" appear in Join On clause(s) in query -5259344436787615838; Column \"lineitem\".\"l_orderkey\" appear in Join On clause(s) in query -2174336608863105762; Column \"lineitem\".\"l_orderkey\" appear in Equal Predicate clause(s) in query -1887467119476231661; Column \"lineitem\".\"l_orderkey\" appear in Join On clause(s) in query 234118651516953391;",
+              "recommendationType": "CreateIndex",
+              "implementationDetails": {
+                "method": "SQL",
+                "script": "create index concurrently l_orderkey_idx on public.lineitem(l_orderkey)"
+              },
+              "analyzedWorkload": {
+                "startTime": "2024-05-31T07:14:34.4124138Z",
+                "endTime": "2024-05-31T19:14:34.4124138Z",
+                "queryCount": 25
+              },
+              "estimatedImpact": [
+                {
+                  "dimensionName": "IndexSize",
+                  "unit": "MB",
+                  "absoluteValue": 115.21875
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -1887467119476231661,
+                  "absoluteValue": 63.422507635390858
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -5265741861999699191,
+                  "absoluteValue": 56.754249304855463
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -5259344436787615838,
+                  "absoluteValue": 77.23764140869261
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": 234118651516953391,
+                  "absoluteValue": 43.678262458967993
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -2174336608863105762,
+                  "absoluteValue": 75.738575466528772
+                }
+              ],
+              "details": {
+                "databaseName": "ecommerce",
+                "schema": "public",
+                "table": "lineitem",
+                "indexType": "BTREE",
+                "indexName": "l_orderkey_idx",
+                "indexColumns": "\"lineitem\".\"l_orderkey\""
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/tuningOptions/index/recommendations/11",
+            "name": "CreateIndex_ecommerce_public_l_orderkey_idx",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/index"
+          },
+          {
+            "properties": {
+              "initialRecommendedTime": "2024-05-31T08:13:55.382539Z",
+              "lastRecommendedTime": "2024-05-31T19:14:34.412442Z",
+              "timesRecommended": 2,
+              "improvedQueryIds": [
+                -6263488632059808423,
+                -2436244725743338508
+              ],
+              "recommendationReason": "Column \"lineitem\".\"l_orderkey\" appear in Join On clause(s) in query -6263488632059808423; Column \"lineitem\".\"l_shipdate\" appear in Non-Equal Predicate clause(s) in query -6263488632059808423;",
+              "recommendationType": "CreateIndex",
+              "implementationDetails": {
+                "method": "SQL",
+                "script": "create index concurrently l_orderkey_l_shipdate_idx on public.lineitem(l_orderkey,l_shipdate)"
+              },
+              "analyzedWorkload": {
+                "startTime": "2024-05-31T07:14:34.4124138Z",
+                "endTime": "2024-05-31T19:14:34.4124138Z",
+                "queryCount": 25
+              },
+              "estimatedImpact": [
+                {
+                  "dimensionName": "IndexSize",
+                  "unit": "MB",
+                  "absoluteValue": 161.140625
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -6263488632059808423,
+                  "absoluteValue": 43.078356952051259
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -2436244725743338508,
+                  "absoluteValue": 83.065721369804919
+                }
+              ],
+              "details": {
+                "databaseName": "ecommerce",
+                "schema": "public",
+                "table": "lineitem",
+                "indexType": "BTREE",
+                "indexName": "l_orderkey_l_shipdate_idx",
+                "indexColumns": "\"lineitem\".\"l_orderkey\";\"lineitem\".\"l_shipdate\""
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/tuningOptions/index/recommendations/18",
+            "name": "CreateIndex_ecommerce_public_l_orderkey_l_shipdate_idx",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/index"
+          }
+        ]
+      }
+    }
+  }
+}

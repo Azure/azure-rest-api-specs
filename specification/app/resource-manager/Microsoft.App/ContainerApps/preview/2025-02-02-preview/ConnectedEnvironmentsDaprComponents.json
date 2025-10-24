@@ -1,0 +1,391 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-02-02-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents": {
+      "get": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "Get the Dapr Components for a connected environment.",
+        "operationId": "ConnectedEnvironmentsDaprComponents_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connected environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentDaprComponentsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Dapr Components": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}": {
+      "get": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "Get a dapr component.",
+        "operationId": "ConnectedEnvironmentsDaprComponents_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connected environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Dapr Component": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "Creates or updates a Dapr Component.",
+        "description": "Creates or updates a Dapr Component in a connected environment.",
+        "operationId": "ConnectedEnvironmentsDaprComponents_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connected environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "daprComponentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the Dapr Component.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update dapr component": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "Delete a Dapr Component.",
+        "description": "Delete a Dapr Component from a connected environment.",
+        "operationId": "ConnectedEnvironmentsDaprComponents_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connected environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Delete operation is accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Environment does not exist"
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete dapr component": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets": {
+      "post": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "List secrets for a dapr component",
+        "operationId": "ConnectedEnvironmentsDaprComponents_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connected environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprSecretsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Secrets": {
+            "$ref": "./examples/ConnectedEnvironmentsDaprComponents_ListSecrets.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectedEnvironmentDaprComponentsCollection": {
+      "description": "Collection of Dapr Components for Environments",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Dapr component resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectedEnvironmentDaprComponent": {
+      "description": "Dapr Component.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Dapr component properties",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentProperties"
+            }
+          ],
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Connected Environment Dapr Component.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ConnectedEnvironmentDaprComponentProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

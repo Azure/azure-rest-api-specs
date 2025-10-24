@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "targetResourceName": "targetCosmosDbClusterName",
+    "migrationName": "migrationRequest",
+    "api-version": "2023-07-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sourceMongoConnection": {
+            "host": "abc.mongodb.com",
+            "port": 88
+          },
+          "targetMongoConnection": {
+            "host": "xyz.mongocluster.cosmos.azure.com",
+            "port": 10255
+          },
+          "collectionList": [
+            {
+              "sourceDatabase": "sourceDb1",
+              "sourceCollection": "sourceCol1",
+              "targetDatabase": "targetDb1",
+              "targetCollection": "targetCol1"
+            },
+            {
+              "sourceDatabase": "sourceDb2",
+              "sourceCollection": "sourceCol2",
+              "targetDatabase": "sourceDb2",
+              "targetCollection": "sourceCol2"
+            }
+          ],
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DocumentDB/mongoClusters/targetCosmosDbClusterName",
+          "provisioningState": "Creating",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/migrationServices/testMigrationService",
+          "kind": "MongoToCosmosDbMongo",
+          "migrationStatus": "Creating"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DocumentDB/mongoClusters/targetCosmosDbClusterName/providers/Microsoft.DataMigration/databaseMigrations/migrationRequest",
+        "name": "migrationRequest",
+        "type": "Microsoft.DataMigration/databaseMigrations"
+      }
+    }
+  }
+}

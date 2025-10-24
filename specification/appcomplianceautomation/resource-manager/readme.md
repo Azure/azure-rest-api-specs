@@ -27,15 +27,23 @@ These are the global settings for the appcomplianceautomation.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-11-16-preview
+tag: package-2024-06
 ```
 
 
+### Tag: package-2024-06
+
+These settings apply only when `--tag=package-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06'
+input-file:
+  - Microsoft.AppComplianceAutomation/stable/2024-06-27/appcomplianceautomation.json
+```
 ### Tag: package-2022-11-16-preview
 
 These settings apply only when `--tag=package-2022-11-16-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11-16-preview'
+``` yaml $(tag) == 'package-2022-11-16-preview'
 input-file:
   - Microsoft.AppComplianceAutomation/preview/2022-11-16-preview/appcomplianceautomation.json
 ```
@@ -51,10 +59,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
 ```
@@ -70,10 +78,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

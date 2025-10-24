@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "serviceGroupName": "ServiceGroup1",
+    "updateServiceGroupRequest": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "properties": {
+        "displayName": "ServiceGroup 1 Name"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/serviceGroups/ServiceGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "name": "ServiceGroup1",
+        "kind": "App",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "ServiceGroup 1 Name",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.Management/operationResults/update/serviceGroups/ServiceGroup1?api-version=2024-02-01-preview"
+      }
+    }
+  }
+}

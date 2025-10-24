@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "privateEndpointConnectionName": "sample-pec",
+    "properties": {
+      "etag": "",
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "My name is Joe and I'm approving this.",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "sample-vault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sample-pec",
+        "type": "Microsoft.KeyVault/vaults/privateEndpointConnections",
+        "etag": "",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "My name is Joe and I'm approving this.",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_Put",
+  "title": "KeyVaultPutPrivateEndpointConnection"
+}

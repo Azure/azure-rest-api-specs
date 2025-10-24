@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0",
+    "location": "centralus",
+    "api-version": "2024-09-01",
+    "body": {
+      "appLocation": "eastus",
+      "sapProduct": "S4HANA",
+      "environment": "NonProd",
+      "databaseType": "HANA",
+      "deploymentType": "SingleServer"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "supportedSkus": [
+          {
+            "isAppServerCertified": true,
+            "isDatabaseCertified": false,
+            "vmSku": "Standard_E32ds_v4"
+          },
+          {
+            "isAppServerCertified": true,
+            "isDatabaseCertified": false,
+            "vmSku": "Standard_E48ds_v4"
+          },
+          {
+            "isAppServerCertified": true,
+            "isDatabaseCertified": false,
+            "vmSku": "Standard_E64ds_v4"
+          },
+          {
+            "isAppServerCertified": true,
+            "isDatabaseCertified": true,
+            "vmSku": "Standard_M32ts"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SapVirtualInstances_InvokeSapSupportedSku",
+  "title": "SAP supported SKUs for single server."
+}

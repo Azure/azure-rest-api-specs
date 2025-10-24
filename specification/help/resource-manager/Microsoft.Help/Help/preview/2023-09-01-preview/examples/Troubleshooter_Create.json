@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "scope": "subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp",
+    "troubleshooterName": "abf168ed-1b54-454a-86f6-e4b62253d3b1",
+    "createTroubleshooterRequestBody": {
+      "properties": {
+        "solutionId": "SampleTroubleshooterSolutionId",
+        "parameters": {
+          "ResourceURI": "subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/troubleshooter/abf168ed-1b54-454a-86f6-e4b62253d3b1",
+        "type": "Microsoft.Help/troubleshooters",
+        "name": "abf168ed-1b54-454a-86f6-e4b62253d3b1",
+        "properties": {
+          "solutionId": "SampleTroubleshooterSolutionId",
+          "provisioningState": "Succeeded",
+          "parameters": {
+            "ResourceURI": "subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp"
+          },
+          "steps": [
+            {
+              "id": "SampleStepId",
+              "title": "Step title",
+              "description": "step description",
+              "guidance": "IP address is used to check if the VM would be reachable from the given IP Address. We have prepopulated the IP address from your browser. If the field is left empty, the generic internet address space will be used.",
+              "executionStatus": "Success",
+              "executionStatusDescription": "Step is success",
+              "type": "Decision",
+              "isLastStep": true,
+              "inputs": [
+                {
+                  "questionId": "6cbe3f23-f3c2-41f3-886e-0cfbeee19b24",
+                  "questionType": "MultiChoice",
+                  "questionContent": "Is VPN Connected?",
+                  "questionContentType": "Text",
+                  "responseHint": null,
+                  "recommendedOption": null,
+                  "selectedOptionValue": null,
+                  "responseValidationProperties": {
+                    "regex": null,
+                    "isRequired": true,
+                    "validationErrorMessage": null,
+                    "maxLength": 1
+                  },
+                  "responseOptions": [
+                    {
+                      "key": "Yes",
+                      "value": "1"
+                    },
+                    {
+                      "key": "No",
+                      "value": "0"
+                    }
+                  ]
+                }
+              ],
+              "automatedCheckResults": null,
+              "insights": null,
+              "error": null
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/troubleshooter/abf168ed-1b54-454a-86f6-e4b62253d3b1",
+        "type": "Microsoft.Help/troubleshooters",
+        "name": "abf168ed-1b54-454a-86f6-e4b62253d3b1",
+        "properties": {
+          "solutionId": "SampleTroubleshooterSolutionId",
+          "provisioningState": "Succeeded",
+          "parameters": {
+            "ResourceURI": "subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp"
+          },
+          "steps": [
+            {
+              "id": "SampleStepId",
+              "title": "Step title",
+              "description": "step description",
+              "guidance": "IP address is used to check if the VM would be reachable from the given IP Address. We have prepopulated the IP address from your browser. If the field is left empty, the generic internet address space will be used.",
+              "executionStatus": "Success",
+              "executionStatusDescription": "Step is success",
+              "type": "Decision",
+              "isLastStep": true,
+              "inputs": [
+                {
+                  "questionId": "6cbe3f23-f3c2-41f3-886e-0cfbeee19b24",
+                  "questionType": "MultiChoice",
+                  "questionContent": "Is VPN Connected?",
+                  "questionContentType": "Text",
+                  "responseHint": null,
+                  "recommendedOption": null,
+                  "selectedOptionValue": null,
+                  "responseValidationProperties": {
+                    "regex": null,
+                    "isRequired": true,
+                    "validationErrorMessage": null,
+                    "maxLength": 1
+                  },
+                  "responseOptions": [
+                    {
+                      "key": "Yes",
+                      "value": "1"
+                    },
+                    {
+                      "key": "No",
+                      "value": "0"
+                    }
+                  ]
+                }
+              ],
+              "automatedCheckResults": null,
+              "insights": null,
+              "error": null
+            }
+          ]
+        }
+      }
+    }
+  }
+}

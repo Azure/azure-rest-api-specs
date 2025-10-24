@@ -1,0 +1,376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases": {
+      "get": {
+        "tags": [
+          "ServerDnsAliases"
+        ],
+        "description": "Gets a list of server DNS aliases for a server.",
+        "operationId": "ServerDnsAliases_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server that the alias is pointing to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of server DNS aliases.",
+            "schema": {
+              "$ref": "#/definitions/ServerDnsAliasListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidServerDnsAliasAcquireRequest - The acquire server DNS alias request body is empty or invalid (it should contain the old server alias id, for example: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 ServerDnsAliasAcquireRequestInvalidOldServerDnsAliasId - The old server DNS alias id in request body is empty or invalid (it should have the form: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 InvalidServerDnsAliasName - Invalid Server DNS Alias name was supplied.\n\n * 400 ServerDnsAliasDoesNotExist - Server DNS Alias does not exist on a server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnableToTurnOnTableAuditingForDbOnServerWithServerDnsAlias - Server Dns Aliases are not working correctly for database that has Table Auditing turned on\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditing - The Server DNS Alias cannot be created for server that has table auditing turned on.\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditingForDb - Server DNS Alias cannot be created for server '{0}' because database '{1}' has Table Auditing or Security Enabled Access feature enabled.\n\n * 400 LimitOfServerDnsAliasesPerServerExceeded - Creating new Server Dns Alias will exceed the allowed number of Server DNS Aliases per server.\n\n * 400 UnableToTurnOnTableAuditingForServerWithServerDnsAlias - Server Dns Aliases are not working correctly for server that has Table Auditing turned on\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerDnsAliasDnsRecordInUse - A duplicate DNS record exists for the requested endpoint.\n\n * 409 ServerDnsAliasAlreadyExists - Server DNS Alias already exists on a given server.\n\n * 409 ServerDnsAliasBusy - Server DNS Alias is busy with another operation.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List server DNS aliases": {
+            "$ref": "./examples/ServerDnsAliasList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}": {
+      "get": {
+        "tags": [
+          "ServerDnsAliases"
+        ],
+        "description": "Gets a server DNS alias.",
+        "operationId": "ServerDnsAliases_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server that the alias is pointing to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dnsAliasName",
+            "in": "path",
+            "description": "The name of the server dns alias.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified server DNS alias.",
+            "schema": {
+              "$ref": "#/definitions/ServerDnsAlias"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidServerDnsAliasAcquireRequest - The acquire server DNS alias request body is empty or invalid (it should contain the old server alias id, for example: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 ServerDnsAliasAcquireRequestInvalidOldServerDnsAliasId - The old server DNS alias id in request body is empty or invalid (it should have the form: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 InvalidServerDnsAliasName - Invalid Server DNS Alias name was supplied.\n\n * 400 ServerDnsAliasDoesNotExist - Server DNS Alias does not exist on a server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnableToTurnOnTableAuditingForDbOnServerWithServerDnsAlias - Server Dns Aliases are not working correctly for database that has Table Auditing turned on\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditing - The Server DNS Alias cannot be created for server that has table auditing turned on.\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditingForDb - Server DNS Alias cannot be created for server '{0}' because database '{1}' has Table Auditing or Security Enabled Access feature enabled.\n\n * 400 LimitOfServerDnsAliasesPerServerExceeded - Creating new Server Dns Alias will exceed the allowed number of Server DNS Aliases per server.\n\n * 400 UnableToTurnOnTableAuditingForServerWithServerDnsAlias - Server Dns Aliases are not working correctly for server that has Table Auditing turned on\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerDnsAliasDnsRecordInUse - A duplicate DNS record exists for the requested endpoint.\n\n * 409 ServerDnsAliasAlreadyExists - Server DNS Alias already exists on a given server.\n\n * 409 ServerDnsAliasBusy - Server DNS Alias is busy with another operation.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get server DNS alias": {
+            "$ref": "./examples/ServerDnsAliasGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerDnsAliases"
+        ],
+        "description": "Creates a server DNS alias.",
+        "operationId": "ServerDnsAliases_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server that the alias is pointing to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dnsAliasName",
+            "in": "path",
+            "description": "The name of the server dns alias.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The server DNS alias already exists.",
+            "schema": {
+              "$ref": "#/definitions/ServerDnsAlias"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidServerDnsAliasAcquireRequest - The acquire server DNS alias request body is empty or invalid (it should contain the old server alias id, for example: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 ServerDnsAliasAcquireRequestInvalidOldServerDnsAliasId - The old server DNS alias id in request body is empty or invalid (it should have the form: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 InvalidServerDnsAliasName - Invalid Server DNS Alias name was supplied.\n\n * 400 ServerDnsAliasDoesNotExist - Server DNS Alias does not exist on a server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnableToTurnOnTableAuditingForDbOnServerWithServerDnsAlias - Server Dns Aliases are not working correctly for database that has Table Auditing turned on\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditing - The Server DNS Alias cannot be created for server that has table auditing turned on.\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditingForDb - Server DNS Alias cannot be created for server '{0}' because database '{1}' has Table Auditing or Security Enabled Access feature enabled.\n\n * 400 LimitOfServerDnsAliasesPerServerExceeded - Creating new Server Dns Alias will exceed the allowed number of Server DNS Aliases per server.\n\n * 400 UnableToTurnOnTableAuditingForServerWithServerDnsAlias - Server Dns Aliases are not working correctly for server that has Table Auditing turned on\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerDnsAliasDnsRecordInUse - A duplicate DNS record exists for the requested endpoint.\n\n * 409 ServerDnsAliasAlreadyExists - Server DNS Alias already exists on a given server.\n\n * 409 ServerDnsAliasBusy - Server DNS Alias is busy with another operation.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created a server DNS alias.",
+            "schema": {
+              "$ref": "#/definitions/ServerDnsAlias"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create server DNS alias": {
+            "$ref": "./examples/ServerDnsAliasCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServerDnsAliases"
+        ],
+        "description": "Deletes the server DNS alias with the given name.",
+        "operationId": "ServerDnsAliases_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server that the alias is pointing to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dnsAliasName",
+            "in": "path",
+            "description": "The name of the server dns alias.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the server DNS alias."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidServerDnsAliasAcquireRequest - The acquire server DNS alias request body is empty or invalid (it should contain the old server alias id, for example: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 ServerDnsAliasAcquireRequestInvalidOldServerDnsAliasId - The old server DNS alias id in request body is empty or invalid (it should have the form: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 InvalidServerDnsAliasName - Invalid Server DNS Alias name was supplied.\n\n * 400 ServerDnsAliasDoesNotExist - Server DNS Alias does not exist on a server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnableToTurnOnTableAuditingForDbOnServerWithServerDnsAlias - Server Dns Aliases are not working correctly for database that has Table Auditing turned on\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditing - The Server DNS Alias cannot be created for server that has table auditing turned on.\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditingForDb - Server DNS Alias cannot be created for server '{0}' because database '{1}' has Table Auditing or Security Enabled Access feature enabled.\n\n * 400 LimitOfServerDnsAliasesPerServerExceeded - Creating new Server Dns Alias will exceed the allowed number of Server DNS Aliases per server.\n\n * 400 UnableToTurnOnTableAuditingForServerWithServerDnsAlias - Server Dns Aliases are not working correctly for server that has Table Auditing turned on\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerDnsAliasDnsRecordInUse - A duplicate DNS record exists for the requested endpoint.\n\n * 409 ServerDnsAliasAlreadyExists - Server DNS Alias already exists on a given server.\n\n * 409 ServerDnsAliasBusy - Server DNS Alias is busy with another operation.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified server DNS alias does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete server DNS alias": {
+            "$ref": "./examples/ServerDnsAliasDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}/acquire": {
+      "post": {
+        "tags": [
+          "ServerDnsAliases"
+        ],
+        "description": "Acquires server DNS alias from another server.",
+        "operationId": "ServerDnsAliases_Acquire",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server that the alias is pointing to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dnsAliasName",
+            "in": "path",
+            "description": "The name of the server dns alias.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerDnsAliasAcquisition"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully acquired server DNS alias.",
+            "schema": {
+              "$ref": "#/definitions/ServerDnsAlias"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 InvalidServerDnsAliasAcquireRequest - The acquire server DNS alias request body is empty or invalid (it should contain the old server alias id, for example: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 ServerDnsAliasAcquireRequestInvalidOldServerDnsAliasId - The old server DNS alias id in request body is empty or invalid (it should have the form: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-old-server/dnsAliases/dns-alias-name-1).\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 InvalidServerDnsAliasName - Invalid Server DNS Alias name was supplied.\n\n * 400 ServerDnsAliasDoesNotExist - Server DNS Alias does not exist on a server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnableToTurnOnTableAuditingForDbOnServerWithServerDnsAlias - Server Dns Aliases are not working correctly for database that has Table Auditing turned on\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditing - The Server DNS Alias cannot be created for server that has table auditing turned on.\n\n * 400 UnableToCreateServerDnsAliasDueToTableAuditingForDb - Server DNS Alias cannot be created for server '{0}' because database '{1}' has Table Auditing or Security Enabled Access feature enabled.\n\n * 400 LimitOfServerDnsAliasesPerServerExceeded - Creating new Server Dns Alias will exceed the allowed number of Server DNS Aliases per server.\n\n * 400 UnableToTurnOnTableAuditingForServerWithServerDnsAlias - Server Dns Aliases are not working correctly for server that has Table Auditing turned on\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerDnsAliasDnsRecordInUse - A duplicate DNS record exists for the requested endpoint.\n\n * 409 ServerDnsAliasAlreadyExists - Server DNS Alias already exists on a given server.\n\n * 409 ServerDnsAliasBusy - Server DNS Alias is busy with another operation.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Acquire server DNS alias": {
+            "$ref": "./examples/ServerDnsAliasAcquire.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerDnsAlias": {
+      "description": "A server DNS alias.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerDnsAliasProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerDnsAliasAcquisition": {
+      "description": "A server dns alias acquisition request.",
+      "required": [
+        "oldServerDnsAliasId"
+      ],
+      "type": "object",
+      "properties": {
+        "oldServerDnsAliasId": {
+          "description": "The id of the server alias that will be acquired to point to this server instead.",
+          "type": "string"
+        }
+      }
+    },
+    "ServerDnsAliasListResult": {
+      "description": "A list of server DNS aliases.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerDnsAlias"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerDnsAliasProperties": {
+      "description": "Properties of a server DNS alias.",
+      "type": "object",
+      "properties": {
+        "azureDnsRecord": {
+          "description": "The fully qualified DNS record for alias",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

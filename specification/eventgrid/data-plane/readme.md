@@ -4,7 +4,6 @@
 
 This is the AutoRest configuration file for EventGrid.
 
-
 Multiple Azure services publish events to Azure Event Grid. This is the configuration file for generating
 the Publish API and the schemas for those events. Each Azure service publishing to Azure Event Grid has its own tag OpenAPI specification
 that describes the schemas for its events.
@@ -14,7 +13,7 @@ This enables customers to download one EventGrid data plane library instead of h
 
 ### Guidelines for defining a new event 
 
-> **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main. Once the PR is merged to main, the events are considered GA regardless of whether docs list them as being in preview. This is because customers cannot control which version of events they consume - it is entirely up to the service publishing the events. Any breaking changes to events would need to be implemented as a new event type. Full details can be found in the [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy/), Section 4.
+> **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main. The architecture board meeting will be scheduled by a member of the Azure SDK team - you do not need to use the scheduling tool. Once the PR is merged to main, the events are considered GA regardless of whether docs list them as being in preview. This is because customers cannot control which version of events they consume - it is entirely up to the service publishing the events. Any breaking changes to events would need to be implemented as a new event type. Full details can be found in the [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy/), Section 4.
 
 In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
@@ -118,70 +117,36 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.Storage/stable/2018-01-01/Storage.json
-- Microsoft.EventHub/stable/2018-01-01/EventHub.json
-- Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
-- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
-- Microsoft.DataBox/stable/2018-01-01/DataBox.json
-- Microsoft.Devices/stable/2018-01-01/IotHub.json
-- Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
-- Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
-- Microsoft.Media/stable/2018-01-01/MediaServices.json
-- Microsoft.Maps/stable/2018-01-01/Maps.json
-- Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
-- Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
-- Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
-- Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
-- Microsoft.Cache/stable/2018-01-01/RedisCache.json
-- Microsoft.Web/stable/2018-01-01/Web.json
-- Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
-- Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
-- Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
-- Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
-- Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-
+- Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
 ```
 
-### Tag: package-2023-06-01-preview
+### Tag: package-2023-11-01
 
-These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-11-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-01-preview'
+``` yaml $(tag) == 'package-2023-11-01'
 input-file:
-- Microsoft.Storage/stable/2018-01-01/Storage.json
-- Microsoft.EventHub/stable/2018-01-01/EventHub.json
-- Microsoft.Resources/stable/2018-01-01/Resources.json
-- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
-- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
-- Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
-- Microsoft.DataBox/stable/2018-01-01/DataBox.json
-- Microsoft.Devices/stable/2018-01-01/IotHub.json
-- Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
-- Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
-- Microsoft.Media/stable/2018-01-01/MediaServices.json
-- Microsoft.Maps/stable/2018-01-01/Maps.json
-- Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
-- Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
-- Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
-- Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
-- Microsoft.Cache/stable/2018-01-01/RedisCache.json
-- Microsoft.Web/stable/2018-01-01/Web.json
-- Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
-- Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
-- Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
-- Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
-- Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-
+- Microsoft.EventGrid/stable/2023-11-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
 ```
 
-### Suppression
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
-    where: $.definitions.CloudEventEvent.properties.data_base64
-    reason: This parameter name is defined by the Cloud Events 1.0 specification
+### Tag: package-2024-01-01
+
+These settings apply only when `--tag=package-2024-01-01` is specified on the command line. Will generate EventGrid SystemEvents from TypeSpec.
+
+``` yaml $(tag) == 'package-2024-01-01'
+input-file:
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2024-01-01/GeneratedSystemEvents.json
+```
+
+### Tag: package-2018-01-01-generated
+These settings apply only when `--tag=package-2018-01-01-generated` is specified on the command line. Will generate EventGrid SystemEvents from TypeSpec, with backcompat from what Swagger was doing for optional extensible enums.
+``` yaml $(tag) == '2018-01-01-generated'
+input-file:
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
 ```
 
 ---
@@ -195,7 +160,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 
 ## C#
@@ -244,26 +209,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Storage/stable/2018-01-01/Storage.json
-  - $(this-folder)/Microsoft.EventHub/stable/2018-01-01/EventHub.json
-  - $(this-folder)/Microsoft.Resources/stable/2018-01-01/Resources.json
   - $(this-folder)/Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
-  - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/DataBox.json
-  - $(this-folder)/Microsoft.Devices/stable/2018-01-01/IotHub.json
-  - $(this-folder)/Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
-  - $(this-folder)/Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
-  - $(this-folder)/Microsoft.Media/stable/2018-01-01/MediaServices.json
-  - $(this-folder)/Microsoft.Maps/stable/2018-01-01/Maps.json
-  - $(this-folder)/Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
-  - $(this-folder)/Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
-  - $(this-folder)/Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
-  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
-  - $(this-folder)/Microsoft.Cache/stable/2018-01-01/RedisCache.json
-  - $(this-folder)/Microsoft.Web/stable/2018-01-01/Web.json
-  - $(this-folder)/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
-  - $(this-folder)/Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
-  - $(this-folder)/Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+  - $(this-folder)/Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
+  - $(this-folder)/Microsoft.EventGrid/stable/2023-11-01/EventGrid.json
+  - $(this-folder)/Microsoft.EventGrid/stable/2024-01-01/GeneratedSystemEvents.json
+  - $(this-folder)/Microsoft.EventGrid/stable/2024-06-01/EventGrid.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

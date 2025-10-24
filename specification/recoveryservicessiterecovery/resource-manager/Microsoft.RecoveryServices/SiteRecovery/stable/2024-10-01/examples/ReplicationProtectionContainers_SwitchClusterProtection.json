@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "protectionContainerName": "pri-cloud-eastus",
+    "fabricName": "fabric-pri-eastus",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "7c943c1b-5122-4097-90c8-861411bdd574",
+    "switchInput": {
+      "properties": {
+        "replicationProtectionClusterName": "testcluster",
+        "providerSpecificDetails": {
+          "instanceType": "A2A",
+          "recoveryContainerId": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/fabric-rec-westus/replicationProtectionContainers/rec-cloud-westus",
+          "policyId": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/klncksan",
+          "protectedItemsDetail": [
+            {
+              "recoveryResourceGroupId": "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/ClusterTestRG-19-01-asr",
+              "replicationProtectedItemName": "yNdYnDYKZ7hYU7zyVeBychFBCyAbEkrJcJNUarDrXio",
+              "vmManagedDisks": [
+                {
+                  "diskId": "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourcegroups/clustertestrg-19-01/providers/microsoft.compute/disks/sdgql0-osdisk",
+                  "recoveryResourceGroupId": "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/ClusterTestRG-19-01-asr",
+                  "primaryStagingAzureStorageAccountId": "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/clustertestrg-19-01/providers/Microsoft.Storage/storageAccounts/ix701lvaasrcache"
+                }
+              ]
+            },
+            {
+              "recoveryResourceGroupId": "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/ClusterTestRG-19-01-asr",
+              "replicationProtectedItemName": "kdUdWvpVnm3QgOQPHoVMX8YAtAO8OC4kKNjt40ERSr4",
+              "vmManagedDisks": [
+                {
+                  "diskId": "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourcegroups/clustertestrg-19-01/providers/microsoft.compute/disks/sdgql1-osdisk",
+                  "recoveryResourceGroupId": "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/ClusterTestRG-19-01-asr",
+                  "primaryStagingAzureStorageAccountId": "/subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/clustertestrg-19-01/providers/Microsoft.Storage/storageAccounts/ix701lvaasrcache"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/fabric-pri-eastus/replicationProtectionContainers/pri-cloud-eastus",
+        "name": "pri-cloud-eastus",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers",
+        "properties": {
+          "fabricFriendlyName": "East US",
+          "friendlyName": "pri-cloud-eastus",
+          "fabricType": "Azure",
+          "protectedItemCount": 13,
+          "pairingStatus": "Paired",
+          "role": "Primary",
+          "fabricSpecificDetails": null
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/fabric-pri-eastus/replicationProtectionContainers/pri-cloud-eastus/replicationProtectionClusters/testcluster/operationresults/76e220ab-8ae8-4047-b6e0-e6c0f6fc2241?api-version=2024-10-01",
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationOperationStatus/5fda1f8f-7c2a-4c9e-bb73-9cf018e9df41?api-version=2024-10-01",
+        "Retry-After": 30
+      }
+    }
+  }
+}

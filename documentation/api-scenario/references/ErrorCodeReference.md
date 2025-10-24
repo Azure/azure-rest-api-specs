@@ -91,3 +91,31 @@ Example:
    }
 }
 ```
+
+## ROUNDTRIP_INCONSISTENT_PROPERTY
+
+**Error message** The property's value in the response is different from what was set in the request. Path: {}. Request: {}. Response: {}
+
+Example: The sku in request parameters is `default`, but actual return is `standard`.
+
+```diff
+{
+   "parameters":{
+      "properties":{
+         "name":"myService",
+         "SKU":"default"
+      }
+   },
+   "responses":{
+      "200":{
+         "properties":{
+            "name":"myService",
++            "SKU":"standard"
+-            "SKU":"default"
+
+         }
+      }
+   }
+}
+
+```

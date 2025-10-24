@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "groupId": "TestGroup",
+    "deploymentId": "deploymentId",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "groupId": "TestGroup",
+        "deploymentState": "ActiveWithSubgroupFailures",
+        "subgroupStatus": [
+          {
+            "groupId": "TestGroup",
+            "deviceClassId": "deviceClassId1",
+            "deploymentState": "Active",
+            "totalDevices": 1,
+            "devicesInProgressCount": 0,
+            "devicesCompletedFailedCount": 0,
+            "devicesCompletedSucceededCount": 1,
+            "devicesCanceledCount": 0
+          },
+          {
+            "groupId": "TestGroup",
+            "deviceClassId": "deviceClassId2",
+            "deploymentState": "Failed",
+            "error": {
+              "code": "ADMConfigurationLimitExceeded",
+              "message": "The subgroup deployment failed to be created due to hitting the ADM configuration limit"
+            },
+            "totalDevices": 2,
+            "devicesInProgressCount": 0,
+            "devicesCompletedFailedCount": 1,
+            "devicesCompletedSucceededCount": 1,
+            "devicesCanceledCount": 0
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,785 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LogsMetricFilters"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/logsMetricFilters": {
+      "get": {
+        "operationId": "LogsMetricFilters_ListBySubscription",
+        "tags": [
+          "LogsMetricFilters"
+        ],
+        "description": "List LogsMetricFilter resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogsMetricFilterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogsMetricFilters_ListBySubscription": {
+            "$ref": "./examples/LogsMetricFilters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/logsMetricFilters": {
+      "get": {
+        "operationId": "LogsMetricFilters_ListByResourceGroup",
+        "tags": [
+          "LogsMetricFilters"
+        ],
+        "description": "List LogsMetricFilter resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogsMetricFilterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogsMetricFilters_ListByResourceGroup": {
+            "$ref": "./examples/LogsMetricFilters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/logsMetricFilters/{name}": {
+      "get": {
+        "operationId": "LogsMetricFilters_Get",
+        "tags": [
+          "LogsMetricFilters"
+        ],
+        "description": "Get a LogsMetricFilter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LogsMetricFilter",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogsMetricFilter"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogsMetricFilters_Get": {
+            "$ref": "./examples/LogsMetricFilters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LogsMetricFilters_CreateOrReplace",
+        "tags": [
+          "LogsMetricFilters"
+        ],
+        "description": "Create a LogsMetricFilter. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LogsMetricFilter",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogsMetricFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LogsMetricFilter' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LogsMetricFilter"
+            }
+          },
+          "201": {
+            "description": "Resource 'LogsMetricFilter' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LogsMetricFilter"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogsMetricFilters_CreateOrReplace": {
+            "$ref": "./examples/LogsMetricFilters_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LogsMetricFilters_Update",
+        "tags": [
+          "LogsMetricFilters"
+        ],
+        "description": "Update a LogsMetricFilter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LogsMetricFilter",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogsMetricFilterTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogsMetricFilter"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogsMetricFilters_Update": {
+            "$ref": "./examples/LogsMetricFilters_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LogsMetricFilters_Delete",
+        "tags": [
+          "LogsMetricFilters"
+        ],
+        "description": "Delete a LogsMetricFilter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LogsMetricFilter",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogsMetricFilters_Delete": {
+            "$ref": "./examples/LogsMetricFilters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsLogsMetricFilterProperties": {
+      "type": "object",
+      "description": "Definition of awsLogsMetricFilter",
+      "properties": {
+        "filterName": {
+          "type": "string",
+          "description": "The name of the metric filter."
+        },
+        "filterPattern": {
+          "type": "string",
+          "description": "A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)."
+        },
+        "logGroupName": {
+          "type": "string",
+          "description": "The name of an existing log group that you want to associate with this metric filter."
+        },
+        "metricTransformations": {
+          "type": "array",
+          "description": "The metric transformations.",
+          "items": {
+            "$ref": "#/definitions/MetricTransformation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Definition of Dimension",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name for the CW metric dimension that the metric filter creates. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:)."
+        },
+        "value": {
+          "type": "string",
+          "description": "The log event field that will contain the value for this dimension. This dimension will only be published for a metric if the value is found in the log event. For example, ``$.eventType`` for JSON log events, or ``$server`` for space-delimited log events."
+        }
+      }
+    },
+    "LogsMetricFilter": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogsMetricFilterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LogsMetricFilterListResult": {
+      "type": "object",
+      "description": "The response of a LogsMetricFilter list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LogsMetricFilter items on this page",
+          "items": {
+            "$ref": "#/definitions/LogsMetricFilter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LogsMetricFilterProperties": {
+      "type": "object",
+      "description": "Definition of LogsMetricFilter",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsLogsMetricFilterProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "LogsMetricFilterTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in LogsMetricFilter resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricTransformation": {
+      "type": "object",
+      "description": "Definition of MetricTransformation",
+      "properties": {
+        "defaultValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "(Optional) The value to emit when a filter pattern does not match a log event. This value can be null."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric.  CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges. You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricName": {
+          "type": "string",
+          "description": "The name of the CloudWatch metric."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace)."
+        },
+        "metricValue": {
+          "type": "string",
+          "description": "The value that is published to the CloudWatch metric. For example, if you're counting the occurrences of a particular term like ``Error``, specify 1 for the metric value. If you're counting the number of bytes transferred, reference the value that is in the log event by using $. followed by the name of the field that you specified in the filter pattern, such as ``$.size``."
+        },
+        "unit": {
+          "$ref": "#/definitions/MetricTransformationUnit",
+          "description": "The unit to assign to the metric. If you omit this, the unit is set as ``None``."
+        }
+      }
+    },
+    "MetricTransformationUnit": {
+      "type": "string",
+      "description": "MetricTransformationUnit enum",
+      "enum": [
+        "Bits",
+        "Bits/Second",
+        "Bytes",
+        "Bytes/Second",
+        "Count",
+        "Count/Second",
+        "Gigabits",
+        "Gigabits/Second",
+        "Gigabytes",
+        "Gigabytes/Second",
+        "Kilobits",
+        "Kilobits/Second",
+        "Kilobytes",
+        "Kilobytes/Second",
+        "Megabits",
+        "Megabits/Second",
+        "Megabytes",
+        "Megabytes/Second",
+        "Microseconds",
+        "Milliseconds",
+        "None",
+        "Percent",
+        "Seconds",
+        "Terabits",
+        "Terabits/Second",
+        "Terabytes",
+        "Terabytes/Second"
+      ],
+      "x-ms-enum": {
+        "name": "MetricTransformationUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bits",
+            "value": "Bits",
+            "description": "MetricTransformationUnit enum Bits"
+          },
+          {
+            "name": "BitsSecond",
+            "value": "Bits/Second",
+            "description": "MetricTransformationUnit enum Bits/Second"
+          },
+          {
+            "name": "Bytes",
+            "value": "Bytes",
+            "description": "MetricTransformationUnit enum Bytes"
+          },
+          {
+            "name": "BytesSecond",
+            "value": "Bytes/Second",
+            "description": "MetricTransformationUnit enum Bytes/Second"
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "MetricTransformationUnit enum Count"
+          },
+          {
+            "name": "CountSecond",
+            "value": "Count/Second",
+            "description": "MetricTransformationUnit enum Count/Second"
+          },
+          {
+            "name": "Gigabits",
+            "value": "Gigabits",
+            "description": "MetricTransformationUnit enum Gigabits"
+          },
+          {
+            "name": "GigabitsSecond",
+            "value": "Gigabits/Second",
+            "description": "MetricTransformationUnit enum Gigabits/Second"
+          },
+          {
+            "name": "Gigabytes",
+            "value": "Gigabytes",
+            "description": "MetricTransformationUnit enum Gigabytes"
+          },
+          {
+            "name": "GigabytesSecond",
+            "value": "Gigabytes/Second",
+            "description": "MetricTransformationUnit enum Gigabytes/Second"
+          },
+          {
+            "name": "Kilobits",
+            "value": "Kilobits",
+            "description": "MetricTransformationUnit enum Kilobits"
+          },
+          {
+            "name": "KilobitsSecond",
+            "value": "Kilobits/Second",
+            "description": "MetricTransformationUnit enum Kilobits/Second"
+          },
+          {
+            "name": "Kilobytes",
+            "value": "Kilobytes",
+            "description": "MetricTransformationUnit enum Kilobytes"
+          },
+          {
+            "name": "KilobytesSecond",
+            "value": "Kilobytes/Second",
+            "description": "MetricTransformationUnit enum Kilobytes/Second"
+          },
+          {
+            "name": "Megabits",
+            "value": "Megabits",
+            "description": "MetricTransformationUnit enum Megabits"
+          },
+          {
+            "name": "MegabitsSecond",
+            "value": "Megabits/Second",
+            "description": "MetricTransformationUnit enum Megabits/Second"
+          },
+          {
+            "name": "Megabytes",
+            "value": "Megabytes",
+            "description": "MetricTransformationUnit enum Megabytes"
+          },
+          {
+            "name": "MegabytesSecond",
+            "value": "Megabytes/Second",
+            "description": "MetricTransformationUnit enum Megabytes/Second"
+          },
+          {
+            "name": "Microseconds",
+            "value": "Microseconds",
+            "description": "MetricTransformationUnit enum Microseconds"
+          },
+          {
+            "name": "Milliseconds",
+            "value": "Milliseconds",
+            "description": "MetricTransformationUnit enum Milliseconds"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "MetricTransformationUnit enum None"
+          },
+          {
+            "name": "Percent",
+            "value": "Percent",
+            "description": "MetricTransformationUnit enum Percent"
+          },
+          {
+            "name": "Seconds",
+            "value": "Seconds",
+            "description": "MetricTransformationUnit enum Seconds"
+          },
+          {
+            "name": "Terabits",
+            "value": "Terabits",
+            "description": "MetricTransformationUnit enum Terabits"
+          },
+          {
+            "name": "TerabitsSecond",
+            "value": "Terabits/Second",
+            "description": "MetricTransformationUnit enum Terabits/Second"
+          },
+          {
+            "name": "Terabytes",
+            "value": "Terabytes",
+            "description": "MetricTransformationUnit enum Terabytes"
+          },
+          {
+            "name": "TerabytesSecond",
+            "value": "Terabytes/Second",
+            "description": "MetricTransformationUnit enum Terabytes/Second"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

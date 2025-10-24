@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-11-15",
+    "id": "ba7ea6f5-3065-40b7-b49a-a90f48584683",
+    "transcriptionUpdate": {
+      "displayName": "Updated transcription name",
+      "description": "Updated transcription description",
+      "customProperties": {
+        "key": "value"
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683?api-version=2024-11-15",
+        "displayName": "Transcription using adapted model en-US",
+        "customProperties": {
+          "key": "value"
+        },
+        "locale": "en-US",
+        "createdDateTime": "2019-01-07T11:34:12Z",
+        "lastActionDateTime": "2019-01-07T11:36:07Z",
+        "model": {
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/models/827712a5-f942-4997-91c3-7c6cde35600b?api-version=2024-11-15"
+        },
+        "links": {
+          "files": "https://westus.api.cognitive.microsoft.com/speechtotext/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683/files?api-version=2024-11-15"
+        },
+        "properties": {
+          "wordLevelTimestampsEnabled": false,
+          "displayFormWordLevelTimestampsEnabled": false,
+          "channels": [
+            0,
+            1
+          ],
+          "punctuationMode": "DictatedAndAutomatic",
+          "profanityFilterMode": "Masked",
+          "timeToLiveHours": 48,
+          "durationMilliseconds": 42000
+        },
+        "status": "Succeeded"
+      }
+    }
+  }
+}

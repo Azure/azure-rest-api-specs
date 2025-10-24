@@ -1,0 +1,74 @@
+{
+  "id": "4eef929a-a65c-47dd-93e2-46b8c17c6c17",
+  "source": "/subscriptions/{subscription-id}",
+  "subject": "/subscriptions/{subscription-id} /resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storageAccount-name}",
+  "data": {
+    "resourceInfo": {
+      "tags": {},
+      "id": "/subscriptions/{subcription-id} /resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storageAccount-name}",
+      "name": "StorageAccount-name",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "eastus",
+      "properties": {
+        "privateEndpointConnections": [],
+        "minimumTlsVersion": "TLS1_2",
+        "allowBlobPublicAccess": 1,
+        "allowSharedKeyAccess": 1,
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [],
+          "ipRules": [],
+          "defaultAction": "Allow"
+        },
+        "supportsHttpsTrafficOnly": 1,
+        "encryption": {
+          "requireInfrastructureEncryption": 0,
+          "services": {
+            "file": {
+              "keyType": "Account",
+              "enabled": 1,
+              "lastEnabledTime": "2023-07-28T20:12:50.6380308Z"
+            },
+            "blob": {
+              "keyType": "Account",
+              "enabled": 1,
+              "lastEnabledTime": "2023-07-28T20:12:50.6380308Z"
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        },
+        "accessTier": "Hot",
+        "provisioningState": "Succeeded",
+        "creationTime": "2023-07-28T20:12:50.4661564Z",
+        "primaryEndpoints": {
+          "dfs": "https://{storageAccount-name}.dfs.core.windows.net/",
+          "web": "https://{storageAccount-name}.z13.web.core.windows.net/",
+          "blob": "https://{storageAccount-name}.blob.core.windows.net/",
+          "queue": "https://{storageAccount-name}.queue.core.windows.net/",
+          "table": "https://{storageAccount-name}.table.core.windows.net/",
+          "file": "https://{storageAccount-name}.file.core.windows.net/"
+        },
+        "primaryLocation": "eastus",
+        "statusOfPrimary": "available",
+        "secondaryLocation": "westus",
+        "statusOfSecondary": "available",
+        "secondaryEndpoints": {
+          "dfs": "https://{storageAccount-name} -secondary.dfs.core.windows.net/",
+          "web": "https://{storageAccount-name}-secondary.z13.web.core.windows.net/",
+          "blob": "https://{storageAccount-name}-secondary.blob.core.windows.net/",
+          "queue": "https://{storageAccount-name}-secondary.queue.core.windows.net/",
+          "table": "https://{storageAccount-name}-secondary.table.core.windows.net/"
+        }
+      }
+    },
+    "operationalInfo": {
+      "resourceEventTime": "2023-07-28T20:13:10.8418063Z"
+    },
+    "apiVersion": "2019-06-01"
+  },
+  "type": "Microsoft.ResourceNotifications.Resources.CreatedOrUpdated",
+  "specversion": "1.0",
+  "time": "2023-07-28T20:13:10.8418063Z",
+  "operationId": "CreatedOrUpdatedEventName",
+  "title": "CreatedOrUpdated"
+}

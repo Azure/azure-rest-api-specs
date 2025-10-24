@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
+            "name": "TestArtifactStore",
+            "type": "microsoft.hybridnetwork/publishers/artifactStores",
+            "location": "eastus",
+            "properties": {
+              "storeType": "AzureContainerRegistry",
+              "replicationStrategy": "SingleReplication",
+              "storageResourceId": "TestResourceId",
+              "managedResourceGroupConfiguration": {
+                "name": "testRg",
+                "location": "eastus"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

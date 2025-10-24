@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+  <head>
+    <style></style>
+    <script src="model-compare.js" type="text/javascript"></script>
+    <script src="new-spec.js" type="text/javascript"></script>
+    <script src="old-spec.js" type="text/javascript"></script>
+    <script>
+      const div = (t) => `<div>${t}</div>`;
+      const tr = (t) => `<tr>${t}</tr>`;
+      const th = (t) => `<th>${t}</th>`;
+      const td = (t) => `<td>${t}</td>`;
+      const a = (r, t) => `<a href="${r}">${t}</a>`;
+      const br = "<br/>";
+      const s = "&nbsp;";
+      const getType = (t) => {
+        switch (t) {
+          case "Warning":
+            return "⚠";
+          case "Info":
+            return "ⓘ";
+          case "Error":
+            return "⛔";
+          default:
+            return t;
+        }
+      };
+      const getError = (comp) =>
+        getType(comp.type) + s + a(comp.docUrl, `${comp.code} (${comp.id})`);
+      const getLine = (location) =>
+        location == null ? "" : location.match(/(?:.*\.json)(.*)/)[1];
+      const getLink = (location) =>
+        location == null
+          ? ""
+          : "vscode://file/" + location.match(/(?:file:\/\/\/)(.*)/)[1];
+      const getPath = (path) => {
+        let pathsMatch = path?.match(/^paths\['([^']*)*/);
+        if (pathsMatch != null) {
+          return pathsMatch[1];
+        }
+        return null;
+      };
+      function* getGroupedPathSegments(path) {
+        let pathPath = getPath(path);
+        if (pathPath != null) {
+          yield "paths";
+          let segmentMatches = [...pathPath.matchAll(/\/[^\/']+/g)];
+          let i = 0;
+          while (i < segmentMatches.length) {
+            let pathSegment = segmentMatches[i];
+            let nextPathSegment =
+              i + 1 < segmentMatches.length ? segmentMatches[i + 1] : null;
+            if (nextPathSegment != null) {
+              i++;
+              yield pathSegment + nextPathSegment;
+            } else {
+              yield pathSegment;
+            }
+            i++;
+          }
+        } else {
+          let segmentMatches = path?.matchAll(/[^\.]+/g);
+          if (segmentMatches != null) {
+            yield* segmentMatches;
+          }
+        }
+      }
+      function* getSpecRefNodes(spec, node) {
+        for (let item of node) {
+          if (item["$ref"] != undefined) {
+            let newPath = item["$ref"]?.replace(/#\//, "").replace(/\//, ".");
+            yield {
+              key: newPath,
+              value: Array.from(getSpecNodes(spec, newPath))[0],
+            };
+          }
+        }
+      }
+      function* getSpecNodes(spec, path) {
+        let matches = path?.matchAll(
+          /(?<property>[^\[\.]+)(?:\['(?<subscript>[^']+)'])?/g,
+        );
+        let node = spec;
+        if (matches != null) {
+          for (let match of matches) {
+            if (node == undefined) break;
+            node = node[match.groups["property"]];
+            if (match.groups["subscript"] != null) {
+              node = node[match.groups["subscript"]];
+            }
+          }
+          if (Array.isArray(node)) {
+            console.log(spec);
+            yield Array.from(getSpecRefNodes(spec, node));
+            // for(let item of node) {
+            //     if (item["$ref"] != undefined) {
+            //         let newPath = item["$ref"]?.replace(/#\//,"").replace(/\//,".");
+            //         let refNode = {};
+            //         refNode[newPath] = Array.from(getSpecNodes(spec, newPath));
+            //         yield refNode;
+            //     }
+            // }
+          } else {
+            yield node;
+          }
+        }
+      }
+      function getSpecNode(spec, path) {
+        return Array.from(getSpecNodes(spec, path))[0];
+      }
+      function getDetails(comp) {
+        let details = "";
+        // details += "Old: " + comp.old.path + br +
+        //            "New: " + comp.new.path + br;
+        details += comp.message + br;
+        details +=
+          a(getLink(comp.old.location), getLine(comp.old.location)) +
+          br +
+          a(getLink(comp.new.location), getLine(comp.new.location)) +
+          br;
+
+        switch (comp.code) {
+          case "ConstraintChanged":
+            let newSpecNode = getSpecNode(newSpec, comp.new.path);
+            let oldSpecNode = getSpecNode(oldSpec, comp.old.path);
+            let constraints = ["minLength", "maxLength", "pattern", "required"];
+            if (Array.isArray(newSpecNode) && Array.isArray(oldSpecNode)) {
+              for (let node1 of newSpecNode) {
+                details += `${node1.key}` + br;
+              }
+              for (let constraint of constraints) {
+                if (newSpecNode[constraint] != oldSpecNode[constraint]) {
+                  details +=
+                    `${newSpecNode[constraint]} != ${oldSpecNode[constraint]}` +
+                    br;
+                }
+                details += "array" + br;
+              }
+              //details += JSON.stringify(newSpecNode) + br;
+            }
+          //                        details += JSON.stringify(a) + br;
+        }
+        return details;
+      }
+      const printComp = (comp) => {
+        return tr(td(comp.mode) + td(getError(comp)) + td(getDetails(comp)));
+      };
+      const printComps = (comps) => {
+        if (comps.length == 0) {
+          return "";
+        }
+        let result = '<div style="margin-left: 20px">';
+        result += "<table border='1' width='100%'>";
+        result += tr(th("Mode") + th("Code") + th("Details"));
+        for (let comp of comps) {
+          result += printComp(comp);
+        }
+        result += "</table>";
+        result += "</div>";
+        return result;
+      };
+      const getPathMode = (node) =>
+        node.existsInOld && node.existsInNew
+          ? " (Updated)"
+          : node.existsInOld && !node.existsInNew
+            ? " (Removed)"
+            : !node.existsInOld && node.existsInNew
+              ? " (Added)"
+              : "";
+      const printTree = (node) => {
+        let margin = node?.parent?.parent == null ? 0 : 20;
+        let result = `<div style="padding-left: ${margin}px">`;
+        result += node.segment + getPathMode(node) + br;
+        result += printComps(node.comps);
+        for (let child of node.getChildren()) {
+          result += printTree(child);
+        }
+        result += "</div>";
+        return result;
+      };
+      class Node {
+        constructor(segment = "") {
+          this.segment = segment;
+          this.comps = [];
+          this.children = {};
+          this.parent = null;
+        }
+
+        *getChildren() {
+          var keys = Object.keys(this.children);
+          var sortedKeys =
+            this.parent == null
+              ? ["paths", "parameters", "definitions"].filter((v) =>
+                  keys.includes(v),
+                )
+              : keys.sort();
+          for (const key of sortedKeys) {
+            yield this.children[key];
+          }
+        }
+
+        getOrAddChild(segment) {
+          let child = this.children[segment];
+          if (child == undefined) {
+            child = new Node(segment);
+            child.parent = this;
+            this.children[segment] = child;
+          }
+          return child;
+        }
+      }
+      const addPathToTree = (tree, path, isNew) => {
+        let node = tree;
+        for (let segment of getGroupedPathSegments(path)) {
+          node = node.getOrAddChild(segment);
+          node.existsInOld |= !isNew;
+          node.existsInNew |= isNew;
+        }
+        return node;
+      };
+      window.onload = () => {
+        let controls = "";
+
+        let pathTree = new Node();
+
+        for (let comp of modelCompare) {
+          let nodeToAddComp = pathTree;
+          if (comp.old.path != null) {
+            nodeToAddComp = addPathToTree(pathTree, comp.old.path, false);
+          }
+          if (comp.new.path != null) {
+            nodeToAddComp = addPathToTree(pathTree, comp.new.path, true);
+          }
+          nodeToAddComp.comps.push(comp);
+        }
+
+        controls += printTree(pathTree);
+
+        document.getElementById("controls").innerHTML = controls;
+
+        return;
+
+        let text = "<table border='1' width='100%'>";
+        text += tr(th("Mode") + th("Code") + th("Details"));
+        for (let comp of modelCompare) {
+          text += tr(td(comp.mode) + td(getError(comp)) + td(getDetails(comp)));
+        }
+        text += "</table>";
+        document.getElementById("data").innerHTML = text;
+      };
+    </script>
+  </head>
+  <body>
+    <h2>Model Compare Explanations</h2>
+    <div id="controls"></div>
+    <div id="data"></div>
+  </body>
+</html>

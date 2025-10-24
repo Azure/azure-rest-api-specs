@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "virtualHardDiskName": "test-vhd",
+    "body": {
+      "azureManagedDiskUploadUrl": "https://YourStorageAccountName.blob.core.windows.net/YourContainerName/YourVHDBlobName.vhd?<sas-token>"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "virtualHardDiskId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd",
+        "uploadStatus": {
+          "uploadedSizeInMB": 10240,
+          "status": "InProgress"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualHardDisks_Upload",
+  "title": "UploadVirtualHardDisk"
+}

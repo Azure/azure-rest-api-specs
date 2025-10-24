@@ -1,0 +1,410 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-06-01-preview",
+    "title": "ChangesClient",
+    "description": "The Resource Changes Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/changes": {
+      "get": {
+        "tags": [
+          "ListChanges"
+        ],
+        "operationId": "Changes_List",
+        "x-ms-examples": {
+          "ListChanges": {
+            "$ref": "./examples/ListChanges.json"
+          }
+        },
+        "description": "Obtains a list of change resources from the past 14 days for the target resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/$top"
+          },
+          {
+            "$ref": "#/parameters/$skipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/changes/{changeResourceId}": {
+      "get": {
+        "tags": [
+          "GetChange"
+        ],
+        "operationId": "Changes_Get",
+        "x-ms-examples": {
+          "GetChange": {
+            "$ref": "./examples/GetChange.json"
+          }
+        },
+        "description": "Obtains the specified change resource for the target resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ChangeResourceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ChangeResourceListResult": {
+      "description": "The list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of Change Resources"
+        },
+        "value": {
+          "description": "The list of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChangeResourceResult"
+          }
+        }
+      }
+    },
+    "ChangeResourceResult": {
+      "description": "Change Resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeProperties"
+        }
+      }
+    },
+    "ChangeProperties": {
+      "description": "The properties of a change",
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "description": "The fully qualified ID of the target resource that was changed",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "targetResourceType": {
+          "description": "The namespace and type of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "changeType": {
+          "description": "The type of change that was captured in the resource",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Update",
+            "Delete",
+            "Create"
+          ],
+          "x-ms-enum": {
+            "name": "ChangeType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Update",
+                "description": "An existing resource underwent a change",
+                "name": "Update"
+              },
+              {
+                "value": "Delete",
+                "description": "An existing resource was deleted",
+                "name": "Delete"
+              },
+              {
+                "value": "Create",
+                "description": "A newly created resource",
+                "name": "Create"
+              }
+            ]
+          }
+        },
+        "changeAttributes": {
+          "$ref": "#/definitions/ChangeAttributes"
+        },
+        "changes": {
+          "$ref": "#/definitions/ChangesDictionary"
+        }
+      }
+    },
+    "ChangeAttributes": {
+      "description": "Details about the change resource",
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "description": "The Azure correlation ID of the change resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "description": "The time the change(s) on the target resource ocurred",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "changesCount": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The number of changes this resource captures"
+        },
+        "previousResourceSnapshotId": {
+          "description": "The GUID of the previous snapshot",
+          "type": "string",
+          "readOnly": true
+        },
+        "newResourceSnapshotId": {
+          "description": "The GUID of the new snapshot",
+          "type": "string",
+          "readOnly": true
+        },
+        "isTruncated": {
+          "description": "The flag indicating whether property changes dictionary was truncated in this resource",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "changedBy": {
+          "description": "The identifier i.e. email id or application id of the entity that made the change(s)",
+          "type": "string",
+          "readOnly": true
+        },
+        "changedByType": {
+          "description": "The entity type that made the change(s)",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Application",
+            "User",
+            "ManagedIdentity",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "changedByType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Application",
+                "description": "An application made the change(s)",
+                "name": "Application"
+              },
+              {
+                "value": "User",
+                "description": "A user made the change(s)",
+                "name": "User"
+              },
+              {
+                "value": "ManagedIdentity",
+                "description": "A ManagedIdentity made the change(s)",
+                "name": "ManagedIdentity"
+              },
+              {
+                "value": "Unknown",
+                "description": "An Unknown entity made the change(s)",
+                "name": "Unknown"
+              }
+            ]
+          }
+        },
+        "clientType": {
+          "description": "Client used to make the changes",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The Azure Resource Provider operation that was invoked to make the change(s). See [here](https://learn.microsoft.com/azure/role-based-access-control/resource-provider-operations) for a full list of possible values",
+          "type": "string",
+          "readOnly": true
+        },
+        "changeControlId": {
+          "description": "The resource identifier of the change control resource associated with this change record.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        }
+      }
+    },
+    "ChangesDictionary": {
+      "description": "A dictionary with changed property name as a key and the change details as the value",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ChangeBase"
+      }
+    },
+    "ChangeBase": {
+      "description": "An individual change on the target resource",
+      "type": "object",
+      "properties": {
+        "previousValue": {
+          "description": "The target resource property value before the change",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "newValue": {
+          "description": "The target resource property value after the change",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceProviderNamespaceParameter": {
+      "name": "resourceProviderNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 256,
+      "description": "The name of the resource provider namespace.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceTypeParameter": {
+      "name": "resourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 256,
+      "description": "The name of the resource type.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ChangeResourceIdParameter": {
+      "name": "changeResourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the change resource",
+      "x-ms-parameter-location": "method"
+    },
+    "$top": {
+      "required": false,
+      "default": 100,
+      "description": "(Optional) Set the maximum number of results per response.",
+      "in": "query",
+      "maximum": 100,
+      "minimum": 1,
+      "name": "$top",
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method"
+    },
+    "$skipToken": {
+      "required": false,
+      "description": "(Optional) The page-continuation token",
+      "in": "query",
+      "name": "$skipToken",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

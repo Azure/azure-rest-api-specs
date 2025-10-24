@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-04-01",
+    "id": "my-batch-synthesis-job-ssml-input-1",
+    "Operation-Id": "f43cb3f3-e35d-4df7-9b0f-9f2a49693d1a",
+    "definition": {
+      "inputKind": "SSML",
+      "inputs": [
+        {
+          "content": "<speak version=\"1.0\" xml:lang=\"en-US\"><voice name=\"en-US-JennyNeural\">The rainbow has seven colors.</voice></speak>"
+        }
+      ],
+      "properties": {
+        "destinationContainerUrl": "https://contoso.blob.core.windows.net/default?sv=2021-04-10&st=2024-03-15T04%3A47%3A54Z&se=2025-03-16T04%3A47%3A00Z&sr=c&sp=racwdl&sig=Masked",
+        "decompressOutputFiles": true
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "operation-location": "https://eastus.api.cognitive.microsoft.com/texttospeech/operations/f43cb3f3-e35d-4df7-9b0f-9f2a49693d1af?api-version=2024-04-01",
+        "operation-id": "f43cb3f3-e35d-4df7-9b0f-9f2a49693d1a"
+      },
+      "body": {
+        "id": "my-batch-synthesis-job-ssml-input-1",
+        "status": "NotStarted",
+        "createdDateTime": "2024-03-15T06:03:33.808822Z",
+        "lastActionDateTime": "2024-03-15T06:03:33.8088223Z",
+        "inputKind": "SSML",
+        "customVoices": {},
+        "properties": {
+          "timeToLiveInHours": 744,
+          "outputFormat": "riff-24khz-16bit-mono-pcm",
+          "concatenateResult": false,
+          "decompressOutputFiles": true,
+          "wordBoundaryEnabled": false,
+          "sentenceBoundaryEnabled": false,
+          "destinationContainerUrl": "https://contoso.blob.core.windows.net/default?sv=2021-04-10&st=2024-03-15T04%3A47%3A54Z&se=2025-03-16T04%3A47%3A00Z&sr=c&sp=racwdl&sig=Masked"
+        }
+      }
+    }
+  }
+}

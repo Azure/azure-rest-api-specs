@@ -670,7 +670,8 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - yangyuan
+            - rkuthala
+            - MattGal
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
       - if:
@@ -937,8 +938,7 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - Jingshu923
-            - zhangyd2015
+            - ruowan
             - Frey-Wang
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
@@ -1182,9 +1182,10 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - RandalliLama
-            - schaabs
-            - jlichwa
+            - cheathamb36
+            - chen-karen
+            - lgonsoulin
+            - vickm
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
       - if:
@@ -1983,7 +1984,7 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - wonner
+            - wanyang7
             - yanjungao718
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
@@ -2532,6 +2533,12 @@ configuration:
       description: 
     - if:
       - payloadType: Pull_Request
+      # If a PR changes no files, "includesModifiedFiles()" incorrectly returns "true" instead of "false",
+      # which adds all labels to the PR.
+      # Workaround by first checking "filesMatchPattern()", which correctly returns "false".
+      - filesMatchPattern:
+          pattern: ".*"
+          matchAny: true
       then:
       - if:
         - includesModifiedFiles:
@@ -2610,6 +2617,12 @@ configuration:
       description: 
     - if:
       - payloadType: Pull_Request
+      # If a PR changes no files, "includesModifiedFiles()" incorrectly returns "true" instead of "false",
+      # which adds all labels to the PR.
+      # Workaround by first checking "filesMatchPattern()", which correctly returns "false".
+      - filesMatchPattern:
+          pattern: ".*"
+          matchAny: true
       then:
       - if:
         - includesModifiedFiles:
@@ -2773,6 +2786,16 @@ configuration:
         then:
         - addLabel:
             label: Container Service
+      - if:
+        - includesModifiedFiles:
+            files:
+            - specification/containerservice/Fleet.Management
+            - specification/containerservice/fleet
+            excludedFiles:
+            - ''
+        then:
+        - addLabel:
+            label: Container Service Fleet
       - if:
         - includesModifiedFiles:
             files:
@@ -3290,6 +3313,12 @@ configuration:
       description: 
     - if:
       - payloadType: Pull_Request
+      # If a PR changes no files, "includesModifiedFiles()" incorrectly returns "true" instead of "false",
+      # which adds all labels to the PR.
+      # Workaround by first checking "filesMatchPattern()", which correctly returns "false".
+      - filesMatchPattern:
+          pattern: ".*"
+          matchAny: true
       then:
       - if:
         - includesModifiedFiles:
