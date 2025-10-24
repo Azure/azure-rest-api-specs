@@ -176,3 +176,10 @@ using Microsoft.NetApp;
 );
 
 @@clientName(ApplicationType.`SAP-HANA`, "SAP_HANA", "python");
+
+@@clientName(Caches.createOrUpdate::parameters.resource, "body");
+@@clientName(Caches.update::parameters.properties, "body");
+
+
+@@clientName(ActiveDirectoryConfigs.createOrUpdate::parameters.resource, "body");
+@@clientName(ActiveDirectoryConfigs.update::parameters.properties, "body");
