@@ -119,6 +119,7 @@ interface LookingGlassOperationGroup {
       /**
        * The IP address of the destination.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing parameter name"
       @query("destinationIP")
       destinationIP: string;
     }

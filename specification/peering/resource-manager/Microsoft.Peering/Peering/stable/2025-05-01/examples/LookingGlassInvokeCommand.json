@@ -1,11 +1,11 @@
 {
   "parameters": {
-    "subscriptionId": "subId",
     "api-version": "2025-05-01",
     "command": "Traceroute",
-    "sourceType": "AzureRegion",
+    "destinationIP": "0.0.0.0",
     "sourceLocation": "West US",
-    "destinationIP": "0.0.0.0"
+    "sourceType": "AzureRegion",
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
@@ -14,5 +14,7 @@
         "output": "traceroute to 0.0.0.0, 64 hops max, 52 bytes packets\n 1 West US (1.1.1.1) 0.111ms 0.222ms 0.333ms"
       }
     }
-  }
+  },
+  "operationId": "LookingGlass_Invoke",
+  "title": "Call looking glass to execute a command"
 }

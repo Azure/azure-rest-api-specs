@@ -1,45 +1,47 @@
 {
   "parameters": {
-    "subscriptionId": "subId",
-    "resourceGroupName": "rgName",
-    "peeringServiceName": "peeringServiceName",
-    "prefixName": "peeringServicePrefixName",
     "api-version": "2025-05-01",
+    "peeringServiceName": "peeringServiceName",
     "peeringServicePrefix": {
       "properties": {
-        "prefix": "192.168.1.0/24",
-        "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000"
+        "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+        "prefix": "192.168.1.0/24"
       }
-    }
+    },
+    "prefixName": "peeringServicePrefixName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "peeringServicePrefixName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName",
         "properties": {
+          "errorMessage": "Prefix is not announced by the service provider to Microsoft.",
+          "learnedType": "None",
+          "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
           "prefix": "192.168.1.0/24",
           "prefixValidationState": "Failed",
-          "learnedType": "None",
-          "errorMessage": "Prefix is not announced by the service provider to Microsoft.",
-          "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
           "provisioningState": "Succeeded"
-        },
-        "name": "peeringServicePrefixName",
-        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName"
+        }
       }
     },
     "201": {
       "body": {
+        "name": "peeringServicePrefixName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName",
         "properties": {
+          "errorMessage": "Prefix is not announced by the service provider to Microsoft.",
+          "learnedType": "None",
+          "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
           "prefix": "192.168.1.0/24",
           "prefixValidationState": "Failed",
-          "learnedType": "None",
-          "errorMessage": "Prefix is not announced by the service provider to Microsoft.",
-          "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
           "provisioningState": "Succeeded"
-        },
-        "name": "peeringServicePrefixName",
-        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName"
+        }
       }
     }
-  }
+  },
+  "operationId": "Prefixes_CreateOrUpdate",
+  "title": "Create or update a prefix for the peering service"
 }

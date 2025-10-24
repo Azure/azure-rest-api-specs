@@ -1,38 +1,40 @@
 {
   "parameters": {
-    "subscriptionId": "subId",
+    "api-version": "2025-05-01",
     "peerAsnName": "peerAsnName",
-    "api-version": "2025-05-01"
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "peerAsnName",
+        "type": "Microsoft.Peering/peerAsns",
+        "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/peerAsnName",
         "properties": {
           "peerAsn": 65000,
           "peerContactDetail": [
             {
-              "role": "Noc",
               "email": "noc@contoso.com",
-              "phone": "+1 (234) 567-8999"
+              "phone": "+1 (234) 567-8999",
+              "role": "Noc"
             },
             {
-              "role": "Policy",
               "email": "abc@contoso.com",
-              "phone": "+1 (234) 567-8900"
+              "phone": "+1 (234) 567-8900",
+              "role": "Policy"
             },
             {
-              "role": "Technical",
               "email": "xyz@contoso.com",
-              "phone": "+1 (234) 567-8900"
+              "phone": "+1 (234) 567-8900",
+              "role": "Technical"
             }
           ],
           "peerName": "Contoso",
           "validationState": "Approved"
-        },
-        "name": "peerAsnName",
-        "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/peerAsnName",
-        "type": "Microsoft.Peering/peerAsns"
+        }
       }
     }
-  }
+  },
+  "operationId": "PeerAsns_Get",
+  "title": "Get a peer ASN"
 }

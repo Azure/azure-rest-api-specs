@@ -595,6 +595,7 @@ model DirectConnection {
   /**
    * The PeeringDB.com ID of the facility at which the connection has to be set up.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   peeringDBFacilityId?: int32;
 
   /**
@@ -637,21 +638,25 @@ model BgpSession {
   /**
    * The IPv4 session address on Microsoft's end.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   microsoftSessionIPv4Address?: string;
 
   /**
    * The IPv6 session address on Microsoft's end.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   microsoftSessionIPv6Address?: string;
 
   /**
    * The IPv4 session address on peer's end.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   peerSessionIPv4Address?: string;
 
   /**
    * The IPv6 session address on peer's end.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   peerSessionIPv6Address?: string;
 
   /**
@@ -715,6 +720,7 @@ model ExchangeConnection {
   /**
    * The PeeringDB.com ID of the facility at which the connection has to be set up.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   peeringDBFacilityId?: int32;
 
   /**
@@ -1073,11 +1079,13 @@ model DirectPeeringFacility {
   /**
    * The PeeringDB.com ID of the facility.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   peeringDBFacilityId?: int32;
 
   /**
    * The PeeringDB.com URL of the facility.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   peeringDBFacilityLink?: string;
 }
 
@@ -1124,31 +1132,37 @@ model ExchangePeeringFacility {
   /**
    * The IPv4 address of Microsoft at the exchange peering facility.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   microsoftIPv4Address?: string;
 
   /**
    * The IPv6 address of Microsoft at the exchange peering facility.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   microsoftIPv6Address?: string;
 
   /**
    * The IPv4 prefixes associated with the exchange peering facility.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   facilityIPv4Prefix?: string;
 
   /**
    * The IPv6 prefixes associated with the exchange peering facility.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   facilityIPv6Prefix?: string;
 
   /**
    * The PeeringDB.com ID of the facility.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   peeringDBFacilityId?: int32;
 
   /**
    * The PeeringDB.com URL of the facility.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   peeringDBFacilityLink?: string;
 }
 
@@ -1211,6 +1225,7 @@ model PeeringRegisteredPrefixProperties {
 /**
  * The resource tags.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model ResourceTags {
   /**
    * Gets or sets the tags, a dictionary of descriptors arm object
@@ -1319,6 +1334,7 @@ model ConnectionMonitorTestProperties {
  * The peering service country.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model PeeringServiceCountry extends Resource {}
 
 /**
@@ -1518,6 +1534,7 @@ model LogAnalyticsWorkspaceProperties {
   /**
    * The Workspace ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   @visibility(Lifecycle.Read)
   workspaceID?: string;
 
