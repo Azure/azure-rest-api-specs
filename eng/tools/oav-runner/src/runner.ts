@@ -11,7 +11,7 @@ import {
   stable,
   swagger,
 } from "@azure-tools/specs-shared/changed-files";
-import { untilFolder } from "@azure-tools/specs-shared/path";
+import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { ReportableOavError } from "./formatting.js";
 
@@ -166,7 +166,10 @@ export async function processFilesToSpecificationList(
         path/to/swagger/2024-01-01/swagger.json <-- we need to identify this file if it references the example
         path/to/swagger/2024-01-01/swagger2.json <-- and do nothing with this one
       */
-      const swaggerDir = path.relative(rootDirectory, untilFolder(absoluteFilePath, "examples"));
+      const swaggerDir = path.relative(
+        rootDirectory,
+        untilLastSegment(absoluteFilePath, "examples"),
+      );
 
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
 
