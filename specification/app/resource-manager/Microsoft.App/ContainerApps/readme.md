@@ -41,6 +41,10 @@ directive:
     from: ManagedEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[3].schema.properties.identity
     reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+  - suppress: AvoidAdditionalProperties
+    from: Agents.json
+    where: $.definitions.AgentSecrets.properties.secretReferences
+    reason: The schema is defined by service.
 ```
 
 ### Tag: package-2026-01-01
@@ -48,6 +52,10 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
+  - stable/2026-01-01/Agents.json
+  - stable/2026-01-01/AgentsConnectors.json
+  - stable/2026-01-01/AgentSpaces.json
+  - stable/2026-01-01/AgentSpacesConnectors.json
   - stable/2026-01-01/AuthConfigs.json
   - stable/2026-01-01/AvailableWorkloadProfiles.json
   - stable/2026-01-01/BillingMeters.json
