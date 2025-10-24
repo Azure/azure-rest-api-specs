@@ -45,8 +45,8 @@ interface RaiBlocklistPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistPropertiesBasicResource> &
@@ -65,8 +65,8 @@ interface RaiBlocklistPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     }
   >;
@@ -83,8 +83,8 @@ interface RaiBlocklistPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiBlocklistPropertiesBasicResourceArmPaginatedResult>
@@ -111,10 +111,10 @@ interface RaiBlocklistPropertiesBasicResources {
    * Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklistItem_DeleteBulk")
   @summary("Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.")
   @action("deleteRaiBlocklistItems")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,
     string[],

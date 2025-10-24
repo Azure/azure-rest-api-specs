@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
@@ -3817,9 +3817,9 @@ model VirtualMachineSize {
   /**
    * The number of vCPUs supported by the virtual machine size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Number of vPUs")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vCPUs?: int32;
 
   /**
@@ -3832,25 +3832,25 @@ model VirtualMachineSize {
   /**
    * The OS VHD disk size, in MB, allowed by the virtual machine size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("OS VHD Disk size")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   osVhdSizeMB?: int32;
 
   /**
    * The resource volume size, in MB, allowed by the virtual machine size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Resource volume size")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxResourceVolumeMB?: int32;
 
   /**
    * The amount of memory, in GB, supported by the virtual machine size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Memory size")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memoryGB?: float64;
 
   /**
@@ -3863,16 +3863,16 @@ model VirtualMachineSize {
   /**
    * Specifies if the virtual machine size supports premium IO.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Premium IO supported")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   premiumIO?: boolean;
 
   /**
    * The estimated price information for using a VM.
    */
-  @summary("Estimated VM prices")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Estimated VM prices")
   estimatedVMPrices?: EstimatedVMPrices;
 
   /**
@@ -4098,7 +4098,7 @@ model ComputeResourceSchema {
   /**
    * Compute properties
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Compute;
 }
 
@@ -4153,9 +4153,9 @@ model Compute {
   /**
    * Errors during provisioning
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningErrors?: ErrorResponse[] | null;
 
   /**
@@ -4198,8 +4198,8 @@ model ClusterUpdateProperties {
  * Desired scale settings for the amlCompute.
  */
 model ScaleSettingsInformation {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Scale settings.")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scaleSettings?: ScaleSettings;
 }
 
@@ -4387,13 +4387,13 @@ model VolumeDefinition {
   /**
    * Volume Options of the mount
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   volume?: VolumeOptions | null;
 
   /**
    * tmpfs option of the mount
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tmpfs?: TmpfsOptions | null;
 }
 
@@ -4423,7 +4423,7 @@ model VolumeOptions {
   /**
    * Indicate whether volume is nocopy
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nocopy?: boolean | null;
 }
 
@@ -4489,17 +4489,17 @@ model AmlComputeNodeInformation {
   /**
    * Private IP address of the compute node.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @summary("Private IP address.")
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIpAddress?: string | null;
 
   /**
    * Public IP address of the compute node.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @summary("Public IP address.")
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIpAddress?: string | null;
 
   /**
@@ -4518,9 +4518,9 @@ model AmlComputeNodeInformation {
   /**
    * ID of the Experiment running on the node, if any else null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @summary("Run ID.")
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runId?: string | null;
 }
 
@@ -4623,7 +4623,7 @@ model AvailableQuota {
   /**
    * Available quota properties
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AvailableQuotaProperties | null;
 }
 
@@ -4646,7 +4646,7 @@ model UsageAndQuotaDetails {
   /**
    * Model collection name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelCollection?: string | null;
 
   /**
@@ -4657,7 +4657,7 @@ model UsageAndQuotaDetails {
   /**
    * Usage details for each deployment
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   usageDetails?: PTUDeploymentUsage[] | null;
 }
 
@@ -4672,13 +4672,13 @@ model PTUDeploymentUsage {
   /**
    * Deployment name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deploymentName?: string | null;
 
   /**
    * Resource group name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceGroup?: string | null;
 
   /**
@@ -4689,7 +4689,7 @@ model PTUDeploymentUsage {
   /**
    * Workspace name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   workspaceName?: string | null;
 }
 
@@ -4722,15 +4722,15 @@ model AssetContainer extends ResourceBase {
   /**
    * The latest version inside this container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   latestVersion?: string | null;
 
   /**
    * The next auto incremental version
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nextVersion?: string | null;
 }
 
@@ -4739,22 +4739,22 @@ model ResourceBase {
   /**
    * The asset description text.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * The asset property dictionary.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<string | null> | null;
 
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string | null> | null;
 }
 
@@ -4771,7 +4771,7 @@ model CodeVersionProperties extends AssetBase {
   /**
    * Uri where code is located
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   codeUri?: string | null;
 
   /**
@@ -4802,7 +4802,7 @@ model PendingUploadRequestDto {
   /**
    * If PendingUploadId = null then random guid will be used.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pendingUploadId?: string | null;
 
   /**
@@ -4816,13 +4816,13 @@ model PendingUploadResponseDto {
   /**
    * Container level read, write, list SAS
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blobReferenceForConsumption?: BlobReferenceForConsumptionDto | null;
 
   /**
    * ID for this upload request
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pendingUploadId?: string | null;
 
   /**
@@ -4837,19 +4837,19 @@ model BlobReferenceForConsumptionDto {
    * Blob URI path for client to upload data.
    * Example: https://blob.windows.core.net/Container/Path
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blobUri?: url | null;
 
   /**
    * Credential info to access storage account
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credential?: PendingUploadCredentialDto | null;
 
   /**
    * Arm ID of the storage account to use
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountArmId?: string | null;
 }
 
@@ -4896,8 +4896,8 @@ model ComponentVersionProperties extends AssetBase {
    * Defines Component definition details.
    * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   componentSpec?: unknown | null;
 
   /**
@@ -4961,13 +4961,13 @@ model GetBlobReferenceSASRequestDto {
   /**
    * Id of the asset to be accessed
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   assetId?: string | null;
 
   /**
    * Blob uri of the asset to be accessed
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blobUri?: url | null;
 }
 
@@ -4979,7 +4979,7 @@ model GetBlobReferenceSASResponseDto {
   /**
    * Blob reference for consumption details
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blobReferenceForConsumption?: GetBlobReferenceForConsumptionDto | null;
 }
 
@@ -4988,19 +4988,19 @@ model GetBlobReferenceForConsumptionDto {
   /**
    * Blob uri, example: https://blob.windows.core.net/Container/Path
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blobUri?: url | null;
 
   /**
    * Credential info to access storage account
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credential?: DataReferenceCredential | null;
 
   /**
    * The ARM id of the storage account
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountArmId?: string | null;
 }
 
@@ -5103,7 +5103,7 @@ model EnvironmentVersionProperties extends AssetBase {
   /**
    * Stage in the environment lifecycle assigned to this environment
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stage?: string | null;
 }
 
@@ -5138,13 +5138,13 @@ model ImageDetails {
   /**
    * Container image details
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   image?: ImageInfo | null;
 
   /**
    * Vulnerability findings details
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vulnerabilityFindings?: VulnerabilityFindings | null;
 }
 
@@ -5153,25 +5153,25 @@ model ImageInfo {
   /**
    * Image digest
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   digest?: string | null;
 
   /**
    * Container registry host name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hostname?: string | null;
 
   /**
    * Repository name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   repository?: string | null;
 
   /**
    * Image tag
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tag?: string | null;
 }
 
@@ -5180,7 +5180,7 @@ model VulnerabilityFindings {
   /**
    * AssetId (Image digest).
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   assetId?: string | null;
 
   /**
@@ -5192,7 +5192,7 @@ model VulnerabilityFindings {
   /**
    * List of vulnerability findings.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   data?: VulnerabilityDetails[] | null;
 
   /**
@@ -5211,19 +5211,19 @@ model VulnerabilityFindings {
    * Scan result date.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lastScanDate?: utcDateTime | null;
 
   /**
    * Vulnerability scanner name.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scanner?: string | null;
 
   /**
    * Data source (internal).
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   source?: string | null;
 
   /**
@@ -5238,33 +5238,33 @@ model VulnerabilityDetails {
   /**
    * CVE id.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cve?: string | null;
 
   /**
    * CVE url.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cveUrl?: string | null;
 
   /**
    * DueDate for vulnerability. Provider data or PublishDate + 30 days.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dueDate?: utcDateTime | null;
 
   /**
    * Vulnerability ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string | null;
 
   /**
    * Dependency details.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   packageDetails?: PackageDetails[] | null;
 
   /**
@@ -5275,14 +5275,14 @@ model VulnerabilityDetails {
   /**
    * Vulnerability ID from provider.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   providerId?: string | null;
 
   /**
    * Vulnerability publish date.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publishDate?: utcDateTime | null;
 
   /**
@@ -5293,25 +5293,25 @@ model VulnerabilityDetails {
   /**
    * Vulnerability description.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   solution?: string | null;
 
   /**
    * Vulnerability name.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   title?: string | null;
 
   /**
    * Vendor vulnerability ID (USN, GH Advisory, etc).
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vendorId?: string | null;
 
   /**
    * Vendor vulnerability url.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vendorUrl?: string | null;
 }
 
@@ -5320,25 +5320,25 @@ model PackageDetails {
   /**
    * Install path.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   installPath?: string | null;
 
   /**
    * Installed version.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   installedVersion?: string | null;
 
   /**
    * Package or dependency name.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string | null;
 
   /**
    * Patched version.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   patchedVersion?: string | null;
 }
 
@@ -5362,7 +5362,7 @@ model InferenceContainerProperties {
   /**
    * The route to check the startup of the application in the container.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startupRoute?: Route | null;
 }
 
@@ -5411,25 +5411,25 @@ model ModelVersionProperties extends AssetBase {
    * Mapping of model flavors to their properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   flavors?: Record<FlavorData | null> | null;
 
   /**
    * Name of the training job which produced this model
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   jobName?: string | null;
 
   /**
    * The storage format for this entity. Used for NCD.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelType?: string | null;
 
   /**
    * The URI path to the model contents.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelUri?: string | null;
 
   /**
@@ -5441,13 +5441,13 @@ model ModelVersionProperties extends AssetBase {
   /**
    * Stage in the model lifecycle assigned to this model
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stage?: string | null;
 
   /**
    * Array of dataset references
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   datasets?: DatasetReference[] | null;
 }
 
@@ -5457,7 +5457,7 @@ model FlavorData {
    * Model flavor-specific data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   data?: Record<string | null> | null;
 }
 
@@ -5468,13 +5468,13 @@ model DatasetReference {
   /**
    * The name of the dataset reference.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string | null;
 
   /**
    * The fully qualified ARM id of the dataset reference.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string | null;
 }
 
@@ -5492,7 +5492,7 @@ model BatchEndpointProperties extends EndpointPropertiesBase {
   /**
    * Default values for Batch Endpoint
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defaults?: BatchEndpointDefaults | null;
 
   /**
@@ -5510,7 +5510,7 @@ model BatchEndpointDefaults {
    * Name of the deployment that will be default for the endpoint.
    * This deployment will end up getting 100% traffic when the endpoint scoring URL is invoked.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deploymentName?: string | null;
 }
 
@@ -5526,37 +5526,37 @@ model EndpointPropertiesBase {
   /**
    * Description of the inference endpoint.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * EndpointAuthKeys to set initially on an Endpoint.
    * This property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keys?: EndpointAuthKeys | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<string | null> | null;
 
   /**
    * Endpoint URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scoringUri?: url | null;
 
   /**
    * Endpoint Swagger URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   swaggerUri?: url | null;
 }
 
@@ -5567,15 +5567,15 @@ model EndpointAuthKeys {
   /**
    * The primary key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   primaryKey?: string | null;
 
   /**
    * The secondary key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   secondaryKey?: string | null;
 }
 
@@ -5616,7 +5616,7 @@ model PartialMinimalTrackedResource {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string> | null;
 }
 
@@ -5634,13 +5634,13 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Compute target for batch inference operation.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   compute?: string | null;
 
   /**
    * Properties relevant to different deployment types.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deploymentConfiguration?: BatchDeploymentConfiguration | null;
 
   /**
@@ -5674,7 +5674,7 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Reference to the model asset for the endpoint deployment.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `model`?: AssetReferenceBase | null;
 
   /**
@@ -5697,14 +5697,14 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
    * Indicates compute configuration for the job.
    * If not provided, will default to the defaults defined in ResourceConfiguration.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resources?: DeploymentResourceConfiguration | null;
 
   /**
    * Retry Settings for the batch inference operation.
    * If not provided, will default to the defaults defined in BatchRetrySettings.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   retrySettings?: BatchRetrySettings | null;
 }
 
@@ -5746,16 +5746,16 @@ model ResourceConfiguration {
   /**
    * Optional type of VM used as supported by the compute target.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType?: string | null;
 
   /**
    * Additional properties bag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<unknown | null> | null;
 }
 
@@ -5781,34 +5781,34 @@ model EndpointDeploymentPropertiesBase {
   /**
    * Code configuration for the endpoint deployment.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   codeConfiguration?: CodeConfiguration | null;
 
   /**
    * Description of the endpoint deployment.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * ARM resource ID or AssetId of the environment specification for the endpoint deployment.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   environmentId?: string | null;
 
   /**
    * Environment variables configuration for the deployment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   environmentVariables?: Record<string | null> | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<string | null> | null;
 }
 
@@ -5819,8 +5819,8 @@ model CodeConfiguration {
   /**
    * ARM resource ID of the code asset.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   codeId?: string | null;
 
   /**
@@ -5856,7 +5856,7 @@ model PartialBatchDeployment {
   /**
    * Description of the endpoint deployment.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 }
 
@@ -5866,7 +5866,7 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * List of AI services connections.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aiServicesConnections?: string[] | null;
 
   /**
@@ -5877,7 +5877,7 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * Customer subnet info to help set up this capability host.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customerSubnet?: string | null;
 
   /**
@@ -5889,19 +5889,19 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * List of Storage connections.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageConnections?: string[] | null;
 
   /**
    * List of Thread storage connections.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   threadStorageConnections?: string[] | null;
 
   /**
    * List of VectorStore connections.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vectorStoreConnections?: string[] | null;
 }
 
@@ -5912,19 +5912,19 @@ model DestinationAsset {
   /**
    * Destination asset name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationName?: string | null;
 
   /**
    * Destination asset version
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationVersion?: string | null;
 
   /**
    * Destination registry name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   registryName?: string | null;
 }
 
@@ -6031,7 +6031,7 @@ model FeatureProperties extends ResourceBase {
   /**
    * Specifies name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   featureName?: string | null;
 }
 
@@ -6049,13 +6049,13 @@ model FeaturesetVersionProperties extends AssetBase {
   /**
    * Specifies list of entities
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   entities?: string[] | null;
 
   /**
    * Specifies the materialization settings
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   materializationSettings?: MaterializationSettings | null;
 
   /**
@@ -6067,13 +6067,13 @@ model FeaturesetVersionProperties extends AssetBase {
   /**
    * Specifies the feature spec details
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   specification?: FeaturesetSpecification | null;
 
   /**
    * Specifies the asset stage
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stage?: string | null;
 }
 
@@ -6082,26 +6082,26 @@ model MaterializationSettings {
   /**
    * Specifies the notification details
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   notification?: NotificationSetting | null;
 
   /**
    * Specifies the compute resource settings
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: MaterializationComputeResource | null;
 
   /**
    * Specifies the schedule details
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   schedule?: RecurrenceTrigger | null;
 
   /**
    * Specifies the spark compute settings
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sparkConfiguration?: Record<string | null> | null;
 
   /**
@@ -6117,23 +6117,23 @@ model NotificationSetting {
   /**
    * Send email notification to user on specified notification type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   emailOn?: EmailNotificationEnableType[] | null;
 
   /**
    * This is the email recipient list which has a limitation of 499 characters in total concat with comma separator
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   emails?: string[] | null;
 
   /**
    * Send webhook callback to a service. Key is a user-provided name for the webhook.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   webhooks?: Record<Webhook | null> | null;
 }
 
@@ -6145,8 +6145,8 @@ model Webhook {
   /**
    * Send callback on a specified notification event
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eventType?: string | null;
 
   /**
@@ -6163,7 +6163,7 @@ model MaterializationComputeResource {
   /**
    * Specifies the instance type
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType?: string | null;
 }
 
@@ -6182,7 +6182,7 @@ model RecurrenceTrigger extends TriggerBase {
   /**
    * The recurrence schedule.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   schedule?: RecurrenceSchedule | null;
 
   /**
@@ -6206,13 +6206,13 @@ model RecurrenceSchedule {
   /**
    * List of month days for the schedule
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   monthDays?: int32[] | null;
 
   /**
    * List of days for the schedule.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   weekDays?: WeekDay[] | null;
 }
 
@@ -6224,13 +6224,13 @@ model TriggerBase {
    * Recommented format would be "2022-06-01T00:00:01"
    * If not present, the schedule will run indefinitely
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endTime?: string | null;
 
   /**
    * Specifies start time of schedule in ISO 8601 format, but without a UTC offset.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startTime?: string | null;
 
   /**
@@ -6253,7 +6253,7 @@ model FeaturesetSpecification {
   /**
    * Specifies the spec path
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   path?: string | null;
 }
 
@@ -6279,7 +6279,7 @@ model FeaturesetVersionBackfillRequest {
   /**
    * Specifies the backfill feature window to be materialized
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   featureWindow?: FeatureWindow | null;
 
   /**
@@ -6319,14 +6319,14 @@ model FeatureWindow {
    * Specifies the feature window end time
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   featureWindowEnd?: utcDateTime | null;
 
   /**
    * Specifies the feature window start time
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   featureWindowStart?: utcDateTime | null;
 }
 
@@ -6337,7 +6337,7 @@ model FeaturesetVersionBackfillResponse {
   /**
    * List of jobs submitted as part of the backfill request.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   jobIds?: string[] | null;
 }
 
@@ -6373,8 +6373,8 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies index columns
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   indexColumns?: IndexColumn[] | null;
 
   /**
@@ -6386,7 +6386,7 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies the asset stage
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stage?: string | null;
 }
 
@@ -6397,7 +6397,7 @@ model IndexColumn {
   /**
    * Specifies the column name
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   columnName?: string | null;
 
   /**
@@ -6426,7 +6426,7 @@ model InferencePoolProperties extends PropertiesBase {
   /**
    * Gets or sets ScaleUnitConfiguration for the inference pool. Used if PoolType=ScaleUnit.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scaleUnitConfiguration?: ScaleUnitConfiguration | null;
 }
 
@@ -6442,7 +6442,7 @@ model ScaleUnitConfiguration {
   /**
    * Gets or sets a list of Registry sources that will be used to confirm identity, storage, ACR.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   registries?: string[] | null;
 }
 
@@ -6453,14 +6453,14 @@ model PropertiesBase {
   /**
    * Description of the resource.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: StringStringKeyValuePair[] | null;
 }
 
@@ -6538,8 +6538,8 @@ model InferenceEndpointProperties extends PropertiesBase {
   /**
    * Endpoint URI for the inference endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpointUri?: url | null;
 
   /**
@@ -6558,7 +6558,7 @@ model InferenceEndpointProperties extends PropertiesBase {
   /**
    * RequestConfiguration for endpoint.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestConfiguration?: RequestConfiguration | null;
 }
 
@@ -6592,19 +6592,19 @@ model InferenceGroupProperties extends PropertiesBase {
   /**
    * Gets or sets environment configuration for the inference group. Used if PoolType=ScaleUnit.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   environmentConfiguration?: GroupEnvironmentConfiguration | null;
 
   /**
    * Gets or sets model configuration for the inference group. Used if PoolType=ScaleUnit.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelConfiguration?: GroupModelConfiguration | null;
 
   /**
    * Gets or sets compute instance type.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nodeSkuType?: string | null;
 
   /**
@@ -6626,31 +6626,31 @@ model GroupEnvironmentConfiguration {
   /**
    * ARM resource ID of the environment specification for the inference pool.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   environmentId?: string | null;
 
   /**
    * Environment variables configuration for the inference pool.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   environmentVariables?: StringStringKeyValuePair[] | null;
 
   /**
    * Liveness probe monitors the health of the container regularly.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   livenessProbe?: ProbeSettings | null;
 
   /**
    * Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   readinessProbe?: ProbeSettings | null;
 
   /**
    * This verifies whether the application within a container is started. Startup probes run before any other probe, and, unless it finishes successfully, disables other probes.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startupProbe?: ProbeSettings | null;
 }
 
@@ -6666,7 +6666,7 @@ model ProbeSettings {
   /**
    * The delay before the first probe in ISO 8601 format.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   initialDelay?: duration | null;
 
   /**
@@ -6692,7 +6692,7 @@ model GroupModelConfiguration {
   /**
    * The URI path to the model.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelId?: string | null;
 }
 
@@ -6714,13 +6714,13 @@ model DeltaModelStatusRequest {
   /**
    * Gets or sets collection of delta models to retrieve status for.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deltaModels?: string[] | null;
 
   /**
    * Gets or sets target base model.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetBaseModel?: string | null;
 }
 
@@ -6737,7 +6737,7 @@ model DeltaModelStatusResponse {
    * Gets or sets dictionary representing modelID and its current state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deltaModels?: Record<DeltaModelCurrentState[] | null> | null;
 
   /**
@@ -6748,13 +6748,13 @@ model DeltaModelStatusResponse {
   /**
    * Gets or sets revision ID.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   revisionId?: string | null;
 
   /**
    * Gets or sets target base model.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetBaseModel?: string | null;
 }
 
@@ -6771,13 +6771,13 @@ model DeltaModelCurrentState {
    * Gets or sets sample of instances with model.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sampleInstanceID?: string | null;
 
   /**
    * Gets or sets status.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   status?: string | null;
 }
 
@@ -6791,13 +6791,13 @@ model DeltaModelListRequest {
   /**
    * Gets or sets skip token for paginated response.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string | null;
 
   /**
    * Gets or sets target base model.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetBaseModel?: string | null;
 }
 
@@ -6809,7 +6809,7 @@ model StringArmPaginatedResult is Azure.Core.Page<Stringforlist>;
 //Fix Me: Compile Error
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Stringforlist {
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   string?: string;
 }
 
@@ -6821,32 +6821,32 @@ model DeltaModelModifyRequest {
    * Gets or sets delta models to remove.
    */
   #suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @uniqueItems
   addDeltaModels?: string[] | null;
 
   /**
    * Gets or sets delta models to remove.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @uniqueItems
   removeDeltaModels?: string[] | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Gets or sets target base model.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetBaseModel?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model GroupStatus {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Gets or sets the actual capacity info for the group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   actualCapacityInfo?: ActualCapacityInfo | null;
 
   /**
@@ -6898,22 +6898,22 @@ model SkuResourceArmPaginatedResult is Azure.Core.Page<SkuResource>;
  */
 model SkuResource {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Gets or sets the Sku Capacity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capacity?: SkuCapacity | null;
 
   /**
    * The resource type name.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   resourceType?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Gets or sets the Sku.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: SkuSetting | null;
 }
 
@@ -6973,22 +6973,22 @@ model JobBaseResourceArmPaginatedResult is Azure.Core.Page<JobBase>;
 model JobBaseProperties extends ResourceBase {
   /**
    * ARM resource ID of the component resource.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   componentId?: string | null;
 
   /**
    * ARM resource ID of the compute resource.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeId?: string | null;
 
   /**
    * Display name of job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string | null;
 
@@ -7001,8 +7001,8 @@ model JobBaseProperties extends ResourceBase {
   /**
    * Identity configuration. If set, this should be one of AmlToken, ManagedIdentity, UserIdentity or null.
    * Defaults to AmlToken if null.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: IdentityConfiguration | null;
 
@@ -7020,22 +7020,22 @@ model JobBaseProperties extends ResourceBase {
 
   /**
    * Notification setting for the job
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   notificationSetting?: NotificationSetting | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Parent job name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parentJobName?: string | null;
 
   /**
    * List of JobEndpoints.
    * For local jobs, a job endpoint will have an endpoint value of FileStreamObject.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   services?: Record<JobService | null> | null;
 
@@ -7064,50 +7064,50 @@ model IdentityConfiguration {
 model JobService {
   /**
    * Url for endpoint.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
   /**
    * Any error in the service.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorMessage?: string | null;
 
   /**
    * Endpoint type.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobServiceType?: string | null;
 
   /**
    * Nodes that user would like to start the service on.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * If Nodes is not set or set to null, the service will only be started on leader node.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nodes?: Nodes | null;
 
   /**
    * Port for endpoint.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   port?: int32 | null;
 
   /**
    * Additional properties to set on the endpoint.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string | null> | null;
 
   /**
    * Status of endpoint.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   status?: string | null;
 }
@@ -7134,8 +7134,8 @@ model MarketplaceSubscriptionResourceArmPaginatedResult
 model MarketplaceSubscriptionProperties {
   /**
    * Marketplace Plan associated with the Marketplace Subscription.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   marketplacePlan?: MarketplacePlan | null;
 
@@ -7163,22 +7163,22 @@ model MarketplaceSubscriptionProperties {
 model MarketplacePlan {
   /**
    * The identifying name of the Offer of the Marketplace Plan.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   offerId?: string | null;
 
   /**
    * The identifying name of the Plan of the Marketplace Plan.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   planId?: string | null;
 
   /**
    * The identifying name of the Publisher of the Marketplace Plan.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   publisherId?: string | null;
 }
@@ -7196,15 +7196,15 @@ model OnlineEndpointTrackedResourceArmPaginatedResult
 model OnlineEndpointProperties extends EndpointPropertiesBase {
   /**
    * ARM resource ID of the compute if it exists.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * optional
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   compute?: string | null;
 
   /**
    * Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   mirrorTraffic?: Record<int32> | null;
 
@@ -7221,8 +7221,8 @@ model OnlineEndpointProperties extends EndpointPropertiesBase {
 
   /**
    * Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   traffic?: Record<int32> | null;
 }
@@ -7243,9 +7243,9 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   appInsightsEnabled?: boolean = false;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The mdc configuration, we disable mdc when it's null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataCollector?: DataCollector | null;
 
   /**
@@ -7260,27 +7260,27 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
 
   /**
    * Compute instance type. Default: Standard_F4s_v2.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string | null = "Standard_F4s_v2";
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Liveness probe monitors the health of the container regularly.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   livenessProbe?: ProbeSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The URI path to the model.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `model`?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The path to mount the model in custom container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelMountPath?: string | null;
 
   /**
@@ -7290,30 +7290,30 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   provisioningState?: DeploymentProvisioningState;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   readinessProbe?: ProbeSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Request settings for the deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestSettings?: OnlineRequestSettings | null;
 
   /**
    * Scale settings for the deployment.
    * If it is null or not provided,
    * it defaults to TargetUtilizationScaleSettings for KubernetesOnlineDeployment
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * and to DefaultScaleSettings for ManagedOnlineDeployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scaleSettings?: OnlineScaleSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Startup probe verify whether an application within a container has started successfully.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startupProbe?: ProbeSettings | null;
 }
 
@@ -7327,9 +7327,9 @@ model DataCollector {
   collections: Record<Collection | null>;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The request logging configuration for mdc, it includes advanced logging settings for all collections. It's optional.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestLogging?: RequestLogging | null;
 
   /**
@@ -7344,9 +7344,9 @@ model DataCollector {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Collection {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientId?: string | null;
 
   /**
@@ -7355,9 +7355,9 @@ model Collection {
   dataCollectionMode?: DataCollectionMode = DataCollectionMode.Disabled;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The data asset arm resource id. Client side will ensure data asset is pointing to the blob storage, and backend will collect data to the blob storage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataId?: string | null;
 
   /**
@@ -7369,9 +7369,9 @@ model Collection {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RequestLogging {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   captureHeaders?: string[] | null;
 }
 
@@ -7417,18 +7417,18 @@ model DeploymentLogsRequest {
   containerType?: ContainerType = ContainerType.InferenceServer;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The maximum number of lines to tail.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tail?: int32 | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DeploymentLogs {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The retrieved online deployment logs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   content?: string | null;
 }
 
@@ -7440,9 +7440,9 @@ model RegenerateEndpointKeysRequest {
   keyType: KeyType;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The value the key is set to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keyValue?: string | null;
 }
 
@@ -7451,9 +7451,9 @@ model RegenerateEndpointKeysRequest {
  */
 model EndpointAuthToken {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Access token for endpoint authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessToken?: string | null;
 
   /**
@@ -7467,9 +7467,9 @@ model EndpointAuthToken {
   refreshAfterTimeUtc?: int64 = 0;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Access token type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tokenType?: string | null;
 }
 
@@ -7491,8 +7491,8 @@ model ScheduleProperties extends ResourceBase {
 
   /**
    * Display name of schedule.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string | null;
 
@@ -7539,9 +7539,9 @@ model ServerlessEndpointProperties {
   authMode: ServerlessInferenceEndpointAuthMode;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Specifies the content safety options. If omitted, the default content safety settings will be configured
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   contentSafety?: ContentSafety | null;
 
   /**
@@ -7552,22 +7552,22 @@ model ServerlessEndpointProperties {
 
   /**
    * The inference uri to target when making requests against the serverless endpoint
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   inferenceEndpoint?: ServerlessInferenceEndpoint | null;
 
   /**
    * The MarketplaceSubscription Azure ID associated to this ServerlessEndpoint.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   marketplaceSubscriptionId?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The model settings (model id) for the model being serviced on the ServerlessEndpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelSettings?: ModelSettings | null;
 
   /**
@@ -7595,7 +7595,7 @@ model ServerlessInferenceEndpoint {
   /**
    * Specifies any required headers to target this serverless endpoint.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
   headers?: Record<string | null> | null;
@@ -7610,9 +7610,9 @@ model ServerlessInferenceEndpoint {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ModelSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The unique model identifier that this ServerlessEndpoint should provision.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelId?: string | null;
 }
 
@@ -7627,52 +7627,52 @@ model RegistryTrackedResourceArmPaginatedResult is Azure.Core.Page<Registry>;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RegistryProperties {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Discovery URL for the Registry
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   discoveryUrl?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * IntellectualPropertyPublisher for the registry
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   intellectualPropertyPublisher?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * ResourceId of the managed RG if the registry has system created resources
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedResourceGroup?: ArmResourceId | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Managed resource group specific settings
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedResourceGroupSettings?: ManagedResourceGroupSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * MLFlow Registry URI for the Registry
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   mlFlowRegistryUri?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Private endpoint connections info used for pending connections in private link portal
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   registryPrivateEndpointConnections?: RegistryPrivateEndpointConnection[] | null;
 
   /**
    * Is the Registry accessible from the internet?
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Possible values: "Enabled" or "Disabled"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicNetworkAccess?: string | null;
 
   /**
    * Details of each region the registry is in
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   regionDetails?: RegistryRegionArmDetails[] | null;
 }
@@ -7683,9 +7683,9 @@ model RegistryProperties {
 model ArmResourceId {
   /**
    * Arm ResourceId is in the format "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * or "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{AcrName}"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceId?: string | null;
 }
 
@@ -7695,8 +7695,8 @@ model ArmResourceId {
 model ManagedResourceGroupSettings {
   /**
    * List of assigned identities for the managed resource group
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   assignedIdentities?: ManagedResourceGroupAssignedIdentities[] | null;
 }
@@ -7720,15 +7720,15 @@ model ManagedResourceGroupAssignedIdentities {
 model RegistryPrivateEndpointConnection {
   /**
    * This is the private endpoint connection name created on SRP
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Full resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string | null;
 
   /**
    * Same as workspace location.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string | null;
 
@@ -7745,27 +7745,27 @@ model RegistryPrivateEndpointConnection {
  */
 model RegistryPrivateEndpointConnectionProperties {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The group ids
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   groupIds?: string[] | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The PE network resource that is linked to this PE connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpoint?: PrivateEndpointResource | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The connection state.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   registryPrivateLinkServiceConnectionState?: RegistryPrivateLinkServiceConnectionState | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * One of null, "Succeeded", "Provisioning", "Failed". While not approved, it's null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: string | null;
 }
 
@@ -7776,9 +7776,9 @@ model RegistryPrivateEndpointConnectionProperties {
 model PrivateEndpointResource
   extends Azure.ResourceManager.CommonTypes.PrivateEndpoint {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The subnetId that the private endpoint is connected to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subnetArmId?: string | null;
 }
 
@@ -7787,15 +7787,15 @@ model PrivateEndpointResource
  */
 model RegistryPrivateLinkServiceConnectionState {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Some RP chose "None". Other RPs use this for region expansion.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   actionsRequired?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * User-defined message that, per NRP doc, may be used for approval-related message.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
@@ -7810,21 +7810,21 @@ model RegistryPrivateLinkServiceConnectionState {
 model RegistryRegionArmDetails {
   /**
    * List of ACR accounts
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   acrDetails?: AcrDetails[] | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The location where the registry exists
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string | null;
 
   /**
    * List of storage accounts
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   storageAccountDetails?: StorageAccountDetails[] | null;
 }
@@ -7834,30 +7834,30 @@ model RegistryRegionArmDetails {
  */
 model AcrDetails {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Details of system created ACR account to be used for the Registry
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   systemCreatedAcrAccount?: SystemCreatedAcrAccount | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SystemCreatedAcrAccount {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Name of the ACR account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   acrAccountName?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * SKU of the ACR account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   acrAccountSku?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * This is populated once the ACR account is created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   armResourceId?: ArmResourceId | null;
 }
 
@@ -7866,9 +7866,9 @@ model SystemCreatedAcrAccount {
  */
 model StorageAccountDetails {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Details of system created storage account to be used for the registry
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   systemCreatedStorageAccount?: SystemCreatedStorageAccount | null;
 }
 
@@ -7880,9 +7880,9 @@ model SystemCreatedStorageAccount {
   allowBlobPublicAccess?: boolean;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * This is populated once the storage account is created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   armResourceId?: ArmResourceId | null;
 
   /**
@@ -7891,9 +7891,9 @@ model SystemCreatedStorageAccount {
   storageAccountHnsEnabled?: boolean;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Name of the storage account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountName?: string | null;
 
   /**
@@ -7905,9 +7905,9 @@ model SystemCreatedStorageAccount {
    * "Standard_GZRS",
    * "Standard_RAGZRS",
    * "Premium_LRS",
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * "Premium_ZRS"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountType?: string | null;
 }
 
@@ -7934,8 +7934,8 @@ model PartialRegistryPartialTrackedResource {
 
 /**
  * Managed service identity (system assigned and/or user assigned identities)
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RegistryPartialManagedServiceIdentity
   extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
@@ -8094,9 +8094,11 @@ model WorkspaceProperties {
    */
   keyVault?: string;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   keyVaults?: string[];
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -8349,8 +8351,8 @@ model ManagedNetworkSettings {
   /**
    * Public IP address assigned to the Azure Firewall.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   firewallPublicIpAddress?: string | null;
 }
 
@@ -8371,9 +8373,9 @@ model OutboundRule {
   status?: RuleStatus;
 
   /**
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Type of a managed network Outbound Rule of a machine learning workspace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: RuleType;
 
   /**
@@ -8408,9 +8410,9 @@ model NetworkAcls {
   defaultAction?: DefaultActionType;
 
   /**
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Rules governing the accessibility of a resource from a specific ip address or ip range.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipRules?: IPRule[];
 }
 
@@ -8452,8 +8454,8 @@ model NotebookPreparationError {
 
 /**
  * Private endpoint connection properties.
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateEndpointConnectionProperties {
   privateEndpoint?: WorkspacePrivateEndpointResource;
 
@@ -8584,8 +8586,8 @@ model WorkspaceHubConfig {
 
 /**
  * The parameters for updating a machine learning workspace.
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkspaceUpdateParameters {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
@@ -8660,9 +8662,11 @@ model WorkspacePropertiesUpdateParameters {
   /**
    * The list of IPv4 addresses that are allowed to access the workspace.
    */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipAllowlist?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -8807,8 +8811,8 @@ model EndpointDeploymentResourceProperties {
   /**
    * Kind of the deployment.
    */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   type: string;
@@ -8864,9 +8868,11 @@ model EndpointModelProperties {
   /**
    * The list of Model Sku.
    */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skus?: EndpointModelSkuProperties[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   systemData?: SystemData;
 
   /**
@@ -8910,8 +8916,8 @@ model EndpointModelSkuProperties {
    * The name of the model SKU.
    */
   name?: string;
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   rateLimits?: EndpointModelSkuRateLimitProperties[];
 
@@ -8947,9 +8953,9 @@ model EndpointModelSkuRateLimitProperties {
   renewalPeriod?: float32;
 
   /**
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The call rate limit for the model.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules?: EndpointModelSkuRateLimitRuleProperties[];
 }
 
@@ -8963,10 +8969,12 @@ model EndpointModelSkuRateLimitRuleProperties {
    */
   dynamicThrottlingEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   matchPatterns?: EndpointModelSkuRateLimitRulePatternProperties[];
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   minCount?: float32;
@@ -8999,8 +9007,8 @@ model RaiBlocklistProperties {
 
 /**
  * The list of Cognitive Services RaiBlocklist Items for batch add.
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @OpenAPI.extension("x-ms-identifiers", #["name"])
 model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
 
@@ -9052,8 +9060,8 @@ model RaiPolicyProperties {
    * Name of the base Content Filters.
    */
   basePolicyName?: string;
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   completionBlocklists?: RaiBlocklistConfig[];
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -9063,15 +9071,15 @@ model RaiPolicyProperties {
    * Content Filters mode.
    */
   mode?: RaiPolicyMode;
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   promptBlocklists?: RaiBlocklistConfig[];
 
   /**
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Content Filters policy type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: RaiPolicyType;
 }
 
@@ -9300,9 +9308,9 @@ model EndpointResourceProperties {
   location?: string;
 
   /**
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Name of the endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 
   /**
@@ -9517,8 +9525,8 @@ model PrivateEndpointConnectionListResult {
    */
   @pageItems
   value?: PrivateEndpointConnection[];
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -9533,8 +9541,8 @@ model PrivateLinkResourceListResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @pageItems
   value?: PrivateLinkResource[];
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -9563,8 +9571,8 @@ model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
    * Optional. This field is required to be implemented by the RP because AML is supporting more than one tier
    */
   sku?: Azure.ResourceManager.CommonTypes.Sku;
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
@@ -9643,9 +9651,9 @@ model ResourceId {
 }
 
 /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * A Machine Learning compute based on AKS.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AKS extends Compute {
   ...AKSSchema;
 
@@ -9670,30 +9678,30 @@ model AKSSchema {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AKSSchemaProperties {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Cluster full qualified domain name
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clusterFqdn?: string | null;
 
   /**
    * System services
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
   systemServices?: SystemService[] | null;
 
   /**
    * Number of agents
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(0)
   agentCount?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Agent virtual machine size
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agentVmSize?: string | null;
 
   /**
@@ -9702,15 +9710,15 @@ model AKSSchemaProperties {
   clusterPurpose?: ClusterPurpose = ClusterPurpose.FastProd;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * SSL configuration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sslConfiguration?: SslConfiguration | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * AKS networking configuration for vnet
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aksNetworkingConfiguration?: AksNetworkingConfiguration | null;
 
   /**
@@ -9719,9 +9727,9 @@ model AKSSchemaProperties {
   loadBalancerType?: LoadBalancerType = LoadBalancerType.PublicIp;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Load Balancer Subnet
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   loadBalancerSubnet?: string | null;
 }
 
@@ -9759,28 +9767,28 @@ model SslConfiguration {
 
   /**
    * Cert data
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   cert?: string | null;
 
   /**
    * Key data
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   key?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * CNAME of the cert
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cname?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Leaf domain label of public endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   leafDomainLabel?: string | null;
 
   /**
@@ -9806,8 +9814,8 @@ model AksNetworkingConfiguration {
 
   /**
    * An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr.
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pattern("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   dnsServiceIP?: string;
 
@@ -9846,22 +9854,22 @@ model KubernetesSchema {
 model KubernetesProperties {
   /**
    * Relay connection string.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   relayConnectionString?: string | null;
 
   /**
    * ServiceBus connection string.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   serviceBusConnectionString?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Extension principal-id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensionPrincipalId?: string | null;
 
   /**
@@ -9897,8 +9905,8 @@ model KubernetesProperties {
 model InstanceTypeSchema {
   /**
    * Node Selector
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   nodeSelector?: Record<string | null> | null;
 
@@ -9945,9 +9953,9 @@ model AmlComputeProperties {
   vmPriority?: VmPriority;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Virtual Machine image for AML Compute - windows only
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   virtualMachineImage?: VirtualMachineImage | null;
 
   /**
@@ -9962,15 +9970,15 @@ model AmlComputeProperties {
 
   /**
    * Credentials for an administrator user account that will be created on each compute node.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("User account credentials.")
   userAccountCredentials?: UserAccountCredentials | null;
 
   /**
    * Virtual network subnet resource ID the compute nodes belong to.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Subnet.")
   subnet?: ResourceId | null;
 
@@ -9997,8 +10005,8 @@ model AmlComputeProperties {
   /**
    * Collection of errors encountered by various compute nodes during node setup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Errors.")
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   errors?: ErrorResponse[] | null;
@@ -10006,7 +10014,7 @@ model AmlComputeProperties {
   /**
    * The number of compute nodes currently assigned to the compute.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @summary("Current node count.")
   currentNodeCount?: int32 | null;
@@ -10014,7 +10022,7 @@ model AmlComputeProperties {
   /**
    * The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @summary("Target node count.")
   targetNodeCount?: int32 | null;
@@ -10022,22 +10030,22 @@ model AmlComputeProperties {
   /**
    * Counts of various node states on the compute.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @summary("Node state counts.")
   nodeStateCounts?: NodeStateCounts | null;
 
   /**
    * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Enable node public IP.")
   enableNodePublicIp?: boolean | null = true;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * A property bag containing additional properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   propertyBag?: unknown | null;
 }
 
@@ -10156,8 +10164,8 @@ model ComputeInstanceProperties {
 
   /**
    * Virtual network subnet resource ID the compute nodes belong to.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Subnet.")
   subnet?: ResourceId | null;
 
@@ -10168,21 +10176,21 @@ model ComputeInstanceProperties {
   applicationSharingPolicy?: ApplicationSharingPolicy = ApplicationSharingPolicy.Shared;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Specifies settings for autologger.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Specifies policy and settings for SSH access.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sshSettings?: ComputeInstanceSshSettings | null;
 
   /**
    * List of Custom Services added to the compute.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   customServices?: CustomService[] | null;
 
@@ -10227,65 +10235,65 @@ model ComputeInstanceProperties {
 
   /**
    * The Compute Instance Authorization type. Available values are personal (default).
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Compute Instance Authorization type.")
   computeInstanceAuthorizationType?: ComputeInstanceAuthorizationType | null = ComputeInstanceAuthorizationType.personal;
 
   /**
    * Enable Auto OS Patching. Possible values are: true, false.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Enable Auto OS Patching.")
   enableOSPatching?: boolean | null = false;
 
   /**
    * Enable root access. Possible values are: true, false.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Enable root access.")
   enableRootAccess?: boolean | null = true;
 
   /**
    * Enable SSO (single sign on). Possible values are: true, false.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Enable SSO (single sign on).")
   enableSSO?: boolean | null = true;
 
   /**
    * Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean | null = false;
 
   /**
    * Settings for a personal compute instance.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Personal Compute Instance settings.")
   personalComputeInstanceSettings?: PersonalComputeInstanceSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Details of customized scripts to execute for setting up the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   setupScripts?: SetupScripts | null;
 
   /**
    * The last operation on ComputeInstance.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   lastOperation?: ComputeInstanceLastOperation | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The list of schedules to be applied on the computes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   schedules?: ComputeSchedules | null;
 
   /**
@@ -10295,15 +10303,15 @@ model ComputeInstanceProperties {
 
   /**
    * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Enable node public IP.")
   enableNodePublicIp?: boolean | null;
 
   /**
    * Describes informations of containers on this ComputeInstance.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   containers?: ComputeInstanceContainer[] | null;
@@ -10311,7 +10319,7 @@ model ComputeInstanceProperties {
   /**
    * Describes informations of dataDisks on this ComputeInstance.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   dataDisks?: ComputeInstanceDataDisk[] | null;
@@ -10319,7 +10327,7 @@ model ComputeInstanceProperties {
   /**
    * Describes informations of dataMounts on this ComputeInstance.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   dataMounts?: ComputeInstanceDataMount[] | null;
@@ -10421,8 +10429,8 @@ model OsPatchingStatus {
 
   /**
    * Collection of errors encountered when doing os patching.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   osPatchingErrors?: ErrorResponse[] | null;
 }
@@ -10433,15 +10441,15 @@ model OsPatchingStatus {
 model ComputeInstanceConnectivityEndpoints {
   /**
    * Public IP Address of this ComputeInstance.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   publicIpAddress?: string | null;
 
   /**
    * Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed).
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   privateIpAddress?: string | null;
 }
@@ -10467,8 +10475,8 @@ model ComputeInstanceApplication {
 model ComputeInstanceCreatedBy {
   /**
    * Name of the user.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   userName?: string | null;
 
@@ -10480,8 +10488,8 @@ model ComputeInstanceCreatedBy {
 
   /**
    * Uniquely identifies the user within his/her organization.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   userId?: string | null;
 }
@@ -10604,8 +10612,8 @@ model ComputeSchedules {
 model ComputeStartStopSchedule {
   /**
    * A system assigned id for the schedule.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string | null;
 
@@ -10661,9 +10669,9 @@ model Recurrence {
   interval?: int32;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The start time in yyyy-MM-ddTHH:mm:ss format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startTime?: string | null;
 
   /**
@@ -10691,15 +10699,15 @@ model ComputeRecurrenceSchedule {
   minutes: int32[];
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * List of month days for the schedule
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   monthDays?: int32[] | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * List of days for the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   weekDays?: ComputeWeekDay[] | null;
 }
 
@@ -10708,9 +10716,9 @@ model ComputeRecurrenceSchedule {
  */
 model Cron {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The start time in yyyy-MM-ddTHH:mm:ss format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startTime?: string | null;
 
   /**
@@ -10729,9 +10737,9 @@ model Cron {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ScheduleBase {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * A system assigned id for the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string | null;
 
   /**
@@ -10808,8 +10816,8 @@ model ComputeInstanceDataDisk {
 
   /**
    * The initial disk size in gigabytes.
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("The initial disk size in gigabytes.")
   diskSizeGB?: int32;
 
@@ -10830,9 +10838,9 @@ model ComputeInstanceDataDisk {
  */
 model ComputeInstanceVersion {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Runtime of compute instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runtime?: string | null;
 }
 
@@ -10937,9 +10945,9 @@ model VirtualMachineSshCredentials {
 }
 
 /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * HDInsight compute properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HDInsightProperties {
   /**
    * Port open for ssh connections on the master node of the cluster.
@@ -10958,9 +10966,9 @@ model HDInsightProperties {
 }
 
 /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * A HDInsight compute.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HDInsight extends Compute {
   ...HDInsightSchema;
 
@@ -10970,7 +10978,6 @@ model HDInsight extends Compute {
   computeType: "HDInsight";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model HDInsightSchema {
   properties?: HDInsightProperties;
@@ -11147,9 +11154,9 @@ model AksComputeSecretsProperties {
   adminKubeConfig?: string;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Image registry pull secret.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   imagePullSecretName?: string | null;
 }
 
@@ -11228,9 +11235,9 @@ model AccountKeyDatastoreCredentials extends DatastoreCredentials {
  */
 model AccountKeyDatastoreSecrets extends DatastoreSecrets {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Storage account key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string | null;
 
   /**
@@ -11332,9 +11339,9 @@ model AssetJobInput {
  */
 model AssetJobOutput {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Output Asset Name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   assetName?: string | null;
 
   /**
@@ -11344,9 +11351,9 @@ model AssetJobOutput {
   mode?: OutputDeliveryMode = OutputDeliveryMode.ReadWriteMount;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Output Asset URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   uri?: string | null;
 }
 
@@ -11375,22 +11382,22 @@ model ForecastHorizon {
 /**
  * AutoMLJob class.
  * Use this class for executing AutoML tasks like Classification/Regression etc.
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * See TaskType enum for all the tasks supported.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutoMLJob extends JobBaseProperties {
   /**
    * The ARM resource ID of the Environment specification for the job.
    * This is optional value to provide, if not provided, AutoML will default this to Production AutoML curated environment version when running the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentId?: string | null;
 
   /**
    * Environment variables included in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string | null> | null;
@@ -11398,15 +11405,15 @@ model AutoMLJob extends JobBaseProperties {
   /**
    * Mapping of output data bindings used in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Queue settings for the job
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -11434,8 +11441,8 @@ model AutoMLJob extends JobBaseProperties {
 model JobOutput {
   /**
    * Description for the output.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string | null;
 
@@ -11460,15 +11467,15 @@ model QueueSettings {
 model JobResourceConfiguration extends ResourceConfiguration {
   /**
    * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dockerArgs?: string | null;
 
   /**
    * Extra arguments to pass to the Docker run command, as a collection. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dockerArgsList?: string[] | null;
 
@@ -11483,8 +11490,8 @@ model JobResourceConfiguration extends ResourceConfiguration {
 /**
  * AutoML vertical class.
  * Base class for AutoML verticals - TableVertical/ImageVertical/NLPVertical
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("taskType")
 model AutoMLVertical {
   /**
@@ -11494,9 +11501,9 @@ model AutoMLVertical {
 
   /**
    * Target column name: This is prediction values column.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Also known as label column name in context of classification tasks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetColumnName?: string | null;
 
   /**
@@ -11511,7 +11518,6 @@ model AutoMLVertical {
   trainingData: MLTableJobInput;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MLTableJobInput extends JobInput {
   ...AssetJobInput;
@@ -11529,8 +11535,8 @@ model MLTableJobInput extends JobInput {
 model JobInput {
   /**
    * Description for the input.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string | null;
 
@@ -11542,9 +11548,9 @@ model JobInput {
 }
 
 /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * N-Cross validations determined automatically.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutoNCrossValidations extends NCrossValidations {
   /**
    * [Required] Mode for determining N-Cross validations.
@@ -11554,8 +11560,8 @@ model AutoNCrossValidations extends NCrossValidations {
 
 /**
  * N-Cross validations value.
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("mode")
 model NCrossValidations {
   /**
@@ -11635,29 +11641,29 @@ model AzureBlobDatastore extends DatastoreProperties {
 
   /**
    * Storage account name.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   accountName?: string | null;
 
   /**
    * Storage account container name.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   containerName?: string | null;
 
   /**
    * Azure cloud endpoint for the storage account.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
   /**
    * Protocol used to communicate with the storage account.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string | null;
 
@@ -11678,15 +11684,15 @@ model AzureBlobDatastore extends DatastoreProperties {
  */
 model AzureDatastore {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Azure Resource Group name
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceGroup?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Azure Subscription Id
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subscriptionId?: string | null;
 }
 
@@ -11732,8 +11738,8 @@ model AzureDataLakeGen2Datastore extends DatastoreProperties {
 
   /**
    * Azure cloud endpoint for the storage account.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
@@ -11747,8 +11753,8 @@ model AzureDataLakeGen2Datastore extends DatastoreProperties {
 
   /**
    * Protocol used to communicate with the storage account.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string | null;
 
@@ -11790,8 +11796,8 @@ model AzureFileDatastore extends DatastoreProperties {
 
   /**
    * Azure cloud endpoint for the storage account.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
@@ -11805,8 +11811,8 @@ model AzureFileDatastore extends DatastoreProperties {
 
   /**
    * Protocol used to communicate with the storage account.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string | null;
 
@@ -11825,9 +11831,9 @@ model AzureFileDatastore extends DatastoreProperties {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AzureOpenAiFineTuning extends FineTuningVertical {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * HyperParameters for fine tuning Azure Open AI model.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hyperParameters?: AzureOpenAiHyperParameters | null;
 
   /**
@@ -11841,21 +11847,21 @@ model AzureOpenAiFineTuning extends FineTuningVertical {
  */
 model AzureOpenAiHyperParameters {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   batchSize?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid over fitting.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   learningRateMultiplier?: float64 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nEpochs?: int32 | null;
 }
 
@@ -11885,9 +11891,9 @@ model FineTuningVertical {
   trainingData: JobInput;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Validation data for fine tuning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationData?: JobInput | null;
 }
 
@@ -11938,28 +11944,28 @@ model EarlyTerminationPolicy {
 model BatchPipelineComponentDeploymentConfiguration
   extends BatchDeploymentConfiguration {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The ARM id of the component to be run.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   componentId?: IdAssetReference | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The description which will be applied to the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * Run-time settings for the pipeline job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   settings?: Record<string | null> | null;
 
   /**
    * The tags which will be applied to the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string | null> | null;
 
@@ -12033,8 +12039,8 @@ model DataDriftMetricThresholdBase {
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
@@ -12043,8 +12049,8 @@ model DataDriftMetricThresholdBase {
 model MonitoringThreshold {
   /**
    * The threshold value. If null, the set default is dependent on the metric type.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   value?: float64 | null;
 }
@@ -12075,8 +12081,8 @@ model DataQualityMetricThresholdBase {
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
@@ -12107,8 +12113,8 @@ model PredictionDriftMetricThresholdBase {
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
@@ -12118,9 +12124,9 @@ model PredictionDriftMetricThresholdBase {
  */
 model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Authority URL used for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorityUrl?: string | null;
 
   /**
@@ -12131,9 +12137,9 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   clientId: string;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Resource the service principal has access to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceUrl?: string | null;
 
   /**
@@ -12167,9 +12173,9 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
  */
 model CertificateDatastoreSecrets extends DatastoreSecrets {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Service principal certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   certificate?: string | null;
 
   /**
@@ -12185,9 +12191,9 @@ model Classification extends AutoMLVertical {
   ...TableVertical;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Positive label for binary metrics calculation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   positiveLabel?: string | null;
 
   /**
@@ -12196,9 +12202,9 @@ model Classification extends AutoMLVertical {
   primaryMetric?: ClassificationPrimaryMetrics = ClassificationPrimaryMetrics.AUCWeighted;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Inputs for training phase for an AutoML Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trainingSettings?: ClassificationTrainingSettings | null;
 
   /**
@@ -12213,15 +12219,15 @@ model Classification extends AutoMLVertical {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ClassificationTrainingSettings extends TrainingSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Allowed models for classification task.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allowedTrainingAlgorithms?: ClassificationModels[] | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Blocked models for classification task.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blockedTrainingAlgorithms?: ClassificationModels[] | null;
 }
 
@@ -12261,9 +12267,9 @@ model TrainingSettings {
   ensembleModelDownloadTimeout?: duration = duration.fromISO("PT5M");
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Stack ensemble settings for stack ensemble run.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stackEnsembleSettings?: StackEnsembleSettings | null;
 }
 
@@ -12272,10 +12278,10 @@ model TrainingSettings {
  */
 model StackEnsembleSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Optional parameters to pass to the initializer of the meta-learner.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stackMetaLearnerKWargs?: unknown | null;
 
   /**
@@ -12294,62 +12300,62 @@ model StackEnsembleSettings {
  */
 model TableVertical {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Columns to use for CVSplit data.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cvSplitColumnNames?: string[] | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Featurization inputs needed for AutoML job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   featurizationSettings?: TableVerticalFeaturizationSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Execution constraints for AutoMLJob.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   limitSettings?: TableVerticalLimitSettings | null;
 
   /**
    * Number of cross validation folds to be applied on training dataset
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * when validation dataset is not provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nCrossValidations?: NCrossValidations | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Test data input.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   testData?: MLTableJobInput | null;
 
   /**
    * The fraction of test dataset that needs to be set aside for validation purpose.
    * Values between (0.0 , 1.0)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Applied when validation dataset is not provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   testDataSize?: float64 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Validation data inputs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationData?: MLTableJobInput | null;
 
   /**
    * The fraction of training dataset that needs to be set aside for validation purpose.
    * Values between (0.0 , 1.0)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Applied when validation dataset is not provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationDataSize?: float64 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   weightColumnName?: string | null;
 }
 
@@ -12359,15 +12365,15 @@ model TableVertical {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * These transformers shall not be used in featurization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blockedTransformers?: BlockedTransformers[] | null;
 
   /**
    * Dictionary of column name and its type (int, float, string, datetime etc).
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   columnNameAndTypes?: Record<string | null> | null;
 
@@ -12386,7 +12392,7 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   transformerParams?: Record<ColumnTransformer[] | null> | null;
@@ -12397,16 +12403,16 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
  */
 model ColumnTransformer {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Fields to apply transformer logic on.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   fields?: string[] | null;
 
   /**
    * Different properties to be passed to transformer.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Input expected is dictionary of key,value pairs in JSON format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: unknown | null;
 }
 
@@ -12415,9 +12421,9 @@ model ColumnTransformer {
  */
 model FeaturizationSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Dataset language, useful for the text data.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   datasetLanguage?: string | null;
 }
 
@@ -12431,9 +12437,9 @@ model TableVerticalLimitSettings {
   enableEarlyTermination?: boolean = true;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Exit score for the AutoML job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exitScore?: float64 | null;
 
   /**
@@ -12468,8 +12474,8 @@ model TableVerticalLimitSettings {
 model CommandJob extends JobBaseProperties {
   /**
    * ARM resource ID of the code asset.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string | null;
 
@@ -12483,8 +12489,8 @@ model CommandJob extends JobBaseProperties {
 
   /**
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   distribution?: DistributionConfiguration | null;
 
@@ -12499,7 +12505,7 @@ model CommandJob extends JobBaseProperties {
   /**
    * Environment variables included in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string | null> | null;
@@ -12507,37 +12513,37 @@ model CommandJob extends JobBaseProperties {
   /**
    * Mapping of input data bindings used in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
 
   /**
    * Command Job limit.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   limits?: CommandJobLimits | null;
 
   /**
    * Mapping of output data bindings used in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Input parameters.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   parameters?: unknown | null;
 
   /**
    * Queue settings for the job
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -12584,9 +12590,9 @@ model JobLimits {
   jobLimitsType: JobLimitsType;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeout?: duration | null;
 }
 
@@ -12595,15 +12601,15 @@ model JobLimits {
  */
 model ContainerResourceRequirements {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Container resource limit info:
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerResourceLimits?: ContainerResourceSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Container resource request info:
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerResourceRequests?: ContainerResourceSettings | null;
 }
 
@@ -12611,23 +12617,23 @@ model ContainerResourceRequirements {
 model ContainerResourceSettings {
   /**
    * Number of vCPUs request/limit for container. More info:
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cpu?: string | null;
 
   /**
    * Number of Nvidia GPU cards request/limit for container. More info:
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gpu?: string | null;
 
   /**
    * Memory size request/limit for container. More info:
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memory?: string | null;
 }
 
@@ -12649,8 +12655,8 @@ model CreateMonitorAction extends ScheduleActionBase {
 model MonitorDefinition {
   /**
    * The monitor's notification settings.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   alertNotificationSettings?: MonitorNotificationSettings | null;
 
@@ -12662,8 +12668,8 @@ model MonitorDefinition {
 
   /**
    * The entities targeted by the monitor.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   monitoringTarget?: MonitoringTarget | null;
 
@@ -12679,8 +12685,8 @@ model MonitorDefinition {
 model MonitorNotificationSettings {
   /**
    * The AML notification email settings.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   emailNotificationSettings?: MonitorEmailNotificationSettings | null;
 }
@@ -12690,7 +12696,7 @@ model MonitorEmailNotificationSettings {
   /**
    * The email recipient list which has a limitation of 499 characters in total.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
   emails?: string[] | null;
@@ -12714,15 +12720,15 @@ model MonitorComputeConfigurationBase {
 model MonitoringTarget {
   /**
    * Reference to the deployment asset targeted by this monitor.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   deploymentId?: string | null;
 
   /**
    * Reference to the model asset targeted by this monitor.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   modelId?: string | null;
 
@@ -12739,15 +12745,15 @@ model MonitoringSignalBase {
   /**
    * The current notification mode for this signal.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
   notificationTypes?: MonitoringNotificationType[] | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string | null> | null;
 
@@ -12801,8 +12807,8 @@ model CustomMetricThreshold {
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
@@ -12811,8 +12817,8 @@ model CustomMetricThreshold {
 model CustomModelFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning custom model.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   hyperParameters?: Record<string | null> | null;
 
@@ -12855,7 +12861,7 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
   /**
    * Monitoring assets to take as input. Key is the component input port name, value is the data asset.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputAssets?: Record<MonitoringInputDataBase | null> | null;
@@ -12863,7 +12869,7 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
   /**
    * Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
@@ -12889,15 +12895,15 @@ model MonitoringInputDataBase {
   /**
    * Mapping of column names to special uses.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   columns?: Record<string | null> | null;
 
   /**
    * The context metadata of the data source.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataContext?: string | null;
 
@@ -12923,9 +12929,9 @@ model MonitoringInputDataBase {
 }
 
 /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * N-Cross validations are specified by user.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomNCrossValidations extends NCrossValidations {
   /**
    * [Required] N-Cross validations value.
@@ -12982,22 +12988,22 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
   /**
    * The settings for computing feature importance.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureImportanceSettings?: FeatureImportanceSettings | null;
 
   /**
    * The feature filter which identifies which feature to calculate drift over.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   features?: MonitoringFeatureFilterBase | null;
 
@@ -13034,9 +13040,9 @@ model FeatureImportanceSettings {
   mode?: FeatureImportanceMode = FeatureImportanceMode.Disabled;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The name of the target column within the input data asset.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetColumn?: string | null;
 }
 
@@ -13056,9 +13062,9 @@ model DataGenerationVertical {
   dataGenerationType: DataGenerationType;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Prompt Settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   promptSettings?: PromptSettings | null;
 
   /**
@@ -13066,8 +13072,8 @@ model DataGenerationVertical {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   teacherModelEndpoint: TeacherModelEndpoint;
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   teacherModelSettings?: TeacherModelSettings | null;
 }
@@ -13092,15 +13098,15 @@ model TeacherModelEndpoint {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TeacherModelSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Teacher Model Request Settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   teacherModelEndpointRequestSettings?: TeacherModelEndpointRequestSettings | null;
 
   /**
    * Teacher Model Inference Settings.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   teacherModelInferenceParameters?: Record<string | null> | null;
 }
@@ -13118,15 +13124,15 @@ model TeacherModelEndpointRequestSettings {
  */
 model DataPathAssetReference extends AssetReferenceBase {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * ARM resource ID of the datastore where the asset is located.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   datastoreId?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The path of the file/directory in the datastore.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   path?: string | null;
 
   /**
@@ -13140,22 +13146,22 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
   /**
    * The settings for computing feature importance.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureImportanceSettings?: FeatureImportanceSettings | null;
 
   /**
    * The features to calculate drift over.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   features?: MonitoringFeatureFilterBase | null;
 
@@ -13215,8 +13221,8 @@ model DistillationJob extends JobBaseProperties {
 
   /**
    * Queue settings for the job
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -13236,8 +13242,8 @@ model DistillationJob extends JobBaseProperties {
 model FinetuningDetails {
   /**
    * Finetuning Hyperparameters
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   hyperParameters?: Record<string | null> | null;
 
@@ -13261,15 +13267,15 @@ model JobResources {
  */
 model DockerCredential extends DataReferenceCredential {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * DockerCredential user password
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * DockerCredential user name
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userName?: string | null;
 
   /**
@@ -13283,8 +13289,8 @@ model EndpointScheduleAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
    * <see href="TBD" />
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   endpointInvocationDefinition: Record<unknown>;
 
@@ -13299,7 +13305,7 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
@@ -13345,8 +13351,8 @@ model FeatureAttributionMetricThreshold {
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
@@ -13383,8 +13389,8 @@ model FineTuningJob extends JobBaseProperties {
 
   /**
    * Queue settings for the job
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -13417,9 +13423,9 @@ model Forecasting extends AutoMLVertical {
   ...TableVertical;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Primary metrics for Forecasting task.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   forecastingSettings?: ForecastingSettings | null;
 
   /**
@@ -13428,9 +13434,9 @@ model Forecasting extends AutoMLVertical {
   primaryMetric?: ForecastingPrimaryMetrics = ForecastingPrimaryMetrics.NormalizedRootMeanSquaredError;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Inputs for training phase for an AutoML Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trainingSettings?: ForecastingTrainingSettings | null;
 
   /**
@@ -13445,17 +13451,17 @@ model Forecasting extends AutoMLVertical {
 model ForecastingSettings {
   /**
    * Country or region for holidays for forecasting tasks.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * These should be ISO 3166 two-letter country/region codes, for example 'US' or 'GB'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   countryOrRegionForHolidays?: string | null;
 
   /**
    * Number of periods between the origin time of one CV fold and the next fold. For
    * example, if `CVStepSize` = 3 for daily data, the origin time for each fold will be
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * three days apart.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cvStepSize?: int32 | null;
 
   /**
@@ -13469,9 +13475,9 @@ model ForecastingSettings {
   forecastHorizon?: ForecastHorizon = #{ mode: "Custom" };
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * When forecasting, this parameter represents the period with which the forecast is desired, for example daily, weekly, yearly, etc. The forecast frequency is dataset frequency by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frequency?: string | null;
 
   /**
@@ -13491,28 +13497,28 @@ model ForecastingSettings {
   targetAggregateFunction?: TargetAggregationFunction = TargetAggregationFunction.None;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The number of past periods to lag from the target column.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetLags?: TargetLags | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The number of past periods used to create a rolling window average of the target column.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetRollingWindowSize?: TargetRollingWindowSize | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The name of the time column. This parameter is required when forecasting to specify the datetime column in the input data used for building the time series and inferring its frequency.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeColumnName?: string | null;
 
   /**
    * The names of columns used to group a timeseries. It can be used to create multiple series.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * If grain is not defined, the data set is assumed to be one time-series. This parameter is used with task type forecasting.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeSeriesIdColumnNames?: string[] | null;
 
   /**
@@ -13527,15 +13533,15 @@ model ForecastingSettings {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ForecastingTrainingSettings extends TrainingSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Allowed models for forecasting task.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allowedTrainingAlgorithms?: ForecastingModels[] | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Blocked models for forecasting task.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blockedTrainingAlgorithms?: ForecastingModels[] | null;
 }
 
@@ -13571,15 +13577,15 @@ model ImageClassification extends AutoMLVertical {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImageClassificationBase extends ImageVertical {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Settings used for training the model.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelSettings?: ImageModelSettingsClassification | null;
 
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsClassification[] | null;
 }
@@ -13592,28 +13598,28 @@ model ImageClassificationBase extends ImageVertical {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelSettingsClassification extends ImageModelSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trainingCropSize?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationCropSize?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Image size to which to resize before cropping for validation dataset. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationResizeSize?: int32 | null;
 
   /**
    * Weighted loss. The accepted values are 0 for no weighted loss.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * 1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   weightedLoss?: int32 | null;
 }
 
@@ -13624,112 +13630,112 @@ model ImageModelSettingsClassification extends ImageModelSettings {
  */
 model ImageModelSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Settings for advanced scenarios.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   advancedSettings?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Enable AMSGrad when optimizer is 'adam' or 'adamw'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   amsGradient?: boolean | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Settings for using Augmentations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   augmentations?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   beta1?: float32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   beta2?: float32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Frequency to store model checkpoints. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   checkpointFrequency?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The pretrained checkpoint model for incremental training.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   checkpointModel?: MLFlowModelJobInput | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The id of a previous run that has a pretrained checkpoint for incremental training.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   checkpointRunId?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Whether to use distributed training.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   distributed?: boolean | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Enable early stopping logic during training.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   earlyStopping?: boolean | null;
 
   /**
    * Minimum number of epochs or validation evaluations to wait before primary metric improvement
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * is tracked for early stopping. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   earlyStoppingDelay?: int32 | null;
 
   /**
    * Minimum number of epochs or validation evaluations with no primary metric improvement before
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * the run is stopped. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   earlyStoppingPatience?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Enable normalization when exporting ONNX model.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableOnnxNormalization?: boolean | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   evaluationFrequency?: int32 | null;
 
   /**
    * Gradient accumulation means running a configured number of "GradAccumulationStep" steps without
    * updating the model weights while accumulating the gradients of those steps, and then using
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * the accumulated gradients to compute the weight updates. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gradientAccumulationStep?: int32 | null;
 
   /**
    * Number of layers to freeze for the model. Must be a positive integer.
    * For instance, passing 2 as value for 'seresnext' means
    * freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   layersToFreeze?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Initial learning rate. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   learningRate?: float32 | null;
 
   /**
@@ -13740,33 +13746,33 @@ model ImageModelSettings {
   /**
    * Name of the model to use for training.
    * For more information on the available models please visit the official documentation:
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelName?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   momentum?: float32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Enable nesterov when optimizer is 'sgd'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nesterov?: boolean | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Number of training epochs. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfEpochs?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Number of data loader workers. Must be a non-negative integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfWorkers?: int32 | null;
 
   /**
@@ -13775,59 +13781,58 @@ model ImageModelSettings {
   optimizer?: StochasticOptimizer = StochasticOptimizer.None;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Random seed to be used when using deterministic training.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   randomSeed?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stepLRGamma?: float32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of step size when learning rate scheduler is 'step'. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stepLRStepSize?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Training batch size. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trainingBatchSize?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Validation batch size. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationBatchSize?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   warmupCosineLRCycles?: float32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   warmupCosineLRWarmupEpochs?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   weightDecay?: float32 | null;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MLFlowModelJobInput extends JobInput {
   ...AssetJobInput;
@@ -13856,28 +13861,28 @@ model MLFlowModelJobInput extends JobInput {
 model ImageModelDistributionSettingsClassification
   extends ImageModelDistributionSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trainingCropSize?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationCropSize?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Image size to which to resize before cropping for validation dataset. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationResizeSize?: string | null;
 
   /**
    * Weighted loss. The accepted values are 0 for no weighted loss.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * 1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   weightedLoss?: string | null;
 }
 
@@ -13899,184 +13904,184 @@ model ImageModelDistributionSettingsClassification
  */
 model ImageModelDistributionSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Enable AMSGrad when optimizer is 'adam' or 'adamw'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   amsGradient?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Settings for using Augmentations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   augmentations?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   beta1?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   beta2?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Whether to use distributer training.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   distributed?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Enable early stopping logic during training.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   earlyStopping?: string | null;
 
   /**
    * Minimum number of epochs or validation evaluations to wait before primary metric improvement
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * is tracked for early stopping. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   earlyStoppingDelay?: string | null;
 
   /**
    * Minimum number of epochs or validation evaluations with no primary metric improvement before
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * the run is stopped. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   earlyStoppingPatience?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Enable normalization when exporting ONNX model.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableOnnxNormalization?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   evaluationFrequency?: string | null;
 
   /**
    * Gradient accumulation means running a configured number of "GradAccumulationStep" steps without
    * updating the model weights while accumulating the gradients of those steps, and then using
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * the accumulated gradients to compute the weight updates. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gradientAccumulationStep?: string | null;
 
   /**
    * Number of layers to freeze for the model. Must be a positive integer.
    * For instance, passing 2 as value for 'seresnext' means
    * freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   layersToFreeze?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Initial learning rate. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   learningRate?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   learningRateScheduler?: string | null;
 
   /**
    * Name of the model to use for training.
    * For more information on the available models please visit the official documentation:
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelName?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   momentum?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Enable nesterov when optimizer is 'sgd'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nesterov?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Number of training epochs. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfEpochs?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Number of data loader workers. Must be a non-negative integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfWorkers?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Type of optimizer. Must be either 'sgd', 'adam', or 'adamw'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   optimizer?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Random seed to be used when using deterministic training.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   randomSeed?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stepLRGamma?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of step size when learning rate scheduler is 'step'. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stepLRStepSize?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Training batch size. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trainingBatchSize?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Validation batch size. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationBatchSize?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   warmupCosineLRCycles?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   warmupCosineLRWarmupEpochs?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   weightDecay?: string | null;
 }
 
@@ -14091,23 +14096,23 @@ model ImageVertical {
   limitSettings: ImageLimitSettings;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Model sweeping and hyperparameter sweeping related settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sweepSettings?: ImageSweepSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Validation data inputs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationData?: MLTableJobInput | null;
 
   /**
    * The fraction of training dataset that needs to be set aside for validation purpose.
    * Values between (0.0 , 1.0)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Applied when validation dataset is not provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationDataSize?: float64 | null;
 }
 
@@ -14136,9 +14141,9 @@ model ImageLimitSettings {
  */
 model ImageSweepSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Type of early termination policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   earlyTermination?: EarlyTerminationPolicy | null;
 
   /**
@@ -14187,15 +14192,15 @@ model ImageInstanceSegmentation extends AutoMLVertical {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImageObjectDetectionBase extends ImageVertical {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Settings used for training the model.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelSettings?: ImageModelSettingsObjectDetection | null;
 
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsObjectDetection[] | null;
 }
@@ -14209,40 +14214,40 @@ model ImageObjectDetectionBase extends ImageVertical {
 model ImageModelSettingsObjectDetection extends ImageModelSettings {
   /**
    * Maximum number of detections per image, for all classes. Must be a positive integer.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   boxDetectionsPerImage?: int32 | null;
 
   /**
    * During inference, only return proposals with a classification score greater than
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * BoxScoreThreshold. Must be a float in the range[0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   boxScoreThreshold?: float32 | null;
 
   /**
    * Image size for train and validation. Must be a positive integer.
    * Note: The training run may get into CUDA OOM if the size is too big.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   imageSize?: int32 | null;
 
   /**
    * Maximum size of the image to be rescaled before feeding it to the backbone.
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxSize?: int32 | null;
 
   /**
    * Minimum size of the image to be rescaled before feeding it to the backbone.
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   minSize?: int32 | null;
 
   /**
@@ -14253,44 +14258,44 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
   /**
    * Enable multi-scale image by varying image size by +/- 50%.
    * Note: training run may get into CUDA OOM if no sufficient GPU memory.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   multiScale?: boolean | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * IOU threshold used during inference in NMS post processing. Must be a float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nmsIouThreshold?: float32 | null;
 
   /**
    * The grid size to use for tiling each image. Note: TileGridSize must not be
    * None to enable small object detection logic. A string containing two integers in mxn format.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tileGridSize?: string | null;
 
   /**
    * Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tileOverlapRatio?: float32 | null;
 
   /**
    * The IOU threshold to use to perform NMS while merging predictions from tiles and image.
    * Used in validation/ inference. Must be float in the range [0, 1].
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tilePredictionsNmsThreshold?: float32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * IOU threshold to use when computing validation metric. Must be float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationIouThreshold?: float32 | null;
 
   /**
@@ -14318,98 +14323,98 @@ model ImageModelDistributionSettingsObjectDetection
   extends ImageModelDistributionSettings {
   /**
    * Maximum number of detections per image, for all classes. Must be a positive integer.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   boxDetectionsPerImage?: string | null;
 
   /**
    * During inference, only return proposals with a classification score greater than
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * BoxScoreThreshold. Must be a float in the range[0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   boxScoreThreshold?: string | null;
 
   /**
    * Image size for train and validation. Must be a positive integer.
    * Note: The training run may get into CUDA OOM if the size is too big.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   imageSize?: string | null;
 
   /**
    * Maximum size of the image to be rescaled before feeding it to the backbone.
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxSize?: string | null;
 
   /**
    * Minimum size of the image to be rescaled before feeding it to the backbone.
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   minSize?: string | null;
 
   /**
    * Model size. Must be 'small', 'medium', 'large', or 'xlarge'.
    * Note: training run may get into CUDA OOM if the model size is too big.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   modelSize?: string | null;
 
   /**
    * Enable multi-scale image by varying image size by +/- 50%.
    * Note: training run may get into CUDA OOM if no sufficient GPU memory.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   multiScale?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * IOU threshold used during inference in NMS post processing. Must be float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nmsIouThreshold?: string | null;
 
   /**
    * The grid size to use for tiling each image. Note: TileGridSize must not be
    * None to enable small object detection logic. A string containing two integers in mxn format.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tileGridSize?: string | null;
 
   /**
    * Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tileOverlapRatio?: string | null;
 
   /**
    * The IOU threshold to use to perform NMS while merging predictions from tiles and image.
    * Used in validation/ inference. Must be float in the range [0, 1].
    * Note: This settings is not supported for the 'yolov5' algorithm.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * NMS: Non-maximum suppression
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tilePredictionsNmsThreshold?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * IOU threshold to use when computing validation metric. Must be float in the range [0, 1].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationIouThreshold?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Metric computation method to use for validation metrics. Must be 'none', 'coco', 'voc', or 'coco_voc'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationMetricType?: string | null;
 }
 
@@ -14450,9 +14455,9 @@ model JobScheduleAction extends ScheduleActionBase {
  */
 model KubernetesOnlineDeployment extends OnlineDeploymentProperties {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The resource requirements for the container (cpu and memory).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerResourceRequirements?: ContainerResourceRequirements | null;
 
   /**
@@ -14464,15 +14469,15 @@ model KubernetesOnlineDeployment extends OnlineDeploymentProperties {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model LabelGeneration extends DataGenerationVertical {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Training data for fine tuning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trainingData?: JobInput | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Validation data for fine tuning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationData?: JobInput | null;
 
   /**
@@ -14525,7 +14530,6 @@ model LiteralJobInput extends JobInput {
   jobInputType: "literal";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MLFlowModelJobOutput extends JobOutput {
   ...AssetJobOutput;
@@ -14537,14 +14541,14 @@ model MLFlowModelJobOutput extends JobOutput {
 }
 
 /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * MLTable data definition
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MLTableData extends DataVersionBaseProperties {
   /**
    * Uris referenced in the MLTable definition (required for lineage)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   referencedUris?: string[] | null;
 
@@ -14554,7 +14558,6 @@ model MLTableData extends DataVersionBaseProperties {
   dataType: "mltable";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MLTableJobOutput extends JobOutput {
   ...AssetJobOutput;
@@ -14570,9 +14573,9 @@ model MLTableJobOutput extends JobOutput {
  */
 model ManagedComputeIdentity extends MonitorComputeIdentityBase {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The identity which will be leveraged by the monitoring jobs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity | null;
 
   /**
@@ -14589,7 +14592,7 @@ model ManagedIdentity extends IdentityConfiguration {
    * Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
   clientId?: string | null;
@@ -14598,15 +14601,15 @@ model ManagedIdentity extends IdentityConfiguration {
    * Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
   objectId?: string | null;
 
   /**
    * Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resourceId?: string | null;
 
@@ -14621,33 +14624,33 @@ model ManagedIdentity extends IdentityConfiguration {
  */
 model ManagedIdentityCredential extends DataReferenceCredential {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * ManagedIdentityCredential identity type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedIdentityType?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * ClientId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userManagedIdentityClientId?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * PrincipalId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userManagedIdentityPrincipalId?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Full arm scope for the Id. For ManagedIdentityType = SystemManaged, this field is null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userManagedIdentityResourceId?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * TenantId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userManagedIdentityTenantId?: string | null;
 
   /**
@@ -14714,8 +14717,8 @@ model MonitorServerlessSparkCompute extends MonitorComputeConfigurationBase {
 model Mpi extends DistributionConfiguration {
   /**
    * Number of processes per MPI node.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   processCountPerInstance?: int32 | null;
 
@@ -14731,21 +14734,21 @@ model Mpi extends DistributionConfiguration {
  */
 model NlpVertical {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Featurization inputs needed for AutoML job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   featurizationSettings?: NlpVerticalFeaturizationSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Execution constraints for AutoMLJob.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   limitSettings?: NlpVerticalLimitSettings | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Validation data inputs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationData?: MLTableJobInput | null;
 }
 
@@ -14856,8 +14859,8 @@ model OneLakeDatastore extends DatastoreProperties {
 
   /**
    * OneLake endpoint to use for the datastore.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
@@ -14886,15 +14889,15 @@ model OneLakeDatastore extends DatastoreProperties {
  */
 model OutputPathAssetReference extends AssetReferenceBase {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * ARM resource ID of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   jobId?: string | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * The path of the file/directory in the job output.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   path?: string | null;
 
   /**
@@ -14910,7 +14913,7 @@ model PipelineJob extends JobBaseProperties {
   /**
    * Inputs for the pipeline job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
@@ -14918,7 +14921,7 @@ model PipelineJob extends JobBaseProperties {
   /**
    * Jobs construct the Pipeline Job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobs?: Record<unknown | null> | null;
@@ -14926,22 +14929,22 @@ model PipelineJob extends JobBaseProperties {
   /**
    * Outputs for the pipeline job
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Pipeline settings, for things like ContinueRunOnStepFailure etc.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   settings?: Record<unknown> | null;
 
   /**
    * ARM resource ID of source job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceJobId?: string | null;
 
@@ -14956,7 +14959,7 @@ model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
@@ -14991,9 +14994,9 @@ model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
  */
 model PyTorch extends DistributionConfiguration {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Number of processes per node.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   processCountPerInstance?: int32 | null;
 
   /**
@@ -15012,9 +15015,9 @@ model RandomSamplingAlgorithm extends SamplingAlgorithm {
   rule?: RandomSamplingAlgorithmRule = RandomSamplingAlgorithmRule.Random;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * An optional integer to use as the seed for random number generation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   seed?: int32 | null;
 
   /**
@@ -15035,9 +15038,9 @@ model Regression extends AutoMLVertical {
   primaryMetric?: RegressionPrimaryMetrics = RegressionPrimaryMetrics.NormalizedRootMeanSquaredError;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Inputs for training phase for an AutoML Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trainingSettings?: RegressionTrainingSettings | null;
 
   /**
@@ -15052,15 +15055,15 @@ model Regression extends AutoMLVertical {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RegressionTrainingSettings extends TrainingSettings {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Allowed models for regression task.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allowedTrainingAlgorithms?: RegressionModels[] | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Blocked models for regression task.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   blockedTrainingAlgorithms?: RegressionModels[] | null;
 }
 
@@ -15070,8 +15073,8 @@ model RegressionTrainingSettings extends TrainingSettings {
 model RollingInputData extends MonitoringInputDataBase {
   /**
    * Reference to the component asset used to preprocess the data.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   preprocessingComponentId?: string | null;
 
@@ -15094,14 +15097,14 @@ model RollingInputData extends MonitoringInputDataBase {
 }
 
 /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * Access with full SAS uri
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SASCredential extends DataReferenceCredential {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Full SAS Uri, including the storage, container/blob path and SAS token
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sasUri?: url | null;
 
   /**
@@ -15110,13 +15113,12 @@ model SASCredential extends DataReferenceCredential {
   credentialType: "SAS";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SASCredentialDto extends PendingUploadCredentialDto {
   /**
    * Full SAS Uri, including the storage, container/blob path and SAS token
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   sasUri?: url | null;
 
@@ -15147,9 +15149,9 @@ model SasDatastoreCredentials extends DatastoreCredentials {
  */
 model SasDatastoreSecrets extends DatastoreSecrets {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Storage container SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sasToken?: string | null;
 
   /**
@@ -15163,9 +15165,9 @@ model SasDatastoreSecrets extends DatastoreSecrets {
  */
 model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Authority URL used for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorityUrl?: string | null;
 
   /**
@@ -15176,9 +15178,9 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   clientId: string;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Resource the service principal has access to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceUrl?: string | null;
 
   /**
@@ -15205,9 +15207,9 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
  */
 model ServicePrincipalDatastoreSecrets extends DatastoreSecrets {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Service principal secret.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientSecret?: string | null;
 
   /**
@@ -15222,15 +15224,15 @@ model ServicePrincipalDatastoreSecrets extends DatastoreSecrets {
 model SparkJob extends JobBaseProperties {
   /**
    * Archive files used in the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   archives?: string[] | null;
 
   /**
    * Arguments for the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   args?: string | null;
 
@@ -15245,7 +15247,7 @@ model SparkJob extends JobBaseProperties {
   /**
    * Spark configured properties.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   conf?: Record<string | null> | null;
@@ -15258,67 +15260,67 @@ model SparkJob extends JobBaseProperties {
 
   /**
    * The ARM resource ID of the Environment specification for the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentId?: Azure.Core.armResourceIdentifier | null;
 
   /**
    * Environment variables included in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string | null> | null;
 
   /**
    * Files used in the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   files?: string[] | null;
 
   /**
    * Mapping of input data bindings used in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
 
   /**
    * Jar files used in the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jars?: string[] | null;
 
   /**
    * Mapping of output data bindings used in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Python files used in the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   pyFiles?: string[] | null;
 
   /**
    * Queue settings for the job
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
   /**
    * Compute Resource configuration for the job.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: SparkResourceConfiguration | null;
 
@@ -15344,8 +15346,8 @@ model SparkJobEntry {
 model SparkResourceConfiguration {
   /**
    * Optional type of VM used as supported by the compute target.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string | null;
 
@@ -15394,8 +15396,8 @@ model SparkJobScalaEntry extends SparkJobEntry {
 model StaticInputData extends MonitoringInputDataBase {
   /**
    * Reference to the component asset used to preprocess the data.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   preprocessingComponentId?: string | null;
 
@@ -15424,15 +15426,15 @@ model StaticInputData extends MonitoringInputDataBase {
  */
 model SweepJob extends JobBaseProperties {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Early termination policies enable canceling poor-performing runs before they complete
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   earlyTermination?: EarlyTerminationPolicy | null;
 
   /**
    * Mapping of input data bindings used in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
@@ -15451,15 +15453,15 @@ model SweepJob extends JobBaseProperties {
   /**
    * Mapping of output data bindings used in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Queue settings for the job
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -15469,9 +15471,9 @@ model SweepJob extends JobBaseProperties {
   samplingAlgorithm: SamplingAlgorithm;
 
   /**
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * [Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   searchSpace: Record<unknown>;
 
   /**
@@ -15490,21 +15492,21 @@ model SweepJob extends JobBaseProperties {
  */
 model SweepJobLimits extends JobLimits {
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Sweep Job max concurrent trials.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxConcurrentTrials?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Sweep Job max total trials.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxTotalTrials?: int32 | null;
 
   /**
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    * Sweep Job Trial timeout value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trialTimeout?: duration | null;
 
   /**
@@ -15519,8 +15521,8 @@ model SweepJobLimits extends JobLimits {
 model TrialComponent {
   /**
    * ARM resource ID of the code asset.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string | null;
 
@@ -15534,8 +15536,8 @@ model TrialComponent {
 
   /**
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   distribution?: DistributionConfiguration | null;
 
@@ -15549,7 +15551,7 @@ model TrialComponent {
   /**
    * Environment variables included in the job.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string | null> | null;
@@ -15601,8 +15603,8 @@ model TensorFlow extends DistributionConfiguration {
 
   /**
    * Number of workers. If not specified, will default to the instance count.
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   workerCount?: int32 | null;
 
@@ -15671,7 +15673,6 @@ model TextNer extends AutoMLVertical {
   taskType: "TextNER";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TopNFeaturesByAttribution extends MonitoringFeatureFilterBase {
   /**
@@ -15792,9 +15793,9 @@ model UserIdentity extends IdentityConfiguration {
 }
 
 /**
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * This connection type covers the AAD auth for any applicable Azure service
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AADAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   /**
@@ -16125,7 +16126,6 @@ model NoneAuthTypeWorkspaceConnectionProperties
   authType: "None";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OAuth2AuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
@@ -16139,9 +16139,9 @@ model OAuth2AuthTypeWorkspaceConnectionProperties
 
 /**
  * ClientId and ClientSecret are required. Other properties are optional
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
  * depending on each OAuth2 provider's implementation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkspaceConnectionOAuth2 {
   /**
    * Required by Concur connection category
@@ -16188,7 +16188,6 @@ model WorkspaceConnectionOAuth2 {
   username?: string;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OpenAIEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
@@ -16200,7 +16199,6 @@ model OpenAIEndpointDeploymentResourceProperties
   type: "Azure.OpenAI";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OpenAIEndpointResourceProperties extends EndpointResourceProperties {
   /**
@@ -16209,7 +16207,6 @@ model OpenAIEndpointResourceProperties extends EndpointResourceProperties {
   endpointType: "Azure.OpenAI";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PATAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
@@ -16264,7 +16261,6 @@ model PrivateEndpointOutboundRule extends OutboundRule {
   type: "PrivateEndpoint";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SASAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
@@ -16310,9 +16306,11 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   inferenceEndpoint?: ServerlessEndpointInferenceEndpoint;
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   marketplaceSubscriptionId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: unknown;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   modelSettings?: ServerlessEndpointModelSettings;
@@ -16457,12 +16455,9 @@ model WorkspaceConnectionUsernamePassword {
   username?: string;
 }
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 //Fix Me: Compile Error
 model InferenceUpdateParameterProperties {
   description?: string;
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 }
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 //Fix Me: Compile Error
@@ -16491,11 +16486,13 @@ alias ReferenceSASParameters = {
   /**
    * Asset id and blob uri.
    */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @body
   body: GetBlobReferenceSASRequestDto;
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 };
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomLocationParameter {
   @path
   @segment("locations")
