@@ -877,25 +877,23 @@
         "description": "Gets the specified authorization from the specified express route port.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "expressRoutePortName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the express route port."
+            "description": "The name of the express route port.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the authorization."
+            "description": "The name of the authorization.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -919,7 +917,7 @@
           }
         },
         "x-ms-examples": {
-          "Get ExpressRoutePort Authorization": {
+          "GetExpressRoutePortAuthorization": {
             "$ref": "./examples/ExpressRoutePortAuthorizationGet.json"
           }
         }
@@ -934,18 +932,15 @@
         "description": "Gets all authorizations in an express route port.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "expressRoutePortName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the express route port."
+            "description": "The name of the express route port.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -972,7 +967,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List ExpressRoutePort Authorization": {
+          "ListExpressRoutePortAuthorization": {
             "$ref": "./examples/ExpressRoutePortAuthorizationList.json"
           }
         }
@@ -987,25 +982,23 @@
         "description": "Creates an authorization in the specified express route port.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "expressRoutePortName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the express route port."
+            "description": "The name of the express route port.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the authorization."
+            "description": "The name of the authorization.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "name": "authorizationParameters",
@@ -1024,6 +1017,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Create Accepted"
+          },
           "201": {
             "description": "Create successful. The operation returns the resulting ExpressRoutePortAuthorization resource.",
             "schema": {
@@ -1048,7 +1044,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create ExpressRoutePort Authorization": {
+          "CreateExpressRoutePortAuthorization": {
             "$ref": "./examples/ExpressRoutePortAuthorizationCreate.json"
           }
         }

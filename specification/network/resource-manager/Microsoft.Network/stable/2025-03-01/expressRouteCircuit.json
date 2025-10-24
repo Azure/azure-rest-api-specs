@@ -289,25 +289,23 @@
         "description": "Gets the specified authorization from the specified express route circuit.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "circuitName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the express route circuit."
+            "description": "The name of the express route circuit.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the authorization."
+            "description": "The name of the authorization.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -331,7 +329,7 @@
           }
         },
         "x-ms-examples": {
-          "Get ExpressRouteCircuit Authorization": {
+          "GetExpressRouteCircuitAuthorization": {
             "$ref": "./examples/ExpressRouteCircuitAuthorizationGet.json"
           }
         }
@@ -346,18 +344,15 @@
         "description": "Gets all authorizations in an express route circuit.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "circuitName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the circuit."
+            "description": "The name of the circuit.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -384,7 +379,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List ExpressRouteCircuit Authorization": {
+          "ListExpressRouteCircuitAuthorization": {
             "$ref": "./examples/ExpressRouteCircuitAuthorizationList.json"
           }
         }
@@ -399,25 +394,23 @@
         "description": "Creates an authorization in the specified express route circuit.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "circuitName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the express route circuit."
+            "description": "The name of the express route circuit.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the authorization."
+            "description": "The name of the authorization.",
+            "pattern": "^[A-Za-z0-9._-]+$"
           },
           {
             "name": "authorizationParameters",
@@ -436,6 +429,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Create Accepted"
+          },
           "201": {
             "description": "Create successful. The operation returns the resulting ExpressRouteCircuitAuthorization resource.",
             "schema": {
@@ -460,7 +456,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create ExpressRouteCircuit Authorization": {
+          "CreateExpressRouteCircuitAuthorization": {
             "$ref": "./examples/ExpressRouteCircuitAuthorizationCreate.json"
           }
         }
