@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Peering;
@@ -112,4 +113,9 @@ using Microsoft.Peering;
 
 @@clientName(CheckServiceProviderAvailabilityOperationGroup.checkServiceProviderAvailability::parameters.body,
   "checkServiceProviderAvailabilityInput"
+);
+
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "python"
 );
