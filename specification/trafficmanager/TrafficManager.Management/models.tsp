@@ -16,9 +16,9 @@ namespace Microsoft.Network;
  */
 union EndpointStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
 }
 
@@ -27,19 +27,19 @@ union EndpointStatus {
  */
 union EndpointMonitorStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CheckingEndpoint: "CheckingEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Degraded: "Degraded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Stopped: "Stopped",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unmonitored: "Unmonitored",
 }
 
@@ -48,9 +48,9 @@ union EndpointMonitorStatus {
  */
 union AlwaysServe {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
 }
 
@@ -59,9 +59,9 @@ union AlwaysServe {
  */
 union ProfileStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
 }
 
@@ -70,17 +70,17 @@ union ProfileStatus {
  */
 union TrafficRoutingMethod {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Performance: "Performance",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Priority: "Priority",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Weighted: "Weighted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Geographic: "Geographic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MultiValue: "MultiValue",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Subnet: "Subnet",
 }
 
@@ -89,15 +89,15 @@ union TrafficRoutingMethod {
  */
 union ProfileMonitorStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CheckingEndpoints: "CheckingEndpoints",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Degraded: "Degraded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inactive: "Inactive",
 }
 
@@ -106,11 +106,11 @@ union ProfileMonitorStatus {
  */
 union MonitorProtocol {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HTTP: "HTTP",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HTTPS: "HTTPS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   TCP: "TCP",
 }
 
@@ -119,9 +119,9 @@ union MonitorProtocol {
  */
 union TrafficViewEnrollmentStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
 }
 
@@ -130,18 +130,18 @@ union TrafficViewEnrollmentStatus {
  */
 union AllowedEndpointRecordType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DomainName: "DomainName",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IPv4Address: "IPv4Address",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IPv6Address: "IPv6Address",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Any: "Any",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum EndpointType {
   AzureEndpoints,
   ExternalEndpoints,
@@ -201,13 +201,13 @@ model EndpointProperties {
   /**
    * The minimum number of IPv4 (DNS record type A) endpoints that must be available in the child profile in order for the parent profile to be considered available. Only applicable to endpoint of type 'NestedEndpoints'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   minChildEndpointsIPv4?: int64;
 
   /**
    * The minimum number of IPv6 (DNS record type AAAA) endpoints that must be available in the child profile in order for the parent profile to be considered available. Only applicable to endpoint of type 'NestedEndpoints'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   minChildEndpointsIPv6?: int64;
 
   /**
@@ -218,7 +218,7 @@ model EndpointProperties {
   /**
    * The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subnets?: EndpointPropertiesSubnetsItem[];
 
   /**
@@ -270,18 +270,18 @@ model EndpointPropertiesCustomHeadersItem {
 /**
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyResource extends Resource {}
 
 /**
  * The core properties of ARM resources
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource
 model Resource {
   /**
@@ -337,7 +337,7 @@ model CloudErrorBody {
   /**
    * Error details
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: CloudErrorBody[];
 }
 
@@ -527,7 +527,7 @@ model MonitorConfig {
   /**
    * List of expected status code ranges.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   expectedStatusCodeRanges?: MonitorConfigExpectedStatusCodeRangesItem[];
 }
 
@@ -564,14 +564,14 @@ model MonitorConfigExpectedStatusCodeRangesItem {
 /**
  * The resource model definition for a ARM tracked top level resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TrackedResource extends Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -631,13 +631,13 @@ model HeatMapProperties {
   /**
    * The endpoints used in this HeatMap calculation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpoints?: HeatMapEndpoint[];
 
   /**
    * The traffic flows produced in this HeatMap calculation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trafficFlows?: TrafficFlow[];
 }
 
@@ -678,7 +678,7 @@ model TrafficFlow {
   /**
    * The query experiences produced in this HeatMap calculation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   queryExperiences?: QueryExperience[];
 }
 

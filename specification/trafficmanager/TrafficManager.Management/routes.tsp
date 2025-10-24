@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProfilesOperationGroup {
   /**
    * Checks the availability of a Traffic Manager Relative DNS name.
@@ -28,7 +28,7 @@ interface ProfilesOperationGroup {
   /**
    * Checks the availability of a Traffic Manager Relative DNS name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Profiles_checkTrafficManagerNameAvailabilityV2")
   @autoRoute
   checkTrafficManagerNameAvailabilityV2 is ArmProviderActionSync<
