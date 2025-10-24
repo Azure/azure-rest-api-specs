@@ -109,6 +109,10 @@ suppressions:
       - securitySettings.json
       - edgeDeviceJobs.json
       - validatedSolutionRecipes.json
+      - kubernetesVersions.json
+      - osImages.json
+      - platformUpdates.json
+      - updateContents.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
