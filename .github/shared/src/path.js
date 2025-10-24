@@ -15,7 +15,7 @@ export function includesSegment(path, segment) {
 /**
  * @param {string} path
  * @param {string} segment
- * @returns {string} Portion of the resolved path up to (but not including) the first occurrence of the named segment (file or folder)
+ * @returns {string} Portion of the resolved path up to (but excluding) the first occurrence of the named segment (file or folder)
  */
 export function untilSegment(path, segment) {
   let current = resolve(path);
