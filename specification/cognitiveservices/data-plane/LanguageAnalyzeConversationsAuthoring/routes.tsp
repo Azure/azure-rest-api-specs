@@ -268,14 +268,8 @@ interface ConversationAuthoringProject {
   )
   @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
-  @renamedFrom(
-    Versions.v2024_11_15_preview,
-    "assignProjectResources"
-  )
-  @renamedFrom(
-    Versions.v2025_11_15_preview,
-    "AssignDeploymentResources"
-  )
+  @renamedFrom(Versions.v2024_11_15_preview, "assignProjectResources")
+  @renamedFrom(Versions.v2025_11_15_preview, "AssignDeploymentResources")
   assignProjectResources is Foundations.LongRunningOperation<
     {
       /**
@@ -308,14 +302,8 @@ interface ConversationAuthoringProject {
   )
   @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
-  @renamedFrom(
-    Versions.v2024_11_15_preview,
-    "unassignProjectResources"
-  )
-  @renamedFrom(
-    Versions.v2025_11_15_preview,
-    "unassignDeploymentResources"
-  )
+  @renamedFrom(Versions.v2024_11_15_preview, "unassignProjectResources")
+  @renamedFrom(Versions.v2025_11_15_preview, "unassignDeploymentResources")
   unassignProjectResources is Foundations.LongRunningOperation<
     {
       /**
@@ -349,10 +337,7 @@ interface ConversationAuthoringProject {
    * Gets the status of an existing assign project resources job.
    */
   @added(Versions.v2025_11_01)
-  @renamedFrom(
-    Versions.v2024_11_15_preview,
-    "getAssignProjectResourcesStatus"
-  )
+  @renamedFrom(Versions.v2024_11_15_preview, "getAssignProjectResourcesStatus")
   @renamedFrom(
     Versions.v2025_11_15_preview,
     "getAssignDeploymentResourcesStatus"

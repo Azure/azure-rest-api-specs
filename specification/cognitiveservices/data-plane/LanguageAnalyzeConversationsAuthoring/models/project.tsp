@@ -434,13 +434,13 @@ model AnalyzeConversationAuthoringProjectDeployment {
    */
   @added(Versions.v2025_11_01)
   @typeChangedFrom(
-   Versions.v2024_11_15_preview,
-   AnalyzeConversationAuthoringProjectResourceInfo[]
+    Versions.v2024_11_15_preview,
+    AnalyzeConversationAuthoringProjectResourceInfo[]
   )
   @typeChangedFrom(
- Versions.v2025_11_15_preview,
-AnalyzeConversationAuthoringDeploymentResource[]
-)
+    Versions.v2025_11_15_preview,
+    AnalyzeConversationAuthoringDeploymentResource[]
+  )
   assignedResources: AnalyzeConversationAuthoringProjectResourceInfo[];
 }
 
@@ -1091,14 +1091,8 @@ model AnalyzeConversationAuthoringProjectResourceAssignments {
   /**
    * Represents the metadata for the project resources to be assigned.
    */
-  @renamedFrom(
-    Versions.v2024_11_15_preview,
-    "projectResources"
-  )
-  @renamedFrom(
-    Versions.v2025_11_15_preview,
-    "resourcesMetadata"
-  )
+  @renamedFrom(Versions.v2024_11_15_preview, "projectResources")
+  @renamedFrom(Versions.v2025_11_15_preview, "resourcesMetadata")
   projectResources: AnalyzeConversationAuthoringProjectResourceAssignmentInfo[];
 }
 
@@ -1106,12 +1100,12 @@ model AnalyzeConversationAuthoringProjectResourceAssignments {
  * Represents metadata for the Azure resource..
  */
 @renamedFrom(
-Versions.v2024_11_15_preview,
-"AnalyzeConversationAuthoringProjectResourceAssignmentInfo"
+  Versions.v2024_11_15_preview,
+  "AnalyzeConversationAuthoringProjectResourceAssignmentInfo"
 )
 @renamedFrom(
-Versions.v2025_11_15_preview,
-"AnalyzeConversationAuthoringResourceMetadata"
+  Versions.v2025_11_15_preview,
+  "AnalyzeConversationAuthoringResourceMetadata"
 )
 model AnalyzeConversationAuthoringProjectResourceAssignmentInfo {
   /**
