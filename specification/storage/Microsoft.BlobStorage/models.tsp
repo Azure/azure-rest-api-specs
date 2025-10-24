@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Storage.Blob;
@@ -19,7 +20,7 @@ scalar base64Bytes extends bytes;
 model StorageError {
   /** The error code. */
   @header("x-ms-error-code")
-  errorCode?: StorageErrorCode;
+  errorCode?: string;
 
   /** The error code for the copy source. */
   @header("x-ms-copy-source-error-code")
@@ -43,352 +44,6 @@ model StorageError {
 
   /** Copy source error message */
   @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
-}
-
-/** Error codes returned by the Azure Blob Storage service. */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
-union StorageErrorCode {
-  /** Account already exists. */
-  AccountAlreadyExists: "AccountAlreadyExists",
-
-  /** Account is being created. */
-  AccountBeingCreated: "AccountBeingCreated",
-
-  /** Account is disabled. */
-  AccountIsDisabled: "AccountIsDisabled",
-
-  /** Authentication failed. */
-  AuthenticationFailed: "AuthenticationFailed",
-
-  /** Authorization failure. */
-  AuthorizationFailure: "AuthorizationFailure",
-
-  /** Condition headers not supported. */
-  ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
-
-  /** Condition not met. */
-  ConditionNotMet: "ConditionNotMet",
-
-  /** Empty metadata key. */
-  EmptyMetadataKey: "EmptyMetadataKey",
-
-  /** Insufficient account permissions. */
-  InsufficientAccountPermissions: "InsufficientAccountPermissions",
-
-  /** Internal error. */
-  InternalError: "InternalError",
-
-  /** Invalid authentication information. */
-  InvalidAuthenticationInfo: "InvalidAuthenticationInfo",
-
-  /** Invalid header value. */
-  InvalidHeaderValue: "InvalidHeaderValue",
-
-  /** Invalid HTTP verb. */
-  InvalidHttpVerb: "InvalidHttpVerb",
-
-  /** Invalid input. */
-  InvalidInput: "InvalidInput",
-
-  /** Invalid MD5. */
-  InvalidMd5: "InvalidMd5",
-
-  /** Invalid metadata. */
-  InvalidMetadata: "InvalidMetadata",
-
-  /** Invalid query parameter value. */
-  InvalidQueryParameterValue: "InvalidQueryParameterValue",
-
-  /** Invalid range. */
-  InvalidRange: "InvalidRange",
-
-  /** Invalid request URL. */
-  InvalidRequestUrl: "InvalidRequestUrl",
-
-  /** Invalid URI. */
-  InvalidUri: "InvalidUri",
-
-  /** Invalid XML document. */
-  InvalidXmlDocument: "InvalidXmlDocument",
-
-  /** Invalid XML node value. */
-  InvalidXmlNodeValue: "InvalidXmlNodeValue",
-
-  /** MD5 mismatch. */
-  Md5Mismatch: "Md5Mismatch",
-
-  /** Metadata too large. */
-  MetadataTooLarge: "MetadataTooLarge",
-
-  /** Missing content length header. */
-  MissingContentLengthHeader: "MissingContentLengthHeader",
-
-  /** Missing required XML node. */
-  MissingRequiredXmlNode: "MissingRequiredXmlNode",
-
-  /** Missing required header. */
-  MissingRequiredHeader: "MissingRequiredHeader",
-
-  /** Missing required query parameter. */
-  MissingRequiredQueryParameter: "MissingRequiredQueryParameter",
-
-  /** Multiple condition headers not supported. */
-  MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
-
-  /** Operation timed out. */
-  OperationTimedOut: "OperationTimedOut",
-
-  /** Out of range input. */
-  OutOfRangeInput: "OutOfRangeInput",
-
-  /** Out of range query parameter value. */
-  OutOfRangeQueryParameterValue: "OutOfRangeQueryParameterValue",
-
-  /** Request body too large. */
-  RequestBodyTooLarge: "RequestBodyTooLarge",
-
-  /** Resource type mismatch. */
-  ResourceTypeMismatch: "ResourceTypeMismatch",
-
-  /** Request URL failed to parse. */
-  RequestUrlFailedToParse: "RequestUrlFailedToParse",
-
-  /** Resource already exists. */
-  ResourceAlreadyExists: "ResourceAlreadyExists",
-
-  /** Resource not found. */
-  ResourceNotFound: "ResourceNotFound",
-
-  /** Server busy. */
-  ServerBusy: "ServerBusy",
-
-  /** Unsupported header. */
-  UnsupportedHeader: "UnsupportedHeader",
-
-  /** Unsupported XML node. */
-  UnsupportedXmlNode: "UnsupportedXmlNode",
-
-  /** Unsupported query parameter. */
-  UnsupportedQueryParameter: "UnsupportedQueryParameter",
-
-  /** Unsupported HTTP verb. */
-  UnsupportedHttpVerb: "UnsupportedHttpVerb",
-
-  /** Append position condition not met. */
-  AppendPositionConditionNotMet: "AppendPositionConditionNotMet",
-
-  /** Blob already exists. */
-  BlobAlreadyExists: "BlobAlreadyExists",
-
-  /** Blob is immutable due to policy. */
-  BlobImmutableDueToPolicy: "BlobImmutableDueToPolicy",
-
-  /** Blob not found. */
-  BlobNotFound: "BlobNotFound",
-
-  /** Blob overwritten. */
-  BlobOverwritten: "BlobOverwritten",
-
-  /** Blob tier inadequate for content length. */
-  BlobTierInadequateForContentLength: "BlobTierInadequateForContentLength",
-
-  /** Blob uses customer specified encryption. */
-  BlobUsesCustomerSpecifiedEncryption: "BlobUsesCustomerSpecifiedEncryption",
-
-  /** Block count exceeds limit. */
-  BlockCountExceedsLimit: "BlockCountExceedsLimit",
-
-  /** Block list too long. */
-  BlockListTooLong: "BlockListTooLong",
-
-  /** Cannot change to lower tier. */
-  CannotChangeToLowerTier: "CannotChangeToLowerTier",
-
-  /** Cannot verify copy source. */
-  CannotVerifyCopySource: "CannotVerifyCopySource",
-
-  /** Container already exists. */
-  ContainerAlreadyExists: "ContainerAlreadyExists",
-
-  /** Container being deleted. */
-  ContainerBeingDeleted: "ContainerBeingDeleted",
-
-  /** Container disabled. */
-  ContainerDisabled: "ContainerDisabled",
-
-  /** Container not found. */
-  ContainerNotFound: "ContainerNotFound",
-
-  /** Content length larger than tier limit. */
-  ContentLengthLargerThanTierLimit: "ContentLengthLargerThanTierLimit",
-
-  /** Copy across accounts not supported. */
-  CopyAcrossAccountsNotSupported: "CopyAcrossAccountsNotSupported",
-
-  /** Copy ID mismatch. */
-  CopyIdMismatch: "CopyIdMismatch",
-
-  /** Feature version mismatch. */
-  FeatureVersionMismatch: "FeatureVersionMismatch",
-
-  /** Incremental copy blob mismatch. */
-  IncrementalCopyBlobMismatch: "IncrementalCopyBlobMismatch",
-
-  /** Incremental copy of earlier version snapshot not allowed. */
-  IncrementalCopyOfEarlierVersionSnapshotNotAllowed: "IncrementalCopyOfEarlierVersionSnapshotNotAllowed",
-
-  /** Incremental copy source must be snapshot. */
-  IncrementalCopySourceMustBeSnapshot: "IncrementalCopySourceMustBeSnapshot",
-
-  /** Infinite lease duration required. */
-  InfiniteLeaseDurationRequired: "InfiniteLeaseDurationRequired",
-
-  /** Invalid blob or block. */
-  InvalidBlobOrBlock: "InvalidBlobOrBlock",
-
-  /** Invalid blob tier. */
-  InvalidBlobTier: "InvalidBlobTier",
-
-  /** Invalid blob type. */
-  InvalidBlobType: "InvalidBlobType",
-
-  /** Invalid block ID. */
-  InvalidBlockId: "InvalidBlockId",
-
-  /** Invalid block list. */
-  InvalidBlockList: "InvalidBlockList",
-
-  /** Invalid operation. */
-  InvalidOperation: "InvalidOperation",
-
-  /** Invalid page range. */
-  InvalidPageRange: "InvalidPageRange",
-
-  /** Invalid source blob type. */
-  InvalidSourceBlobType: "InvalidSourceBlobType",
-
-  /** Invalid source blob URL. */
-  InvalidSourceBlobUrl: "InvalidSourceBlobUrl",
-
-  /** Invalid version for page blob operation. */
-  InvalidVersionForPageBlobOperation: "InvalidVersionForPageBlobOperation",
-
-  /** Lease already present. */
-  LeaseAlreadyPresent: "LeaseAlreadyPresent",
-
-  /** Lease already broken. */
-  LeaseAlreadyBroken: "LeaseAlreadyBroken",
-
-  /** Lease ID mismatch with blob operation. */
-  LeaseIdMismatchWithBlobOperation: "LeaseIdMismatchWithBlobOperation",
-
-  /** Lease ID mismatch with container operation. */
-  LeaseIdMismatchWithContainerOperation: "LeaseIdMismatchWithContainerOperation",
-
-  /** Lease ID mismatch with lease operation. */
-  LeaseIdMismatchWithLeaseOperation: "LeaseIdMismatchWithLeaseOperation",
-
-  /** Lease ID missing. */
-  LeaseIdMissing: "LeaseIdMissing",
-
-  /** Lease is breaking and cannot be acquired. */
-  LeaseIsBreakingAndCannotBeAcquired: "LeaseIsBreakingAndCannotBeAcquired",
-
-  /** Lease is breaking and cannot be changed. */
-  LeaseIsBreakingAndCannotBeChanged: "LeaseIsBreakingAndCannotBeChanged",
-
-  /** Lease is broken and cannot be renewed. */
-  LeaseIsBrokenAndCannotBeRenewed: "LeaseIsBrokenAndCannotBeRenewed",
-
-  /** Lease lost. */
-  LeaseLost: "LeaseLost",
-
-  /** Lease not present with blob operation. */
-  LeaseNotPresentWithBlobOperation: "LeaseNotPresentWithBlobOperation",
-
-  /** Lease not present with container operation. */
-  LeaseNotPresentWithContainerOperation: "LeaseNotPresentWithContainerOperation",
-
-  /** Lease not present with lease operation. */
-  LeaseNotPresentWithLeaseOperation: "LeaseNotPresentWithLeaseOperation",
-
-  /** Maximum blob size condition not met. */
-  MaxBlobSizeConditionNotMet: "MaxBlobSizeConditionNotMet",
-
-  /** No pending copy operation. */
-  NoPendingCopyOperation: "NoPendingCopyOperation",
-
-  /** Operation not allowed on incremental copy blob. */
-  OperationNotAllowedOnIncrementalCopyBlob: "OperationNotAllowedOnIncrementalCopyBlob",
-
-  /** Pending copy operation. */
-  PendingCopyOperation: "PendingCopyOperation",
-
-  /** Previous snapshot not found. */
-  PreviousSnapshotNotFound: "PreviousSnapshotNotFound",
-
-  /** Previous snapshot operation not supported. */
-  PreviousSnapshotOperationNotSupported: "PreviousSnapshotOperationNotSupported",
-
-  /** Previous snapshot cannot be newer. */
-  PreviousSnapshotCannotBeNewer: "PreviousSnapshotCannotBeNewer",
-
-  /** Sequence number condition not met. */
-  SequenceNumberConditionNotMet: "SequenceNumberConditionNotMet",
-
-  /** Sequence number increment too large. */
-  SequenceNumberIncrementTooLarge: "SequenceNumberIncrementTooLarge",
-
-  /** Snapshot count exceeded. */
-  SnapshotCountExceeded: "SnapshotCountExceeded",
-
-  /** Snapshot operation rate exceeded. */
-  SnapshotOperationRateExceeded: "SnapshotOperationRateExceeded",
-
-  /** Snapshots present. */
-  SnapshotsPresent: "SnapshotsPresent",
-
-  /** Source condition not met. */
-  SourceConditionNotMet: "SourceConditionNotMet",
-
-  /** System in use. */
-  SystemInUse: "SystemInUse",
-
-  /** Target condition not met. */
-  TargetConditionNotMet: "TargetConditionNotMet",
-
-  /** Unauthorized blob overwrite. */
-  UnauthorizedBlobOverwrite: "UnauthorizedBlobOverwrite",
-
-  /** Blob being rehydrated. */
-  BlobBeingRehydrated: "BlobBeingRehydrated",
-
-  /** Blob archived. */
-  BlobArchived: "BlobArchived",
-
-  /** Blob not archived. */
-  BlobNotArchived: "BlobNotArchived",
-
-  /** Authorization source IP mismatch. */
-  AuthorizationSourceIPMismatch: "AuthorizationSourceIPMismatch",
-
-  /** Authorization protocol mismatch. */
-  AuthorizationProtocolMismatch: "AuthorizationProtocolMismatch",
-
-  /** Authorization permission mismatch. */
-  AuthorizationPermissionMismatch: "AuthorizationPermissionMismatch",
-
-  /** Authorization service mismatch. */
-  AuthorizationServiceMismatch: "AuthorizationServiceMismatch",
-
-  /** Authorization resource type mismatch. */
-  AuthorizationResourceTypeMismatch: "AuthorizationResourceTypeMismatch",
-
-  /** Blob access tier not supported for account type. */
-  BlobAccessTierNotSupportedForAccountType: "BlobAccessTierNotSupportedForAccountType",
-
-  /** Extensible */
-  string,
 }
 
 /// Models
@@ -869,7 +524,7 @@ union ArchiveStatus {
 @Xml.name("Blob")
 model BlobItemInternal {
   /** The name of the blob. */
-  @Xml.name("Name") name: string;
+  @Xml.name("Name") name: BlobName;
 
   /** Whether the blob is deleted. */
   @Xml.name("Deleted") deleted: boolean;
@@ -894,10 +549,10 @@ model BlobItemInternal {
 
   /** The object replication metadata of the blob. */
   #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
-  @Xml.name("OrMetadata")
+  @Xml.name("ObjectReplicationMetadata")
   objectReplicationMetadata?: ObjectReplicationMetadata;
 
-  /** Whether the blog has versions only. */
+  /** Whether the blob has versions only. */
   @Xml.name("HasVersionsOnly") hasVersionsOnly?: boolean;
 }
 
@@ -916,7 +571,7 @@ model BlobPropertiesInternal {
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
 
-  /** The blog ETag. */
+  /** The blob ETag. */
   @Xml.name("Etag") eTag: string;
 
   /** The content length of the blob. */
@@ -976,10 +631,10 @@ model BlobPropertiesInternal {
   /** The copy status description of the blob. */
   @Xml.name("CopyStatusDescription") copyStatusDescription?: string;
 
-  /** Whether the blog is encrypted on the server. */
+  /** Whether the blob is encrypted on the server. */
   @Xml.name("ServerEncrypted") serverEncrypted?: boolean;
 
-  /** Whether the blog is incremental copy. */
+  /** Whether the blob is incremental copy. */
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
   /** The name of the destination snapshot. */
@@ -1129,8 +784,7 @@ model ObjectReplicationMetadata is Record<string>;
 /// Service Properties
 
 /** The service properties. */
-@Xml.name("StorageServiceProperties")
-model BlobServiceProperties {
+model StorageServiceProperties {
   /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;
 
@@ -2483,14 +2137,6 @@ alias ContainerNamePathParameter = {
 };
 
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
-alias MetadataHeadersParameter = {
-  /** The metadata headers. */
-  @alternateType(Record<string>, "rust")
-  @header("x-ms-meta")
-  metadata: string;
-};
-
-// NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
   @alternateType(Record<string>, "rust")
@@ -2535,8 +2181,7 @@ alias FilterBlobsIncludeParameter = {
 alias FilterBlobsWhereParameter = {
   /** Filters the results to return only to return only blobs whose tags match the specified expression. */
   @query
-  @clientName("filterExpression")
-  where: string;
+  where?: string;
 };
 
 /** The Content-Length header. */
@@ -2676,4 +2321,41 @@ alias PageWriteParameter<TPageWrite extends string> = {
   /** Required. You may specify one of the following options:\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size. */
   @header("x-ms-page-write")
   pageWrite: TPageWrite;
+};
+
+alias IfBlobMatchHeader = {
+  /** Specify an ETag value to operate only on blobs with a matching value. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-match")
+  ifMatch?: string;
+};
+
+alias IfBlobModifiedSinceHeader = {
+  /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-modified-since")
+  @encode("rfc7231")
+  ifModifiedSince?: utcDateTime;
+};
+
+alias IfBlobNoneMatchHeader = {
+  /** Specify an ETag value to operate only on blobs without a matching value. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-none-match")
+  ifNoneMatch?: string;
+};
+
+alias IfBlobUnmodifiedSinceHeader = {
+  /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-unmodified-since")
+  @encode("rfc7231")
+  ifUnmodifiedSince?: utcDateTime;
+};
+
+alias ListBlobsStartFrom = {
+  /** Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive) */
+  @added(Versions.v2026_02_06)
+  @query
+  startFrom?: string;
 };
