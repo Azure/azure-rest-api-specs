@@ -52,7 +52,7 @@ model ScimApiConsumption is TrackedResource<ScimApiConsumptionProperties> {
   @doc("Singleton SCIM API Consumption resource")
   @key
   @pattern("default")
-  @segment("scimApiConsumption")
+  @segment("scimApiConsumptions")
   @path
   name: string;
 }
