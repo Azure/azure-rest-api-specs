@@ -2,7 +2,7 @@
 
 import { basename, resolve, sep } from "path";
 import { describe, expect, it } from "vitest";
-import { includesSegment, untilSegment } from "../src/path.js";
+import { includesSegment, untilLastSegment } from "../src/path.js";
 
 const cwd = process.cwd();
 
@@ -23,6 +23,8 @@ describe("path", () => {
     ["a/b/c/d.txt", basename(cwd), true],
     ["a/b/c/d.txt", "", true],
     ["a/b/c/d.txt", sep, false],
+    // Multiple occurrences of segment
+    ["/a/b/a/c/a/d.txt", "a", true],
   ])("includesSegment(%o, %o) => %o", (path, segment, expected) => {
     expect(includesSegment(path, segment)).toEqual(expected);
   });
@@ -42,7 +44,9 @@ describe("path", () => {
     ["a/b/c/d.txt", "a", cwd],
     ["a/b/c/d.txt", "", "/"],
     ["a/b/c/d.txt", sep, ""],
-  ])("untilSegment(%o, %o) => %o", (path, segment, expected) => {
-    expect(untilSegment(path, segment)).toEqual(expected);
+    // Ensure last occurrence of segment is used
+    ["/a/b/a/c/a/d.txt", "a", "/a/b/a/c"],
+  ])("untilLastSegment(%o, %o) => %o", (path, segment, expected) => {
+    expect(untilLastSegment(path, segment)).toEqual(expected);
   });
 });
