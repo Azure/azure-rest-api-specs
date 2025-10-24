@@ -163,7 +163,8 @@ export async function processFilesToSpecificationList(
         The `examples` folder is traditionally populated with example.json files related to the owning spec.
         However, these examples might be contained within subdirectories of the examples folder.
 
-        path/to/swagger/2024-01-01/examples/example.json <-- this is an example file path
+        path/to/swagger/2024-01-01/examples/example.json                        <-- valid example path
+        path/to/swagger/2024-01-01/examples/subdirectory1/example.json <-- also valid example path
         path/to/swagger/2024-01-01/swagger.json <-- we need to identify this file if it references the example
         path/to/swagger/2024-01-01/swagger2.json <-- and do nothing with this one
       */
