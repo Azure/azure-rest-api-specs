@@ -6162,10 +6162,14 @@
           "type": "string",
           "readOnly": true,
           "enum": [
-            "Pending",
+            "Unknown",
+            "Scheduled",
             "Active",
+            "Pending",
+            "Failed",
             "Canceled",
             "Completed",
+            "Stopped",
             "PendingSettlement"
           ],
           "x-ms-enum": {
@@ -6304,13 +6308,16 @@
           "type": "string",
           "readOnly": true,
           "enum": [
+            "Unknown",
             "Scheduled",
             "Active",
+            "Pending",
+            "Failed",
             "Completed",
-            "Missed",
             "Canceled",
+            "Removed",
             "PendingSettlement",
-            "Removed"
+            "Missed"
           ],
           "x-ms-enum": {
             "name": "MilestoneStatus",
