@@ -29,7 +29,7 @@ interface JobBases {
   /**
    * Gets a Job by name/id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Get")
   @summary("Gets a Job by name/id.")
   get is ArmResourceRead<JobBase>;
@@ -38,7 +38,7 @@ interface JobBases {
    * Creates and executes a Job.
    * For update case, the Tags in the definition passed in will replace Tags in the existing job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_CreateOrUpdate")
   @summary("Creates and executes a Job.\r\nFor update case, the Tags in the definition passed in will replace Tags in the existing job.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<JobBase>;
@@ -46,8 +46,8 @@ interface JobBases {
   /**
    * Deletes a Job (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Delete")
   @summary("Deletes a Job (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -64,7 +64,7 @@ interface JobBases {
   /**
    * Lists Jobs in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_List")
   @summary("Lists Jobs in the workspace.")
   list is ArmResourceListByParent<
@@ -106,7 +106,7 @@ interface JobBases {
   /**
    * Cancels a Job (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Cancel")
   @summary("Cancels a Job (asynchronous).")
   cancel is ArmResourceActionAsync<

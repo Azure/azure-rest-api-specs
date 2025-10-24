@@ -64,7 +64,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Get deployments under the Azure OpenAI connection by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_GetDeployment")
   @summary("Get deployments under the Azure OpenAI connection by name.")
   getDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.Read<EndpointDeploymentResourcePropertiesBasicResource>;
@@ -72,7 +72,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Create or update Azure OpenAI connection deployment resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_CreateOrUpdateDeployment")
   @summary("Create or update Azure OpenAI connection deployment resource with the specified parameters")
   createOrUpdateDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.CreateOrUpdateAsync<
@@ -92,7 +92,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Delete Azure OpenAI connection deployment resource by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_DeleteDeployment")
   @summary("Delete Azure OpenAI connection deployment resource by name")
   deleteDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.DeleteWithoutOkAsync<
@@ -110,7 +110,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Get all the deployments under the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_ListDeployments")
   @summary("Get all the deployments under the Azure OpenAI connection.")
   listDeployments is EndpointDeploymentResourcePropertiesBasicResourceOps.List<
@@ -170,7 +170,7 @@ interface EndpointDeployment {
   /**
    * Create or update endpoint deployment resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,

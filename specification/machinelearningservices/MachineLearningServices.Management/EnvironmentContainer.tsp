@@ -60,7 +60,7 @@ interface EnvironmentContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentContainers_Get")
   @summary("Get container.")
   get is EnvironmentContainerOps.Read<EnvironmentContainer>;
@@ -68,7 +68,7 @@ interface EnvironmentContainers {
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @useFinalStateVia("original-uri")
   @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
   @summary("Create or update container.")
@@ -90,8 +90,8 @@ interface EnvironmentContainers {
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentContainers_Delete")
   @summary("Delete container.")
   delete is EnvironmentContainerOps.DeleteWithoutOkAsync<
@@ -108,7 +108,7 @@ interface EnvironmentContainers {
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentContainers_List")
   @summary("List environment containers.")
   list is EnvironmentContainerOps.List<
@@ -159,7 +159,7 @@ interface EnvironmentContainerOperationGroup {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentContainers_Get")
   @summary("Get container.")
   get is EnvironmentContainerOperationGroupOps.Read<EnvironmentContainer>;
@@ -167,7 +167,7 @@ interface EnvironmentContainerOperationGroup {
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentContainers_CreateOrUpdate")
   @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOperationGroupOps.CreateOrUpdateSync<EnvironmentContainer>;
@@ -175,7 +175,7 @@ interface EnvironmentContainerOperationGroup {
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentContainers_Delete")
   @summary("Delete container.")
   delete is EnvironmentContainerOperationGroupOps.DeleteSync<EnvironmentContainer>;
@@ -183,7 +183,7 @@ interface EnvironmentContainerOperationGroup {
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentContainers_List")
   @summary("List environment containers.")
   list is EnvironmentContainerOperationGroupOps.List<

@@ -50,7 +50,7 @@ interface PrivateEndpointConnections {
    * Called by end-users to approve or reject a PE connection.
    * This method must validate and forward the call to NRP.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Called by end-users to approve or reject a PE connection.\r\nThis method must validate and forward the call to NRP.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,

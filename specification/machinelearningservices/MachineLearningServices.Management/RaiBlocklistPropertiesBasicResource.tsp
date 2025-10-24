@@ -28,7 +28,7 @@ interface RaiBlocklistPropertiesBasicResources {
   /**
    * Gets the specified custom blocklist associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklist_Get")
   @summary("Gets the specified custom blocklist associated with the Azure OpenAI connection.")
   get is ArmResourceRead<RaiBlocklistPropertiesBasicResource>;
@@ -36,7 +36,7 @@ interface RaiBlocklistPropertiesBasicResources {
   /**
    * Update the state of specified blocklist associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklist_Create")
   @summary("Update the state of specified blocklist associated with the Azure OpenAI connection.")
   create is ArmResourceCreateOrReplaceAsync<
@@ -56,7 +56,7 @@ interface RaiBlocklistPropertiesBasicResources {
   /**
    * Deletes the specified custom blocklist associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklist_Delete")
   @summary("Deletes the specified custom blocklist associated with the Azure OpenAI connection.")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -74,7 +74,7 @@ interface RaiBlocklistPropertiesBasicResources {
   /**
    * Gets the custom blocklists associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklists_List")
   @summary("Gets the custom blocklists associated with the Azure OpenAI connection.")
   list is ArmResourceListByParent<
@@ -93,7 +93,7 @@ interface RaiBlocklistPropertiesBasicResources {
   /**
    * Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklistItem_AddBulk")
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
@@ -110,7 +110,7 @@ interface RaiBlocklistPropertiesBasicResources {
   /**
    * Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklistItem_DeleteBulk")
   @summary("Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.")

@@ -82,7 +82,7 @@ interface DataContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataContainers_Get")
   @summary("Get container.")
   get is DataContainerOps.Read<DataContainer>;
@@ -90,7 +90,7 @@ interface DataContainers {
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @useFinalStateVia("original-uri")
   @operationId("RegistryDataContainers_CreateOrUpdate")
   @summary("Create or update container.")
@@ -112,8 +112,8 @@ interface DataContainers {
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataContainers_Delete")
   @summary("Delete container.")
   delete is DataContainerOps.DeleteWithoutOkAsync<
@@ -130,7 +130,7 @@ interface DataContainers {
   /**
    * List Data containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataContainers_List")
   @summary("List Data containers.")
   list is DataContainerOps.List<
@@ -181,7 +181,7 @@ interface DataContainerOperationGroup {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataContainers_Get")
   @summary("Get container.")
   get is DataContainerOperationGroupOps.Read<DataContainer>;
@@ -189,7 +189,7 @@ interface DataContainerOperationGroup {
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataContainers_CreateOrUpdate")
   @summary("Create or update container.")
   createOrUpdate is DataContainerOperationGroupOps.CreateOrUpdateSync<DataContainer>;
@@ -197,7 +197,7 @@ interface DataContainerOperationGroup {
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataContainers_Delete")
   @summary("Delete container.")
   delete is DataContainerOperationGroupOps.DeleteSync<DataContainer>;
@@ -205,7 +205,7 @@ interface DataContainerOperationGroup {
   /**
    * List data containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataContainers_List")
   @summary("List data containers.")
   list is DataContainerOperationGroupOps.List<

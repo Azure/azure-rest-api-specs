@@ -266,7 +266,6 @@ using Microsoft.MachineLearningServices;
 @@clientName(Registries.createOrUpdate::parameters.resource, "body");
 @@clientName(Registries.update::parameters.properties, "body");
 @@clientLocation(Registries.getBlobReferenceSAS, "RegistryDataReferences");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "body");

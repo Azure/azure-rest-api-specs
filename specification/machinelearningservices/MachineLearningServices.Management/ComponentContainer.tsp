@@ -56,7 +56,7 @@ interface ComponentContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryComponentContainers_Get")
   @summary("Get container.")
   get is ComponentContainerOps.Read<ComponentContainer>;
@@ -64,7 +64,7 @@ interface ComponentContainers {
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryComponentContainers_CreateOrUpdate")
   @summary("Create or update container.")
   createOrUpdate is ComponentContainerOps.CreateOrUpdateAsync<
@@ -81,8 +81,8 @@ interface ComponentContainers {
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryComponentContainers_Delete")
   @summary("Delete container.")
   delete is ComponentContainerOps.DeleteWithoutOkAsync<
@@ -99,7 +99,7 @@ interface ComponentContainers {
   /**
    * List containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryComponentContainers_List")
   @summary("List containers.")
   list is ComponentContainerOps.List<
@@ -144,7 +144,7 @@ interface ComponentContainerOperationGroup {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentContainers_Get")
   @summary("Get container.")
   get is ComponentContainerOperationGroupOps.Read<ComponentContainer>;
@@ -152,7 +152,7 @@ interface ComponentContainerOperationGroup {
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentContainers_CreateOrUpdate")
   @summary("Create or update container.")
   createOrUpdate is ComponentContainerOperationGroupOps.CreateOrUpdateSync<ComponentContainer>;
@@ -160,7 +160,7 @@ interface ComponentContainerOperationGroup {
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentContainers_Delete")
   @summary("Delete container.")
   delete is ComponentContainerOperationGroupOps.DeleteSync<ComponentContainer>;
@@ -168,7 +168,7 @@ interface ComponentContainerOperationGroup {
   /**
    * List component containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentContainers_List")
   @summary("List component containers.")
   list is ComponentContainerOperationGroupOps.List<

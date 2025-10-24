@@ -62,7 +62,7 @@ interface ModelVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_Get")
   @summary("Get version.")
   get is ModelVersionOps.Read<ModelVersion>;
@@ -70,7 +70,7 @@ interface ModelVersions {
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_CreateOrUpdate")
   @summary("Create or update version.")
   createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<
@@ -87,8 +87,8 @@ interface ModelVersions {
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_Delete")
   @summary("Delete version.")
   delete is ModelVersionOps.DeleteWithoutOkAsync<
@@ -105,7 +105,7 @@ interface ModelVersions {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_List")
   @summary("List versions.")
   list is ModelVersionOps.List<
@@ -159,7 +159,7 @@ interface ModelVersions {
   /**
    * Generate a storage location and credential for the client to upload a model asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_CreateOrGetStartPendingUpload")
   @action("startPendingUpload")
   @summary("Generate a storage location and credential for the client to upload a model asset to.")
@@ -205,7 +205,7 @@ interface ModelVersionOperationGroup {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_Get")
   @summary("Get version.")
   get is ModelVersionOperationGroupOps.Read<ModelVersion>;
@@ -213,7 +213,7 @@ interface ModelVersionOperationGroup {
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_CreateOrUpdate")
   @summary("Create or update version.")
   createOrUpdate is ModelVersionOperationGroupOps.CreateOrUpdateSync<ModelVersion>;
@@ -221,7 +221,7 @@ interface ModelVersionOperationGroup {
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_Delete")
   @summary("Delete version.")
   delete is ModelVersionOperationGroupOps.DeleteSync<ModelVersion>;
@@ -229,7 +229,7 @@ interface ModelVersionOperationGroup {
   /**
    * List model versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_List")
   @summary("List model versions.")
   list is ModelVersionOperationGroupOps.List<
@@ -301,7 +301,7 @@ interface ModelVersionOperationGroup {
   /**
    * Publish version asset into registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_Publish")
   @summary("Publish version asset into registry.")
   publish is ModelVersionOperationGroupOps.ActionAsync<

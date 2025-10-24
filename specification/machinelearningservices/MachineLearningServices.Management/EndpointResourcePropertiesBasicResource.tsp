@@ -29,7 +29,7 @@ interface EndpointResourcePropertiesBasicResources {
   /**
    * Gets endpoint resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Endpoint_Get")
   @summary("Get endpoint resource")
   get is ArmResourceRead<EndpointResourcePropertiesBasicResource>;
@@ -37,8 +37,8 @@ interface EndpointResourcePropertiesBasicResources {
   /**
    * Create or update endpoint resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Endpoint_CreateOrUpdate")
   @summary("Create or update endpoint resource with the specified parameters")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -51,7 +51,7 @@ interface EndpointResourcePropertiesBasicResources {
   /**
    * List All the endpoints under this workspace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Endpoint_List")
   @summary("List All the endpoints under this workspace")
   list is ArmResourceListByParent<
@@ -63,15 +63,15 @@ interface EndpointResourcePropertiesBasicResources {
       @query("endpointType")
       endpointType?: EndpointType;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("includeOnlineEndpoints")
       includeOnlineEndpoints?: boolean = false;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("includeServerlessEndpoints")
       includeServerlessEndpoints?: boolean = false;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("includeConnections")
       includeConnections?: boolean = false;
 
@@ -93,7 +93,7 @@ interface EndpointResourcePropertiesBasicResources {
   /**
    * List keys for the endpoint resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Endpoint_ListKeys")
   @summary("List keys for the endpoint resource.")
   listKeys is ArmResourceActionSync<
@@ -105,7 +105,7 @@ interface EndpointResourcePropertiesBasicResources {
   /**
    * Get available models under the endpoint resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Endpoint_GetModels")
   @summary("Get available models under the endpoint resource.")
   @list
@@ -120,7 +120,7 @@ interface EndpointResourcePropertiesBasicResources {
   /**
    * Regenerate account keys
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Endpoint_RegenerateKeys")
   @summary("Regenerate account keys")
   @action("regenerateKey")
