@@ -1,0 +1,79 @@
+{
+  "operationId": "AnalyzeText",
+  "title": "SuccessfulEntityRecognitionOverlapPolicy",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2024-11-15-preview",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "EntityRecognition",
+      "parameters": {
+        "modelVersion": "latest",
+        "overlapPolicy": {
+          "policyKind": "matchLongest"
+        }
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "4",
+            "language": "en",
+            "text": "25th April Meeting was an intresting one. At least we gont to experience the WorldCup"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "EntityRecognitionResults",
+        "results": {
+          "documents": [
+            {
+              "entities": [
+                {
+                  "text": "25th April Meeting",
+                  "category": "Event",
+                  "type": "Event",
+                  "offset": 0,
+                  "length": 18,
+                  "confidenceScore": 0.59,
+                  "tags": [
+                    {
+                      "name": "Event",
+                      "confidenceScore": 0.59
+                    }
+                  ]
+                },
+                {
+                  "text": "Worldcup",
+                  "category": "Event",
+                  "type": "SportsEvent",
+                  "offset": 0,
+                  "length": 8,
+                  "confidenceScore": 0.51,
+                  "tags": [
+                    {
+                      "name": "Event",
+                      "confidenceScore": 0.55
+                    },
+                    {
+                      "name": "SportsEvent",
+                      "confidenceScore": 0.51
+                    }
+                  ]
+                }
+              ],
+              "id": "4",
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2021-06-01"
+        }
+      }
+    }
+  }
+}
