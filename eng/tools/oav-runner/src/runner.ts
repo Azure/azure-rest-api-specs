@@ -4,7 +4,14 @@ import * as fs from "fs";
 import * as oav from "oav";
 import * as path from "path";
 
-import { example, getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
+import {
+  example,
+  getChangedFiles,
+  preview,
+  stable,
+  swagger,
+} from "@azure-tools/specs-shared/changed-files";
+import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { ReportableOavError } from "./formatting.js";
 
@@ -149,16 +156,22 @@ export async function processFilesToSpecificationList(
   for (const file of files) {
     const absoluteFilePath = path.join(rootDirectory, file);
 
-    // if the file is an example, we need to find the swagger file that references it
-    if (example(file)) {
+    // if the file is an example, under "preview" or "stable" (but not the TypeSpec source folder),
+    // we need to find the swagger file that references it
+    if (example(file) && (preview(file) || stable(file))) {
       /*
-        examples exist in the same directory as the swagger file that references them:
+        The `examples` folder is traditionally populated with example.json files related to the owning spec.
+        However, these examples might be contained within subdirectories of the examples folder.
 
-        path/to/swagger/2024-01-01/examples/example.json <-- this is an example file path
+        path/to/swagger/2024-01-01/examples/example.json                        <-- valid example path
+        path/to/swagger/2024-01-01/examples/subdirectory1/example.json <-- also valid example path
         path/to/swagger/2024-01-01/swagger.json <-- we need to identify this file if it references the example
         path/to/swagger/2024-01-01/swagger2.json <-- and do nothing with this one
       */
-      const swaggerDir = path.dirname(path.dirname(file));
+      const swaggerDir = path.relative(
+        rootDirectory,
+        untilLastSegment(absoluteFilePath, "examples"),
+      );
 
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
 
