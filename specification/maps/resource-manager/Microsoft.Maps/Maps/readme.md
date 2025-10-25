@@ -32,7 +32,6 @@ tag: package-preview-2025-10
 
 ```
 
-
 ### Tag: package-preview-2025-10
 
 These settings apply only when `--tag=package-preview-2025-10` is specified on the command line.
@@ -40,41 +39,6 @@ These settings apply only when `--tag=package-preview-2025-10` is specified on t
 ``` yaml $(tag) == 'package-preview-2025-10'
 input-file:
   - preview/2025-10-01-preview/maps-management.json
-```
-### Tag: package-preview-2024-07
-
-These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2024-07'
-input-file:
-  - preview/2024-07-01-preview/maps-management.json
-```
-
-### Tag: package-preview-2024-01
-
-These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-01'
-input-file:
-  - preview/2024-01-01-preview/maps-management.json
-```
-
-### Tag: package-preview-2023-12
-
-These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-12'
-input-file:
-  - preview/2023-12-01-preview/maps-management.json
-```
-
-### Tag: package-preview-2023-08
-
-These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-08'
-input-file:
-  - preview/2023-08-01-preview/maps-management.json
 ```
 
 ### Tag: package-2023-06
@@ -86,24 +50,6 @@ input-file:
   - stable/2023-06-01/maps-management.json
 ```
 
-### Tag: package-preview-2021-12
-
-These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-12'
-input-file:
-  - preview/2021-12-01-preview/maps-management.json
-```
-
-### Tag: package-preview-2021-07
-
-These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-07'
-input-file:
-  - preview/2021-07-01-preview/maps-management.json
-```
-
 ### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
@@ -111,15 +57,6 @@ These settings apply only when `--tag=package-2021-02` is specified on the comma
 ``` yaml $(tag) == 'package-2021-02'
 input-file:
   - stable/2021-02-01/maps-management.json
-```
-
-### Tag: package-preview-2020-02
-
-These settings apply only when `--tag=package-preview-2020-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2020-02'
-input-file:
-  - preview/2020-02-01-preview/maps-management.json
 ```
 
 ### Tag: package-2017-01
@@ -139,8 +76,6 @@ These settings apply only when `--tag=package-2018-05` is specified on the comma
 input-file:
 - stable/2018-05-01/maps-management.json
 ```
-
----
 
 # Code Generation
 
