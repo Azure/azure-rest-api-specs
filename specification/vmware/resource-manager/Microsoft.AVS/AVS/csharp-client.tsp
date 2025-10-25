@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
   },
   "csharp"
 )
-@useDependency(Microsoft.AVS.Versions.v2024_09_01)
+@useDependency(Microsoft.AVS.Versions.v2025_09_01)
 namespace Customization;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
@@ -180,3 +180,11 @@ interface Skus extends Microsoft.AVS.Skus {}
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup("csharp")
 interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup("csharp")
+interface Maintenances extends Microsoft.AVS.Maintenances {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup("csharp")
+interface Licenses extends Microsoft.AVS.Licenses {}
