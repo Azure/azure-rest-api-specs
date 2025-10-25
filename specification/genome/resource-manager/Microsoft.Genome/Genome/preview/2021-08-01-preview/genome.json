@@ -564,6 +564,31 @@
         }
       ]
     },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The identity type."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user assigned identities associated with the resource.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
     "IpRule": {
       "type": "object",
       "description": "IP rule for network access control.",
@@ -735,6 +760,42 @@
       },
       "readOnly": true
     },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The identity type.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity is assigned to the resource"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity"
+          },
+          {
+            "name": "SystemAssigned, UserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "Both system-assigned and user-assigned managed identities"
+          }
+        ]
+      }
+    },
     "Sku": {
       "type": "object",
       "description": "The resource model definition representing SKU",
@@ -831,6 +892,20 @@
           "type": "integer",
           "format": "int32",
           "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User-assigned managed identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Azure Active Directory principal ID associated with this Identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client App Id associated with this identity."
         }
       }
     },

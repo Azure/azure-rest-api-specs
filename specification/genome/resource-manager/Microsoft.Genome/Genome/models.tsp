@@ -54,16 +54,16 @@ model Sku {
 union ResourceIdentityType {
   string,
 
-  /** None */
+  /** No managed identity is assigned to the resource */
   None: "None",
 
-  /** SystemAssigned */
+  /** System-assigned managed identity */
   SystemAssigned: "SystemAssigned",
 
-  /** UserAssigned */
+  /** User-assigned managed identity */
   UserAssigned: "UserAssigned",
 
-  /** SystemAssigned, UserAssigned */
+  /** Both system-assigned and user-assigned managed identities */
   `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
 }
 
@@ -227,14 +227,4 @@ model GenomeAccountProperties {
 
   /** Encryption properties for this resource. */
   encryption?: Encryption;
-}
-
-/** Parameters for updating a Genome Account. */
-model GenomeAccountUpdate {
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard tags pattern"
-  tags?: Record<string>;
-
-  /** Managed identity configuration for the genome account. */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }

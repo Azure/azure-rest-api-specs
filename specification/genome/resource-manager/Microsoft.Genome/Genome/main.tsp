@@ -10,10 +10,7 @@ import "./client.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.CommonTypes;
 
 /** Microsoft Genome Resource Provider API */
 @armProviderNamespace
@@ -65,7 +62,7 @@ interface GenomeAccounts {
   create is ArmResourceCreateOrUpdateAsync<GenomeAccount>;
 
   /** Update properties of an existing Genome account. */
-  update is ArmResourcePatchSync<GenomeAccount, GenomeAccountUpdate>;
+  update is ArmResourcePatchSync<GenomeAccount, GenomeAccountProperties>;
 
   /** Delete a Genome account. */
   delete is ArmResourceDeleteWithoutOkAsync<GenomeAccount>;
