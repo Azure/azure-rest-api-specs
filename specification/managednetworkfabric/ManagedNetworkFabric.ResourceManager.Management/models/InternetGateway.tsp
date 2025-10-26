@@ -22,6 +22,7 @@ model InternetGatewayProperties {
   @visibility(Lifecycle.Read)
   port?: int32;
 
+  #suppress "ArmResourcePropertiesBag" "This will be fixed in the next major version"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "This is a valid property name."
   @doc("Gateway Type of the resource.")
   @madeOptional(Versions.v2024_06_15_preview)
