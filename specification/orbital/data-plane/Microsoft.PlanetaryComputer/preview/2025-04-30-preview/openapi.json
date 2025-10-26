@@ -37,25 +37,16 @@
   },
   "tags": [
     {
-      "name": "Ingestion Management"
-    },
-    {
-      "name": "Ingestion Sources"
+      "name": "SpatioTemporal Asset Catalog (STAC) API"
     },
     {
       "name": "STAC Collection Configuration"
     },
     {
-      "name": "SpatioTemporal Asset Catalog (STAC) API"
-    },
-    {
-      "name": "Tile Matrix Sets"
+      "name": "Image Exports for STAC Collections"
     },
     {
       "name": "Tiles for STAC Items"
-    },
-    {
-      "name": "Image Exports for STAC Collections"
     },
     {
       "name": "Map Legends"
@@ -64,10 +55,19 @@
       "name": "Tiles for STAC Collections Mosaics"
     },
     {
+      "name": "Tile Matrix Sets"
+    },
+    {
       "name": "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
     },
     {
       "name": "Sign an HREF for read access"
+    },
+    {
+      "name": "Ingestion Management"
+    },
+    {
+      "name": "Ingestion Sources"
     }
   ],
   "paths": {
@@ -1066,240 +1066,6 @@
         }
       }
     },
-    "/data/collections/{collectionId}/items/{itemId}/crop/{width}x{height}.{format}": {
-      "post": {
-        "operationId": "TilerGeoJsons_CropWidthByHeightFormat",
-        "tags": [
-          "Tiles for STAC Items"
-        ],
-        "summary": "Geojson Crop",
-        "description": "Create image from a geojson feature.",
-        "produces": [
-          "image/png",
-          "image/jpeg",
-          "image/jpg",
-          "image/webp",
-          "image/jp2",
-          "image/tiff; application=geotiff",
-          "application/x-binary",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assets"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.expression"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.noData"
-          },
-          {
-            "$ref": "#/parameters/AssetQueryParameters.unscale"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
-          },
-          {
-            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
-          },
-          {
-            "name": "collectionId",
-            "in": "path",
-            "description": "STAC Collection Identifier",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
-            "name": "itemId",
-            "in": "path",
-            "description": "STAC Item Identifier",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
-            "name": "width",
-            "in": "path",
-            "description": "Width in pixels for the output image.",
-            "required": true,
-            "type": "number",
-            "format": "float"
-          },
-          {
-            "name": "height",
-            "in": "path",
-            "description": "Height in pixels for the output image.",
-            "required": true,
-            "type": "number",
-            "format": "float"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
-            "name": "color_formula",
-            "in": "query",
-            "description": "rio-color formula (info: https://github.com/mapbox/rio-color)",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "colorFormula"
-          },
-          {
-            "name": "coord-crs",
-            "in": "query",
-            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "coordinateReferenceSystem"
-          },
-          {
-            "name": "resampling",
-            "in": "query",
-            "description": "Resampling method.",
-            "required": false,
-            "type": "string",
-            "default": "nearest",
-            "enum": [
-              "nearest",
-              "bilinear",
-              "cubic",
-              "cubic_spline",
-              "lanczos",
-              "average",
-              "mode",
-              "gauss",
-              "rms"
-            ],
-            "x-ms-enum": {
-              "name": "Resampling",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "nearest",
-                  "value": "nearest",
-                  "description": "Nearest neighbor - fastest method that selects the closest pixel value"
-                },
-                {
-                  "name": "bilinear",
-                  "value": "bilinear",
-                  "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
-                },
-                {
-                  "name": "cubic",
-                  "value": "cubic",
-                  "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
-                },
-                {
-                  "name": "cubic_spline",
-                  "value": "cubic_spline",
-                  "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
-                },
-                {
-                  "name": "lanczos",
-                  "value": "lanczos",
-                  "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
-                },
-                {
-                  "name": "average",
-                  "value": "average",
-                  "description": "Average resampling - calculates the mean of all contributing pixels"
-                },
-                {
-                  "name": "mode",
-                  "value": "mode",
-                  "description": "Mode resampling - selects the most common value from contributing pixels"
-                },
-                {
-                  "name": "gauss",
-                  "value": "gauss",
-                  "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
-                },
-                {
-                  "name": "rms",
-                  "value": "rms",
-                  "description": "Root mean square resampling - useful for resampling error or deviation grids"
-                }
-              ]
-            }
-          },
-          {
-            "name": "max_size",
-            "in": "query",
-            "description": "Image output size limit if width and height limits are not set.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 1024,
-            "x-ms-client-name": "maxSize"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
-          },
-          {
-            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request GeoJson body.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Feature"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Return an image.",
-            "schema": {
-              "type": "file"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TilerGeoJsons_CropWidthByHeightFormat": {
-            "$ref": "./examples/TilerGeoJsons_CropWidthByHeightFormat.json"
-          }
-        }
-      }
-    },
     "/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}.{format}": {
       "get": {
         "operationId": "TilerParts_GetCroppedToBoundingBox",
@@ -1531,6 +1297,240 @@
         "x-ms-examples": {
           "TilerParts_GetCroppedToBoundingBox": {
             "$ref": "./examples/TilerParts_GetMinxMinyMaxxMaxyFormat.json"
+          }
+        }
+      }
+    },
+    "/data/collections/{collectionId}/items/{itemId}/crop/{width}x{height}.{format}": {
+      "post": {
+        "operationId": "TilerGeoJsons_CropWidthByHeightFormat",
+        "tags": [
+          "Tiles for STAC Items"
+        ],
+        "summary": "Geojson Crop",
+        "description": "Create image from a geojson feature.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "STAC Item Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "width",
+            "in": "path",
+            "description": "Width in pixels for the output image.",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "height",
+            "in": "path",
+            "description": "Height in pixels for the output image.",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "color_formula",
+            "in": "query",
+            "description": "rio-color formula (info: https://github.com/mapbox/rio-color)",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "colorFormula"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "resampling",
+            "in": "query",
+            "description": "Resampling method.",
+            "required": false,
+            "type": "string",
+            "default": "nearest",
+            "enum": [
+              "nearest",
+              "bilinear",
+              "cubic",
+              "cubic_spline",
+              "lanczos",
+              "average",
+              "mode",
+              "gauss",
+              "rms"
+            ],
+            "x-ms-enum": {
+              "name": "Resampling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "nearest",
+                  "value": "nearest",
+                  "description": "Nearest neighbor - fastest method that selects the closest pixel value"
+                },
+                {
+                  "name": "bilinear",
+                  "value": "bilinear",
+                  "description": "Bilinear interpolation - calculates output values using a weighted average of 2x2 input cells"
+                },
+                {
+                  "name": "cubic",
+                  "value": "cubic",
+                  "description": "Cubic interpolation - uses a weighted average of 4x4 input cells for smoother results"
+                },
+                {
+                  "name": "cubic_spline",
+                  "value": "cubic_spline",
+                  "description": "Cubic spline interpolation - similar to cubic but preserves edges better"
+                },
+                {
+                  "name": "lanczos",
+                  "value": "lanczos",
+                  "description": "Lanczos windowed sinc resampling - high-quality with minimal artifacts"
+                },
+                {
+                  "name": "average",
+                  "value": "average",
+                  "description": "Average resampling - calculates the mean of all contributing pixels"
+                },
+                {
+                  "name": "mode",
+                  "value": "mode",
+                  "description": "Mode resampling - selects the most common value from contributing pixels"
+                },
+                {
+                  "name": "gauss",
+                  "value": "gauss",
+                  "description": "Gaussian weighted resampling - applies a gaussian weighting to contributing pixels"
+                },
+                {
+                  "name": "rms",
+                  "value": "rms",
+                  "description": "Root mean square resampling - useful for resampling error or deviation grids"
+                }
+              ]
+            }
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TilerGeoJsons_CropWidthByHeightFormat": {
+            "$ref": "./examples/TilerGeoJsons_CropWidthByHeightFormat.json"
           }
         }
       }
