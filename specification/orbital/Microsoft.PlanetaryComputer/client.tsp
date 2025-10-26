@@ -270,7 +270,7 @@ interface Tiler {
 // === Shared Access Signature (SAS) ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
-@clientName("SharedAccessSignatureClient", "csharp")
+@clientName("ManagedStorageSharedAccessSignatureClient", "csharp")
 interface SharedAccessSignature {
   // Sign HREF for read access
   getSign is Sas.getSign;
