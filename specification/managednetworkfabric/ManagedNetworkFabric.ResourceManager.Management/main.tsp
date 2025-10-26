@@ -59,7 +59,6 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-#suppress "LatestVersionOfCommonTypesMustBeUsed" "This will be fixed in the next major version"
 @doc("Self service experience for Azure Network Fabric API.")
 @armProviderNamespace("Microsoft.ManagedNetworkFabric")
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
