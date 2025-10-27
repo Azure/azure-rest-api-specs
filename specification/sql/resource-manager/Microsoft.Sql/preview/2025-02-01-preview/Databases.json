@@ -31,8 +31,32 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "$skipToken",
+            "name": "$top",
             "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "How the results should be ordered.",
             "required": false,
             "type": "string"
           },
@@ -57,10 +81,14 @@
             }
           }
         },
+        "x-ms-odata": "#/definitions/Database",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
+          "Gets a list of databases with OData filtering.": {
+            "$ref": "./examples/ListVCoreDatabasesByServerWithOdata.json"
+          },
           "Gets a list of databases.": {
             "$ref": "./examples/ListVCoreDatabasesByServer.json"
           },
@@ -88,20 +116,6 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "description": "The child resources to include in the response.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that filters elements in the collection.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -122,7 +136,6 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/Database",
         "x-ms-examples": {
           "Gets a database configured with Default enclave type.": {
             "$ref": "./examples/GetVCoreDatabaseDefaultEnclave.json"
@@ -132,9 +145,6 @@
           },
           "Gets a database.": {
             "$ref": "./examples/GetVCoreDatabase.json"
-          },
-          "Gets a database with database level keys expanded.": {
-            "$ref": "./examples/GetVCoreDatabaseWithExpandEqualsKeys.json"
           },
           "Gets a database with Availability zone specified.": {
             "$ref": "./examples/GetDatabaseWithAvailabilityZone.json"
@@ -1500,6 +1510,11 @@
         "encryptionProtectorAutoRotation": {
           "description": "The flag to enable or disable auto rotation of database encryption protector AKV key.",
           "type": "boolean"
+        },
+        "provisioningState": {
+          "description": "Specifies the provisioning state for this resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1929,6 +1944,11 @@
         "encryptionProtectorAutoRotation": {
           "description": "The flag to enable or disable auto rotation of database encryption protector AKV key.",
           "type": "boolean"
+        },
+        "provisioningState": {
+          "description": "Specifies the provisioning state for this resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
