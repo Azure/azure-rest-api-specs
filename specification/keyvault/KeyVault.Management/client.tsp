@@ -261,5 +261,12 @@ using Azure.Core;
   "java"
 );
 
+@@clientLocation(ManagedHsms.listByResource, "MhsmRegions", "java");
+@@clientLocation(ManagedHsms.listByMHSMResource,
+  "MhsmPrivateLinkResources",
+  "java"
+);
+@@clientName(ManagedHsms.listByMHSMResource, "listByMhsmResource", "java");
+
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "python");
