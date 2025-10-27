@@ -14,8 +14,8 @@
           "activeRevisionsMode": "Single",
           "ingress": {
             "external": true,
-            "targetPort": 80,
-            "allowInsecure": true
+            "targetPort": 443,
+            "allowInsecure": false
           }
         },
         "template": {
@@ -71,22 +71,8 @@
                   "weight": 100,
                   "latestRevision": true
                 }
-              ],
-              "customDomains": null,
-              "allowInsecure": true,
-              "ipSecurityRestrictions": null,
-              "corsPolicy": null,
-              "clientCertificateMode": null,
-              "stickySessions": null,
-              "additionalPortMappings": null,
-              "targetPortHttpScheme": null
-            },
-            "registries": null,
-            "dapr": null,
-            "runtime": null,
-            "maxInactiveRevisions": 100,
-            "revisionTransitionThreshold": 100,
-            "service": null
+              ]
+            }
           },
           "template": {
             "revisionSuffix": "",
@@ -94,13 +80,11 @@
             "containers": [
               {
                 "image": "default/logicapps-base:latest",
-                "imageType": "ContainerImage",
                 "name": "logicapps-container",
                 "resources": {
                   "cpu": 1.0,
                   "memory": "2Gi",
-                  "ephemeralStorage": "4Gi",
-                  "gpu": 1.0
+                  "ephemeralStorage": "4Gi"
                 }
               }
             ],
@@ -109,11 +93,8 @@
               "minReplicas": 1,
               "maxReplicas": 30,
               "cooldownPeriod": 350,
-              "pollingInterval": 35,
-              "rules": null
-            },
-            "volumes": null,
-            "serviceBinds": null
+              "pollingInterval": 35
+            }
           },
           "eventStreamEndpoint": "https://azurecontainerapps-test.dev/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/containerApps/testcontainerAppKind/eventstream"
         },
@@ -153,22 +134,8 @@
                   "weight": 100,
                   "latestRevision": true
                 }
-              ],
-              "customDomains": null,
-              "allowInsecure": true,
-              "ipSecurityRestrictions": null,
-              "corsPolicy": null,
-              "clientCertificateMode": null,
-              "stickySessions": null,
-              "additionalPortMappings": null,
-              "targetPortHttpScheme": null
-            },
-            "registries": null,
-            "dapr": null,
-            "runtime": null,
-            "maxInactiveRevisions": 100,
-            "revisionTransitionThreshold": 100,
-            "service": null
+              ]
+            }
           },
           "template": {
             "revisionSuffix": "",
@@ -176,7 +143,6 @@
             "containers": [
               {
                 "image": "default/logicapps-base:latest",
-                "imageType": "ContainerImage",
                 "name": "logicapps-container",
                 "resources": {
                   "cpu": 1.0,
@@ -185,16 +151,12 @@
                 }
               }
             ],
-            "initContainers": null,
             "scale": {
               "minReplicas": 1,
               "maxReplicas": 30,
               "cooldownPeriod": 350,
-              "pollingInterval": 35,
-              "rules": null
-            },
-            "volumes": null,
-            "serviceBinds": null
+              "pollingInterval": 35
+            }
           },
           "eventStreamEndpoint": "https://azurecontainerapps-test.dev/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/containerApps/testcontainerAppKind/eventstream"
         },
