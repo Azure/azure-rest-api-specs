@@ -45,20 +45,17 @@ union CheckServiceProviderAvailabilityResponse {
   "Unavailable",
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface CheckServiceProviderAvailabilityOperationGroup {
-  /**
-   * Checks if the peering service provider is present within 1000 miles of customer's location
-   */
-  @autoRoute
-  checkServiceProviderAvailability is ArmProviderActionSync<
-    Request = CheckServiceProviderAvailabilityInput,
-    Response = {
-      @body body: CheckServiceProviderAvailabilityResponse;
-    },
-    Scope = SubscriptionActionScope
-  >;
-}
+/**
+ * Checks if the peering service provider is present within 1000 miles of customer's location
+ */
+@autoRoute
+op checkServiceProviderAvailability is ArmProviderActionSync<
+  Request = CheckServiceProviderAvailabilityInput,
+  Response = {
+    @body body: CheckServiceProviderAvailabilityResponse;
+  },
+  Scope = SubscriptionActionScope
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface LegacyPeeringsOperationGroup {

@@ -146,7 +146,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/checkServiceProviderAvailability": {
       "post": {
-        "operationId": "CheckServiceProviderAvailability_CheckServiceProviderAvailability",
+        "operationId": "CheckServiceProviderAvailability",
         "description": "Checks if the peering service provider is present within 1000 miles of customer's location",
         "produces": [
           "text/plain",
@@ -181,6 +181,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Check if peering service provider is available in customer location": {
+            "$ref": "./examples/CheckServiceProviderAvailability.json"
           }
         }
       }

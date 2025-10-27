@@ -107,11 +107,7 @@ using Microsoft.Peering;
   PeeringServices
 );
 
-@@clientLocation(CheckServiceProviderAvailabilityOperationGroup.checkServiceProviderAvailability,
-  "CheckServiceProviderAvailability"
-);
-
-@@clientName(CheckServiceProviderAvailabilityOperationGroup.checkServiceProviderAvailability::parameters.body,
+@@clientName(checkServiceProviderAvailability::parameters.body,
   "checkServiceProviderAvailabilityInput"
 );
 
