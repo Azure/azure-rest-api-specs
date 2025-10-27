@@ -96,6 +96,12 @@ model BlobServiceClientParameters {
   uint64,
   "rust"
 );
+@@alternateType(BlobName,
+  {
+    identity: "crate::models::StorageBlobName",
+  },
+  "rust"
+);
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.submitBatch, "!rust");
