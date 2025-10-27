@@ -51,6 +51,7 @@ model PhraseListProperties {
 @doc("Metadata for a transcription request.")
 model TranscriptionOptions {
   @doc("The URL of the audio to be transcribed. The audio must be shorter than 2 hours in audio duration and smaller than 250 MB in size. If both Audio and AudioUrl are provided, Audio is used.")
+  @clientName("audioUri", "csharp")
   audioUrl?: url;
 
   @doc("A list of possible locales for the transcription. If not specified, the locale of the speech in the audio is detected automatically from all supported locales.")

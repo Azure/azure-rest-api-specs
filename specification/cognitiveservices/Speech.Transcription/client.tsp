@@ -19,5 +19,4 @@ namespace Azure.Ai.Speech.Transcription;
 
 @@clientName(TranscriptionOptions.diarization, "diarizationOptions");
 @@clientName(TranscriptionOptions.channels, "activeChannels");
-@@clientName(TranscriptionOptions.audioUrl, "audioUri", "csharp");
 @@access(transcribe, Access.internal, "csharp");
