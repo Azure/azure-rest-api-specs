@@ -1994,7 +1994,7 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ModelVersionResource",
-                "__new": "#/definitions/CodeContainer"
+                "__new": "#/definitions/ModelVersion"
               }
             }
           },
@@ -2002,7 +2002,7 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ModelVersionResource",
-                "__new": "#/definitions/CodeContainer"
+                "__new": "#/definitions/ModelVersion"
               }
             },
             "headers": {
@@ -9836,6 +9836,15 @@
         }
       }
     },
+    "ComputeResourceSchema__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Compute",
+          "description": "Compute properties"
+        }
+      }
+    },
     "DataContainerResource__deleted": {
       "type": "object",
       "description": "Azure Resource Manager resource envelope.",
@@ -13627,7 +13636,7 @@
           }
         },
         "properties__added": {
-          "$ref": "#/definitions/ComputeResourceSchema",
+          "$ref": "#/definitions/Compute",
           "description": "The resource-specific properties for this resource."
         },
         "identity": {

@@ -75,7 +75,7 @@ interface ModelVersions {
   @summary("Create or update version.")
   createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<
     ModelVersion,
-    Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<CodeContainer> & {
+    Response = ArmResourceUpdatedResponse<ModelVersion> | (ArmResourceCreatedResponse<ModelVersion> & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

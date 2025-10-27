@@ -798,6 +798,12 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 |------|------------|-------|
 | `definitions.ComputeInstanceSchema__deleted` | deleted | `{"type":"object","description":"Properties(top level) of ComputeInstance","properties":{"properties"...` |
 
+### Changes for `ComputeResourceSchema`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ComputeResourceSchema__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/Compute","description":"Compute p...` |
+
 ### Changes for `DataContainerResource`
 
 | Path | Change Type | Value |
@@ -1257,7 +1263,7 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.ComponentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentContainerProperties","description":"[Required] Additional attributes...` |
 | `definitions.ComponentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentVersionProperties","description":"[Required] Additional attributes o...` |
 | `definitions.ComputeInstance.properties__added` | added | `{"properties":{"$ref":"#/definitions/ComputeInstanceProperties","description":"Properties of Compute...` |
-| `definitions.ComputeResource.properties.properties__added` | added | `{"$ref":"#/definitions/ComputeResourceSchema","description":"The resource-specific properties for th...` |
+| `definitions.ComputeResource.properties.properties__added` | added | `{"$ref":"#/definitions/Compute","description":"The resource-specific properties for this resource."}` |
 | `definitions.ContentSafetyEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel","description":"Model used for the endpoint ...` |
 | `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Enum to determine the input data delivery mode.","default":"...` |
 | `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
@@ -3032,8 +3038,8 @@ which requires UsernamePassword` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].get.responses.200.schema.$ref` | `#/definitions/ModelVersionResource` | `#/definitions/ModelVersion` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].put.parameters[4].schema.$ref` | `#/definitions/ModelVersionResource` | `#/definitions/ModelVersion` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].put.responses.200.schema.$ref` | `#/definitions/ModelVersionResource` | `#/definitions/CodeContainer` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].put.responses.201.schema.$ref` | `#/definitions/ModelVersionResource` | `#/definitions/CodeContainer` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].put.responses.200.schema.$ref` | `#/definitions/ModelVersionResource` | `#/definitions/ModelVersion` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].put.responses.201.schema.$ref` | `#/definitions/ModelVersionResource` | `#/definitions/ModelVersion` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/removeRegions'].post.parameters[1].schema.$ref` | `#/definitions/RegistryTrackedResource` | `#/definitions/Registry` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/removeRegions'].post.responses.200.schema.$ref` | `#/definitions/RegistryTrackedResource` | `#/definitions/Registry` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/removeRegions'].post.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
