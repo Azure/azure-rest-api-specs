@@ -25,14 +25,14 @@ model Cluster
   /**
    * Distinguishes the kind of cluster. Read-only.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   kind?: Kind;
 
   /**
    * The SKU to create, which affects price, performance, and features.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: Sku;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
@@ -40,7 +40,7 @@ model Cluster
   /**
    * The identity of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
@@ -58,18 +58,20 @@ interface Clusters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RedisEnterprise_Create")
+  @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<Cluster>;
 
   /**
    * Updates an existing Redis Enterprise cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("RedisEnterprise_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = ClusterUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Cluster> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -77,12 +79,13 @@ interface Clusters {
    * Deletes a Redis Enterprise cache cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("RedisEnterprise_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

@@ -38,6 +38,7 @@ interface AccessPolicyAssignments {
    * Creates/Updates a particular access policy assignment for a database
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("original-uri")
   @operationId("AccessPolicyAssignment_CreateUpdate")
   createUpdate is ArmResourceCreateOrReplaceAsync<AccessPolicyAssignment>;
 
@@ -45,12 +46,12 @@ interface AccessPolicyAssignments {
    * Deletes a single access policy assignment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("AccessPolicyAssignment_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AccessPolicyAssignment,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

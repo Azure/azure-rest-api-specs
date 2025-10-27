@@ -27,7 +27,7 @@ interface PrivateEndpointConnections {
   /**
    * Updates the state of the specified private endpoint connection associated with the Redis Enterprise cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   put is PrivateEndpointOperations.CreateOrReplaceAsync<
     Cluster,
     PrivateEndpointConnection,
@@ -40,11 +40,11 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection associated with the Redis Enterprise cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is PrivateEndpointOperations.DeleteAsync<
     Cluster,
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**

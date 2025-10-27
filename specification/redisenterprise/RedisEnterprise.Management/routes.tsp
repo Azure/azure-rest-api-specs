@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cache;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationsStatusOperationGroup {
   /**
    * Gets the status of operation.
@@ -33,12 +33,5 @@ interface OperationsStatusOperationGroup {
     @minLength(1)
     @path
     operationId: string,
-
-    /**
-     * The ID of the target subscription.
-     */
-    @minLength(1)
-    @path
-    SubscriptionId: string,
   ): ArmResponse<OperationStatus> | ErrorResponse;
 }

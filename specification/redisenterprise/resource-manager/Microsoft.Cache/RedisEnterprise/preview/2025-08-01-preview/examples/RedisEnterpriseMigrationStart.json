@@ -1,60 +1,62 @@
 {
   "parameters": {
-    "clusterName": "cache1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-08-01-preview",
-    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f",
+    "clusterName": "cache1",
     "parameters": {
       "properties": {
-        "sourceType": "AzureCacheForRedis",
+        "skipDataMigration": true,
         "sourceResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redis/cache1",
-        "switchDns": true,
-        "skipDataMigration": true
+        "sourceType": "AzureCacheForRedis",
+        "switchDns": true
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
   },
   "responses": {
     "200": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationStatus..."
-      },
       "body": {
-        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/migrations/default",
         "name": "default",
         "type": "Microsoft.Cache/redisEnterprise/migrations",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/migrations/default",
         "properties": {
           "creationTime": "2024-10-01T12:00:00Z",
+          "lastModifiedTime": "2024-10-01T12:00:00Z",
+          "provisioningState": "Completed",
+          "skipDataMigration": true,
           "sourceResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redis/cache1",
           "sourceType": "AzureCacheForRedis",
-          "targetResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
-          "skipDataMigration": true,
-          "provisioningState": "Completed",
           "statusDetails": "",
           "switchDns": true,
-          "lastModifiedTime": "2024-10-01T12:00:00Z"
+          "targetResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationStatus..."
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationStatus..."
-      },
       "body": {
-        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/migrations/default",
         "name": "default",
         "type": "Microsoft.Cache/redisEnterprise/migrations",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/migrations/default",
         "properties": {
           "creationTime": "2024-10-01T12:00:00Z",
+          "lastModifiedTime": "2024-10-01T12:00:00Z",
+          "provisioningState": "Completed",
+          "skipDataMigration": true,
           "sourceResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redis/cache1",
           "sourceType": "AzureCacheForRedis",
-          "targetResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
-          "skipDataMigration": true,
-          "provisioningState": "Completed",
           "statusDetails": "",
           "switchDns": true,
-          "lastModifiedTime": "2024-10-01T12:00:00Z"
+          "targetResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationStatus..."
       }
     }
-  }
+  },
+  "operationId": "Migration_Start",
+  "title": "RedisEnterpriseMigrationStart"
 }

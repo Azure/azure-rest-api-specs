@@ -35,27 +35,30 @@ interface Databases {
   /**
    * Creates a database
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<Database>;
 
   /**
    * Updates a database
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     Database,
     PatchModel = DatabaseUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Database> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Database> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes a single database
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
@@ -75,54 +78,56 @@ interface Databases {
   /**
    * Regenerates the Redis Enterprise database's access keys.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   regenerateKey is ArmResourceActionAsync<
     Database,
     RegenerateKeyParameters,
     ArmResponse<AccessKeys>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = AccessKeys> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = AccessKeys> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Imports database files to target database.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   `import` is ArmResourceActionAsync<
     Database,
     ImportClusterParameters,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Exports a database file from target database.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   export is ArmResourceActionAsync<
     Database,
     ExportClusterParameters,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Forcibly removes the link to the specified database resource.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   forceUnlink is ArmResourceActionAsync<
     Database,
     ForceUnlinkParameters,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Forcibly recreates an existing database on the specified cluster, and rejoins it to an existing replication group. **IMPORTANT NOTE:** All data in this database will be discarded, and the database will temporarily be unavailable while rejoining the replication group.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   forceLinkToReplicationGroup is ArmResourceActionAsyncBase<
     Database,
     ForceLinkParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>
   >;
@@ -130,20 +135,24 @@ interface Databases {
   /**
    * Flushes all the keys in this database and also from its linked databases.
    */
-  flush is ArmResourceActionAsync<
+  flush is ArmResourceActionAsyncBase<
     Database,
     FlushParameters,
-    OkResponse,
-    OptionalRequestBody = true
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OptionalRequestBody = true,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>
   >;
 
   /**
    * Upgrades the database Redis version to the latest available.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   upgradeDBRedisVersion is ArmResourceActionAsyncBase<
     Database,
     void,
-    ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>
   >;
 }

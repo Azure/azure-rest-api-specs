@@ -790,7 +790,7 @@ union SourceType {
 /**
  * Current provisioning status
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MigrationProvisioningState {
   string,
 
@@ -833,7 +833,7 @@ union MigrationProvisioningState {
 /**
  * Which access key to regenerate.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AccessKeyType {
   /**
    * Primary
@@ -928,13 +928,14 @@ model Sku {
 /**
  * Properties of Redis Enterprise clusters for create operations
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterCreateProperties extends ClusterProperties {
   /**
    * Whether or not public network traffic can access the Redis cluster. Only 'Enabled' or 'Disabled' can be set. null is returned only for clusters created using an old API version which do not have this property and cannot be set.
    */
-  publicNetworkAccess: PublicNetworkAccess;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  publicNetworkAccess: PublicNetworkAccess | null;
 }
 
 /**
@@ -1055,7 +1056,7 @@ model ClusterUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -1063,12 +1064,13 @@ model ClusterUpdate {
 /**
  * Properties of Redis Enterprise clusters for update operations
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterUpdateProperties extends ClusterProperties {
   /**
    * Whether or not public network traffic can access the Redis cluster. Only 'Enabled' or 'Disabled' can be set. null is returned only for clusters created using an old API version which do not have this property and cannot be set.
    */
-  publicNetworkAccess?: PublicNetworkAccess;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  publicNetworkAccess?: PublicNetworkAccess | null;
 }
 
 /**
@@ -1084,9 +1086,14 @@ model DatabaseList is Azure.Core.Page<Database>;
 /**
  * Properties for creating Redis Enterprise databases
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-model DatabaseCreateProperties extends DatabaseProperties {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model DatabaseCreateProperties extends DatabaseProperties {
+  /**
+   * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created. Default is Disabled.
+   */
+  accessKeysAuthentication?: AccessKeysAuthentication = AccessKeysAuthentication.Disabled;
+}
 
 /**
  * Properties of Redis Enterprise databases, as opposed to general resource properties like location, tags
@@ -1288,8 +1295,13 @@ model DatabaseUpdate {
 /**
  * Properties for updating Redis Enterprise databases
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DatabaseUpdateProperties extends DatabaseProperties {}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model DatabaseUpdateProperties extends DatabaseProperties {
+  /**
+   * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created. Default is Disabled.
+   */
+  accessKeysAuthentication?: AccessKeysAuthentication;
+}
 
 /**
  * The secret access keys used for authenticating connections to redis
@@ -1325,6 +1337,7 @@ model ImportClusterParameters {
   /**
    * SAS URIs for the target blobs to import from
    */
+  @secret
   sasUris: string[];
 }
 
@@ -1335,6 +1348,7 @@ model ExportClusterParameters {
   /**
    * SAS URI for the target directory to export to
    */
+  @secret
   sasUri: string;
 }
 
@@ -1371,13 +1385,6 @@ model AccessPolicyAssignmentPropertiesUser {
 }
 
 /**
- * The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ProxyResourceAutoGenerated
-  extends Azure.ResourceManager.CommonTypes.Resource {}
-
-/**
  * The response of a list-all operation.
  */
 model AccessPolicyAssignmentList is Azure.Core.Page<AccessPolicyAssignment>;
@@ -1405,6 +1412,7 @@ model SkuDetails {
   /**
    * The cache size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sizeInGB?: float32;
 }

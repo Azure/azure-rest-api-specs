@@ -25,6 +25,7 @@ model Migration is Azure.ResourceManager.ProxyResource<MigrationProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface Migrations {
   /**
@@ -39,7 +40,13 @@ interface Migrations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Migration_Start")
-  start is ArmResourceCreateOrReplaceAsync<Migration>;
+  @Azure.Core.useFinalStateVia("original-uri")
+  start is ArmResourceCreateOrReplaceAsync<
+    Migration,
+    Response = (ArmResponse<Migration> &
+      ArmCombinedLroHeaders) | (ArmCreatedResponse<Migration> &
+      ArmCombinedLroHeaders)
+  >;
 
   /**
    * Gets information about all migrations attempts in a Redis Enterprise cluster.
@@ -59,7 +66,7 @@ interface Migrations {
   cancel is ArmResourceActionAsyncBase<
     Migration,
     void,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Migration>
   >;
 }

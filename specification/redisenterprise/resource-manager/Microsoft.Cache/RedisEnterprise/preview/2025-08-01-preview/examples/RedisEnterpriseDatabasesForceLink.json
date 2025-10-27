@@ -1,10 +1,8 @@
 {
   "parameters": {
-    "databaseName": "default",
-    "clusterName": "cache1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-08-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "clusterName": "cache1",
+    "databaseName": "default",
     "parameters": {
       "geoReplication": {
         "groupNickname": "groupName",
@@ -17,7 +15,9 @@
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "202": {
@@ -25,5 +25,7 @@
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Cache/...pathToOperationStatus..."
       }
     }
-  }
+  },
+  "operationId": "Databases_ForceLinkToReplicationGroup",
+  "title": "How to relink a database after a regional outage"
 }

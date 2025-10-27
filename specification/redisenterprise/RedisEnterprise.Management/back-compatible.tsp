@@ -56,7 +56,5 @@ using Microsoft.Cache;
 @@clientName(Migrations.start::parameters.resource, "parameters");
 @@clientLocation(Migrations.list, "Migration");
 @@clientLocation(Migrations.cancel, "Migration");
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-// @@Legacy.flattenProperty(Migration.properties);
 
 @@clientLocation(OperationsStatusOperationGroup.get, "OperationsStatus");
