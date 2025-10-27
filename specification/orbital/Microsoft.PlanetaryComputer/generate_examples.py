@@ -30,6 +30,22 @@ def load_openapi_spec():
     
     return operations
 
+def remove_refs_from_object(obj):
+    """Recursively remove $ref properties from an object"""
+    if isinstance(obj, dict):
+        # Remove $ref if it exists
+        if '$ref' in obj:
+            del obj['$ref']
+        # Recursively process all values
+        for key, value in obj.items():
+            remove_refs_from_object(value)
+    elif isinstance(obj, list):
+        # Recursively process all items in list
+        for item in obj:
+            remove_refs_from_object(item)
+    # For primitive types (str, int, bool, None), do nothing
+    return obj
+
 def parse_path_template(openapi_path, request_uri):
     """Match OpenAPI path template with actual request URI"""
     # Convert OpenAPI path to regex
@@ -238,7 +254,7 @@ def post_process_examples():
             if mapping.get('type') == 'search_variant':
                 # For StacSearch_Get: keep only api-version parameter and change response to 200
                 if 'parameters' in target_example:
-                    # Keep only api-version parameter
+                    # Keep only api-version parameter (GET operations don't have request bodies)
                     api_version = target_example['parameters'].get('api-version')
                     target_example['parameters'] = {}
                     if api_version:
@@ -249,10 +265,6 @@ def post_process_examples():
                     if '201' in target_example['responses']:
                         target_example['responses']['200'] = target_example['responses']['201']
                         del target_example['responses']['201']
-                
-                # Remove request body for GET operation
-                if 'body' in target_example:
-                    del target_example['body']
                 
                 print(f"Created search variant: {mapping['target']}")
                 
@@ -265,6 +277,9 @@ def post_process_examples():
                 print(f"Created derived example: {mapping['target']}")
             
             # Write target example
+            # Remove $ref properties before writing
+            remove_refs_from_object(target_example)
+            
             with open(target_path, 'w') as f:
                 json.dump(target_example, f, indent=2, ensure_ascii=False)
             
@@ -350,22 +365,40 @@ def generate_examples():
                     print(f"Status code {status_code} already exists for {matching_operation['operationId']}, skipping...")
                     continue
                 
-                # Prepare request body for non-form-data requests
+                # Prepare request body for non-form-data requests  
                 request_body = None
                 if (entry.get('RequestBody') is not None and 
                     content_type and 'multipart/form-data' not in content_type):
-                    request_body = entry.get('RequestBody')
+                    raw_body = entry.get('RequestBody')
+                    # Try to parse as JSON first
+                    try:
+                        if isinstance(raw_body, str):
+                            request_body = json.loads(raw_body)
+                        elif isinstance(raw_body, list):
+                            # Join array elements and try to parse
+                            body_content = ''.join(raw_body)
+                            request_body = json.loads(body_content)
+                        else:
+                            request_body = raw_body
+                    except json.JSONDecodeError:
+                        # If JSON parsing fails, use the raw body
+                        request_body = raw_body
                 
                 # Create or update example structure
                 if existing_example:
                     # Update existing example with new response
                     example = existing_example
-                    example['responses'][status_code] = {
-                        "body": response_body
-                    }
-                    # Add request body if it doesn't exist and we have one
-                    if request_body is not None and 'body' not in example:
-                        example['body'] = request_body
+                    if response_body is None:
+                        example['responses'][status_code] = {}
+                    else:
+                        example['responses'][status_code] = {
+                            "body": response_body
+                        }
+                    # Add request body as a parameter if it doesn't exist and we have one
+                    if request_body is not None and 'body' not in example.get('parameters', {}):
+                        if 'parameters' not in example:
+                            example['parameters'] = {}
+                        example['parameters']['body'] = request_body
                     print(f"Added status code {status_code} to existing example: {example_path}")
                 else:
                     # Create new example
@@ -374,18 +407,21 @@ def generate_examples():
                         "operationId": matching_operation['operationId'],
                         "parameters": parameters,
                         "responses": {
-                            status_code: {
+                            status_code: {} if response_body is None else {
                                 "body": response_body
                             }
                         }
                     }
-                    # Add request body if we have one
+                    # Add request body as a parameter if we have one
                     if request_body is not None:
-                        example['body'] = request_body
+                        example['parameters']['body'] = request_body
                     print(f"Created new example: {example_path}")
                 
                 # Ensure examples folder exists
                 os.makedirs(EXAMPLES_FOLDER, exist_ok=True)
+                
+                # Remove $ref properties before writing
+                remove_refs_from_object(example)
                 
                 with open(example_path, 'w') as f:
                     json.dump(example, f, indent=2, ensure_ascii=False)
