@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource_group_name_01",
+    "conditionalCreditName": "conditionalCredit_starts_now_20251027",
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "location": "global",
+      "properties": {
+        "entityType": "Primary",
+        "displayName": "Conditional Credit Starts Now Example",
+        "systemId": "CACO-SYSTEM-NOW-001",
+        "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+        "startAt": "2025-10-27T00:00:00Z",
+        "allowContributors": "Enabled",
+        "milestones": [
+          {
+            "milestoneId": "550e8400-e29b-41d4-a716-446655440071",
+            "spendTarget": {
+              "amount": 1000,
+              "currencyCode": "USD"
+            },
+            "award": {
+              "duration": "P1M",
+              "credit": {
+                "amount": 100,
+                "currencyCode": "USD"
+              }
+            },
+            "endAt": "2025-10-31T23:59:59Z"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_starts_now_20251027",
+        "name": "conditionalCredit_starts_now_20251027",
+        "type": "Microsoft.BillingBenefits/conditionalCredits",
+        "properties": {
+          "entityType": "Primary",
+          "displayName": "Conditional Credit Starts Now Example",
+          "systemId": "CACO-SYSTEM-NOW-001",
+          "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+          "startAt": "2025-10-27T00:00:00Z",
+          "endAt": "2025-11-27T00:00:00Z",
+          "allowContributors": "Enabled",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "provisioningState": "Succeeded",
+          "status": "Active",
+          "milestones": [
+            {
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440071",
+              "status": "Active",
+              "endAt": "2025-10-31T23:59:59Z",
+              "spendTarget": {
+                "amount": 1000,
+                "currencyCode": "USD"
+              },
+              "award": {
+                "duration": "P1M",
+                "credit": {
+                  "amount": 100,
+                  "currencyCode": "USD"
+                }
+              }
+            }
+          ]
+        },
+        "location": "global"
+      }
+    }
+  }
+}

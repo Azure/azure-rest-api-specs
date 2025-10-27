@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource_group_name_01",
+    "conditionalCreditName": "conditionalCredit_update_remove_milestone_20251027",
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "properties": {
+        "displayName": "Conditional Credit Update Remove Milestone Example",
+        "milestones": [
+          {
+            "milestoneId": "550e8400-e29b-41d4-a716-446655440081",
+        "endAt": "2025-11-30T23:59:59Z",
+            "spendTarget": {
+              "amount": 1000,
+              "currencyCode": "USD"
+            },
+            "award": {
+              "credit": {
+                "grain": "FullTerm",
+                "amount": 100,
+                "currencyCode": "USD"
+              },
+              "duration": "P1M"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_update_remove_milestone_20251027",
+        "name": "conditionalCredit_update_remove_milestone_20251027",
+        "type": "Microsoft.BillingBenefits/conditionalCredits",
+        "properties": {
+          "entityType": "Primary",
+          "displayName": "Conditional Credit Update Remove Milestone Example",
+          "systemId": "CACO-SYSTEM-UPDATE-REMOVE-001",
+          "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+          "startAt": "2025-11-01T00:00:00Z",
+          "endAt": "2025-12-01T00:00:00Z",
+          "allowContributors": "Enabled",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "provisioningState": "Succeeded",
+          "status": "Active",
+          "milestones": [
+            {
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440081",
+              "status": "Active",
+        "endAt": "2025-11-30T23:59:59Z",
+              "spendTarget": {
+                "amount": 1000,
+                "currencyCode": "USD"
+              },
+              "award": {
+                "duration": "P1M",
+                "credit": {
+                  "amount": 100,
+                  "currencyCode": "USD"
+                }
+              }
+            }
+          ]
+        },
+        "location": "global"
+      }
+    }
+  }
+}
