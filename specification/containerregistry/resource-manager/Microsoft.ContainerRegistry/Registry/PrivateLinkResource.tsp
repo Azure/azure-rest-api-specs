@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
 
-alias PrivateLinkOperations = PrivateLinks<PrivateLink>;
+alias PrivateLinkOperations = PrivateLinks<PrivateLinkResource>;
 
 @armResourceOperations
 interface PrivateLinkResources {
