@@ -31,15 +31,11 @@ interface Migrations {
   /**
    * Gets information about a migration in a Redis Enterprise cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Migration_Get")
   get is ArmResourceRead<Migration>;
 
   /**
    * Starts a new migration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Migration_Start")
   @Azure.Core.useFinalStateVia("original-uri")
   start is ArmResourceCreateOrReplaceAsync<
     Migration,
@@ -51,8 +47,6 @@ interface Migrations {
   /**
    * Gets information about all migrations attempts in a Redis Enterprise cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Migration_List")
   list is ArmResourceListByParent<
     Migration,
     Response = ArmResponse<MigrationList>
@@ -61,8 +55,6 @@ interface Migrations {
   /**
    * Cancel or rollback the migration operation in a Redis Enterprise cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Migration_Cancel")
   cancel is ArmResourceActionAsyncBase<
     Migration,
     void,

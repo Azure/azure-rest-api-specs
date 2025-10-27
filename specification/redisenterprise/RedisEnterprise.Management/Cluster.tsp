@@ -49,24 +49,18 @@ interface Clusters {
   /**
    * Gets information about a Redis Enterprise cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RedisEnterprise_Get")
   get is ArmResourceRead<Cluster>;
 
   /**
    * Creates or updates an existing (overwrite/recreate, with potential downtime) cache cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RedisEnterprise_Create")
   @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<Cluster>;
 
   /**
    * Updates an existing Redis Enterprise cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @operationId("RedisEnterprise_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Cluster,
@@ -78,11 +72,9 @@ interface Clusters {
   /**
    * Deletes a Redis Enterprise cache cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @operationId("RedisEnterprise_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
@@ -92,8 +84,6 @@ interface Clusters {
   /**
    * Lists all Redis Enterprise clusters in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RedisEnterprise_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Cluster,
     Response = ArmResponse<ClusterList>
@@ -102,15 +92,11 @@ interface Clusters {
   /**
    * Lists all Redis Enterprise clusters in the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RedisEnterprise_List")
   list is ArmListBySubscription<Cluster, Response = ArmResponse<ClusterList>>;
 
   /**
    * Lists the available SKUs for scaling the Redis Enterprise cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RedisEnterprise_ListSkusForScaling")
   listSkusForScaling is ArmResourceActionSync<
     Cluster,
     void,
@@ -120,8 +106,6 @@ interface Clusters {
   /**
    * Gets the private link resources that need to be created for a Redis Enterprise cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkResources_ListByCluster")
   @list
   @get
   @action("privateLinkResources")

@@ -18,8 +18,6 @@ interface OperationsStatusOperationGroup {
   /**
    * Gets the status of operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationsStatus_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/operationsStatus/{operationId}")
   @get
   get(
