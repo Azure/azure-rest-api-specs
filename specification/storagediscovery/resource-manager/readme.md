@@ -1,7 +1,7 @@
-# StorageDiscovery
+# Storage Discovery
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for StorageDiscovery.
+> This is the AutoRest configuration file for Storage Discovery.
 
 ## Configuration
 
