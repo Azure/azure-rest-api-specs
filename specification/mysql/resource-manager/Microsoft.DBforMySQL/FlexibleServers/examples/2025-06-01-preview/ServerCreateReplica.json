@@ -1,0 +1,132 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "parameters": {
+      "location": "SoutheastAsia",
+      "properties": {
+        "createMode": "Replica",
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/source-server"
+      }
+    },
+    "resourceGroupName": "testgr",
+    "serverName": "replica-server",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "replica-server",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/replica-server",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "availabilityZone": "3",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-24T08:19:18.5729164+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "replica-server.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled",
+            "replicationMode": "BinaryLog"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "replicaCapacity": 0,
+          "replicationRole": "Replica",
+          "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/source-server",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 360,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 20,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7"
+        },
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "ElasticServer": "1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "replica-server",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/replica-server",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "availabilityZone": "3",
+          "backup": {
+            "backupIntervalHours": 24,
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-24T08:19:18.5729164+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "replica-server.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled",
+            "replicationMode": "BinaryLog"
+          },
+          "maintenancePolicy": {
+            "patchStrategy": "Regular"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "replicaCapacity": 0,
+          "replicationRole": "Replica",
+          "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/source-server",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 360,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 20,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7"
+        },
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "ElasticServer": "1"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Servers_Create",
+  "title": "Create a replica server"
+}
