@@ -3,12 +3,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
 /**
@@ -448,6 +450,7 @@ model ChangeKeyVault {
 /**
  * Status of the KeyVault connection.
  */
+@clientName("NetAppKeyVaultStatus", "csharp")
 union KeyVaultStatus {
   string,
 
