@@ -4,11 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AppConfiguration;
 
@@ -868,6 +865,7 @@ model KeyValueProperties {
    * The primary identifier of a key-value.
    * The key is used in unison with the label to uniquely identify a key-value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   key?: string;
 
@@ -1061,6 +1059,7 @@ model KeyValueFilter {
   /**
    * Filters key-values by their key field.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 
   /**

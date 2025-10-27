@@ -2,10 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ContainerRegistry;
 
@@ -599,6 +596,7 @@ model RunProperties {
   /**
    * The scope of the credentials that were used to login to the source registry during this run.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sourceRegistryAuth?: string;
 
   /**
@@ -615,6 +613,7 @@ model RunProperties {
   /**
    * The update trigger token passed for the Run.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   updateTriggerToken?: string;
 
   /**
@@ -1045,6 +1044,7 @@ model TaskStepProperties {
   /**
    * The token (git PAT or SAS token of storage account blob) associated with the context for a step.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   contextAccessToken?: string;
 }
 
@@ -1186,11 +1186,13 @@ model AuthInfo {
   /**
    * The access token used to access the source control provider.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token: string;
 
   /**
    * The refresh token used to refresh the access token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   refreshToken?: string;
 
   /**
@@ -1850,6 +1852,7 @@ model OverrideTaskStepProperties {
   /**
    * Base64 encoded update trigger token that will be attached with the base image trigger webhook.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   updateTriggerToken?: string;
 }
 

@@ -2570,6 +2570,7 @@ model RegistrationInfo {
   /**
    * The registration token base64 encoded string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token?: string;
 
   /**
@@ -3781,6 +3782,7 @@ model RegistrationTokenMinimal {
   /**
    * The registration token base64 encoded string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token?: string;
 }
 
