@@ -730,6 +730,7 @@ model SearchDocumentsResult {
   @doc("Continuation URL returned when the query can't return all the requested results in a single response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response.")  
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@odata.nextLink")
+  @nextLink
   nextLink?: string;
 
   @doc("Reason that a partial response was returned for a semantic ranking request.")
