@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-12-30",
+    "firewallRuleName": "rule1",
+    "parameters": {
+      "properties": {
+        "endIpAddress": "255.255.255.255",
+        "startIpAddress": "0.0.0.0"
+      }
+    },
+    "resourceGroupName": "TestGroup",
+    "serverName": "testserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/firewallRules/rule1",
+        "properties": {
+          "endIpAddress": "255.255.255.255",
+          "startIpAddress": "0.0.0.0"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "rule1",
+        "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/firewallRules/rule1",
+        "properties": {
+          "endIpAddress": "255.255.255.255",
+          "startIpAddress": "0.0.0.0"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "FirewallRules_CreateOrUpdate",
+  "title": "Create a firewall rule"
+}

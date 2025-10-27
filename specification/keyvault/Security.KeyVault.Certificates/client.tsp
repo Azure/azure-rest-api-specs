@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 @versioned(KeyVault.Versions)
 namespace Customizations;
 
-@@clientName(KeyVault, "Certificate", "java");
+@@clientName(KeyVault, "CertificateClient", "java");
 @@clientName(KeyVault, "Client", "go");
 @@clientName(KeyVault, "Certificate", "rust");
 
@@ -225,6 +225,8 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(AdministratorDetails.EmailAddress, "Email", "go");
 
 @@clientName(SubjectAlternativeNames.upns, "UserPrincipalNames", "go");
+@@clientName(SubjectAlternativeNames.uris, "URIs", "go");
+@@clientName(SubjectAlternativeNames.ipAddresses, "IPAddresses", "go");
 @@clientName(X509CertificateProperties.ekus, "EnhancedKeyUsage", "go");
 
 @@clientName(CertificateBundle.cer, "CER", "go");
@@ -235,9 +237,16 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(JsonWebKeyCurveName, "CurveName", "go");
 @@clientName(JsonWebKeyType, "KeyType", "go");
 
+@@alternateType(CertificateAttributes.recoveryLevel, string, "go");
+@@alternateType(CertificateOperation.error, string, "go");
+
 // Rust configuration
 @@clientName(setCertificateContacts, "SetContacts", "rust");
 
+// Internalize createCertificate to wrap it with one that will return a Poller.
+@@access(KeyVault.createCertificate, Access.internal, "rust");
+@@clientName(KeyVault.createCertificate, "BeginCreateCertificate", "rust");
+@@access(CertificateCreateParameters, Access.public, "rust");
 @@clientName(CertificateCreateParameters,
   "CreateCertificateParameters",
   "rust"

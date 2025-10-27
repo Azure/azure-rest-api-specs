@@ -12,6 +12,7 @@ const specModelCache = new Map();
 
 /**
  * @typedef {Object} ToJSONOptions
+ * @prop {boolean} [embedErrors]
  * @prop {boolean} [includeRefs]
  * @prop {boolean} [relativePaths]
  *
@@ -35,7 +36,9 @@ export class SpecModel {
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    */
-  constructor(folder, options) {
+  constructor(folder, options = {}) {
+    const { logger } = options;
+
     const resolvedFolder = resolve(folder);
 
     const cachedSpecModel = specModelCache.get(resolvedFolder);
@@ -44,7 +47,7 @@ export class SpecModel {
     }
 
     this.#folder = resolvedFolder;
-    this.#logger = options?.logger;
+    this.#logger = logger;
 
     specModelCache.set(resolvedFolder, this);
   }
@@ -215,16 +218,17 @@ export class SpecModel {
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync(options) {
-    const readmes = await mapAsync(
-      [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
-      async (r) => await r.toJSONAsync(options),
-    );
-
-    return {
-      folder: this.#folder,
-      readmes,
-    };
+  async toJSONAsync(options = {}) {
+    return await embedError(async () => {
+      const readmes = await mapAsync(
+        [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
+        async (r) => await r.toJSONAsync(options),
+      );
+      return {
+        folder: this.#folder,
+        readmes,
+      };
+    }, options);
   }
 
   /**
@@ -232,5 +236,26 @@ export class SpecModel {
    */
   toString() {
     return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
+  }
+}
+
+/**
+ * @template T
+ * @param {() => Promise<T>} fn
+ * @param {Object} [options]
+ * @param {boolean} [options.embedErrors]
+ * @returns {Promise<T | {error: string}>}
+ */
+export async function embedError(fn, options = {}) {
+  const { embedErrors } = options;
+
+  try {
+    return await fn();
+  } catch (error) {
+    if (embedErrors && error instanceof Error) {
+      return { error: error.message };
+    } else {
+      throw error;
+    }
   }
 }

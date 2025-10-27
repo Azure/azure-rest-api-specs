@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Oracle.Database;
 
-@@clientName(Oracle.Database, "OracleDatabaseMgmt", "python");
+@@clientName(Oracle.Database, "OracleDatabaseMgmtClient", "python");
 @@clientName(Oracle.Database, "OracleDatabaseManagementClient", "javascript");
 
 // CSharp
@@ -529,6 +529,10 @@ using Oracle.Database;
   "ClusterSubnetOcid",
   "csharp"
 );
+@@clientName(CloudVmClusterProperties.exascaleDbStorageVaultId,
+  "ExascaleDBStorageVaultOcid",
+  "csharp"
+);
 @@clientName(VirtualNetworkAddressProperties.vmOcid, "VipVmOcid", "csharp");
 @@clientName(VirtualNetworkAddressProperties.ocid, "VipOcid", "csharp");
 @@clientName(DbServerProperties.ocid, "DBServerOcid", "csharp");
@@ -567,6 +571,52 @@ using Oracle.Database;
   "csharp"
 );
 @@clientName(AutonomousDatabaseBaseProperties.ocid, "DatabaseOcid", "csharp");
+@@clientName(DbSystem, "OracleDBSystem", "csharp");
+@@clientName(DbSystemProperties, "OracleDBSystemProperties", "csharp");
+@@clientName(DbSystemProperties.dbVersion, "DBVersion", "csharp");
+@@clientName(DbSystemProperties.pdbName, "PluggableDatabaseName", "csharp");
+@@clientName(DbSystemBaseProperties, "OracleDBSystemBaseProperties", "csharp");
+@@clientName(DbVersion, "OracleDBVersion", "csharp");
+@@clientName(DbVersionProperties, "OracleDBVersionProperties", "csharp");
+@@clientName(DbVersionProperties.supportsPdb,
+  "DoesSupportPluggableDatabase",
+  "csharp"
+);
+@@clientName(NetworkAnchor, "OracleNetworkAnchor", "csharp");
+@@clientName(NetworkAnchorProperties,
+  "OracleNetworkAnchorProperties",
+  "csharp"
+);
+@@alternateType(NetworkAnchorProperties.dnsForwardingRulesUrl, url, "csharp");
+@@alternateType(NetworkAnchorProperties.dnsListeningEndpointNsgRulesUrl,
+  url,
+  "csharp"
+);
+@@alternateType(NetworkAnchorProperties.dnsForwardingEndpointNsgRulesUrl,
+  url,
+  "csharp"
+);
+@@clientName(ResourceAnchor, "OracleResourceAnchor", "csharp");
+@@clientName(ResourceAnchorProperties,
+  "OracleResourceAnchorProperties",
+  "csharp"
+);
+@@clientName(BaseDbSystemShapes, "OracleBaseDbSystemShapes", "csharp");
+@@clientName(DbSystemOptions, "OracleDBSystemOptions", "csharp");
+@@clientName(DbSystemDatabaseEditionType,
+  "DBSystemDatabaseEditionType",
+  "csharp"
+);
+@@clientName(DbSystemLifecycleState, "DBSystemLifecycleState", "csharp");
+@@clientName(DbSystemSourceType, "DBSystemSourceType", "csharp");
+@@clientName(DiskRedundancyType, "DBSystemDiskRedundancyType", "csharp");
+@@clientName(DnsForwardingRule, "NetworkAnchorDnsForwardingRule", "csharp");
+@@clientName(ExadataVmClusterStorageManagementType.ASM, "Asm", "csharp");
+@@clientName(ShapeAttribute, "ExascaleStorageShapeAttribute", "csharp");
+@@clientName(ShapeAttribute.SMART_STORAGE, "SmartStorage", "csharp");
+@@clientName(ShapeAttribute.BLOCK_STORAGE, "BlockStorage", "csharp");
+@@clientName(StorageManagementType.LVM, "Lvm", "csharp");
+@@clientName(ShapeFamilyType.ExadbXs, "ExadbXS", "csharp");
 
 // Java
 @@clientName(AutonomousDatabaseBackups.listByParent,

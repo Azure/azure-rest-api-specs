@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 @versioned(KeyVault.Versions)
 namespace Customizations;
 
-@@clientName(KeyVault, "Key", "java");
+@@clientName(KeyVault, "KeyClient", "java");
 @@clientName(KeyVault, "Client", "go");
 @@clientName(KeyVault, "Key", "rust");
 
@@ -483,6 +483,9 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(JsonWebKey.qi, "QI", "go");
 
 @@clientName(KeyAttestation.certificatePemFile, "CertificatePEMFile", "go");
+
+@@alternateType(JsonWebKey.keyOps, JsonWebKeyOperation[], "go");
+@@alternateType(KeyAttributes.recoveryLevel, string, "go");
 
 // JS configuration
 @@clientName(JsonWebKeyCurveName.P256_K, "P256K", "javascript");
