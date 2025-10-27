@@ -33,8 +33,8 @@ model AppLinkMemberProperties {
   @doc("Self managed upgrade profile")
   selfManagedUpgradeProfile?: SelfManagedUpgradeProfile;
 
-  @doc("Observability settings")
-  observabilitySettings?: ObservabilitySettings;
+  @doc("Observability profile")
+  observabilityProfile?: ObservabilityProfile;
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
@@ -90,48 +90,17 @@ model SelfManagedUpgradeProfile {
   version: string;
 }
 
-@doc("AppLinkMember observability state")
-union ObservabilityState {
-  string,
-
-  @doc("Observability state disabled")
-  Disabled: "Disabled",
-
-  @doc("Observability state enabled")
-  Enabled: "Enabled",
+@doc("AppLinkMember observability profile")
+model ObservabilityProfile {
+  @doc("Metrics configuration")
+  metrics?: MetricsProfile;
 }
 
-@doc("AppLinkMember metrics settings")
-model MetricsSettings {
-  @doc("Metrics state")
-  state: ObservabilityState;
-}
-
-@doc("AppLinkMember logs settings")
-model LogsSettings {
-  @doc("Logs state")
-  state: ObservabilityState;
-}
-
-@doc("AppLinkMember traces settings")
-model TracesSettings {
-  @doc("Traces state")
-  state: ObservabilityState;
-}
-
-@doc("AppLinkMember observability settings")
-model ObservabilitySettings {
-  @doc("Metrics settings")
-  metrics?: MetricsSettings;
-
-  @doc("Logs settings")
-  logs?: LogsSettings;
-
-  @doc("Traces settings")
-  traces?: TracesSettings;
-
-  @doc("Managed identity")
-  managedIdentity?: string;
+@doc("AppLinkMember metrics profile")
+model MetricsProfile {
+  @doc("Metrics endpoint URL")
+  @visibility(Lifecycle.Read)
+  metricsEndpoint: string;
 }
 
 @armResourceOperations

@@ -456,6 +456,9 @@ model DrillPatchProperties {
   @doc("Chaos Experiment properties.")
   chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
 
+  @doc("HealthModel properties.")
+  healthModelProperties?: HealthModelPropertiesOfDrill;
+
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;
 }
