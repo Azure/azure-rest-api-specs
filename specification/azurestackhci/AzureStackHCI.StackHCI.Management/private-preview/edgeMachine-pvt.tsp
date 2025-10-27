@@ -155,6 +155,47 @@ model EdgeMachineProperties {
   @doc("Last time data updated to service.")
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
+
+  @doc("Ownership voucher details for provisioned machine.")
+  @visibility(Lifecycle.Create)
+  ownershipVoucherDetails?: OwnershipVoucherDetails;
+
+  @doc("Details for device provisioning.")
+  provisioningDetails?: ProvisioningDetails
+}
+
+/**
+ * Details for device provisioning.
+ */
+model ProvisioningDetails{
+  @doc("Operating system profile.")
+  osProfile: OsProvisionProfile;
+
+  @doc("User configuration.")
+  @Azure.ResourceManager.identifiers(#["userName"])
+  userDetails?: UserDetails[];
+}
+
+/**
+ * Details for ownership voucher.
+ */
+model OwnershipVoucherDetails {
+  @doc("Ownership voucher in base64 encoded format")
+  @secret
+  ownershipVoucher: string;
+
+  @doc("Owner key type")
+  ownerKeyType: OwnerKeyType;
+}
+
+/**
+ * Type of owner key in the voucher
+ */
+union OwnerKeyType {
+  string,
+
+  @doc("Owner is Microsoft managed key")
+  MicrosoftManaged: "MicrosoftManaged",
 }
 
 @doc("operation detail.")

@@ -2603,6 +2603,17 @@
           "format": "date-time",
           "description": "Last time data updated to service.",
           "readOnly": true
+        },
+        "ownershipVoucherDetails": {
+          "$ref": "#/definitions/OwnershipVoucherDetails",
+          "description": "Ownership voucher details for provisioned machine.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "provisioningDetails": {
+          "$ref": "#/definitions/ProvisioningDetails",
+          "description": "Details for device provisioning."
         }
       }
     },
@@ -3975,6 +3986,44 @@
         }
       }
     },
+    "OwnerKeyType": {
+      "type": "string",
+      "description": "Type of owner key in the voucher",
+      "enum": [
+        "MicrosoftManaged"
+      ],
+      "x-ms-enum": {
+        "name": "OwnerKeyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftManaged",
+            "value": "MicrosoftManaged",
+            "description": "Owner is Microsoft managed key"
+          }
+        ]
+      }
+    },
+    "OwnershipVoucherDetails": {
+      "type": "object",
+      "description": "Details for ownership voucher.",
+      "properties": {
+        "ownershipVoucher": {
+          "type": "string",
+          "format": "password",
+          "description": "Ownership voucher in base64 encoded format",
+          "x-ms-secret": true
+        },
+        "ownerKeyType": {
+          "$ref": "#/definitions/OwnerKeyType",
+          "description": "Owner key type"
+        }
+      },
+      "required": [
+        "ownershipVoucher",
+        "ownerKeyType"
+      ]
+    },
     "PerNodeExtensionState": {
       "type": "object",
       "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
@@ -4050,6 +4099,29 @@
           "readOnly": true
         }
       }
+    },
+    "ProvisioningDetails": {
+      "type": "object",
+      "description": "Details for device provisioning.",
+      "properties": {
+        "osProfile": {
+          "$ref": "#/definitions/OsProvisionProfile",
+          "description": "Operating system profile."
+        },
+        "userDetails": {
+          "type": "array",
+          "description": "User configuration.",
+          "items": {
+            "$ref": "#/definitions/UserDetails"
+          },
+          "x-ms-identifiers": [
+            "userName"
+          ]
+        }
+      },
+      "required": [
+        "osProfile"
+      ]
     },
     "ProvisioningOsType": {
       "type": "string",
