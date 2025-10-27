@@ -40,9 +40,7 @@ using Microsoft.ProviderHub;
   "properties"
 );
 
-@@clientLocation(OperationsPutContents.listByProviderRegistration,
-  Operations
-);
+@@clientLocation(OperationsPutContents.listByProviderRegistration, Operations);
 @@clientLocation(OperationsPutContents.createOrUpdate, Operations);
 @@clientName(OperationsPutContents.createOrUpdate::parameters.resource,
   "OperationsPutContent"
@@ -101,4 +99,8 @@ using Microsoft.ProviderHub;
 );
 @@clientLocation(SkuResourceOperationGroupThird.getNestedResourceTypeThird,
   Skus
+);
+
+@@clientName(SkuResourceOperationGroupThird.createOrUpdateNestedResourceTypeThird::parameters.resource,
+  "properties"
 );
