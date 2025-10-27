@@ -203,6 +203,24 @@ export function resourceManager(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
+export function preview(file) {
+  // Folder name "preview" should match case for consistency across specs
+  return typeof file === "string" && includesSegment(file, "preview");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function stable(file) {
+  // Folder name "stable" should match case for consistency across specs
+  return typeof file === "string" && includesSegment(file, "stable");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
 export function example(file) {
   // Folder name "examples" should match case for consistency across specs
   return typeof file === "string" && json(file) && includesSegment(file, "examples");
