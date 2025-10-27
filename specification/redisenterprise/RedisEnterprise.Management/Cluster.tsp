@@ -125,7 +125,7 @@ interface Clusters {
   listByCluster is ArmResourceActionSync<
     Cluster,
     void,
-    ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>
+    ArmResponse<PrivateEndpointConnectionResourceListResult>
   >;
 }
 

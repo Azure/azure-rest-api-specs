@@ -25,6 +25,7 @@ interface OperationsStatusOperationGroup {
   get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The ID of an ongoing async operation.

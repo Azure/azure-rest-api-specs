@@ -1129,7 +1129,6 @@ model DatabaseProperties {
   /**
    * Persistence settings
    */
-  @identifiers(#[])
   persistence?: Persistence;
 
   /**

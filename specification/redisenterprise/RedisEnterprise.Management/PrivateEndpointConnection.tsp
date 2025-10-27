@@ -53,7 +53,7 @@ interface PrivateEndpointConnections {
   list is PrivateEndpointOperations.ListByParent<
     Cluster,
     PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
+    Response = ArmResponse<PrivateEndpointConnectionResourceListResult>
   >;
 }
 
