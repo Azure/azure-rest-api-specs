@@ -7920,6 +7920,11 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
+        },
+        "enableSdnPolicy": {
+          "type": "boolean",
+          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.",
+          "default": true
         }
       }
     },
@@ -7966,6 +7971,10 @@
         "dnsSettings": {
           "$ref": "#/definitions/InterfaceDNSSettings",
           "description": "DNS Settings for the interface"
+        },
+        "enableSdnPolicy": {
+          "type": "boolean",
+          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations."
         }
       }
     },
