@@ -1065,13 +1065,13 @@ enum ImmutabilityPolicyMode {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum BlobImmutabilityPolicyMode {
   /** The immutability policy is mutable. */
-  Mutable: "Mutable",
+  Mutable: "mutable",
 
   /** The immutability policy is locked. */
-  Locked: "Locked",
+  Locked: "locked",
 
   /** The immutability policy is unlocked. */
-  Unlocked: "Unlocked",
+  Unlocked: "unlocked",
 }
 
 /** The blob type. */
