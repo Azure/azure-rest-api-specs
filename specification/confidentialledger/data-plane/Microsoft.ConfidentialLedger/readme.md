@@ -18,26 +18,8 @@ Confidential Ledger provides SDKs for the following languages:
 These are the global settings for Confidential Ledger.
 
 ```yaml
-tag: package-2024-12-09-preview-ledger
+tag: package-2022-05-13-ledger
 openapi-type: data-plane
-```
-
-### Tag: package-0.1-preview-ledger
-
-These settings apply only when `--tag=package-0.1-preview-ledger` is specified on the command line.
-
-```yaml $(tag) == 'package-0.1-preview-ledger'
-input-file:
-  - preview/0.1-preview/confidentialledger.json
-```
-
-### Tag: package-0.1-preview-identity
-
-These settings apply only when `--tag=package-0.1-preview-identity` is specified on the command line.
-
-```yaml $(tag) == 'package-0.1-preview-identity'
-input-file:
-  - preview/0.1-preview/identityservice.json
 ```
 
 ### Tag: package-2022-05-13-ledger
@@ -56,82 +38,4 @@ These settings apply only when `--tag=package-2022-05-13-identity` is specified 
 ```yaml $(tag) == 'package-2022-05-13-identity'
 input-file:
   - stable/2022-05-13/identityservice.json
-```
-
-### Tag: package-2023-01-18-preview-ledger
-
-These settings apply only when `--tag=package-2023-01-18-preview-ledger` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-01-18-preview-ledger'
-input-file:
-  - preview/2023-01-18-preview/confidentialledger.json
-```
-
-### Tag: package-2023-01-18-preview-identity
-
-These settings apply only when `--tag=package-2023-01-18-preview-identity` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-01-18-preview-identity'
-input-file:
-  - preview/2023-01-18-preview/identityservice.json
-```
-
-### Tag: package-2024-01-26-preview-ledger
-
-These settings apply only when `--tag=package-2024-01-26-preview-ledger` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01-26-preview-ledger'
-input-file:
-  - preview/2024-01-26-preview/confidentialledger.json
-```
-
-### Tag: package-2024-01-26-preview-identity
-
-These settings apply only when `--tag=package-2024-01-26-preview-identity` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01-26-preview-identity'
-input-file:
-  - preview/2024-01-26-preview/identityservice.json
-```
-
-### Tag: package-2024-08-22-preview-ledger
-
-These settings apply only when `--tag=package-2024-08-22-preview-ledger` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-08-22-preview-ledger'
-input-file:
-  - preview/2024-08-22-preview/confidentialledger.json
-```
-
-### Tag: package-2024-08-22-preview-identity
-
-These settings apply only when `--tag=package-2024-08-22-preview-identity` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-08-22-preview-identity'
-input-file:
-  - preview/2024-08-22-preview/identityservice.json
-```
-
-### Tag: package-2024-12-09-preview-ledger
-
-These settings apply only when `--tag=package-2024-12-09-preview-ledger` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-12-09-preview-ledger'
-input-file:
-  - preview/2024-12-09-preview/confidentialledger.json
-directive:
-  - suppress: HostParametersValidation
-    reason: Existing API, change would potentially be breaking.
-```
-
-### Tag: package-2024-12-09-preview-identity
-
-These settings apply only when `--tag=package-2024-12-09-preview-identity` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-12-09-preview-identity'
-input-file:
-  - preview/2024-12-09-preview/identityservice.json
-directive:
-  - suppress: HostParametersValidation
-    reason: Existing API, change would potentially be breaking.
 ```
