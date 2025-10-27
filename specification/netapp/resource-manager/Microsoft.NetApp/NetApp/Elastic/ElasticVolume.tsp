@@ -32,7 +32,7 @@ model ElasticVolume is TrackedResource<ElasticVolumeProperties> {
 
 /**
  * Elastic Volume properties
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 model ElasticVolumeProperties {
   /** A unique file path for the volume. Used when creating mount targets. This needs to be unique within the elastic capacity pool. */
@@ -54,7 +54,7 @@ model ElasticVolumeProperties {
 
   /**
    * Azure lifecycle management.
-  */
+   */
   @visibility(Lifecycle.Read)
   provisioningState?: NetAppProvisioningState;
 
@@ -102,6 +102,54 @@ model ElasticMountTargetProperties {
 
   /** The SMB server's Fully Qualified Domain Name, FQDN */
   smbServerFqdn?: string;
+}
+
+/**
+ * Elastic Volume Patch properties
+ */
+@added(Versions.v2025_09_01_preview)
+model ElasticVolumePatchProperties {
+  /** A unique file path for the volume. Used when creating mount targets. This needs to be unique within the elastic capacity pool. */
+  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
+  @minLength(1)
+  @maxLength(80)
+  filePath?: string;
+
+  /** Maximum size allowed for a volume in bytes. Valid values are in the range 1GiB to 16TiB. Values expressed in bytes as multiples of 1 GiB. */
+  @minValue(1073741824)
+  @maxValue(17592186044416)
+  size?: int64;
+
+  /** Set of export policy rules */
+  exportPolicy?: ElasticExportPolicy;
+
+  /** Set of support protocol types for the elastic volume */
+  protocolTypes?: ElasticProtocolType[];
+
+  /** Current availability status of the resource. */
+  availabilityStatus?: ElasticResourceAvailabilityStatus;
+
+  /** Resource identifier used to identify the Elastic Snapshot. */
+  snapshotResourceId?: string;
+
+  /** List of mount targets that can be used to mount this volume */
+  @OpenAPI.extension("x-ms-identifiers", #["ipAddress", "smbServerFqdn"])
+  mountTargets?: ElasticMountTargetProperties[];
+
+  /** Data protection configuration option for the volume, including snapshot policies and backup. */
+  dataProtection?: ElasticVolumeDataProtectionProperties;
+
+  /** Controls the visibility of the volume's read-only snapshot directory, which provides access to each of the volume's snapshots. */
+  snapshotDirectoryVisibility?: SnapshotDirectoryVisibility;
+
+  /** SMB Properties */
+  smbProperties?: ElasticSmbPatchProperties;
+
+  /** Resource identifier used to identify the Elastic Backup. */
+  backupResourceId?: string;
+
+  /** The current state of the restoration process. */
+  restorationState?: ElasticVolumeRestorationState;
 }
 
 /** Elastic Volume Snapshot Properties */
@@ -155,6 +203,13 @@ model ElasticSmbProperties {
   smbEncryption?: ElasticSmbEncryption = ElasticSmbEncryption.Disabled;
 }
 
+/** SMB Patch Properties */
+@added(Versions.v2025_09_01_preview)
+model ElasticSmbPatchProperties {
+  /** Used to enable or disable encryption for in-flight SMB data volume. This flag can be modified during Elastic volume update operation as well. Only applicable for SMB protocol Elastic volumes. */
+  smbEncryption?: ElasticSmbEncryption;
+}
+
 /** SMB encryption */
 @added(Versions.v2025_09_01_preview)
 union ElasticSmbEncryption {
@@ -184,7 +239,7 @@ union ElasticVolumeRestorationState {
 
 /**
  * Set of export policy rules
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 model ElasticExportPolicy {
   /** Export policy rule */
@@ -316,8 +371,9 @@ interface ElasticVolumes {
   update is ArmCustomPatchAsync<
     ElasticVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
-        ElasticVolume,
-        ElasticVolumeProperties>
+      ElasticVolume,
+      ElasticVolumeProperties
+    >
   >;
 
   /** Delete the specified volume */

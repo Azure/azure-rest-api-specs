@@ -2097,7 +2097,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticBackupVaults/{backupVaultName}/backups": {
       "get": {
-        "operationId": "ElasticBackups_ListByElasticBackupVault",
+        "operationId": "ElasticBackups_ListByVault",
         "tags": [
           "ElasticBackups"
         ],
@@ -2141,11 +2141,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ElasticBackups_ListByElasticBackupVault": {
-            "$ref": "./examples/ElasticBackups_ListByElasticBackupVault.json"
           }
         },
         "x-ms-pageable": {
@@ -4142,7 +4137,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/snapshots/{snapshotPolicyName}/elasticvolumes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/snapshots/elasticvolumes": {
       "get": {
         "operationId": "ElasticSnapshotPolicies_ListVolumes",
         "tags": [
@@ -4166,14 +4161,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
-          },
-          {
-            "name": "snapshotPolicyName",
-            "in": "path",
-            "description": "The name of the ElasticSnapshotPolicy",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
           }
         ],
         "responses": {
@@ -4194,6 +4181,9 @@
           "ElasticSnapshotPolicies_ListVolumes": {
             "$ref": "./examples/ElasticSnapshotPolicies_ListVolumes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -12955,7 +12945,7 @@
       "description": "The type used for update operations of the ActiveDirectoryConfig.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -13034,7 +13024,7 @@
           "maxLength": 255
         },
         "secretPassword": {
-          "$ref": "#/definitions/SecretPassword",
+          "$ref": "#/definitions/SecretPasswordUpdate",
           "description": "Access password from Azure KeyVault Secrets to connect Active Directory"
         }
       }
@@ -19507,6 +19497,37 @@
         "keyVaultUri",
         "secretName"
       ]
+    },
+    "SecretPasswordKeyVaultPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of key vault to get the secrets for password.",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Uri of KeyVault.",
+          "maxLength": 255
+        },
+        "secretName": {
+          "type": "string",
+          "description": "The name of KeyVault password secret.",
+          "maxLength": 127
+        }
+      }
+    },
+    "SecretPasswordUpdate": {
+      "type": "object",
+      "description": "Access password from Azure KeyVault Secrets to connect Active Directory",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/SecretPasswordKeyVaultPropertiesUpdate",
+          "description": "Properties provided by KeyVault."
+        },
+        "identity": {
+          "$ref": "#/definitions/SecretPasswordIdentity",
+          "description": "Identity used to authenticate to KeyVault. Applicable if keySource is 'Microsoft.KeyVault'."
+        }
+      }
     },
     "ServiceLevel": {
       "type": "string",

@@ -216,14 +216,15 @@ interface ElasticSnapshotPolicies {
   @added(Versions.v2025_09_01_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticSnapshotPolicy>;
 
-  @doc("Get elastic volumes associated with elastic snapshot policy")
+  /**
+   * Get elastic volumes associated with elastic snapshot policy
+   */
   @get
   @action("elasticvolumes")
   @added(Versions.v2025_09_01_preview)
-  listVolumes is ArmResourceActionSync<
+  listVolumes is ArmResourceListByParent<
     ElasticSnapshotPolicy,
-    void,
-    ArmResponse<ElasticSnapshotPolicyVolumeList>
+    Response = ArmResponse<ElasticSnapshotPolicyVolumeList>
   >;
 }
 

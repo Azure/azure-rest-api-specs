@@ -161,9 +161,12 @@ interface ElasticBackups {
 
   @added(Versions.v2025_09_01_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackup>;
-  /** List all elastic backups Under an elastic Backup Vault */
+
+  /**
+   * List all elastic backups Under an elastic Backup Vault
+   */
   @added(Versions.v2025_09_01_preview)
-  listByElasticBackupVault is ArmResourceListByParent<ElasticBackup>;
+  listByVault is ArmResourceListByParent<ElasticBackup>;
 }
 
 @@clientName(ElasticBackups.createOrUpdate::parameters.resource, "body");
