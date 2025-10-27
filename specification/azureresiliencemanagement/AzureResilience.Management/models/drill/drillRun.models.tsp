@@ -92,6 +92,9 @@ model DrillRunAddNotesRequest {
 
 @doc("Request body for Failover API.")
 model DrillRunFailoverRequest {
+  @doc("AutoFailover - whether to pause between Fault and Failover for manual input.")
+  autoFailover: AutoFailover;
+
   @doc("The failover properties.")
   failoverProperties: FailoverRequest;
 }

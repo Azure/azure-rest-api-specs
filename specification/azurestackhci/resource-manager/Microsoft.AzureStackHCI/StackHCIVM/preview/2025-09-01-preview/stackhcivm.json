@@ -6489,7 +6489,8 @@
       "description": "The hypervisor generation of the Virtual Machine [V1, V2]",
       "enum": [
         "V1",
-        "V2"
+        "V2",
+        "NA"
       ],
       "x-ms-enum": {
         "name": "HyperVGeneration",
@@ -6504,6 +6505,11 @@
             "name": "V2",
             "value": "V2",
             "description": "Generation 2 (V2) hypervisor"
+          },
+          {
+            "name": "NA",
+            "value": "NA",
+            "description": "Not applicable/determined by platform"
           }
         ]
       }
@@ -7910,6 +7916,11 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
+        },
+        "enableSdnPolicy": {
+          "type": "boolean",
+          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.",
+          "default": true
         }
       }
     },
@@ -7956,6 +7967,10 @@
         "dnsSettings": {
           "$ref": "#/definitions/InterfaceDNSSettings",
           "description": "DNS Settings for the interface"
+        },
+        "enableSdnPolicy": {
+          "type": "boolean",
+          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations."
         }
       }
     },

@@ -75,7 +75,7 @@ jobs:
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
-          NODE_OPTIONS: "--max-old-space-size=8192"
+          NODE_OPTIONS: "--max-old-space-size=16384"
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact
