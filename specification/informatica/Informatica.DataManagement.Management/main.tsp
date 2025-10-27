@@ -348,6 +348,7 @@ model InformaticaProperties {
 
 @doc("Link Organization")
 model LinkOrganization {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Link organization token")
   token?: string;
 }
@@ -482,6 +483,7 @@ model ServerlessRuntimeTag {
 
 @doc("Informatica Serverless Runtime User context properties")
 model ServerlessRuntimeUserContextProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("User context token for OBO flow.")
   userContextToken: string;
 }

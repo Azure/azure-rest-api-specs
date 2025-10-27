@@ -1454,12 +1454,14 @@ model AccessKeys {
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 

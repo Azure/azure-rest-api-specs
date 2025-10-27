@@ -264,12 +264,14 @@ model BucketGenerateCredentials {
   /**
    * The Access Key that is required along with the Secret Key to access the bucket.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   accessKey?: string;
 
   /**
    * The Secret Key that is required along with the Access Key to access the bucket.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   secretKey?: string;
 

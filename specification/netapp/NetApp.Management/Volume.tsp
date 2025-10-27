@@ -54,6 +54,7 @@ model VolumeProperties {
   /**
    * A unique file path for the volume. Used when creating mount targets
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
