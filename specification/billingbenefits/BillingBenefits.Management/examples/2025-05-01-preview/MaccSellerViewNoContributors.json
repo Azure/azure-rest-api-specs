@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "properties": {
+        "$filter": "properties/status ne 'Canceled'",
+        "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "allowContributors": true,
+              "automaticShortfall": "Enabled",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "commitment": {
+                "amount": 20000,
+                "currencyCode": "USD",
+                "grain": "FullTerm"
+              },
+              "displayName": "Macc 20230614",
+              "endAt": "2024-06-30T00:00:00Z",
+              "entityType": "Primary",
+              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+              "provisioningState": "Canceled",
+              "resourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/{rgName}/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
+              "shortfall": {
+                "balanceVersion": 5,
+                "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+                "charge": {
+                  "amount": 20000,
+                  "currencyCode": "USD",
+                  "grain": "FullTerm"
+                },
+                "endAt": "2024-07-01T00:00:00Z",
+                "productCode": "000278da-0000-0160-330f-a0b98cdbbdc4",
+                "startAt": "2023-07-01T00:00:00Z",
+                "systemId": "shortfall67890123"
+              },
+              "startAt": "2023-07-01T00:00:00Z",
+              "status": "ShortfallCharged",
+              "systemId": "13810867107109237"
+            },
+            "systemData": {
+              "createdAt": "2023-06-12T22:05:09Z",
+              "createdByType": "User",
+              "lastModifiedAt": "2023-06-12T22:05:09Z",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SellerResource_List",
+  "title": "SellerViewNoContributors"
+}
