@@ -28,7 +28,76 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2024-10-01-preview
+tag: package-preview-2025-03-01-preview
+```
+
+### Tag: package-preview-2025-03-01-preview
+
+These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03-01-preview'
+input-file:
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apigateway.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimallpolicies.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimapis.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimauthorizationproviders.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimbackends.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimcaches.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimclientApplications.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimcontenttypes.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimdeletedservices.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimdocumentations.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimgatewayConfigConnections.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimgatewayHostnameBindings.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimgroups.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimissues.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimloggers.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimnamedvalues.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimoutbounddependency.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimpolicyfragments.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimpolicyrestrictions.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimpolicyrestrictionsvalidation.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimportalconfigs.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimportalrevisions.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimprivatelink.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimproducts.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimquotas.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimregions.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimschema.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimsettings.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimskus.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimtags.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimtenant.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimworkspacebackends.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimworkspacecertificates.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimworkspacediagnostics.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimworkspacelinks.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimworkspaceloggers.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/apimworkspaces.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/definitions.json
+  - Microsoft.ApiManagement/preview/2025-03-01-preview/operationStatuses.json
 ```
 
 ### Tag: package-preview-2024-10-01-preview
@@ -1296,31 +1365,31 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4037
     from: definitions.json
-    reason: We want customers to be able to supply any valid JSON token, object or otherwise    
+    reason: We want customers to be able to supply any valid JSON token, object or otherwise
   - suppress: R4009
     from: apimprivatelink.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimprivatelink.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimportalsettings.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimportalconfigs.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimpolicyfragments.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: LroErrorContent
     from: apimapis.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
   - suppress: LroErrorContent
     from: apimusers.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
   - suppress: LroErrorContent
     from: apimpolicyrestrictionsvalidation.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     from: definitions.json
@@ -1339,7 +1408,7 @@ suppressions:
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspacediagnostics.json
-    where: 
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/diagnostics"].get.responses["200"].schema.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/diagnostics"].get.responses.["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
