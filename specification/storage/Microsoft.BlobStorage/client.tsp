@@ -98,7 +98,7 @@ model BlobServiceClientParameters {
 );
 @@alternateType(BlobName,
   {
-    identity: "crate::models::StorageBlobName",
+    name: "crate::models::StorageBlobName",
   },
   "rust"
 );
