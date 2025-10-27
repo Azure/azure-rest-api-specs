@@ -3225,6 +3225,7 @@ model AzureActiveDirectoryApplicationCredentials {
 @doc("Response from a List Datasources request. If successful, it includes the full definitions of all datasources.")
 model ListDataSourcesResult {
   @doc("The datasources in the Search service.")
+  @pageItems
   value: SearchIndexerDataSource[];
 }
 
@@ -3410,6 +3411,7 @@ model SearchIndexerCache {
 @doc("Response from a List Indexers request. If successful, it includes the full definitions of all indexers.")
 model ListIndexersResult {
   @doc("The indexers in the Search service.")
+  @pageItems
   value: SearchIndexer[];
 }
 
@@ -3770,6 +3772,7 @@ model SearchIndexerIndexProjectionsParameters {
 @doc("Response from a list skillset request. If successful, it includes the full definitions of all skillsets.")
 model ListSkillsetsResult {
   @doc("The skillsets defined in the Search service.")
+  @pageItems
   value: SearchIndexerSkillset[];
 }
 
@@ -3803,6 +3806,7 @@ model SynonymMap {
 @doc("Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.")
 model ListSynonymMapsResult {
   @doc("The synonym maps in the Search service.")
+  @pageItems
   value: SynonymMap[];
 }
 
@@ -4378,6 +4382,7 @@ model KnowledgeAgentRequestLimits {
 @added(Versions.v2025_08_01_preview)
 model ListKnowledgeAgentsResult {
   @doc("The knowledge agents in the service.")
+  @pageItems
   value: KnowledgeAgent[];
 }
 
@@ -4548,6 +4553,7 @@ model AzureBlobKnowledgeSourceParameters {
 @added(Versions.v2025_08_01_preview)
 model ListKnowledgeSourcesResult {
   @doc("The knowledge sources in the service.")
+  @pageItems
   value: KnowledgeSource[];
 }
 

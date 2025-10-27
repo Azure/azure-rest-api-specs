@@ -63,6 +63,7 @@ interface Documents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Suggests documents in the index that match the given partial query text.")
   @route("/indexes('{indexName}')/docs/search.suggest")
+  @list
   @get
   suggestGet is SearchIndexOperation<
     {
@@ -93,6 +94,7 @@ interface Documents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Sends a batch of document write actions to the index.")
   @route("/indexes('{indexName}')/docs/search.index")
+  @list
   @post
   index is SearchIndexOperation<
     {
@@ -107,6 +109,7 @@ interface Documents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Autocompletes incomplete query terms based on input text and matching terms in the index.")
   @route("/indexes('{indexName}')/docs/search.autocomplete")
+  @list
   @get
   autocompleteGet is SearchIndexOperation<
     {

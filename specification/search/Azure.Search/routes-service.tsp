@@ -61,6 +61,7 @@ interface DataSources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all datasources available for a search service.")
   @route("/datasources")
+  @list
   @get
   list is SearchOperation<selectQuery, ListDataSourcesResult>;
 
@@ -204,6 +205,7 @@ interface Indexers {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all indexers available for a search service.")
   @route("/indexers")
+  @list
   @get
   list is SearchOperation<selectQuery, ListIndexersResult>;
 
@@ -292,6 +294,7 @@ interface Skillsets {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("List all skillsets in a search service.")
   @route("/skillsets")
+  @list
   @get
   list is SearchOperation<selectQuery, ListSkillsetsResult>;
 
@@ -377,6 +380,7 @@ interface SynonymMaps {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all synonym maps available for a search service.")
   @route("/synonymmaps")
+  @list
   @get
   list is SearchOperation<selectQuery, ListSynonymMapsResult>;
 
@@ -587,6 +591,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all agents available for a search service.")
   @route("/agents")
+  @list
   @get
   list is SearchOperation<{}, ListKnowledgeAgentsResult>;
 
@@ -658,6 +663,7 @@ interface Sources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all knowledge sources available for a search service.")
   @route("/knowledgesources")
+  @list
   @get
   list is SearchOperation<{}, ListKnowledgeSourcesResult>;
 

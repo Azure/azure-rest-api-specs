@@ -1144,6 +1144,7 @@ model SingleVectorFieldResult {
 @doc("Response containing suggestion query results from an index.")
 model SuggestDocumentsResult {
   @doc("The sequence of results returned by the query.")
+  @pageItems
   value: SuggestResult[];
 
   @doc("A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request.")
@@ -1227,6 +1228,7 @@ model IndexDocumentsResult {
   _: 200 | 207;
 
   @doc("The list of status information for each document in the indexing request.")
+  @pageItems
   value: IndexingResult[];
 }
 
@@ -1252,6 +1254,7 @@ model AutocompleteResult {
   coverage?: float64;
 
   @doc("The list of returned Autocompleted items.")
+  @pageItems
   value: AutocompleteItem[];
 }
 
