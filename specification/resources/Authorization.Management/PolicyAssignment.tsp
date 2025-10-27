@@ -1,0 +1,125 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Authorization;
+/**
+ * The policy assignment.
+ */
+@extensionResource
+model PolicyAssignment
+  is Azure.ResourceManager.ExtensionResource<PolicyAssignmentProperties> {
+  ...ResourceNameParameter<
+    Resource = PolicyAssignment,
+    KeyName = "policyAssignmentName",
+    SegmentName = "policyAssignments",
+    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+  >;
+
+  /**
+   * The location of the policy assignment. Only required when utilizing managed identity.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /**
+   * The managed identity associated with the policy assignment.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: Identity;
+}
+
+@armResourceOperations
+interface PolicyAssignments {
+  /**
+   * This operation retrieves a single policy assignment, given its name and the scope it was created at.
+   */
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    PolicyAssignment,
+    Parameters = {
+      /**
+       * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
+   *  This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  create is Extension.CreateOrReplaceSync<
+    Extension.ScopeParameter,
+    PolicyAssignment,
+    Response = ArmResourceCreatedSyncResponse<PolicyAssignment>
+  >;
+
+  /**
+   *  This operation updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is Extension.CustomPatchSync<
+    Extension.ScopeParameter,
+    PolicyAssignment,
+    PatchModel = PolicyAssignmentUpdate
+  >;
+
+  /**
+   * This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding '/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.
+   */
+  delete is Extension.DeleteSync<
+    Extension.ScopeParameter,
+    PolicyAssignment,
+    Response = ArmResponse<PolicyAssignment> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * This operation retrieves the list of all policy assignments associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource group, which is everything in the unfiltered list except those applied to resources contained within the resource group. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource group.
+   */
+  listForResourceGroup is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    PolicyAssignment,
+    Parameters = {
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+
+      /**
+       * The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
+       */
+      @query("$expand")
+      $expand?: string;
+
+      /**
+       * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
+       */
+      @maxValue(1000)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+}
+
+@@doc(PolicyAssignment.name, "The name of the policy assignment to get.");
+@@doc(PolicyAssignment.properties, "Properties for the policy assignment.");
+@@doc(PolicyAssignments.create::parameters.resource,
+  "Parameters for the policy assignment."
+);
+@@doc(PolicyAssignments.update::parameters.properties,
+  "Parameters for policy assignment patch request."
+);

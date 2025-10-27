@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "policySetDefinitionName": "CostManagement",
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "1.2.1",
+            "type": "Microsoft.Authorization/policySetDefinitions/versions",
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement/versions/1.2.1",
+            "properties": {
+              "description": "Policies to enforce low cost storage SKUs",
+              "displayName": "Cost Management",
+              "metadata": {
+                "category": "Cost Management"
+              },
+              "policyDefinitions": [
+                {
+                  "definitionVersion": "1.*.*",
+                  "parameters": {
+                    "listOfAllowedSKUs": {
+                      "value": [
+                        "Standard_GRS",
+                        "Standard_LRS"
+                      ]
+                    }
+                  },
+                  "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+                  "policyDefinitionReferenceId": "Limit_Skus"
+                },
+                {
+                  "definitionVersion": "1.*.*",
+                  "parameters": {
+                    "prefix": {
+                      "value": "DeptA"
+                    },
+                    "suffix": {
+                      "value": "-LC"
+                    }
+                  },
+                  "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+                  "policyDefinitionReferenceId": "Resource_Naming"
+                }
+              ],
+              "version": "1.2.1"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicySetDefinitionVersions_List",
+  "title": "List policy set definitions"
+}
