@@ -130,7 +130,7 @@ interface BatchAccounts {
 
 @@maxLength(BatchAccount.name, 24);
 @@minLength(BatchAccount.name, 3);
-@@pattern(BatchAccount.name, "^[a-z0-9]+$");
+@@pattern(BatchAccount.name, "^[a-zA-Z0-9]+$");
 @@doc(BatchAccount.name, "The name of the Batch account.");
 @@doc(BatchAccount.properties, "The properties associated with the account.");
 @@doc(BatchAccounts.create::parameters.resource,

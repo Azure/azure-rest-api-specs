@@ -31,7 +31,8 @@ interface LocationOperationGroup {
       @path
       @segment("locations")
       locationName: string;
-    }
+    },
+    Error = CloudError
   >;
   /**
    * Gets the list of Batch supported Virtual Machine VM sizes available at the given location.
