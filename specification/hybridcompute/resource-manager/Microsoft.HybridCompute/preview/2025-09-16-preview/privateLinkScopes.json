@@ -1758,7 +1758,7 @@
         "modelAsString": true
       }
     },
-    "ServiceExtensionPublicNetworkAccess": { 
+    "ServiceExtensionPublicNetworkAccess": {
       "type": "string",
       "description": "Property to control enforcement of private link validation for a given service extension.",
       "enum": [
@@ -1779,132 +1779,132 @@
           }
         ]
       }
-    }
-  },
-  "PrivateEndpointConnectionProperties": {
-    "type": "object",
-    "description": "Properties of a private endpoint connection.",
-    "properties": {
-      "privateEndpoint": {
-        "$ref": "#/definitions/PrivateEndpointProperty",
-        "description": "Private endpoint which the connection belongs to."
-      },
-      "privateLinkServiceConnectionState": {
-        "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-        "description": "Connection state of the private endpoint connection."
-      },
-      "provisioningState": {
-        "description": "State of the private endpoint connection.",
-        "type": "string",
-        "readOnly": true
-      },
-      "groupIds": {
-        "description": "List of group IDs.",
-        "type": "array",
-        "items": {
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of a private endpoint connection.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupIds": {
+          "description": "List of group IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "description": "Private endpoint which the connection belongs to.",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "description": "State of the private endpoint connection.",
+      "required": [
+        "status",
+        "description"
+      ],
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
           "type": "string"
         },
-        "readOnly": true
-      }
-    }
-  },
-  "PrivateEndpointProperty": {
-    "type": "object",
-    "description": "Private endpoint which the connection belongs to.",
-    "properties": {
-      "id": {
-        "description": "Resource id of the private endpoint.",
-        "type": "string"
-      }
-    }
-  },
-  "PrivateLinkServiceConnectionStateProperty": {
-    "type": "object",
-    "description": "State of the private endpoint connection.",
-    "required": [
-      "status",
-      "description"
-    ],
-    "properties": {
-      "status": {
-        "description": "The private link service connection status.",
-        "type": "string"
-      },
-      "description": {
-        "description": "The private link service connection description.",
-        "type": "string"
-      },
-      "actionsRequired": {
-        "description": "The actions required for private link service connection.",
-        "type": "string",
-        "readOnly": true
-      }
-    }
-  },
-  "PrivateEndpointConnection": {
-    "type": "object",
-    "description": "A private endpoint connection",
-    "allOf": [
-      {
-        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-      }
-    ],
-    "properties": {
-      "properties": {
-        "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-        "description": "Resource properties."
-      },
-      "systemData": {
-        "readOnly": true,
-        "description": "The system meta data relating to this resource.",
-        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
-      }
-    }
-  },
-  "PrivateEndpointConnectionListResult": {
-    "type": "object",
-    "description": "A list of private endpoint connections.",
-    "properties": {
-      "value": {
-        "description": "Array of results.",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/PrivateEndpointConnection"
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
         },
-        "readOnly": true
-      },
-      "nextLink": {
-        "description": "Link to retrieve next page of results.",
-        "type": "string",
-        "readOnly": true
-      }
-    }
-  },
-  "PublicNetworkAccessType": {
-    "type": "string",
-    "description": "The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).",
-    "default": "Disabled",
-    "enum": [
-      "Enabled",
-      "Disabled"
-    ],
-    "x-ms-enum": {
-      "name": "PublicNetworkAccessType",
-      "modelAsString": true,
-      "values": [
-        {
-          "value": "Enabled",
-          "description": "Allows Azure Arc agents to communicate with Azure Arc services over both public (internet) and private endpoints."
-        },
-        {
-          "value": "Disabled",
-          "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
-        },
-        {
-          "value": "SecuredByPerimeter",
-          "description": "Azure Arc agent communication with Azure Arc services over public (internet) is enforced by Network Security Perimeter (NSP)"
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "type": "string",
+          "readOnly": true
         }
-      ]
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "A private endpoint connection",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "A list of private endpoint connections.",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PublicNetworkAccessType": {
+      "type": "string",
+      "description": "The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).",
+      "default": "Disabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Allows Azure Arc agents to communicate with Azure Arc services over both public (internet) and private endpoints."
+          },
+          {
+            "value": "Disabled",
+            "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
+          },
+          {
+            "value": "SecuredByPerimeter",
+            "description": "Azure Arc agent communication with Azure Arc services over public (internet) is enforced by Network Security Perimeter (NSP)"
+          }
+        ]
+      }
     }
   },
   "parameters": {
