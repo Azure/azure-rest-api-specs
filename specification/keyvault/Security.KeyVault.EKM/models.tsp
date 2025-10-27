@@ -28,7 +28,6 @@ model EkmConnection {
   /**
    * The root CA certificate chain that issued the proxy server's certificate. An array of certificates in the certificate chain, each in DER format and base64url encoded.
    */
-  @endcoded("base64url")
   @encodedName("application/json", "server_ca_certificates")
   serverCaCertificates: string[];
 
@@ -46,7 +45,6 @@ model EkmProxyClientCertificateInfo {
   /**
    * The client root CA certificate chain to authenticate to the EKM proxy. An array of certificates in the certificate chain, each in DER format and base64url encoded.
    */
-  @endcoded("base64url")
   @encodedName("application/json", "ca_certificates")
   caCertificates: string[];
 
