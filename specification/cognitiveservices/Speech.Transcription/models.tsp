@@ -1,7 +1,11 @@
 import "@typespec/http";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.Transcription;
@@ -25,7 +29,8 @@ union ProfanityFilterMode {
 
 @doc("Enhanced mode properties for transcription.")
 model EnhancedModeProperties {
-  @doc("Enable enhanced mode for transcription.")
+  @doc("Enable enhanced mode for transcription. This is automatically set to true when task, targetLanguage, or prompt are specified.")
+  @visibility(Lifecycle.Read)
   enabled?: boolean;
 
   @doc("Task type for enhanced mode.")
@@ -78,7 +83,8 @@ model TranscriptionOptions {
 
 @doc("The Speaker Diarization settings. Diarization settings must be specified to enable speaker diarization.")
 model TranscriptionDiarizationOptions {
-  @doc("Gets or sets a value indicating whether speaker diarization is enabled.")
+  @doc("Enable speaker diarization. This is automatically set to true when maxSpeakers is specified.")
+  @visibility(Lifecycle.Read)
   enabled?: boolean;
 
   @maxValue(35)

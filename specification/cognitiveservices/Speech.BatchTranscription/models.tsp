@@ -1,8 +1,10 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Traits.Private;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 
 namespace Azure.Ai.Speech.BatchTranscription;
@@ -68,9 +70,11 @@ model TranscriptionJob {
   dataset?: EntityReference;
 
   @doc("A list of content urls to get audio files to transcribe. Up to 1000 urls are allowed.\r\nThis property will not be returned in a response.")
+  @clientName("contents", "csharp/java")
   contentUrls?: Array<url>;
 
   @doc("A URL for an Azure blob container that contains the audio files. A container is allowed to have a maximum size of 5GB and a maximum number of 10000 blobs.\r\nThe maximum size for a blob is 2.5GB.\r\nContainer SAS should contain 'r' (read) and 'l' (list) permissions.\r\nThis property will not be returned in a response.")
+  @clientName("sourceContainer", "csharp/java")
   contentContainerUrl?: url;
 
   @minLength(1)
@@ -97,6 +101,7 @@ model TranscriptionJob {
 
   @visibility(Lifecycle.Read)
   @doc("The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @clientName("created")
   createdDateTime?: utcDateTime;
 }
 
@@ -116,6 +121,7 @@ model TranscriptionProperties {
   channels?: Array<int32>;
 
   @doc("The requested destination container.\n\nRemarks\n\nWhen a destination container is used in combination with a timeToLive, the metadata of a transcription will be deleted normally, but the data stored in the destination container, including transcription results, will remain untouched, because no delete permissions are required for this container.\n\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\" instead of destinationContainerUrl, where blobs can be cleaned up.")
+  @clientName("destinationContainer", "csharp/java")
   destinationContainerUrl?: url;
 
   @doc("The mode used for punctuation.")
@@ -134,6 +140,7 @@ model TranscriptionProperties {
   diarization?: DiarizationProperties;
 
   @doc("LanguageIdentificationProperties")
+  @clientName("languageIdentificationProperties")
   languageIdentification?: LanguageIdentificationProperties;
 }
 
@@ -220,6 +227,7 @@ union LanguageIdentificationMode {
 @resource("files")
 model TranscriptionFile {
   @doc("The creation time of this file. The time stamp is encoded as ISO 8601 date and time format (see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @clientName("created")
   createdDateTime: utcDateTime;
 
   @doc("FileKind")
@@ -243,6 +251,7 @@ model TranscriptionFile {
 @doc("FileLinks")
 model FileLinks {
   @doc("The url to retrieve the content of this file.")
+  @clientName("content", "csharp/java")
   contentUrl: url;
 }
 
