@@ -693,18 +693,22 @@ model AutocompleteOptions {
 model SearchDocumentsResult {
   @doc("The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if the query can't return all the requested documents in a single response.")
   @encodedName("application/json", "@odata.count")
+  @visibility(Lifecycle.Read)
   count?: int64;
 
   @doc("A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not specified in the request.")
   @encodedName("application/json", "@search.coverage")
+  @visibility(Lifecycle.Read)
   coverage?: float64;
 
   @doc("The facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not include any facet expressions.")
   @encodedName("application/json", "@search.facets")
+  @visibility(Lifecycle.Read)
   facets?: Record<FacetResult[]>;
 
   @doc("The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'.")
   @encodedName("application/json", "@search.answers")
+  @visibility(Lifecycle.Read)
   answers?: QueryAnswerResult[];
 
   @doc("Debug information that applies to the search results as a whole.")
@@ -715,20 +719,25 @@ model SearchDocumentsResult {
 
   @doc("Continuation JSON payload returned when the query can't return all the requested results in a single response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response.")
   @encodedName("application/json", "@search.nextPageParameters")
+  @visibility(Lifecycle.Read)
   nextPageParameters?: SearchRequest;
 
   @doc("The sequence of results returned by the query.")
+  @pageItems
+  @visibility(Lifecycle.Read)
   value: SearchResult[];
 
-  @doc("Continuation URL returned when the query can't return all the requested results in a single response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response.")
+  @doc("Continuation URL returned when the query can't return all the requested results in a single response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response.")  
   @encodedName("application/json", "@odata.nextLink")
   nextLink?: string;
 
   @doc("Reason that a partial response was returned for a semantic ranking request.")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.semanticPartialResponseReason")
   semanticPartialResponseReason?: SemanticErrorReason;
 
   @doc("Type of partial response that was returned for a semantic ranking request.")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.semanticPartialResponseType")
   semanticPartialResponseType?: SemanticSearchResultsType;
 

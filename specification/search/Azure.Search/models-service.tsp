@@ -4194,6 +4194,7 @@ model RescoringOptions {
 model ListIndexesResult {
   @doc("The indexes in the Search service.")
   @pageItems
+  @visibility(Lifecycle.Read)
   value: SearchIndex[];
 }
 
