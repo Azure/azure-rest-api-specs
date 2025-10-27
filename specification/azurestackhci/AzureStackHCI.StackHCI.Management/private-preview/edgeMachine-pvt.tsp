@@ -161,13 +161,13 @@ model EdgeMachineProperties {
   ownershipVoucherDetails?: OwnershipVoucherDetails;
 
   @doc("Details for device provisioning.")
-  provisioningDetails?: ProvisioningDetails
+  provisioningDetails?: ProvisioningDetails;
 }
 
 /**
  * Details for device provisioning.
  */
-model ProvisioningDetails{
+model ProvisioningDetails {
   @doc("Operating system profile.")
   osProfile: OsProvisionProfile;
 
