@@ -44,7 +44,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ConnectedEnvironmentDaprComponentsCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentsCollection"
             }
           },
           "default": {
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "default": {
@@ -154,7 +154,7 @@
             "description": "Configuration details of the Dapr Component.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           {
@@ -165,13 +165,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
           "default": {
@@ -299,73 +299,6 @@
           "List Container Apps Secrets": {
             "$ref": "./examples/ConnectedEnvironmentsDaprComponents_ListSecrets.json"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "ConnectedEnvironmentDaprComponentsCollection": {
-      "description": "Collection of Dapr Components for Environments",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of Dapr component resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ConnectedEnvironmentDaprComponent": {
-      "description": "Dapr Component.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Dapr component properties",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentProperties"
-            }
-          ],
-          "properties": {
-            "provisioningState": {
-              "description": "Provisioning state of the Connected Environment Dapr Component.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "InProgress",
-                "Deleting"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "ConnectedEnvironmentDaprComponentProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "deploymentErrors": {
-              "description": "Any errors that occurred during deployment or deployment validation",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
         }
       }
     }

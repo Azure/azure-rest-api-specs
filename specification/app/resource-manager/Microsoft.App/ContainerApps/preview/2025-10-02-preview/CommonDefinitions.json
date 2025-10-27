@@ -930,6 +930,27 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Connected Environment Dapr Component.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DaprComponentProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "deploymentErrors": {
+          "description": "Any errors that occurred during deployment or deployment validation",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
