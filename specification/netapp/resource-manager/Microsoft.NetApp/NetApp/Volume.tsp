@@ -1369,7 +1369,7 @@ model VolumePatchPropertiesDataProtection {
    * Advanced Ransomware Protection updatable settings
    */
   @added(Versions.v2025_09_01_preview)
-  ransomwareProtectionPatchSettings?: RansomwareProtectionPatchSettings;
+  ransomwareProtection?: RansomwareProtectionPatchSettings;
 }
 
 /**

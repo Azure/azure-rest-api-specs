@@ -168,25 +168,25 @@ model ElasticSnapshotPolicyMonthlySchedule {
 union DayOfWeek {
   string,
 
-  /** Sunday */
+  /** Take a snapshot each Sunday */
   Sunday: "Sunday",
 
-  /** Monday */
+  /** Take a snapshot each Monday */
   Monday: "Monday",
 
-  /** Tuesday */
+  /** Take a snapshot each Tuesday */
   Tuesday: "Tuesday",
 
-  /** Wednesday */
+  /** Take a snapshot each Wednesday */
   `Wednesday `: "Wednesday ",
 
-  /** Thursday */
+  /** Take a snapshot each Thursday */
   Thursday: "Thursday",
 
-  /** Friday */
+  /** Take a snapshot each Friday */
   Friday: "Friday",
 
-  /** Saturday */
+  /** Take a snapshot each Saturday */
   Saturday: "Saturday",
 }
 /**

@@ -319,17 +319,17 @@ union ProvisioningState {
   string,
 
   /**
-   * Accepted
+   * Resource has been accepted
    */
   Accepted: "Accepted",
 
   /**
-   * Creating
+   * Resource is being created
    */
   Creating: "Creating",
 
   /**
-   * Patching
+   * Resource is being patched
    */
   Patching: "Patching",
 
@@ -340,22 +340,22 @@ union ProvisioningState {
   Updating: "Updating",
 
   /**
-   * Deleting
+   * Resource is being deleted
    */
   Deleting: "Deleting",
 
   /**
-   * Moving
+   * Resource is being moved
    */
   Moving: "Moving",
 
   /**
-   * Failed
+   * Resource has Failed
    */
   Failed: "Failed",
 
   /**
-   * Succeeded
+   * Resource has Succeeded
    */
   Succeeded: "Succeeded",
 }
