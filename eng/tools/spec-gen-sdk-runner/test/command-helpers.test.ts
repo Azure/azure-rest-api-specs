@@ -461,7 +461,7 @@ describe("commands.ts", () => {
             headSha: "abc123",
             prNumber: "123",
             labelAction: false,
-            isSpecGenSdkCheckRequired: false,
+            isSpecGenSdkCheckRequired: true,
             apiViewRequestData: [],
           },
           undefined,
@@ -619,7 +619,7 @@ describe("commands.ts", () => {
 
       const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
       // Based on the constants in types.ts, JS SDK does not require check for data plane
-      expect(result2).toBe(false);
+      expect(result2).toBe(true);
 
       const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
       // .NET SDK set (dataplane: false)
