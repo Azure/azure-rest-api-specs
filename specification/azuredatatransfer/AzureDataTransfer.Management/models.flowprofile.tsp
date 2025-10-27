@@ -409,3 +409,14 @@ union Casing {
    */
   Sensitive: "Sensitive",
 }
+
+/**
+ * The flow profiles list result
+ */
+@added(Versions.v2025_10_10_preview)
+model FlowProfilesListResult {
+  /**
+   * FlowProfileMetadata array.
+   */
+  value?: FlowProfileMetadata[];
+}
