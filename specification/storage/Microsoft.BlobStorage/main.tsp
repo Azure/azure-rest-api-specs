@@ -34,6 +34,5 @@ namespace Storage.Blob;
 @doc("The Azure.Storage.Blob service versions.")
 enum Versions {
   @doc("The 2025-11-05 version of the Azure.Storage.Blob service.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_11_05: "2025-11-05",
 }
