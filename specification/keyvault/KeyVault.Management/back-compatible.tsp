@@ -63,8 +63,11 @@ using Azure.Core;
 
 @@clientName(ManagedHsms.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedHsms.update::parameters.properties, "parameters");
-@@clientLocation(ManagedHsms.listByMHSMResource, "MHSMPrivateLinkResources");
-@@clientLocation(ManagedHsms.listByResource, "MHSMRegions");
+@@clientLocation(ManagedHsms.listByMHSMResource,
+  "MHSMPrivateLinkResources",
+  "!csharp,!java"
+);
+@@clientLocation(ManagedHsms.listByResource, "MHSMRegions", "!csharp,!java");
 
 @@clientLocation(MhsmPrivateEndpointConnections.get,
   "MHSMPrivateEndpointConnections",
