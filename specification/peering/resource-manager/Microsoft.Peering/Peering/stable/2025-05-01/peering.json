@@ -40,9 +40,6 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "PeerAsns"
     },
     {
@@ -62,6 +59,9 @@
     },
     {
       "name": "PeeringServicePrefixes"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -81,7 +81,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -3275,6 +3275,153 @@
         }
       }
     },
+    "MetricDimension": {
+      "type": "object",
+      "description": "Dimensions of the metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension.",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Specifications of the Metrics for Azure Monitoring.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the metric.",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localized friendly description of the metric.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit that makes sense for the metric.",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type will be set to one of the values: Average, Minimum, Maximum, Total, Count.",
+          "readOnly": true
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "Supported time grain types for the metric.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions of the metric.",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "The peering API operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation.",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The information related to the operation.",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "The properties of the operation.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "type": "object",
+      "description": "The information related to the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the resource provider.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The name of the operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "The paginated list of peering API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of peering API operations.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch the next page of peering API operations.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "The properties of the operation.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specification payload.",
+          "readOnly": true
+        }
+      }
+    },
     "PeerAsn": {
       "type": "object",
       "description": "The essential information related to the peer's ASN.",
@@ -4363,6 +4510,21 @@
       "required": [
         "value"
       ]
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification payload.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Metrics for Azure Monitoring.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
     },
     "SessionAddressProvider": {
       "type": "string",

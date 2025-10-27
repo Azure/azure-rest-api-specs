@@ -21,6 +21,7 @@ import "./ConnectionMonitorTest.tsp";
 import "./PeeringServicePrefix.tsp";
 import "./PeeringService.tsp";
 import "./routes.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -47,5 +48,3 @@ enum Versions {
    */
   v2025_05_01: "2025-05-01",
 }
-
-interface Operations extends Azure.ResourceManager.Operations {}

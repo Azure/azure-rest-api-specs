@@ -795,6 +795,24 @@ model LookingGlassOutput {
 }
 
 /**
+ * The paginated list of peering API operations.
+ */
+model OperationListResult {
+  /**
+   * The list of peering API operations.
+   */
+  @pageItems
+  value?: Operation[];
+
+  /**
+   * The link to fetch the next page of peering API operations.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
+
+/**
  * The peering API operation.
  */
 model Operation {
