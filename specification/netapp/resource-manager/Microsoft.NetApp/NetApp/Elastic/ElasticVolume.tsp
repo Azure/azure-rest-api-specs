@@ -372,7 +372,7 @@ interface ElasticVolumes {
     ElasticVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticVolume,
-      ElasticVolumeProperties
+      ElasticVolumePatchProperties
     >
   >;
 

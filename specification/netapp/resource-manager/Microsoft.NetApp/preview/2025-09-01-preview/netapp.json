@@ -16105,6 +16105,40 @@
         ]
       }
     },
+    "ElasticSmbEncryption": {
+      "type": "string",
+      "description": "SMB encryption",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ElasticSmbEncryption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Value indicating the SMB encryption is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Value indicating the SMB encryption is disabled"
+          }
+        ]
+      }
+    },
+    "ElasticSmbPatchProperties": {
+      "type": "object",
+      "description": "SMB Patch Properties",
+      "properties": {
+        "smbEncryption": {
+          "$ref": "#/definitions/ElasticSmbEncryption",
+          "description": "Used to enable or disable encryption for in-flight SMB data volume. This flag can be modified during Elastic volume update operation as well. Only applicable for SMB protocol Elastic volumes."
+        }
+      }
+    },
     "ElasticSmbProperties": {
       "type": "object",
       "description": "SMB Properties",
@@ -16748,7 +16782,7 @@
           "description": "Controls the visibility of the volume's read-only snapshot directory, which provides access to each of the volume's snapshots."
         },
         "smbProperties": {
-          "$ref": "#/definitions/ElasticSmbProperties",
+          "$ref": "#/definitions/ElasticSmbPatchProperties",
           "description": "SMB Properties"
         },
         "backupResourceId": {
