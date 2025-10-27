@@ -199,6 +199,7 @@ union DenyStatusMode {
   /**
    * The denyAssignment status is unknown.
    */
+  @added(Versions.v2025_07_01)
   Unknown: "unknown",
 }
 
