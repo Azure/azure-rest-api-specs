@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 /**
- * The key vault client performs cryptographic key operations and vault operations against the Key Vault service.
+ * The key Vault client performs cryptographic key operations and vault operations against the Key Vault service.
  */
 @useAuth(
   OAuth2Auth<[

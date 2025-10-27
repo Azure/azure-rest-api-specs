@@ -15,7 +15,7 @@ namespace KeyVault;
  */
 model EkmConnection {
   /**
-   * EKM proxy FQDM (Fully Qualified Domain Name). Only allowed characters are a-z, A-Z, 0-9, hyphen (-), dot (.), and colon (:).
+   * EKM proxy FQDN (Fully Qualified Domain Name). Only allowed characters are a-z, A-Z, 0-9, hyphen (-), dot (.), and colon (:).
    */
   host: string;
 
@@ -26,10 +26,17 @@ model EkmConnection {
   pathPrefix?: string;
 
   /**
-   * The root CA certificate chain that issued the proxy server's certificate. An array of certificates in the certificate chain, each in DER format and base64 encoded.
+   * The root CA certificate chain that issued the proxy server's certificate. An array of certificates in the certificate chain, each in DER format and base64url encoded.
    */
+  @endcoded("base64url")
   @encodedName("application/json", "server_ca_certificates")
   serverCaCertificates: string[];
+
+  /**
+   * The subject common name of the server certificate of EKM Proxy.
+   */
+  @encodedName("application/json", "server_subject_common_name")
+  serverSubjectCommonName?: string;
 }
 
 /**
@@ -37,8 +44,9 @@ model EkmConnection {
  */
 model EkmProxyClientCertificateInfo {
   /**
-   * The client root CA certificate chain to authenticate to the EKM proxy. An array of certificates in the certificate chain, each in DER format and base64 encoded.
+   * The client root CA certificate chain to authenticate to the EKM proxy. An array of certificates in the certificate chain, each in DER format and base64url encoded.
    */
+  @endcoded("base64url")
   @encodedName("application/json", "ca_certificates")
   caCertificates: string[];
 
@@ -54,7 +62,7 @@ model EkmProxyClientCertificateInfo {
  */
 model EkmProxyInfo {
   /**
-   * The highest supported proxy interface api version supported by the EKM proxy.
+   * The highest version of proxy interface API supported by the EKM Proxy.
    */
   @encodedName("application/json", "api_version")
   apiVersion: string;
