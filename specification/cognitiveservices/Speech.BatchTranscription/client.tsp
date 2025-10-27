@@ -15,9 +15,17 @@ namespace Azure.Ai.Speech.BatchTranscription;
 // Client customizations for property names
 
 @@clientName(TranscriptionJob.contentUrls, "contents", "csharp/java");
-@@clientName(TranscriptionJob.contentContainerUrl, "sourceContainer", "csharp/java");
+@@clientName(TranscriptionJob.contentContainerUrl,
+  "sourceContainer",
+  "csharp/java"
+);
 @@clientName(TranscriptionJob.createdDateTime, "created");
-@@clientName(TranscriptionProperties.destinationContainerUrl, "destinationContainer", "csharp/java");
-@@clientName(TranscriptionProperties.languageIdentification, "languageIdentificationProperties");
+@@clientName(TranscriptionProperties.destinationContainerUrl,
+  "destinationContainer",
+  "csharp/java"
+);
+@@clientName(TranscriptionProperties.languageIdentification,
+  "languageIdentificationProperties"
+);
 @@clientName(TranscriptionFile.createdDateTime, "created");
 @@clientName(FileLinks.contentUrl, "content", "csharp/java");
