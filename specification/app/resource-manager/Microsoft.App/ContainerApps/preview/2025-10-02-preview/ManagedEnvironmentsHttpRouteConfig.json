@@ -208,8 +208,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Delete operation completed"
+          "202": {
+            "description": "Delete operation is in progress",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Http Route does not exist"
@@ -225,7 +230,8 @@
           "Delete Certificate": {
             "$ref": "./examples/HttpRouteConfig_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/httpRouteConfigs": {

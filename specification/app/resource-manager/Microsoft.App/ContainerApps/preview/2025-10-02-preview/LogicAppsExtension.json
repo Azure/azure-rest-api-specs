@@ -536,35 +536,26 @@
       "description": "The properties of logic apps extension."
     },
     "WorkflowEnvelope": {
-      "description": "Workflow properties definition.",
+      "description": "Schema for the workflow object.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource id."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the resource name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the resource type."
-        },
         "kind": {
           "type": "string",
-          "description": "The resource kind."
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Gets the logic app hybrid workflow kind.",
+          "enum": [
+            "Stateful",
+            "Stateless",
+            "Agentic"
+          ],
+          "x-ms-enum": {
+            "name": "WorkflowKind",
+            "modelAsString": true
+          }
         },
         "properties": {
           "description": "Additional workflow properties.",
