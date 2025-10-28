@@ -12,20 +12,17 @@ namespace Microsoft.DevTestLab;
 /**
  * Properties of an artifact source.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ArtifactSource extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("artifactsources")
-  name: string;
-
-  properties: ArtifactSourceProperties;
+model ArtifactSource
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    ArtifactSourceProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = ArtifactSource,
+    KeyName = "name",
+    SegmentName = "artifactsources",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

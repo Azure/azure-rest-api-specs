@@ -13,20 +13,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A formula for creating a VM, specifying an image base and other parameters
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model Formula extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("formulas")
-  name: string;
-
-  properties: FormulaProperties;
+model Formula
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    FormulaProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = Formula,
+    KeyName = "name",
+    SegmentName = "formulas",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

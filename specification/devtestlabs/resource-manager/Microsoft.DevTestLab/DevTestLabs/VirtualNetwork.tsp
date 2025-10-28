@@ -13,20 +13,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual network.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualNetwork extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("virtualnetworks")
-  name: string;
-
-  properties: VirtualNetworkProperties;
+model VirtualNetwork
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    VirtualNetworkProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = VirtualNetwork,
+    KeyName = "name",
+    SegmentName = "virtualnetworks",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

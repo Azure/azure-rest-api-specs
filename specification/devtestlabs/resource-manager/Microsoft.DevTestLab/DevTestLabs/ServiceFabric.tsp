@@ -12,20 +12,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A Service Fabric.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ServiceFabric extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("servicefabrics")
-  name: string;
-
-  properties: ServiceFabricProperties;
+model ServiceFabric
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    ServiceFabricProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = ServiceFabric,
+    KeyName = "name",
+    SegmentName = "servicefabrics",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -140,12 +137,28 @@ interface ServiceFabrics {
   /**
    * Start a service fabric. This operation can take a while to complete.
    */
-  start is ServiceFabricOps.ActionAsync<ServiceFabric, void, OkResponse>;
+  start is ServiceFabricOps.ActionAsync<
+    ServiceFabric,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 
   /**
    * Stop a service fabric This operation can take a while to complete.
    */
-  stop is ServiceFabricOps.ActionAsync<ServiceFabric, void, OkResponse>;
+  stop is ServiceFabricOps.ActionAsync<
+    ServiceFabric,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 
 @@doc(ServiceFabric.name, "The name of the service fabric.");

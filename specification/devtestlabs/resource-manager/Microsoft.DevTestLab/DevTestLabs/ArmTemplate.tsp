@@ -12,20 +12,17 @@ namespace Microsoft.DevTestLab;
 /**
  * An Azure Resource Manager template.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ArmTemplate extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("armtemplates")
-  name: string;
-
-  properties: ArmTemplateProperties;
+model ArmTemplate
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    ArmTemplateProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = ArmTemplate,
+    KeyName = "name",
+    SegmentName = "armtemplates",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

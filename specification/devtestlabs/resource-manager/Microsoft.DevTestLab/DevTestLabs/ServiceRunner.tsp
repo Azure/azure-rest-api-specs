@@ -13,20 +13,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A container for a managed identity to execute DevTest lab services.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ServiceRunner extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("servicerunners")
-  name: string;
+model ServiceRunner
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    never,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = Secret,
+    KeyName = "name",
+    SegmentName = "servicerunners",
+    NamePattern = ""
+  >;
 
   /**
    * The identity of the resource.
