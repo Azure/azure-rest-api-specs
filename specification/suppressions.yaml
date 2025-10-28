@@ -19,10 +19,10 @@
     - cognitiveservices/data-plane/ContentSafety/preview/2023-04-30-preview/contentsafety.json
     - cognitiveservices/data-plane/ContentSafety/preview/2023-10-15-preview/contentsafety.json
     - cognitiveservices/data-plane/ContentSafety/preview/2024-02-15-preview/contentsafety.json
-    - cognitiveservices/data-plane/Language/preview/2023-11-15-preview/analyzedocuments.json
-    - cognitiveservices/data-plane/Language/preview/2023-11-15-preview/analyzetext.json
-    - cognitiveservices/data-plane/Language/preview/2023-11-15-preview/analyzeconversations.json
-    - cognitiveservices/data-plane/Language/preview/2024-05-15-preview/analyzeconversations.json
+    - cognitiveservices/data-plane/LanguageAnalyzeDocuments/preview/2023-11-15-preview/analyzedocuments.json
+    - cognitiveservices/data-plane/LanguageAnalyzeText/preview/2023-11-15-preview/analyzetext.json
+    - cognitiveservices/data-plane/LanguageAnalyzeConversations/preview/2023-11-15-preview/analyzeconversations.json
+    - cognitiveservices/data-plane/LanguageAnalyzeConversations/preview/2024-05-15-preview/analyzeconversations.json
     - computeschedule/resource-manager/Microsoft.ComputeSchedule/preview/2024-06-01-preview/computeschedule.json
     - confidentialledger/data-plane/Microsoft.CodeTransparency/preview/2024-01-11-preview/cts.json
     - devopsinfrastructure/resource-manager/Microsoft.DevOpsInfrastructure/preview/2023-10-30-preview/devopsinfrastructure.json
@@ -65,7 +65,7 @@
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
   paths:
-    - awsconnector/*/tspconfig.yaml
+    - awsconnector/**/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -440,6 +440,17 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+  paths:
+    # Casing "Confidentialledger" is not a typo.  This needs to match until the folder name is corrected in the repo.
+    - confidentialledger/Confidentialledger.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
     - options.@azure-tools/typespec-go.generate-samples
     - options.@azure-tools/typespec-ts.experimental-extensible-enums
     - options.@azure-tools/typespec-ts.package-details.name
@@ -770,6 +781,17 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
+  paths:
+    - marketplacecatalog/Products/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
   paths:
     - manufacturingplatform/Manufacturingplatform.Management/tspconfig.yaml
@@ -1042,10 +1064,18 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - options.@azure-tools/typespec-csharp.*
+  paths:
+    - servicebus/ServiceBus.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
     - options.@azure-tools/typespec-go.flavor
     - options.@azure-tools/typespec-go.generate-samples
   paths:
-    - servicefabricmanagedclusters/ServiceFabricManagedClusters.Management/tspconfig.yaml
+    - servicefabricmanagedclusters/resource-manager/Microsoft.ServiceFabric/ServiceFabricManagedClusters/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -1170,3 +1200,60 @@
   paths:
     - workloads/Workloads.SAPDiscoverySite.Management/tspconfig.yaml
     - workloads/Workloads.SAPMonitor.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until Go needs to generate SDK
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+  paths:
+    - ai/Azure.AI.Agents/tspconfig.yaml
+    - ai/Azure.AI.Projects/tspconfig.yaml
+    - ai/ContentUnderstanding/tspconfig.yaml
+    - ai/DocumentIntelligence/tspconfig.yaml
+    - ai/Face/tspconfig.yaml
+    - ai/HealthInsights/HealthInsights.OpenAPI/tspconfig.yaml
+    - ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml
+    - ai/ImageAnalysis/tspconfig.yaml
+    - ai/ModelInference/tspconfig.yaml
+    - ai/OpenAI.Assistants/tspconfig.yaml
+    - apicenter/ApiCenter.DataApi/tspconfig.yaml
+    - app/data-plane/DynamicSessions/tspconfig.yaml
+    - appconfiguration/data-plane/AppConfiguration/tspconfig.yaml
+    - applicationinsights/ApplicationInsights.LiveMetrics/tspconfig.yaml
+    - cognitiveservices/AnomalyDetector/tspconfig.yaml
+    - cognitiveservices/ContentSafety/tspconfig.yaml
+    - cognitiveservices/Language.AnalyzeConversations-authoring/tspconfig.yaml
+    - cognitiveservices/Language.AnalyzeDocuments/tspconfig.yaml
+    - cognitiveservices/Language.AnalyzeText/tspconfig.yaml
+    - cognitiveservices/Language.AnalyzeText-authoring/tspconfig.yaml
+    - cognitiveservices/Language.Conversations/tspconfig.yaml
+    - cognitiveservices/Language.QuestionAnswering/tspconfig.yaml
+    - cognitiveservices/Language.QuestionAnswering-authoring/tspconfig.yaml
+    - cognitiveservices/OpenAI.Inference/tspconfig.yaml
+    - cognitiveservices/Speech.VideoTranslation/tspconfig.yaml
+    - communication/Communication.JobRouter/tspconfig.yaml
+    - communication/Communication.Messages/tspconfig.yaml
+    - confidentialledger/Microsoft.CodeTransparency/tspconfig.yaml
+    - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
+    - devcenter/DevCenter/tspconfig.yaml
+    - healthdataaiservices/HealthDataAIServices.DeidServices/tspconfig.yaml
+    - keyvault/Security.KeyVault.Administration/tspconfig.yaml
+    - keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml
+    - loadtestservice/data-plane/loadtesting/tspconfig.yaml
+    - loadtestservice/data-plane/playwright/tspconfig.yaml
+    - machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml
+    - machinelearningservices/AzureAI.Assets/tspconfig.yaml
+    - orbital/Microsoft.PlanetaryComputer/tspconfig.yaml
+    - playwrighttesting/PlaywrightTesting.AuthManager/tspconfig.yaml
+    - programmableconnectivity/Azure.ProgrammableConnectivity/tspconfig.yaml
+    - purview/Azure.Analytics.Purview.DataMap/tspconfig.yaml
+    - quantum/Quantum.Workspace/tspconfig.yaml
+    - riskiq/Easm/tspconfig.yaml
+    - schemaregistry/data-plane/SchemaRegistry/tspconfig.yaml
+    - storage/Microsoft.BlobStorage/tspconfig.yaml
+    - translation/data-plane/DocumentTranslation/tspconfig.yaml
+    - translation/data-plane/TextTranslation/tspconfig.yaml
+    - trustedsigning/data-plane/TrustedSigning/tspconfig.yaml
+    - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
+    - webpubsub/data-plane/WebPubSub/tspconfig.yaml

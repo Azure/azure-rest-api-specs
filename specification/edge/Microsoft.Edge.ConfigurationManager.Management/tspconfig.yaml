@@ -12,15 +12,15 @@ options:
     arm-types-dir: "{project-root}/../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.WorkloadOrchestration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.WorkloadOrchestration"
     api-version: "2025-06-01"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/workloadorchestration"
-    package-dir: "armworkloadorchestration"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armworkloadorchestration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armworkloadorchestration"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -28,7 +28,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-workloadorchestration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-workloadorchestration"
     namespace: "azure.mgmt.workloadorchestration"
     generate-test: true
     generate-sample: true
@@ -42,7 +42,7 @@ options:
     api-version: "2025-06-01"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-workloadorchestration"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-workloadorchestration"
     flavor: azure
     package-details:
       name: "@azure/arm-workloadorchestration"
