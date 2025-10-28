@@ -1,7 +1,7 @@
-# HybridConnectivity
+# hybridconnectivity
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for HybridConnectivity.
+> This is the AutoRest configuration file for hybridconnectivity.
 
 ## Configuration
 
