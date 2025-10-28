@@ -84,7 +84,9 @@ model ImportPipelineSourceProperties {
   storageAccessMode?: StorageAccessMode = StorageAccessMode.SasToken;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The trigger properties of the import pipeline
+ */
 model PipelineTriggerProperties {
   /**
    * The source trigger properties of the pipeline.
@@ -92,7 +94,9 @@ model PipelineTriggerProperties {
   sourceTrigger?: PipelineSourceTriggerProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The source trigger properties of the import pipeline
+ */
 model PipelineSourceTriggerProperties {
   /**
    * The current status of the source trigger.
