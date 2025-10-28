@@ -2165,6 +2165,27 @@ model SessionHostProvisioningConfigurationProperties {
 }
 
 /**
+ * The configuration for session host provisioning operations.
+ */
+model SessionHostProvisioningConfigurationPatchProperties {
+  /**
+   * Whether the session host should be set in drain mode following provisioning.
+   */
+  setDrainMode?: boolean;
+
+  /**
+   * The number of session hosts to exist in the Host Pool.
+   */
+  @minValue(1)
+  instanceCount?: int32;
+
+  /**
+   * Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation.
+   */
+  canaryPolicy?: CanaryPolicy;
+}
+
+/**
  * Represents a SessionHostManagementPatch definition.
  */
 model SessionHostManagementPatchProperties {
@@ -2177,6 +2198,18 @@ model SessionHostManagementPatchProperties {
    * Parameters for a hostpool update.
    */
   update?: HostPoolUpdateConfigurationPatchProperties;
+
+  /**
+   * Parameters that apply when session hosts are provisioned.
+   */
+  @added(Versions.v2025_04_01_preview)
+  provisioning?: SessionHostProvisioningConfigurationPatchProperties;
+
+  /**
+   * The policy that should be applied when the Session Host provisioning operation fails.
+   */
+  @added(Versions.v2025_04_01_preview)
+  failedSessionHostCleanupPolicy?: FailedSessionHostCleanupPolicySHC;
 }
 /**
  * List of ApplicationGroup definitions.
