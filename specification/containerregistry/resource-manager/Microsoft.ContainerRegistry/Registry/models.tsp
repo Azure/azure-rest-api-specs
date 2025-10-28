@@ -61,19 +61,6 @@ union LastModifiedByType {
   Key: "Key",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union PipelineOptions {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  OverwriteTags: "OverwriteTags",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  OverwriteBlobs: "OverwriteBlobs",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  DeleteSourceBlobOnSuccess: "DeleteSourceBlobOnSuccess",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ContinueOnErrors: "ContinueOnErrors",
-}
-
 /**
  * Whether or not zone redundancy is enabled for this container registry
  */
@@ -122,7 +109,6 @@ model ProxyResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 /**
