@@ -166,7 +166,7 @@ model ResourceSiteRecoveryTestFailoverCleanupParams {
 
 @doc("Definition of recovery resource reprotect params for site recovery solution.")
 model ResourceSiteRecoveryReprotectParams {
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Disk Reprotect Input Details")
   diskReprotectInputDetails?: DiskReprotectInputDetails[];
 }

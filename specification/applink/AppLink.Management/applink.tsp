@@ -16,7 +16,7 @@ model AppLink is TrackedResource<AppLinkProperties> {
 
 @doc("AppLink properties")
 model AppLinkProperties {
-  @doc("Provisioning state of the AppLink resource")
+  @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

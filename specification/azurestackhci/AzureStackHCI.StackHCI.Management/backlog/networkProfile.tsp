@@ -95,32 +95,32 @@ model NetworkProfileReportedProperties {
 
   @doc("Details of nodes in the network profile.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   nodes?: Node[];
 
   @doc("Details of physical adapters.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   physicalAdapters?: PhysicalAdapter[];
 
   @doc("Details of virtual switches.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   virtualSwitches?: VirtualSwitch[];
 
   @doc("Details of networks.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   networks?: Network[];
 
   @doc("Details of virtual adapters.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   virtualAdapters?: VirtualAdapter[];
 
   @doc("Details of network intents.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   intents?: NetworkIntent[];
 }
 

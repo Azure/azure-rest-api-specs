@@ -15,12 +15,12 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.ArcContainerStorage"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ArcContainerStorage"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ArcContainerStorage"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-arccontainerstorage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-arccontainerstorage"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.arccontainerstorage"
     service-name: "ArcContainerStorage"
@@ -31,22 +31,22 @@ options:
     hierarchyClient: false
     experimental-extensible-enums: true
     enableOperationGroup: true
-    package-dir: "arm-arccontainerstorage"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-arccontainerstorage"
     flavor: "azure"
     package-details:
       name: "@azure/arm-arccontainerstorage"
   "@azure-tools/typespec-python":
     namespace: "azure.mgmt.arccontainerstorage"
-    package-dir: "azure-mgmt-arccontainerstorage"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-arccontainerstorage"
+    package-name: "azure-mgmt-arccontainerstorage"
     flavor: "azure"
     generate-test: true
     generate-sample: true
     api-version: "2024-10-01-preview"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/arccontainerstorage"
-    package-dir: "armarccontainerstorage"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armarccontainerstorage"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armarccontainerstorage"
     flavor: "azure"
     fix-const-stuttering: true
     generate-samples: true

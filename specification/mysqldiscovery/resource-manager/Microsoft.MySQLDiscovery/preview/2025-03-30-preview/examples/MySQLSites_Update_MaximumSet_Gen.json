@@ -1,0 +1,52 @@
+{
+  "title": "MySQLSites_Update_MaximumSet",
+  "operationId": "MySQLSites_Update",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgmysqldiscovery",
+    "siteName": "testSite",
+    "api-version": "2025-03-30-preview",
+    "body": {
+      "tags": {
+        "env": "prod",
+        "team": "migration"
+      },
+      "properties": {
+        "masterSiteId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/demoRG/providers/Microsoft.OffAzure/MasterSites/master1",
+        "migrateProjectId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/demoRG/providers/Microsoft.Migrate/migrateProjects/projectA"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgmysqldiscovery/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite",
+        "name": "testSite",
+        "type": "Microsoft.MySQLDiscovery/MySQLSites",
+        "location": "eastus",
+        "tags": {
+          "env": "prod",
+          "team": "migration"
+        },
+        "properties": {
+          "masterSiteId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/demoRG/providers/Microsoft.OffAzure/MasterSites/master1",
+          "migrateProjectId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/demoRG/providers/Microsoft.Migrate/migrateProjects/projectA",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-03-20T12:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-03-21T09:15:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.MySQLDiscovery/operationResults/xyz123?api-version=2025-03-30-preview"
+      }
+    }
+  }
+}

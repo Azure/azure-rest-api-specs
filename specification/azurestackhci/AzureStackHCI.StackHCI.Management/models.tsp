@@ -3,10 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -1075,14 +1072,13 @@ model DeploymentStep {
    * List of nested steps of AzureStackHCI Cluster Deployment.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   steps?: DeploymentStep[];
 
   /**
    * List of exceptions in AzureStackHCI Cluster Deployment.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   exception?: string[];
 }
 

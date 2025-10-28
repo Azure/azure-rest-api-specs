@@ -14,6 +14,12 @@ model CodeScanSiteProperties {
   @doc("The provisioning state of the CodeScanSite.")
   @visibility(Lifecycle.Read)
   provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+
+  @doc("Migrate project ID.")
+  migrateProjectId: string;
+
+  @doc("Assessment project ID.")
+  assessmentProjectId: string;
 }
 
 @doc("CodeScanSite resource.")

@@ -5619,7 +5619,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name of the backend pool."
+          "description": "name of the backend pool.",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/BackendAddressPoolProperties",
@@ -5909,7 +5914,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name for the frontend IP configuration."
+          "description": "name for the frontend IP configuration.",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/FrontendIPConfigurationProperties",
@@ -6052,10 +6062,6 @@
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
-        },
-        "vmImageRepositoryCredentials": {
-          "$ref": "#/definitions/VmImageRepositoryCredentials",
-          "description": "The credentials used to login to the image repository that has access to the specified image"
         },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier",
@@ -6483,7 +6489,8 @@
       "description": "The hypervisor generation of the Virtual Machine [V1, V2]",
       "enum": [
         "V1",
-        "V2"
+        "V2",
+        "NA"
       ],
       "x-ms-enum": {
         "name": "HyperVGeneration",
@@ -6498,6 +6505,11 @@
             "name": "V2",
             "value": "V2",
             "description": "Generation 2 (V2) hypervisor"
+          },
+          {
+            "name": "NA",
+            "value": "NA",
+            "description": "Not applicable/determined by platform"
           }
         ]
       }
@@ -6689,7 +6701,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name of the inbound nat rule"
+          "description": "name of the inbound nat rule",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/InboundNATRuleProperties",
@@ -6850,12 +6867,16 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name of the backend address"
+          "description": "name of the backend address",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/LoadBalancerBackendAddressProperties",
-          "description": "backend address properties",
-          "readOnly": true
+          "description": "backend address properties"
         }
       },
       "required": [
@@ -7058,7 +7079,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name of the load balancer rule"
+          "description": "name of the load balancer rule",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/LoadBalancerRuleProperties",
@@ -7101,8 +7127,35 @@
           "description": "Reference for the health probe for this connection"
         },
         "loadDistribution": {
-          "$ref": "#/definitions/LoadBalancerRuleSessionPersistenceType",
-          "description": "SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)"
+          "type": "string",
+          "description": "SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)",
+          "default": "Default",
+          "enum": [
+            "Default",
+            "SourceIP",
+            "SourceIPProtocol"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerRuleSessionPersistenceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "Default - 5-tuple hashing"
+              },
+              {
+                "name": "SourceIP",
+                "value": "SourceIP",
+                "description": "Source IP - 2-tuple hashing looking at src-dst ip"
+              },
+              {
+                "name": "SourceIPProtocol",
+                "value": "SourceIPProtocol",
+                "description": "SourceIPProtocol - 3-tuple hashing looking at src-dst ip and ip protocol"
+              }
+            ]
+          }
         },
         "idleTimeoutInMinutes": {
           "type": "integer",
@@ -7255,18 +7308,6 @@
             "allowedResources": [
               {
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/l2Networks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/l3Networks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/trunkedNetworks"
               },
               {
                 "type": "Microsoft.AzureStackHCI/virtualNetwork/subnets"
@@ -7713,6 +7754,14 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
+        "inboundNATRules": {
+          "type": "array",
+          "description": "List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet",
+          "items": {
+            "$ref": "#/definitions/InboundNATRule"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the public IP",
@@ -7867,6 +7916,11 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
+        },
+        "enableSdnPolicy": {
+          "type": "boolean",
+          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.",
+          "default": true
         }
       }
     },
@@ -7913,6 +7967,10 @@
         "dnsSettings": {
           "$ref": "#/definitions/InterfaceDNSSettings",
           "description": "DNS Settings for the interface"
+        },
+        "enableSdnPolicy": {
+          "type": "boolean",
+          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations."
         }
       }
     },
@@ -8230,7 +8288,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name of the load balancer health probe"
+          "description": "name of the load balancer health probe",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/ProbeProperties",
@@ -8262,19 +8325,19 @@
         "intervalInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Probe interval in seconds (5-300) default 15"
+          "description": "Probe interval in seconds (5-300) default 15",
+          "default": 15
         },
         "numberOfProbes": {
           "type": "integer",
           "format": "int32",
-          "description": "number of consecutive probe failures before marking unhealthy (1-20) default 2"
+          "description": "number of consecutive probe failures before marking unhealthy (1-20) default 2",
+          "default": 2
         }
       },
       "required": [
         "protocol",
-        "port",
-        "intervalInSeconds",
-        "numberOfProbes"
+        "port"
       ]
     },
     "ProvisioningAction": {
@@ -8445,6 +8508,11 @@
         "ipConfiguration": {
           "$ref": "#/definitions/IPConfigurationArmReference",
           "description": "network interface or LoadBalancer frontendIPconfiguration using this public IP",
+          "readOnly": true
+        },
+        "natGateway": {
+          "$ref": "#/definitions/NatGatewayArmReference",
+          "description": "natGateway using this public IP",
           "readOnly": true
         },
         "provisioningState": {
@@ -9337,6 +9405,12 @@
           "description": "Boolean indicating whether it is an existing local hard disk or if one should be created.",
           "default": false
         },
+        "localVhdPath": {
+          "type": "string",
+          "format": "password",
+          "description": "Absolute path of the VHD. This is only applicable when createFromLocal is true.",
+          "x-ms-secret": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual hard disk.",
@@ -9637,6 +9711,10 @@
           "type": "boolean",
           "description": "Boolean indicating whether this is an existing local virtual machine or if one should be created.",
           "default": false
+        },
+        "localVmName": {
+          "type": "string",
+          "description": "HyperV name of the VM. This is only applicable when createFromLocal is true."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
@@ -10526,26 +10604,6 @@
           }
         }
       }
-    },
-    "VmImageRepositoryCredentials": {
-      "type": "object",
-      "description": "The credentials used to login to the image repository that has access to the specified image",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "Username for accessing image repository"
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "Password for accessing image repository",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
     },
     "VmSizeEnum": {
       "type": "string",

@@ -310,6 +310,10 @@
           "type": "string",
           "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
         },
+        "witnessAuthenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'."
+        },
         "cloudAccountName": {
           "type": "string",
           "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
@@ -404,6 +408,14 @@
         "hostedApplication": {
           "$ref": "#/definitions/HostedApplicationIntent",
           "description": "Hosted Application details of the cluster."
+        },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )"
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters"
         },
         "sdnIntegration": {
           "$ref": "#/definitions/SdnIntegration",
@@ -943,7 +955,19 @@
           ],
           "x-ms-enum": {
             "name": "SdnIntegrationStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "true",
+                "value": "true",
+                "description": "SDN integration is enabled for the deployment."
+              },
+              {
+                "name": "false",
+                "value": "false",
+                "description": "SDN integration is disabled for the deployment."
+              }
+            ]
           },
           "description": "Specifies whether SDN integration is enabled for the deployment. If this property is not provided, it defaults to 'Disabled' for backward compatibility. The value is set to 'Enabled' when the user opts to enable SDN during initial deployment."
         },

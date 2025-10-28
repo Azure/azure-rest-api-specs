@@ -194,6 +194,12 @@
         "x-ms-examples": {
           "ClusterJobs_CreateOrUpdate_ConfigureArcGateway": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureCVM": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -377,7 +383,9 @@
       "type": "string",
       "description": "ClusterJob Type supported.",
       "enum": [
-        "ConfigureArcGateway"
+        "ConfigureArcGateway",
+        "ConfigureCVM",
+        "ConfigureSdnIntegration"
       ],
       "x-ms-enum": {
         "name": "HciJobType",
@@ -387,6 +395,16 @@
             "name": "ConfigureArcGateway",
             "value": "ConfigureArcGateway",
             "description": "Job to configure arc gateway for the cluster."
+          },
+          {
+            "name": "ConfigureCVM",
+            "value": "ConfigureCVM",
+            "description": "Job to configure cvm (Confidential VM) intent for the cluster."
+          },
+          {
+            "name": "ConfigureSdnIntegration",
+            "value": "ConfigureSdnIntegration",
+            "description": "Job to configure SDN integration for the cluster."
           }
         ]
       }
@@ -446,6 +464,70 @@
         }
       ],
       "x-ms-discriminator-value": "ConfigureArcGateway"
+    },
+    "HciConfigureCVMJobProperties": {
+      "type": "object",
+      "properties": {
+        "confidentialVmIntent": {
+          "$ref": "./hciCommon.json#/definitions/ConfidentialVmIntent",
+          "description": "Defines the customer's intent for updating confidential VM properties"
+        }
+      },
+      "required": [
+        "confidentialVmIntent"
+      ],
+      "description": "Properties for configuring CVM (Confidential VM) intent for the cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureCVM"
+    },
+    "HciConfigureSdnIntegrationJobProperties": {
+      "type": "object",
+      "properties": {
+        "sdnIntegrationIntent": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SdnIntegrationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Enable SDN integration for the deployment."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Disable SDN integration for the deployment."
+              }
+            ]
+          },
+          "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment."
+        },
+        "sdnPrefix": {
+          "type": "string",
+          "maxLength": 8,
+          "pattern": "^(?!.*--)(?!.*-$)[A-Za-z0-9-]{1,8}$",
+          "description": "A string identifier used to construct the Network Controller (NC) REST resource name. This prefix helps group and distinguish SDN-managed network components and must follow specific formatting rules: Must not be empty or contain only whitespace. Must be 8 characters or fewer. Allowed characters: letters (A–Z, a–z), digits (0–9), and hyphens (-). Cannot end with a hyphen. Cannot contain consecutive hyphens."
+        }
+      },
+      "required": [
+        "sdnIntegrationIntent"
+      ],
+      "description": "Properties for configuring SDN integration intent for the cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureSdnIntegration"
     },
     "JobReportedProperties": {
       "type": "object",

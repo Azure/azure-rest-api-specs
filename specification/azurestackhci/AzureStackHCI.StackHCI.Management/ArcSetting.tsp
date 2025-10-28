@@ -215,7 +215,7 @@ model ArcSettingProperties {
    * Properties for each of the default extensions category
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["category"])
+  @identifiers(#["category"])
   defaultExtensions?: DefaultExtensionDetails[];
 }
 
@@ -389,7 +389,7 @@ model ArcConnectivityProperties {
   /**
    * Service configurations associated with the connectivity resource. They are only processed by the server if 'enabled' property is set to 'true'.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["serviceName"])
+  @identifiers(#["serviceName"])
   serviceConfigurations?: ServiceConfiguration[];
 }
 

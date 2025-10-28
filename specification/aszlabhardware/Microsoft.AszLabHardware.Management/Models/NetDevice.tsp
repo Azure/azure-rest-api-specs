@@ -1,6 +1,6 @@
 import "./Port.tsp";
 
-using OpenAPI;
+using Azure.ResourceManager;
 
 @doc("Information about a network device")
 model NetDevice {
@@ -29,6 +29,6 @@ model NetDevice {
   netDeviceMacs: string[];
 
   @doc("Information of individual ports on network device")
-  @extension("x-ms-identifiers", #["portId"])
+  @identifiers(#["portId"])
   ports: Port[];
 }

@@ -16,23 +16,38 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
-@added(Versions.v2025_08_15_preview)
-@doc("ConfigTemplateMetadata Properties")
-model ConfigTemplateMetadataProperties {
-  @doc("Hierarchy ARM Ids")
+@added(Versions.v2025_08_01)
+@doc("Hierarchy Ids With Level for applying config Template which will further generate ARG objects")
+model HierarchyMetadata {
+  @doc("Hierarchy Ids")
   @visibility(Lifecycle.Read)
-  hierarchyIds?: armResourceIdentifier<[
+  hierarchyIds?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Edge/targets";
+      type: "Microsoft.Edge/Targets";
     },
     {
-      type: "Microsoft.Edge/sites";
+      type: "Microsoft.Edge/Sites";
     }
   ]>[];
 
   @doc("Hierarchy Level")
   @visibility(Lifecycle.Read)
   level?: string;
+}
+
+@added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
+@doc("ConfigTemplateMetadata Properties")
+model ConfigTemplateMetadataProperties {
+  @doc("Hierarchy ARM Ids")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  linkedHierarchies?: HierarchyMetadata[];
+
+  @doc("Hierarchy ARM Ids")
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  unLinkedHierarchies?: HierarchyMetadata[];
 
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)
@@ -40,6 +55,7 @@ model ConfigTemplateMetadataProperties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("SolutionSchema Resource")
 @parentResource(ConfigTemplate)
 model ConfigTemplateMetadata
@@ -55,6 +71,7 @@ model ConfigTemplateMetadata
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface ConfigTemplateMetadatas {
   @doc("Get a ConfigTemplateMetadata Resource")

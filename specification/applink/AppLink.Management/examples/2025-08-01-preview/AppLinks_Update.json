@@ -8,9 +8,16 @@
     "appLinkName": "applink-test-01",
     "properties": {
       "tags": {
-        "key7952": "no"
+        "environment": "production",
+        "cost-center": "platform"
       },
-      "properties": {}
+      "properties": {},
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/applink-identity": {}
+        }
+      }
     }
   },
   "responses": {
@@ -19,18 +26,23 @@
         "properties": {
           "provisioningState": "Succeeded"
         },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/applink-identity": {
+              "principalId": "44444444-5555-6666-7777-888888888888",
+              "clientId": "99999999-aaaa-bbbb-cccc-dddddddddddd"
+            }
+          }
+        },
         "tags": {
-          "key2913": "test_tag"
+          "environment": "production",
+          "cost-center": "platform"
         },
         "location": "westus2",
-        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.AppLink/AppLinks/test",
-        "name": "applink01",
-        "type": "Microsoft.AppLink/AppLinks",
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "00000000-1111-2222-3333-444444444444",
-          "tenantId": "00000000-1111-2222-3333-444444444444"
-        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.AppLink/appLinks/applink-test-01",
+        "name": "applink-test-01",
+        "type": "Microsoft.AppLink/appLinks",
         "systemData": {
           "createdBy": "user01",
           "createdByType": "User",
@@ -43,8 +55,8 @@
     },
     "202": {
       "headers": {
-        "Retry-After": 30,
-        "location": "https://rp.applink.azure.netoperationstatus"
+        "Location": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.AppLink/locations/westus2/operationStatuses/12345678-1234-1234-1234-123456789abc",
+        "Retry-After": "30"
       }
     }
   }

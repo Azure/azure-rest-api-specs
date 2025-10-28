@@ -135,14 +135,14 @@ model UpdateProperties {
   /**
    * If update State is HasPrerequisite, this property contains an array of objects describing prerequisite updates before installing this update. Otherwise, it is empty.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["packageName"])
+  @identifiers(#["packageName"])
   prerequisites?: UpdatePrerequisite[];
 
   /**
    * An array of component versions for a Solution Bundle update, and an empty array otherwise.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["version"])
+  @identifiers(#["version"])
   componentVersions?: PackageVersionInfo[];
 
   /**

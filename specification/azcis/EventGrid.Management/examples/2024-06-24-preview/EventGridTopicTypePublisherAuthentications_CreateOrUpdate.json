@@ -1,0 +1,56 @@
+{
+  "title": "Create EventGridTopicTypePublisherAuthentications",
+  "operationId": "EventGridTopicTypePublisherAuthentications_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-06-24-preview",
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "publisherAuthentication",
+    "resource": {
+      "properties": {
+        "topicTypeName": "TestTopicType",
+        "authenticationType": "Certificate",
+        "certificateSubjectNames": [
+          "CN=test.domain.com"
+        ],
+        "azureLocation": "useast"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications/publisherAuthentication",
+        "name": "publisherAuthentication",
+        "type": "Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications",
+        "properties": {
+          "topicTypeName": "TestTopicType",
+          "authenticationType": "Certificate",
+          "certificateSubjectNames": [
+            "CN=test.domain.com"
+          ],
+          "azureLocation": "useast",
+          "provisioningState": "Succeeded",
+          "publisherAuthenticationsOutput": "{\"topicTypePublisherInfoProperties\":{\"certificateSubjectNames\":[\"CN=test.domain.com\"]}}"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications/publisherAuthentication",
+        "name": "publisherAuthentication",
+        "type": "Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications",
+        "properties": {
+          "topicTypeName": "TestTopicType",
+          "authenticationType": "Certificate",
+          "certificateSubjectNames": [
+            "CN=test.domain.com"
+          ],
+          "azureLocation": "useast",
+          "provisioningState": "Succeeded",
+          "publisherAuthenticationsOutput": "{\"topicTypePublisherInfoProperties\":{\"certificateSubjectNames\":[\"CN=test.domain.com\"]}}"
+        }
+      }
+    }
+  }
+}

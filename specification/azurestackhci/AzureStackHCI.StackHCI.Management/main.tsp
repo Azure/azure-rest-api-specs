@@ -18,7 +18,7 @@ import "./Cluster.tsp";
 import "./DeploymentSetting.tsp";
 import "./EdgeDeviceJob.tsp";
 import "./EdgeDevice.tsp";
-import "./HCIExtension.tsp";
+import "./Extension.tsp";
 import "./Offer.tsp";
 import "./Publisher.tsp";
 import "./SecuritySetting.tsp";
@@ -56,7 +56,5 @@ enum Versions {
   /**
    * The 2025-09-22-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_09_01_preview: "2025-09-22-preview",
 }

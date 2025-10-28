@@ -29,19 +29,19 @@ model LinkProperties {
 
   /** The Azure resource ID of the port that this network link is connected to the first device. */
   @visibility(Lifecycle.Read)
-  deviceLogicalPortOneId: DeviceLogicalPortResourceId;
+  deviceLogicalPortOneId?: DeviceLogicalPortResourceId;
 
   /** The Azure resource ID of the second device connected via this network link. */
   @visibility(Lifecycle.Read)
-  deviceTwoId: DeviceResourceId;
+  deviceTwoId?: DeviceResourceId;
 
   /** The Azure resource ID of the port that this network link is connected to the second device. */
   @visibility(Lifecycle.Read)
-  deviceLogicalPortTwoId: DeviceLogicalPortResourceId;
+  deviceLogicalPortTwoId?: DeviceLogicalPortResourceId;
 
   /** The ID of the plane that this link is associated with. */
   @visibility(Lifecycle.Read)
-  planeId: string;
+  planeId?: string;
 
   /** The Azure resource ID of the cluster that the rack is associated with, if any. */
   @visibility(Lifecycle.Read)

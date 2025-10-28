@@ -168,10 +168,10 @@ model MachineAssistantJobProperties extends EdgeMachineJobProperties {
   intent: string;
 
   @doc("The source of the model used for analysis.")
-  source: string;
+  source?: string;
 
   @doc("The type of model used for analysis.")
-  type: string;
+  type?: string;
 
   @doc("Machine Assistant job reported properties.")
   @visibility(Lifecycle.Read)
@@ -448,7 +448,7 @@ model EceActionStatus {
 
   @doc("List of steps of Edge device job.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: Step[];
 }
 
@@ -491,7 +491,7 @@ model Step {
 
   @doc("List of nested steps during job execution..")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: Step[];
 
   @doc("List of exceptions in job execution.")
@@ -563,6 +563,9 @@ union OSOperationType {
 
   @doc("OS Update operation")
   Update: "Update",
+
+  @doc("OS ReImage operation")
+  ReImage: "ReImage",
 }
 
 @doc("User configuration.")

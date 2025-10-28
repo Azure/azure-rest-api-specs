@@ -89,15 +89,6 @@ model DstsClaimProvisioning {
   dstsInstance?: string;
 }
 
-@doc("This model represents an IP range in SCI.")
-model RequiredIpRange {
-  @doc("Gets or sets the start of IP range. E.g. \"172.1.1.1\".")
-  fromIpAddress: string;
-
-  @doc("Gets or sets the end of IP range. E.g. \"172.1.1.5\".")
-  toIpAddress: string;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-invalid-chars" "Arm resource name must contain only alphanumeric characters"
 @doc("dstsServiceClientIdentityResource Resource")
 model DstsServiceClientIdentityResource

@@ -117,13 +117,13 @@ model AllocationAggregateReservation {
   /**
    * [Output only] List of resources currently in use.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   inUseResources?: AllocationAggregateReservationReservedResourceInfo[];
 
   /**
    * List of reserved resources (CPUs, memory, accelerators).
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   reservedResources?: AllocationAggregateReservationReservedResourceInfo[];
 
   /**
@@ -245,7 +245,7 @@ model AttachedDisk {
   /**
    * A list of features to enable on the guest operating system. Applicable only for bootable images. Read Enabling guest operating system features to see a list of available options.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   guestOsFeatures?: GuestOsFeature[];
 
   /**
@@ -556,7 +556,7 @@ model Scheduling {
   /**
    * A set of node affinity and anti-affinity configurations. Refer to Configuring node affinity for more information. Overrides reservationAffinity.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nodeAffinities?: SchedulingNodeAffinity[];
 
   /**
@@ -683,7 +683,7 @@ model Status {
   /**
    * A list of messages that carry the error details. There is a common set of message types for APIs to use.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: Record<unknown>[];
 
   /**
@@ -783,19 +783,19 @@ model InitialStateConfig {
   /**
    * The Key Database (db).
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dbs?: FileContentBuffer[];
 
   /**
    * The forbidden key database (dbx).
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dbxs?: FileContentBuffer[];
 
   /**
    * The Key Exchange Key (KEK).
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   keks?: FileContentBuffer[];
 
   /**
@@ -847,7 +847,7 @@ model GcpComputeInstanceProperties {
   /**
    * Array of disks associated with this instance. Persistent disks must be created before you can assign them.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disks?: AttachedDisk[];
 
   /**
@@ -863,7 +863,7 @@ model GcpComputeInstanceProperties {
   /**
    * A list of the type and count of accelerator cards attached to the instance.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   guestAccelerators?: AcceleratorConfig[];
 
   /**
@@ -1002,7 +1002,7 @@ model GcpComputeInstanceProperties {
   /**
    * A list of service accounts, with their specified scopes, authorized for this instance. Only one service account per VM instance is supported. Service accounts generate access tokens that can be accessed through the metadata server and used to authenticate applications on the instance. See Service Accounts for more information.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serviceAccounts?: ServiceAccount[];
 
   /**
@@ -1084,7 +1084,7 @@ model Metadata {
   /**
    * Array of key/value pairs. The total size of all keys and values must be less than 512 KB.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   items?: {
     @pattern("[a-zA-Z0-9-_]{1,128}")
     key?: string;
@@ -1106,13 +1106,13 @@ model NetworkInterface {
   /**
    * An array of configurations for this interface. Currently, only one access config, ONE_TO_ONE_NAT, is supported. If there are no accessConfigs specified, then this instance will have no external internet access.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   accessConfigs?: AccessConfig[];
 
   /**
    * An array of alias IP ranges for this network interface. You can only specify this field for network interfaces in VPC networks.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   aliasIpRanges?: AliasIpRange[];
 
   /**
@@ -1128,7 +1128,7 @@ model NetworkInterface {
   /**
    * An array of IPv6 access configurations for this interface. Currently, only one IPv6 access config, DIRECT_IPV6, is supported. If there is no ipv6AccessConfig specified, then this instance will have no external IPv6 Internet access.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipv6AccessConfigs?: AccessConfig[];
 
   /**
@@ -1215,7 +1215,7 @@ model Help {
   /**
    * URL(s) pointing to additional information on handling the current error.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   links?: HelpLink[];
 }
 

@@ -32,6 +32,10 @@ union HyperVGeneration {
   @doc("Generation 2 (V2) hypervisor")
   V2: "V2",
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Not applicable/determined by platform")
+  NA: "NA",
+
   string,
 }
 
@@ -617,18 +621,6 @@ model LogicalNetworkArmReference {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
     },
     {
-      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l2Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l3Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/trunkedNetworks";
-    },
-    {
       type: "Microsoft.AzureStackHCI/virtualNetwork/subnets";
     }
   ]>;
@@ -797,10 +789,6 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
-  @added(Versions.v2024_08_01_preview)
-  @doc("The credentials used to login to the image repository that has access to the specified image")
-  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
-
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -822,17 +810,6 @@ model GalleryImageProperties {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
     }
   ]>;
-}
-
-@added(Versions.v2024_08_01_preview)
-@doc("The credentials used to login to the image repository that has access to the specified image")
-model VmImageRepositoryCredentials {
-  @doc("Username for accessing image repository")
-  username: string;
-
-  @doc("Password for accessing image repository")
-  @secret
-  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -1102,7 +1079,7 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 
   @doc("A collection of references to logical networks that are currently using this NSG")
@@ -1202,6 +1179,10 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.")
+  enableSdnPolicy?: boolean = true;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -1513,6 +1494,10 @@ model PublicIPAddressProperties {
   @visibility(Lifecycle.Read)
   ipConfiguration?: IPConfigurationArmReference;
 
+  @doc("natGateway using this public IP")
+  @visibility(Lifecycle.Read)
+  natGateway?: NatGatewayArmReference;
+
   @doc("Provisioning state of the public IP")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
@@ -1545,6 +1530,8 @@ model InboundNATRuleProperties {
 @doc("Inbound nat rule properties")
 model InboundNATRule {
   @doc("name of the inbound nat rule")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties of the inbound nat rule")
@@ -1556,13 +1543,18 @@ model InboundNATRule {
 model NatGatewayProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("List of public ip addresses that the gateway can use for NAT.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   publicIPAddresses?: PublicIPAddressArmReference[];
 
   @visibility(Lifecycle.Read)
   @doc("List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subnets?: VirtualNetworkSubnetArmReference[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
+  @extension("x-ms-identifiers", #[])
+  inboundNATRules?: InboundNATRule[];
 
   @doc("Provisioning state of the public IP")
   @visibility(Lifecycle.Read)
@@ -1601,6 +1593,8 @@ model NatGatewayStatusProvisioningStatus {
 @doc("FrontendIP Configuration object for a load balancer.")
 model FrontendIPConfiguration {
   @doc("name for the frontend IP configuration.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties for this frontendIPConfiguration")
@@ -1631,7 +1625,7 @@ model FrontendIPConfigurationProperties {
 @doc("Backend address pool for the load balancer.")
 model BackendAddressPoolProperties {
   @doc("List of backend addresses for the backend pool")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   loadBalancerBackendAddresses?: LoadBalancerBackendAddress[];
 
   @doc("Reference to the virtual network for this backend pool. Mutually exclusive with logicalNetwork")
@@ -1645,6 +1639,8 @@ model BackendAddressPoolProperties {
 @doc("Backend address pool for the load balancer.")
 model BackendAddressPool {
   @doc("name of the backend pool.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties for the backend pool")
@@ -1682,10 +1678,11 @@ model LoadBalancerBackendAddressProperties {
 @doc("LoadBalancer Backend Address")
 model LoadBalancerBackendAddress {
   @doc("name of the backend address")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("backend address properties")
-  @visibility(Lifecycle.Read)
   properties: LoadBalancerBackendAddressProperties;
 }
 
@@ -1712,7 +1709,7 @@ model LoadBalancerRuleProperties {
   probe?: LoadBalancerProbeReference;
 
   @doc("SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)")
-  loadDistribution?: LoadBalancerRuleSessionPersistenceType;
+  loadDistribution?: LoadBalancerRuleSessionPersistenceType = LoadBalancerRuleSessionPersistenceType.Default;
 
   @doc("Time for which connections are preserved before being torn down.")
   idleTimeoutInMinutes?: int32;
@@ -1722,6 +1719,8 @@ model LoadBalancerRuleProperties {
 @doc("LoadBalancer Rules")
 model LoadBalancerRule {
   @doc("name of the load balancer rule")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("load balancer rule properties")
@@ -1741,16 +1740,18 @@ model ProbeProperties {
   requestPath?: string;
 
   @doc("Probe interval in seconds (5-300) default 15")
-  intervalInSeconds: int32;
+  intervalInSeconds?: int32 = 15;
 
   @doc("number of consecutive probe failures before marking unhealthy (1-20) default 2")
-  numberOfProbes: int32;
+  numberOfProbes?: int32 = 2;
 }
 
 @added(Versions.v2025_09_01_preview)
 @doc("Load balancer health probes")
 model Probe {
   @doc("name of the load balancer health probe")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("load balancer rule properties")
@@ -1917,6 +1918,10 @@ model NetworkInterfacesUpdateProperties {
 
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.")
+  enableSdnPolicy?: boolean;
 }
 
 @doc("Tags object for patch operations.")
@@ -2010,6 +2015,11 @@ model VirtualHardDiskProperties {
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
   createFromLocal?: boolean = false;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Absolute path of the VHD. This is only applicable when createFromLocal is true.")
+  @secret
+  localVhdPath?: string;
 
   @doc("Provisioning state of the virtual hard disk.")
   @visibility(Lifecycle.Read)
@@ -2177,6 +2187,10 @@ model VirtualMachineInstanceProperties {
   @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
   createFromLocal?: boolean = false;
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("HyperV name of the VM. This is only applicable when createFromLocal is true.")
+  localVmName?: string;
+
   @doc("Provisioning state of the virtual machine instance.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
@@ -2280,7 +2294,7 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
@@ -2590,7 +2604,7 @@ model StorageProfileUpdate {
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 

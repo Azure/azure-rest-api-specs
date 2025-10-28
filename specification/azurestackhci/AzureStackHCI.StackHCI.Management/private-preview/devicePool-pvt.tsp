@@ -124,7 +124,7 @@ model DevicePoolProperties {
 
   @doc("operation status details for device pool.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operationDetails?: OperationDetail[];
 }
 

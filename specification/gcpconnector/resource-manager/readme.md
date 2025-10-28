@@ -40,6 +40,9 @@ input-file:
   - Microsoft.GcpConnector/preview/2025-12-01-preview/computeInstance.json
   - Microsoft.GcpConnector/preview/2025-12-01-preview/operations.json
   - Microsoft.GcpConnector/preview/2025-12-01-preview/storageBucket.json
+  - Microsoft.GcpConnector/preview/2025-12-01-preview/bigQueryDataset.json
+  - Microsoft.GcpConnector/preview/2025-12-01-preview/sqlAdminInstance.json
+  - Microsoft.GcpConnector/preview/2025-12-01-preview/containerClusters.json
 ```
 
 ## Suppression
@@ -48,10 +51,66 @@ input-file:
 directive:
   - suppress: AvoidAdditionalProperties
     reason: 1. Properties in GCP definition represents user defined gcpTags.
-    from:
-        - cloudFunction.json
-        - computeInstance.json
-        - storageBucket.json
+    from: computeInstance.json
+    where:
+      - $.definitions.InstanceProperties.properties.gcpTags
+      - $.definitions.AttachedDiskInitializeParams.properties.labels
+      - $.definitions.AttachedDiskInitializeParams.properties.resourceManagerTags
+      - $.definitions.ErrorInfo.properties.metadatas
+      - $.definitions.GcpComputeInstanceProperties.properties.labels
+      - $.definitions.InstanceParams.properties.resourceManagerTags
+      - $.definitions.SetCommonInstanceMetadataOperationMetadata.properties.perLocationOperations
+      - $.definitions.Status.properties.details
+
+  - suppress: AvoidAdditionalProperties
+    reason: 1. Properties in GCP definition represents user defined gcpTags.
+    from: cloudFunction.json
+    where:
+      - $.definitions.FunctionProperties.properties.gcpTags
+      - $.definitions.BuildConfig.properties.environmentVariables
+      - $.definitions.CloudFunctionTagsUpdate.properties.tags
+      - $.definitions.GcpFunctionProperties.properties.labels
+      - $.definitions.ServiceConfig.properties.environmentVariables
+
+  - suppress: AvoidAdditionalProperties
+    reason: 1. Properties in GCP definition represents user defined gcpTags.
+    from: bigQueryDataset.json
+    where:
+      - $.definitions.BigQueryDatasetProperties.properties.gcpTags
+      - $.definitions.BigQueryDatasetTagsUpdate.properties.tags
+      - $.definitions.GcpBigQueryDatasetProperties.properties.labels
+      - $.definitions.GcpBigQueryDatasetProperties.properties.resourceTags
+
+  - suppress: AvoidAdditionalProperties
+    reason: 1. Properties in GCP definition represents user defined gcpTags.
+    from: containerClusters.json
+    where:
+      - $.definitions.ClusterProperties.properties.gcpTags
+      - $.definitions.AutoprovisioningNodePoolDefaults.properties.resourceLabels
+      - $.definitions.GcpContainerClusterProperties.properties.resourceLabels
+      - $.definitions.LinuxNodeConfig.properties.sysctls
+      - $.definitions.MaintenanceWindow.properties.maintenanceExclusions
+      - $.definitions.NodeConfig.properties.labels
+      - $.definitions.NodeConfig.properties.metadata
+      - $.definitions.NodeConfig.properties.resourceLabels
+      - $.definitions.OperationError.properties.details
+      - $.definitions.ResourceManagerTags.properties.tags
+
+  - suppress: AvoidAdditionalProperties
+    reason: 1. Properties in GCP definition represents user defined gcpTags.
+    from: storageBucket.json
+    where:
+      - $.definitions.BucketProperties.properties.gcpTags
+      - $.definitions.GcpBucketProperties.properties.labels
+      - $.definitions.StorageBucketTagsUpdate.properties.tags
+
+  - suppress: AvoidAdditionalProperties
+    reason: 1. Properties in GCP definition represents user defined gcpTags.
+    from: sqlAdminInstance.json
+    where:
+      - $.definitions.SQLAdminInstanceProperties.properties.gcpTags
+      - $.definitions.SQLAdminInstanceTagsUpdate.properties.tags
+      - $.definitions.Settings.properties.userLabels
 ```
 ---
 

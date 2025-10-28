@@ -831,6 +831,19 @@
           "description": "Software Assurance properties of the cluster.",
           "$ref": "#/definitions/SoftwareAssuranceProperties"
         },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )"
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters",
+          "readOnly": true
+        },
+        "clusterWitness": {
+          "$ref": "#/definitions/ClusterWitnessProperties",
+          "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations."
+        },
         "hostedApplication": {
           "$ref": "#/definitions/HostedApplicationProperties",
           "description": "Hosted Application details of the cluster.",
@@ -915,7 +928,12 @@
         },
         "sdnProperties": {
           "description": "Software Defined Networking Properties of the cluster",
-          "$ref": "#/definitions/SdnProperties"
+          "$ref": "./hciCommon.json#/definitions/SdnProperties"
+        },
+        "arcGatewayProperties": {
+          "description": "Azure Arc Gateway properties of the cluster.",
+          "$ref": "#/definitions/ArcGatewayProperties",
+          "readOnly": true
         },
         "localAvailabilityZones": {
           "type": "array",
@@ -1293,6 +1311,17 @@
         "attestationServiceEndpoint": {
           "description": "Region specific endpoint for Microsoft Azure Attestation service for the cluster",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterWitnessProperties": {
+      "type": "object",
+      "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.",
+      "properties": {
+        "authenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'.",
           "readOnly": true
         }
       }
@@ -1746,23 +1775,35 @@
       "additionalProperties": false,
       "readOnly": true
     },
-    "SdnProperties": {
+    "ArcGatewayProperties": {
       "type": "object",
-      "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
+      "description": "Azure Arc Gateway properties of the cluster.",
       "properties": {
-        "sdnStatus": {
-          "$ref": "./hciCommon.json#/definitions/SdnStatus",
-          "readOnly": true
-        },
-        "sdnDomainName": {
+        "arcGatewayStatus": {
           "type": "string",
-          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
-          "readOnly": true
-        },
-        "sdnApiAddress": {
-          "type": "string",
-          "description": "Represents the API address for the SDN deployment.",
-          "readOnly": true
+          "description": "Status of the Azure Arc Gateway on the cluster.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ArcGatewayStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Azure Arc Gateway is enabled on the cluster."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Azure Arc Gateway is disabled on the cluster."
+              }
+            ]
+          }
         }
       }
     },
@@ -1782,6 +1823,7 @@
             "Disabled"
           ],
           "default": "Disabled",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ConfidentialVmStatus",
             "modelAsString": true,
@@ -1802,8 +1844,7 @@
                 "description": "Confidential VM support is disabled. None of the nodes in the cluster are CVM capable."
               }
             ]
-          },
-          "readOnly": true
+          }
         }
       }
     }

@@ -42,7 +42,7 @@ model GoalResourceProperties {
 
   @doc("List of service groups of which this resource is memberof.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["serviceGroupId"])
+  @identifiers(#["serviceGroupId"])
   serviceGroupMemberships?: ServiceGroupMembership[];
 
   @doc("Provisioning state")

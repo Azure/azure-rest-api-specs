@@ -1,0 +1,52 @@
+{
+  "title": "List copilots by subscription",
+  "operationId": "Copilots_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilots/my-copilot",
+            "name": "my-copilot",
+            "type": "Microsoft.PortalServices/copilots",
+            "location": "East US",
+            "properties": {
+              "spendingLimit": 1000,
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2024-12-01T10:00:00.000Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-12-01T10:00:00.000Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-dev/providers/Microsoft.PortalServices/copilots/dev-copilot",
+            "name": "dev-copilot",
+            "type": "Microsoft.PortalServices/copilots",
+            "location": "West US 2",
+            "properties": {
+              "spendingLimit": 500,
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "dev@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2024-11-15T14:30:00.000Z",
+              "lastModifiedBy": "dev@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-11-15T14:30:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -18,6 +18,7 @@ namespace Microsoft.Edge;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Solution Metadata Properties")
 model SolutionMetadataProperties {
   @doc("Display name of the solution metadata resource")
@@ -34,9 +35,18 @@ model SolutionMetadataProperties {
       type: "Microsoft.Edge/SolutionTemplates";
     }
   ]>;
+
+  @doc("Latest solution template version")
+  @visibility(Lifecycle.Read)
+  latestVersion?: string;
+
+  @doc("Current solution template version")
+  @visibility(Lifecycle.Read)
+  currentVersion?: string;
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Solution Metadata Resource attached to a Target or Site")
 model SolutionMetadata
   is Azure.ResourceManager.ExtensionResource<SolutionMetadataProperties> {
@@ -51,6 +61,7 @@ model SolutionMetadata
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface SolutionMetadatas {
   @doc("Get a Solution resource")

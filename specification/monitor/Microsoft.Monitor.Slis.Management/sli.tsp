@@ -43,12 +43,12 @@ model SliResource {
   executionState: ExecutionState;
 
   @doc("Destination AMW accounts.")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   destinationAmwAccounts: AmwAccount[];
 
   @visibility(Lifecycle.Read)
   @doc("The destination Azure Monitor Workspace (AMW) accounts where the SLI emits metrics.")
-  @OpenAPI.extension("x-ms-identifiers", #["metricNamespace", "metricName"])
+  @identifiers(#["metricNamespace", "metricName"])
   destinationMetrics: Metric[];
 
   @doc("Defines the SLO baseline associated with the SLI.")
@@ -156,18 +156,4 @@ interface Slis {
   @doc("Lists all SLI resources under a parent resource.")
   @route(ServiceGroupRoute)
   listByParent is ArmResourceListByParent<Sli, ServiceGroupParameters>;
-
-  /**
-  POST Actions
-  */
-  @route(ServiceGroupRoute)
-  @armResourceAction(Sli)
-  @post
-  @doc("Returns preview data for the signal.")
-  signalPreview is ArmResourceActionSync<
-    Sli,
-    Signal,
-    void,
-    ServiceGroupParameters
-  >;
 }

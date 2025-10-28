@@ -5,6 +5,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./applink.tsp";
 import "./applinkmember.tsp";
+import "./applinkmemberupgradehistory.tsp";
+import "./applinkavailableversion.tsp";
 
 using Versioning;
 using Azure.ResourceManager;

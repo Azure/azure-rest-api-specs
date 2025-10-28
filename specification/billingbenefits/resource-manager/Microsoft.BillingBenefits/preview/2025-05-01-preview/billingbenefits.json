@@ -3734,6 +3734,20 @@
         "modelAsString": true
       }
     },
+    "Duration": {
+      "type": "string",
+      "description": "Duration for which the benefit is active.",
+      "enum": [
+        "P1M",
+        "P1Y",
+        "P3Y",
+        "P5Y"
+      ],
+      "x-ms-enum": {
+        "name": "Term",
+        "modelAsString": true
+      }
+    },
     "DisplayName": {
       "type": "string",
       "description": "Display name"
@@ -6167,6 +6181,9 @@
         },
         "benefitResourceId": {
           "$ref": "#/definitions/BenefitResourceId"
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
         }
       }
     },
@@ -6178,11 +6195,6 @@
         {
           "$ref": "#/definitions/ConditionalCreditProperties"
         }
-      ],
-      "required": [
-        "productCode",
-        "startAt",
-        "systemId"
       ],
       "properties": {
         "systemId": {
@@ -6210,12 +6222,6 @@
         {
           "$ref": "#/definitions/ConditionalCreditProperties"
         }
-      ],
-      "required": [
-        "primaryResourceId",
-        "systemId",
-        "productCode",
-        "startAt"
       ],
       "properties": {
         "primaryResourceId": {
@@ -6275,12 +6281,6 @@
     "ConditionalCreditMilestoneBase": {
       "type": "object",
       "description": "Base milestone definition for conditional credits",
-      "required": [
-        "milestoneId",
-        "name",
-        "endAt",
-        "spendTarget"
-      ],
       "properties": {
         "milestoneId": {
           "type": "string",
@@ -6330,9 +6330,6 @@
           "$ref": "#/definitions/ConditionalCreditMilestoneBase"
         }
       ],
-      "required": [
-        "award"
-      ],
       "properties": {
         "award": {
           "$ref": "#/definitions/Award",
@@ -6356,14 +6353,6 @@
     "Award": {
       "type": "object",
       "description": "Award details for milestone completion",
-      "required": [
-        "credit",
-        "startAt",
-        "endAt",
-        "resourceId",
-        "systemId",
-        "balanceVersion"
-      ],
       "properties": {
         "credit": {
           "$ref": "#/definitions/Commitment",
@@ -6392,6 +6381,9 @@
         "balanceVersion": {
           "$ref": "#/definitions/BalanceVersion",
           "readOnly": true
+        },
+        "duration": {
+          "$ref": "#/definitions/Duration"
         }
       }
     },
@@ -6432,18 +6424,52 @@
     },
     "ConditionalCreditList": {
       "type": "object",
-      "description": "List of conditional credits",
+      "description": "List of applicable conditional credits",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConditionalCredit"
           },
-          "description": "List of conditional credits"
+          "description": "List of applicable conditional credits"
         },
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results"
+        }
+      }
+    },
+    "ApplicableConditionalCreditList": {
+      "type": "object",
+      "description": "List of applicable conditional credits",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicableConditionalCredit"
+          },
+          "description": "List of applicable conditional credits"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results"
+        }
+      }
+    },
+    "ApplicableConditionalCredit": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "Applicable Conditional Credit.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Applicable Conditional Credit properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConditionalCreditProperties"
         }
       }
     },

@@ -9,20 +9,20 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-saashub"
     flavor: azure
-    package-dir: "azure-resourcemanager-saashub"
     namespace: "com.azure.resourcemanager.saashub"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-saashub"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-saashub"
     package-name: "@azure/arm-saashub"
     package-details:
       name: "@azure/arm-saashub"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/saashub"
-    package-dir: "armsaashub"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsaashub"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsaashub"
     fix-const-stuttering: true
     generate-examples: true
     generate-samples: true
@@ -31,14 +31,14 @@ options:
     inject-spans: true
   "@azure-tools/typespec-python":
     flavor: azure
-    package-dir: "azure-mgmt-saashub"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-saashub"
+    package-name: "azure-mgmt-saashub"
     namespace: "azure.mgmt.saashub"
     generate-test: true
     generate-sample: true
   # "@azure-tools/typespec-csharp":  # Temporarily disabled due to beta emitter bug (v0.2.0-beta.20250701.1)
   #   flavor: azure                 # Error: 'AzureResourceManagerSaasHubContext' does not contain a definition for 'Default'
-  #   package-dir: "Azure.ResourceManager.SaasHub"  # Generated code tries to access AzureResourceManagerSaasHubContext.Default which doesn't exist
+  #   emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.SaasHub"  # Generated code tries to access AzureResourceManagerSaasHubContext.Default which doesn't exist
   #   namespace: "Azure.ResourceManager.SaasHub"     # Try explicit namespace instead of {package-dir} to avoid context naming issues
   #   clear-output-folder: true
   #   # Alternative workaround approaches to try:

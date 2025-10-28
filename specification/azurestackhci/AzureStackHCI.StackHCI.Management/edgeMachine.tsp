@@ -133,7 +133,7 @@ model EdgeMachineProperties {
 
   @doc("operation status details for edge machine.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operationDetails?: OperationDetail[];
 
   @doc("Last time data updated to service.")
