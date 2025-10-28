@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./ExportPipeline.tsp";
+import "./Pipeline.models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Versioning;
@@ -49,7 +50,12 @@ model ExportPipelineTargetProperties {
   /**
    * They key vault secret uri to obtain the target storage SAS token.
    */
-  keyVaultUri: string;
+  keyVaultUri?: string;
+
+  /**
+   * The storage access mode used for the customer storage account.
+   */
+  storageAccessMode?: StorageAccessMode = StorageAccessMode.SasToken;
 }
 
 /**

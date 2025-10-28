@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./ImportPipeline.tsp";
+import "./Pipeline.models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Versioning;
@@ -75,7 +76,12 @@ model ImportPipelineSourceProperties {
   /**
    * They key vault secret uri to obtain the source storage SAS token.
    */
-  keyVaultUri: string;
+  keyVaultUri?: string;
+
+  /**
+   * The storage access mode used for the customer storage account.
+   */
+  storageAccessMode?: StorageAccessMode = StorageAccessMode.SasToken;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
