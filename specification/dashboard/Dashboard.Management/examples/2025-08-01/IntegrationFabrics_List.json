@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sampleIntegration",
+            "type": "Microsoft.Dashboard/grafana/integrationFabrics",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Dashboard/grafana/myWorkspace/integrationFabrics/myIntegrationFabricName",
+            "location": "West US",
+            "properties": {
+              "dataSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAmw1",
+              "provisioningState": "Succeeded",
+              "scenarios": [
+                "scenario1",
+                "scenario2"
+              ],
+              "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myAks1"
+            }
+          },
+          {
+            "name": "sampleIntegration",
+            "type": "Microsoft.Dashboard/grafana/integrationFabrics",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Dashboard/grafana/myWorkspace/integrationFabrics/myIntegrationFabricName",
+            "location": "West US",
+            "properties": {
+              "dataSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAmw2",
+              "provisioningState": "Succeeded",
+              "scenarios": [
+                "scenario1",
+                "scenario2"
+              ],
+              "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myAks2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "IntegrationFabrics_List",
+  "title": "IntegrationFabrics_List"
+}

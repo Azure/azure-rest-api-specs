@@ -88,6 +88,12 @@ model DayOfWeekUpdate {
 @maxLength(255)
 scalar Ocid extends string;
 
+@added(Versions.v20250701_preview)
+@doc("SshPublicKey string")
+@minLength(1)
+@maxLength(1024)
+scalar SshPublicKey extends string;
+
 @doc("LicenseModel enum")
 union LicenseModel {
   @doc("License included")
@@ -284,6 +290,54 @@ union SystemShapes {
 
   @doc("Exadata DB on Exascale Infrastructure shape")
   ExaDbXs: "ExaDbXS",
+
+  string,
+}
+
+@added(Versions.v20250701_preview)
+@doc("Allowed values for BaseDb System Shapes")
+union BaseDbSystemShapes {
+  @doc("Vm Standard X86")
+  VMStandardX86: "VM.Standard.x86",
+
+  string,
+}
+
+@added(Versions.v20250701_preview)
+@doc("Storage Management type enum.")
+union StorageManagementType {
+  @doc("Logical Volume management")
+  LVM: "LVM",
+
+  string,
+}
+
+@added(Versions.v20250701_preview)
+@doc("Allowed values for shape family.")
+union ShapeFamilyType {
+  @doc("Family value for Exadata Shape")
+  Exadata: "EXADATA",
+
+  @doc("Family value for Exadb XS Shape")
+  ExadbXs: "EXADB_XS",
+
+  @doc("Family value for Single Node Shape")
+  SingleNode: "SINGLENODE",
+
+  @doc("Family value for Virtual Machine Shape")
+  VirtualMachine: "VIRTUALMACHINE",
+
+  string,
+}
+
+@doc("The type of Exascale storage used for Exadata VM cluster. The default is SMART_STORAGE which supports Oracle Database 23ai and later")
+@added(Versions.v20250801_preview)
+union ShapeAttribute {
+  @doc("Smart storage")
+  SMART_STORAGE: "SMART_STORAGE",
+
+  @doc("block storage")
+  BLOCK_STORAGE: "BLOCK_STORAGE",
 
   string,
 }
