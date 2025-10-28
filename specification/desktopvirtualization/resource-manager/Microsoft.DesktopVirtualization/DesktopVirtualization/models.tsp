@@ -2607,7 +2607,6 @@ model HostPoolProperties {
   /**
    * DeploymentScope type for HostPool.
    */
-  @visibility(Lifecycle.Read)
   @added(Versions.v2025_08_01_preview)
   deploymentScope?: DeploymentScope;
 

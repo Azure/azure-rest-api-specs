@@ -7889,8 +7889,7 @@
         },
         "deploymentScope": {
           "$ref": "#/definitions/DeploymentScope",
-          "description": "DeploymentScope type for HostPool.",
-          "readOnly": true
+          "description": "DeploymentScope type for HostPool."
         },
         "oboTenantId": {
           "type": "string",
@@ -11020,6 +11019,14 @@
         "update": {
           "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties",
           "description": "Parameters for a hostpool update."
+        },
+        "provisioning": {
+          "$ref": "#/definitions/SessionHostProvisioningConfigurationPatchProperties",
+          "description": "Parameters that apply when session hosts are provisioned."
+        },
+        "failedSessionHostCleanupPolicy": {
+          "$ref": "#/definitions/FailedSessionHostCleanupPolicySHC",
+          "description": "The policy that should be applied when the Session Host provisioning operation fails."
         }
       }
     },
@@ -11421,6 +11428,26 @@
           "x-ms-identifiers": [
             "healthCheckName"
           ]
+        }
+      }
+    },
+    "SessionHostProvisioningConfigurationPatchProperties": {
+      "type": "object",
+      "description": "The configuration for session host provisioning operations.",
+      "properties": {
+        "setDrainMode": {
+          "type": "boolean",
+          "description": "Whether the session host should be set in drain mode following provisioning."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of session hosts to exist in the Host Pool.",
+          "minimum": 1
+        },
+        "canaryPolicy": {
+          "$ref": "#/definitions/CanaryPolicy",
+          "description": "Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation."
         }
       }
     },
