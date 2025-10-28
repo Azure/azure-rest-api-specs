@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
+using Azure.Core.Foundations;
 using Azure.Core.Traits;
 using Azure.Core.Traits.Private;
 using TypeSpec.Rest;
@@ -315,58 +316,5 @@ model SpeechToTextCustomPage<
     Traits,
     Azure.Core.Traits.TraitLocation.Response,
     Azure.Core.Traits.TraitContext.List
-  >;
-}
-
-interface CustomResourceOperations<
-  InterfaceTraits extends TypeSpec.Reflection.Model,
-  ErrorResponse = Azure.Core.Foundations.ErrorResponse
-> {
-  /**
-   * Resource list operation template.
-   * @template Resource Resource type.
-   * @template Traits Object describing the traits of the operation.
-   */
-  // @Foundations.Private.ensureVerb("ResourceList", "GET")
-  ResourceListWithCustomPage<
-    Resource extends TypeSpec.Reflection.Model,
-    Traits extends TypeSpec.Reflection.Model = {}
-  > is Foundations.ResourceList<
-    Resource,
-    TraitProperties<
-      Traits & InterfaceTraits,
-      TraitLocation.Parameters,
-      TraitContext.List
-    >,
-    SpeechToTextCustomPage<Resource, Traits & InterfaceTraits>,
-    Traits & InterfaceTraits,
-    ErrorResponse
-  >;
-
-  /**
-   * Create or replace operation template.
-   * @template Resource Resource type.
-   * @template Traits Object describing the traits of the operation.
-   */
-  @createsOrReplacesResource(Resource)
-  ResourceCreate<
-    Resource extends TypeSpec.Reflection.Model,
-    Traits extends TypeSpec.Reflection.Model = {}
-  > is Foundations.ResourceCollectionOperation<
-    Resource,
-    Foundations.ResourceBody<Resource> &
-      TraitProperties<
-        Traits & InterfaceTraits,
-        TraitLocation.Parameters,
-        TraitContext.Create
-      >,
-    Foundations.ResourceCreatedResponse<Resource &
-      TraitProperties<
-        Traits & InterfaceTraits,
-        TraitLocation.Response,
-        TraitContext.Create
-      >>,
-    Traits & InterfaceTraits,
-    ErrorResponse
   >;
 }
