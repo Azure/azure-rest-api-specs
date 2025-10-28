@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "clientApplicationId": "testAppId",
+    "parameters": {
+      "properties": {
+        "displayName": "Test Application",
+        "description": "This is just an example application",
+        "ownerId": "/users/userId"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId",
+        "type": "Microsoft.ApiManagement/service/clientApplications",
+        "name": "testAppId",
+        "properties": {
+          "displayName": "Test Application",
+          "ownerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/userId",
+          "state": "active",
+          "description": "This is just an example application",
+          "entraApplicationId": "00000000-0000-0000-0000-000000000000",
+          "entraTenantId": "00000000-0000-0000-0000-000000000010"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId",
+        "type": "Microsoft.ApiManagement/service/clientApplications",
+        "name": "testAppId",
+        "properties": {
+          "displayName": "Test Application",
+          "ownerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/userId",
+          "state": "active",
+          "description": "This is just an example application",
+          "entraApplicationId": "00000000-0000-0000-0000-000000000001",
+          "entraTenantId": "00000000-0000-0000-0000-000000000011"
+        }
+      }
+    }
+  }
+}

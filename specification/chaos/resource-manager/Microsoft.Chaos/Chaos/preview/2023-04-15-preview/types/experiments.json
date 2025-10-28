@@ -1,0 +1,867 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Experiment Types",
+    "version": "2023-04-15-preview"
+  },
+  "paths": {},
+  "parameters": {
+    "experimentName": {
+      "name": "experimentName",
+      "description": "String that represents a Experiment resource name.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "minLength": 1,
+      "pattern": "^[^<>%&:?#/\\\\]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "statusId": {
+      "name": "statusId",
+      "description": "GUID that represents a Experiment status.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "runningFilter": {
+      "name": "running",
+      "description": "Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then the results will not be filtered.",
+      "type": "boolean",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "x-nullable": false
+    },
+    "executionDetailsId": {
+      "name": "executionDetailsId",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "GUID that represents a Experiment execution detail.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+    }
+  },
+  "definitions": {
+    "experiment": {
+      "type": "object",
+      "description": "Model that represents a Experiment resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata of the experiment resource.",
+          "$ref": "../../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "identity": {
+          "description": "The identity of the experiment resource.",
+          "$ref": "./common.json#/definitions/resourceIdentity"
+        },
+        "properties": {
+          "description": "The properties of the experiment resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/experimentProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "experimentUpdate": {
+      "type": "object",
+      "description": "Describes an experiment update.",
+      "properties": {
+        "identity": {
+          "description": "The identity of the experiment resource.",
+          "$ref": "./common.json#/definitions/resourceIdentity"
+        }
+      }
+    },
+    "experimentProperties": {
+      "description": "Model that represents the Experiment properties model.",
+      "type": "object",
+      "properties": {
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/step"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of steps.",
+          "minItems": 1
+        },
+        "selectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/selector"
+          },
+          "description": "List of selectors.",
+          "minItems": 1
+        },
+        "startOnCreation": {
+          "description": "A boolean value that indicates if experiment should be started on creation or not.",
+          "type": "boolean",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "steps",
+        "selectors"
+      ],
+      "additionalProperties": false
+    },
+    "experimentListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Experiment resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/experiment"
+          },
+          "description": "List of Experiment resources.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Experiment resources.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "step": {
+      "type": "object",
+      "description": "Model that represents a step in the Experiment resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "String of the step name.",
+          "minLength": 1
+        },
+        "branches": {
+          "type": "array",
+          "description": "List of branches.",
+          "items": {
+            "$ref": "#/definitions/branch"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "branches"
+      ],
+      "additionalProperties": false
+    },
+    "branch": {
+      "type": "object",
+      "description": "Model that represents a branch in the step.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "String of the branch name.",
+          "minLength": 1
+        },
+        "actions": {
+          "type": "array",
+          "description": "List of actions.",
+          "items": {
+            "$ref": "#/definitions/action"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "actions"
+      ],
+      "additionalProperties": false
+    },
+    "action": {
+      "type": "object",
+      "description": "Model that represents the base action model.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Enum that discriminates between action models."
+        },
+        "name": {
+          "$ref": "./common.json#/definitions/urn",
+          "description": "String that represents a Capability URN."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "delayAction": {
+      "type": "object",
+      "description": "Model that represents a delay action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/action"
+        }
+      ],
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "ISO8601 formatted string that represents a duration.",
+          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?$",
+          "format": "duration"
+        }
+      },
+      "required": [
+        "duration"
+      ],
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "delay"
+    },
+    "discreteAction": {
+      "type": "object",
+      "description": "Model that represents a discrete action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/action"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "description": "List of key value pairs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/keyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "selectorId": {
+          "type": "string",
+          "description": "String that represents a selector.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "parameters",
+        "selectorId"
+      ],
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "discrete"
+    },
+    "continuousAction": {
+      "type": "object",
+      "description": "Model that represents a continuous action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/action"
+        }
+      ],
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "ISO8601 formatted string that represents a duration.",
+          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?$",
+          "format": "duration"
+        },
+        "parameters": {
+          "description": "List of key value pairs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/keyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "selectorId": {
+          "type": "string",
+          "description": "String that represents a selector.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "duration",
+        "parameters",
+        "selectorId"
+      ],
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "continuous"
+    },
+    "keyValuePair": {
+      "description": "A map to describe the settings of an action.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The name of the setting for the action.",
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "description": "The value of the setting for the action.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "selector": {
+      "type": "object",
+      "description": "Model that represents a selector in the Experiment resource.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Enum of the selector type.",
+          "enum": [
+            "List",
+            "Query"
+          ],
+          "x-ms-enum": {
+            "name": "SelectorType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "String of the selector ID.",
+          "minLength": 1
+        },
+        "filter": {
+          "$ref": "#/definitions/filter"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ],
+      "additionalProperties": true
+    },
+    "listSelector": {
+      "type": "object",
+      "description": "Model that represents a list selector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/selector"
+        }
+      ],
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "List of Target references.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/targetReference"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "List",
+      "required": [
+        "targets"
+      ]
+    },
+    "querySelector": {
+      "type": "object",
+      "description": "Model that represents a query selector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/selector"
+        }
+      ],
+      "properties": {
+        "queryString": {
+          "type": "string",
+          "description": "Azure Resource Graph (ARG) Query Language query for target resources."
+        },
+        "subscriptionIds": {
+          "type": "array",
+          "description": "Subscription id list to scope resource query.",
+          "items": {
+            "type": "string",
+            "description": "String of the availability zone ID."
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "Query",
+      "required": [
+        "queryString",
+        "subscriptionIds"
+      ]
+    },
+    "filter": {
+      "type": "object",
+      "description": "Model that represents available filter types that can be applied to a targets list.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Enum that discriminates between filter types. Currently only `Simple` type is supported.",
+          "enum": [
+            "Simple"
+          ],
+          "x-ms-enum": {
+            "name": "FilterType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "simpleFilter": {
+      "type": "object",
+      "description": "Model that represents a simple target filter.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/filter"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/simpleFilterParameters"
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "Simple"
+    },
+    "simpleFilterParameters": {
+      "description": "Model that represents the Simple filter parameters.",
+      "type": "object",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "String of the availability zone ID."
+          },
+          "description": "List of Azure availability zones to filter targets by."
+        }
+      },
+      "additionalProperties": false
+    },
+    "targetReference": {
+      "type": "object",
+      "description": "Model that represents a reference to a Target in the selector.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Enum of the Target reference type.",
+          "enum": [
+            "ChaosTarget"
+          ],
+          "x-ms-enum": {
+            "name": "TargetReferenceType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "String of the resource ID of a Target resource.",
+          "pattern": "^\\/[Ss][Uu][Bb][Ss][Cc][Rr][Ii][Pp][Tt][Ii][Oo][Nn][Ss]\\/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\\/[Rr][Ee][Ss][Oo][Uu][Rr][Cc][Ee][Gg][Rr][Oo][Uu][Pp][Ss]\\/[a-zA-Z0-9_\\-\\.\\(\\)]*[a-zA-Z0-9_\\-\\(\\)]\\/[Pp][Rr][Oo][Vv][Ii][Dd][Ee][Rr][Ss]\\/[a-zA-Z0-9]+\\.[a-zA-Z0-9]+\\/[a-zA-Z0-9_\\-\\.]+\\/[a-zA-Z0-9_\\-\\.]+\\/[Pp][Rr][Oo][Vv][Ii][Dd][Ee][Rr][Ss]\\/[Mm][Ii][Cc][Rr][Oo][Ss][Oo][Ff][Tt]\\.[Cc][Hh][Aa][Oo][Ss]\\/[Tt][Aa][Rr][Gg][Ee][Tt][Ss]\\/[a-zA-Z0-9_\\-\\.]+$"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "experimentCancelOperationResult": {
+      "type": "object",
+      "description": "Model that represents the result of a cancel Experiment operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "String of the Experiment name.",
+          "readOnly": true
+        },
+        "statusUrl": {
+          "$ref": "./common.json#/definitions/url",
+          "description": "URL to retrieve the Experiment status.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "experimentStartOperationResult": {
+      "type": "object",
+      "description": "Model that represents the result of a start Experiment operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "String of the Experiment name.",
+          "readOnly": true
+        },
+        "statusUrl": {
+          "$ref": "./common.json#/definitions/url",
+          "description": "URL to retrieve the Experiment status.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "experimentStatus": {
+      "type": "object",
+      "description": "Model that represents the status of a Experiment.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "String of the resource type.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "String of the fully qualified resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "String of the resource name.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The properties of experiment execution status.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/experimentStatusProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "experimentStatusProperties": {
+      "description": "Model that represents the Experiment status properties model.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "String that represents the status of a Experiment.",
+          "readOnly": true
+        },
+        "createdDateUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the created date time of a Experiment.",
+          "readOnly": true
+        },
+        "endDateUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the end date time of a Experiment.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "experimentStatusListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Experiment statuses and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/experimentStatus"
+          },
+          "description": "List of Experiment statuses.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Experiment statuses.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "experimentExecutionActionTargetDetailsProperties": {
+      "description": "Model that represents the Experiment action target details properties model.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the execution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target for the action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetFailedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the failed date time.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "targetCompletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the completed date time.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "error": {
+          "description": "The error of the action.",
+          "type": "object",
+          "$ref": "#/definitions/experimentExecutionActionTargetDetailsError",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "experimentExecutionActionTargetDetailsError": {
+      "type": "object",
+      "description": "Model that represents the Experiment action target details error model.",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "experimentExecutionDetailsListResult": {
+      "description": "Model that represents a list of Experiment execution details and a link for pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/experimentExecutionDetails"
+          },
+          "description": "List of Experiment execution details.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Experiment execution details.",
+          "readOnly": true
+        }
+      }
+    },
+    "experimentExecutionDetails": {
+      "description": "Model that represents the execution details of a Experiment.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "String of the resource type.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "String of the fully qualified resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "String of the resource name.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The properties of the experiment execution details.",
+          "$ref": "#/definitions/experimentExecutionDetailsProperties",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        }
+      }
+    },
+    "experimentExecutionDetailsProperties": {
+      "description": "Model that represents the Experiment execution details properties model.",
+      "type": "object",
+      "properties": {
+        "experimentId": {
+          "description": "The id of the experiment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The value of the status of the experiment execution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "failureReason": {
+          "description": "The reason why the execution failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the created date time.",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the last action date time.",
+          "readOnly": true
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the start date time.",
+          "readOnly": true
+        },
+        "stopDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the stop date time.",
+          "readOnly": true
+        },
+        "runInformation": {
+          "description": "The information of the experiment run.",
+          "type": "object",
+          "properties": {
+            "steps": {
+              "description": "The steps of the experiment run.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/stepStatus"
+              },
+              "x-ms-identifiers": [
+                "stepName"
+              ],
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "stepStatus": {
+      "description": "Model that represents the a list of branches and branch statuses.",
+      "type": "object",
+      "properties": {
+        "stepName": {
+          "description": "The name of the step.",
+          "type": "string",
+          "readOnly": true
+        },
+        "stepId": {
+          "description": "The id of the step.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The value of the status of the step.",
+          "type": "string",
+          "readOnly": true
+        },
+        "branches": {
+          "description": "The array of branches.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/branchStatus"
+          },
+          "x-ms-identifiers": [
+            "branchName"
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "branchStatus": {
+      "description": "Model that represents the a list of actions and action statuses.",
+      "type": "object",
+      "properties": {
+        "branchName": {
+          "description": "The name of the branch status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "branchId": {
+          "description": "The id of the branch status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the branch.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actions": {
+          "description": "The array of actions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/actionStatus"
+          },
+          "x-ms-identifiers": [
+            "actionId"
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "actionStatus": {
+      "type": "object",
+      "description": "Model that represents the an action and its status.",
+      "properties": {
+        "actionName": {
+          "description": "The name of the action status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionId": {
+          "description": "The id of the action status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the start time of the action.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the end time of the action.",
+          "readOnly": true
+        },
+        "targets": {
+          "description": "The array of targets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/experimentExecutionActionTargetDetailsProperties"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

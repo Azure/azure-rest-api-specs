@@ -1,8 +1,8 @@
-import { describe, test, expect } from "vitest";
-import { searchRelatedParentFolders } from "../../src/utils.js";
-import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { describe, expect, test } from "vitest";
 import { readmeMdRegex, typespecProjectRegex } from "../../src/spec-helpers.js";
+import { searchRelatedParentFolders } from "../../src/utils.js";
 
 describe("searchRelatedParentFolders", () => {
   // Get the absolute path to the repo root

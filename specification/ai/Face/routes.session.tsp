@@ -19,7 +19,6 @@ alias LivenessSessionWithVerifyDescription = """
   Permissions includes...
   >
   *
-    * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.
     * A token lifetime of 10 minutes.
   
   > [!NOTE]
@@ -36,7 +35,6 @@ alias CreateLivenessSessionDescription = """
   Permissions includes...
   >
   *
-    * Ability to call /detectLiveness/singleModal for up to 3 retries.
     * A token lifetime of 10 minutes.
   
   > [!NOTE]
@@ -74,7 +72,10 @@ alias CreateLivenessWithVerifySessionSummary = "Create a new liveness session wi
 alias GetLivenessWithVerifySessionResultDescription = "Get session result of detectLivenessWithVerify/singleModal call.";
 alias ListLivenessWithVerifySessionsSummary = "Lists sessions for /detectLivenessWithVerify/SingleModal.";
 alias GetSessionImageDescription = "Get session image stored during the liveness session.";
+alias GetLivenessSessionSettingDescription = "Get the liveness sessions setting object.";
+alias PatchLivenessSessionSettingDescription = "Update the liveness setting object.";
 alias SuccessfullyDeletedSession = "Successfully deleted session and all correlated data.";
+alias GetClientAssetsAccessTokenDescription = "Get access token to get access to client AI model assets.";
 
 @get
 @action("audit")
@@ -255,6 +256,39 @@ interface LivenessSessionOperations {
       sessionImageId: string;
     },
     SessionImageStream,
+    ServiceTraits,
+    FaceErrorResponse
+  >;
+
+  @added(Versions.v1_3_preview_1)
+  @doc(GetClientAssetsAccessTokenDescription)
+  @get
+  @route("settings/getClientAssetsAccessToken")
+  getClientAssetsAccessToken is Azure.Core.RpcOperation<
+    {},
+    ClientAssetsAccessTokenResponse,
+    ServiceTraits,
+    FaceErrorResponse
+  >;
+
+  @added(Versions.v1_3_preview_1)
+  @doc(GetLivenessSessionSettingDescription)
+  @get
+  @route("settings")
+  getSettings is Azure.Core.RpcOperation<
+    {},
+    Settings,
+    ServiceTraits,
+    FaceErrorResponse
+  >;
+
+  @added(Versions.v1_3_preview_1)
+  @doc(PatchLivenessSessionSettingDescription)
+  @patch(#{ implicitOptionality: true })
+  @route("settings")
+  patchSettings is Azure.Core.RpcOperation<
+    BodyParameter<Settings>,
+    Settings,
     ServiceTraits,
     FaceErrorResponse
   >;

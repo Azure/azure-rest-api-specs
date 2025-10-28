@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -19,6 +21,10 @@ union ConnectedClusterKind {
   ProvisionedCluster: "ProvisionedCluster",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AWS: "AWS",
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("Represents a connected cluster hosted on Google Cloud Platform (GCP)")
+  GCP: "GCP",
 }
 
 /**
@@ -449,6 +455,7 @@ model Gateway {
   /**
    * The resource ID of the gateway used for the Arc router feature.
    */
+  @removed(Versions.v2025_08_01_preview)
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.HybridCompute/gateways";
@@ -515,7 +522,6 @@ model ConnectedClusterPatch {
   /**
    * Describes the connected cluster resource properties that can be updated during PATCH operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ConnectedClusterPatchProperties;
 }
 
@@ -537,6 +543,12 @@ model ConnectedClusterPatchProperties {
    * Indicates whether Azure Hybrid Benefit is opted in
    */
   azureHybridBenefit?: AzureHybridBenefit;
+
+  /**
+   * Indicates whether Gateway is enabled for the connected cluster resource
+   */
+  @added(Versions.v2025_12_01_preview)
+  gateway?: Gateway;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -566,7 +578,7 @@ model CredentialResults {
    * Base64-encoded Kubernetes configuration file.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   kubeconfigs?: CredentialResult[];
 }
 
@@ -636,14 +648,13 @@ model ConnectedClusterList is Azure.Core.Page<ConnectedCluster>;
 /**
  * The paginated list of connected cluster API operations.
  */
-@Azure.Core.pagedResult
 model OperationList {
   /**
    * The list of connected cluster API operations.
    */
-  @Azure.Core.items
+  @pageItems
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value: Operation[];
 
   /**

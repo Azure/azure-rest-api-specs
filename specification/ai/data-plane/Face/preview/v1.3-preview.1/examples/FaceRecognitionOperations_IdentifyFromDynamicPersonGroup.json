@@ -1,0 +1,30 @@
+{
+  "title": "Identify from DynamicPersonGroup",
+  "operationId": "FaceRecognitionOperations_IdentifyFromDynamicPersonGroup",
+  "parameters": {
+    "apiVersion": "v1.3-preview.1",
+    "body": {
+      "faceIds": [
+        "c5c24a82-6845-4031-9d5d-978df9175426"
+      ],
+      "dynamicPersonGroupId": "your_dynamic_person_group_id",
+      "maxNumOfCandidatesReturned": 9,
+      "confidenceThreshold": 0.7
+    }
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "faceId": "c5c24a82-6845-4031-9d5d-978df9175426",
+          "candidates": [
+            {
+              "personId": "85c0c630-c9c9-40f8-8a4e-f9ae4f926ea5",
+              "confidence": 0.8
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
