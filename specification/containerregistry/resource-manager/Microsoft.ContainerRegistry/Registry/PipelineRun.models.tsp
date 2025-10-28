@@ -91,7 +91,9 @@ model PipelineRunRequest {
   catalogDigest?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The pipeline run source properties
+ */
 @added(Versions.vLatestPreview)
 model PipelineRunSourceProperties {
   /**
@@ -105,7 +107,9 @@ model PipelineRunSourceProperties {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The pipeline run target properties
+ */
 @added(Versions.vLatestPreview)
 model PipelineRunTargetProperties {
   /**
@@ -177,7 +181,9 @@ model PipelineRunResponse {
   pipelineRunErrorMessage?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The progress properties.
+ */
 model ProgressProperties {
   /**
    * The percentage complete of the copy operation.
@@ -185,7 +191,9 @@ model ProgressProperties {
   percentage?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The pipeline trigger descriptor
+ */
 model PipelineTriggerDescriptor {
   /**
    * The source trigger that caused the pipeline run.
@@ -193,7 +201,9 @@ model PipelineTriggerDescriptor {
   sourceTrigger?: PipelineSourceTriggerDescriptor;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The pipeline source trigger descriptor.
+ */
 model PipelineSourceTriggerDescriptor {
   /**
    * The timestamp when the source update happened.
