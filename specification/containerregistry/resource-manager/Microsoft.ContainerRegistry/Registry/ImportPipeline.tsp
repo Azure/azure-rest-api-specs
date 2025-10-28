@@ -5,7 +5,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./Registry.tsp";
-import "./ExportPipeline"
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
