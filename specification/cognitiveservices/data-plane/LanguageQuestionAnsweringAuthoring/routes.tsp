@@ -13,6 +13,37 @@ using Azure.Core.Traits;
 
 namespace Language.QuestionAnswering.Authoring;
 
+/**
+ * Optional query/body parameters for the export operation.
+ * Using a named model enables client-side renaming without breaking wire contract.
+ */
+model ExportOptions {
+  /** Knowledge base Import or Export format. */
+  @query("format")
+  format?: format = format.json;
+
+  /** Kind of the asset of the project. */
+  @query("assetKind")
+  assetKind?: AssestKind;
+}
+
+/**
+ * Optional query/body parameters for the import operation.
+ */
+model ImportOptions {
+  /** Knowledge base Import or Export format. */
+  @query("format")
+  format?: format = format.json;
+
+  /** Kind of the asset of the project. */
+  @query("assetKind")
+  assetKind?: AssestKind;
+
+  /** Project assets the needs to be imported. */
+  @bodyRoot
+  body?: ImportJobOptions;
+}
+
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
@@ -80,25 +111,14 @@ interface QuestionAnsweringProjects {
   @pollingOperation(QuestionAnsweringProjects.getExportStatus)
   export is Foundations.LongRunningOperation<
     {
-      /**
-       * The name of the project to use.
-       */
+      /** The name of the project to use. */
       @maxLength(100)
       @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
-      /**
-       * Knowledge base Import or Export format.
-       */
-      @query("format")
-      format?: format = format.json;
-
-      /**
-       * Kind of the asset of the project.
-       */
-      @query("assetKind")
-      assetKind?: AssestKind;
+      /** Optional export parameters. See `ExportOptions`. */
+      ... ExportOptions;
     },
     ExportJobResponse,
     {},
@@ -122,31 +142,14 @@ interface QuestionAnsweringProjects {
   @pollingOperation(QuestionAnsweringProjects.getImportStatus)
   `import` is Foundations.LongRunningOperation<
     {
-      /**
-       * The name of the project to use.
-       */
+      /** The name of the project to use. */
       @maxLength(100)
       @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
-      /**
-       * Knowledge base Import or Export format.
-       */
-      @query("format")
-      format?: format = format.json;
-
-      /**
-       * Kind of the asset of the project.
-       */
-      @query("assetKind")
-      assetKind?: AssestKind;
-
-      /**
-       * Project assets the needs to be imported.
-       */
-      @bodyRoot
-      body?: ImportJobOptions;
+      /** Optional import parameters. See `ImportOptions`. */
+      ... ImportOptions;
     },
     AcceptedResponse,
     {},

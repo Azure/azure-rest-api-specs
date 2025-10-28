@@ -74,3 +74,5 @@ interface QuestionAnsweringAuthoringClientOperations {
 }
 
 @@clientName(QuestionAnsweringProjectMetadata, "QuestionAnsweringProject");
+@@clientName(ExportOptions.format, "fileFormat");
+@@clientName(ImportOptions.format, "fileFormat");
