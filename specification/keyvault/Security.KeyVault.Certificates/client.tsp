@@ -243,6 +243,10 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 // Rust configuration
 @@clientName(setCertificateContacts, "SetContacts", "rust");
 
+// Internalize createCertificate to wrap it with one that will return a Poller.
+@@access(KeyVault.createCertificate, Access.internal, "rust");
+@@clientName(KeyVault.createCertificate, "BeginCreateCertificate", "rust");
+@@access(CertificateCreateParameters, Access.public, "rust");
 @@clientName(CertificateCreateParameters,
   "CreateCertificateParameters",
   "rust"
