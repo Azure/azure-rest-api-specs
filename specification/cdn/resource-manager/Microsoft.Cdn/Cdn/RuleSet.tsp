@@ -2,13 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Profile.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
 /**
@@ -31,16 +32,31 @@ interface RuleSets {
    */
   get is ArmResourceRead<RuleSet>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates a new rule set within the specified profile.
    */
-  // create is ArmResourceCreateOrReplaceSync<RuleSet>;
+  @removed(Versions.v2025_12_01)
+  @renamedFrom(Versions.v2025_12_01, "create")
+  @sharedRoute
   @put
-  create is Azure.ResourceManager.Legacy.CustomPatchAsync<
+  createV1 is Azure.ResourceManager.Legacy.CustomPatchAsync<
     RuleSet,
     PatchModel = void,
     Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>
+  >;
+
+  /**
+   * Creates or update a batch rule set within the specified profile along with the rules associate to it.
+   */
+  @added(Versions.v2025_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    RuleSet,
+    OptionalRequestBody = true,
+    Response = ArmResponse<RuleSet> | (ArmCreatedResponse<RuleSet> &
+      ArmAsyncOperationHeader<FinalResult = RuleSet> &
+      ArmLroLocationHeader<FinalResult = RuleSet>) | ErrorResponse
   >;
 
   /**
@@ -79,3 +95,8 @@ interface RuleSets {
 @@doc(RuleSet.properties,
   "The JSON object that contains the properties of the Rule Set to create."
 );
+
+// Mark batch mode properties as added in version 2025-12-01
+@@added(RuleSetProperties.batchMode, Versions.v2025_12_01);
+@@added(RuleSetProperties.rules, Versions.v2025_12_01);
+@@added(BatchRuleProperties, Versions.v2025_12_01);
