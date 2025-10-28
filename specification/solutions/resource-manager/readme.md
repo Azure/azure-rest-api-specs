@@ -1,7 +1,7 @@
-# Solutions
+# ManagedApplication
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for Solutions.
+> This is the AutoRest configuration file for ManagedApplication.
 
 ## Configuration
 
