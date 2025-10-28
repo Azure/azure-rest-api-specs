@@ -24,7 +24,7 @@ model ElasticSnapshotPolicy
   ...ResourceNameParameter<
     Resource = ElasticSnapshotPolicy,
     KeyName = "snapshotPolicyName",
-    SegmentName = "snapshots",
+    SegmentName = "elasticSnapshotPolicies",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
   >;
   ...Azure.ResourceManager.EntityTagProperty;
@@ -222,9 +222,10 @@ interface ElasticSnapshotPolicies {
   @get
   @action("elasticvolumes")
   @added(Versions.v2025_09_01_preview)
-  listVolumes is ArmResourceListByParent<
+  listVolumes is ArmResourceActionSync<
     ElasticSnapshotPolicy,
-    Response = ArmResponse<ElasticSnapshotPolicyVolumeList>
+    void,
+    ArmResponse<ElasticSnapshotPolicyVolumeList>
   >;
 }
 

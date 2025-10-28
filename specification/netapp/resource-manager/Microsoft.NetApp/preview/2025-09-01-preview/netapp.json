@@ -3804,7 +3804,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/snapshots": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticSnapshotPolicies": {
       "get": {
         "operationId": "ElasticSnapshotPolicies_ListByElasticAccount",
         "tags": [
@@ -3854,7 +3854,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/snapshots/{snapshotPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticSnapshotPolicies/{snapshotPolicyName}": {
       "get": {
         "operationId": "ElasticSnapshotPolicies_Get",
         "tags": [
@@ -4142,7 +4142,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/snapshots/elasticvolumes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticSnapshotPolicies/{snapshotPolicyName}/elasticvolumes": {
       "get": {
         "operationId": "ElasticSnapshotPolicies_ListVolumes",
         "tags": [
@@ -4166,6 +4166,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
+          },
+          {
+            "name": "snapshotPolicyName",
+            "in": "path",
+            "description": "The name of the ElasticSnapshotPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
           }
         ],
         "responses": {
@@ -4186,9 +4194,6 @@
           "ElasticSnapshotPolicies_ListVolumes": {
             "$ref": "./examples/ElasticSnapshotPolicies_ListVolumes.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
