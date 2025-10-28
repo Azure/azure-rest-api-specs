@@ -5,8 +5,10 @@
 // -----------------------------------------------------------------------
 
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Versioning;
+using Azure.ResourceManager;
 
 namespace Microsoft.StandbyPool;
 
@@ -18,7 +20,7 @@ model DynamicSizing {
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
-@removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+@removed(Microsoft.StandbyPool.Versions.`2025-03-01`)
 @doc("Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.")
 model PoolResourceStateCount {
   @doc("The state that the pooled resources count is for.")
@@ -28,19 +30,19 @@ model PoolResourceStateCount {
   count: int64;
 }
 
-@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
 @doc("Displays StandbyPool status.")
 model PoolStatus {
   @doc("Displays the healthy state of the StandbyPool.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code: HealthStateCode;
 
   @doc("Displays the StandbyPool health state details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
-@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
 @doc("StandbyPool health state.")
 union HealthStateCode {
   string,
