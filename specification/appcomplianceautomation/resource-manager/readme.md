@@ -1,7 +1,7 @@
-# AppComplianceAutomation
+# appcomplianceautomation
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for AppComplianceAutomation.
+> This is the AutoRest configuration file for appcomplianceautomation.
 
 ## Configuration
 
