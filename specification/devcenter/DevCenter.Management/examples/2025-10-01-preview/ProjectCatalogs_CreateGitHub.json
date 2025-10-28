@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "body": {
+      "properties": {
+        "gitHub": {
+          "path": "/templates",
+          "branch": "main",
+          "secretIdentifier": "https://contosokv.vault.azure.net/secrets/CentralRepoPat",
+          "uri": "https://github.com/Contoso/centralrepo-fake.git"
+        }
+      }
+    },
+    "catalogName": "CentralCatalog",
+    "projectName": "DevProject",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "CentralCatalog",
+        "type": "Microsoft.DevCenter/projects/catalogs",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/DevProject/catalogs/CentralCatalog",
+        "properties": {
+          "connectionState": "Connected",
+          "gitHub": {
+            "path": "/templates",
+            "branch": "main",
+            "secretIdentifier": "https://contosokv.vault.azure.net/secrets/CentralRepoPat",
+            "uri": "https://github.com/Contoso/centralrepo-fake.git"
+          },
+          "lastSyncStats": {
+            "added": 0,
+            "removed": 0,
+            "syncedCatalogItemTypes": [
+              "EnvironmentDefinition"
+            ],
+            "synchronizationErrors": 0,
+            "unchanged": 0,
+            "updated": 0,
+            "validationErrors": 0
+          },
+          "provisioningState": "Accepted",
+          "syncState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "createdBy": "User1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "CentralCatalog",
+        "type": "Microsoft.DevCenter/projects/catalogs",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/DevProject/catalogs/CentralCatalog",
+        "properties": {
+          "connectionState": "Connected",
+          "gitHub": {
+            "path": "/templates",
+            "branch": "main",
+            "secretIdentifier": "https://contosokv.vault.azure.net/secrets/CentralRepoPat",
+            "uri": "https://github.com/Contoso/centralrepo-fake.git"
+          },
+          "lastSyncStats": {
+            "added": 0,
+            "removed": 0,
+            "syncedCatalogItemTypes": [
+              "EnvironmentDefinition"
+            ],
+            "synchronizationErrors": 0,
+            "unchanged": 0,
+            "updated": 0,
+            "validationErrors": 0
+          },
+          "provisioningState": "Accepted",
+          "syncState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "createdBy": "User1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ProjectCatalogs_CreateOrUpdate",
+  "title": "ProjectCatalogs_CreateOrUpdateGitHub"
+}
