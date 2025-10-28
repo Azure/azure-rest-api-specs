@@ -4051,8 +4051,16 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MHSMPrivateLinkResourceProperties",
-          "description": "The resource-specific properties for this resource.",
+          "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ManagedHsmSku",
+          "description": "SKU details"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         }
       },
       "allOf": [
@@ -4102,14 +4110,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "sku": {
-          "$ref": "#/definitions/ManagedHsmSku",
-          "description": "SKU details"
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (system assigned and/or user assigned identities)"
         }
       }
     },
