@@ -38,7 +38,7 @@ enum Versions {
   `2025-03-01`,
 
   @doc("API Version 2025-10-01.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2025-10-01`,
 }
 
