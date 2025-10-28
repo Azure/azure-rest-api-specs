@@ -11,7 +11,7 @@ using Microsoft.PlanetaryComputer;
 
 @useDependency(Versions.v2025_04_30_Preview)
 @client({
-  name: "PlanetaryComputerClient",
+  name: "GeoCatalogClient",
   service: Microsoft.PlanetaryComputer,
 })
 namespace Customizations;
@@ -89,7 +89,7 @@ interface Ingestion {
 
   // Ingestion sources
   createSource is IngestionSources.create;
-  createOrReplaceSource is IngestionSources.createOrReplace;
+  replaceSource is IngestionSources.replace;
   deleteSource is IngestionSources.delete;
   getSource is IngestionSources.get;
   listSources is IngestionSources.list;
@@ -105,7 +105,7 @@ interface Stac {
   #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
   createCollectionAsset is StacCollectionAssets.create;
   #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
-  createOrReplaceCollectionAsset is StacCollectionAssets.createOrReplace;
+  replaceCollectionAsset is StacCollectionAssets.replace;
   deleteCollectionAsset is StacCollectionAssets.delete;
 
   // Collection Configuration
@@ -113,7 +113,7 @@ interface Stac {
 
   // Collection Mosaics
   addMosaic is StacCollectionMosaics.add;
-  createOrReplaceMosaic is StacCollectionMosaics.createOrReplace;
+  replaceMosaic is StacCollectionMosaics.replace;
   deleteMosaic is StacCollectionMosaics.delete;
   getMosaic is StacCollectionMosaics.get;
 
@@ -135,7 +135,7 @@ interface Stac {
 
   // Collection Render Options
   createRenderOption is StacCollectionRenderOptions.create;
-  createOrReplaceRenderOption is StacCollectionRenderOptions.createOrReplace;
+  replaceRenderOption is StacCollectionRenderOptions.replace;
   deleteRenderOption is StacCollectionRenderOptions.delete;
   getRenderOption is StacCollectionRenderOptions.get;
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
@@ -151,6 +151,9 @@ interface Stac {
   // STAC Conformance
   getConformanceClass is StacConformanceClass.get;
 
+  // STAC landing page
+  getLandingPage is StacLandingPages.get;
+
   // STAC Items
   createItem is StacItems.create;
   createOrReplaceItem is StacItems.createOrReplace;
@@ -163,7 +166,7 @@ interface Stac {
 
   // STAC Queryables
   createQueryables is StacQueryables.create;
-  createOrReplaceQueryable is StacQueryables.createOrReplace;
+  replaceQueryable is StacQueryables.replace;
   deleteQueryable is StacQueryables.delete;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
