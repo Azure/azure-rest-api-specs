@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-12-01'
 input-file:
-  - Microsoft.DataBoxEdge/stable/2023-12-01/databoxedge.json
+  - stable/2023-12-01/databoxedge.json
 ```
 ### Tag: package-2023-07
 
@@ -43,7 +43,7 @@ These settings apply only when `--tag=package-2023-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-07'
 input-file:
-  - Microsoft.DataBoxEdge/stable/2023-07-01/databoxedge.json
+  - stable/2023-07-01/databoxedge.json
 ```
 ### Tag: package-2023-01-01-preview
 
@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
-- Microsoft.DataBoxEdge/preview/2023-01-01-preview/databoxedge.json
+- preview/2023-01-01-preview/databoxedge.json
 ```
 
 ### Tag: package-2022-12-01-preview
@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-2022-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-12-01-preview'
 input-file:
-- Microsoft.DataBoxEdge/preview/2022-12-01-preview/databoxedge.json
+- preview/2022-12-01-preview/databoxedge.json
 ```
 
 ### Tag: package-2022-04-01-preview
@@ -69,7 +69,7 @@ These settings apply only when `--tag=package-2022-04-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
-- Microsoft.DataBoxEdge/preview/2022-04-01-preview/databoxedge.json
+- preview/2022-04-01-preview/databoxedge.json
 ```
 
 ### Tag: package-2022-03-01
@@ -78,7 +78,7 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-03-01'
 input-file:
-- Microsoft.DataBoxEdge/stable/2022-03-01/databoxedge.json
+- stable/2022-03-01/databoxedge.json
 ```
 
 ### Tag: package-2021-06-01
@@ -87,7 +87,7 @@ These settings apply only when `--tag=package-2021-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-06-01'
 input-file:
-- Microsoft.DataBoxEdge/stable/2021-06-01/databoxedge.json
+- stable/2021-06-01/databoxedge.json
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -96,7 +96,7 @@ These settings apply only when `--tag=package-2021-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-- Microsoft.DataBoxEdge/preview/2021-06-01-preview/databoxedge.json
+- preview/2021-06-01-preview/databoxedge.json
 ```
 
 ### Tag: package-2021-02-01
@@ -105,7 +105,7 @@ These settings apply only when `--tag=package-2021-02-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-02-01'
 input-file:
-- Microsoft.DataBoxEdge/stable/2021-02-01/databoxedge.json
+- stable/2021-02-01/databoxedge.json
 ```
 
 ### Tag: package-2021-02-01-preview
@@ -114,7 +114,7 @@ These settings apply only when `--tag=package-2021-02-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-02-01-preview'
 input-file:
-- Microsoft.DataBoxEdge/preview/2021-02-01-preview/databoxedge.json
+- preview/2021-02-01-preview/databoxedge.json
 ```
 
 ### Tag: package-2020-12-01
@@ -123,7 +123,7 @@ These settings apply only when `--tag=package-2020-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-12-01'
 input-file:
-- Microsoft.DataBoxEdge/stable/2020-12-01/databoxedge.json
+- stable/2020-12-01/databoxedge.json
 ```
 
 ### Tag: package-2020-09-01-preview
@@ -132,7 +132,7 @@ These settings apply only when `--tag=package-2020-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-09-01-preview'
 input-file:
-- Microsoft.DataBoxEdge/preview/2020-09-01-preview/databoxedge.json
+- preview/2020-09-01-preview/databoxedge.json
 ```
 
 ### Tag: package-2020-09-01
@@ -141,7 +141,7 @@ These settings apply only when `--tag=package-2020-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-09-01'
 input-file:
-- Microsoft.DataBoxEdge/stable/2020-09-01/databoxedge.json
+- stable/2020-09-01/databoxedge.json
 ```
 
 ### Tag: package-2020-05-preview
@@ -150,7 +150,7 @@ These settings apply only when `--tag=package-2020-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-05-preview'
 input-file:
-- Microsoft.DataBoxEdge/preview/2020-05-01-preview/databoxedge.json
+- preview/2020-05-01-preview/databoxedge.json
 ```
 
 ### Tag: package-2019-08
@@ -159,7 +159,7 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
-- Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
+- stable/2019-08-01/databoxedge.json
 ```
 
 ### Tag: package-2019-07
@@ -168,7 +168,7 @@ These settings apply only when `--tag=package-2019-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-07'
 input-file:
-- Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
+- stable/2019-07-01/databoxedge.json
 ```
 
 ### Tag: package-2019-03
@@ -177,7 +177,7 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-03'
 input-file:
-- Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
+- stable/2019-03-01/databoxedge.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -186,7 +186,7 @@ These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
+- stable/2019-08-01/databoxedge.json
 ```
 
 ---

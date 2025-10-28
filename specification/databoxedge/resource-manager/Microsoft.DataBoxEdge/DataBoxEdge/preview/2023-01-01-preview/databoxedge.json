@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-07-01",
+    "version": "2023-01-01-preview",
     "title": "DataBoxEdgeManagementClient"
   },
   "host": "management.azure.com",
@@ -317,9 +317,6 @@
           "200": {
             "description": "Successfully deleted the resource."
           },
-          "202": {
-            "description": "Accepted the request to delete the resource."
-          },
           "204": {
             "description": "The resource is already deleted."
           },
@@ -330,7 +327,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DataBoxEdgeDeviceDelete": {
             "$ref": "./examples/DataBoxEdgeDeviceDelete.json"
@@ -1366,6 +1362,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/offers": {
+      "get": {
+        "tags": [
+          "MarketplaceImageOffer"
+        ],
+        "summary": "Returns list of all offers",
+        "operationId": "MarketplaceImageOffer_ListOffers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListOffers is working fine",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceImageOfferList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListOffers.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/operationsStatus/{name}": {
       "get": {
         "tags": [
@@ -1661,6 +1707,422 @@
         "x-ms-examples": {
           "GetDCAccessCode": {
             "$ref": "./examples/GetDCAccessCode.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers": {
+      "get": {
+        "tags": [
+          "MarketplaceImagePublisher"
+        ],
+        "summary": "Returns list of publishers",
+        "operationId": "MarketplaceImagePublisher_ListPublishers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListPublishers is working fine",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceImagePublisherList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListPublishers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers": {
+      "get": {
+        "tags": [
+          "MarketplaceImageOffer"
+        ],
+        "summary": "Returns List of Offers by Publisher name",
+        "operationId": "MarketplaceImageOffer_ListOffersbyPublisher",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListOffersbyPublisher is working fine",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceImageOfferList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListOffersbyPublisher.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus": {
+      "get": {
+        "tags": [
+          "MarketplaceImageSku"
+        ],
+        "summary": "Returns List of SKUs Within Offer",
+        "operationId": "MarketplaceImageSku_ListSKUsWithinOffer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListSKUsWithinOffer is working fine",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceImageSkuList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListSKUsWithinOffer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions": {
+      "get": {
+        "tags": [
+          "MarketplaceImageVersion"
+        ],
+        "summary": "Returns List of Versions within SKU",
+        "operationId": "MarketplaceImageVersion_ListVersionswithinSKU",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListVersionswithinSKU is working fine",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceImageVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListVersionswithinSKU.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions/{versionName}": {
+      "get": {
+        "tags": [
+          "MarketplaceImageVersion"
+        ],
+        "description": "Get Particular Image",
+        "operationId": "MarketplaceImageVersion_GetParticularImage",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetParticularImage is working fine",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceImageVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/GetParticularImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions/{versionName}/generatesastoken": {
+      "post": {
+        "tags": [
+          "MarketplaceImageSasToken"
+        ],
+        "summary": "Returns SASToken",
+        "operationId": "MarketplaceImageSasToken_GetSASToken",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "pattern": "[ A-Za-z0-9_@./#&+-]*"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to start VM Image Download",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceSasToken"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "GetSASToken is working fine",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceSasToken"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/GetSASToken.json"
           }
         }
       }
@@ -4182,7 +4644,7 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of Addon",
           "readOnly": true
         }
@@ -4263,7 +4725,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of Alert",
           "readOnly": true
         }
@@ -4459,6 +4921,11 @@
             "modelAsString": true
           }
         },
+        "customLocationsObjectId": {
+          "type": "string",
+          "description": "Arc Custom Locations ObjectId",
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Addon Provisioning State",
           "enum": [
@@ -4593,7 +5060,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of BandwidthSchedule",
           "readOnly": true
         }
@@ -4950,6 +5417,23 @@
           "description": "Service subnet",
           "type": "string",
           "readOnly": true
+        },
+        "componentType": {
+          "description": "ComponentType of the Kubernetes node.",
+          "enum": [
+            "Invalid",
+            "Cluster",
+            "Node",
+            "Etcd",
+            "CNI",
+            "LoadBalancer"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KubernetesComponentType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4970,6 +5454,24 @@
           "format": "int64",
           "description": "Memory in GB",
           "type": "integer"
+        }
+      }
+    },
+    "ComputeVersionInformation": {
+      "description": "This contains the compute information",
+      "type": "object",
+      "properties": {
+        "kubernetesVersion": {
+          "description": "Kubernetes Version",
+          "type": "string"
+        },
+        "iotEdgeVersion": {
+          "description": "IOTEdge Version",
+          "type": "string"
+        },
+        "azureArcVersion": {
+          "description": "Azure Arc Version",
+          "type": "string"
         }
       }
     },
@@ -5024,7 +5526,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of Container",
           "readOnly": true
         }
@@ -5148,14 +5650,14 @@
             "AzureModularDataCentre"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "DataBoxEdge Resource",
           "readOnly": true
         },
@@ -5181,7 +5683,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of DataBoxEdgeDevice",
           "readOnly": true
         }
@@ -5371,7 +5873,7 @@
       "type": "object",
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "DataBoxEdge Device Properties",
           "readOnly": true
         },
@@ -5499,8 +6001,13 @@
           "$ref": "#/definitions/DataResidency",
           "description": "The details of data-residency related properties for this resource"
         },
-        "kubernetesWorkloadProfile": {
-          "description": "Kubernetes Workload Profile",
+        "computeVersionInformation": {
+          "$ref": "#/definitions/ComputeVersionInformation",
+          "description": "The details of compute version information",
+          "readOnly": true
+        },
+        "kubernetesPlatform": {
+          "description": "Type of Kubernetes Platform",
           "type": "string",
           "readOnly": true
         }
@@ -5809,7 +6316,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to device capacity info.",
           "readOnly": true
         }
@@ -5883,6 +6390,11 @@
             "$ref": "#/definitions/VmPlacementRequestResult"
           },
           "x-ms-identifiers": []
+        },
+        "deviceCapacityRequestType": {
+          "type": "string",
+          "description": "Flag to check the type of capacity check on the appliance.",
+          "readOnly": true
         }
       }
     },
@@ -5904,7 +6416,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of DiagnosticProactiveLogCollectionSettings",
           "readOnly": true
         }
@@ -5928,7 +6440,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Represents resource creation and updation time",
           "readOnly": true
         }
@@ -6032,6 +6544,23 @@
           "description": "Etcd version",
           "type": "string",
           "readOnly": true
+        },
+        "componentType": {
+          "description": "ComponentType of the Kubernetes node.",
+          "enum": [
+            "Invalid",
+            "Cluster",
+            "Node",
+            "Etcd",
+            "CNI",
+            "LoadBalancer"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KubernetesComponentType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6185,109 +6714,6 @@
         "password": {
           "$ref": "#/definitions/AsymmetricEncryptedSecret",
           "description": "Repository user password."
-        }
-      }
-    },
-    "IoTAddon": {
-      "description": "IoT Addon.",
-      "required": [
-        "properties",
-        "kind"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Addon"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/IoTAddonProperties",
-          "description": "Properties specific to IOT addon.",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "description": "The path ID that uniquely identifies the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The object name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The hierarchical type of the object.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-discriminator-value": "IotEdge"
-    },
-    "IoTAddonProperties": {
-      "description": "IoT addon properties.",
-      "required": [
-        "ioTDeviceDetails",
-        "ioTEdgeDeviceDetails"
-      ],
-      "type": "object",
-      "properties": {
-        "ioTDeviceDetails": {
-          "$ref": "#/definitions/IoTDeviceInfo",
-          "description": "IoT device metadata to which appliance needs to be connected."
-        },
-        "ioTEdgeDeviceDetails": {
-          "$ref": "#/definitions/IoTDeviceInfo",
-          "description": "IoT edge device to which the IoT Addon needs to be configured."
-        },
-        "version": {
-          "description": "Version of IoT running on the appliance.",
-          "type": "string",
-          "readOnly": true
-        },
-        "hostPlatform": {
-          "description": "Host OS supported by the IoT addon.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "PlatformType",
-            "modelAsString": true
-          }
-        },
-        "hostPlatformType": {
-          "description": "Platform where the runtime is hosted.",
-          "enum": [
-            "KubernetesCluster",
-            "LinuxVM"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "HostPlatformType",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "description": "Addon Provisioning State",
-          "enum": [
-            "Invalid",
-            "Creating",
-            "Created",
-            "Updating",
-            "Reconfiguring",
-            "Failed",
-            "Deleting"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AddonState",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -6725,6 +7151,23 @@
         "version": {
           "description": "Kubernetes cluster version",
           "type": "string"
+        },
+        "componentType": {
+          "description": "ComponentType of the Kubernetes node.",
+          "enum": [
+            "Invalid",
+            "Cluster",
+            "Node",
+            "Etcd",
+            "CNI",
+            "LoadBalancer"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KubernetesComponentType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6798,6 +7241,18 @@
         "processorCount": {
           "format": "int32",
           "description": "Processor count",
+          "type": "integer",
+          "readOnly": true
+        },
+        "hugePage2M": {
+          "format": "int32",
+          "description": "Count of huge pages",
+          "type": "integer",
+          "readOnly": true
+        },
+        "hugePage1G": {
+          "format": "int32",
+          "description": "Count of huge pages",
           "type": "integer",
           "readOnly": true
         }
@@ -6989,6 +7444,239 @@
           "description": "Load balancer version",
           "type": "string",
           "readOnly": true
+        },
+        "componentType": {
+          "description": "ComponentType of the Kubernetes node.",
+          "enum": [
+            "Invalid",
+            "Cluster",
+            "Node",
+            "Etcd",
+            "CNI",
+            "LoadBalancer"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KubernetesComponentType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MarketplaceImageOffer": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MarketplaceImageOfferProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MarketplaceImageOfferList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarketplaceImageOffer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MarketplaceImageOfferProperties": {
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "contentVersion": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string"
+        },
+        "skuMappings": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuMapping"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MarketplaceImagePublisher": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MarketplaceImagePublisherProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MarketplaceImagePublisherList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarketplaceImagePublisher"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MarketplaceImagePublisherProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        }
+      }
+    },
+    "MarketplaceImageSku": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MarketplaceImageSkuProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MarketplaceImageSkuList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarketplaceImageSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MarketplaceImageSkuProperties": {
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "type": "string"
+        },
+        "offerId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "contentVersion": {
+          "type": "string"
+        },
+        "skuMappings": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuMapping"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "type": "string"
+        }
+      }
+    },
+    "MarketplaceImageVersion": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MarketplaceImageVersionProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MarketplaceImageVersionList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarketplaceImageVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MarketplaceImageVersionProperties": {
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "type": "string"
+        },
+        "offerId": {
+          "type": "string"
+        },
+        "skuId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "contentVersion": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string"
+        }
+      }
+    },
+    "MarketplaceSasToken": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "sasUri": {
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -7331,7 +8019,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of MonitoringConfiguration",
           "readOnly": true
         }
@@ -7582,7 +8270,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of NetworkSettings",
           "readOnly": true
         }
@@ -7637,7 +8325,10 @@
           "enum": [
             "Invalid",
             "Master",
-            "Worker"
+            "Worker",
+            "ManagementCluster",
+            "ControlPlane",
+            "NodePool"
           ],
           "type": "string",
           "readOnly": true,
@@ -7657,6 +8348,23 @@
             "ipAddress",
             "port"
           ]
+        },
+        "componentType": {
+          "description": "ComponentType of the Kubernetes node.",
+          "enum": [
+            "Invalid",
+            "Cluster",
+            "Node",
+            "Etcd",
+            "CNI",
+            "LoadBalancer"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KubernetesComponentType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -7884,7 +8592,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of Order",
           "readOnly": true
         },
@@ -8329,7 +9037,7 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of Role",
           "readOnly": true
         }
@@ -8451,7 +9159,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of Share",
           "readOnly": true
         }
@@ -8738,6 +9446,24 @@
         }
       }
     },
+    "SkuMapping": {
+      "type": "object",
+      "properties": {
+        "catalogPlanId": {
+          "type": "string"
+        },
+        "marketplaceSkuId": {
+          "type": "string"
+        },
+        "marketplaceSkuVersions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "StorageAccount": {
       "description": "Represents a Storage Account on the  Data Box Edge/Gateway device.",
       "required": [
@@ -8756,7 +9482,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of StorageAccount",
           "readOnly": true
         }
@@ -8780,7 +9506,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of StorageAccountCredential",
           "readOnly": true
         }
@@ -9057,7 +9783,7 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of Trigger",
           "readOnly": true
         }
@@ -9276,7 +10002,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of UpdateSummary",
           "readOnly": true
         }
@@ -9561,7 +10287,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of User",
           "readOnly": true
         }
