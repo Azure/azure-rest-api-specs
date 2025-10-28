@@ -1,0 +1,466 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_Get",
+        "x-ms-examples": {
+          "Get the tuning options of a server.": {
+            "$ref": "./examples/TuningOptionsGet.json"
+          }
+        },
+        "description": "Gets the tuning options of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TuningOptions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_ListRecommendations",
+        "x-ms-examples": {
+          "List available index recommendations.": {
+            "$ref": "./examples/TuningOptionsListIndexRecommendations.json"
+          },
+          "List available table recommendations.": {
+            "$ref": "./examples/TuningOptionsListTableRecommendations.json"
+          },
+          "List available index recommendations, filtered to exclusively get those of CREATE INDEX type.": {
+            "$ref": "./examples/TuningOptionsListIndexRecommendationsFilteredForCreateIndex.json"
+          },
+          "List available table recommendations, filtered to exclusively get those of ANALYZE TABLE type.": {
+            "$ref": "./examples/TuningOptionsListTableRecommendationsFilteredForAnalyzeTable.json"
+          }
+        },
+        "description": "Lists available object recommendations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
+          },
+          {
+            "$ref": "#/parameters/RecommendationTypeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ObjectRecommendationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_ListByServer",
+        "x-ms-examples": {
+          "List the tuning options of a server.": {
+            "$ref": "./examples/TuningOptionsListByServer.json"
+          }
+        },
+        "description": "Lists the tuning options of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TuningOptionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ImpactRecord": {
+      "type": "object",
+      "properties": {
+        "dimensionName": {
+          "type": "string",
+          "description": "Dimension name."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Dimension unit."
+        },
+        "queryId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional property that can be used to store the identifier of the query, if the metric is for a specific query."
+        },
+        "absoluteValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Absolute value."
+        }
+      },
+      "description": "Impact on some metric if this recommended action is applied."
+    },
+    "ObjectRecommendationDetails": {
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Database name."
+        },
+        "schema": {
+          "type": "string",
+          "description": "Schema name."
+        },
+        "table": {
+          "type": "string",
+          "description": "Table name."
+        },
+        "indexType": {
+          "type": "string",
+          "description": "Index type."
+        },
+        "indexName": {
+          "type": "string",
+          "description": "Index name."
+        },
+        "indexColumns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Index columns."
+        },
+        "includedColumns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Index included columns."
+        }
+      },
+      "description": "Recommendation details for the recommended action.",
+      "readOnly": true
+    },
+    "ObjectRecommendationProperties": {
+      "type": "object",
+      "properties": {
+        "initialRecommendedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time (UTC) of this recommendation."
+        },
+        "lastRecommendedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time (UTC) that this recommendation was produced."
+        },
+        "timesRecommended": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of times this recommendation has been produced."
+        },
+        "improvedQueryIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "List of identifiers for all queries identified as targets for improvement if the recommendation is applied. The list is only populated for CREATE INDEX recommendations."
+        },
+        "recommendationReason": {
+          "type": "string",
+          "description": "Reason for this recommendation."
+        },
+        "currentState": {
+          "type": "string",
+          "description": "Current state."
+        },
+        "recommendationType": {
+          "type": "string",
+          "enum": [
+            "CreateIndex",
+            "DropIndex",
+            "ReIndex",
+            "AnalyzeTable"
+          ],
+          "x-ms-enum": {
+            "name": "RecommendationType",
+            "modelAsString": true
+          },
+          "description": "Type for this recommendation."
+        },
+        "implementationDetails": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "description": "Method of implementation for recommended action."
+            },
+            "script": {
+              "type": "string",
+              "description": "Implementation script for the recommended action."
+            }
+          },
+          "description": "Implementation details for the recommended action."
+        },
+        "analyzedWorkload": {
+          "type": "object",
+          "properties": {
+            "startTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Start time (UTC) of the workload analyzed."
+            },
+            "endTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "End time (UTC) of the workload analyzed."
+            },
+            "queryCount": {
+              "format": "int32",
+              "type": "integer",
+              "description": "Number of queries from the workload that were examined to produce this recommendation. For DROP INDEX recommendations it's 0 (zero)."
+            }
+          },
+          "description": "Workload information for the recommended action."
+        },
+        "estimatedImpact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImpactRecord"
+          },
+          "x-ms-identifiers": [
+            "dimensionName"
+          ],
+          "readOnly": true,
+          "description": "Estimated impact of this recommended action."
+        },
+        "details": {
+          "$ref": "#/definitions/ObjectRecommendationDetails",
+          "description": "Recommendation details for the recommended action."
+        }
+      },
+      "description": "Object recommendation properties.",
+      "readOnly": true
+    },
+    "ObjectRecommendation": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Always empty.",
+          "x-ms-visibility": "internal"
+        },
+        "properties": {
+          "$ref": "#/definitions/ObjectRecommendationProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of an object recommendation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Object recommendation properties."
+    },
+    "ObjectRecommendationList": {
+      "description": "List of available object recommendations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of available object recommendations.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectRecommendation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "Link used to get the next page of results.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "TuningOptions": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Impact on some metric if this recommended action is applied."
+    },
+    "TuningOptionsList": {
+      "description": "List of server tuning options.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of available tuning options.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TuningOptions"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "Link used to get the next page of results.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TuningOptionParameter": {
+      "name": "tuningOption",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "index",
+        "table"
+      ],
+      "description": "The name of the tuning option.",
+      "x-ms-enum": {
+        "name": "TuningOption",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RecommendationTypeParameter": {
+      "name": "recommendationType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "CreateIndex",
+        "DropIndex",
+        "AnalyzeTable"
+      ],
+      "description": "Recommendations list filter. Retrieves recommendations based on type.",
+      "x-ms-enum": {
+        "name": "RecommendationType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

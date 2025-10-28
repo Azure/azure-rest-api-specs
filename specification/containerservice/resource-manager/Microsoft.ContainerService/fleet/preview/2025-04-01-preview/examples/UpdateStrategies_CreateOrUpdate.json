@@ -1,0 +1,166 @@
+{
+  "operationId": "FleetUpdateStrategies_CreateOrUpdate",
+  "title": "Create a FleetUpdateStrategy.",
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1",
+    "updateStrategyName": "strategy1",
+    "resource": {
+      "properties": {
+        "strategy": {
+          "stages": [
+            {
+              "name": "stage1",
+              "groups": [
+                {
+                  "name": "group-a",
+                  "beforeGates": [
+                    {
+                      "displayName": "gate before group-a",
+                      "type": "Approval"
+                    }
+                  ],
+                  "afterGates": [
+                    {
+                      "displayName": "gate after group-a",
+                      "type": "Approval"
+                    }
+                  ]
+                }
+              ],
+              "beforeGates": [
+                {
+                  "displayName": "gate before stage1",
+                  "type": "Approval"
+                }
+              ],
+              "afterGates": [
+                {
+                  "displayName": "gate after stage1",
+                  "type": "Approval"
+                }
+              ],
+              "afterStageWaitInSeconds": 3600
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/fleets/myFleet/updateStrategies/strategy1",
+        "name": "strategy1",
+        "type": "Microsoft.ContainerService/fleets/updateStrategies",
+        "systemData": {
+          "createdBy": "@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2023-03-01T01:10:08.395Z",
+          "lastModifiedBy": "@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-03-01T01:10:08.395Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "strategy": {
+            "stages": [
+              {
+                "name": "stage1",
+                "groups": [
+                  {
+                    "name": "group-a",
+                    "beforeGates": [
+                      {
+                        "displayName": "gate before group-a",
+                        "type": "Approval"
+                      }
+                    ],
+                    "afterGates": [
+                      {
+                        "displayName": "gate after group-a",
+                        "type": "Approval"
+                      }
+                    ]
+                  }
+                ],
+                "beforeGates": [
+                  {
+                    "displayName": "gate before stage1",
+                    "type": "Approval"
+                  }
+                ],
+                "afterGates": [
+                  {
+                    "displayName": "gate after stage1",
+                    "type": "Approval"
+                  }
+                ],
+                "afterStageWaitInSeconds": 3600
+              }
+            ]
+          }
+        },
+        "eTag": "\"EtagValue\""
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/fleets/myFleet/updateStrategies/strategy1",
+        "name": "strategy1",
+        "type": "Microsoft.ContainerService/fleets/updateStrategies",
+        "systemData": {
+          "createdBy": "@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2023-03-01T01:10:08.395Z",
+          "lastModifiedBy": "@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-03-01T01:10:08.395Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "strategy": {
+            "stages": [
+              {
+                "name": "stage1",
+                "groups": [
+                  {
+                    "name": "group-a",
+                    "beforeGates": [
+                      {
+                        "displayName": "gate before group-a",
+                        "type": "Approval"
+                      }
+                    ],
+                    "afterGates": [
+                      {
+                        "displayName": "gate after group-a",
+                        "type": "Approval"
+                      }
+                    ]
+                  }
+                ],
+                "beforeGates": [
+                  {
+                    "displayName": "gate before stage1",
+                    "type": "Approval"
+                  }
+                ],
+                "afterGates": [
+                  {
+                    "displayName": "gate after stage1",
+                    "type": "Approval"
+                  }
+                ],
+                "afterStageWaitInSeconds": 3600
+              }
+            ]
+          }
+        },
+        "eTag": "\"EtagValue\""
+      }
+    }
+  }
+}

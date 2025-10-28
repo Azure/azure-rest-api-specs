@@ -1,0 +1,98 @@
+{
+  "title": "Get LivenessWithVerify Session Result",
+  "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessionResult",
+  "parameters": {
+    "apiVersion": "v1.3-preview.1",
+    "sessionId": "b12e033e-bda7-4b83-a211-e721c661f30e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sessionId": "b12e033e-bda7-4b83-a211-e721c661f30e",
+        "authToken": "eyJhbGciOiJFUzI1NiIsIm",
+        "status": "NotStarted",
+        "modelVersion": "2024-11-15",
+        "isAbuseMonitoringEnabled": true,
+        "expectedClientIpAddress": "1.2.3.4",
+        "results": {
+          "attempts": [
+            {
+              "attemptId": 2,
+              "attemptStatus": "Succeeded",
+              "result": {
+                "livenessDecision": "realface",
+                "targets": {
+                  "color": {
+                    "faceRectangle": {
+                      "top": 669,
+                      "left": 203,
+                      "width": 646,
+                      "height": 724
+                    }
+                  }
+                },
+                "verifyResult": {
+                  "matchConfidence": 0.08871888,
+                  "isIdentical": false
+                },
+                "digest": "B0A803BB7B26F3C8F29CD36030F8E63ED3FAF955FEEF8E01C88AB8FD89CCF761",
+                "sessionImageId": "Ae3PVWlXAmVAnXgkAFt1QSjGUWONKzWiSr2iPh9p9G4I",
+                "verifyImageHash": "43B7D8E8769533C3290DBD37A84D821B2C28CB4381DF9C6784DBC4AAF7E45018"
+              },
+              "clientInformation": [
+                {
+                  "ip": "73.21.34.122"
+                }
+              ],
+              "abuseMonitoringResult": {
+                "isAbuseDetected": true,
+                "otherFlaggedSessions": [
+                  {
+                    "attemptId": 1,
+                    "sessionId": "b12e033e-bda7-4b83-a211-e721c661f30e",
+                    "sessionImageId": "Ae3PVWlXAmVAnXgkAFt1QSjGUWONKzWiSr2iPh9p9G4I"
+                  }
+                ]
+              }
+            },
+            {
+              "attemptId": 1,
+              "attemptStatus": "Failed",
+              "error": {
+                "code": "FaceWithMaskDetected",
+                "message": "Mask detected on face image.",
+                "targets": {
+                  "color": {
+                    "faceRectangle": {
+                      "top": 669,
+                      "left": 203,
+                      "width": 646,
+                      "height": 724
+                    }
+                  }
+                }
+              },
+              "clientInformation": [
+                {
+                  "ip": "73.21.34.122"
+                }
+              ]
+            }
+          ],
+          "verifyReferences": [
+            {
+              "referenceType": "image",
+              "faceRectangle": {
+                "top": 316,
+                "left": 131,
+                "width": 498,
+                "height": 677
+              },
+              "qualityForRecognition": "high"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

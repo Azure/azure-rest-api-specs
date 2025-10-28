@@ -1838,25 +1838,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -3695,49 +3676,6 @@
         "notificationSettings"
       ]
     },
-    "ScheduledActionPropertiesUpdate": {
-      "type": "object",
-      "description": "Scheduled action properties",
-      "properties": {
-        "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of resource the scheduled action is targeting"
-        },
-        "actionType": {
-          "$ref": "#/definitions/ActionType",
-          "description": "The action the scheduled action should perform in the resources"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time which the scheduled action is supposed to start running"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the scheduled action is supposed to stop scheduling"
-        },
-        "schedule": {
-          "$ref": "#/definitions/ScheduledActionsScheduleUpdate",
-          "description": "The schedule the scheduled action is supposed to follow"
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "The notification settings for the scheduled action",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "Tell if the scheduled action is disabled or not",
-          "default": false
-        }
-      }
-    },
     "ScheduledActionResource": {
       "type": "object",
       "description": "Represents an scheduled action resource metadata.",
@@ -3809,7 +3747,7 @@
       "description": "The scheduled action extension",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ScheduledActionProperties",
+          "$ref": "#/definitions/ScheduledActionsExtensionProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -3842,17 +3780,128 @@
     },
     "ScheduledActionUpdate": {
       "type": "object",
-      "description": "The scheduled action resource",
+      "description": "The type used for update operations of the ScheduledAction.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/ScheduledActionPropertiesUpdate",
+          "$ref": "#/definitions/ScheduledActionUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "ScheduledActionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ScheduledAction.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the scheduled action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the scheduled action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the scheduled action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the scheduled action is supposed to stop scheduling"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduledActionsScheduleUpdate",
+          "description": "The schedule the scheduled action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the scheduled action is disabled or not",
+          "default": false
         }
+      }
+    },
+    "ScheduledActionsExtensionProperties": {
+      "type": "object",
+      "description": "Scheduled action extension properties",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the scheduled action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the scheduled action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the scheduled action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the scheduled action is supposed to stop scheduling"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduledActionsSchedule",
+          "description": "The schedule the scheduled action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the scheduled action is disabled or not",
+          "default": false
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        },
+        "resourceNotificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action at a resource level. Resource level notification settings are scope to specific resources only and submitted through attach requests.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "resourceType",
+        "actionType",
+        "startTime",
+        "schedule",
+        "notificationSettings"
       ]
     },
     "ScheduledActionsId": {

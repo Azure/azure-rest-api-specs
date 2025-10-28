@@ -1,18 +1,18 @@
 import path from "node:path";
-import {
-  getChangedFiles,
-  searchRelatedParentFolders,
-  searchSharedLibrary,
-  searchRelatedTypeSpecProjectBySharedLibrary,
-  groupPathsByService,
-  createCombinedSpecs,
-  type SpecResults,
-  type ChangedSpecs,
-  type SpecConfigs,
-  getLastPathSegment,
-} from "./utils.js";
 import { logMessage } from "./log.js";
 import { SpecGenSdkCmdInput } from "./types.js";
+import {
+  createCombinedSpecs,
+  getChangedFiles,
+  getLastPathSegment,
+  groupPathsByService,
+  searchRelatedParentFolders,
+  searchRelatedTypeSpecProjectBySharedLibrary,
+  searchSharedLibrary,
+  type ChangedSpecs,
+  type SpecConfigs,
+  type SpecResults,
+} from "./utils.js";
 
 export const readmeMdRegex = /^readme.md$/;
 export const typespecProjectRegex = /^tspconfig.yaml$/;

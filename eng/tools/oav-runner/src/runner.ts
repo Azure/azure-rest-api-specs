@@ -1,19 +1,26 @@
 #!/usr/bin/env node
 
+import * as fs from "fs";
 import * as oav from "oav";
 import * as path from "path";
-import * as fs from "fs";
 
+import {
+  example,
+  getChangedFiles,
+  preview,
+  stable,
+  swagger,
+} from "@azure-tools/specs-shared/changed-files";
+import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
-import { includesFolder } from "@azure-tools/specs-shared/path";
-import { getChangedFiles } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { ReportableOavError } from "./formatting.js";
 
 export async function preCheckFiltering(
   rootDirectory: string,
   fileList?: string[],
 ): Promise<string[]> {
-  const changedFiles = fileList ?? (await getChangedFiles({ cwd: rootDirectory }));
+  const changedFiles =
+    fileList ?? (await getChangedFiles({ cwd: rootDirectory, paths: ["specification"] }));
 
   const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
 
@@ -114,33 +121,26 @@ export async function checkSpecs(
 
 async function getFiles(rootDirectory: string, directory: string): Promise<string[]> {
   const target = path.join(rootDirectory, directory);
-  const items = await fs.promises.readdir(target, {
-    withFileTypes: true,
-  });
+
+  let items: fs.Dirent[];
+  try {
+    items = await fs.promises.readdir(target, {
+      withFileTypes: true,
+    });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException)?.code === "ENOENT") {
+      console.log(`Skipping deleted directory '${target}'`);
+      return [];
+    } else {
+      throw error;
+    }
+  }
 
   return items
     .filter((d) => d.isFile() && d.name.endsWith(".json"))
     .map((d) => path.join(target, d.name))
     .map((d) => d.replace(/^.*?(specification[\/\\].*)$/, "$1"))
     .filter((d) => d.includes("specification" + path.sep));
-}
-
-function example(file: string): boolean {
-  return (
-    typeof file === "string" &&
-    file.toLowerCase().endsWith(".json") &&
-    includesFolder(file, "examples")
-  );
-}
-
-function swagger(file: string): boolean {
-  return (
-    typeof file === "string" &&
-    file.toLowerCase().endsWith(".json") &&
-    (includesFolder(file, "data-plane") || includesFolder(file, "resource-manager")) &&
-    includesFolder(file, "specification") &&
-    !includesFolder(file, "examples")
-  );
 }
 
 export async function processFilesToSpecificationList(
@@ -154,22 +154,24 @@ export async function processFilesToSpecificationList(
   // files from get-changed-files are relative to the root of the repo,
   // though that context is passed into this from cli arguments.
   for (const file of files) {
-    if (!file.startsWith("specification/")) {
-      continue;
-    }
-
     const absoluteFilePath = path.join(rootDirectory, file);
 
-    // if the file is an example, we need to find the swagger file that references it
-    if (example(file)) {
+    // if the file is an example, under "preview" or "stable" (but not the TypeSpec source folder),
+    // we need to find the swagger file that references it
+    if (example(file) && (preview(file) || stable(file))) {
       /*
-        examples exist in the same directory as the swagger file that references them:
+        The `examples` folder is traditionally populated with example.json files related to the owning spec.
+        However, these examples might be contained within subdirectories of the examples folder.
 
-        path/to/swagger/2024-01-01/examples/example.json <-- this is an example file path
+        path/to/swagger/2024-01-01/examples/example.json                        <-- valid example path
+        path/to/swagger/2024-01-01/examples/subdirectory1/example.json <-- also valid example path
         path/to/swagger/2024-01-01/swagger.json <-- we need to identify this file if it references the example
         path/to/swagger/2024-01-01/swagger2.json <-- and do nothing with this one
       */
-      const swaggerDir = path.dirname(path.dirname(file));
+      const swaggerDir = path.relative(
+        rootDirectory,
+        untilLastSegment(absoluteFilePath, "examples"),
+      );
 
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
 
