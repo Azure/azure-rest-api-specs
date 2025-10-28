@@ -109,6 +109,7 @@ model ProxyResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
+  systemData?: SystemData;
 }
 
 /**
