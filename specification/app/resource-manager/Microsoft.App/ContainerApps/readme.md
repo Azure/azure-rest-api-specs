@@ -41,6 +41,13 @@ directive:
     from: ManagedEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[3].schema.properties.identity
     reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+  - suppress: AvoidAdditionalProperties
+    from: CommonDefinitions.json    
+    where:
+      - $.definitions.DaprSubscription.properties.properties.properties.metadata
+      - $.definitions.ServiceBind.properties.customizedKeys
+    reason: |
+      Do not introduce breaking changes in GA services
 ```
 
 ### Tag: package-preview-2025-10-02-preview
@@ -204,13 +211,6 @@ input-file:
   - preview/2025-02-02-preview/Subscriptions.json
   - preview/2025-02-02-preview/Usages.json
 directive:
-  - suppress: AvoidAdditionalProperties
-    from: CommonDefinitions.json    
-    where:
-      - $.definitions.DaprSubscription.properties.properties.properties.metadata
-      - $.definitions.ServiceBind.properties.customizedKeys
-    reason: |
-      Do not introduce breaking changes in GA services
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: LogicAppsExtension.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows/{workflowName}"].get
