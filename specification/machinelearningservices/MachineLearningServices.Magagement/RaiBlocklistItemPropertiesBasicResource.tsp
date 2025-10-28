@@ -28,21 +28,24 @@ interface RaiBlocklistItemPropertiesBasicResources {
   /**
    * Gets the specified custom blocklist item associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklistItem_Get")
+  @summary("Gets the specified custom blocklist item associated with the Azure OpenAI connection.")
   get is ArmResourceRead<RaiBlocklistItemPropertiesBasicResource>;
 
   /**
    * Update the state of specified blocklist item associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklistItem_Create")
+  @summary("Update the state of specified blocklist item associated with the Azure OpenAI connection.")
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -53,14 +56,16 @@ interface RaiBlocklistItemPropertiesBasicResources {
   /**
    * Deletes the specified custom blocklist item associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklistItem_Delete")
+  @summary("Deletes the specified custom blocklist item associated with the Azure OpenAI connection.")
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -69,14 +74,16 @@ interface RaiBlocklistItemPropertiesBasicResources {
   /**
    * Gets the custom blocklist items associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiBlocklistItems_List")
+  @summary("Gets the custom blocklist items associated with the Azure OpenAI connection.")
   list is ArmResourceListByParent<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },

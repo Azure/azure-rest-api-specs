@@ -25,57 +25,62 @@ model RaiPolicyPropertiesBasicResource
   >;
 }
 
-alias RaiPolicyPropertiesBasicResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface RaiPolicyPropertiesBasicResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Azure Machine Learning Workspace Name */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Azure Machine Learning Workspace Name */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Friendly name of the workspace connection */
-    @path
-    @segment("connections")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    connectionName: string;
-  },
-  {
-    /** Name of the Rai Policy. */
-    @path
-    @segment("raiPolicies")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-    raiPolicyName: string;
-  }
->;
+        /** Friendly name of the workspace connection */
+        @path
+        @segment("connections")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        connectionName: string,
+      },
+      {
+        /** Name of the Rai Policy. */
+        @path
+        @segment("raiPolicies")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        raiPolicyName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResources {
   /**
    * Gets the specified Content Filters associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiPolicy_Get")
+  @summary("Gets the specified Content Filters associated with the Azure OpenAI connection.")
   get is RaiPolicyPropertiesBasicResourceOps.Read<RaiPolicyPropertiesBasicResource>;
 
   /**
    * Update the state of specified Content Filters associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiPolicy_Create")
+  @summary("Update the state of specified Content Filters associated with the Azure OpenAI connection.")
   create is RaiPolicyPropertiesBasicResourceOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -86,14 +91,16 @@ interface RaiPolicyPropertiesBasicResources {
   /**
    * Deletes the specified Content Filters associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiPolicy_Delete")
+  @summary("Deletes the specified Content Filters associated with the Azure OpenAI connection.")
   delete is RaiPolicyPropertiesBasicResourceOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -102,67 +109,74 @@ interface RaiPolicyPropertiesBasicResources {
   /**
    * List the specified Content Filters associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionRaiPolicies_List")
+  @summary("List the specified Content Filters associated with the Azure OpenAI connection.")
   list is RaiPolicyPropertiesBasicResourceOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
   >;
 }
-alias RaiPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface RaiPolicyOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Azure Machine Learning Workspace Name */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Azure Machine Learning Workspace Name */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Name of the endpoint resource. */
-    @path
-    @segment("endpoints")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$")
-    endpointName: string;
-  },
-  {
-    /** Name of the Rai Policy. */
-    @path
-    @segment("raiPolicies")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-    raiPolicyName: string;
-  }
->;
+        /** Name of the endpoint resource. */
+        @path
+        @segment("endpoints")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$")
+        endpointName: string,
+      },
+      {
+        /** Name of the Rai Policy. */
+        @path
+        @segment("raiPolicies")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        raiPolicyName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface RaiPolicy {
   /**
    * Gets the specified Content Filters associated with the Azure OpenAI account.
    */
+  @summary("Gets the specified Content Filters associated with the Azure OpenAI account.")
   get is RaiPolicyOps.Read<RaiPolicyPropertiesBasicResource>;
 
   /**
    * Update the state of specified Content Filters associated with the Azure OpenAI account.
    */
+  @summary("Update the state of specified Content Filters associated with the Azure OpenAI account.")
   create is RaiPolicyOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -173,12 +187,14 @@ interface RaiPolicy {
   /**
    * Deletes the specified Content Filters associated with the Azure OpenAI account.
    */
+  @summary("Deletes the specified Content Filters associated with the Azure OpenAI account.")
   delete is RaiPolicyOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -187,14 +203,16 @@ interface RaiPolicy {
   /**
    * List the specified Content Filters associated with the Azure OpenAI account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RaiPolicies_List")
+  @summary("List the specified Content Filters associated with the Azure OpenAI account.")
   list is RaiPolicyOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },

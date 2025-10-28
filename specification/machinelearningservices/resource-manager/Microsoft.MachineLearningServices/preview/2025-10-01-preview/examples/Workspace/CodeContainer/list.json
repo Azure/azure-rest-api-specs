@@ -1,20 +1,21 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "testrg123",
-    "workspaceName": "testworkspace",
     "name": "testcode",
+    "$skipToken": "skiptoken",
     "api-version": "2025-10-01-preview",
-    "$skipToken": "skiptoken"
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "string",
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testContainer",
             "name": "testContainer",
             "type": "Microsoft.MachineLearningServices/workspaces/codes",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testContainer",
             "properties": {
               "description": "string",
               "tags": {
@@ -32,9 +33,9 @@
             }
           },
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testContainer2",
             "name": "testContainer2",
             "type": "Microsoft.MachineLearningServices/workspaces/codes",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testContainer2",
             "properties": {
               "description": "string",
               "tags": {
@@ -51,9 +52,10 @@
               "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": "string"
+        ]
       }
     }
-  }
+  },
+  "operationId": "CodeContainers_List",
+  "title": "List Workspace Code Container."
 }

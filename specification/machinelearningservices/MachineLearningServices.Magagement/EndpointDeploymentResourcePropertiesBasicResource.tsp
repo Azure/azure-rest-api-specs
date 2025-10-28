@@ -26,57 +26,62 @@ model EndpointDeploymentResourcePropertiesBasicResource
   >;
 }
 
-alias EndpointDeploymentResourcePropertiesBasicResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface EndpointDeploymentResourcePropertiesBasicResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Azure Machine Learning Workspace Name */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Azure Machine Learning Workspace Name */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Friendly name of the workspace connection */
-    @path
-    @segment("connections")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    connectionName: string;
-  },
-  {
-    /** Name of the deployment resource */
-    @path
-    @segment("deployments")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    deploymentName: string;
-  }
->;
+        /** Friendly name of the workspace connection */
+        @path
+        @segment("connections")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        connectionName: string,
+      },
+      {
+        /** Name of the deployment resource */
+        @path
+        @segment("deployments")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        deploymentName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Get deployments under the Azure OpenAI connection by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_GetDeployment")
+  @summary("Get deployments under the Azure OpenAI connection by name.")
   getDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.Read<EndpointDeploymentResourcePropertiesBasicResource>;
 
   /**
    * Create or update Azure OpenAI connection deployment resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_CreateOrUpdateDeployment")
+  @summary("Create or update Azure OpenAI connection deployment resource with the specified parameters")
   createOrUpdateDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -87,14 +92,16 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Delete Azure OpenAI connection deployment resource by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_DeleteDeployment")
+  @summary("Delete Azure OpenAI connection deployment resource by name")
   deleteDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -103,62 +110,68 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Get all the deployments under the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_ListDeployments")
+  @summary("Get all the deployments under the Azure OpenAI connection.")
   listDeployments is EndpointDeploymentResourcePropertiesBasicResourceOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>
   >;
 }
-alias EndpointDeploymentOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface EndpointDeploymentOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Azure Machine Learning Workspace Name */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Azure Machine Learning Workspace Name */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Name of the endpoint resource. */
-    @path
-    @segment("endpoints")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$")
-    endpointName: string;
-  },
-  {
-    /** Name of the deployment resource */
-    @path
-    @segment("deployments")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    deploymentName: string;
-  }
->;
+        /** Name of the endpoint resource. */
+        @path
+        @segment("endpoints")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$")
+        endpointName: string,
+      },
+      {
+        /** Name of the deployment resource */
+        @path
+        @segment("deployments")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        deploymentName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface EndpointDeployment {
   /**
    * Get deployments under endpoint resource by name
    */
+  @summary("Get deployments under endpoint resource by name")
   get is EndpointDeploymentOps.Read<EndpointDeploymentResourcePropertiesBasicResource>;
 
   /**
    * Create or update endpoint deployment resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Response = ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource> | ArmAcceptedLroResponse,
@@ -169,12 +182,14 @@ interface EndpointDeployment {
   /**
    * Delete  endpoint deployment resource by name
    */
+  @summary("Delete  endpoint deployment resource by name")
   delete is EndpointDeploymentOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -183,6 +198,7 @@ interface EndpointDeployment {
   /**
    * Get all the deployments under the endpoint resource scope
    */
+  @summary("Get all the deployments under the endpoint resource scope")
   list is EndpointDeploymentOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>

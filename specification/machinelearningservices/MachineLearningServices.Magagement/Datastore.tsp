@@ -30,11 +30,13 @@ interface Datastores {
   /**
    * Get datastore.
    */
+  @summary("Get datastore.")
   get is ArmResourceRead<Datastore>;
 
   /**
    * Create or update datastore.
    */
+  @summary("Create or update datastore.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Datastore,
     Parameters = {
@@ -42,18 +44,20 @@ interface Datastores {
        * Flag to skip validation.
        */
       @query("skipValidation")
-      skipValidation?: boolean;
+      skipValidation?: boolean = false;
     }
   >;
 
   /**
    * Delete datastore.
    */
+  @summary("Delete datastore.")
   delete is ArmResourceDeleteSync<Datastore>;
 
   /**
    * List datastores.
    */
+  @summary("List datastores.")
   list is ArmResourceListByParent<
     Datastore,
     Parameters = {
@@ -97,7 +101,7 @@ interface Datastores {
        * Order by property in ascending order.
        */
       @query("orderByAsc")
-      orderByAsc?: boolean;
+      orderByAsc?: boolean = false;
     },
     Response = ArmResponse<DatastoreResourceArmPaginatedResult>
   >;
@@ -105,6 +109,7 @@ interface Datastores {
   /**
    * Get datastore secrets.
    */
+  @summary("Get datastore secrets.")
   listSecrets is ArmResourceActionSync<
     Datastore,
     SecretExpiry,

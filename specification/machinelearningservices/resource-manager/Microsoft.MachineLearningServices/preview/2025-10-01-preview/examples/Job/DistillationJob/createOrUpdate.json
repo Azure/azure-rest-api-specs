@@ -4,10 +4,9 @@
     "body": {
       "properties": {
         "computeId": "gpu-compute",
-        "experimentName": "llm-finetuning",
         "dataGenerationDetails": {
-          "dataGenerationType": "LabelGeneration",
           "dataGenerationTaskType": "Conversation",
+          "dataGenerationType": "LabelGeneration",
           "teacherModelEndpoint": {
             "endpointName": "newfinetuneinttesting-jbuob"
           },
@@ -18,6 +17,7 @@
             "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
           }
         },
+        "experimentName": "llm-finetuning",
         "finetuningDetails": {
           "studentModel": {
             "description": null,
@@ -30,9 +30,9 @@
         "outputs": {
           "string": {
             "description": "string",
-            "uri": "string",
+            "jobOutputType": "mlflow_model",
             "mode": "ReadWriteMount",
-            "jobOutputType": "mlflow_model"
+            "uri": "string"
           }
         },
         "queueSettings": {
@@ -53,17 +53,16 @@
   "responses": {
     "200": {
       "body": {
-        "id": "string",
         "name": "string",
+        "type": "string",
+        "id": "string",
         "properties": {
+          "description": "string",
           "componentId": "string",
           "computeId": "string",
-          "description": "string",
-          "displayName": "string",
-          "experimentName": "string",
           "dataGenerationDetails": {
-            "dataGenerationType": "LabelGeneration",
             "dataGenerationTaskType": "Conversation",
+            "dataGenerationType": "LabelGeneration",
             "teacherModelEndpoint": {
               "endpointName": "newfinetuneinttesting-jbuob"
             },
@@ -74,6 +73,8 @@
               "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
             }
           },
+          "displayName": "string",
+          "experimentName": "string",
           "finetuningDetails": {
             "studentModel": {
               "description": null,
@@ -98,9 +99,9 @@
           "outputs": {
             "string": {
               "description": "string",
-              "uri": "string",
+              "jobOutputType": "mlflow_model",
               "mode": "ReadWriteMount",
-              "jobOutputType": "mlflow_model"
+              "uri": "string"
             }
           },
           "properties": {
@@ -126,24 +127,22 @@
           "lastModifiedAt": "2025-01-01T12:34:56.999+00:22",
           "lastModifiedBy": "string",
           "lastModifiedByType": "ManagedIdentity"
-        },
-        "type": "string"
+        }
       },
       "headers": {}
     },
     "201": {
       "body": {
-        "id": "string",
         "name": "string",
+        "type": "string",
+        "id": "string",
         "properties": {
+          "description": "string",
           "componentId": "string",
           "computeId": "string",
-          "description": "string",
-          "displayName": "string",
-          "experimentName": "string",
           "dataGenerationDetails": {
-            "dataGenerationType": "LabelGeneration",
             "dataGenerationTaskType": "Conversation",
+            "dataGenerationType": "LabelGeneration",
             "teacherModelEndpoint": {
               "endpointName": "newfinetuneinttesting-jbuob"
             },
@@ -154,6 +153,8 @@
               "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
             }
           },
+          "displayName": "string",
+          "experimentName": "string",
           "finetuningDetails": {
             "studentModel": {
               "description": null,
@@ -178,9 +179,9 @@
           "outputs": {
             "string": {
               "description": "string",
-              "uri": "string",
+              "jobOutputType": "mlflow_model",
               "mode": "ReadWriteMount",
-              "jobOutputType": "mlflow_model"
+              "uri": "string"
             }
           },
           "properties": {
@@ -206,10 +207,11 @@
           "lastModifiedAt": "2025-01-01T12:34:56.999+00:22",
           "lastModifiedBy": "string",
           "lastModifiedByType": "ManagedIdentity"
-        },
-        "type": "string"
+        }
       },
       "headers": {}
     }
-  }
+  },
+  "operationId": "Jobs_CreateOrUpdate",
+  "title": "CreateOrUpdate Distillation Job."
 }

@@ -1,55 +1,54 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
     "name": "string",
-    "version": "string",
     "api-version": "2025-10-01-preview",
     "body": {
       "properties": {
         "description": "string",
-        "tags": {
-          "string": "string"
-        },
+        "indexColumns": [
+          {
+            "columnName": "string",
+            "dataType": "Datetime"
+          }
+        ],
+        "isAnonymous": false,
+        "isArchived": false,
         "properties": {
           "string": "string"
         },
-        "isArchived": false,
-        "isAnonymous": false,
-        "indexColumns": [
-          {
-            "dataType": "Datetime",
-            "columnName": "string"
-          }
-        ]
+        "tags": {
+          "string": "string"
+        }
       }
-    }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
-            "string": "string"
-          },
+          "indexColumns": [
+            {
+              "columnName": "string",
+              "dataType": "Integer"
+            }
+          ],
+          "isAnonymous": false,
+          "isArchived": false,
           "properties": {
             "string": "string"
           },
-          "isArchived": false,
-          "isAnonymous": false,
-          "indexColumns": [
-            {
-              "dataType": "Integer",
-              "columnName": "string"
-            }
-          ],
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "tags": {
+            "string": "string"
+          }
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999+00:58",
@@ -59,31 +58,31 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "Key"
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
-            "string": "string"
-          },
+          "indexColumns": [
+            {
+              "columnName": "string",
+              "dataType": "Integer"
+            }
+          ],
+          "isAnonymous": false,
+          "isArchived": false,
           "properties": {
             "string": "string"
           },
-          "isArchived": false,
-          "isAnonymous": false,
-          "indexColumns": [
-            {
-              "dataType": "Integer",
-              "columnName": "string"
-            }
-          ],
-          "provisioningState": "Canceled"
+          "provisioningState": "Canceled",
+          "tags": {
+            "string": "string"
+          }
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999+00:58",
@@ -93,7 +92,10 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "FeaturestoreEntityVersions_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Featurestore Entity Version."
 }

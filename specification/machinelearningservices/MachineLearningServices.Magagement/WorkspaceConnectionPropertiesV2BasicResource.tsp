@@ -31,26 +31,30 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Lists machine learning workspaces connections by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkspaceConnections_Get")
+  @summary("Lists machine learning workspaces connections by name.")
   get is ArmResourceRead<WorkspaceConnectionPropertiesV2BasicResource>;
 
   /**
    * Create or update machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkspaceConnections_Create")
-  create is ArmResourceCreateOrReplaceSync<
+  @summary("Create or update machine learning workspaces connections under the specified workspace.")
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     WorkspaceConnectionPropertiesV2BasicResource,
-    Response = ArmResourceUpdatedResponse<WorkspaceConnectionPropertiesV2BasicResource>
+    OptionalRequestBody = true,
+    Response = ArmResponse<WorkspaceConnectionPropertiesV2BasicResource>
   >;
 
   /**
    * Update machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkspaceConnections_Update")
+  @summary("Update machine learning workspaces connections under the specified workspace.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     WorkspaceConnectionPropertiesV2BasicResource,
@@ -61,15 +65,17 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Delete machine learning workspaces connections by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkspaceConnections_Delete")
+  @summary("Delete machine learning workspaces connections by name.")
   delete is ArmResourceDeleteSync<WorkspaceConnectionPropertiesV2BasicResource>;
 
   /**
    * Lists all the available machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkspaceConnections_List")
+  @summary("List all the available machine learning workspaces connections under the specified workspace.")
   list is ArmResourceListByParent<
     WorkspaceConnectionPropertiesV2BasicResource,
     Parameters = {
@@ -89,7 +95,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
        * query parameter that indicates if get connection call should return both connections and datastores
        */
       @query("includeAll")
-      includeAll?: boolean;
+      includeAll?: boolean = false;
     },
     Response = ArmResponse<WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult>
   >;
@@ -97,8 +103,9 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * List all the secrets of a machine learning workspaces connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkspaceConnections_ListSecrets")
+  @summary("List all the secrets of a machine learning workspaces connections.")
   @action("listsecrets")
   listSecrets is ArmResourceActionSync<
     WorkspaceConnectionPropertiesV2BasicResource,
@@ -109,8 +116,9 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Test machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkspaceConnections_TestConnection")
+  @summary("Test machine learning workspaces connections under the specified workspace.")
   @action("testconnection")
   testConnection is ArmResourceActionAsyncBase<
     WorkspaceConnectionPropertiesV2BasicResource,
@@ -123,8 +131,9 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Get available models under the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_GetModels")
+  @summary("Get available models under the Azure OpenAI connection.")
   @list
   @get
   @action("models")
@@ -136,6 +145,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
       /**
        * Api version used by proxy call
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }

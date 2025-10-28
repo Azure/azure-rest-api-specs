@@ -1,10 +1,6 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "testrg123",
-    "registryName": "registry123",
     "api-version": "2025-10-01-preview",
-    "modelName": "testContainer",
     "body": {
       "properties": {
         "description": "Model container description",
@@ -13,14 +9,18 @@
           "tag2": "value2"
         }
       }
-    }
+    },
+    "modelName": "testContainer",
+    "registryName": "registry123",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/registries/registry123/models/testContainer",
         "name": "testContainer",
         "type": "Microsoft.MachineLearningServices/registries/models",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/registries/registry123/models/testContainer",
         "properties": {
           "description": "Model container description",
           "tags": {
@@ -40,9 +40,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/registries/registry123/models/testContainer",
         "name": "testContainer",
         "type": "Microsoft.MachineLearningServices/registries/models",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/registries/registry123/models/testContainer",
         "properties": {
           "description": "Model container description",
           "tags": {
@@ -60,5 +60,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "RegistryModelContainers_CreateOrUpdate",
+  "title": "CreateOrUpdate Registry Model Container."
 }

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -28,62 +29,88 @@ model EnvironmentContainer
   >;
 }
 
-alias EnvironmentContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface EnvironmentContainerOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning registry. This is case-insensitive */
-    @path
-    @segment("registries")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-    registryName: string;
-  },
-  {
-    /** Container name. This is case-sensitive. */
-    @path
-    @segment("environments")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-    environmentName: string;
-  }
->;
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
+      },
+      {
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("environments")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        environmentName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface EnvironmentContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentContainers_Get")
+  @summary("Get container.")
   get is EnvironmentContainerOps.Read<EnvironmentContainer>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @useFinalStateVia("original-uri")
   @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
-  createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<EnvironmentContainer>;
+  @summary("Create or update container.")
+  createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<
+    EnvironmentContainer,
+    Response = ArmResourceUpdatedResponse<EnvironmentContainer> | (ArmResourceCreatedResponse<
+      EnvironmentContainer,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = EnvironmentContainer> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentContainers_Delete")
+  @summary("Delete container.")
   delete is EnvironmentContainerOps.DeleteWithoutOkAsync<
     EnvironmentContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentContainers_List")
+  @summary("List environment containers.")
   list is EnvironmentContainerOps.List<
     EnvironmentContainer,
     Parameters = {
@@ -97,62 +124,68 @@ interface EnvironmentContainers {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<EnvironmentContainerResourceArmPaginatedResult>
   >;
 }
-alias EnvironmentContainerOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface EnvironmentContainerOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning workspace. */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
-  },
-  {
-    /** Container name. This is case-sensitive. */
-    @path
-    @segment("environments")
-    @key
-    name: string;
-  }
->;
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
+      },
+      {
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("environments")
+        @key
+        name: string,
+      }
+    > {}
 
 @armResourceOperations
 interface EnvironmentContainerOperationGroup {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentContainers_Get")
+  @summary("Get container.")
   get is EnvironmentContainerOperationGroupOps.Read<EnvironmentContainer>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOperationGroupOps.CreateOrUpdateSync<EnvironmentContainer>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentContainers_Delete")
+  @summary("Delete container.")
   delete is EnvironmentContainerOperationGroupOps.DeleteSync<EnvironmentContainer>;
 
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentContainers_List")
+  @summary("List environment containers.")
   list is EnvironmentContainerOperationGroupOps.List<
     EnvironmentContainer,
     Parameters = {
@@ -166,7 +199,7 @@ interface EnvironmentContainerOperationGroup {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<EnvironmentContainerResourceArmPaginatedResult>
   >;

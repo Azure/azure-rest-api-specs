@@ -26,7 +26,7 @@ model OnlineDeployment
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -37,34 +37,65 @@ interface OnlineDeployments {
   /**
    * Get Inference Deployment Deployment.
    */
+  @summary("Get Inference Deployment Deployment.")
   get is ArmResourceRead<OnlineDeployment>;
 
   /**
    * Create or update Inference Endpoint Deployment (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineDeployment>;
+  @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update Inference Endpoint Deployment (asynchronous).")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    OnlineDeployment,
+    Response = ArmResourceUpdatedResponse<OnlineDeployment> | (ArmResourceCreatedResponse<
+      OnlineDeployment,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineDeployment>
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update Online Deployment (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update Online Deployment (asynchronous).")
   update is ArmCustomPatchAsync<
     OnlineDeployment,
-    PatchModel = PartialMinimalTrackedResourceWithSku
+    PatchModel = PartialMinimalTrackedResourceWithSku,
+    Response = OnlineDeployment | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
    * Delete Inference Endpoint Deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete Inference Endpoint Deployment (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineDeployment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List Inference Endpoint Deployments.
    */
+  @summary("List Inference Endpoint Deployments.")
   list is ArmResourceListByParent<
     OnlineDeployment,
     Parameters = {
@@ -92,6 +123,7 @@ interface OnlineDeployments {
   /**
    * Polls an Endpoint operation.
    */
+  @summary("Polls an Endpoint operation.")
   getLogs is ArmResourceActionSync<
     OnlineDeployment,
     DeploymentLogsRequest,
@@ -104,6 +136,7 @@ interface OnlineDeployments {
   @list
   @get
   @action("skus")
+  @summary("List Inference Endpoint Deployment Skus.")
   listSkus is ArmResourceActionSync<
     OnlineDeployment,
     void,
@@ -136,4 +169,10 @@ interface OnlineDeployments {
 );
 @@doc(OnlineDeployments.getLogs::parameters.body,
   "The request containing parameters for retrieving logs."
+);
+@@doc(OnlineDeployment.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(OnlineDeployment.sku,
+  "Sku details required for ARM contract for Autoscaling."
 );

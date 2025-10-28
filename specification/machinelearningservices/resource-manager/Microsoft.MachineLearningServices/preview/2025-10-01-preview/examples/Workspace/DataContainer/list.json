@@ -1,29 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "testrg123",
-    "workspaceName": "workspace123",
     "name": "data123",
-    "api-version": "2025-10-01-preview"
+    "api-version": "2025-10-01-preview",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "workspace123"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "nextlink",
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/data/datacontainer123",
             "name": "datastore123",
             "type": "Microsoft.MachineLearningServices/workspaces/data",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/data/datacontainer123",
             "properties": {
-              "dataType": "UriFile",
               "description": "string",
-              "tags": {
-                "tag1": "value1",
-                "tag2": "value2"
-              },
+              "dataType": "UriFile",
               "properties": {
                 "properties1": "value1",
                 "properties2": "value2"
+              },
+              "tags": {
+                "tag1": "value1",
+                "tag2": "value2"
               }
             },
             "systemData": {
@@ -36,19 +37,19 @@
             }
           },
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/data/datacontainer124",
             "name": "datastore124",
             "type": "Microsoft.MachineLearningServices/workspaces/data",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/data/datacontainer124",
             "properties": {
-              "dataType": "UriFile",
               "description": "string",
-              "tags": {
-                "tag1": "value1",
-                "tag2": "value2"
-              },
+              "dataType": "UriFile",
               "properties": {
                 "properties1": "value1",
                 "properties2": "value2"
+              },
+              "tags": {
+                "tag1": "value1",
+                "tag2": "value2"
               }
             },
             "systemData": {
@@ -60,9 +61,10 @@
               "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": "nextlink"
+        ]
       }
     }
-  }
+  },
+  "operationId": "DataContainers_List",
+  "title": "List Workspace Data Container."
 }

@@ -33,25 +33,49 @@ interface FeaturestoreEntityVersions {
   /**
    * Get version.
    */
+  @summary("Get version.")
   get is ArmResourceRead<FeaturestoreEntityVersion>;
 
   /**
    * Create or update version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityVersion>;
+  @summary("Create or update version.")
+  @Azure.Core.useFinalStateVia("original-uri")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FeaturestoreEntityVersion,
+    Response = ArmResourceUpdatedResponse<FeaturestoreEntityVersion> | (ArmResourceCreatedResponse<
+      FeaturestoreEntityVersion,
+      ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
+  >;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete version.")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List versions.
    */
+  @summary("List versions.")
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
     Parameters = {
@@ -71,7 +95,7 @@ interface FeaturestoreEntityVersions {
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
 
       /**
        * page size
@@ -84,6 +108,12 @@ interface FeaturestoreEntityVersions {
        */
       @query("versionName")
       versionName?: string;
+
+      /**
+       * featurestore entity version
+       */
+      @query("version")
+      version?: string;
 
       /**
        * description for the feature entity version

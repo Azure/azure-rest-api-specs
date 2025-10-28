@@ -1,20 +1,17 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
-    "poolName": "string",
-    "groupName": "string",
     "api-version": "2025-10-01-preview",
     "body": {
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "kind": "string",
+      "location": "string",
       "properties": {
         "description": "string",
-        "properties": [
-          {
-            "key": "string",
-            "value": "string"
-          }
-        ],
         "environmentConfiguration": {
           "environmentId": "azureml://registries/test-registry/models/enginefeed/versions/1",
           "environmentVariables": [
@@ -25,66 +22,74 @@
           ],
           "livenessProbe": {
             "failureThreshold": 1,
-            "successThreshold": 1,
-            "timeout": "PT5M",
+            "initialDelay": "PT5M",
             "period": "PT5M",
-            "initialDelay": "PT5M"
+            "successThreshold": 1,
+            "timeout": "PT5M"
           },
           "readinessProbe": {
             "failureThreshold": 1,
-            "successThreshold": 1,
-            "timeout": "PT5M",
+            "initialDelay": "PT5M",
             "period": "PT5M",
-            "initialDelay": "PT5M"
+            "successThreshold": 1,
+            "timeout": "PT5M"
           },
           "startupProbe": {
             "failureThreshold": 1,
-            "successThreshold": 1,
-            "timeout": "PT5M",
+            "initialDelay": "PT5M",
             "period": "PT5M",
-            "initialDelay": "PT5M"
+            "successThreshold": 1,
+            "timeout": "PT5M"
           }
         },
-        "nodeSkuType": "string",
-        "scaleUnitSize": 1,
         "modelConfiguration": {
           "modelId": "azureml://registries/test-registry/models/modelabc/versions/1"
-        }
-      },
-      "tags": {},
-      "location": "string",
-      "kind": "string",
-      "identity": {
-        "type": "SystemAssigned",
-        "userAssignedIdentities": {
-          "string": {}
-        }
+        },
+        "nodeSkuType": "string",
+        "properties": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ],
+        "scaleUnitSize": 1
       },
       "sku": {
         "name": "string",
-        "tier": "Free",
-        "size": "string",
+        "capacity": 1,
         "family": "string",
-        "capacity": 1
-      }
-    }
+        "size": "string",
+        "tier": "Free"
+      },
+      "tags": {}
+    },
+    "groupName": "string",
+    "poolName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
         "properties": {
           "description": "string",
-          "properties": [
-            {
-              "key": "string",
-              "value": "string"
-            }
-          ],
-          "provisioningState": "Updating",
           "environmentConfiguration": {
             "environmentId": "azureml://registries/test-registry/models/enginefeed/versions/1",
             "environmentVariables": [
@@ -95,31 +100,45 @@
             ],
             "livenessProbe": {
               "failureThreshold": 1,
-              "successThreshold": 1,
-              "timeout": "PT5M",
+              "initialDelay": "PT5M",
               "period": "PT5M",
-              "initialDelay": "PT5M"
+              "successThreshold": 1,
+              "timeout": "PT5M"
             },
             "readinessProbe": {
               "failureThreshold": 1,
-              "successThreshold": 1,
-              "timeout": "PT5M",
+              "initialDelay": "PT5M",
               "period": "PT5M",
-              "initialDelay": "PT5M"
+              "successThreshold": 1,
+              "timeout": "PT5M"
             },
             "startupProbe": {
               "failureThreshold": 1,
-              "successThreshold": 1,
-              "timeout": "PT5M",
+              "initialDelay": "PT5M",
               "period": "PT5M",
-              "initialDelay": "PT5M"
+              "successThreshold": 1,
+              "timeout": "PT5M"
             }
           },
-          "nodeSkuType": "string",
-          "scaleUnitSize": 1,
           "modelConfiguration": {
             "modelId": "azureml://registries/test-registry/models/modelabc/versions/1"
-          }
+          },
+          "nodeSkuType": "string",
+          "properties": [
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ],
+          "provisioningState": "Updating",
+          "scaleUnitSize": 1
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Basic"
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999+00:15",
@@ -129,69 +148,69 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "Key"
         },
-        "tags": {},
-        "location": "string",
-        "kind": "string",
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
         "identity": {
-          "type": "SystemAssigned,UserAssigned",
+          "type": "None",
           "principalId": "00000000-1111-2222-3333-444444444444",
           "tenantId": "00000000-1111-2222-3333-444444444444",
           "userAssignedIdentities": {
             "string": {
-              "principalId": "00000000-1111-2222-3333-444444444444",
-              "clientId": "00000000-1111-2222-3333-444444444444"
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
             }
           }
         },
-        "sku": {
-          "name": "string",
-          "tier": "Basic",
-          "size": "string",
-          "family": "string",
-          "capacity": 1
-        }
-      }
-    },
-    "201": {
-      "headers": {},
-      "body": {
-        "id": "string",
-        "name": "string",
-        "type": "string",
+        "kind": "string",
+        "location": "string",
         "properties": {
           "description": "string",
-          "properties": [],
-          "provisioningState": "Deleting",
           "environmentConfiguration": {
             "environmentId": "azureml://registries/test-registry/models/enginefeed/versions/1",
             "environmentVariables": [],
             "livenessProbe": {
               "failureThreshold": 1,
-              "successThreshold": 1,
-              "timeout": "PT5M",
+              "initialDelay": "PT5M",
               "period": "PT5M",
-              "initialDelay": "PT5M"
+              "successThreshold": 1,
+              "timeout": "PT5M"
             },
             "readinessProbe": {
               "failureThreshold": 1,
-              "successThreshold": 1,
-              "timeout": "PT5M",
+              "initialDelay": "PT5M",
               "period": "PT5M",
-              "initialDelay": "PT5M"
+              "successThreshold": 1,
+              "timeout": "PT5M"
             },
             "startupProbe": {
               "failureThreshold": 1,
-              "successThreshold": 1,
-              "timeout": "PT5M",
+              "initialDelay": "PT5M",
               "period": "PT5M",
-              "initialDelay": "PT5M"
+              "successThreshold": 1,
+              "timeout": "PT5M"
             }
           },
-          "nodeSkuType": "string",
-          "scaleUnitSize": 1,
           "modelConfiguration": {
             "modelId": "azureml://registries/test-registry/models/modelabc/versions/1"
-          }
+          },
+          "nodeSkuType": "string",
+          "properties": [],
+          "provisioningState": "Deleting",
+          "scaleUnitSize": 1
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Standard"
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999+00:15",
@@ -201,28 +220,11 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         },
-        "tags": {},
-        "location": "string",
-        "kind": "string",
-        "identity": {
-          "type": "None",
-          "principalId": "00000000-1111-2222-3333-444444444444",
-          "tenantId": "00000000-1111-2222-3333-444444444444",
-          "userAssignedIdentities": {
-            "string": {
-              "principalId": "00000000-1111-2222-3333-444444444444",
-              "clientId": "00000000-1111-2222-3333-444444444444"
-            }
-          }
-        },
-        "sku": {
-          "name": "string",
-          "tier": "Standard",
-          "size": "string",
-          "family": "string",
-          "capacity": 1
-        }
-      }
+        "tags": {}
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "InferenceGroups_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Inference Group."
 }

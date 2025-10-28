@@ -29,34 +29,44 @@ interface JobBases {
   /**
    * Gets a Job by name/id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Get")
+  @summary("Gets a Job by name/id.")
   get is ArmResourceRead<JobBase>;
 
   /**
    * Creates and executes a Job.
    * For update case, the Tags in the definition passed in will replace Tags in the existing job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_CreateOrUpdate")
+  @summary("Creates and executes a Job.\r\nFor update case, the Tags in the definition passed in will replace Tags in the existing job.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<JobBase>;
 
   /**
    * Deletes a Job (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Delete")
+  @summary("Deletes a Job (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     JobBase,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * Lists Jobs in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_List")
+  @summary("Lists Jobs in the workspace.")
   list is ArmResourceListByParent<
     JobBase,
     Parameters = {
@@ -82,7 +92,7 @@ interface JobBases {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
 
       /**
        * Comma-separated list of user property names (and optionally values). Example: prop1,prop2=value2
@@ -96,9 +106,16 @@ interface JobBases {
   /**
    * Cancels a Job (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Cancel")
-  cancel is ArmResourceActionAsync<JobBase, void, OkResponse>;
+  @summary("Cancels a Job (asynchronous).")
+  cancel is ArmResourceActionAsync<
+    JobBase,
+    void,
+    Response = {
+      @body body: void;
+    }
+  >;
 }
 
 @@doc(JobBase.name,

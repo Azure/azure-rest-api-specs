@@ -33,25 +33,49 @@ interface FeaturestoreEntityContainers {
   /**
    * Get container.
    */
+  @summary("Get container.")
   getEntity is ArmResourceRead<FeaturestoreEntityContainer>;
 
   /**
    * Create or update container.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityContainer>;
+  @summary("Create or update container.")
+  @Azure.Core.useFinalStateVia("original-uri")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FeaturestoreEntityContainer,
+    Response = ArmResourceUpdatedResponse<FeaturestoreEntityContainer> | (ArmResourceCreatedResponse<
+      FeaturestoreEntityContainer,
+      ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
+  >;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete container.")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List featurestore entity containers.
    */
+  @summary("List featurestore entity containers.")
   list is ArmResourceListByParent<
     FeaturestoreEntityContainer,
     Parameters = {
@@ -71,13 +95,19 @@ interface FeaturestoreEntityContainers {
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
 
       /**
        * page size
        */
       @query("pageSize")
       pageSize?: int32 = 20;
+
+      /**
+       * name for the featurestore entity
+       */
+      @query("name")
+      name?: string;
 
       /**
        * description for the featurestore entity

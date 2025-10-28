@@ -25,68 +25,89 @@ model ModelVersion
   >;
 }
 
-alias ModelVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface ModelVersionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning registry. This is case-insensitive */
-    @path
-    @segment("registries")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-    registryName: string;
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
 
-    /** Container name. This is case-sensitive. */
-    @path
-    @segment("models")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-    modelName: string;
-  },
-  {
-    /** Version identifier. This is case-sensitive. */
-    @path
-    @segment("versions")
-    @key
-    version: string;
-  }
->;
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("models")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        modelName: string,
+      },
+      {
+        /** Version identifier. This is case-sensitive. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
 
 @armResourceOperations
 interface ModelVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_Get")
+  @summary("Get version.")
   get is ModelVersionOps.Read<ModelVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_CreateOrUpdate")
-  createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<ModelVersion>;
+  @summary("Create or update version.")
+  createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<
+    ModelVersion,
+    Response = ArmResourceUpdatedResponse<ModelVersion> | (ArmResourceCreatedResponse<ModelVersion> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_Delete")
+  @summary("Delete version.")
   delete is ModelVersionOps.DeleteWithoutOkAsync<
     ModelVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_List")
+  @summary("List versions.")
   list is ModelVersionOps.List<
     ModelVersion,
     Parameters = {
@@ -130,7 +151,7 @@ interface ModelVersions {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<ModelVersionResourceArmPaginatedResult>
   >;
@@ -138,72 +159,79 @@ interface ModelVersions {
   /**
    * Generate a storage location and credential for the client to upload a model asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryModelVersions_CreateOrGetStartPendingUpload")
   @action("startPendingUpload")
+  @summary("Generate a storage location and credential for the client to upload a model asset to.")
   createOrGetStartPendingUpload is ModelVersionOps.ActionSync<
     ModelVersion,
     PendingUploadRequestDto,
     ArmResponse<PendingUploadResponseDto>
   >;
 }
-alias ModelVersionOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface ModelVersionOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning workspace. */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Container name. This is case-sensitive. */
-    @path
-    @segment("models")
-    @key
-    name: string;
-  },
-  {
-    /** Version identifier. This is case-sensitive. */
-    @path
-    @segment("versions")
-    @key
-    version: string;
-  }
->;
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("models")
+        @key
+        name: string,
+      },
+      {
+        /** Version identifier. This is case-sensitive. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
 
 @armResourceOperations
 interface ModelVersionOperationGroup {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_Get")
+  @summary("Get version.")
   get is ModelVersionOperationGroupOps.Read<ModelVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is ModelVersionOperationGroupOps.CreateOrUpdateSync<ModelVersion>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_Delete")
+  @summary("Delete version.")
   delete is ModelVersionOperationGroupOps.DeleteSync<ModelVersion>;
 
   /**
    * List model versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_List")
+  @summary("List model versions.")
   list is ModelVersionOperationGroupOps.List<
     ModelVersion,
     Parameters = {
@@ -224,6 +252,12 @@ interface ModelVersionOperationGroup {
        */
       @query("$top")
       $top?: int32;
+
+      /**
+       * Model version.
+       */
+      @query("version")
+      version?: string;
 
       /**
        * Model description.
@@ -259,7 +293,7 @@ interface ModelVersionOperationGroup {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<ModelVersionResourceArmPaginatedResult>
   >;
@@ -267,12 +301,15 @@ interface ModelVersionOperationGroup {
   /**
    * Publish version asset into registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelVersions_Publish")
+  @summary("Publish version asset into registry.")
   publish is ModelVersionOperationGroupOps.ActionAsync<
     ModelVersion,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 }
 

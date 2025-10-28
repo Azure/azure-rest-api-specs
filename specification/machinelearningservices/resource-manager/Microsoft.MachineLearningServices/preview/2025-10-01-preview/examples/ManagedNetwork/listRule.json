@@ -1,39 +1,41 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2025-10-01-preview",
     "resourceGroupName": "test-rg",
-    "workspaceName": "aml-workspace-name",
-    "api-version": "2025-10-01-preview"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/outboundRules/rule_name_1",
             "name": "rule_name_1",
             "type": "workspace/outboundRules",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/outboundRules/rule_name_1",
             "properties": {
               "type": "FQDN",
+              "category": "Required",
               "destination": "destination_of_the_fqdn_rule",
-              "status": "Inactive",
-              "category": "Required"
+              "status": "Inactive"
             }
           },
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/outboundRules/rule_name_2",
             "name": "rule_name_2",
             "type": "workspace/outboundRules",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/outboundRules/rule_name_2",
             "properties": {
               "type": "FQDN",
+              "category": "Required",
               "destination": "destination_of_the_fqdn_rule",
-              "status": "Inactive",
-              "category": "Required"
+              "status": "Inactive"
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ManagedNetworkSettingsRule_List",
+  "title": "List ManagedNetworkSettingsRule"
 }

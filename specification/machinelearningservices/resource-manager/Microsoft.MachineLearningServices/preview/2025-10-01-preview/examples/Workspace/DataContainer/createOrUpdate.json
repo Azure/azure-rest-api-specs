@@ -1,41 +1,41 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "testrg123",
-    "workspaceName": "workspace123",
-    "api-version": "2025-10-01-preview",
     "name": "datacontainer123",
+    "api-version": "2025-10-01-preview",
     "body": {
       "properties": {
-        "dataType": "UriFile",
         "description": "string",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
+        "dataType": "UriFile",
         "properties": {
           "properties1": "value1",
           "properties2": "value2"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
         }
       }
-    }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "workspace123"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/data/datacontainer123",
         "name": "datacontainer123",
         "type": "Microsoft.MachineLearningServices/workspaces/data",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/data/datacontainer123",
         "properties": {
-          "dataType": "UriFile",
           "description": "string",
-          "tags": {
-            "tag1": "value1",
-            "tag2": "value2"
-          },
+          "dataType": "UriFile",
           "properties": {
             "properties1": "value1",
             "properties2": "value2"
+          },
+          "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
           }
         },
         "systemData": {
@@ -50,19 +50,19 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/data/datacontainer123",
         "name": "datacontainer123",
         "type": "Microsoft.MachineLearningServices/workspaces/data",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/data/datacontainer123",
         "properties": {
-          "dataType": "UriFile",
           "description": "string",
-          "tags": {
-            "tag1": "value1",
-            "tag2": "value2"
-          },
+          "dataType": "UriFile",
           "properties": {
             "properties1": "value1",
             "properties2": "value2"
+          },
+          "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
           }
         },
         "systemData": {
@@ -75,5 +75,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "DataContainers_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Data Container."
 }

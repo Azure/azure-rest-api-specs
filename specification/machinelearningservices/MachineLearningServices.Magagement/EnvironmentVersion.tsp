@@ -25,68 +25,89 @@ model EnvironmentVersion
   >;
 }
 
-alias EnvironmentVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface EnvironmentVersionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning registry. This is case-insensitive */
-    @path
-    @segment("registries")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-    registryName: string;
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
 
-    /** Container name. This is case-sensitive. */
-    @path
-    @segment("environments")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-    environmentName: string;
-  },
-  {
-    /** Version identifier. This is case-sensitive. */
-    @path
-    @segment("versions")
-    @key
-    version: string;
-  }
->;
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("environments")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        environmentName: string,
+      },
+      {
+        /** Version identifier. This is case-sensitive. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
 
 @armResourceOperations
 interface EnvironmentVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentVersions_Get")
+  @summary("Get version.")
   get is EnvironmentVersionOps.Read<EnvironmentVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
-  createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<EnvironmentVersion>;
+  @summary("Create or update version.")
+  createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<
+    EnvironmentVersion,
+    Response = ArmResourceUpdatedResponse<EnvironmentVersion> | (ArmResourceCreatedResponse<EnvironmentVersion> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentVersions_Delete")
+  @summary("Delete version.")
   delete is EnvironmentVersionOps.DeleteWithoutOkAsync<
     EnvironmentVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryEnvironmentVersions_List")
+  @summary("List versions.")
   list is EnvironmentVersionOps.List<
     EnvironmentVersion,
     Parameters = {
@@ -112,68 +133,74 @@ interface EnvironmentVersions {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<EnvironmentVersionResourceArmPaginatedResult>
   >;
 }
-alias EnvironmentVersionOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface EnvironmentVersionOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning workspace. */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Container name. This is case-sensitive. */
-    @path
-    @segment("environments")
-    @key
-    name: string;
-  },
-  {
-    /** Version identifier. This is case-sensitive. */
-    @path
-    @segment("versions")
-    @key
-    version: string;
-  }
->;
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("environments")
+        @key
+        name: string,
+      },
+      {
+        /** Version identifier. This is case-sensitive. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
 
 @armResourceOperations
 interface EnvironmentVersionOperationGroup {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentVersions_Get")
+  @summary("Get version.")
   get is EnvironmentVersionOperationGroupOps.Read<EnvironmentVersion>;
 
   /**
    * Creates or updates an EnvironmentVersion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentVersions_CreateOrUpdate")
+  @summary("Creates or updates an EnvironmentVersion.")
   createOrUpdate is EnvironmentVersionOperationGroupOps.CreateOrUpdateSync<EnvironmentVersion>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentVersions_Delete")
+  @summary("Delete version.")
   delete is EnvironmentVersionOperationGroupOps.DeleteSync<EnvironmentVersion>;
 
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentVersions_List")
+  @summary("List versions.")
   list is EnvironmentVersionOperationGroupOps.List<
     EnvironmentVersion,
     Parameters = {
@@ -199,7 +226,7 @@ interface EnvironmentVersionOperationGroup {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<EnvironmentVersionResourceArmPaginatedResult>
   >;
@@ -207,12 +234,15 @@ interface EnvironmentVersionOperationGroup {
   /**
    * Publish version asset into registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentVersions_Publish")
+  @summary("Publish version asset into registry.")
   publish is EnvironmentVersionOperationGroupOps.ActionAsync<
     EnvironmentVersion,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 }
 

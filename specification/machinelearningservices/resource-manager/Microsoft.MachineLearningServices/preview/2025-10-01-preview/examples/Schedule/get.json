@@ -1,42 +1,41 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
     "name": "string",
-    "api-version": "2025-10-01-preview"
+    "api-version": "2025-10-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
-            "string": "string"
-          },
-          "properties": {
-            "string": "string"
-          },
-          "displayName": "string",
-          "isEnabled": false,
-          "trigger": {
-            "endTime": "string",
-            "startTime": "string",
-            "timeZone": "string",
-            "triggerType": "Cron",
-            "expression": "string"
-          },
           "action": {
             "actionType": "InvokeBatchEndpoint",
             "endpointInvocationDefinition": {
               "a108545b-def1-4c86-8e53-dbcb1de3a8bc": null
             }
           },
-          "provisioningState": "Creating"
+          "displayName": "string",
+          "isEnabled": false,
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Creating",
+          "tags": {
+            "string": "string"
+          },
+          "trigger": {
+            "endTime": "string",
+            "expression": "string",
+            "startTime": "string",
+            "timeZone": "string",
+            "triggerType": "Cron"
+          }
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999Z",
@@ -46,7 +45,10 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "Key"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Schedules_Get",
+  "title": "Get Schedule."
 }

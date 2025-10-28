@@ -1,10 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "testrg123",
-    "workspaceName": "workspace123",
-    "api-version": "2025-10-01-preview",
     "name": "testContainer",
+    "api-version": "2025-10-01-preview",
     "body": {
       "properties": {
         "description": "Model container description",
@@ -13,14 +10,17 @@
           "tag2": "value2"
         }
       }
-    }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "workspace123"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/models/testContainer",
         "name": "testContainer",
         "type": "Microsoft.MachineLearningServices/workspaces/models",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/models/testContainer",
         "properties": {
           "description": "Model container description",
           "tags": {
@@ -40,9 +40,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/models/testContainer",
         "name": "testContainer",
         "type": "Microsoft.MachineLearningServices/workspaces/models",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/models/testContainer",
         "properties": {
           "description": "Model container description",
           "tags": {
@@ -60,5 +60,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "ModelContainers_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Model Container."
 }

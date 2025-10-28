@@ -1,45 +1,47 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "api-version": "2025-10-01-preview"
+    "api-version": "2025-10-01-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "nextLink",
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace",
             "name": "testworkspace",
             "type": "Microsoft.MachineLearningServices/workspaces",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace",
             "location": "eastus2euap",
             "properties": {
-              "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry",
-              "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
+              "description": "test description",
               "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
-              "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount",
+              "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry",
               "discoveryUrl": "http://example.com",
               "friendlyName": "HelloName",
-              "description": "test description"
+              "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
+              "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount"
             }
           },
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-5678/providers/Microsoft.MachineLearningServices/workspaces/testworkspace",
             "name": "testworkspace",
             "type": "Microsoft.MachineLearningServices/workspaces",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-5678/providers/Microsoft.MachineLearningServices/workspaces/testworkspace",
             "location": "eastus2euap",
             "properties": {
-              "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistryNew",
-              "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkvNew",
+              "description": "test description",
               "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
-              "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccountOld",
+              "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistryNew",
               "discoveryUrl": "http://example.com",
               "friendlyName": "HelloName",
-              "description": "test description"
+              "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkvNew",
+              "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccountOld"
             }
           }
-        ],
-        "nextLink": "nextLink"
+        ]
       }
     }
-  }
+  },
+  "operationId": "Workspaces_ListBySubscription",
+  "title": "Get Workspaces by subscription"
 }

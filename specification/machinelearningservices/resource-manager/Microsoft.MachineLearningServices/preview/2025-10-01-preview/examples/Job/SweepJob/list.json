@@ -1,75 +1,78 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
-    "api-version": "2025-10-01-preview",
     "$skipToken": "string",
+    "api-version": "2025-10-01-preview",
     "jobType": "string",
-    "tag": "string"
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tag": "string",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           {
-            "id": "string",
             "name": "string",
             "type": "string",
+            "id": "string",
             "properties": {
               "description": "string",
-              "tags": {
-                "string": "string"
+              "computeId": "string",
+              "displayName": "string",
+              "earlyTermination": {
+                "delayEvaluation": 1,
+                "evaluationInterval": 1,
+                "policyType": "MedianStopping"
+              },
+              "experimentName": "string",
+              "jobType": "Sweep",
+              "limits": {
+                "jobLimitsType": "Sweep",
+                "maxConcurrentTrials": 1,
+                "maxTotalTrials": 1,
+                "trialTimeout": "PT1S"
+              },
+              "objective": {
+                "goal": "Minimize",
+                "primaryMetric": "string"
               },
               "properties": {
                 "string": "string"
               },
-              "displayName": "string",
-              "status": "NotStarted",
-              "experimentName": "string",
-              "services": {
-                "string": {
-                  "jobServiceType": "string",
-                  "port": 1,
-                  "endpoint": "string",
-                  "status": "string",
-                  "errorMessage": "string",
-                  "properties": {
-                    "string": "string"
-                  }
-                }
-              },
-              "computeId": "string",
-              "jobType": "Sweep",
               "samplingAlgorithm": {
                 "samplingAlgorithmType": "Grid"
               },
-              "limits": {
-                "jobLimitsType": "Sweep",
-                "maxTotalTrials": 1,
-                "maxConcurrentTrials": 1,
-                "trialTimeout": "PT1S"
+              "searchSpace": {
+                "string": {}
               },
-              "earlyTermination": {
-                "evaluationInterval": 1,
-                "delayEvaluation": 1,
-                "policyType": "MedianStopping"
+              "services": {
+                "string": {
+                  "endpoint": "string",
+                  "errorMessage": "string",
+                  "jobServiceType": "string",
+                  "port": 1,
+                  "properties": {
+                    "string": "string"
+                  },
+                  "status": "string"
+                }
               },
-              "objective": {
-                "primaryMetric": "string",
-                "goal": "Minimize"
+              "status": "NotStarted",
+              "tags": {
+                "string": "string"
               },
               "trial": {
                 "codeId": "string",
                 "command": "string",
-                "environmentId": "string",
-                "environmentVariables": {
-                  "string": "string"
-                },
                 "distribution": {
                   "distributionType": "Mpi",
                   "processCountPerInstance": 1
+                },
+                "environmentId": "string",
+                "environmentVariables": {
+                  "string": "string"
                 },
                 "resources": {
                   "instanceCount": 1,
@@ -80,9 +83,6 @@
                     }
                   }
                 }
-              },
-              "searchSpace": {
-                "string": {}
               }
             },
             "systemData": {
@@ -94,9 +94,11 @@
               "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Jobs_List",
+  "title": "List Sweep Job."
 }

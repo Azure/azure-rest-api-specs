@@ -1,75 +1,74 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
+    "api-version": "2025-10-01-preview",
     "id": "string",
-    "api-version": "2025-10-01-preview"
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
-            "string": "string"
+          "componentId": "string",
+          "computeId": "string",
+          "displayName": "string",
+          "experimentName": "string",
+          "fineTuningDetails": {
+            "model": {
+              "description": null,
+              "jobInputType": "mlflow_model",
+              "mode": "ReadOnlyMount",
+              "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
+            },
+            "modelProvider": "Custom",
+            "taskType": "TextCompletion",
+            "trainingData": {
+              "description": null,
+              "jobInputType": "uri_file",
+              "mode": "ReadOnlyMount",
+              "uri": "azureml://datastores/workspaceblobstore/paths/UI/2023-06-06_175927_UTC/small_train.jsonl"
+            }
+          },
+          "identity": {
+            "identityType": "AMLToken"
+          },
+          "isArchived": false,
+          "jobType": "FineTuning",
+          "notificationSetting": {
+            "emailOn": [
+              "JobFailed"
+            ],
+            "emails": [
+              "string"
+            ]
+          },
+          "outputs": {
+            "string": {
+              "description": "string",
+              "jobOutputType": "mlflow_model",
+              "mode": "ReadWriteMount",
+              "uri": "string"
+            }
           },
           "properties": {
             "string": "string"
           },
-          "displayName": "string",
-          "status": "Created",
-          "experimentName": "string",
-          "computeId": "string",
-          "isArchived": false,
-          "identity": {
-            "identityType": "AMLToken"
-          },
-          "fineTuningDetails": {
-            "taskType": "TextCompletion",
-            "modelProvider": "Custom",
-            "model": {
-              "jobInputType": "mlflow_model",
-              "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11",
-              "mode": "ReadOnlyMount",
-              "description": null
-            },
-            "trainingData": {
-              "jobInputType": "uri_file",
-              "uri": "azureml://datastores/workspaceblobstore/paths/UI/2023-06-06_175927_UTC/small_train.jsonl",
-              "mode": "ReadOnlyMount",
-              "description": null
-            }
+          "queueSettings": {
+            "jobTier": "Standard"
           },
           "resources": {
             "instanceTypes": [
               "Standard_NC6"
             ]
           },
-          "queueSettings": {
-            "jobTier": "Standard"
-          },
-          "componentId": "string",
-          "notificationSetting": {
-            "emails": [
-              "string"
-            ],
-            "emailOn": [
-              "JobFailed"
-            ]
-          },
-          "jobType": "FineTuning",
-          "outputs": {
-            "string": {
-              "description": "string",
-              "uri": "string",
-              "mode": "ReadWriteMount",
-              "jobOutputType": "mlflow_model"
-            }
+          "status": "Created",
+          "tags": {
+            "string": "string"
           }
         },
         "systemData": {
@@ -80,7 +79,10 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "ManagedIdentity"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Jobs_Get",
+  "title": "Get FineTuning Job."
 }

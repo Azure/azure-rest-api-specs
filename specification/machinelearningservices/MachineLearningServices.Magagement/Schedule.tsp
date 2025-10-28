@@ -30,25 +30,48 @@ interface Schedules {
   /**
    * Get schedule.
    */
+  @summary("Get schedule.")
   get is ArmResourceRead<Schedule>;
 
   /**
    * Create or update schedule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Schedule>;
+  @summary("Create or update schedule.")
+  @Azure.Core.useFinalStateVia("original-uri")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Schedule,
+    Response = ArmResourceUpdatedResponse<Schedule> | (ArmResourceCreatedResponse<
+      Schedule,
+      LroHeaders = ArmAsyncOperationHeader<Schedule>
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete schedule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete schedule.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Schedule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List schedules in specified workspace.
    */
+  @summary("List schedules in specified workspace.")
   list is ArmResourceListByParent<
     Schedule,
     Parameters = {
@@ -62,7 +85,7 @@ interface Schedules {
        * Status filter for schedule.
        */
       @query("listViewType")
-      listViewType?: ScheduleListViewType;
+      listViewType?: ScheduleListViewType = ScheduleListViewType.EnabledOnly;
     },
     Response = ArmResponse<ScheduleResourceArmPaginatedResult>
   >;

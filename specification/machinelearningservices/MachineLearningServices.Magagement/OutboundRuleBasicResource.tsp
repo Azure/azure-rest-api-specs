@@ -23,45 +23,49 @@ model OutboundRuleBasicResource
   >;
 }
 
-alias OutboundRuleBasicResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface OutboundRuleBasicResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Azure Machine Learning Workspace Name */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
-  },
-  {
-    /** Name of the workspace managed network outbound rule */
-    @path
-    @segment("outboundRules")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    ruleName: string;
-  }
->;
+        /** Azure Machine Learning Workspace Name */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
+      },
+      {
+        /** Name of the workspace managed network outbound rule */
+        @path
+        @segment("outboundRules")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        ruleName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface OutboundRuleBasicResources {
   /**
    * Gets an outbound rule from the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkSettingsRule_Get")
+  @summary("Gets an outbound rule from the managed network of a machine learning workspace.")
   get is OutboundRuleBasicResourceOps.Read<OutboundRuleBasicResource>;
 
   /**
    * Creates or updates an outbound rule in the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkSettingsRule_CreateOrUpdate")
+  @summary("Creates or updates an outbound rule in the managed network of a machine learning workspace.")
   createOrUpdate is OutboundRuleBasicResourceOps.CreateOrUpdateAsync<
     OutboundRuleBasicResource,
     Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse,
@@ -72,9 +76,10 @@ interface OutboundRuleBasicResources {
   /**
    * Deletes an outbound rule from the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkSettingsRule_Delete")
+  @summary("Deletes an outbound rule from the managed network of a machine learning workspace.")
   delete is OutboundRuleBasicResourceOps.DeleteWithoutOkAsync<
     OutboundRuleBasicResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -83,52 +88,59 @@ interface OutboundRuleBasicResources {
   /**
    * Lists the managed network outbound rules for a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkSettingsRule_List")
-  list is OutboundRuleBasicResourceOps.List<OutboundRuleBasicResource>;
+  @summary("Lists the managed network outbound rules for a machine learning workspace.")
+  list is OutboundRuleBasicResourceOps.List<
+    OutboundRuleBasicResource,
+    Response = OutboundRuleListResult
+  >;
 }
-alias OutboundRuleBasicResourceOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface OutboundRuleBasicResourceOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Azure Machine Learning Workspace Name */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Azure Machine Learning Workspace Name */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Name of the managedNetwork associated with the workspace. Only 'default' is supported. */
-    @path
-    @segment("managedNetworks")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    managedNetworkName: string;
-  },
-  {
-    /** Name of the workspace managed network outbound rule */
-    @path
-    @segment("outboundRules")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    ruleName: string;
-  }
->;
+        /** Name of the managedNetwork associated with the workspace. Only 'default' is supported. */
+        @path
+        @segment("managedNetworks")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        managedNetworkName: string,
+      },
+      {
+        /** Name of the workspace managed network outbound rule */
+        @path
+        @segment("outboundRules")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        ruleName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface OutboundRuleBasicResourceOperationGroup {
   /**
    * The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRule_Get")
+  @summary("The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.")
   get is OutboundRuleBasicResourceOperationGroupOps.Read<OutboundRuleBasicResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRule_CreateOrUpdate")
   createOrUpdate is OutboundRuleBasicResourceOperationGroupOps.CreateOrUpdateAsync<
     OutboundRuleBasicResource,
@@ -140,16 +152,21 @@ interface OutboundRuleBasicResourceOperationGroup {
   /**
    * The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRule_Delete")
+  @summary("The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.")
   delete is OutboundRuleBasicResourceOperationGroupOps.DeleteWithoutOkAsync<OutboundRuleBasicResource>;
 
   /**
    * The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRule_List")
-  list is OutboundRuleBasicResourceOperationGroupOps.List<OutboundRuleBasicResource>;
+  @summary("The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.")
+  list is OutboundRuleBasicResourceOperationGroupOps.List<
+    OutboundRuleBasicResource,
+    Response = OutboundRuleListResult
+  >;
 }
 
 @@doc(OutboundRuleBasicResource.name,

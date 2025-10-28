@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 
@@ -26,7 +27,7 @@ model InferencePool
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -37,34 +38,65 @@ interface InferencePools {
   /**
    * Get InferencePool.
    */
+  @summary("Get InferencePool.")
   get is ArmResourceRead<InferencePool>;
 
   /**
    * Create or update InferencePool (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<InferencePool>;
+  @summary("Create or update InferencePool (asynchronous).")
+  @useFinalStateVia("original-uri")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    InferencePool,
+    Response = ArmResourceUpdatedResponse<InferencePool> | (ArmResourceCreatedResponse<
+      InferencePool,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferencePool>
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update InferencePool (asynchronous).
    */
+  @summary("Update InferencePool (asynchronous).")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     InferencePool,
-    PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity
+    PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
+    Response = InferencePool | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
    * Delete InferencePool (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete InferencePool (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     InferencePool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List InferencePools.
    */
+  @summary("List InferencePools.")
   list is ArmResourceListByParent<
     InferencePool,
     Parameters = {
@@ -111,4 +143,10 @@ interface InferencePools {
 );
 @@doc(InferencePools.update::parameters.properties,
   "Inference Pool entity to apply during operation."
+);
+@@doc(InferencePool.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(InferencePool.sku,
+  "Sku details required for ARM contract for Autoscaling."
 );

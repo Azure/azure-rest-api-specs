@@ -25,16 +25,57 @@ model Feature is Azure.ResourceManager.ProxyResource<FeatureProperties, false> {
 }
 
 @armResourceOperations
+interface FeatureOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
+
+        /** Name of Azure Machine Learning featuresets. */
+        @path
+        @segment("featuresets")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        featuresetName: string,
+
+        /** Inference Version name. */
+        @path
+        @segment("versions")
+        @key
+        featuresetVersion: string,
+      },
+      {
+        /** Inference FeatureName name. */
+        @path
+        @segment("features")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        featureName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface Features {
   /**
    * Get feature.
    */
-  get is ArmResourceRead<Feature>;
+  @summary("Get feature.")
+  get is FeatureOps.Read<Feature>;
 
   /**
    * List Features.
    */
-  list is ArmResourceListByParent<
+  @summary("List Features.")
+  list is FeatureOps.List<
     Feature,
     Parameters = {
       /**
@@ -50,6 +91,12 @@ interface Features {
       tags?: string;
 
       /**
+       * feature name.
+       */
+      @query("featureName")
+      featureName?: string;
+
+      /**
        * Description of the featureset.
        */
       @query("description")
@@ -59,7 +106,7 @@ interface Features {
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
 
       /**
        * Page size.

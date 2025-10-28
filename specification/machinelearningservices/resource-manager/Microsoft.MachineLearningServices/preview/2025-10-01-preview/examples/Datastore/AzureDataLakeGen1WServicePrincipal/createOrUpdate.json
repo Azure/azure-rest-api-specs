@@ -1,94 +1,58 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
     "name": "string",
     "api-version": "2025-10-01-preview",
-    "skipValidation": false,
     "body": {
       "properties": {
         "description": "string",
-        "tags": {
-          "string": "string"
-        },
-        "properties": null,
         "credentials": {
-          "credentialsType": "ServicePrincipal",
           "authorityUrl": "string",
-          "resourceUrl": "string",
-          "tenantId": "00000000-1111-2222-3333-444444444444",
           "clientId": "00000000-1111-2222-3333-444444444444",
+          "credentialsType": "ServicePrincipal",
+          "resourceUrl": "string",
           "secrets": {
-            "secretsType": "ServicePrincipal",
-            "clientSecret": "string"
-          }
+            "clientSecret": "string",
+            "secretsType": "ServicePrincipal"
+          },
+          "tenantId": "00000000-1111-2222-3333-444444444444"
         },
         "datastoreType": "AzureDataLakeGen1",
-        "storeName": "string"
-      }
-    }
-  },
-  "responses": {
-    "200": {
-      "headers": {},
-      "body": {
-        "id": "string",
-        "name": "string",
-        "type": "string",
-        "properties": {
-          "description": "string",
-          "tags": {
-            "string": "string"
-          },
-          "properties": null,
-          "credentials": {
-            "credentialsType": "ServicePrincipal",
-            "authorityUrl": "string",
-            "resourceUrl": "string",
-            "tenantId": "00000000-1111-2222-3333-444444444444",
-            "clientId": "00000000-1111-2222-3333-444444444444",
-            "secrets": {
-              "secretsType": "ServicePrincipal"
-            }
-          },
-          "datastoreType": "AzureDataLakeGen1",
-          "storeName": "string"
-        },
-        "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
-          "createdBy": "string",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
+        "properties": null,
+        "storeName": "string",
+        "tags": {
+          "string": "string"
         }
       }
     },
-    "201": {
-      "headers": {},
+    "resourceGroupName": "test-rg",
+    "skipValidation": false,
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
-            "string": "string"
-          },
-          "properties": null,
           "credentials": {
-            "credentialsType": "ServicePrincipal",
             "authorityUrl": "string",
-            "resourceUrl": "string",
-            "tenantId": "00000000-1111-2222-3333-444444444444",
             "clientId": "00000000-1111-2222-3333-444444444444",
+            "credentialsType": "ServicePrincipal",
+            "resourceUrl": "string",
             "secrets": {
               "secretsType": "ServicePrincipal"
-            }
+            },
+            "tenantId": "00000000-1111-2222-3333-444444444444"
           },
           "datastoreType": "AzureDataLakeGen1",
-          "storeName": "string"
+          "properties": null,
+          "storeName": "string",
+          "tags": {
+            "string": "string"
+          }
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999Z",
@@ -98,7 +62,45 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }
-      }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "credentials": {
+            "authorityUrl": "string",
+            "clientId": "00000000-1111-2222-3333-444444444444",
+            "credentialsType": "ServicePrincipal",
+            "resourceUrl": "string",
+            "secrets": {
+              "secretsType": "ServicePrincipal"
+            },
+            "tenantId": "00000000-1111-2222-3333-444444444444"
+          },
+          "datastoreType": "AzureDataLakeGen1",
+          "properties": null,
+          "storeName": "string",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Datastores_CreateOrUpdate",
+  "title": "CreateOrUpdate datastore (Azure Data Lake Gen1 w/ ServicePrincipal)."
 }

@@ -26,7 +26,7 @@ model BatchEndpoint
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -37,34 +37,66 @@ interface BatchEndpoints {
   /**
    * Gets a batch inference endpoint by name.
    */
+  @summary("Get batch inference endpoint by name.")
   get is ArmResourceRead<BatchEndpoint>;
 
   /**
    * Creates a batch inference endpoint (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchEndpoint>;
+  @summary("Create a batch inference endpoint (asynchronous).")
+  @Azure.Core.useFinalStateVia("original-uri")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    BatchEndpoint,
+    Response = ArmResourceUpdatedResponse<BatchEndpoint> | (ArmResourceCreatedResponse<
+      BatchEndpoint,
+      LroHeaders = ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
+  >;
 
   /**
    * Update a batch inference endpoint (asynchronous).
    */
+  @summary("Update a batch inference endpoint (asynchronous).")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BatchEndpoint,
-    PatchModel = PartialMinimalTrackedResourceWithIdentity
+    PatchModel = PartialMinimalTrackedResourceWithIdentity,
+    Response = BatchEndpoint | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
    * Delete Batch Inference Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete Batch Inference Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * Lists Batch inference endpoint in the workspace.
    */
+  @summary("Lists Batch inference endpoint in the workspace.")
   list is ArmResourceListByParent<
     BatchEndpoint,
     Parameters = {
@@ -87,11 +119,8 @@ interface BatchEndpoints {
    * Lists batch Inference Endpoint keys.
    */
   @action("listkeys")
-  listKeys is ArmResourceActionSync<
-    BatchEndpoint,
-    void,
-    ArmResponse<EndpointAuthKeys>
-  >;
+  @summary("Lists batch Inference Endpoint keys.")
+  listKeys is ArmResourceActionSync<BatchEndpoint, void, EndpointAuthKeys>;
 }
 
 @@doc(BatchEndpoint.name, "Name for the Batch Endpoint.");
@@ -103,4 +132,10 @@ interface BatchEndpoints {
 );
 @@doc(BatchEndpoints.update::parameters.properties,
   "Mutable batch inference endpoint definition object."
+);
+@@doc(BatchEndpoint.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(BatchEndpoint.sku,
+  "Sku details required for ARM contract for Autoscaling."
 );

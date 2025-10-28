@@ -25,68 +25,89 @@ model ComponentVersion
   >;
 }
 
-alias ComponentVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface ComponentVersionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning registry. This is case-insensitive */
-    @path
-    @segment("registries")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-    registryName: string;
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
 
-    /** Container name. */
-    @path
-    @segment("components")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-    componentName: string;
-  },
-  {
-    /** Version identifier. */
-    @path
-    @segment("versions")
-    @key
-    version: string;
-  }
->;
+        /** Container name. */
+        @path
+        @segment("components")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        componentName: string,
+      },
+      {
+        /** Version identifier. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
 
 @armResourceOperations
 interface ComponentVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryComponentVersions_Get")
+  @summary("Get version.")
   get is ComponentVersionOps.Read<ComponentVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryComponentVersions_CreateOrUpdate")
-  createOrUpdate is ComponentVersionOps.CreateOrUpdateAsync<ComponentVersion>;
+  @summary("Create or update version.")
+  createOrUpdate is ComponentVersionOps.CreateOrUpdateAsync<
+    ComponentVersion,
+    Response = ArmResourceUpdatedResponse<ComponentVersion> | (ArmResourceCreatedResponse<ComponentVersion> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryComponentVersions_Delete")
+  @summary("Delete version.")
   delete is ComponentVersionOps.DeleteWithoutOkAsync<
     ComponentVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryComponentVersions_List")
+  @summary("List versions.")
   list is ComponentVersionOps.List<
     ComponentVersion,
     Parameters = {
@@ -111,63 +132,69 @@ interface ComponentVersions {
     Response = ArmResponse<ComponentVersionResourceArmPaginatedResult>
   >;
 }
-alias ComponentVersionOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface ComponentVersionOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning workspace. */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Container name. */
-    @path
-    @segment("components")
-    @key
-    name: string;
-  },
-  {
-    /** Version identifier. */
-    @path
-    @segment("versions")
-    @key
-    version: string;
-  }
->;
+        /** Container name. */
+        @path
+        @segment("components")
+        @key
+        name: string,
+      },
+      {
+        /** Version identifier. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
 
 @armResourceOperations
 interface ComponentVersionOperationGroup {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentVersions_Get")
+  @summary("Get version.")
   get is ComponentVersionOperationGroupOps.Read<ComponentVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is ComponentVersionOperationGroupOps.CreateOrUpdateSync<ComponentVersion>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentVersions_Delete")
+  @summary("Delete version.")
   delete is ComponentVersionOperationGroupOps.DeleteSync<ComponentVersion>;
 
   /**
    * List component versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentVersions_List")
+  @summary("List component versions.")
   list is ComponentVersionOperationGroupOps.List<
     ComponentVersion,
     Parameters = {
@@ -193,7 +220,7 @@ interface ComponentVersionOperationGroup {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<ComponentVersionResourceArmPaginatedResult>
   >;
@@ -201,12 +228,15 @@ interface ComponentVersionOperationGroup {
   /**
    * Publish version asset into registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ComponentVersions_Publish")
+  @summary("Publish version asset into registry.")
   publish is ComponentVersionOperationGroupOps.ActionAsync<
     ComponentVersion,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 }
 

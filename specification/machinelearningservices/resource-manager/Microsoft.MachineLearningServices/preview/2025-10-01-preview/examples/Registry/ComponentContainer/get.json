@@ -1,24 +1,23 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "registryName": "my-aml-registry",
+    "api-version": "2025-10-01-preview",
     "componentName": "string",
-    "api-version": "2025-10-01-preview"
+    "registryName": "my-aml-registry",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
+          "properties": {
             "string": "string"
           },
-          "properties": {
+          "tags": {
             "string": "string"
           }
         },
@@ -30,7 +29,10 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "RegistryComponentContainers_Get",
+  "title": "Get Registry Component Container."
 }

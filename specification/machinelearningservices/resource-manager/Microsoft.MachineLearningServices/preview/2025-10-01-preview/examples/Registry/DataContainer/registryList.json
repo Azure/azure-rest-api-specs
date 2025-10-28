@@ -1,33 +1,33 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "registryName": "registryName",
-    "api-version": "2025-10-01-preview",
     "$skipToken": "string",
-    "listViewType": "All"
+    "api-version": "2025-10-01-preview",
+    "listViewType": "All",
+    "registryName": "registryName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           {
-            "id": "string",
             "name": "string",
             "type": "string",
+            "id": "string",
             "properties": {
               "description": "string",
-              "tags": {
-                "string": "string"
-              },
-              "properties": {
-                "string": "string"
-              },
+              "dataType": "uri_folder",
               "isArchived": false,
               "latestVersion": "string",
               "nextVersion": "string",
-              "dataType": "uri_folder"
+              "properties": {
+                "string": "string"
+              },
+              "tags": {
+                "string": "string"
+              }
             },
             "systemData": {
               "createdAt": "2020-01-01T12:34:56.999+00:15",
@@ -38,9 +38,11 @@
               "lastModifiedByType": "ManagedIdentity"
             }
           }
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "RegistryDataContainers_List",
+  "title": "RegistryList Registry Data Container."
 }

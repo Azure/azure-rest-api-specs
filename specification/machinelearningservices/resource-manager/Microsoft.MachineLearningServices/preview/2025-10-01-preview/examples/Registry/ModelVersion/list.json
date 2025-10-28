@@ -1,37 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "registryName": "my-aml-registry",
-    "modelName": "string",
-    "api-version": "2025-10-01-preview",
-    "$skipToken": "string",
-    "$orderBy": "string",
-    "$top": 1,
-    "version": "string",
     "description": "string",
+    "$orderBy": "string",
+    "$skipToken": "string",
+    "$top": 1,
+    "api-version": "2025-10-01-preview",
+    "modelName": "string",
     "offset": 1,
+    "properties": "string",
+    "registryName": "my-aml-registry",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "tags": "string",
-    "properties": "string"
+    "version": "string"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           {
-            "id": "string",
             "name": "string",
             "type": "string",
+            "id": "string",
             "properties": {
               "description": "string",
-              "tags": {
-                "string": "string"
-              },
-              "properties": {
-                "string": "string"
-              },
-              "isAnonymous": false,
               "flavors": {
                 "string": {
                   "data": {
@@ -39,8 +32,15 @@
                   }
                 }
               },
+              "isAnonymous": false,
               "modelType": "CustomModel",
-              "modelUri": "string"
+              "modelUri": "string",
+              "properties": {
+                "string": "string"
+              },
+              "tags": {
+                "string": "string"
+              }
             },
             "systemData": {
               "createdAt": "2020-01-01T12:34:56.999Z",
@@ -51,9 +51,11 @@
               "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "RegistryModelVersions_List",
+  "title": "List Registry Model Version."
 }

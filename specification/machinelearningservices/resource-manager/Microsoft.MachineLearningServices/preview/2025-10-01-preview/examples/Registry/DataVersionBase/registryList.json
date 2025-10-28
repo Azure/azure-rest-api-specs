@@ -1,40 +1,40 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "registryName": "registryName",
     "name": "string",
-    "api-version": "2025-10-01-preview",
     "$orderBy": "string",
-    "$top": 1,
     "$skipToken": "string",
     "$tags": "string",
-    "listViewType": "ArchivedOnly"
+    "$top": 1,
+    "api-version": "2025-10-01-preview",
+    "listViewType": "ArchivedOnly",
+    "registryName": "registryName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           {
-            "id": "string",
             "name": "string",
             "type": "string",
+            "id": "string",
             "properties": {
               "description": "string",
-              "tags": {
-                "string": "string"
-              },
+              "dataType": "mltable",
+              "dataUri": "string",
+              "isAnonymous": false,
+              "isArchived": false,
               "properties": {
                 "string": "string"
               },
-              "isArchived": false,
-              "isAnonymous": false,
-              "dataUri": "string",
-              "dataType": "mltable",
               "referencedUris": [
                 "string"
-              ]
+              ],
+              "tags": {
+                "string": "string"
+              }
             },
             "systemData": {
               "createdAt": "2020-01-01T12:34:56.999+00:48",
@@ -45,9 +45,11 @@
               "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "RegistryDataVersions_List",
+  "title": "RegistryList Registry Data Version Base."
 }

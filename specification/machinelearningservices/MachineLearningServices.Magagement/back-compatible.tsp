@@ -3,20 +3,25 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.MachineLearningServices;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(ClusterUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterUpdateParameters.properties
+);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(RegistryPrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RegistryPrivateEndpointConnection.properties
+);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(SharedPrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedPrivateLinkResource.properties
+);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(WorkspaceUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkspaceUpdateParameters.properties
+);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientLocation(ComputeResources.get, "Compute");
 @@clientLocation(ComputeResources.createOrUpdate, "Compute");
@@ -261,8 +266,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(Registries.createOrUpdate::parameters.resource, "body");
 @@clientName(Registries.update::parameters.properties, "body");
 @@clientLocation(Registries.getBlobReferenceSAS, "RegistryDataReferences");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(Registry.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
 @@clientName(Workspaces.update::parameters.properties, "body");
@@ -274,14 +278,13 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(Workspaces.provisionManagedNetwork,
   "ManagedNetworkProvisions"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(Workspace.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "body"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(PrivateEndpointConnection.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.get,
   "WorkspaceConnections"
@@ -456,3 +459,9 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(PTUQuotaOperationGroup.listAvailable, "PTUQuota");
 @@clientLocation(PTUQuotaOperationGroup.getAvailable, "PTUQuota");
 @@clientLocation(PTUQuotaOperationGroup.list, "PTUQuota");
+
+@@clientName(QuotasOperationGroup.update::parameters.body, "parameters");
+@@clientName(FqdnEndpointsPropertyBag, "FQDNEndpointsPropertyBag");
+@@clientName(FqdnEndpoint, "FQDNEndpoint");
+@@clientName(FqdnEndpointDetail, "FQDNEndpointDetail");
+@@clientName(FqdnEndpoints, "FQDNEndpoints");

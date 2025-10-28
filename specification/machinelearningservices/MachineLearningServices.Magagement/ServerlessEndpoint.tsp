@@ -29,7 +29,7 @@ model ServerlessEndpoint
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -40,30 +40,64 @@ interface ServerlessEndpoints {
   /**
    * Get Serverless Endpoint.
    */
+  @summary("Get Serverless Endpoint.")
   get is ArmResourceRead<ServerlessEndpoint>;
 
   /**
    * Create or update Serverless Endpoint (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ServerlessEndpoint>;
+  @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update Serverless Endpoint (asynchronous).")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ServerlessEndpoint,
+    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmResourceCreatedResponse<
+      ServerlessEndpoint,
+      LroHeaders = ArmAsyncOperationHeader<ServerlessEndpoint>
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update Serverless Endpoint (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update Serverless Endpoint (asynchronous).")
   update is ArmCustomPatchAsync<
     ServerlessEndpoint,
-    PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity
+    PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
+    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
    * Delete Serverless Endpoint (asynchronous).
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ServerlessEndpoint>;
+  @summary("Delete Serverless Endpoint (asynchronous).")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ServerlessEndpoint,
+    Response = (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Serverless Endpoints.
    */
+  @summary("List Serverless Endpoints.")
   list is ArmResourceListByParent<
     ServerlessEndpoint,
     Parameters = {
@@ -79,19 +113,17 @@ interface ServerlessEndpoints {
   /**
    * List EndpointAuthKeys for an Endpoint using Key-based authentication.
    */
-  listKeys is ArmResourceActionSync<
-    ServerlessEndpoint,
-    void,
-    ArmResponse<EndpointAuthKeys>
-  >;
+  @summary("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
+  listKeys is ArmResourceActionSync<ServerlessEndpoint, void, EndpointAuthKeys>;
 
   /**
    * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).
    */
+  @summary("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
   regenerateKeys is ArmResourceActionAsync<
     ServerlessEndpoint,
     RegenerateEndpointKeysRequest,
-    ArmResponse<EndpointAuthKeys>
+    EndpointAuthKeys
   >;
 }
 
@@ -107,4 +139,10 @@ interface ServerlessEndpoints {
 );
 @@doc(ServerlessEndpoints.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
+);
+@@doc(ServerlessEndpoint.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(ServerlessEndpoint.sku,
+  "Sku details required for ARM contract for Autoscaling."
 );

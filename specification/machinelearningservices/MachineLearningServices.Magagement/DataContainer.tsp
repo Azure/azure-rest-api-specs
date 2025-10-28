@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -25,61 +26,113 @@ model DataContainer
   >;
 }
 
-alias DataContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface DataContainerOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning registry. This is case-insensitive */
-    @path
-    @segment("registries")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-    registryName: string;
-  },
-  {
-    /** Container name. */
-    @path
-    @segment("data")
-    @key
-    name: string;
-  }
->;
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
+      },
+      {
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        name: string,
+      }
+    > {}
+
+@armResourceOperations
+interface DataContainerwithNamePatternOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
+      },
+      {
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        name: string,
+      }
+    > {}
 
 @armResourceOperations
 interface DataContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataContainers_Get")
+  @summary("Get container.")
   get is DataContainerOps.Read<DataContainer>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @useFinalStateVia("original-uri")
   @operationId("RegistryDataContainers_CreateOrUpdate")
-  createOrUpdate is DataContainerOps.CreateOrUpdateAsync<DataContainer>;
+  @summary("Create or update container.")
+  createOrUpdate is DataContainerwithNamePatternOps.CreateOrUpdateAsync<
+    DataContainer,
+    Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<
+      DataContainer,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = CodeContainer> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataContainers_Delete")
+  @summary("Delete container.")
   delete is DataContainerOps.DeleteWithoutOkAsync<
     DataContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List Data containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataContainers_List")
+  @summary("List Data containers.")
   list is DataContainerOps.List<
     DataContainer,
     Parameters = {
@@ -93,62 +146,68 @@ interface DataContainers {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<DataContainerResourceArmPaginatedResult>
   >;
 }
-alias DataContainerOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface DataContainerOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning workspace. */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
-  },
-  {
-    /** Container name. */
-    @path
-    @segment("data")
-    @key
-    name: string;
-  }
->;
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
+      },
+      {
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        name: string,
+      }
+    > {}
 
 @armResourceOperations
 interface DataContainerOperationGroup {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataContainers_Get")
+  @summary("Get container.")
   get is DataContainerOperationGroupOps.Read<DataContainer>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is DataContainerOperationGroupOps.CreateOrUpdateSync<DataContainer>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataContainers_Delete")
+  @summary("Delete container.")
   delete is DataContainerOperationGroupOps.DeleteSync<DataContainer>;
 
   /**
    * List data containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataContainers_List")
+  @summary("List data containers.")
   list is DataContainerOperationGroupOps.List<
     DataContainer,
     Parameters = {
@@ -162,7 +221,7 @@ interface DataContainerOperationGroup {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<DataContainerResourceArmPaginatedResult>
   >;

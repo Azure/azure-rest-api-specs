@@ -1,75 +1,94 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
-    "endpointName": "testEndpointName",
-    "deploymentName": "testDeploymentName",
     "api-version": "2025-10-01-preview",
     "body": {
-      "tags": {},
       "sku": {
         "name": "string",
-        "tier": "Free",
-        "size": "string",
+        "capacity": 1,
         "family": "string",
-        "capacity": 1
-      }
-    }
+        "size": "string",
+        "tier": "Free"
+      },
+      "tags": {}
+    },
+    "deploymentName": "testDeploymentName",
+    "endpointName": "testEndpointName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
         "properties": {
           "description": "string",
-          "properties": {
-            "string": "string"
-          },
+          "appInsightsEnabled": false,
           "codeConfiguration": {
             "codeId": "string",
             "scoringScript": "string"
           },
+          "containerResourceRequirements": {
+            "containerResourceLimits": {
+              "cpu": "\"1\"",
+              "gpu": "\"1\"",
+              "memory": "\"2Gi\""
+            },
+            "containerResourceRequests": {
+              "cpu": "\"1\"",
+              "gpu": "\"1\"",
+              "memory": "\"2Gi\""
+            }
+          },
+          "endpointComputeType": "Kubernetes",
           "environmentId": "string",
           "environmentVariables": {
             "string": "string"
           },
-          "scaleSettings": {
-            "scaleType": "Default"
-          },
-          "requestSettings": {
-            "maxQueueWait": "PT5M",
-            "requestTimeout": "PT5M",
-            "maxConcurrentRequestsPerInstance": 1
-          },
-          "modelMountPath": "string",
-          "appInsightsEnabled": false,
+          "instanceType": "string",
           "livenessProbe": {
             "failureThreshold": 1,
-            "successThreshold": 1,
-            "timeout": "PT5M",
+            "initialDelay": "PT5M",
             "period": "PT5M",
-            "initialDelay": "PT5M"
+            "successThreshold": 1,
+            "timeout": "PT5M"
+          },
+          "model": "string",
+          "modelMountPath": "string",
+          "properties": {
+            "string": "string"
           },
           "provisioningState": "Creating",
-          "instanceType": "string",
-          "model": "string",
-          "endpointComputeType": "Kubernetes",
-          "containerResourceRequirements": {
-            "containerResourceRequests": {
-              "cpu": "\"1\"",
-              "memory": "\"2Gi\"",
-              "gpu": "\"1\""
-            },
-            "containerResourceLimits": {
-              "cpu": "\"1\"",
-              "memory": "\"2Gi\"",
-              "gpu": "\"1\""
-            }
+          "requestSettings": {
+            "maxConcurrentRequestsPerInstance": 1,
+            "maxQueueWait": "PT5M",
+            "requestTimeout": "PT5M"
+          },
+          "scaleSettings": {
+            "scaleType": "Default"
           }
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Free"
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999Z",
@@ -79,33 +98,16 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         },
-        "tags": {},
-        "location": "string",
-        "kind": "string",
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "00000000-1111-2222-3333-444444444444",
-          "tenantId": "00000000-1111-2222-3333-444444444444",
-          "userAssignedIdentities": {
-            "string": {
-              "principalId": "00000000-1111-2222-3333-444444444444",
-              "clientId": "00000000-1111-2222-3333-444444444444"
-            }
-          }
-        },
-        "sku": {
-          "name": "string",
-          "tier": "Free",
-          "size": "string",
-          "family": "string",
-          "capacity": 1
-        }
-      }
+        "tags": {}
+      },
+      "headers": {}
     },
     "202": {
       "headers": {
         "Location": "example_location"
       }
     }
-  }
+  },
+  "operationId": "OnlineDeployments_Update",
+  "title": "Update Kubernetes Online Deployment."
 }

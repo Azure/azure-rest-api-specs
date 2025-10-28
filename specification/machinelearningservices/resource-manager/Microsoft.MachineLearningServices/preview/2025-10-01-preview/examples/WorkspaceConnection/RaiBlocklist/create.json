@@ -1,24 +1,23 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "aml-workspace-name",
-    "connectionName": "testConnection",
-    "raiBlocklistName": "raiBlocklistName",
     "api-version": "2025-10-01-preview",
     "body": {
       "properties": {
         "description": "Basic blocklist description"
       }
-    }
+    },
+    "connectionName": "testConnection",
+    "raiBlocklistName": "raiBlocklistName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/connections/testConnection/raiBlocklists/raiBlocklistName",
         "name": "raiBlocklistName",
         "type": "Microsoft.MachineLearningServices/workspaces/connections/raiBlocklists",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/connections/testConnection/raiBlocklists/raiBlocklistName",
         "properties": {
           "description": "Basic blocklist description"
         },
@@ -30,14 +29,14 @@
           "lastModifiedBy": "00000000-1111-2222-3333-444444444444",
           "lastModifiedByType": "Application"
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/connections/testConnection/raiBlocklists/raiBlocklistName",
         "name": "raiBlocklistName",
         "type": "Microsoft.MachineLearningServices/workspaces/connections/raiBlocklists",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/connections/testConnection/raiBlocklists/raiBlocklistName",
         "properties": {
           "description": "Basic blocklist description"
         },
@@ -49,7 +48,10 @@
           "lastModifiedBy": "00000000-1111-2222-3333-444444444444",
           "lastModifiedByType": "Application"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ConnectionRaiBlocklist_Create",
+  "title": "Create Rai Blocklist"
 }

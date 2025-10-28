@@ -1,29 +1,28 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "registryName": "my-aml-registry",
+    "api-version": "2025-10-01-preview",
     "codeName": "string",
-    "version": "string",
-    "api-version": "2025-10-01-preview"
+    "registryName": "my-aml-registry",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
-            "string": "string"
-          },
+          "codeUri": "https://blobStorage/folderName",
+          "isAnonymous": false,
           "properties": {
             "string": "string"
           },
-          "isAnonymous": false,
-          "codeUri": "https://blobStorage/folderName"
+          "tags": {
+            "string": "string"
+          }
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999Z",
@@ -33,7 +32,10 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "RegistryCodeVersions_Get",
+  "title": "Get Registry Code Version."
 }

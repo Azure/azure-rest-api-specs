@@ -1,35 +1,32 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
-    "api-version": "2025-10-01-preview",
     "$skipToken": "string",
+    "api-version": "2025-10-01-preview",
     "count": 1,
     "isDefault": false,
     "names": [
       "string"
     ],
-    "searchText": "string",
     "orderBy": "string",
-    "orderByAsc": false
+    "orderByAsc": false,
+    "resourceGroupName": "test-rg",
+    "searchText": "string",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           {
-            "id": "string",
             "name": "string",
             "type": "string",
+            "id": "string",
             "properties": {
               "description": "string",
-              "tags": {
-                "string": "string"
-              },
-              "isDefault": false,
-              "properties": null,
+              "accountName": "string",
+              "containerName": "string",
               "credentials": {
                 "credentialsType": "AccountKey",
                 "secrets": {
@@ -37,9 +34,12 @@
                 }
               },
               "datastoreType": "AzureBlob",
-              "accountName": "string",
-              "containerName": "string",
               "endpoint": "core.windows.net",
+              "isDefault": false,
+              "properties": null,
+              "tags": {
+                "string": "string"
+              },
               "protocol": "https"
             },
             "systemData": {
@@ -51,9 +51,11 @@
               "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Datastores_List",
+  "title": "List datastores."
 }

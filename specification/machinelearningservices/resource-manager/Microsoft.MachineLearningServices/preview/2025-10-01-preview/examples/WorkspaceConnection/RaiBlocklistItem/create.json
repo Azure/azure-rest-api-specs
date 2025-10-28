@@ -1,26 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "aml-workspace-name",
-    "connectionName": "testConnection",
-    "raiBlocklistName": "raiBlocklistName",
-    "raiBlocklistItemName": "raiBlocklistItemName",
     "api-version": "2025-10-01-preview",
     "body": {
       "properties": {
         "isRegex": false,
         "pattern": "Pattern To Block"
       }
-    }
+    },
+    "connectionName": "testConnection",
+    "raiBlocklistItemName": "raiBlocklistItemName",
+    "raiBlocklistName": "raiBlocklistName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/connections/testConnection/raiBlocklists/raiBlocklistName/raiBlocklistItems/raiBlocklistItemName",
         "name": "raiBlocklistItemName",
         "type": "Microsoft.MachineLearningServices/workspaces/connections/raiBlocklists/raiBlocklistItem",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/connections/testConnection/raiBlocklists/raiBlocklistName/raiBlocklistItems/raiBlocklistItemName",
         "properties": {
           "isRegex": false,
           "pattern": "Pattern To Block"
@@ -33,14 +32,14 @@
           "lastModifiedBy": "00000000-1111-2222-3333-444444444444",
           "lastModifiedByType": "Application"
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/connections/testConnection/raiBlocklists/raiBlocklistName/raiBlocklistItems/raiBlocklistItemName",
         "name": "raiBlocklistItemName",
         "type": "Microsoft.MachineLearningServices/workspaces/connections/raiBlocklists/raiBlocklistItem",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/connections/testConnection/raiBlocklists/raiBlocklistName/raiBlocklistItems/raiBlocklistItemName",
         "properties": {
           "isRegex": false,
           "pattern": "Pattern To Block"
@@ -53,7 +52,10 @@
           "lastModifiedBy": "00000000-1111-2222-3333-444444444444",
           "lastModifiedByType": "Application"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ConnectionRaiBlocklistItem_Create",
+  "title": "Create RaiBlocklist Item"
 }

@@ -1,23 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "location": "location",
+    "$skipToken": "string",
     "api-version": "2025-10-01-preview",
-    "$skipToken": "string"
+    "location": "location",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           {
             "properties": {
               "total": 1
             }
           }
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PTUQuota_ListAvailable",
+  "title": "List available MaaS PTU quota."
 }

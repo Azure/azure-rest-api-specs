@@ -1,26 +1,28 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
-    "poolName": "string",
+    "api-version": "2025-10-01-preview",
     "groupName": "string",
-    "api-version": "2025-10-01-preview"
+    "poolName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "requestedCapacity": 1,
         "actualCapacityInfo": {
-          "total": 1,
-          "succeeded": 1,
           "failed": 1,
+          "outdatedFailed": 1,
           "outdatedSucceeded": 1,
-          "outdatedFailed": 1
+          "succeeded": 1,
+          "total": 1
         },
-        "endpointCount": 1
-      }
+        "endpointCount": 1,
+        "requestedCapacity": 1
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "InferenceGroups_GetStatus",
+  "title": "GetStatus Workspace Inference Group."
 }

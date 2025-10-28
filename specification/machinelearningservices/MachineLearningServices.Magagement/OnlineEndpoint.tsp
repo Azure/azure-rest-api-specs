@@ -26,7 +26,7 @@ model OnlineEndpoint
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -37,34 +37,65 @@ interface OnlineEndpoints {
   /**
    * Get Online Endpoint.
    */
+  @summary("Get Online Endpoint.")
   get is ArmResourceRead<OnlineEndpoint>;
 
   /**
    * Create or update Online Endpoint (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineEndpoint>;
+  @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update Online Endpoint (asynchronous).")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    OnlineEndpoint,
+    Response = ArmResourceUpdatedResponse<OnlineEndpoint> | (ArmResourceCreatedResponse<
+      OnlineEndpoint,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineEndpoint>
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update Online Endpoint (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update Online Endpoint (asynchronous).")
   update is ArmCustomPatchAsync<
     OnlineEndpoint,
-    PatchModel = PartialMinimalTrackedResourceWithIdentity
+    PatchModel = PartialMinimalTrackedResourceWithIdentity,
+    Response = OnlineEndpoint | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
    * Delete Online Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete Online Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List Online Endpoints.
    */
+  @summary("List Online Endpoints.")
   list is ArmResourceListByParent<
     OnlineEndpoint,
     Parameters = {
@@ -116,25 +147,26 @@ interface OnlineEndpoints {
   /**
    * List EndpointAuthKeys for an Endpoint using Key-based authentication.
    */
-  listKeys is ArmResourceActionSync<
-    OnlineEndpoint,
-    void,
-    ArmResponse<EndpointAuthKeys>
-  >;
+  @summary("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
+  listKeys is ArmResourceActionSync<OnlineEndpoint, void, EndpointAuthKeys>;
 
   /**
    * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).
    */
+  @summary("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpoint,
     RegenerateEndpointKeysRequest,
-    OkResponse
+    Response = {
+      @body body: void;
+    }
   >;
 
   /**
    * Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.
    */
   @action("token")
+  @summary("Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.")
   getToken is ArmResourceActionSync<
     OnlineEndpoint,
     void,
@@ -154,4 +186,10 @@ interface OnlineEndpoints {
 );
 @@doc(OnlineEndpoints.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
+);
+@@doc(OnlineEndpoint.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(OnlineEndpoint.sku,
+  "Sku details required for ARM contract for Autoscaling."
 );

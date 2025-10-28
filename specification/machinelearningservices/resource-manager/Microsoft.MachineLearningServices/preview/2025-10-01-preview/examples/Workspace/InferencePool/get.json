@@ -1,18 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
+    "api-version": "2025-10-01-preview",
     "inferencePoolName": "string",
-    "api-version": "2025-10-01-preview"
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
         "properties": {
           "description": "string",
           "properties": [
@@ -23,12 +35,19 @@
           ],
           "provisioningState": "Canceled",
           "scaleUnitConfiguration": {
+            "disablePublicEgress": false,
             "registries": [
               "string",
               "registryName1"
-            ],
-            "disablePublicEgress": false
+            ]
           }
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Standard"
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999+00:21",
@@ -38,28 +57,11 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         },
-        "tags": {},
-        "location": "string",
-        "kind": "string",
-        "identity": {
-          "type": "UserAssigned",
-          "principalId": "00000000-1111-2222-3333-444444444444",
-          "tenantId": "00000000-1111-2222-3333-444444444444",
-          "userAssignedIdentities": {
-            "string": {
-              "principalId": "00000000-1111-2222-3333-444444444444",
-              "clientId": "00000000-1111-2222-3333-444444444444"
-            }
-          }
-        },
-        "sku": {
-          "name": "string",
-          "tier": "Standard",
-          "size": "string",
-          "family": "string",
-          "capacity": 1
-        }
-      }
+        "tags": {}
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "InferencePools_Get",
+  "title": "Get Workspace Inference Pool."
 }

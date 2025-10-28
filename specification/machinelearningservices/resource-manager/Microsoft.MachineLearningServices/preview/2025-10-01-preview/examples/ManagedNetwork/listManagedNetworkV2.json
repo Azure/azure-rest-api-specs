@@ -1,41 +1,43 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "aml-workspace-name",
+    "api-version": "2025-10-01-preview",
     "managedNetworkName": "default",
-    "api-version": "2025-10-01-preview"
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/managedNetworks/default",
             "name": "default",
             "type": "Microsoft.MachineLearningServices/workspaces/managedNetworks",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/managedNetworks/default",
             "properties": {
               "managedNetwork": {
+                "firewallPublicIpAddress": "22.22.131.49",
+                "firewallSku": "Standard",
                 "isolationMode": "AllowOnlyApprovedOutbound",
                 "networkId": "00000000-1111-2222-3333-444444444444",
                 "outboundRules": {
                   "rule_name_1": {
                     "type": "FQDN",
-                    "destination": "destination_endpoint",
-                    "status": "Active",
                     "category": "UserDefined",
-                    "errorInformation": null
+                    "destination": "destination_endpoint",
+                    "errorInformation": null,
+                    "status": "Active"
                   }
-                },
-                "firewallSku": "Standard",
-                "firewallPublicIpAddress": "22.22.131.49"
+                }
               },
               "provisioningState": "Succeeded"
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ManagedNetworkSettings_List",
+  "title": "List ManagedNetworkSettings"
 }

@@ -1,47 +1,49 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "testrg123",
-    "workspaceName": "workspaces123",
-    "computeName": "compute123",
     "api-version": "2025-10-01-preview",
+    "computeName": "compute123",
     "customServices": [
       {
         "name": "rstudio-workbench",
-        "image": {
-          "type": "docker",
-          "reference": "ghcr.io/azure/rstudio-workbench:latest"
+        "docker": {
+          "privileged": true
         },
+        "endpoints": [
+          {
+            "name": "connect",
+            "hostIp": null,
+            "published": 4444,
+            "target": 8787,
+            "protocol": "http"
+          }
+        ],
         "environmentVariables": {
           "RSP_LICENSE": {
             "type": "local",
             "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
           }
         },
-        "docker": {
-          "privileged": true
+        "image": {
+          "type": "docker",
+          "reference": "ghcr.io/azure/rstudio-workbench:latest"
         },
-        "endpoints": [
-          {
-            "protocol": "http",
-            "name": "connect",
-            "target": 8787,
-            "published": 4444,
-            "hostIp": null
-          }
-        ],
         "volumes": [
           {
             "type": "bind",
+            "readOnly": true,
             "source": "/mnt/azureuser/",
-            "target": "/home/testuser/",
-            "readOnly": true
+            "target": "/home/testuser/"
           }
         ]
       }
-    ]
+    ],
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
   },
   "responses": {
     "200": {}
-  }
+  },
+  "operationId": "Compute_UpdateCustomServices",
+  "title": "Update Custom Services"
 }

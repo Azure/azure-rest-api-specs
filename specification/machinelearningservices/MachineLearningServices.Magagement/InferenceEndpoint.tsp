@@ -26,43 +26,111 @@ model InferenceEndpoint
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
+interface InferenceEndpointOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
+
+        /** Pool name. */
+        @path
+        @segment("inferencePools")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        poolName: string,
+      },
+      {
+        /** Inference Endpoint name. */
+        @path
+        @segment("endpoints")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        endpointName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface InferenceEndpoints {
   /**
    * Get InferenceEndpoint.
    */
-  get is ArmResourceRead<InferenceEndpoint>;
+  @summary("Get InferenceEndpoint.")
+  get is InferenceEndpointOps.Read<InferenceEndpoint>;
 
   /**
    * Create or update InferenceEndpoint (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<InferenceEndpoint>;
+  @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update InferenceEndpoint (asynchronous).")
+  createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<
+    InferenceEndpoint,
+    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmResourceCreatedResponse<
+      InferenceEndpoint,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceEndpoint>
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update InferenceEndpoint (asynchronous).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<InferenceEndpoint, PatchModel = any>;
+  @summary("Update InferenceEndpoint (asynchronous).")
+  update is InferenceEndpointOps.CustomPatchAsync<
+    InferenceEndpoint,
+    PatchModel = void,
+    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete InferenceEndpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete InferenceEndpoint (asynchronous).")
+  delete is InferenceEndpointOps.DeleteWithoutOkAsync<
     InferenceEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List Inference Endpoints.
    */
-  list is ArmResourceListByParent<
+  @summary("List Inference Endpoints.")
+  list is InferenceEndpointOps.List<
     InferenceEndpoint,
     Parameters = {
       /**
@@ -108,4 +176,10 @@ interface InferenceEndpoints {
 );
 @@doc(InferenceEndpoints.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
+);
+@@doc(InferenceEndpoint.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(InferenceEndpoint.sku,
+  "Sku details required for ARM contract for Autoscaling."
 );

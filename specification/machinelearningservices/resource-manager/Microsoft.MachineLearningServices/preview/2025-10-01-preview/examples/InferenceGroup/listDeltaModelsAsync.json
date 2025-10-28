@@ -1,26 +1,28 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
-    "poolName": "string",
-    "groupName": "string",
     "api-version": "2025-10-01-preview",
     "body": {
-      "targetBaseModel": "azureml://registries/test-registry/models/modelabc/versions/1",
       "count": -1,
-      "skipToken": "string"
-    }
+      "skipToken": "string",
+      "targetBaseModel": "azureml://registries/test-registry/models/modelabc/versions/1"
+    },
+    "groupName": "string",
+    "poolName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           "string"
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "InferenceGroups_ListDeltaModelsAsync",
+  "title": "ListDeltaModelsAsync Inference Group."
 }

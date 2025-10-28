@@ -1,20 +1,22 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2025-10-01-preview",
     "resourceGroupName": "workspace-1234",
-    "workspaceName": "testworkspace",
-    "api-version": "2025-10-01-preview"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
   },
   "responses": {
     "200": {
       "body": {
-        "notebookResourceId": "94350843095843059",
+        "expiresIn": 28800,
         "hostName": "Host product name",
+        "notebookResourceId": "94350843095843059",
         "publicDns": "resource.notebooks.azure.net",
-        "tokenType": "Bearer",
-        "expiresIn": 28800.0,
-        "scope": "aznb_identity"
+        "scope": "aznb_identity",
+        "tokenType": "Bearer"
       }
     }
-  }
+  },
+  "operationId": "Workspaces_ListNotebookAccessToken",
+  "title": "List Workspace Keys"
 }

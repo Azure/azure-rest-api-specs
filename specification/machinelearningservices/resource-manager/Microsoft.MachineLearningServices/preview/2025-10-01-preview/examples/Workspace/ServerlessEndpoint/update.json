@@ -1,52 +1,71 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
     "name": "string",
     "api-version": "2025-10-01-preview",
     "body": {
-      "tags": {},
-      "sku": {
-        "name": "string",
-        "tier": "Premium",
-        "size": "string",
-        "family": "string",
-        "capacity": 1
-      },
       "identity": {
         "type": "None",
         "userAssignedIdentities": {
           "string": {}
         }
-      }
-    }
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Premium"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
         "properties": {
+          "authMode": "Key",
+          "contentSafety": {
+            "contentSafetyLevel": "Blocking",
+            "contentSafetyStatus": "Disabled"
+          },
+          "endpointState": "Suspended",
+          "inferenceEndpoint": {
+            "headers": {
+              "string": "string"
+            },
+            "uri": "https://www.contoso.com/example"
+          },
+          "marketplaceSubscriptionId": "string",
           "modelSettings": {
             "modelId": "string"
           },
-          "authMode": "Key",
-          "inferenceEndpoint": {
-            "uri": "https://www.contoso.com/example",
-            "headers": {
-              "string": "string"
-            }
-          },
-          "provisioningState": "Creating",
-          "endpointState": "Suspended",
-          "marketplaceSubscriptionId": "string",
-          "contentSafety": {
-            "contentSafetyStatus": "Disabled",
-            "contentSafetyLevel": "Blocking"
-          }
+          "provisioningState": "Creating"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Free"
         },
         "systemData": {
           "createdAt": "2020-01-01T12:34:56.999+00:13",
@@ -56,33 +75,16 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "Application"
         },
-        "tags": {},
-        "location": "string",
-        "kind": "string",
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "00000000-1111-2222-3333-444444444444",
-          "tenantId": "00000000-1111-2222-3333-444444444444",
-          "userAssignedIdentities": {
-            "string": {
-              "principalId": "00000000-1111-2222-3333-444444444444",
-              "clientId": "00000000-1111-2222-3333-444444444444"
-            }
-          }
-        },
-        "sku": {
-          "name": "string",
-          "tier": "Free",
-          "size": "string",
-          "family": "string",
-          "capacity": 1
-        }
-      }
+        "tags": {}
+      },
+      "headers": {}
     },
     "202": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
       }
     }
-  }
+  },
+  "operationId": "ServerlessEndpoints_Update",
+  "title": "Update Workspace Serverless Endpoint."
 }

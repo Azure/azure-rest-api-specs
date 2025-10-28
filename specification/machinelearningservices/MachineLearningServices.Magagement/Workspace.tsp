@@ -14,10 +14,7 @@ namespace Microsoft.MachineLearningServices;
  * An object that represents a machine learning workspace.
  */
 model Workspace
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    WorkspaceProperties,
-    false
-  > {
+  is Azure.ResourceManager.ProxyResource<WorkspaceProperties, false> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",
@@ -25,9 +22,17 @@ model Workspace
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
   ...Azure.ResourceManager.ResourceSkuProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -35,12 +40,14 @@ interface Workspaces {
   /**
    * Gets the properties of the specified machine learning workspace.
    */
+  @summary("Gets the properties of the specified machine learning workspace.")
   get is ArmResourceRead<Workspace>;
 
   /**
    * Creates or updates a workspace with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates a workspace with the specified parameters.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,
@@ -52,6 +59,7 @@ interface Workspaces {
    * Updates a machine learning workspace with the specified parameters.
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Updates a machine learning workspace with the specified parameters.")
   update is ArmCustomPatchAsync<
     Workspace,
     PatchModel = WorkspaceUpdateParameters
@@ -60,7 +68,8 @@ interface Workspaces {
   /**
    * Deletes a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a machine learning workspace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = {
@@ -68,7 +77,7 @@ interface Workspaces {
        * Flag to indicate delete is a purge request.
        */
       @query("forceToPurge")
-      forceToPurge?: boolean;
+      forceToPurge?: boolean = false;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -76,6 +85,7 @@ interface Workspaces {
   /**
    * Lists all the available machine learning workspaces under the specified resource group.
    */
+  @summary("Lists all the available machine learning workspaces under the specified resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     Parameters = {
@@ -91,7 +101,7 @@ interface Workspaces {
       @query("$skip")
       $skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -100,6 +110,7 @@ interface Workspaces {
   /**
    * Lists all the available machine learning workspaces under the specified subscription.
    */
+  @summary("Lists all the available machine learning workspaces under the specified subscription.")
   listBySubscription is ArmListBySubscription<
     Workspace,
     Parameters = {
@@ -115,7 +126,7 @@ interface Workspaces {
       @query("$skip")
       $skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -124,7 +135,7 @@ interface Workspaces {
   /**
    * Lists all enabled features for a workspace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WorkspaceFeatures_List")
   @list
   @get
@@ -138,16 +149,18 @@ interface Workspaces {
   /**
    * Diagnose workspace setup issue.
    */
+  @summary("Diagnose workspace setup issue.")
   diagnose is ArmResourceActionAsync<
     Workspace,
     DiagnoseWorkspaceParameters,
-    ArmResponse<DiagnoseResponseResult>,
+    DiagnoseResponseResult,
     OptionalRequestBody = true
   >;
 
   /**
    * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.
    */
+  @summary("Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.")
   listKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -157,6 +170,7 @@ interface Workspaces {
   /**
    * Get Azure Machine Learning Workspace notebook access token
    */
+  @summary("Get Azure Machine Learning Workspace notebook access token")
   listNotebookAccessToken is ArmResourceActionSync<
     Workspace,
     void,
@@ -166,6 +180,7 @@ interface Workspaces {
   /**
    * Lists keys of Azure Machine Learning Workspaces notebook.
    */
+  @summary("Lists keys of Azure Machine Learning Workspaces notebook.")
   listNotebookKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -175,6 +190,7 @@ interface Workspaces {
   /**
    * Lists keys of Azure Machine Learning Workspace's storage account.
    */
+  @summary("Lists keys of Azure Machine Learning Workspace's storage account.")
   listStorageAccountKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -184,36 +200,44 @@ interface Workspaces {
   /**
    * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
    */
-  @list
   @get
   @action("outboundNetworkDependenciesEndpoints")
+  @summary("Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.")
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     Workspace,
     void,
-    ArmResponse<ExternalFqdnResponse>
+    ArmResponse<ExternalFQDNResponse>
   >;
 
   /**
    * Prepare Azure Machine Learning Workspace's notebook resource
    */
+  @summary("Prepare Azure Machine Learning Workspace's notebook resource")
   prepareNotebook is ArmResourceActionAsync<
     Workspace,
     void,
-    ArmResponse<NotebookResourceInfo>
+    NotebookResourceInfo
   >;
 
   /**
    * Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry
    */
-  resyncKeys is ArmResourceActionAsync<Workspace, void, OkResponse>;
+  @summary("Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry")
+  resyncKeys is ArmResourceActionAsync<
+    Workspace,
+    void,
+    Response = {
+      @body body: void;
+    }
+  >;
 
   /**
    * Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_GetAllModels")
-  @list
   @action("listConnectionModels")
+  @summary("Get all models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.")
   getAllModels is ArmResourceActionSync<
     Workspace,
     void,
@@ -223,8 +247,9 @@ interface Workspaces {
   /**
    * Get all the deployments under the workspace scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EndpointDeployment_GetInWorkspace")
+  @summary("Get all the deployments under the workspace scope")
   @list
   @get
   @action("deployments")
@@ -254,11 +279,12 @@ interface Workspaces {
    * Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
    * Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkResources_List")
   @list
   @get
   @action("privateLinkResources")
+  @summary("Called by Client (Portal, CLI, etc) to get available \"private link resources\" for the workspace.\r\nEach \"private link resource\" is a connection endpoint (IP address) to the resource.\r\nPre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.\r\nOther RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.\r\nDefined in the \"[NRP] Private Endpoint Design\" doc, topic \"GET API for GroupIds\".")
   privateLinkResourcesList is ArmResourceActionSync<
     Workspace,
     void,
@@ -268,12 +294,13 @@ interface Workspaces {
   /**
    * Provisions the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
+  @summary("Provisions the managed network of a machine learning workspace.")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
     ManagedNetworkProvisionOptions,
-    ArmResponse<ManagedNetworkProvisionStatus>,
+    ManagedNetworkProvisionStatus,
     OptionalRequestBody = true
   >;
 }
@@ -291,4 +318,7 @@ interface Workspaces {
 );
 @@doc(Workspaces.provisionManagedNetwork::parameters.body,
   "Managed Network Provisioning Options for a machine learning workspace."
+);
+@@doc(Workspace.sku,
+  "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier"
 );

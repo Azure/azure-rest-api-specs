@@ -1,22 +1,10 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "aml-workspace-name",
-    "endpointName": "Azure.OpenAI",
-    "raiPolicyName": "raiPolicyName",
     "api-version": "2025-10-01-preview",
     "body": {
       "properties": {
         "type": "SystemManaged",
-        "mode": "Blocking",
         "basePolicyName": "112",
-        "promptBlocklists": [
-          {
-            "blocking": false,
-            "blocklistName": "blocklistName"
-          }
-        ],
         "completionBlocklists": [
           {
             "blocking": false,
@@ -25,33 +13,37 @@
         ],
         "contentFilters": [
           {
-            "enabled": false,
-            "allowedContentLevel": "Low",
             "name": "policyName",
+            "allowedContentLevel": "Low",
             "blocking": false,
+            "enabled": false,
             "source": "Prompt"
+          }
+        ],
+        "mode": "Blocking",
+        "promptBlocklists": [
+          {
+            "blocking": false,
+            "blocklistName": "blocklistName"
           }
         ]
       }
-    }
+    },
+    "endpointName": "Azure.OpenAI",
+    "raiPolicyName": "raiPolicyName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "name": "raiPolicyName",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/endpoints/Azure.OpenAI/raiPolicies/raiPolicyName",
         "type": "Microsoft.MachineLearningServices/workspaces/endpoints/raiPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/endpoints/Azure.OpenAI/raiPolicies/raiPolicyName",
         "properties": {
           "type": "SystemManaged",
-          "mode": "Blocking",
           "basePolicyName": "112",
-          "promptBlocklists": [
-            {
-              "blocking": false,
-              "blocklistName": "blocklistName"
-            }
-          ],
           "completionBlocklists": [
             {
               "blocking": false,
@@ -60,11 +52,18 @@
           ],
           "contentFilters": [
             {
-              "enabled": false,
-              "allowedContentLevel": "Low",
               "name": "policyName",
+              "allowedContentLevel": "Low",
               "blocking": false,
+              "enabled": false,
               "source": "Prompt"
+            }
+          ],
+          "mode": "Blocking",
+          "promptBlocklists": [
+            {
+              "blocking": false,
+              "blocklistName": "blocklistName"
             }
           ]
         },
@@ -76,24 +75,17 @@
           "lastModifiedBy": "00000000-1111-2222-3333-444444444444",
           "lastModifiedByType": "Application"
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
         "name": "raiPolicyName",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/endpoints/Azure.OpenAI/raiPolicies/raiPolicyName",
         "type": "Microsoft.MachineLearningServices/workspaces/endpoints/raiPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/endpoints/Azure.OpenAI/raiPolicies/raiPolicyName",
         "properties": {
           "type": "SystemManaged",
-          "mode": "Blocking",
           "basePolicyName": "112",
-          "promptBlocklists": [
-            {
-              "blocking": false,
-              "blocklistName": "blocklistName"
-            }
-          ],
           "completionBlocklists": [
             {
               "blocking": false,
@@ -102,11 +94,18 @@
           ],
           "contentFilters": [
             {
-              "enabled": false,
-              "allowedContentLevel": "Low",
               "name": "policyName",
+              "allowedContentLevel": "Low",
               "blocking": false,
+              "enabled": false,
               "source": "Prompt"
+            }
+          ],
+          "mode": "Blocking",
+          "promptBlocklists": [
+            {
+              "blocking": false,
+              "blocklistName": "blocklistName"
             }
           ]
         },
@@ -118,7 +117,10 @@
           "lastModifiedBy": "00000000-1111-2222-3333-444444444444",
           "lastModifiedByType": "Application"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "RaiPolicy_Create",
+  "title": "Create Rai policy"
 }

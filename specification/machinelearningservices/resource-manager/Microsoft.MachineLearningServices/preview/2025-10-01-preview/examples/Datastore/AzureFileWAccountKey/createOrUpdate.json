@@ -1,46 +1,42 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "workspaceName": "my-aml-workspace",
     "name": "string",
     "api-version": "2025-10-01-preview",
-    "skipValidation": false,
     "body": {
       "properties": {
         "description": "string",
-        "tags": {
-          "string": "string"
-        },
-        "properties": null,
+        "accountName": "string",
         "credentials": {
           "credentialsType": "AccountKey",
           "secrets": {
-            "secretsType": "AccountKey",
-            "key": "string"
+            "key": "string",
+            "secretsType": "AccountKey"
           }
         },
         "datastoreType": "AzureFile",
-        "accountName": "string",
-        "fileShareName": "string",
         "endpoint": "string",
+        "fileShareName": "string",
+        "properties": null,
+        "tags": {
+          "string": "string"
+        },
         "protocol": "string"
       }
-    }
+    },
+    "resourceGroupName": "test-rg",
+    "skipValidation": false,
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
-            "string": "string"
-          },
-          "properties": null,
+          "accountName": "string",
           "credentials": {
             "credentialsType": "AccountKey",
             "secrets": {
@@ -48,9 +44,12 @@
             }
           },
           "datastoreType": "AzureFile",
-          "accountName": "string",
-          "fileShareName": "string",
           "endpoint": "string",
+          "fileShareName": "string",
+          "properties": null,
+          "tags": {
+            "string": "string"
+          },
           "protocol": "string"
         },
         "systemData": {
@@ -61,20 +60,17 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
-        "id": "string",
         "name": "string",
         "type": "string",
+        "id": "string",
         "properties": {
           "description": "string",
-          "tags": {
-            "string": "string"
-          },
-          "properties": null,
+          "accountName": "string",
           "credentials": {
             "credentialsType": "AccountKey",
             "secrets": {
@@ -82,9 +78,12 @@
             }
           },
           "datastoreType": "AzureFile",
-          "accountName": "string",
-          "fileShareName": "string",
           "endpoint": "string",
+          "fileShareName": "string",
+          "properties": null,
+          "tags": {
+            "string": "string"
+          },
           "protocol": "string"
         },
         "systemData": {
@@ -95,7 +94,10 @@
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Datastores_CreateOrUpdate",
+  "title": "CreateOrUpdate datastore (Azure File store w/ AccountKey)."
 }

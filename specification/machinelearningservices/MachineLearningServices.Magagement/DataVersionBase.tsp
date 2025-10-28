@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -25,67 +26,125 @@ model DataVersionBase
   >;
 }
 
-alias DataVersionBaseOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface DataVersionBaseOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning registry. This is case-insensitive */
-    @path
-    @segment("registries")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-    registryName: string;
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
 
-    /** Container name. */
-    @path
-    @segment("data")
-    @key
-    name: string;
-  },
-  {
-    /** Version identifier. */
-    @path
-    @segment("versions")
-    @key
-    version: string;
-  }
->;
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        name: string,
+      },
+      {
+        /** Version identifier. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
+
+@armResourceOperations
+interface DataVersionWithNamePatternBaseOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
+
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        name: string,
+      },
+      {
+        /** Version identifier. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
 
 @armResourceOperations
 interface DataVersionBases {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataVersions_Get")
+  @summary("Get version.")
   get is DataVersionBaseOps.Read<DataVersionBase>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @useFinalStateVia("original-uri")
   @operationId("RegistryDataVersions_CreateOrUpdate")
-  createOrUpdate is DataVersionBaseOps.CreateOrUpdateAsync<DataVersionBase>;
+  @summary("Create or update version.")
+  createOrUpdate is DataVersionWithNamePatternBaseOps.CreateOrUpdateAsync<
+    DataVersionBase,
+    Response = ArmResourceUpdatedResponse<DataVersionBase> | (ArmResourceCreatedResponse<
+      DataVersionBase,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = DataVersionBase> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataVersions_Delete")
+  @summary("Delete version.")
   delete is DataVersionBaseOps.DeleteWithoutOkAsync<
     DataVersionBase,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
    * List data versions in the data container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataVersions_List")
+  @summary("List data versions in the data container")
   list is DataVersionBaseOps.List<
     DataVersionBase,
     Parameters = {
@@ -118,7 +177,7 @@ interface DataVersionBases {
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<DataVersionBaseResourceArmPaginatedResult>
   >;
@@ -126,64 +185,71 @@ interface DataVersionBases {
   /**
    * Generate a storage location and credential for the client to upload a data asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RegistryDataVersions_CreateOrGetStartPendingUpload")
   @action("startPendingUpload")
+  @summary("Generate a storage location and credential for the client to upload a data asset to.")
   createOrGetStartPendingUpload is DataVersionBaseOps.ActionSync<
     DataVersionBase,
     PendingUploadRequestDto,
     ArmResponse<PendingUploadResponseDto>
   >;
 }
-alias DataVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+@armResourceOperations
+interface DataVersionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
-    /** Name of Azure Machine Learning workspace. */
-    @path
-    @segment("workspaces")
-    @key
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    workspaceName: string;
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
 
-    /** Container name. */
-    @path
-    @segment("data")
-    @key
-    name: string;
-  },
-  {
-    /** Version identifier. */
-    @path
-    @segment("versions")
-    @key
-    version: string;
-  }
->;
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        name: string,
+      },
+      {
+        /** Version identifier. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
 
 @armResourceOperations
 interface DataVersions {
   /**
    * Get version.
    */
+  @summary("Get version.")
   get is DataVersionOps.Read<DataVersionBase>;
 
   /**
    * Create or update version.
    */
+  @summary("Create or update version.")
   createOrUpdate is DataVersionOps.CreateOrUpdateSync<DataVersionBase>;
 
   /**
    * Delete version.
    */
+  @summary("Delete version.")
   delete is DataVersionOps.DeleteSync<DataVersionBase>;
 
   /**
    * List data versions in the data container
    */
+  @summary("List data versions in the data container")
   list is DataVersionOps.List<
     DataVersionBase,
     Parameters = {
@@ -216,7 +282,7 @@ interface DataVersions {
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<DataVersionBaseResourceArmPaginatedResult>
   >;
@@ -224,10 +290,13 @@ interface DataVersions {
   /**
    * Publish version asset into registry.
    */
+  @summary("Publish version asset into registry.")
   publish is DataVersionOps.ActionAsync<
     DataVersionBase,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 }
 

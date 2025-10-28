@@ -25,9 +25,9 @@
         "outputs": {
           "string": {
             "description": "string",
-            "uri": "string",
+            "jobOutputType": "mlflow_model",
             "mode": "ReadWriteMount",
-            "jobOutputType": "mlflow_model"
+            "uri": "string"
           }
         },
         "queueSettings": {
@@ -48,12 +48,13 @@
   "responses": {
     "200": {
       "body": {
-        "id": "string",
         "name": "string",
+        "type": "string",
+        "id": "string",
         "properties": {
+          "description": "string",
           "componentId": "string",
           "computeId": "string",
-          "description": "string",
           "displayName": "string",
           "experimentName": "string",
           "fineTuningDetails": {
@@ -88,9 +89,9 @@
           "outputs": {
             "string": {
               "description": "string",
-              "uri": "string",
+              "jobOutputType": "mlflow_model",
               "mode": "ReadWriteMount",
-              "jobOutputType": "mlflow_model"
+              "uri": "string"
             }
           },
           "properties": {
@@ -116,19 +117,19 @@
           "lastModifiedAt": "2020-01-01T12:34:56.999+00:22",
           "lastModifiedBy": "string",
           "lastModifiedByType": "ManagedIdentity"
-        },
-        "type": "string"
+        }
       },
       "headers": {}
     },
     "201": {
       "body": {
-        "id": "string",
         "name": "string",
+        "type": "string",
+        "id": "string",
         "properties": {
+          "description": "string",
           "componentId": "string",
           "computeId": "string",
-          "description": "string",
           "displayName": "string",
           "experimentName": "string",
           "fineTuningDetails": {
@@ -163,9 +164,9 @@
           "outputs": {
             "string": {
               "description": "string",
-              "uri": "string",
+              "jobOutputType": "mlflow_model",
               "mode": "ReadWriteMount",
-              "jobOutputType": "mlflow_model"
+              "uri": "string"
             }
           },
           "properties": {
@@ -191,10 +192,11 @@
           "lastModifiedAt": "2020-01-01T12:34:56.999+00:22",
           "lastModifiedBy": "string",
           "lastModifiedByType": "ManagedIdentity"
-        },
-        "type": "string"
+        }
       },
       "headers": {}
     }
-  }
+  },
+  "operationId": "Jobs_CreateOrUpdate",
+  "title": "CreateOrUpdate FineTuning Job."
 }

@@ -1,31 +1,33 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "location": "location",
+    "$skipToken": "string",
     "api-version": "2025-10-01-preview",
-    "$skipToken": "string"
+    "location": "location",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           {
             "modelCollection": "string",
             "quota": 1,
             "usageDetails": [
               {
-                "resourceGroup": "string",
-                "workspaceName": "string",
+                "collectionQuotaUsage": 1,
                 "deploymentName": "string",
+                "resourceGroup": "string",
                 "usage": 1,
-                "collectionQuotaUsage": 1
+                "workspaceName": "string"
               }
             ]
           }
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PTUQuota_List",
+  "title": "List MaaS PTU usage and quota."
 }
