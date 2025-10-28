@@ -296,10 +296,10 @@
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/ExportOptions.format"
+            "$ref": "#/parameters/ExportQueryParameters.format"
           },
           {
-            "$ref": "#/parameters/ExportOptions.assetKind"
+            "$ref": "#/parameters/ExportQueryParameters.assetKind"
           }
         ],
         "responses": {
@@ -355,13 +355,19 @@
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/ImportOptions.format"
+            "$ref": "#/parameters/ImportQueryParameters.format"
           },
           {
-            "$ref": "#/parameters/ImportOptions.assetKind"
+            "$ref": "#/parameters/ImportQueryParameters.assetKind"
           },
           {
-            "$ref": "#/parameters/ImportOptions.body"
+            "name": "body",
+            "in": "body",
+            "description": "Project assets the needs to be imported.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ImportJobOptions"
+            }
           }
         ],
         "responses": {
@@ -2982,7 +2988,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "ExportOptions.assetKind": {
+    "ExportQueryParameters.assetKind": {
       "name": "assetKind",
       "in": "query",
       "description": "Kind of the asset of the project.",
@@ -3010,7 +3016,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ExportOptions.format": {
+    "ExportQueryParameters.format": {
       "name": "format",
       "in": "query",
       "description": "Knowledge base Import or Export format.",
@@ -3045,7 +3051,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ImportOptions.assetKind": {
+    "ImportQueryParameters.assetKind": {
       "name": "assetKind",
       "in": "query",
       "description": "Kind of the asset of the project.",
@@ -3073,17 +3079,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ImportOptions.body": {
-      "name": "body",
-      "in": "body",
-      "description": "Project assets the needs to be imported.",
-      "required": false,
-      "schema": {
-        "$ref": "#/definitions/ImportJobOptions"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "ImportOptions.format": {
+    "ImportQueryParameters.format": {
       "name": "format",
       "in": "query",
       "description": "Knowledge base Import or Export format.",

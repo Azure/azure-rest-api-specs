@@ -74,5 +74,5 @@ interface QuestionAnsweringAuthoringClientOperations {
 }
 
 @@clientName(QuestionAnsweringProjectMetadata, "QuestionAnsweringProject");
-@@clientName(ExportOptions.format, "fileFormat");
-@@clientName(ImportOptions.format, "fileFormat");
+@@clientName(ExportQueryParameters.format, "fileFormat", "python");
+@@clientName(ImportQueryParameters.format, "fileFormat", "python");

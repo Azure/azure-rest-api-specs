@@ -14,10 +14,10 @@ using Azure.Core.Traits;
 namespace Language.QuestionAnswering.Authoring;
 
 /**
- * Optional query/body parameters for the export operation.
+ * Optional query parameters for the export operation.
  * Using a named model enables client-side renaming without breaking wire contract.
  */
-model ExportOptions {
+model ExportQueryParameters {
   /** Knowledge base Import or Export format. */
   @query("format")
   format?: format = format.json;
@@ -28,9 +28,9 @@ model ExportOptions {
 }
 
 /**
- * Optional query/body parameters for the import operation.
+ * Optional query parameters for the import operation.
  */
-model ImportOptions {
+model ImportQueryParameters {
   /** Knowledge base Import or Export format. */
   @query("format")
   format?: format = format.json;
@@ -38,10 +38,6 @@ model ImportOptions {
   /** Kind of the asset of the project. */
   @query("assetKind")
   assetKind?: AssestKind;
-
-  /** Project assets the needs to be imported. */
-  @bodyRoot
-  body?: ImportJobOptions;
 }
 
 alias ServiceTraits = NoRepeatableRequests &
@@ -117,8 +113,8 @@ interface QuestionAnsweringProjects {
       @path
       projectName: string;
 
-      /** Optional export parameters. See `ExportOptions`. */
-      ... ExportOptions;
+      /** Optional export parameters. See `ExportQueryParameters`. */
+      ... ExportQueryParameters;
     },
     ExportJobResponse,
     {},
@@ -148,8 +144,12 @@ interface QuestionAnsweringProjects {
       @path
       projectName: string;
 
-      /** Optional import parameters. See `ImportOptions`. */
-      ... ImportOptions;
+      /** Optional import parameters. See `ImportQueryParameters`. */
+      ... ImportQueryParameters;
+
+      /** Project assets the needs to be imported. */
+      @bodyRoot
+      body?: ImportJobOptions;
     },
     AcceptedResponse,
     {},
