@@ -26,7 +26,39 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2025-04-01-preview
+tag: package-2025-10-10
+```
+
+### Tag: package-2025-10-10
+
+These settings apply only when `--tag=package-2025-10-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-10'
+input-file:
+  - stable/2025-10-10/desktopvirtualization.json
+suppressions:
+  - code: PutRequestResponseSchemeArm
+    from: desktopvirtualization.json
+    reason: The system metadata are not the input parameters, and our service doesn't support patch operation fot this resource, this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have the related properties. The rule seems conflict with the contract. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270 and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683. There is a fix for this and is waiting for the rollout.
+    where:
+      - $.definitions.ResourceProviderOperationListResult
+  - code: PatchIdentityProperty
+    from: desktopvirtualization.json
+    reason: Our service doesn't support update the identity in the patch method.  
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}'].patch.parameters[4]
 ```
 
 ### Tag: package-preview-2025-04-01-preview
