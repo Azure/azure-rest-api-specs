@@ -35,15 +35,15 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
-- Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
-- Microsoft.EventHub/stable/2017-04-01/consumergroups.json
-- Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
-- Microsoft.EventHub/stable/2017-04-01/eventhubs.json
-- Microsoft.EventHub/stable/2017-04-01/namespaces.json
-- Microsoft.EventHub/stable/2017-04-01/networkRuleSets.json
-- Microsoft.EventHub/stable/2017-04-01/operations.json
-- Microsoft.EventHub/stable/2017-04-01/sku.json
+- stable/2017-04-01/AuthorizationRules.json
+- stable/2017-04-01/CheckNameAvailability.json
+- stable/2017-04-01/consumergroups.json
+- stable/2017-04-01/disasterRecoveryConfigs.json
+- stable/2017-04-01/eventhubs.json
+- stable/2017-04-01/namespaces.json
+- stable/2017-04-01/networkRuleSets.json
+- stable/2017-04-01/operations.json
+- stable/2017-04-01/sku.json
 ```
 
 
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2015-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-08'
 input-file:
-- Microsoft.EventHub/stable/2015-08-01/EventHub.json
+- stable/2015-08-01/EventHub.json
 ```
 
 
@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-2014-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-09'
 input-file:
-- Microsoft.EventHub/stable/2014-09-01/EventHub.json
+- stable/2014-09-01/EventHub.json
 ```
 
 ### Tag: package-2021-01-preview
@@ -72,14 +72,14 @@ These settings apply only when `--tag=package-2021-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2021-01-preview'
 input-file:
-- Microsoft.EventHub/preview/2021-01-01-preview/namespaces-preview.json
-- Microsoft.EventHub/preview/2021-01-01-preview/operations.json
-- Microsoft.EventHub/preview/2021-01-01-preview/eventhubs.json
-- Microsoft.EventHub/preview/2021-01-01-preview/disasterRecoveryConfigs.json
-- Microsoft.EventHub/preview/2021-01-01-preview/networkrulessets-preview.json
-- Microsoft.EventHub/preview/2021-01-01-preview/AuthorizationRules.json
-- Microsoft.EventHub/preview/2021-01-01-preview/consumergroups.json
-- Microsoft.EventHub/preview/2021-01-01-preview/CheckNameAvailability.json
+- preview/2021-01-01-preview/namespaces-preview.json
+- preview/2021-01-01-preview/operations.json
+- preview/2021-01-01-preview/eventhubs.json
+- preview/2021-01-01-preview/disasterRecoveryConfigs.json
+- preview/2021-01-01-preview/networkrulessets-preview.json
+- preview/2021-01-01-preview/AuthorizationRules.json
+- preview/2021-01-01-preview/consumergroups.json
+- preview/2021-01-01-preview/CheckNameAvailability.json
 ```
 
 ### Tag: package-2021-06-preview
@@ -88,17 +88,17 @@ These settings apply only when `--tag=package-2021-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2021-06-preview'
 input-file:
-- Microsoft.EventHub/preview/2021-06-01-preview/AvailableClusterRegions-preview.json
-- Microsoft.EventHub/preview/2021-06-01-preview/Clusters-preview.json
-- Microsoft.EventHub/preview/2021-06-01-preview/quotaConfiguration-preview.json
-- Microsoft.EventHub/preview/2021-06-01-preview/namespaces-preview.json
-- Microsoft.EventHub/preview/2021-06-01-preview/operations.json
-- Microsoft.EventHub/preview/2021-06-01-preview/eventhubs.json
-- Microsoft.EventHub/preview/2021-06-01-preview/disasterRecoveryConfigs.json
-- Microsoft.EventHub/preview/2021-06-01-preview/networkrulessets-preview.json
-- Microsoft.EventHub/preview/2021-06-01-preview/AuthorizationRules.json
-- Microsoft.EventHub/preview/2021-06-01-preview/consumergroups.json
-- Microsoft.EventHub/preview/2021-06-01-preview/CheckNameAvailability.json
+- preview/2021-06-01-preview/AvailableClusterRegions-preview.json
+- preview/2021-06-01-preview/Clusters-preview.json
+- preview/2021-06-01-preview/quotaConfiguration-preview.json
+- preview/2021-06-01-preview/namespaces-preview.json
+- preview/2021-06-01-preview/operations.json
+- preview/2021-06-01-preview/eventhubs.json
+- preview/2021-06-01-preview/disasterRecoveryConfigs.json
+- preview/2021-06-01-preview/networkrulessets-preview.json
+- preview/2021-06-01-preview/AuthorizationRules.json
+- preview/2021-06-01-preview/consumergroups.json
+- preview/2021-06-01-preview/CheckNameAvailability.json
 ```
 
 ### Tag: package-2018-01-preview
@@ -107,20 +107,20 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-01-preview'
 input-file:
-- Microsoft.EventHub/preview/2018-01-01-preview/AvailableClusterRegions-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/ipfilterrules-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/namespaces-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/quotaConfiguration-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/virtualnetworkrules-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/networkrulessets-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/AuthorizationRules.json
-- Microsoft.EventHub/preview/2018-01-01-preview/CheckNameAvailability.json
-- Microsoft.EventHub/preview/2018-01-01-preview/consumergroups.json
-- Microsoft.EventHub/preview/2018-01-01-preview/disasterRecoveryConfigs.json
-- Microsoft.EventHub/preview/2018-01-01-preview/operations.json
-- Microsoft.EventHub/preview/2018-01-01-preview/eventhubs.json
-- Microsoft.EventHub/preview/2018-01-01-preview/sku.json
+- preview/2018-01-01-preview/AvailableClusterRegions-preview.json
+- preview/2018-01-01-preview/Clusters-preview.json
+- preview/2018-01-01-preview/ipfilterrules-preview.json
+- preview/2018-01-01-preview/namespaces-preview.json
+- preview/2018-01-01-preview/quotaConfiguration-preview.json
+- preview/2018-01-01-preview/virtualnetworkrules-preview.json
+- preview/2018-01-01-preview/networkrulessets-preview.json
+- preview/2018-01-01-preview/AuthorizationRules.json
+- preview/2018-01-01-preview/CheckNameAvailability.json
+- preview/2018-01-01-preview/consumergroups.json
+- preview/2018-01-01-preview/disasterRecoveryConfigs.json
+- preview/2018-01-01-preview/operations.json
+- preview/2018-01-01-preview/eventhubs.json
+- preview/2018-01-01-preview/sku.json
 ```
 
 ### Tag: package-2021-11
@@ -129,18 +129,18 @@ These settings apply only when `--tag=package-2021-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-11'
 input-file:
-- Microsoft.EventHub/stable/2021-11-01/AvailableClusterRegions-preview.json
-- Microsoft.EventHub/stable/2021-11-01/Clusters-preview.json
-- Microsoft.EventHub/stable/2021-11-01/quotaConfiguration-preview.json
-- Microsoft.EventHub/stable/2021-11-01/namespaces-preview.json
-- Microsoft.EventHub/stable/2021-11-01/operations.json
-- Microsoft.EventHub/stable/2021-11-01/eventhubs.json
-- Microsoft.EventHub/stable/2021-11-01/disasterRecoveryConfigs.json
-- Microsoft.EventHub/stable/2021-11-01/networkrulessets-preview.json
-- Microsoft.EventHub/stable/2021-11-01/AuthorizationRules.json
-- Microsoft.EventHub/stable/2021-11-01/consumergroups.json
-- Microsoft.EventHub/stable/2021-11-01/CheckNameAvailability.json
-- Microsoft.EventHub/stable/2021-11-01/SchemaRegistry.json
+- stable/2021-11-01/AvailableClusterRegions-preview.json
+- stable/2021-11-01/Clusters-preview.json
+- stable/2021-11-01/quotaConfiguration-preview.json
+- stable/2021-11-01/namespaces-preview.json
+- stable/2021-11-01/operations.json
+- stable/2021-11-01/eventhubs.json
+- stable/2021-11-01/disasterRecoveryConfigs.json
+- stable/2021-11-01/networkrulessets-preview.json
+- stable/2021-11-01/AuthorizationRules.json
+- stable/2021-11-01/consumergroups.json
+- stable/2021-11-01/CheckNameAvailability.json
+- stable/2021-11-01/SchemaRegistry.json
 ```
 
 ### Tag: package-2022-01-preview
@@ -149,19 +149,19 @@ These settings apply only when `--tag=package-2022-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2022-01-preview'
 input-file:
-- Microsoft.EventHub/preview/2022-01-01-preview/AvailableClusterRegions-preview.json
-- Microsoft.EventHub/preview/2022-01-01-preview/Clusters-preview.json
-- Microsoft.EventHub/preview/2022-01-01-preview/namespaces-preview.json
-- Microsoft.EventHub/preview/2022-01-01-preview/quotaConfiguration-preview.json
-- Microsoft.EventHub/preview/2022-01-01-preview/networkrulessets-preview.json
-- Microsoft.EventHub/preview/2022-01-01-preview/AuthorizationRules.json
-- Microsoft.EventHub/preview/2022-01-01-preview/CheckNameAvailability.json
-- Microsoft.EventHub/preview/2022-01-01-preview/consumergroups.json
-- Microsoft.EventHub/preview/2022-01-01-preview/disasterRecoveryConfigs.json
-- Microsoft.EventHub/preview/2022-01-01-preview/operations.json
-- Microsoft.EventHub/preview/2022-01-01-preview/eventhubs.json
-- Microsoft.EventHub/preview/2022-01-01-preview/SchemaRegistry.json
-- Microsoft.EventHub/preview/2022-01-01-preview/ApplicationGroups.json
+- preview/2022-01-01-preview/AvailableClusterRegions-preview.json
+- preview/2022-01-01-preview/Clusters-preview.json
+- preview/2022-01-01-preview/namespaces-preview.json
+- preview/2022-01-01-preview/quotaConfiguration-preview.json
+- preview/2022-01-01-preview/networkrulessets-preview.json
+- preview/2022-01-01-preview/AuthorizationRules.json
+- preview/2022-01-01-preview/CheckNameAvailability.json
+- preview/2022-01-01-preview/consumergroups.json
+- preview/2022-01-01-preview/disasterRecoveryConfigs.json
+- preview/2022-01-01-preview/operations.json
+- preview/2022-01-01-preview/eventhubs.json
+- preview/2022-01-01-preview/SchemaRegistry.json
+- preview/2022-01-01-preview/ApplicationGroups.json
 ```
 
 ### Tag: package-2022-10-preview
@@ -170,19 +170,19 @@ These settings apply only when `--tag=package-2022-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2022-10-preview'
 input-file:
-- Microsoft.EventHub/preview/2022-10-01-preview/AvailableClusterRegions-preview.json
-- Microsoft.EventHub/preview/2022-10-01-preview/Clusters-preview.json
-- Microsoft.EventHub/preview/2022-10-01-preview/namespaces-preview.json
-- Microsoft.EventHub/preview/2022-10-01-preview/quotaConfiguration-preview.json
-- Microsoft.EventHub/preview/2022-10-01-preview/networkrulessets-preview.json
-- Microsoft.EventHub/preview/2022-10-01-preview/AuthorizationRules.json
-- Microsoft.EventHub/preview/2022-10-01-preview/CheckNameAvailability.json
-- Microsoft.EventHub/preview/2022-10-01-preview/consumergroups.json
-- Microsoft.EventHub/preview/2022-10-01-preview/disasterRecoveryConfigs.json
-- Microsoft.EventHub/preview/2022-10-01-preview/operations.json
-- Microsoft.EventHub/preview/2022-10-01-preview/eventhubs.json
-- Microsoft.EventHub/preview/2022-10-01-preview/SchemaRegistry.json
-- Microsoft.EventHub/preview/2022-10-01-preview/ApplicationGroups.json
+- preview/2022-10-01-preview/AvailableClusterRegions-preview.json
+- preview/2022-10-01-preview/Clusters-preview.json
+- preview/2022-10-01-preview/namespaces-preview.json
+- preview/2022-10-01-preview/quotaConfiguration-preview.json
+- preview/2022-10-01-preview/networkrulessets-preview.json
+- preview/2022-10-01-preview/AuthorizationRules.json
+- preview/2022-10-01-preview/CheckNameAvailability.json
+- preview/2022-10-01-preview/consumergroups.json
+- preview/2022-10-01-preview/disasterRecoveryConfigs.json
+- preview/2022-10-01-preview/operations.json
+- preview/2022-10-01-preview/eventhubs.json
+- preview/2022-10-01-preview/SchemaRegistry.json
+- preview/2022-10-01-preview/ApplicationGroups.json
 ```
 
 ### Tag: package-2023-01-preview
@@ -191,19 +191,19 @@ These settings apply only when `--tag=package-2023-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2023-01-preview'
 input-file:
-- Microsoft.EventHub/preview/2023-01-01-preview/AvailableClusterRegions-preview.json
-- Microsoft.EventHub/preview/2023-01-01-preview/Clusters-preview.json
-- Microsoft.EventHub/preview/2023-01-01-preview/namespaces-preview.json
-- Microsoft.EventHub/preview/2023-01-01-preview/quotaConfiguration-preview.json
-- Microsoft.EventHub/preview/2023-01-01-preview/networkrulessets-preview.json
-- Microsoft.EventHub/preview/2023-01-01-preview/AuthorizationRules.json
-- Microsoft.EventHub/preview/2023-01-01-preview/CheckNameAvailability.json
-- Microsoft.EventHub/preview/2023-01-01-preview/consumergroups.json
-- Microsoft.EventHub/preview/2023-01-01-preview/disasterRecoveryConfigs.json
-- Microsoft.EventHub/preview/2023-01-01-preview/operations.json
-- Microsoft.EventHub/preview/2023-01-01-preview/eventhubs.json
-- Microsoft.EventHub/preview/2023-01-01-preview/SchemaRegistry.json
-- Microsoft.EventHub/preview/2023-01-01-preview/ApplicationGroups.json
+- preview/2023-01-01-preview/AvailableClusterRegions-preview.json
+- preview/2023-01-01-preview/Clusters-preview.json
+- preview/2023-01-01-preview/namespaces-preview.json
+- preview/2023-01-01-preview/quotaConfiguration-preview.json
+- preview/2023-01-01-preview/networkrulessets-preview.json
+- preview/2023-01-01-preview/AuthorizationRules.json
+- preview/2023-01-01-preview/CheckNameAvailability.json
+- preview/2023-01-01-preview/consumergroups.json
+- preview/2023-01-01-preview/disasterRecoveryConfigs.json
+- preview/2023-01-01-preview/operations.json
+- preview/2023-01-01-preview/eventhubs.json
+- preview/2023-01-01-preview/SchemaRegistry.json
+- preview/2023-01-01-preview/ApplicationGroups.json
 ```
 
 ### Tag: package-2024-01
@@ -212,19 +212,19 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-01'
 input-file:
-- Microsoft.EventHub/stable/2024-01-01/AvailableClusterRegions.json
-- Microsoft.EventHub/stable/2024-01-01/Clusters.json
-- Microsoft.EventHub/stable/2024-01-01/namespaces.json
-- Microsoft.EventHub/stable/2024-01-01/quotaConfiguration.json
-- Microsoft.EventHub/stable/2024-01-01/networkrulessets.json
-- Microsoft.EventHub/stable/2024-01-01/AuthorizationRules.json
-- Microsoft.EventHub/stable/2024-01-01/CheckNameAvailability.json
-- Microsoft.EventHub/stable/2024-01-01/consumergroups.json
-- Microsoft.EventHub/stable/2024-01-01/disasterRecoveryConfigs.json
-- Microsoft.EventHub/stable/2024-01-01/operations.json
-- Microsoft.EventHub/stable/2024-01-01/eventhubs.json
-- Microsoft.EventHub/stable/2024-01-01/SchemaRegistry.json
-- Microsoft.EventHub/stable/2024-01-01/ApplicationGroups.json
+- stable/2024-01-01/AvailableClusterRegions.json
+- stable/2024-01-01/Clusters.json
+- stable/2024-01-01/namespaces.json
+- stable/2024-01-01/quotaConfiguration.json
+- stable/2024-01-01/networkrulessets.json
+- stable/2024-01-01/AuthorizationRules.json
+- stable/2024-01-01/CheckNameAvailability.json
+- stable/2024-01-01/consumergroups.json
+- stable/2024-01-01/disasterRecoveryConfigs.json
+- stable/2024-01-01/operations.json
+- stable/2024-01-01/eventhubs.json
+- stable/2024-01-01/SchemaRegistry.json
+- stable/2024-01-01/ApplicationGroups.json
 ```
 
 ### Tag: package-2024-05-preview
@@ -233,19 +233,19 @@ These settings apply only when `--tag=package-2024-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2024-05-preview'
 input-file:
-- Microsoft.EventHub/preview/2024-05-01-preview/AvailableClusterRegions-preview.json
-- Microsoft.EventHub/preview/2024-05-01-preview/Clusters-preview.json
-- Microsoft.EventHub/preview/2024-05-01-preview/namespaces.json
-- Microsoft.EventHub/preview/2024-05-01-preview/quotaConfiguration-preview.json
-- Microsoft.EventHub/preview/2024-05-01-preview/networkrulessets-preview.json
-- Microsoft.EventHub/preview/2024-05-01-preview/AuthorizationRules.json
-- Microsoft.EventHub/preview/2024-05-01-preview/CheckNameAvailability.json
-- Microsoft.EventHub/preview/2024-05-01-preview/consumergroups.json
-- Microsoft.EventHub/preview/2024-05-01-preview/disasterRecoveryConfigs.json
-- Microsoft.EventHub/preview/2024-05-01-preview/operations.json
-- Microsoft.EventHub/preview/2024-05-01-preview/eventhubs.json
-- Microsoft.EventHub/preview/2024-05-01-preview/SchemaRegistry.json
-- Microsoft.EventHub/preview/2024-05-01-preview/ApplicationGroups.json
+- preview/2024-05-01-preview/AvailableClusterRegions-preview.json
+- preview/2024-05-01-preview/Clusters-preview.json
+- preview/2024-05-01-preview/namespaces.json
+- preview/2024-05-01-preview/quotaConfiguration-preview.json
+- preview/2024-05-01-preview/networkrulessets-preview.json
+- preview/2024-05-01-preview/AuthorizationRules.json
+- preview/2024-05-01-preview/CheckNameAvailability.json
+- preview/2024-05-01-preview/consumergroups.json
+- preview/2024-05-01-preview/disasterRecoveryConfigs.json
+- preview/2024-05-01-preview/operations.json
+- preview/2024-05-01-preview/eventhubs.json
+- preview/2024-05-01-preview/SchemaRegistry.json
+- preview/2024-05-01-preview/ApplicationGroups.json
 ```
 
 ### Tag: package-2025-05-preview
@@ -254,7 +254,7 @@ These settings apply only when `--tag=package-2025-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2025-05-preview'
 input-file:
-- Microsoft.EventHub/preview/2025-05-01-preview/openapi.json
+- preview/2025-05-01-preview/openapi.json
 ```
 
 ## Suppression
@@ -487,15 +487,15 @@ These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.EventHub/preview/2018-01-01-preview/AvailableClusterRegions-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/namespaces-preview.json
-- Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
-- Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
-- Microsoft.EventHub/stable/2017-04-01/consumergroups.json
-- Microsoft.EventHub/stable/2017-04-01/operations.json
-- Microsoft.EventHub/stable/2017-04-01/eventhubs.json
-- Microsoft.EventHub/stable/2017-04-01/sku.json
+- preview/2018-01-01-preview/AvailableClusterRegions-preview.json
+- preview/2018-01-01-preview/Clusters-preview.json
+- preview/2018-01-01-preview/namespaces-preview.json
+- stable/2017-04-01/AuthorizationRules.json
+- stable/2017-04-01/CheckNameAvailability.json
+- stable/2017-04-01/consumergroups.json
+- stable/2017-04-01/operations.json
+- stable/2017-04-01/eventhubs.json
+- stable/2017-04-01/sku.json
 ```
 
 
