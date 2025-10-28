@@ -43,7 +43,7 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
 @doc("Contains the KeyPhraseResult.")
 model KeyPhraseResult is PreBuiltResult {
   @doc("Response by document")
-  @typeChangedFrom(Versions.v2024_11_15_preview, KeyPhrasesDocumentResult[])
+  @typeChangedFrom(Versions.v2025_11_15_preview, KeyPhrasesDocumentResult[])
   documents: KeyPhrasesDocumentResultWithDetectedLanguage[];
 }
 
