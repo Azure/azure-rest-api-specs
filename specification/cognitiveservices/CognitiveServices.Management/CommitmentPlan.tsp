@@ -27,19 +27,20 @@ model CommitmentPlan
   /**
    * Resource Etag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The kind (type) of cognitive service account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * The resource model definition representing SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 }
 
@@ -85,7 +86,7 @@ interface CommitmentPlans {
   /**
    * Deletes the specified commitmentPlan associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is CommitmentPlanOps.DeleteWithoutOkAsync<
     CommitmentPlan,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -141,21 +142,22 @@ interface CommitmentPlanOperationGroup {
   /**
    * Returns a Cognitive Services commitment plan specified by the parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_GetPlan")
   getPlan is CommitmentPlanOperationGroupOps.Read<CommitmentPlan>;
 
   /**
    * Create Cognitive Services commitment plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_CreateOrUpdatePlan")
   createOrUpdatePlan is CommitmentPlanOperationGroupOps.CreateOrUpdateAsync<CommitmentPlan>;
 
   /**
    * Create Cognitive Services commitment plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_UpdatePlan")
   @patch(#{ implicitOptionality: false })
   updatePlan is CommitmentPlanOperationGroupOps.CustomPatchAsync<
@@ -166,8 +168,8 @@ interface CommitmentPlanOperationGroup {
   /**
    * Deletes a Cognitive Services commitment plan from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_DeletePlan")
   deletePlan is CommitmentPlanOperationGroupOps.DeleteWithoutOkAsync<
     CommitmentPlan,
@@ -177,7 +179,7 @@ interface CommitmentPlanOperationGroup {
   /**
    * Returns all the resources of a particular type belonging to a resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_ListPlansByResourceGroup")
   listPlansByResourceGroup is CommitmentPlanOperationGroupOps.List<
     CommitmentPlan,
@@ -187,7 +189,7 @@ interface CommitmentPlanOperationGroup {
   /**
    * Returns all the resources of a particular type belonging to a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_ListPlansBySubscription")
   listPlansBySubscription is CommitmentPlanOperationOps.List<
     CommitmentPlan,

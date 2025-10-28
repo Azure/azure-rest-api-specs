@@ -27,13 +27,14 @@ model Project
   /**
    * Resource Etag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 }
 @armResourceOperations
@@ -46,8 +47,8 @@ interface Projects {
   /**
    * Create Cognitive Services Account's Project. Project is a sub-resource of an account which give AI developer it's individual container to work on.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     Project,
     Response = ArmResourceUpdatedResponse<Project> | ArmResourceCreatedResponse<
@@ -63,7 +64,7 @@ interface Projects {
   /**
    * Updates a Cognitive Services Project
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Project,

@@ -28,14 +28,14 @@ interface OutboundRuleBasicResources {
   /**
    * The GET API for retrieving a single outbound rule of the managed network associated with the cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRule_Get")
   get is ArmResourceRead<OutboundRuleBasicResource>;
 
   /**
    * The PUT API for creating or updating a single outbound rule of the managed network associated with the cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRule_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OutboundRuleBasicResource,
@@ -46,14 +46,14 @@ interface OutboundRuleBasicResources {
   /**
    * The DELETE API for deleting a single outbound rule of the managed network associated with the cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRule_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<OutboundRuleBasicResource>;
 
   /**
    * The GET API for retrieving the list of outbound rules of the managed network associated with the cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRule_List")
   list is ArmResourceListByParent<
     OutboundRuleBasicResource,

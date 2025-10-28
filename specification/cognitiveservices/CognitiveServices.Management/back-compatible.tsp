@@ -97,7 +97,6 @@ using Microsoft.CognitiveServices;
 @@clientLocation(CommitmentPlanAccountAssociations.listAssociations,
   CommitmentPlans
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommitmentPlanAccountAssociation.properties
 );
 
@@ -107,7 +106,6 @@ using Microsoft.CognitiveServices;
 @@clientName(DefenderForAISettings.update::parameters.properties,
   "defenderForAISettings"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DefenderForAISetting.properties
 );
 

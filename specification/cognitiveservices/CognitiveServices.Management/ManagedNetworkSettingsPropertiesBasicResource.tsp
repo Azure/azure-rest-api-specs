@@ -23,19 +23,20 @@ model ManagedNetworkSettingsPropertiesBasicResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * Get API for managed network settings of a cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkSettings_Get")
   get is ArmResourceRead<ManagedNetworkSettingsPropertiesBasicResource>;
 
   /**
    * PUT API for managed network settings of a cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkSettings_Put")
   put is ArmResourceCreateOrReplaceAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
@@ -46,7 +47,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * Patch API for managed network settings of a cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkSettings_Patch")
   @patch(#{ implicitOptionality: false })
   patch is Azure.ResourceManager.Legacy.CustomPatchAsync<
@@ -58,7 +59,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * List API for managed network settings of a cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkSettings_List")
   list is ArmResourceListByParent<
     ManagedNetworkSettingsPropertiesBasicResource,
@@ -68,7 +69,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * The POST API for updating the outbound rules of the managed network associated with the cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OutboundRules_Post")
   @action("batchOutboundRules")
   post is ArmResourceActionAsync<

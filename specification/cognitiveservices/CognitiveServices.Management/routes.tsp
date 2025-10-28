@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.CognitiveServices;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DeletedAccountsOperationGroup {
   /**
    * Returns all the resources of a particular type belonging to a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DeletedAccounts_List")
   @autoRoute
   @get
@@ -31,12 +31,12 @@ interface DeletedAccountsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ResourceSkusOperationGroup {
   /**
    * Gets the list of Microsoft.CognitiveServices SKUs available for your Subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ResourceSkus_List")
   @autoRoute
   @get
@@ -49,12 +49,12 @@ interface ResourceSkusOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsagesOperationGroup {
   /**
    * Get usages for the requested subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Usages_List")
   @autoRoute
   @get
@@ -78,7 +78,7 @@ interface UsagesOperationGroup {
 /**
  * Check available SKUs.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 op checkSkuAvailability is ArmProviderActionSync<
   Request = CheckSkuAvailabilityParameter,
@@ -99,7 +99,7 @@ op checkDomainAvailability is ArmProviderActionSync<
 /**
  * Model capacity calculator.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @operationId("calculateModelCapacity")
 @autoRoute
 op calculateModelCapacity is ArmProviderActionSync<
@@ -109,12 +109,12 @@ op calculateModelCapacity is ArmProviderActionSync<
   Parameters = {}
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface CommitmentTiersOperationGroup {
   /**
    * List Commitment Tiers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentTiers_List")
   @autoRoute
   @get
@@ -127,12 +127,12 @@ interface CommitmentTiersOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ModelsOperationGroup {
   /**
    * List Models.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Models_List")
   @autoRoute
   @get
@@ -145,12 +145,12 @@ interface ModelsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface LocationBasedModelCapacitiesOperationGroup {
   /**
    * List Location Based ModelCapacities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocationBasedModelCapacities_List")
   @autoRoute
   @get
@@ -186,12 +186,12 @@ interface LocationBasedModelCapacitiesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ModelCapacitiesOperationGroup {
   /**
    * List ModelCapacities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ModelCapacities_List")
   @autoRoute
   @get

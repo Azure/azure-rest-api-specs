@@ -79,14 +79,14 @@ interface AgentDeploymentResources {
   /**
    * Gets an Agent Deployment by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AgentDeployments_Get")
   get is AgentDeploymentResourcesOps.Read<AgentDeploymentResource>;
 
   /**
    * Creates or updates an Agent Deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AgentDeployments_CreateOrUpdate")
   createOrUpdate is AgentDeploymentResourcesOps.CreateOrUpdateAsync<
     AgentDeploymentResource,
@@ -102,8 +102,9 @@ interface AgentDeploymentResources {
         /**
          * Timeout for the client to use when polling the asynchronous operation.
          */
+        #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @header("x-ms-async-operation-timeout")
-        @encode("duration", string)
+        @format("duration")
         asyncOperationTimeout: string;
       }
     >
@@ -112,14 +113,14 @@ interface AgentDeploymentResources {
   /**
    * Delete Agent Deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AgentDeployments_Delete")
   delete is AgentDeploymentResourcesOps.DeleteWithoutOkAsync<AgentDeploymentResource>;
 
   /**
    * Lists Agent Deployments in the application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AgentDeployments_List")
   list is AgentDeploymentResourcesOps.List<
     AgentDeploymentResource,
@@ -139,7 +140,7 @@ interface AgentDeploymentResources {
       /**
        * Names of agent deployments to retrieve.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "names", explode: true })
       names?: string[];
 
@@ -161,7 +162,7 @@ interface AgentDeploymentResources {
   /**
    * Starts an Agent Deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AgentDeployments_Start")
   start is AgentDeploymentResourcesOps.ActionSync<
     AgentDeploymentResource,
@@ -172,7 +173,7 @@ interface AgentDeploymentResources {
   /**
    * Stops an Agent Deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AgentDeployments_Stop")
   stop is AgentDeploymentResourcesOps.ActionSync<
     AgentDeploymentResource,

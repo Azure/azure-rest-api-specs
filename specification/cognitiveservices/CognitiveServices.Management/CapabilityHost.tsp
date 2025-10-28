@@ -58,7 +58,7 @@ interface CapabilityHosts {
   /**
    * Get account capabilityHost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AccountCapabilityHosts_Get")
   get is CapabilityHostOps.Read<
     CapabilityHostResource,
@@ -68,7 +68,7 @@ interface CapabilityHosts {
   /**
    * Create or update account capabilityHost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AccountCapabilityHosts_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is CapabilityHostOps.CreateOrUpdateAsync<
@@ -80,8 +80,9 @@ interface CapabilityHosts {
         /**
          * Timeout for the client to use when polling the asynchronous operation.
          */
+        #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @header("x-ms-async-operation-timeout")
-        @encode("duration", string)
+        @format("duration")
         asyncOperationTimeout: string;
       }
     >
@@ -90,7 +91,7 @@ interface CapabilityHosts {
   /**
    * Delete account capabilityHost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AccountCapabilityHosts_Delete")
   delete is CapabilityHostOps.DeleteWithoutOkAsync<
     CapabilityHostResource,
@@ -98,8 +99,9 @@ interface CapabilityHosts {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("x-ms-async-operation-timeout")
-      @encode("duration", string)
+      @format("duration")
       asyncOperationTimeout: string;
     }> | NoContentResponse
   >;
@@ -160,8 +162,9 @@ interface ProjectCapabilityHosts {
         /**
          * Timeout for the client to use when polling the asynchronous operation.
          */
+        #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @header("x-ms-async-operation-timeout")
-        @encode("duration", string)
+        @format("duration")
         asyncOperationTimeout: string;
       }
     >
@@ -176,8 +179,9 @@ interface ProjectCapabilityHosts {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("x-ms-async-operation-timeout")
-      @encode("duration", string)
+      @format("duration")
       asyncOperationTimeout: string;
     }> | NoContentResponse
   >;

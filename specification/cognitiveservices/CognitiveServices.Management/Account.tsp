@@ -25,25 +25,26 @@ model Account
   /**
    * Resource Etag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The kind (type) of cognitive service account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * The resource model definition representing SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 }
 
@@ -78,8 +79,8 @@ interface Accounts {
   /**
    * Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is AccountOps.CreateOrUpdateAsync<
     Account,
     Response = ArmResourceUpdatedResponse<Account> | ArmResourceCreatedResponse<
@@ -95,7 +96,7 @@ interface Accounts {
   /**
    * Updates a Cognitive Services account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is AccountOps.CustomPatchAsync<
     Account,
@@ -110,7 +111,7 @@ interface Accounts {
   /**
    * Deletes a Cognitive Services account from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is AccountOps.DeleteWithoutOkAsync<
     Account,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -184,7 +185,7 @@ interface Accounts {
   /**
    * Gets the private link resources that need to be created for a Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkResources_List")
   @get
   @action("privateLinkResources")
@@ -197,7 +198,8 @@ interface Accounts {
   /**
    * Test the rai safety provider associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TestRaiExternalSafetyProvider_CreateOrUpdate")
   @put
   createOrUpdate is AccountOps.CreateOrUpdateSync<
@@ -218,7 +220,7 @@ interface Accounts {
   /**
    * Provisions the managed network of a cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is AccountOps.ActionAsync<
     Account,
@@ -267,7 +269,7 @@ interface DeletedAccounts {
   /**
    * Deletes a Cognitive Services account from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   purge is DeletedAccountOps.DeleteWithoutOkAsync<
     Account,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

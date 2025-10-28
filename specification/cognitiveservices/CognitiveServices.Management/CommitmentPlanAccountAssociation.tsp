@@ -27,13 +27,15 @@ model CommitmentPlanAccountAssociation
   /**
    * Resource Etag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -73,22 +75,22 @@ interface CommitmentPlanAccountAssociations {
   /**
    * Gets the association of the Cognitive Services commitment plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_GetAssociation")
   getAssociation is CommitmentPlanAccountAssociationsOps.Read<CommitmentPlanAccountAssociation>;
 
   /**
    * Create or update the association of the Cognitive Services commitment plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_CreateOrUpdateAssociation")
   createOrUpdateAssociation is CommitmentPlanAccountAssociationsOps.CreateOrUpdateAsync<CommitmentPlanAccountAssociation>;
 
   /**
    * Deletes the association of the Cognitive Services commitment plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_DeleteAssociation")
   deleteAssociation is CommitmentPlanAccountAssociationsOps.DeleteWithoutOkAsync<
     CommitmentPlanAccountAssociation,
@@ -98,7 +100,7 @@ interface CommitmentPlanAccountAssociations {
   /**
    * Gets the associations of the Cognitive Services commitment plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CommitmentPlans_ListAssociations")
   listAssociations is CommitmentPlanAccountAssociationsOps.List<
     CommitmentPlanAccountAssociation,

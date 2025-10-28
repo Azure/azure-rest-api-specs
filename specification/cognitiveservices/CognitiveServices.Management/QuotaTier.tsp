@@ -24,6 +24,7 @@ model QuotaTier is Azure.ResourceManager.ProxyResource<QuotaTierProperties> {
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface QuotaTiers {
   /**
    * Gets the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.
@@ -44,6 +45,7 @@ interface QuotaTiers {
   /**
    * Update the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     QuotaTier,

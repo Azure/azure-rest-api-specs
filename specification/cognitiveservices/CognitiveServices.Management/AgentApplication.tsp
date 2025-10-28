@@ -52,8 +52,9 @@ interface AgentApplications {
         /**
          * Timeout for the client to use when polling the asynchronous operation.
          */
+        #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @header("x-ms-async-operation-timeout")
-        @encode("duration", string)
+        @format("duration")
         asyncOperationTimeout: string;
       }
     >
@@ -91,7 +92,7 @@ interface AgentApplications {
       /**
        * Names of agent applications to retrieve.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "names", explode: true })
       names?: string[];
 
