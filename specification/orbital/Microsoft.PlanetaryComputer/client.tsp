@@ -11,7 +11,7 @@ using Microsoft.PlanetaryComputer;
 
 @useDependency(Versions.v2025_04_30_Preview)
 @client({
-  name: "GeoCatalogClient",
+  name: "PlanetaryComputerClient",
   service: Microsoft.PlanetaryComputer,
 })
 namespace Customizations;
