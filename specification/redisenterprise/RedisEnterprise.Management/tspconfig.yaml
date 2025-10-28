@@ -1,3 +1,8 @@
+parameters:
+  "service-dir":
+    default: "sdk/redisenterprise"
+  "dependencies":
+    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +13,32 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/RedisEnterprise/{version-status}/{version}/redisenterprise.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-redisenterprise"
+    namespace: "azure.mgmt.redisenterprise"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/sdk/redisenterprise/arm-redisenterprise"
+    package-details:
+      name: "@azure/arm-redisenterprise"
+    is-modular-library: true
+    experimental-extensible-enums: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-redisenterprise"
+    namespace: com.azure.resourcemanager.redisenterprise
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armredisenterprise"
+    service-dir: "sdk/redisenterprise"
+    emitter-output-dir: "{output-dir}/{service-dir}/armredisenterprise"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
