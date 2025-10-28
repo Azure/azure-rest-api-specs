@@ -91,6 +91,23 @@ union HostPoolProvisioningAction {
 }
 
 /**
+ * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+ */
+union AllowRDPShortPathWithPrivateLink {
+  string,
+
+  /**
+   * Blocks the use of RDPShortPath if the hostpool PublicNetworkAccess setting is configured to require private link.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Allows the use of RDPShortPath even if the hostpool PublicNetworkAccess is configured to require the use of private link.
+   */
+  Enabled: "Enabled",
+}
+
+/**
  * Provisioning state of the Session Host Configuration.
  */
 union ProvisioningStateSHC {
@@ -2621,7 +2638,7 @@ model HostPoolProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.v2025_09_01_preview)
-  allowRDPShortPathWithPrivateLink?: AllowRDPSPWithPL;
+  allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 }
 
 /**
@@ -3639,12 +3656,12 @@ model HostPoolPatchProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
 
-   /**
+  /**
    * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.v2025_09_01_preview)
-  allowRDPShortPathWithPrivateLink?: AllowRDPSPWithPL;
+  allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 }
 
 /**

@@ -1739,9 +1739,6 @@
         "x-ms-examples": {
           "HostPools_CreateOrUpdate": {
             "$ref": "./examples/HostPool_CreateOrUpdate.json"
-          },
-          "HostPools_CreateOrUpdate with RDP ShortPath and Private Link": {
-            "$ref": "./examples/HostPool_CreateOrUpdate_WithRDPShortPathPrivateLink.json"
           }
         }
       },
@@ -6188,7 +6185,7 @@
         }
       }
     },
-    "AllowRDPSPWithPL": {
+    "AllowRDPShortPathWithPrivateLink": {
       "type": "string",
       "description": "Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.",
       "enum": [
@@ -6196,18 +6193,18 @@
         "Enabled"
       ],
       "x-ms-enum": {
-        "name": "AllowRDPSPWithPL",
+        "name": "AllowRDPShortPathWithPrivateLink",
         "modelAsString": true,
         "values": [
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Using RDP Shortpath with Private link is disabled. This is the default value."
+            "description": "Blocks the use of RDPShortPath if the hostpool PublicNetworkAccess setting is configured to require private link."
           },
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Using RDP Shortpath with Private link is enabled. Customer has consented to use RDP Shortpath with Private link."
+            "description": "Allows the use of RDPShortPath even if the hostpool PublicNetworkAccess is configured to require the use of private link."
           }
         ]
       }
@@ -6654,6 +6651,10 @@
         "showInFeed": {
           "type": "boolean",
           "description": "Boolean representing whether the applicationGroup is show in the feed."
+        },
+        "oboTenantId": {
+          "type": "string",
+          "description": "Tenant that the resource is being requested on behalf of."
         }
       },
       "required": [
@@ -7053,6 +7054,30 @@
       "x-ms-enum": {
         "name": "DayOfWeek",
         "modelAsString": false
+      }
+    },
+    "DeploymentScope": {
+      "type": "string",
+      "description": "DeploymentScope type for HostPool.",
+      "enum": [
+        "Geographical",
+        "Regional"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Geographical",
+            "value": "Geographical",
+            "description": "For geographical Broker and ArmProvider talking to Geographical SQL DB"
+          },
+          {
+            "name": "Regional",
+            "value": "Regional",
+            "description": "For regional Broker and ArmProvider talking to regional SQL DB"
+          }
+        ]
       }
     },
     "Desktop": {
@@ -7753,7 +7778,7 @@
           "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections"
         },
         "allowRDPShortPathWithPrivateLink": {
-          "$ref": "#/definitions/AllowRDPSPWithPL",
+          "$ref": "#/definitions/AllowRDPShortPathWithPrivateLink",
           "description": "Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes."
         }
       }
@@ -7894,8 +7919,16 @@
           "$ref": "#/definitions/ManagementType",
           "description": "The type of management for this hostpool, Automated or Standard. The default value is Automated."
         },
+        "deploymentScope": {
+          "$ref": "#/definitions/DeploymentScope",
+          "description": "DeploymentScope type for HostPool."
+        },
+        "oboTenantId": {
+          "type": "string",
+          "description": "Tenant that the resource is being requested on behalf of."
+        },
         "allowRDPShortPathWithPrivateLink": {
-          "$ref": "#/definitions/AllowRDPSPWithPL",
+          "$ref": "#/definitions/AllowRDPShortPathWithPrivateLink",
           "description": "Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes."
         }
       },
@@ -11022,6 +11055,14 @@
         "update": {
           "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties",
           "description": "Parameters for a hostpool update."
+        },
+        "provisioning": {
+          "$ref": "#/definitions/SessionHostProvisioningConfigurationPatchProperties",
+          "description": "Parameters that apply when session hosts are provisioned."
+        },
+        "failedSessionHostCleanupPolicy": {
+          "$ref": "#/definitions/FailedSessionHostCleanupPolicySHC",
+          "description": "The policy that should be applied when the Session Host provisioning operation fails."
         }
       }
     },
@@ -11423,6 +11464,26 @@
           "x-ms-identifiers": [
             "healthCheckName"
           ]
+        }
+      }
+    },
+    "SessionHostProvisioningConfigurationPatchProperties": {
+      "type": "object",
+      "description": "The configuration for session host provisioning operations.",
+      "properties": {
+        "setDrainMode": {
+          "type": "boolean",
+          "description": "Whether the session host should be set in drain mode following provisioning."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of session hosts to exist in the Host Pool.",
+          "minimum": 1
+        },
+        "canaryPolicy": {
+          "$ref": "#/definitions/CanaryPolicy",
+          "description": "Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation."
         }
       }
     },
@@ -12059,6 +12120,10 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
+        },
+        "oboTenantId": {
+          "type": "string",
+          "description": "Tenant that the resource is being requested on behalf of."
         }
       }
     },
