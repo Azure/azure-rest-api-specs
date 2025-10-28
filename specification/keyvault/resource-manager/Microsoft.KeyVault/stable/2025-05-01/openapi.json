@@ -4051,13 +4051,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MHSMPrivateLinkResourceProperties",
-          "description": "Resource properties.",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ManagedHsmResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4078,6 +4078,11 @@
       "type": "object",
       "description": "Properties of a private link resource.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource",
+          "readOnly": true
+        },
         "groupId": {
           "type": "string",
           "description": "Group identifier of private link resource.",
@@ -4097,6 +4102,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "sku": {
+          "$ref": "#/definitions/ManagedHsmSku",
+          "description": "SKU details"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         }
       }
     },
@@ -4583,55 +4596,6 @@
           "$ref": "#/definitions/ManagedHSMSecurityDomainProperties",
           "description": "Managed HSM security domain properties.",
           "readOnly": true
-        }
-      }
-    },
-    "ManagedHsmResource": {
-      "type": "object",
-      "description": "Managed HSM resource",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Azure Resource Manager resource ID for the managed HSM Pool.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the managed HSM Pool.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type of the managed HSM Pool.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The supported Azure location where the managed HSM Pool should be created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "sku": {
-          "$ref": "#/definitions/ManagedHsmSku",
-          "description": "SKU details"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the key vault resource.",
-          "readOnly": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (system assigned and/or user assigned identities)"
         }
       }
     },

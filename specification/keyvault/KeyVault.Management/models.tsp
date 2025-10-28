@@ -1959,18 +1959,25 @@ model MhsmPrivateLinkResourceListResult {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MhsmPrivateLinkResource extends Azure.ResourceManager.CommonTypes.TrackedResource {
-  /**
-   * Resource properties.
-   */
-  properties?: MhsmPrivateLinkResourceProperties;
+model MhsmPrivateLinkResource is Azure.ResourceManager.TrackedResource<MhsmPrivateLinkResourceProperties> {
+  @doc("Name of the private link resource")
+  @maxLength(90)
+  @minLength(1)
+  @pattern("^[a-zA-Z0-9\\_\\-]*")
+  @key("mhsmPrivateLinkResourceName")
+  @segment("mhsmPrivateLinkResources")
+  @path
+  name: string;
 }
 
 /**
  * Properties of a private link resource.
  */
 model MhsmPrivateLinkResourceProperties {
+  @doc("The provisioned state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
   /**
    * Group identifier of private link resource.
    */
@@ -1987,6 +1994,16 @@ model MhsmPrivateLinkResourceProperties {
    * Required DNS zone names of the the private link resource.
    */
   requiredZoneNames?: string[];
+
+  /**
+   * SKU details
+   */
+  sku?: ManagedHsmSku;
+
+  /**
+   * Managed service identity (system assigned and/or user assigned identities)
+   */
+  identity?: CommonTypes.ManagedServiceIdentity;
 }
 
 /**
