@@ -44,8 +44,6 @@ interface RaiExternalSafetyProviderSchemas {
   /**
    * Gets the specified external safety provider associated with the Subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RaiExternalSafetyProvider_Get")
   get is ArmResourceRead<
     RaiExternalSafetyProviderSchema,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -54,9 +52,7 @@ interface RaiExternalSafetyProviderSchemas {
   /**
    * Create the rai safety provider associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RaiExternalSafetyProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RaiExternalSafetyProviderSchema,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -66,8 +62,6 @@ interface RaiExternalSafetyProviderSchemas {
   /**
    * Deletes the specified custom topic associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RaiExternalSafetyProvider_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiExternalSafetyProviderSchema,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -76,8 +70,6 @@ interface RaiExternalSafetyProviderSchemas {
   /**
    * Gets the safety providers associated with the subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RaiExternalSafetyProviders_List")
   list is ArmResourceListByParent<
     RaiExternalSafetyProviderSchema,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

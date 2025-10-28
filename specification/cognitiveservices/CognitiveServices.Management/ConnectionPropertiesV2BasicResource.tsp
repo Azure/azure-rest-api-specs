@@ -58,16 +58,12 @@ interface ConnectionPropertiesV2BasicResources {
   /**
    * Lists Cognitive Services account connection by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccountConnections_Get")
   get is ConnectionPropertiesV2BasicResourceOps.Read<ConnectionPropertiesV2BasicResource>;
 
   /**
    * Create or update Cognitive Services account connection under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccountConnections_Create")
   create is ConnectionPropertiesV2BasicResourceOps.CreateOrUpdateSync<
     ConnectionPropertiesV2BasicResource,
     Response = ArmResourceUpdatedResponse<ConnectionPropertiesV2BasicResource>,
@@ -77,8 +73,6 @@ interface ConnectionPropertiesV2BasicResources {
   /**
    * Update Cognitive Services account connection under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccountConnections_Update")
   @patch(#{ implicitOptionality: false })
   update is ConnectionPropertiesV2BasicResourceOps.CustomPatchSync<
     ConnectionPropertiesV2BasicResource,
@@ -89,15 +83,11 @@ interface ConnectionPropertiesV2BasicResources {
   /**
    * Delete Cognitive Services account connection by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccountConnections_Delete")
   delete is ConnectionPropertiesV2BasicResourceOps.DeleteSync<ConnectionPropertiesV2BasicResource>;
 
   /**
    * Lists all the available  Cognitive Services account connections under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccountConnections_List")
   list is ConnectionPropertiesV2BasicResourceOps.List<
     ConnectionPropertiesV2BasicResource,
     Parameters = {

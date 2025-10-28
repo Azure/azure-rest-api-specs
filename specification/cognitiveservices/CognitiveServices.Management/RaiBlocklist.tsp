@@ -65,8 +65,6 @@ interface RaiBlocklists {
   /**
    * Batch operation to add blocklist items.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RaiBlocklistItems_BatchAdd")
   @action("addRaiBlocklistItems")
   batchAdd is ArmResourceActionSync<
     RaiBlocklist,
@@ -77,8 +75,6 @@ interface RaiBlocklists {
   /**
    * Batch operation to delete blocklist items.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RaiBlocklistItems_BatchDelete")
   @action("deleteRaiBlocklistItems")
   batchDelete is ArmResourceActionSync<
     RaiBlocklist,

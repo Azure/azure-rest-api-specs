@@ -18,8 +18,6 @@ interface DeletedAccountsOperationGroup {
   /**
    * Returns all the resources of a particular type belonging to a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DeletedAccounts_List")
   @autoRoute
   @get
   @action("deletedAccounts")
@@ -36,8 +34,6 @@ interface ResourceSkusOperationGroup {
   /**
    * Gets the list of Microsoft.CognitiveServices SKUs available for your Subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ResourceSkus_List")
   @autoRoute
   @get
   @list
@@ -54,8 +50,6 @@ interface UsagesOperationGroup {
   /**
    * Get usages for the requested subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Usages_List")
   @autoRoute
   @get
   @action("usages")
@@ -114,8 +108,6 @@ interface CommitmentTiersOperationGroup {
   /**
    * List Commitment Tiers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CommitmentTiers_List")
   @autoRoute
   @get
   @list
@@ -132,8 +124,6 @@ interface ModelsOperationGroup {
   /**
    * List Models.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Models_List")
   @autoRoute
   @get
   @list
@@ -150,8 +140,6 @@ interface LocationBasedModelCapacitiesOperationGroup {
   /**
    * List Location Based ModelCapacities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LocationBasedModelCapacities_List")
   @autoRoute
   @get
   @action("modelCapacities")
@@ -191,8 +179,6 @@ interface ModelCapacitiesOperationGroup {
   /**
    * List ModelCapacities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ModelCapacities_List")
   @autoRoute
   @get
   @list

@@ -79,15 +79,11 @@ interface AgentDeploymentResources {
   /**
    * Gets an Agent Deployment by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AgentDeployments_Get")
   get is AgentDeploymentResourcesOps.Read<AgentDeploymentResource>;
 
   /**
    * Creates or updates an Agent Deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AgentDeployments_CreateOrUpdate")
   createOrUpdate is AgentDeploymentResourcesOps.CreateOrUpdateAsync<
     AgentDeploymentResource,
     Response = ArmResponse<AgentDeploymentResource> | ArmResourceCreatedResponse<
@@ -113,15 +109,11 @@ interface AgentDeploymentResources {
   /**
    * Delete Agent Deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AgentDeployments_Delete")
   delete is AgentDeploymentResourcesOps.DeleteWithoutOkAsync<AgentDeploymentResource>;
 
   /**
    * Lists Agent Deployments in the application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AgentDeployments_List")
   list is AgentDeploymentResourcesOps.List<
     AgentDeploymentResource,
     Parameters = {
@@ -162,8 +154,6 @@ interface AgentDeploymentResources {
   /**
    * Starts an Agent Deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AgentDeployments_Start")
   start is AgentDeploymentResourcesOps.ActionSync<
     AgentDeploymentResource,
     void,
@@ -173,8 +163,6 @@ interface AgentDeploymentResources {
   /**
    * Stops an Agent Deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AgentDeployments_Stop")
   stop is AgentDeploymentResourcesOps.ActionSync<
     AgentDeploymentResource,
     void,

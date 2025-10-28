@@ -185,8 +185,6 @@ interface Accounts {
   /**
    * Gets the private link resources that need to be created for a Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkResources_List")
   @get
   @action("privateLinkResources")
   privateLinkResourcesList is AccountOps.ActionSync<
@@ -198,9 +196,7 @@ interface Accounts {
   /**
    * Test the rai safety provider associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TestRaiExternalSafetyProvider_CreateOrUpdate")
   @put
   createOrUpdate is AccountOps.CreateOrUpdateSync<
     Account,
@@ -220,8 +216,6 @@ interface Accounts {
   /**
    * Provisions the managed network of a cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is AccountOps.ActionAsync<
     Account,
     Request = ManagedNetworkProvisionOptions,

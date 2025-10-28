@@ -58,8 +58,6 @@ interface CapabilityHosts {
   /**
    * Get account capabilityHost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccountCapabilityHosts_Get")
   get is CapabilityHostOps.Read<
     CapabilityHostResource,
     Response = ArmResponse<CapabilityHostResource>
@@ -68,8 +66,6 @@ interface CapabilityHosts {
   /**
    * Create or update account capabilityHost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccountCapabilityHosts_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is CapabilityHostOps.CreateOrUpdateAsync<
     CapabilityHostResource,
@@ -91,8 +87,6 @@ interface CapabilityHosts {
   /**
    * Delete account capabilityHost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AccountCapabilityHosts_Delete")
   delete is CapabilityHostOps.DeleteWithoutOkAsync<
     CapabilityHostResource,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> & {
