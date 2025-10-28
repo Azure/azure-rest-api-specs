@@ -329,7 +329,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.InstanceTypeSchema.properties.resources.$ref__added` | added | `#/definitions/InstanceTypeSchemaResources` |
 | `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.$ref__deleted` | deleted | `#/definitions/PartialUserAssignedIdentity` |
 | `definitions.SkuSetting.properties.tier.$ref__deleted` | deleted | `../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier` |
-| `definitions.StringArmPaginatedResult.properties.value.items.$ref__added` | added | `#/definitions/Stringforlist` |
 | `definitions.SynapseSpark.properties.properties.$ref__added` | added | `#/definitions/SynapseSparkProperties` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota'].get.parameters[1].$ref__deleted` | deleted | `machineLearningServices.json#/parameters/PaginationParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/quotaAndUsage'].get.parameters[1].$ref__deleted` | deleted | `machineLearningServices.json#/parameters/PaginationParameter` |
@@ -433,7 +432,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.ResourceConfiguration.properties.properties.additionalProperties.type__deleted` | deleted | `object` |
 | `definitions.SkuSetting.properties.tier.type__added` | added | `string` |
 | `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.type__deleted` | deleted | `object` |
-| `definitions.StringArmPaginatedResult.properties.value.items.type__deleted` | deleted | `string` |
 | `definitions.SynapseSpark.properties.properties.type__deleted` | deleted | `object` |
 | `definitions.VirtualMachine.type__added` | added | `object` |
 | `definitions.VirtualMachineSecrets.type__added` | added | `object` |
@@ -670,8 +668,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.ListStorageAccountKeysResult.properties.userStorageKey.format__added` | added | `password` |
 | `definitions.ListWorkspaceKeysResult.properties.appInsightsInstrumentationKey.format__added` | added | `password` |
 | `definitions.ListWorkspaceKeysResult.properties.userStorageKey.format__added` | added | `password` |
-| `definitions.ManagedIdentity.properties.clientId.format__deleted` | deleted | `uuid` |
-| `definitions.ManagedIdentity.properties.objectId.format__deleted` | deleted | `uuid` |
 | `definitions.NotebookAccessTokenResult.properties.accessToken.format__added` | added | `password` |
 | `definitions.NotebookAccessTokenResult.properties.refreshToken.format__added` | added | `password` |
 | `definitions.Password.properties.name.format__added` | added | `password` |
@@ -1038,6 +1034,12 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 |------|------------|-------|
 | `definitions.AKSSchemaProperties__added` | added | `{"type":"object","description":"AKS properties","properties":{"clusterFqdn":{"type":"string","descri...` |
 
+### Changes for `Azure.Core.uuid`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions['Azure.Core.uuid__added']` | added | `{"type":"string","format":"uuid","description":"Universally Unique Identifier"}` |
+
 ### Changes for `BatchDeploymentProperties`
 
 | Path | Change Type | Value |
@@ -1229,12 +1231,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ServerlessEndpointProperties__added` | added | `{"type":"object","properties":{"authMode":{"type":"string","description":"[Required] Specifies the a...` |
-
-### Changes for `Stringforlist`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Stringforlist__added` | added | `{"type":"object","properties":{"string":{"type":"string"}}}` |
 
 ### Changes for `SynapseSparkProperties`
 
@@ -2459,6 +2455,8 @@ Example: https://blob.windows.core.net/Container/Path` |
 <seealso href="https://docs.docker.com/engine/reference/builder/" />` | `Path to the Dockerfile in the build context.
 <seealso href="https://docs.docker.com/engine/reference/builder/" />` |
 | `definitions.CapabilityHost.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.CertificateDatastoreCredentials.properties.clientId.description` | `[Required] Service principal client ID.` | `Universally Unique Identifier` |
+| `definitions.CertificateDatastoreCredentials.properties.tenantId.description` | `[Required] ID of the tenant to which the service principal belongs.` | `Universally Unique Identifier` |
 | `definitions.CodeContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.CodeContainer.description` | `Container for code asset versions.` | `Azure Resource Manager resource envelope.` |
 | `definitions.CodeContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/CodeContainerResource` | `#/definitions/CodeContainer` |
@@ -2853,7 +2851,10 @@ If Nodes is not set or set to null, the service will only be started on leader n
 We need this when we support UserAssignedIdentities` | `Currently, we support only SystemAssigned MSI.
 We need this when we support UserAssignedIdentities` |
 | `definitions.KubernetesOnlineDeployment.allOf[0].$ref` | `#/definitions/OnlineDeployment` | `#/definitions/OnlineDeploymentProperties` |
+| `definitions.ManagedIdentity.properties.clientId.description` | `Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.` | `Universally Unique Identifier` |
+| `definitions.ManagedIdentity.properties.objectId.description` | `Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.` | `Universally Unique Identifier` |
 | `definitions.ManagedOnlineDeployment.allOf[0].$ref` | `#/definitions/OnlineDeployment` | `#/definitions/OnlineDeploymentProperties` |
+| `definitions.ManagedResourceGroupAssignedIdentities.properties.principalId.description` | `Identity principal Id` | `Universally Unique Identifier` |
 | `definitions.MarketplaceSubscriptionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/MarketplaceSubscriptionResource` | `#/definitions/MarketplaceSubscription` |
 | `definitions.MLTableData.allOf[0].$ref` | `#/definitions/DataVersionBase` | `#/definitions/DataVersionBaseProperties` |
 | `definitions.ModelContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
@@ -2909,6 +2910,8 @@ configure the algorithm` |
 | `definitions.Schedule.description` | `Base definition of a schedule` | `Azure Resource Manager resource envelope.` |
 | `definitions.ScheduleResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ScheduleResource` | `#/definitions/Schedule` |
 | `definitions.ServerlessEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |
+| `definitions.ServicePrincipalDatastoreCredentials.properties.clientId.description` | `[Required] Service principal client ID.` | `Universally Unique Identifier` |
+| `definitions.ServicePrincipalDatastoreCredentials.properties.tenantId.description` | `[Required] ID of the tenant to which the service principal belongs.` | `Universally Unique Identifier` |
 | `definitions.SharedPrivateLinkResourceProperty.properties.status.description` | `Connection status of the service consumer with the service provider
 Possible state transitions
 Pending -> Approved (Service provider approves the connection request)
@@ -2973,6 +2976,7 @@ TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.c
 depending on each OAuth2 provider's implementation.` | `ClientId and ClientSecret are required. Other properties are optional
 depending on each OAuth2 provider's implementation.` |
 | `definitions.WorkspaceConnectionOAuth2.properties.authUrl.format` | `url` | `uri` |
+| `definitions.WorkspaceConnectionOAuth2.properties.clientId.description` | `Client id in the format of UUID` | `Universally Unique Identifier` |
 | `definitions.WorkspaceConnectionOAuth2.properties.refreshToken.description` | `Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho
 where user needs to get RefreshToken offline` | `Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho
 where user needs to get RefreshToken offline` |

@@ -10692,6 +10692,11 @@
         }
       }
     },
+    "Azure.Core.uuid__added": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BatchDeploymentProperties__added": {
       "type": "object",
       "description": "Batch inference settings per deployment.",
@@ -12389,14 +12394,6 @@
         "authMode"
       ]
     },
-    "Stringforlist__added": {
-      "type": "object",
-      "properties": {
-        "string": {
-          "type": "string"
-        }
-      }
-    },
     "SynapseSparkProperties__added": {
       "type": "object",
       "properties": {
@@ -13190,8 +13187,20 @@
     },
     "CertificateDatastoreCredentials": {
       "properties": {
+        "clientId": {
+          "description": {
+            "__old": "[Required] Service principal client ID.",
+            "__new": "Universally Unique Identifier"
+          }
+        },
         "secrets": {
           "x-ms-secret__deleted": true
+        },
+        "tenantId": {
+          "description": {
+            "__old": "[Required] ID of the tenant to which the service principal belongs.",
+            "__new": "Universally Unique Identifier"
+          }
         }
       }
     },
@@ -16692,10 +16701,16 @@
     "ManagedIdentity": {
       "properties": {
         "clientId": {
-          "format__deleted": "uuid"
+          "description": {
+            "__old": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
+            "__new": "Universally Unique Identifier"
+          }
         },
         "objectId": {
-          "format__deleted": "uuid"
+          "description": {
+            "__old": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
+            "__new": "Universally Unique Identifier"
+          }
         }
       }
     },
@@ -16742,7 +16757,11 @@
     "ManagedResourceGroupAssignedIdentities": {
       "properties": {
         "principalId": {
-          "x-nullable__deleted": false
+          "x-nullable__deleted": false,
+          "description": {
+            "__old": "Identity principal Id",
+            "__new": "Universally Unique Identifier"
+          }
         }
       }
     },
@@ -18163,8 +18182,20 @@
     },
     "ServicePrincipalDatastoreCredentials": {
       "properties": {
+        "clientId": {
+          "description": {
+            "__old": "[Required] Service principal client ID.",
+            "__new": "Universally Unique Identifier"
+          }
+        },
         "secrets": {
           "x-ms-secret__deleted": true
+        },
+        "tenantId": {
+          "description": {
+            "__old": "[Required] ID of the tenant to which the service principal belongs.",
+            "__new": "Universally Unique Identifier"
+          }
         }
       }
     },
@@ -18327,15 +18358,7 @@
     "StringArmPaginatedResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "items": {
-            "type__deleted": "string",
-            "$ref__added": "#/definitions/Stringforlist"
-          }
-        }
-      }
+      ]
     },
     "SweepJob": {
       "properties": {
@@ -18971,6 +18994,12 @@
           "format": {
             "__old": "url",
             "__new": "uri"
+          }
+        },
+        "clientId": {
+          "description": {
+            "__old": "Client id in the format of UUID",
+            "__new": "Universally Unique Identifier"
           }
         },
         "clientSecret": {

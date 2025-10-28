@@ -16863,6 +16863,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureBlobDatastore": {
       "type": "object",
       "description": "Azure Blob datastore configuration.",
@@ -17838,7 +17843,7 @@
         "clientId": {
           "type": "string",
           "format": "uuid",
-          "description": "[Required] Service principal client ID."
+          "description": "Universally Unique Identifier"
         },
         "resourceUrl": {
           "type": "string",
@@ -17856,7 +17861,7 @@
         "tenantId": {
           "type": "string",
           "format": "uuid",
-          "description": "[Required] ID of the tenant to which the service principal belongs."
+          "description": "Universally Unique Identifier"
         },
         "thumbprint": {
           "type": "string",
@@ -26146,7 +26151,8 @@
       "properties": {
         "clientId": {
           "type": "string",
-          "description": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
+          "format": "uuid",
+          "description": "Universally Unique Identifier",
           "x-nullable": true,
           "x-ms-mutability": [
             "create",
@@ -26155,7 +26161,8 @@
         },
         "objectId": {
           "type": "string",
-          "description": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
+          "format": "uuid",
+          "description": "Universally Unique Identifier",
           "x-nullable": true,
           "x-ms-mutability": [
             "create",
@@ -26526,7 +26533,7 @@
         "principalId": {
           "type": "string",
           "format": "uuid",
-          "description": "Identity principal Id",
+          "description": "Universally Unique Identifier",
           "readOnly": true
         }
       }
@@ -31192,7 +31199,7 @@
         "clientId": {
           "type": "string",
           "format": "uuid",
-          "description": "[Required] Service principal client ID."
+          "description": "Universally Unique Identifier"
         },
         "resourceUrl": {
           "type": "string",
@@ -31210,7 +31217,7 @@
         "tenantId": {
           "type": "string",
           "format": "uuid",
-          "description": "[Required] ID of the tenant to which the service principal belongs."
+          "description": "Universally Unique Identifier"
         }
       },
       "required": [
@@ -31920,7 +31927,7 @@
           "type": "array",
           "description": "[Placeholder] Discription for value property",
           "items": {
-            "$ref": "#/definitions/Stringforlist"
+            "type": "string"
           }
         },
         "nextLink": {
@@ -31940,14 +31947,6 @@
           "type": "string"
         },
         "value": {
-          "type": "string"
-        }
-      }
-    },
-    "Stringforlist": {
-      "type": "object",
-      "properties": {
-        "string": {
           "type": "string"
         }
       }
@@ -33826,7 +33825,7 @@
         "clientId": {
           "type": "string",
           "format": "uuid",
-          "description": "Client id in the format of UUID"
+          "description": "Universally Unique Identifier"
         },
         "clientSecret": {
           "type": "string",

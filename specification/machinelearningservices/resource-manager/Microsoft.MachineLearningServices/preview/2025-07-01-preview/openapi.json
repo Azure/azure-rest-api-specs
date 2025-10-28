@@ -22899,6 +22899,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureBlobDatastore": {
       "type": "object",
       "description": "Azure Blob datastore configuration.",
@@ -24165,8 +24170,7 @@
           "x-nullable": true
         },
         "clientId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "[Required] Service principal client ID."
         },
         "resourceUrl": {
@@ -24183,8 +24187,7 @@
           ]
         },
         "tenantId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "[Required] ID of the tenant to which the service principal belongs."
         },
         "thumbprint": {
@@ -34717,7 +34720,7 @@
       "description": "Managed identity configuration.",
       "properties": {
         "clientId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
           "x-nullable": true,
           "x-ms-mutability": [
@@ -34726,7 +34729,7 @@
           ]
         },
         "objectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
           "x-nullable": true,
           "x-ms-mutability": [
@@ -35160,8 +35163,7 @@
       "description": "Details for managed resource group assigned identities.",
       "properties": {
         "principalId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Identity principal Id",
           "readOnly": true
         }
@@ -41036,8 +41038,7 @@
           "x-nullable": true
         },
         "clientId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "[Required] Service principal client ID."
         },
         "resourceUrl": {
@@ -41054,8 +41055,7 @@
           ]
         },
         "tenantId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "[Required] ID of the tenant to which the service principal belongs."
         }
       },
@@ -41925,7 +41925,7 @@
           "type": "array",
           "description": "The Stringforlist items on this page",
           "items": {
-            "$ref": "#/definitions/Stringforlist"
+            "type": "string"
           }
         },
         "nextLink": {
@@ -41945,14 +41945,6 @@
           "type": "string"
         },
         "value": {
-          "type": "string"
-        }
-      }
-    },
-    "Stringforlist": {
-      "type": "object",
-      "properties": {
-        "string": {
           "type": "string"
         }
       }
@@ -44282,8 +44274,7 @@
           "description": "Required by Concur connection category"
         },
         "clientId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Client id in the format of UUID"
         },
         "clientSecret": {

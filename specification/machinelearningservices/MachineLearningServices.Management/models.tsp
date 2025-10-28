@@ -6804,13 +6804,18 @@ model DeltaModelListRequest {
 /**
  * A paginated list of String entities.
  */
-model StringArmPaginatedResult is Azure.Core.Page<Stringforlist>;
+model StringArmPaginatedResult {
+  /**
+   * The Stringforlist items on this page
+   */
+  @pageItems
+  value: string[];
 
-//Fix Me: Compile Error
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Stringforlist {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  string?: string;
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: url;
 }
 
 /**
@@ -7710,8 +7715,7 @@ model ManagedResourceGroupAssignedIdentities {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
+  principalId?: Azure.Core.uuid;
 }
 
 /**
@@ -12133,8 +12137,7 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
    * [Required] Service principal client ID.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  clientId: string;
+  clientId: Azure.Core.uuid;
 
   /**
    * Resource the service principal has access to.
@@ -12152,8 +12155,7 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
    * [Required] ID of the tenant to which the service principal belongs.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  tenantId: string;
+  tenantId: Azure.Core.uuid;
 
   /**
    * [Required] Thumbprint of the certificate used for authentication.
@@ -14594,8 +14596,7 @@ model ManagedIdentity extends IdentityConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @format("uuid")
-  clientId?: string | null;
+  clientId?: Azure.Core.uuid | null;
 
   /**
    * Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.
@@ -14603,8 +14604,7 @@ model ManagedIdentity extends IdentityConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @format("uuid")
-  objectId?: string | null;
+  objectId?: Azure.Core.uuid | null;
 
   /**
    * Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.
@@ -15174,8 +15174,7 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
    * [Required] Service principal client ID.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  clientId: string;
+  clientId: Azure.Core.uuid;
 
   /**
    * Resource the service principal has access to.
@@ -15193,8 +15192,7 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
    * [Required] ID of the tenant to which the service principal belongs.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  tenantId: string;
+  tenantId: Azure.Core.uuid;
 
   /**
    * [Required] Credential type used to authentication with storage.
@@ -16152,8 +16150,7 @@ model WorkspaceConnectionOAuth2 {
    * Client id in the format of UUID
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  clientId?: string;
+  clientId?: Azure.Core.uuid;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
