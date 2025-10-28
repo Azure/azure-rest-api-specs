@@ -8,6 +8,8 @@ import "./billings.tsp";
 import "./discoveredAssets.tsp";
 import "./discoveredAssetEndpointProfiles.tsp";
 import "./namespaces.tsp";
+import "./ns_credential.tsp";
+import "./ns_policy.tsp";
 import "./ns_assets.tsp";
 import "./ns_devices.tsp";
 import "./ns_discoveredAssets.tsp";
@@ -48,6 +50,10 @@ enum Versions {
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-10-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_10_01: "2025-10-01",
+
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-11-01-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_11_01_preview: "2025-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

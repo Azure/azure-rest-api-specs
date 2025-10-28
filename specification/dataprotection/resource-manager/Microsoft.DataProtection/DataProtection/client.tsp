@@ -36,3 +36,44 @@ using Microsoft.DataProtection;
 );
 
 @@clientName(Microsoft.DataProtection, "DataProtectionMgmtClient", "python");
+
+@@clientName(BackupVaultOperationResults.getInResourceGroup,
+  "listInResourceGroup",
+  "javascript"
+);
+@@clientName(BackupVaultResources.getInSubscription,
+  "listInSubscription",
+  "javascript"
+);
+@@clientName(DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
+  "listBackupSecurityPINRequestsObjects",
+  "javascript"
+);
+@@clientName(DppBaseResourceOperationGroup.getDeleteProtectedItemRequestsObjects,
+  "listDeleteProtectedItemRequestsObjects",
+  "javascript"
+);
+@@clientName(ResourceGuards.getDeleteResourceGuardProxyRequestsObjects,
+  "listDeleteResourceGuardProxyRequestsObjects",
+  "javascript"
+);
+@@clientName(DppBaseResourceOperationGroup.getDisableSoftDeleteRequestsObjects,
+  "listDisableSoftDeleteRequestsObjects",
+  "javascript"
+);
+@@clientName(ResourceGuardResources.getResourcesInResourceGroup,
+  "listResourcesInResourceGroup",
+  "javascript"
+);
+@@clientName(ResourceGuardResources.getResourcesInSubscription,
+  "listResourcesInSubscription",
+  "javascript"
+);
+@@clientName(DppBaseResourceOperationGroup.getUpdateProtectedItemRequestsObjects,
+  "listUpdateProtectedItemRequestsObjects",
+  "javascript"
+);
+@@clientName(DppBaseResourceOperationGroup.getUpdateProtectionPolicyRequestsObjects,
+  "listUpdateProtectionPolicyRequestsObjects",
+  "javascript"
+);
