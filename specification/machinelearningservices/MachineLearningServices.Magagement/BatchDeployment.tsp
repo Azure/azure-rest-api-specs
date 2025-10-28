@@ -1,0 +1,102 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./BatchEndpoint.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.MachineLearningServices;
+
+@parentResource(BatchEndpoint)
+model BatchDeployment
+  is Azure.ResourceManager.TrackedResource<BatchDeploymentProperties, false> {
+  ...ResourceNameParameter<
+    Resource = BatchDeployment,
+    KeyName = "deploymentName",
+    SegmentName = "deployments",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  kind?: string;
+
+  ...Azure.ResourceManager.ResourceSkuProperty;
+}
+
+@armResourceOperations
+interface BatchDeployments {
+  /**
+   * Gets a batch inference deployment by id.
+   */
+  get is ArmResourceRead<BatchDeployment>;
+
+  /**
+   * Creates/updates a batch inference deployment (asynchronous).
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchDeployment>;
+
+  /**
+   * Update a batch inference deployment (asynchronous).
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    BatchDeployment,
+    PatchModel = PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
+  >;
+
+  /**
+   * Delete Batch Inference deployment (asynchronous).
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    BatchDeployment,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists Batch inference deployments in the workspace.
+   */
+  list is ArmResourceListByParent<
+    BatchDeployment,
+    Parameters = {
+      /**
+       * Ordering of list.
+       */
+      @query("$orderBy")
+      $orderBy?: string;
+
+      /**
+       * Top of list.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+    },
+    Response = ArmResponse<BatchDeploymentTrackedResourceArmPaginatedResult>
+  >;
+}
+
+@@doc(BatchDeployment.name, "The identifier for the Batch deployments.");
+@@doc(BatchDeployment.properties,
+  "[Required] Additional attributes of the entity."
+);
+@@doc(BatchDeployments.createOrUpdate::parameters.resource,
+  "Batch inference deployment definition object."
+);
+@@doc(BatchDeployments.update::parameters.properties,
+  "Batch inference deployment definition object."
+);
