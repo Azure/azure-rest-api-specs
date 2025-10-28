@@ -8,7 +8,7 @@ using Versioning;
 namespace Microsoft.ContainerRegistry;
 
 /**
- * The properties of an export pipeline.
+ * The properties of an archive version.
  */
 @added(Versions.vLatestPreview)
 model ArchiveVersionProperties {
