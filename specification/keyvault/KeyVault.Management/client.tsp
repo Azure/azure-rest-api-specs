@@ -196,7 +196,6 @@ using Azure.Core;
   azureLocation,
   "csharp"
 );
-@@alternateType(ManagedHsmResource.location, azureLocation, "csharp");
 @@alternateType(PrivateLinkResource.location, azureLocation, "csharp");
 @@alternateType(MhsmNetworkRuleSet.bypass,
   ManagedHsmNetworkRuleBypassOption,

@@ -1851,57 +1851,6 @@ model ManagedHSMSecurityDomainProperties {
 }
 
 /**
- * Managed HSM resource
- */
-model ManagedHsmResource {
-  /**
-   * The Azure Resource Manager resource ID for the managed HSM Pool.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the managed HSM Pool.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The resource type of the managed HSM Pool.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The supported Azure location where the managed HSM Pool should be created.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
-
-  /**
-   * SKU details
-   */
-  sku?: ManagedHsmSku;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /**
-   * Metadata pertaining to creation and last modification of the key vault resource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
-  identity?: CommonTypes.ManagedServiceIdentity;
-}
-
-/**
  * SKU details
  */
 model ManagedHsmSku {
@@ -2011,7 +1960,7 @@ model MhsmPrivateLinkResourceListResult {
  * A private link resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MhsmPrivateLinkResource extends ManagedHsmResource {
+model MhsmPrivateLinkResource extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**
    * Resource properties.
    */
