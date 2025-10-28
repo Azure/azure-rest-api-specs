@@ -12,13 +12,9 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.KeyVault"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: true
-    enable-bicep-serialization: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-keyvault"
     namespace: "azure.mgmt.keyvault"
