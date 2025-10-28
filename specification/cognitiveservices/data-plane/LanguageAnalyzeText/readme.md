@@ -6,12 +6,12 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Language - Text is 2025-05-15-preview.
+The current preview release of Language - Text is 2025-11-15-preview.
 
-The current stable release of Language - Text is 2024-11-01.
+The current stable release of Language - Text is 2025-11-01.
 
 ```yaml
-tag: release_2025-05-15-preview
+tag: release_2025-11-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -23,6 +23,19 @@ directive:
     reason: ISO should be upper case.
 ```
 
+### Release 2025-11-15-preview
+
+These settings apply only when `--tag=release_2025-11-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025-11-15-preview'
+input-file:
+  - preview/2025-11-15-preview/analyzetext.json
+title:
+  Microsoft Cognitive Language Service - Text
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ### Release 2025-11-01
 
 These settings apply only when `--tag=release_2025-11-01` is specified on the command line.
@@ -30,19 +43,6 @@ These settings apply only when `--tag=release_2025-11-01` is specified on the co
 ``` yaml $(tag) == 'release_2025-11-01'
 input-file:
   - stable/2025-11-01/analyzetext.json
-title:
-  Microsoft Cognitive Language Service - Text
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2025-05-15-preview
-
-These settings apply only when `--tag=release_2025-05-15-preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2025-05-15-preview'
-input-file:
-  - preview/2025-05-15-preview/analyzetext.json
 title:
   Microsoft Cognitive Language Service - Text
 modelerfour:
