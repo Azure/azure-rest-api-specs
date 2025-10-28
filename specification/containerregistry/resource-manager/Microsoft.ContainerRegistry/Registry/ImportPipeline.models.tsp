@@ -21,6 +21,7 @@ union TriggerStatus {
 /**
  * The type of source for the import pipeline.
  */
+@added(Versions.vLatestPreview)
 union PipelineSourceType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -30,6 +31,7 @@ union PipelineSourceType {
 /**
  * The properties of an import pipeline.
  */
+@added(Versions.vLatestPreview)
 model ImportPipelineProperties {
   /**
    * The source properties of the import pipeline.
@@ -56,6 +58,7 @@ model ImportPipelineProperties {
 /**
  * The properties of the import pipeline source.
  */
+@added(Versions.vLatestPreview)
 model ImportPipelineSourceProperties {
   /**
    * The type of source for the import pipeline.
@@ -94,6 +97,7 @@ model PipelineSourceTriggerProperties {
 /**
  * The result of a request to list import pipelines for a container registry.
  */
+@added(Versions.vLatestPreview)
 model ImportPipelineListResult {
   /**
    * The list of import pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of import pipelines.

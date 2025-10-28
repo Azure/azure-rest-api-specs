@@ -10,6 +10,7 @@ namespace Microsoft.ContainerRegistry;
 /**
  * The properties of an export pipeline.
  */
+@added(Versions.vLatestPreview)
 model ExportPipelineProperties {
   /**
    * The target properties of the export pipeline.
@@ -31,6 +32,7 @@ model ExportPipelineProperties {
 /**
  * The properties of the export pipeline target.
  */
+@added(Versions.vLatestPreview)
 model ExportPipelineTargetProperties {
   /**
    * The type of target for the export pipeline.
@@ -53,6 +55,7 @@ model ExportPipelineTargetProperties {
 /**
  * The result of a request to list export pipelines for a container registry.
  */
+@added(Versions.vLatestPreview)
 model ExportPipelineListResult {
   /**
    * The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of export pipelines.

@@ -153,6 +153,7 @@ union NetworkRuleBypassOptions {
 /**
  * Determines whether registry artifacts are indexed for metadata search.
  */
+@added(Versions.vLatestPreview)
 union MetadataSearch {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -531,6 +532,7 @@ model AzureADAuthenticationAsArmPolicy {
 /**
  * The soft delete policy for a container registry
  */
+@added(Versions.vLatestPreview)
 model SoftDeletePolicy {
   /**
    * The number of days after which a soft-deleted item is permanently deleted.

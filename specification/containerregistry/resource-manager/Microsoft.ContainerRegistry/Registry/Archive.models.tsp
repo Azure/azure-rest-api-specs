@@ -40,6 +40,7 @@ model DebianArchivePackageSourceProperties
 /**
  * The properties of a archive.
  */
+@added(Versions.vLatestPreview)
 model ArchiveProperties {
   /**
    * The package source of the archive.
@@ -68,6 +69,7 @@ model ArchiveProperties {
 /**
  * The properties of the archive package source.
  */
+@added(Versions.vLatestPreview)
 model ArchivePackageSourceProperties {
   /**
    * The type of package source for a archive.
@@ -83,6 +85,7 @@ model ArchivePackageSourceProperties {
 /**
  * The parameters for updating a archive.
  */
+@added(Versions.vLatestPreview)
 model ArchiveUpdateParameters {
   /**
    * The properties of the connected registry update parameters.
@@ -121,6 +124,7 @@ model ArchiveUpdateProperties {
 /**
  * The result of a request to list archives for a container registry.
  */
+@added(Versions.vLatestPreview)
 model ArchiveListResult {
   /**
    * The list of archives. Since this list may be incomplete, the nextLink field should be used to request the next list of archives.

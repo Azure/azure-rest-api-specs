@@ -10,6 +10,7 @@ namespace Microsoft.ContainerRegistry;
 /**
  * The type of the source.
  */
+@added(Versions.vLatestPreview)
 union PipelineRunSourceType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -19,6 +20,7 @@ union PipelineRunSourceType {
 /**
  * The type of the target.
  */
+@added(Versions.vLatestPreview)
 union PipelineRunTargetType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -28,6 +30,7 @@ union PipelineRunTargetType {
 /**
  * The properties of a pipeline run.
  */
+@added(Versions.vLatestPreview)
 model PipelineRunProperties {
   /**
    * The provisioning state of a pipeline run.
@@ -55,6 +58,7 @@ model PipelineRunProperties {
 /**
  * The request properties provided for a pipeline run.
  */
+@added(Versions.vLatestPreview)
 model PipelineRunRequest {
   /**
    * The resource ID of the pipeline to run.
@@ -86,6 +90,7 @@ model PipelineRunRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.vLatestPreview)
 model PipelineRunSourceProperties {
   /**
    * The type of the source.
@@ -99,6 +104,7 @@ model PipelineRunSourceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.vLatestPreview)
 model PipelineRunTargetProperties {
   /**
    * The type of the target.
@@ -114,6 +120,7 @@ model PipelineRunTargetProperties {
 /**
  * The response properties returned for a pipeline run.
  */
+@added(Versions.vLatestPreview)
 model PipelineRunResponse {
   /**
    * The current status of the pipeline run.
@@ -196,6 +203,7 @@ model PipelineSourceTriggerDescriptor {
 /**
  * The result of a request to list pipeline runs for a container registry.
  */
+@added(Versions.vLatestPreview)
 model PipelineRunListResult {
   /**
    * The list of pipeline runs. Since this list may be incomplete, the nextLink field should be used to request the next list of pipeline runs.
