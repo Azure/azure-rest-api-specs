@@ -16,7 +16,7 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents an export pipeline for a container registry.
  */
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @parentResource(Registry)
 model ExportPipeline
   is Azure.ResourceManager.ProxyResource<ExportPipelineProperties> {
@@ -30,17 +30,17 @@ model ExportPipeline
   /**
    * The location of the export pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   location?: string;
 
   /**
    * The identity of the export pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: IdentityProperties;
 }
 
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface ExportPipelines {
   /**
@@ -56,7 +56,7 @@ interface ExportPipelines {
   /**
    * Deletes an export pipeline from a container registry.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ExportPipeline,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

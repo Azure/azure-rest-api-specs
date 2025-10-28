@@ -87,9 +87,10 @@ namespace Microsoft.ContainerRegistry;
  */
 enum Versions {
   /**
-   * The 2025-05-01-preview API version.
+   * The latest preview API version.
    */
-  v2025_06_01_preview: "2025-06-01-preview",
+  @previewVersion
+  vLatestPreview: "2025-06-01-preview",
 
   /**
    * The 2025-11-01 API version.

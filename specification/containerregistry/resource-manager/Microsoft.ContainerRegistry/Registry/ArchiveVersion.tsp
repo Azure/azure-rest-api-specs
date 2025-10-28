@@ -117,7 +117,7 @@ interface ArchiveVersionListOps
 /**
  * An object that represents an export pipeline for a container registry.
  */
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @parentResource(Archive)
 model ArchiveVersion
   is Azure.ResourceManager.ProxyResource<ArchiveVersionProperties> {
@@ -129,7 +129,7 @@ model ArchiveVersion
   >;
 }
 
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface ArchiveVersions {
   /**

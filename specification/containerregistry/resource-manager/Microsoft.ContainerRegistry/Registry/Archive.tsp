@@ -96,7 +96,7 @@ interface AchieveOps
 /**
  * An object that represents a archive for a container registry.
  */
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @parentResource(Registry)
 model Archive is Azure.ResourceManager.ProxyResource<ArchiveProperties> {
   ...ResourceNameParameter<
@@ -107,7 +107,7 @@ model Archive is Azure.ResourceManager.ProxyResource<ArchiveProperties> {
   >;
 }
 
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface Archives {
   /**
