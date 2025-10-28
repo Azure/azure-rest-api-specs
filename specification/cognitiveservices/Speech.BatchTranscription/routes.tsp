@@ -40,7 +40,7 @@ op deleteTranscription is Operations.ResourceDelete<TranscriptionJob>;
 @get
 @route("/transcriptions")
 @doc("Gets a list of transcriptions for the authenticated subscription.")
-op listTranscriptions is Azure.Core.RpcOperation<
+op listTranscriptions is Azure.Core.Foundations.Operation<
   {
     /** Maximum number of transcriptions to return */
     @query top?: int32;
@@ -60,7 +60,7 @@ op listTranscriptions is Azure.Core.RpcOperation<
 @get
 @route("/transcriptions/{id}/files")
 @doc("Gets the files of the transcription identified by the given ID")
-op listTranscriptionFiles is Azure.Core.RpcOperation<
+op listTranscriptionFiles is Azure.Core.Foundations.Operation<
   {
     /** Transcription job identifier */
     @path id: string;
