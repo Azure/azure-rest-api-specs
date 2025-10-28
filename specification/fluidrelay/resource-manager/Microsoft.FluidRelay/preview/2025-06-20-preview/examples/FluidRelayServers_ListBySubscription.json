@@ -1,14 +1,14 @@
 {
   "parameters": {
-    "subscriptionId": "xxxx-xxxx-xxxx-xxxx",
-    "api-version": "2022-06-01"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-06-20-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer",
             "name": "myFluidRelayServer",
             "type": "Microsoft.FluidRelay/fluidRelayServers",
             "location": "west-us",
@@ -25,7 +25,31 @@
                   "https://www.afd.contoso.org"
                 ]
               },
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "sharedKeyAccess": "Enabled",
+              "privateKeyAccess": "Disabled",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer/privateEndpointConnections/myPrivateEndpointConnection",
+                  "name": "myPrivateEndpointConnection",
+                  "type": "Microsoft.FluidRelay/fluidRelayServers/privateEndpointConnections",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpointConnection"
+                    },
+                    "groupIds": [
+                      "FluidRelayServers"
+                    ],
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Auto-approved",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
             }
           }
         ],
