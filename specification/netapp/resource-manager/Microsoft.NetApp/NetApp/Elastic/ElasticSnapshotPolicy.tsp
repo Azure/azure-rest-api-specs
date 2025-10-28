@@ -219,13 +219,13 @@ interface ElasticSnapshotPolicies {
   /**
    * Get elastic volumes associated with elastic snapshot policy
    */
-  @get
+  @list
   @action("elasticvolumes")
   @added(Versions.v2025_09_01_preview)
   listVolumes is ArmResourceActionSync<
     ElasticSnapshotPolicy,
     void,
-    ArmResponse<ElasticSnapshotPolicyVolumeList>
+    ElasticSnapshotPolicyVolumeList
   >;
 }
 

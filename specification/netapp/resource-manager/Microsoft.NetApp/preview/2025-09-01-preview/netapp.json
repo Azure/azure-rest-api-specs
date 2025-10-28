@@ -4143,7 +4143,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticSnapshotPolicies/{snapshotPolicyName}/elasticvolumes": {
-      "get": {
+      "post": {
         "operationId": "ElasticSnapshotPolicies_ListVolumes",
         "tags": [
           "ElasticSnapshotPolicies"
@@ -4194,6 +4194,9 @@
           "ElasticSnapshotPolicies_ListVolumes": {
             "$ref": "./examples/ElasticSnapshotPolicies_ListVolumes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
