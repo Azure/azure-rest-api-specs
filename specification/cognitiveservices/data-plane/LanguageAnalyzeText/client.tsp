@@ -7,6 +7,7 @@ using Azure.ClientGenerator.Core;
 namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(Text, "TextAnalysis");
+@@clientName(Text, "TextAnalysisClient", "python");
 
 @@clientName(Tasks, "TextActions");
 @@clientName(State, "TextActionState");
