@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-05'
 input-file:
-  - Microsoft.Automanage/stable/2022-05-04/automanage.json
+  - stable/2022-05-04/automanage.json
 ```
 
 ### Tag: package-2021-04-30-preview
@@ -47,10 +47,10 @@ These settings apply only when `--tag=package-2021-04-30-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-04-30-preview'
 input-file:
-- Microsoft.Automanage/preview/2021-04-30-preview/automanage.json
+- preview/2021-04-30-preview/automanage.json
 directive:
   - suppress: R3010
-    from: Microsoft.Automanage/preview/2021-04-30-preview/automanage.json
+    from: preview/2021-04-30-preview/automanage.json
     reason: list by immediate parent operations are defined
 ```
 
@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-2020-06-30-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-06-30-preview'
 input-file:
-- Microsoft.Automanage/preview/2020-06-30-preview/automanage.json
+- preview/2020-06-30-preview/automanage.json
 ```
 
 ## Suppression
