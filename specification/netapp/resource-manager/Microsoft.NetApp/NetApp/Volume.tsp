@@ -266,7 +266,7 @@ model VolumeProperties {
   /**
    * Specifies the type of LDAP server for a given NFS volume.
    */
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -430,7 +430,7 @@ model VolumeProperties {
   /**
    * Language supported for volume.
    */
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_07_01_preview)
   language?: VolumeLanguage;
 
   /**
@@ -1041,28 +1041,28 @@ model ReplicationObject {
   /**
    * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
    */
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
 
   /**
    * Contains human-readable instructions on what the next step is to finish the external replication setup.
    */
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
 
   /**
    * The mirror state property describes the current status of data replication for a replication. It provides insight into whether the data is actively being mirrored, if the replication process has been paused, or if it has yet to be initialized.
    */
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
 
   /**
    * The status of the Volume Replication
    */
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
 }
@@ -1070,6 +1070,7 @@ model ReplicationObject {
 /**
  * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
  */
+@added(Versions.v2025_07_01_preview)
 union ExternalReplicationSetupStatus {
   string,
 
@@ -2079,7 +2080,7 @@ union BreakthroughMode {
 /**
  * Quota Report for volume
  */
-@added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_07_01_preview)
 model ListQuotaReportResponse {
   /**
    * List of quota reports
@@ -2091,7 +2092,7 @@ model ListQuotaReportResponse {
 /**
  * Quota report record properties
  */
-@added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_07_01_preview)
 model QuotaReport {
   /**
    * Type of quota
@@ -2565,7 +2566,7 @@ interface Volumes {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Volume>
   >;
 
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_07_01_preview)
   listQuotaReport is ArmResourceActionAsync<
     Volume,
     void,
