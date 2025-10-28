@@ -1959,7 +1959,8 @@ model MhsmPrivateLinkResourceListResult {
 /**
  * A private link resource
  */
-model MhsmPrivateLinkResource is Azure.ResourceManager.TrackedResource<MhsmPrivateLinkResourceProperties> {
+model MhsmPrivateLinkResource
+  is Azure.ResourceManager.TrackedResource<MhsmPrivateLinkResourceProperties> {
   @doc("Name of the private link resource")
   @maxLength(90)
   @minLength(1)
