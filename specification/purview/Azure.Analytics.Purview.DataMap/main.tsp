@@ -27,7 +27,6 @@ namespace PurviewDataMap;
 @doc("Service API versions")
 enum ApiVersions {
   @doc("2023-09-01 service API version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_09_01: "2023-09-01",
 }
 

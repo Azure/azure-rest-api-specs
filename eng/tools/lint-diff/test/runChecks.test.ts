@@ -1,4 +1,4 @@
-import { vi, test, describe, beforeEach, expect, Mock } from "vitest";
+import { beforeEach, describe, expect, Mock, test, vi } from "vitest";
 
 vi.mock(import("@azure-tools/specs-shared/exec"), async (importOriginal) => {
   const actual = await importOriginal();
@@ -24,11 +24,10 @@ vi.mock(import("../src/markdown-utils.js"), async (importOriginal) => {
   };
 });
 
-import { runChecks, getAutorestErrors } from "../src/runChecks.js";
-import { AutorestRunResult } from "../src/lintdiff-types.js";
 import { execNpmExec } from "@azure-tools/specs-shared/exec";
-import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { AutorestRunResult, ReadmeAffectedTags } from "../src/lintdiff-types.js";
+import { getAutorestErrors, runChecks } from "../src/runChecks.js";
 
 describe("runChecks", () => {
   beforeEach(() => {

@@ -39,24 +39,25 @@ enum Versions {
   /**
    * The 7.5 API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `v7.5`: "7.5",
 
   /**
    * The 7.6-preview.2 API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `v7.6_preview.2`: "7.6-preview.2",
 
   /**
    * The 7.6 API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `v7.6`: "7.6",
 
   /**
    * The 2025-06-01-preview API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_06_01_preview: "2025-06-01-preview",
+
+  /**
+   * The 2025-07-01 API version.
+   */
+  v2025_07_01: "2025-07-01",
 }

@@ -753,6 +753,11 @@
           "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
           "type": "string",
           "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {}
+            ]
+          },
           "x-ms-mutability": [
             "create"
           ]
@@ -761,6 +766,11 @@
           "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
           "type": "string",
           "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {}
+            ]
+          },
           "x-ms-mutability": [
             "create"
           ]
@@ -1190,10 +1200,6 @@
           "description": "Create mode for server, only valid values for this are Normal and Restore.",
           "enum": [
             "Normal",
-            "ServerMigrationV1",
-            "DatabaseMigrationV1",
-            "ServerMigration",
-            "Standby",
             "Restore"
           ],
           "type": "string",

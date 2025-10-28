@@ -6,19 +6,19 @@ export class SpecModelError extends Error {
    *
    * @type {string|undefined}
    */
-  source;
+  #source;
 
   /**
    * Path to readme that caused the error (if known)
    * @type {string|undefined}
    */
-  readme;
+  #readme;
 
   /**
    * Name of tag that caused the error (if known)
    * @type {string|undefined}
    */
-  tag;
+  #tag;
 
   /**
    * @param {string} message
@@ -28,22 +28,34 @@ export class SpecModelError extends Error {
    * @param {string} [options.readme] Path to readme that caused the error (if known)
    * @param {string} [options.tag] Name of tag that caused the error (if known)
    */
-  constructor(message, options) {
-    super(message, { cause: options?.cause });
+  constructor(message, options = {}) {
+    const { cause, source, readme, tag } = options;
+
+    const fullMessage =
+      message +
+      (source ? `\n  Problem File: ${source}` : "") +
+      (readme ? `\n  Readme: ${readme}` : "") +
+      (tag ? `\n  Tag: ${tag}` : "") +
+      (cause ? `\n  Cause: ${cause}` : "");
+
+    super(fullMessage, { cause });
 
     this.name = this.constructor.name;
 
-    this.source = options?.source;
-    this.readme = options?.readme;
-    this.tag = options?.tag;
+    this.#source = source;
+    this.#readme = readme;
+    this.#tag = tag;
   }
 
-  toString() {
-    return (
-      `SpecModelError: ${this.message}` +
-      `${this.source ? `\n\tProblem File: ${this.source}` : ""}` +
-      `${this.readme ? `\n\tReadme: ${this.readme}` : ""}` +
-      `${this.tag ? `\n\tTag: ${this.tag}` : ""}`
-    );
+  get source() {
+    return this.#source;
+  }
+
+  get readme() {
+    return this.#readme;
+  }
+
+  get tag() {
+    return this.#tag;
   }
 }

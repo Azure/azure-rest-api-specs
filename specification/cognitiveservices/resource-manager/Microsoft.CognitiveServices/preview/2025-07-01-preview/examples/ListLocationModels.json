@@ -1,0 +1,290 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "WestUS"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "OpenAI",
+            "skuName": "S0",
+            "model": {
+              "format": "OpenAI",
+              "name": "ada",
+              "version": "1",
+              "maxCapacity": 3,
+              "capabilities": {
+                "inference": "false",
+                "scaleType": "Manual",
+                "completion": "true",
+                "search": "true",
+                "FineTuneTokensMaxValuePerExample": "4096",
+                "FineTuneTokensMaxValue": "2000000000"
+              },
+              "deprecation": {
+                "fineTune": "2024-06-14T00:00:00Z",
+                "inference": "2024-06-14T00:00:00Z",
+                "deprecationStatus": "Planned"
+              },
+              "lifecycleStatus": "Legacy",
+              "systemData": {
+                "createdBy": "Microsoft",
+                "createdAt": "2021-10-07T00:00:00Z",
+                "lastModifiedBy": "Microsoft",
+                "lastModifiedAt": "2021-10-07T00:00:00Z"
+              },
+              "skus": [
+                {
+                  "name": "provisioned",
+                  "usageName": "OpenAI.Provisioned.Class1",
+                  "capacity": {
+                    "minimum": 100,
+                    "maximum": 1000,
+                    "step": 100,
+                    "default": 100
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": "AIServices",
+            "skuName": "S0",
+            "model": {
+              "format": "OpenAI",
+              "name": "dall-e-3",
+              "version": "3.0",
+              "isDefaultVersion": true,
+              "skus": [
+                {
+                  "name": "Provisioned",
+                  "usageName": "OpenAI.Provisioned.Dalle",
+                  "capacity": {
+                    "minimum": 300,
+                    "maximum": 60000,
+                    "step": 100,
+                    "default": 300
+                  },
+                  "deprecationDate": "2025-09-30T00:00:00Z"
+                }
+              ],
+              "maxCapacity": 2,
+              "capabilities": {
+                "inference": "true",
+                "imageGenerations": "true"
+              },
+              "deprecation": {
+                "inference": "2025-06-30T00:00:00Z",
+                "deprecationStatus": "Tentative"
+              },
+              "lifecycleStatus": "GenerallyAvailable",
+              "modelCatalogAssetId": "azureml://registries/azure-openai/models/dall-e-3/versions/3.0",
+              "systemData": {
+                "createdBy": "Microsoft",
+                "createdAt": "2023-08-11T00:00:00Z",
+                "lastModifiedBy": "Microsoft",
+                "lastModifiedAt": "2023-08-11T00:00:00Z"
+              }
+            }
+          },
+          {
+            "kind": "OpenAI",
+            "skuName": "S0",
+            "model": {
+              "format": "OpenAI",
+              "name": "gpt-35-turbo",
+              "version": "0301",
+              "isDefaultVersion": false,
+              "skus": [
+                {
+                  "name": "Standard",
+                  "usageName": "OpenAI.Standard.gpt-35-turbo",
+                  "capacity": {
+                    "maximum": 1000000,
+                    "default": 120
+                  },
+                  "deprecationDate": "2025-02-13T00:00:00Z"
+                },
+                {
+                  "name": "Provisioned",
+                  "usageName": "OpenAI.Provisioned.gpt-35-turbo",
+                  "capacity": {
+                    "minimum": 300,
+                    "maximum": 30000,
+                    "step": 100,
+                    "default": 300
+                  },
+                  "deprecationDate": "2025-05-15T00:00:00Z"
+                }
+              ],
+              "maxCapacity": 9,
+              "capabilities": {
+                "scaleType": "Manual,Standard",
+                "completion": "true",
+                "chatCompletion": "true",
+                "maxTotalToken": "4096"
+              },
+              "deprecation": {
+                "inference": "2025-04-30T00:00:00Z",
+                "deprecationStatus": "Planned"
+              },
+              "lifecycleStatus": "Deprecated",
+              "systemData": {
+                "createdBy": "Microsoft",
+                "createdByType": "Application",
+                "createdAt": "2023-03-09T00:00:00Z",
+                "lastModifiedBy": "Microsoft",
+                "lastModifiedByType": "Application",
+                "lastModifiedAt": "2023-07-06T00:00:00Z"
+              }
+            }
+          },
+          {
+            "kind": "OpenAI",
+            "skuName": "S0",
+            "model": {
+              "format": "OpenAI",
+              "name": "gpt-4o",
+              "version": "2024-05-13",
+              "maxCapacity": 50,
+              "capabilities": {
+                "fineTune": "false",
+                "inference": "true",
+                "scaleType": "Manual,Provisioned",
+                "completion": "true",
+                "chat": "true",
+                "vision": "true"
+              },
+              "deprecation": {
+                "inference": "2025-09-15T00:00:00Z",
+                "deprecationStatus": "Tentative"
+              },
+              "replacementConfig": {
+                "targetModelName": "gpt-4.1",
+                "targetModelVersion": "2025-04-14",
+                "autoUpgradeStartDate": "2025-03-26T07:00:00Z",
+                "upgradeOnExpiryLeadTimeDays": 7
+              },
+              "modelCatalogAssetId": "azureml://registries/azure-openai/models/gpt-4o/versions/2024-05-13",
+              "lifecycleStatus": "Deprecating",
+              "systemData": {
+                "createdBy": "Microsoft",
+                "createdAt": "2024-05-13T00:00:00Z",
+                "lastModifiedBy": "Microsoft",
+                "lastModifiedAt": "2024-12-15T00:00:00Z"
+              },
+              "skus": [
+                {
+                  "name": "provisioned",
+                  "usageName": "OpenAI.Provisioned.GPT4o",
+                  "capacity": {
+                    "minimum": 50,
+                    "maximum": 2000,
+                    "step": 50,
+                    "default": 100
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": "AIServices",
+            "skuName": "S0",
+            "model": {
+              "format": "Meta",
+              "name": "Llama-3.2-90B-Vision-Instruct",
+              "version": "2",
+              "isDefaultVersion": false,
+              "skus": [
+                {
+                  "name": "GlobalStandard",
+                  "usageName": "AIServices.GlobalStandard.MaaS",
+                  "capacity": {
+                    "maximum": 1,
+                    "default": 1
+                  }
+                }
+              ],
+              "maxCapacity": 3,
+              "capabilities": {
+                "chatCompletion": "true"
+              },
+              "deprecation": {
+                "inference": "2099-12-31T00:00:00Z"
+              },
+              "lifecycleStatus": "Stable",
+              "modelCatalogAssetId": "azureml://registries/azureml-meta/models/Llama-3.2-90B-Vision-Instruct/versions/2",
+              "systemData": {
+                "createdBy": "Microsoft",
+                "createdByType": "Application",
+                "createdAt": "2024-10-01T00:00:00Z",
+                "lastModifiedBy": "MaaSModelConverter",
+                "lastModifiedByType": "Application",
+                "lastModifiedAt": "2025-04-16T04:45:33.9367873Z"
+              }
+            }
+          },
+          {
+            "kind": "OpenAI",
+            "skuName": "S0",
+            "model": {
+              "format": "OpenAI",
+              "name": "gpt-4o",
+              "version": "2024-08-06",
+              "maxCapacity": 50,
+              "capabilities": {
+                "fineTune": "false",
+                "inference": "true",
+                "scaleType": "Manual,Standard,Provisioned",
+                "completion": "true",
+                "chat": "true",
+                "vision": "true",
+                "functionCalling": "true"
+              },
+              "finetuneCapabilities": {
+                "fineTune": "true",
+                "inference": "true",
+                "scaleType": "Manual",
+                "completion": "true",
+                "chat": "true"
+              },
+              "modelCatalogAssetId": "azureml://registries/azure-openai/models/gpt-4o/versions/2024-08-06",
+              "lifecycleStatus": "GenerallyAvailable",
+              "systemData": {
+                "createdBy": "Microsoft",
+                "createdAt": "2024-08-06T00:00:00Z",
+                "lastModifiedBy": "Microsoft",
+                "lastModifiedAt": "2024-11-01T00:00:00Z"
+              },
+              "skus": [
+                {
+                  "name": "Standard",
+                  "usageName": "OpenAI.Standard.GPT4o",
+                  "capacity": {
+                    "minimum": 1,
+                    "maximum": 100,
+                    "step": 1,
+                    "default": 10
+                  }
+                },
+                {
+                  "name": "provisioned",
+                  "usageName": "OpenAI.Provisioned.GPT4o",
+                  "capacity": {
+                    "minimum": 50,
+                    "maximum": 2000,
+                    "step": 50,
+                    "default": 100
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
