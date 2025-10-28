@@ -5,6 +5,8 @@ import "./ExportPipeline.models.tsp";
 import "./ImportPipeline.models.tsp";
 import "./models.tsp";
 
+using Versioning;
+
 namespace Microsoft.ContainerRegistry;
 
 /**

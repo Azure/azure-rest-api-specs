@@ -3,6 +3,8 @@ import "@azure-tools/typespec-azure-core";
 import "./Archive.tsp";
 import "./models.tsp";
 
+using Versioning;
+
 namespace Microsoft.ContainerRegistry;
 
 /**

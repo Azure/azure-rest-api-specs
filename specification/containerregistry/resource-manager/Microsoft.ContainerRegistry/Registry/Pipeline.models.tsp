@@ -6,6 +6,8 @@ import "@typespec/versioning";
 import "./models.tsp";
 import "./Registry.tsp";
 
+using Versioning;
+
 namespace Microsoft.ContainerRegistry;
 
 /**
