@@ -1,7 +1,7 @@
 # IoTOperationsMQ
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for IoTOperationsMQ.
+> This is the AutoRest configuration file for alicesprings.
 
 ## Configuration
 
