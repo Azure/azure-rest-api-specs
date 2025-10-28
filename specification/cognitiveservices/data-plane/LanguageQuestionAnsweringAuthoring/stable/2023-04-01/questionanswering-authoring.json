@@ -296,66 +296,10 @@
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
           },
           {
-            "name": "format",
-            "in": "query",
-            "description": "Knowledge base Import or Export format.",
-            "required": false,
-            "type": "string",
-            "default": "json",
-            "enum": [
-              "json",
-              "tsv",
-              "excel"
-            ],
-            "x-ms-enum": {
-              "name": "format",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "json",
-                  "value": "json",
-                  "description": "Export or Import QnA assets in JSON format."
-                },
-                {
-                  "name": "tsv",
-                  "value": "tsv",
-                  "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
-                },
-                {
-                  "name": "excel",
-                  "value": "excel",
-                  "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
-                }
-              ]
-            },
-            "x-ms-client-name": "fileFormat"
+            "$ref": "#/parameters/ExportOptions.format"
           },
           {
-            "name": "assetKind",
-            "in": "query",
-            "description": "Kind of the asset of the project.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "qnas",
-              "synonyms"
-            ],
-            "x-ms-enum": {
-              "name": "AssestKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "qnas",
-                  "value": "qnas",
-                  "description": "Question and Answers."
-                },
-                {
-                  "name": "synonyms",
-                  "value": "synonyms",
-                  "description": "Synonyms."
-                }
-              ]
-            }
+            "$ref": "#/parameters/ExportOptions.assetKind"
           }
         ],
         "responses": {
@@ -411,75 +355,13 @@
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
           },
           {
-            "name": "format",
-            "in": "query",
-            "description": "Knowledge base Import or Export format.",
-            "required": false,
-            "type": "string",
-            "default": "json",
-            "enum": [
-              "json",
-              "tsv",
-              "excel"
-            ],
-            "x-ms-enum": {
-              "name": "format",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "json",
-                  "value": "json",
-                  "description": "Export or Import QnA assets in JSON format."
-                },
-                {
-                  "name": "tsv",
-                  "value": "tsv",
-                  "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
-                },
-                {
-                  "name": "excel",
-                  "value": "excel",
-                  "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
-                }
-              ]
-            },
-            "x-ms-client-name": "fileFormat"
+            "$ref": "#/parameters/ImportOptions.format"
           },
           {
-            "name": "assetKind",
-            "in": "query",
-            "description": "Kind of the asset of the project.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "qnas",
-              "synonyms"
-            ],
-            "x-ms-enum": {
-              "name": "AssestKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "qnas",
-                  "value": "qnas",
-                  "description": "Question and Answers."
-                },
-                {
-                  "name": "synonyms",
-                  "value": "synonyms",
-                  "description": "Synonyms."
-                }
-              ]
-            }
+            "$ref": "#/parameters/ImportOptions.assetKind"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Project assets the needs to be imported.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ImportJobOptions"
-            }
+            "$ref": "#/parameters/ImportOptions.body"
           }
         ],
         "responses": {
@@ -3099,6 +2981,142 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "ExportOptions.assetKind": {
+      "name": "assetKind",
+      "in": "query",
+      "description": "Kind of the asset of the project.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "qnas",
+        "synonyms"
+      ],
+      "x-ms-enum": {
+        "name": "AssestKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "qnas",
+            "value": "qnas",
+            "description": "Question and Answers."
+          },
+          {
+            "name": "synonyms",
+            "value": "synonyms",
+            "description": "Synonyms."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ExportOptions.format": {
+      "name": "format",
+      "in": "query",
+      "description": "Knowledge base Import or Export format.",
+      "required": false,
+      "type": "string",
+      "default": "json",
+      "enum": [
+        "json",
+        "tsv",
+        "excel"
+      ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Export or Import QnA assets in JSON format."
+          },
+          {
+            "name": "tsv",
+            "value": "tsv",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
+          },
+          {
+            "name": "excel",
+            "value": "excel",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ImportOptions.assetKind": {
+      "name": "assetKind",
+      "in": "query",
+      "description": "Kind of the asset of the project.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "qnas",
+        "synonyms"
+      ],
+      "x-ms-enum": {
+        "name": "AssestKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "qnas",
+            "value": "qnas",
+            "description": "Question and Answers."
+          },
+          {
+            "name": "synonyms",
+            "value": "synonyms",
+            "description": "Synonyms."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ImportOptions.body": {
+      "name": "body",
+      "in": "body",
+      "description": "Project assets the needs to be imported.",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/ImportJobOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ImportOptions.format": {
+      "name": "format",
+      "in": "query",
+      "description": "Knowledge base Import or Export format.",
+      "required": false,
+      "type": "string",
+      "default": "json",
+      "enum": [
+        "json",
+        "tsv",
+        "excel"
+      ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Export or Import QnA assets in JSON format."
+          },
+          {
+            "name": "tsv",
+            "value": "tsv",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
+          },
+          {
+            "name": "excel",
+            "value": "excel",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }
