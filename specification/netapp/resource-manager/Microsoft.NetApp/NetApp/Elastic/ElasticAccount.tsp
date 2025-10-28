@@ -113,7 +113,8 @@ union ElasticKeyVaultStatus {
 @added(Versions.v2025_09_01_preview)
 model ElasticEncryptionIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
-  principalId?: Azure.Core.uuid;
+  @visibility(Lifecycle.Read)
+  principalId?: string;
 
   /** The ARM resource identifier of the user assigned identity used to authenticate with key vault. Applicable if identity.type has 'UserAssigned'. It should match key of identity.userAssignedIdentities. */
   userAssignedIdentity?: Azure.Core.armResourceIdentifier<[

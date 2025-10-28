@@ -13144,11 +13144,6 @@
         }
       }
     },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
@@ -15766,8 +15761,9 @@
       "description": "Identity used to authenticate with key vault.",
       "properties": {
         "principalId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The principal ID (object ID) of the identity used to authenticate with key vault. Read-only."
+          "type": "string",
+          "description": "The principal ID (object ID) of the identity used to authenticate with key vault. Read-only.",
+          "readOnly": true
         },
         "userAssignedIdentity": {
           "type": "string",
