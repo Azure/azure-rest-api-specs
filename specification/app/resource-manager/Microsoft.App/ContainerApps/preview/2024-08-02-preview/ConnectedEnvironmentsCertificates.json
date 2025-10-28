@@ -1,0 +1,315 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-08-02-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/certificates": {
+      "get": {
+        "tags": [
+          "ConnectedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Get the Certificates in a given connected environment.",
+        "operationId": "ConnectedEnvironmentsCertificates_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Connected Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CertificateCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Certificates by Connected Environment": {
+            "$ref": "./examples/ConnectedEnvironmentsCertificates_ListByConnectedEnvironment.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/certificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "ConnectedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Get the specified Certificate.",
+        "operationId": "ConnectedEnvironmentsCertificates_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Connected Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the Certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Certificate": {
+            "$ref": "./examples/ConnectedEnvironmentsCertificate_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConnectedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Create or Update a Certificate.",
+        "operationId": "ConnectedEnvironmentsCertificates_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Connected Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the Certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateEnvelope",
+            "in": "body",
+            "description": "Certificate to be created or updated",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Certificate": {
+            "$ref": "./examples/ConnectedEnvironmentsCertificate_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConnectedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Deletes the specified Certificate.",
+        "operationId": "ConnectedEnvironmentsCertificates_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Connected Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the Certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed"
+          },
+          "204": {
+            "description": "Certificate does not exist"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Certificate": {
+            "$ref": "./examples/ConnectedEnvironmentsCertificate_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConnectedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Update properties of a certificate",
+        "description": "Patches a certificate. Currently only patching of tags is supported",
+        "operationId": "ConnectedEnvironmentsCertificates_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Connected Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the Certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateEnvelope",
+            "in": "body",
+            "required": true,
+            "description": "Properties of a certificate that need to be updated",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CertificatePatch"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Certificate updated successfully.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Certificate": {
+            "$ref": "./examples/ConnectedEnvironmentsCertificates_Patch.json"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

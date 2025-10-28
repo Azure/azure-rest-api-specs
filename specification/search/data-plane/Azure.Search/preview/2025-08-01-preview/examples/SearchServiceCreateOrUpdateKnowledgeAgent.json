@@ -1,0 +1,157 @@
+{
+  "operationId": "KnowledgeAgents_CreateOrUpdate",
+  "title": "SearchServiceCreateOrUpdateKnowledgeAgent",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "agentName": "agent-preview-test",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "If-Match": null,
+    "If-None-Match": null,
+    "Prefer": "return=representation",
+    "KnowledgeAgent": {
+      "name": "agent-preview-test",
+      "models": [
+        {
+          "azureOpenAIParameters": {
+            "resourceUri": "https://test-sample.openai.azure.com/",
+            "deploymentId": "myDeployment",
+            "apiKey": "api-key",
+            "modelName": "gpt-4o-mini"
+          },
+          "kind": "azureOpenAI"
+        }
+      ],
+      "knowledgeSources": [
+        {
+          "name": "ks-preview-test",
+          "includeReferences": true,
+          "includeReferenceSourceData": true,
+          "alwaysQuerySource": true,
+          "maxSubQueries": 5,
+          "rerankerThreshold": 2.1
+        }
+      ],
+      "outputConfiguration": {
+        "modality": "extractiveData",
+        "answerInstructions": "Provide a concise answer to the question.",
+        "attemptFastPath": false,
+        "includeActivity": true
+      },
+      "requestLimits": {
+        "maxRuntimeInSeconds": 60,
+        "maxOutputSize": 100000
+      },
+      "retrievalInstructions": "Instructions for retrieval for the agent.",
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      },
+      "description": "Description of the agent."
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "agent-preview-test",
+        "description": "Description of the agent.",
+        "retrievalInstructions": "Instructions for retrieval for the agent.",
+        "knowledgeSources": [
+          {
+            "name": "ks-preview-test",
+            "alwaysQuerySource": true,
+            "includeReferences": true,
+            "includeReferenceSourceData": true,
+            "maxSubQueries": 5,
+            "rerankerThreshold": 2.1
+          }
+        ],
+        "models": [
+          {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "myDeployment",
+              "apiKey": "api-key",
+              "modelName": "gpt-4o-mini"
+            }
+          }
+        ],
+        "outputConfiguration": {
+          "modality": "extractiveData",
+          "answerInstructions": "Provide a concise answer to the question.",
+          "attemptFastPath": false,
+          "includeActivity": true
+        },
+        "requestLimits": {
+          "maxRuntimeInSeconds": 60,
+          "maxOutputSize": 100000
+        },
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "agent-preview-test",
+        "description": "Description of the agent.",
+        "retrievalInstructions": "Instructions for retrieval for the agent.",
+        "knowledgeSources": [
+          {
+            "name": "ks-preview-test",
+            "alwaysQuerySource": true,
+            "includeReferences": true,
+            "includeReferenceSourceData": true,
+            "maxSubQueries": 5,
+            "rerankerThreshold": 2.1
+          }
+        ],
+        "models": [
+          {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "myDeployment",
+              "apiKey": "api-key",
+              "modelName": "gpt-4o-mini"
+            }
+          }
+        ],
+        "outputConfiguration": {
+          "modality": "extractiveData",
+          "answerInstructions": "Provide a concise answer to the question.",
+          "attemptFastPath": false,
+          "includeActivity": true
+        },
+        "requestLimits": {
+          "maxRuntimeInSeconds": 60,
+          "maxOutputSize": 100000
+        },
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        }
+      }
+    }
+  }
+}

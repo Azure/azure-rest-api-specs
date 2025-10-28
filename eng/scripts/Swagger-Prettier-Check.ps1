@@ -11,8 +11,8 @@ $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
 if ($CheckAll) {
-  LogInfo "npm exec --no -- prettier --check $repoPath/specification/**/*.json --log-level warn"
-  npm exec --no -- prettier --check $repoPath/specification/**/*.json --log-level warn
+  LogInfo "npm exec --no -- prettier --check $repoPath/specification/**/*.json --log-level debug"
+  npm exec --no -- prettier --check $repoPath/specification/**/*.json --log-level debug
   if ($LASTEXITCODE) {
     $pathsWithErrors += "$repoPath/specification/**/*.json"
   }
@@ -25,8 +25,8 @@ else
   }
   else {
     foreach ($file in $filesToCheck) {
-      LogInfo "npm exec --no -- prettier --check $repoPath/$file --log-level warn"
-      npm exec --no -- prettier --check $repoPath/$file --log-level warn
+      LogInfo "npm exec --no -- prettier --check $repoPath/$file --log-level debug"
+      npm exec --no -- prettier --check $repoPath/$file --log-level debug
       if ($LASTEXITCODE) {
         $pathsWithErrors += $file
       }

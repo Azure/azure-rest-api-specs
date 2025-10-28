@@ -17,7 +17,7 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
-@doc("Capability, to match in Solution Templates & Targets")
+@doc("Capability, to match in Solution Templates and Targets")
 model Capability {
   @doc("Name of Capability")
   name: string;
@@ -74,7 +74,13 @@ interface Contexts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Context>;
 
   @doc("update an Context Resource")
-  update is ArmResourcePatchAsync<Context, ContextProperties>;
+  update is ArmCustomPatchAsync<
+    Context,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Context,
+      ContextProperties
+    >
+  >;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Context>;

@@ -1,0 +1,36 @@
+{
+  "operationId": "Endpoints_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "endpoint": {
+      "properties": {
+        "description": "Example NFS Mount Endpoint Description",
+        "endpointType": "NfsMount",
+        "export": "examples-exportName",
+        "host": "0.0.0.0"
+      }
+    },
+    "endpointName": "examples-endpointName",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "title": "Endpoints_CreateOrUpdate_NfsMount",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-endpointName",
+        "type": "Microsoft.StorageMover/storageMovers/endpoints",
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName",
+        "properties": {
+          "description": "Example NFS Mount Endpoint Description",
+          "endpointType": "NfsMount",
+          "export": "examples-exportName",
+          "host": "0.0.0.0",
+          "nfsVersion": "NFSauto",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

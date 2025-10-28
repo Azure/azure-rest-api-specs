@@ -2,7 +2,7 @@
 
 import { dirname, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
-import { Swagger } from "../src/swagger.js";
+import { API_VERSION_LIFECYCLE_STAGES, Swagger } from "../src/swagger.js";
 
 import { fileURLToPath } from "url";
 import { ConsoleLogger } from "../src/logger.js";
@@ -69,6 +69,14 @@ describe("Swagger", () => {
         ],
       ]),
     );
+  });
+
+  it("computes versionKind from path", () => {
+    let swagger = new Swagger(resolve("foo/preview/2025-01-01-preview/foo.json"));
+    expect(swagger.versionKind).toEqual(API_VERSION_LIFECYCLE_STAGES.PREVIEW);
+
+    swagger = new Swagger(resolve("foo/stable/2025-01-01/foo.json"));
+    expect(swagger.versionKind).toEqual(API_VERSION_LIFECYCLE_STAGES.STABLE);
   });
 
   describe("getOperations", () => {

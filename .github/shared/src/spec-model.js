@@ -3,13 +3,16 @@
 import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { flatMapAsync, mapAsync } from "./array.js";
+import { readme } from "./changed-files.js";
 import { Readme } from "./readme.js";
+import { SpecModelError } from "./spec-model-error.js";
 
 /** @type {Map<string, SpecModel>} */
 const specModelCache = new Map();
 
 /**
  * @typedef {Object} ToJSONOptions
+ * @prop {boolean} [embedErrors]
  * @prop {boolean} [includeRefs]
  * @prop {boolean} [relativePaths]
  *
@@ -19,7 +22,7 @@ const specModelCache = new Map();
 
 export class SpecModel {
   /** @type {string} absolute path */
-  // @ts-ignore Ignore error that value may not be set in ctor (since we may returned cached value)
+  // @ts-expect-error Ignore error that value may not be set in ctor (since we may returned cached value)
   #folder;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -33,7 +36,9 @@ export class SpecModel {
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    */
-  constructor(folder, options) {
+  constructor(folder, options = {}) {
+    const { logger } = options;
+
     const resolvedFolder = resolve(folder);
 
     const cachedSpecModel = specModelCache.get(resolvedFolder);
@@ -42,7 +47,7 @@ export class SpecModel {
     }
 
     this.#folder = resolvedFolder;
-    this.#logger = options?.logger;
+    this.#logger = logger;
 
     specModelCache.set(resolvedFolder, this);
   }
@@ -160,7 +165,12 @@ export class SpecModel {
 
     // The swagger file supplied does not exist in the given specModel
     if (affectedSwaggers.size === 0) {
-      throw new Error(`No affected swaggers found in specModel for ${swaggerPath}`);
+      throw new SpecModelError(
+        `Swagger file ${swaggerPath} not found in specModel.\n` +
+          `It must be referenced in the "input-file" section of a tag in a readme.md file ` +
+          `or in a swagger JSON file using $ref.`,
+        { source: swaggerPath },
+      );
     }
 
     return affectedSwaggers;
@@ -200,23 +210,25 @@ export class SpecModel {
     const readmes = [...(await this.getReadmes()).values()];
     const tags = await flatMapAsync(readmes, async (r) => [...(await r.getTags()).values()]);
     const swaggers = tags.flatMap((t) => [...t.inputFiles.values()]);
-    return swaggers;
+    const refs = await flatMapAsync(swaggers, async (s) => [...(await s.getRefs()).values()]);
+    return [...swaggers, ...refs];
   }
 
   /**
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync(options) {
-    const readmes = await mapAsync(
-      [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
-      async (r) => await r.toJSONAsync(options),
-    );
-
-    return {
-      folder: this.#folder,
-      readmes,
-    };
+  async toJSONAsync(options = {}) {
+    return await embedError(async () => {
+      const readmes = await mapAsync(
+        [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
+        async (r) => await r.toJSONAsync(options),
+      );
+      return {
+        folder: this.#folder,
+        readmes,
+      };
+    }, options);
   }
 
   /**
@@ -227,13 +239,23 @@ export class SpecModel {
   }
 }
 
-// TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
-
 /**
- * @param {string} [file]
- * @returns {boolean}
+ * @template T
+ * @param {() => Promise<T>} fn
+ * @param {Object} [options]
+ * @param {boolean} [options.embedErrors]
+ * @returns {Promise<T | {error: string}>}
  */
-function readme(file) {
-  // Filename "readme.md" with any case is a valid README file
-  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
+export async function embedError(fn, options = {}) {
+  const { embedErrors } = options;
+
+  try {
+    return await fn();
+  } catch (error) {
+    if (embedErrors && error instanceof Error) {
+      return { error: error.message };
+    } else {
+      throw error;
+    }
+  }
 }
