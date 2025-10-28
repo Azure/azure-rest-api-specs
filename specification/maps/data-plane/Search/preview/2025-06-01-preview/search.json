@@ -327,14 +327,14 @@
           {
             "name": "addressLine",
             "in": "query",
-            "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\n**If query is given, should not use this parameter.**",
+            "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "countryRegion",
             "in": "query",
-            "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\n**If query is given, should not use this parameter.**",
+            "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
@@ -350,35 +350,35 @@
           {
             "name": "adminDistrict",
             "in": "query",
-            "description": "The country subdivision portion of an address, such as WA.\n\n**If query is given, should not use this parameter.**",
+            "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "adminDistrict2",
             "in": "query",
-            "description": "The county for the structured address, such as King.\n\n**If query is given, should not use this parameter.**",
+            "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "adminDistrict3",
             "in": "query",
-            "description": "The named area for the structured address.\n\n**If query is given, should not use this parameter.**",
+            "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "locality",
             "in": "query",
-            "description": "The locality portion of an address, such as Seattle.\n\n**If query is given, should not use this parameter.**",
+            "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "postalCode",
             "in": "query",
-            "description": "The postal code portion of an address.\n\n**If query is given, should not use this parameter.**",
+            "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
@@ -659,10 +659,34 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Coordinates"
+            "name": "coordinates",
+            "in": "query",
+            "description": "Required when `bbox` is not provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat\n\n**Note:** `coordinates` becomes a secondary signal if `bbox` is provided.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "collectionFormat": "csv",
+            "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "#/parameters/Bbox"
+            "name": "bbox",
+            "in": "query",
+            "description": "Required when `coordinates` is not provided. A rectangular area on the earth defined as a bounding box object. The sides of the rectangle are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2.\n\nMinimum size: approximately 0.00001 degrees (~0.01 meters).\n\n  Maximum size: up to the full global extent (-180,-90 to 180,90)",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4,
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/Top"
@@ -1488,11 +1512,11 @@
           "type": "string"
         },
         "addressLine": {
-          "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\n**If query is given, should not use this parameter.**",
+          "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "countryRegion": {
-          "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\n**If query is given, should not use this parameter.**",
+          "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "bbox": {
@@ -1521,23 +1545,23 @@
           "maxItems": 2
         },
         "adminDistrict": {
-          "description": "The country subdivision portion of an address, such as WA.\n\n**If query is given, should not use this parameter.**",
+          "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "adminDistrict2": {
-          "description": "The county for the structured address, such as King.\n\n**If query is given, should not use this parameter.**",
+          "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "adminDistrict3": {
-          "description": "The named area for the structured address.\n\n**If query is given, should not use this parameter.**",
+          "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "locality": {
-          "description": "The locality portion of an address, such as Seattle.\n\n**If query is given, should not use this parameter.**",
+          "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "postalCode": {
-          "description": "The postal code portion of an address.\n\n**If query is given, should not use this parameter.**",
+          "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         }
       }

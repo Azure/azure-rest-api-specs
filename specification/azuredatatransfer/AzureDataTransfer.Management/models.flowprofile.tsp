@@ -413,7 +413,7 @@ union Casing {
 /**
  * The flow profiles list result
  */
-@added(Versions.v2025_10_10_preview)
+@added(Versions.v2025_05_30_preview)
 model FlowProfilesListResult {
   /**
    * FlowProfileMetadata array.
