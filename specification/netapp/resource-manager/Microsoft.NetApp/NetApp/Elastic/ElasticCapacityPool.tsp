@@ -32,40 +32,40 @@ model ElasticCapacityPool is TrackedResource<ElasticCapacityPoolProperties> {
 
 /**
  * Elastic capacity pool properties
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 model ElasticCapacityPoolProperties {
   /**
    * Provisioned size of the pool (in bytes). For zoneRedundant service level pool, value must be in the range 1TiB to 16TiB or 1TiB to 128TiB for supported region. Values expressed in bytes as multiples of 1TiB till 16TiB and in multiples of 8TiB from 24TiB to 128TiB. Pool size can't be shrunk once it is created.
-  */
+   */
   @minValue(1099511627776)
   @maxValue(140737488355330)
   size: int64;
 
   /**
    * The service level of the elastic capacity pool
-  */
+   */
   serviceLevel: ElasticServiceLevel;
 
   /**
    * Azure lifecycle management.
-  */
+   */
   @visibility(Lifecycle.Read)
   provisioningState?: NetAppProvisioningState;
 
   /**
    * Encryption settings
-  */
+   */
   encryption?: ElasticEncryptionConfiguration;
 
   /**
    * Total throughput of the pool in MiB/s
-  */
+   */
   totalThroughputMibps?: float64;
 
   /**
    * The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/elasticVolumes, this is used by all the volumes within the pool
-  */
+   */
   subnetResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -74,19 +74,19 @@ model ElasticCapacityPoolProperties {
 
   /**
    * Indicates the current zone of the pool. This can be changed for zoneRedundant service level pool with the changeZone action
-  */
+   */
   @minLength(1)
   @maxLength(1)
   currentZone?: string;
 
   /**
    * Current availability status of the resource.
-  */
+   */
   availabilityStatus?: ElasticResourceAvailabilityStatus;
 
   /**
    * The Azure Resource URI for an Active Directory configuration. This is used by all the SMB volumes within the pool
-  */
+   */
   activeDirectoryConfigResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Netapp/activeDirectoryConfigs";
@@ -105,17 +105,17 @@ union ElasticServiceLevel {
 
 /**
  * CMK Encryption Configuration
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 model ElasticEncryptionConfiguration {
   /**
    * Pool Encryption Key Source.
-  */
+   */
   elasticPoolEncryptionKeySource: ElasticPoolEncryptionKeySource;
 
   /**
    * The resource ID of private endpoint for KeyVault. It must reside in the same VNET as the volume. Only applicable if encryptionKeySource = 'Microsoft.KeyVault'.
-  */
+   */
   keyVaultPrivateEndpointResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/privateEndpoints";
@@ -125,43 +125,43 @@ model ElasticEncryptionConfiguration {
 
 /**
  * Pool Encryption Key Source.
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 union ElasticPoolEncryptionKeySource {
   string,
 
   /**
    * Represents the encryption key source of Elastic pool is Microsoft.NetApp
-  */
+   */
   NetApp: "NetApp",
 
   /**
    * Represents the encryption key source of Elastic pool is Microsoft.KeyVault
-  */
+   */
   KeyVault: "KeyVault",
 }
 
 /**
  * Current availability status of the resource.
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 union ElasticResourceAvailabilityStatus {
   string,
 
   /**
    * The resource is currently Online and accessible
-  */
+   */
   Online: "Online",
 
   /**
    * The resource is currently Offline and not accessible
-  */
+   */
   Offline: "Offline",
 }
 
 /**
  * Availability status
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 union CheckElasticResourceAvailabilityStatus {
   string,
@@ -175,7 +175,7 @@ union CheckElasticResourceAvailabilityStatus {
 
 /**
  * Availability reason
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 union CheckElasticResourceAvailabilityReason {
   string,
@@ -198,12 +198,12 @@ model ChangeZoneRequest {
 
 /**
  * File path availability request content - availability is based on the elastic volume filePath within the given elastic capacityPool.
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 model CheckElasticVolumeFilePathAvailabilityRequest {
   /**
    * A unique file path for the volume. Used when creating mount targets. This needs to be unique within the elastic capacity pool.
-  */
+   */
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
   @minLength(1)
   @maxLength(80)
@@ -212,25 +212,24 @@ model CheckElasticVolumeFilePathAvailabilityRequest {
 
 /**
  * Information regarding availability of a resource.
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 model CheckElasticResourceAvailabilityResponse {
   /**
    * True indicates name is valid and available. False indicates the name is invalid, unavailable, or both.
-  */
+   */
   isAvailable?: CheckElasticResourceAvailabilityStatus;
 
   /**
    * Invalid indicates the name provided does not match Azure NetApp Files naming requirements. AlreadyExists indicates that the name is already in use and is therefore unavailable.
-  */
+   */
   reason?: CheckElasticResourceAvailabilityReason;
 
   /**
    * If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that resource name is already in use, and direct them to select a different name.
-  */
+   */
   message?: string;
 }
-
 
 @armResourceOperations
 interface ElasticCapacityPools {
@@ -246,11 +245,12 @@ interface ElasticCapacityPools {
   @added(Versions.v2025_09_01_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
-  ElasticCapacityPool,
-      Azure.ResourceManager.Foundations.ResourceUpdateModel<
-        ElasticCapacityPool,
-        ElasticCapacityPoolProperties>
->;
+    ElasticCapacityPool,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ElasticCapacityPool,
+      ElasticCapacityPoolProperties
+    >
+  >;
 
   /** Delete the specified NetApp elastic account */
   @added(Versions.v2025_09_01_preview)
@@ -262,7 +262,7 @@ interface ElasticCapacityPools {
 
   /**
    * Moves pool to another zone
-  */
+   */
   @added(Versions.v2025_09_01_preview)
   changeZone is ArmResourceActionAsync<
     ElasticCapacityPool,

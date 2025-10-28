@@ -137,11 +137,12 @@ interface ElasticAccounts {
   @added(Versions.v2025_09_01_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
-  ElasticAccount,
-      Azure.ResourceManager.Foundations.ResourceUpdateModel<
-        ElasticAccount,
-        ElasticAccountProperties>
->;
+    ElasticAccount,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ElasticAccount,
+      ElasticAccountProperties
+    >
+  >;
 
   /** Delete the specified NetApp elastic account */
   @added(Versions.v2025_09_01_preview)

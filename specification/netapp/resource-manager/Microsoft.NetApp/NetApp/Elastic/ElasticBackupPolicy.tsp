@@ -102,8 +102,8 @@ interface ElasticBackupPolicies {
   >;
 
   /**
-     * Delete the specified Elastic Policy Vault
-     */
+   * Delete the specified Elastic Policy Vault
+   */
   @added(Versions.v2025_09_01_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupPolicy>;
   /**

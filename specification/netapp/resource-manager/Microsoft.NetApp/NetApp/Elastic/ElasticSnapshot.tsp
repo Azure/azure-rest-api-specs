@@ -30,7 +30,7 @@ model ElasticSnapshot is ProxyResource<ElasticSnapshotProperties> {
 
 /**
  * Elastic Snapshot properties
-*/
+ */
 @added(Versions.v2025_09_01_preview)
 model ElasticSnapshotProperties {
   /** Azure lifecycle management. */
