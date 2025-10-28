@@ -505,7 +505,7 @@ op getAssetStatisticsCustomized(
    * Options for asset statistics including asset selection and statistical calculation parameters
    */
   options: GetAssetStatisticsOptions,
-): StacAssetStatistics;
+): Record<Record<BandStatistics>>;
 
 @@override(TilerAssetStatistics.getAll,
   getAssetStatisticsCustomized,

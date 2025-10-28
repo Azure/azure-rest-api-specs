@@ -645,10 +645,12 @@ def generate_examples():
                         example['responses'][status_code] = {
                             "body": response_body
                         }
-                    # Add request body as a parameter if it doesn't exist and we have one
-                    if request_body is not None and 'body' not in example.get('parameters', {}):
-                        if 'parameters' not in example:
-                            example['parameters'] = {}
+                    # Update parameters (to ensure proper typing, especially for arrays)
+                    if 'parameters' not in example:
+                        example['parameters'] = {}
+                    example['parameters'].update(parameters)
+                    # Add request body as a parameter if we have one
+                    if request_body is not None:
                         example['parameters']['body'] = request_body
                     print(f"Added status code {status_code} to existing example: {example_path}")
                 else:
@@ -671,11 +673,25 @@ def generate_examples():
                 # Ensure examples folder exists
                 os.makedirs(EXAMPLES_FOLDER, exist_ok=True)
                 
+                # Debug: check assets before remove_refs
+                if 'assets' in example.get('parameters', {}):
+                    print(f"DEBUG BEFORE remove_refs: assets = {repr(example['parameters']['assets'])}, type = {type(example['parameters']['assets'])}")
+                
                 # Remove $ref properties before writing
                 remove_refs_from_object(example)
                 
+                # Debug: check assets after remove_refs and before json.dump
+                if 'assets' in example.get('parameters', {}):
+                    print(f"DEBUG AFTER remove_refs: assets = {repr(example['parameters']['assets'])}, type = {type(example['parameters']['assets'])}")
+                
                 with open(example_path, 'w') as f:
                     json.dump(example, f, indent=2, ensure_ascii=False)
+                
+                # Debug: verify what was written
+                if 'assets' in example.get('parameters', {}):
+                    with open(example_path, 'r') as f:
+                        written = json.load(f)
+                        print(f"DEBUG WRITTEN TO FILE: assets = {repr(written.get('parameters', {}).get('assets'))}")
                 
                 print("Example updated successfully")
                 
