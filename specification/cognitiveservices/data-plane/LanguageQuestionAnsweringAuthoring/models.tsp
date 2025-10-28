@@ -347,7 +347,7 @@ model UpdateSourceFiles {
  * Represents the project.
  */
 @resource("authoring/query-knowledgebases/projects")
-model QuestionAnsweringProject {
+model QuestionAnsweringProjectMetadata {
   /**
    * Name of the project.
    */
@@ -496,7 +496,7 @@ model QuestionAnsweringAuthoringProjectDeletionJobState {
  * Job state represents the job metadata and any errors.
  */
 @resource("sources/jobs")
-@parentResource(QuestionAnsweringProject)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QuestionAnsweringAuthoringUpdateSourcesJobState {
   ...QuestionAnsweringAuthoringJobState;
 }
@@ -505,7 +505,7 @@ model QuestionAnsweringAuthoringUpdateSourcesJobState {
  * Job state represents the job metadata and any errors.
  */
 @resource("qnas/jobs")
-@parentResource(QuestionAnsweringProject)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QuestionAnsweringAuthoringUpdateQnasJobState {
   ...QuestionAnsweringAuthoringJobState;
 }
@@ -514,7 +514,7 @@ model QuestionAnsweringAuthoringUpdateQnasJobState {
  * Export job status, project metadata, and assets.
  */
 @resource("export/jobs")
-@parentResource(QuestionAnsweringProject)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QuestionAnsweringAuthoringExportJobState {
   ...QuestionAnsweringAuthoringJobState;
   ...ExportJobResultUrl;
@@ -524,7 +524,7 @@ model QuestionAnsweringAuthoringExportJobState {
  * Import job status, project metadata, and assets.
  */
 @resource("import/jobs")
-@parentResource(QuestionAnsweringProject)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QuestionAnsweringAuthoringImportJobState {
   ...QuestionAnsweringAuthoringJobState;
 }
@@ -582,7 +582,7 @@ model ImportJobOptions {
   /**
    * Parameters needed to create the project.
    */
-  metadata?: QuestionAnsweringProject;
+  metadata?: QuestionAnsweringProjectMetadata;
 
   /**
    * All assets for this project.
@@ -625,7 +625,7 @@ model SynonymAssets is Azure.Core.Page<WordAlterations>;
  * Collection of word alterations.
  */
 @resource("synonyms")
-@parentResource(QuestionAnsweringProject)
+@parentResource(QuestionAnsweringProjectMetadata)
 model WordAlterations {
   /**
    * Collection of word alterations.
@@ -648,7 +648,7 @@ model ImportQnaRecord {
  * QnA Record with last updated date-time.
  */
 @resource("qnas")
-@parentResource(QuestionAnsweringProject)
+@parentResource(QuestionAnsweringProjectMetadata)
 model RetrieveQnaRecord {
   ...QnaRecord;
   ...LastUpdatedDateTimeParameter;
@@ -808,7 +808,7 @@ model SourceDisplayNameParameter {
  * Project deployment details.
  */
 @resource("deployments")
-@parentResource(QuestionAnsweringProject)
+@parentResource(QuestionAnsweringProjectMetadata)
 model ProjectDeployment {
   /**
    * Name of the deployment.
@@ -827,7 +827,7 @@ model ProjectDeployment {
  * Custom source record with last updated date-time.
  */
 @resource("sources")
-@parentResource(QuestionAnsweringProject)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QnaSourceRecord {
   ...QnaSourceMetadata;
   ...LastUpdatedDateTimeParameter;

@@ -98,7 +98,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedQuestionAnsweringProject"
+              "$ref": "#/definitions/PagedQuestionAnsweringProjectMetadata"
             }
           },
           "default": {
@@ -146,7 +146,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/QuestionAnsweringProject"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
             }
           },
           "default": {
@@ -190,7 +190,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QuestionAnsweringProjectCreateOrUpdate"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadataCreateOrUpdate"
             }
           }
         ],
@@ -198,13 +198,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/QuestionAnsweringProject"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/QuestionAnsweringProject"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
             }
           },
           "default": {
@@ -327,8 +327,7 @@
                   "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
                 }
               ]
-            },
-            "x-ms-client-name": "fileFormat"
+            }
           },
           {
             "name": "assetKind",
@@ -442,8 +441,7 @@
                   "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
                 }
               ]
-            },
-            "x-ms-client-name": "fileFormat"
+            }
           },
           {
             "name": "assetKind",
@@ -1896,7 +1894,7 @@
       "description": "Project assets that need to be imported.",
       "properties": {
         "metadata": {
-          "$ref": "#/definitions/QuestionAnsweringProject",
+          "$ref": "#/definitions/QuestionAnsweringProjectMetadata",
           "description": "Parameters needed to create the project."
         },
         "assets": {
@@ -2162,15 +2160,15 @@
         "value"
       ]
     },
-    "PagedQuestionAnsweringProject": {
+    "PagedQuestionAnsweringProjectMetadata": {
       "type": "object",
-      "description": "Paged collection of QuestionAnsweringProject items",
+      "description": "Paged collection of QuestionAnsweringProjectMetadata items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The QuestionAnsweringProject items on this page",
+          "description": "The QuestionAnsweringProjectMetadata items on this page",
           "items": {
-            "$ref": "#/definitions/QuestionAnsweringProject"
+            "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
           }
         },
         "nextLink": {
@@ -2772,7 +2770,7 @@
         "status"
       ]
     },
-    "QuestionAnsweringProject": {
+    "QuestionAnsweringProjectMetadata": {
       "type": "object",
       "description": "Represents the project.",
       "properties": {
@@ -2826,7 +2824,7 @@
         "projectName"
       ]
     },
-    "QuestionAnsweringProjectCreateOrUpdate": {
+    "QuestionAnsweringProjectMetadataCreateOrUpdate": {
       "type": "object",
       "description": "Represents the project.",
       "properties": {

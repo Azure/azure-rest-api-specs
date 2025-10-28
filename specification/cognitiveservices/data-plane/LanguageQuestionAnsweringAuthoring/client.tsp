@@ -72,3 +72,5 @@ interface QuestionAnsweringAuthoringClientOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"
   addFeedback is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.addFeedback;
 }
+
+@@clientName(QuestionAnsweringProjectMetadata, "QuestionAnsweringProject");
