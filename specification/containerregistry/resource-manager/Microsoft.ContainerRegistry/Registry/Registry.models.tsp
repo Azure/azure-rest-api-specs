@@ -206,7 +206,9 @@ enum PasswordName {
 
 /** The resource type for Container Registry. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" ""
-const ContainerRegistryResourceType = `Microsoft.ContainerRegistry/registries`;
+enum ContainerRegistryResourceType {
+  `Microsoft.ContainerRegistry/registries`,
+}
 
 /**
  * A request to check whether a container registry name is available.
