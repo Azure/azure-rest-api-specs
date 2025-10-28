@@ -1,7 +1,4 @@
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "./PrivateLinkResource.tsp";
-import "./models.tsp";
+using Azure.ResourceManager;
 
 namespace Microsoft.ContainerRegistry;
 
