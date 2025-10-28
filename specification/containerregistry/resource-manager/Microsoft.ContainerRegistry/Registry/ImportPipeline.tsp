@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./Registry.tsp";
+import "./ExportPipeline"
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -30,13 +31,13 @@ model ImportPipeline
   /**
    * The location of the import pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /**
    * The identity of the import pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityProperties;
 }
 
@@ -56,7 +57,7 @@ interface ImportPipelines {
   /**
    * Deletes an import pipeline from a container registry.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ImportPipeline,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
