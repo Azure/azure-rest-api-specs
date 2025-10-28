@@ -1,0 +1,50 @@
+{
+  "operationId": "KnowledgeSources_List",
+  "title": "SearchServiceListKnowledgeSourcesAzureBlob",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myblobknowledgesource",
+            "description": "Azure Blob knowledge source for documents",
+            "kind": "azureBlob",
+            "azureBlobParameters": {
+              "containerName": "documents",
+              "identity": {
+                "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
+              },
+              "createdResources": {
+                "datasource": "myblobknowledgesource-datasource",
+                "index": "myblobknowledgesource-index",
+                "indexer": "myblobknowledgesource-indexer"
+              }
+            },
+            "@odata.etag": "0x8D9A1234567890D"
+          },
+          {
+            "name": "anotherblobsource",
+            "description": "Another Azure Blob knowledge source",
+            "kind": "azureBlob",
+            "azureBlobParameters": {
+              "containerName": "another-container",
+              "identity": {
+                "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
+              },
+              "createdResources": {
+                "datasource": "anotherblobsource-datasource",
+                "index": "anotherblobsource-index"
+              }
+            },
+            "@odata.etag": "0x8D9A1234567890E"
+          }
+        ]
+      }
+    }
+  }
+}

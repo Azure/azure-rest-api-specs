@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "endpoint": "https://myservice.search.windows.net",
+    "knowledgeBaseName": "my-knowledge-base",
+    "api-version": "2025-11-01-preview",
+    "retrievalRequest": {
+      "intents": [
+        {
+          "type": "semantic",
+          "search": "latest features in Azure AI Search"
+        },
+        {
+          "type": "semantic",
+          "search": "pricing information"
+        }
+      ],
+      "retrievalReasoningEffort": {
+        "kind": "minimal"
+      },
+      "outputMode": "extractiveData",
+      "includeActivity": true,
+      "knowledgeSourceParams": [
+        {
+          "knowledgeSourceName": "documentation-index",
+          "kind": "searchIndex",
+          "includeReferences": true,
+          "filterAddOn": "category eq 'documentation'"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "Azure AI Search includes vector search, semantic search, and hybrid search capabilities."
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "id": 1,
+            "type": "searchIndex",
+            "elapsedMs": 120,
+            "knowledgeSourceName": "documentation-index",
+            "queryTime": "2025-10-13T16:00:00Z",
+            "count": 8,
+            "searchIndexArguments": {
+              "search": "latest features in Azure AI Search",
+              "filter": "category eq 'documentation'"
+            }
+          },
+          {
+            "id": 2,
+            "type": "searchIndex",
+            "elapsedMs": 95,
+            "knowledgeSourceName": "documentation-index",
+            "queryTime": "2025-10-13T16:00:00Z",
+            "count": 3,
+            "searchIndexArguments": {
+              "search": "pricing information",
+              "filter": "category eq 'documentation'"
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "doc1",
+            "activitySource": 1,
+            "rerankerScore": 0.92,
+            "docKey": "456"
+          },
+          {
+            "type": "searchIndex",
+            "id": "doc2",
+            "activitySource": 2,
+            "rerankerScore": 0.88,
+            "docKey": "789"
+          }
+        ]
+      }
+    }
+  }
+}

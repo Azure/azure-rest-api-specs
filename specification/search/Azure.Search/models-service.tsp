@@ -3132,6 +3132,7 @@ model SearchIndexerDataSource {
   subType?: string;
 
   @doc("Credentials for the datasource.")
+  @flattenProperty
   credentials: DataSourceCredentials;
 
   @doc("The data container for the datasource.")
