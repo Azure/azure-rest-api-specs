@@ -48,7 +48,7 @@ interface Ingestions {
 
     @doc("Definition of the ingestion")
     @body
-    definition: IngestionDefinition,
+    body: IngestionDefinition,
   ): {
     @doc("Url of the created ingestion")
     @header
@@ -74,7 +74,7 @@ interface Ingestions {
 
     @doc("Ingestion properties to update")
     @body
-    definition: IngestionDefinition,
+    body: IngestionDefinition,
   ): {
     @statusCode statusCode: 200;
 
@@ -544,7 +544,7 @@ interface IngestionSources {
 
     @doc("Definition of the ingestion source")
     @body
-    ingestionSource: IngestionSource,
+    body: IngestionSource,
   ): {
     @doc("Url of the created ingestion source")
     @header
@@ -572,7 +572,7 @@ interface IngestionSources {
 
     @doc("Definition of the ingestion source")
     @body
-    ingestionSource: IngestionSource,
+    body: IngestionSource,
   ): {
     @doc("Url of the created ingestion source")
     @header
@@ -622,7 +622,7 @@ model IngestionSourceSummary {
   kind: IngestionSourceType;
 
   @doc("Created time in UTC format")
-  created: utcDateTime;
+  created?: utcDateTime;
 }
 
 @doc("Ingestion Source")
@@ -633,7 +633,7 @@ model IngestionSource {
 
   @doc("Created time in UTC format")
   @visibility(Lifecycle.Read)
-  created: utcDateTime;
+  created?: utcDateTime;
 
   @doc("Discriminator for the ingestion source")
   kind: IngestionSourceType;
@@ -770,6 +770,12 @@ interface IngestionOperations {
   } | ErrorResponse;
 }
 
+@doc("Error information wrapper")
+model ErrorInfo {
+  @doc("Error details")
+  error: Error;
+}
+
 @doc("Microsoft Planetary Computer Pro geo-catalog operation")
 model Operation {
   @doc("Operation id")
@@ -800,7 +806,7 @@ model Operation {
   additionalInformation?: Record<string>;
 
   @doc("Error information")
-  error?: Error;
+  error?: ErrorInfo;
 }
 
 @doc("Operation status")
@@ -892,6 +898,7 @@ interface StacCollections {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
   @doc("Create a new collection in the GeoCatalog instance")
   @summary("Create Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
@@ -954,34 +961,19 @@ interface StacCollections {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
   @doc("Create or replace a collection in the GeoCatalog instance")
   @summary("Create or update Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac/collections")
   @put
-  @pollingOperation(IngestionOperations.get)
   createOrReplace(
     ...CollectionParameters,
 
     @doc("Request collection body")
     @body
     body: StacCollection,
-  ): {
-    @pollingLocation
-    @doc("Url used to monitor the background operation")
-    @header
-    location: url;
-
-    @doc("Url used to monitor the background operation")
-    @header("operation-location")
-    operationLocation: url;
-
-    @statusCode statusCode: 200;
-
-    @doc("Operation")
-    @body
-    _: Operation;
-  } | ErrorResponse;
+  ): StacCollection;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Delete a collection in the GeoCatalog instance")

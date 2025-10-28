@@ -15,6 +15,7 @@ interface StacCollectionAssets {
    */
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
   @summary("Create Collection Asset")
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/assets")
@@ -53,6 +54,7 @@ interface StacCollectionAssets {
    */
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
   @summary("Update Collection Asset")
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/assets/{assetId}")

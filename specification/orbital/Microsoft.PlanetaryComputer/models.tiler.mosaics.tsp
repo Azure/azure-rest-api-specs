@@ -319,3 +319,33 @@ model MosaicSearchQueryParameters {
   @query("skipcovered")
   skipCovered?: boolean;
 }
+
+/**
+ * Asset information for the specified point
+ */
+model StacItemPointAsset {
+  /**
+   * STAC item ID
+   */
+  id: string;
+
+  /**
+   * Bounding box coordinates for the feature
+   */
+  @encodedName("application/json", "bbox")
+  boundingBox: float32[];
+
+  /**
+   * Asset information for the specified point
+   */
+  assets: Record<StacAsset>;
+
+  /**
+   * Collection ID
+   */
+  @minLength(1)
+  @maxLength(500)
+  @pattern(".*")
+  @encodedName("application/json", "collection")
+  collectionId: string;
+}

@@ -332,7 +332,7 @@ model StacCatalogCollections {
   /**
    * Array of STAC collections available in the catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
   collections: StacCollection[];
 }
 
@@ -342,8 +342,10 @@ model StacCatalogCollections {
  *
  * Represents a STAC collection.
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
 @resource("collections")
 model StacCollection {
+  ...Record<unknown>;
   ...StacMicrosoftProperties;
   ...StacExtensionsList;
 
@@ -390,6 +392,14 @@ model StacCollection {
    * Assets
    */
   assets?: Record<StacAsset>;
+
+  /**
+   * Item Assets
+   *
+   * See the [Item Assets Definition Extension Specification](https://github.com/stac-extensions/item-assets)
+   */
+  @encodedName("application/json", "item_assets")
+  itemAssets?: Record<StacItemAsset>;
 
   /**
    * License identifier for the collection data.
@@ -452,6 +462,44 @@ model StacAsset {
    * Media type of the asset.
    */
   type?: string;
+
+  /**
+   * Roles of the asset within the item.
+   */
+  roles?: string[];
+}
+
+/**
+ *
+ * https://github.com/stac-extensions/item-assets
+ *
+ * Represents a STAC item asset, which describes the assets available under any item in the collection.
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+model StacItemAsset {
+  ...Record<unknown>;
+  ...StacCommonMetadata;
+
+  /**
+   * Human-readable title for the asset.
+   */
+  title: string;
+
+  /**
+   * Detailed description of the asset.
+   */
+  description?: string;
+
+  /**
+   * URL to the asset file.
+   */
+  @minLength(1)
+  href?: string;
+
+  /**
+   * Media type of the asset.
+   */
+  type: string;
 
   /**
    * Roles of the asset within the item.

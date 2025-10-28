@@ -432,12 +432,11 @@ model AssetQueryParameters {
   expression?: string;
 
   /**
-   * Per asset band indexes (coma separated indexes)
+   * Per asset band indexes (coma separated indexes, e.g. "image|1,2,3" means use the bands 1, 2, and 3 from the asset named "image")
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query("asset_bidx")
-  @query(#{ explode: true })
-  assetBandIndices?: string[];
+  assetBandIndices?: string;
 
   /**
    * Asset as Band

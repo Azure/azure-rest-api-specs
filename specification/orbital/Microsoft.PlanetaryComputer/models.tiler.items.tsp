@@ -194,22 +194,6 @@ model TilerCoreModelsResponsesPoint {
 }
 
 /**
- * Return dataset's basic info or the list of available assets.
- */
-model StacItemAssetDetails {
-  /**
-   * status code for info operation response
-   */
-  @statusCode statusCode: 200;
-
-  /**
-   * body for info operation response
-   */
-  @summary("Response Info Api Collections  Collection Id  Items  Item Id  Info Get")
-  data: TilerInfo;
-}
-
-/**
  * Dataset Info.
  */
 @summary("TilerInfo")
@@ -252,71 +236,68 @@ model TilerInfo {
   /**
    * Color interpretation
    */
-  @summary("Colorinterp")
-  colorinterp?: string[];
+  @encodedName("application/json", "colorinterp")
+  colorInterpretation?: string[];
 
   /**
    * Driver
    */
-  @summary("Driver")
   driver?: string;
 
   /**
    * Count
    */
-  @summary("Count")
   count?: int32;
 
   /**
    * Width
    */
-  @summary("Width")
   width?: int32;
 
   /**
    * Height
    */
-  @summary("Height")
   height?: int32;
 
   /**
    * Overviews
    */
-  @summary("Overviews")
-  overviews?: string[];
+  overviews?: int32[];
 
   /**
    * Scales
    */
-  @summary("Scales")
   scales?: int32[];
 
   /**
    * Offsets
    */
-  @summary("Offsets")
   offsets?: int32[];
 
   /**
    * Colormap
    */
-  @summary("Colormap")
   colormap?: Record<string[]>;
 
   /**
    * Minzoom
    */
-  @summary("Minzoom")
   @encodedName("application/json", "minzoom")
   minZoom?: int32;
 
   /**
    * Maxzoom
    */
-  @summary("Maxzoom")
   @encodedName("application/json", "maxzoom")
   maxZoom?: int32;
+
+  /**
+   * Coordinate Reference System
+   */
+  @encodedName("application/json", "crs")
+  coordinateReferenceSystem?: string;
 }
+
 /**
  * Union type for band metadata elements
  */
@@ -373,23 +354,6 @@ model AvailableAssets {
   @bodyRoot
   @summary("Response Available Assets Api Collections  Collection Id  Items  Item Id  Assets Get")
   body: string[];
-}
-
-/**
- * Return dataset's statistics.
- */
-model StacAssetStatistics {
-  /**
-   * Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get
-   */
-  @statusCode
-  statusCode: 200;
-
-  /**
-   * Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get
-   */
-  @summary("Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get")
-  data: Record<BandStatistics>;
 }
 
 /**
@@ -512,50 +476,32 @@ model WmtsCapabilities {
 }
 
 /**
+ * Properties for STAC Item statistics GeoJSON Feature
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+model StacItemStatisticsGeoJsonProperties {
+  ...Record<unknown>;
+
+  /**
+   * Statistical information for each band in the asset
+   */
+  statistics: Record<BandStatistics>;
+}
+
+/**
  * STAC Item representing a spatiotemporal asset with statistical information
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
 model StacItemStatisticsGeoJson {
-  ...Feature;
-  ...StacMicrosoftProperties;
+  ...FeatureBase;
 
   /**
-   * Unique identifier for the feature
+   * GeoJSON type identifier for Feature
    */
-  id: string;
+  type: FeatureType;
 
   /**
-   * Bounding box coordinates for the feature
+   * Feature properties
    */
-  @encodedName("application/json", "bbox")
-  boundingBox: float32[];
-
-  /**
-   * Stac Version
-   */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
-
-  /**
-   * ID of the STAC collection this item belongs to
-   */
-  collection?: string;
-
-  /**
-   * MSFT Timestamp
-   */
-  @encodedName("application/json", "_msft:ts")
-  timestamp?: string;
-
-  /**
-   * MSFT ETag
-   */
-  @encodedName("application/json", "_msft:etag")
-  eTag?: string;
-
-  /**
-   * List of STAC extension URLs used by this item
-   */
-  @encodedName("application/json", "stac_extensions")
-  stacExtensions?: url[];
+  properties?: StacItemStatisticsGeoJsonProperties;
 }

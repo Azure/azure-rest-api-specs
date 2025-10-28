@@ -550,6 +550,6 @@ interface MosaicsAssetsForPoints {
       @query("coord-crs")
       coordinateReferenceSystem?: string;
     },
-    StacAsset[]
+    StacItemPointAsset[]
   >;
 }

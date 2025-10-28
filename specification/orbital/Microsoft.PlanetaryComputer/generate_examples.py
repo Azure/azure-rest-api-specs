@@ -7,6 +7,14 @@ import glob
 import copy
 from urllib.parse import urlparse, parse_qs
 
+try:
+    import jsonref
+    HAS_JSONREF = True
+except ImportError:
+    HAS_JSONREF = False
+    print("Warning: jsonref module not available. Install with: pip install jsonref")
+    print("$ref resolution will be skipped, which may cause parameter parsing issues.\n")
+
 OPENAPI_JSON = "specification/orbital/data-plane/Microsoft.PlanetaryComputer/preview/2025-04-30-preview/openapi.json"
 EXAMPLES_FOLDER = "specification/orbital/Microsoft.PlanetaryComputer/examples/2025-04-30-preview/"
 RECORDINGS = "specification/orbital/Microsoft.PlanetaryComputer/recordings/"
@@ -14,7 +22,13 @@ RECORDINGS = "specification/orbital/Microsoft.PlanetaryComputer/recordings/"
 def load_openapi_spec():
     """Load the OpenAPI 2.0 spec and make a list of PATH, VERB, operationId"""
     with open(OPENAPI_JSON, 'r') as f:
-        spec = json.load(f)
+        if HAS_JSONREF:
+            # Load with $ref resolution using jsonref
+            base_uri = f'file:///{os.path.abspath(OPENAPI_JSON).replace(os.sep, "/")}'
+            spec_dict = json.load(f)
+            spec = jsonref.JsonRef.replace_refs(spec_dict, base_uri=base_uri, jsonschema=True)
+        else:
+            spec = json.load(f)
     
     operations = []
     for path, path_item in spec.get('paths', {}).items():
@@ -48,19 +62,180 @@ def remove_refs_from_object(obj):
 
 def parse_path_template(openapi_path, request_uri):
     """Match OpenAPI path template with actual request URI"""
-    # Convert OpenAPI path to regex
-    # Replace {param} with named groups
-    regex_path = re.sub(r'\{([^}]+)\}', r'(?P<\1>[^/]+)', openapi_path)
-    regex_path = f'^{regex_path}$'
-    
     # Extract path from request URI
     parsed_uri = urlparse(request_uri)
     request_path = parsed_uri.path
     
-    match = re.match(regex_path, request_path)
-    if match:
-        return match.groupdict()
-    return None
+    # Split both paths into segments
+    template_segments = openapi_path.strip('/').split('/')
+    request_segments = request_path.strip('/').split('/')
+    
+    if len(template_segments) != len(request_segments):
+        return None
+    
+    params = {}
+    
+    for template_seg, request_seg in zip(template_segments, request_segments):
+        # Check if this segment contains parameters
+        if '{' in template_seg and '}' in template_seg:
+            # Handle complex templates like {width}x{height}.{format}
+            if template_seg.count('{') > 1:
+                # Multiple parameters in one segment
+                params.update(parse_complex_segment(template_seg, request_seg))
+            else:
+                # Single parameter in segment
+                param_match = re.search(r'\{([^}]+)\}', template_seg)
+                if param_match:
+                    param_name = param_match.group(1)
+                    params[param_name] = request_seg
+        else:
+            # Static segment - must match exactly
+            if template_seg != request_seg:
+                return None
+    
+    return params
+
+def parse_complex_segment(template_segment, request_segment):
+    """Parse segments with multiple parameters like {width}x{height}.{format}, {longitude},{latitude}, {z}/{x}/{y}@{scale}x.{format}"""
+    params = {}
+    
+    # Extract parameter names from template
+    param_names = re.findall(r'\{([^}]+)\}', template_segment)
+    
+    if not param_names:
+        return params
+    
+    # Handle specific known patterns first
+    
+    # Pattern: {minx},{miny},{maxx},{maxy} (without format)
+    if len(param_names) == 4 and template_segment.count(',') == 3 and '.' not in template_segment:
+        # Example: -84.393,33.6798,-84.367,33.7058
+        bbox_values = request_segment.split(',')
+        if len(bbox_values) == 4:
+            params[param_names[0]] = bbox_values[0]  # minx
+            params[param_names[1]] = bbox_values[1]  # miny
+            params[param_names[2]] = bbox_values[2]  # maxx
+            params[param_names[3]] = bbox_values[3]  # maxy
+            return params
+    
+    # Pattern: {minx},{miny},{maxx},{maxy}.{format}
+    if len(param_names) == 5 and template_segment.count(',') == 3 and '.' in template_segment:
+        # Example: -84.393,33.6798,-84.367,33.7058.png
+        # Find the last dot to separate format
+        last_dot_index = request_segment.rfind('.')
+        if last_dot_index > 0:
+            format_val = request_segment[last_dot_index + 1:]
+            bbox_part = request_segment[:last_dot_index]
+            
+            # Split on commas to get the 4 bbox values
+            bbox_values = bbox_part.split(',')
+            if len(bbox_values) == 4:
+                params[param_names[0]] = bbox_values[0]  # minx
+                params[param_names[1]] = bbox_values[1]  # miny
+                params[param_names[2]] = bbox_values[2]  # maxx
+                params[param_names[3]] = bbox_values[3]  # maxy
+                params[param_names[4]] = format_val      # format
+                return params
+    
+    # Pattern: {longitude},{latitude}
+    if len(param_names) == 2 and ',' in template_segment and template_segment.count('{') == 2:
+        parts = request_segment.split(',')
+        if len(parts) == 2:
+            params[param_names[0]] = parts[0].strip()
+            params[param_names[1]] = parts[1].strip()
+            return params
+    
+    # Pattern: {scale}x.{format} or {y}@{scale}x.{format}
+    if '@' in template_segment and 'x.' in template_segment:
+        # Example template: {y}@{scale}x.{format}
+        # Example request: 6564.0@1.0x.png
+        # Split on @ first
+        at_parts = request_segment.split('@')
+        if len(at_parts) == 2 and len(param_names) >= 2:
+            # First part before @ is for the first parameter (e.g., y)
+            if len(param_names) == 3:
+                params[param_names[0]] = at_parts[0]
+                # Second part has scale and format: "1.0x.png"
+                scale_format = at_parts[1]
+                # Find "x." to split scale and format
+                x_dot_index = scale_format.find('x.')
+                if x_dot_index > 0:
+                    params[param_names[1]] = scale_format[:x_dot_index]
+                    params[param_names[2]] = scale_format[x_dot_index + 2:]
+            elif len(param_names) == 2:
+                # Template is just {scale}x.{format}
+                scale_format = at_parts[1] if at_parts[1] else at_parts[0]
+                x_dot_index = scale_format.find('x.')
+                if x_dot_index > 0:
+                    params[param_names[0]] = scale_format[:x_dot_index]
+                    params[param_names[1]] = scale_format[x_dot_index + 2:]
+            return params
+    
+    # Pattern: {width}x{height}.{format}
+    if 'x' in template_segment and '.' in template_segment and len(param_names) == 3:
+        result = parse_width_height_format(template_segment, request_segment)
+        if result:
+            return result
+    
+    # Generic regex-based approach for other patterns
+    # Escape special regex characters in the template except for parameter placeholders
+    regex_template = re.escape(template_segment)
+    
+    # Find all parameter placeholders in the escaped template
+    param_matches = list(re.finditer(r'\\?\{([^}]+)\\?\}', regex_template))
+    
+    if not param_matches:
+        return params
+    
+    # Build regex by replacing escaped parameter placeholders with capture groups
+    current_regex = regex_template
+    param_names_ordered = []
+    
+    # Replace in reverse order to maintain positions
+    for match in reversed(param_matches):
+        param_name = match.group(1)
+        param_names_ordered.insert(0, param_name)
+        
+        # Replace the escaped placeholder with a named capture group
+        # Use a more permissive pattern that captures most characters except path separators
+        start, end = match.span()
+        current_regex = current_regex[:start] + f'(?P<{param_name}>[^/]+?)' + current_regex[end:]
+    
+    # Try to match the request segment against our regex
+    try:
+        segment_match = re.match(f'^{current_regex}$', request_segment)
+        if segment_match:
+            params.update(segment_match.groupdict())
+    except re.error:
+        # If regex fails, return empty params
+        pass
+    
+    return params
+
+def parse_width_height_format(template_segment, request_segment):
+    """Specific parser for {width}x{height}.{format} pattern"""
+    params = {}
+    
+    # Extract parameter names from template
+    param_names = re.findall(r'\{([^}]+)\}', template_segment)
+    
+    # For {width}x{height}.{format} pattern
+    if len(param_names) == 3 and 'x' in template_segment and '.' in template_segment:
+        # Match pattern like "256.0x256.0.png"
+        # Find the last dot (for format extension) and work backwards
+        last_dot_index = request_segment.rfind('.')
+        if last_dot_index > 0 and 'x' in request_segment[:last_dot_index]:
+            format_val = request_segment[last_dot_index + 1:]
+            width_height_part = request_segment[:last_dot_index]
+            
+            # Split on 'x' to get width and height
+            if 'x' in width_height_part:
+                width, height = width_height_part.split('x', 1)
+                params[param_names[0]] = width  # width
+                params[param_names[1]] = height  # height
+                params[param_names[2]] = format_val  # format
+    
+    return params
 
 def parse_multipart_form_data(request_body, content_type):
     """Parse multipart/form-data from request body"""
@@ -111,21 +286,90 @@ def parse_multipart_form_data(request_body, content_type):
     
     return form_data
 
+def convert_parameter_type(value, param_spec):
+    """Convert parameter value to the correct type based on OpenAPI spec"""
+    if not param_spec:
+        return value
+    
+    param_type = param_spec.get('type')
+    param_format = param_spec.get('format')
+    
+    # Handle array types
+    if param_type == 'array':
+        items_type = param_spec.get('items', {}).get('type')
+        if isinstance(value, str):
+            # Parse CSV format
+            values = [v.strip() for v in value.split(',')]
+        elif isinstance(value, list):
+            values = value
+        else:
+            return value
+        
+        # Convert each item to the correct type
+        if items_type == 'integer':
+            try:
+                return [int(v) for v in values]
+            except (ValueError, TypeError):
+                return values
+        elif items_type == 'number' or items_type == 'float':
+            try:
+                return [float(v) for v in values]
+            except (ValueError, TypeError):
+                return values
+        else:
+            return values
+    
+    # Handle integer types
+    elif param_type == 'integer':
+        try:
+            return int(value)
+        except (ValueError, TypeError):
+            return value
+    
+    # Handle number/float types
+    elif param_type == 'number' or param_format == 'float' or param_format == 'double':
+        try:
+            return float(value)
+        except (ValueError, TypeError):
+            return value
+    
+    # Handle boolean types
+    elif param_type == 'boolean':
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            return value.lower() in ('true', '1', 'yes')
+        return bool(value)
+    
+    # Default: return as-is (string or other)
+    return value
+
 def extract_parameters(operation, request_uri, path_params, request_body=None, content_type=None):
-    """Extract all query, path, and form parameters"""
+    """Extract all query, path, and form parameters with correct types"""
     parsed_uri = urlparse(request_uri)
     query_params = parse_qs(parsed_uri.query)
     
     # Flatten query params (remove list wrapping for single values)
     query_params = {k: v[0] if len(v) == 1 else v for k, v in query_params.items()}
     
+    # Build a lookup map of parameter specs by name
+    param_specs = {}
+    for param in operation.get('parameters', []):
+        param_name = param.get('name')
+        if param_name:
+            param_specs[param_name] = param
+    
     parameters = {}
     
-    # Add path parameters
-    parameters.update(path_params)
+    # Add path parameters with type conversion
+    for param_name, param_value in path_params.items():
+        param_spec = param_specs.get(param_name)
+        parameters[param_name] = convert_parameter_type(param_value, param_spec)
     
-    # Add query parameters
-    parameters.update(query_params)
+    # Add query parameters with type conversion
+    for param_name, param_value in query_params.items():
+        param_spec = param_specs.get(param_name)
+        parameters[param_name] = convert_parameter_type(param_value, param_spec)
     
     # Add form data parameters if present
     if request_body and content_type and 'multipart/form-data' in content_type:

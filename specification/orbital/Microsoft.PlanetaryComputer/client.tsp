@@ -231,8 +231,8 @@ interface Tiler {
   listStatistics is TilerStatistics.getAll;
 
   // Tile JSON
-  // getTileJson is TilerTileJsonOperations.get;
   getTileJson is TilerTileJsonTileMatrixSets.get;
+  // getTileJson is TilerTileJsonOperations.get;
 
   // Tiles
   getTile is TilerTileMatrixSets.getZxyScaleByFormat;
@@ -263,8 +263,8 @@ interface Tiler {
   getMosaicsTile is MosaicsTileMatrixSets.getZxyScaleByFormat;
 
   // Mosaic WMTS Capabilities
-  // getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
   getMosaicsWmtsCapabilities is MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml;
+  // getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
 }
 
 // === Shared Access Signature (SAS) ===

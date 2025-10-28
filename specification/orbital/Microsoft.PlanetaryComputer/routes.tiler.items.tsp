@@ -74,7 +74,7 @@ interface TilerInfoOperations {
       @query(#{ explode: true })
       assets?: string[];
     },
-    StacItemAssetDetails
+    Record<TilerInfo>
   >;
 }
 
@@ -162,7 +162,7 @@ interface TilerAssetStatistics {
       ...getAssetStatisticsCustomizedCommonSignatures;
       ...StatisticsQueryParameters;
     },
-    StacAssetStatistics
+    Record<Record<BandStatistics>>
   >;
 }
 
@@ -588,13 +588,13 @@ alias cropGeoJsonWithDimensionsCustomizedCommonSignatures = {
    * Width in pixels for the output image.
    */
   @path
-  width: float32;
+  width: int32;
 
   /**
    * Height in pixels for the output image.
    */
   @path
-  height: float32;
+  height: int32;
 
   /**
    * Output format for the tile or image (e.g., png, jpeg, webp)
@@ -674,13 +674,13 @@ alias getPartWithDimensionsCustomizedCommonSignatures = {
    * Width in pixels for the output image.
    */
   @path
-  width: float32;
+  width: int32;
 
   /**
    * Height in pixels for the output image.
    */
   @path
-  height: float32;
+  height: int32;
 
   /**
    * Output format for the tile or image (e.g., png, jpeg, webp)
