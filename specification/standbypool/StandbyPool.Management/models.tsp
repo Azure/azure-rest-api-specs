@@ -16,7 +16,7 @@ namespace Microsoft.StandbyPool;
 @doc("Specifies the dynamic sizing configuration.")
 model DynamicSizing {
   @doc("Indicates whether dynamic sizing is enabled for the standby pool.")
-  enabled: boolean;
+  enabled?: boolean;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
