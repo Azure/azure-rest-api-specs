@@ -6185,6 +6185,30 @@
         }
       }
     },
+    "AllowRDPShortPathWithPrivateLink": {
+      "type": "string",
+      "description": "Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "AllowRDPShortPathWithPrivateLink",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Blocks the use of RDPShortPath if the hostpool PublicNetworkAccess setting is configured to require private link."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Allows the use of RDPShortPath even if the hostpool PublicNetworkAccess is configured to require the use of private link."
+          }
+        ]
+      }
+    },
     "AppAttachPackage": {
       "type": "object",
       "description": "Schema for App Attach Package properties.",
@@ -7757,6 +7781,10 @@
         "relayUDP": {
           "$ref": "#/definitions/RelayUDP",
           "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections"
+        },
+        "allowRDPShortPathWithPrivateLink": {
+          "$ref": "#/definitions/AllowRDPShortPathWithPrivateLink",
+          "description": "Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes."
         }
       }
     },
@@ -7898,12 +7926,15 @@
         },
         "deploymentScope": {
           "$ref": "#/definitions/DeploymentScope",
-          "description": "DeploymentScope type for HostPool.",
-          "readOnly": true
+          "description": "DeploymentScope type for HostPool."
         },
         "oboTenantId": {
           "type": "string",
           "description": "Tenant that the resource is being requested on behalf of."
+        },
+        "allowRDPShortPathWithPrivateLink": {
+          "$ref": "#/definitions/AllowRDPShortPathWithPrivateLink",
+          "description": "Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes."
         }
       },
       "required": [
@@ -11029,6 +11060,14 @@
         "update": {
           "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties",
           "description": "Parameters for a hostpool update."
+        },
+        "provisioning": {
+          "$ref": "#/definitions/SessionHostProvisioningConfigurationPatchProperties",
+          "description": "Parameters that apply when session hosts are provisioned."
+        },
+        "failedSessionHostCleanupPolicy": {
+          "$ref": "#/definitions/FailedSessionHostCleanupPolicySHC",
+          "description": "The policy that should be applied when the Session Host provisioning operation fails."
         }
       }
     },
@@ -11430,6 +11469,26 @@
           "x-ms-identifiers": [
             "healthCheckName"
           ]
+        }
+      }
+    },
+    "SessionHostProvisioningConfigurationPatchProperties": {
+      "type": "object",
+      "description": "The configuration for session host provisioning operations.",
+      "properties": {
+        "setDrainMode": {
+          "type": "boolean",
+          "description": "Whether the session host should be set in drain mode following provisioning."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of session hosts to exist in the Host Pool.",
+          "minimum": 1
+        },
+        "canaryPolicy": {
+          "$ref": "#/definitions/CanaryPolicy",
+          "description": "Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation."
         }
       }
     },
