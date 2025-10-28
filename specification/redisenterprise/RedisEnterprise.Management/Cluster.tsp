@@ -112,7 +112,7 @@ interface Clusters {
   listByCluster is ArmResourceActionSync<
     Cluster,
     void,
-    ArmResponse<PrivateEndpointConnectionResourceListResult>
+    ArmResponse<PrivateLinkResourceListResult>
   >;
 }
 
