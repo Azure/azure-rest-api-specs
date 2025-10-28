@@ -14,6 +14,7 @@ Each `service` in given `organization` must [**version uniformly**][Azure Servic
 within a `organization` can have their own version lifecycle.
 
 A `organization` has a path of form:
+
 `specification/<organization>`
 
 
@@ -30,8 +31,6 @@ An Azure service is a set of operations that version uniformly (in perpetuity). 
 In specs repository, an ARM service has a path of form:
 
 `specification/<organization>/resource-manager/<RPNS>/<service>`
-
-where `<RPNS>` stands for ARM **Resource Provider (RP) namespace**.
 
 A data-plane service has a path of form:
 

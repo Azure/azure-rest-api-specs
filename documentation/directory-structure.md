@@ -234,7 +234,7 @@ The following patterns exist in the repository for historical reasons but are **
 
 ## Current migration efforts
 
-We are actively working to migrate the entire repository to align with the new directory structure guidelines. This comprehensive migration effort aims to eliminate inconsistencies between legacy patterns and the recommended structure.
+We are actively working to finish the entire repository migration to align with the new directory structure guidelines by March 2026. This comprehensive migration effort aims to eliminate inconsistencies between legacy patterns and the recommended structure.
 
 ### Migration objectives
 
@@ -246,15 +246,18 @@ We are actively working to migrate the entire repository to align with the new d
 
 ### Guidelines for service teams
 
-Refer to [Widget] as an example of the suggested folder structure and if any concerns, contact azversioning@service.microsoft.com for guidance.
+Refer to [Widget] as an example of the suggested folder structure and if any concerns,
 
 **For new services:**
 - Always use the recommended structure described in this document
-- Contact the Azure SDK team if you have questions about implementation
 
 **For existing services:**
-- Contact the Azure SDK team if you need to add new services or want to migrate existing ones
-- When folder migration PRs are merged, they may conflict with ongoing PRs. Follow the [Conflict Resolve Guide] to handle these conflicts
+- When folder migration PRs are merged, they may conflict with ongoing PRs. Follow the [Conflict Resolve Guide] to handle these conflicts.
+
+## Contact Us
+
+If you have any questions regarding folder structure and Azure Service Versioning Guideline, you can reach out by
+- Email to azversioning@service.microsoft.com
 
 
 > [!WARNING]
