@@ -15,6 +15,7 @@ namespace Microsoft.NetApp;
  * Information regarding Quota Item.
  */
 @renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItem")
+@clientName("NetAppSubscriptionQuotaItem", "csharp")
 @parentResource(SubscriptionLocationResource)
 model QuotaItem is Azure.ResourceManager.ProxyResource<QuotaItemProperties> {
   ...ResourceNameParameter<

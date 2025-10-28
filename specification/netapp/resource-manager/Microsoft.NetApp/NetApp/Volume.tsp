@@ -2028,6 +2028,7 @@ union EnableSubvolumes {
 /**
  * The status of the replication
  */
+@clientName("NetAppMirrorState", "csharp")
 union MirrorState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
