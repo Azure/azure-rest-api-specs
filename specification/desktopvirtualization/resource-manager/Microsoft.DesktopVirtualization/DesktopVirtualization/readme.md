@@ -57,6 +57,12 @@ suppressions:
     reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: desktopvirtualization.json
+    reason: Property name follows RDP specification and existing naming conventions in the service.
+    where:
+      - $.definitions.HostPoolProperties.properties.allowRDPShortPathWithPrivateLink
+      - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
 ```
 
 ### Tag: package-preview-2025-08-01-preview
