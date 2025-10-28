@@ -12,7 +12,7 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-datadog"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-datadog"
     namespace: "azure.mgmt.datadog"
     generate-test: true
     generate-sample: true
@@ -24,7 +24,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/datadog
-    package-dir: "arm-datadog"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-datadog"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
