@@ -1,18 +1,22 @@
 {
   "title": "Close a notification session",
   "operationId": "NotificationsSessions_CloseSession",
-  "description": "This example demonstrates closing an active notification session to stop receiving notifications.",
+  "description": "This example demonstrates closing a notification session and deleting all its metadata.",
   "parameters": {
     "api-version": "2025-08-01-preview",
     "location": "westus2",
     "notificationSessionId": "3c998dad-3936-4e9a-8c7e-ce6cde53ccea"
   },
   "responses": {
+    "204": {
+      "headers": {},
+      "description": "Notification session closed and deleted successfully"
+    },
     "200": {
       "headers": {},
       "body": {
         "status": "Closed",
-        "message": "Notification session '3c998dad-3936-4e9a-8c7e-ce6cde53ccea' has been successfully closed. No further notifications will be sent to this session."
+        "message": "Notification session '3c998dad-3936-4e9a-8c7e-ce6cde53ccea' has been successfully closed and all metadata deleted."
       }
     }
   }

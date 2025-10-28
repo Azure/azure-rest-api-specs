@@ -197,9 +197,9 @@ interface NotificationsSessions {
     @body body: GetSessionDetailsResponse;
   } | ErrorResponse;
 
-  /** Close the session. */
-  @post
-  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:closeSession")
+  /** Delete a notification session and all its metadata. */
+  @delete
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}")
   closeSession(
     @path
     @pattern("^[a-z0-9]+$")
@@ -211,6 +211,8 @@ interface NotificationsSessions {
 
     ...ApiVersionParameter,
   ): {
+    @statusCode _: 204;
+  } | {
     @statusCode _: 200;
     @body body: CloseSessionResponse;
   } | ErrorResponse;

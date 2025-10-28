@@ -160,10 +160,10 @@
         }
       }
     },
-    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}:closeSession": {
-      "post": {
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}": {
+      "delete": {
         "operationId": "NotificationsSessions_CloseSession",
-        "description": "Close the session.",
+        "description": "Delete a notification session and all its metadata.",
         "parameters": [
           {
             "name": "location",
@@ -189,6 +189,9 @@
             "schema": {
               "$ref": "#/definitions/CloseSessionResponse"
             }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
