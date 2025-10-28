@@ -16,17 +16,22 @@ namespace Microsoft.CognitiveServices;
  */
 @parentResource(Account)
 model CommitmentPlan
-  is Azure.ResourceManager.TrackedResource<CommitmentPlanProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CommitmentPlanProperties> {
   ...ResourceNameParameter<
     Resource = CommitmentPlan,
     KeyName = "commitmentPlanName",
     SegmentName = "commitmentPlans",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 
   /**
-   * The Kind of the resource.
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The kind (type) of cognitive service account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
@@ -52,6 +57,8 @@ interface CommitmentPlanOps
         @segment("accounts")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         accountName: string,
       },
       {
@@ -87,7 +94,10 @@ interface CommitmentPlans {
   /**
    * Gets the commitmentPlans associated with the Cognitive Services account.
    */
-  list is CommitmentPlanOps.List<CommitmentPlan>;
+  list is CommitmentPlanOps.List<
+    CommitmentPlan,
+    Response = CommitmentPlanListResult
+  >;
 }
 @armResourceOperations
 interface CommitmentPlanOperationGroupOps
@@ -96,6 +106,24 @@ interface CommitmentPlanOperationGroupOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /** The name of the commitmentPlan associated with the Cognitive Services Account */
+        @path
+        @segment("commitmentPlans")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        commitmentPlanName: string,
+      }
+    > {}
+
+@armResourceOperations
+interface CommitmentPlanOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
         ...Azure.ResourceManager.Legacy.Provider,
       },
       {
@@ -151,20 +179,26 @@ interface CommitmentPlanOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CommitmentPlans_ListPlansByResourceGroup")
-  listPlansByResourceGroup is CommitmentPlanOperationGroupOps.List<CommitmentPlan>;
+  listPlansByResourceGroup is CommitmentPlanOperationGroupOps.List<
+    CommitmentPlan,
+    Response = CommitmentPlanListResult
+  >;
 
   /**
    * Returns all the resources of a particular type belonging to a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CommitmentPlans_ListPlansBySubscription")
-  listPlansBySubscription is CommitmentPlanOperationGroupOps.ListBySubscription<CommitmentPlan>;
+  listPlansBySubscription is CommitmentPlanOperationOps.List<
+    CommitmentPlan,
+    Response = CommitmentPlanListResult
+  >;
 }
 
 @@doc(CommitmentPlan.name,
   "The name of the commitmentPlan associated with the Cognitive Services Account"
 );
-@@encodedName(CommitmentPlan.eTag, "application/json", "etag");
+@@encodedName(CommitmentPlan.etag, "application/json", "etag");
 @@doc(CommitmentPlan.properties,
   "Properties of Cognitive Services account commitment plan."
 );

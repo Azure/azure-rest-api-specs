@@ -1,46 +1,48 @@
 {
   "parameters": {
     "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "parameters": {
       "model": {
-        "format": "OpenAI",
         "name": "gpt-4",
+        "format": "OpenAI",
         "version": "0613"
       },
       "skuName": "ProvisionedManaged",
       "workloads": [
         {
-          "requestPerMinute": 10,
           "requestParameters": {
-            "avgPromptTokens": 30,
-            "avgGeneratedTokens": 50
-          }
+            "avgGeneratedTokens": 50,
+            "avgPromptTokens": 30
+          },
+          "requestPerMinute": 10
         },
         {
-          "requestPerMinute": 20,
           "requestParameters": {
-            "avgPromptTokens": 60,
-            "avgGeneratedTokens": 20
-          }
+            "avgGeneratedTokens": 20,
+            "avgPromptTokens": 60
+          },
+          "requestPerMinute": 20
         }
       ]
-    }
+    },
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
+        "estimatedCapacity": {
+          "deployableValue": 400,
+          "value": 346
+        },
         "model": {
-          "format": "OpenAI",
           "name": "gpt-4",
+          "format": "OpenAI",
           "version": "0613"
         },
-        "skuName": "ProvisionedManaged",
-        "estimatedCapacity": {
-          "value": 346,
-          "deployableValue": 400
-        }
+        "skuName": "ProvisionedManaged"
       }
     }
-  }
+  },
+  "operationId": "calculateModelCapacity",
+  "title": "Calculate Model Capacity"
 }

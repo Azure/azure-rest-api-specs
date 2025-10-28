@@ -1,51 +1,53 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "commitmentPlanName": "commitmentPlanName",
+    "api-version": "2025-10-01-preview",
     "commitmentPlan": {
       "properties": {
-        "hostingModel": "Web",
-        "planType": "Speech2Text",
         "autoRenew": true,
         "current": {
           "tier": "T1"
-        }
+        },
+        "hostingModel": "Web",
+        "planType": "Speech2Text"
       }
-    }
+    },
+    "commitmentPlanName": "commitmentPlanName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/commitmentPlans/commitmentPlanName",
         "name": "commitmentPlanName",
         "type": "Microsoft.CognitiveServices/accounts/commitmentPlans",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/commitmentPlans/commitmentPlanName",
         "properties": {
-          "hostingModel": "Web",
-          "planType": "Speech2Text",
           "autoRenew": true,
           "current": {
             "tier": "T1"
-          }
+          },
+          "hostingModel": "Web",
+          "planType": "Speech2Text"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/commitmentPlans/commitmentPlanName",
         "name": "commitmentPlanName",
         "type": "Microsoft.CognitiveServices/accounts/commitmentPlans",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/commitmentPlans/commitmentPlanName",
         "properties": {
-          "hostingModel": "Web",
-          "planType": "Speech2Text",
           "autoRenew": true,
           "current": {
             "tier": "T1"
-          }
+          },
+          "hostingModel": "Web",
+          "planType": "Speech2Text"
         }
       }
     }
-  }
+  },
+  "operationId": "CommitmentPlans_CreateOrUpdate",
+  "title": "PutCommitmentPlan"
 }

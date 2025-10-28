@@ -1,9 +1,9 @@
 {
   "parameters": {
+    "accountName": "accountName",
     "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resourceGroupName",
-    "accountName": "accountName"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -13,7 +13,6 @@
             "name": "raiIfcToolLabelName",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiIfcToolLabels/raiIfcToolLabelName",
             "properties": {
-              "toolConnectionName": "Web_Search",
               "accountScope": {
                 "labelValues": {
                   "confidentiality": "low"
@@ -21,22 +20,25 @@
               },
               "projectScopes": [
                 {
-                  "project": "hualiang-project",
                   "labelValues": {
                     "confidentiality": "low"
-                  }
+                  },
+                  "project": "hualiang-project"
                 },
                 {
-                  "project": "sahana-project",
                   "labelValues": {
                     "confidentiality": "low"
-                  }
+                  },
+                  "project": "sahana-project"
                 }
-              ]
+              ],
+              "toolConnectionName": "Web_Search"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "RaiToolLabels_List",
+  "title": "ListRaiToolLabels"
 }

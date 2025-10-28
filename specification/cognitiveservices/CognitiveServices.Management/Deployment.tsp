@@ -29,7 +29,11 @@ model Deployment is Azure.ResourceManager.ProxyResource<DeploymentProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: Sku;
 
-  ...Azure.ResourceManager.EntityTagProperty;
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -72,13 +76,14 @@ interface Deployments {
   /**
    * Gets the deployments associated with the Cognitive Services account.
    */
-  list is ArmResourceListByParent<Deployment>;
+  list is ArmResourceListByParent<Deployment, Response = DeploymentListResult>;
 
   /**
    * Lists the specified deployments skus associated with the Cognitive Services account.
    */
   @get
   @action("skus")
+  @list
   listSkus is ArmResourceActionSync<
     Deployment,
     void,
@@ -99,7 +104,7 @@ interface Deployments {
 @@doc(Deployment.name,
   "The name of the deployment associated with the Cognitive Services Account"
 );
-@@encodedName(Deployment.eTag, "application/json", "etag");
+@@encodedName(Deployment.etag, "application/json", "etag");
 @@doc(Deployment.properties,
   "Properties of Cognitive Services account deployment."
 );
@@ -107,3 +112,5 @@ interface Deployments {
   "The deployment properties."
 );
 @@doc(Deployments.update::parameters.properties, "The deployment properties.");
+@@summary(Deployments.pause, "Pause a deployment");
+@@summary(Deployments.resume, "Resume a deployment");

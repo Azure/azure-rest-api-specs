@@ -22,7 +22,12 @@ model RaiExternalSafetyProviderSchema
     SegmentName = "raiExternalSafetyProviders",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -80,7 +85,7 @@ interface RaiExternalSafetyProviderSchemas {
 @@doc(RaiExternalSafetyProviderSchema.name,
   "The name of the Rai External Safety Provider associated with the Cognitive Services Account"
 );
-@@encodedName(RaiExternalSafetyProviderSchema.eTag, "application/json", "etag");
+@@encodedName(RaiExternalSafetyProviderSchema.etag, "application/json", "etag");
 @@doc(RaiExternalSafetyProviderSchema.properties,
   "Properties of Cognitive Services Rai External Safety provider."
 );

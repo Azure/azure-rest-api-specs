@@ -22,7 +22,12 @@ model RaiPolicy is Azure.ResourceManager.ProxyResource<RaiPolicyProperties> {
     SegmentName = "raiPolicies",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -46,6 +51,8 @@ interface RaiPolicyOps
         @segment("accounts")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         accountName: string,
       },
       {
@@ -78,7 +85,7 @@ interface RaiPolicies {
   /**
    * Gets the content filters associated with the Azure OpenAI account.
    */
-  list is RaiPolicyOps.List<RaiPolicy>;
+  list is RaiPolicyOps.List<RaiPolicy, Response = RaiPolicyListResult>;
 }
 @armResourceOperations
 interface SubscriptionRaiPolicyOps
@@ -125,7 +132,7 @@ interface SubscriptionRaiPolicy {
 @@doc(RaiPolicy.name,
   "The name of the RaiPolicy associated with the Cognitive Services Account"
 );
-@@encodedName(RaiPolicy.eTag, "application/json", "etag");
+@@encodedName(RaiPolicy.etag, "application/json", "etag");
 @@doc(RaiPolicy.properties, "Properties of Cognitive Services RaiPolicy.");
 @@doc(RaiPolicies.createOrUpdate::parameters.resource,
   "Properties describing the Content Filters."

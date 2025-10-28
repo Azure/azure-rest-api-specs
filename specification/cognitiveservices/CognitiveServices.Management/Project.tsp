@@ -15,7 +15,8 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services project is an Azure resource representing the provisioned account's project, it's type, location and SKU.
  */
 @parentResource(Account)
-model Project is Azure.ResourceManager.TrackedResource<ProjectProperties> {
+model Project
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProjectProperties> {
   ...ResourceNameParameter<
     Resource = Project,
     KeyName = "projectName",
@@ -24,12 +25,17 @@ model Project is Azure.ResourceManager.TrackedResource<ProjectProperties> {
   >;
 
   /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
    * Identity for the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: Identity;
 }
-
 @armResourceOperations
 interface Projects {
   /**
@@ -62,7 +68,7 @@ interface Projects {
   update is ArmCustomPatchAsync<
     Project,
     PatchModel = Project,
-    Response = ArmResponse<Project> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Project> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project>> & {
       @bodyRoot
       _: Project;
     })
@@ -76,7 +82,7 @@ interface Projects {
   /**
    * Returns all the projects in a Cognitive Services account.
    */
-  list is ArmResourceListByParent<Project>;
+  list is ArmResourceListByParent<Project, Response = ProjectListResult>;
 }
 
 @@maxLength(Project.name, 64);

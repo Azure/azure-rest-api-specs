@@ -40,7 +40,8 @@ interface RaiContentFilters {
    */
   list is ArmResourceListByParent<
     RaiContentFilter,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = RaiContentFilterListResult
   >;
 }
 

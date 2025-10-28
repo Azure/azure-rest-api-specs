@@ -55,7 +55,10 @@ interface OutboundRuleBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OutboundRule_List")
-  list is ArmResourceListByParent<OutboundRuleBasicResource>;
+  list is ArmResourceListByParent<
+    OutboundRuleBasicResource,
+    Response = OutboundRuleListResult
+  >;
 }
 
 @@doc(OutboundRuleBasicResource.name,
@@ -65,3 +68,15 @@ interface OutboundRuleBasicResources {
   "Outbound Rule for the managed network of a cognitive services account."
 );
 @@doc(OutboundRuleBasicResources.createOrUpdate::parameters.resource, "");
+@@summary(OutboundRuleBasicResources.list,
+  "The GET API for retrieving the list of outbound rules of the managed network associated with the cognitive services account."
+);
+@@summary(OutboundRuleBasicResources.get,
+  "The GET API for retrieving a single outbound rule of the managed network associated with the cognitive services account."
+);
+@@summary(OutboundRuleBasicResources.createOrUpdate,
+  "The PUT API for creating or updating a single outbound rule of the managed network associated with the cognitive services account."
+);
+@@summary(OutboundRuleBasicResources.delete,
+  "The DELETE API for deleting a single outbound rule of the managed network associated with the cognitive services account."
+);

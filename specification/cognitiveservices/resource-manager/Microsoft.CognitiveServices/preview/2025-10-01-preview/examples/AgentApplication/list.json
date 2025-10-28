@@ -1,36 +1,36 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "accountName": "my-cognitive-services-account",
-    "projectName": "my-project",
-    "api-version": "2025-10-01-preview",
     "$skipToken": "string",
+    "accountName": "my-cognitive-services-account",
+    "api-version": "2025-10-01-preview",
     "count": 30,
     "names": [
       "agent-app-1",
       "agent-app-2"
     ],
-    "searchText": "test",
     "orderBy": "name",
-    "orderByAsc": true
+    "orderByAsc": true,
+    "projectName": "my-project",
+    "resourceGroupName": "test-rg",
+    "searchText": "test",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "string",
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1",
             "name": "agent-app-1",
             "type": "Microsoft.CognitiveServices/accounts/projects/applications",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1",
             "properties": {
               "description": "Sample agent application for customer support",
+              "displayName": "Customer Support Agent",
               "tags": {
                 "environment": "production",
                 "team": "ai-platform"
-              },
-              "displayName": "Customer Support Agent"
+              }
             },
             "systemData": {
               "createdAt": "2024-09-29T12:34:56.999Z",
@@ -41,9 +41,11 @@
               "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": "string"
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AgentApplications_List",
+  "title": "List Account Agent Applications."
 }

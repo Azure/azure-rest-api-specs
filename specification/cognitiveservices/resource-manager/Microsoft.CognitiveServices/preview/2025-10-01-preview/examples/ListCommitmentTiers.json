@@ -1,28 +1,30 @@
 {
   "parameters": {
     "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "location": "location",
     "resourceGroupName": "resourceGroupName",
-    "location": "location"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "kind": "TextAnalytics",
-            "skuName": "S",
+            "cost": {},
             "hostingModel": "Web",
+            "kind": "TextAnalytics",
             "planType": "TA",
-            "tier": "T1",
             "quota": {
               "quantity": 1000000,
               "unit": "Transaction"
             },
-            "cost": {}
+            "skuName": "S",
+            "tier": "T1"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "CommitmentTiers_List",
+  "title": "ListCommitmentTiers"
 }

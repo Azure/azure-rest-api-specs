@@ -1,13 +1,10 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
+    "api-version": "2025-10-01-preview",
     "raiToolConnectionName": "Web_Search",
     "raiToolLabel": {
       "properties": {
-        "toolConnectionName": "Web_Search",
         "accountScope": {
           "labelValues": {
             "confidentiality": "low"
@@ -15,29 +12,31 @@
         },
         "projectScopes": [
           {
-            "project": "test-project",
             "labelValues": {
               "confidentiality": "low"
-            }
+            },
+            "project": "test-project"
           },
           {
-            "project": "sample-project",
             "labelValues": {
               "confidentiality": "low"
-            }
+            },
+            "project": "sample-project"
           }
-        ]
+        ],
+        "toolConnectionName": "Web_Search"
       }
-    }
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiToolLabels/Web_Search",
-        "type": "Microsoft.CognitiveServices/accounts/raiToolLabels",
         "name": "Web_Search",
+        "type": "Microsoft.CognitiveServices/accounts/raiToolLabels",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiToolLabels/Web_Search",
         "properties": {
-          "toolConnectionName": "Web_Search",
           "accountScope": {
             "labelValues": {
               "confidentiality": "low"
@@ -45,28 +44,28 @@
           },
           "projectScopes": [
             {
-              "project": "test-project",
               "labelValues": {
                 "confidentiality": "low"
-              }
+              },
+              "project": "test-project"
             },
             {
-              "project": "sample-project",
               "labelValues": {
                 "confidentiality": "low"
-              }
+              },
+              "project": "sample-project"
             }
-          ]
+          ],
+          "toolConnectionName": "Web_Search"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiToolLabels/Web_Search",
-        "type": "Microsoft.CognitiveServices/accounts/raiToolLabels",
         "name": "Web_Search",
+        "type": "Microsoft.CognitiveServices/accounts/raiToolLabels",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiToolLabels/Web_Search",
         "properties": {
-          "toolConnectionName": "Web_Search",
           "accountScope": {
             "labelValues": {
               "confidentiality": "low"
@@ -74,20 +73,23 @@
           },
           "projectScopes": [
             {
-              "project": "test-project",
               "labelValues": {
                 "confidentiality": "low"
-              }
+              },
+              "project": "test-project"
             },
             {
-              "project": "sample-project",
               "labelValues": {
                 "confidentiality": "low"
-              }
+              },
+              "project": "sample-project"
             }
-          ]
+          ],
+          "toolConnectionName": "Web_Search"
         }
       }
     }
-  }
+  },
+  "operationId": "RaiToolLabels_CreateOrUpdate",
+  "title": "PutRaiToolLabel"
 }

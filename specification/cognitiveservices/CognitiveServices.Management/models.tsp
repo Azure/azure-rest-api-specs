@@ -45,9 +45,9 @@ union ProvisioningState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  ResolvingDNS: "ResolvingDNS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ResolvingDNS: "ResolvingDNS",
 }
 
 /**
@@ -1758,7 +1758,6 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility(Lifecycle.Read)
   provisioningState?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState;
 
   /**
@@ -1771,7 +1770,7 @@ model PrivateEndpointConnectionProperties {
  * The api properties for special APIs.
  */
 model ApiProperties {
-  ...Record<Record<unknown>>;
+  ...Record<unknown>;
 
   /**
    * (QnAMaker Only) The runtime endpoint of QnAMaker.
@@ -2131,7 +2130,20 @@ model AccountSku {
 /**
  * The response to a list usage request.
  */
-model UsageListResult is Azure.Core.Page<Usage>;
+model UsageListResult {
+  /**
+   * The link used to get the next page of Usages.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of usages for Cognitive Service account.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: Usage[];
+}
 
 /**
  * The usage data for a usage request.
@@ -2191,7 +2203,20 @@ model MetricName {
 /**
  * The list of cognitive services accounts operation response.
  */
-model AccountModelListResult is Azure.Core.Page<AccountModel>;
+model AccountModelListResult {
+  /**
+   * The link used to get the next page of Model.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services accounts Model and their properties.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name", "format", "version"])
+  value?: AccountModel[];
+}
 
 /**
  * Cognitive Services account Model.
@@ -2254,7 +2279,6 @@ model AccountModel extends DeploymentModel {
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
-  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -2428,35 +2452,6 @@ model ReplacementConfig {
 }
 
 /**
- * Localized display information for this particular operation.
- */
-model OperationDisplay {
-  /**
-   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
-   */
-  @visibility(Lifecycle.Read)
-  provider?: string;
-
-  /**
-   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
-   */
-  @visibility(Lifecycle.Read)
-  resource?: string;
-
-  /**
-   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
-   */
-  @visibility(Lifecycle.Read)
-  operation?: string;
-
-  /**
-   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-}
-
-/**
  * Check SKU availability parameter.
  */
 model CheckSkuAvailabilityParameter {
@@ -2492,7 +2487,7 @@ model SkuAvailabilityListResult {
  */
 model SkuAvailability {
   /**
-   * The Kind of the resource.
+   * The kind (type) of cognitive service account.
    */
   kind?: string;
 
@@ -2502,7 +2497,7 @@ model SkuAvailability {
   type?: string;
 
   /**
-   * The SKU of Cognitive Services account.
+   * The name of SKU.
    */
   skuName?: string;
 
@@ -2525,14 +2520,31 @@ model SkuAvailability {
 /**
  * The list of cognitive services accounts operation response.
  */
-model CommitmentTierListResult is Azure.Core.Page<CommitmentTier>;
+model CommitmentTierListResult {
+  /**
+   * The link used to get the next page of CommitmentTier.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services accounts CommitmentTier and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    #["kind", "tier", "skuName", "hostingModel", "planType"]
+  )
+  value?: CommitmentTier[];
+}
 
 /**
  * Cognitive Services account commitment tier.
  */
 model CommitmentTier {
   /**
-   * The Kind of the resource.
+   * The kind (type) of cognitive service account.
    */
   kind?: string;
 
@@ -2605,7 +2617,23 @@ model CommitmentCost {
 /**
  * The list of cognitive services models.
  */
-model ModelListResult is Azure.Core.Page<Model>;
+model ModelListResult {
+  /**
+   * The link used to get the next page of Model.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services accounts Model and their properties.
+   */
+  @pageItems
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    #["kind", "skuName", "/model/name", "/model/format", "/model/version"]
+  )
+  value?: Model[];
+}
 
 /**
  * Cognitive Services Model.
@@ -2685,7 +2713,7 @@ model CheckDomainAvailabilityParameter {
   type: string;
 
   /**
-   * The Kind of the resource.
+   * The kind (type) of cognitive service account.
    */
   kind?: string;
 }
@@ -2715,7 +2743,7 @@ model DomainAvailability {
   type?: string;
 
   /**
-   * The Kind of the resource.
+   * The kind (type) of cognitive service account.
    */
   kind?: string;
 }
@@ -2806,6 +2834,7 @@ model PrivateEndpointConnectionListResult {
   /**
    * Array of private endpoint connections
    */
+  @pageItems
   value?: PrivateEndpointConnection[];
 }
 
@@ -2935,12 +2964,12 @@ model DeploymentProperties {
   /**
    * The service tier for the deployment. Determines the pricing and performance level for request processing. Use 'Default' for standard pricing or 'Priority' for higher-priority processing with premium pricing. Note: Pause operations are only supported on Standard, DataZoneStandard, and GlobalStandard SKUs.
    */
-  serviceTier?: ServiceTier;
+  serviceTier?: ServiceTier | null;
 
   /**
    * The state of the deployment. Controls whether the deployment is accepting inference requests. Use 'Running' for active deployments that process requests, or 'Paused' to temporarily stop inference while preserving the deployment configuration.
    */
-  deploymentState?: DeploymentState;
+  deploymentState?: DeploymentState | null;
 }
 
 /**
@@ -2971,11 +3000,13 @@ model DeploymentCapacitySettings {
   /**
    * The designated capacity.
    */
+  @minValue(0)
   designatedCapacity?: int32;
 
   /**
    * The priority of this capacity setting.
    */
+  @minValue(0)
   priority?: int32;
 }
 
@@ -3005,7 +3036,21 @@ model PatchResourceTags {
 /**
  * The list of cognitive services accounts operation response.
  */
-model DeploymentSkuListResult is Azure.Core.Page<SkuResource>;
+model DeploymentSkuListResult {
+  /**
+   * The link used to get the next page of deployment skus.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services accounts deployment skus.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["resourceType"])
+  @visibility(Lifecycle.Read)
+  value?: SkuResource[];
+}
 
 /**
  * Properties of Cognitive Services account resource sku resource properties.
@@ -3303,7 +3348,20 @@ model RaiBlocklistProperties {
 /**
  * The list of cognitive services RAI Blocklist Items.
  */
-model RaiBlockListItemsResult is Azure.Core.Page<RaiBlocklistItem>;
+model RaiBlockListItemsResult {
+  /**
+   * The link used to get the next page of RaiBlocklistItems.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of RaiBlocklistItems.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: RaiBlocklistItem[];
+}
 
 /**
  * RAI Custom Blocklist Item properties.
@@ -3385,8 +3443,20 @@ model RaiTopicProperties {
 /**
  * The list of cognitive services RAI External Safety Providers.
  */
-model RaiExternalSafetyProviderResult
-  is Azure.Core.Page<RaiExternalSafetyProviderSchema>;
+model RaiExternalSafetyProviderResult {
+  /**
+   * The link used to get the next page of Rai External Safety Provider.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of RaiExternalSafetyProvider.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: RaiExternalSafetyProviderSchema[];
+}
 
 /**
  * RAI External SafetyProvider schema properties.
@@ -3508,7 +3578,20 @@ model RaiExternalSafetyProviderProperties {
 /**
  * The list of cognitive services RAI Topics.
  */
-model RaiTopicResult is Azure.Core.Page<RaiTopic>;
+model RaiTopicResult {
+  /**
+   * The link used to get the next page of RaiTopics.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of RaiTopic.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: RaiTopic[];
+}
 
 /**
  * RAI Tool Label properties.
@@ -3559,7 +3642,20 @@ model RaiToolLabelPropertiesProjectScopesItem {
 /**
  * The list of Cognitive Services RAI Tool Labels.
  */
-model RaiToolLabelResult is Azure.Core.Page<RaiToolLabel>;
+model RaiToolLabelResult {
+  /**
+   * The link used to get the next page of RaiToolLabels.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of RAI Tool Labels.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: RaiToolLabel[];
+}
 
 /**
  * Azure OpenAI Content Filter Properties.
@@ -3596,8 +3692,20 @@ model CommitmentPlanAccountAssociationProperties {
 /**
  * A list of NSP configurations for an Cognitive Services account.
  */
-model NetworkSecurityPerimeterConfigurationList
-  is Azure.Core.Page<NetworkSecurityPerimeterConfiguration>;
+model NetworkSecurityPerimeterConfigurationList {
+  /**
+   * Array of NSP configurations List Result for an Cognitive Services account.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  value?: NetworkSecurityPerimeterConfiguration[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * The properties of an NSP Configuration.
@@ -3797,7 +3905,20 @@ model NetworkSecurityPerimeterProfileInfo {
 /**
  * The list of cognitive services Defender for AI Settings.
  */
-model DefenderForAISettingResult is Azure.Core.Page<DefenderForAISetting>;
+model DefenderForAISettingResult {
+  /**
+   * The link used to get the next page of Defender for AI Settings.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of Defender for AI Settings.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: DefenderForAISetting[];
+}
 
 /**
  * The Defender for AI resource properties.
@@ -3921,16 +4042,23 @@ model ConnectionUpdateContent {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ConnectionPropertiesV2BasicResourceArmPaginatedResult
-  is Azure.Core.Page<ConnectionPropertiesV2BasicResource>;
+model ConnectionPropertiesV2BasicResourceArmPaginatedResult {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @nextLink
+  nextLink?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @pageItems
+  value?: ConnectionPropertiesV2BasicResource[];
+}
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model CapabilityHostProperties extends ResourceBase {
+model CapabilityHost extends ResourceBase {
   /**
    * List of AI services connections.
    */
-  aiServicesConnections?: string[];
+  aiServicesConnections?: string[] | null;
 
   /**
    * Kind of this capability host.
@@ -3940,7 +4068,7 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * Customer subnet info to help set up this capability host.
    */
-  customerSubnet?: string;
+  customerSubnet?: string | null;
 
   /**
    * Provisioning state for the CapabilityHost.
@@ -3951,17 +4079,17 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * List of connection names from those available in the account or project to be used as a storage resource.
    */
-  storageConnections?: string[];
+  storageConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used for Thread storage.
    */
-  threadStorageConnections?: string[];
+  threadStorageConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).
    */
-  vectorStoreConnections?: string[];
+  vectorStoreConnections?: string[] | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -3969,13 +4097,13 @@ model ResourceBase {
   /**
    * The asset description text.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
+  tags?: Record<string> | null;
 }
 
 /**
@@ -4005,7 +4133,7 @@ model QuotaTierProperties {
    * Information about the quota tier upgrade eligibility for the subscription.
    */
   @visibility(Lifecycle.Read)
-  tierUpgradeEligibilityInfo?: QuotaTierUpgradeEligibilityInfo;
+  tierUpgradeEligibilityInfo?: QuotaTierUpgradeEligibilityInfo | null;
 }
 
 /**
@@ -4015,7 +4143,7 @@ model QuotaTierUpgradeEligibilityInfo {
   /**
    * Name of the next quota tier for the subscription.
    */
-  nextTierName?: string;
+  nextTierName?: string | null;
 
   /**
    * Specifies whether an upgrade to the next quota tier is available.
@@ -4026,12 +4154,12 @@ model QuotaTierUpgradeEligibilityInfo {
    * The date after which the current tier will be upgraded to the next tier if the TierUpgradePolicy is "OnceUpgradeIsAvailable" (UTC).
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  upgradeApplicableDate?: utcDateTime;
+  upgradeApplicableDate?: utcDateTime | null;
 
   /**
    * Reason in case the subscription is not eligible for upgrade to the next tier.
    */
-  upgradeUnavailabilityReason?: string;
+  upgradeUnavailabilityReason?: string | null;
 }
 
 /**
@@ -4093,7 +4221,7 @@ model ManagedNetworkSettings {
    * Dictionary of <OutboundRule>
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  outboundRules?: Record<OutboundRule>;
+  outboundRules?: Record<OutboundRule> | null;
 
   /**
    * Status of the Provisioning for the managed network of a cognitive services account.
@@ -4114,7 +4242,7 @@ model ManagedNetworkSettings {
    * Public IP address assigned to the Azure Firewall.
    */
   @visibility(Lifecycle.Read)
-  egressIpAddress?: string;
+  egressIpAddress?: string | null;
 }
 
 /**
@@ -4154,8 +4282,19 @@ model ManagedNetworkSettingsEx extends ManagedNetworkSettings {
 /**
  * A paginated list of Agent Application entities.
  */
-model AgentApplicationResourceArmPaginatedResult
-  is Azure.Core.Page<AgentApplication>;
+model AgentApplicationResourceArmPaginatedResult {
+  /**
+   * The link to the next page of Agent Application objects. If null, there are no additional pages.
+   */
+  @nextLink
+  nextLink?: string | null;
+
+  /**
+   * An array of objects of type Agent Application.
+   */
+  @pageItems
+  value?: AgentApplicationResource[];
+}
 
 /**
  * Resource type representing an agentic application as a management construct.
@@ -4165,37 +4304,37 @@ model AgenticApplication extends ResourceBase {
   /**
    * The display name of the application.
    */
-  displayName?: string;
+  displayName?: string | null;
 
   /**
    * The application's dedicated invocation endpoint.
    */
-  baseUrl?: string;
+  baseUrl?: string | null;
 
   /**
    * The list of agent definitions comprising this application, returned as references to the objects under the parent project; use this to obtain a flat list of all agent-version pairs represented by this application.
    */
-  agents?: AgentReference[];
+  agents?: AgentReference[] | null;
 
   /**
    * The EntraId Agentic Blueprint of the application.
    */
-  agentIdentityBlueprint?: AssignedIdentity;
+  agentIdentityBlueprint?: AssignedIdentity | null;
 
   /**
    * The (default) agent instance identity of the application.
    */
-  defaultInstanceIdentity?: AssignedIdentity;
+  defaultInstanceIdentity?: AssignedIdentity | null;
 
   /**
    * Gets or sets the authorization policy associated with this agentic application instance.
    */
-  authorizationPolicy?: ApplicationAuthorizationPolicy;
+  authorizationPolicy?: ApplicationAuthorizationPolicy | null;
 
   /**
    * Gets or sets the traffic routing policy for the application's deployments.
    */
-  trafficRoutingPolicy?: ApplicationTrafficRoutingPolicy;
+  trafficRoutingPolicy?: ApplicationTrafficRoutingPolicy | null;
 
   /**
    * Provisioning state of the application.
@@ -4217,12 +4356,12 @@ model AgentReference {
   /**
    * Gets the agent's unique identifier within the organization (subscription).
    */
-  agentId?: string;
+  agentId?: string | null;
 
   /**
    * Gets the agent's name (unique within the project/app).
    */
-  agentName?: string;
+  agentName?: string | null;
 }
 
 /**
@@ -4257,7 +4396,7 @@ model AssignedIdentity {
   /**
    * The subject of this identity assignment.
    */
-  subject?: string;
+  subject?: string | null;
 
   /**
    * Represents the provisioning state of an identity resource.
@@ -4289,7 +4428,7 @@ model ApplicationTrafficRoutingPolicy {
   /**
    * Gets or sets the collection of traffic routing rules.
    */
-  rules?: TrafficRoutingRule[];
+  rules?: TrafficRoutingRule[] | null;
 }
 
 /**
@@ -4299,17 +4438,17 @@ model TrafficRoutingRule {
   /**
    * The identifier of this traffic routing rule.
    */
-  ruleId?: string;
+  ruleId?: string | null;
 
   /**
    * A user-provided description for this traffic routing rule.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * The unique identifier of the deployment to which traffic is routed by this rule.
    */
-  deploymentId?: string;
+  deploymentId?: string | null;
 
   /**
    * Gets or sets the percentage of traffic allocated to this instance.
@@ -4324,12 +4463,12 @@ model AgentReferenceResourceArmPaginatedResult {
   /**
    * The link to the next page of Agent Reference objects. If null, there are no additional pages.
    */
-  nextLink?: string;
+  nextLink?: string | null;
 
   /**
    * An array of objects of type Agent Reference.
    */
-  value?: AgentReferenceResource[];
+  value?: AgentReferenceResource[] | null;
 }
 
 /**
@@ -4347,8 +4486,19 @@ model AgentReferenceResource
 /**
  * A paginated list of Agent Deployment entities.
  */
-model AgentDeploymentResourceArmPaginatedResult
-  is Azure.Core.Page<AgentDeploymentResource>;
+model AgentDeploymentResourceArmPaginatedResult {
+  /**
+   * The link to the next page of Agent Deployment objects. If null, there are no additional pages.
+   */
+  @nextLink
+  nextLink?: string | null;
+
+  /**
+   * An array of objects of type Agent Deployment.
+   */
+  @pageItems
+  value?: AgentDeploymentResource[];
+}
 
 /**
  * Type representing an agent deployment as a management construct.
@@ -4359,29 +4509,29 @@ model AgentDeployment extends ResourceBase {
   /**
    * Gets or sets the display name of the deployment.
    */
-  displayName?: string;
+  displayName?: string | null;
 
   /**
    * Gets or sets the unique identifier of the deployment.
    */
-  deploymentId?: string;
+  deploymentId?: string | null;
 
   /**
    * Gets or sets the current operational state of the deployment (and, intrinsically, of the comprising agents).
    */
-  state?: AgentDeploymentState;
+  state?: AgentDeploymentState | null;
 
   /**
    * Gets or sets the supported protocol types and versions exposed by this deployment.
    */
   @OpenAPI.extension("x-ms-identifiers", #["protocol", "version"])
-  protocols?: AgentProtocolVersion[];
+  protocols?: AgentProtocolVersion[] | null;
 
   /**
    * Returns a flat list of agent:version deployed in this deployment.
    */
   @OpenAPI.extension("x-ms-identifiers", #["agentId"])
-  agents?: VersionedAgentReference[];
+  agents?: VersionedAgentReference[] | null;
 
   /**
    * Gets or sets the type of deployment for the agent.
@@ -4407,7 +4557,7 @@ model AgentProtocolVersion {
   /**
    * The version of the protocol.
    */
-  version?: string;
+  version?: string | null;
 }
 
 /**
@@ -4418,7 +4568,7 @@ model VersionedAgentReference extends AgentReference {
   /**
    * Gets the agent's version (unique for each agent lineage).
    */
-  agentVersion?: string;
+  agentVersion?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4435,6 +4585,7 @@ model PATAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ConnectionPersonalAccessToken {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   pat?: string;
 }
 
@@ -4473,11 +4624,13 @@ model UsernamePasswordAuthTypeConnectionProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ConnectionUsernamePassword {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   password?: string;
 
   /**
    * Optional, required by connections like SalesForce for extra security in addition to UsernamePassword
    */
+  @secret
   securityToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4506,6 +4659,7 @@ model SASAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ConnectionSharedAccessSignature {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   sas?: string;
 }
 
@@ -4529,6 +4683,7 @@ model AccountKeyAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
  */
 model ConnectionAccountKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   key?: string;
 }
 
@@ -4548,8 +4703,11 @@ model ServicePrincipalAuthTypeConnectionProperties
 model ConnectionServicePrincipal {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   clientId?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   clientSecret?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   tenantId?: string;
 }
@@ -4569,7 +4727,9 @@ model AccessKeyAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
 model ConnectionAccessKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   accessKeyId?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   secretAccessKey?: string;
 }
 
@@ -4612,6 +4772,7 @@ model ApiKeyAuthConnectionProperties extends ConnectionPropertiesV2 {
  */
 model ConnectionApiKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   key?: string;
 }
 
@@ -4677,20 +4838,24 @@ model ConnectionOAuth2 {
   clientId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   clientSecret?: string;
 
   /**
    * Required by GoogleAdWords connection category
    */
+  @secret
   developerToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   password?: string;
 
   /**
    * Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho
    * where user needs to get RefreshToken offline
    */
+  @secret
   refreshToken?: string;
 
   /**
@@ -4745,11 +4910,13 @@ model HostedAgentDeployment extends AgentDeployment {
   /**
    * Gets or sets the minimum number of replicas for this hosted deployment.
    */
+  @minValue(0)
   minReplicas?: int32;
 
   /**
    * Gets or sets the maximum number of replicas for this hosted deployment.
    */
+  @minValue(0)
   maxReplicas?: int32;
 
   /**
@@ -4797,47 +4964,47 @@ model AgentCard {
   /**
    * Human-readable name for the Agent (e.g., 'Recipe Agent').
    */
-  name?: string;
+  name?: string | null;
 
   /**
    * Human-readable description of the Agent's function.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * URL address where the Agent is hosted.
    */
-  url?: string;
+  url?: string | null;
 
   /**
    * Service provider information for the Agent.
    */
-  provider?: ProviderInfo;
+  provider?: ProviderInfo | null;
 
   /**
    * Version of the Agent (format defined by provider, e.g., '1.0.0').
    */
-  version?: string;
+  version?: string | null;
 
   /**
    * URL for the Agent's documentation.
    */
-  documentationUrl?: string;
+  documentationUrl?: string | null;
 
   /**
    * Default interaction modes supported by the Agent across all skills.
    */
-  defaultInputModes?: string[];
+  defaultInputModes?: string[] | null;
 
   /**
    * Default output modes supported by the Agent across all skills.
    */
-  defaultOutputModes?: string[];
+  defaultOutputModes?: string[] | null;
 
   /**
    * Collection of capability units the Agent can perform.
    */
-  skills?: Skill[];
+  skills?: Skill[] | null;
 }
 
 /**
@@ -4847,12 +5014,12 @@ model ProviderInfo {
   /**
    * Organization name of the provider.
    */
-  organization?: string;
+  organization?: string | null;
 
   /**
    * URL of the provider.
    */
-  url?: string;
+  url?: string | null;
 }
 
 /**
@@ -4862,35 +5029,290 @@ model Skill {
   /**
    * Unique identifier for the skill.
    */
-  id?: string;
+  id?: string | null;
 
   /**
    * Human-readable name for the skill.
    */
-  name?: string;
+  name?: string | null;
 
   /**
    * Skill description.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * Tags describing the skill's capability category (e.g., 'cooking', 'customer support').
    */
-  tags?: string[];
+  tags?: string[] | null;
 
   /**
    * Example scenarios or prompts the skill can execute (e.g., 'I need a recipe for bread').
    */
-  examples?: string[];
+  examples?: string[] | null;
 
   /**
    * Input MIME types supported by the skill (if different from default).
    */
-  inputModes?: string[];
+  inputModes?: string[] | null;
 
   /**
    * Output MIME types supported by the skill (if different from default).
    */
-  outputModes?: string[];
+  outputModes?: string[] | null;
 }
+
+/**
+ * The list of cognitive services accounts operation response.
+ */
+model ModelCapacityListResult {
+  /**
+   * The link used to get the next page of ModelSkuCapacity.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services accounts ModelSkuCapacity.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["model"])
+  value?: ModelCapacityListResultValueItem[];
+}
+
+/**
+ * List of managed networks of a cognitive services account.
+ */
+model ManagedNetworkListResult {
+  /**
+   * The link to the next page constructed using the continuationToken.  If null, there are no additional pages.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of managed network settings of an account. Since this list may be incomplete, the nextLink field should be used to request the next list of cognitive services accounts.
+   */
+  @pageItems
+  value?: ManagedNetworkSettingsPropertiesBasicResource[];
+}
+
+/**
+ * List of outbound rules for the managed network of a cognitive services account.
+ */
+model OutboundRuleListResult {
+  /**
+   * The link to the next page constructed using the continuationToken.  If null, there are no additional pages.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of cognitive services accounts. Since this list may be incomplete, the nextLink field should be used to request the next list of cognitive services accounts.
+   */
+  @pageItems
+  value?: OutboundRuleBasicResource[];
+}
+
+/**
+ * Managed Network Provisioning options for managed network of a cognitive services account.
+ */
+model ManagedNetworkProvisionOptions {}
+
+/**
+ * The list of cognitive services RAI Blocklists.
+ */
+model RaiBlockListResult {
+  /**
+   * The link used to get the next page of RaiBlocklists.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of RaiBlocklist.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: RaiBlocklist[];
+}
+
+/**
+ * The list of Cognitive Services RaiBlocklist Items for batch add.
+ */
+@OpenAPI.extension("x-ms-identifiers", #["name"])
+model RaiBlocklistItemsBulkAddRequest is Array<RaiBlocklistItemBulkRequest>;
+
+/**
+ * The list of cognitive services accounts operation response.
+ */
+model AccountListResult {
+  /**
+   * The link used to get the next page of accounts.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services accounts and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Account[];
+}
+
+/**
+ * The list of cognitive services Commitment Plan Account Association operation response.
+ */
+model CommitmentPlanAccountAssociationListResult {
+  /**
+   * The link used to get the next page of Commitment Plan Account Association.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services Commitment Plan Account Association and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  value?: CommitmentPlanAccountAssociation[];
+}
+
+/**
+ * The list of cognitive services accounts operation response.
+ */
+model CommitmentPlanListResult {
+  /**
+   * The link used to get the next page of CommitmentPlan.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services accounts CommitmentPlan and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: CommitmentPlan[];
+}
+
+/**
+ * The list of cognitive services accounts operation response.
+ */
+model DeploymentListResult {
+  /**
+   * The link used to get the next page of Deployment.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services accounts Deployment and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Deployment[];
+}
+
+/**
+ * The list of cognitive services EncryptionScopes.
+ */
+model EncryptionScopeListResult {
+  /**
+   * The link used to get the next page of EncryptionScope.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of EncryptionScope.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: EncryptionScope[];
+}
+
+/**
+ * The list of cognitive services projects operation response.
+ */
+model ProjectListResult {
+  /**
+   * The link used to get the next page of projects.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Cognitive Services projects and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Project[];
+}
+
+/**
+ * The list of Quota Tiers response.
+ */
+model QuotaTierListResult {
+  /**
+   * The link used to get the next page of quota tiers.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of Quota Tiers and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  value?: QuotaTier[];
+}
+
+/**
+ * The list of Content Filters.
+ */
+model RaiContentFilterListResult {
+  /**
+   * The link used to get the next page of Content Filters.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of RaiContentFilter.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: RaiContentFilter[];
+}
+
+/**
+ * The list of cognitive services RaiPolicies.
+ */
+model RaiPolicyListResult {
+  /**
+   * The link used to get the next page of RaiPolicy.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of RaiPolicy.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: RaiPolicy[];
+}
+@@OpenAPI.extension(ResourceSkuListResult.value,
+  "x-ms-identifiers",
+  #["resourceType", "name", "kind"]
+);
+
+/**
+ * The list of Cognitive Services RaiBlocklist Items Names.
+ */
+model RaiBlocklistItemsBulkDeleteRequest is Array<string>;

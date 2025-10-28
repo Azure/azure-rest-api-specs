@@ -15,8 +15,8 @@ namespace Microsoft.CognitiveServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Account)
-model CapabilityHost
-  is Azure.ResourceManager.ProxyResource<CapabilityHostProperties, false> {
+model CapabilityHostResource
+  is Azure.ResourceManager.ProxyResource<CapabilityHost, false> {
   ...ResourceNameParameter<
     Resource = CapabilityHost,
     KeyName = "capabilityHostName",
@@ -39,6 +39,8 @@ interface CapabilityHostOps
         @segment("accounts")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         accountName: string,
       },
       {
@@ -58,21 +60,49 @@ interface CapabilityHosts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccountCapabilityHosts_Get")
-  get is CapabilityHostOps.Read<CapabilityHost>;
+  get is CapabilityHostOps.Read<
+    CapabilityHostResource,
+    Response = ArmResponse<CapabilityHostResource>
+  >;
 
   /**
    * Create or update account capabilityHost.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccountCapabilityHosts_CreateOrUpdate")
-  createOrUpdate is CapabilityHostOps.CreateOrUpdateAsync<CapabilityHost>;
+  @Azure.Core.useFinalStateVia("original-uri")
+  createOrUpdate is CapabilityHostOps.CreateOrUpdateAsync<
+    CapabilityHostResource,
+    Request = CapabilityHostResource,
+    Response = ArmResponse<CapabilityHostResource> | ArmResourceCreatedResponse<
+      CapabilityHostResource,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = CapabilityHostResource> & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        @encode("duration", string)
+        asyncOperationTimeout: string;
+      }
+    >
+  >;
 
   /**
    * Delete account capabilityHost.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AccountCapabilityHosts_Delete")
-  delete is CapabilityHostOps.DeleteWithoutOkAsync<CapabilityHost>;
+  delete is CapabilityHostOps.DeleteWithoutOkAsync<
+    CapabilityHostResource,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      @encode("duration", string)
+      asyncOperationTimeout: string;
+    }> | NoContentResponse
+  >;
 }
 @armResourceOperations
 interface ProjectCapabilityHostOps
@@ -88,6 +118,8 @@ interface ProjectCapabilityHostOps
         @segment("accounts")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         accountName: string,
 
         /** The name of Cognitive Services account's project. */
@@ -95,6 +127,8 @@ interface ProjectCapabilityHostOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         projectName: string,
       },
       {
@@ -112,23 +146,47 @@ interface ProjectCapabilityHosts {
   /**
    * Get project capabilityHost.
    */
-  get is ProjectCapabilityHostOps.Read<CapabilityHost>;
+  get is ProjectCapabilityHostOps.Read<CapabilityHostResource>;
 
   /**
    * Create or update project capabilityHost.
    */
-  createOrUpdate is ProjectCapabilityHostOps.CreateOrUpdateAsync<CapabilityHost>;
+  @Azure.Core.useFinalStateVia("original-uri")
+  createOrUpdate is ProjectCapabilityHostOps.CreateOrUpdateAsync<
+    CapabilityHostResource,
+    Response = ArmResponse<CapabilityHostResource> | ArmResourceCreatedResponse<
+      CapabilityHostResource,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = CapabilityHostResource> & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        @encode("duration", string)
+        asyncOperationTimeout: string;
+      }
+    >
+  >;
 
   /**
    * Delete project capabilityHost.
    */
-  delete is ProjectCapabilityHostOps.DeleteWithoutOkAsync<CapabilityHost>;
+  delete is ProjectCapabilityHostOps.DeleteWithoutOkAsync<
+    CapabilityHostResource,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      @encode("duration", string)
+      asyncOperationTimeout: string;
+    }> | NoContentResponse
+  >;
 }
 
-@@doc(CapabilityHost.name,
+@@doc(CapabilityHostResource.name,
   "The name of the capability host associated with the Cognitive Services Resource"
 );
-@@doc(CapabilityHost.properties,
+@@doc(CapabilityHostResource.properties,
   "[Required] Additional attributes of the entity."
 );
 @@doc(CapabilityHosts.createOrUpdate::parameters.resource,
@@ -137,3 +195,13 @@ interface ProjectCapabilityHosts {
 @@doc(ProjectCapabilityHosts.createOrUpdate::parameters.resource,
   "CapabilityHost definition."
 );
+@@summary(ProjectCapabilityHosts.get, "Get project capabilityHost.");
+@@summary(CapabilityHosts.createOrUpdate,
+  "Create or update account capabilityHost."
+);
+@@summary(CapabilityHosts.delete, "Delete account capabilityHost.");
+@@summary(ProjectCapabilityHosts.createOrUpdate,
+  "Create or update project capabilityHost."
+);
+@@summary(ProjectCapabilityHosts.delete, "Delete project capabilityHost.");
+@@summary(CapabilityHosts.get, "Get account capabilityHost.");

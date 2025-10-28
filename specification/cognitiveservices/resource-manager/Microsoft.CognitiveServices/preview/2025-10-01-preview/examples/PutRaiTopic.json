@@ -1,17 +1,17 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "raiTopicName": "raiTopicName",
+    "api-version": "2025-10-01-preview",
     "raiTopic": {
       "properties": {
-        "topicName": "raiTopicName",
         "description": "This is a sample topic.",
-        "sampleBlobUrl": "https://example.blob.core.windows.net/sampleblob"
+        "sampleBlobUrl": "https://example.blob.core.windows.net/sampleblob",
+        "topicName": "raiTopicName"
       }
-    }
+    },
+    "raiTopicName": "raiTopicName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -19,14 +19,14 @@
         "name": "raiTopicName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiTopics/raiTopicName",
         "properties": {
-          "topicName": "raiTopicName",
-          "topicId": "00000000-0000-0000-0000-000000000000",
           "description": "This is a sample topic.",
+          "createdAt": "2025-07-01T00:00:00Z",
+          "failedReason": null,
+          "lastModifiedAt": "2025-07-02T00:00:00Z",
           "sampleBlobUrl": "https://example.blob.core.windows.net/sampleblob",
           "status": "Training",
-          "failedReason": null,
-          "createdAt": "2025-07-01T00:00:00Z",
-          "lastModifiedAt": "2025-07-02T00:00:00Z"
+          "topicId": "00000000-0000-0000-0000-000000000000",
+          "topicName": "raiTopicName"
         }
       }
     },
@@ -35,16 +35,18 @@
         "name": "raiTopicName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiTopics/raiTopicName",
         "properties": {
-          "topicName": "raiTopicName",
-          "topicId": "00000000-0000-0000-0000-000000000000",
           "description": "This is a sample topic.",
+          "createdAt": "2025-07-01T00:00:00Z",
+          "failedReason": null,
+          "lastModifiedAt": "2025-07-02T00:00:00Z",
           "sampleBlobUrl": "https://example.blob.core.windows.net/sampleblob",
           "status": "Training",
-          "failedReason": null,
-          "createdAt": "2025-07-01T00:00:00Z",
-          "lastModifiedAt": "2025-07-02T00:00:00Z"
+          "topicId": "00000000-0000-0000-0000-000000000000",
+          "topicName": "raiTopicName"
         }
       }
     }
-  }
+  },
+  "operationId": "RaiTopics_CreateOrUpdate",
+  "title": "PutRaiTopic"
 }

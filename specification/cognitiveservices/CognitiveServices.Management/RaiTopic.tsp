@@ -22,7 +22,12 @@ model RaiTopic is Azure.ResourceManager.ProxyResource<RaiTopicProperties> {
     SegmentName = "raitopics",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -61,7 +66,7 @@ interface RaiTopics {
 @@doc(RaiTopic.name,
   "The name of the Rai Topic associated with the Cognitive Services Account"
 );
-@@encodedName(RaiTopic.eTag, "application/json", "etag");
+@@encodedName(RaiTopic.etag, "application/json", "etag");
 @@doc(RaiTopic.properties, "Properties of Cognitive Services Rai Topic.");
 @@doc(RaiTopics.createOrUpdate::parameters.resource,
   "Properties describing the rai topic."

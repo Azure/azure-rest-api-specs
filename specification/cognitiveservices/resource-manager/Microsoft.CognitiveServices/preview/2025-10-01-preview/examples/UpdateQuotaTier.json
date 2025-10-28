@@ -1,8 +1,8 @@
 {
   "parameters": {
+    "default": "default",
     "api-version": "2025-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "default": "default",
     "tier": {
       "properties": {
         "tierUpgradePolicy": "NoAutoUpgrade"
@@ -12,15 +12,17 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/quotaTiers/default",
         "name": "default",
         "type": "Microsoft.CognitiveServices/quotaTiers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/quotaTiers/default",
         "properties": {
-          "currentTierName": "Free-Tier",
           "assignmentDate": "2025-06-09T18:13:29.389Z",
+          "currentTierName": "Free-Tier",
           "tierUpgradePolicy": "NoAutoUpgrade"
         }
       }
     }
-  }
+  },
+  "operationId": "QuotaTiers_Update",
+  "title": "Update the quota tier resource for a subscription"
 }

@@ -23,7 +23,12 @@ model RaiBlocklist
     SegmentName = "raiBlocklists",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -53,7 +58,7 @@ interface RaiBlocklists {
   /**
    * Gets the custom blocklists associated with the Azure OpenAI account.
    */
-  list is ArmResourceListByParent<RaiBlocklist>;
+  list is ArmResourceListByParent<RaiBlocklist, Response = RaiBlockListResult>;
 
   /**
    * Batch operation to add blocklist items.
@@ -63,7 +68,7 @@ interface RaiBlocklists {
   @action("addRaiBlocklistItems")
   batchAdd is ArmResourceActionSync<
     RaiBlocklist,
-    RaiBlocklistItemBulkRequest[],
+    RaiBlocklistItemsBulkAddRequest,
     ArmResponse<RaiBlocklist>
   >;
 
@@ -75,15 +80,14 @@ interface RaiBlocklists {
   @action("deleteRaiBlocklistItems")
   batchDelete is ArmResourceActionSync<
     RaiBlocklist,
-    Record<unknown>,
+    RaiBlocklistItemsBulkDeleteRequest,
     NoContentResponse
   >;
 }
-
 @@doc(RaiBlocklist.name,
   "The name of the RaiBlocklist associated with the Cognitive Services Account"
 );
-@@encodedName(RaiBlocklist.eTag, "application/json", "etag");
+@@encodedName(RaiBlocklist.etag, "application/json", "etag");
 @@doc(RaiBlocklist.properties,
   "Properties of Cognitive Services RaiBlocklist."
 );

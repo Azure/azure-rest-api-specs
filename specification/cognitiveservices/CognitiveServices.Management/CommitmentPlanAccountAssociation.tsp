@@ -23,7 +23,12 @@ model CommitmentPlanAccountAssociation
     SegmentName = "accountAssociations",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -34,20 +39,50 @@ model CommitmentPlanAccountAssociation
 }
 
 @armResourceOperations
+interface CommitmentPlanAccountAssociationsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * aaaaaaaaaaaaaaaaa
+         */
+        @path
+        @segment("commitmentPlans")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        commitmentPlanName: string,
+      },
+      {
+        /**
+         * aaaaaaaaaaaaaaaaaa
+         */
+        @path
+        @segment("accountAssociations")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        commitmentPlanAssociationName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface CommitmentPlanAccountAssociations {
   /**
    * Gets the association of the Cognitive Services commitment plan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CommitmentPlans_GetAssociation")
-  getAssociation is ArmResourceRead<CommitmentPlanAccountAssociation>;
+  getAssociation is CommitmentPlanAccountAssociationsOps.Read<CommitmentPlanAccountAssociation>;
 
   /**
    * Create or update the association of the Cognitive Services commitment plan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CommitmentPlans_CreateOrUpdateAssociation")
-  createOrUpdateAssociation is ArmResourceCreateOrReplaceAsync<CommitmentPlanAccountAssociation>;
+  createOrUpdateAssociation is CommitmentPlanAccountAssociationsOps.CreateOrUpdateAsync<CommitmentPlanAccountAssociation>;
 
   /**
    * Deletes the association of the Cognitive Services commitment plan.
@@ -55,7 +90,7 @@ interface CommitmentPlanAccountAssociations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("CommitmentPlans_DeleteAssociation")
-  deleteAssociation is ArmResourceDeleteWithoutOkAsync<
+  deleteAssociation is CommitmentPlanAccountAssociationsOps.DeleteWithoutOkAsync<
     CommitmentPlanAccountAssociation,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -65,13 +100,16 @@ interface CommitmentPlanAccountAssociations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CommitmentPlans_ListAssociations")
-  listAssociations is ArmResourceListByParent<CommitmentPlanAccountAssociation>;
+  listAssociations is CommitmentPlanAccountAssociationsOps.List<
+    CommitmentPlanAccountAssociation,
+    Response = CommitmentPlanAccountAssociationListResult
+  >;
 }
 
 @@doc(CommitmentPlanAccountAssociation.name,
   "The name of the commitment plan association with the Cognitive Services Account"
 );
-@@encodedName(CommitmentPlanAccountAssociation.eTag,
+@@encodedName(CommitmentPlanAccountAssociation.etag,
   "application/json",
   "etag"
 );

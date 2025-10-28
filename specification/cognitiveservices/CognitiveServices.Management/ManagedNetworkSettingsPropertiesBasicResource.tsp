@@ -60,7 +60,10 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettings_List")
-  list is ArmResourceListByParent<ManagedNetworkSettingsPropertiesBasicResource>;
+  list is ArmResourceListByParent<
+    ManagedNetworkSettingsPropertiesBasicResource,
+    Response = ArmResponse<ManagedNetworkListResult>
+  >;
 
   /**
    * The POST API for updating the outbound rules of the managed network associated with the cognitive services account.
@@ -70,8 +73,8 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   @action("batchOutboundRules")
   post is ArmResourceActionAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
-    ManagedNetworkSettingsBasicResource,
-    ArmResponse<ResourceListResult<OutboundRuleBasicResource>>
+    Request = ManagedNetworkSettingsBasicResource,
+    Response = OutboundRuleListResult
   >;
 }
 
@@ -89,4 +92,19 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
 );
 @@doc(ManagedNetworkSettingsPropertiesBasicResources.post::parameters.body,
   "The Managed Network Settings object of the account."
+);
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.list,
+  "List API for managed network settings of a cognitive services account."
+);
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.get,
+  "Get API for managed network settings of a cognitive services account."
+);
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.put,
+  "PUT API for managed network settings of a cognitive services account."
+);
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.patch,
+  "Patch API for managed network settings of a cognitive services account."
+);
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.post,
+  "The POST API for updating the outbound rules of the managed network associated with the cognitive services account."
 );

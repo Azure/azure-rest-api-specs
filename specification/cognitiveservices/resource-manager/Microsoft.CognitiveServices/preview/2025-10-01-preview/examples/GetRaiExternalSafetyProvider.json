@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "safetyProviderName": "safetyProviderName"
+    "safetyProviderName": "safetyProviderName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -10,17 +10,19 @@
         "name": "safetyProviderName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders/safetyProviderName",
         "properties": {
+          "createdAt": "2025-07-01T00:00:00Z",
+          "keyVaultUri": "https://example.vault.azure.net",
+          "lastModifiedAt": "2025-07-02T00:00:00Z",
+          "managedIdentity": "00000000-0000-0000-0000-000000000000",
+          "mode": "sync",
           "providerId": "00000000-0000-0000-0000-000000000000",
           "providerName": "safetyProviderName",
-          "mode": "sync",
-          "url": "https://example.webhook.endpoint",
           "secretName": "mySecretName",
-          "managedIdentity": "00000000-0000-0000-0000-000000000000",
-          "keyVaultUri": "https://example.vault.azure.net",
-          "createdAt": "2025-07-01T00:00:00Z",
-          "lastModifiedAt": "2025-07-02T00:00:00Z"
+          "url": "https://example.webhook.endpoint"
         }
       }
     }
-  }
+  },
+  "operationId": "RaiExternalSafetyProvider_Get",
+  "title": "GetRaiExternalSafetyProvider"
 }

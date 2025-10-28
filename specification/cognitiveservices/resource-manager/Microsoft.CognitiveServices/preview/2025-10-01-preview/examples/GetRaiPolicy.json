@@ -1,12 +1,12 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
+    "api-version": "2025-10-01-preview",
     "deploymentName": "deploymentName",
+    "effective": true,
     "raiPolicyName": "raiPolicyName",
-    "effective": true
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -15,7 +15,6 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiPolicies/raiPolicyName",
         "properties": {
           "basePolicyName": "Microsoft.Default",
-          "mode": "Asynchronous_filter",
           "contentFilters": [
             {
               "name": "Hate",
@@ -76,30 +75,33 @@
             {
               "name": "Jailbreak",
               "blocking": true,
-              "source": "Prompt",
-              "enabled": true
+              "enabled": true,
+              "source": "Prompt"
             },
             {
               "name": "Protected Material Text",
               "blocking": true,
-              "source": "Completion",
-              "enabled": true
+              "enabled": true,
+              "source": "Completion"
             },
             {
               "name": "Protected Material Code",
               "blocking": true,
-              "source": "Completion",
-              "enabled": true
+              "enabled": true,
+              "source": "Completion"
             },
             {
               "name": "Profanity",
               "blocking": true,
-              "source": "Prompt",
-              "enabled": true
+              "enabled": true,
+              "source": "Prompt"
             }
-          ]
+          ],
+          "mode": "Asynchronous_filter"
         }
       }
     }
-  }
+  },
+  "operationId": "RaiPolicies_Get",
+  "title": "GetRaiPolicy"
 }

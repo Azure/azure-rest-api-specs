@@ -1,18 +1,18 @@
 {
   "parameters": {
     "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "commitmentPlanName": "commitmentPlanName",
     "resourceGroupName": "resourceGroupName",
-    "commitmentPlanName": "commitmentPlanName"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/commitmentPlans/commitmentPlanName/accountAssociations/accountAssociationName",
             "name": "accountAssociationName",
             "type": "Microsoft.CognitiveServices/commitmentPlans/accountAssociations",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/commitmentPlans/commitmentPlanName/accountAssociations/accountAssociationName",
             "properties": {
               "accountId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName"
             }
@@ -20,5 +20,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "CommitmentPlans_ListAssociations",
+  "title": "ListCommitmentPlans"
 }

@@ -1,21 +1,21 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
-    "accountName": "my-cognitive-services-account",
-    "projectName": "my-project",
     "name": "agent-app-1",
-    "api-version": "2025-10-01-preview"
+    "accountName": "my-cognitive-services-account",
+    "api-version": "2025-10-01-preview",
+    "projectName": "my-project",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agents/agent-001",
             "name": "CustomerSupportAgent",
             "type": "Microsoft.CognitiveServices/accounts/projects/applications/agents",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agents/agent-001",
             "properties": {
               "agentId": "agent-001",
               "agentName": "CustomerSupportAgent"
@@ -30,9 +30,9 @@
             }
           },
           {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agents/agent-002",
             "name": "TechnicalSupportAgent",
             "type": "Microsoft.CognitiveServices/accounts/projects/applications/agents",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agents/agent-002",
             "properties": {
               "agentId": "agent-002",
               "agentName": "TechnicalSupportAgent"
@@ -46,9 +46,11 @@
               "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AgentApplications_ListAgents",
+  "title": "List Agents for Agent Application."
 }

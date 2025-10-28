@@ -1,21 +1,23 @@
 {
   "parameters": {
     "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "location": "westus",
     "parameters": {
-      "subdomainName": "contosodemoapp1",
-      "type": "Microsoft.CognitiveServices/accounts"
-    }
+      "type": "Microsoft.CognitiveServices/accounts",
+      "subdomainName": "contosodemoapp1"
+    },
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
+        "type": "Microsoft.CognitiveServices/accounts",
         "isSubdomainAvailable": false,
         "reason": "Sub domain name 'contosodemoapp1' is not valid",
-        "subdomainName": "contosodemoapp1",
-        "type": "Microsoft.CognitiveServices/accounts"
+        "subdomainName": "contosodemoapp1"
       }
     }
-  }
+  },
+  "operationId": "CheckDomainAvailability",
+  "title": "Check SKU Availability"
 }

@@ -1,57 +1,59 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
     "accountName": "cognitive-account-name",
-    "managedNetworkName": "default",
     "api-version": "2025-10-01-preview",
     "body": {
       "properties": {
         "managedNetwork": {
+          "firewallSku": "Standard",
           "isolationMode": "AllowOnlyApprovedOutbound",
           "outboundRules": {
             "rule_name_1": {
               "type": "FQDN",
-              "destination": "destination_endpoint",
-              "category": "UserDefined"
+              "category": "UserDefined",
+              "destination": "destination_endpoint"
             }
-          },
-          "firewallSku": "Standard"
+          }
         }
       }
-    }
+    },
+    "managedNetworkName": "default",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Location": "example_location"
-      }
-    },
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/cognitive-account-name/managedNetworks/default",
         "name": "default",
         "type": "Microsoft.CognitiveServices/accounts/managedNetworks",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/cognitive-account-name/managedNetworks/default",
         "properties": {
           "managedNetwork": {
+            "egressIpAddress": "22.22.131.49",
+            "firewallSku": "Standard",
             "isolationMode": "AllowOnlyApprovedOutbound",
             "networkId": "00000000-1111-2222-3333-444444444444",
             "outboundRules": {
               "rule_name_1": {
                 "type": "FQDN",
-                "destination": "destination_endpoint",
-                "status": "Active",
                 "category": "UserDefined",
-                "errorInformation": null
+                "destination": "destination_endpoint",
+                "errorInformation": null,
+                "status": "Active"
               }
-            },
-            "firewallSku": "Standard",
-            "egressIpAddress": "22.22.131.49"
+            }
           },
           "provisioningState": "Succeeded"
         }
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
       }
     }
-  }
+  },
+  "operationId": "ManagedNetworkSettings_Patch",
+  "title": "Patch ManagedNetworkSettings"
 }

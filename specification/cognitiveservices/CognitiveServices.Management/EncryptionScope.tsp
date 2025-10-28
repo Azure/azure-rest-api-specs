@@ -23,7 +23,12 @@ model EncryptionScope
     SegmentName = "encryptionScopes",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -53,13 +58,16 @@ interface EncryptionScopes {
   /**
    * Gets the content filters associated with the Azure OpenAI account.
    */
-  list is ArmResourceListByParent<EncryptionScope>;
+  list is ArmResourceListByParent<
+    EncryptionScope,
+    Response = EncryptionScopeListResult
+  >;
 }
 
 @@doc(EncryptionScope.name,
   "The name of the encryptionScope associated with the Cognitive Services Account"
 );
-@@encodedName(EncryptionScope.eTag, "application/json", "etag");
+@@encodedName(EncryptionScope.etag, "application/json", "etag");
 @@doc(EncryptionScope.properties,
   "Properties of Cognitive Services EncryptionScope."
 );

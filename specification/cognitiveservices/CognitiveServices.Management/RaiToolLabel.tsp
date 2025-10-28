@@ -23,7 +23,12 @@ model RaiToolLabel
     SegmentName = "raiToolLabels",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -60,7 +65,7 @@ interface RaiToolLabels {
 }
 
 @@doc(RaiToolLabel.name, "The name of the Rai Tool Label");
-@@encodedName(RaiToolLabel.eTag, "application/json", "etag");
+@@encodedName(RaiToolLabel.etag, "application/json", "etag");
 @@doc(RaiToolLabel.properties, "Properties of the RAI Tool Label.");
 @@doc(RaiToolLabels.createOrUpdate::parameters.resource,
   "Properties describing the RAI Tool Label."

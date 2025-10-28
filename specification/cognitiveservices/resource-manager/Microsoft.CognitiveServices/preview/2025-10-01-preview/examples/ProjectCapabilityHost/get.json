@@ -1,28 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
     "accountName": "account-1",
-    "projectName": "project-1",
+    "api-version": "2025-10-01-preview",
     "capabilityHostName": "capabilityHostName",
-    "api-version": "2025-10-01-preview"
+    "projectName": "project-1",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/account-1/projects/project-1/capabilityHosts/capabilityHostName",
         "name": "capabilityHostName",
         "type": "Microsoft.CognitiveServices/accounts/projects/capabilityHosts",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/account-1/projects/project-1/capabilityHosts/capabilityHostName",
         "properties": {
           "description": "string",
+          "customerSubnet": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroups/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubne",
+          "provisioningState": "Succeeded",
           "tags": {
             "string": "string"
-          },
-          "customerSubnet": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroups/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubne",
-          "provisioningState": "Succeeded"
+          }
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ProjectCapabilityHosts_Get",
+  "title": "Get Project CapabilityHost."
 }

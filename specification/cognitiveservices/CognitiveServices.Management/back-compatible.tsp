@@ -9,7 +9,7 @@ using Microsoft.CognitiveServices;
 @@clientLocation(Accounts.privateLinkResourcesList, "PrivateLinkResources");
 @@clientName(Accounts.privateLinkResourcesList, "List");
 @@clientLocation(Accounts.createOrUpdate, "TestRaiExternalSafetyProvider");
-@@clientName(Accounts.createOrUpdate::parameters.body, "safetyProvider");
+@@clientName(Accounts.createOrUpdate::parameters.resource, "safetyProvider");
 @@clientLocation(Accounts.provisionManagedNetwork, "ManagedNetworkProvisions");
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
@@ -98,7 +98,8 @@ using Microsoft.CognitiveServices;
   CommitmentPlans
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommitmentPlanAccountAssociation.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommitmentPlanAccountAssociation.properties
+);
 
 @@clientName(DefenderForAISettings.createOrUpdate::parameters.resource,
   "defenderForAISettings"
@@ -107,7 +108,8 @@ using Microsoft.CognitiveServices;
   "defenderForAISettings"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DefenderForAISetting.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DefenderForAISetting.properties
+);
 
 @@clientName(Projects.create::parameters.resource, "project");
 @@clientName(Projects.update::parameters.properties, "project");
@@ -208,3 +210,25 @@ using Microsoft.CognitiveServices;
 );
 
 @@clientLocation(ModelCapacitiesOperationGroup.list, "ModelCapacities");
+@@clientName(calculateModelCapacity::parameters.body, "parameters");
+@@clientName(checkDomainAvailability::parameters.body, "parameters");
+@@clientName(checkSkuAvailability::parameters.body, "parameters");
+@@clientName(AgentApplicationResource, "AgentApplication");
+@@clientName(CapabilityHost, "CapabilityHostProperties");
+@@clientName(CapabilityHostResource, "CapabilityHost");
+
+//@@clientName(AgentDeploymentResource, "AgentDeployment");
+//@@clientName(AgentDeployment, "AgentDeploymentProperties");
+//@@clientName(AgentReferenceResource, "AgentReference");
+//@@clientName(AgentReference, "AgentReferenceProperties");
+
+@@visibility(Project.tags, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
+@@visibility(CommitmentPlan.tags,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);
+@@visibility(Account.tags, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
+@@TypeSpec.Http.header(Azure.ResourceManager.ArmLroLocationHeader.location,
+  "location"
+);

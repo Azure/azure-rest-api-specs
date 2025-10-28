@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "raiToolConnectionName": "ToolLabelName"
+    "api-version": "2025-10-01-preview",
+    "raiToolConnectionName": "ToolLabelName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -12,31 +12,33 @@
         "name": "raiToolLabelName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiIfcToolLabels/raiIfcToolLabelName",
         "properties": {
-          "toolConnectionName": "SampleToolLabel",
           "accountScope": {
             "labelValues": {
-              "dataDirection": "egress",
-              "confidentiality": "low"
+              "confidentiality": "low",
+              "dataDirection": "egress"
             }
           },
           "projectScopes": [
             {
-              "project": "ProjectA",
               "labelValues": {
-                "dataDirection": "egress",
-                "confidentiality": "low"
-              }
+                "confidentiality": "low",
+                "dataDirection": "egress"
+              },
+              "project": "ProjectA"
             },
             {
-              "project": "ProjectB",
               "labelValues": {
-                "dataDirection": "egress",
-                "confidentiality": "high"
-              }
+                "confidentiality": "high",
+                "dataDirection": "egress"
+              },
+              "project": "ProjectB"
             }
-          ]
+          ],
+          "toolConnectionName": "SampleToolLabel"
         }
       }
     }
-  }
+  },
+  "operationId": "RaiToolLabels_Get",
+  "title": "GetRaiToolLabel"
 }

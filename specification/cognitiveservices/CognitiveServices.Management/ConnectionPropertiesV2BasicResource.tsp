@@ -39,6 +39,8 @@ interface ConnectionPropertiesV2BasicResourceOps
         @segment("accounts")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         accountName: string,
       },
       {
@@ -68,7 +70,8 @@ interface ConnectionPropertiesV2BasicResources {
   @operationId("AccountConnections_Create")
   create is ConnectionPropertiesV2BasicResourceOps.CreateOrUpdateSync<
     ConnectionPropertiesV2BasicResource,
-    Response = ArmResourceUpdatedResponse<ConnectionPropertiesV2BasicResource>
+    Response = ArmResourceUpdatedResponse<ConnectionPropertiesV2BasicResource>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -114,7 +117,7 @@ interface ConnectionPropertiesV2BasicResources {
        * query parameter that indicates if get connection call should return both connections and datastores
        */
       @query("includeAll")
-      includeAll?: boolean;
+      includeAll?: boolean = false;
     },
     Response = ArmResponse<ConnectionPropertiesV2BasicResourceArmPaginatedResult>
   >;
@@ -133,6 +136,8 @@ interface ProjectConnectionOps
         @segment("accounts")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         accountName: string,
 
         /** The name of Cognitive Services account's project. */
@@ -140,6 +145,8 @@ interface ProjectConnectionOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         projectName: string,
       },
       {
@@ -165,7 +172,8 @@ interface ProjectConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ProjectConnectionOps.CreateOrUpdateSync<
     ConnectionPropertiesV2BasicResource,
-    Response = ArmResourceUpdatedResponse<ConnectionPropertiesV2BasicResource>
+    Response = ArmResourceUpdatedResponse<ConnectionPropertiesV2BasicResource>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -205,7 +213,7 @@ interface ProjectConnections {
        * query parameter that indicates if get connection call should return both connections and datastores
        */
       @query("includeAll")
-      includeAll?: boolean;
+      includeAll?: boolean = false;
     },
     Response = ArmResponse<ConnectionPropertiesV2BasicResourceArmPaginatedResult>
   >;
@@ -228,4 +236,34 @@ interface ProjectConnections {
 );
 @@doc(ProjectConnections.update::parameters.properties,
   "Parameters for account connection update."
+);
+@@summary(ConnectionPropertiesV2BasicResources.list,
+  "Lists all the available  Cognitive Services account connections under the specified account."
+);
+@@summary(ConnectionPropertiesV2BasicResources.get,
+  "Lists Cognitive Services account connection by name."
+);
+@@summary(ConnectionPropertiesV2BasicResources.create,
+  "Create or update Cognitive Services account connection under the specified account."
+);
+@@summary(ConnectionPropertiesV2BasicResources.update,
+  "Update Cognitive Services account connection under the specified account."
+);
+@@summary(ConnectionPropertiesV2BasicResources.delete,
+  "Delete Cognitive Services account connection by name."
+);
+@@summary(ProjectConnections.list,
+  "Lists all the available Cognitive Services project connections under the specified project."
+);
+@@summary(ProjectConnections.get,
+  "Lists Cognitive Services project connection by name."
+);
+@@summary(ProjectConnections.create,
+  "Create or update Cognitive Services project connection under the specified project."
+);
+@@summary(ProjectConnections.update,
+  "Update Cognitive Services project connection under the specified project."
+);
+@@summary(ProjectConnections.delete,
+  "Delete Cognitive Services project connection by name."
 );

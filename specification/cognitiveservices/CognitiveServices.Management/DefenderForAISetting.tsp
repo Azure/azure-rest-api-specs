@@ -23,7 +23,12 @@ model DefenderForAISetting
     SegmentName = "defenderForAISettings",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -64,7 +69,7 @@ interface DefenderForAISettings {
 }
 
 @@doc(DefenderForAISetting.name, "The name of the defender for AI setting.");
-@@encodedName(DefenderForAISetting.eTag, "application/json", "etag");
+@@encodedName(DefenderForAISetting.etag, "application/json", "etag");
 @@doc(DefenderForAISetting.properties,
   "The Defender for AI resource properties."
 );

@@ -23,7 +23,12 @@ model RaiBlocklistItem
     SegmentName = "raiBlocklistItems",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Resource tags.
@@ -62,7 +67,7 @@ interface RaiBlocklistItems {
 @@doc(RaiBlocklistItem.name,
   "The name of the RaiBlocklist Item associated with the custom blocklist"
 );
-@@encodedName(RaiBlocklistItem.eTag, "application/json", "etag");
+@@encodedName(RaiBlocklistItem.etag, "application/json", "etag");
 @@doc(RaiBlocklistItem.properties,
   "Properties of Cognitive Services RaiBlocklist Item."
 );

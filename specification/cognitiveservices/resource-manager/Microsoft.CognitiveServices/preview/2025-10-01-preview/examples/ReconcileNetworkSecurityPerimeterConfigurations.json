@@ -1,43 +1,43 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "nspConfigurationName": "NSPConfigurationName"
+    "api-version": "2025-10-01-preview",
+    "nspConfigurationName": "NSPConfigurationName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/networkSecurityPerimeterConfigurations/config1",
         "name": "networkSecurityPerimeterConfigurationName",
         "type": "Microsoft.CognitiveServices/accounts/networkSecurityPerimeterConfigurations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/networkSecurityPerimeterConfigurations/config1",
         "properties": {
-          "provisioningState": "Succeeded",
           "networkSecurityPerimeter": {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/networkSecurityPerimeters/perimeter",
-            "perimeterGuid": "00000000-0000-0000-0000-000000000000",
-            "location": "East US"
-          },
-          "resourceAssociation": {
-            "name": "associationName",
-            "accessMode": "Enforced"
+            "location": "East US",
+            "perimeterGuid": "00000000-0000-0000-0000-000000000000"
           },
           "profile": {
             "name": "profileName",
-            "accessRulesVersion": 1,
             "accessRules": [
               {
                 "name": "ruleName",
                 "properties": {
-                  "direction": "Inbound",
                   "addressPrefixes": [
                     "148.0.0.0/8",
                     "152.4.6.0/24"
-                  ]
+                  ],
+                  "direction": "Inbound"
                 }
               }
-            ]
+            ],
+            "accessRulesVersion": 1
+          },
+          "provisioningState": "Succeeded",
+          "resourceAssociation": {
+            "name": "associationName",
+            "accessMode": "Enforced"
           }
         }
       }
@@ -47,5 +47,7 @@
         "azure-asyncoperation": "http://azure.async.operation/status"
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+  "title": "ReconcileNetworkSecurityPerimeterConfigurations"
 }

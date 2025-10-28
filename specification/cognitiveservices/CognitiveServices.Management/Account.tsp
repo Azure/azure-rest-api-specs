@@ -13,7 +13,8 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services account is an Azure resource representing the provisioned account, it's type, location and SKU.
  */
-model Account is Azure.ResourceManager.TrackedResource<AccountProperties> {
+model Account
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AccountProperties> {
   ...ResourceNameParameter<
     Resource = Account,
     KeyName = "accountName",
@@ -22,7 +23,13 @@ model Account is Azure.ResourceManager.TrackedResource<AccountProperties> {
   >;
 
   /**
-   * The Kind of the resource.
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The kind (type) of cognitive service account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
@@ -55,6 +62,8 @@ interface AccountOps
         @segment("accounts")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
         accountName: string,
       }
     > {}
@@ -91,7 +100,8 @@ interface Accounts {
   update is AccountOps.CustomPatchAsync<
     Account,
     PatchModel = Account,
-    Response = ArmResponse<Account> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Account;
     })
@@ -109,12 +119,12 @@ interface Accounts {
   /**
    * Returns all the resources of a particular type belonging to a resource group
    */
-  listByResourceGroup is AccountOps.List<Account>;
+  listByResourceGroup is AccountOps.List<Account, Response = AccountListResult>;
 
   /**
    * Returns all the resources of a particular type belonging to a subscription.
    */
-  list is AccountOps.ListBySubscription<Account>;
+  list is ArmListBySubscription<Account, Response = AccountListResult>;
 
   /**
    * Lists the account keys for the specified Cognitive Services account.
@@ -164,6 +174,7 @@ interface Accounts {
    */
   @get
   @action("models")
+  @list
   listModels is AccountOps.ActionSync<
     Account,
     void,
@@ -189,17 +200,17 @@ interface Accounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TestRaiExternalSafetyProvider_CreateOrUpdate")
   @put
-  @action("{safetyProviderName}")
-  createOrUpdate is AccountOps.ActionSync<
+  createOrUpdate is AccountOps.CreateOrUpdateSync<
     Account,
-    RaiExternalSafetyProviderSchema,
-    ArmResponse<RaiExternalSafetyProviderSchema> | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>,
+    Request = RaiExternalSafetyProviderSchema,
+    Response = ArmResponse<RaiExternalSafetyProviderSchema> | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>,
     Parameters = {
       /**
        * The name of the Rai External Safety Provider associated with the Cognitive Services Account
        */
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
       @path
+      @segment("testRaiExternalSafetyProvider")
       safetyProviderName: string;
     }
   >;
@@ -211,8 +222,9 @@ interface Accounts {
   @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is AccountOps.ActionAsync<
     Account,
-    Record<unknown>,
-    ArmResponse<ManagedNetworkProvisionStatus>,
+    Request = ManagedNetworkProvisionOptions,
+    Result = void,
+    Response = ArmResponse<ManagedNetworkProvisionStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkProvisionStatus>>,
     OptionalRequestBody = true
   >;
 }
@@ -239,6 +251,8 @@ interface DeletedAccountOps
         @segment("deletedAccounts")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @maxLength(64)
+        @minLength(2)
         accountName: string,
       }
     > {}
@@ -271,9 +285,12 @@ interface DeletedAccounts {
   "The parameters to provide for the created account."
 );
 @@doc(Accounts.regenerateKey::parameters.body, "regenerate key parameters.");
-@@doc(Accounts.createOrUpdate::parameters.body,
+@@doc(Accounts.createOrUpdate::parameters.resource,
   "Properties describing the rai external safety provider."
 );
 @@doc(Accounts.provisionManagedNetwork::parameters.body,
   "Managed Network Provisioning Options for a cognitive services account."
+);
+@@summary(Accounts.provisionManagedNetwork,
+  "Provisions the managed network of a cognitive services account."
 );

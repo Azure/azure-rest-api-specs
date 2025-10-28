@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "raiBlocklistName": "raiBlocklistName"
+    "api-version": "2025-10-01-preview",
+    "raiBlocklistName": "raiBlocklistName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -14,20 +14,22 @@
             "name": "raiBlocklistItemName",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiBlocklists/raiBlocklistName/raiBlocklistItems/raiBlocklistItemName",
             "properties": {
-              "pattern": "Pattern To Block",
-              "isRegex": false
+              "isRegex": false,
+              "pattern": "Pattern To Block"
             }
           },
           {
             "name": "raiBlocklistItemName2",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiBlocklists/raiBlocklistName/raiBlocklistItems/raiBlocklistItemName2",
             "properties": {
-              "pattern": "Another Pattern To Block",
-              "isRegex": false
+              "isRegex": false,
+              "pattern": "Another Pattern To Block"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "RaiBlocklistItems_List",
+  "title": "ListBlocklistItems"
 }

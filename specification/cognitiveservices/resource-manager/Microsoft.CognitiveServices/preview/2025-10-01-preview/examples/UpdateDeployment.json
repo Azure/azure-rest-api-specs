@@ -1,36 +1,36 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "deploymentName": "deploymentName",
+    "api-version": "2025-10-01-preview",
     "deployment": {
       "sku": {
         "name": "Standard",
         "capacity": 1
       }
-    }
+    },
+    "deploymentName": "deploymentName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
         "name": "deploymentName",
         "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+        "properties": {
+          "deploymentState": "Paused",
+          "model": {
+            "name": "ada",
+            "format": "OpenAI",
+            "version": "1"
+          },
+          "provisioningState": "Succeeded",
+          "serviceTier": "Priority"
+        },
         "sku": {
           "name": "Standard",
           "capacity": 1
-        },
-        "properties": {
-          "model": {
-            "format": "OpenAI",
-            "name": "ada",
-            "version": "1"
-          },
-          "serviceTier": "Priority",
-          "deploymentState": "Paused",
-          "provisioningState": "Succeeded"
         }
       }
     },
@@ -39,5 +39,7 @@
         "azure-asyncoperation": "http://azure.async.operation/status"
       }
     }
-  }
+  },
+  "operationId": "Deployments_Update",
+  "title": "UpdateDeployment"
 }

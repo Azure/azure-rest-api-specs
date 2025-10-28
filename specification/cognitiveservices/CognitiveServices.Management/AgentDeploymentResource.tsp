@@ -26,23 +26,87 @@ model AgentDeploymentResource
 }
 
 @armResourceOperations
+interface AgentDeploymentResourcesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of Cognitive Services account. */
+        @path
+        @segment("accounts")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @minLength(2)
+        @maxLength(64)
+        accountName: string,
+
+        /**
+         * aaaaaaaaaaaaa
+         */
+        @path
+        @segment("projects")
+        @key
+        @minLength(2)
+        @maxLength(64)
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        projectName: string,
+
+        /**
+         * aaaaaaaaaaaaaaa
+         */
+        @path
+        @segment("applications")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        appName: string,
+      },
+      {
+        /**
+         * aaaaaaaaaaaaaaa
+         */
+        @path
+        @segment("deployments")
+        @key
+        deploymentName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface AgentDeploymentResources {
   /**
    * Gets an Agent Deployment by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentDeployments_Get")
-  get is ArmResourceRead<AgentDeploymentResource>;
+  get is AgentDeploymentResourcesOps.Read<AgentDeploymentResource>;
 
   /**
    * Creates or updates an Agent Deployment (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentDeployments_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is AgentDeploymentResourcesOps.CreateOrUpdateAsync<
     AgentDeploymentResource,
-    LroHeaders = ArmLroLocationHeader<FinalResult = AgentDeploymentResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<AgentDeploymentResource> | ArmResourceCreatedResponse<
+      AgentDeploymentResource,
+      LroHeaders = ArmLroLocationHeader<FinalResult = AgentDeploymentResource> & {
+        /**
+         * URI to poll for asynchronous operation status.
+         */
+        @header("Azure-AsyncOperation")
+        azureAsyncOperation: string;
+
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        @encode("duration", string)
+        asyncOperationTimeout: string;
+      }
+    >
   >;
 
   /**
@@ -50,14 +114,14 @@ interface AgentDeploymentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentDeployments_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<AgentDeploymentResource>;
+  delete is AgentDeploymentResourcesOps.DeleteWithoutOkAsync<AgentDeploymentResource>;
 
   /**
    * Lists Agent Deployments in the application.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentDeployments_List")
-  list is ArmResourceListByParent<
+  list is AgentDeploymentResourcesOps.List<
     AgentDeploymentResource,
     Parameters = {
       /**
@@ -89,7 +153,7 @@ interface AgentDeploymentResources {
        * Whether to order in ascending order.
        */
       @query("orderByAsc")
-      orderByAsc?: boolean;
+      orderByAsc?: boolean = false;
     },
     Response = ArmResponse<AgentDeploymentResourceArmPaginatedResult>
   >;
@@ -99,14 +163,22 @@ interface AgentDeploymentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentDeployments_Start")
-  start is ArmResourceActionSync<AgentDeploymentResource, void, OkResponse>;
+  start is AgentDeploymentResourcesOps.ActionSync<
+    AgentDeploymentResource,
+    void,
+    OkResponse
+  >;
 
   /**
    * Stops an Agent Deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentDeployments_Stop")
-  stop is ArmResourceActionSync<AgentDeploymentResource, void, OkResponse>;
+  stop is AgentDeploymentResourcesOps.ActionSync<
+    AgentDeploymentResource,
+    void,
+    OkResponse
+  >;
 }
 
 @@doc(AgentDeploymentResource.name,
@@ -118,3 +190,13 @@ interface AgentDeploymentResources {
 @@doc(AgentDeploymentResources.createOrUpdate::parameters.resource,
   "Agent Deployment definition object."
 );
+@@summary(AgentDeploymentResources.get, "Gets an Agent Deployment by name.");
+@@summary(AgentDeploymentResources.list,
+  "Lists Agent Deployments in the application."
+);
+@@summary(AgentDeploymentResources.createOrUpdate,
+  "Creates or updates an Agent Deployment (asynchronous)."
+);
+@@summary(AgentDeploymentResources.delete, "Delete Agent Deployment.");
+@@summary(AgentDeploymentResources.start, "Starts an Agent Deployment.");
+@@summary(AgentDeploymentResources.stop, "Stops an Agent Deployment.");

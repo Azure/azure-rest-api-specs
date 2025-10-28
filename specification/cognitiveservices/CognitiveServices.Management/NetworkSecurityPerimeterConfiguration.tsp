@@ -46,7 +46,7 @@ interface NetworkSecurityPerimeterConfigurations {
   reconcile is ArmResourceActionAsync<
     NetworkSecurityPerimeterConfiguration,
     void,
-    ArmResponse<NetworkSecurityPerimeterConfiguration>
+    Response = NetworkSecurityPerimeterConfiguration
   >;
 }
 
