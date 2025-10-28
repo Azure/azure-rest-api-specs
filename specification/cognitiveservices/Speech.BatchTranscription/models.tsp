@@ -47,6 +47,7 @@ union ProfanityFilterMode {
 @resource("transcriptions")
 model TranscriptionJob {
   @doc("TranscriptionLinks")
+  @visibility(Lifecycle.Read)
   links?: TranscriptionLinks;
 
   @doc("TranscriptionProperties")
@@ -55,12 +56,10 @@ model TranscriptionJob {
   @doc("The id of this entity.")
   @key("id")
   @visibility(Lifecycle.Read)
-  @pollingOperationParameter("getTranscription")
   id: string;
 
   @visibility(Lifecycle.Read)
   @doc("The location of this entity.")
-  @pollingLocation
   self: url;
 
   @doc("EntityReference")
@@ -70,9 +69,11 @@ model TranscriptionJob {
   dataset?: EntityReference;
 
   @doc("A list of content urls to get audio files to transcribe. Up to 1000 urls are allowed.\r\nThis property will not be returned in a response.")
+  @visibility(Lifecycle.Create)
   contentUrls?: Array<url>;
 
   @doc("A URL for an Azure blob container that contains the audio files. A container is allowed to have a maximum size of 5GB and a maximum number of 10000 blobs.\r\nThe maximum size for a blob is 2.5GB.\r\nContainer SAS should contain 'r' (read) and 'l' (list) permissions.\r\nThis property will not be returned in a response.")
+  @visibility(Lifecycle.Create)
   contentContainerUrl?: url;
 
   @minLength(1)

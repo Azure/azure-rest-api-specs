@@ -6,6 +6,7 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.Core.Traits.Private;
 
 namespace Azure.Ai.Speech.BatchTranscription;
 
@@ -15,13 +16,46 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
+// Request model for creating a transcription (excludes read-only properties)
+@doc("Request model for creating a new transcription job.")
+model TranscriptionJobCreate {
+  @doc("TranscriptionProperties")
+  properties: TranscriptionProperties;
+
+  @doc("EntityReference")
+  `model`?: EntityReference;
+
+  @doc("EntityReference")
+  dataset?: EntityReference;
+
+  @doc("A list of content urls to get audio files to transcribe. Up to 1000 urls are allowed.\r\nThis property will not be returned in a response.")
+  contentUrls?: Array<url>;
+
+  @doc("A URL for an Azure blob container that contains the audio files. A container is allowed to have a maximum size of 5GB and a maximum number of 10000 blobs.\r\nThe maximum size for a blob is 2.5GB.\r\nContainer SAS should contain 'r' (read) and 'l' (list) permissions.\r\nThis property will not be returned in a response.")
+  contentContainerUrl?: url;
+
+  @minLength(1)
+  @doc("The locale of the contained data. If Language Identification is used, this locale is used to transcribe speech for which no language could be detected.")
+  locale: string;
+
+  @minLength(1)
+  @doc("The display name of the object.")
+  displayName: string;
+
+  @doc("The description of the object.")
+  description?: string;
+
+  @doc("The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.")
+  customProperties?: Record<string>;
+}
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "This is an existing service, we have a non-conforming operation."
 @post
 @route("/transcriptions:submit")
 @doc("Starts a new transcription job.")
-op startTranscription is Azure.Core.RpcOperation<
-  TranscriptionJob,
+op startTranscription is Azure.Core.Foundations.Operation<
+  TranscriptionJobCreate,
   TranscriptionJob
 >;
 
