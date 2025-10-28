@@ -1,7 +1,7 @@
-# MongoDB Atlas
+# MongoDB.Atlas RP
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for MongoDB Atlas.
+> This is the AutoRest configuration file for LiftrMongoDB service.
 
 ## Configuration
 
