@@ -4,12 +4,8 @@
   "parameters": {
     "api-version": "2025-04-30-preview",
     "body": {
-      "type": "Collection",
-      "id": "test-collection-d45537668d06",
-      "stac_version": "1.0.0",
-      "description": "A collection for integration tests purposes",
-      "links": [],
-      "title": "Test Collection d45537668d06",
+      "id": "test-partition-type-collection",
+      "description": "Temporary collection for partition type testing",
       "extent": {
         "spatial": {
           "bbox": [
@@ -25,32 +21,32 @@
           "interval": [
             [
               "2020-01-01T00:00:00Z",
-              null
+              "2099-12-31T23:59:59Z"
             ]
           ]
         }
       },
-      "license": "CC-BY-4.0"
+      "license": "proprietary",
+      "links": [],
+      "stac_version": "1.0.0",
+      "title": "Test Partition Type Collection",
+      "type": "Collection"
     }
   },
   "responses": {
     "202": {
-      "headers": {
-        "location": "https://contoso.com/operationstatus",
-        "operation-location": "https://contoso.com/operationstatus"
-      },
       "body": {
-        "id": "4e2eab39-038b-48a2-be6c-698069ed9f21",
+        "id": "00000000-0000-0000-0000-000000000000",
         "status": "Pending",
-        "type": "AddCollection",
         "statusHistory": [
           {
             "status": "Pending",
-            "timestamp": "2025-03-11T17:06:44.1259931Z"
+            "timestamp": "2025-10-28T18:39:55.3981248Z"
           }
         ],
-        "creationTime": "2025-03-11T17:06:44.1259917Z",
-        "collectionId": "test-collection"
+        "type": "AddCollection",
+        "creationTime": "2025-10-28T18:39:55.3981203Z",
+        "collectionId": "test-partition-type-collection"
       }
     }
   }

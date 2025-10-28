@@ -47,7 +47,7 @@ interface StacCollectionAssets {
 
       @body
       body: StacCollection;
-    } | StacCollection
+    }
   >;
   /**
    * Update an existing asset in a given collection.
@@ -59,7 +59,7 @@ interface StacCollectionAssets {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/assets/{assetId}")
   @put
-  createOrReplace is Azure.Core.Foundations.Operation<
+  replace is Azure.Core.Foundations.Operation<
     {
       /**
        * STAC Collection ID
@@ -89,12 +89,7 @@ interface StacCollectionAssets {
       @multipartBody
       body: StacAssetData;
     },
-    {
-      ...CreatedResponse;
-
-      @body
-      body: StacCollection;
-    } | StacCollection
+    StacCollection
   >;
   /**
    * Delete an asset from a given collection.
@@ -122,7 +117,7 @@ interface StacCollectionAssets {
       @pattern(".*")
       assetId: string;
     },
-    OkResponse
+    StacCollection
   >;
 }
 
@@ -229,7 +224,7 @@ interface StacCollectionMosaics {
 
       @body
       body: StacMosaic;
-    } | StacMosaic
+    }
   >;
   /**
    * Get a mosaic definition from a given collection
@@ -267,7 +262,7 @@ interface StacCollectionMosaics {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/configurations/mosaics/{mosaicId}")
   @put
-  createOrReplace is Azure.Core.Foundations.Operation<
+  replace is Azure.Core.Foundations.Operation<
     {
       /**
        * Unique identifier for the STAC collection.
@@ -291,12 +286,7 @@ interface StacCollectionMosaics {
       @body
       body: StacMosaic;
     },
-    {
-      ...CreatedResponse;
-
-      @body
-      body: StacMosaic;
-    } | StacMosaic
+    StacMosaic
   >;
   /**
    * Delete a mosaic definition from a given collection
@@ -378,7 +368,7 @@ interface StacCollectionRenderOptions {
 
       @body
       body: RenderOption;
-    } | RenderOption
+    }
   >;
   /**
    * Get a render option for a given collection
@@ -416,7 +406,7 @@ interface StacCollectionRenderOptions {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/configurations/render-options/{renderOptionId}")
   @put
-  createOrReplace is Azure.Core.Foundations.Operation<
+  replace is Azure.Core.Foundations.Operation<
     {
       /**
        * Unique identifier for the STAC collection.
@@ -440,12 +430,7 @@ interface StacCollectionRenderOptions {
       @body
       body: RenderOption;
     },
-    {
-      ...CreatedResponse;
-
-      @body
-      body: RenderOption;
-    } | RenderOption
+    RenderOption
   >;
   /**
    * Delete a render option for a given collection
@@ -579,7 +564,7 @@ interface StacCollectionPartitionTypes {
       @body
       body: PartitionType;
     },
-    OkResponse | NotFoundResponse
+    OkResponse
   >;
 }
 
@@ -682,7 +667,7 @@ interface StacQueryables {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/queryables/{queryableName}")
   @put
-  createOrReplace is Azure.Core.Foundations.Operation<
+  replace is Azure.Core.Foundations.Operation<
     {
       /**
        * Unique identifier for the STAC collection.
@@ -706,11 +691,6 @@ interface StacQueryables {
       @body
       body: StacQueryable;
     },
-    {
-      ...CreatedResponse;
-
-      @body
-      body: StacQueryable;
-    } | StacQueryable
+    StacQueryable
   >;
 }

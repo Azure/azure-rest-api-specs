@@ -116,7 +116,7 @@ model IngestionDefinition {
   id: uuid;
 
   @doc("Ingestion type")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   importType: IngestionType;
 
   @doc("Ingestion name")
@@ -561,7 +561,7 @@ interface IngestionSources {
   @doc("Update an existing ingestion source in a geo-catalog")
   @route("/inma/ingestion-sources/{id}")
   @put
-  createOrReplace(
+  replace(
     ...ApiVersionParameter,
 
     @doc("Ingestion source id")
@@ -578,8 +578,7 @@ interface IngestionSources {
     @header
     location: url;
 
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
-    @statusCode statusCode: 200 | 201;
+    @statusCode statusCode: 200;
 
     @doc("Ingestion source summary")
     @body

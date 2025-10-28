@@ -922,9 +922,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Return dataset's statistics.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StacAssetStatistics"
+              "type": "object",
+              "additionalProperties": {
+                "additionalProperties": {
+                  "$ref": "#/definitions/BandStatistics"
+                },
+                "type": "object"
+              }
             }
           },
           "default": {
@@ -1296,7 +1302,7 @@
         },
         "x-ms-examples": {
           "TilerParts_GetCroppedToBoundingBox": {
-            "$ref": "./examples/TilerParts_GetMinxMinyMaxxMaxyFormat.json"
+            "$ref": "./examples/TilerParts_GetCroppedToBoundingBox.json"
           }
         }
       }
@@ -1370,16 +1376,16 @@
             "in": "path",
             "description": "Width in pixels for the output image.",
             "required": true,
-            "type": "number",
-            "format": "float"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "height",
             "in": "path",
             "description": "Height in pixels for the output image.",
             "required": true,
-            "type": "number",
-            "format": "float"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "format",
@@ -1616,16 +1622,16 @@
             "in": "path",
             "description": "Width in pixels for the output image.",
             "required": true,
-            "type": "number",
-            "format": "float"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "height",
             "in": "path",
             "description": "Height in pixels for the output image.",
             "required": true,
-            "type": "number",
-            "format": "float"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "format",
@@ -1775,7 +1781,7 @@
         },
         "x-ms-examples": {
           "TilerParts_GetCroppedToBoundingBoxWidthByHeight": {
-            "$ref": "./examples/TilerParts_GetMinxMinyMaxxMaxyWidthByHeightFormat.json"
+            "$ref": "./examples/TilerParts_GetCroppedToBoundingBoxWidthByHeight.json"
           }
         }
       }
@@ -2048,9 +2054,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Return dataset's basic info or the list of available assets.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StacItemAssetDetails"
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/TilerInfo"
+              }
             }
           },
           "default": {
@@ -4136,7 +4145,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/StacAsset"
+                "$ref": "#/definitions/StacItemPointAsset"
               }
             }
           },
@@ -7331,7 +7340,7 @@
             "$ref": "#/parameters/CollectionParameters.collectionId"
           },
           {
-            "name": "definition",
+            "name": "body",
             "in": "body",
             "description": "Definition of the ingestion",
             "required": true,
@@ -7438,7 +7447,7 @@
             "$ref": "#/parameters/IngestionParameters.ingestionId"
           },
           {
-            "name": "definition",
+            "name": "body",
             "in": "body",
             "description": "Ingestion properties to update",
             "required": true,
@@ -7779,7 +7788,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "ingestionSource",
+            "name": "body",
             "in": "body",
             "description": "Definition of the ingestion source",
             "required": true,
@@ -7864,7 +7873,7 @@
         }
       },
       "put": {
-        "operationId": "IngestionSources_CreateOrReplace",
+        "operationId": "IngestionSources_Replace",
         "tags": [
           "Ingestion Sources"
         ],
@@ -7883,7 +7892,7 @@
             "pattern": ".*"
           },
           {
-            "name": "ingestionSource",
+            "name": "body",
             "in": "body",
             "description": "Definition of the ingestion source",
             "required": true,
@@ -7895,19 +7904,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/IngestionSource"
-            },
-            "headers": {
-              "location": {
-                "type": "string",
-                "format": "uri",
-                "description": "Url of the created ingestion source"
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/IngestionSource"
             },
@@ -7933,8 +7929,8 @@
           }
         },
         "x-ms-examples": {
-          "IngestionSources_CreateOrReplace": {
-            "$ref": "./examples/IngestionSources_CreateOrReplace.json"
+          "IngestionSources_Replace": {
+            "$ref": "./examples/IngestionSources_Replace.json"
           }
         }
       },
@@ -8741,31 +8737,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Operation"
-            },
-            "headers": {
-              "location": {
-                "type": "string",
-                "format": "uri",
-                "description": "Url used to monitor the background operation"
-              },
-              "operation-location": {
-                "type": "string",
-                "format": "uri",
-                "description": "Url used to monitor the background operation"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/StacCollection"
             }
           }
         },
@@ -8773,11 +8745,7 @@
           "StacCollections_CreateOrReplace": {
             "$ref": "./examples/StacCollections_CreateOrReplace.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "StacCollections_Delete",
@@ -8877,12 +8845,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/StacCollection"
-            }
-          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
@@ -8911,7 +8873,7 @@
     },
     "/stac/collections/{collectionId}/assets/{assetId}": {
       "put": {
-        "operationId": "StacCollectionAssets_CreateOrReplace",
+        "operationId": "StacCollectionAssets_Replace",
         "tags": [
           "STAC Collection Configuration"
         ],
@@ -8964,12 +8926,6 @@
               "$ref": "#/definitions/StacCollection"
             }
           },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/StacCollection"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -8984,8 +8940,8 @@
           }
         },
         "x-ms-examples": {
-          "StacCollectionAssets_CreateOrReplace": {
-            "$ref": "./examples/StacCollectionAssets_CreateOrReplace.json"
+          "StacCollectionAssets_Replace": {
+            "$ref": "./examples/StacCollectionAssets_Replace.json"
           }
         }
       },
@@ -9021,7 +8977,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StacCollection"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -9174,12 +9133,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/StacMosaic"
-            }
-          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
@@ -9264,7 +9217,7 @@
         }
       },
       "put": {
-        "operationId": "StacCollectionMosaics_CreateOrReplace",
+        "operationId": "StacCollectionMosaics_Replace",
         "tags": [
           "STAC Collection Configuration"
         ],
@@ -9309,12 +9262,6 @@
               "$ref": "#/definitions/StacMosaic"
             }
           },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/StacMosaic"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -9329,8 +9276,8 @@
           }
         },
         "x-ms-examples": {
-          "StacCollectionMosaics_CreateOrReplace": {
-            "$ref": "./examples/StacCollectionMosaics_CreateOrReplace.json"
+          "StacCollectionMosaics_Replace": {
+            "$ref": "./examples/StacCollectionMosaics_Replace.json"
           }
         }
       },
@@ -9470,9 +9417,6 @@
           "200": {
             "description": "The request has succeeded."
           },
-          "404": {
-            "description": "The server cannot find the requested resource."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -9575,12 +9519,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RenderOption"
-            }
-          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
@@ -9665,7 +9603,7 @@
         }
       },
       "put": {
-        "operationId": "StacCollectionRenderOptions_CreateOrReplace",
+        "operationId": "StacCollectionRenderOptions_Replace",
         "tags": [
           "STAC Collection Configuration"
         ],
@@ -9710,12 +9648,6 @@
               "$ref": "#/definitions/RenderOption"
             }
           },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/RenderOption"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -9730,8 +9662,8 @@
           }
         },
         "x-ms-examples": {
-          "StacCollectionRenderOptions_CreateOrReplace": {
-            "$ref": "./examples/StacCollectionRenderOptions_CreateOrReplace.json"
+          "StacCollectionRenderOptions_Replace": {
+            "$ref": "./examples/StacCollectionRenderOptions_Replace.json"
           }
         }
       },
@@ -10409,7 +10341,7 @@
     },
     "/stac/collections/{collectionId}/queryables/{queryableName}": {
       "put": {
-        "operationId": "StacQueryables_CreateOrReplace",
+        "operationId": "StacQueryables_Replace",
         "tags": [
           "STAC Collection Configuration"
         ],
@@ -10454,12 +10386,6 @@
               "$ref": "#/definitions/StacQueryable"
             }
           },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/StacQueryable"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -10474,8 +10400,8 @@
           }
         },
         "x-ms-examples": {
-          "StacQueryables_CreateOrReplace": {
-            "$ref": "./examples/StacQueryables_CreateOrReplace.json"
+          "StacQueryables_Replace": {
+            "$ref": "./examples/StacQueryables_Replace.json"
           }
         }
       },
@@ -12488,6 +12414,19 @@
         "coordinates"
       ]
     },
+    "ErrorInfo": {
+      "type": "object",
+      "description": "Error information wrapper",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "Feature": {
       "type": "object",
       "description": "GeoJSON Feature object representing a geographic entity",
@@ -12747,6 +12686,7 @@
           "description": "Ingestion type",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -12790,6 +12730,15 @@
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion creation model",
       "properties": {
+        "importType": {
+          "$ref": "#/definitions/IngestionType",
+          "description": "Ingestion type",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "displayName": {
           "type": "string",
           "description": "Ingestion name"
@@ -12943,7 +12892,6 @@
       "discriminator": "kind",
       "required": [
         "id",
-        "created",
         "kind"
       ]
     },
@@ -12967,8 +12915,7 @@
       },
       "required": [
         "id",
-        "kind",
-        "created"
+        "kind"
       ]
     },
     "IngestionSourceType": {
@@ -13421,7 +13368,7 @@
           }
         },
         "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "$ref": "#/definitions/ErrorInfo",
           "description": "Error information"
         }
       },
@@ -14227,23 +14174,6 @@
       ],
       "additionalProperties": {}
     },
-    "StacAssetStatistics": {
-      "type": "object",
-      "description": "Return dataset's statistics.",
-      "properties": {
-        "data": {
-          "type": "object",
-          "title": "Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get",
-          "description": "Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get",
-          "additionalProperties": {
-            "$ref": "#/definitions/BandStatistics"
-          }
-        }
-      },
-      "required": [
-        "data"
-      ]
-    },
     "StacAssetUpdate": {
       "type": "object",
       "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/item-spec.md#asset-object\n\nRepresents a STAC asset, which is a file or resource associated with a STAC item.",
@@ -14440,6 +14370,14 @@
             "$ref": "#/definitions/StacAsset"
           }
         },
+        "item_assets": {
+          "type": "object",
+          "description": "Item Assets\n\nSee the [Item Assets Definition Extension Specification](https://github.com/stac-extensions/item-assets)",
+          "additionalProperties": {
+            "$ref": "#/definitions/StacItemAsset"
+          },
+          "x-ms-client-name": "itemAssets"
+        },
         "license": {
           "type": "string",
           "description": "License identifier for the collection data.",
@@ -14475,7 +14413,8 @@
         "links",
         "license",
         "extent"
-      ]
+      ],
+      "additionalProperties": {}
     },
     "StacCollectionTemporalExtent": {
       "type": "object",
@@ -14702,19 +14641,81 @@
       ],
       "x-ms-discriminator-value": "Feature"
     },
-    "StacItemAssetDetails": {
+    "StacItemAsset": {
       "type": "object",
-      "description": "Return dataset's basic info or the list of available assets.",
+      "description": "https://github.com/stac-extensions/item-assets\n\nRepresents a STAC item asset, which describes the assets available under any item in the collection.",
       "properties": {
-        "data": {
-          "$ref": "#/definitions/TilerInfo",
-          "title": "Response Info Api Collections  Collection Id  Items  Item Id  Info Get",
-          "description": "body for info operation response"
+        "platform": {
+          "type": "string",
+          "description": "Platform that acquired the data."
+        },
+        "instruments": {
+          "type": "array",
+          "description": "Instruments that acquired the data.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "constellation": {
+          "type": "string",
+          "description": "Constellation of satellites that acquired the data."
+        },
+        "mission": {
+          "type": "string",
+          "description": "Mission associated with the data."
+        },
+        "providers": {
+          "type": "array",
+          "description": "Organizations or individuals who provide the data.",
+          "items": {
+            "$ref": "#/definitions/StacProvider"
+          }
+        },
+        "gsd": {
+          "type": "number",
+          "format": "float",
+          "description": "Ground sample distance in meters."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp of the data."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp of the data."
+        },
+        "title": {
+          "type": "string",
+          "description": "Human-readable title for the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the asset."
+        },
+        "href": {
+          "type": "string",
+          "description": "URL to the asset file.",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "Media type of the asset."
+        },
+        "roles": {
+          "type": "array",
+          "description": "Roles of the asset within the item.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
-        "data"
-      ]
+        "title",
+        "type"
+      ],
+      "additionalProperties": {}
     },
     "StacItemBounds": {
       "type": "object",
@@ -14836,6 +14837,46 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "StacItemPointAsset": {
+      "type": "object",
+      "description": "Asset information for the specified point",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "STAC item ID"
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box coordinates for the feature",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "x-ms-client-name": "boundingBox"
+        },
+        "assets": {
+          "type": "object",
+          "description": "Asset information for the specified point",
+          "additionalProperties": {
+            "$ref": "#/definitions/StacAsset"
+          }
+        },
+        "collection": {
+          "type": "string",
+          "description": "Collection ID",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": ".*",
+          "x-ms-client-name": "collectionId"
+        }
+      },
+      "required": [
+        "id",
+        "bbox",
+        "assets",
+        "collection"
       ]
     },
     "StacItemProperties": {
@@ -14998,77 +15039,31 @@
           "description": "GeoJSON type identifier for Feature"
         },
         "properties": {
-          "type": "object",
-          "description": "Feature properties",
-          "default": {},
-          "additionalProperties": {}
-        },
-        "msft:_created": {
-          "type": "string",
-          "description": "MSFT Created",
-          "x-ms-client-name": "createdOn"
-        },
-        "msft:_updated": {
-          "type": "string",
-          "description": "MSFT Updated",
-          "x-ms-client-name": "updatedOn"
-        },
-        "msft:short_description": {
-          "type": "string",
-          "description": "MSFT Short Description",
-          "maxLength": 300,
-          "x-ms-client-name": "shortDescription"
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the feature"
-        },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box coordinates for the feature",
-          "items": {
-            "type": "number",
-            "format": "float"
-          },
-          "x-ms-client-name": "boundingBox"
-        },
-        "stac_version": {
-          "type": "string",
-          "description": "Stac Version",
-          "default": "1.0.0",
-          "minLength": 1,
-          "x-ms-client-name": "stacVersion"
-        },
-        "collection": {
-          "type": "string",
-          "description": "ID of the STAC collection this item belongs to"
-        },
-        "_msft:ts": {
-          "type": "string",
-          "description": "MSFT Timestamp",
-          "x-ms-client-name": "timestamp"
-        },
-        "_msft:etag": {
-          "type": "string",
-          "description": "MSFT ETag",
-          "x-ms-client-name": "eTag"
-        },
-        "stac_extensions": {
-          "type": "array",
-          "description": "List of STAC extension URLs used by this item",
-          "items": {
-            "type": "string",
-            "format": "uri"
-          },
-          "x-ms-client-name": "stacExtensions"
+          "$ref": "#/definitions/StacItemStatisticsGeoJsonProperties",
+          "description": "Feature properties"
         }
       },
       "required": [
         "geometry",
-        "type",
-        "id",
-        "bbox"
+        "type"
       ]
+    },
+    "StacItemStatisticsGeoJsonProperties": {
+      "type": "object",
+      "description": "Properties for STAC Item statistics GeoJSON Feature",
+      "properties": {
+        "statistics": {
+          "type": "object",
+          "description": "Statistical information for each band in the asset",
+          "additionalProperties": {
+            "$ref": "#/definitions/BandStatistics"
+          }
+        }
+      },
+      "required": [
+        "statistics"
+      ],
+      "additionalProperties": {}
     },
     "StacItemUpdate": {
       "type": "object",
@@ -16519,46 +16514,41 @@
         },
         "colorinterp": {
           "type": "array",
-          "title": "Colorinterp",
           "description": "Color interpretation",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "colorInterpretation"
         },
         "driver": {
           "type": "string",
-          "title": "Driver",
           "description": "Driver"
         },
         "count": {
           "type": "integer",
           "format": "int32",
-          "title": "Count",
           "description": "Count"
         },
         "width": {
           "type": "integer",
           "format": "int32",
-          "title": "Width",
           "description": "Width"
         },
         "height": {
           "type": "integer",
           "format": "int32",
-          "title": "Height",
           "description": "Height"
         },
         "overviews": {
           "type": "array",
-          "title": "Overviews",
           "description": "Overviews",
           "items": {
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           }
         },
         "scales": {
           "type": "array",
-          "title": "Scales",
           "description": "Scales",
           "items": {
             "type": "integer",
@@ -16567,7 +16557,6 @@
         },
         "offsets": {
           "type": "array",
-          "title": "Offsets",
           "description": "Offsets",
           "items": {
             "type": "integer",
@@ -16576,7 +16565,6 @@
         },
         "colormap": {
           "type": "object",
-          "title": "Colormap",
           "description": "Colormap",
           "additionalProperties": {
             "items": {
@@ -16588,16 +16576,19 @@
         "minzoom": {
           "type": "integer",
           "format": "int32",
-          "title": "Minzoom",
           "description": "Minzoom",
           "x-ms-client-name": "minZoom"
         },
         "maxzoom": {
           "type": "integer",
           "format": "int32",
-          "title": "Maxzoom",
           "description": "Maxzoom",
           "x-ms-client-name": "maxZoom"
+        },
+        "crs": {
+          "type": "string",
+          "description": "Coordinate Reference System",
+          "x-ms-client-name": "coordinateReferenceSystem"
         }
       },
       "required": [
@@ -16825,13 +16816,9 @@
     "AssetQueryParameters.assetBandIndices": {
       "name": "asset_bidx",
       "in": "query",
-      "description": "Per asset band indexes (coma separated indexes)",
+      "description": "Per asset band indexes (coma separated indexes, e.g. \"image|1,2,3\" means use the bands 1, 2, and 3 from the asset named \"image\")",
       "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "csv",
+      "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "assetBandIndices"
     },

@@ -2,15 +2,34 @@
   "title": "StacCollections_CreateOrReplace",
   "operationId": "StacCollections_CreateOrReplace",
   "parameters": {
-    "collectionId": "test-collection-568725878606",
+    "collectionId": "test-collection-lifecycle",
     "api-version": "2025-04-30-preview",
     "body": {
+      "id": "test-collection-lifecycle",
       "type": "Collection",
-      "id": "test-collection-d45537668d06",
-      "stac_version": "1.0.0",
-      "description": "A collection for integration tests purposes",
-      "links": [],
-      "title": "Test Collection d45537668d06",
+      "links": [
+        {
+          "rel": "items",
+          "type": "application/geo+json",
+          "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/collections/test-collection-lifecycle/items"
+        },
+        {
+          "rel": "parent",
+          "type": "application/json",
+          "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/"
+        },
+        {
+          "rel": "root",
+          "type": "application/json",
+          "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/"
+        },
+        {
+          "rel": "self",
+          "type": "application/json",
+          "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/collections/test-collection-lifecycle"
+        }
+      ],
+      "title": "Test Collection Lifecycle",
       "extent": {
         "spatial": {
           "bbox": [
@@ -26,32 +45,71 @@
           "interval": [
             [
               "2020-01-01T00:00:00Z",
-              null
+              "2024-12-31T23:59:59Z"
             ]
           ]
         }
       },
-      "license": "CC-BY-4.0"
+      "license": "proprietary",
+      "description": "Test collection for lifecycle operations - UPDATED",
+      "stac_version": "1.0.0",
+      "msft:_created": "2025-10-28T18:47:27.7827791Z",
+      "msft:_updated": "2025-10-28T18:47:27.7827791Z"
     }
   },
   "responses": {
     "200": {
-      "headers": {
-        "location": "https://contoso.com/operationstatus",
-        "operation-location": "https://contoso.com/operationstatus"
-      },
       "body": {
-        "id": "4e2eab39-038b-48a2-be6c-698069ed9f21",
-        "status": "Pending",
-        "type": "UpdateCollection",
-        "statusHistory": [
+        "id": "test-collection-lifecycle",
+        "type": "Collection",
+        "links": [
           {
-            "status": "Pending",
-            "timestamp": "2025-03-11T17:06:44.1259931Z"
+            "rel": "self",
+            "type": "application/json",
+            "href": "http://test-accessibility.h5d5a9crhnc8deaz.uksouth.geocatalog.spatio.azure.com/stac/collections/test-collection-lifecycle/"
+          },
+          {
+            "rel": "parent",
+            "type": "application/json",
+            "href": "http://test-accessibility.h5d5a9crhnc8deaz.uksouth.geocatalog.spatio.azure.com/"
+          },
+          {
+            "rel": "root",
+            "type": "application/json",
+            "href": "http://test-accessibility.h5d5a9crhnc8deaz.uksouth.geocatalog.spatio.azure.com/"
+          },
+          {
+            "rel": "items",
+            "type": "application/json",
+            "href": "http://test-accessibility.h5d5a9crhnc8deaz.uksouth.geocatalog.spatio.azure.com/stac/collections/test-collection-lifecycle/items"
           }
         ],
-        "creationTime": "2025-03-11T17:06:44.1259917Z",
-        "collectionId": "test-collection"
+        "title": "Test Collection Lifecycle",
+        "extent": {
+          "spatial": {
+            "bbox": [
+              [
+                -180,
+                -90,
+                180,
+                90
+              ]
+            ]
+          },
+          "temporal": {
+            "interval": [
+              [
+                "2020-01-01T00:00:00Z",
+                "2024-12-31T23:59:59Z"
+              ]
+            ]
+          }
+        },
+        "license": "proprietary",
+        "description": "Test collection for lifecycle operations - UPDATED",
+        "stac_version": "1.0.0",
+        "msft:_created": "2025-10-28T18:47:27.7827791Z",
+        "msft:_updated": "2025-10-28T18:48:06.7735849Z"
       }
     }
   }

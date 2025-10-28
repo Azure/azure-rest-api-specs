@@ -2,20 +2,20 @@
   "title": "StacCollectionRenderOptions_Get",
   "operationId": "StacCollectionRenderOptions_Get",
   "parameters": {
-    "collectionId": "sentinel-2-l2a-tutorial-7",
-    "renderOptionId": "natural-color",
+    "collectionId": "naip-atl",
+    "renderOptionId": "test-natural-color",
     "api-version": "2025-04-30-preview"
   },
   "responses": {
     "200": {
       "body": {
-          "id": "natural-color",
-          "name": "Natural color",
-          "description": "True color composite of visible bands (B04, B03, B02)",
-          "type": "raster-tile",
-          "options": "assets=B04&assets=B03&assets=B02&nodata=0&color_formula=Gamma RGB 3.2 Saturation 0.8 Sigmoidal RGB 25 0.35",
-          "minZoom": 9
-        }
+        "id": "test-natural-color",
+        "name": "Test Natural color updated",
+        "description": "RGB from visual assets - updated",
+        "type": "raster-tile",
+        "options": "assets=image&asset_bidx=image|1,2,3",
+        "minZoom": 6
+      }
     }
   }
 }

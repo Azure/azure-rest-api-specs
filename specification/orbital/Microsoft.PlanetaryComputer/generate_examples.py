@@ -386,11 +386,12 @@ def process_response_body(response_body):
     # If it's None, return None
     if response_body is None:
         return None
-        
-    # If it's already a dict or list, return as-is
-    if isinstance(response_body, (dict, list)):
+    
+    # If it's already a dict, return as-is (already parsed JSON)
+    if isinstance(response_body, dict):
         return response_body
-        
+    
+    # If it's a list, concatenate elements (recordings split long strings into arrays)
     if isinstance(response_body, list):
         # Join array elements into single string
         body_content = ''.join(response_body)
@@ -401,6 +402,8 @@ def process_response_body(response_body):
     try:
         return json.loads(body_content)
     except json.JSONDecodeError:
+        # Not JSON - return as string
+        # For multiline strings in JSON, they will be escaped with \n
         return body_content
 
 def load_existing_example(example_path):
@@ -415,6 +418,10 @@ def load_existing_example(example_path):
 
 def should_add_response(existing_example, status_code):
     """Check if we should add this response status code"""
+    # Skip 404 status codes - don't add them to examples
+    if status_code == "404":
+        return False
+    
     if not existing_example:
         return True
     
