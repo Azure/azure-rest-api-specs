@@ -310,11 +310,4 @@ model SpeechToTextCustomPage<
   @visibility(Lifecycle.Read)
   @nextLink
   `@nextLink`?: ResourceLocation<Resource>;
-
-  // Include custom response fields
-  ...Azure.Core.Traits.Private.TraitProperties<
-    Traits,
-    Azure.Core.Traits.TraitLocation.Response,
-    Azure.Core.Traits.TraitContext.List
-  >;
 }
