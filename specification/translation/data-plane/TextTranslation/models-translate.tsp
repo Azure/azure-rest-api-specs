@@ -199,10 +199,10 @@ model TranslationTarget {
   adaptiveDatasetId?: string;
 
   @doc("""
-    Reference sentence pairs to generate adaptive results.
+    Reference text pairs to generate adaptive customized translation.
     """)
   @maxItems(5)
-  referenceTextPairs?: ReferenceSentencePair[];
+  referenceTextPairs?: ReferenceTextPair[];
 }
 
 @doc("Request body for the translate API.")
@@ -245,9 +245,9 @@ model TranslateInputItem {
   targets: TranslationTarget[];
 }
 
-@doc("Reference sentence pair.")
+@doc("Reference text pair to generate adaptive customized translation.")
 @added(APIVersion.v2025_10_01_preview)
-model ReferenceSentencePair {
+model ReferenceTextPair {
   @doc("Source reference sentence.")
   source: string;
 
