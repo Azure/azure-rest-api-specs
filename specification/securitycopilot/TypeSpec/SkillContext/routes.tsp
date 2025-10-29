@@ -384,3 +384,10 @@ op getSuggestedPrompts(
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
     @body request: DynamicPromptsSuggestedPromptsRequest
 ): SuggestedPromptsResponse;
+
+@post
+@route("/dummyRoute")
+op dummyRoute(
+    @header("dummy-token") evaluationToken: InsNotificationType,
+    @body request: TeamsNotificationInputs
+): NotificationRequest;
