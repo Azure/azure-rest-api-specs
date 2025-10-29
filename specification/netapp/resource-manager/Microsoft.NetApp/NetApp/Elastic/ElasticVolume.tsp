@@ -6,6 +6,7 @@ import "./../models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -39,6 +40,7 @@ model ElasticVolumeProperties {
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
   @minLength(1)
   @maxLength(80)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   filePath: string;
 
   /** Maximum size allowed for a volume in bytes. Valid values are in the range 1GiB to 16TiB. Values expressed in bytes as multiples of 1 GiB. */
@@ -59,13 +61,20 @@ model ElasticVolumeProperties {
   provisioningState?: NetAppProvisioningState;
 
   /** Current availability status of the resource. */
+  @visibility(Lifecycle.Read)
   availabilityStatus?: ElasticResourceAvailabilityStatus;
 
   /** Resource identifier used to identify the Elastic Snapshot. */
-  snapshotResourceId?: string;
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  snapshotResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes/elasticSnapshots";
+    }
+  ]>;
 
   /** List of mount targets that can be used to mount this volume */
   @OpenAPI.extension("x-ms-identifiers", #["ipAddress", "smbServerFqdn"])
+  @visibility(Lifecycle.Read)
   mountTargets?: ElasticMountTargetProperties[];
 
   /** Data protection configuration option for the volume, including snapshot policies and backup. */
@@ -78,9 +87,15 @@ model ElasticVolumeProperties {
   smbProperties?: ElasticSmbProperties;
 
   /** Resource identifier used to identify the Elastic Backup. */
-  backupResourceId?: string;
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  backupResourceId?:  Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.NetApp/elasticAccounts/elasticBackupVaults/elasticBackups";
+    }
+  ]>;
 
   /** The current state of the restoration process. */
+  @visibility(Lifecycle.Read)
   restorationState?: ElasticVolumeRestorationState;
 }
 
@@ -98,7 +113,7 @@ model ElasticVolumeDataProtectionProperties {
 @added(Versions.v2025_09_01_preview)
 model ElasticMountTargetProperties {
   /** The mount target's IPv4 address, used to mount the volume */
-  ipAddress?: string;
+  ipAddress?: ipV4Address;
 
   /** The SMB server's Fully Qualified Domain Name, FQDN */
   smbServerFqdn?: string;
@@ -109,11 +124,6 @@ model ElasticMountTargetProperties {
  */
 @added(Versions.v2025_09_01_preview)
 model ElasticVolumePatchProperties {
-  /** A unique file path for the volume. Used when creating mount targets. This needs to be unique within the elastic capacity pool. */
-  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
-  @minLength(1)
-  @maxLength(80)
-  filePath?: string;
 
   /** Maximum size allowed for a volume in bytes. Valid values are in the range 1GiB to 16TiB. Values expressed in bytes as multiples of 1 GiB. */
   @minValue(1073741824)
@@ -126,16 +136,6 @@ model ElasticVolumePatchProperties {
   /** Set of support protocol types for the elastic volume */
   protocolTypes?: ElasticProtocolType[];
 
-  /** Current availability status of the resource. */
-  availabilityStatus?: ElasticResourceAvailabilityStatus;
-
-  /** Resource identifier used to identify the Elastic Snapshot. */
-  snapshotResourceId?: string;
-
-  /** List of mount targets that can be used to mount this volume */
-  @OpenAPI.extension("x-ms-identifiers", #["ipAddress", "smbServerFqdn"])
-  mountTargets?: ElasticMountTargetProperties[];
-
   /** Data protection configuration option for the volume, including snapshot policies and backup. */
   dataProtection?: ElasticVolumeDataProtectionProperties;
 
@@ -144,12 +144,6 @@ model ElasticVolumePatchProperties {
 
   /** SMB Properties */
   smbProperties?: ElasticSmbPatchProperties;
-
-  /** Resource identifier used to identify the Elastic Backup. */
-  backupResourceId?: string;
-
-  /** The current state of the restoration process. */
-  restorationState?: ElasticVolumeRestorationState;
 }
 
 /** Elastic Volume Snapshot Properties */
@@ -274,7 +268,11 @@ model ElasticExportPolicyRule {
 @added(Versions.v2025_09_01_preview)
 model ElasticVolumeRevert {
   /** Resource identifier used to identify the Elastic Snapshot. */
-  snapshotResourceId?: string;
+  snapshotResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.NetApp/elasticAccounts/elasticSnapshots";
+    }
+  ]>;
 }
 
 /** Unix access rule */

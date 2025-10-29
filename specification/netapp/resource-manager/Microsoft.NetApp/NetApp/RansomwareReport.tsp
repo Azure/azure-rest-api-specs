@@ -35,7 +35,7 @@ model RansomwareReport
   ...ResourceNameParameter<
     Resource = RansomwareReport,
     KeyName = "ransomwareReportName",
-    SegmentName = "ransomwarereports",
+    SegmentName = "ransomwareReports",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
   >;
 }

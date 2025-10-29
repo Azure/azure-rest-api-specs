@@ -23,7 +23,7 @@ model ElasticSnapshot is ProxyResource<ElasticSnapshotProperties> {
   ...ResourceNameParameter<
     Resource = ElasticSnapshot,
     KeyName = "snapshotName",
-    SegmentName = "snapshots",
+    SegmentName = "elasticSnapshots",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
   >;
 }

@@ -3366,102 +3366,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticCapacityPools/{poolName}/elasticVolumes/{volumeName}/revert": {
-      "post": {
-        "operationId": "ElasticVolumes_Revert",
-        "tags": [
-          "ElasticVolumes"
-        ],
-        "description": "Revert a volume to the snapshot specified in the body",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the ElasticAccount",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the ElasticCapacityPool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "description": "The name of the ElasticVolume",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ElasticVolumeRevert"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ElasticVolume"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ElasticVolumes_Revert": {
-            "$ref": "./examples/ElasticVolumes_Revert.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ElasticVolume"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticCapacityPools/{poolName}/elasticVolumes/{volumeName}/snapshots": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticCapacityPools/{poolName}/elasticVolumes/{volumeName}/elasticSnapshots": {
       "get": {
         "operationId": "ElasticSnapshots_ListByElasticVolume",
         "tags": [
@@ -3531,7 +3436,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticCapacityPools/{poolName}/elasticVolumes/{volumeName}/snapshots/{snapshotName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticCapacityPools/{poolName}/elasticVolumes/{volumeName}/elasticSnapshots/{snapshotName}": {
       "get": {
         "operationId": "ElasticSnapshots_Get",
         "tags": [
@@ -3800,6 +3705,101 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticCapacityPools/{poolName}/elasticVolumes/{volumeName}/revert": {
+      "post": {
+        "operationId": "ElasticVolumes_Revert",
+        "tags": [
+          "ElasticVolumes"
+        ],
+        "description": "Revert a volume to the snapshot specified in the body",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the ElasticAccount",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the ElasticCapacityPool",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The name of the ElasticVolume",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticVolumeRevert"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticVolume"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticVolumes_Revert": {
+            "$ref": "./examples/ElasticVolumes_Revert.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ElasticVolume"
         },
         "x-ms-long-running-operation": true
       }
@@ -8980,7 +8980,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/ransomwarereports": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/ransomwareReports": {
       "get": {
         "operationId": "RansomwareReports_List",
         "tags": [
@@ -9050,7 +9050,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/ransomwarereports/{ransomwareReportName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/ransomwareReports/{ransomwareReportName}": {
       "get": {
         "operationId": "RansomwareReports_Get",
         "tags": [
@@ -9125,7 +9125,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/ransomwarereports/{ransomwareReportName}/clearSuspects": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/ransomwareReports/{ransomwareReportName}/clearSuspects": {
       "post": {
         "operationId": "RansomwareReports_ClearSuspects",
         "tags": [
@@ -12890,7 +12890,7 @@
           "type": "array",
           "description": "An array of DNS server IP addresses(IPv4 only) for the Active Directory",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
           }
         },
         "smbServerName": {
@@ -12988,7 +12988,7 @@
           "type": "array",
           "description": "An array of DNS server IP addresses(IPv4 only) for the Active Directory",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
           }
         },
         "smbServerName": {
@@ -13151,6 +13151,10 @@
           "description": "Resource id of the remote volume"
         }
       }
+    },
+    "Azure.Core.ipV4Address": {
+      "type": "string",
+      "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -14101,7 +14105,7 @@
           "readOnly": true
         },
         "ipAddress": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
           "description": "The mount target's IPv4 address, used to mount the cache.",
           "readOnly": true
         },
@@ -14236,7 +14240,15 @@
         },
         "keyVaultPrivateEndpointResourceId": {
           "type": "string",
-          "description": "The resource ID of private endpoint for KeyVault. It must reside in the same VNET as the volume. Only applicable if encryptionKeySource = 'Microsoft.KeyVault'."
+          "format": "arm-id",
+          "description": "The resource ID of private endpoint for KeyVault. It must reside in the same VNET as the volume. Only applicable if encryptionKeySource = 'Microsoft.KeyVault'.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         },
         "maximumNumberOfFiles": {
           "type": "integer",
@@ -14403,7 +14415,15 @@
         },
         "keyVaultPrivateEndpointResourceId": {
           "type": "string",
-          "description": "The resource ID of private endpoint for KeyVault. It must reside in the same VNET as the volume. Only applicable if encryptionKeySource = 'Microsoft.KeyVault'."
+          "format": "arm-id",
+          "description": "The resource ID of private endpoint for KeyVault. It must reside in the same VNET as the volume. Only applicable if encryptionKeySource = 'Microsoft.KeyVault'.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         },
         "cifsChangeNotifications": {
           "$ref": "#/definitions/CifsChangeNotifyState",
@@ -16009,7 +16029,7 @@
       "description": "Contains all the information needed to mount an elastic volume",
       "properties": {
         "ipAddress": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
           "description": "The mount target's IPv4 address, used to mount the volume"
         },
         "smbServerFqdn": {
@@ -16587,7 +16607,11 @@
           "description": "A unique file path for the volume. Used when creating mount targets. This needs to be unique within the elastic capacity pool.",
           "minLength": 1,
           "maxLength": 80,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$"
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "size": {
           "type": "integer",
@@ -16614,11 +16638,24 @@
         },
         "availabilityStatus": {
           "$ref": "#/definitions/ElasticResourceAvailabilityStatus",
-          "description": "Current availability status of the resource."
+          "description": "Current availability status of the resource.",
+          "readOnly": true
         },
         "snapshotResourceId": {
           "type": "string",
-          "description": "Resource identifier used to identify the Elastic Snapshot."
+          "format": "arm-id",
+          "description": "Resource identifier used to identify the Elastic Snapshot.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes/elasticSnapshots"
+              }
+            ]
+          }
         },
         "mountTargets": {
           "type": "array",
@@ -16626,6 +16663,7 @@
           "items": {
             "$ref": "#/definitions/ElasticMountTargetProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "ipAddress",
             "smbServerFqdn"
@@ -16645,11 +16683,24 @@
         },
         "backupResourceId": {
           "type": "string",
-          "description": "Resource identifier used to identify the Elastic Backup."
+          "format": "arm-id",
+          "description": "Resource identifier used to identify the Elastic Backup.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/elasticAccounts/elasticBackupVaults/elasticBackups"
+              }
+            ]
+          }
         },
         "restorationState": {
           "$ref": "#/definitions/ElasticVolumeRestorationState",
-          "description": "The current state of the restoration process."
+          "description": "The current state of the restoration process.",
+          "readOnly": true
         }
       },
       "required": [
@@ -16694,7 +16745,15 @@
       "properties": {
         "snapshotResourceId": {
           "type": "string",
-          "description": "Resource identifier used to identify the Elastic Snapshot."
+          "format": "arm-id",
+          "description": "Resource identifier used to identify the Elastic Snapshot.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/elasticAccounts/elasticSnapshots"
+              }
+            ]
+          }
         }
       }
     },
@@ -16738,13 +16797,6 @@
       "type": "object",
       "description": "The updatable properties of the ElasticVolume.",
       "properties": {
-        "filePath": {
-          "type": "string",
-          "description": "A unique file path for the volume. Used when creating mount targets. This needs to be unique within the elastic capacity pool.",
-          "minLength": 1,
-          "maxLength": 80,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$"
-        },
         "size": {
           "type": "integer",
           "format": "int64",
@@ -16763,25 +16815,6 @@
             "$ref": "#/definitions/ElasticProtocolType"
           }
         },
-        "availabilityStatus": {
-          "$ref": "#/definitions/ElasticResourceAvailabilityStatus",
-          "description": "Current availability status of the resource."
-        },
-        "snapshotResourceId": {
-          "type": "string",
-          "description": "Resource identifier used to identify the Elastic Snapshot."
-        },
-        "mountTargets": {
-          "type": "array",
-          "description": "List of mount targets that can be used to mount this volume",
-          "items": {
-            "$ref": "#/definitions/ElasticMountTargetProperties"
-          },
-          "x-ms-identifiers": [
-            "ipAddress",
-            "smbServerFqdn"
-          ]
-        },
         "dataProtection": {
           "$ref": "#/definitions/ElasticVolumeDataProtectionProperties",
           "description": "Data protection configuration option for the volume, including snapshot policies and backup."
@@ -16793,14 +16826,6 @@
         "smbProperties": {
           "$ref": "#/definitions/ElasticSmbPatchProperties",
           "description": "SMB Properties"
-        },
-        "backupResourceId": {
-          "type": "string",
-          "description": "Resource identifier used to identify the Elastic Backup."
-        },
-        "restorationState": {
-          "$ref": "#/definitions/ElasticVolumeRestorationState",
-          "description": "The current state of the restoration process."
         }
       }
     },

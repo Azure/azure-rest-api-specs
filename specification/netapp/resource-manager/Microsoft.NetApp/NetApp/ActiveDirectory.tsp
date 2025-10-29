@@ -57,7 +57,7 @@ model ActiveDirectoryConfigCommonProperties {
   userName?: string;
 
   /** An array of DNS server IP addresses(IPv4 only) for the Active Directory */
-  dns?: string[];
+  dns?: ipV4Address[];
 
   /** NetBIOS name of the SMB server. This name will be registered as a computer account in the AD and used to mount volumes */
   @maxLength(10)

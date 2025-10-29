@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./Volume.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -136,7 +137,11 @@ model CacheProperties {
   /**
    * The resource ID of private endpoint for KeyVault. It must reside in the same VNET as the volume. Only applicable if encryptionKeySource = 'Microsoft.KeyVault'.
    */
-  keyVaultPrivateEndpointResourceId?: string;
+  keyVaultPrivateEndpointResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
 
   /**
    * Maximum number of files allowed.
@@ -277,7 +282,7 @@ model CacheMountTargetProperties {
    * The mount target's IPv4 address, used to mount the cache.
    */
   @visibility(Lifecycle.Read)
-  ipAddress?: string;
+  ipAddress?: ipV4Address;
 
   /**
    * The SMB server's Fully Qualified Domain Name, FQDN
