@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Confluent",
-    "version": "2021-03-01-preview"
+    "version": "2021-12-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -584,7 +584,7 @@
         },
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         },
         "properties": {
@@ -601,6 +601,7 @@
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/ConfluentAgreementResource"
           }
@@ -658,6 +659,7 @@
         "value": {
           "description": "List of Confluent operations supported by the Microsoft.Confluent provider.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/OperationResult"
           }
@@ -691,6 +693,7 @@
         "details": {
           "description": "Error detail",
           "type": "array",
+          "x-ms-identifiers": [],
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
@@ -882,7 +885,7 @@
         },
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         },
         "properties": {
@@ -910,6 +913,7 @@
         "value": {
           "description": "Result of a list operation.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/OrganizationResource"
           }
@@ -940,10 +944,7 @@
       "in": "query",
       "description": "Client Api Version.",
       "required": true,
-      "type": "string",
-      "enum": [
-        "2021-03-01-preview"
-      ]
+      "type": "string"
     },
     "SubscriptionIdParameter": {
       "in": "path",

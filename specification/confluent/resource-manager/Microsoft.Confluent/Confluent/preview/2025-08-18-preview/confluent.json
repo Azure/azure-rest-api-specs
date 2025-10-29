@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConfluentManagementClient",
-    "version": "2024-07-01",
+    "version": "2025-08-18-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -67,7 +67,7 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -85,8 +85,11 @@
           }
         },
         "x-ms-examples": {
-          "OrganizationOperations_List": {
-            "$ref": "./examples/OrganizationOperations_List.json"
+          "OrganizationOperations_List_MaximumSet": {
+            "$ref": "./examples/OrganizationOperations_List_MaximumSet_Gen.json"
+          },
+          "OrganizationOperations_List_MinimumSet": {
+            "$ref": "./examples/OrganizationOperations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -101,10 +104,10 @@
         "description": "List Confluent marketplace agreements in the subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -122,8 +125,11 @@
           }
         },
         "x-ms-examples": {
-          "MarketplaceAgreements_List": {
-            "$ref": "./examples/MarketplaceAgreements_List.json"
+          "List Confluent marketplace agreements in the subscription. (Maximumset)": {
+            "$ref": "./examples/MarketplaceAgreements_List_MaximumSet_Gen.json"
+          },
+          "List Confluent marketplace agreements in the subscription. (Minimumset)": {
+            "$ref": "./examples/MarketplaceAgreements_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -138,10 +144,10 @@
         "description": "Create Confluent Marketplace agreement in the subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "body",
@@ -168,8 +174,11 @@
           }
         },
         "x-ms-examples": {
-          "MarketplaceAgreements_Create": {
-            "$ref": "./examples/MarketplaceAgreements_Create.json"
+          "Create Confluent Marketplace agreement in the subscription. (Maximumset)": {
+            "$ref": "./examples/MarketplaceAgreements_Create_MaximumSet_Gen.json"
+          },
+          "Create Confluent Marketplace agreement in the subscription. (MinimumSet)": {
+            "$ref": "./examples/MarketplaceAgreements_Create_MinimumSet_Gen.json"
           }
         }
       }
@@ -183,10 +192,10 @@
         "description": "List all organizations under the specified subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -204,8 +213,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_ListBySubscription": {
-            "$ref": "./examples/Organization_ListBySubscription.json"
+          "Organization_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/Organization_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -222,13 +231,13 @@
         "description": "List all Organizations under the specified resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -246,8 +255,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_ListByResourceGroup": {
-            "$ref": "./examples/Organization_ListByResourceGroup.json"
+          "Organization_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/Organization_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -264,13 +273,13 @@
         "description": "Get the properties of a specific Organization resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -295,8 +304,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_Get": {
-            "$ref": "./examples/Organization_Get.json"
+          "Organization_Get_MaximumSet": {
+            "$ref": "./examples/Organization_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -308,13 +317,13 @@
         "description": "Create Organization resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -365,8 +374,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_Create": {
-            "$ref": "./examples/Organization_Create.json"
+          "Organization_Create_MaximumSet": {
+            "$ref": "./examples/Organization_Create_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -382,13 +391,13 @@
         "description": "Update Organization resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -422,8 +431,8 @@
           }
         },
         "x-ms-examples": {
-          "Confluent_Update": {
-            "$ref": "./examples/Organization_Update.json"
+          "Organization_Update_MaximumSet": {
+            "$ref": "./examples/Organization_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -435,13 +444,13 @@
         "description": "Delete Organization resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -480,8 +489,11 @@
           }
         },
         "x-ms-examples": {
-          "Confluent_Delete": {
-            "$ref": "./examples/Organization_Delete.json"
+          "Organization_Delete_MaximumSet": {
+            "$ref": "./examples/Organization_Delete_MaximumSet_Gen.json"
+          },
+          "Organization_Delete_MinimumSet": {
+            "$ref": "./examples/Organization_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -499,13 +511,13 @@
         "description": "Invite user to the organization",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -539,8 +551,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_InviteUser": {
-            "$ref": "./examples/Access_InviteUser.json"
+          "Access_InviteUser_MaximumSet": {
+            "$ref": "./examples/Access_InviteUser_MaximumSet_Gen.json"
+          },
+          "Access_InviteUser_MinimumSet": {
+            "$ref": "./examples/Access_InviteUser_MinimumSet_Gen.json"
           }
         }
       }
@@ -554,13 +569,13 @@
         "description": "Organization role bindings",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -594,8 +609,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_CreateRoleBinding": {
-            "$ref": "./examples/Access_CreateRoleBinding.json"
+          "Access_CreateRoleBinding_MaximumSet": {
+            "$ref": "./examples/Access_CreateRoleBinding_MaximumSet_Gen.json"
+          },
+          "Access_CreateRoleBinding_MinimumSet": {
+            "$ref": "./examples/Access_CreateRoleBinding_MinimumSet_Gen.json"
           }
         }
       }
@@ -606,13 +624,13 @@
         "description": "Organization role bindings",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -644,8 +662,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_DeleteRoleBinding": {
-            "$ref": "./examples/Access_DeleteRoleBinding.json"
+          "Access_DeleteRoleBinding_MaximumSet": {
+            "$ref": "./examples/Access_DeleteRoleBinding_MaximumSet_Gen.json"
+          },
+          "Access_DeleteRoleBinding_MinimumSet": {
+            "$ref": "./examples/Access_DeleteRoleBinding_MinimumSet_Gen.json"
           }
         }
       }
@@ -659,13 +680,13 @@
         "description": "Cluster details",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -699,8 +720,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_ClusterList": {
-            "$ref": "./examples/Access_ClusterList.json"
+          "Access_ListClusters_MaximumSet": {
+            "$ref": "./examples/Access_ListClusters_MaximumSet_Gen.json"
+          },
+          "Access_ListClusters_MinimumSet": {
+            "$ref": "./examples/Access_ListClusters_MinimumSet_Gen.json"
           }
         }
       }
@@ -714,13 +738,13 @@
         "description": "Environment list of an organization",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -754,8 +778,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_EnvironmentList": {
-            "$ref": "./examples/Access_EnvironmentList.json"
+          "Access_ListEnvironments_MaximumSet": {
+            "$ref": "./examples/Access_ListEnvironments_MaximumSet_Gen.json"
+          },
+          "Access_ListEnvironments_MinimumSet": {
+            "$ref": "./examples/Access_ListEnvironments_MinimumSet_Gen.json"
           }
         }
       }
@@ -769,13 +796,13 @@
         "description": "Organization accounts invitation details",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -809,8 +836,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_InvitationsList": {
-            "$ref": "./examples/Access_InvitationsList.json"
+          "Access_ListInvitations_MaximumSet": {
+            "$ref": "./examples/Access_ListInvitations_MaximumSet_Gen.json"
+          },
+          "Access_ListInvitations_MinimumSet": {
+            "$ref": "./examples/Access_ListInvitations_MinimumSet_Gen.json"
           }
         }
       }
@@ -824,13 +854,13 @@
         "description": "Organization role bindings",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -864,8 +894,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_RoleBindingNameList": {
-            "$ref": "./examples/Access_RoleBindingNameList.json"
+          "Access_ListRoleBindingNameList_MaximumSet": {
+            "$ref": "./examples/Access_ListRoleBindingNameList_MaximumSet_Gen.json"
+          },
+          "Access_ListRoleBindingNameList_MinimumSet": {
+            "$ref": "./examples/Access_ListRoleBindingNameList_MinimumSet_Gen.json"
           }
         }
       }
@@ -879,13 +912,13 @@
         "description": "Organization role bindings",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -919,8 +952,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_RoleBindingList": {
-            "$ref": "./examples/Access_RoleBindingList.json"
+          "Access_ListRoleBindings_MaximumSet": {
+            "$ref": "./examples/Access_ListRoleBindings_MaximumSet_Gen.json"
+          },
+          "Access_ListRoleBindings_MinimumSet": {
+            "$ref": "./examples/Access_ListRoleBindings_MinimumSet_Gen.json"
           }
         }
       }
@@ -934,13 +970,13 @@
         "description": "Organization service accounts details",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -974,8 +1010,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_ServiceAccountsList": {
-            "$ref": "./examples/Access_ServiceAccountsList.json"
+          "Access_ListServiceAccounts_MaximumSet": {
+            "$ref": "./examples/Access_ListServiceAccounts_MaximumSet_Gen.json"
+          },
+          "Access_ListServiceAccounts_MinimumSet": {
+            "$ref": "./examples/Access_ListServiceAccounts_MinimumSet_Gen.json"
           }
         }
       }
@@ -989,13 +1028,13 @@
         "description": "Organization users details",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1029,8 +1068,11 @@
           }
         },
         "x-ms-examples": {
-          "Access_UsersList": {
-            "$ref": "./examples/Access_UsersList.json"
+          "Access_ListUsers_MaximumSet": {
+            "$ref": "./examples/Access_ListUsers_MaximumSet_Gen.json"
+          },
+          "Access_ListUsers_MinimumSet": {
+            "$ref": "./examples/Access_ListUsers_MinimumSet_Gen.json"
           }
         }
       }
@@ -1041,13 +1083,13 @@
         "description": "Get API key details of a kafka or schema registry cluster",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1079,8 +1121,11 @@
           }
         },
         "x-ms-examples": {
-          "Organization_GetClusterAPIKey": {
-            "$ref": "./examples/Organization_GetClusterAPIKey.json"
+          "Organization_GetClusterAPIKey_MaximumSet": {
+            "$ref": "./examples/Organization_GetClusterAPIKey_MaximumSet_Gen.json"
+          },
+          "Organization_GetClusterAPIKey_MinimumSet": {
+            "$ref": "./examples/Organization_GetClusterAPIKey_MinimumSet_Gen.json"
           }
         }
       },
@@ -1089,13 +1134,13 @@
         "description": "Deletes API key of a kafka or schema registry cluster",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1127,8 +1172,11 @@
           }
         },
         "x-ms-examples": {
-          "Organization_DeleteClusterAPIKey": {
-            "$ref": "./examples/Organization_DeleteClusterAPIKey.json"
+          "Organization_DeleteClusterAPIKey_MaximumSet": {
+            "$ref": "./examples/Organization_DeleteClusterAPIKey_MaximumSet_Gen.json"
+          },
+          "Organization_DeleteClusterAPIKey_MinimumSet": {
+            "$ref": "./examples/Organization_DeleteClusterAPIKey_MinimumSet_Gen.json"
           }
         }
       }
@@ -1142,13 +1190,13 @@
         "description": "Lists of all the environments in a organization",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1188,8 +1236,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_ListEnvironments": {
-            "$ref": "./examples/Organization_EnvironmentList.json"
+          "Organization_ListEnvironments_MaximumSet": {
+            "$ref": "./examples/Organization_ListEnvironments_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1206,13 +1254,13 @@
         "description": "Get Environment details by environment Id",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1244,8 +1292,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_GetEnvironmentById": {
-            "$ref": "./examples/Organization_GetEnvironmentById.json"
+          "Organization_GetEnvironmentById_MaximumSet": {
+            "$ref": "./examples/Organization_GetEnvironmentById_MaximumSet_Gen.json"
           }
         }
       },
@@ -1257,13 +1305,13 @@
         "description": "Create confluent environment",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1310,8 +1358,8 @@
           }
         },
         "x-ms-examples": {
-          "Environment_CreateOrUpdate": {
-            "$ref": "./examples/Environment_Create.json"
+          "Environment_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Environment_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
@@ -1323,13 +1371,13 @@
         "description": "Delete confluent environment by id",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1367,13 +1415,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Environment_Delete": {
-            "$ref": "./examples/Environment_Delete.json"
+          "Environment_Delete_MaximumSet": {
+            "$ref": "./examples/Environment_Delete_MaximumSet_Gen.json"
+          },
+          "Environment_Delete_MinimumSet": {
+            "$ref": "./examples/Environment_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1391,13 +1442,13 @@
         "description": "Lists of all the clusters in a environment",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1444,8 +1495,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_ListClusters": {
-            "$ref": "./examples/Organization_ClusterList.json"
+          "Organization_ListClusters_MaximumSet": {
+            "$ref": "./examples/Organization_ListClusters_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1462,13 +1513,13 @@
         "description": "Get cluster by Id",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1507,8 +1558,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_GetClusterById": {
-            "$ref": "./examples/Organization_GetClusterById.json"
+          "Organization_GetClusterById_MaximumSet": {
+            "$ref": "./examples/Organization_GetClusterById_MaximumSet_Gen.json"
           }
         }
       },
@@ -1520,13 +1571,13 @@
         "description": "Create confluent clusters",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1580,8 +1631,8 @@
           }
         },
         "x-ms-examples": {
-          "Cluster_CreateOrUpdate": {
-            "$ref": "./examples/Cluster_Create.json"
+          "Cluster_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Cluster_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
@@ -1593,13 +1644,13 @@
         "description": "Delete confluent cluster by id",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1644,13 +1695,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Cluster_Delete": {
-            "$ref": "./examples/Cluster_Delete.json"
+          "Cluster_Delete_MaximumSet": {
+            "$ref": "./examples/Cluster_Delete_MaximumSet_Gen.json"
+          },
+          "Cluster_Delete_MinimumSet": {
+            "$ref": "./examples/Cluster_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1668,13 +1722,13 @@
         "description": "Lists all the connectors in a cluster",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1728,8 +1782,8 @@
           }
         },
         "x-ms-examples": {
-          "Connector_List": {
-            "$ref": "./examples/Organization_ConnectorList.json"
+          "Connector_List_MaximumSet": {
+            "$ref": "./examples/Connector_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1746,13 +1800,13 @@
         "description": "Get confluent connector by Name",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1798,8 +1852,8 @@
           }
         },
         "x-ms-examples": {
-          "Connector_Get": {
-            "$ref": "./examples/Organization_GetConnectorByName.json"
+          "Connector_Get_MaximumSet": {
+            "$ref": "./examples/Connector_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -1811,13 +1865,13 @@
         "description": "Create confluent connector by Name",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1878,8 +1932,8 @@
           }
         },
         "x-ms-examples": {
-          "Connector_CreateOrUpdate": {
-            "$ref": "./examples/Organization_CreateConnectorByName.json"
+          "Connector_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Connector_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
@@ -1891,13 +1945,13 @@
         "description": "Delete confluent connector by name",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -1949,13 +2003,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Connector_Delete": {
-            "$ref": "./examples/Organization_DeleteConnectorByName.json"
+          "Connector_Delete_MaximumSet": {
+            "$ref": "./examples/Connector_Delete_MaximumSet_Gen.json"
+          },
+          "Connector_Delete_MinimumSet": {
+            "$ref": "./examples/Connector_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1973,13 +2030,13 @@
         "description": "Creates API key for a schema registry Cluster ID or Kafka Cluster ID under a environment",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2027,8 +2084,11 @@
           }
         },
         "x-ms-examples": {
-          "Organization_CreateClusterAPIKey": {
-            "$ref": "./examples/Organization_CreateClusterAPIKey.json"
+          "Organization_CreateAPIKey_MaximumSet": {
+            "$ref": "./examples/Organization_CreateAPIKey_MaximumSet_Gen.json"
+          },
+          "Organization_CreateAPIKey_MinimumSet": {
+            "$ref": "./examples/Organization_CreateAPIKey_MinimumSet_Gen.json"
           }
         }
       }
@@ -2042,13 +2102,13 @@
         "description": "Lists of all the topics in a clusters",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2102,8 +2162,8 @@
           }
         },
         "x-ms-examples": {
-          "Organization_ListTopics": {
-            "$ref": "./examples/Organization_TopicList.json"
+          "Topics_List_MaximumSet": {
+            "$ref": "./examples/Topics_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2120,13 +2180,13 @@
         "description": "Get confluent topic by Name",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2172,8 +2232,8 @@
           }
         },
         "x-ms-examples": {
-          "Topics_Get": {
-            "$ref": "./examples/Topics_Get.json"
+          "Topics_Get_MaximumSet": {
+            "$ref": "./examples/Topics_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -2185,13 +2245,13 @@
         "description": "Create confluent topics by Name",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2252,8 +2312,8 @@
           }
         },
         "x-ms-examples": {
-          "Topics_Create": {
-            "$ref": "./examples/Topics_Create.json"
+          "Topics_Create_MaximumSet": {
+            "$ref": "./examples/Topics_Create_MaximumSet_Gen.json"
           }
         }
       },
@@ -2265,13 +2325,13 @@
         "description": "Delete confluent topic by name",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2323,13 +2383,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Topics_Delete": {
-            "$ref": "./examples/Topics_Delete.json"
+          "Topics_Delete_MaximumSet": {
+            "$ref": "./examples/Topics_Delete_MaximumSet_Gen.json"
+          },
+          "Topics_Delete_MinimumSet": {
+            "$ref": "./examples/Topics_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2347,13 +2410,13 @@
         "description": "Get schema registry clusters",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2400,8 +2463,11 @@
           }
         },
         "x-ms-examples": {
-          "Organization_ListSchemaRegistryClusters": {
-            "$ref": "./examples/Organization_ListSchemaRegistryClusters.json"
+          "Organization_ListSchemaRegistryClusters_MaximumSet": {
+            "$ref": "./examples/Organization_ListSchemaRegistryClusters_MaximumSet_Gen.json"
+          },
+          "Organization_ListSchemaRegistryClusters_MinimumSet": {
+            "$ref": "./examples/Organization_ListSchemaRegistryClusters_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2415,13 +2481,13 @@
         "description": "Get schema registry cluster by Id",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2460,8 +2526,11 @@
           }
         },
         "x-ms-examples": {
-          "Organization_GetSchemaRegistryClusterById": {
-            "$ref": "./examples/Organization_GetSchemaRegistryClusterById.json"
+          "Organization_GetSchemaRegistryClusterById_MaximumSet": {
+            "$ref": "./examples/Organization_GetSchemaRegistryClusterById_MaximumSet_Gen.json"
+          },
+          "Organization_GetSchemaRegistryClusterById_MinimumSet": {
+            "$ref": "./examples/Organization_GetSchemaRegistryClusterById_MinimumSet_Gen.json"
           }
         }
       }
@@ -2475,13 +2544,13 @@
         "description": "cloud provider regions available for creating Schema Registry clusters.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2515,8 +2584,11 @@
           }
         },
         "x-ms-examples": {
-          "Organization_ListRegions": {
-            "$ref": "./examples/Organization_ListRegions.json"
+          "Organization_ListRegions_MaximumSet": {
+            "$ref": "./examples/Organization_ListRegions_MaximumSet_Gen.json"
+          },
+          "Organization_ListRegions_MinimumSet": {
+            "$ref": "./examples/Organization_ListRegions_MinimumSet_Gen.json"
           }
         }
       }
@@ -2528,13 +2600,13 @@
         "description": "Organization Validate proxy resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2568,8 +2640,8 @@
           }
         },
         "x-ms-examples": {
-          "Validations_ValidateOrganizations": {
-            "$ref": "./examples/Validations_ValidateOrganizations.json"
+          "Organization Validate proxy resource": {
+            "$ref": "./examples/Validations_ValidateOrganization_MaximumSet_Gen.json"
           }
         }
       }
@@ -2581,13 +2653,13 @@
         "description": "Organization Validate proxy resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -2621,8 +2693,8 @@
           }
         },
         "x-ms-examples": {
-          "Validations_ValidateOrganizations": {
-            "$ref": "./examples/Validations_ValidateOrganizationsV2.json"
+          "Organization Validate proxy resource": {
+            "$ref": "./examples/Validations_ValidateOrganizationV2_MaximumSet_Gen.json"
           }
         }
       }
@@ -3037,6 +3109,10 @@
         "cosmosIdStrategy": {
           "type": "string",
           "description": "Azure Cosmos Database Id Strategy"
+        },
+        "cosmosWriteDetails": {
+          "type": "string",
+          "description": "Azure Cosmos write config details"
         }
       },
       "allOf": [
@@ -3073,6 +3149,10 @@
         "cosmosMessageKeyField": {
           "type": "string",
           "description": "Azure Cosmos Database Message Key Field"
+        },
+        "cosmosIncludeAllContainers": {
+          "type": "string",
+          "description": "Azure Cosmos Database Include all the containers in the database."
         }
       },
       "allOf": [
@@ -3358,7 +3438,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource",
           "readOnly": true
         },
@@ -3422,7 +3502,9 @@
       "description": "Connector Class",
       "enum": [
         "AZUREBLOBSOURCE",
-        "AZUREBLOBSINK"
+        "AZUREBLOBSINK",
+        "AZURECOSMOSV2SINK",
+        "AZURECOSMOSV2SOURCE"
       ],
       "x-ms-enum": {
         "name": "ConnectorClass",
@@ -3435,6 +3517,14 @@
           {
             "name": "AZUREBLOBSINK",
             "value": "AZUREBLOBSINK"
+          },
+          {
+            "name": "AZURECOSMOSV2SINK",
+            "value": "AZURECOSMOSV2SINK"
+          },
+          {
+            "name": "AZURECOSMOSV2SOURCE",
+            "value": "AZURECOSMOSV2SOURCE"
           }
         ]
       }
@@ -3480,7 +3570,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3811,6 +3901,10 @@
           "type": "string",
           "description": "Kafka Service Account Id"
         },
+        "serviceAccountName": {
+          "type": "string",
+          "description": "Kafka Service Account Name"
+        },
         "topics": {
           "type": "array",
           "description": "Kafka topics list",
@@ -3872,6 +3966,10 @@
           "type": "string",
           "description": "Kafka Service Account Id"
         },
+        "serviceAccountName": {
+          "type": "string",
+          "description": "Kafka Service Account Name"
+        },
         "topicRegex": {
           "type": "string",
           "description": "Kafka topics Regex pattern"
@@ -3919,6 +4017,10 @@
         "serviceAccountId": {
           "type": "string",
           "description": "Kafka Service Account Id"
+        },
+        "serviceAccountName": {
+          "type": "string",
+          "description": "Kafka Service Account Name"
         },
         "topics": {
           "type": "array",
@@ -3981,6 +4083,10 @@
           "type": "string",
           "description": "Kafka Service Account Id"
         },
+        "serviceAccountName": {
+          "type": "string",
+          "description": "Kafka Service Account Name"
+        },
         "topicRegex": {
           "type": "string",
           "description": "Kafka topics Regex pattern"
@@ -4028,6 +4134,10 @@
         "serviceAccountId": {
           "type": "string",
           "description": "Kafka Service Account Id"
+        },
+        "serviceAccountName": {
+          "type": "string",
+          "description": "Kafka Service Account Name"
         },
         "topics": {
           "type": "array",
@@ -4349,7 +4459,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4714,7 +4824,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4792,7 +4902,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5086,7 +5196,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
