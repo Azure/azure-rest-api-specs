@@ -55,40 +55,7 @@ alias PolicyDefinitionVersionOps = Azure.ResourceManager.Legacy.ExtensionOperati
   }
 >;
 
-@armResourceOperations
-interface PolicyDefinitionVersions {
-  /**
-   * This operation retrieves the policy definition version in the given subscription with the given name.
-   */
-  get is PolicyDefinitionVersionOps.Read<PolicyDefinitionVersion>;
-
-  /**
-   * This operation creates or updates a policy definition in the given subscription with the given name.
-   */
-  createOrUpdate is PolicyDefinitionVersionOps.CreateOrUpdateSync<PolicyDefinitionVersion>;
-
-  /**
-   * This operation deletes the policy definition version in the given subscription with the given name.
-   */
-  delete is PolicyDefinitionVersionOps.DeleteSync<PolicyDefinitionVersion>;
-
-  /**
-   * This operation retrieves a list of all the policy definition versions for the given policy definition.
-   */
-  list is PolicyDefinitionVersionOps.List<
-    PolicyDefinitionVersion,
-    Parameters = {
-      /**
-       * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
-       */
-      @maxValue(1000)
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
-    }
-  >;
-}
-alias PolicyDefinitionVersionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias PolicyDefinitionVersionTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
@@ -116,34 +83,7 @@ alias PolicyDefinitionVersionOperationGroupOps = Azure.ResourceManager.Legacy.Ex
   }
 >;
 
-@armResourceOperations
-interface PolicyDefinitionVersionOperationGroup {
-  /**
-   * This operation retrieves the built-in policy definition version with the given name.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyDefinitionVersions_GetBuiltIn")
-  getBuiltIn is PolicyDefinitionVersionOperationGroupOps.Read<PolicyDefinitionVersion>;
-
-  /**
-   * This operation retrieves a list of all the built-in policy definition versions for the given policy definition.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyDefinitionVersions_ListBuiltIn")
-  listBuiltIn is PolicyDefinitionVersionOperationGroupOps.List<
-    PolicyDefinitionVersion,
-    Parameters = {
-      /**
-       * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
-       */
-      @maxValue(1000)
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
-    }
-  >;
-}
-alias PolicyDefinitionVersionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias PolicyDefinitionVersionManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
@@ -189,14 +129,69 @@ alias PolicyDefinitionVersionOperationGroupOps = Azure.ResourceManager.Legacy.Ex
 >;
 
 @armResourceOperations
-interface PolicyDefinitionVersionOperationGroup {
+interface PolicyDefinitionVersions {
+  /**
+   * This operation retrieves the policy definition version in the given subscription with the given name.
+   */
+  get is PolicyDefinitionVersionOps.Read<PolicyDefinitionVersion>;
+
+  /**
+   * This operation creates or updates a policy definition in the given subscription with the given name.
+   */
+  createOrUpdate is PolicyDefinitionVersionOps.CreateOrUpdateSync<PolicyDefinitionVersion>;
+
+  /**
+   * This operation deletes the policy definition version in the given subscription with the given name.
+   */
+  delete is PolicyDefinitionVersionOps.DeleteSync<PolicyDefinitionVersion>;
+
+  /**
+   * This operation retrieves a list of all the policy definition versions for the given policy definition.
+   */
+  list is PolicyDefinitionVersionOps.List<
+    PolicyDefinitionVersion,
+    Parameters = {
+      /**
+       * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
+       */
+      @maxValue(1000)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+
+  /**
+   * This operation retrieves the built-in policy definition version with the given name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PolicyDefinitionVersions_GetBuiltIn")
+  getBuiltIn is PolicyDefinitionVersionTenantOps.Read<PolicyDefinitionVersion>;
+
+  /**
+   * This operation retrieves a list of all the built-in policy definition versions for the given policy definition.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PolicyDefinitionVersions_ListBuiltIn")
+  listBuiltIn is PolicyDefinitionVersionTenantOps.List<
+    PolicyDefinitionVersion,
+    Parameters = {
+      /**
+       * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
+       */
+      @maxValue(1000)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+
   /**
    * This operation retrieves the policy definition version in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitionVersions_GetAtManagementGroup")
-  getAtManagementGroup is PolicyDefinitionVersionOperationGroupOps.Read<
-    Extension.ManagementGroup,
+  getAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.Read<
     PolicyDefinitionVersion
   >;
 
@@ -205,8 +200,7 @@ interface PolicyDefinitionVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitionVersions_CreateOrUpdateAtManagementGroup")
-  createOrUpdateAtManagementGroup is PolicyDefinitionVersionOperationGroupOps.CreateOrUpdateSync<
-    Extension.ManagementGroup,
+  createOrUpdateAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.CreateOrUpdateSync<
     PolicyDefinitionVersion
   >;
 
@@ -215,8 +209,7 @@ interface PolicyDefinitionVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitionVersions_DeleteAtManagementGroup")
-  deleteAtManagementGroup is PolicyDefinitionVersionOperationGroupOps.DeleteSync<
-    Extension.ManagementGroup,
+  deleteAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.DeleteSync<
     PolicyDefinitionVersion
   >;
 
@@ -225,8 +218,7 @@ interface PolicyDefinitionVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitionVersions_ListByManagementGroup")
-  listByManagementGroup is PolicyDefinitionVersionOperationGroupOps.List<
-    Extension.ManagementGroup,
+  listByManagementGroup is PolicyDefinitionVersionManagementGroupOps.List<
     PolicyDefinitionVersion,
     Parameters = {
       /**
@@ -249,6 +241,6 @@ interface PolicyDefinitionVersionOperationGroup {
 @@doc(PolicyDefinitionVersions.createOrUpdate::parameters.resource,
   "The policy definition properties."
 );
-@@doc(PolicyDefinitionVersionOperationGroup.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(PolicyDefinitionVersions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy definition properties."
 );
