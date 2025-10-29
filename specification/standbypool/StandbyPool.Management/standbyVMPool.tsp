@@ -74,8 +74,7 @@ model StandbyVirtualMachinePoolElasticityProfile {
   @minValue(0)
   @maxValue(2000)
   @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
-  @encodedName("application/json", "maxReadyCapacity")
-  maxReadyCapacityLimited: int64;
+  maxReadyCapacity: int64;
 
   @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
   @doc("Specifies the maximum number of virtual machines in the standby virtual machine pool.")
@@ -88,8 +87,7 @@ model StandbyVirtualMachinePoolElasticityProfile {
   @minValue(0)
   @maxValue(2000)
   @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
-  @encodedName("application/json", "minReadyCapacity")
-  minReadyCapacityLimited?: int64;
+  minReadyCapacity?: int64;
 
   @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
   @doc("Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.")
