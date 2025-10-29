@@ -53,9 +53,6 @@ enum Versions {
   /** Version 2024-11-01 */
   v2024_11_01: "2024-11-01",
 
-  /** Version 2024-11-15-preview" */
-  v2024_11_15_preview: "2024-11-15-preview",
-
   /** Version 2025-05-15 */
   v2025_05_15_preview: "2025-05-15-preview",
 
