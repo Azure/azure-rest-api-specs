@@ -31,6 +31,13 @@ options:
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-paloaltonetworksngfw"
+  "@azure-tools/typespec-csharp":
+    service-dir: "sdk/paloaltonetworks.ngfw"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.PaloAltoNetworks.Ngfw"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/paloaltonetworksngfw"
     emitter-output-dir: "{output-dir}/{service-dir}/armpanngfw"
