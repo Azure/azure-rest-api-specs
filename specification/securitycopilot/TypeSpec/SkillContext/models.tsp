@@ -830,12 +830,12 @@ namespace SkillContext
 		type: MemoryType;
 	}
 
-	@doc("MemoryDtoResponsePage")
+	@doc("Page of MemoryDtoResponse items with optional continuation token for pagination.")
 	model MemoryDtoResponsePage {
-		@doc("List of MemoryDtoResponse")
+		@doc("List of MemoryDtoResponse.")
 		items: Array<MemoryDtoResponse>;
 
-		@doc("Continuation token for pagination")
+		@doc("Continuation token for pagination.")
 		continuationToken?: string;
 	}
 
@@ -1562,8 +1562,114 @@ namespace SkillContext
 		Error,
 	}
 
-	@doc("Wrapper request for state of debugging through local PluginHost")
-	model SetLocalPluginHostDebugRequest {
-		localPluginHostDebugState: LocalPluginHostDebugState;
+	@doc("Request model TeamsNotificationInputs")
+	model TeamsNotificationInputs {
+		@doc("The ID of the recipient for the Teams notification, which is an Entra ID.")
+		recipientId: string;
+
+		@doc("The ID of the agent sending the notification, which is an Entra ID.")
+		tenantId: string;
+
+		@doc("The ID of the agent sending the notification.")
+		agentId: string;
+
+		@doc("The Bot ID of the Azure Bot registered by INS as part of onboarding your Teams agent with INS. Defaults to test bot ID if not specified. For production, use your registered bot ID.")
+		botId?: string;
+
+		@doc("The template ID for the Teams notification, which can be used to specify a predefined message format. Defaults to test template ID if not specified. For production, use your registered template ID.")
+		templateId?: string;
+
+		@doc("The subject of the Teams notification.")
+		subject?: string;
+
+		@doc("The locale for the Teams notification, defaulting to 'en-US'.")
+		locale?: string;
+
+		@doc("A dictionary of options for the Teams notification, such as custom properties or additional settings.")
+		options?: Record<string>;
+
+		@doc("Description of the notification, which can be used to provide additional context or information for querying or logging purposes.")
+		description?: string;
+
+		@doc("Other parameters in selected template.")
+		parameters?: Record<unknown>;
+	}
+
+	@doc("Represents a notification including destinations, locale and template mapping settings.")
+	model NotificationRequest {
+		@doc("The destinations for this notification.")
+		destinations: Array<Destination>;
+		
+		@doc("The deduplication identifier.")
+		deduplicationId: string;
+
+		@doc("Identifier of the template used for this notification.")
+		templateId: string;
+
+		@doc("Indicates whether tenant parameter-mapping rules apply.")
+		mapParametersToTemplateUsingTenantSettings: boolean;
+
+		@doc("Locale string.")
+		locale: string;
+
+		@doc("Dictionary holding all parameters (subject, mailbox, etc.).")
+		parameters: Record<unknown>;
+
+		@doc("Identifier of the agent sending this notification.")
+		agentId: string;
+
+		@doc("Bot ID of the Azure Bot registered by INS for the Teams agent.")
+		botId: string;
+	}
+
+	@doc("Represents a destination for a notification (e.g., Email, EntraId).")
+	model Destination {
+		@doc("Unique identifier for this destination.")
+		id: string;
+
+		@doc("Type string for this destination (e.g., 'Email').")
+		type: string;
+	}
+
+	@doc("Notification types supported (mapped from InsNotificationTypes C# constants).")
+	enum InsNotificationType {
+		@doc("Email notification type.")
+		Email: "Email",
+
+		@doc("One-way Teams notification (no user response expected).")
+		TeamsOneWay: "1-way Teams",
+
+		@doc("Two-way Teams notification (user response expected).")
+		TeamsTwoWay: "2-way Teams",
+	}
+
+	@doc("Adaptive Card sample parameter constants converted from C# static class.")
+	model AdaptiveCardSampleParameterConstants {
+		@doc("Default template ID for Teams notifications.")
+		DefaultTemplateId: string = "demo-teams-base-template-05292025";
+
+		@doc("Default bot ID for Teams notifications, sent to the test bot.")
+		DefaultBotId: string = "873f4300-3413-4bf7-b213-17ed31741df8";
+
+		@doc("Parameter key for the subject in notification parameters.")
+		SubjectParameterKey: string = "subject";
+
+		@doc("Parameter key for the action list in notification parameters.")
+		ActionListParameterKey: string = "actionList";
+
+		@doc("Key for action title in action dictionary.")
+		ActionTitleKey: string = "actionTitle";
+
+		@doc("Key for action value in action dictionary.")
+		ActionValueKey: string = "actionValue";
+	}
+
+	@doc("INS Teams constants converted from C# static class.")
+	model InsTeamsConstants {
+		@doc("Service name for logging.")
+		ServiceName: string = "INSTeamsNotification";
+
+		@doc("INS Teams notification message Id key; must be included in parameters of the request body regardless of template.")
+		MessageIdKey: string = "messageId";
 	}
 }
