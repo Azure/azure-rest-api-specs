@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2021-09-01-preview"
+    "version": "2023-04-27"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -47,64 +47,19 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getAccountCredentials": {
-      "post": {
-        "operationId": "Monitors_GetAccountCredentials",
-        "summary": "Gets the user account credentials for a Monitor",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Dynatrace account API Key",
-            "schema": {
-              "$ref": "#/definitions/AccountInfoSecure"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "tags": [
-          "Monitors"
-        ],
-        "x-ms-examples": {
-          "Monitors_GetAccountCredentials_MaximumSet_Gen": {
-            "$ref": "./examples/Monitors_GetAccountCredentials_MaximumSet_Gen.json"
-          },
-          "Monitors_GetAccountCredentials_MinimumSet_Gen": {
-            "$ref": "./examples/Monitors_GetAccountCredentials_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredResources": {
       "post": {
         "operationId": "Monitors_ListMonitoredResources",
         "summary": "List the resources currently being monitored by the Dynatrace monitor resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -120,7 +75,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -146,13 +101,13 @@
         "summary": "Returns the payload that needs to be passed in the request body for installing Dynatrace agent on a VM.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -168,7 +123,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -191,13 +146,13 @@
         "summary": "Get a MonitorResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -213,7 +168,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -238,13 +193,13 @@
         "summary": "Create a MonitorResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -275,7 +230,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -296,13 +251,13 @@
         "summary": "Update a MonitorResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -327,7 +282,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -352,13 +307,13 @@
         "summary": "Delete a MonitorResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -377,7 +332,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -400,20 +355,20 @@
         "summary": "List the operations for Dynatrace.Observability",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -439,10 +394,10 @@
         "summary": "List all MonitorResource by subscriptionId",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -455,7 +410,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -481,13 +436,13 @@
         "summary": "List MonitorResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -500,7 +455,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -526,13 +481,13 @@
         "summary": "Get a TagRule",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -551,7 +506,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -576,13 +531,13 @@
         "summary": "Create a TagRule",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -616,7 +571,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -632,61 +587,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "TagRules_Update",
-        "summary": "Update a TagRule",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RuleSetNameParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/TagRuleUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TagRule"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "tags": [
-          "TagRules"
-        ],
-        "x-ms-examples": {
-          "TagRules_Update_MaximumSet_Gen": {
-            "$ref": "./examples/TagRules_Update_MaximumSet_Gen.json"
-          },
-          "TagRules_Update_MinimumSet_Gen": {
-            "$ref": "./examples/TagRules_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "TagRules_Delete",
         "x-ms-long-running-operation": true,
@@ -696,13 +596,13 @@
         "summary": "Delete a TagRule",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -724,7 +624,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -747,13 +647,13 @@
         "summary": "List all TagRule by monitorName",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -769,7 +669,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -789,6 +689,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getMarketplaceSaaSResourceDetails": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_GetMarketplaceSaaSResourceDetails",
+        "description": "Get Marketplace SaaS resource details of a tenant under a specific subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceSaaSResourceDetailsResponse"
+            }
+          },
+          "404": {
+            "description": "No Marketplace SaaS resource found for the given tenant Id",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_GetMarketplaceSaaSResourceDetails_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_GetMarketplaceSaaSResourceDetails_MaximumSet_Gen.json"
+          },
+          "Monitors_GetMarketplaceSaaSResourceDetails_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_GetMarketplaceSaaSResourceDetails_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}": {
       "put": {
         "operationId": "SingleSignOn_CreateOrUpdate",
@@ -799,13 +745,13 @@
         "summary": "Create a DynatraceSingleSignOnResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -839,7 +785,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -860,13 +806,13 @@
         "summary": "Get a DynatraceSingleSignOnResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -885,7 +831,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -908,13 +854,13 @@
         "summary": "List all DynatraceSingleSignOnResource by monitorName",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -930,7 +876,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -953,16 +899,16 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listHosts": {
       "post": {
         "operationId": "Monitors_ListHosts",
-        "summary": "List the compute resources currently being monitored by the Dynatrace resource.",
+        "summary": "List the VM/VMSS resources currently being monitored by the Dynatrace resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -978,7 +924,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -998,19 +944,68 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getMetricStatus": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_GetMetricStatus",
+        "description": "Get metric status",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitor resource",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_GetMetricStatus_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_GetMetricStatus_MaximumSet_Gen.json"
+          },
+          "Monitors_GetMetricStatus_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_GetMetricStatus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listAppServices": {
       "post": {
         "operationId": "Monitors_ListAppServices",
         "summary": "Gets list of App Services with Dynatrace PaaS OneAgent enabled",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -1026,7 +1021,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1052,13 +1047,13 @@
         "summary": "Gets the SSO configuration details from the partner.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -1081,7 +1076,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1104,13 +1099,13 @@
         "summary": "Gets all the Dynatrace environments that a user can link a azure resource to",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
@@ -1129,7 +1124,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1151,27 +1146,6 @@
     }
   },
   "definitions": {
-    "AccountInfoSecure": {
-      "type": "object",
-      "properties": {
-        "accountId": {
-          "type": "string",
-          "description": "Account Id of the account this environment is linked to",
-          "readOnly": true
-        },
-        "apiKey": {
-          "$ref": "#/definitions/SecureString",
-          "description": "API Key of the user account",
-          "readOnly": true
-        },
-        "regionId": {
-          "type": "string",
-          "description": "Region in which the account is created",
-          "readOnly": true
-        }
-      },
-      "description": "Dynatrace account API Key"
-    },
     "MonitoredResourceListResponse": {
       "type": "object",
       "properties": {
@@ -1189,6 +1163,24 @@
         }
       },
       "description": "List of all the resources being monitored by Dynatrace monitor resource"
+    },
+    "MarketplaceSaaSResourceDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "marketplaceSaaSResourceId": {
+          "type": "string",
+          "description": "Id of the Marketplace SaaS Resource"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Id of the plan"
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
+        }
+      },
+      "description": "Marketplace SaaS resource details linked to the given tenant Id"
     },
     "VMExtensionPayload": {
       "type": "object",
@@ -1264,6 +1256,20 @@
       },
       "description": "Details of App Services having Dynatrace OneAgent installed"
     },
+    "MetricsStatusResponse": {
+      "type": "object",
+      "properties": {
+        "azureResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Azure resource IDs"
+        }
+      },
+      "description": "Response of get metrics status operation"
+    },
     "AppServiceListResponse": {
       "type": "object",
       "properties": {
@@ -1288,14 +1294,10 @@
         "properties": {
           "$ref": "#/definitions/MonitorProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System metadata for this resource.",
           "readOnly": true
         },
@@ -1310,7 +1312,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1328,26 +1330,6 @@
             "update",
             "create"
           ]
-        },
-        "monitoringStatus": {
-          "$ref": "#/definitions/MonitoringStatus",
-          "description": "Status of the monitor."
-        },
-        "marketplaceSubscriptionStatus": {
-          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
-          "description": "Marketplace subscription status."
-        },
-        "dynatraceEnvironmentProperties": {
-          "$ref": "#/definitions/DynatraceEnvironmentProperties",
-          "description": "Properties of the Dynatrace environment."
-        },
-        "userInfo": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "User info."
-        },
-        "planData": {
-          "$ref": "#/definitions/PlanData",
-          "description": "Billing plan information."
         }
       },
       "description": "The updatable properties of the MonitorResource."
@@ -1368,7 +1350,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a MonitorResource list operation."
+      "description": "The response of a MonitorResource list operation.",
+      "required": [
+        "value"
+      ]
     },
     "TagRule": {
       "type": "object",
@@ -1376,14 +1361,10 @@
         "properties": {
           "$ref": "#/definitions/MonitoringTagRulesProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System metadata for this resource.",
           "readOnly": true
         }
@@ -1394,23 +1375,9 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "TagRuleUpdate": {
-      "type": "object",
-      "properties": {
-        "logRules": {
-          "$ref": "#/definitions/LogRules",
-          "description": "Set of rules for sending logs for the Monitor resource."
-        },
-        "metricRules": {
-          "$ref": "#/definitions/MetricRules",
-          "description": "Set of rules for sending metrics for the Monitor resource."
-        }
-      },
-      "description": "The updatable properties of the TagRule."
     },
     "TagRuleListResult": {
       "type": "object",
@@ -1428,7 +1395,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a TagRule list operation."
+      "description": "The response of a TagRule list operation.",
+      "required": [
+        "value"
+      ]
     },
     "DynatraceSingleSignOnResource": {
       "type": "object",
@@ -1436,14 +1406,10 @@
         "properties": {
           "$ref": "#/definitions/DynatraceSingleSignOnProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System metadata for this resource.",
           "readOnly": true
         }
@@ -1454,7 +1420,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1474,13 +1440,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a DynatraceSingleSignOnResource list operation."
-    },
-    "SecureString": {
-      "type": "string",
-      "format": "password",
-      "x-ms-secret": true,
-      "description": "Credential string."
+      "description": "The response of a DynatraceSingleSignOnResource list operation.",
+      "required": [
+        "value"
+      ]
     },
     "MonitoredResource": {
       "type": "object",
@@ -1745,11 +1708,11 @@
       "type": "object",
       "properties": {
         "firstName": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "First Name of the user"
         },
         "lastName": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "Last Name of the user"
         },
         "emailAddress": {
@@ -1772,15 +1735,15 @@
       "type": "object",
       "properties": {
         "usageType": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "different usage type like PAYG/COMMITTED. this could be enum"
         },
         "billingCycle": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "different billing cycles like MONTHLY/WEEKLY. this could be enum"
         },
         "planDetails": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "plan id as published by Dynatrace"
         },
         "effectiveDate": {
@@ -1841,6 +1804,10 @@
       "description": "Set of rules for sending metrics for the Monitor resource.",
       "type": "object",
       "properties": {
+        "sendingMetrics": {
+          "$ref": "#/definitions/SendingMetricsStatus",
+          "description": "Flag specifying if metrics from Azure resources should be sent for the Monitor resource."
+        },
         "filteringTags": {
           "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
           "type": "array",
@@ -2020,7 +1987,12 @@
           "type": "string",
           "description": "Azure region in which we want to link the environment"
         }
-      }
+      },
+      "required": [
+        "tenantId",
+        "userPrincipal",
+        "region"
+      ]
     },
     "LinkableEnvironmentResponse": {
       "description": "Response for getting all the linkable environments",
@@ -2058,6 +2030,19 @@
         }
       }
     },
+    "MarketplaceSaaSResourceDetailsRequest": {
+      "description": "Request for getting Marketplace SaaS resource details for a tenant Id",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id"
+        }
+      },
+      "required": [
+        "tenantId"
+      ]
+    },
     "SSODetailsRequest": {
       "description": "Request for getting sso details for a user",
       "type": "object",
@@ -2066,7 +2051,10 @@
           "type": "string",
           "description": "user principal id of the user"
         }
-      }
+      },
+      "required": [
+        "userPrincipal"
+      ]
     },
     "SSODetailsResponse": {
       "type": "object",
@@ -2111,11 +2099,6 @@
         "name": "SSOStatus",
         "modelAsString": true
       }
-    },
-    "MediumString": {
-      "type": "string",
-      "maxLength": 50,
-      "description": "Shorthand for setting length limit."
     },
     "email": {
       "type": "string",
@@ -2245,6 +2228,16 @@
       "description": "The details of the get sso details request.",
       "schema": {
         "$ref": "#/definitions/SSODetailsRequest"
+      }
+    },
+    "TenantIdParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "request",
+      "in": "body",
+      "required": true,
+      "description": "Tenant Id",
+      "schema": {
+        "$ref": "#/definitions/MarketplaceSaaSResourceDetailsRequest"
       }
     }
   }
