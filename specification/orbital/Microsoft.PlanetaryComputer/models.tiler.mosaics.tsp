@@ -15,9 +15,7 @@ namespace Microsoft.PlanetaryComputer;
  */
 model MosaicTileQueryParameters {
   /**
-   * Buffer on each side of the given tile. It must be a multiple of `0.5`. Output
-   * **tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257,
-   * 1.0 = 258x258).
+   * Buffer on each side of the given tile. It must be a multiple of `0.5`. Output **tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257, 1.0 = 258x258).
    */
   @query("buffer")
   buffer?: string;
@@ -310,8 +308,7 @@ model MosaicSearchQueryParameters {
   exitWhenFull?: boolean;
 
   /**
-   * Skip any items that would show up completely under the previous items (defaults
-   * to True in PgSTAC).
+   * Skip any items that would show up completely under the previous items (defaults to True in PgSTAC).
    */
   @query("skipcovered")
   skipCovered?: boolean;
