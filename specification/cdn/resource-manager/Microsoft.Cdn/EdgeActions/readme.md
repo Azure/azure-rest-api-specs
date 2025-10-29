@@ -38,33 +38,6 @@ These settings apply only when `--tag=package-2025-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-09-01-preview'
 input-file:
   - preview/2025-09-01-preview/openapi.json
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: Operation APIs for Microsoft.Cdn are to be defined in cdn swagger
-  - code: PatchBodyParametersSchema
-    reason: This is the API design and therefore exempted
-  - code: ProvisioningStateMustBeReadOnly
-    reason: These errors are from the previous API versions
-  - code: PutResponseCodes
-    reason: These errors are from the previous API versions
-  - code: PostResponseCodes
-    reason: These errors are from the previous API versions
-  - code: DeleteResponseCodes
-    reason: These errors are from the previous API versions
-  - code: PatchResponseCodes
-    reason: These errors are from the previous API versions
-  - code: ResourceNameRestriction
-    reason: These errors are from the previous API versions
-  - code: RepeatedPathInfo
-    reason: These errors are from the previous API versions
-  - code: OperationsApiSchemaUsesCommonTypes
-    reason: These errors are from the previous API versions
-  - code: LroLocationHeader
-    reason: These errors are from the previous API versions
-  - code: ArmResourcePropertiesBag
-    reason: This is the API design and therefore exempted
-  - code: ConsistentPatchProperties
-    reason: This is the API design and therefore exempted
 modelerfour:
   lenient-model-deduplication: true
   prenamer: true
