@@ -21,7 +21,6 @@
           "Agents"
         ],
         "summary": "Get all agents for a subscription.",
-        "description": "Get all agents for a subscription.",
         "operationId": "Agents_ListBySubscription",
         "parameters": [
           {
@@ -61,7 +60,6 @@
           "Agents"
         ],
         "summary": "Get all the agents in a resource group.",
-        "description": "Get all the agents in a resource group.",
         "operationId": "Agents_ListByResourceGroup",
         "parameters": [
           {
@@ -104,7 +102,6 @@
           "Agents"
         ],
         "summary": "Get the properties of an Agent.",
-        "description": "Get the properties of an Agent.",
         "operationId": "Agents_Get",
         "parameters": [
           {
@@ -118,7 +115,8 @@
             "in": "path",
             "description": "Name of the agent.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -149,7 +147,6 @@
           "Agents"
         ],
         "summary": "Creates or updates an Agent.",
-        "description": "Creates or updates an Agent.",
         "operationId": "Agents_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -217,7 +214,6 @@
           "Agents"
         ],
         "summary": "Update Agent's properties.",
-        "description": "Patches an Agent using JSON Merge Patch",
         "operationId": "Agents_Update",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -281,7 +277,6 @@
           "Agents"
         ],
         "summary": "Delete an Agent.",
-        "description": "Delete an Agent.",
         "operationId": "Agents_Delete",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -298,7 +293,8 @@
             "name": "agentName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -336,7 +332,6 @@
           "Agents"
         ],
         "summary": "Start an Agent.",
-        "description": "Start an Agent.",
         "operationId": "Agents_Start",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -353,7 +348,8 @@
             "name": "agentName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -394,7 +390,6 @@
           "Agents"
         ],
         "summary": "Stop an Agent.",
-        "description": "Stop an Agent.",
         "operationId": "Agents_Stop",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -411,7 +406,8 @@
             "name": "agentName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -491,14 +487,12 @@
     "AgentPatch": {
       "description": "Site Reliability Engineer (SRE) Agent",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ResourceTags"
+        }
+      ],
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        },
         "identity": {
           "description": "Managed identities for the Agent to interact with other Azure services without maintaining any secrets or credentials in code.",
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"

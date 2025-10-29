@@ -21,7 +21,6 @@
           "AgentSpaces"
         ],
         "summary": "Get all agent spaces for a subscription.",
-        "description": "Get all agent spaces for a subscription.",
         "operationId": "AgentSpaces_ListBySubscription",
         "parameters": [
           {
@@ -61,7 +60,6 @@
           "AgentSpaces"
         ],
         "summary": "Get all the agent spaces in a resource group.",
-        "description": "Get all the agent spaces in a resource group.",
         "operationId": "AgentSpaces_ListByResourceGroup",
         "parameters": [
           {
@@ -104,7 +102,6 @@
           "AgentSpaces"
         ],
         "summary": "Get the properties of an Agent Space.",
-        "description": "Get the properties of an Agent Space.",
         "operationId": "AgentSpaces_Get",
         "parameters": [
           {
@@ -118,7 +115,8 @@
             "in": "path",
             "description": "Name of the agent space.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]*[A-Za-z0-9])$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -149,7 +147,6 @@
           "AgentSpaces"
         ],
         "summary": "Creates or updates an Agent Space.",
-        "description": "Creates or updates an Agent Space.",
         "operationId": "AgentSpaces_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -218,7 +215,6 @@
           "AgentSpaces"
         ],
         "summary": "Update Agent Space's properties.",
-        "description": "Patches an Agent Space using JSON Merge Patch",
         "operationId": "AgentSpaces_Update",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -283,7 +279,6 @@
           "AgentSpaces"
         ],
         "summary": "Delete an Agent Space.",
-        "description": "Delete an Agent Space.",
         "operationId": "AgentSpaces_Delete",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -378,14 +373,12 @@
     "AgentSpacePatch": {
       "description": "SRE AgentSpace Patch payload",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ResourceTags"
+        }
+      ],
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        },
         "identity": {
           "description": "Managed identities for the Agent space to interact with other Azure services without maintaining any secrets or credentials in code.",
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
