@@ -1,0 +1,65 @@
+{
+  "title": "EdgeMachineExtensions_Get",
+  "operationId": "EdgeMachineExtensions_Get",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "Test-RG",
+    "edgeMachineName": "EdgeMachine01",
+    "extensionName": "BareMetalHostExtension",
+    "api-version": "2024-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/Test-RG/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/extensions/CustomScriptExtension",
+        "name": "CustomScriptExtension",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/extensions",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "extensionParameters": {
+            "publisher": "Microsoft.Compute",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.10.3",
+            "autoUpgradeMinorVersion": true,
+            "enableAutomaticUpgrade": false,
+            "settings": {
+              "fileUris": [
+                "https://contoso.blob.core.windows.net/scripts/install.ps1"
+              ],
+              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File install.ps1"
+            }
+          },
+          "perNodeExtensionDetails": [
+            {
+              "name": "EdgeMachine-01",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/Test-RG/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/extensions/CustomScriptExtension",
+              "state": "Succeeded",
+              "typeHandlerVersion": "1.10.0",
+              "instanceView": {
+                "name": "CustomScriptExtension",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.10.0",
+                "status": {
+                  "code": "success",
+                  "level": "Information",
+                  "displayStatus": "Provisioning succeeded",
+                  "message": "Finished executing command, StdOut: , StdErr:",
+                  "time": "2019-08-08T20:42:10.999Z"
+                }
+              }
+            }
+          ],
+          "managedBy": "Azure"
+        }
+      }
+    }
+  }
+}

@@ -37,14 +37,17 @@ interface EdgeDeviceJobs {
    * Get a EdgeDeviceJob
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is Extension.Read<Extension.ScopeParameter, EdgeDeviceJob>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDeviceJob
+  >;
 
   /**
    * Create a EdgeDeviceJob
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is Extension.CreateOrReplaceAsync<
-    Extension.ScopeParameter,
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDeviceJob
   >;
 
@@ -52,8 +55,8 @@ interface EdgeDeviceJobs {
    * Delete a EdgeDeviceJob
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is Extension.DeleteWithoutOkAsync<
-    Extension.ScopeParameter,
+  delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDeviceJob
   >;
 
@@ -61,8 +64,8 @@ interface EdgeDeviceJobs {
    * List EdgeDeviceJob resources by EdgeDevice
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  listByEdgeDevice is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  listByEdgeDevice is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDeviceJob
   >;
 }

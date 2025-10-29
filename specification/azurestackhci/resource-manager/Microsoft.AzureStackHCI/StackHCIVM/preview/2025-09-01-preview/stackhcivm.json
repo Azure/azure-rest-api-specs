@@ -6063,10 +6063,6 @@
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
         },
-        "vmImageRepositoryCredentials": {
-          "$ref": "#/definitions/VmImageRepositoryCredentials",
-          "description": "The credentials used to login to the image repository that has access to the specified image"
-        },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier",
           "description": "This is the gallery image definition identifier."
@@ -6493,7 +6489,8 @@
       "description": "The hypervisor generation of the Virtual Machine [V1, V2]",
       "enum": [
         "V1",
-        "V2"
+        "V2",
+        "NA"
       ],
       "x-ms-enum": {
         "name": "HyperVGeneration",
@@ -6508,6 +6505,11 @@
             "name": "V2",
             "value": "V2",
             "description": "Generation 2 (V2) hypervisor"
+          },
+          {
+            "name": "NA",
+            "value": "NA",
+            "description": "Not applicable/determined by platform"
           }
         ]
       }
@@ -7308,18 +7310,6 @@
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
               },
               {
-                "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/l2Networks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/l3Networks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/trunkedNetworks"
-              },
-              {
                 "type": "Microsoft.AzureStackHCI/virtualNetwork/subnets"
               }
             ]
@@ -7926,6 +7916,11 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
+        },
+        "enableSdnPolicy": {
+          "type": "boolean",
+          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.",
+          "default": true
         }
       }
     },
@@ -7972,6 +7967,10 @@
         "dnsSettings": {
           "$ref": "#/definitions/InterfaceDNSSettings",
           "description": "DNS Settings for the interface"
+        },
+        "enableSdnPolicy": {
+          "type": "boolean",
+          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations."
         }
       }
     },
@@ -9406,6 +9405,12 @@
           "description": "Boolean indicating whether it is an existing local hard disk or if one should be created.",
           "default": false
         },
+        "localVhdPath": {
+          "type": "string",
+          "format": "password",
+          "description": "Absolute path of the VHD. This is only applicable when createFromLocal is true.",
+          "x-ms-secret": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual hard disk.",
@@ -9706,6 +9711,10 @@
           "type": "boolean",
           "description": "Boolean indicating whether this is an existing local virtual machine or if one should be created.",
           "default": false
+        },
+        "localVmName": {
+          "type": "string",
+          "description": "HyperV name of the VM. This is only applicable when createFromLocal is true."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
@@ -10595,26 +10604,6 @@
           }
         }
       }
-    },
-    "VmImageRepositoryCredentials": {
-      "type": "object",
-      "description": "The credentials used to login to the image repository that has access to the specified image",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "Username for accessing image repository"
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "Password for accessing image repository",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
     },
     "VmSizeEnum": {
       "type": "string",

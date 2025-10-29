@@ -32,6 +32,10 @@ union HyperVGeneration {
   @doc("Generation 2 (V2) hypervisor")
   V2: "V2",
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Not applicable/determined by platform")
+  NA: "NA",
+
   string,
 }
 
@@ -617,18 +621,6 @@ model LogicalNetworkArmReference {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
     },
     {
-      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l2Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l3Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/trunkedNetworks";
-    },
-    {
       type: "Microsoft.AzureStackHCI/virtualNetwork/subnets";
     }
   ]>;
@@ -797,10 +789,6 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
-  @added(Versions.v2024_08_01_preview)
-  @doc("The credentials used to login to the image repository that has access to the specified image")
-  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
-
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -822,17 +810,6 @@ model GalleryImageProperties {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
     }
   ]>;
-}
-
-@added(Versions.v2024_08_01_preview)
-@doc("The credentials used to login to the image repository that has access to the specified image")
-model VmImageRepositoryCredentials {
-  @doc("Username for accessing image repository")
-  username: string;
-
-  @doc("Password for accessing image repository")
-  @secret
-  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -1202,6 +1179,10 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.")
+  enableSdnPolicy?: boolean = true;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -1937,6 +1918,10 @@ model NetworkInterfacesUpdateProperties {
 
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.")
+  enableSdnPolicy?: boolean;
 }
 
 @doc("Tags object for patch operations.")
@@ -2030,6 +2015,11 @@ model VirtualHardDiskProperties {
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
   createFromLocal?: boolean = false;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Absolute path of the VHD. This is only applicable when createFromLocal is true.")
+  @secret
+  localVhdPath?: string;
 
   @doc("Provisioning state of the virtual hard disk.")
   @visibility(Lifecycle.Read)
@@ -2196,6 +2186,10 @@ model VirtualMachineInstanceProperties {
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
   createFromLocal?: boolean = false;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("HyperV name of the VM. This is only applicable when createFromLocal is true.")
+  localVmName?: string;
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility(Lifecycle.Read)

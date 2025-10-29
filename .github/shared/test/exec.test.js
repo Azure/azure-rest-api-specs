@@ -57,10 +57,10 @@ describe("execNpm", () => {
 
 describe("execNpmExec", () => {
   // A command run in the context of "npm exec --no -- ___" needs to call
-  // something referenced in package.json. In this case, js-yaml is present
+  // something referenced in package.json. In this case, prettier is present
   // so it is used.
-  it("runs js-yaml", async () => {
-    await expect(execNpmExec(["js-yaml", "--version"], options)).resolves.toEqual({
+  it("runs prettier", async () => {
+    await expect(execNpmExec(["prettier", "--version"], options)).resolves.toEqual({
       stdout: expect.toSatisfy((v) => semver.valid(v)),
       stderr: "",
       error: undefined,

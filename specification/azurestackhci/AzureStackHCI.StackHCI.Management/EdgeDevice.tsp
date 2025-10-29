@@ -35,14 +35,17 @@ interface EdgeDevices {
    * Get a EdgeDevice
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is Extension.Read<Extension.ScopeParameter, EdgeDevice>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDevice
+  >;
 
   /**
    * Create a EdgeDevice
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is Extension.CreateOrReplaceAsync<
-    Extension.ScopeParameter,
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDevice
   >;
 
@@ -50,8 +53,8 @@ interface EdgeDevices {
    * Delete a EdgeDevice
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is Extension.DeleteWithoutOkAsync<
-    Extension.ScopeParameter,
+  delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDevice
   >;
 
@@ -59,14 +62,17 @@ interface EdgeDevices {
    * List EdgeDevice resources by parent
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  list is Extension.ListByTarget<Extension.ScopeParameter, EdgeDevice>;
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDevice
+  >;
 
   /**
    * A long-running resource action.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  validate is Extension.ActionAsync<
-    Extension.ScopeParameter,
+  validate is Azure.ResourceManager.Extension.ActionAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDevice,
     ValidateRequest,
     ValidateResponseResult

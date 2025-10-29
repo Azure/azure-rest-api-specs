@@ -18,7 +18,7 @@ import "./Cluster.tsp";
 import "./DeploymentSetting.tsp";
 import "./EdgeDeviceJob.tsp";
 import "./EdgeDevice.tsp";
-import "./HCIExtension.tsp";
+import "./Extension.tsp";
 import "./Offer.tsp";
 import "./Publisher.tsp";
 import "./SecuritySetting.tsp";
@@ -31,6 +31,8 @@ import "./ValidatedSolutionRecipe.tsp";
 // import "./edgeMachine.tsp";
 import "./hciCommon.tsp";
 // import "./edgeMachineJobs.tsp";
+// import "./private-preview/validateOwnershipVouchers-pvt.tsp";
+// import "./routes.tsp";
 import "./Operations.tsp";
 
 using TypeSpec.Rest;
