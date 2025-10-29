@@ -833,7 +833,7 @@ namespace SkillContext
 	@doc("Page of MemoryDtoResponse items with optional continuation token for pagination.")
 	model MemoryDtoResponsePage {
 		@doc("List of MemoryDtoResponse.")
-		items: Array<MemoryDtoResponse>;
+		values: Array<MemoryDtoResponse>;
 
 		@doc("Continuation token for pagination.")
 		continuationToken?: string;
