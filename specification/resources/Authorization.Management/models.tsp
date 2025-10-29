@@ -578,7 +578,6 @@ model ParameterDefinitionsValue {
   /**
    * The allowed values for the parameter.
    */
-  @identifiers(#[])
   allowedValues?: unknown[];
 
   /**
