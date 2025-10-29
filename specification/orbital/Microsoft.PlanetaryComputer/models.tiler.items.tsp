@@ -172,9 +172,6 @@ model BoundingBoxPathParameters {
  *
  * response model for `/point` endpoints
  */
-/**
- * Response model for point query operations providing values at a specific location
- */
 model TilerCoreModelsResponsesPoint {
   /**
    * Geographic coordinates [longitude, latitude] of the queried point
