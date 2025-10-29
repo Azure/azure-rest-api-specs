@@ -11,7 +11,7 @@ using Microsoft.PlanetaryComputer;
 
 @useDependency(Versions.v2025_04_30_Preview)
 @client({
-  name: "PlanetaryComputerClient",
+  name: "PlanetaryComputerProClient",
   service: Microsoft.PlanetaryComputer,
 })
 namespace Customizations;
@@ -189,7 +189,7 @@ interface Stac {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
 @clientName("TilerClient", "csharp")
-interface Tiler {
+interface Data {
   // Tile Matrix Sets
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
 
