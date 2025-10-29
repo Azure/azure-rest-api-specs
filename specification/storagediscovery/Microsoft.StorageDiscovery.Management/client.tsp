@@ -19,3 +19,16 @@ using Microsoft.StorageDiscovery;
   "StorageDiscoveryMgmtClient",
   "python"
 );
+
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "StorageDiscoveryProvisioningState",
+  "csharp"
+);
+@@clientName(StorageDiscoveryResourceType,
+  "StorageDiscoveryResourceKind",
+  "csharp"
+);
+@@clientName(StorageDiscoveryWorkspacePropertiesUpdate,
+  "StorageDiscoveryWorkspacePatchProperties",
+  "csharp"
+);

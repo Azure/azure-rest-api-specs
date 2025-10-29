@@ -1,6 +1,6 @@
-import { describe, test, expect } from "vitest";
-import { createCombinedSpecs, type SpecResults } from "../../src/utils.js";
 import path from "node:path";
+import { describe, expect, test } from "vitest";
+import { createCombinedSpecs, type SpecResults } from "../../src/utils.js";
 
 describe("createCombinedSpecs", () => {
   test("combines specs from readme and typespec paths", () => {

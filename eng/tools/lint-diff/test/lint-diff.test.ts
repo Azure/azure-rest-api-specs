@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { test, describe, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 
 // TODO: Actual tests
 describe("e2e", () => {
