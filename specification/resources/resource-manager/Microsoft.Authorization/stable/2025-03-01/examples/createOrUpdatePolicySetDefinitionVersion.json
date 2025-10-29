@@ -1,17 +1,13 @@
 {
   "parameters": {
-    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
-    "policySetDefinitionName": "CostManagement",
-    "policyDefinitionVersion": "1.2.1",
     "api-version": "2025-03-01",
     "parameters": {
       "properties": {
-        "displayName": "Cost Management",
         "description": "Policies to enforce low cost storage SKUs",
+        "displayName": "Cost Management",
         "metadata": {
           "category": "Cost Management"
         },
-        "version": "1.2.1",
         "parameters": {
           "namePrefix": {
             "type": "String",
@@ -23,8 +19,6 @@
         },
         "policyDefinitions": [
           {
-            "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
-            "policyDefinitionReferenceId": "Limit_Skus",
             "parameters": {
               "listOfAllowedSKUs": {
                 "value": [
@@ -32,11 +26,11 @@
                   "Standard_LRS"
                 ]
               }
-            }
+            },
+            "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "policyDefinitionReferenceId": "Limit_Skus"
           },
           {
-            "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
-            "policyDefinitionReferenceId": "Resource_Naming",
             "parameters": {
               "prefix": {
                 "value": "[parameters('namePrefix')]"
@@ -44,79 +38,30 @@
               "suffix": {
                 "value": "-LC"
               }
-            }
-          }
-        ]
-      }
-    }
-  },
-  "responses": {
-    "201": {
-      "headers": {},
-      "body": {
-        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement/versions/1.2.1",
-        "type": "Microsoft.Authorization/policySetDefinitions/versions",
-        "name": "1.2.1",
-        "properties": {
-          "displayName": "Cost Management",
-          "description": "Policies to enforce low cost storage SKUs",
-          "metadata": {
-            "category": "Cost Management"
-          },
-          "version": "1.2.1",
-          "parameters": {
-            "namePrefix": {
-              "type": "String",
-              "defaultValue": "myPrefix",
-              "metadata": {
-                "displayName": "Prefix to enforce on resource names"
-              }
-            }
-          },
-          "policyDefinitions": [
-            {
-              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
-              "definitionVersion": "1.*.*",
-              "policyDefinitionReferenceId": "Limit_Skus",
-              "parameters": {
-                "listOfAllowedSKUs": {
-                  "value": [
-                    "Standard_GRS",
-                    "Standard_LRS"
-                  ]
-                }
-              }
             },
-            {
-              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
-              "definitionVersion": "1.*.*",
-              "policyDefinitionReferenceId": "Resource_Naming",
-              "parameters": {
-                "prefix": {
-                  "value": "[parameters('namePrefix')]"
-                },
-                "suffix": {
-                  "value": "-LC"
-                }
-              }
-            }
-          ]
-        }
+            "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+            "policyDefinitionReferenceId": "Resource_Naming"
+          }
+        ],
+        "version": "1.2.1"
       }
     },
+    "policyDefinitionVersion": "1.2.1",
+    "policySetDefinitionName": "CostManagement",
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+  },
+  "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement/versions/1.2.1",
-        "type": "Microsoft.Authorization/policySetDefinitions/versions",
         "name": "1.2.1",
+        "type": "Microsoft.Authorization/policySetDefinitions/versions",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement/versions/1.2.1",
         "properties": {
-          "displayName": "Cost Management",
           "description": "Policies to enforce low cost storage SKUs",
+          "displayName": "Cost Management",
           "metadata": {
             "category": "Cost Management"
           },
-          "version": "1.2.1",
           "parameters": {
             "namePrefix": {
               "type": "String",
@@ -128,9 +73,7 @@
           },
           "policyDefinitions": [
             {
-              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
               "definitionVersion": "1.*.*",
-              "policyDefinitionReferenceId": "Limit_Skus",
               "parameters": {
                 "listOfAllowedSKUs": {
                   "value": [
@@ -138,12 +81,12 @@
                     "Standard_LRS"
                   ]
                 }
-              }
+              },
+              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+              "policyDefinitionReferenceId": "Limit_Skus"
             },
             {
-              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
               "definitionVersion": "1.*.*",
-              "policyDefinitionReferenceId": "Resource_Naming",
               "parameters": {
                 "prefix": {
                   "value": "[parameters('namePrefix')]"
@@ -151,11 +94,70 @@
                 "suffix": {
                   "value": "-LC"
                 }
+              },
+              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+              "policyDefinitionReferenceId": "Resource_Naming"
+            }
+          ],
+          "version": "1.2.1"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "1.2.1",
+        "type": "Microsoft.Authorization/policySetDefinitions/versions",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement/versions/1.2.1",
+        "properties": {
+          "description": "Policies to enforce low cost storage SKUs",
+          "displayName": "Cost Management",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "parameters": {
+            "namePrefix": {
+              "type": "String",
+              "defaultValue": "myPrefix",
+              "metadata": {
+                "displayName": "Prefix to enforce on resource names"
               }
             }
-          ]
+          },
+          "policyDefinitions": [
+            {
+              "definitionVersion": "1.*.*",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              },
+              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+              "policyDefinitionReferenceId": "Limit_Skus"
+            },
+            {
+              "definitionVersion": "1.*.*",
+              "parameters": {
+                "prefix": {
+                  "value": "[parameters('namePrefix')]"
+                },
+                "suffix": {
+                  "value": "-LC"
+                }
+              },
+              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+              "policyDefinitionReferenceId": "Resource_Naming"
+            }
+          ],
+          "version": "1.2.1"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PolicySetDefinitionVersions_CreateOrUpdate",
+  "title": "Create or update a policy set definition version"
 }

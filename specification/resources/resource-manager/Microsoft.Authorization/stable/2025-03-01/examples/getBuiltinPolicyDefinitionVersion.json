@@ -1,19 +1,20 @@
 {
   "parameters": {
-    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "api-version": "2025-03-01",
     "policyDefinitionName": "7433c107-6db4-4ad1-b57a-a76dce0154a1",
     "policyDefinitionVersion": "1.2.1",
-    "api-version": "2025-03-01"
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "name": "1.2.1",
+        "type": "Microsoft.Authorization/policyDefinitions/versions",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1/versions/1.2.1",
         "properties": {
-          "mode": "All",
-          "displayName": "Allowed storage account SKUs",
-          "policyType": "BuiltIn",
           "description": "This policy enables you to specify a set of storage account SKUs that your organization can deploy.",
+          "displayName": "Allowed storage account SKUs",
+          "mode": "All",
           "parameters": {
             "listOfAllowedSKUs": {
               "type": "Array",
@@ -24,13 +25,12 @@
               }
             }
           },
-          "version": "1.2.1",
           "policyRule": {
             "if": {
               "allOf": [
                 {
-                  "field": "type",
-                  "equals": "Microsoft.Storage/storageAccounts"
+                  "equals": "Microsoft.Storage/storageAccounts",
+                  "field": "type"
                 },
                 {
                   "not": {
@@ -43,12 +43,14 @@
             "then": {
               "effect": "Deny"
             }
-          }
-        },
-        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1/versions/1.2.1",
-        "type": "Microsoft.Authorization/policyDefinitions/versions",
-        "name": "1.2.1"
-      }
+          },
+          "policyType": "BuiltIn",
+          "version": "1.2.1"
+        }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PolicyDefinitionVersions_GetBuiltIn",
+  "title": "Retrieve a built-in policy definition version"
 }

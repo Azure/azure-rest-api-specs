@@ -1,18 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
-    "policyDefinitionName": "ResourceNaming",
-    "policyDefinitionVersion": "1.2.1",
     "api-version": "2025-03-01",
     "parameters": {
       "properties": {
-        "mode": "All",
-        "displayName": "Enforce resource naming convention",
         "description": "Force resource names to begin with given 'prefix' and/or end with given 'suffix'",
+        "displayName": "Enforce resource naming convention",
         "metadata": {
           "category": "Naming"
         },
-        "version": "1.2.1",
+        "mode": "All",
+        "parameters": {
+          "prefix": {
+            "type": "String",
+            "metadata": {
+              "description": "Resource name prefix",
+              "displayName": "Prefix"
+            }
+          },
+          "suffix": {
+            "type": "String",
+            "metadata": {
+              "description": "Resource name suffix",
+              "displayName": "Suffix"
+            }
+          }
+        },
         "policyRule": {
           "if": {
             "not": {
@@ -24,40 +36,42 @@
             "effect": "deny"
           }
         },
-        "parameters": {
-          "prefix": {
-            "type": "String",
-            "metadata": {
-              "displayName": "Prefix",
-              "description": "Resource name prefix"
-            }
-          },
-          "suffix": {
-            "type": "String",
-            "metadata": {
-              "displayName": "Suffix",
-              "description": "Resource name suffix"
-            }
-          }
-        }
+        "version": "1.2.1"
       }
-    }
+    },
+    "policyDefinitionName": "ResourceNaming",
+    "policyDefinitionVersion": "1.2.1",
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
-        "type": "Microsoft.Authorization/policyDefinitions/versions",
         "name": "1.2.1",
+        "type": "Microsoft.Authorization/policyDefinitions/versions",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
         "properties": {
-          "mode": "All",
-          "displayName": "Naming Convention",
           "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+          "displayName": "Naming Convention",
           "metadata": {
             "category": "Naming"
           },
-          "version": "1.2.1",
+          "mode": "All",
+          "parameters": {
+            "prefix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name prefix",
+                "displayName": "Prefix"
+              }
+            },
+            "suffix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name suffix",
+                "displayName": "Suffix"
+              }
+            }
+          },
           "policyRule": {
             "if": {
               "not": {
@@ -69,40 +83,40 @@
               "effect": "deny"
             }
           },
-          "parameters": {
-            "prefix": {
-              "type": "String",
-              "metadata": {
-                "displayName": "Prefix",
-                "description": "Resource name prefix"
-              }
-            },
-            "suffix": {
-              "type": "String",
-              "metadata": {
-                "displayName": "Suffix",
-                "description": "Resource name suffix"
-              }
-            }
-          },
-          "policyType": "Custom"
+          "policyType": "Custom",
+          "version": "1.2.1"
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
-        "type": "Microsoft.Authorization/policyDefinitions/versions",
         "name": "1.2.1",
+        "type": "Microsoft.Authorization/policyDefinitions/versions",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
         "properties": {
-          "mode": "All",
-          "displayName": "Naming Convention",
           "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+          "displayName": "Naming Convention",
           "metadata": {
             "category": "Naming"
           },
-          "version": "1.2.1",
+          "mode": "All",
+          "parameters": {
+            "prefix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name prefix",
+                "displayName": "Prefix"
+              }
+            },
+            "suffix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name suffix",
+                "displayName": "Suffix"
+              }
+            }
+          },
           "policyRule": {
             "if": {
               "not": {
@@ -114,25 +128,13 @@
               "effect": "deny"
             }
           },
-          "parameters": {
-            "prefix": {
-              "type": "String",
-              "metadata": {
-                "displayName": "Prefix",
-                "description": "Resource name prefix"
-              }
-            },
-            "suffix": {
-              "type": "String",
-              "metadata": {
-                "displayName": "Suffix",
-                "description": "Resource name suffix"
-              }
-            }
-          },
-          "policyType": "Custom"
+          "policyType": "Custom",
+          "version": "1.2.1"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PolicyDefinitionVersions_CreateOrUpdate",
+  "title": "Create or update a policy definition version"
 }

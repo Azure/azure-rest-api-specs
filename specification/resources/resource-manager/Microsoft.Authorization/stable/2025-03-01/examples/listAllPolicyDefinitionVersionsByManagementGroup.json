@@ -1,25 +1,39 @@
 {
   "parameters": {
-    "managementGroupName": "MyManagementGroup",
-    "api-version": "2025-03-01"
+    "api-version": "2025-03-01",
+    "managementGroupName": "MyManagementGroup"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
-            "type": "Microsoft.Authorization/policyDefinitions/versions",
             "name": "1.2.1",
+            "type": "Microsoft.Authorization/policyDefinitions/versions",
+            "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
             "properties": {
-              "mode": "All",
-              "displayName": "Naming Convention",
               "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+              "displayName": "Naming Convention",
               "metadata": {
                 "category": "Naming"
               },
-              "version": "1.2.1",
+              "mode": "All",
+              "parameters": {
+                "prefix": {
+                  "type": "String",
+                  "metadata": {
+                    "description": "Resource name prefix",
+                    "displayName": "Prefix"
+                  }
+                },
+                "suffix": {
+                  "type": "String",
+                  "metadata": {
+                    "description": "Resource name suffix",
+                    "displayName": "Suffix"
+                  }
+                }
+              },
               "policyRule": {
                 "if": {
                   "not": {
@@ -31,37 +45,37 @@
                   "effect": "deny"
                 }
               },
+              "policyType": "Custom",
+              "version": "1.2.1"
+            }
+          },
+          {
+            "name": "1.0.0",
+            "type": "Microsoft.Authorization/policyDefinitions/versions",
+            "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.0.0",
+            "properties": {
+              "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+              "displayName": "Naming Convention",
+              "metadata": {
+                "category": "Naming"
+              },
+              "mode": "All",
               "parameters": {
                 "prefix": {
                   "type": "String",
                   "metadata": {
-                    "displayName": "Prefix",
-                    "description": "Resource name prefix"
+                    "description": "Resource name prefix",
+                    "displayName": "Prefix"
                   }
                 },
                 "suffix": {
                   "type": "String",
                   "metadata": {
-                    "displayName": "Suffix",
-                    "description": "Resource name suffix"
+                    "description": "Resource name suffix",
+                    "displayName": "Suffix"
                   }
                 }
               },
-              "policyType": "Custom"
-            }
-          },
-          {
-            "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.0.0",
-            "type": "Microsoft.Authorization/policyDefinitions/versions",
-            "name": "1.0.0",
-            "properties": {
-              "mode": "All",
-              "displayName": "Naming Convention",
-              "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
-              "metadata": {
-                "category": "Naming"
-              },
-              "version": "1.2.1",
               "policyRule": {
                 "if": {
                   "not": {
@@ -73,27 +87,15 @@
                   "effect": "deny"
                 }
               },
-              "parameters": {
-                "prefix": {
-                  "type": "String",
-                  "metadata": {
-                    "displayName": "Prefix",
-                    "description": "Resource name prefix"
-                  }
-                },
-                "suffix": {
-                  "type": "String",
-                  "metadata": {
-                    "displayName": "Suffix",
-                    "description": "Resource name suffix"
-                  }
-                }
-              },
-              "policyType": "Custom"
+              "policyType": "Custom",
+              "version": "1.2.1"
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PolicyDefinitionVersions_ListAllAtManagementGroup",
+  "title": "List all policy definition versions at management group"
 }

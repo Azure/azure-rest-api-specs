@@ -1,28 +1,38 @@
 {
   "parameters": {
+    "api-version": "2025-03-01",
     "managementGroupId": "MyManagementGroup",
-    "policyDefinitionName": "ResourceNaming",
-    "api-version": "2025-03-01"
+    "policyDefinitionName": "ResourceNaming"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
-        "type": "Microsoft.Authorization/policyDefinitions",
         "name": "ResourceNaming",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
         "properties": {
-          "mode": "All",
-          "displayName": "Naming Convention",
           "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+          "displayName": "Naming Convention",
           "metadata": {
             "category": "Naming"
           },
-          "version": "1.2.1",
-          "versions": [
-            "1.2.1",
-            "1.0.0"
-          ],
+          "mode": "All",
+          "parameters": {
+            "prefix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name prefix",
+                "displayName": "Prefix"
+              }
+            },
+            "suffix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name suffix",
+                "displayName": "Suffix"
+              }
+            }
+          },
           "policyRule": {
             "if": {
               "not": {
@@ -34,25 +44,17 @@
               "effect": "deny"
             }
           },
-          "parameters": {
-            "prefix": {
-              "type": "String",
-              "metadata": {
-                "displayName": "Prefix",
-                "description": "Resource name prefix"
-              }
-            },
-            "suffix": {
-              "type": "String",
-              "metadata": {
-                "displayName": "Suffix",
-                "description": "Resource name suffix"
-              }
-            }
-          },
-          "policyType": "Custom"
+          "policyType": "Custom",
+          "version": "1.2.1",
+          "versions": [
+            "1.2.1",
+            "1.0.0"
+          ]
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PolicyDefinitions_GetAtManagementGroup",
+  "title": "Retrieve a policy definition at management group level"
 }

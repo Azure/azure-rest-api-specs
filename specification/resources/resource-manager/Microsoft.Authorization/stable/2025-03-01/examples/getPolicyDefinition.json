@@ -1,25 +1,38 @@
 {
   "parameters": {
-    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "api-version": "2025-03-01",
     "policyDefinitionName": "ResourceNaming",
-    "api-version": "2025-03-01"
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "name": "ResourceNaming",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
         "properties": {
-          "mode": "All",
-          "displayName": "Naming Convention",
           "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+          "displayName": "Naming Convention",
           "metadata": {
             "category": "Naming"
           },
-          "version": "1.2.1",
-          "versions": [
-            "1.2.1",
-            "1.0.0"
-          ],
+          "mode": "All",
+          "parameters": {
+            "prefix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name prefix",
+                "displayName": "Prefix"
+              }
+            },
+            "suffix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name suffix",
+                "displayName": "Suffix"
+              }
+            }
+          },
           "policyRule": {
             "if": {
               "not": {
@@ -31,28 +44,17 @@
               "effect": "deny"
             }
           },
-          "parameters": {
-            "prefix": {
-              "type": "String",
-              "metadata": {
-                "displayName": "Prefix",
-                "description": "Resource name prefix"
-              }
-            },
-            "suffix": {
-              "type": "String",
-              "metadata": {
-                "displayName": "Suffix",
-                "description": "Resource name suffix"
-              }
-            }
-          },
-          "policyType": "Custom"
-        },
-        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
-        "type": "Microsoft.Authorization/policyDefinitions",
-        "name": "ResourceNaming"
-      }
+          "policyType": "Custom",
+          "version": "1.2.1",
+          "versions": [
+            "1.2.1",
+            "1.0.0"
+          ]
+        }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PolicyDefinitions_Get",
+  "title": "Retrieve a policy definition"
 }

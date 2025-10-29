@@ -1,38 +1,39 @@
 {
   "parameters": {
-    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
-    "api-version": "2025-03-01"
+    "api-version": "2025-03-01",
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
+            "name": "1.2.1",
+            "type": "Microsoft.Authorization/policyDefinitions/versions",
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
             "properties": {
-              "mode": "All",
-              "displayName": "Naming Convention",
               "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+              "displayName": "Naming Convention",
               "metadata": {
                 "category": "Naming"
               },
+              "mode": "All",
               "parameters": {
                 "prefix": {
                   "type": "String",
                   "metadata": {
-                    "displayName": "Prefix",
-                    "description": "Resource name prefix"
+                    "description": "Resource name prefix",
+                    "displayName": "Prefix"
                   }
                 },
                 "suffix": {
                   "type": "String",
                   "metadata": {
-                    "displayName": "Suffix",
-                    "description": "Resource name suffix"
+                    "description": "Resource name suffix",
+                    "displayName": "Suffix"
                   }
                 }
               },
-              "version": "1.2.1",
               "policyRule": {
                 "if": {
                   "not": {
@@ -44,37 +45,37 @@
                   "effect": "deny"
                 }
               },
-              "policyType": "Custom"
-            },
-            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
-            "type": "Microsoft.Authorization/policyDefinitions/versions",
-            "name": "1.2.1"
+              "policyType": "Custom",
+              "version": "1.2.1"
+            }
           },
           {
+            "name": "1.0.0",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/versions/1.0.0",
             "properties": {
-              "mode": "All",
-              "displayName": "Naming Convention",
               "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+              "displayName": "Naming Convention",
               "metadata": {
                 "category": "Naming"
               },
+              "mode": "All",
               "parameters": {
                 "prefix": {
                   "type": "String",
                   "metadata": {
-                    "displayName": "Prefix",
-                    "description": "Resource name prefix"
+                    "description": "Resource name prefix",
+                    "displayName": "Prefix"
                   }
                 },
                 "suffix": {
                   "type": "String",
                   "metadata": {
-                    "displayName": "Suffix",
-                    "description": "Resource name suffix"
+                    "description": "Resource name suffix",
+                    "displayName": "Suffix"
                   }
                 }
               },
-              "version": "1.0.0",
               "policyRule": {
                 "if": {
                   "not": {
@@ -86,14 +87,15 @@
                   "effect": "deny"
                 }
               },
-              "policyType": "Custom"
-            },
-            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/versions/1.0.0",
-            "type": "Microsoft.Authorization/policyDefinitions",
-            "name": "1.0.0"
+              "policyType": "Custom",
+              "version": "1.0.0"
+            }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "PolicyDefinitionVersions_ListAll",
+  "title": "List all policy definition versions at subscription"
 }
