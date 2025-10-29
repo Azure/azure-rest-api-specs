@@ -290,6 +290,7 @@ model TranslationResult {
   ...CommonResultHeaders;
 
   @doc("Array of the translated text elements.")
+  @visibility(Lifecycle.Read)
   value: TranslatedTextItem[];
 
   @header("x-mt-system")
