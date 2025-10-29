@@ -45,7 +45,7 @@ interface PrefixListGlobalRulestackResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     PrefixListGlobalRulestackResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**

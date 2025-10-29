@@ -73,7 +73,7 @@ interface GlobalRulestackResources {
     GlobalRulestackResource,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**

@@ -45,7 +45,7 @@ interface PreRulesResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     PreRulesResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**

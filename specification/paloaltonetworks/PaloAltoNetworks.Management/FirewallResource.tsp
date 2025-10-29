@@ -61,7 +61,7 @@ interface FirewallResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**

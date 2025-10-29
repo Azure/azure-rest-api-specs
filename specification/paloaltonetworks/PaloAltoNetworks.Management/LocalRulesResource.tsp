@@ -45,7 +45,7 @@ interface LocalRulesResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     LocalRulesResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**

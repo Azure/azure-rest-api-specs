@@ -45,7 +45,7 @@ interface CertificateObjectGlobalRulestackResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     CertificateObjectGlobalRulestackResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**

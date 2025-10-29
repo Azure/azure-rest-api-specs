@@ -45,7 +45,7 @@ interface FqdnListLocalRulestackResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     FqdnListLocalRulestackResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**
