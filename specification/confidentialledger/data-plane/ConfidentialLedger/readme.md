@@ -4,6 +4,14 @@
 
 This is the AutoRest configuration file for Confidential Ledger.
 
+Confidential Ledger provides SDKs for the following languages:
+
+- [Python](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/confidentialledger/azure-confidentialledger/azure/confidentialledger)
+- [Javascript/Typescript](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/confidentialledger/confidential-ledger-rest/swagger/README.md)
+- [Java](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/confidentialledger/azure-security-confidentialledger/swagger/README.md)
+- [C#](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/confidentialledger/Azure.Security.ConfidentialLedger/src/autorest.md)
+
+
 ## Configuration
 
 ### Basic Information
@@ -15,6 +23,15 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 ```yaml
 openapi-type: data-plane
 tag: package-2024-12-09-preview
+```
+
+### Tag: package-2022-05-13-ledger
+
+These settings apply only when `--tag=package-2022-05-13-ledger` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-13-ledger'
+input-file:
+  - stable/2022-05-13/confidentialledger.json
 ```
 
 ### Tag: package-2024-12-09-preview
