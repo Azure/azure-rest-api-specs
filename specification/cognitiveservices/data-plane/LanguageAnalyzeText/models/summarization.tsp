@@ -19,7 +19,7 @@ model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** (Optional) If provided, the query will be used to extract most relevant sentences from the document. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_11_15_preview)
   query?: string;
 }
 
@@ -40,7 +40,7 @@ model ExtractiveSummarizationResult is PreBuiltResult {
   /** Response by document */
   @added(Versions.v2023_04_01)
   @typeChangedFrom(
-    Versions.v2024_11_15_preview,
+    Versions.v2025_11_15_preview,
     ExtractedSummaryDocumentResult[]
   )
   documents: ExtractedSummaryDocumentResultWithDetectedLanguage[];
@@ -66,7 +66,7 @@ model ExtractedSummaryDocumentResult is DocumentResult {
 }
 
 /** A ranked list of sentences representing the extracted summary. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ExtractedSummaryDocumentResultWithDetectedLanguage
   is ExtractedSummaryDocumentResult {
   ...DocumentDetectedLanguage;
@@ -116,7 +116,7 @@ model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
 
   /** (Optional) If provided, the query will be used to generate the summary. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_11_15_preview)
   instruction?: string;
 }
 
@@ -137,7 +137,7 @@ model AbstractiveSummarizationResultBase {
   /** Response by document */
   @added(Versions.v2023_04_01)
   @typeChangedFrom(
-    Versions.v2024_11_15_preview,
+    Versions.v2025_11_15_preview,
     AbstractiveSummaryDocumentResult[]
   )
   documents: AbstractiveSummaryDocumentResultWithDetectedLanguage[];
@@ -157,7 +157,7 @@ model AbstractiveSummaryDocumentResult is DocumentResult {
 }
 
 /** An object representing the Abstractive Summarization result of a single document with detected language. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_11_15_preview)
 model AbstractiveSummaryDocumentResultWithDetectedLanguage
   is AbstractiveSummaryDocumentResult {
   ...DocumentDetectedLanguage;
