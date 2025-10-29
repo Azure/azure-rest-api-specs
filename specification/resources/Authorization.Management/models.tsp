@@ -310,6 +310,7 @@ model PolicyAssignmentProperties {
   /**
    * The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   metadata?: unknown;
 
   /**
@@ -354,6 +355,7 @@ model ParameterValuesValue {
   /**
    * The value of the parameter.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   value?: unknown;
 }
 
@@ -537,11 +539,13 @@ model PolicyDefinitionProperties {
   /**
    * The policy rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   policyRule?: unknown;
 
   /**
    * The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   metadata?: unknown;
 
   /**
@@ -583,11 +587,13 @@ model ParameterDefinitionsValue {
   /**
    * The default value for the parameter if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   defaultValue?: unknown;
 
   /**
    * Provides validation of parameter inputs during assignment using a self-defined JSON schema. This property is only supported for object-type parameters and follows the Json.NET Schema 2019-09 implementation. You can learn more about using schemas at https://json-schema.org/ and test draft schemas at https://www.jsonschemavalidator.net/.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   schema?: unknown;
 
   /**
@@ -660,6 +666,7 @@ model ExternalEvaluationEndpointSettings {
   /**
    * The details of the endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   details?: unknown;
 }
 
@@ -691,11 +698,13 @@ model PolicyDefinitionVersionProperties {
   /**
    * The policy rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   policyRule?: unknown;
 
   /**
    * The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   metadata?: unknown;
 
   /**
@@ -738,6 +747,7 @@ model PolicySetDefinitionProperties {
   /**
    * The policy set definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   metadata?: unknown;
 
   /**
@@ -865,6 +875,7 @@ model PolicySetDefinitionVersionProperties {
   /**
    * The policy set definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   metadata?: unknown;
 
   /**
@@ -923,6 +934,7 @@ model PolicyTokenOperation {
   /**
    * The payload of the resource operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   content?: unknown;
 }
 
@@ -949,6 +961,7 @@ model PolicyTokenResponse {
   /**
    * An array of external evaluation endpoint invocation results.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   results?: ExternalEvaluationEndpointInvocationResult[];
 
   /**
@@ -1001,6 +1014,7 @@ model ExternalEvaluationEndpointInvocationResult {
   /**
    * The set of claims that will be attached to the policy token as an attestation for the result of the endpoint invocation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   claims?: unknown;
 
   /**

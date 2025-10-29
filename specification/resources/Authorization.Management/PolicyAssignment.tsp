@@ -13,7 +13,6 @@ namespace Microsoft.Authorization;
 /**
  * The policy assignment.
  */
-@extensionResource
 model PolicyAssignment
   is Azure.ResourceManager.ExtensionResource<PolicyAssignmentProperties> {
   ...ResourceNameParameter<
