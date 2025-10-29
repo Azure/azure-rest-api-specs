@@ -1572,6 +1572,10 @@
         }
       ],
       "properties": {
+        "dataConnectorType": {
+          "description": "The type of the data connector.",
+          "type": "string"
+        },
         "source": {
           "description": "Source of the data connector - \"Agent\" when directly stored in agent, \"AgentSpace\" when inherited.",
           "type": "string",
@@ -1586,16 +1590,26 @@
         {
           "$ref": "#/definitions/DataConnector"
         }
-      ]
+      ],
+      "properties": {
+        "dataConnectorType": {
+          "description": "The type of the data connector.",
+           "enum": [
+            "Kusto",
+            "Icm"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentSpaceDataConnectorType",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "DataConnector": {
       "type": "object",
       "description": "Data Connector properties",
       "properties": {
-        "dataConnectorType": {
-          "description": "The type of the data connector.",
-          "type": "string"
-        },
         "dataSource": {
           "description": "Data source connection string or endpoint.",
           "type": "string",
@@ -1607,7 +1621,8 @@
         },
         "identity": {
           "description": "Identity used to access the data source.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "provisioningState": {
           "description": "Provisioning state of the data connector.",

@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
-    "name": "newAgentSpace",
+    "agentSpaceName": "newAgentSpace",
     "api-version": "2026-01-01",
     "agentSpaceEnvelope": {
       "location": "East US",
@@ -25,7 +25,11 @@
             "execute"
           ],
           "genevaActionsConfiguration": {
-            "acisEndpoint": "https://acis.eastus.monitoring.azure.com"
+            "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+            "clientId": "12345678-1234-1234-1234-123456789012",
+            "certificateSubjectName": "CN=AgentSpaceAuth",
+            "authenticationMode": "OAuth",
+            "extensionName": "GenevaActions"
           }
         }
       }
@@ -68,7 +72,11 @@
               "execute"
             ],
             "genevaActionsConfiguration": {
-              "acisEndpoint": "https://acis.eastus.monitoring.azure.com"
+              "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+              "clientId": "12345678-1234-1234-1234-123456789012",
+              "certificateSubjectName": "CN=AgentSpaceAuth",
+              "authenticationMode": "OAuth",
+              "extensionName": "GenevaActions"
             }
           }
         }
@@ -107,7 +115,11 @@
               "execute"
             ],
             "genevaActionsConfiguration": {
-              "acisEndpoint": "https://acis.eastus.monitoring.azure.com"
+              "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+              "clientId": "12345678-1234-1234-1234-123456789012",
+              "certificateSubjectName": "CN=AgentSpaceAuth",
+              "authenticationMode": "OAuth",
+              "extensionName": "GenevaActions"
             }
           }
         }
