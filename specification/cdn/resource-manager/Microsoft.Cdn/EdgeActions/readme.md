@@ -55,7 +55,6 @@ suppressions:
   - code: PostResponseCodes
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
     reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
-  # NOTE: ProvisioningState properties already emit as readOnly via @visibility(Read); if ProvisioningStateMustBeReadOnly still fires in CI (unexpected), add a targeted suppression per property instead of blanket suppression.
 ```
 
 ---
