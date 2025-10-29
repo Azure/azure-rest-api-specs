@@ -13,19 +13,19 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-healthbot"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-healthbot"
     namespace: "azure.mgmt.healthbot"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-healthbot"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-healthbot"
     namespace: "com.azure.resourcemanager.healthbot"
     service-name: "Healthbot" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/healthbot
-    package-dir: "arm-healthbot"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-healthbot"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
