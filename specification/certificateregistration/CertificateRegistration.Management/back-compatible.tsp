@@ -37,20 +37,42 @@ using Microsoft.CertificateRegistration;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateOrder.properties);
 
+@@clientLocation(AppServiceCertificateResources.getCertificate,
+  AppServiceCertificateOrders
+);
+@@clientLocation(AppServiceCertificateResources.createOrUpdateCertificate,
+  AppServiceCertificateOrders
+);
 @@clientName(AppServiceCertificateResources.createOrUpdateCertificate::parameters.resource,
   "keyVaultCertificate"
 );
-
+@@clientLocation(AppServiceCertificateResources.updateCertificate,
+  AppServiceCertificateOrders
+);
 @@clientName(AppServiceCertificateResources.updateCertificate::parameters.properties,
   "keyVaultCertificate"
 );
-
+@@clientLocation(AppServiceCertificateResources.deleteCertificate,
+  AppServiceCertificateOrders
+);
+@@clientLocation(AppServiceCertificateResources.listCertificates,
+  AppServiceCertificateOrders
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateResource.properties);
 
+@@clientLocation(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
+  CertificateOrdersDiagnostics
+);
+@@clientLocation(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
+  CertificateOrdersDiagnostics
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
 
+@@clientLocation(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation,
+  AppServiceCertificateOrders
+);
 @@clientLocation(Operations.list, "CertificateRegistrationProvider");
 @@clientName(Operations.list, "ListOperations");
 @@clientName(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation::parameters.body,

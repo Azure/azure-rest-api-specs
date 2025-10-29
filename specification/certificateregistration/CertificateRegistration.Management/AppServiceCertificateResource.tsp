@@ -30,8 +30,6 @@ interface AppServiceCertificateResources {
   /**
    * Description for Get the certificate associated with a certificate order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceCertificateOrders_GetCertificate")
   getCertificate is ArmResourceRead<
     AppServiceCertificateResource,
     Error = DefaultErrorResponse
@@ -40,8 +38,6 @@ interface AppServiceCertificateResources {
   /**
    * Description for Creates or updates a certificate and associates with key vault secret.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceCertificateOrders_CreateOrUpdateCertificate")
   createOrUpdateCertificate is ArmResourceCreateOrReplaceAsync<
     AppServiceCertificateResource,
     Response = ArmResponse<AppServiceCertificateResource> | ArmResourceCreatedResponse<
@@ -54,8 +50,6 @@ interface AppServiceCertificateResources {
   /**
    * Description for Creates or updates a certificate and associates with key vault secret.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceCertificateOrders_UpdateCertificate")
   @patch(#{ implicitOptionality: false })
   updateCertificate is ArmCustomPatchSync<
     AppServiceCertificateResource,
@@ -66,8 +60,6 @@ interface AppServiceCertificateResources {
   /**
    * Description for Delete the certificate associated with a certificate order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceCertificateOrders_DeleteCertificate")
   deleteCertificate is ArmResourceDeleteSync<
     AppServiceCertificateResource,
     Error = DefaultErrorResponse
@@ -76,8 +68,6 @@ interface AppServiceCertificateResources {
   /**
    * Description for List all certificates associated with a certificate order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AppServiceCertificateOrders_ListCertificates")
   listCertificates is ArmResourceListByParent<
     AppServiceCertificateResource,
     Response = ArmResponse<AppServiceCertificateCollection>,
