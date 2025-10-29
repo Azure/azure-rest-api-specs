@@ -255,10 +255,7 @@ using Azure.Core;
   "GetDeletedManagedHsms",
   "csharp"
 );
-@@clientName(VaultsOperationGroup.listDeleted,
-  "GetDeletedKeyVaults",
-  "csharp"
-);
+@@clientName(VaultsOperationGroup.listDeleted, "GetDeletedKeyVaults", "csharp");
 
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
