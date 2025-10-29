@@ -326,7 +326,7 @@
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the DDoS detection rule.."
+          "description": "The provisioning state of the DDoS detection rule."
         },
         "detectionMode": {
           "type": "string",
@@ -366,7 +366,14 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource type."
+          "description": "The resource type.",
+          "enum": [
+            "Microsoft.Network/ddosCustomPolicies/ddosDetectionRules"
+          ],
+          "x-ms-enum": {
+            "name": "DdosDetectionRule",
+            "modelAsString": true
+          }
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -386,7 +393,7 @@
       "properties": {
         "trafficType": {
           "type": "string",
-          "description": "The traffic type detection rule will be applied upon.",
+          "description": "The traffic type (one of Tcp, Udp, TcpSyn) that the detection rule will be applied upon.",
           "enum": [
             "Tcp",
             "Udp",
