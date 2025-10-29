@@ -40,7 +40,6 @@ model TransliterateParameters {
 @added(APIVersion.v2025_10_01_preview)
 model TransliterateBody {
   @doc("Array of the input text elements to transliterate.")
-  @visibility(Lifecycle.Read)
   inputs: InputTextItem[];
 }
 
@@ -61,6 +60,7 @@ model TransliterateResult {
   ...CommonResultHeaders;
 
   @doc("Array of transliterated texts")
+  @visibility(Lifecycle.Read)
   value: TransliteratedText[];
 }
 
