@@ -42,10 +42,10 @@
       "name": "EdgeActions"
     },
     {
-      "name": "EdgeActionsVersions"
+      "name": "EdgeActionVersions"
     },
     {
-      "name": "EdgeActionsExecutionFilters"
+      "name": "EdgeActionExecutionFilters"
     }
   ],
   "paths": {
@@ -537,9 +537,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/executionFilters": {
       "get": {
-        "operationId": "EdgeActionsExecutionFilters_ListByEdgeAction",
+        "operationId": "EdgeActionExecutionFilters_ListByEdgeAction",
         "tags": [
-          "EdgeActionsExecutionFilters"
+          "EdgeActionExecutionFilters"
         ],
         "description": "List EdgeActionExecutionFilter resources by EdgeAction",
         "parameters": [
@@ -562,6 +562,11 @@
             "pattern": "[a-zA-Z0-9]+"
           }
         ],
+        "x-ms-examples": {
+          "ListEdgeActionExecutionFiltersByEdgeAction": {
+            "$ref": "./examples/EdgeActionExecutionFilters_ListByEdgeAction.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
@@ -576,11 +581,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ListEdgeActionsExecutionFiltersByEdgeAction": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_ListByEdgeAction.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -588,9 +588,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/executionFilters/{executionFilter}": {
       "get": {
-        "operationId": "EdgeActionsExecutionFilters_Get",
+        "operationId": "EdgeActionExecutionFilters_Get",
         "tags": [
-          "EdgeActionsExecutionFilters"
+          "EdgeActionExecutionFilters"
         ],
         "description": "Get a EdgeActionExecutionFilter",
         "parameters": [
@@ -622,6 +622,11 @@
             "pattern": "[a-zA-Z0-9]+"
           }
         ],
+        "x-ms-examples": {
+          "GetEdgeActionExecutionFilter": {
+            "$ref": "./examples/EdgeActionExecutionFilters_Get.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
@@ -635,17 +640,12 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetEdgeActionExecutionFilters": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "EdgeActionsExecutionFilters_Create",
+        "operationId": "EdgeActionExecutionFilters_Create",
         "tags": [
-          "EdgeActionsExecutionFilters"
+          "EdgeActionExecutionFilters"
         ],
         "description": "Create a EdgeActionExecutionFilter",
         "parameters": [
@@ -686,6 +686,11 @@
             }
           }
         ],
+        "x-ms-examples": {
+          "CreateEdgeActionExecutionFilter": {
+            "$ref": "./examples/EdgeActionExecutionFilters_Create.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Resource 'EdgeActionExecutionFilter' update operation succeeded",
@@ -717,20 +722,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "CreateEdgeActionExecutionFilters": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_Create.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "EdgeActionsExecutionFilters_Update",
+        "operationId": "EdgeActionExecutionFilters_Update",
         "tags": [
-          "EdgeActionsExecutionFilters"
+          "EdgeActionExecutionFilters"
         ],
         "description": "Update a EdgeActionExecutionFilter",
         "parameters": [
@@ -771,6 +771,11 @@
             }
           }
         ],
+        "x-ms-examples": {
+          "UpdateEdgeActionExecutionFilter": {
+            "$ref": "./examples/EdgeActionExecutionFilters_Update.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
@@ -799,20 +804,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "UpdateEdgeActionExecutionFilters": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "EdgeActionsExecutionFilters_Delete",
+        "operationId": "EdgeActionExecutionFilters_Delete",
         "tags": [
-          "EdgeActionsExecutionFilters"
+          "EdgeActionExecutionFilters"
         ],
         "description": "Delete a EdgeActionExecutionFilter",
         "parameters": [
@@ -844,6 +844,11 @@
             "pattern": "[a-zA-Z0-9]+"
           }
         ],
+        "x-ms-examples": {
+          "DeleteEdgeActionExecutionFilter": {
+            "$ref": "./examples/EdgeActionExecutionFilters_Delete.json"
+          }
+        },
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
@@ -869,11 +874,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "DeleteEdgeActionExecutionFilters": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -882,9 +882,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions": {
       "get": {
-        "operationId": "EdgeActionsVersions_ListByEdgeAction",
+        "operationId": "EdgeActionVersions_ListByEdgeAction",
         "tags": [
-          "EdgeActionsVersions"
+          "EdgeActionVersions"
         ],
         "description": "List EdgeActionVersion resources by EdgeAction",
         "parameters": [
@@ -907,6 +907,11 @@
             "pattern": "[a-zA-Z0-9]+"
           }
         ],
+        "x-ms-examples": {
+          "ListEdgeActionVersionsByEdgeAction": {
+            "$ref": "./examples/EdgeActionVersions_ListByEdgeAction.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
@@ -921,11 +926,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GetEdgeActionVersionsByEdgeAction": {
-            "$ref": "./examples/EdgeActionsVersions_ListByEdgeAction.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -933,9 +933,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}": {
       "get": {
-        "operationId": "EdgeActionsVersions_Get",
+        "operationId": "EdgeActionVersions_Get",
         "tags": [
-          "EdgeActionsVersions"
+          "EdgeActionVersions"
         ],
         "description": "Get a EdgeActionVersion",
         "parameters": [
@@ -967,6 +967,11 @@
             "pattern": "[a-zA-Z0-9]+"
           }
         ],
+        "x-ms-examples": {
+          "GetEdgeActionVersion": {
+            "$ref": "./examples/EdgeActionVersions_Get.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
@@ -980,17 +985,12 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetEdgeActionVersion": {
-            "$ref": "./examples/EdgeActionsVersions_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "EdgeActionsVersions_Create",
+        "operationId": "EdgeActionVersions_Create",
         "tags": [
-          "EdgeActionsVersions"
+          "EdgeActionVersions"
         ],
         "description": "Create a EdgeActionVersion",
         "parameters": [
@@ -1031,6 +1031,11 @@
             }
           }
         ],
+        "x-ms-examples": {
+          "CreateEdgeActionVersion": {
+            "$ref": "./examples/EdgeActionVersions_Create.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Resource 'EdgeActionVersion' update operation succeeded",
@@ -1062,20 +1067,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "CreateEdgeActionVersion": {
-            "$ref": "./examples/EdgeActionsVersions_Create.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "EdgeActionsVersions_Update",
+        "operationId": "EdgeActionVersions_Update",
         "tags": [
-          "EdgeActionsVersions"
+          "EdgeActionVersions"
         ],
         "description": "Update a EdgeActionVersion",
         "parameters": [
@@ -1116,6 +1116,11 @@
             }
           }
         ],
+        "x-ms-examples": {
+          "UpdateEdgeActionVersion": {
+            "$ref": "./examples/EdgeActionVersions_Update.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
@@ -1144,20 +1149,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "UpdateEdgeActionVersion": {
-            "$ref": "./examples/EdgeActionsVersions_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "EdgeActionsVersions_Delete",
+        "operationId": "EdgeActionVersions_Delete",
         "tags": [
-          "EdgeActionsVersions"
+          "EdgeActionVersions"
         ],
         "description": "Delete a EdgeActionVersion",
         "parameters": [
@@ -1189,6 +1189,11 @@
             "pattern": "[a-zA-Z0-9]+"
           }
         ],
+        "x-ms-examples": {
+          "DeleteEdgeActionVersion": {
+            "$ref": "./examples/EdgeActionVersions_Delete.json"
+          }
+        },
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
@@ -1214,11 +1219,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "DeleteEdgeActionVersion": {
-            "$ref": "./examples/EdgeActionsVersions_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1227,9 +1227,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/deployVersionCode": {
       "post": {
-        "operationId": "EdgeActionsVersions_DeployVersionCode",
+        "operationId": "EdgeActionVersions_DeployVersionCode",
         "tags": [
-          "EdgeActionsVersions"
+          "EdgeActionVersions"
         ],
         "description": "A long-running resource action.",
         "parameters": [
@@ -1270,6 +1270,11 @@
             }
           }
         ],
+        "x-ms-examples": {
+          "DeployVersionCode": {
+            "$ref": "./examples/EdgeActionVersions_DeployVersionCode.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
@@ -1298,11 +1303,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "DeployVersionCode": {
-            "$ref": "./examples/EdgeActionsVersions_DeployVersionCode.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1311,9 +1311,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/getVersionCode": {
       "post": {
-        "operationId": "EdgeActionsVersions_GetVersionCode",
+        "operationId": "EdgeActionVersions_GetVersionCode",
         "tags": [
-          "EdgeActionsVersions"
+          "EdgeActionVersions"
         ],
         "description": "A long-running resource action.",
         "parameters": [
@@ -1345,6 +1345,11 @@
             "pattern": "[a-zA-Z0-9]+"
           }
         ],
+        "x-ms-examples": {
+          "GetVersionCode": {
+            "$ref": "./examples/EdgeActionVersions_GetVersionCode.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
@@ -1373,11 +1378,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GetVersionCode": {
-            "$ref": "./examples/EdgeActionsVersions_GetVersionCode.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1386,9 +1386,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault": {
       "post": {
-        "operationId": "EdgeActionsVersions_SwapDefault",
+        "operationId": "EdgeActionVersions_SwapDefault",
         "tags": [
-          "EdgeActionsVersions"
+          "EdgeActionVersions"
         ],
         "description": "A long-running resource action.",
         "parameters": [
@@ -1420,6 +1420,11 @@
             "pattern": "[a-zA-Z0-9]+"
           }
         ],
+        "x-ms-examples": {
+          "SwapDefault": {
+            "$ref": "./examples/EdgeActionVersions_SwapDefault.json"
+          }
+        },
         "responses": {
           "202": {
             "description": "Resource operation accepted.",
@@ -1443,11 +1448,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Swap Default Version": {
-            "$ref": "./examples/EdgeActionsVersions_SwapDefault.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1945,7 +1945,7 @@
       ],
       "x-ms-enum": {
         "name": "EdgeActionVersionValidationStatus",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Succeeded",
