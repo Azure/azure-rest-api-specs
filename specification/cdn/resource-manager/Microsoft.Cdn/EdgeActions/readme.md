@@ -41,6 +41,21 @@ input-file:
 modelerfour:
   lenient-model-deduplication: true
   prenamer: true
+suppressions:
+  # Operations endpoint for Microsoft.Cdn already defined in central Cdn swagger, not duplicated here
+  - code: OperationsAPIImplementation
+    reason: Operations API implemented in central Cdn swagger (package-preview-2025-09) for provider Microsoft.Cdn.
+  # LRO POST actions intentionally return 200 (final) and 202 (in-progress) matching 2024-07-22-preview baseline
+  - code: PostResponseCodes
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/addAttachment"].post
+    reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
+  - code: PostResponseCodes
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/deleteAttachment"].post
+    reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
+  - code: PostResponseCodes
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
+    reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
+  # NOTE: ProvisioningState properties already emit as readOnly via @visibility(Read); if ProvisioningStateMustBeReadOnly still fires in CI (unexpected), add a targeted suppression per property instead of blanket suppression.
 ```
 
 ---
