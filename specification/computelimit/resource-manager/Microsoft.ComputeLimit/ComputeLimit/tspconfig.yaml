@@ -14,16 +14,19 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-java":
     flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-computelimit"
     package-dir: "azure-resourcemanager-computelimit"
     namespace: "com.azure.resourcemanager.computelimit"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computelimit"
     package-dir: "arm-computelimit"
     package-details:
       name: "@azure/arm-computelimit"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/computelimit"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcomputelimit"
     package-dir: "armcomputelimit"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     generate-samples: true
@@ -32,14 +35,16 @@ options:
     inject-spans: true
   "@azure-tools/typespec-python":
     flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computelimit"
     package-dir: "azure-mgmt-computelimit"
     namespace: "azure.mgmt.computelimit"
     generate-sample: true
     generate-test: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Computelimit"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-dir: "Azure.ResourceManager.ComputeLimit"
+    namespace: "Azure.ResourceManager.ComputeLimit"
     clear-output-folder: true
     model-namespace: true
 linter:
