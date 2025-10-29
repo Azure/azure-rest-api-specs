@@ -170,7 +170,7 @@ model StacConformanceClasses {
 }
 
 /**
- * Search model. * Defines parameters for a STAC search POST request.
+ * Search model. Defines parameters for a STAC search POST request.
  */
 model StacSearchParameters {
   /**
