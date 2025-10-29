@@ -31,6 +31,8 @@ import "./ValidatedSolutionRecipe.tsp";
 // import "./edgeMachine.tsp";
 import "./hciCommon.tsp";
 // import "./edgeMachineJobs.tsp";
+// import "./private-preview/validateOwnershipVouchers-pvt.tsp";
+// import "./routes.tsp";
 import "./Operations.tsp";
 
 using TypeSpec.Rest;
