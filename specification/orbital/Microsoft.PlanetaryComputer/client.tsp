@@ -37,6 +37,12 @@ namespace Customizations;
 @@alternateType(StacSearchParameters.filter, string, "csharp,java");
 @@alternateType(RegisterMosaic.filter, string, "csharp,java");
 
+// Workaround errors CS0019 and CS0019
+@@alternateType(StacCollectionTemporalExtent.interval,
+  utcDateTime[][],
+  "csharp"
+);
+
 // Address naming convention violations for C# SDK
 @@clientName(TilerMosaicSearchRegistrationResponse,
   "TilerMosaicSearchRegistrationResult",
