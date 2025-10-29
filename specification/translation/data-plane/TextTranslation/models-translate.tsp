@@ -124,9 +124,9 @@ model TranslateParameters {
   allowFallback?: boolean = true;
 }
 
-@doc("Translate targets parameters")
+@doc("Target language and translation configuration parameters.")
 @added(APIVersion.v2025_10_01_preview)
-model TranslateTarget {
+model TranslationTarget {
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
     in the translation scope. It's possible to translate to multiple languages simultaneously by including 
@@ -242,7 +242,7 @@ model TranslateInputItem {
   @doc("""
     Translation target parameters.
     """)
-  targets: TranslateTarget[];
+  targets: TranslationTarget[];
 }
 
 @doc("Reference sentence pair.")
