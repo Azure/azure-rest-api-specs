@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 import { run } from "../dist/src/cli.js";
 import { avocado, UnifiedPipelineReport } from "../dist/src/index.js";
 
-var argv = yargs
+var argv = yargs(hideBin(process.argv))
   .usage("Usage: avocado [options]")
   .alias("f", "file")
   .describe("f", "output detail result to log file")
