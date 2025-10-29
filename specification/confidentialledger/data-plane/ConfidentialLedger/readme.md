@@ -11,7 +11,6 @@ Confidential Ledger provides SDKs for the following languages:
 - [Java](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/confidentialledger/azure-security-confidentialledger/swagger/README.md)
 - [C#](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/confidentialledger/Azure.Security.ConfidentialLedger/src/autorest.md)
 
-
 ## Configuration
 
 ### Basic Information
