@@ -8,8 +8,8 @@ pr:
       # Smoke test on changed files
       - eng/pipelines/swagger-api-doc-preview.yml
       - eng/pipelines/templates/steps/set-sha-check.yml
-      - .github/shared/src/doc-preview.js
-      - .github/shared/cmd/api-doc-preview.js
+      - .github/workflows/src/doc-preview.js
+      - .github/workflows/cmd/api-doc-preview.js
 
 jobs:
   - job: SwaggerApiDocPreview
@@ -60,7 +60,7 @@ jobs:
 
       - script: cmd/api-doc-preview.js --output ../../AzureRestPreview
         displayName: Generate Swagger API documentation preview
-        workingDirectory: .github/shared
+        workingDirectory: .github/workflows
 
       - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
         parameters:

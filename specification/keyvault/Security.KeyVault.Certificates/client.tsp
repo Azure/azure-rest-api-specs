@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 @versioned(KeyVault.Versions)
 namespace Customizations;
 
-@@clientName(KeyVault, "Certificate", "java");
+@@clientName(KeyVault, "CertificateClient", "java");
 @@clientName(KeyVault, "Client", "go");
 @@clientName(KeyVault, "Certificate", "rust");
 
@@ -42,9 +42,9 @@ op updateCertificate is KeyVaultOperation<
     /**
      * The parameters for certificate update.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: CertificateUpdateParameters;
   },
   CertificateBundle
@@ -104,6 +104,7 @@ op getCertificate is KeyVaultOperation<
 @summary("List certificates in a specified key vault")
 @route("/certificates")
 @get
+@list
 op listCertificateProperties is KeyVaultOperation<
   {
     /**
@@ -123,6 +124,7 @@ op listCertificateProperties is KeyVaultOperation<
 @summary("List certificate issuers for a specified key vault.")
 @route("/certificates/issuers")
 @get
+@list
 op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 
 /**
@@ -133,6 +135,7 @@ op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 @summary("List the versions of a certificate.")
 @route("/certificates/{certificate-name}/versions")
 @get
+@list
 op listCertificatePropertiesVersions is KeyVaultOperation<
   {
     /**
@@ -153,6 +156,7 @@ op listCertificatePropertiesVersions is KeyVaultOperation<
 @summary("Lists the deleted certificates in the specified vault currently available for recovery.")
 @route("/deletedcertificates")
 @get
+@list
 op listDeletedCertificateProperties is KeyVaultOperation<
   {
     /**
@@ -221,6 +225,8 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(AdministratorDetails.EmailAddress, "Email", "go");
 
 @@clientName(SubjectAlternativeNames.upns, "UserPrincipalNames", "go");
+@@clientName(SubjectAlternativeNames.uris, "URIs", "go");
+@@clientName(SubjectAlternativeNames.ipAddresses, "IPAddresses", "go");
 @@clientName(X509CertificateProperties.ekus, "EnhancedKeyUsage", "go");
 
 @@clientName(CertificateBundle.cer, "CER", "go");
@@ -231,13 +237,20 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(JsonWebKeyCurveName, "CurveName", "go");
 @@clientName(JsonWebKeyType, "KeyType", "go");
 
+@@alternateType(CertificateAttributes.recoveryLevel, string, "go");
+@@alternateType(CertificateOperation.error, string, "go");
+
 // Rust configuration
 @@clientName(setCertificateContacts, "SetContacts", "rust");
 
+// Elide createCertificate but keep the request model for a convenience poller (LRO).
+@@scope(KeyVault.createCertificate, "!rust");
+@@usage(CertificateCreateParameters, Usage.input, "rust");
 @@clientName(CertificateCreateParameters,
   "CreateCertificateParameters",
   "rust"
 );
+
 @@clientName(CertificateImportParameters,
   "ImportCertificateParameters",
   "rust"
@@ -277,7 +290,8 @@ op listDeletedCertificateProperties is KeyVaultOperation<
   "ListDeletedCertificateProperties",
   "rust"
 );
-@@clientName(updateCertificate, "UpdateCertificateProperties", "rust");
+// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
+@@clientName(KeyVault.updateCertificate, "UpdateCertificateProperties", "rust");
 
 @@clientName(getCertificateContacts, "GetContacts", "rust");
 @@clientName(deleteCertificateContacts, "DeleteContacts", "rust");

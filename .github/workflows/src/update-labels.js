@@ -1,5 +1,6 @@
 // @ts-check
 
+import { isFullGitSha } from "../../shared/src/git.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "../src/context.js";
 
@@ -7,20 +8,45 @@ import { extractInputs } from "../src/context.js";
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export default async function updateLabels({ github, context, core }) {
-  const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
-  await updateLabelsImpl({ owner, repo, issue_number, run_id, github, core });
+  const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
+    github,
+    context,
+    core,
+  );
+  await updateLabelsImpl({ owner, repo, head_sha, issue_number, run_id, github, core });
 }
 
 /**
  * @param {Object} params
  * @param {string} params.owner
  * @param {string} params.repo
+ * @param {string} params.head_sha
  * @param {number} params.issue_number
  * @param {number} params.run_id
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
  */
-export async function updateLabelsImpl({ owner, repo, issue_number, run_id, github, core }) {
+export async function updateLabelsImpl({
+  owner,
+  repo,
+  head_sha,
+  issue_number,
+  run_id,
+  github,
+  core,
+}) {
+  if (isFullGitSha(head_sha)) {
+    core.setOutput("head_sha", head_sha);
+  } else {
+    core.info(`head_sha is not a valid full git SHA: '${head_sha}'`);
+  }
+
+  if (Number.isInteger(issue_number) && issue_number > 0) {
+    core.setOutput("issue_number", issue_number);
+  } else {
+    core.info(`issue_number must be a positive integer: ${issue_number}`);
+  }
+
   /** @type {string[]} */
   let artifactNames = [];
 
@@ -59,6 +85,11 @@ export async function updateLabelsImpl({ owner, repo, issue_number, run_id, gith
 
       if (key.startsWith("label-")) {
         const name = key.substring("label-".length);
+
+        if (!name) {
+          throw new Error(`Invalid value for label name: '${name}'`);
+        }
+
         if (value === "true") {
           labelsToAdd.push(name);
         } else if (value === "false") {

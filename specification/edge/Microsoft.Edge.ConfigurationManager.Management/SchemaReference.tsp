@@ -27,7 +27,7 @@ model SchemaReferenceProperties {
 
 @doc("Schema Reference Resource")
 model SchemaReference is ExtensionResource<SchemaReferenceProperties> {
-  ...ResourceNameParameter<SchemaReference>;
+  ...ResourceNameParameter<SchemaReference, NamePattern = "^default$">;
   ...EntityTagProperty;
 }
 
@@ -35,6 +35,15 @@ model SchemaReference is ExtensionResource<SchemaReferenceProperties> {
 interface SchemaReferences {
   @doc("Get a Schema Reference Resource")
   get is ArmResourceRead<SchemaReference>;
+
+  @doc("Create or update a Schema Reference Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SchemaReference>;
+
+  @doc("update a Schema Reference Resource")
+  update is ArmResourcePatchSync<SchemaReference, SchemaReferenceProperties>;
+
+  @doc("Delete a Schema Reference Resource")
+  delete is ArmResourceDeleteWithoutOkAsync<SchemaReference>;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<SchemaReference>;

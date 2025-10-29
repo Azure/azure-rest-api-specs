@@ -1,0 +1,559 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2025-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the Defender for Storage settings for the specified resource.": {
+            "$ref": "./examples/DefenderForStorage/GetDefenderForStorageSettings_example.json"
+          }
+        },
+        "tags": [
+          "DefenderForStorage"
+        ],
+        "description": "Gets the Defender for Storage settings for the specified storage account.",
+        "operationId": "DefenderForStorage_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get Defender for Storage settings.",
+            "schema": {
+              "$ref": "#/definitions/DefenderForStorageSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates the Defender for Storage settings on a specified resource.": {
+            "$ref": "./examples/DefenderForStorage/PutDefenderForStorageSettings_example.json"
+          }
+        },
+        "tags": [
+          "DefenderForStorage"
+        ],
+        "description": "Creates or updates the Defender for Storage settings on a specified storage account.",
+        "operationId": "DefenderForStorage_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSettingName"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to create or update Defender for Storage settings.",
+            "schema": {
+              "$ref": "#/definitions/DefenderForStorageSetting"
+            }
+          },
+          "201": {
+            "description": "Request to create or update Defender for Storage settings partially succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefenderForStorageSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan": {
+      "post": {
+        "x-ms-examples": {
+          "Initiate a Defender for Storage malware scan for the specified storage account.": {
+            "$ref": "./examples/DefenderForStorage/StartMalwareScan_example.json"
+          }
+        },
+        "tags": [
+          "DefenderForStorage",
+          "Antimalware",
+          "Scan"
+        ],
+        "description": "Initiate a Defender for Storage malware scan for the specified storage account.",
+        "operationId": "DefenderForStorage_StartMalwareScan",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the malware scan operation.",
+            "schema": {
+              "$ref": "#/definitions/MalwareScan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan": {
+      "post": {
+        "x-ms-examples": {
+          "Cancel a Defender for Storage malware scan for the specified storage resource.": {
+            "$ref": "./examples/DefenderForStorage/CancelMalwareScan_example.json"
+          }
+        },
+        "tags": [
+          "DefenderForStorage",
+          "Antimalware",
+          "Scan"
+        ],
+        "description": "Cancels a Defender for Storage malware scan for the specified storage account.",
+        "operationId": "DefenderForStorage_CancelMalwareScan",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSettingName"
+          },
+          {
+            "$ref": "#/parameters/ScanId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the malware scan operation.",
+            "schema": {
+              "$ref": "#/definitions/MalwareScan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the Defender for Storage malware scan for the specified storage resource.": {
+            "$ref": "./examples/DefenderForStorage/GetMalwareScan_example.json"
+          }
+        },
+        "tags": [
+          "DefenderForStorage",
+          "Antimalware",
+          "Scan"
+        ],
+        "description": "Gets the Defender for Storage malware scan for the specified storage resource.",
+        "operationId": "DefenderForStorage_GetMalwareScan",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/DefenderForStorageSettingName"
+          },
+          {
+            "$ref": "#/parameters/ScanId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The state of the malware scan operation.",
+            "schema": {
+              "$ref": "#/definitions/MalwareScan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DefenderForStorageSetting": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DefenderForStorageSettingProperties"
+        }
+      },
+      "description": "The Defender for Storage resource."
+    },
+    "DefenderForStorageSettingProperties": {
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether Defender for Storage is enabled on this storage account."
+        },
+        "malwareScanning": {
+          "$ref": "#/definitions/MalwareScanningProperties"
+        },
+        "sensitiveDataDiscovery": {
+          "$ref": "#/definitions/SensitiveDataDiscoveryProperties"
+        },
+        "overrideSubscriptionLevelSettings": {
+          "type": "boolean",
+          "description": "Indicates whether the settings defined for this storage account should override the settings defined for the subscription."
+        }
+      },
+      "description": "Defender for Storage resource properties."
+    },
+    "MalwareScanningProperties": {
+      "type": "object",
+      "properties": {
+        "onUpload": {
+          "$ref": "#/definitions/OnUploadProperties"
+        },
+        "scanResultsEventGridTopicResourceId": {
+          "type": "string",
+          "description": "Optional. Resource id of an Event Grid Topic to send scan results to."
+        },
+        "blobScanResultsOptions": {
+          "type": "string",
+          "description": "Optional. Write scan result on BlobIndexTags by default.",
+          "enum": [
+            "BlobIndexTags",
+            "None"
+          ],
+          "default": "BlobIndexTags",
+          "x-ms-enum": {
+            "name": "blobScanResultsOptions",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "BlobIndexTags",
+                "description": "Write scan results on the blobs index tags."
+              },
+              {
+                "value": "None",
+                "description": "Do not write scan results on the blobs index tags."
+              }
+            ]
+          }
+        },
+        "automatedResponse": {
+          "type": "string",
+          "description": "Optional. Specifies the automated response action to take when malware is detected.",
+          "enum": [
+            "None",
+            "BlobSoftDelete"
+          ],
+          "default": "None",
+          "x-ms-enum": {
+            "name": "AutomatedResponseType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No automated response will be taken when malware is detected."
+              },
+              {
+                "value": "BlobSoftDelete",
+                "description": "The blob will be soft deleted when malware is detected."
+              }
+            ]
+          }
+        },
+        "operationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true,
+          "description": "Upon failure or partial success. Additional data describing Malware Scanning enable/disable operation."
+        }
+      },
+      "description": "Properties of Malware Scanning."
+    },
+    "OnUploadProperties": {
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether On Upload malware scanning should be enabled."
+        },
+        "capGBPerMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines the max GB to be scanned per Month. Set to -1 if no capping is needed. If not specified, the default value is -1."
+        },
+        "filters": {
+          "$ref": "#/definitions/OnUploadFilters",
+          "x-nullable": true,
+          "description": "Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type."
+        }
+      },
+      "description": "Properties of On Upload malware scanning."
+    },
+    "OnUploadFilters": {
+      "type": "object",
+      "properties": {
+        "excludeBlobsWithPrefix": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional. A list of prefixes to exclude from on-upload malware scanning.\nFormat: `container-name/blob-name` (start with the container name; do not include the storage account name).\nExclude entire containers: Use prefix of container names you want to exclude without a trailing `/`.\nExclude a single container: Add a trailing slash `/` after the container name to avoid excluding other containers with similar prefixes."
+        },
+        "excludeBlobsWithSuffix": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional. A list of suffixes to exclude from on-upload malware scanning. Suffixes match only the end of blob names, and should be used for file extensions or blob name endings only."
+        },
+        "excludeBlobsLargerThan": {
+          "format": "int64",
+          "x-nullable": true,
+          "description": "Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning."
+        }
+      },
+      "description": "Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type."
+    },
+    "SensitiveDataDiscoveryProperties": {
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether Sensitive Data Discovery should be enabled."
+        },
+        "operationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true,
+          "description": "Upon failure or partial success. Additional data describing Sensitive Data Discovery enable/disable operation."
+        }
+      },
+      "description": "Properties of Sensitive Data Discovery."
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "A status describing the success/failure of the enablement/disablement operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The operation status code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information regarding the success/failure of the operation."
+        }
+      }
+    },
+    "MalwareScan": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MalwareScanProperties"
+        }
+      },
+      "description": "Describes the state of a malware scan operation."
+    },
+    "MalwareScanProperties": {
+      "type": "object",
+      "properties": {
+        "scanId": {
+          "type": "string",
+          "description": "The identifier of the scan."
+        },
+        "scanStatus": {
+          "type": "string",
+          "description": "A status code of the scan operation."
+        },
+        "scanStatusMessage": {
+          "type": "string",
+          "description": "A description of the status of the scan."
+        },
+        "scanStartTime": {
+          "type": "string",
+          "description": "The time at which the scan had been initiated."
+        },
+        "scanEndTime": {
+          "type": "string",
+          "description": "The time at which the scan has ended. Only available for a scan which has terminated."
+        },
+        "scanSummary": {
+          "type": "object",
+          "$ref": "#/definitions/ScanSummary",
+          "description": "A summary of the scan results."
+        }
+      }
+    },
+    "ScanSummary": {
+      "type": "object",
+      "description": "A summary of the scan results.",
+      "properties": {
+        "blobs": {
+          "type": "object",
+          "$ref": "#/definitions/BlobsScanSummary",
+          "description": "A summary of the scan results of the blobs that were scanned."
+        },
+        "estimatedScanCostUSD": {
+          "type": "number",
+          "format": "double",
+          "description": "The estimated cost of the scan. Only available for a scan which has terminated."
+        }
+      }
+    },
+    "BlobsScanSummary": {
+      "type": "object",
+      "description": "A summary of the scan results of the blobs that were scanned.",
+      "properties": {
+        "totalBlobsScanned": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of blobs that were scanned."
+        },
+        "maliciousBlobsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of malicious blobs that were detected during the scan."
+        },
+        "skippedBlobsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of blobs that were skipped."
+        },
+        "failedBlobsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of failed blob scans."
+        },
+        "scannedBlobsInGB": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of gigabytes of data that were scanned."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DefenderForStorageSettingName": {
+      "name": "settingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "enum": [
+        "current"
+      ],
+      "x-ms-enum": {
+        "name": "settingName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "current",
+            "description": "Name of the Defender for Storage Settings name."
+          }
+        ]
+      },
+      "description": "Defender for Storage setting name.",
+      "x-ms-parameter-location": "method"
+    },
+    "DefenderForStorageSetting": {
+      "name": "defenderForStorageSetting",
+      "in": "body",
+      "required": true,
+      "description": "Defender for Storage Settings",
+      "schema": {
+        "$ref": "#/definitions/DefenderForStorageSetting"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ScanId": {
+      "name": "scanId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$",
+      "description": "The identifier of the scan. Can be either 'latest' or a GUID.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -233,12 +233,11 @@ model SecretUpdateParameters {
 /**
  * The secret list result.
  */
-@pagedResult
 model SecretListResult {
   /**
    * A response message containing a list of secrets in the key vault along with a link to the next page of secrets.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: SecretItem[];
 
@@ -284,12 +283,11 @@ model SecretItem {
 /**
  * The deleted secret list result
  */
-@pagedResult
 model DeletedSecretListResult {
   /**
    * A response message containing a list of deleted secrets in the key vault along with a link to the next page of deleted secrets.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: DeletedSecretItem[];
 
