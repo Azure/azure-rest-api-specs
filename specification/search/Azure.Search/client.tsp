@@ -352,16 +352,24 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchClient.Documents.index, Access.internal);
 @@access(SearchIndexerClient.DataSources.list, Access.internal);
 @@access(SearchIndexerClient.DataSources.createOrUpdate, Access.internal);
+@@access(SearchIndexerClient.DataSources.delete, Access.internal, "python");
 @@access(SearchIndexerClient.Indexers.list, Access.internal);
 @@access(SearchIndexerClient.Indexers.createOrUpdate, Access.internal);
+@@access(SearchIndexerClient.Indexers.delete, Access.internal, "python");
 @@access(SearchIndexerClient.Skillsets.list, Access.internal);
 @@access(SearchIndexerClient.Skillsets.createOrUpdate, Access.internal);
+@@access(SearchIndexerClient.Skillsets.delete, Access.internal, "python");
 @@access(SearchIndexClient.SynonymMaps.list, Access.internal);
 @@access(SearchIndexClient.SynonymMaps.createOrUpdate, Access.internal);
+@@access(SearchIndexClient.SynonymMaps.delete, Access.internal, "python");
 @@access(SearchIndexClient.Indexes.createOrUpdate, Access.internal);
+@@access(SearchIndexClient.Indexes.delete, Access.internal, "python");
 @@access(SearchIndexClient.Aliases.createOrUpdate, Access.internal);
+@@access(SearchIndexClient.Aliases.delete, Access.internal, "python");
 @@access(SearchIndexClient.Agents.createOrUpdate, Access.internal);
+@@access(SearchIndexClient.Agents.delete, Access.internal, "python");
 @@access(SearchIndexClient.Sources.createOrUpdate, Access.internal);
+@@access(SearchIndexClient.Sources.delete, Access.internal, "python");
 
 @@clientNamespace(Search.ErrorResponse, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorDetail, "Azure.Search.Documents");
