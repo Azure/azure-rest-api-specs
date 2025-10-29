@@ -2454,7 +2454,7 @@ model ProfileUpgradeParameters {
   /**
    * Web Application Firewall (WAF) and security policy mapping for the profile upgrade
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   wafMappingList: ProfileChangeSkuWafMapping[];
 }
 
@@ -2549,7 +2549,7 @@ model ProfileLogScrubbing {
   /**
    * List of log scrubbing rules applied to the Azure Front Door profile logs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scrubbingRules?: ProfileScrubbingRules[];
 }
 
@@ -3115,7 +3115,7 @@ model OriginCapacityResourceProperties {
   /**
    * Whether to enable origin capacity for a specific origin
    */
-  enabled?: boolean;
+  enabled?: EnabledState;
 
   /**
    * The nearest origin capacity pop region for an origin
@@ -3129,7 +3129,7 @@ model OriginCapacityResourceProperties {
   originRequestRateThreshold?: int64;
 
   /**
-   * The ingress rate limit threshold for an origin per minute in MB
+   * The ingress rate limit threshold for an origin per minute in bytes
    */
   @minValue(1)
   originIngressRateThreshold?: int64;
@@ -3335,13 +3335,13 @@ model RuleUpdatePropertiesParameters {
   /**
    * A list of conditions that must be matched for the actions to be executed
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   conditions?: DeliveryRuleCondition[];
 
   /**
    * A list of actions that are executed when all the conditions of a rule are satisfied.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   actions?: DeliveryRuleAction[];
 
   /**
@@ -3612,7 +3612,7 @@ model MetricsResponse {
   granularity?: MetricsGranularity;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   series?: MetricsResponseSeriesItem[];
 }
 
@@ -3624,11 +3624,11 @@ model MetricsResponseSeriesItem {
   unit?: MetricsSeriesUnit;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   groups?: MetricsResponseSeriesPropertiesItemsItem[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   data?: Components1Gs0LlpSchemasMetricsresponsePropertiesSeriesItemsPropertiesDataItems[];
 }
 
@@ -3663,7 +3663,7 @@ model RankingsResponse {
   dateTimeEnd?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tables?: RankingsResponseTablesItem[];
 }
 
@@ -3673,7 +3673,7 @@ model RankingsResponseTablesItem {
   ranking?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   data?: RankingsResponseTablesPropertiesItemsItem[];
 }
 
@@ -3683,7 +3683,7 @@ model RankingsResponseTablesPropertiesItemsItem {
   name?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metrics?: RankingsResponseTablesPropertiesItemsMetricsItem[];
 }
 
@@ -3783,7 +3783,7 @@ model WafMetricsResponse {
   granularity?: WafMetricsGranularity;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   series?: WafMetricsResponseSeriesItem[];
 }
 
@@ -3795,11 +3795,11 @@ model WafMetricsResponseSeriesItem {
   unit?: WafMetricsSeriesUnit;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   groups?: WafMetricsResponseSeriesPropertiesItemsItem[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   data?: Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesDataItems[];
 }
 
@@ -3837,7 +3837,7 @@ model WafRankingsResponse {
   groups?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   data?: WafRankingsResponseDataItem[];
 }
 
@@ -3847,7 +3847,7 @@ model WafRankingsResponseDataItem {
   groupValues?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metrics?: ComponentsKpo1PjSchemasWafrankingsresponsePropertiesDataItemsPropertiesMetricsItems[];
 }
 
@@ -3948,7 +3948,7 @@ model CanMigrateProperties {
   defaultSku?: CanMigrateDefaultSku;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: MigrationErrorType[];
 }
 
@@ -4003,7 +4003,7 @@ model MigrationParameters {
   /**
    * Waf mapping for the migrated profile
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   migrationWebApplicationFirewallMappings?: MigrationWebApplicationFirewallMapping[];
 }
 
@@ -4123,20 +4123,20 @@ model EndpointProperties extends EndpointPropertiesUpdateParameters {
   /**
    * The source of the content being delivered via CDN.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   origins: DeepCreatedOrigin[];
 
   /**
    * The origin groups comprising of origins that are used for load balancing the traffic based on availability.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   originGroups?: DeepCreatedOriginGroup[];
 
   /**
    * The custom domains under the endpoint.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   customDomains?: DeepCreatedCustomDomain[];
 
   /**
@@ -4305,7 +4305,7 @@ model ResponseBasedOriginErrorDetectionParameters {
   /**
    * The list of Http status code ranges that are considered as server errors for origin and it is marked as unhealthy.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   httpErrorRanges?: HttpErrorRangeParameters[];
 }
 
@@ -4412,7 +4412,7 @@ model EndpointPropertiesUpdateParameters {
   /**
    * List of rules defining the user's geo access within a CDN endpoint. Each geo filter defines an access rule to a specified path or content, e.g. block APAC for path /pictures/
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   geoFilters?: GeoFilter[];
 
   /**
@@ -4423,7 +4423,7 @@ model EndpointPropertiesUpdateParameters {
   /**
    * List of keys used to validate the signed URL hashes.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["keyId"])
+  @identifiers(#["keyId"])
   urlSigningKeys?: UrlSigningKey[];
 
   /**
@@ -4517,7 +4517,7 @@ model EndpointPropertiesUpdateParametersDeliveryPolicy {
   /**
    * A list of the delivery rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   rules: DeliveryRule[];
 }
 
@@ -4538,13 +4538,13 @@ model DeliveryRule {
   /**
    * A list of conditions that must be matched for the actions to be executed
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   conditions?: DeliveryRuleCondition[];
 
   /**
    * A list of actions that are executed when all the conditions of a rule are satisfied.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   actions: DeliveryRuleAction[];
 }
 
@@ -4904,7 +4904,7 @@ model OperationsListResult {
    * List of CDN operations supported by the CDN resource provider.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: Operation[];
 
   /**
@@ -4994,13 +4994,13 @@ model ServiceSpecification {
   /**
    * Log specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 
   /**
    * Metric specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -5061,7 +5061,7 @@ model MetricSpecification {
   /**
    * Retention policies of a resource metric.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   availabilities?: MetricAvailability[];
 
   /**
@@ -5072,7 +5072,7 @@ model MetricSpecification {
   /**
    * The dimensions of metric
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: DimensionProperties[];
 
   /**
@@ -5146,7 +5146,7 @@ model EdgeNodeProperties {
   /**
    * List of ip address groups.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["deliveryRegion"])
+  @identifiers(#["deliveryRegion"])
   ipAddressGroups: IpAddressGroup[];
 }
 
@@ -5162,13 +5162,13 @@ model IpAddressGroup {
   /**
    * The list of ip v4 addresses.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["baseIpAddress"])
+  @identifiers(#["baseIpAddress"])
   ipv4Addresses?: CidrIpAddress[];
 
   /**
    * The list of ip v6 addresses.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["baseIpAddress"])
+  @identifiers(#["baseIpAddress"])
   ipv6Addresses?: CidrIpAddress[];
 }
 
@@ -5199,7 +5199,7 @@ model CdnMigrationToAfdParameters {
   /**
    * A name map between classic CDN endpoints and AFD Premium/Standard endpoints.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   migrationEndpointMappings?: MigrationEndpointMapping[];
 }
 
@@ -5357,7 +5357,7 @@ model RateLimitRuleList {
   /**
    * List of rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   rules?: RateLimitRule[];
 }
 
@@ -5404,7 +5404,7 @@ model CustomRule {
   /**
    * List of match conditions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   matchConditions: MatchCondition[];
 
   /**
@@ -5455,7 +5455,7 @@ model CustomRuleList {
   /**
    * List of rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   rules?: CustomRule[];
 }
 
@@ -5466,7 +5466,7 @@ model ManagedRuleSetList {
   /**
    * List of rule sets.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleSetType", "ruleSetVersion"])
+  @identifiers(#["ruleSetType", "ruleSetVersion"])
   managedRuleSets?: ManagedRuleSet[];
 }
 
@@ -5494,7 +5494,7 @@ model ManagedRuleSet {
   /**
    * Defines the rule overrides to apply to the rule set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleGroupName"])
+  @identifiers(#["ruleGroupName"])
   ruleGroupOverrides?: ManagedRuleGroupOverride[];
 }
 
@@ -5510,7 +5510,7 @@ model ManagedRuleGroupOverride {
   /**
    * List of rules that will be enabled. If none specified, all rules in the group will be disabled.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleId"])
+  @identifiers(#["ruleId"])
   rules?: ManagedRuleOverride[];
 }
 
@@ -5606,7 +5606,7 @@ model ManagedRuleSetDefinitionProperties {
    * Rule groups of the managed rule set.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["ruleGroupName"])
+  @identifiers(#["ruleGroupName"])
   ruleGroups?: ManagedRuleGroupDefinition[];
 }
 
@@ -5630,7 +5630,7 @@ model ManagedRuleGroupDefinition {
    * List of rules within the managed rule group.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["ruleId"])
+  @identifiers(#["ruleId"])
   rules?: ManagedRuleDefinition[];
 }
 
@@ -6458,7 +6458,7 @@ model SecurityPolicyWebApplicationFirewallParametersWithEmbeddedWafPolicy
   /**
    * Waf associations
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   associations?: SecurityPolicyWebApplicationFirewallAssociation[];
 
   /**
@@ -6495,7 +6495,7 @@ model SecurityPolicyWebApplicationFirewallParameters
   /**
    * Waf associations
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   associations?: SecurityPolicyWebApplicationFirewallAssociation[];
 
   /**
@@ -7805,7 +7805,7 @@ model UrlSigningActionParameters extends DeliveryRuleActionParameters {
   /**
    * Defines which query string parameters in the url to be considered for expires, key id etc.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["paramName"])
+  @identifiers(#["paramName"])
   parameterNameOverride?: UrlSigningParamIdentifier[];
 
   typeName: "DeliveryRuleUrlSigningActionParameters";

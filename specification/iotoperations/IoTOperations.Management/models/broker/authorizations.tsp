@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;

@@ -7776,6 +7776,16 @@
         ]
       }
     },
+    "AdditionalData": {
+      "type": "object",
+      "description": "Additional metadata or properties.",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "Id of the workflow."
+        }
+      }
+    },
     "AvailableSolutionTemplateVersion": {
       "type": "object",
       "description": "Available Solution template Version along with latest revision",
@@ -9314,6 +9324,10 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Error Details if any failure is there",
           "readOnly": true
+        },
+        "additionalData": {
+          "$ref": "#/definitions/AdditionalData",
+          "description": "Additional metadata or properties."
         }
       },
       "required": [
@@ -10599,7 +10613,7 @@
           "description": "The URI for tracking the latest action performed on this solution version.",
           "readOnly": true
         },
-        "lastestActionTriggeredBy": {
+        "latestActionTriggeredBy": {
           "type": "string",
           "description": "Object Id of user who triggered the latest action on this solution version.",
           "readOnly": true

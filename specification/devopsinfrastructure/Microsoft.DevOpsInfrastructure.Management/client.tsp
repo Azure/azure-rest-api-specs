@@ -101,7 +101,16 @@ using Microsoft.DevOpsInfrastructure;
 @@clientName(StorageProfile, "DevOpsStorageProfile", "csharp");
 
 @@clientName(VmssFabricProfile, "DevOpsVmssFabricProfile", "csharp");
-
+@@clientName(CheckNameAvailabilityResult,
+  "DevOpsCheckNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(Pools.checkNameAvailability,
+  "CheckDevOpsPoolNameAvailability",
+  "csharp"
+);
+@@clientName(AvailabilityStatus, "DevOpsAvailabilityStatus", "csharp");
+@@clientName(EphemeralType, "DevOpsEphemeralType", "csharp");
 /* Rename opeartions */
 @@clientName(SubscriptionUsages.usages, "GetUsages", "csharp");
 

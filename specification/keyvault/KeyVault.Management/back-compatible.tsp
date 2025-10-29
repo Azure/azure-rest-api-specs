@@ -63,23 +63,30 @@ using Azure.Core;
 
 @@clientName(ManagedHsms.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedHsms.update::parameters.properties, "parameters");
-@@clientLocation(ManagedHsms.listByMHSMResource, "MHSMPrivateLinkResources");
-@@clientLocation(ManagedHsms.listByResource, "MHSMRegions");
+@@clientLocation(ManagedHsms.listByMHSMResource,
+  "MHSMPrivateLinkResources",
+  "!csharp,!java"
+);
+@@clientLocation(ManagedHsms.listByResource, "MHSMRegions", "!csharp,!java");
 
 @@clientLocation(MhsmPrivateEndpointConnections.get,
-  "MHSMPrivateEndpointConnections"
+  "MHSMPrivateEndpointConnections",
+  "!csharp,!java"
 );
 @@clientLocation(MhsmPrivateEndpointConnections.put,
-  "MHSMPrivateEndpointConnections"
+  "MHSMPrivateEndpointConnections",
+  "!csharp,!java"
 );
 @@clientName(MhsmPrivateEndpointConnections.put::parameters.resource,
   "properties"
 );
 @@clientLocation(MhsmPrivateEndpointConnections.delete,
-  "MHSMPrivateEndpointConnections"
+  "MHSMPrivateEndpointConnections",
+  "!csharp,!java"
 );
 @@clientLocation(MhsmPrivateEndpointConnections.listByResource,
-  "MHSMPrivateEndpointConnections"
+  "MHSMPrivateEndpointConnections",
+  "!csharp,!java"
 );
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MhsmPrivateEndpointConnection.properties
 );
@@ -139,14 +146,14 @@ using Azure.Core;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "OperationProperties");
 
-@@OpenAPI.extension(MhsmRegionsListResult.value, "x-ms-identifiers", #["name"]);
+@@Azure.ResourceManager.identifiers(MhsmRegionsListResult.value, #["name"]);
 
 @@clientName(Azure.ResourceManager.CommonTypes.Resource,
   "ArmResource",
   "python"
 );
 @@clientName(VaultListResult, "ResourceListResult");
-@@clientName(MhsmServiceTagRule, "MHSMServiceTagRule");
+@@clientName(MhsmServiceTagRule, "MHSMServiceTagRule", "!java,!csharp");
 
 @@clientName(JsonWebKeyCurveName.`P-256`, "P256", "python");
 @@clientName(JsonWebKeyCurveName.`P-384`, "P384", "python");
@@ -251,13 +258,16 @@ op ManagedHsmsPurgeDeletedCustomized(
   body: void,
 ): void;
 
-@@override(DeletedVaults.getDeleted, VaultsGetDeletedCustomized, "python");
-@@override(DeletedVaults.purgeDeleted, VaultsPurgeDeletedCustomized, "python");
+@@override(DeletedVaults.getDeleted, VaultsGetDeletedCustomized, "python,go");
+@@override(DeletedVaults.purgeDeleted,
+  VaultsPurgeDeletedCustomized,
+  "python,go"
+);
 @@override(DeletedManagedHsms.getDeleted,
   ManagedHsmsGetDeletedCustomized,
-  "python"
+  "python,go"
 );
 @@override(DeletedManagedHsms.purgeDeleted,
   ManagedHsmsPurgeDeletedCustomized,
-  "python"
+  "python,go"
 );
