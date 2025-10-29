@@ -694,6 +694,36 @@
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private endpoint resource."
         },
+        "ipVersionType": {
+          "type": "string",
+          "description": "The IP version type for private IPs on the private endpoint network interface.",
+          "enum": [
+            "IPv4",
+            "IPv6",
+            "DualStack"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointIPVersionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "IPv4",
+                "value": "IPv4",
+                "description": "Indicates that the Private IPs of the PE NIC will be IPv4 only."
+              },
+              {
+                "name": "IPv6",
+                "value": "IPv6",
+                "description": "Indicates that the Private IPs of the PE NIC will be IPv6 only."
+              },
+              {
+                "name": "DualStack",
+                "value": "DualStack",
+                "description": "Indicates that the IPv6 Private IPs can exist along with IPv4 IPs on PE Nic."
+              }
+            ]
+          }
+        },       
         "privateLinkServiceConnections": {
           "type": "array",
           "items": {
