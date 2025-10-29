@@ -326,6 +326,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(SynonymMap, Usage.input);
 @@access(AutocompleteItem, Access.public);
 @@usage(AutocompleteItem, Usage.input);
+@@access(SuggestResult, Access.public);
+@@usage(SuggestResult, Usage.input);
 @@access(IndexingResult, Access.public);
 @@usage(IndexingResult, Usage.input);
 @@access(FacetResult, Access.public);
