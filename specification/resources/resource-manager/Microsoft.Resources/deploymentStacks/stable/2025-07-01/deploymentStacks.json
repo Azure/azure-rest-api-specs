@@ -2650,37 +2650,7 @@
         ]
       }
     },
-    "DeploymentStacksDiagnosticLevel": {
-      "type": "string",
-      "description": "Denotes the additional response level.",
-      "enum": [
-        "info",
-        "warning",
-        "error"
-      ],
-      "x-ms-enum": {
-        "name": "DeploymentStacksDiagnosticLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Info",
-            "value": "info",
-            "description": "Informational message."
-          },
-          {
-            "name": "Warning",
-            "value": "warning",
-            "description": "Warning message."
-          },
-          {
-            "name": "Error",
-            "value": "error",
-            "description": "Error message."
-          }
-        ]
-      }
-    },
-    "DeploymentStacksDiagnostics": {
+    "DeploymentStacksDiagnostic": {
       "type": "object",
       "description": "The error additional info",
       "properties": {
@@ -2714,6 +2684,36 @@
         "code",
         "message"
       ]
+    },
+    "DeploymentStacksDiagnosticLevel": {
+      "type": "string",
+      "description": "Denotes the additional response level.",
+      "enum": [
+        "info",
+        "warning",
+        "error"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStacksDiagnosticLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Info",
+            "value": "info",
+            "description": "Informational message."
+          },
+          {
+            "name": "Warning",
+            "value": "warning",
+            "description": "Warning message."
+          },
+          {
+            "name": "Error",
+            "value": "error",
+            "description": "Error message."
+          }
+        ]
+      }
     },
     "DeploymentStacksManagementStatus": {
       "type": "string",
@@ -3028,6 +3028,32 @@
       "type": "object",
       "description": "Information about a single resource change predicted by What-If operation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM Resource ID of a resource managed by the deployment stack.",
+          "readOnly": true
+        },
+        "extension": {
+          "$ref": "#/definitions/DeploymentExtension",
+          "description": "The extension the resource was deployed with.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "identifiers": {
+          "type": "object",
+          "description": "The extensible resource identifiers.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version the resource was deployed with",
+          "readOnly": true
+        },
         "before": {
           "type": "object",
           "description": "The predicted value before the deployment is executed.",
@@ -3048,10 +3074,6 @@
             "path"
           ]
         },
-        "resourceId": {
-          "type": "string",
-          "description": "The resource id of the resource being changed."
-        },
         "deploymentId": {
           "type": "string",
           "description": "The resource id of the Deployment responsible for this change."
@@ -3059,11 +3081,6 @@
         "symbolicName": {
           "type": "string",
           "description": "The symbolic name of the resource being changed."
-        },
-        "identifiers": {
-          "type": "object",
-          "description": "The extensible resource identifiers.",
-          "additionalProperties": {}
         },
         "changeType": {
           "$ref": "#/definitions/DeploymentStacksWhatIfChangeType",
@@ -3107,15 +3124,10 @@
         }
       },
       "required": [
-        "resourceId",
-        "deploymentId",
-        "symbolicName",
-        "identifiers",
         "changeType",
         "changeCertainty",
         "managementStatusChange",
-        "denyStatusChange",
-        "unsupportedReason"
+        "denyStatusChange"
       ]
     },
     "DeploymentStacksWhatIfResult": {
@@ -3297,7 +3309,7 @@
           "type": "array",
           "description": "List of resource diagnostics detected by What-If operation.",
           "items": {
-            "$ref": "#/definitions/DeploymentStacksDiagnostics"
+            "$ref": "#/definitions/DeploymentStacksDiagnostic"
           },
           "readOnly": true,
           "x-ms-identifiers": []

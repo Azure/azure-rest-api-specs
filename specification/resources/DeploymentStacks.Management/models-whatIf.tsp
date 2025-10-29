@@ -77,7 +77,7 @@ model DeploymentStacksWhatIfResultProperties is DeploymentStacksError {
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  diagnostics?: DeploymentStacksDiagnostics[];
+  diagnostics?: DeploymentStacksDiagnostic[];
 }
 
 /**
@@ -107,28 +107,18 @@ model DeploymentStacksWhatIfChange {
  */
 @added(Versions.v2025_07_01)
 model DeploymentStacksWhatIfResourceChange {
+  ...ResourceReference;
   ...ResourceChangeDelta;
-
-  /**
-   * The resource id of the resource being changed.
-   */
-  resourceId: string;
 
   /**
    * The resource id of the Deployment responsible for this change.
    */
-  deploymentId: string;
+  deploymentId?: string;
 
   /**
    * The symbolic name of the resource being changed.
    */
-  symbolicName: string;
-
-  /**
-   * The extensible resource identifiers.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Extensible resources will have type-specific properties to help with unique identification"
-  identifiers: Record<unknown>;
+  symbolicName?: string;
 
   /**
    * Type of change that will be made to the resource when the deployment is executed.
@@ -153,7 +143,7 @@ model DeploymentStacksWhatIfResourceChange {
   /**
    * The explanation about why the resource is unsupported by What-If.
    */
-  unsupportedReason: string;
+  unsupportedReason?: string;
 }
 
 /**
@@ -243,7 +233,7 @@ model DeploymentStacksWhatIfPropertyChange {
  * The error additional info
  */
 @added(Versions.v2025_07_01)
-model DeploymentStacksDiagnostics {
+model DeploymentStacksDiagnostic {
   /**
    * Denotes the additional response level.
    */
