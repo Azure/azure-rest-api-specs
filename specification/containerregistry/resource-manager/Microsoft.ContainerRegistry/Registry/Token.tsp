@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Registry.tsp";
+import "./Token.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;

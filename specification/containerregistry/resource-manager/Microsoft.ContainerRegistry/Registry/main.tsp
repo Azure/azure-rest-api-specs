@@ -19,53 +19,38 @@ import "./client.tsp";
 
 // Registry core
 import "./Registry.tsp";
-import "./Registry.models.tsp";
 
 // Features
 
 // Archive feature
 import "./Archive.tsp";
-import "./Archive.models.tsp";
 import "./ArchiveVersion.tsp";
-import "./ArchiveVersion.models.tsp";
 
 // Artifact Cache feature
 import "./CacheRule.tsp";
-import "./CacheRule.models.tsp";
 import "./CredentialSet.tsp";
-import "./CredentialSet.models.tsp";
 
 // Connected Registry feature
 import "./ConnectedRegistry.tsp";
-import "./ConnectedRegistry.models.tsp";
 
 // Private endpoint feature
 import "./PrivateLinkResource.tsp";
-import "./PrivateLinkResource.models.tsp";
 import "./PrivateEndpointConnection.tsp";
-import "./PrivateEndpointConnection.models.tsp";
 
 // Replication feature
 import "./Replication.tsp";
-import "./Replication.models.tsp";
 
 // Scope map and Tokens feature
 import "./ScopeMap.tsp";
-import "./ScopeMap.models.tsp";
 import "./Token.tsp";
-import "./Token.models.tsp";
 
 // Transfer feature
 import "./ExportPipeline.tsp";
-import "./ExportPipeline.models.tsp";
 import "./ImportPipeline.tsp";
-import "./ImportPipeline.models.tsp";
 import "./PipelineRun.tsp";
-import "./PipelineRun.models.tsp";
 
 // Webhook feature
 import "./Webhook.tsp";
-import "./Webhook.models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

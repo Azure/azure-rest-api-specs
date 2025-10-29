@@ -4,7 +4,8 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "./Archive.tsp";
+import "./Archive.tsp"; // Needed?
+import "./ArchiveVersion.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
