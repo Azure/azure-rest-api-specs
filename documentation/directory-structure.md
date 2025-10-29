@@ -256,7 +256,8 @@ Refer to [Widget] as an example of the suggested folder structure and if any con
 
 ## Contact Us
 
-If you have any questions regarding folder structure and Azure Service Versioning Guideline, you can reach out by
+If you have any questions regarding folder structure and Azure Service Versioning Guideline, you can reach out by:
+- [TypeSpec Discussion] Channel.
 - Email to azversioning@service.microsoft.com
 
 
@@ -277,3 +278,4 @@ If you have any questions regarding folder structure and Azure Service Versionin
 [uniform versioning guideline]: https://github.com/Azure/azure-rest-api-specs/wiki/Azure-Service-Versioning-Guideline
 [Conflict Resolve Guide]: https://github.com/Azure/azure-rest-api-specs/wiki/Resolving-Folder-Migration-Conflicts:-A-Guide-for-PR-Authors
 [Widget]: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/widget
+[TypeSpec Discussion]: https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47

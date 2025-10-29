@@ -20,9 +20,10 @@ A `organization` has a path of form:
 
 ## Resource Provider Namespace (RPNS)
 
-A `RPNS` has a path form of 
+The resource provider namespace is the service ARM API resource provider namespace. In the folder structure guideline, A `RPNS` has a path form of 
 
 `specification/<organization>/resource-manager/<RPNS>`
+
 
 ## Service
 
