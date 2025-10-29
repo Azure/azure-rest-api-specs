@@ -24,7 +24,7 @@
     - cognitiveservices/data-plane/LanguageAnalyzeConversations/preview/2023-11-15-preview/analyzeconversations.json
     - cognitiveservices/data-plane/LanguageAnalyzeConversations/preview/2024-05-15-preview/analyzeconversations.json
     - computeschedule/resource-manager/Microsoft.ComputeSchedule/preview/2024-06-01-preview/computeschedule.json
-    - confidentialledger/data-plane/Microsoft.CodeTransparency/preview/2024-01-11-preview/cts.json
+    - confidentialledger/data-plane/CodeTransparency/preview/2024-01-11-preview/cts.json
     - devopsinfrastructure/resource-manager/Microsoft.DevOpsInfrastructure/preview/2023-10-30-preview/devopsinfrastructure.json
     - devopsinfrastructure/resource-manager/Microsoft.DevOpsInfrastructure/preview/2023-12-13-preview/devopsinfrastructure.json
     - devopsinfrastructure/resource-manager/Microsoft.DevOpsInfrastructure/preview/2024-03-26-preview/devopsinfrastructure.json
@@ -417,24 +417,7 @@
     - options.@azure-tools/typespec-go.service-dir
     - options.@azure-tools/typespec-java.namespace
   paths:
-    - confidentialledger/Microsoft.CodeTransparency/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.flavor
-    - options.@azure-tools/typespec-go.generate-fakes
-    - options.@azure-tools/typespec-go.inject-spans
-    - options.@azure-tools/typespec-go.package-dir
-    - options.@azure-tools/typespec-go.emitter-output-dir
-    - options.@azure-tools/typespec-go.service-dir
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-  paths:
-    - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
+    - confidentialledger/data-plane/CodeTransparency/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -445,7 +428,7 @@
     - options.@azure-tools/typespec-ts.*
   paths:
     # Casing "Confidentialledger" is not a typo.  This needs to match until the folder name is corrected in the repo.
-    - confidentialledger/Confidentialledger.Management/tspconfig.yaml
+    - confidentialledger/resource-manager/Microsoft.ConfidentialLedger/ConfidentialLedger/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -1234,8 +1217,7 @@
     - cognitiveservices/Speech.VideoTranslation/tspconfig.yaml
     - communication/Communication.JobRouter/tspconfig.yaml
     - communication/Communication.Messages/tspconfig.yaml
-    - confidentialledger/Microsoft.CodeTransparency/tspconfig.yaml
-    - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
+    - confidentialledger/data-plane/CodeTransparency/tspconfig.yaml
     - devcenter/DevCenter/tspconfig.yaml
     - healthdataaiservices/HealthDataAIServices.DeidServices/tspconfig.yaml
     - keyvault/Security.KeyVault.Administration/tspconfig.yaml
