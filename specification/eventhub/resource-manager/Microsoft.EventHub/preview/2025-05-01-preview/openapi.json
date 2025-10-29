@@ -990,7 +990,10 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1003,7 +1006,11 @@
           "NamespacesUpdate": {
             "$ref": "./examples/NameSpaces/EHNameSpaceUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Namespaces_Delete",
