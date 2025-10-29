@@ -85,11 +85,11 @@ export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
     managementPlane: true,
   },
   "azure-sdk-for-java": {
-    dataPlane: false,
+    dataPlane: true,
     managementPlane: true,
   },
   "azure-sdk-for-js": {
-    dataPlane: false,
+    dataPlane: true,
     managementPlane: true,
   },
   "azure-sdk-for-net": {
