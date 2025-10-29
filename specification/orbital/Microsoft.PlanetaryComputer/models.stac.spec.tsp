@@ -59,32 +59,27 @@ union FilterLanguage {
  */
 union StacQueryableDefinitionDataType {
   /**
-   * Character strings.
-   * Example: 'This is a literal string.'
+   * Character strings. Example: 'This is a literal string.'
    */
   string: "string",
 
   /**
-   * Numbers including integers and floating point values.
-   * Examples: -100, 3.14159
+   * Numbers including integers and floating point values. Examples: -100, 3.14159
    */
   number: "number",
 
   /**
-   * Booleans.
-   * Examples: true, false
+   * Booleans. Examples: true, false
    */
   boolean: "boolean",
 
   /**
-   * An instant with a granularity of a second or smaller.
-   * Example (JSON): { "timestamp": "1969-07-20T20:17:40Z" }
+   * An instant with a granularity of a second or smaller. Example (JSON): { "timestamp": "1969-07-20T20:17:40Z" }
    */
   timestamp: "timestamp",
 
   /**
-   * An instant with a granularity of a day.
-   * Example (JSON): { "date": "1969-07-20" }
+   * An instant with a granularity of a day. Example (JSON): { "date": "1969-07-20" }
    */
   date: "date",
 

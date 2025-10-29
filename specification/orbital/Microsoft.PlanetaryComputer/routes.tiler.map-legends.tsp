@@ -81,11 +81,7 @@ interface MapsClassMapLegends {
 
 interface MapsLegends {
   /**
-   * Generate a legend image for a given colormap.
-   *
-   * If the colormap has non-contiguous values at the beginning or end,
-   * which aren't desired in the output image, they can be trimmed by specifying
-   * the number of values to trim.
+   * Generate a legend image for a given colormap. If the colormap has non-contiguous values at the beginning or end, which aren't desired in the output image, they can be trimmed by specifying the number of values to trim.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Legend")
