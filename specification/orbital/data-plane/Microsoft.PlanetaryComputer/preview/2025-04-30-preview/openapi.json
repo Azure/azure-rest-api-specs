@@ -11054,13 +11054,13 @@
         "percentile_2": {
           "type": "number",
           "format": "float",
-          "description": "Percentile 2\nThe 2nd percentile value.",
+          "description": "The 2nd percentile value.",
           "x-ms-client-name": "percentile2"
         },
         "percentile_98": {
           "type": "number",
           "format": "float",
-          "description": "Percentile 98\nThe 98th percentile value.",
+          "description": "The 98th percentile value.",
           "x-ms-client-name": "percentile98"
         }
       },
@@ -13709,7 +13709,7 @@
         },
         "description": {
           "type": "string",
-          "description": "A longer description of the render option that can be used to explain its\ncontent."
+          "description": "A longer description of the render option that can be used to explain its content."
         },
         "type": {
           "type": "string",
@@ -13748,7 +13748,7 @@
         },
         "vectorOptions": {
           "$ref": "#/definitions/RenderOptionVectorOptions",
-          "description": "Options for rendering vector tiles. Valid only for `vt-polygon`  and `vt-line`\ntypes."
+          "description": "Options for rendering vector tiles. Valid only for `vt-polygon` and `vt-line` types."
         },
         "minZoom": {
           "type": "integer",
@@ -13763,7 +13763,7 @@
         },
         "conditions": {
           "type": "array",
-          "description": "A list of property/value conditions that must be in the active mosaic CQL for\nthis render option to be enabled",
+          "description": "A list of property/value conditions that must be in the active mosaic CQL for this render option to be enabled",
           "items": {
             "$ref": "#/definitions/RenderOptionCondition"
           }
@@ -13797,7 +13797,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/LegendConfigType",
-          "description": "Legend type to make,\none of: `continuous`,\n`classmap`,\n`interval` or `none`\n(note, `none` is a string literal)."
+          "description": "Legend type to make, one of: `continuous`, `classmap`, `interval` or `none` (note, `none` is a string literal)."
         },
         "labels": {
           "type": "array",
@@ -13809,7 +13809,7 @@
         "trimStart": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items to trim from the start of the legend definition. Used if\nthere are values important for rendering (e.g. nodata) that aren't desirable in\nthe legend."
+          "description": "The number of items to trim from the start of the legend definition. Used if there are values important for rendering (e.g. nodata) that aren't desirable in the legend."
         },
         "trimEnd": {
           "type": "integer",
@@ -13819,7 +13819,7 @@
         "scaleFactor": {
           "type": "number",
           "format": "float",
-          "description": "A factor to multiply interval legend labels by. Useful for scaled rasters whose\ncolormap definitions map to unscaled values, effectively showing legend labels\nas scaled values."
+          "description": "A factor to multiply interval legend labels by. Useful for scaled rasters whose colormap definitions map to unscaled values, effectively showing legend labels as scaled values."
         }
       }
     },
@@ -15319,7 +15319,7 @@
         },
         "method": {
           "type": "string",
-          "description": "Specifies the HTTP method that the resource expects.\nDefault: GET.",
+          "description": "Specifies the HTTP method that the resource expects. Default: GET.",
           "default": "GET",
           "enum": [
             "GET",
@@ -15331,7 +15331,7 @@
         },
         "headers": {
           "type": "object",
-          "description": "Object key-value pairs that map to headers.\nExample: { \"Accept\": \"application/json\" }.",
+          "description": "Object key-value pairs that map to headers. Example: { \"Accept\": \"application/json\" }.",
           "additionalProperties": {
             "type": "string"
           }
@@ -15343,7 +15343,7 @@
         },
         "merge": {
           "type": "boolean",
-          "description": "Indicates whether the client is expected to merge the body value into the current request body before following the link.\nThis is only valid when the server is responding to a POST request.\nDefault: false.",
+          "description": "Indicates whether the client is expected to merge the body value into the current request body before following the link. This is only valid when the server is responding to a POST request. Default: false.",
           "default": false
         }
       },
@@ -15697,7 +15697,7 @@
     },
     "StacSearchParameters": {
       "type": "object",
-      "description": "Search model.\n*\nDefines parameters for a STAC search POST request.",
+      "description": "Search model. Defines parameters for a STAC search POST request.",
       "properties": {
         "collections": {
           "type": "array",
@@ -16068,7 +16068,7 @@
         },
         "keywords": {
           "type": "array",
-          "description": "Unordered list of one or more commonly used or formalized word(s) or phrase(s)\nused to describe this dataset",
+          "description": "Unordered list of one or more commonly used or formalized word(s) or phrase(s) used to describe this dataset",
           "items": {
             "type": "string"
           }
@@ -16090,11 +16090,11 @@
         },
         "cornerOfOrigin": {
           "$ref": "#/definitions/TileMatrixCornerOfOrigin",
-          "description": "The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin\nfor numbering tile rows and columns. This corner is also a corner of the (0, 0)\ntile."
+          "description": "The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin for numbering tile rows and columns. This corner is also a corner of the (0, 0) tile."
         },
         "pointOfOrigin": {
           "type": "array",
-          "description": "Precise position in CRS coordinates of the corner of origin (e.g. the top-left\ncorner) for this tile matrix. This position is also a corner of the (0, 0)\ntile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did\nnot exist.",
+          "description": "Precise position in CRS coordinates of the corner of origin (e.g. the top-left corner) for this tile matrix. This position is also a corner of the (0, 0) tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did not exist.",
           "items": {
             "type": "number",
             "format": "float"
@@ -16177,11 +16177,11 @@
         },
         "description": {
           "type": "string",
-          "description": "Brief narrative description of this tile matrix set, normally available for\ndisplay to a human"
+          "description": "Brief narrative description of this tile matrix set, normally available for display to a human"
         },
         "keywords": {
           "type": "array",
-          "description": "Unordered list of one or more commonly used or formalized word(s) or phrase(s)\nused to describe this tile matrix set",
+          "description": "Unordered list of one or more commonly used or formalized word(s) or phrase(s) used to describe this tile matrix set",
           "items": {
             "type": "string"
           }
@@ -16348,7 +16348,7 @@
         "minZoom": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum zoom level that can be requested for this collection. Provides a\nhard limit for the tile servers to ensure they don't get requests for low zoom\nlevels, which would cause many files to be fetched and the tile servers to\nhang.",
+          "description": "The minimum zoom level that can be requested for this collection. Provides a hard limit for the tile servers to ensure they don't get requests for low zoom levels, which would cause many files to be fetched and the tile servers to hang.",
           "maximum": 24
         },
         "maxItemsPerTile": {
