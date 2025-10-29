@@ -1181,8 +1181,8 @@ model NetworkInterfaceProperties {
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
 
   @added(Versions.v2025_09_01_preview)
-  @doc("Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.")
-  enableSdnPolicy?: boolean = true;
+  @doc("This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface.")
+  bypassSdnPolicies?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -1920,8 +1920,8 @@ model NetworkInterfacesUpdateProperties {
   dnsSettings?: InterfaceDNSSettings;
 
   @added(Versions.v2025_09_01_preview)
-  @doc("Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.")
-  enableSdnPolicy?: boolean;
+  @doc("This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface.")
+  bypassSdnPolicies?: boolean;
 }
 
 @doc("Tags object for patch operations.")

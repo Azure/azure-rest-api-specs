@@ -7917,10 +7917,9 @@
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
         },
-        "enableSdnPolicy": {
+        "bypassSdnPolicies": {
           "type": "boolean",
-          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.",
-          "default": true
+          "description": "This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface."
         }
       }
     },
@@ -7968,9 +7967,9 @@
           "$ref": "#/definitions/InterfaceDNSSettings",
           "description": "DNS Settings for the interface"
         },
-        "enableSdnPolicy": {
+        "bypassSdnPolicies": {
           "type": "boolean",
-          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations."
+          "description": "This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface."
         }
       }
     },
