@@ -36,6 +36,11 @@ namespace NewRelic.Observability;
  */
 enum Versions {
   /**
+   * The 2025-04-01-preview API version.
+   */
+  v2025_04_01_preview: "2025-04-01-preview",
+
+  /**
    * The 2025-05-01-preview API version.
    */
   v2025_05_01_preview: "2025-05-01-preview",
