@@ -789,10 +789,6 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
-  @added(Versions.v2024_08_01_preview)
-  @doc("The credentials used to login to the image repository that has access to the specified image")
-  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
-
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -814,17 +810,6 @@ model GalleryImageProperties {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
     }
   ]>;
-}
-
-@added(Versions.v2024_08_01_preview)
-@doc("The credentials used to login to the image repository that has access to the specified image")
-model VmImageRepositoryCredentials {
-  @doc("Username for accessing image repository")
-  username: string;
-
-  @doc("Password for accessing image repository")
-  @secret
-  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -1194,6 +1179,10 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.")
+  enableSdnPolicy?: boolean = true;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -1929,6 +1918,10 @@ model NetworkInterfacesUpdateProperties {
 
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.")
+  enableSdnPolicy?: boolean;
 }
 
 @doc("Tags object for patch operations.")
