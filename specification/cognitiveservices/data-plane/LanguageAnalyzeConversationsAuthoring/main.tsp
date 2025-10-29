@@ -50,11 +50,6 @@ enum Versions {
   v2025_11_01: "2025-11-01",
 
   /**
-   * The 2024-11-15-preview API version.
-   */
-  v2024_11_15_preview: "2024-11-15-preview",
-
-  /**
    * The 2025-05-15-preview API version.
    */
   v2025_05_15_preview: "2025-05-15-preview",

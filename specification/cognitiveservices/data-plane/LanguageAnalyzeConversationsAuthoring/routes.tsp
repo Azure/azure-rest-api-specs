@@ -68,7 +68,7 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2025_11_01)
 @renamedFrom(
-  Versions.v2024_11_15_preview,
+  Versions.v2025_05_15_preview,
   "conversationAuthoringListProjectResources"
 )
 @renamedFrom(
@@ -122,7 +122,7 @@ op conversationAuthoringListTrainedModels is languageOperations.ResourceList<
  * Lists the exported models belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 op conversationAuthoringListExportedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringExportedTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -230,7 +230,7 @@ interface ConversationAuthoringDeployment {
       @body
       @clientName("details", "csharp")
       @typeChangedFrom(
-        Versions.v2024_11_15_preview,
+        Versions.v2025_05_15_preview,
         AnalyzeConversationAuthoringProjectAzureResourceIds
       )
       @typeChangedFrom(
@@ -268,7 +268,7 @@ interface ConversationAuthoringProject {
   )
   @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
-  @renamedFrom(Versions.v2024_11_15_preview, "assignProjectResources")
+  @renamedFrom(Versions.v2025_05_15_preview, "assignProjectResources")
   @renamedFrom(Versions.v2025_11_15_preview, "AssignDeploymentResources")
   assignProjectResources is Foundations.LongRunningOperation<
     {
@@ -302,7 +302,7 @@ interface ConversationAuthoringProject {
   )
   @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
-  @renamedFrom(Versions.v2024_11_15_preview, "unassignProjectResources")
+  @renamedFrom(Versions.v2025_05_15_preview, "unassignProjectResources")
   @renamedFrom(Versions.v2025_11_15_preview, "unassignDeploymentResources")
   unassignProjectResources is Foundations.LongRunningOperation<
     {
@@ -319,7 +319,7 @@ interface ConversationAuthoringProject {
       @body
       @clientName("details", "csharp")
       @typeChangedFrom(
-        Versions.v2024_11_15_preview,
+        Versions.v2025_05_15_preview,
         AnalyzeConversationAuthoringProjectAzureResourceIds
       )
       @typeChangedFrom(
@@ -337,7 +337,7 @@ interface ConversationAuthoringProject {
    * Gets the status of an existing assign project resources job.
    */
   @added(Versions.v2025_11_01)
-  @renamedFrom(Versions.v2024_11_15_preview, "getAssignProjectResourcesStatus")
+  @renamedFrom(Versions.v2025_05_15_preview, "getAssignProjectResourcesStatus")
   @renamedFrom(
     Versions.v2025_11_15_preview,
     "getAssignDeploymentResourcesStatus"
@@ -352,7 +352,7 @@ interface ConversationAuthoringProject {
   @get
   @added(Versions.v2025_11_01)
   @renamedFrom(
-    Versions.v2024_11_15_preview,
+    Versions.v2025_05_15_preview,
     "getUnassignProjectResourcesStatus"
   )
   @renamedFrom(
@@ -576,7 +576,7 @@ interface ConversationAuthoringProject {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @post
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
@@ -593,7 +593,7 @@ interface ConversationAuthoringProject {
   @post
   @pollingOperation(ConversationAuthoringProject.getCopyProjectStatus)
   @access(Access.internal, "python")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
       /**
@@ -618,7 +618,7 @@ interface ConversationAuthoringProject {
   /**
    * Gets the status of an existing copy project job.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
 
   /**
@@ -686,7 +686,7 @@ interface ConversationAuthoringExportedModel {
   /**
    * Gets the details of an exported model.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   getExportedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedTrainedModel>;
 
   /**
@@ -698,7 +698,7 @@ interface ConversationAuthoringExportedModel {
   @pollingOperation(
     ConversationAuthoringExportedModel.getExportedModelJobStatus
   )
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   @access(Access.internal, "python")
   deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -727,7 +727,7 @@ interface ConversationAuthoringExportedModel {
   @pollingOperation(
     ConversationAuthoringExportedModel.getExportedModelJobStatus
   )
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   @access(Access.internal, "python")
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
@@ -757,7 +757,7 @@ interface ConversationAuthoringExportedModel {
   /**
    * Gets the status for an existing job to create or update an exported model.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedModelJobState>;
 }
 interface ConversationAuthoringTrainedModel {
@@ -778,7 +778,7 @@ interface ConversationAuthoringTrainedModel {
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
   @pollingOperation(ConversationAuthoringTrainedModel.getEvaluationStatus)
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
       /**
@@ -836,7 +836,7 @@ interface ConversationAuthoringTrainedModel {
   /**
    * Gets the status for an evaluation job.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
 
   /**

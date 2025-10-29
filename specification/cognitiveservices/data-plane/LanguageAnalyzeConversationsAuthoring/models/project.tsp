@@ -69,7 +69,7 @@ model AnalyzeConversationAuthoringProjectMetadata {
    * The storage container name in case of conversation summarization.
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   storageInputContainerName?: string;
 
   /**
@@ -156,7 +156,7 @@ model AnalyzeConversationAuthoringCreateProjectOptions {
   /**
    * The storage container name in case of conversation summarization.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   storageInputContainerName?: string;
 
   /**
@@ -183,7 +183,7 @@ model AnalyzeConversationAuthoringCreateProjectOptions {
 /**
  * Represents the options for authorizing a project copy to the current Azure resource.
  */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
@@ -204,7 +204,7 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
 /**
  * Represents the options for copying an existing project to another Azure resource.
  */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringCopiedProjectOptions {
   /**
    * Represents the project kind.
@@ -327,7 +327,7 @@ model AnalyzeConversationAuthoringEvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 @resource("copy/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringCopiedProjectJobState {
@@ -434,7 +434,7 @@ model AnalyzeConversationAuthoringProjectDeployment {
    */
   @added(Versions.v2025_11_01)
   @typeChangedFrom(
-    Versions.v2024_11_15_preview,
+    Versions.v2025_05_15_preview,
     AnalyzeConversationAuthoringProjectResourceInfo[]
   )
   @typeChangedFrom(
@@ -492,7 +492,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
  * Represents the payload for deleting a project deployment.
  */
 @renamedFrom(
-  Versions.v2024_11_15_preview,
+  Versions.v2025_05_15_preview,
   "AnalyzeConversationAuthoringProjectAzureResourceIds"
 )
 @renamedFrom(
@@ -1028,7 +1028,7 @@ model AnalyzeConversationAuthoringLoadSnapshotJobState {
  */
 @added(Versions.v2025_11_01)
 @renamedFrom(
-  Versions.v2024_11_15_preview,
+  Versions.v2025_05_15_preview,
   "AnalyzeConversationAuthoringDeploymentResourcesInfoList"
 )
 @renamedFrom(
@@ -1054,7 +1054,7 @@ model AnalyzeConversationAuthoringDeploymentResourcesInfoList {
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 @renamedFrom(
-  Versions.v2024_11_15_preview,
+  Versions.v2025_05_15_preview,
   "AnalyzeConversationAuthoringProjectResourceInfo"
 )
 @renamedFrom(
@@ -1080,7 +1080,7 @@ model AnalyzeConversationAuthoringProjectResourceInfo {
  */
 @added(Versions.v2025_11_01)
 @renamedFrom(
-  Versions.v2024_11_15_preview,
+  Versions.v2025_05_15_preview,
   "AnalyzeConversationAuthoringProjectResourceAssignments"
 )
 @renamedFrom(
@@ -1091,7 +1091,7 @@ model AnalyzeConversationAuthoringProjectResourceAssignments {
   /**
    * Represents the metadata for the project resources to be assigned.
    */
-  @renamedFrom(Versions.v2024_11_15_preview, "projectResources")
+  @renamedFrom(Versions.v2025_05_15_preview, "projectResources")
   @renamedFrom(Versions.v2025_11_15_preview, "resourcesMetadata")
   projectResources: AnalyzeConversationAuthoringProjectResourceAssignmentInfo[];
 }
@@ -1100,7 +1100,7 @@ model AnalyzeConversationAuthoringProjectResourceAssignments {
  * Represents metadata for the Azure resource..
  */
 @renamedFrom(
-  Versions.v2024_11_15_preview,
+  Versions.v2025_05_15_preview,
   "AnalyzeConversationAuthoringProjectResourceAssignmentInfo"
 )
 @renamedFrom(
@@ -1127,7 +1127,7 @@ model AnalyzeConversationAuthoringProjectResourceAssignmentInfo {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
@@ -1142,7 +1142,7 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 @renamedFrom(
-  Versions.v2024_11_15_preview,
+  Versions.v2025_05_15_preview,
   "AnalyzeConversationAuthoringProjectResourcesJobState"
 )
 @renamedFrom(
@@ -1902,7 +1902,7 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
 /**
  * Represents the state of a job to create or updated an exported model.
  */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 @resource("jobs")
 @parentResource(AnalyzeConversationAuthoringExportedTrainedModel)
 model AnalyzeConversationAuthoringExportedModelJobState {
@@ -1911,7 +1911,7 @@ model AnalyzeConversationAuthoringExportedModelJobState {
 /**
  * Represents the properties for the model file.
  */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringModelFile {
   /**
    * The name of the file.
@@ -1926,7 +1926,7 @@ model AnalyzeConversationAuthoringModelFile {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model ExportedModelOptions {
   /**
    * The trained model label.
