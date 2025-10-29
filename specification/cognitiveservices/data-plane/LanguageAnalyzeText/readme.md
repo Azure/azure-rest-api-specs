@@ -62,19 +62,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Release 2024-11-15-preview
-
-These settings apply only when `--tag=release_2024_11_15-preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2024-11-15-preview'
-input-file:
-  - preview/2024-11-15-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service - Text
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ### Release 2024-11-01
 
 These settings apply only when `--tag=release_2024-11-01` is specified on the command line.
