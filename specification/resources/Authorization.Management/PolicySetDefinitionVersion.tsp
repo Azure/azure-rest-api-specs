@@ -55,6 +55,79 @@ alias PolicySetDefinitionVersionOps = Azure.ResourceManager.Legacy.ExtensionOper
   }
 >;
 
+alias PolicySetDefinitionVersionTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Authorization";
+
+    /** The name of the policy set definition. */
+    @path
+    @segment("policySetDefinitions")
+    @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    policySetDefinitionName: string;
+  },
+  {},
+  {
+    /** The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number */
+    @path
+    @segment("versions")
+    @key
+    @pattern("^\\d+\\.\\d+\\.\\d+$")
+    policyDefinitionVersion: string;
+  }
+>;
+
+alias PolicySetDefinitionVersionManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Management";
+
+    /** The name of the management group. The name is case insensitive. */
+    @path
+    @segment("managementGroups")
+    @key
+    managementGroupName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<PolicySetDefinitionVersion>;
+
+    /** The name of the policy set definition. */
+    @path
+    @segment("policySetDefinitions")
+    @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    policySetDefinitionName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<PolicySetDefinitionVersion>;
+
+    /** The name of the policy set definition. */
+    @path
+    @segment("policySetDefinitions")
+    @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    policySetDefinitionName: string;
+
+    /** The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number */
+    @path
+    @segment("versions")
+    @key
+    @pattern("^\\d+\\.\\d+\\.\\d+$")
+    policyDefinitionVersion: string;
+  }
+>;
+
 @armResourceOperations
 interface PolicySetDefinitionVersions {
   /**
@@ -102,43 +175,13 @@ interface PolicySetDefinitionVersions {
       $top?: int32;
     }
   >;
-}
-alias PolicySetDefinitionVersionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Authorization";
-
-    /** The name of the policy set definition. */
-    @path
-    @segment("policySetDefinitions")
-    @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
-    policySetDefinitionName: string;
-  },
-  {},
-  {
-    /** The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number */
-    @path
-    @segment("versions")
-    @key
-    @pattern("^\\d+\\.\\d+\\.\\d+$")
-    policyDefinitionVersion: string;
-  }
->;
-
-@armResourceOperations
-interface PolicySetDefinitionVersionOperationGroup {
   /**
    * This operation retrieves the built-in policy set definition version with the given name and version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicySetDefinitionVersions_GetBuiltIn")
-  getBuiltIn is PolicySetDefinitionVersionOperationGroupOps.Read<
+  getBuiltIn is PolicySetDefinitionVersionTenantOps.Read<
     PolicySetDefinitionVersion,
     Parameters = {
       /**
@@ -154,7 +197,7 @@ interface PolicySetDefinitionVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicySetDefinitionVersions_ListBuiltIn")
-  listBuiltIn is PolicySetDefinitionVersionOperationGroupOps.List<
+  listBuiltIn is PolicySetDefinitionVersionTenantOps.List<
     PolicySetDefinitionVersion,
     Parameters = {
       /**
@@ -172,61 +215,13 @@ interface PolicySetDefinitionVersionOperationGroup {
       $top?: int32;
     }
   >;
-}
-alias PolicySetDefinitionVersionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Management";
-
-    /** The name of the management group. The name is case insensitive. */
-    @path
-    @segment("managementGroups")
-    @key
-    managementGroupName: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<PolicySetDefinitionVersion>;
-
-    /** The name of the policy set definition. */
-    @path
-    @segment("policySetDefinitions")
-    @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
-    policySetDefinitionName: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<PolicySetDefinitionVersion>;
-
-    /** The name of the policy set definition. */
-    @path
-    @segment("policySetDefinitions")
-    @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
-    policySetDefinitionName: string;
-
-    /** The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number */
-    @path
-    @segment("versions")
-    @key
-    @pattern("^\\d+\\.\\d+\\.\\d+$")
-    policyDefinitionVersion: string;
-  }
->;
-
-@armResourceOperations
-interface PolicySetDefinitionVersionOperationGroup {
   /**
    * This operation retrieves the policy set definition version in the given management group with the given name and version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicySetDefinitionVersions_GetAtManagementGroup")
-  getAtManagementGroup is PolicySetDefinitionVersionOperationGroupOps.Read<
-    Extension.ManagementGroup,
+  getAtManagementGroup is PolicySetDefinitionVersionManagementGroupOps.Read<
     PolicySetDefinitionVersion,
     Parameters = {
       /**
@@ -242,8 +237,7 @@ interface PolicySetDefinitionVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicySetDefinitionVersions_CreateOrUpdateAtManagementGroup")
-  createOrUpdateAtManagementGroup is PolicySetDefinitionVersionOperationGroupOps.CreateOrUpdateSync<
-    Extension.ManagementGroup,
+  createOrUpdateAtManagementGroup is PolicySetDefinitionVersionManagementGroupOps.CreateOrUpdateSync<
     PolicySetDefinitionVersion
   >;
 
@@ -252,8 +246,7 @@ interface PolicySetDefinitionVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicySetDefinitionVersions_DeleteAtManagementGroup")
-  deleteAtManagementGroup is PolicySetDefinitionVersionOperationGroupOps.DeleteSync<
-    Extension.ManagementGroup,
+  deleteAtManagementGroup is PolicySetDefinitionVersionManagementGroupOps.DeleteSync<
     PolicySetDefinitionVersion
   >;
 
@@ -262,8 +255,7 @@ interface PolicySetDefinitionVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicySetDefinitionVersions_ListByManagementGroup")
-  listByManagementGroup is PolicySetDefinitionVersionOperationGroupOps.List<
-    Extension.ManagementGroup,
+  listByManagementGroup is PolicySetDefinitionVersionManagementGroupOps.List<
     PolicySetDefinitionVersion,
     Parameters = {
       /**
@@ -292,6 +284,6 @@ interface PolicySetDefinitionVersionOperationGroup {
 @@doc(PolicySetDefinitionVersions.createOrUpdate::parameters.resource,
   "The policy set definition properties."
 );
-@@doc(PolicySetDefinitionVersionOperationGroup.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(PolicySetDefinitionVersions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy set definition version properties."
 );
