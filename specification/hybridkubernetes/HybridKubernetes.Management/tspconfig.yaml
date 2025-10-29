@@ -15,7 +15,7 @@ options:
     package-name: "Azure.ResourceManager.Kubernetes"
     namespace: "{package-name}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-hybridkubernetes"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hybridkubernetes"
     namespace: "azure.mgmt.hybridkubernetes"
     generate-test: true
     generate-sample: true
@@ -26,7 +26,7 @@ options:
     service-name: "Hybridkubernetes" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-hybridkubernetes"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hybridkubernetes"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true

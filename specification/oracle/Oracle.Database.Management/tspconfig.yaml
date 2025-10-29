@@ -19,7 +19,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-oracledatabase"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-oracledatabase"
     package-details:
       name: "@azure/arm-oracledatabase"
     flavor: azure
@@ -34,7 +34,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/oracledatabase"
     emitter-output-dir: "{output-dir}/{service-dir}/armoracledatabase"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armoracledatabase"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armoracledatabase/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -42,7 +42,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-oracledatabase"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-oracledatabase"
     namespace: azure.mgmt.oracledatabase
     generate-test: true
     generate-sample: true
@@ -52,6 +52,7 @@ options:
     clear-output-folder: true
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    service-dir: "sdk/oracle"
 
 linter:
   extends:

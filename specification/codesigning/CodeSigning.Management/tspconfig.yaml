@@ -18,14 +18,14 @@ options:
     namespace: "com.azure.resourcemanager.trustedsigning"
     service-name: "Trusted Signing"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-trustedsigning"
     namespace: "azure.mgmt.trustedsigning"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-trustedsigning"
     flavor: azure
     package-details:
       name: "@azure/arm-trustedsigning"
@@ -39,6 +39,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.TrustedSigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

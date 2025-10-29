@@ -42,8 +42,12 @@ directive:
     from: timezone.json
     reason: It will break existing clients if we change the name
 
-```
+  - suppress: IntegerTypeMustHaveFormat
+    reason: Data-plane specs can suppress violations of this rule, since it only exists for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec (https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff#integertypemusthaveformat).
 
+  - suppress: OperationIdNounVerb
+    reason: Fixing this risks introducing breaking changes.
+```
 
 ### Tag: package-stable-1.0
 
@@ -51,7 +55,7 @@ These settings apply only when `--tag=package-stable-1.0` is specified on the co
 
 ``` yaml $(tag) == 'package-stable-1.0'
 input-file:
-  - preview/1.0/timezone.json
+  - stable/1.0/timezone.json
 ```
 
 # Code Generation

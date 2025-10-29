@@ -21,7 +21,7 @@ options:
     inject-spans: true
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: azure-mgmt-virtualenclaves
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-virtualenclaves"
     namespace: azure.mgmt.virtualenclaves
     generate-test: true
     generate-sample: true
@@ -32,7 +32,7 @@ options:
     namespace: com.azure.resourcemanager.virtualenclaves
     service-name: Virtual Enclaves
   "@azure-tools/typespec-ts":
-    package-dir: "arm-virtualenclaves"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-virtualenclaves"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

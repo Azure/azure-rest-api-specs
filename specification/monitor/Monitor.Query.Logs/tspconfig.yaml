@@ -15,10 +15,10 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/Microsoft.OperationalInsights/{version-status}/{version}/OperationalInsights.json"
+    output-file: "{azure-resource-provider-folder}/OperationalInsights/{version-status}/{version}/OperationalInsights.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-monitor-query"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-query"
+    package-name: "azure-monitor-query"
     package-mode: dataplane
     package-version: 2.0.0
     flavor: azure
@@ -31,7 +31,7 @@ options:
     generate-protocol-methods: false
     model-namespace: true
   "@azure-tools/typespec-ts":
-    package-dir: "monitor-query-logs"
+    emitter-output-dir: "{output-dir}/{service-dir}/monitor-query-logs"
     is-modular-library: true
     package-details:
       name: "@azure/monitor-query-logs"

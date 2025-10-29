@@ -17,11 +17,11 @@ options:
     package-name: "Azure.ResourceManager.Compute.Recommender"
     namespace: "{package-name}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-computerecommender"
     namespace: "azure.mgmt.computerecommender"
     generate-test: true
     generate-sample: true
     flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computerecommender"
   "@azure-tools/typespec-java":
     service-dir: "sdk/compute"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-recommender"
@@ -30,7 +30,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: "sdk/compute"
-    package-dir: "arm-computerecommender"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computerecommender"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

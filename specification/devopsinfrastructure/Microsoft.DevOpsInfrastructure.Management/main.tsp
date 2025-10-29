@@ -19,14 +19,10 @@ namespace Microsoft.DevOpsInfrastructure;
 /** Api versions */
 enum Versions {
   /** 2025-01-21 version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(CommonTypes.Versions.v5)
   v2025_01_21: "2025-01-21",
 
   /** 2025-09-20 version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(CommonTypes.Versions.v6)
   v2025_09_20: "2025-09-20",
 }
@@ -354,7 +350,8 @@ union LogonType {
 @doc("The network profile of the machines in the pool.")
 model NetworkProfile {
   @doc("The subnet id on which to put all machines created in the pool.")
-  subnetId: string;
+  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  subnetId?: string;
 
   @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
