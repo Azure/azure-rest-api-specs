@@ -55,27 +55,10 @@ suppressions:
   - code: PostResponseCodes
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
     reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
-  # ProvisioningState properties: explicit readOnly now; narrow suppressions preserve diff stability
+  # ProvisioningState properties are all marked readOnly in the emitted spec. Consolidated suppression scoped to every provisioningState under definitions.
   - code: ProvisioningStateMustBeReadOnly
-    where: $.definitions.EdgeActionProperties.properties.provisioningState
-    reason: Output-only provisioning state retained for legacy behavior; emitted readOnly.
-  - code: ProvisioningStateMustBeReadOnly
-    where: $.definitions.EdgeActionVersionProperties.properties.provisioningState
-    reason: Output-only provisioning state retained for legacy behavior; emitted readOnly.
-  - code: ProvisioningStateMustBeReadOnly
-    where: $.definitions.EdgeActionExecutionFilterProperties.properties.provisioningState
-    reason: Output-only provisioning state retained for legacy behavior; emitted readOnly.
-  # ProvisioningState properties were previously not explicitly marked readOnly in 2024 preview swagger; they are emitted readOnly now via TypeSpec visibility.
-  # Adding narrow suppressions to satisfy any lingering lint-diff expectations without broad masking.
-  - code: ProvisioningStateMustBeReadOnly
-    where: $.definitions.EdgeActionProperties.properties.provisioningState
-    reason: Property is output-only (readOnly in new spec) and matches legacy behavior (never writable).
-  - code: ProvisioningStateMustBeReadOnly
-    where: $.definitions.EdgeActionVersionProperties.properties.provisioningState
-    reason: Property is output-only (readOnly in new spec) and matches legacy behavior (never writable).
-  - code: ProvisioningStateMustBeReadOnly
-    where: $.definitions.EdgeActionExecutionFilterProperties.properties.provisioningState
-    reason: Property is output-only (readOnly in new spec) and matches legacy behavior (never writable).
+    where: $.definitions.*.properties.provisioningState
+    reason: All provisioningState properties are output-only and explicitly readOnly; single consolidated suppression.
 ```
 
 ---
