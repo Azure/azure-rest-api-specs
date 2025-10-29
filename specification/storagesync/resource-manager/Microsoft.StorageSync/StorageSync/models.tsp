@@ -368,7 +368,7 @@ model OperationResourceServiceSpecification {
   /**
    * List of metric specifications.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: OperationResourceMetricSpecification[];
 }
 
@@ -404,7 +404,6 @@ model OperationResourceMetricSpecification {
   /**
    * Supported aggregation types for the metric.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   supportedAggregationTypes?: string[];
 
   /**
@@ -420,7 +419,7 @@ model OperationResourceMetricSpecification {
   /**
    * Dimensions for the metric specification.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: OperationResourceMetricSpecificationDimension[];
 }
 
@@ -685,7 +684,7 @@ model StorageSyncServiceProperties {
    * List of private endpoint connection associated with the specified storage sync service
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["properties/privateEndpoint/id"])
+  @identifiers(#["properties/privateEndpoint/id"])
   privateEndpointConnections?: PrivateEndpointConnection[];
 }
 
@@ -733,7 +732,7 @@ model StorageSyncServiceArray {
    * Collection of StorageSyncServices.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: StorageSyncService[];
 
   /**
@@ -751,7 +750,7 @@ model SyncGroupArray {
    * Collection of SyncGroup.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: SyncGroup[];
 
   /**
@@ -1061,7 +1060,7 @@ model CloudEndpointArray {
    * Collection of CloudEndpoint.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: CloudEndpoint[];
 
   /**
@@ -1144,7 +1143,7 @@ model PreRestoreRequest {
   /**
    * Pre Restore restore file spec array.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   restoreFileSpec?: RestoreFileSpec[];
 
   /**
@@ -1210,7 +1209,7 @@ model PostRestoreRequest {
   /**
    * Post Restore restore file spec array.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   restoreFileSpec?: RestoreFileSpec[];
 }
 
@@ -1231,7 +1230,6 @@ model TriggerChangeDetectionParameters {
   /**
    * Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   paths?: string[];
 }
 
@@ -1580,7 +1578,7 @@ model ServerEndpointSyncSessionStatus {
    * Array of per-item errors coming from the last sync session.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["errorCode"])
+  @identifiers(#["errorCode"])
   filesNotSyncingErrors?: ServerEndpointFilesNotSyncingError[];
 
   /**
@@ -1887,7 +1885,7 @@ model CloudTieringFilesNotTiering {
    * Array of tiering errors
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["errorCode"])
+  @identifiers(#["errorCode"])
   errors?: FilesNotTieringError[];
 }
 
@@ -1996,7 +1994,7 @@ model ServerEndpointRecallStatus {
    * Array of recall errors
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["errorCode"])
+  @identifiers(#["errorCode"])
   recallErrors?: ServerEndpointRecallError[];
 }
 
@@ -2038,7 +2036,7 @@ model ServerEndpointProvisioningStatus {
    * Provisioning Step status information for each step in the provisioning process
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   provisioningStepStatuses?: ServerEndpointProvisioningStepStatus[];
 }
 
@@ -2155,7 +2153,7 @@ model ServerEndpointArray {
    * Collection of ServerEndpoint.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: ServerEndpoint[];
 
   /**
@@ -2188,7 +2186,7 @@ model RegisteredServerArray {
    * Collection of Registered Server.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: RegisteredServer[];
 
   /**
@@ -2464,7 +2462,7 @@ model WorkflowArray {
    * Collection of workflow items.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: Workflow[];
 
   /**
@@ -2645,7 +2643,6 @@ model ResourcesMoveInfo {
   /**
    * Collection of Resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   resources?: string[];
 }
 
@@ -2675,10 +2672,7 @@ model OperationDisplayResource {
 }
 
 model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
-@@OpenAPI.extension(OperationEntityListResult.value,
-  "x-ms-identifiers",
-  #["name"]
-);
+@@identifiers(OperationEntityListResult.value, #["name"]);
 
 /**
  * Standard OK response with Azure request tracking headers.
