@@ -79,7 +79,7 @@ interface EdgeActions {
 }
 
 @armResourceOperations
-interface EdgeActionsVersions {
+interface EdgeActionVersions {
   get is ArmResourceRead<EdgeActionVersion>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
   update is ArmResourcePatchAsync<
@@ -104,7 +104,7 @@ interface EdgeActionsVersions {
 }
 
 @armResourceOperations
-interface EdgeActionsExecutionFilters {
+interface EdgeActionExecutionFilters {
   get is ArmResourceRead<EdgeActionExecutionFilter>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionExecutionFilter>;
   update is ArmResourcePatchAsync<
