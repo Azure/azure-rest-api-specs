@@ -52,14 +52,10 @@ namespace Microsoft.AVS;
 @doc("Azure VMware Solution API versions.")
 enum Versions {
   @doc("Azure VMware Solution API version 2023-09-01.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_09_01: "2023-09-01",
 
   @doc("Azure VMware Solution API version 2024-09-01.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_09_01: "2024-09-01",
 }

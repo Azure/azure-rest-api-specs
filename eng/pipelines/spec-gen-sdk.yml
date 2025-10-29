@@ -29,6 +29,10 @@ parameters:
     type: boolean
     default: false
     displayName: 'Create SDK pull request'
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
+    displayName: 'Release plan work item id'
 
 trigger: none
 
@@ -43,3 +47,4 @@ extends:
     ApiVersion: ${{ parameters.ApiVersion }}
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
+    ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}

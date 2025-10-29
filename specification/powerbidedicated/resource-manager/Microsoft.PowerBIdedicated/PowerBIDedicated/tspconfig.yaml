@@ -12,28 +12,29 @@ options:
     output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-powerbidedicated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-powerbidedicated"
     namespace: "azure.mgmt.powerbidedicated"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-powerbidedicated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-powerbidedicated"
     namespace: "com.azure.resourcemanager.powerbidedicated"
     service-name: "PowerBIDedicated" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/powerbidedicated
-    package-dir: "arm-powerbidedicated"
-    is-modular-library: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-powerbidedicated"
+    typespec-title-map:
+      PowerBIDedicatedClient: "PowerBIDedicated"
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-powerbidedicated"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/powerbidedicated"
-    package-dir: "armpowerbidedicated"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpowerbidedicated"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpowerbidedicated"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

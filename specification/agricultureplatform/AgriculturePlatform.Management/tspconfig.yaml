@@ -18,33 +18,30 @@ options:
   "@azure-tools/typespec-providerhub-controller":
     emitter-output-dir: "{output-dir}/generated"
     code-kind: model
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.AgriculturePlatform"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-agricultureplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-agricultureplatform"
     namespace: "azure.mgmt.agricultureplatform"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-agricultureplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-agricultureplatform"
     namespace: "com.azure.resourcemanager.agricultureplatform"
     service-name: "Agriculture Platform"
     flavor: "azure"
   "@azure-tools/typespec-ts":
     flavor: "azure"
     experimental-extensible-enums: true
-    package-dir: "arm-agricultureplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-agricultureplatform"
     package-details:
       name: "@azure/arm-agricultureplatform"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/agricultureplatform"
-    package-dir: "armagricultureplatform"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armagricultureplatform"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armagricultureplatform"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

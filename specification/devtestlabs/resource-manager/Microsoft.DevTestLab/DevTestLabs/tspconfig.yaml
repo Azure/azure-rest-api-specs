@@ -20,19 +20,19 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     namespace: "azure.mgmt.devtestlabs"
-    package-dir: "azure-mgmt-devtestlabs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-devtestlabs"
     payload-flattening-threshold: 2
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-devtestlabs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-devtestlabs"
     namespace: "com.azure.resourcemanager.devtestlabs"
     service-name: "DevTestLabs"
     payload-flattening-threshold: 1
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-devtestlabs"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-devtestlabs"
     flavor: azure
     experimental-extensible-enums: true
     generate-metadata: true
@@ -40,8 +40,8 @@ options:
       name: "@azure/arm-devtestlabs"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/devtestlabs"
-    package-dir: "armdevtestlabs"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdevtestlabs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdevtestlabs"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
