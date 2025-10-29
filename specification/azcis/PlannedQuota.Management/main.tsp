@@ -7,7 +7,6 @@ import "./plannedquota.tsp";
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
 @service(#{ title: "Azure CIS FRP" })
 @doc("Planned Quota Provider")
