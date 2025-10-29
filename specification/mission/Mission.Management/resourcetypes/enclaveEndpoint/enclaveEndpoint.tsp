@@ -3,9 +3,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-using OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.ResourceManager;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
@@ -43,7 +43,7 @@ model EnclaveEndpointDestinationRule {
 
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Enclave Endpoint Rule Collection.")
   ruleCollection: EnclaveEndpointDestinationRule[];
 

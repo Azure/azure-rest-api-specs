@@ -5,7 +5,7 @@ import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { example } from "./changed-files.js";
-import { includesFolder } from "./path.js";
+import { includesSegment } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
@@ -60,11 +60,13 @@ export class Swagger {
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {Tag} [options.tag]
    */
-  constructor(path, options) {
-    const rootDir = dirname(options?.tag?.readme?.path ?? "");
+  constructor(path, options = {}) {
+    const { logger, tag } = options;
+
+    const rootDir = dirname(tag?.readme?.path ?? "");
     this.#path = resolve(rootDir, path);
-    this.#logger = options?.logger;
-    this.#tag = options?.tag;
+    this.#logger = logger;
+    this.#tag = tag;
   }
 
   /**
@@ -193,7 +195,7 @@ export class Swagger {
    * @returns {string} version kind (stable or preview)
    */
   get versionKind() {
-    return includesFolder(this.#path, "preview")
+    return includesSegment(this.#path, "preview")
       ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
       : API_VERSION_LIFECYCLE_STAGES.STABLE;
   }
@@ -202,14 +204,16 @@ export class Swagger {
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync(options) {
+  async toJSONAsync(options = {}) {
+    const { includeRefs, relativePaths } = options;
+
     return await embedError(
       async () => ({
         path:
-          options?.relativePaths && this.#tag?.readme?.specModel
+          relativePaths && this.#tag?.readme?.specModel
             ? relative(this.#tag?.readme?.specModel.folder, this.#path)
             : this.#path,
-        refs: options?.includeRefs
+        refs: includeRefs
           ? await mapAsync(
               [...(await this.getRefs()).values()].sort((a, b) => a.path.localeCompare(b.path)),
               async (s) =>

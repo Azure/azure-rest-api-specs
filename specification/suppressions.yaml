@@ -19,10 +19,10 @@
     - cognitiveservices/data-plane/ContentSafety/preview/2023-04-30-preview/contentsafety.json
     - cognitiveservices/data-plane/ContentSafety/preview/2023-10-15-preview/contentsafety.json
     - cognitiveservices/data-plane/ContentSafety/preview/2024-02-15-preview/contentsafety.json
-    - cognitiveservices/data-plane/Language/preview/2023-11-15-preview/analyzedocuments.json
-    - cognitiveservices/data-plane/Language/preview/2023-11-15-preview/analyzetext.json
-    - cognitiveservices/data-plane/Language/preview/2023-11-15-preview/analyzeconversations.json
-    - cognitiveservices/data-plane/Language/preview/2024-05-15-preview/analyzeconversations.json
+    - cognitiveservices/data-plane/LanguageAnalyzeDocuments/preview/2023-11-15-preview/analyzedocuments.json
+    - cognitiveservices/data-plane/LanguageAnalyzeText/preview/2023-11-15-preview/analyzetext.json
+    - cognitiveservices/data-plane/LanguageAnalyzeConversations/preview/2023-11-15-preview/analyzeconversations.json
+    - cognitiveservices/data-plane/LanguageAnalyzeConversations/preview/2024-05-15-preview/analyzeconversations.json
     - computeschedule/resource-manager/Microsoft.ComputeSchedule/preview/2024-06-01-preview/computeschedule.json
     - confidentialledger/data-plane/Microsoft.CodeTransparency/preview/2024-01-11-preview/cts.json
     - devopsinfrastructure/resource-manager/Microsoft.DevOpsInfrastructure/preview/2023-10-30-preview/devopsinfrastructure.json
@@ -435,6 +435,17 @@
     - parameters.service-dir.default
   paths:
     - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+  paths:
+    # Casing "Confidentialledger" is not a typo.  This needs to match until the folder name is corrected in the repo.
+    - confidentialledger/Confidentialledger.Management/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated

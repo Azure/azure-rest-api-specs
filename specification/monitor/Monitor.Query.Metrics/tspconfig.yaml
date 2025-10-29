@@ -23,12 +23,13 @@ options:
     package-version: 1.0.0
     flavor: azure
     namespace: azure.monitor.querymetrics
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.Monitor.Query.Metrics"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
+    package-name: "Azure.Monitor.Query.Metrics"
+    namespace: "{package-name}"
+    generate-convenience-methods: true
+    generate-protocol-methods: false
+    model-namespace: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/monitor-query-metrics"
     is-modular-library: true

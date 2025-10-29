@@ -4,7 +4,7 @@ import { debugLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
 
 const USAGE =
-  "Usage: npx spec-model path/to/spec [--debug] [--include-refs] [--relative-paths]\n" +
+  "Usage: npx spec-model path/to/spec [--debug] [--include-refs] [--relative-paths] [--no-embed-errors]\n" +
   "Example: npx spec-model specfication/contosowidgetmanager";
 
 // Exclude first two args (node, script file)
@@ -18,6 +18,9 @@ args = args.filter((a) => a != "--include-refs");
 
 const relativePaths = args.includes("--relative-paths");
 args = args.filter((a) => a != "--relative-paths");
+
+const noEmbedErrors = args.includes("--no-embed-errors");
+args = args.filter((a) => a != "--no-embed-errors");
 
 if (args.length < 1) {
   console.error(USAGE);
@@ -40,7 +43,7 @@ const specModel = new SpecModel(specPath, { logger });
 console.log(
   JSON.stringify(
     // Always embed errors, since we always want to return a valid JSON object instead of throwing
-    await specModel.toJSONAsync({ embedErrors: true, includeRefs, relativePaths }),
+    await specModel.toJSONAsync({ embedErrors: !noEmbedErrors, includeRefs, relativePaths }),
     null,
     2,
   ),
