@@ -331,6 +331,12 @@
           },
           "Update resource to add System and User managed identities": {
             "$ref": "./examples/communicationServices/updateWithSystemAndUserIdentity.json"
+          },
+          "Update resource to add DisableLocalAuth": {
+            "$ref": "./examples/communicationServices/updateWithDisableLocalAuth.json"
+          },
+          "Update resource to add PublicNetworkAccess": {
+            "$ref": "./examples/communicationServices/updateWithPublicNetworkAccess.json"
           }
         }
       },
@@ -453,6 +459,9 @@
           },
           "Create resource with Customer Managed Key Encryption": {
             "$ref": "./examples/communicationServices/createWithEncryption.json"
+          },
+          "Create or update resource with PublicNetworkAccess": {
+            "$ref": "./examples/communicationServices/createOrUpdateWithPublicNetworkAccess.json"
           },
           "Create resource with disableLocalAuth": {
             "$ref": "./examples/communicationServices/createOrUpdateWithDisableLocalAuth.json"
@@ -1077,6 +1086,13 @@
         },
         "publicNetworkAccess": {
           "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/PublicNetworkAccess"
+        },
+        "disableLocalAuth": {
+          "description": "Disable local authentication for the CommunicationService.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
