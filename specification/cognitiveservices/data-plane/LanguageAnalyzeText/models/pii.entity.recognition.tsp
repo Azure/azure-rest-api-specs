@@ -32,11 +32,11 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   excludePiiCategories?: PiiCategoriesExclude[];
 
   /** RedactionPolicy to be used on the input. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   @removed(Versions.v2025_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
 
@@ -115,7 +115,7 @@ model ValueExclusionPolicy {
 }
 
 /** The abstract base class for RedactionPolicy. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
@@ -135,7 +135,7 @@ model BaseRedactionPolicy {
 }
 
 /** Represents the policy of redacting with a redaction character */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -163,21 +163,21 @@ model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of not redacting found PII. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntityMaskPolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
 }
 
 /** Kinds of redaction policies supported. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 union RedactionPolicyKind {
   string,
 
@@ -219,7 +219,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2024_11_15_preview, PiiEntitiesDocumentResult[])
+  @typeChangedFrom(Versions.v2025_05_15_preview, PiiEntitiesDocumentResult[])
   documents: PiiResultWithDetectedLanguage[];
 }
 
@@ -244,15 +244,15 @@ model PiiEntityWithTags is Entity {
   tags?: EntityTag[];
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   mask?: string;
 
   /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   maskOffset?: int32;
 
   /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   maskLength?: int32;
 }
 
@@ -263,7 +263,7 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, Entity[])
+  @typeChangedFrom(Versions.v2025_05_15_preview, Entity[])
   entities: PiiEntityWithTags[];
 }
 
@@ -815,26 +815,18 @@ union PiiCategoriesExclude {
 
   /** Date Of Birth */
   @added(Versions.v2025_11_01)
-  @removed(Versions.v2024_11_15_preview)
-  @added(Versions.v2025_05_15_preview)
   DateOfBirth: "DateOfBirth",
 
   /** Bank Account Number */
   @added(Versions.v2025_11_01)
-  @removed(Versions.v2024_11_15_preview)
-  @added(Versions.v2025_05_15_preview)
   BankAccountNumber: "BankAccountNumber",
 
   /** Passport Number */
   @added(Versions.v2025_11_01)
-  @removed(Versions.v2024_11_15_preview)
-  @added(Versions.v2025_05_15_preview)
   PassportNumber: "PassportNumber",
 
   /** Drivers License Number */
   @added(Versions.v2025_11_01)
-  @removed(Versions.v2024_11_15_preview)
-  @added(Versions.v2025_05_15_preview)
   DriversLicenseNumber: "DriversLicenseNumber",
 
   /** Neighborhood */
@@ -843,8 +835,6 @@ union PiiCategoriesExclude {
 
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
   @added(Versions.v2025_11_01)
-  @removed(Versions.v2024_11_15_preview)
-  @added(Versions.v2025_05_15_preview)
   SortCode: "SortCode",
 
   /** PIN */
@@ -857,7 +847,7 @@ union PiiCategoriesExclude {
 
   /** VIN */
   @added(Versions.v2025_11_01)
-  @removed(Versions.v2024_11_15_preview)
+  @removed(Versions.v2025_05_15_preview)
   @added(Versions.v2025_11_15_preview)
   VehicleIdentificationNumber: "VehicleIdentificationNumber",
 
