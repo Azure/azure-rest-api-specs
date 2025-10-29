@@ -46,6 +46,58 @@ alias PolicyDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
+alias PolicyDefinitionTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Authorization";
+  },
+  {},
+  {
+    /** The name of the built-in policy definition to get. */
+    @path
+    @segment("policyDefinitions")
+    @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    policyDefinitionName: string;
+  }
+>;
+
+alias PolicyDefinitionManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Management";
+
+    /** The ID of the management group. */
+    @path
+    @segment("managementGroups")
+    @key
+    managementGroupId: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<PolicyDefinition>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<PolicyDefinition>;
+
+    /** The name of the policy definition to get. */
+    @path
+    @segment("policyDefinitions")
+    @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    policyDefinitionName: string;
+  }
+>;
+
 @armResourceOperations
 interface PolicyDefinitions {
   /**
@@ -88,43 +140,20 @@ interface PolicyDefinitions {
       $top?: int32;
     }
   >;
-}
-alias PolicyDefinitionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Authorization";
-  },
-  {},
-  {
-    /** The name of the built-in policy definition to get. */
-    @path
-    @segment("policyDefinitions")
-    @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
-    policyDefinitionName: string;
-  }
->;
-
-@armResourceOperations
-interface PolicyDefinitionOperationGroup {
-  /**
+    /**
    * This operation retrieves the built-in policy definition with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitions_GetBuiltIn")
-  getBuiltIn is PolicyDefinitionOperationGroupOps.Read<PolicyDefinition>;
+  getBuiltIn is PolicyDefinitionTenantOps.Read<PolicyDefinition>;
 
   /**
    * This operation retrieves a list of all the built-in policy definitions that match the optional given $filter. If $filter='policyType -eq {value}' is provided, the returned list only includes all built-in policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all built-in policy definitions whose category match the {value}.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitions_ListBuiltIn")
-  listBuiltIn is PolicyDefinitionOperationGroupOps.List<
+  listBuiltIn is PolicyDefinitionTenantOps.List<
     PolicyDefinition,
     Parameters = {
       /**
@@ -142,47 +171,13 @@ interface PolicyDefinitionOperationGroup {
       $top?: int32;
     }
   >;
-}
-alias PolicyDefinitionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Management";
-
-    /** The ID of the management group. */
-    @path
-    @segment("managementGroups")
-    @key
-    managementGroupId: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<PolicyDefinition>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<PolicyDefinition>;
-
-    /** The name of the policy definition to get. */
-    @path
-    @segment("policyDefinitions")
-    @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
-    policyDefinitionName: string;
-  }
->;
-
-@armResourceOperations
-interface PolicyDefinitionOperationGroup {
   /**
    * This operation retrieves the policy definition in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitions_GetAtManagementGroup")
-  getAtManagementGroup is PolicyDefinitionOperationGroupOps.Read<
-    Extension.ManagementGroup,
+  getAtManagementGroup is PolicyDefinitionManagementGroupOps.Read<
     PolicyDefinition
   >;
 
@@ -192,8 +187,7 @@ interface PolicyDefinitionOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("PolicyDefinitions_CreateOrUpdateAtManagementGroup")
-  createOrUpdateAtManagementGroup is PolicyDefinitionOperationGroupOps.CreateOrUpdateSync<
-    Extension.ManagementGroup,
+  createOrUpdateAtManagementGroup is PolicyDefinitionManagementGroupOps.CreateOrUpdateSync<
     PolicyDefinition,
     Response = ArmResourceCreatedSyncResponse<PolicyDefinition>
   >;
@@ -203,8 +197,7 @@ interface PolicyDefinitionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitions_DeleteAtManagementGroup")
-  deleteAtManagementGroup is PolicyDefinitionOperationGroupOps.DeleteSync<
-    Extension.ManagementGroup,
+  deleteAtManagementGroup is PolicyDefinitionManagementGroupOps.DeleteSync<
     PolicyDefinition
   >;
 
@@ -213,8 +206,7 @@ interface PolicyDefinitionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitions_ListByManagementGroup")
-  listByManagementGroup is PolicyDefinitionOperationGroupOps.List<
-    Extension.ManagementGroup,
+  listByManagementGroup is PolicyDefinitionManagementGroupOps.List<
     PolicyDefinition,
     Parameters = {
       /**
@@ -239,6 +231,6 @@ interface PolicyDefinitionOperationGroup {
 @@doc(PolicyDefinitions.createOrUpdate::parameters.resource,
   "The policy definition properties."
 );
-@@doc(PolicyDefinitionOperationGroup.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(PolicyDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy definition properties."
 );
