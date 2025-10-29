@@ -39,6 +39,7 @@ union EdgeActionVersionDeploymentType {
 
 /** The validation status for edge action versions */
 union EdgeActionVersionValidationStatus {
+  string,
   /** Validation succeeded */
   Succeeded: "Succeeded",
 
