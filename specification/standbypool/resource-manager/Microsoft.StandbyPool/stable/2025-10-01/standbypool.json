@@ -1351,7 +1351,8 @@
           "type": "integer",
           "format": "int64",
           "description": "Specifies maximum number of standby container groups in the standby pool.",
-          "minimum": 0
+          "minimum": 0,
+          "x-ms-client-name": "maxReadyCapacityUnlimited"
         },
         "refillPolicy": {
           "$ref": "#/definitions/RefillPolicy",
@@ -1595,13 +1596,15 @@
           "type": "integer",
           "format": "int64",
           "description": "Specifies the maximum number of virtual machines in the standby virtual machine pool.",
-          "minimum": 0
+          "minimum": 0,
+          "x-ms-client-name": "maxReadyCapacityUnlimited"
         },
         "minReadyCapacity": {
           "type": "integer",
           "format": "int64",
           "description": "Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.",
-          "minimum": 0
+          "minimum": 0,
+          "x-ms-client-name": "minReadyCapacityUnlimited"
         },
         "postProvisioningDelay": {
           "type": "string",

@@ -73,13 +73,29 @@ model StandbyVirtualMachinePoolElasticityProfile {
   @doc("Specifies the maximum number of virtual machines in the standby virtual machine pool.")
   @minValue(0)
   @maxValue(2000)
-  maxReadyCapacity: int64;
+  @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @encodedName("application/json", "maxReadyCapacity")
+  maxReadyCapacityLimited: int64;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies the maximum number of virtual machines in the standby virtual machine pool.")
+  @minValue(0)
+  @encodedName("application/json", "maxReadyCapacity")
+  maxReadyCapacityUnlimited: int64;
 
   @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
   @doc("Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.")
   @minValue(0)
   @maxValue(2000)
-  minReadyCapacity?: int64;
+  @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @encodedName("application/json", "minReadyCapacity")
+  minReadyCapacityLimited?: int64;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.")
+  @minValue(0)
+  @encodedName("application/json", "minReadyCapacity")
+  minReadyCapacityUnlimited?: int64;
 
   @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
   @doc("Specifies the duration to wait after virtual machine provisioning before the virtual machine becomes available for use. The duration should be specified in ISO 8601 format (e.g., PT2S for 2 seconds).")

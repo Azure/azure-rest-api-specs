@@ -55,7 +55,15 @@ model StandbyContainerGroupPoolElasticityProfile {
   @doc("Specifies maximum number of standby container groups in the standby pool.")
   @minValue(0)
   @maxValue(2000)
-  maxReadyCapacity: int64;
+  @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @encodedName("application/json", "maxReadyCapacity")
+  maxReadyCapacityLimited: int64;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies maximum number of standby container groups in the standby pool.")
+  @minValue(0)
+  @encodedName("application/json", "maxReadyCapacity")
+  maxReadyCapacityUnlimited: int64;
 
   @doc("Specifies refill policy of the pool.")
   refillPolicy?: RefillPolicy;
