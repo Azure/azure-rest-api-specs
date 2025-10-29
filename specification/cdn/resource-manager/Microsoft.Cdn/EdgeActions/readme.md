@@ -55,10 +55,10 @@ suppressions:
   - code: PostResponseCodes
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
     reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
-  # ProvisioningState properties are all marked readOnly in the emitted spec. Consolidated suppression scoped to every provisioningState under definitions.
+  # ProvisioningState properties are all marked readOnly in the emitted spec. File-scoped suppression to cover all occurrences.
   - code: ProvisioningStateMustBeReadOnly
-    where: $.definitions.*.properties.provisioningState
-    reason: All provisioningState properties are output-only and explicitly readOnly; single consolidated suppression.
+    from: openapi.json
+    reason: All provisioningState properties are output-only and explicitly marked readOnly in the definitions section.
 ```
 
 ---
