@@ -173,6 +173,17 @@ model MCPToolDefinition extends ToolDefinition {
   allowedTools?: string[];
 }
 
+@doc("The input definition information for a Computer Use tool as used to configure an agent.")
+@added(Versions.v2025_05_15_preview)
+model ComputerUseToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'computer_use_preview'.")
+  type: "computer_use_preview";
+
+  @doc("The computer use tool parameters.")
+  @encodedName("application/json", "computer_use_preview")
+  computerUsePreview: ComputerUseToolParameters;
+}
+
 // Definition details: File Search
 
 /**
@@ -420,6 +431,28 @@ model RequiredMcpToolCall extends RequiredToolCall {
   server_label: string;
 }
 
+@doc("A representation of a requested call to a Computer Use tool, needed by the model to continue evaluation of a run.")
+@added(Versions.v2025_05_15_preview)
+model RequiredComputerUseToolCall extends RequiredToolCall {
+  @doc("The object type of the required tool call. Always 'computer_use_preview' for Computer Use tools.")
+  type: "computer_use_preview";
+
+  @doc("Detailed information about the computer use action to be executed.")
+  @encodedName("application/json", "computer_use_preview")
+  computerUsePreview: RequiredComputerUseToolCallDetails;
+}
+
+@doc("The detailed information for a computer use tool invocation.")
+@added(Versions.v2025_05_15_preview)
+model RequiredComputerUseToolCallDetails {
+  @doc("The action to be performed by the computer use tool.")
+  action: ComputerUseAction;
+
+  @doc("Safety checks that are pending acknowledgment by the developer.")
+  @encodedName("application/json", "pending_safety_checks")
+  pendingSafetyChecks: SafetyCheck[];
+}
+
 //
 // Tool calls -- present in run steps and provide information about tool execution
 //
@@ -605,6 +638,38 @@ model RunStepMcpToolCall extends RunStepToolCall {
   @doc("The label for the MCP server")
   @encodedName("application/json", "server_label")
   serverLabel?: string;
+}
+
+@doc("""
+  A record of a call to a Computer Use tool, issued by the model in evaluation of a defined tool, that represents
+  executed computer automation actions.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepComputerUseToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'computer_use_preview'.")
+  type: "computer_use_preview";
+
+  @doc("The detailed information about the computer use tool call.")
+  @encodedName("application/json", "computer_use_preview")
+  computerUsePreview: RunStepComputerUseToolCallDetails;
+}
+
+@doc("The detailed information about a computer use tool call.")
+@added(Versions.v2025_05_15_preview)
+model RunStepComputerUseToolCallDetails {
+  @doc("The action to be performed by the computer use tool.")
+  action: ComputerUseAction;
+
+  @doc("Safety checks that are pending acknowledgment by the developer.")
+  @encodedName("application/json", "pending_safety_checks")
+  pendingSafetyChecks: SafetyCheck[];
+
+  @doc("The output from the computer use tool.")
+  output: ComputerScreenshot;
+
+  @doc("Safety checks that have been acknowledged by the developer.")
+  @encodedName("application/json", "acknowledged_safety_checks")
+  acknowledgedSafetyChecks?: SafetyCheck[];
 }
 
 @doc("""
@@ -799,17 +864,36 @@ model BingGroundingSearchConfiguration {
   @encodedName("application/json", "connection_id")
   connectionId: string;
 
-  @doc("The market where the results come from.")
+  @doc("""
+    The market where the results come from. Typically, market is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form: `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, `en-US`. The string is case insensitive. For a list of possible market values, see [Market codes](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes). If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in Market codes, Bing uses a best fit market code based on an internal mapping that is subject to change.
+    """)
   market?: string;
 
-  @doc("The language to use for user interface strings when calling Bing API.")
+  @doc("""
+    The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.
+    For a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).
+    Bing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.
+    If the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).
+    To specify the 2-letter code, set this parameter to an ISO 639-1 language code.
+    To specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.
+    Although optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.
+    """)
   @encodedName("application/json", "set_lang")
   setLang?: string;
 
-  @doc("The number of search results to return in the bing api response")
+  @doc("""
+    The number of search results to return in the response. The default is 5 and the maximum value is 50. The actual number delivered may be less than requested. 
+    - It is possible for multiple pages to include some overlap in results. 
+    - This parameter affects only web page results. It's possible that AI model might not use all search results returned by Bing.
+    """)
   count?: int64;
 
-  @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
+  @doc("""
+    Filter search results by the following case-insensitive age values:
+    - Day: Return webpages that Bing discovered within the last 24 hours.
+    - Week: Return webpages that Bing discovered within the last 7 days.
+    - Month: Return webpages that Bing discovered within the last 30 days. To get articles discovered by Bing during a specific timeframe, specify a date range in the form: `YYYY-MM-DD..YYYY-MM-DD`. For example, `freshness=2019-02-01..2019-05-30. To limit the results to a single date, set this parameter to a specific date. For example, freshness=2019-02-04`.
+    """)
   freshness?: string;
 }
 
@@ -856,14 +940,40 @@ model RunStepConnectedAgent {
 //
 
 @doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
+@discriminator("type")
 @added(Versions.v2025_05_01)
-model ToolOutput {
+model StructuredToolOutput {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The object type for the tool output. Defaults to `function_call_output` if not provided.")
+  type: string = "function_call_output";
+
   @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
   @encodedName("application/json", "tool_call_id")
   toolCallId?: string;
+}
 
-  @doc("The output from the tool to be submitted.")
+@doc("The output from a function tool to be submitted.")
+@added(Versions.v2025_05_01)
+model ToolOutput extends StructuredToolOutput {
+  @doc("The object type, which is always 'function_call_output'.")
+  type: "function_call_output";
+
+  @doc("The output from the function tool to be submitted.")
   output?: string;
+}
+
+@doc("The output from a computer use tool to be submitted.")
+@added(Versions.v2025_05_15_preview)
+model ComputerToolOutput extends StructuredToolOutput {
+  @doc("The object type, which is always 'computer_call_output'.")
+  type: "computer_call_output";
+
+  @doc("The output from the computer use tool.")
+  output: ComputerScreenshot;
+
+  @doc("Safety checks that have been acknowledged by the developer.")
+  @encodedName("application/json", "acknowledged_safety_checks")
+  acknowledgedSafetyChecks?: SafetyCheck[];
 }
 
 //
@@ -964,6 +1074,10 @@ union AgentsNamedToolChoiceType {
   /** Tool type `mcp` */
   @added(Versions.v2025_05_15_preview)
   mcp: "mcp",
+
+  /** Tool type `computer_use_preview` */
+  @added(Versions.v2025_05_15_preview)
+  computerUsePreview: "computer_use_preview",
 }
 
 /** The function name that will be used, if using the `function` tool */
@@ -1089,17 +1203,36 @@ model BingCustomSearchConfiguration {
   @encodedName("application/json", "instance_name")
   instanceName: string;
 
-  @doc("The market where the results come from.")
+  @doc("""
+    The market where the results come from. Typically, market is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form: `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, `en-US`. The string is case insensitive. For a list of possible market values, see [Market codes](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes). If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in Market codes, Bing uses a best fit market code based on an internal mapping that is subject to change.
+    """)
   market?: string;
 
-  @doc("The language to use for user interface strings when calling Bing API.")
+  @doc("""
+    The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.
+    For a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).
+    Bing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.
+    If the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).
+    To specify the 2-letter code, set this parameter to an ISO 639-1 language code.
+    To specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.
+    Although optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.
+    """)
   @encodedName("application/json", "set_lang")
   setLang?: string;
 
-  @doc("The number of search results to return in the bing api response")
+  @doc("""
+    The number of search results to return in the response. The default is 5 and the maximum value is 50. The actual number delivered may be less than requested. 
+    - It is possible for multiple pages to include some overlap in results. 
+    - This parameter affects only web page results. It's possible that AI model might not use all search results returned by Bing.
+    """)
   count?: int64;
 
-  @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
+  @doc("""
+    Filter search results by the following case-insensitive age values:
+    - Day: Return webpages that Bing discovered within the last 24 hours.
+    - Week: Return webpages that Bing discovered within the last 7 days.
+    - Month: Return webpages that Bing discovered within the last 30 days. To get articles discovered by Bing during a specific timeframe, specify a date range in the form: `YYYY-MM-DD..YYYY-MM-DD`. For example, `freshness=2019-02-01..2019-05-30. To limit the results to a single date, set this parameter to a specific date. For example, freshness=2019-02-04`.
+    """)
   freshness?: string;
 }
 
@@ -1124,4 +1257,216 @@ model AzureFunctionStorageQueue {
   @doc("The name of an Azure function storage queue.")
   @encodedName("application/json", "queue_name")
   queueName: string;
+}
+
+@doc("The computer use tool parameters.")
+@added(Versions.v2025_05_15_preview)
+model ComputerUseToolParameters {
+  @doc("The display width for the computer use tool.")
+  @encodedName("application/json", "display_width")
+  @minValue(1)
+  displayWidth: int32;
+
+  @doc("The display height for the computer use tool.")
+  @encodedName("application/json", "display_height")
+  @minValue(1)
+  displayHeight: int32;
+
+  @doc("The environment for the computer use tool.")
+  environment: ComputerUseEnvironment;
+}
+
+@doc("The environment types supported by the computer use tool.")
+@added(Versions.v2025_05_15_preview)
+union ComputerUseEnvironment {
+  string,
+
+  /** Windows environment */
+  windows: "windows",
+
+  /** Mac environment */
+  mac: "mac",
+
+  /** Linux environment */
+  linux: "linux",
+
+  /** Browser environment */
+  browser: "browser",
+}
+
+// specific actions for computer use tool
+
+@doc("An abstract representation of a computer use action.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+model ComputerUseAction {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The type of computer use action.")
+  type: string;
+}
+
+@doc("A click action.")
+@added(Versions.v2025_05_15_preview)
+model ClickAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a click action, this property is always set to click.")
+  type: "click";
+
+  @doc("The x-coordinate where the click occurred.")
+  x: int32;
+
+  @doc("The y-coordinate where the click occurred.")
+  y: int32;
+
+  @doc("Indicates which mouse button was pressed during the click.")
+  button: MouseButton;
+}
+
+@doc("The mouse button types supported by click actions.")
+@added(Versions.v2025_05_15_preview)
+union MouseButton {
+  string,
+
+  /** Left mouse button */
+  left: "left",
+
+  /** Right mouse button */
+  right: "right",
+
+  /** Mouse wheel button */
+  wheel: "wheel",
+
+  /** Back mouse button */
+  back: "back",
+
+  /** Forward mouse button */
+  forward: "forward",
+}
+
+@doc("A double click action.")
+@added(Versions.v2025_05_15_preview)
+model DoubleClickAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a double click action, this property is always set to double_click.")
+  type: "double_click";
+
+  @doc("The x-coordinate where the double click occurred.")
+  x: int32;
+
+  @doc("The y-coordinate where the double click occurred.")
+  y: int32;
+}
+
+@doc("A drag action.")
+@added(Versions.v2025_05_15_preview)
+model DragAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a drag action, this property is always set to drag.")
+  type: "drag";
+
+  @doc("An array of coordinates representing the path of the drag action.")
+  path: CoordinatePoint[];
+}
+
+@doc("A coordinate point with x and y values.")
+@added(Versions.v2025_05_15_preview)
+model CoordinatePoint {
+  @doc("The x-coordinate.")
+  x: int32;
+
+  @doc("The y-coordinate.")
+  y: int32;
+}
+
+@doc("A collection of keypresses the model would like to perform.")
+@added(Versions.v2025_05_15_preview)
+model KeyPressAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a keypress action, this property is always set to keypress.")
+  type: "keypress";
+
+  @doc("The combination of keys the model is requesting to be pressed. This is an array of strings, each representing a key.")
+  keys: string[];
+}
+
+@doc("A mouse move action.")
+@added(Versions.v2025_05_15_preview)
+model MoveAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a move action, this property is always set to move.")
+  type: "move";
+
+  @doc("The x-coordinate to move to.")
+  x: int32;
+
+  @doc("The y-coordinate to move to.")
+  y: int32;
+}
+
+@doc("A screenshot action.")
+@added(Versions.v2025_05_15_preview)
+model ScreenshotAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a screenshot action, this property is always set to screenshot.")
+  type: "screenshot";
+}
+
+@doc("A scroll action.")
+@added(Versions.v2025_05_15_preview)
+model ScrollAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a scroll action, this property is always set to scroll.")
+  type: "scroll";
+
+  @doc("The x-coordinate where the scroll occurred.")
+  x: int32;
+
+  @doc("The y-coordinate where the scroll occurred.")
+  y: int32;
+
+  @doc("The horizontal scroll distance.")
+  @encodedName("application/json", "scroll_x")
+  scrollX: int32;
+
+  @doc("The vertical scroll distance.")
+  @encodedName("application/json", "scroll_y")
+  scrollY: int32;
+}
+
+@doc("An action to type in text.")
+@added(Versions.v2025_05_15_preview)
+model TypeAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a type action, this property is always set to type.")
+  type: "type";
+
+  @doc("The text to type.")
+  text: string;
+}
+
+@doc("A wait action.")
+@added(Versions.v2025_05_15_preview)
+model WaitAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a wait action, this property is always set to wait.")
+  type: "wait";
+}
+
+@doc("Safety check that has been acknowledged by the developer.")
+@added(Versions.v2025_05_15_preview)
+model SafetyCheck {
+  @doc("The ID of the pending safety check.")
+  id: string;
+
+  @doc("The type of the pending safety check.")
+  code?: string;
+
+  @doc("Details about the pending safety check.")
+  message?: string;
+}
+
+@doc("The output from a computer use tool representing a screenshot.")
+@added(Versions.v2025_05_15_preview)
+model ComputerScreenshot {
+  @doc("Specifies the event type. For a computer screenshot, this property is always set to computer_screenshot.")
+  type: "computer_screenshot";
+
+  @doc("The identifier of an uploaded file that contains the screenshot.")
+  @encodedName("application/json", "file_id")
+  fileId?: string;
+
+  @doc("The URL of the screenshot image.")
+  @encodedName("application/json", "image_url")
+  imageUrl?: string;
 }

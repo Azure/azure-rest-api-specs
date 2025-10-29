@@ -71,8 +71,8 @@ using Azure.Core;
   "UsernameUriString",
   "csharp"
 );
-@@clientName(Minute.`0`, "Zero", "csharp,go,python");
-@@clientName(Minute.`30`, "Thirty", "csharp,go,python");
+@@clientName(Minute.`0`, "Zero", "csharp,go,python,javascript");
+@@clientName(Minute.`30`, "Thirty", "csharp,go,python,javascript");
 @@usage(JobRun, Usage.input, "csharp");
 @@usage(JobRunError, Usage.output, "csharp");
 @@clientName(Microsoft.StorageMover, "StorageMoverMgmtClient", "python");
