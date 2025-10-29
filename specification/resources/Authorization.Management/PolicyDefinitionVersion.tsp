@@ -191,27 +191,21 @@ interface PolicyDefinitionVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitionVersions_GetAtManagementGroup")
-  getAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.Read<
-    PolicyDefinitionVersion
-  >;
+  getAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.Read<PolicyDefinitionVersion>;
 
   /**
    * This operation creates or updates a policy definition version in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitionVersions_CreateOrUpdateAtManagementGroup")
-  createOrUpdateAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.CreateOrUpdateSync<
-    PolicyDefinitionVersion
-  >;
+  createOrUpdateAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.CreateOrUpdateSync<PolicyDefinitionVersion>;
 
   /**
    * This operation deletes the policy definition in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicyDefinitionVersions_DeleteAtManagementGroup")
-  deleteAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.DeleteSync<
-    PolicyDefinitionVersion
-  >;
+  deleteAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.DeleteSync<PolicyDefinitionVersion>;
 
   /**
    * This operation retrieves a list of all the policy definition versions for the given policy definition in the given management group.

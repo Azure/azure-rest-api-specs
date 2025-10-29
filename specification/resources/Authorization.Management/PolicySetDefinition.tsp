@@ -219,18 +219,14 @@ interface PolicySetDefinitions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicySetDefinitions_CreateOrUpdateAtManagementGroup")
-  createOrUpdateAtManagementGroup is PolicySetDefinitionManagementGroupOps.CreateOrUpdateSync<
-    PolicySetDefinition
-  >;
+  createOrUpdateAtManagementGroup is PolicySetDefinitionManagementGroupOps.CreateOrUpdateSync<PolicySetDefinition>;
 
   /**
    * This operation deletes the policy set definition in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PolicySetDefinitions_DeleteAtManagementGroup")
-  deleteAtManagementGroup is PolicySetDefinitionManagementGroupOps.DeleteSync<
-    PolicySetDefinition
-  >;
+  deleteAtManagementGroup is PolicySetDefinitionManagementGroupOps.DeleteSync<PolicySetDefinition>;
 
   /**
    * This operation retrieves a list of all the policy set definitions in a given management group that match the optional given $filter. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, the unfiltered list includes all policy set definitions associated with the management group, including those that apply directly or from management groups that contain the given management group. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given management group. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn and Custom. If $filter='category -eq {value}' is provided, the returned list only includes all policy set definitions whose category match the {value}.
