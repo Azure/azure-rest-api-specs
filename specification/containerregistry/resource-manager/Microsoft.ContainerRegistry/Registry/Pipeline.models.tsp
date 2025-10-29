@@ -16,7 +16,6 @@ union StorageAccessMode {
   SasToken: "SasToken",
 }
 
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.vLatestPreview)
 union PipelineOptions {
