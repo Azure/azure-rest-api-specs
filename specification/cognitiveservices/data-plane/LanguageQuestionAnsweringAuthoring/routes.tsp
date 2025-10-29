@@ -114,7 +114,7 @@ interface QuestionAnsweringProjects {
       projectName: string;
 
       /** Optional export parameters. See `ExportQueryParameters`. */
-      ... ExportQueryParameters;
+      ...ExportQueryParameters;
     },
     ExportJobResponse,
     {},
@@ -145,7 +145,7 @@ interface QuestionAnsweringProjects {
       projectName: string;
 
       /** Optional import parameters. See `ImportQueryParameters`. */
-      ... ImportQueryParameters;
+      ...ImportQueryParameters;
 
       /** Project assets the needs to be imported. */
       @bodyRoot
