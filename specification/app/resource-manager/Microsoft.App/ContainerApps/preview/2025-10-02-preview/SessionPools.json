@@ -437,7 +437,7 @@
   },
   "definitions": {
     "McpServerSettings": {
-      "description": "The settings of the MCP server for this session pool.",
+      "description": "The settings of the MCP (Model Context Protocol) server for this session pool.",
       "type": "object",
       "properties": {
         "isMcpServerEnabled": {
@@ -453,6 +453,7 @@
         "mcpServerEndpoint": {
           "description": "The endpoint of the MCP server.",
           "type": "string",
+          "format": "uri",
           "readOnly": true
         }
       }
@@ -1009,7 +1010,7 @@
               ]
             },
             "mcpServerSettings": {
-              "description": "The MCP server settings of the session pool.",
+              "description": "The MCP (Model Context Protocol) server settings of the session pool.",
               "$ref": "#/definitions/McpServerSettings"
             }
           },
