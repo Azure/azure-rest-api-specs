@@ -2,7 +2,7 @@
 
 import debug from "debug";
 import { simpleGit } from "simple-git";
-import { includesFolder } from "./path.js";
+import { includesSegment } from "./path.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -187,7 +187,7 @@ export function readme(file) {
  */
 export function dataPlane(file) {
   // Folder name "data-plane" should match case for consistency across specs
-  return typeof file === "string" && includesFolder(file, "data-plane");
+  return typeof file === "string" && includesSegment(file, "data-plane");
 }
 
 /**
@@ -196,7 +196,25 @@ export function dataPlane(file) {
  */
 export function resourceManager(file) {
   // Folder name "resource-manager" should match case for consistency across specs
-  return typeof file === "string" && includesFolder(file, "resource-manager");
+  return typeof file === "string" && includesSegment(file, "resource-manager");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function preview(file) {
+  // Folder name "preview" should match case for consistency across specs
+  return typeof file === "string" && includesSegment(file, "preview");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function stable(file) {
+  // Folder name "stable" should match case for consistency across specs
+  return typeof file === "string" && includesSegment(file, "stable");
 }
 
 /**
@@ -205,7 +223,7 @@ export function resourceManager(file) {
  */
 export function example(file) {
   // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && includesFolder(file, "examples");
+  return typeof file === "string" && json(file) && includesSegment(file, "examples");
 }
 
 /**
@@ -247,5 +265,5 @@ export function swagger(file) {
  * @returns {boolean}
  */
 export function scenario(file) {
-  return typeof file === "string" && json(file) && includesFolder(file, "scenarios");
+  return typeof file === "string" && json(file) && includesSegment(file, "scenarios");
 }

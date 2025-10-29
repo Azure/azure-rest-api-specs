@@ -789,10 +789,6 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
-  @added(Versions.v2024_08_01_preview)
-  @doc("The credentials used to login to the image repository that has access to the specified image")
-  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
-
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -814,17 +810,6 @@ model GalleryImageProperties {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
     }
   ]>;
-}
-
-@added(Versions.v2024_08_01_preview)
-@doc("The credentials used to login to the image repository that has access to the specified image")
-model VmImageRepositoryCredentials {
-  @doc("Username for accessing image repository")
-  username: string;
-
-  @doc("Password for accessing image repository")
-  @secret
-  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
