@@ -3,8 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "./models.tsp";
-import "./Archive.tsp"; // Needed?
 import "./ArchiveVersion.models.tsp";
 
 using TypeSpec.Rest;
