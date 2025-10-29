@@ -118,6 +118,11 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
   - NewRelic.Observability/preview/2025-05-01-preview/NewRelic.json
+```
+
+### Suppressions
+
+```yaml
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: NewRelic.json
