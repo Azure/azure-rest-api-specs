@@ -24,6 +24,9 @@ These settings apply only when `--tag=package-2022-05-13-identity` is specified 
 ```yaml $(tag) == 'package-2022-05-13-identity'
 input-file:
   - stable/2022-05-13/identityservice.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
 ```
 
 ### Tag: package-2024-12-09-preview

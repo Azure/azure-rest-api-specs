@@ -32,6 +32,9 @@ These settings apply only when `--tag=package-2022-05-13-ledger` is specified on
 ```yaml $(tag) == 'package-2022-05-13-ledger'
 input-file:
   - stable/2022-05-13/confidentialledger.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
 ```
 
 ### Tag: package-2024-12-09-preview
