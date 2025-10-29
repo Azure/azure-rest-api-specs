@@ -1,9 +1,3 @@
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "./Registry.tsp";
-import "./PrivateEndpointConnection.tsp";
-import "./models.tsp";
-
 using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerRegistry;

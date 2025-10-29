@@ -1,8 +1,4 @@
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "./ImportPipeline.tsp";
 import "./Pipeline.models.tsp";
-import "./models.tsp";
 
 using TypeSpec.Versioning;
 

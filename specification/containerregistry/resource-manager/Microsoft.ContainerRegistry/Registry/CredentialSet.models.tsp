@@ -1,8 +1,3 @@
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "./ConnectedRegistry.tsp";
-import "./models.tsp";
-
 namespace Microsoft.ContainerRegistry;
 
 /**

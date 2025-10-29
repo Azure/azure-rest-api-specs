@@ -1,8 +1,3 @@
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "./ArchiveVersion.tsp";
-import "./models.tsp";
-
 using Versioning;
 
 namespace Microsoft.ContainerRegistry;

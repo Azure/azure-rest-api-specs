@@ -1,11 +1,3 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "./models.tsp";
-import "./Registry.tsp";
-
 using Versioning;
 
 namespace Microsoft.ContainerRegistry;

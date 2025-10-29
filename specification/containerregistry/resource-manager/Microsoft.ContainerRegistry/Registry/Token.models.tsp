@@ -1,8 +1,3 @@
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "./Token.tsp";
-import "./models.tsp";
-
 namespace Microsoft.ContainerRegistry;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
