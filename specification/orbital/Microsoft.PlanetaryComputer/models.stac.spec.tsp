@@ -170,9 +170,7 @@ model StacConformanceClasses {
 }
 
 /**
- * Search model.
- * *
- * Defines parameters for a STAC search POST request.
+ * Search model. * Defines parameters for a STAC search POST request.
  */
 model StacSearchParameters {
   /**
@@ -918,15 +916,13 @@ model StacLink {
   length?: int32;
 
   /**
-   * Specifies the HTTP method that the resource expects.
-   * Default: GET.
+   * Specifies the HTTP method that the resource expects. Default: GET.
    */
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
   method?: "GET" | "POST" | string = "GET";
 
   /**
-   * Object key-value pairs that map to headers.
-   * Example: { "Accept": "application/json" }.
+   * Object key-value pairs that map to headers. Example: { "Accept": "application/json" }.
    */
   headers?: Record<string>;
 
@@ -937,9 +933,7 @@ model StacLink {
   body?: Record<unknown>;
 
   /**
-   * Indicates whether the client is expected to merge the body value into the current request body before following the link.
-   * This is only valid when the server is responding to a POST request.
-   * Default: false.
+   * Indicates whether the client is expected to merge the body value into the current request body before following the link. This is only valid when the server is responding to a POST request. Default: false.
    */
   merge?: boolean = false;
 }

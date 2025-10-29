@@ -436,14 +436,12 @@ model BandStatistics {
   validPixels: float32;
 
   /**
-   * Percentile 2
    * The 2nd percentile value.
    */
   @encodedName("application/json", "percentile_2")
   percentile2: float32;
 
   /**
-   * Percentile 98
    * The 98th percentile value.
    */
   @encodedName("application/json", "percentile_98")

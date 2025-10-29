@@ -23,14 +23,12 @@ model TileMatrixSet {
   title?: string;
 
   /**
-   * Brief narrative description of this tile matrix set, normally available for
-   * display to a human
+   * Brief narrative description of this tile matrix set, normally available for display to a human
    */
   description?: string;
 
   /**
-   * Unordered list of one or more commonly used or formalized word(s) or phrase(s)
-   * used to describe this tile matrix set
+   * Unordered list of one or more commonly used or formalized word(s) or phrase(s) used to describe this tile matrix set
    */
   keywords?: string[];
 
@@ -126,8 +124,7 @@ model TileMatrix {
   description?: string;
 
   /**
-   * Unordered list of one or more commonly used or formalized word(s) or phrase(s)
-   * used to describe this dataset
+   * Unordered list of one or more commonly used or formalized word(s) or phrase(s) used to describe this dataset
    */
   keywords?: string[];
 
@@ -148,17 +145,12 @@ model TileMatrix {
   cellSize: float32;
 
   /**
-   * The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin
-   * for numbering tile rows and columns. This corner is also a corner of the (0, 0)
-   * tile.
+   * The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin for numbering tile rows and columns. This corner is also a corner of the (0, 0) tile.
    */
   cornerOfOrigin?: TileMatrixCornerOfOrigin;
 
   /**
-   * Precise position in CRS coordinates of the corner of origin (e.g. the top-left
-   * corner) for this tile matrix. This position is also a corner of the (0, 0)
-   * tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did
-   * not exist.
+   * Precise position in CRS coordinates of the corner of origin (e.g. the top-left corner) for this tile matrix. This position is also a corner of the (0, 0) tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did not exist.
    */
   pointOfOrigin: float32[];
 

@@ -25,8 +25,7 @@ model RenderOption {
   name: string;
 
   /**
-   * A longer description of the render option that can be used to explain its
-   * content.
+   * A longer description of the render option that can be used to explain its content.
    */
   description?: string;
 
@@ -43,8 +42,7 @@ model RenderOption {
   options?: string;
 
   /**
-   * Options for rendering vector tiles. Valid only for `vt-polygon`  and `vt-line`
-   * types.
+   * Options for rendering vector tiles. Valid only for `vt-polygon` and `vt-line` types.
    */
   vectorOptions?: RenderOptionVectorOptions;
 
@@ -60,8 +58,7 @@ model RenderOption {
   legend?: RenderOptionLegend;
 
   /**
-   * A list of property/value conditions that must be in the active mosaic CQL for
-   * this render option to be enabled
+   * A list of property/value conditions that must be in the active mosaic CQL for this render option to be enabled
    */
   conditions?: RenderOptionCondition[];
 }
@@ -106,11 +103,7 @@ model RenderOptionVectorOptions {
  */
 model RenderOptionLegend {
   /**
-   * Legend type to make,
-   * one of: `continuous`,
-   * `classmap`,
-   * `interval` or `none`
-   * (note, `none` is a string literal).
+   * Legend type to make, one of: `continuous`, `classmap`, `interval` or `none` (note, `none` is a string literal).
    */
   type?: LegendConfigType;
 
@@ -120,9 +113,7 @@ model RenderOptionLegend {
   labels?: string[];
 
   /**
-   * The number of items to trim from the start of the legend definition. Used if
-   * there are values important for rendering (e.g. nodata) that aren't desirable in
-   * the legend.
+   * The number of items to trim from the start of the legend definition. Used if there are values important for rendering (e.g. nodata) that aren't desirable in the legend.
    */
   trimStart?: int32;
 
@@ -132,9 +123,7 @@ model RenderOptionLegend {
   trimEnd?: int32;
 
   /**
-   * A factor to multiply interval legend labels by. Useful for scaled rasters whose
-   * colormap definitions map to unscaled values, effectively showing legend labels
-   * as scaled values.
+   * A factor to multiply interval legend labels by. Useful for scaled rasters whose colormap definitions map to unscaled values, effectively showing legend labels as scaled values.
    */
   scaleFactor?: float32;
 }
@@ -316,10 +305,7 @@ model UserCollectionSettings {
  */
 model TileSettings {
   /**
-   * The minimum zoom level that can be requested for this collection. Provides a
-   * hard limit for the tile servers to ensure they don't get requests for low zoom
-   * levels, which would cause many files to be fetched and the tile servers to
-   * hang.
+   * The minimum zoom level that can be requested for this collection. Provides a hard limit for the tile servers to ensure they don't get requests for low zoom levels, which would cause many files to be fetched and the tile servers to hang.
    */
   @maxValue(24)
   minZoom: int32;
