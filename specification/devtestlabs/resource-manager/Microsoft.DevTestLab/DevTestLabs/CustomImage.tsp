@@ -12,20 +12,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A custom image.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model CustomImage extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("customimages")
-  name: string;
-
-  properties: CustomImageProperties;
+model CustomImage
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    CustomImageProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = CustomImage,
+    KeyName = "name",
+    SegmentName = "customimages",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

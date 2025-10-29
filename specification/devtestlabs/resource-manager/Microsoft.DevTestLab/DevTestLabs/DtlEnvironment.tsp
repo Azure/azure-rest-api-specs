@@ -13,20 +13,17 @@ namespace Microsoft.DevTestLab;
 /**
  * An environment, which is essentially an ARM template deployment.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model DtlEnvironment extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("environments")
-  name: string;
-
-  properties: EnvironmentProperties;
+model DtlEnvironment
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    EnvironmentProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = DtlEnvironment,
+    KeyName = "name",
+    SegmentName = "environments",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

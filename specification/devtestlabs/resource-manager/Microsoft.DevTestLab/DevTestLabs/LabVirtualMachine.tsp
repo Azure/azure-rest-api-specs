@@ -13,20 +13,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual machine.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model LabVirtualMachine extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("virtualmachines")
-  name: string;
-
-  properties: LabVirtualMachineProperties;
+model LabVirtualMachine
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    LabVirtualMachineProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = LabVirtualMachine,
+    KeyName = "name",
+    SegmentName = "virtualmachines",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -138,7 +135,11 @@ interface VirtualMachines {
   addDataDisk is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     DataDiskProperties,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -148,7 +149,11 @@ interface VirtualMachines {
   applyArtifacts is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     ApplyArtifactsRequest,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -158,7 +163,11 @@ interface VirtualMachines {
   claim is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -168,7 +177,11 @@ interface VirtualMachines {
   detachDataDisk is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     DetachDataDiskProperties,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -198,7 +211,11 @@ interface VirtualMachines {
   redeploy is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -208,7 +225,11 @@ interface VirtualMachines {
   resize is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     ResizeLabVirtualMachineProperties,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -218,7 +239,11 @@ interface VirtualMachines {
   restart is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -228,14 +253,26 @@ interface VirtualMachines {
   start is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
    * Stop a virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  stop is LabVirtualMachineOps.ActionAsync<LabVirtualMachine, void, OkResponse>;
+  stop is LabVirtualMachineOps.ActionAsync<
+    LabVirtualMachine,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 
   /**
    * Transfers all data disks attached to the virtual machine to be owned by the current user. This operation can take a while to complete.
@@ -244,7 +281,11 @@ interface VirtualMachines {
   transferDisks is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -254,7 +295,11 @@ interface VirtualMachines {
   unClaim is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

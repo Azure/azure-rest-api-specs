@@ -13,20 +13,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A secret.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model Secret extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("secrets")
-  name: string;
-
-  properties: SecretProperties;
+model Secret
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    SecretProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = Secret,
+    KeyName = "name",
+    SegmentName = "secrets",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

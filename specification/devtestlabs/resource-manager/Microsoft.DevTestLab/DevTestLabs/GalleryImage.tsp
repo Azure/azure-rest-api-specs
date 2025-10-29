@@ -12,25 +12,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A gallery image.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model GalleryImage extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("galleryimages")
-  name: string;
-
-  /**
-   * The properties of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties: GalleryImageProperties;
+model GalleryImage
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    GalleryImageProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = GalleryImage,
+    KeyName = "name",
+    SegmentName = "galleryimages",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
