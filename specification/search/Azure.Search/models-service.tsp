@@ -1,9 +1,11 @@
 ﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core.Legacy;
 
 namespace Search;
 
@@ -3130,6 +3132,7 @@ model SearchIndexerDataSource {
   subType?: string;
 
   @doc("Credentials for the datasource.")
+  @flattenProperty
   credentials: DataSourceCredentials;
 
   @doc("The data container for the datasource.")
@@ -3203,6 +3206,7 @@ model SearchResourceEncryptionKey {
   keyVaultUri: string;
 
   @doc("Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.")
+  @flattenProperty
   accessCredentials?: AzureActiveDirectoryApplicationCredentials;
 
   @doc("An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared.")
@@ -3222,6 +3226,7 @@ model AzureActiveDirectoryApplicationCredentials {
 @doc("Response from a List Datasources request. If successful, it includes the full definitions of all datasources.")
 model ListDataSourcesResult {
   @doc("The datasources in the Search service.")
+  @pageItems
   value: SearchIndexerDataSource[];
 }
 
@@ -3407,6 +3412,7 @@ model SearchIndexerCache {
 @doc("Response from a List Indexers request. If successful, it includes the full definitions of all indexers.")
 model ListIndexersResult {
   @doc("The indexers in the Search service.")
+  @pageItems
   value: SearchIndexer[];
 }
 
@@ -3767,6 +3773,7 @@ model SearchIndexerIndexProjectionsParameters {
 @doc("Response from a list skillset request. If successful, it includes the full definitions of all skillsets.")
 model ListSkillsetsResult {
   @doc("The skillsets defined in the Search service.")
+  @pageItems
   value: SearchIndexerSkillset[];
 }
 
@@ -3800,6 +3807,7 @@ model SynonymMap {
 @doc("Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.")
 model ListSynonymMapsResult {
   @doc("The synonym maps in the Search service.")
+  @pageItems
   value: SynonymMap[];
 }
 
@@ -4191,6 +4199,7 @@ model RescoringOptions {
 model ListIndexesResult {
   @doc("The indexes in the Search service.")
   @pageItems
+  @visibility(Lifecycle.Read)
   value: SearchIndex[];
 }
 
@@ -4374,6 +4383,7 @@ model KnowledgeAgentRequestLimits {
 @added(Versions.v2025_08_01_preview)
 model ListKnowledgeAgentsResult {
   @doc("The knowledge agents in the service.")
+  @pageItems
   value: KnowledgeAgent[];
 }
 
@@ -4462,6 +4472,22 @@ union KnowledgeSourceKind {
 
   @doc("A knowledge source that read and ingest data from Azure Blob Storage to a Search Index.")
   AzureBlob: "azureBlob",
+
+  @doc("A knowledge source that reads data from indexed SharePoint.")
+  @added(Versions.v2025_11_01_preview)
+  IndexedSharePoint: "indexedSharePoint",
+
+  @doc("A knowledge source that reads data from indexed OneLake.")
+  @added(Versions.v2025_11_01_preview)
+  IndexedOneLake: "indexedOneLake",
+
+  @doc("A knowledge source that reads data from the web.")
+  @added(Versions.v2025_11_01_preview)
+  Web: "web",
+
+  @doc("A knowledge source that reads data from remote SharePoint.")
+  @added(Versions.v2025_11_01_preview)
+  RemoteSharePoint: "remoteSharePoint",
 }
 
 @doc("Knowledge Source targeting a search index.")
@@ -4528,6 +4554,7 @@ model AzureBlobKnowledgeSourceParameters {
 @added(Versions.v2025_08_01_preview)
 model ListKnowledgeSourcesResult {
   @doc("The knowledge sources in the service.")
+  @pageItems
   value: KnowledgeSource[];
 }
 

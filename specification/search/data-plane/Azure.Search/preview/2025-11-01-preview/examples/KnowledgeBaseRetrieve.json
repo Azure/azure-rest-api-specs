@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "endpoint": "https://myservice.search.windows.net",
+    "knowledgeBaseName": "my-knowledge-base",
+    "api-version": "2025-11-01-preview",
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "What is Azure AI Search?"
+            }
+          ]
+        }
+      ],
+      "outputMode": "extractiveData",
+      "includeActivity": true
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "Azure AI Search is a cloud search service with built-in AI capabilities that enrich all types of information to help you identify and explore relevant content at scale."
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "id": 1,
+            "type": "searchIndex",
+            "elapsedMs": 150,
+            "knowledgeSourceName": "products-index",
+            "queryTime": "2025-10-13T16:00:00Z",
+            "count": 5,
+            "searchIndexArguments": {
+              "search": "Azure AI Search",
+              "filter": null
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "doc1",
+            "activitySource": 1,
+            "rerankerScore": 0.95,
+            "docKey": "123"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeBaseRetrieve",
+  "parameters": {    
+    "endpoint": "https://myservice.search.windows.net",
+    "knowledgeBaseName": "my-knowledge-base",
+    "api-version": "2025-11-01-preview",
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "What are the benefits of using Azure AI Search?"
+            }
+          ]
+        }
+      ],
+      "maxRuntimeInSeconds": 30,
+      "maxOutputSize": 5000,
+      "retrievalReasoningEffort": {
+        "kind": "medium"
+      },
+      "includeActivity": true,
+      "outputMode": "answerSynthesis"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "Azure AI Search provides several benefits including: 1) Powerful full-text search capabilities, 2) AI-powered enrichment through cognitive skills, 3) Semantic search for better relevance, 4) Scalable and secure cloud infrastructure."
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "id": 1,
+            "type": "modelQueryPlanning",
+            "elapsedMs": 250,
+            "inputTokens": 50,
+            "outputTokens": 30
+          },
+          {
+            "id": 2,
+            "type": "searchIndex",
+            "knowledgeSourceName": "documents-index",
+            "queryTime": "2025-11-01T10:00:00Z",
+            "count": 5,
+            "elapsedMs": 150,
+            "searchIndexArguments": {
+              "search": "Azure AI Search benefits"
+            }
+          },
+          {
+            "id": 3,
+            "type": "modelAnswerSynthesis",
+            "elapsedMs": 300,
+            "inputTokens": 500,
+            "outputTokens": 150
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "doc1",
+            "activitySource": 2,
+            "docKey": "azure-search-overview",
+            "rerankerScore": 0.95
+          },
+          {
+            "type": "searchIndex",
+            "id": "doc2",
+            "activitySource": 2,
+            "docKey": "azure-search-features",
+            "rerankerScore": 0.89
+          }
+        ]
+      }
+    }
+  }
+}

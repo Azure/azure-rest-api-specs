@@ -587,6 +587,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all agents available for a search service.")
   @route("/agents")
+  @list
   @get
   list is SearchOperation<{}, ListKnowledgeAgentsResult>;
 
@@ -658,6 +659,7 @@ interface Sources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all knowledge sources available for a search service.")
   @route("/knowledgesources")
+  @list
   @get
   list is SearchOperation<{}, ListKnowledgeSourcesResult>;
 

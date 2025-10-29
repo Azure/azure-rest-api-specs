@@ -1,0 +1,24 @@
+{
+  "operationId": "KnowledgeSources_Get",
+  "title": "SearchServiceGetKnowledgeSource",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "sourceName": "myknowledgesource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myknowledgesource",
+        "description": "Search index knowledge source for customer data",
+        "kind": "searchIndex",
+        "searchIndexParameters": {
+          "searchIndexName": "customer-index",
+          "sourceDataSelect": "title, content, metadata"
+        },
+        "@odata.etag": "0x8D9A1234567890C"
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeBaseRetrieveWithIntents",
+  "parameters": {
+    "endpoint": "https://myservice.search.windows.net",
+    "knowledgeBaseName": "my-knowledge-base",
+    "api-version": "2025-11-01-preview",
+    "retrievalRequest": {
+      "intents": [
+        {
+          "type": "semantic",
+          "search": "Find information about Azure pricing"
+        }
+      ],
+      "maxRuntimeInSeconds": 30,
+      "retrievalReasoningEffort": {
+        "kind": "low"
+      },
+      "includeActivity": true,
+      "outputMode": "extractiveData",
+      "knowledgeSourceParams": [
+        {
+          "knowledgeSourceName": "pricing-index",
+          "kind": "searchIndex",
+          "includeReferences": true,
+          "includeReferenceSourceData": true,
+          "filterAddOn": "category eq 'pricing'"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "Azure offers flexible pricing options for its services. Pricing varies by service tier, region, and usage volume."
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "id": 1,
+            "type": "searchIndex",
+            "knowledgeSourceName": "pricing-index",
+            "queryTime": "2025-11-01T10:00:00Z",
+            "count": 3,
+            "elapsedMs": 120,
+            "searchIndexArguments": {
+              "search": "Azure pricing",
+              "filter": "category eq 'pricing'"
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "pricing1",
+            "activitySource": 1,
+            "docKey": "azure-pricing-overview",
+            "rerankerScore": 0.92,
+            "sourceData": {
+              "title": "Azure Pricing Overview",
+              "url": "https://azure.microsoft.com/pricing"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
