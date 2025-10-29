@@ -256,6 +256,7 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(VaultsOperationGroup.listDeleted, "GetDeletedKeyVaults", "csharp");
+@@clientName(PrivateEndpointConnection, "KeyVaultPrivateEndpointConnection", "csharp");
 
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
