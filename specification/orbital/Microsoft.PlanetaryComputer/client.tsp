@@ -44,7 +44,7 @@ namespace Customizations;
 );
 
 // Models ending with "Definition" - rename appropriately
-@@clientName(IngestionDefinition, "IngestionDefinition", "csharp");
+@@clientName(IngestionDefinition, "IngestionInformation", "csharp");
 
 // Models ending with "Operation" - rename to "Info"
 @@clientName(IngestionRunOperation, "IngestionRunInformation", "csharp");
