@@ -10,3 +10,6 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(TextTranslation.TranslationLanguage.dir, "Directionality");
 @@clientName(TextTranslation.LanguageScript.dir, "Directionality");
+
+@@clientName(TextTranslation.TranslateBody, "TranslateInputs");
+@@clientName(TextTranslation.TransliterateBody, "TransliterateInputs");

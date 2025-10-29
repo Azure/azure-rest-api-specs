@@ -460,9 +460,9 @@
         ]
       }
     },
-    "ReferenceSentencePair": {
+    "ReferenceTextPair": {
       "type": "object",
-      "description": "Reference sentence pair.",
+      "description": "Reference text pair to generate adaptive customized translation.",
       "properties": {
         "source": {
           "type": "string",
@@ -504,7 +504,7 @@
     },
     "TranslateBody": {
       "type": "object",
-      "description": "Request body for the translate API.",
+      "description": "Request data for translation.",
       "properties": {
         "inputs": {
           "type": "array",
@@ -563,7 +563,7 @@
           "type": "array",
           "description": "Translation target parameters.",
           "items": {
-            "$ref": "#/definitions/TranslateTarget"
+            "$ref": "#/definitions/TranslationTarget"
           }
         }
       },
@@ -576,9 +576,68 @@
       "type": "object",
       "description": "Request parameters for the translate API."
     },
-    "TranslateTarget": {
+    "TranslatedTextItem": {
       "type": "object",
-      "description": "Translate targets parameters",
+      "description": "Element containing the translated text",
+      "properties": {
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "The detectedLanguage property is only present in the result object when language auto-detection is requested."
+        },
+        "translations": {
+          "type": "array",
+          "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter.",
+          "items": {
+            "$ref": "#/definitions/TranslationText"
+          }
+        }
+      },
+      "required": [
+        "translations"
+      ]
+    },
+    "TranslationLanguage": {
+      "type": "object",
+      "description": "The value of the translation property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag.\nA key identifies a language for which text can be translated to or translated from.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the language in the locale requested via Accept-Language header."
+        },
+        "nativeName": {
+          "type": "string",
+          "description": "Display name of the language in the locale native for this language."
+        },
+        "dir": {
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+        }
+      },
+      "required": [
+        "name",
+        "nativeName",
+        "dir"
+      ]
+    },
+    "TranslationResult": {
+      "type": "object",
+      "description": "Response for the translation API.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of the translated text elements.",
+          "items": {
+            "$ref": "#/definitions/TranslatedTextItem"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TranslationTarget": {
+      "type": "object",
+      "description": "Target language and translation configuration parameters.",
       "properties": {
         "language": {
           "type": "string",
@@ -673,74 +732,15 @@
         },
         "referenceTextPairs": {
           "type": "array",
-          "description": "Reference sentence pairs to generate adaptive results.",
+          "description": "Reference text pairs to generate adaptive customized translation.",
           "maxItems": 5,
           "items": {
-            "$ref": "#/definitions/ReferenceSentencePair"
+            "$ref": "#/definitions/ReferenceTextPair"
           }
         }
       },
       "required": [
         "language"
-      ]
-    },
-    "TranslatedTextItem": {
-      "type": "object",
-      "description": "Element containing the translated text",
-      "properties": {
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "The detectedLanguage property is only present in the result object when language auto-detection is requested."
-        },
-        "translations": {
-          "type": "array",
-          "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter.",
-          "items": {
-            "$ref": "#/definitions/TranslationText"
-          }
-        }
-      },
-      "required": [
-        "translations"
-      ]
-    },
-    "TranslationLanguage": {
-      "type": "object",
-      "description": "The value of the translation property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag.\nA key identifies a language for which text can be translated to or translated from.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Display name of the language in the locale requested via Accept-Language header."
-        },
-        "nativeName": {
-          "type": "string",
-          "description": "Display name of the language in the locale native for this language."
-        },
-        "dir": {
-          "$ref": "#/definitions/LanguageDirectionality",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
-        }
-      },
-      "required": [
-        "name",
-        "nativeName",
-        "dir"
-      ]
-    },
-    "TranslationResult": {
-      "type": "object",
-      "description": "Response for the translation API.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of the translated text elements.",
-          "items": {
-            "$ref": "#/definitions/TranslatedTextItem"
-          }
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TranslationText": {
@@ -809,7 +809,7 @@
     },
     "TransliterateBody": {
       "type": "object",
-      "description": "Request body for the transliterate API.",
+      "description": "Request data for transliteration.",
       "properties": {
         "inputs": {
           "type": "array",

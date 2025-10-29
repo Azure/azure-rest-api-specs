@@ -205,7 +205,7 @@ model TranslationTarget {
   referenceTextPairs?: ReferenceTextPair[];
 }
 
-@doc("Request body for the translate API.")
+@doc("Request data for translate.")
 @added(APIVersion.v2025_10_01_preview)
 model TranslateBody {
   @doc("Array of the input text elements to translate.")
