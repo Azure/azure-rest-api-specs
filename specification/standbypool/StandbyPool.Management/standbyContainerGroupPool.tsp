@@ -53,7 +53,6 @@ model StandbyContainerGroupPoolResourceProperties {
 @doc("Specifies the elasticity profile of the standby container group pools.")
 model StandbyContainerGroupPoolElasticityProfile {
   @doc("Specifies maximum number of standby container groups in the standby pool.")
-  @maxValue(2000)
   @minValue(0)
   maxReadyCapacity: int64;
 

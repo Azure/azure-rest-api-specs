@@ -71,13 +71,11 @@ union VirtualMachineState {
 @doc("Details of the elasticity profile.")
 model StandbyVirtualMachinePoolElasticityProfile {
   @doc("Specifies the maximum number of virtual machines in the standby virtual machine pool.")
-  @maxValue(2000)
   @minValue(0)
   maxReadyCapacity: int64;
 
   @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
   @doc("Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.")
-  @maxValue(2000)
   @minValue(0)
   minReadyCapacity?: int64;
 
