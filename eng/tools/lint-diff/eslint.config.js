@@ -9,8 +9,8 @@ import tseslint from "typescript-eslint";
 export default defineConfig(
   { ignores: ["dist/**"] },
   eslint.configs.recommended,
-  tseslint.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
   {
-    languageOptions: { globals: globals.node },
+    languageOptions: { globals: globals.node, parserOptions: { projectService: true } },
   },
 );
