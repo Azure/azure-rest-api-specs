@@ -29,6 +29,7 @@ interface TopLevelDomains {
   /**
    * Description for Get details of a top-level domain.
    */
+  @summary("Get details of a top-level domain.")
   get is ArmResourceRead<
     TopLevelDomain,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -49,6 +50,7 @@ interface TopLevelDomains {
    * Description for Gets all legal agreements that user needs to accept before purchasing a domain.
    */
   @list
+  @summary("Gets all legal agreements that user needs to accept before purchasing a domain.")
   listAgreements is ArmResourceActionSync<
     TopLevelDomain,
     TopLevelDomainAgreementOption,

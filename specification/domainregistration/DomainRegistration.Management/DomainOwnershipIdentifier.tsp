@@ -31,6 +31,7 @@ interface DomainOwnershipIdentifiers {
   /**
    * Description for Get ownership identifier for domain
    */
+  @summary("Get ownership identifier for domain")
   getOwnershipIdentifier is ArmResourceRead<
     DomainOwnershipIdentifier,
     Error = DefaultErrorResponse
@@ -40,6 +41,7 @@ interface DomainOwnershipIdentifiers {
    * Description for Creates an ownership identifier for a domain or updates identifier details for an existing identifier
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates an ownership identifier for a domain or updates identifier details for an existing identifier")
   createOrUpdateOwnershipIdentifier is ArmResourceCreateOrReplaceSync<
     DomainOwnershipIdentifier,
     Response = ArmResourceUpdatedResponse<DomainOwnershipIdentifier>,
@@ -50,6 +52,7 @@ interface DomainOwnershipIdentifiers {
    * Description for Creates an ownership identifier for a domain or updates identifier details for an existing identifier
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Creates an ownership identifier for a domain or updates identifier details for an existing identifier")
   updateOwnershipIdentifier is ArmCustomPatchSync<
     DomainOwnershipIdentifier,
     PatchModel = DomainOwnershipIdentifier,
@@ -59,6 +62,7 @@ interface DomainOwnershipIdentifiers {
   /**
    * Description for Delete ownership identifier for domain
    */
+  @summary("Delete ownership identifier for domain")
   deleteOwnershipIdentifier is ArmResourceDeleteSync<
     DomainOwnershipIdentifier,
     Error = DefaultErrorResponse
@@ -67,6 +71,7 @@ interface DomainOwnershipIdentifiers {
   /**
    * Description for Lists domain ownership identifiers.
    */
+  @summary("Lists domain ownership identifiers.")
   listOwnershipIdentifiers is ArmResourceListByParent<
     DomainOwnershipIdentifier,
     Response = ArmResponse<DomainOwnershipIdentifierCollection>,

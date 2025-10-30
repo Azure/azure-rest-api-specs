@@ -27,6 +27,7 @@ interface Domains {
   /**
    * Description for Get a domain.
    */
+  @summary("Get a domain.")
   get is ArmResourceRead<Domain, Error = DefaultErrorResponse>;
 
   /**
@@ -34,6 +35,7 @@ interface Domains {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates a domain.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Domain,
     Response = ArmResourceUpdatedResponse<Domain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
@@ -49,6 +51,7 @@ interface Domains {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
+  @summary("Creates or updates a domain.")
   update is ArmCustomPatchSync<
     Domain,
     PatchModel = DomainPatchResource,
@@ -62,6 +65,7 @@ interface Domains {
   /**
    * Description for Delete a domain.
    */
+  @summary("Delete a domain.")
   delete is ArmResourceDeleteSync<
     Domain,
     Parameters = {
@@ -77,6 +81,7 @@ interface Domains {
   /**
    * Description for Get all domains in a resource group.
    */
+  @summary("Get all domains in a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Domain,
     Response = ArmResponse<DomainCollection>,
@@ -97,6 +102,7 @@ interface Domains {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Renew a domain.")
   renew is ArmResourceActionSync<
     Domain,
     void,
@@ -109,6 +115,7 @@ interface Domains {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
+  @summary("Transfer out domain to another registrar")
   transferOut is ArmResourceActionSync<
     Domain,
     void,
