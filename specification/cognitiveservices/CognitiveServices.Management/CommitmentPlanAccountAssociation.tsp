@@ -50,7 +50,7 @@ interface CommitmentPlanAccountAssociationsOps
         ...Azure.ResourceManager.Legacy.Provider,
 
         /**
-         * aaaaaaaaaaaaaaaaa
+         * The name of the commitmentPlan associated with the Cognitive Services Account
          */
         @path
         @segment("commitmentPlans")
@@ -60,7 +60,7 @@ interface CommitmentPlanAccountAssociationsOps
       },
       {
         /**
-         * aaaaaaaaaaaaaaaaaa
+         * The name of the commitment plan association with the Cognitive Services Account
          */
         @path
         @segment("accountAssociations")

@@ -44,7 +44,7 @@ interface AgentDeploymentResourcesOps
         accountName: string,
 
         /**
-         * aaaaaaaaaaaaa
+         * The name of Cognitive Services account's project.
          */
         @path
         @segment("projects")
@@ -55,7 +55,7 @@ interface AgentDeploymentResourcesOps
         projectName: string,
 
         /**
-         * aaaaaaaaaaaaaaa
+         * The name of the application associated with the Cognitive Services Account
          */
         @path
         @segment("applications")
@@ -65,7 +65,7 @@ interface AgentDeploymentResourcesOps
       },
       {
         /**
-         * aaaaaaaaaaaaaaa
+         * The name of the deployment associated with the Cognitive Services Account
          */
         @path
         @segment("deployments")
