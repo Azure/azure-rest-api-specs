@@ -14,6 +14,7 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Key Vault container ARM resource for a certificate that is purchased through Azure.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is required in envelope to match legacy API shape"
 @parentResource(AppServiceCertificateOrder)
 model AppServiceCertificateResource
   is Azure.ResourceManager.TrackedResource<AppServiceCertificate> {
@@ -23,6 +24,11 @@ model AppServiceCertificateResource
     SegmentName = "certificates",
     NamePattern = ""
   >;
+
+  /**
+   * Kind of resource
+   */
+  kind?: string;
 }
 
 @armResourceOperations

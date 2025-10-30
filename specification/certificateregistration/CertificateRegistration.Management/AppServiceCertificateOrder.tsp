@@ -13,6 +13,7 @@ namespace Microsoft.CertificateRegistration;
 /**
  * SSL certificate purchase order.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is required in envelope to match legacy API shape"
 model AppServiceCertificateOrder
   is Azure.ResourceManager.TrackedResource<AppServiceCertificateOrderProperties> {
   ...ResourceNameParameter<
@@ -21,6 +22,11 @@ model AppServiceCertificateOrder
     SegmentName = "certificateOrders",
     NamePattern = ""
   >;
+
+  /**
+   * Kind of resource
+   */
+  kind?: string;
 }
 
 @armResourceOperations
