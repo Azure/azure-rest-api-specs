@@ -76,7 +76,7 @@ model HealthcareLROTask extends AnalyzeTextLROTask {
 model HealthcareResult is PreBuiltResult {
   /** List of result objects for the processed Healthcare documents. */
   @typeChangedFrom(
-    Versions.v2024_11_15_preview,
+    Versions.v2025_11_15_preview,
     HealthcareEntitiesDocumentResult[]
   )
   documents: HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage[];
@@ -488,7 +488,7 @@ model HealthcareLROResult extends AnalyzeTextLROResult {
 }
 
 /** Result object for the processed Healthcare document with detected language. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_11_15_preview)
 model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is HealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
