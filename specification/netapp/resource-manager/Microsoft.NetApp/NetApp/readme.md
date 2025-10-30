@@ -549,25 +549,25 @@ suppressions:
     reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
     from: netapp.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/restoreFiles"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/migrateBackups"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/netAppAccounts/{accountName}/migrateBackups"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/restoreFiles"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/migrateBackups"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateBackups"].post
 
   - code: XmsPageableForListCalls
     reasons: These are GET on a singleton resource. These are false positives.
     from: netapp.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestBackupStatus/current"].get
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestRestoreStatus/current"].get
-      - $.paths["/subscriptions/{subscriptionId}/providers/locations/{location}/regionInfos/default"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestBackupStatus/current"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestRestoreStatus/current"].get
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfos/default"].get
 
   - code: RequiredPropertiesMissingInResourceModel
     reason: https://eng.ms/docs/products/arm/api_contracts/usagesapicontract
     where:
-     - $.paths["/subscriptions/{subscriptionId}/providers/locations/{location}/usages"].get
-     - $.paths["/subscriptions/{subscriptionId}/providers/locations/{location}/usages/{usageType}"].get
-     - $.paths["/subscriptions/{subscriptionId}/providers/locations/{location}/usages"].get.responses.200.schema
-     - $.paths["/subscriptions/{subscriptionId}/providers/locations/{location}/usages/{usageType}"].get.responses.200.schema
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages"].get
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages"].get.responses.200.schema
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get.responses.200.schema
      - $.definitions.UsagesListResult
      - $.definitions.UsageResult
 
@@ -575,5 +575,5 @@ suppressions:
     reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
     from: netapp.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent"].post
 ```
