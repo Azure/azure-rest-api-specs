@@ -65,7 +65,7 @@ interface GroupIdInformations {
   /**
    * List private link resources for the given provisioning service
    */
-  listPrivateLinkResources is GroupIdInformationsOps.List<
+  listPrivateLinkResources is GroupIdInformationsOps.ListSinglePage<
     GroupIdInformation,
     Response = ArmResponse<PrivateLinkResources>
   >;

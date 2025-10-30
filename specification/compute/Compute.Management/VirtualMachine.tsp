@@ -314,13 +314,9 @@ interface VirtualMachines {
    */
   reimage is ComputeResourceActionAsync<
     VirtualMachine,
-    {
-      /**
-       * Parameters supplied to the Reimage Virtual Machine operation.
-       */
-      @bodyRoot parameters?: VirtualMachineReimageParameters;
-    },
-    OkResponse
+    Request = VirtualMachineReimageParameters,
+    Response = OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -387,16 +383,11 @@ interface VirtualMachines {
   @operationId("VirtualMachines_migrateToVMScaleSet")
   migrateToVMScaleSet is ArmResourceActionAsyncBase<
     VirtualMachine,
-    {
-      /**
-       * Parameters supplied to the Migrate Virtual Machine operation.
-       */
-      @bodyRoot
-      parameters?: MigrateVMToVirtualMachineScaleSetInput;
-    },
-    ArmAcceptedLroResponse,
+    Request = MigrateVMToVirtualMachineScaleSetInput,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>,
-    Error = CloudError
+    Error = CloudError,
+    OptionalRequestBody = true
   >;
 }
 
@@ -424,4 +415,7 @@ interface VirtualMachines {
 );
 @@doc(VirtualMachines.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."
+);
+@@doc(VirtualMachines.migrateToVMScaleSet::parameters.body,
+  "Parameters supplied to the Migrate Virtual Machine operation."
 );

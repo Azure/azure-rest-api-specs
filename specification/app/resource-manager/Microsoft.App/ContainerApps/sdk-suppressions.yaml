@@ -3,6 +3,14 @@ suppressions:
     - package: 'sdk/resourcemanager/appcontainers/armappcontainers'
       breaking-changes:
         - Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed
+        - Function `*ConnectedEnvironmentsClient.Update` parameter(s) have been changed from `(context.Context, string, string, *ConnectedEnvironmentsClientUpdateOptions)` to `(context.Context, string, string, ConnectedEnvironmentPatchResource, *ConnectedEnvironmentsClientUpdateOptions)`
+        - Operation `*ConnectedEnvironmentsCertificatesClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginCreateOrUpdate` instead.
+        - Operation `*ConnectedEnvironmentsCertificatesClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginDelete` instead.
+        - Operation `*ConnectedEnvironmentsCertificatesClient.Update` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginUpdate` instead.
+        - Operation `*ConnectedEnvironmentsDaprComponentsClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsDaprComponentsClient.BeginCreateOrUpdate` instead.
+        - Operation `*ConnectedEnvironmentsDaprComponentsClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsDaprComponentsClient.BeginDelete` instead.
+        - Operation `*ConnectedEnvironmentsStoragesClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsStoragesClient.BeginCreateOrUpdate` instead.
+        - Operation `*ConnectedEnvironmentsStoragesClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsStoragesClient.BeginDelete` instead.
   azure-sdk-for-python:
     - package: azure-mgmt-appcontainers
       breaking-changes:

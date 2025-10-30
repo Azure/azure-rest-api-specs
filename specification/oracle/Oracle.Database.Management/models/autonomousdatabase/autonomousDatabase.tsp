@@ -699,7 +699,7 @@ model AutonomousDatabaseUpdateProperties {
   @added(Versions.v20250601_preview)
   @doc("The list of scheduled operations.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scheduledOperationsList?: ScheduledOperationsTypeUpdate[];
 
   @doc("The Oracle Database Edition that applies to the Autonomous databases.")
@@ -1002,7 +1002,7 @@ model AutonomousDatabaseBaseProperties {
   @added(Versions.v20250601_preview)
   @doc("The list of scheduled operations.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scheduledOperationsList?: ScheduledOperationsType[];
 
   @doc("The private endpoint Ip address for the resource.")
