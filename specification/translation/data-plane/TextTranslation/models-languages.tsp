@@ -86,6 +86,10 @@ model TranslationLanguage {
 
   @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
   dir: LanguageDirectionality;
+
+  @doc("LLM models supported for translation.")
+  @added(APIVersion.v2025_10_01_preview)
+  models: Record<string>;
 }
 
 @doc("""

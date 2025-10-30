@@ -39,9 +39,9 @@ namespace TextTranslation;
 
 @doc("Text Translation supported versions")
 enum APIVersion {
-  @doc("Version 2025-10-01")
-  v2025_10_01_preview: "2025-10-01-preview",
-
   @doc("Version 3.0")
   v3_0: "3.0",
+
+  @doc("Version 2025-10-01")
+  v2025_10_01_preview: "2025-10-01-preview",
 }

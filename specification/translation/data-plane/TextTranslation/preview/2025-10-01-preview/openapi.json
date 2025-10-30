@@ -504,7 +504,7 @@
     },
     "TranslateBody": {
       "type": "object",
-      "description": "Request data for translation.",
+      "description": "Request data for translate.",
       "properties": {
         "inputs": {
           "type": "array",
@@ -611,12 +611,20 @@
         "dir": {
           "$ref": "#/definitions/LanguageDirectionality",
           "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+        },
+        "models": {
+          "type": "object",
+          "description": "LLM models supported for translation.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "name",
         "nativeName",
-        "dir"
+        "dir",
+        "models"
       ]
     },
     "TranslationResult": {
@@ -628,7 +636,8 @@
           "description": "Array of the translated text elements.",
           "items": {
             "$ref": "#/definitions/TranslatedTextItem"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -809,7 +818,7 @@
     },
     "TransliterateBody": {
       "type": "object",
-      "description": "Request data for transliteration.",
+      "description": "Request data for transliterate.",
       "properties": {
         "inputs": {
           "type": "array",
@@ -832,7 +841,8 @@
           "description": "Array of transliterated texts",
           "items": {
             "$ref": "#/definitions/TransliteratedText"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
