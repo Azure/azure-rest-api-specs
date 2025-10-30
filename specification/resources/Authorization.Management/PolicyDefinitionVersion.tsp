@@ -165,14 +165,12 @@ interface PolicyDefinitionVersions {
    * This operation retrieves the built-in policy definition version with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyDefinitionVersions_GetBuiltIn")
   getBuiltIn is PolicyDefinitionVersionTenantOps.Read<PolicyDefinitionVersion>;
 
   /**
    * This operation retrieves a list of all the built-in policy definition versions for the given policy definition.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyDefinitionVersions_ListBuiltIn")
   listBuiltIn is PolicyDefinitionVersionTenantOps.List<
     PolicyDefinitionVersion,
     Parameters = {
@@ -190,28 +188,24 @@ interface PolicyDefinitionVersions {
    * This operation retrieves the policy definition version in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyDefinitionVersions_GetAtManagementGroup")
   getAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.Read<PolicyDefinitionVersion>;
 
   /**
    * This operation creates or updates a policy definition version in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyDefinitionVersions_CreateOrUpdateAtManagementGroup")
   createOrUpdateAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.CreateOrUpdateSync<PolicyDefinitionVersion>;
 
   /**
    * This operation deletes the policy definition in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyDefinitionVersions_DeleteAtManagementGroup")
   deleteAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.DeleteSync<PolicyDefinitionVersion>;
 
   /**
    * This operation retrieves a list of all the policy definition versions for the given policy definition in the given management group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyDefinitionVersions_ListByManagementGroup")
   listByManagementGroup is PolicyDefinitionVersionManagementGroupOps.List<
     PolicyDefinitionVersion,
     Parameters = {

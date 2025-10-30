@@ -180,7 +180,6 @@ interface PolicySetDefinitionVersions {
    * This operation retrieves the built-in policy set definition version with the given name and version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicySetDefinitionVersions_GetBuiltIn")
   getBuiltIn is PolicySetDefinitionVersionTenantOps.Read<
     PolicySetDefinitionVersion,
     Parameters = {
@@ -196,7 +195,6 @@ interface PolicySetDefinitionVersions {
    * This operation retrieves a list of all the built-in policy set definition versions for the given built-in policy set definition.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicySetDefinitionVersions_ListBuiltIn")
   listBuiltIn is PolicySetDefinitionVersionTenantOps.List<
     PolicySetDefinitionVersion,
     Parameters = {
@@ -220,7 +218,6 @@ interface PolicySetDefinitionVersions {
    * This operation retrieves the policy set definition version in the given management group with the given name and version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicySetDefinitionVersions_GetAtManagementGroup")
   getAtManagementGroup is PolicySetDefinitionVersionManagementGroupOps.Read<
     PolicySetDefinitionVersion,
     Parameters = {
@@ -236,21 +233,18 @@ interface PolicySetDefinitionVersions {
    * This operation creates or updates a policy set definition version in the given management group with the given name and version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicySetDefinitionVersions_CreateOrUpdateAtManagementGroup")
   createOrUpdateAtManagementGroup is PolicySetDefinitionVersionManagementGroupOps.CreateOrUpdateSync<PolicySetDefinitionVersion>;
 
   /**
    * This operation deletes the policy set definition version in the given management group with the given name and version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicySetDefinitionVersions_DeleteAtManagementGroup")
   deleteAtManagementGroup is PolicySetDefinitionVersionManagementGroupOps.DeleteSync<PolicySetDefinitionVersion>;
 
   /**
    * This operation retrieves a list of all the policy set definition versions for the given policy set definition in a given management group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicySetDefinitionVersions_ListByManagementGroup")
   listByManagementGroup is PolicySetDefinitionVersionManagementGroupOps.List<
     PolicySetDefinitionVersion,
     Parameters = {

@@ -20,7 +20,6 @@ interface PolicyDefinitionVersionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all built-in policy definition versions.")
-  @operationId("PolicyDefinitionVersions_ListAllBuiltins")
   @autoRoute
   @action("listPolicyDefinitionVersions")
   listAllBuiltins is ArmProviderActionSync<Response = ResourceListResult<PolicyDefinitionVersion>>;
@@ -29,7 +28,6 @@ interface PolicyDefinitionVersionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy definition versions at management group scope.")
-  @operationId("PolicyDefinitionVersions_ListAllAtManagementGroup")
   @autoRoute
   @action("listPolicyDefinitionVersions")
   listAllAtManagementGroup is ArmProviderActionSync<
@@ -50,7 +48,6 @@ interface PolicyDefinitionVersionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy definition versions within a subscription.")
-  @operationId("PolicyDefinitionVersions_ListAll")
   @autoRoute
   @action("listPolicyDefinitionVersions")
   listAll is ArmProviderActionSync<
@@ -66,7 +63,6 @@ interface PolicySetDefinitionVersionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all built-in policy set definition versions.")
-  @operationId("PolicySetDefinitionVersions_ListAllBuiltins")
   @autoRoute
   @action("listPolicySetDefinitionVersions")
   listAllBuiltins is ArmProviderActionSync<Response = ResourceListResult<PolicySetDefinitionVersion>>;
@@ -75,7 +71,6 @@ interface PolicySetDefinitionVersionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy set definition versions at management group scope.")
-  @operationId("PolicySetDefinitionVersions_ListAllAtManagementGroup")
   @autoRoute
   @action("listPolicySetDefinitionVersions")
   listAllAtManagementGroup is ArmProviderActionSync<
@@ -96,7 +91,6 @@ interface PolicySetDefinitionVersionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy set definition versions within a subscription.")
-  @operationId("PolicySetDefinitionVersions_ListAll")
   @autoRoute
   @action("listPolicySetDefinitionVersions")
   listAll is ArmProviderActionSync<
@@ -112,7 +106,6 @@ interface PolicyTokensOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Acquires a policy token.")
-  @operationId("PolicyTokens_Acquire")
   @autoRoute
   @action("acquirePolicyToken")
   acquire is ArmProviderActionSync<
@@ -125,7 +118,6 @@ interface PolicyTokensOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Acquires a policy token at management group level.")
-  @operationId("PolicyTokens_AcquireAtManagementGroup")
   @autoRoute
   @action("acquirePolicyToken")
   acquireAtManagementGroup is ArmProviderActionSync<
