@@ -6,6 +6,11 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
-export default defineConfig(eslint.configs.recommended, tseslint.configs.recommended, {
-  languageOptions: { globals: globals.node },
-});
+export default defineConfig(
+  { ignores: ["*.config.js", "test/**"] },
+  eslint.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
+  {
+    languageOptions: { globals: globals.node, parserOptions: { projectService: true } },
+  },
+);
