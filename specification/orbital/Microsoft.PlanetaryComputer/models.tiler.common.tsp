@@ -110,6 +110,9 @@ union TilerImageFormat {
  * Identifier selecting one of the TileMatrixSetId supported (default:
  * 'WebMercatorQuad')
  */
+/**
+ * Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles
+ */
 union TileMatrixSetId {
   string,
 
@@ -207,6 +210,13 @@ union MosaicMetadataType {
  * Identifier selecting one of the TileMatrixSetId supported (default:
  * 'WebMercatorQuad')
  */
+/**
+ * Identifier selecting one of the TileMatrixSetId supported (default:
+ * 'WebMercatorQuad')
+ */
+/**
+ * Method used to select or compute pixels when creating composites from multiple sources
+ */
 union PixelSelection {
   string,
 
@@ -297,6 +307,9 @@ model TilerInfoGeoJsonFeature {
  * TileJSON model.
  *
  * Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0
+ */
+/**
+ * TileJSON metadata describing a tile set according to the TileJSON specification
  */
 model TileJsonMetadata {
   /**
@@ -496,19 +509,22 @@ model MiscTileQueryParameters {
  */
 model ZxyPathParameters {
   /**
-   * Identifier (Z) selecting one of the scales defined in the TileMatrixSet and representing the scaleDenominator the tile.
+   * Identifier (Z) selecting one of the scales defined in the TileMatrixSet and
+   * representing the scaleDenominator the tile.
    */
   @path
   z: float32;
 
   /**
-   * Column (X) index of the tile on the selected TileMatrix. It cannot exceed the MatrixHeight-1 for the selected TileMatrix.
+   * Column (X) index of the tile on the selected TileMatrix. It cannot exceed the
+   * MatrixHeight-1 for the selected TileMatrix.
    */
   @path
   x: float32;
 
   /**
-   * Row (Y) index of the tile on the selected TileMatrix. It cannot exceed the MatrixWidth-1 for the selected TileMatrix.
+   * Row (Y) index of the tile on the selected TileMatrix. It cannot exceed the
+   * MatrixWidth-1 for the selected TileMatrix.
    */
   @path
   y: float32;

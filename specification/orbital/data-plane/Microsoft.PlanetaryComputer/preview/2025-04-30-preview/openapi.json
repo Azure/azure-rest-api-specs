@@ -3735,7 +3735,7 @@
           "Map Legends"
         ],
         "summary": "Get Legend",
-        "description": "Generate a legend image for a given colormap. If the colormap has non-contiguous values at the beginning or end, which aren't desired in the output image, they can be trimmed by specifying the number of values to trim.",
+        "description": "Generate a legend image for a given colormap.\n\nIf the colormap has non-contiguous values at the beginning or end,\nwhich aren't desired in the output image, they can be trimmed by specifying\nthe number of values to trim.",
         "produces": [
           "image/png",
           "application/json"
@@ -8294,7 +8294,7 @@
           "Sign an HREF for read access"
         ],
         "summary": "sign an HREF in the format of a URL and returns a SharedAccessSignatureSignedHrefResponse",
-        "description": "Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works). If the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.",
+        "description": "Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works).\nIf the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8351,7 +8351,7 @@
           "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
         ],
         "summary": "generate a SAS Token for the given Azure Blob storage account and container.",
-        "description": "Generate a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works) for the given storage account and container. The storage account and container must be associated with a Planetary Computer dataset indexed by the STAC API.",
+        "description": "Generate a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)\nfor the given storage account and container. The storage account and container\nmust be associated with a Planetary Computer dataset indexed by the STAC API.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8407,7 +8407,7 @@
           "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
         ],
         "summary": "Revoke SAS token for the managed storage account of this GeoCatalog.",
-        "description": "Revoke a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works) for managed storage account of this GeoCatalog.",
+        "description": "Revoke a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)\nfor managed storage account of this GeoCatalog.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8812,7 +8812,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Create Collection Asset",
-        "description": "Create a new asset in the Collection metadata and write the associated file to managed storage.",
+        "description": "Create a new asset in the Collection metadata and write the associated\nfile to managed storage.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -9389,7 +9389,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Create Partitiontype",
-        "description": "Updates partition type for a GeoCatalog Collection. This will determine the partitioning scheme for items within the database, and can only be set before any items are loaded.\n\nIdeal partitioning schemes result in partitions of roughly 100k items each.\n\nThe default partitioning scheme is \"none\" which does not partition items.",
+        "description": "Updates partition type for a GeoCatalog Collection. This will\ndetermine the partitioning scheme for items within the database,\nand can only be set before any items are loaded.\n\nIdeal partitioning schemes result in partitions of roughly 100k items each.\n\nThe default partitioning scheme is \"none\" which does not partition items.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -10346,7 +10346,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Update Collection Queryables",
-        "description": "Updates a queryable given a queryable definition and corresponding collection id.",
+        "description": "Updates a queryable given a queryable definition and\ncorresponding collection id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -11054,13 +11054,13 @@
         "percentile_2": {
           "type": "number",
           "format": "float",
-          "description": "The 2nd percentile value.",
+          "description": "Percentile 2\nThe 2nd percentile value.",
           "x-ms-client-name": "percentile2"
         },
         "percentile_98": {
           "type": "number",
           "format": "float",
-          "description": "The 98th percentile value.",
+          "description": "Percentile 98\nThe 98th percentile value.",
           "x-ms-client-name": "percentile98"
         }
       },
@@ -12987,7 +12987,7 @@
     "IntervalLegendsElement": {},
     "LegendConfigType": {
       "type": "string",
-      "description": "Legend type to make, one of: `continuous`, `classmap`, `interval` or `none`\n(note, `none` is a string literal).",
+      "description": "Legend type to make, one of: `continuous`, `classmap`, `interval` or `none`\n(note, `none` is a string literal).Defines the legend configuration types for data visualization.",
       "enum": [
         "continuous",
         "classmap",
@@ -13524,7 +13524,7 @@
     },
     "PixelSelection": {
       "type": "string",
-      "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+      "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')Method used to select or compute pixels when creating composites from multiple sources",
       "enum": [
         "first",
         "highest",
@@ -13709,7 +13709,7 @@
         },
         "description": {
           "type": "string",
-          "description": "A longer description of the render option that can be used to explain its content."
+          "description": "A longer description of the render option that can be used to explain its\ncontent."
         },
         "type": {
           "type": "string",
@@ -13748,7 +13748,7 @@
         },
         "vectorOptions": {
           "$ref": "#/definitions/RenderOptionVectorOptions",
-          "description": "Options for rendering vector tiles. Valid only for `vt-polygon` and `vt-line` types."
+          "description": "Options for rendering vector tiles. Valid only for `vt-polygon`  and `vt-line`\ntypes."
         },
         "minZoom": {
           "type": "integer",
@@ -13763,7 +13763,7 @@
         },
         "conditions": {
           "type": "array",
-          "description": "A list of property/value conditions that must be in the active mosaic CQL for this render option to be enabled",
+          "description": "A list of property/value conditions that must be in the active mosaic CQL for\nthis render option to be enabled",
           "items": {
             "$ref": "#/definitions/RenderOptionCondition"
           }
@@ -13797,7 +13797,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/LegendConfigType",
-          "description": "Legend type to make, one of: `continuous`, `classmap`, `interval` or `none` (note, `none` is a string literal)."
+          "description": "Legend type to make,\none of: `continuous`,\n`classmap`,\n`interval` or `none`\n(note, `none` is a string literal)."
         },
         "labels": {
           "type": "array",
@@ -13809,7 +13809,7 @@
         "trimStart": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items to trim from the start of the legend definition. Used if there are values important for rendering (e.g. nodata) that aren't desirable in the legend."
+          "description": "The number of items to trim from the start of the legend definition. Used if\nthere are values important for rendering (e.g. nodata) that aren't desirable in\nthe legend."
         },
         "trimEnd": {
           "type": "integer",
@@ -13819,7 +13819,7 @@
         "scaleFactor": {
           "type": "number",
           "format": "float",
-          "description": "A factor to multiply interval legend labels by. Useful for scaled rasters whose colormap definitions map to unscaled values, effectively showing legend labels as scaled values."
+          "description": "A factor to multiply interval legend labels by. Useful for scaled rasters whose\ncolormap definitions map to unscaled values, effectively showing legend labels\nas scaled values."
         }
       }
     },
@@ -15319,7 +15319,7 @@
         },
         "method": {
           "type": "string",
-          "description": "Specifies the HTTP method that the resource expects. Default: GET.",
+          "description": "Specifies the HTTP method that the resource expects.\nDefault: GET.",
           "default": "GET",
           "enum": [
             "GET",
@@ -15331,7 +15331,7 @@
         },
         "headers": {
           "type": "object",
-          "description": "Object key-value pairs that map to headers. Example: { \"Accept\": \"application/json\" }.",
+          "description": "Object key-value pairs that map to headers.\nExample: { \"Accept\": \"application/json\" }.",
           "additionalProperties": {
             "type": "string"
           }
@@ -15343,7 +15343,7 @@
         },
         "merge": {
           "type": "boolean",
-          "description": "Indicates whether the client is expected to merge the body value into the current request body before following the link. This is only valid when the server is responding to a POST request. Default: false.",
+          "description": "Indicates whether the client is expected to merge the body value into the current request body before following the link.\nThis is only valid when the server is responding to a POST request.\nDefault: false.",
           "default": false
         }
       },
@@ -15621,27 +15621,27 @@
               {
                 "name": "string",
                 "value": "string",
-                "description": "Character strings. Example: 'This is a literal string.'"
+                "description": "Character strings.\nExample: 'This is a literal string.'"
               },
               {
                 "name": "number",
                 "value": "number",
-                "description": "Numbers including integers and floating point values. Examples: -100, 3.14159"
+                "description": "Numbers including integers and floating point values.\nExamples: -100, 3.14159"
               },
               {
                 "name": "boolean",
                 "value": "boolean",
-                "description": "Booleans. Examples: true, false"
+                "description": "Booleans.\nExamples: true, false"
               },
               {
                 "name": "timestamp",
                 "value": "timestamp",
-                "description": "An instant with a granularity of a second or smaller. Example (JSON): { \"timestamp\": \"1969-07-20T20:17:40Z\" }"
+                "description": "An instant with a granularity of a second or smaller.\nExample (JSON): { \"timestamp\": \"1969-07-20T20:17:40Z\" }"
               },
               {
                 "name": "date",
                 "value": "date",
-                "description": "An instant with a granularity of a day. Example (JSON): { \"date\": \"1969-07-20\" }"
+                "description": "An instant with a granularity of a day.\nExample (JSON): { \"date\": \"1969-07-20\" }"
               }
             ]
           },
@@ -15670,34 +15670,34 @@
           {
             "name": "string",
             "value": "string",
-            "description": "Character strings. Example: 'This is a literal string.'"
+            "description": "Character strings.\nExample: 'This is a literal string.'"
           },
           {
             "name": "number",
             "value": "number",
-            "description": "Numbers including integers and floating point values. Examples: -100, 3.14159"
+            "description": "Numbers including integers and floating point values.\nExamples: -100, 3.14159"
           },
           {
             "name": "boolean",
             "value": "boolean",
-            "description": "Booleans. Examples: true, false"
+            "description": "Booleans.\nExamples: true, false"
           },
           {
             "name": "timestamp",
             "value": "timestamp",
-            "description": "An instant with a granularity of a second or smaller. Example (JSON): { \"timestamp\": \"1969-07-20T20:17:40Z\" }"
+            "description": "An instant with a granularity of a second or smaller.\nExample (JSON): { \"timestamp\": \"1969-07-20T20:17:40Z\" }"
           },
           {
             "name": "date",
             "value": "date",
-            "description": "An instant with a granularity of a day. Example (JSON): { \"date\": \"1969-07-20\" }"
+            "description": "An instant with a granularity of a day.\nExample (JSON): { \"date\": \"1969-07-20\" }"
           }
         ]
       }
     },
     "StacSearchParameters": {
       "type": "object",
-      "description": "Search model. Defines parameters for a STAC search POST request.",
+      "description": "Search model.\n*\nDefines parameters for a STAC search POST request.",
       "properties": {
         "collections": {
           "type": "array",
@@ -15933,7 +15933,7 @@
     },
     "TileJsonMetadata": {
       "type": "object",
-      "description": "TileJSON model.\n\nBased on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0",
+      "description": "TileJSON model.\n\nBased on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0TileJSON metadata describing a tile set according to the TileJSON specification",
       "properties": {
         "tilejson": {
           "type": "string",
@@ -16068,7 +16068,7 @@
         },
         "keywords": {
           "type": "array",
-          "description": "Unordered list of one or more commonly used or formalized word(s) or phrase(s) used to describe this dataset",
+          "description": "Unordered list of one or more commonly used or formalized word(s) or phrase(s)\nused to describe this dataset",
           "items": {
             "type": "string"
           }
@@ -16090,11 +16090,11 @@
         },
         "cornerOfOrigin": {
           "$ref": "#/definitions/TileMatrixCornerOfOrigin",
-          "description": "The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin for numbering tile rows and columns. This corner is also a corner of the (0, 0) tile."
+          "description": "The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin\nfor numbering tile rows and columns. This corner is also a corner of the (0, 0)\ntile."
         },
         "pointOfOrigin": {
           "type": "array",
-          "description": "Precise position in CRS coordinates of the corner of origin (e.g. the top-left corner) for this tile matrix. This position is also a corner of the (0, 0) tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did not exist.",
+          "description": "Precise position in CRS coordinates of the corner of origin (e.g. the top-left\ncorner) for this tile matrix. This position is also a corner of the (0, 0)\ntile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did\nnot exist.",
           "items": {
             "type": "number",
             "format": "float"
@@ -16177,11 +16177,11 @@
         },
         "description": {
           "type": "string",
-          "description": "Brief narrative description of this tile matrix set, normally available for display to a human"
+          "description": "Brief narrative description of this tile matrix set, normally available for\ndisplay to a human"
         },
         "keywords": {
           "type": "array",
-          "description": "Unordered list of one or more commonly used or formalized word(s) or phrase(s) used to describe this tile matrix set",
+          "description": "Unordered list of one or more commonly used or formalized word(s) or phrase(s)\nused to describe this tile matrix set",
           "items": {
             "type": "string"
           }
@@ -16265,7 +16265,7 @@
     },
     "TileMatrixSetId": {
       "type": "string",
-      "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+      "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles",
       "enum": [
         "CanadianNAD83_LCC",
         "EuropeanETRS89_LAEAQuad",
@@ -16348,7 +16348,7 @@
         "minZoom": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum zoom level that can be requested for this collection. Provides a hard limit for the tile servers to ensure they don't get requests for low zoom levels, which would cause many files to be fetched and the tile servers to hang.",
+          "description": "The minimum zoom level that can be requested for this collection. Provides a\nhard limit for the tile servers to ensure they don't get requests for low zoom\nlevels, which would cause many files to be fetched and the tile servers to\nhang.",
           "maximum": 24
         },
         "maxItemsPerTile": {
@@ -16368,7 +16368,7 @@
     },
     "TilerCoreModelsResponsesPoint": {
       "type": "object",
-      "description": "Point model.\n\nresponse model for `/point` endpoints",
+      "description": "Point model.\n\nresponse model for `/point` endpointsResponse model for point query operations providing values at a specific location",
       "properties": {
         "coordinates": {
           "type": "array",
@@ -16662,7 +16662,7 @@
     },
     "TilerStacSearchDefinition": {
       "type": "object",
-      "description": "PgSTAC Search entry.\n\nref:\nhttps://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915",
+      "description": "PgSTAC Search entry.\n\nref:\nhttps://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915Stored search query in the PgSTAC database",
       "properties": {
         "hash": {
           "type": "string",
@@ -18338,7 +18338,7 @@
     "MosaicSearchQueryParameters.skipCovered": {
       "name": "skipcovered",
       "in": "query",
-      "description": "Skip any items that would show up completely under the previous items (defaults to True in PgSTAC).",
+      "description": "Skip any items that would show up completely under the previous items (defaults\nto True in PgSTAC).",
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method",
@@ -18357,7 +18357,7 @@
     "MosaicTileQueryParameters.buffer": {
       "name": "buffer",
       "in": "query",
-      "description": "Buffer on each side of the given tile. It must be a multiple of `0.5`. Output **tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257, 1.0 = 258x258).",
+      "description": "Buffer on each side of the given tile. It must be a multiple of `0.5`. Output\n**tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257,\n1.0 = 258x258).",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -18560,7 +18560,7 @@
     "StatisticsQueryParameters.histogramBins": {
       "name": "histogram_bins",
       "in": "query",
-      "description": "Defines the number of equal-width bins (https://numpy.org/doc/stable/reference/generated/numpy.histogram.html) in the given range (10, by default)",
+      "description": "Defines the number of equal-width bins in the given range (10, by default).\n\nIf bins is a sequence (comma `,` delimited values), it defines a monotonically\nincreasing array of bin edges, including the rightmost edge, allowing for\nnon-uniform bin widths.\n\nlink: https://numpy.org/doc/stable/reference/generated/numpy.histogram.html",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -18569,7 +18569,7 @@
     "StatisticsQueryParameters.histogramRange": {
       "name": "histogram_range",
       "in": "query",
-      "description": "Comma-delimited range of the bins (https://numpy.org/doc/stable/reference/generated/numpy.histogram.html).",
+      "description": "Comma `,` delimited range of the bins.\n\nThe lower and upper range of the bins. If not provided, range is simply\n(a.min(), a.max()).\n\nValues outside the range are ignored. The first element of the range must be\nless than or equal to the second.\nrange affects the automatic bin computation as well.\n\nlink: https://numpy.org/doc/stable/reference/generated/numpy.histogram.html",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -18751,7 +18751,7 @@
     "TileMatrixSetQueryParameters.buffer": {
       "name": "buffer",
       "in": "query",
-      "description": "Buffer on each side of the given tile. It must be a multiple of `0.5`. Output **tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257, 1.0 = 258x258).",
+      "description": "Buffer on each side of the given tile. It must be a multiple of `0.5`. Output\n**tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257,\n1.0 = 258x258).",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -18859,7 +18859,7 @@
     "ZxyPathParameters.x": {
       "name": "x",
       "in": "path",
-      "description": "Column (X) index of the tile on the selected TileMatrix. It cannot exceed the MatrixHeight-1 for the selected TileMatrix.",
+      "description": "Column (X) index of the tile on the selected TileMatrix. It cannot exceed the\nMatrixHeight-1 for the selected TileMatrix.",
       "required": true,
       "type": "number",
       "format": "float",
@@ -18868,7 +18868,7 @@
     "ZxyPathParameters.y": {
       "name": "y",
       "in": "path",
-      "description": "Row (Y) index of the tile on the selected TileMatrix. It cannot exceed the MatrixWidth-1 for the selected TileMatrix.",
+      "description": "Row (Y) index of the tile on the selected TileMatrix. It cannot exceed the\nMatrixWidth-1 for the selected TileMatrix.",
       "required": true,
       "type": "number",
       "format": "float",
@@ -18877,7 +18877,7 @@
     "ZxyPathParameters.z": {
       "name": "z",
       "in": "path",
-      "description": "Identifier (Z) selecting one of the scales defined in the TileMatrixSet and representing the scaleDenominator the tile.",
+      "description": "Identifier (Z) selecting one of the scales defined in the TileMatrixSet and\nrepresenting the scaleDenominator the tile.",
       "required": true,
       "type": "number",
       "format": "float",

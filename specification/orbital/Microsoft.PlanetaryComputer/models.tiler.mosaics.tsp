@@ -15,7 +15,9 @@ namespace Microsoft.PlanetaryComputer;
  */
 model MosaicTileQueryParameters {
   /**
-   * Buffer on each side of the given tile. It must be a multiple of `0.5`. Output **tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257, 1.0 = 258x258).
+   * Buffer on each side of the given tile. It must be a multiple of `0.5`. Output
+   * **tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257,
+   * 1.0 = 258x258).
    */
   @query("buffer")
   buffer?: string;
@@ -218,6 +220,9 @@ model TilerStacSearchRegistration {
  * ref:
  * https://github.com/stac-utils/pgstac/blob/3499daa2bfa700ae7bb07503795c169bf2ebafc7/sql/004_search.sql#L907-L915
  */
+/**
+ * Stored search query in the PgSTAC database
+ */
 model TilerStacSearchDefinition {
   /**
    * Unique hash identifier for the search query
@@ -308,7 +313,8 @@ model MosaicSearchQueryParameters {
   exitWhenFull?: boolean;
 
   /**
-   * Skip any items that would show up completely under the previous items (defaults to True in PgSTAC).
+   * Skip any items that would show up completely under the previous items (defaults
+   * to True in PgSTAC).
    */
   @query("skipcovered")
   skipCovered?: boolean;

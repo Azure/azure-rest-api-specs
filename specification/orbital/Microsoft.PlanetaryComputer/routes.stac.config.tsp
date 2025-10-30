@@ -10,7 +10,8 @@ namespace Microsoft.PlanetaryComputer;
 
 interface StacCollectionAssets {
   /**
-   * Create a new asset in the Collection metadata and write the associated file to managed storage.
+   * Create a new asset in the Collection metadata and write the associated
+   * file to managed storage.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -533,7 +534,9 @@ interface StacCollectionPartitionTypes {
     PartitionType
   >;
   /**
-   * Updates partition type for a GeoCatalog Collection. This will determine the partitioning scheme for items within the database, and can only be set before any items are loaded.
+   * Updates partition type for a GeoCatalog Collection. This will
+   * determine the partitioning scheme for items within the database,
+   * and can only be set before any items are loaded.
    *
    * Ideal partitioning schemes result in partitions of roughly 100k items each.
    *
@@ -656,7 +659,8 @@ interface StacQueryables {
     }
   >;
   /**
-   * Updates a queryable given a queryable definition and corresponding collection id.
+   * Updates a queryable given a queryable definition and
+   * corresponding collection id.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Update Collection Queryables")

@@ -48,14 +48,32 @@ model StatisticsQueryParameters {
   percentiles?: int32[];
 
   /**
-   * Defines the number of equal-width bins (https://numpy.org/doc/stable/reference/generated/numpy.histogram.html) in the given range (10, by default)
+   *
+   * Defines the number of equal-width bins in the given range (10, by default).
+   *
+   * If bins is a sequence (comma `,` delimited values), it defines a monotonically
+   * increasing array of bin edges, including the rightmost edge, allowing for
+   * non-uniform bin widths.
+   *
+   * link: https://numpy.org/doc/stable/reference/generated/numpy.histogram.html
+   *
    */
   @query("histogram_bins")
   histogramBins?: string;
 
   /**
    *
-   * Comma-delimited range of the bins (https://numpy.org/doc/stable/reference/generated/numpy.histogram.html).
+   * Comma `,` delimited range of the bins.
+   *
+   * The lower and upper range of the bins. If not provided, range is simply
+   * (a.min(), a.max()).
+   *
+   * Values outside the range are ignored. The first element of the range must be
+   * less than or equal to the second.
+   * range affects the automatic bin computation as well.
+   *
+   * link: https://numpy.org/doc/stable/reference/generated/numpy.histogram.html
+   *
    */
   @query("histogram_range")
   histogramRange?: string;
@@ -66,7 +84,9 @@ model StatisticsQueryParameters {
  */
 model TileMatrixSetQueryParameters {
   /**
-   * Buffer on each side of the given tile. It must be a multiple of `0.5`. Output **tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257, 1.0 = 258x258).
+   * Buffer on each side of the given tile. It must be a multiple of `0.5`. Output
+   * **tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257,
+   * 1.0 = 258x258).
    */
   @query("buffer")
   buffer?: string;
@@ -151,6 +171,9 @@ model BoundingBoxPathParameters {
  * Point model.
  *
  * response model for `/point` endpoints
+ */
+/**
+ * Response model for point query operations providing values at a specific location
  */
 model TilerCoreModelsResponsesPoint {
   /**
@@ -413,12 +436,14 @@ model BandStatistics {
   validPixels: float32;
 
   /**
+   * Percentile 2
    * The 2nd percentile value.
    */
   @encodedName("application/json", "percentile_2")
   percentile2: float32;
 
   /**
+   * Percentile 98
    * The 98th percentile value.
    */
   @encodedName("application/json", "percentile_98")

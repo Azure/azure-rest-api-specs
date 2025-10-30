@@ -82,7 +82,9 @@ model SharedAccessSignatureSignedHrefResponse {
 
 interface Sas {
   /**
-   * Generate a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works) for the given storage account and container. The storage account and container must be associated with a Planetary Computer dataset indexed by the STAC API.
+   * Generate a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)
+   * for the given storage account and container. The storage account and container
+   * must be associated with a Planetary Computer dataset indexed by the STAC API.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @tag("Shared Access Signature (SAS) Tokens to use with Azure SDKs")
@@ -111,7 +113,8 @@ interface Sas {
   ): SharedAccessSignatureTokenResponse | ErrorResponse;
 
   /**
-   * Revoke a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works) for managed storage account of this GeoCatalog.
+   * Revoke a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)
+   * for managed storage account of this GeoCatalog.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @tag("Shared Access Signature (SAS) Tokens to use with Azure SDKs")
@@ -133,7 +136,8 @@ interface Sas {
   ): OkResponse | ErrorResponse;
 
   /**
-   * Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works). If the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.
+   * Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works).
+   * If the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @tag("Sign an HREF for read access")
