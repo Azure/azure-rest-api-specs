@@ -47,7 +47,6 @@ interface PolicyDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the built-in policy definition versions for all built-in policy definitions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all built-in policy definition versions.")
   @autoRoute
   @action("listPolicyDefinitionVersions")
@@ -56,7 +55,6 @@ interface PolicyDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the policy definition versions for all policy definitions at the management group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy definition versions at management group scope.")
   @autoRoute
   @post
@@ -69,7 +67,6 @@ interface PolicyDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the policy definition versions for all policy definitions within a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy definition versions within a subscription.")
   @autoRoute
   @action("listPolicyDefinitionVersions")
@@ -84,7 +81,6 @@ interface PolicySetDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the built-in policy set definition versions for all built-in policy set definitions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all built-in policy set definition versions.")
   @autoRoute
   @action("listPolicySetDefinitionVersions")
@@ -92,7 +88,6 @@ interface PolicySetDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the policy set definition versions for all policy set definitions at the management group scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy set definition versions at management group scope.")
   @autoRoute
   @post
@@ -105,7 +100,6 @@ interface PolicySetDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the policy set definition versions for all policy set definitions within a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy set definition versions within a subscription.")
   @autoRoute
   @action("listPolicySetDefinitionVersions")
@@ -120,7 +114,6 @@ interface PolicyTokensOperationGroup {
   /**
    * This operation acquires a policy token in the given subscription for the given request body.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Acquires a policy token.")
   @autoRoute
   @action("acquirePolicyToken")
@@ -133,7 +126,6 @@ interface PolicyTokensOperationGroup {
   /**
    * This operation acquires a policy token in the given management group for the given request body.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Acquires a policy token at management group level.")
   @autoRoute
   @post

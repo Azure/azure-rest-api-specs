@@ -155,7 +155,6 @@ interface PolicySetDefinitions {
   /**
    * This operation retrieves the built-in policy set definition with the given name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   getBuiltIn is PolicySetDefinitionTenantOps.Read<
     PolicySetDefinition,
     Parameters = {
@@ -170,7 +169,6 @@ interface PolicySetDefinitions {
   /**
    * This operation retrieves a list of all the built-in policy set definitions that match the optional given $filter. If $filter='category -eq {value}' is provided, the returned list only includes all built-in policy set definitions whose category match the {value}.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listBuiltIn is PolicySetDefinitionTenantOps.List<
     PolicySetDefinition,
     Parameters = {
@@ -199,7 +197,6 @@ interface PolicySetDefinitions {
   /**
    * This operation retrieves the policy set definition in the given management group with the given name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   getAtManagementGroup is PolicySetDefinitionManagementGroupOps.Read<
     PolicySetDefinition,
     Parameters = {
@@ -214,19 +211,16 @@ interface PolicySetDefinitions {
   /**
    * This operation creates or updates a policy set definition in the given management group with the given name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdateAtManagementGroup is PolicySetDefinitionManagementGroupOps.CreateOrUpdateSync<PolicySetDefinition>;
 
   /**
    * This operation deletes the policy set definition in the given management group with the given name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   deleteAtManagementGroup is PolicySetDefinitionManagementGroupOps.DeleteSync<PolicySetDefinition>;
 
   /**
    * This operation retrieves a list of all the policy set definitions in a given management group that match the optional given $filter. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, the unfiltered list includes all policy set definitions associated with the management group, including those that apply directly or from management groups that contain the given management group. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given management group. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn and Custom. If $filter='category -eq {value}' is provided, the returned list only includes all policy set definitions whose category match the {value}.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByManagementGroup is PolicySetDefinitionManagementGroupOps.List<
     PolicySetDefinition,
     Parameters = {
