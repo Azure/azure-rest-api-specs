@@ -1091,10 +1091,9 @@
               "$ref": "#/definitions/CodeContainer"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -1405,10 +1404,9 @@
               "$ref": "#/definitions/CodeVersion"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -1761,10 +1759,9 @@
               "$ref": "#/definitions/ComponentContainer"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -2075,10 +2072,9 @@
               "$ref": "#/definitions/ComponentVersion"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -3552,10 +3548,9 @@
               "$ref": "#/definitions/EnvironmentVersion"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -3867,10 +3862,9 @@
               "$ref": "#/definitions/ModelContainer"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -4030,6 +4024,13 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version identifier.",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "description",
@@ -4233,10 +4234,9 @@
               "$ref": "#/definitions/ModelVersion"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -23898,6 +23898,14 @@
     "CapabilityHostProperties": {
       "type": "object",
       "properties": {
+        "acaEnvironmentConnections": {
+          "type": "array",
+          "description": "List of Aca Environment connections.",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
         "aiServicesConnections": {
           "type": "array",
           "description": "List of AI services connections.",
@@ -23957,6 +23965,15 @@
           "items": {
             "type": "string"
           }
+        },
+        "messages": {
+          "type": "array",
+          "description": "List of messages containing errors.",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [
@@ -24180,11 +24197,13 @@
         },
         "secrets": {
           "$ref": "#/definitions/CertificateDatastoreSecrets",
+          "format": "password",
           "description": "[Required] Service principal secrets.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "tenantId": {
           "$ref": "#/definitions/Azure.Core.uuid",
@@ -25853,7 +25872,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The identity of the resource."
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
@@ -31248,12 +31267,12 @@
         },
         "forecastingSettings": {
           "$ref": "#/definitions/ForecastingSettings",
-          "description": "Primary metrics for Forecasting task.",
+          "description": "Forecasting task specific inputs.",
           "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
-          "description": "Primary metric for forecasting task.",
+          "description": "Primary metrics for Forecasting task.",
           "default": "NormalizedRootMeanSquaredError",
           "enum": [
             "SpearmanCorrelation",
@@ -32217,8 +32236,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsObjectDetection"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "limitSettings": {
           "$ref": "#/definitions/ImageLimitSettings",
@@ -33019,8 +33037,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsObjectDetection"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "limitSettings": {
           "$ref": "#/definitions/ImageLimitSettings",
