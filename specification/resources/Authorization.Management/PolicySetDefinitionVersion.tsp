@@ -93,11 +93,7 @@ alias PolicySetDefinitionVersionManagementGroupOps = Azure.ResourceManager.Legac
     @key
     providerNamespace: "Microsoft.Management";
 
-    /** The name of the management group. The name is case insensitive. */
-    @path
-    @segment("managementGroups")
-    @key
-    managementGroupName: string;
+    ...CommonTypes.ManagementGroupNameParameter;
   },
   {
     ...Extension.ExtensionProviderNamespace<PolicySetDefinitionVersion>;
