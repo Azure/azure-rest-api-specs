@@ -109,8 +109,7 @@ union TilerImageFormat {
 /**
  * Identifier selecting one of the TileMatrixSetId supported (default:
  * 'WebMercatorQuad')
- */
-/**
+ *
  * Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles
  */
 union TileMatrixSetId {
@@ -208,14 +207,10 @@ union MosaicMetadataType {
 
 /**
  * Identifier selecting one of the TileMatrixSetId supported (default:
- * 'WebMercatorQuad')
- */
-/**
- * Identifier selecting one of the TileMatrixSetId supported (default:
- * 'WebMercatorQuad')
- */
-/**
- * Method used to select or compute pixels when creating composites from multiple sources
+ *  'WebMercatorQuad')
+ *
+ * Represents the method used to select or compute pixels when creating
+ *  composites from multiple sources
  */
 union PixelSelection {
   string,
@@ -304,12 +299,9 @@ model TilerInfoGeoJsonFeature {
 }
 
 /**
- * TileJSON model.
+ * TileJSON metadata describing a tile set according to the TileJSON specification
  *
  * Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0
- */
-/**
- * TileJSON metadata describing a tile set according to the TileJSON specification
  */
 model TileJsonMetadata {
   /**
