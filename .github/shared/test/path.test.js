@@ -1,46 +1,53 @@
 // @ts-check
 
-import { strict as assert } from "assert";
-import { existsSync, mkdirSync, rmSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { afterEach, beforeEach, describe, it } from "vitest";
-import { includesFolder } from "../src/path.js";
+import { basename, resolve, sep } from "path";
+import { describe, expect, it } from "vitest";
+import { includesSegment, untilLastSegment } from "../src/path.js";
 
-// Get the directory of this test file
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const cwd = process.cwd();
 
-/**
- * Unit tests for path.js utility functions
- */
-describe("Path utilities", () => {
-  let tempTestDir;
-
-  beforeEach(() => {
-    // Create a temporary directory for test files
-    tempTestDir = join(__dirname, "temp-path-tests");
-    if (existsSync(tempTestDir)) {
-      rmSync(tempTestDir, { recursive: true, force: true });
-    }
-    mkdirSync(tempTestDir, { recursive: true });
+describe("path", () => {
+  it.each([
+    ["/a/b/c/d.txt", "d.txt", true],
+    ["/a/b/c/d.txt", "c", true],
+    ["/a/b/c/d.txt", "b", true],
+    ["/a/b/c/d.txt", "a", true],
+    ["/a/b/c/d.txt", "", true],
+    ["/a/b/c/d.txt", "z", false],
+    ["/a/b/c/d.txt", sep, false],
+    // Ensure path is resolved (against cwd) before searching
+    ["a/b/c/d.txt", "d.txt", true],
+    ["a/b/c/d.txt", "c", true],
+    ["a/b/c/d.txt", "b", true],
+    ["a/b/c/d.txt", "a", true],
+    ["a/b/c/d.txt", basename(cwd), true],
+    ["a/b/c/d.txt", "", true],
+    ["a/b/c/d.txt", sep, false],
+    // Multiple occurrences of segment
+    ["/a/b/a/c/a/d.txt", "a", true],
+  ])("includesSegment(%o, %o) => %o", (path, segment, expected) => {
+    expect(includesSegment(path, segment)).toEqual(expected);
   });
 
-  afterEach(() => {
-    // Clean up temporary directory
-    if (existsSync(tempTestDir)) {
-      rmSync(tempTestDir, { recursive: true, force: true });
-    }
-  });
-
-  describe("includesFolder", () => {
-    it("should return true when path contains the specified folder", () => {
-      assert.equal(includesFolder("/path/to/examples/file.json", "examples"), true);
-      assert.equal(includesFolder("/path/to/examples", "examples"), true);
-    });
-
-    it("should return false when path does not contain the specified folder", () => {
-      assert.equal(includesFolder("/path/to/swagger/file.json", "examples"), false);
-    });
+  it.each([
+    ["/a/b/c/d.txt", "d.txt", "/a/b/c"],
+    ["/a/b/c/d.txt", "c", "/a/b"],
+    ["/a/b/c/d.txt", "b", "/a"],
+    ["/a/b/c/d.txt", "a", "/"],
+    ["/a/b/c/d.txt", "", "/"],
+    ["/a/b/c/d.txt", "z", ""],
+    ["/a/b/c/d.txt", sep, ""],
+    // Ensure path is resolved (against cwd) before searching
+    ["a/b/c/d.txt", "d.txt", "a/b/c"],
+    ["a/b/c/d.txt", "c", "a/b"],
+    ["a/b/c/d.txt", "b", "a"],
+    ["a/b/c/d.txt", "a", cwd],
+    ["a/b/c/d.txt", "", "/"],
+    ["a/b/c/d.txt", sep, ""],
+    // Ensure last occurrence of segment is used
+    ["/a/b/a/c/a/d.txt", "a", "/a/b/a/c"],
+  ])("untilLastSegment(%o, %o) => %o", (path, segment, expected) => {
+    const resolvedExpected = expected === "" ? "" : resolve(expected);
+    expect(untilLastSegment(path, segment)).toEqual(resolvedExpected);
   });
 });
