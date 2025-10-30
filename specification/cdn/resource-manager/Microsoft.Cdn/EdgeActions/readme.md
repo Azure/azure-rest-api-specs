@@ -85,5 +85,5 @@ swagger-to-sdk:
 ## C#
 
 C# SDK generation is configured via TypeSpec in `tspconfig.yaml`.
-The generated SDK uses the `Azure.ResourceManager.Cdn` namespace and is included in the Azure.ResourceManager.Cdn package.
+The generated SDK uses the `Azure.ResourceManager.EdgeActions` namespace as a separate package.
 
