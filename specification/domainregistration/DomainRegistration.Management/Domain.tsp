@@ -47,11 +47,12 @@ interface Domains {
    * Description for Creates or updates a domain.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Domain,
     PatchModel = DomainPatchResource,
-    Response = ArmResponse<Domain> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
+    Response = ArmResponse<Domain> | (ArmAcceptedResponse & {
       @bodyRoot
       _: Domain;
     }),
@@ -95,10 +96,11 @@ interface Domains {
    * Description for Renew a domain.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renew is ArmResourceActionSync<
     Domain,
     void,
-    OkResponse | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = Domain>> | NoContentResponse,
+    OkResponse | ArmAcceptedResponse | NoContentResponse,
     Error = DefaultErrorResponse
   >;
 
