@@ -13,33 +13,6 @@ using Azure.Core.Traits;
 
 namespace Language.QuestionAnswering.Authoring;
 
-/**
- * Optional query parameters for the export operation.
- * Using a named model enables client-side renaming without breaking wire contract.
- */
-model ExportQueryParameters {
-  /** Knowledge base Import or Export format. */
-  @query("format")
-  format?: format = format.json;
-
-  /** Kind of the asset of the project. */
-  @query("assetKind")
-  assetKind?: AssestKind;
-}
-
-/**
- * Optional query parameters for the import operation.
- */
-model ImportQueryParameters {
-  /** Knowledge base Import or Export format. */
-  @query("format")
-  format?: format = format.json;
-
-  /** Kind of the asset of the project. */
-  @query("assetKind")
-  assetKind?: AssestKind;
-}
-
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
