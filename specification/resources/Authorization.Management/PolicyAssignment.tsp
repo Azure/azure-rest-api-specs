@@ -116,16 +116,11 @@ interface PolicyAssignments {
    * This operation retrieves the list of all policy assignments applicable to the management group that match the given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter=atScope() is provided, the returned list includes all policy assignments that are assigned to the management group or the management group's ancestors. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the management group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the management group.
    */
   @summary("Retrieves all policy assignments that apply to a management group.")
-  @autoRoute
-  @list
-  @listsResource(PolicyAssignment)
-  @segmentOf(PolicyAssignment)
-  @armResourceList(PolicyAssignment)
-  @get
-  listForManagementGroup(
-    ...ManagementGroupIdParameters<PolicyAssignment>,
-    ...PolicyAssignmentListParameters,
-  ): ResourceListResult<PolicyAssignment> | ErrorResponse;
+  listForManagementGroup is Extension.ListByTarget<
+    Extension.ManagementGroup<"managementGroupId">,
+    PolicyAssignment,
+    Parameters = PolicyAssignmentListParameters
+  >;
 
   /**
    * This operation retrieves the list of all policy assignments associated with the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the subscription, including those that apply directly or from management groups that contain the given subscription, as well as any applied to objects contained within the subscription. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the subscription, which is everything in the unfiltered list except those applied to objects contained within the subscription. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the subscription. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.

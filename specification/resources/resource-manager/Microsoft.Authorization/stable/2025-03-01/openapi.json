@@ -921,14 +921,15 @@
         "description": "This operation retrieves the list of all policy assignments applicable to the management group that match the given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter=atScope() is provided, the returned list includes all policy assignments that are assigned to the management group or the management group's ancestors. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the management group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the management group.",
         "parameters": [
           {
-            "name": "managementGroupId",
-            "in": "path",
-            "description": "The ID of the management group.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "$filter",
@@ -957,7 +958,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignmentListResult"
             }
