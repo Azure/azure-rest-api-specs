@@ -580,9 +580,6 @@
         "logConfiguration": {
           "$ref": "#/definitions/LogConfiguration"
         },
-        "firstPartyConfiguration": {
-          "$ref": "#/definitions/FirstPartyConfiguration"
-        },
         "dashboardConfiguration": {
           "$ref": "#/definitions/DashboardConfiguration"
         },
@@ -752,96 +749,6 @@
           "description": "The connection string for the Application Insights resource.",
           "type": "string",
           "x-ms-secret": true
-        }
-      }
-    },
-    "FirstPartyConfiguration": {
-      "description": "First Party Configurations",
-      "type": "object",
-      "properties": {
-        "agentTypeName": {
-          "description": "The name of the agent type.",
-          "type": "string"
-        },
-        "agentImageOverride": {
-          "description": "The image to use for the agent.",
-          "type": "string"
-        },
-        "agentImageConfiguration": {
-          "description": "Agent image configuration for first party agents",
-          "$ref": "#/definitions/AgentImageConfiguration"
-        },
-        "subAgents": {
-          "description": "Names of subAgents that used by first party configuration",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "kustoClusterConfiguration": {
-          "description": "Kusto Cluster configuration for first party agents",
-          "$ref": "#/definitions/KustoClusterConfiguration"
-        },
-        "keyVaultConfiguration": {
-          "description": "Key Vault configuration for first party agents",
-          "$ref": "#/definitions/KeyVaultConfiguration"
-        }
-      }
-    },
-    "AgentImageConfiguration": {
-      "description": "Configuration for agent image",
-      "type": "object",
-      "properties": {
-        "imageName": {
-          "description": "The name of the agent image.",
-          "type": "string"
-        },
-        "registryUserName": {
-          "description": "The username for the container registry.",
-          "type": "string"
-        },
-        "registryPassword": {
-          "description": "The password for the container registry.",
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "KustoClusterConfiguration": {
-      "description": "Kusto Cluster Configuration",
-      "type": "object",
-      "properties": {
-        "clusterUri": {
-          "description": "The URI of the Kusto cluster.",
-          "type": "string"
-        },
-        "databaseName": {
-          "description": "The name of the Kusto database.",
-          "type": "string"
-        },
-        "tableName": {
-          "description": "The name of the Kusto table.",
-          "type": "string"
-        },
-        "identity": {
-          "description": "The identity used to access the Kusto cluster.",
-          "type": "string",
-          "format": "arm-id"
-        }
-      }
-    },
-    "KeyVaultConfiguration": {
-      "description": "Key Vault Configuration",
-      "type": "object",
-      "properties": {
-        "keyVaultUri": {
-          "description": "The URI of the Key Vault.",
-          "type": "string"
-        },
-        "identity": {
-          "description": "The identity used to access the Key Vault.",
-          "type": "string",
-          "format": "arm-id"
         }
       }
     },

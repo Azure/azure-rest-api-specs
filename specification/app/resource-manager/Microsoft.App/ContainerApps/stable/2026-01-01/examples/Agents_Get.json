@@ -60,28 +60,6 @@
               "appId": "87654321-4321-4321-4321-210987654321"
             }
           },
-          "firstPartyConfiguration": {
-            "agentTypeName": "ChatBot",
-            "agentImageOverride": "mcr.microsoft.com/agents/chatbot:latest",
-            "agentImageConfiguration": {
-              "imageName": "custom-agent:v1.0.0",
-              "registryUserName": "testuser"
-            },
-            "subAgents": [
-              "rag-agent",
-              "code-agent"
-            ],
-            "kustoClusterConfiguration": {
-              "clusterUri": "https://testcluster.eastus.kusto.windows.net",
-              "databaseName": "AgentMetrics",
-              "tableName": "Interactions",
-              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kustoIdentity"
-            },
-            "keyVaultConfiguration": {
-              "keyVaultUri": "https://testkv.vault.azure.net/",
-              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kvIdentity"
-            }
-          },
           "dashboardConfiguration": {
             "azureMonitorWorkspaceQueryEndpoint": "https://testworkspace.eastus.metrics.monitor.azure.com",
             "azureMonitorWorkspaceMetricsIngestionEndpoint": "https://testworkspace-dce.eastus.ingest.monitor.azure.com",
