@@ -30,7 +30,6 @@ using Microsoft.DBforMySQL;
   "csharp"
 );
 @@clientName(ConfigurationListForBatchUpdate.value, "Values", "csharp");
-//@@clientName(ConfigurationListResult.value, "Values", "csharp");
 @@clientName(Configuration, "MySqlFlexibleServerConfiguration", "csharp");
 @@clientName(Database, "MySqlFlexibleServerDatabase", "csharp");
 @@clientName(FirewallRule, "MySqlFlexibleServerFirewallRule", "csharp");
@@ -181,10 +180,7 @@ using Microsoft.DBforMySQL;
   "csharp"
 );
 @@clientName(BackupSettings, "MySqlFlexibleServerBackupSettings", "csharp");
-@@clientName(BackupStoreDetails,
-  "MySqlFlexibleServerBackupStoreDetails",
-  "csharp"
-);
+
 @@clientName(FullBackupStoreDetails,
   "MySqlFlexibleServerFullBackupStoreDetails",
   "csharp"
@@ -257,6 +253,7 @@ using Microsoft.DBforMySQL;
 @@clientName(Servers.detachVNet, "DetachVnet", "csharp");
 @@clientName(BackupType.FULL, "Full", "csharp");
 @@clientName(DataEncryption.type, "EncryptionType", "csharp");
+@@clientName(LogFileProperties.type, "TypePropertiesType", "csharp");
 
 @@scope(OperationProgress.get, "!csharp");
 @@scope(Operations.list, "!csharp");
