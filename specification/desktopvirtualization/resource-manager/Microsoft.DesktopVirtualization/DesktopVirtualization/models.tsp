@@ -74,6 +74,23 @@ union HostPoolProvisioningAction {
 }
 
 /**
+ * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+ */
+union AllowRDPShortPathWithPrivateLink {
+  string,
+
+  /**
+   * Blocks the use of RDPShortPath if the hostpool PublicNetworkAccess setting is configured to require private link.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Allows the use of RDPShortPath even if the hostpool PublicNetworkAccess is configured to require the use of private link.
+   */
+  Enabled: "Enabled",
+}
+
+/**
  * Provisioning state of the Session Host Configuration.
  */
 union ProvisioningStateSHC {
@@ -1242,6 +1259,23 @@ union DiffDiskPlacement {
 }
 
 /**
+ * DeploymentScope type for HostPool.
+ */
+union DeploymentScope {
+  string,
+
+  /**
+   * For geographical Broker and ArmProvider talking to Geographical SQL DB
+   */
+  Geographical: "Geographical",
+
+  /**
+   * For regional Broker and ArmProvider talking to regional SQL DB
+   */
+  Regional: "Regional",
+}
+
+/**
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
@@ -2246,6 +2280,12 @@ model ApplicationGroupProperties {
    * Boolean representing whether the applicationGroup is show in the feed.
    */
   showInFeed?: boolean;
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
 }
 
 /**
@@ -2556,6 +2596,25 @@ model HostPoolProperties {
    * The type of management for this hostpool, Automated or Standard. The default value is Automated.
    */
   managementType?: ManagementType;
+
+  /**
+   * DeploymentScope type for HostPool.
+   */
+  @added(Versions.v2025_08_01_preview)
+  deploymentScope?: DeploymentScope;
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
+
+  /**
+   * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
+  @added(Versions.v2025_09_01_preview)
+  allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 }
 
 /**
@@ -2977,6 +3036,12 @@ model WorkspaceProperties {
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
 }
 
 /**
@@ -3566,6 +3631,13 @@ model HostPoolPatchProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
+
+  /**
+   * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
+  @added(Versions.v2025_09_01_preview)
+  allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 }
 
 /**
