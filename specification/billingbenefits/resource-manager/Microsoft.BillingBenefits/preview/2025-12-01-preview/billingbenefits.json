@@ -3095,6 +3095,270 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/freeServices/{freeServiceName}": {
+      "put": {
+        "description": "This operation creates or updates free services in Azure.",
+        "operationId": "FreeServices_Create",
+        "tags": [
+          "Free Services"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "FreeServicesCreate": {
+            "$ref": "./examples/FreeServicesCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FreeServicesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FreeServicesPutRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been created.",
+            "schema": {
+              "$ref": "#/definitions/FreeServices"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              }
+            }
+          },
+          "201": {
+            "description": "The resource is created.",
+            "schema": {
+              "$ref": "#/definitions/FreeServices"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "This operation retrieves properties for free services.",
+        "operationId": "FreeServices_Get",
+        "tags": [
+          "Free Services"
+        ],
+        "x-ms-examples": {
+          "FreeServicesGet": {
+            "$ref": "./examples/FreeServicesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FreeServicesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/FreeServices"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "This operation deletes free services from the subscription. Only free services that are in an expired or cancelled states can be deleted.",
+        "operationId": "FreeServices_Delete",
+        "tags": [
+          "Free Services"
+        ],
+        "x-ms-examples": {
+          "FreeServicesDelete": {
+            "$ref": "./examples/FreeServicesDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FreeServicesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist and the request is well formed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/freeServices": {
+      "get": {
+        "description": "This operation lists the free services that are available under the specified resource group.",
+        "operationId": "FreeServices_ListByResourceGroup",
+        "tags": [
+          "Free Services"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FreeServicesListByResourceGroup": {
+            "$ref": "./examples/FreeServicesListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/FreeServicesList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/freeServices": {
+      "get": {
+        "description": "This operation lists free services that are available under the specified subscription.",
+        "operationId": "FreeServices_ListBySubscription",
+        "tags": [
+          "Free Services"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FreeServicesListBySubscription": {
+            "$ref": "./examples/FreeServicesListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/FreeServicesList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3503,6 +3767,116 @@
             "update"
           ],
           "description": "Resource Tags"
+        }
+      }
+    },
+    "FreeServices": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "The Free Services API includes operations for creating and managing free services.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Free services properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FreeServicesProperties"
+        }
+      }
+    },
+    "FreeServicesProperties": {
+      "type": "object",
+      "description": "Properties of a free service",
+      "properties": {
+        "productCode": {
+          "description": "This is the catalog UPN for the product.",
+          "$ref": "#/definitions/ProductCode"
+        },
+        "status": {
+          "$ref": "#/definitions/FreeServicesStatus"
+        },
+        "startAt": {
+          "$ref": "#/definitions/StartAt"
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/FreeServicesProvisioningState"
+        }
+      }
+    },
+    "FreeServicesStatus": {
+      "type": "string",
+      "description": "Status of the free service",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Active",
+        "Canceled",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "FreeServicesStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "Free service status is unknown"
+          },
+          {
+            "value": "Pending",
+            "description": "Free service is pending activation"
+          },
+          {
+            "value": "Active",
+            "description": "Free service is active"
+          },
+          {
+            "value": "Canceled",
+            "description": "Free service has been canceled"
+          },
+          {
+            "value": "Completed",
+            "description": "Free service has been completed"
+          }
+        ]
+      }
+    },
+    "FreeServicesProvisioningState": {
+      "type": "string",
+      "description": "Provisioning states of a Free Service.",
+      "readOnly": true,
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "FreeServiceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "FreeServicesList": {
+      "type": "object",
+      "description": "This operation lists the free services that are available under the specified subscription.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of free services",
+          "items": {
+            "$ref": "#/definitions/FreeServices"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results"
         }
       }
     },
@@ -6800,6 +7174,25 @@
       "description": "Request body for updating a conditional credit",
       "schema": {
         "$ref": "#/definitions/ConditionalCreditPatchRequest"
+      }
+    },
+    "FreeServicesNameParameter": {
+      "name": "freeServiceName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "description": "Name of the free service"
+    },
+    "FreeServicesPutRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Free services create request",
+      "schema": {
+        "$ref": "#/definitions/FreeServices"
       }
     }
   }
