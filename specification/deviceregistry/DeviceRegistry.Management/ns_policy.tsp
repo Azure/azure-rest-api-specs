@@ -105,6 +105,10 @@ model BringYourOwnCertificateAuthority {
   @doc("The certificate chain in PEM format provided by the customer. This should include all intermediate certificates up to the root CA.")
   certificateChain?: string;
 
+  @doc("Parsed details of the signed certificate. Only populated when a signed certificate has been successfully uploaded and validated. Provided for convenience to help customers inspect certificate properties.")
+  @visibility(Lifecycle.Read)
+  certificateDetails?: CertificateDetails;
+
   @doc("The status of the BYOCA configuration, indicating the current state of the certificate lifecycle.")
   @visibility(Lifecycle.Read)
   status?: BringYourOwnCertificateAuthorityStatus;
@@ -170,6 +174,54 @@ model RevocationDetails {
   @doc("Optional additional information about the revocation.")
   @visibility(Lifecycle.Read)
   additionalInfo?: string;
+}
+
+@added(Versions.v2025_02_01)
+@doc("Parsed certificate details extracted from the PEM-encoded certificate. Provided for convenience to help customers inspect certificate properties without parsing PEM manually.")
+model CertificateDetails {
+  @doc("The X.509 subject Distinguished Name (DN) of the certificate.")
+  @visibility(Lifecycle.Read)
+  subject?: string;
+
+  @doc("The X.509 issuer Distinguished Name (DN) of the certificate.")
+  @visibility(Lifecycle.Read)
+  issuer?: string;
+
+  @doc("The certificate serial number in hexadecimal format.")
+  @visibility(Lifecycle.Read)
+  serialNumber?: string;
+
+  @doc("The certificate's SHA-1 thumbprint (fingerprint) in hexadecimal format.")
+  @visibility(Lifecycle.Read)
+  thumbprint?: string;
+
+  @doc("The certificate's SHA-256 thumbprint (fingerprint) in hexadecimal format.")
+  @visibility(Lifecycle.Read)
+  thumbprintSha256?: string;
+
+  @doc("The date and time when the certificate becomes valid. Format ISO8601.")
+  @visibility(Lifecycle.Read)
+  notBefore?: utcDateTime;
+
+  @doc("The date and time when the certificate expires. Format ISO8601.")
+  @visibility(Lifecycle.Read)
+  notAfter?: utcDateTime;
+
+  @doc("The signature algorithm used to sign the certificate (e.g., 'sha256WithRSAEncryption', 'ecdsa-with-SHA256').")
+  @visibility(Lifecycle.Read)
+  signatureAlgorithm?: string;
+
+  @doc("The public key algorithm (e.g., 'RSA', 'ECC').")
+  @visibility(Lifecycle.Read)
+  publicKeyAlgorithm?: string;
+
+  @doc("The public key size in bits (e.g., 2048, 4096 for RSA; 256, 384 for ECC).")
+  @visibility(Lifecycle.Read)
+  keySize?: int32;
+
+  @doc("X.509 version number of the certificate (typically 3 for X.509v3).")
+  @visibility(Lifecycle.Read)
+  version?: int32;
 }
 
 @added(Versions.v2025_02_01)
