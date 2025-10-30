@@ -109,6 +109,16 @@ model ElasticVolumeDataProtectionProperties {
   backup?: ElasticVolumeBackupProperties;
 }
 
+/** Data protection configuration option for updating the volume, including snapshot policies and backup. */
+@added(Versions.v2025_09_01_preview)
+model ElasticVolumeDataProtectionPatchProperties {
+  /** Used to apply a snapshot policy to a volume. */
+  snapshot?: ElasticVolumeSnapshotProperties;
+
+  /** Used to configure backups on an elastic volume. */
+  backup?: ElasticVolumeBackupProperties;
+}
+
 /** Contains all the information needed to mount an elastic volume */
 @added(Versions.v2025_09_01_preview)
 model ElasticMountTargetProperties {
@@ -132,11 +142,8 @@ model ElasticVolumePatchProperties {
   /** Set of export policy rules */
   exportPolicy?: ElasticExportPolicy;
 
-  /** Set of support protocol types for the elastic volume */
-  protocolTypes?: ElasticProtocolType[];
-
   /** Data protection configuration option for the volume, including snapshot policies and backup. */
-  dataProtection?: ElasticVolumeDataProtectionProperties;
+  dataProtection?: ElasticVolumeDataProtectionPatchProperties;
 
   /** Controls the visibility of the volume's read-only snapshot directory, which provides access to each of the volume's snapshots. */
   snapshotDirectoryVisibility?: SnapshotDirectoryVisibility;

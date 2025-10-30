@@ -15583,7 +15583,11 @@
         },
         "serviceLevel": {
           "$ref": "#/definitions/ElasticServiceLevel",
-          "description": "The service level of the elastic capacity pool"
+          "description": "The service level of the elastic capacity pool",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/NetAppProvisioningState",
@@ -15597,12 +15601,17 @@
         "totalThroughputMibps": {
           "type": "number",
           "format": "double",
-          "description": "Total throughput of the pool in MiB/s"
+          "description": "Total throughput of the pool in MiB/s",
+          "readOnly": true
         },
         "subnetResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/elasticVolumes, this is used by all the volumes within the pool",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -15615,11 +15624,13 @@
           "type": "string",
           "description": "Indicates the current zone of the pool. This can be changed for zoneRedundant service level pool with the changeZone action",
           "minLength": 1,
-          "maxLength": 1
+          "maxLength": 1,
+          "readOnly": true
         },
         "availabilityStatus": {
           "$ref": "#/definitions/ElasticResourceAvailabilityStatus",
-          "description": "Current availability status of the resource."
+          "description": "Current availability status of the resource.",
+          "readOnly": true
         },
         "activeDirectoryConfigResourceId": {
           "type": "string",
@@ -15669,40 +15680,9 @@
           "minimum": 1099511627776,
           "maximum": 140737488355330
         },
-        "serviceLevel": {
-          "$ref": "#/definitions/ElasticServiceLevel",
-          "description": "The service level of the elastic capacity pool"
-        },
         "encryption": {
           "$ref": "#/definitions/ElasticEncryptionConfigurationUpdate",
           "description": "Encryption settings"
-        },
-        "totalThroughputMibps": {
-          "type": "number",
-          "format": "double",
-          "description": "Total throughput of the pool in MiB/s"
-        },
-        "subnetResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/elasticVolumes, this is used by all the volumes within the pool",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks/subnets"
-              }
-            ]
-          }
-        },
-        "currentZone": {
-          "type": "string",
-          "description": "Indicates the current zone of the pool. This can be changed for zoneRedundant service level pool with the changeZone action",
-          "minLength": 1,
-          "maxLength": 1
-        },
-        "availabilityStatus": {
-          "$ref": "#/definitions/ElasticResourceAvailabilityStatus",
-          "description": "Current availability status of the resource."
         },
         "activeDirectoryConfigResourceId": {
           "type": "string",
@@ -16539,6 +16519,20 @@
         }
       }
     },
+    "ElasticVolumeDataProtectionPatchProperties": {
+      "type": "object",
+      "description": "Data protection configuration option for updating the volume, including snapshot policies and backup.",
+      "properties": {
+        "snapshot": {
+          "$ref": "#/definitions/ElasticVolumeSnapshotProperties",
+          "description": "Used to apply a snapshot policy to a volume."
+        },
+        "backup": {
+          "$ref": "#/definitions/ElasticVolumeBackupProperties",
+          "description": "Used to configure backups on an elastic volume."
+        }
+      }
+    },
     "ElasticVolumeDataProtectionProperties": {
       "type": "object",
       "description": "Data protection configuration option for the volume, including snapshot policies and backup.",
@@ -16808,15 +16802,8 @@
           "$ref": "#/definitions/ElasticExportPolicy",
           "description": "Set of export policy rules"
         },
-        "protocolTypes": {
-          "type": "array",
-          "description": "Set of support protocol types for the elastic volume",
-          "items": {
-            "$ref": "#/definitions/ElasticProtocolType"
-          }
-        },
         "dataProtection": {
-          "$ref": "#/definitions/ElasticVolumeDataProtectionProperties",
+          "$ref": "#/definitions/ElasticVolumeDataProtectionPatchProperties",
           "description": "Data protection configuration option for the volume, including snapshot policies and backup."
         },
         "snapshotDirectoryVisibility": {

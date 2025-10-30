@@ -45,6 +45,7 @@ model ElasticCapacityPoolProperties {
   /**
    * The service level of the elastic capacity pool
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceLevel: ElasticServiceLevel;
 
   /**
@@ -61,11 +62,13 @@ model ElasticCapacityPoolProperties {
   /**
    * Total throughput of the pool in MiB/s
    */
+  @visibility(Lifecycle.Read)
   totalThroughputMibps?: float64;
 
   /**
    * The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/elasticVolumes, this is used by all the volumes within the pool
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -77,11 +80,13 @@ model ElasticCapacityPoolProperties {
    */
   @minLength(1)
   @maxLength(1)
+  @visibility(Lifecycle.Read)
   currentZone?: string;
 
   /**
    * Current availability status of the resource.
    */
+  @visibility(Lifecycle.Read)
   availabilityStatus?: ElasticResourceAvailabilityStatus;
 
   /**
