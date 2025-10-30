@@ -3,11 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-
 namespace PaloAltoNetworks.Cloudngfw;
 
 /**
@@ -1433,6 +1428,7 @@ model PanoramaConfig {
   /**
    * VM auth key for panorama connectivity
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   vmAuthKey?: string;
 
@@ -1871,6 +1867,7 @@ model ApplicationInsights {
   /**
    * Application Insights key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key?: string;
 }
 
@@ -1966,11 +1963,13 @@ model MonitorLog {
   /**
    * Primary Key value for Monitor
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   primaryKey?: string;
 
   /**
    * Secondary Key value for Monitor
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secondaryKey?: string;
 }
 
