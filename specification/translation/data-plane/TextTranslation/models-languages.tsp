@@ -66,7 +66,8 @@ model GetSupportedLanguagesResult {
 
   @doc("LLM models supported.")
   @added(APIVersion.v2025_10_01_preview)
-  models?: Record<string>;
+  @visibility(Lifecycle.Read)
+  models?: string[];
 }
 
 alias BaseLanguage = {
@@ -89,7 +90,8 @@ model TranslationLanguage {
 
   @doc("LLM models supported for translation.")
   @added(APIVersion.v2025_10_01_preview)
-  models: Record<string>;
+  @visibility(Lifecycle.Read)
+  models: string[];
 }
 
 @doc("""

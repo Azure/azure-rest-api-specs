@@ -333,11 +333,12 @@
           }
         },
         "models": {
-          "type": "object",
+          "type": "array",
           "description": "LLM models supported.",
-          "additionalProperties": {
+          "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -589,7 +590,8 @@
           "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter.",
           "items": {
             "$ref": "#/definitions/TranslationText"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -613,11 +615,12 @@
           "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
         },
         "models": {
-          "type": "object",
+          "type": "array",
           "description": "LLM models supported for translation.",
-          "additionalProperties": {
+          "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [

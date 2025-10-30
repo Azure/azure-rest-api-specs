@@ -355,6 +355,16 @@ model TranslatedTextItem {
     An array of translation results. The size of the array matches the number of target 
     languages specified through the to query parameter.
     """)
+  @renamedFrom(APIVersion.v2025_10_01_preview, "translations")
+  @removed(APIVersion.v2025_10_01_preview)
+  translationsV3: TranslationText[];
+
+  @doc("""
+    An array of translation results. The size of the array matches the number of target 
+    languages specified through the to query parameter.
+    """)
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
   translations: TranslationText[];
 
   @removed(APIVersion.v2025_10_01_preview)
