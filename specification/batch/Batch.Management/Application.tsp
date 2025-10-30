@@ -14,6 +14,8 @@ namespace Microsoft.Batch;
 /**
  * Contains information about an application in a Batch account.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is required in envelope to match legacy API shape"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags must allow arbitrary string values for compatibility with legacy ARM shape"
 @parentResource(BatchAccount)
 model Application
   is Azure.ResourceManager.ProxyResource<ApplicationProperties> {
@@ -23,6 +25,16 @@ model Application
     SegmentName = "applications",
     NamePattern = "^[a-zA-Z0-9_-]+$"
   >;
+
+  /***
+   * The entity tag for the certificate.
+   */
+  etag?: string;
+
+  /**
+   * The tags of the certificate.
+   */
+  tags?: Record<string>;
 }
 
 @armResourceOperations

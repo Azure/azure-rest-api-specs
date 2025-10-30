@@ -14,6 +14,8 @@ namespace Microsoft.Batch;
 /**
  * Contains the information for a detector.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is required in envelope to match legacy API shape"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags must allow arbitrary string values for compatibility with legacy ARM shape"
 @parentResource(BatchAccount)
 model DetectorResponse
   is Azure.ResourceManager.ProxyResource<DetectorResponseProperties> {
@@ -23,6 +25,16 @@ model DetectorResponse
     SegmentName = "detectors",
     NamePattern = ""
   >;
+
+  /***
+   * The entity tag for the certificate.
+   */
+  etag?: string;
+
+  /**
+   * The tags of the certificate.
+   */
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -35,7 +47,10 @@ interface DetectorResponses {
   /**
    * Gets information about the detectors available for a given Batch account.
    */
-  listDetectors is ArmResourceListByParent<DetectorResponse, Error = CloudError>;
+  listDetectors is ArmResourceListByParent<
+    DetectorResponse,
+    Error = CloudError
+  >;
 }
 
 @@doc(DetectorResponse.name, "The name of the detector.");

@@ -14,6 +14,8 @@ namespace Microsoft.Batch;
 /**
  * Contains information about a private link resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is required in envelope to match legacy API shape"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags must allow arbitrary string values for compatibility with legacy ARM shape"
 @parentResource(BatchAccount)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
@@ -23,6 +25,16 @@ model PrivateEndpointConnection
     SegmentName = "privateEndpointConnections",
     NamePattern = "^[a-zA-Z0-9_-]+\\.?[a-fA-F0-9-]*$"
   >;
+
+  /***
+   * The entity tag for the certificate.
+   */
+  etag?: string;
+
+  /**
+   * The tags of the certificate.
+   */
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -39,6 +51,8 @@ interface PrivateEndpointConnections {
   update is ArmCustomPatchAsync<
     PrivateEndpointConnection,
     PatchModel = PrivateEndpointConnection,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /**
        * The state (ETag) version of the private endpoint connection to update. This value can be omitted or set to "*" to apply the operation unconditionally.
@@ -53,7 +67,10 @@ interface PrivateEndpointConnections {
    * Deletes the specified private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection, Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    PrivateEndpointConnection,
+    Error = CloudError
+  >;
 
   /**
    * Lists all of the private endpoint connections in the specified account.
