@@ -1,0 +1,2774 @@
+/*
+ * This file was automatically generated from an OpenAPI .yaml file.
+ * Edits made directly to this file will be lost.
+ */
+
+import "../common";
+import "./custom.tsp";
+
+// HAND EDIT NOTE: including this here pending consolidation of a top-level compilation entry point to manage it
+import "../specialized-types";
+
+using TypeSpec.OpenAPI;
+
+namespace OpenAI;
+
+// Tool generated type. Extracts from FileSearchToolCallItemBase.results
+alias FileSearchToolCallItemBaseResult = {
+  /** The unique ID of the file. */
+  file_id?: string;
+
+  /** The text that was retrieved from the file. */
+  text?: string;
+
+  /** The name of the file. */
+  filename?: string;
+
+  attributes?: VectorStoreFileAttributes;
+
+  /** The relevance score of the file - a value between 0 and 1. */
+  score?: float32;
+};
+
+// MANUAL NOTE: This is renamed here, by hand, to temporarily account for the pending ingestion of conversation additions.
+alias CreateResponse_Pre_Update = {
+  ...ModelResponsePropertiesForRequest;
+  ...ResponseProperties;
+
+  // Tool customization: Apply renamed Item -> ItemParam
+  /**
+   * Text, image, or file inputs to the model, used to generate a response.
+   *
+   * Learn more:
+   * - [Text inputs and outputs](/docs/guides/text)
+   * - [Image inputs](/docs/guides/images)
+   * - [File inputs](/docs/guides/pdf-files)
+   * - [Conversation state](/docs/guides/conversation-state)
+   * - [Function calling](/docs/guides/function-calling)
+   */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+  input?: string | (ItemParam | EasyInputMessage)[];
+
+  @doc("""
+    Specify additional output data to include in the model response. Currently
+    supported values are:
+    - `code_interpreter_call.outputs`: Includes the outputs of python code execution
+      in code interpreter tool call items.
+    - `computer_call_output.output.image_url`: Include image urls from the computer call output.
+    - `file_search_call.results`: Include the search results of
+      the file search tool call.
+    - `message.input_image.image_url`: Include image urls from the input message.
+    - `message.output_text.logprobs`: Include logprobs with assistant messages.
+    - `reasoning.encrypted_content`: Includes an encrypted version of reasoning
+      tokens in reasoning item outputs. This enables reasoning items to be used in
+      multi-turn conversations when using the Responses API statelessly (like
+      when the `store` parameter is set to `false`, or when an organization is
+      enrolled in the zero data retention program).
+    """)
+  include?: Includable[] | null;
+
+  /** Whether to allow the model to run tool calls in parallel. */
+  parallel_tool_calls?: boolean | null = true;
+
+  /**
+   * Whether to store the generated model response for later retrieval via
+   * API.
+   */
+  store?: boolean | null = true;
+
+  @doc("""
+    A system (or developer) message inserted into the model's context.
+
+    When using along with `previous_response_id`, the instructions from a previous
+    response will not be carried over to the next response. This makes it simple
+    to swap out system (or developer) messages in new responses.
+    """)
+  instructions?: string | null;
+
+  /**
+   * If set to true, the model response data will be streamed to the client
+   * as it is generated using [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
+   * See the [Streaming section below](/docs/api-reference/responses-streaming)
+   * for more information.
+   */
+  stream?: boolean | null = false;
+};
+
+// MANUAL NOTE: This is renamed here, by hand, to temporarily account for the pending ingestion of conversation additions.
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+alias Response_Pre_Update = {
+  ...ModelResponsePropertiesForResponse;
+  ...ResponseProperties;
+
+  /** Unique identifier for this Response. */
+  id: string;
+
+  @doc("""
+    The object type of this resource - always set to `response`.
+    """)
+  object: "response";
+
+  @doc("""
+    The status of the response generation. One of `completed`, `failed`,
+    `in_progress`, `cancelled`, `queued`, or `incomplete`.
+    """)
+  status?:
+    | "completed"
+    | "failed"
+    | "in_progress"
+    | "cancelled"
+    | "queued"
+    | "incomplete";
+
+  // Tool customization: Fully qualify as an integer-based unix timestamp
+  /** Unix timestamp (in seconds) of when this Response was created. */
+  @encode("unixTimestamp", int32)
+  created_at: utcDateTime;
+
+  error: ResponseError | null;
+
+  /** Details about why the response is incomplete. */
+  incomplete_details: {
+    /** The reason why the response is incomplete. */
+    reason?: "max_output_tokens" | "content_filter";
+  } | null;
+
+  @doc("""
+    An array of content items generated by the model.
+
+    - The length and order of items in the `output` array is dependent
+      on the model's response.
+    - Rather than accessing the first item in the `output` array and
+      assuming it's an `assistant` message with the content generated by
+      the model, you might consider using the `output_text` property where
+      supported in SDKs.
+    """)
+  output: OutputItem[];
+
+  @doc("""
+    A system (or developer) message inserted into the model's context.
+
+    When using along with `previous_response_id`, the instructions from a previous
+    response will not be carried over to the next response. This makes it simple
+    to swap out system (or developer) messages in new responses.
+    """)
+  instructions: string | InputItem[] | null;
+
+  @doc("""
+    SDK-only convenience property that contains the aggregated text output
+    from all `output_text` items in the `output` array, if any are present.
+    Supported in the Python and JavaScript SDKs.
+    """)
+  output_text?: string | null;
+
+  usage?: ResponseUsage;
+
+  /** Whether to allow the model to run tool calls in parallel. */
+  parallel_tool_calls: boolean = true;
+};
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+model ResponseProperties {
+  /**
+   * The unique ID of the previous response to the model. Use this to
+   * create multi-turn conversations. Learn more about
+   * [conversation state](/docs/guides/conversation-state).
+   */
+  previous_response_id?: string | null;
+
+  @doc("""
+    Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI
+    offers a wide range of models with different capabilities, performance
+    characteristics, and price points. Refer to the [model guide](/docs/models)
+    to browse and compare available models.
+    """)
+  `model`?: ModelIdsResponses;
+
+  reasoning?: Reasoning | null;
+
+  /**
+   * Whether to run the model response in the background.
+   * [Learn more](/docs/guides/background).
+   */
+  background?: boolean | null = false;
+
+  /** An upper bound for the number of tokens that can be generated for a response, including visible output tokens and [reasoning tokens](/docs/guides/reasoning). */
+  max_output_tokens?: int32 | null;
+
+  /** The maximum number of total calls to built-in tools that can be processed in a response. This maximum number applies across all built-in tool calls, not per individual tool. Any further attempts to call a tool by the model will be ignored. */
+  max_tool_calls?: int32 | null;
+
+  /**
+   * Configuration options for a text response from the model. Can be plain
+   * text or structured JSON data. Learn more:
+   * - [Text inputs and outputs](/docs/guides/text)
+   * - [Structured Outputs](/docs/guides/structured-outputs)
+   */
+  text?: {
+    // Tool customization: Employ discriminated type base
+    format?: ResponseTextFormatConfiguration;
+  };
+
+  @doc("""
+    An array of tools the model may call while generating a response. You
+    can specify which tool to use by setting the `tool_choice` parameter.
+
+    The two categories of tools you can provide the model are:
+
+    - **Built-in tools**: Tools that are provided by OpenAI that extend the
+      model's capabilities, like [web search](/docs/guides/tools-web-search)
+      or [file search](/docs/guides/tools-file-search). Learn more about
+      [built-in tools](/docs/guides/tools).
+    - **Function calls (custom tools)**: Functions that are defined by you,
+      enabling the model to call your own code. Learn more about
+      [function calling](/docs/guides/function-calling).
+    """)
+  tools?: Tool[];
+
+  // Tool customization: Employ discriminated type base for tool objects
+  @doc("""
+    How the model should select which tool (or tools) to use when generating
+    a response. See the `tools` parameter to see how to specify which tools
+    the model can call.
+    """)
+  tool_choice?: ToolChoiceOptions | ToolChoiceObject;
+
+  prompt?: Prompt | null;
+
+  @doc("""
+    The truncation strategy to use for the model response.
+    - `auto`: If the context of this response and previous ones exceeds
+      the model's context window size, the model will truncate the
+      response to fit the context window by dropping input items in the
+      middle of the conversation.
+    - `disabled` (default): If a model response will exceed the context window
+      size for a model, the request will fail with a 400 error.
+    """)
+  truncation?: "auto" | "disabled" | null = "disabled";
+}
+
+// Tool customization: Alias to avoid circular reference
+alias ModelIds = ModelIdsResponses;
+
+union ModelIdsResponses {
+  ModelIdsShared,
+
+    | "o1-pro"
+    | "o1-pro-2025-03-19"
+    | "o3-pro"
+    | "o3-pro-2025-06-10"
+    | "o3-deep-research"
+    | "o3-deep-research-2025-06-26"
+    | "o4-mini-deep-research"
+    | "o4-mini-deep-research-2025-06-26"
+    | "computer-use-preview"
+    | "computer-use-preview-2025-03-11",
+}
+
+// Tool customization: Establish a discriminated type base
+/** Content item used to generate a response. */
+@discriminator("type")
+model ItemParam {
+  type: ItemType;
+}
+
+// Tool customization: Rename to supply base for split input/output models
+/**
+ * The results of a file search tool call. See the
+ * [file search guide](/docs/guides/tools-file-search) for more information.
+ */
+alias FileSearchToolCallItemBase = {
+  /** The queries used to search for files. */
+  queries: string[];
+
+  /** The results of the file search tool call. */
+  results?: FileSearchToolCallItemBaseResult[] | null;
+};
+
+@@doc(FileSearchToolCallItemResource,
+  """
+    The results of a file search tool call. See the
+    [file search guide](/docs/guides/tools-file-search) for more information.
+
+    """
+);
+@@doc(FileSearchToolCallItemParam,
+  """
+    The results of a file search tool call. See the
+    [file search guide](/docs/guides/tools-file-search) for more information.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/**
+ * A tool call to run a function. See the
+ * [function calling guide](/docs/guides/function-calling) for more information.
+ */
+alias FunctionToolCallItemBase = {
+  /** The unique ID of the function tool call generated by the model. */
+  call_id: string;
+
+  /** The name of the function to run. */
+  name: string;
+
+  /** A JSON string of the arguments to pass to the function. */
+  arguments: string;
+};
+
+@@doc(FunctionToolCallItemResource,
+  """
+    A tool call to run a function. See the
+    [function calling guide](/docs/guides/function-calling) for more information.
+
+    """
+);
+@@doc(FunctionToolCallItemParam,
+  """
+    A tool call to run a function. See the
+    [function calling guide](/docs/guides/function-calling) for more information.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/** The output of a function tool call. */
+alias FunctionToolCallOutputItemBase = {
+  /** The unique ID of the function tool call generated by the model. */
+  call_id: string;
+
+  /** A JSON string of the output of the function tool call. */
+  output: string;
+};
+
+@@doc(FunctionToolCallOutputItemResource,
+  """
+    The output of a function tool call.
+
+    """
+);
+@@doc(FunctionToolCallOutputItemParam,
+  """
+    The output of a function tool call.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/**
+ * The results of a web search tool call. See the
+ * [web search guide](/docs/guides/tools-web-search) for more information.
+ */
+alias WebSearchToolCallItemBase = {
+  // Tool customization: Apply discriminated type base
+  /**
+   * An object describing the specific action taken in this web search call.
+   * Includes details on how the model used the web (search, open_page, find).
+   */
+  action: WebSearchAction;
+};
+
+@@doc(WebSearchToolCallItemResource,
+  """
+    The results of a web search tool call. See the
+    [web search guide](/docs/guides/tools-web-search) for more information.
+
+    """
+);
+@@doc(WebSearchToolCallItemParam,
+  """
+    The results of a web search tool call. See the
+    [web search guide](/docs/guides/tools-web-search) for more information.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/**
+ * A tool call to a computer use tool. See the
+ * [computer use guide](/docs/guides/tools-computer-use) for more information.
+ */
+alias ComputerToolCallItemBase = {
+  /** An identifier used when responding to the tool call with output. */
+  call_id: string;
+
+  action: ComputerAction;
+
+  /** The pending safety checks for the computer call. */
+  pending_safety_checks: ComputerToolCallSafetyCheck[];
+};
+
+@@doc(ComputerToolCallItemResource,
+  """
+    A tool call to a computer use tool. See the
+    [computer use guide](/docs/guides/tools-computer-use) for more information.
+
+    """
+);
+@@doc(ComputerToolCallItemParam,
+  """
+    A tool call to a computer use tool. See the
+    [computer use guide](/docs/guides/tools-computer-use) for more information.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/** The output of a computer tool call. */
+alias ComputerToolCallOutputItemBase = {
+  /** The ID of the computer tool call that produced the output. */
+  call_id: string;
+
+  /**
+   * The safety checks reported by the API that have been acknowledged by the
+   * developer.
+   */
+  acknowledged_safety_checks?: ComputerToolCallSafetyCheck[];
+
+  // Tool customization: Apply discriminated type
+  output: ComputerToolCallOutputItemOutput;
+};
+
+@@doc(ComputerToolCallOutputItemResource,
+  """
+    The output of a computer tool call.
+
+    """
+);
+@@doc(ComputerToolCallOutputItemParam,
+  """
+    The output of a computer tool call.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+alias ReasoningItemBase = {
+  @doc("""
+    The encrypted content of the reasoning item - populated when a response is
+    generated with `reasoning.encrypted_content` in the `include` parameter.
+    """)
+  encrypted_content?: string | null;
+
+  // Tool customization: Use customized discriminated type for summary parts
+  /** Reasoning text contents. */
+  summary: ReasoningItemSummaryPart[];
+};
+
+@@doc(ReasoningItemResource,
+  """
+    A description of the chain of thought used by a reasoning model while generating
+    a response. Be sure to include these items in your `input` to the Responses API
+    for subsequent turns of a conversation if you are manually
+    [managing context](/docs/guides/conversation-state).
+
+    """
+);
+@@doc(ReasoningItemParam,
+  """
+    A description of the chain of thought used by a reasoning model while generating
+    a response. Be sure to include these items in your `input` to the Responses API
+    for subsequent turns of a conversation if you are manually
+    [managing context](/docs/guides/conversation-state).
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/** An internal identifier for an item to reference. */
+alias ItemReferenceItemBase = {};
+
+@@doc(ItemReferenceItemParam,
+  """
+    An internal identifier for an item to reference.
+    """
+);
+// Tool customization: Establish a discriminated type base for tools
+/** A tool that can be used to generate a response. */
+union ToolType {
+  string,
+  file_search: "file_search",
+  function: "function",
+  computer_use_preview: "computer_use_preview",
+  web_search_preview: "web_search_preview",
+  mcp: "mcp",
+  code_interpreter: "code_interpreter",
+  image_generation: "image_generation",
+  local_shell: "local_shell",
+}
+@discriminator("type")
+model Tool {
+  type: ToolType;
+}
+
+@doc("""
+  Controls which (if any) tool is called by the model.
+
+  `none` means the model will not call any tool and instead generates a message.
+
+  `auto` means the model can pick between generating a message or calling one or
+  more tools.
+
+  `required` means the model must call one or more tools.
+  """)
+union ToolChoiceOptions {
+  "none",
+  "auto",
+  "required",
+}
+
+// Tool customization: Establish a discriminated type base
+/**
+ * Indicates that the model should use a built-in tool to generate a response.
+ * [Learn more about built-in tools](/docs/guides/tools).
+ */
+union ToolChoiceObjectType {
+  string,
+  file_search: "file_search",
+  function: "function",
+  computer: "computer_use_preview",
+  web_search: "web_search_preview",
+  image_generation: "image_generation",
+  code_interpreter: "code_interpreter",
+  mcp: "mcp",
+}
+@discriminator("type")
+model ToolChoiceObject {
+  type: ToolChoiceObjectType;
+}
+model ToolChoiceObjectFileSearch extends ToolChoiceObject {
+  type: ToolChoiceObjectType.file_search;
+}
+model ToolChoiceObjectComputer extends ToolChoiceObject {
+  type: ToolChoiceObjectType.computer;
+}
+model ToolChoiceObjectWebSearch extends ToolChoiceObject {
+  type: ToolChoiceObjectType.web_search;
+}
+model ToolChoiceObjectImageGen extends ToolChoiceObject {
+  type: ToolChoiceObjectType.image_generation;
+}
+model ToolChoiceObjectCodeInterpreter extends ToolChoiceObject {
+  type: ToolChoiceObjectType.code_interpreter;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base
+/** Use this option to force the model to call a specific function. */
+model ToolChoiceObjectFunction extends ToolChoiceObject {
+  @doc("""
+    For function calling, the type is always `function`.
+    """)
+  type: ToolChoiceObjectType.function;
+
+  /** The name of the function to call. */
+  name: string;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base
+/** Use this option to force the model to call a specific tool on a remote MCP server. */
+model ToolChoiceObjectMCP extends ToolChoiceObject {
+  @doc("""
+    For MCP tools, the type is always `mcp`.
+    """)
+  type: ToolChoiceObjectType.mcp;
+
+  /** The label of the MCP server to use. */
+  server_label: string;
+
+  /** The name of the tool to call on the server. */
+  name?: string | null;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base for tools
+/** Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling). */
+model FunctionTool extends Tool {
+  @doc("""
+    The type of the function tool. Always `function`.
+    """)
+  type: ToolType.function;
+
+  /** The name of the function to call. */
+  name: string;
+
+  /** A description of the function. Used by the model to determine whether or not to call the function. */
+  description?: string | null;
+
+  /** A JSON schema object describing the parameters of the function. */
+  parameters: unknown | null;
+
+  @doc("""
+    Whether to enforce strict parameter validation. Default `true`.
+    """)
+  strict: boolean | null;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base for tools
+/** A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search). */
+model FileSearchTool extends Tool {
+  @doc("""
+    The type of the file search tool. Always `file_search`.
+    """)
+  type: ToolType.file_search;
+
+  /** The IDs of the vector stores to search. */
+  vector_store_ids: string[];
+
+  /** The maximum number of results to return. This number should be between 1 and 50 inclusive. */
+  max_num_results?: int32;
+
+  /** Ranking options for search. */
+  ranking_options?: RankingOptions;
+
+  /** A filter to apply. */
+  filters?: Filters | null;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base for tools
+/** A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use). */
+model ComputerUsePreviewTool extends Tool {
+  @doc("""
+    The type of the computer use tool. Always `computer_use_preview`.
+    """)
+  type: ToolType.computer_use_preview;
+
+  /** The type of computer environment to control. */
+  environment: "windows" | "mac" | "linux" | "ubuntu" | "browser";
+
+  /** The width of the computer display. */
+  display_width: int32;
+
+  /** The height of the computer display. */
+  display_height: int32;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base for tools
+/** This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search). */
+model WebSearchPreviewTool extends Tool {
+  @doc("""
+    The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.
+    """)
+  type: ToolType.web_search_preview;
+
+  // Tool customization: Use a custom discriminated type basis for web search locations
+  /** The user's location. */
+  user_location?: Location | null;
+
+  @doc("""
+    High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
+    """)
+  search_context_size?: "low" | "medium" | "high";
+}
+
+// Tool customization: Establish a discriminated base for location approximation
+union LocationType {
+  string,
+  approximate: "approximate",
+}
+@discriminator("type")
+model Location {
+  type: LocationType;
+}
+model ApproximateLocation extends Location {
+  type: LocationType.approximate;
+  country?: string | null;
+  region?: string | null;
+  city?: string | null;
+  timezone?: string | null;
+}
+
+/** A pending safety check for the computer call. */
+model ComputerCallSafetyCheckParam {
+  /** The ID of the pending safety check. */
+  id: string;
+
+  /** The type of the pending safety check. */
+  code?: string | null;
+
+  /** Details about the pending safety check. */
+  message?: string | null;
+}
+
+/** A pending safety check for the computer call. */
+model ComputerToolCallSafetyCheck {
+  /** The ID of the pending safety check. */
+  id: string;
+
+  /** The type of the pending safety check. */
+  code: string;
+
+  /** Details about the pending safety check. */
+  message: string;
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** A click action. */
+model ComputerActionClick extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a click action, this property is
+    always set to `click`.
+    """)
+  type: ComputerActionType.click;
+
+  @doc("""
+    Indicates which mouse button was pressed during the click. One of `left`, `right`, `wheel`, `back`, or `forward`.
+    """)
+  button: "left" | "right" | "wheel" | "back" | "forward";
+
+  /** The x-coordinate where the click occurred. */
+  x: int32;
+
+  /** The y-coordinate where the click occurred. */
+  y: int32;
+}
+
+// Tool customization: Establish discriminated type base
+union ComputerActionType {
+  screenshot: "screenshot",
+  click: "click",
+  double_click: "double_click",
+  scroll: "scroll",
+  type: "type",
+  wait: "wait",
+  keypress: "keypress",
+  drag: "drag",
+  move: "move",
+}
+@discriminator("type")
+model ComputerAction {
+  type: ComputerActionType;
+}
+
+// Tool customization: Establish a discriminated type basis for computer call outputs
+/** A computer screenshot image used with the computer use tool. */
+union ComputerToolCallOutputItemOutputType {
+  string,
+  screenshot: "computer_screenshot",
+}
+@discriminator("type")
+model ComputerToolCallOutputItemOutput {
+  type: ComputerToolCallOutputItemOutputType;
+}
+model ComputerToolCallOutputItemOutputComputerScreenshot
+  extends ComputerToolCallOutputItemOutput {
+  type: ComputerToolCallOutputItemOutputType.screenshot;
+  image_url?: string;
+  file_id?: string;
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** A double click action. */
+model ComputerActionDoubleClick extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a double click action, this property is
+    always set to `double_click`.
+    """)
+  type: ComputerActionType.double_click;
+
+  /** The x-coordinate where the double click occurred. */
+  x: int32;
+
+  /** The y-coordinate where the double click occurred. */
+  y: int32;
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** A drag action. */
+model ComputerActionDrag extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a drag action, this property is
+    always set to `drag`.
+    """)
+  type: ComputerActionType.drag;
+
+  @doc("""
+    An array of coordinates representing the path of the drag action. Coordinates will appear as an array
+    of objects, eg
+    ```
+    [
+      { x: 100, y: 200 },
+      { x: 200, y: 300 }
+    ]
+    ```
+    """)
+  path: Coordinate[];
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** A mouse move action. */
+model ComputerActionMove extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a move action, this property is
+    always set to `move`.
+    """)
+  type: ComputerActionType.move;
+
+  /** The x-coordinate to move to. */
+  x: int32;
+
+  /** The y-coordinate to move to. */
+  y: int32;
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** A screenshot action. */
+model ComputerActionScreenshot extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a screenshot action, this property is
+    always set to `screenshot`.
+    """)
+  type: ComputerActionType.screenshot;
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** A scroll action. */
+model ComputerActionScroll extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a scroll action, this property is
+    always set to `scroll`.
+    """)
+  type: ComputerActionType.scroll;
+
+  /** The x-coordinate where the scroll occurred. */
+  x: int32;
+
+  /** The y-coordinate where the scroll occurred. */
+  y: int32;
+
+  /** The horizontal scroll distance. */
+  scroll_x: int32;
+
+  /** The vertical scroll distance. */
+  scroll_y: int32;
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** An action to type in text. */
+model ComputerActionTypeKeys extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a type action, this property is
+    always set to `type`.
+    """)
+  type: ComputerActionType.type;
+
+  /** The text to type. */
+  text: string;
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** A wait action. */
+model ComputerActionWait extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a wait action, this property is
+    always set to `wait`.
+    """)
+  type: ComputerActionType.wait;
+}
+
+// Tool customization (apply_discriminator): Apply base discriminator type for ComputerAction and align naming
+/** A collection of keypresses the model would like to perform. */
+model ComputerActionKeyPress extends ComputerAction {
+  @doc("""
+    Specifies the event type. For a keypress action, this property is
+    always set to `keypress`.
+    """)
+  type: ComputerActionType.keypress;
+
+  /**
+   * The combination of keys the model is requesting to be pressed. This is an
+   * array of strings, each representing a key.
+   */
+  keys: string[];
+}
+
+@doc("""
+  An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.
+  """)
+model Coordinate {
+  /** The x-coordinate. */
+  x: int32;
+
+  /** The y-coordinate. */
+  y: int32;
+}
+
+/**
+ * **o-series models only**
+ *
+ * Configuration options for
+ * [reasoning models](https://platform.openai.com/docs/guides/reasoning).
+ */
+model Reasoning {
+  effort?: ReasoningEffort | null = "medium";
+
+  @doc("""
+    A summary of the reasoning performed by the model. This can be
+    useful for debugging and understanding the model's reasoning process.
+    One of `auto`, `concise`, or `detailed`.
+    """)
+  summary?: "auto" | "concise" | "detailed" | null;
+
+  // Tool customization: Correct inapplicable default
+  #suppress "deprecated" "Warning unnecessary for spec description of deprecation"
+  #deprecated "This field is marked as deprecated."
+  @doc("""
+    **Deprecated:** use `summary` instead.
+
+    A summary of the reasoning performed by the model. This can be
+    useful for debugging and understanding the model's reasoning process.
+    One of `auto`, `concise`, or `detailed`.
+    """)
+  generate_summary?: "auto" | "concise" | "detailed" | null = null;
+}
+
+// Tool customization: Establish discriminated type base to increase union precision, rename for clarity
+@doc("""
+  An object specifying the format that the model must output.
+
+  Configuring `{ "type": "json_schema" }` enables Structured Outputs,
+  which ensures the model will match your supplied JSON schema. Learn more in the
+  [Structured Outputs guide](/docs/guides/structured-outputs).
+
+  The default format is `{ "type": "text" }` with no additional options.
+
+  **Not recommended for gpt-4o and newer models:**
+
+  Setting to `{ "type": "json_object" }` enables the older JSON mode, which
+  ensures the message the model generates is valid JSON. Using `json_schema`
+  is preferred for models that support it.
+  """)
+union ResponseTextFormatConfigurationType {
+  string,
+  text: "text",
+  json_schema: "json_schema",
+  json_object: "json_object",
+}
+@discriminator("type")
+model ResponseTextFormatConfiguration {
+  type: ResponseTextFormatConfigurationType;
+}
+model ResponseTextFormatConfigurationText
+  extends ResponseTextFormatConfiguration {
+  type: ResponseTextFormatConfigurationType.text;
+}
+model ResponseTextFormatConfigurationJsonObject
+  extends ResponseTextFormatConfiguration {
+  type: ResponseTextFormatConfigurationType.json_object;
+}
+
+// Tool customization (apply_discriminator): Apply base type
+/**
+ * JSON Schema response format. Used to generate structured JSON responses.
+ * Learn more about [Structured Outputs](/docs/guides/structured-outputs).
+ */
+model ResponseTextFormatConfigurationJsonSchema
+  extends ResponseTextFormatConfiguration {
+  @doc("""
+    The type of response format being defined. Always `json_schema`.
+    """)
+  type: ResponseTextFormatConfigurationType.json_schema;
+
+  /**
+   * A description of what the response format is for, used by the model to
+   * determine how to respond in the format.
+   */
+  description?: string;
+
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain
+   * underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+
+  schema: ResponseFormatJsonSchemaSchema;
+
+  @doc("""
+    Whether to enable strict schema adherence when generating the output.
+    If set to true, the model will always follow the exact schema defined
+    in the `schema` field. Only a subset of JSON Schema is supported when
+    `strict` is `true`. To learn more, read the [Structured Outputs
+    guide](/docs/guides/structured-outputs).
+    """)
+  strict?: boolean | null = false;
+}
+
+@doc("""
+  Specify additional output data to include in the model response. Currently
+  supported values are:
+  - `code_interpreter_call.outputs`: Includes the outputs of python code execution
+    in code interpreter tool call items.
+  - `computer_call_output.output.image_url`: Include image urls from the computer call output.
+  - `file_search_call.results`: Include the search results of
+    the file search tool call.
+  - `message.input_image.image_url`: Include image urls from the input message.
+  - `message.output_text.logprobs`: Include logprobs with assistant messages.
+  - `reasoning.encrypted_content`: Includes an encrypted version of reasoning
+    tokens in reasoning item outputs. This enables reasoning items to be used in
+    multi-turn conversations when using the Responses API statelessly (like
+    when the `store` parameter is set to `false`, or when an organization is
+    enrolled in the zero data retention program).
+  """)
+union Includable {
+  "code_interpreter_call.outputs",
+  "computer_call_output.output.image_url",
+  "file_search_call.results",
+  "message.input_image.image_url",
+  "message.output_text.logprobs",
+  "reasoning.encrypted_content",
+  "web_search_call.results",
+  "web_search_call.action.sources",
+}
+
+// Tool customization: Establish discriminated type hierarchy
+/** Multi-modal input and output contents. */
+union ItemContentType {
+  input_text: "input_text",
+  input_audio: "input_audio",
+  input_image: "input_image",
+  input_file: "input_file",
+  output_text: "output_text",
+  output_audio: "output_audio",
+  refusal: "refusal",
+}
+@discriminator("type")
+model ItemContent {
+  type: ItemContentType;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base, rename for clarity
+/** An audio input to the model. */
+model ItemContentInputAudio extends ItemContent {
+  @doc("""
+    The type of the input item. Always `input_audio`.
+    """)
+  type: ItemContentType.input_audio;
+
+  /** Base64-encoded audio data. */
+  data: string;
+
+  @doc("""
+    The format of the audio data. Currently supported formats are `mp3` and
+    `wav`.
+    """)
+  format: "mp3" | "wav";
+}
+
+/**
+ * A list of one or many input items to the model, containing different content
+ * types.
+ */
+model InputMessageContentList is InputContent[];
+
+// Tool customization (apply_discriminator): Apply discriminated type base, rename for clarity
+/** An audio output from the model. */
+model ItemContentOutputAudio extends ItemContent {
+  @doc("""
+    The type of the output audio. Always `output_audio`.
+    """)
+  type: ItemContentType.output_audio;
+
+  /** Base64-encoded audio data from the model. */
+  data: string;
+
+  /** The transcript of the audio data from the model. */
+  transcript: string;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base, rename for clarity
+/** A refusal from the model. */
+model ItemContentRefusal extends ItemContent {
+  @doc("""
+    The type of the refusal. Always `refusal`.
+    """)
+  type: ItemContentType.refusal;
+
+  /** The refusal explanationfrom the model. */
+  refusal: string;
+}
+
+// Tool customization: Establish discriminated type hierarchy
+union AnnotationType {
+  string,
+  file_citation: "file_citation",
+  url_citation: "url_citation",
+  file_path: "file_path",
+  container_file_citation: "container_file_citation",
+}
+@discriminator("type")
+model Annotation {
+  type: AnnotationType;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated base type, rename for consistency and clarity
+/** A citation to a file. */
+model AnnotationFileCitation extends Annotation {
+  @doc("""
+    The type of the file citation. Always `file_citation`.
+    """)
+  type: AnnotationType.file_citation;
+
+  /** The ID of the file. */
+  file_id: string;
+
+  /** The index of the file in the list of files. */
+  index: int32;
+
+  /** The filename of the file cited. */
+  filename: string;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated base type, rename for consistency and clarity
+/** A citation for a web resource used to generate a model response. */
+model AnnotationUrlCitation extends Annotation {
+  @doc("""
+    The type of the URL citation. Always `url_citation`.
+    """)
+  type: AnnotationType.url_citation;
+
+  // Tool customization: url uses the url type
+  /** The URL of the web resource. */
+  url: url;
+
+  /** The index of the first character of the URL citation in the message. */
+  start_index: int32;
+
+  /** The index of the last character of the URL citation in the message. */
+  end_index: int32;
+
+  /** The title of the web resource. */
+  title: string;
+}
+
+/** A citation for a container file used to generate a model response. */
+model ContainerFileCitationBody {
+  @doc("""
+    The type of the container file citation. Always `container_file_citation`.
+    """)
+  type: "container_file_citation" = "container_file_citation";
+
+  /** The ID of the container file. */
+  container_id: string;
+
+  /** The ID of the file. */
+  file_id: string;
+
+  /** The index of the first character of the container file citation in the message. */
+  start_index: int32;
+
+  /** The index of the last character of the container file citation in the message. */
+  end_index: int32;
+
+  /** The filename of the container file cited. */
+  filename: string;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated base type, rename for consistency and clarity
+/** A path to a file. */
+model AnnotationFilePath extends Annotation {
+  @doc("""
+    The type of the file path. Always `file_path`.
+    """)
+  type: AnnotationType.file_path;
+
+  /** The ID of the file. */
+  file_id: string;
+
+  /** The index of the file in the list of files. */
+  index: int32;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base, rename for clarity
+/** A text input to the model. */
+model ItemContentInputText extends ItemContent {
+  @doc("""
+    The type of the input item. Always `input_text`.
+    """)
+  type: ItemContentType.input_text;
+
+  /** The text input to the model. */
+  text: string;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base, rename for clarity
+/** An image input to the model. Learn about [image inputs](/docs/guides/vision). */
+model ItemContentInputImage extends ItemContent {
+  @doc("""
+    The type of the input item. Always `input_image`.
+    """)
+  type: ItemContentType.input_image;
+
+  /** The URL of the image to be sent to the model. A fully qualified URL or base64 encoded image in a data URL. */
+  image_url?: string | null;
+
+  /** The ID of the file to be sent to the model. */
+  file_id?: string | null;
+
+  // Tool customization: Fix optionality, default of property
+  @doc("""
+    The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`.
+    """)
+  detail?: "low" | "high" | "auto" = "auto";
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base, rename for clarity
+/** A file input to the model. */
+model ItemContentInputFile extends ItemContent {
+  @doc("""
+    The type of the input item. Always `input_file`.
+    """)
+  type: ItemContentType.input_file;
+
+  /** The ID of the file to be sent to the model. */
+  file_id?: string | null;
+
+  /** The name of the file to be sent to the model. */
+  filename?: string;
+
+  /** The content of the file to be sent to the model. */
+  file_data?: string;
+}
+
+model RankingOptions {
+  /** The ranker to use for the file search. */
+  ranker?: "auto" | "default-2024-11-15";
+
+  /** The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will attempt to return only the most relevant results, but may return fewer results. */
+  score_threshold?: float32;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+union Filters {
+  ComparisonFilter,
+  CompoundFilter,
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base, rename for clarity
+/** A text output from the model. */
+model ItemContentOutputText extends ItemContent {
+  @doc("""
+    The type of the output text. Always `output_text`.
+    """)
+  type: ItemContentType.output_text;
+
+  /** The text output from the model. */
+  text: string;
+
+  /** The annotations of the text output. */
+  annotations: Annotation[];
+
+  logprobs?: LogProb[];
+}
+
+/**
+ * Represents token usage details including input tokens, output tokens,
+ * a breakdown of output tokens, and the total tokens used.
+ */
+model ResponseUsage {
+  /** The number of input tokens. */
+  input_tokens: int32;
+
+  /** A detailed breakdown of the input tokens. */
+  input_tokens_details: {
+    /**
+     * The number of tokens that were retrieved from the cache.
+     * [More on prompt caching](/docs/guides/prompt-caching).
+     */
+    cached_tokens: int32;
+  };
+
+  /** The number of output tokens. */
+  output_tokens: int32;
+
+  /** A detailed breakdown of the output tokens. */
+  output_tokens_details: {
+    /** The number of reasoning tokens. */
+    reasoning_tokens: int32;
+  };
+
+  /** The total number of tokens used. */
+  total_tokens: int32;
+}
+
+/** An error object returned when the model fails to generate a Response. */
+model ResponseError {
+  code: ResponseErrorCode;
+
+  /** A human-readable description of the error. */
+  message: string;
+}
+
+/** The error code for the response. */
+union ResponseErrorCode {
+  "server_error",
+  "rate_limit_exceeded",
+  "invalid_prompt",
+  "vector_store_timeout",
+  "invalid_image",
+  "invalid_image_format",
+  "invalid_base64_image",
+  "invalid_image_url",
+  "image_too_large",
+  "image_too_small",
+  "image_parse_error",
+  "image_content_policy_violation",
+  "invalid_image_mode",
+  "image_file_too_large",
+  "unsupported_image_media_type",
+  "empty_image_file",
+  "failed_to_download_image",
+  "image_file_not_found",
+}
+
+/** A list of Response items. */
+model ResponseItemList {
+  @doc("""
+    The type of object returned, must be `list`.
+    """)
+  object: "list";
+
+  /** A list of items used to generate this response. */
+  data: ItemResource[];
+
+  /** Whether there are more items available. */
+  has_more: boolean;
+
+  /** The ID of the first item in the list. */
+  first_id: string;
+
+  /** The ID of the last item in the list. */
+  last_id: string;
+}
+
+// Tool customization: Establish discriminated type base
+union ResponseStreamEventType {
+  string,
+  response_audio_delta: "response.audio.delta",
+  response_audio_done: "response.audio.done",
+  response_audio_transcript_delta: "response.audio_transcript.delta",
+  response_audio_transcript_done: "response.audio_transcript.done",
+  response_code_interpreter_call_code_delta: "response.code_interpreter_call_code.delta",
+  response_code_interpreter_call_code_done: "response.code_interpreter_call_code.done",
+  response_code_interpreter_call_completed: "response.code_interpreter_call.completed",
+  response_code_interpreter_call_in_progress: "response.code_interpreter_call.in_progress",
+  response_code_interpreter_call_interpreting: "response.code_interpreter_call.interpreting",
+  response_completed: "response.completed",
+  response_content_part_added: "response.content_part.added",
+  response_content_part_done: "response.content_part.done",
+  response_created: "response.created",
+  error: "error",
+  response_file_search_call_completed: "response.file_search_call.completed",
+  response_file_search_call_in_progress: "response.file_search_call.in_progress",
+  response_file_search_call_searching: "response.file_search_call.searching",
+  response_function_call_arguments_delta: "response.function_call_arguments.delta",
+  response_function_call_arguments_done: "response.function_call_arguments.done",
+  response_in_progress: "response.in_progress",
+  response_failed: "response.failed",
+  response_incomplete: "response.incomplete",
+  response_output_item_added: "response.output_item.added",
+  response_output_item_done: "response.output_item.done",
+  response_refusal_delta: "response.refusal.delta",
+  response_refusal_done: "response.refusal.done",
+  response_output_text_annotation_added: "response.output_text.annotation.added",
+  response_output_text_delta: "response.output_text.delta",
+  response_output_text_done: "response.output_text.done",
+  response_reasoning_summary_part_added: "response.reasoning_summary_part.added",
+  response_reasoning_summary_part_done: "response.reasoning_summary_part.done",
+  response_reasoning_summary_text_delta: "response.reasoning_summary_text.delta",
+  response_reasoning_summary_text_done: "response.reasoning_summary_text.done",
+  response_web_search_call_completed: "response.web_search_call.completed",
+  response_web_search_call_in_progress: "response.web_search_call.in_progress",
+  response_web_search_call_searching: "response.web_search_call.searching",
+  response_image_generation_call_completed: "response.image_generation_call.completed",
+  response_image_generation_call_generating: "response.image_generation_call.generating",
+  response_image_generation_call_in_progress: "response.image_generation_call.in_progress",
+  response_image_generation_call_partial_image: "response.image_generation_call.partial_image",
+  response_mcp_call_arguments_delta: "response.mcp_call.arguments_delta",
+  response_mcp_call_arguments_done: "response.mcp_call.arguments_done",
+  response_mcp_call_completed: "response.mcp_call.completed",
+  response_mcp_call_failed: "response.mcp_call.failed",
+  response_mcp_call_in_progress: "response.mcp_call.in_progress",
+  response_mcp_list_tools_completed: "response.mcp_list_tools.completed",
+  response_mcp_list_tools_failed: "response.mcp_list_tools.failed",
+  response_mcp_list_tools_in_progress: "response.mcp_list_tools.in_progress",
+  response_queued: "response.queued",
+  response_reasoning_delta: "response.reasoning.delta",
+  response_reasoning_done: "response.reasoning.done",
+  response_reasoning_summary_delta: "response.reasoning_summary.delta",
+  response_reasoning_summary_done: "response.reasoning_summary.done",
+}
+@discriminator("type")
+model ResponseStreamEvent {
+  type: ResponseStreamEventType;
+
+  /** The sequence number for this event. */
+  sequence_number: int32;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the model response is complete. */
+model ResponseCompletedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.completed`.
+    """)
+  type: ResponseStreamEventType.response_completed;
+
+  /** Properties of the completed response. */
+  response: Response;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a new content part is added. */
+model ResponseContentPartAddedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.content_part.added`.
+    """)
+  type: ResponseStreamEventType.response_content_part_added;
+
+  /** The ID of the output item that the content part was added to. */
+  item_id: string;
+
+  /** The index of the output item that the content part was added to. */
+  output_index: int32;
+
+  /** The index of the content part that was added. */
+  content_index: int32;
+
+  /** The content part that was added. */
+  part: OutputContent;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a content part is done. */
+model ResponseContentPartDoneEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.content_part.done`.
+    """)
+  type: ResponseStreamEventType.response_content_part_done;
+
+  /** The ID of the output item that the content part was added to. */
+  item_id: string;
+
+  /** The index of the output item that the content part was added to. */
+  output_index: int32;
+
+  /** The index of the content part that is done. */
+  content_index: int32;
+
+  /** The content part that is done. */
+  part: OutputContent;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** An event that is emitted when a response is created. */
+model ResponseCreatedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.created`.
+    """)
+  type: ResponseStreamEventType.response_created;
+
+  /** The response that was created. */
+  response: Response;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an error occurs. */
+model ResponseErrorEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `error`.
+    """)
+  type: ResponseStreamEventType.error;
+
+  /** The error code. */
+  code: string | null;
+
+  /** The error message. */
+  message: string;
+
+  /** The error parameter. */
+  param: string | null;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a file search call is completed (results found). */
+model ResponseFileSearchCallCompletedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.file_search_call.completed`.
+    """)
+  type: ResponseStreamEventType.response_file_search_call_completed;
+
+  /** The index of the output item that the file search call is initiated. */
+  output_index: int32;
+
+  /** The ID of the output item that the file search call is initiated. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a file search call is initiated. */
+model ResponseFileSearchCallInProgressEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.file_search_call.in_progress`.
+    """)
+  type: ResponseStreamEventType.response_file_search_call_in_progress;
+
+  /** The index of the output item that the file search call is initiated. */
+  output_index: int32;
+
+  /** The ID of the output item that the file search call is initiated. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a file search is currently searching. */
+model ResponseFileSearchCallSearchingEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.file_search_call.searching`.
+    """)
+  type: ResponseStreamEventType.response_file_search_call_searching;
+
+  /** The index of the output item that the file search call is searching. */
+  output_index: int32;
+
+  /** The ID of the output item that the file search call is initiated. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when there is a partial function-call arguments delta. */
+model ResponseFunctionCallArgumentsDeltaEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.function_call_arguments.delta`.
+    """)
+  type: ResponseStreamEventType.response_function_call_arguments_delta;
+
+  /** The ID of the output item that the function-call arguments delta is added to. */
+  item_id: string;
+
+  /** The index of the output item that the function-call arguments delta is added to. */
+  output_index: int32;
+
+  /** The function-call arguments delta that is added. */
+  delta: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when function-call arguments are finalized. */
+model ResponseFunctionCallArgumentsDoneEvent extends ResponseStreamEvent {
+  type: ResponseStreamEventType.response_function_call_arguments_done;
+
+  /** The ID of the item. */
+  item_id: string;
+
+  /** The index of the output item. */
+  output_index: int32;
+
+  /** The function-call arguments. */
+  arguments: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the response is in progress. */
+model ResponseInProgressEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.in_progress`.
+    """)
+  type: ResponseStreamEventType.response_in_progress;
+
+  /** The response that is in progress. */
+  response: Response;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** An event that is emitted when a response fails. */
+model ResponseFailedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.failed`.
+    """)
+  type: ResponseStreamEventType.response_failed;
+
+  /** The response that failed. */
+  response: Response;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** An event that is emitted when a response finishes as incomplete. */
+model ResponseIncompleteEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.incomplete`.
+    """)
+  type: ResponseStreamEventType.response_incomplete;
+
+  /** The response that was incomplete. */
+  response: Response;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a new output item is added. */
+model ResponseOutputItemAddedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.output_item.added`.
+    """)
+  type: ResponseStreamEventType.response_output_item_added;
+
+  /** The index of the output item that was added. */
+  output_index: int32;
+
+  /** The output item that was added. */
+  item: OutputItem;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an output item is marked done. */
+model ResponseOutputItemDoneEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.output_item.done`.
+    """)
+  type: ResponseStreamEventType.response_output_item_done;
+
+  /** The index of the output item that was marked done. */
+  output_index: int32;
+
+  /** The output item that was marked done. */
+  item: OutputItem;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when there is a partial refusal text. */
+model ResponseRefusalDeltaEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.refusal.delta`.
+    """)
+  type: ResponseStreamEventType.response_refusal_delta;
+
+  /** The ID of the output item that the refusal text is added to. */
+  item_id: string;
+
+  /** The index of the output item that the refusal text is added to. */
+  output_index: int32;
+
+  /** The index of the content part that the refusal text is added to. */
+  content_index: int32;
+
+  /** The refusal text that is added. */
+  delta: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when refusal text is finalized. */
+model ResponseRefusalDoneEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.refusal.done`.
+    """)
+  type: ResponseStreamEventType.response_refusal_done;
+
+  /** The ID of the output item that the refusal text is finalized. */
+  item_id: string;
+
+  /** The index of the output item that the refusal text is finalized. */
+  output_index: int32;
+
+  /** The index of the content part that the refusal text is finalized. */
+  content_index: int32;
+
+  /** The refusal text that is finalized. */
+  refusal: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when there is an additional text delta. */
+model ResponseTextDeltaEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.output_text.delta`.
+    """)
+  type: ResponseStreamEventType.response_output_text_delta;
+
+  /** The ID of the output item that the text delta was added to. */
+  item_id: string;
+
+  /** The index of the output item that the text delta was added to. */
+  output_index: int32;
+
+  /** The index of the content part that the text delta was added to. */
+  content_index: int32;
+
+  /** The text delta that was added. */
+  delta: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when text content is finalized. */
+model ResponseTextDoneEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.output_text.done`.
+    """)
+  type: ResponseStreamEventType.response_output_text_done;
+
+  /** The ID of the output item that the text content is finalized. */
+  item_id: string;
+
+  /** The index of the output item that the text content is finalized. */
+  output_index: int32;
+
+  /** The index of the content part that the text content is finalized. */
+  content_index: int32;
+
+  /** The text content that is finalized. */
+  text: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a new reasoning summary part is added. */
+model ResponseReasoningSummaryPartAddedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.reasoning_summary_part.added`.
+    """)
+  type: ResponseStreamEventType.response_reasoning_summary_part_added;
+
+  /** The ID of the item this summary part is associated with. */
+  item_id: string;
+
+  /** The index of the output item this summary part is associated with. */
+  output_index: int32;
+
+  /** The index of the summary part within the reasoning summary. */
+  summary_index: int32;
+
+  // Tool customization: Use customized discriminated type for summary parts
+  /** The summary part that was added. */
+  part: ReasoningItemSummaryPart;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a reasoning summary part is completed. */
+model ResponseReasoningSummaryPartDoneEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.reasoning_summary_part.done`.
+    """)
+  type: ResponseStreamEventType.response_reasoning_summary_part_done;
+
+  /** The ID of the item this summary part is associated with. */
+  item_id: string;
+
+  /** The index of the output item this summary part is associated with. */
+  output_index: int32;
+
+  /** The index of the summary part within the reasoning summary. */
+  summary_index: int32;
+
+  // Tool customization: Use customized discriminated type for summary parts
+  /** The completed summary part. */
+  part: ReasoningItemSummaryPart;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a delta is added to a reasoning summary text. */
+model ResponseReasoningSummaryTextDeltaEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.reasoning_summary_text.delta`.
+    """)
+  type: ResponseStreamEventType.response_reasoning_summary_text_delta;
+
+  /** The ID of the item this summary text delta is associated with. */
+  item_id: string;
+
+  /** The index of the output item this summary text delta is associated with. */
+  output_index: int32;
+
+  /** The index of the summary part within the reasoning summary. */
+  summary_index: int32;
+
+  /** The text delta that was added to the summary. */
+  delta: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a reasoning summary text is completed. */
+model ResponseReasoningSummaryTextDoneEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.reasoning_summary_text.done`.
+    """)
+  type: ResponseStreamEventType.response_reasoning_summary_text_done;
+
+  /** The ID of the item this summary text is associated with. */
+  item_id: string;
+
+  /** The index of the output item this summary text is associated with. */
+  output_index: int32;
+
+  /** The index of the summary part within the reasoning summary. */
+  summary_index: int32;
+
+  /** The full text of the completed reasoning summary. */
+  text: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a web search call is completed. */
+model ResponseWebSearchCallCompletedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.web_search_call.completed`.
+    """)
+  type: ResponseStreamEventType.response_web_search_call_completed;
+
+  /** The index of the output item that the web search call is associated with. */
+  output_index: int32;
+
+  /** Unique ID for the output item associated with the web search call. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a web search call is initiated. */
+model ResponseWebSearchCallInProgressEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.web_search_call.in_progress`.
+    """)
+  type: ResponseStreamEventType.response_web_search_call_in_progress;
+
+  /** The index of the output item that the web search call is associated with. */
+  output_index: int32;
+
+  /** Unique ID for the output item associated with the web search call. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a web search call is executing. */
+model ResponseWebSearchCallSearchingEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.web_search_call.searching`.
+    """)
+  type: ResponseStreamEventType.response_web_search_call_searching;
+
+  /** The index of the output item that the web search call is associated with. */
+  output_index: int32;
+
+  /** Unique ID for the output item associated with the web search call. */
+  item_id: string;
+}
+
+// Tool customization: Establish a discriminated type base
+/** Content item used to generate a response. */
+@discriminator("type")
+model ItemResource {
+  type: ItemType;
+  id: string;
+}
+
+// Tool customization: Stub/remove deeply customized type
+alias InputItem = ItemParam;
+
+// Tool customization: Stub/remove deeply customized type
+alias InputContent = ItemContent;
+
+// Tool customization: Stub/remove deeply customized type
+alias OutputContent = ItemContent;
+
+// Tool customization: Stub/remove deeply customized type
+alias OutputItem = ItemResource;
+
+// Tool customization: Stub/remove deeply customized type
+alias OutputMessage = ResponsesMessageItemResource;
+
+// Tool customization: Stub/remove deeply customized type
+alias InputMessage = ResponsesMessageItemResource;
+
+// Tool customization: Stub/remove deeply customized type
+alias InputMessageResource = ResponsesMessageItemParam;
+
+// Tool customization: Stub/remove deeply customized type
+alias ComputerCallOutputItemParam = ItemParam;
+
+// Tool customization: Stub/remove deeply customized type
+alias ComputerToolCallOutputResource = ComputerToolCallOutputItemResource;
+
+// Tool customization: Stub/remove deeply customized type
+alias FunctionToolCallResource = FunctionToolCallItemResource;
+
+// Tool customization: Stub/remove deeply customized type
+alias FunctionToolCallOutputResource = FunctionToolCallOutputItemResource;
+
+// Tool customization: Stub/remove deeply customized type
+alias FunctionCallOutputItemParam = FunctionToolCallOutputItemParam;
+
+// Tool customization (apply_discriminator): Apply discriminated type base for tools
+/** A tool that runs Python code to help generate a response to a prompt. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+model CodeInterpreterTool extends Tool {
+  @doc("""
+    The type of the code interpreter tool. Always `code_interpreter`.
+    """)
+  type: ToolType.code_interpreter;
+
+  /**
+   * The code interpreter container. Can be a container ID or an object that
+   * specifies uploaded file IDs to make available to your code.
+   */
+  container: string | CodeInterpreterToolAuto;
+}
+
+/**
+ * Configuration for a code interpreter container. Optionally specify the IDs
+ * of the files to run the code on.
+ */
+model CodeInterpreterToolAuto {
+  @doc("""
+    Always `auto`.
+    """)
+  type: "auto";
+
+  /** An optional list of uploaded files to make available to your code. */
+  file_ids?: string[];
+}
+
+// Tool customization (apply_discriminator): Establish discriminated type base
+/** The image output from the code interpreter. */
+model CodeInterpreterOutputImage extends CodeInterpreterOutput {
+  /** The type of the output. Always 'image'. */
+  type: CodeInterpreterOutputType.image;
+
+  // Tool customization: url uses the url type
+  /** The URL of the image output from the code interpreter. */
+  url: url;
+}
+
+// Tool customization (apply_discriminator): Establish discriminated type base
+/** The logs output from the code interpreter. */
+model CodeInterpreterOutputLogs extends CodeInterpreterOutput {
+  /** The type of the output. Always 'logs'. */
+  type: CodeInterpreterOutputType.logs;
+
+  /** The logs output from the code interpreter. */
+  logs: string;
+}
+
+// Tool customization (apply_discriminator): Establish discriminated type base
+/** Action type "find": Searches for a pattern within a loaded page. */
+model WebSearchActionFind extends WebSearchAction {
+  /** The action type. */
+  type: WebSearchActionType.find;
+
+  // Tool customization: url uses the url type
+  /** The URL of the page searched for the pattern. */
+  url: url;
+
+  /** The pattern or text to search for within the page. */
+  pattern: string;
+}
+
+// Tool customization (apply_discriminator): Establish discriminated type base
+/** Action type "open_page" - Opens a specific URL from search results. */
+model WebSearchActionOpenPage extends WebSearchAction {
+  /** The action type. */
+  type: WebSearchActionType.open_page;
+
+  // Tool customization: url uses the url type
+  /** The URL opened by the model. */
+  url: url;
+}
+
+// Tool customization (apply_discriminator): Establish discriminated type base
+/** Action type "search" - Performs a web search query. */
+model WebSearchActionSearch extends WebSearchAction {
+  /** The action type. */
+  type: WebSearchActionType.search;
+
+  /** The search query. */
+  query: string;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base for tools
+@doc("""
+  A tool that generates images using a model like `gpt-image-1`.
+  """)
+model ImageGenTool extends Tool {
+  @doc("""
+    The type of the image generation tool. Always `image_generation`.
+    """)
+  type: ToolType.image_generation;
+
+  @doc("""
+    The image generation model to use. Default: `gpt-image-1`.
+    """)
+  `model`?: "gpt-image-1" = "gpt-image-1";
+
+  @doc("""
+    The quality of the generated image. One of `low`, `medium`, `high`,
+    or `auto`. Default: `auto`.
+    """)
+  quality?: "low" | "medium" | "high" | "auto" = "auto";
+
+  @doc("""
+    The size of the generated image. One of `1024x1024`, `1024x1536`,
+    `1536x1024`, or `auto`. Default: `auto`.
+    """)
+  size?: "1024x1024" | "1024x1536" | "1536x1024" | "auto" = "auto";
+
+  @doc("""
+    The output format of the generated image. One of `png`, `webp`, or
+    `jpeg`. Default: `png`.
+    """)
+  output_format?: "png" | "webp" | "jpeg" = "png";
+
+  /** Compression level for the output image. Default: 100. */
+  @minValue(0)
+  @maxValue(100)
+  output_compression?: int32 = 100;
+
+  @doc("""
+    Moderation level for the generated image. Default: `auto`.
+    """)
+  moderation?: "auto" | "low" = "auto";
+
+  @doc("""
+    Background type for the generated image. One of `transparent`,
+    `opaque`, or `auto`. Default: `auto`.
+    """)
+  background?: "transparent" | "opaque" | "auto" = "auto";
+
+  @doc("""
+    Optional mask for inpainting. Contains `image_url`
+    (string, optional) and `file_id` (string, optional).
+    """)
+  input_image_mask?: {
+    /** Base64-encoded mask image. */
+    image_url?: string;
+
+    /** File ID for the mask image. */
+    file_id?: string;
+  };
+
+  /** Number of partial images to generate in streaming mode, from 0 (default value) to 3. */
+  @minValue(0)
+  @maxValue(3)
+  partial_images?: int32 = 0;
+}
+
+// Tool customization: Rename to supply base for split input/output models
+/** An image generation request made by the model. */
+alias ImageGenToolCallItemBase = {
+  /** The generated image encoded in base64. */
+  result: string | null;
+};
+
+@@doc(ImageGenToolCallItemResource,
+  """
+    An image generation request made by the model.
+
+    """
+);
+@@doc(ImageGenToolCallItemParam,
+  """
+    An image generation request made by the model.
+
+    """
+);
+/** Execute a shell command on the server. */
+model LocalShellExecAction {
+  @doc("""
+    The type of the local shell action. Always `exec`.
+    """)
+  type: "exec";
+
+  /** The command to run. */
+  command: string[];
+
+  /** Optional timeout in milliseconds for the command. */
+  timeout_ms?: int32 | null;
+
+  /** Optional working directory to run the command in. */
+  working_directory?: string | null;
+
+  /** Environment variables to set for the command. */
+  env: Record<string>;
+
+  /** Optional user to run the command as. */
+  user?: string | null;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base for tools
+/** A tool that allows the model to execute shell commands in a local environment. */
+model LocalShellTool extends Tool {
+  @doc("""
+    The type of the local shell tool. Always `local_shell`.
+    """)
+  type: ToolType.local_shell;
+}
+
+// Tool customization: Rename to supply base for split input/output models
+/** A tool call to run a command on the local shell. */
+alias LocalShellToolCallItemBase = {
+  /** The unique ID of the local shell tool call generated by the model. */
+  call_id: string;
+
+  action: LocalShellExecAction;
+};
+
+@@doc(LocalShellToolCallItemResource,
+  """
+    A tool call to run a command on the local shell.
+
+    """
+);
+@@doc(LocalShellToolCallItemParam,
+  """
+    A tool call to run a command on the local shell.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/** The output of a local shell tool call. */
+alias LocalShellToolCallOutputItemBase = {
+  /** A JSON string of the output of the local shell tool call. */
+  output: string;
+};
+
+@@doc(LocalShellToolCallOutputItemResource,
+  """
+    The output of a local shell tool call.
+
+    """
+);
+@@doc(LocalShellToolCallOutputItemParam,
+  """
+    The output of a local shell tool call.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/** A request for human approval of a tool invocation. */
+alias MCPApprovalRequestItemBase = {
+  /** The label of the MCP server making the request. */
+  server_label: string;
+
+  /** The name of the tool to run. */
+  name: string;
+
+  /** A JSON string of arguments for the tool. */
+  arguments: string;
+};
+
+@@doc(MCPApprovalRequestItemResource,
+  """
+    A request for human approval of a tool invocation.
+
+    """
+);
+@@doc(MCPApprovalRequestItemParam,
+  """
+    A request for human approval of a tool invocation.
+
+    """
+);
+// Tool customization: Rename to supply base for split input/output models
+/** A response to an MCP approval request. */
+alias MCPApprovalResponseItemBase = {
+  /** The ID of the approval request being answered. */
+  approval_request_id: string;
+
+  /** Whether the request was approved. */
+  approve: boolean;
+
+  /** Optional reason for the decision. */
+  reason?: string | null;
+};
+
+@@doc(MCPApprovalResponseItemResource,
+  """
+    A response to an MCP approval request.
+
+    """
+);
+@@doc(MCPApprovalResponseItemParam,
+  """
+    A response to an MCP approval request.
+
+    """
+);
+// Tool customization: Stub for already-split type
+alias MCPApprovalResponseResource = MCPApprovalResponseItemResource;
+
+// Tool customization: Rename to supply base for split input/output models
+/** A list of tools available on an MCP server. */
+alias MCPListToolsItemBase = {
+  /** The label of the MCP server. */
+  server_label: string;
+
+  /** The tools available on the server. */
+  tools: MCPListToolsTool[];
+
+  /** Error message if the server could not list tools. */
+  error?: string | null;
+};
+
+@@doc(MCPListToolsItemResource,
+  """
+    A list of tools available on an MCP server.
+
+    """
+);
+@@doc(MCPListToolsItemParam,
+  """
+    A list of tools available on an MCP server.
+
+    """
+);
+/** A tool available on an MCP server. */
+model MCPListToolsTool {
+  /** The name of the tool. */
+  name: string;
+
+  /** The description of the tool. */
+  description?: string | null;
+
+  /** The JSON schema describing the tool's input. */
+  input_schema: unknown;
+
+  /** Additional annotations about the tool. */
+  annotations?: unknown | null;
+}
+
+// Tool customization (apply_discriminator): Apply discriminated type base for tools
+/**
+ * Give the model access to additional tools via remote Model Context Protocol
+ * (MCP) servers. [Learn more about MCP](/docs/guides/tools-remote-mcp).
+ */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+model MCPTool extends Tool {
+  @doc("""
+    The type of the MCP tool. Always `mcp`.
+    """)
+  type: ToolType.mcp;
+
+  /** A label for this MCP server, used to identify it in tool calls. */
+  server_label: string;
+
+  /** The URL for the MCP server. */
+  server_url: string;
+
+  /**
+   * Optional HTTP headers to send to the MCP server. Use for authentication
+   * or other purposes.
+   */
+  headers?: Record<string> | null;
+
+  /** List of allowed tool names or a filter object. */
+  allowed_tools?: string[] | {
+    /** List of allowed tool names. */
+    tool_names?: string[];
+  } | null;
+
+  /** Specify which of the MCP server's tools require approval. */
+  require_approval?:
+    | {
+        /** A list of tools that always require approval. */
+        always?: {
+          /** List of tools that require approval. */
+          tool_names?: string[];
+        };
+
+        /** A list of tools that never require approval. */
+        `never`?: {
+          /** List of tools that do not require approval. */
+          tool_names?: string[];
+        };
+      }
+    | "always"
+    | "never"
+    | null = "always";
+}
+
+// Tool customization: Rename to supply base for split input/output models
+/** An invocation of a tool on an MCP server. */
+alias MCPCallItemBase = {
+  /** The label of the MCP server running the tool. */
+  server_label: string;
+
+  /** The name of the tool that was run. */
+  name: string;
+
+  /** A JSON string of the arguments passed to the tool. */
+  arguments: string;
+
+  /** The output from the tool call. */
+  output?: string | null;
+
+  /** The error from the tool call, if any. */
+  error?: string | null;
+};
+
+@@doc(MCPCallItemResource,
+  """
+    An invocation of a tool on an MCP server.
+
+    """
+);
+@@doc(MCPCallItemParam,
+  """
+    An invocation of a tool on an MCP server.
+
+    """
+);
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an image generation tool call has completed and the final image is available. */
+model ResponseImageGenCallCompletedEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.image_generation_call.completed'. */
+  type: ResponseStreamEventType.response_image_generation_call_completed;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The unique identifier of the image generation item being processed. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an image generation tool call is actively generating an image (intermediate state). */
+model ResponseImageGenCallGeneratingEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.image_generation_call.generating'. */
+  type: ResponseStreamEventType.response_image_generation_call_generating;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The unique identifier of the image generation item being processed. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an image generation tool call is in progress. */
+model ResponseImageGenCallInProgressEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.image_generation_call.in_progress'. */
+  type: ResponseStreamEventType.response_image_generation_call_in_progress;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The unique identifier of the image generation item being processed. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a partial image is available during image generation streaming. */
+model ResponseImageGenCallPartialImageEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.image_generation_call.partial_image'. */
+  type: ResponseStreamEventType.response_image_generation_call_partial_image;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The unique identifier of the image generation item being processed. */
+  item_id: string;
+
+  /** 0-based index for the partial image (backend is 1-based, but this is 0-based for the user). */
+  partial_image_index: int32;
+
+  /** Base64-encoded partial image data, suitable for rendering as an image. */
+  partial_image_b64: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when there is a delta (partial update) to the arguments of an MCP tool call. */
+model ResponseMCPCallArgumentsDeltaEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.mcp_call.arguments_delta'. */
+  type: ResponseStreamEventType.response_mcp_call_arguments_delta;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The unique identifier of the MCP tool call item being processed. */
+  item_id: string;
+
+  /** The partial update to the arguments for the MCP tool call. */
+  delta: unknown;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the arguments for an MCP tool call are finalized. */
+model ResponseMCPCallArgumentsDoneEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.mcp_call.arguments_done'. */
+  type: ResponseStreamEventType.response_mcp_call_arguments_done;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The unique identifier of the MCP tool call item being processed. */
+  item_id: string;
+
+  /** The finalized arguments for the MCP tool call. */
+  arguments: unknown;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an MCP  tool call has completed successfully. */
+model ResponseMCPCallCompletedEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.mcp_call.completed'. */
+  type: ResponseStreamEventType.response_mcp_call_completed;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an MCP  tool call has failed. */
+model ResponseMCPCallFailedEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.mcp_call.failed'. */
+  type: ResponseStreamEventType.response_mcp_call_failed;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an MCP  tool call is in progress. */
+model ResponseMCPCallInProgressEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.mcp_call.in_progress'. */
+  type: ResponseStreamEventType.response_mcp_call_in_progress;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The unique identifier of the MCP tool call item being processed. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the list of available MCP tools has been successfully retrieved. */
+model ResponseMCPListToolsCompletedEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.mcp_list_tools.completed'. */
+  type: ResponseStreamEventType.response_mcp_list_tools_completed;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the attempt to list available MCP tools has failed. */
+model ResponseMCPListToolsFailedEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.mcp_list_tools.failed'. */
+  type: ResponseStreamEventType.response_mcp_list_tools_failed;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the system is in the process of retrieving the list of available MCP tools. */
+model ResponseMCPListToolsInProgressEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.mcp_list_tools.in_progress'. */
+  type: ResponseStreamEventType.response_mcp_list_tools_in_progress;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when an annotation is added to output text content. */
+model ResponseOutputTextAnnotationAddedEvent {
+  /** The type of the event. Always 'response.output_text_annotation.added'. */
+  type: "response.output_text_annotation.added";
+
+  /** The unique identifier of the item to which the annotation is being added. */
+  item_id: string;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The index of the content part within the output item. */
+  content_index: int32;
+
+  /** The index of the annotation within the content part. */
+  annotation_index: int32;
+
+  /** The annotation object being added. (See annotation schema for details.) */
+  annotation: unknown;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a response is queued and waiting to be processed. */
+model ResponseQueuedEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.queued'. */
+  type: ResponseStreamEventType.response_queued;
+
+  /** The full response object that is queued. */
+  response: Response;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when there is a delta (partial update) to the reasoning content. */
+model ResponseReasoningDeltaEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.reasoning.delta'. */
+  type: ResponseStreamEventType.response_reasoning_delta;
+
+  /** The unique identifier of the item for which reasoning is being updated. */
+  item_id: string;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The index of the reasoning content part within the output item. */
+  content_index: int32;
+
+  /** The partial update to the reasoning content. */
+  delta: unknown;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the reasoning content is finalized for an item. */
+model ResponseReasoningDoneEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.reasoning.done'. */
+  type: ResponseStreamEventType.response_reasoning_done;
+
+  /** The unique identifier of the item for which reasoning is finalized. */
+  item_id: string;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The index of the reasoning content part within the output item. */
+  content_index: int32;
+
+  /** The finalized reasoning text. */
+  text: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when there is a delta (partial update) to the reasoning summary content. */
+model ResponseReasoningSummaryDeltaEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.reasoning_summary.delta'. */
+  type: ResponseStreamEventType.response_reasoning_summary_delta;
+
+  /** The unique identifier of the item for which the reasoning summary is being updated. */
+  item_id: string;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The index of the summary part within the output item. */
+  summary_index: int32;
+
+  /** The partial update to the reasoning summary content. */
+  delta: unknown;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the reasoning summary content is finalized for an item. */
+model ResponseReasoningSummaryDoneEvent extends ResponseStreamEvent {
+  /** The type of the event. Always 'response.reasoning_summary.done'. */
+  type: ResponseStreamEventType.response_reasoning_summary_done;
+
+  /** The unique identifier of the item for which the reasoning summary is finalized. */
+  item_id: string;
+
+  /** The index of the output item in the response's output array. */
+  output_index: int32;
+
+  /** The index of the summary part within the output item. */
+  summary_index: int32;
+
+  /** The finalized reasoning summary text. */
+  text: string;
+}
+
+// Tool customization: Stub orphaned old output type
+alias CodeInterpreterFileOutput = unknown;
+
+// Tool customization: Stub orphaned copy source for CodeInterpreterOutputLogs
+alias CodeInterpreterTextOutput = CodeInterpreterOutputLogs;
+
+// Tool customization: Rename to supply base for split input/output models
+/** A tool call to run code. */
+alias CodeInterpreterToolCallItemBase = {
+  /** The ID of the container used to run the code. */
+  container_id: string;
+
+  /** The code to run, or null if not available. */
+  code: string | null;
+
+  // Tool customization: Apply discriminated type base
+  /**
+   * The outputs generated by the code interpreter, such as logs or images.
+   * Can be null if no outputs are available.
+   */
+  outputs: CodeInterpreterOutput[] | null;
+};
+
+@@doc(CodeInterpreterToolCallItemResource,
+  """
+    A tool call to run code.
+
+    """
+);
+@@doc(CodeInterpreterToolCallItemParam,
+  """
+    A tool call to run code.
+
+    """
+);
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when there is a partial audio response. */
+model ResponseAudioDeltaEvent {
+  @doc("""
+    The type of the event. Always `response.audio.delta`.
+    """)
+  type: "response.audio.delta";
+
+  /** A chunk of Base64 encoded response audio bytes. */
+  delta: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the audio response is complete. */
+model ResponseAudioDoneEvent {
+  @doc("""
+    The type of the event. Always `response.audio.done`.
+    """)
+  type: "response.audio.done";
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when there is a partial transcript of audio. */
+model ResponseAudioTranscriptDeltaEvent {
+  @doc("""
+    The type of the event. Always `response.audio.transcript.delta`.
+    """)
+  type: "response.audio.transcript.delta";
+
+  /** The partial transcript of the audio response. */
+  delta: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the full audio transcript is completed. */
+model ResponseAudioTranscriptDoneEvent {
+  @doc("""
+    The type of the event. Always `response.audio.transcript.done`.
+    """)
+  type: "response.audio.transcript.done";
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a partial code snippet is streamed by the code interpreter. */
+model ResponseCodeInterpreterCallCodeDeltaEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.code_interpreter_call_code.delta`.
+    """)
+  type: ResponseStreamEventType.response_code_interpreter_call_code_delta;
+
+  /** The index of the output item in the response for which the code is being streamed. */
+  output_index: int32;
+
+  /** The unique identifier of the code interpreter tool call item. */
+  item_id: string;
+
+  /** The partial code snippet being streamed by the code interpreter. */
+  delta: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the code snippet is finalized by the code interpreter. */
+model ResponseCodeInterpreterCallCodeDoneEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.code_interpreter_call_code.done`.
+    """)
+  type: ResponseStreamEventType.response_code_interpreter_call_code_done;
+
+  /** The index of the output item in the response for which the code is finalized. */
+  output_index: int32;
+
+  /** The unique identifier of the code interpreter tool call item. */
+  item_id: string;
+
+  /** The final code snippet output by the code interpreter. */
+  code: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the code interpreter call is completed. */
+model ResponseCodeInterpreterCallCompletedEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.code_interpreter_call.completed`.
+    """)
+  type: ResponseStreamEventType.response_code_interpreter_call_completed;
+
+  /** The index of the output item in the response for which the code interpreter call is completed. */
+  output_index: int32;
+
+  /** The unique identifier of the code interpreter tool call item. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when a code interpreter call is in progress. */
+model ResponseCodeInterpreterCallInProgressEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.code_interpreter_call.in_progress`.
+    """)
+  type: ResponseStreamEventType.response_code_interpreter_call_in_progress;
+
+  /** The index of the output item in the response for which the code interpreter call is in progress. */
+  output_index: int32;
+
+  /** The unique identifier of the code interpreter tool call item. */
+  item_id: string;
+}
+
+// Tool customization: Remove shared sequence_number property that was moved to the common parent
+/** Emitted when the code interpreter is actively interpreting the code snippet. */
+model ResponseCodeInterpreterCallInterpretingEvent extends ResponseStreamEvent {
+  @doc("""
+    The type of the event. Always `response.code_interpreter_call.interpreting`.
+    """)
+  type: ResponseStreamEventType.response_code_interpreter_call_interpreting;
+
+  /** The index of the output item in the response for which the code interpreter is interpreting code. */
+  output_index: int32;
+
+  /** The unique identifier of the code interpreter tool call item. */
+  item_id: string;
+}
+
+/** The top log probability of a token. */
+model TopLogProb {
+  token: string;
+  logprob: float32;
+  bytes: int32[];
+}
+
+/** The log probability of a token. */
+model LogProb {
+  token: string;
+  logprob: float32;
+  bytes: int32[];
+  top_logprobs: TopLogProb[];
+}
+
+/**
+ * Reference to a prompt template and its variables.
+ * [Learn more](/docs/guides/text?api-mode=responses#reusable-prompts).
+ */
+model Prompt {
+  /** The unique identifier of the prompt template to use. */
+  id: string;
+
+  /** Optional version of the prompt template. */
+  version?: string | null;
+
+  variables?: ResponsePromptVariables | null;
+}
+
+// Tool customization: Clarify record type for prompt variable content part mappings
+/**
+ * Optional map of values to substitute in for variables in your
+ * prompt. The substitution values can either be strings, or other
+ * Response input types like images or files.
+ */
+@extension("x-oaiTypeLabel", "map")
+@extension("x-oaiExpandable", true)
+model ResponsePromptVariables is Record<ItemParam>;
+
+/**An object specifying the format that the model must output.
+
+Configuring `{ "type": "json_schema" }` enables Structured Outputs,
+which ensures the model will match your supplied JSON schema. Learn more in the
+[Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+
+The default format is `{ "type": "text" }` with no additional options.
+
+**Not recommended for gpt-4o and newer models:**
+
+Setting to `{ "type": "json_object" }` enables the older JSON mode, which
+ensures the message the model generates is valid JSON. Using `json_schema`
+is preferred for models that support it.*/
+@discriminator("type")
+model TextResponseFormatConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Auto-suppressed warnings non-applicable rules during import."
+  type: string;
+}
+
+/**Constrains the verbosity of the model's response. Lower values will result in
+more concise responses, while higher values will result in more verbose responses.
+Currently supported values are `low`, `medium`, and `high`.*/
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Auto-suppressed warnings non-applicable rules during import."
+union Verbosity {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Auto-suppressed warnings non-applicable rules during import."
+  "low" | "medium" | "high",
+  null,
+}

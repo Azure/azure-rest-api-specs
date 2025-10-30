@@ -1,0 +1,468 @@
+import "@typespec/http";
+import "@typespec/openapi";
+import "@azure-tools/typespec-azure-core";
+
+import "../responses/models.tsp";
+
+using TypeSpec.Http;
+
+namespace Azure.AI.Projects;
+
+model CreateAgentVersionRequest {
+  ...OpenAI.MetadataPropertyForRequest;
+
+  @doc("A human-readable description of the agent.")
+  @maxLength(512)
+  description?: string;
+
+  @doc("The agent definition. This can be a workflow, hosted agent, or a simple agent definition.")
+  definition: AgentDefinition;
+}
+
+model CreateAgentVersionFromManifestRequest {
+  ...OpenAI.MetadataPropertyForRequest;
+
+  @doc("A human-readable description of the agent.")
+  @maxLength(512)
+  description?: string;
+
+  @doc("The manifest ID to import the agent version from.")
+  manifest_id: string;
+
+  @doc("The inputs to the manifest that will result in a fully materialized Agent.")
+  parameter_values: Record<unknown>;
+}
+
+model CreateAgentFromManifestRequest {
+  @doc("""
+    The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+    - Must start and end with alphanumeric characters, 
+    - Can contain hyphens in the middle
+    - Must not exceed 63 characters.
+    """)
+  @maxLength(63)
+  name: string;
+
+  ...CreateAgentVersionFromManifestRequest;
+}
+
+model UpdateAgentFromManifestRequest {
+  ...CreateAgentVersionFromManifestRequest;
+}
+
+model CreateAgentRequest {
+  @doc("""
+    The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+    - Must start and end with alphanumeric characters, 
+    - Can contain hyphens in the middle
+    - Must not exceed 63 characters.
+    """)
+  @maxLength(63)
+  name: string;
+
+  ...CreateAgentVersionRequest;
+}
+
+model UpdateAgentRequest {
+  ...CreateAgentVersionRequest;
+}
+
+model AgentObject {
+  @doc("The object type, which is always 'agent'.")
+  object: "agent";
+
+  @doc("The unique identifier of the agent.")
+  id: string;
+
+  @doc("The name of the agent.")
+  @maxLength(63)
+  name: string;
+
+  @doc("The latest version of the agent.")
+  versions: {
+    latest: AgentVersionObject;
+  };
+}
+
+model AgentVersionObject {
+  ...OpenAI.MetadataPropertyForResponse;
+
+  @doc("The object type, which is always 'agent.version'.")
+  object: "agent.version";
+
+  @doc("The unique identifier of the agent version.")
+  id: string;
+
+  @doc("The name of the agent. Name can be used to retrieve/update/delete the agent.")
+  @maxLength(256)
+  name: string;
+
+  @doc("The version identifier of the agent. Agents are immutable and every update creates a new version while keeping the name same.")
+  version: string;
+
+  @doc("A human-readable description of the agent.")
+  @maxLength(512)
+  description?: string;
+
+  @doc("The Unix timestamp (seconds) when the agent was created.")
+  @encode("unixTimestamp", int32)
+  created_at: utcDateTime;
+
+  definition: AgentDefinition;
+}
+
+union AgentProtocol {
+  string,
+  activity_protocol: "activity_protocol",
+  responses: "responses",
+}
+
+union AgentKind {
+  string,
+  prompt: "prompt",
+  hosted: "hosted",
+  container_app: "container_app",
+  workflow: "workflow",
+}
+
+@doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
+model RaiConfig {
+  @doc("The name of the RAI policy to apply.")
+  rai_policy_name: string;
+}
+
+@discriminator("kind")
+model AgentDefinition {
+  kind: AgentKind;
+
+  @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
+  rai_config?: RaiConfig;
+}
+
+@doc("A record mapping for a single protocol and its version.")
+model ProtocolVersionRecord {
+  @doc("The protocol type.")
+  protocol: AgentProtocol;
+
+  @doc("The version string for the protocol, e.g. 'v0.1.1'.")
+  version: string;
+}
+
+@doc("The workflow specification in CSDL format.")
+model WorkflowDefinition extends AgentDefinition {
+  kind: AgentKind.workflow;
+
+  @doc("(Deprecated) The CSDL trigger definition. Use `workflow` property instead to send CSDL yaml definition inline.")
+  trigger?: Record<unknown>;
+
+  @doc("The CSDL YAML definition of the workflow.")
+  workflow?: string;
+}
+
+@doc("The hosted agent definition.")
+@discriminator("kind")
+model HostedAgentDefinition extends AgentDefinition {
+  kind: AgentKind.hosted;
+
+  @doc("""
+    An array of tools the hosted agent's model may call while generating a response. You
+    can specify which tool to use by setting the `tool_choice` parameter.
+    """)
+  tools?: OpenAI.Tool[];
+
+  @doc("The protocols that the agent supports for ingress communication of the containers.")
+  @example(#[
+    #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "a2a", version: "v0.3.0" }
+  ])
+  container_protocol_versions: ProtocolVersionRecord[];
+
+  /**
+   * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
+   * https://learn.microsoft.com/en-us/azure/container-apps/containers#allocations
+   */
+  @doc("The CPU configuration for the hosted agent.")
+  @example("0.25")
+  cpu: string;
+
+  @doc("The memory configuration for the hosted agent.")
+  @example("0.5Gi")
+  memory: string;
+
+  @doc("Environment variables to set in the hosted agent container.")
+  @example(#{ name: "LOG_LEVEL", value: "debug" })
+  environment_variables?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+@doc("The image-based deployment definition for a hosted agent.")
+model ImageBasedHostedAgentDefinition extends HostedAgentDefinition {
+  kind: AgentKind.hosted;
+
+  @doc("The image for the hosted agent.")
+  @example("myregistry.azurecr.io/my-hosted-agent:latest")
+  image: string;
+}
+
+@doc("The container app agent definition.")
+model ContainerAppAgentDefinition extends AgentDefinition {
+  kind: AgentKind.container_app;
+
+  @doc("The protocols that the agent supports for ingress communication of the containers.")
+  @example(#[
+    #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "a2a", version: "v0.3.0" }
+  ])
+  container_protocol_versions: ProtocolVersionRecord[];
+
+  @doc("The resource ID of the Azure Container App that hosts this agent. Not mutable across versions.")
+  container_app_resource_id: string;
+
+  @doc("The suffix to apply to the app subdomain when sending ingress to the agent. This can be a label (e.g., '---current'), a specific revision (e.g., '--0000001'), or empty to use the default endpoint for the container app.")
+  @example("")
+  @example("---current")
+  @example("--0000001")
+  ingress_subdomain_suffix: string;
+}
+
+@doc("The prompt agent definition")
+model PromptAgentDefinition extends AgentDefinition {
+  kind: AgentKind.prompt;
+
+  @doc("The model deployment to use for this agent.")
+  `model`: string;
+
+  @doc("A system (or developer) message inserted into the model's context.")
+  instructions?: string | null;
+
+  @doc("""
+    What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+    We generally recommend altering this or `top_p` but not both.
+    """)
+  @minValue(0)
+  @maxValue(2)
+  temperature?: float32 | null = 1;
+
+  @doc("""
+    An alternative to sampling with temperature, called nucleus sampling,
+    where the model considers the results of the tokens with top_p probability
+    mass. So 0.1 means only the tokens comprising the top 10% probability mass
+    are considered.
+    
+    We generally recommend altering this or `temperature` but not both.
+    """)
+  @minValue(0)
+  @maxValue(1)
+  top_p?: float32 | null = 1;
+
+  reasoning?: OpenAI.Reasoning | null;
+
+  @doc("""
+    An array of tools the model may call while generating a response. You
+    can specify which tool to use by setting the `tool_choice` parameter.
+    """)
+  tools?: OpenAI.Tool[];
+
+  /**
+   * Configuration options for a text response from the model. Can be plain text or structured JSON data.
+   */
+  text?: {
+    // Tool customization: Employ discriminated type base
+    format?: OpenAI.ResponseTextFormatConfiguration;
+  };
+
+  @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
+  structured_inputs?: Record<StructuredInputDefinition>;
+}
+
+alias ListAgentQueryParameters = {
+  @query
+  @doc("Filter agents by kind. If not provided, all agents are returned.")
+  kind?: AgentKind;
+
+  ...OpenAI.CommonPageQueryParameters;
+};
+
+model AgentList {
+  /** A list of items used to generate this response. */
+  data: AgentObject[];
+
+  ...CommonListObjectProperties;
+}
+
+model AgentVersionList {
+  /** A list of items used to generate this response. */
+  data: AgentVersionObject[];
+
+  ...CommonListObjectProperties;
+}
+
+@doc("A deleted agent Object")
+model DeleteAgentResponse {
+  @doc("The object type. Always 'agent.deleted'.")
+  object: "agent.deleted";
+
+  @doc("The name of the agent.")
+  name: string;
+
+  @doc("Whether the agent was successfully deleted.")
+  deleted: boolean;
+}
+
+@doc("A deleted agent version Object")
+model DeleteAgentVersionResponse {
+  @doc("The object type. Always 'agent.deleted'.")
+  object: "agent.version.deleted";
+
+  @doc("The name of the agent.")
+  name: string;
+
+  @doc("The version identifier of the agent.")
+  version: string;
+
+  @doc("Whether the agent was successfully deleted.")
+  deleted: boolean;
+}
+
+@doc("An structured input that can participate in prompt template substitutions and tool argument binding.")
+model StructuredInputDefinition {
+  @doc("A human-readable description of the input.")
+  description?: string;
+
+  @doc("The default value for the input if no run-time value is provided.")
+  default_value?: unknown;
+
+  @doc("When provided, the input value is bound to the specified tool arguments.")
+  tool_argument_bindings?: ToolArgumentBinding[];
+
+  @doc("The JSON schema for the structured input (optional).")
+  schema?: unknown;
+
+  @doc("Whether the input property is required when the agent is invoked.")
+  required?: boolean = false;
+}
+
+model ToolArgumentBinding {
+  @doc("The name of the tool to participate in the argument binding. If not provided, then all tools with matching arguments will participate in binding.")
+  tool_name?: string;
+
+  @doc("The name of the argument within the tool.")
+  argument_name: string;
+}
+
+@doc("The details of the container of a specific version of an agent.")
+model AgentContainerObject {
+  @doc("The object type, which is always 'agent.container'.")
+  @visibility(Lifecycle.Read)
+  object: "agent.container";
+
+  @doc("The status of the container of a specific version of an agent.")
+  @visibility(Lifecycle.Read)
+  status: AgentContainerStatus;
+
+  @doc("The maximum number of replicas for the container. Default is 1.")
+  @example(10)
+  max_replicas?: int32;
+
+  @doc("The minimum number of replicas for the container. Default is 1.")
+  @example(1)
+  min_replicas?: int32;
+
+  @doc("The error message if the container failed to operate, if any.")
+  @visibility(Lifecycle.Read)
+  error_message?: string;
+
+  @doc("The creation time of the container.")
+  @visibility(Lifecycle.Read)
+  created_at: utcDateTime;
+
+  @doc("The last update time of the container.")
+  @visibility(Lifecycle.Read)
+  updated_at: utcDateTime;
+}
+
+@doc("Status of the container of a specific version of an agent.")
+union AgentContainerStatus {
+  @doc("The container is starting.")
+  Starting: "Starting",
+
+  @doc("The container is running.")
+  Running: "Running",
+
+  @doc("The container is stopping.")
+  Stopping: "Stopping",
+
+  @doc("The container is stopped.")
+  Stopped: "Stopped",
+
+  @doc("The container has failed.")
+  Failed: "Failed",
+
+  @doc("The container is deleting.")
+  Deleting: "Deleting",
+
+  @doc("The container is deleted.")
+  Deleted: "Deleted",
+
+  @doc("The container is updating.")
+  Updating: "Updating",
+}
+
+@doc("The container operation for a specific version of an agent.")
+model AgentContainerOperationObject {
+  @doc("The ID of the container operation. This id is unique identifier across the system.")
+  id: string;
+
+  @doc("The ID of the agent.")
+  agent_id: string;
+
+  @doc("The ID of the agent version.")
+  agent_version_id: string;
+
+  @doc("The status of the container operation.")
+  status: AgentContainerOperationStatus;
+
+  @doc("The error of the container operation, if any.")
+  error?: AgentContainerOperationError;
+
+  @doc("The container of the specific version of an agent.")
+  container?: AgentContainerObject;
+}
+
+@doc("The error details of the container operation, if any.")
+model AgentContainerOperationError {
+  @doc("The error code of the container operation, if any.")
+  code: string;
+
+  @doc("The error type of the container operation, if any.")
+  type: string;
+
+  @doc("The error message of the container operation, if any.")
+  message: string;
+}
+
+@doc("Status of the container operation for a specific version of an agent.")
+union AgentContainerOperationStatus {
+  @doc("The container operation is not started.")
+  NotStarted: "NotStarted",
+
+  @doc("The container operation is in progress.")
+  InProgress: "InProgress",
+
+  @doc("The container operation has succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("The container operation has failed.")
+  Failed: "Failed",
+}
+
+model AcceptedAgentContainerOperation {
+  @statusCode
+  code: 202;
+
+  @header("Operation-Location")
+  location: url;
+
+  @body
+  body: AgentContainerOperationObject;
+}

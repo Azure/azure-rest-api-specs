@@ -1,0 +1,2199 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Azure AI",
+    "version": "v1"
+  },
+  "tags": [],
+  "paths": {
+    "/connections": {
+      "get": {
+        "operationId": "Connections_list",
+        "description": "List all connections in the project, without populating connection credentials",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "connectionType",
+            "in": "query",
+            "required": false,
+            "description": "List connections of this specific type",
+            "schema": {
+              "$ref": "#/components/schemas/ConnectionType"
+            },
+            "explode": false
+          },
+          {
+            "name": "defaultConnection",
+            "in": "query",
+            "required": false,
+            "description": "List connections that are default connections",
+            "schema": {
+              "type": "boolean"
+            },
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedConnection"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connections/{name}": {
+      "get": {
+        "operationId": "Connections_get",
+        "description": "Get a connection by name, without populating connection credentials",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The friendly name of the connection, provided by the user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connection"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connections/{name}/getConnectionWithCredentials": {
+      "post": {
+        "operationId": "Connections_getWithCredentials",
+        "description": "Get a connection by name, with its connection credentials",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The friendly name of the connection, provided by the user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connection"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasets": {
+      "get": {
+        "operationId": "Datasets_listLatest",
+        "description": "List the latest version of each DatasetVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedDatasetVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasets/{name}/versions": {
+      "get": {
+        "operationId": "Datasets_listVersions",
+        "description": "List all versions of the given DatasetVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedDatasetVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasets/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Datasets_getVersion",
+        "description": "Get the specific version of the DatasetVersion. The service returns 404 Not Found error if the DatasetVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the DatasetVersion to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Datasets_deleteVersion",
+        "description": "Delete the specific version of the DatasetVersion. The service returns 204 No Content if the DatasetVersion was deleted successfully or if the DatasetVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the DatasetVersion to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Datasets_createOrUpdateVersion",
+        "description": "Create a new or update an existing DatasetVersion with the given version id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the DatasetVersion to create or update.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetVersion"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DatasetVersionUpdate"
+              }
+            }
+          },
+          "description": "The DatasetVersion to create or update."
+        }
+      }
+    },
+    "/datasets/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Datasets_getCredentials",
+        "description": "Get the SAS credential to access the storage account associated with a Dataset version.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the DatasetVersion to operate on.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetCredentialResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasets/{name}/versions/{version}/startPendingUpload": {
+      "post": {
+        "operationId": "Datasets_startPendingUploadVersion",
+        "description": "Start a new or get an existing pending upload of a dataset for a specific version.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the DatasetVersion to operate on.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PendingUploadResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PendingUploadRequest"
+              }
+            }
+          },
+          "description": "The pending upload request parameters"
+        }
+      }
+    },
+    "/deployments": {
+      "get": {
+        "operationId": "Deployments_list",
+        "description": "List all deployed models in the project",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelPublisher",
+            "in": "query",
+            "required": false,
+            "description": "Model publisher to filter models by",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "modelName",
+            "in": "query",
+            "required": false,
+            "description": "Model name (the publisher specific name) to filter models by",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "deploymentType",
+            "in": "query",
+            "required": false,
+            "description": "Type of deployment to filter list by",
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentType"
+            },
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedDeployment"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deployments/{name}": {
+      "get": {
+        "operationId": "Deployments_get",
+        "description": "Get a deployed model.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Name of the deployment",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Deployment"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/indexes": {
+      "get": {
+        "operationId": "Indexes_listLatest",
+        "description": "List the latest version of each Index",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedIndex"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/indexes/{name}/versions": {
+      "get": {
+        "operationId": "Indexes_listVersions",
+        "description": "List all versions of the given Index",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedIndex"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/indexes/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Indexes_getVersion",
+        "description": "Get the specific version of the Index. The service returns 404 Not Found error if the Index does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the Index to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Index"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Indexes_deleteVersion",
+        "description": "Delete the specific version of the Index. The service returns 204 No Content if the Index was deleted successfully or if the Index does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the Index to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Indexes_createOrUpdateVersion",
+        "description": "Create a new or update an existing Index with the given version id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the Index to create or update.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Index"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Index"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndexUpdate"
+              }
+            }
+          },
+          "description": "The Index to create or update."
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://ai.azure.com/.default"
+      ]
+    }
+  ],
+  "components": {
+    "parameters": {
+      "Azure.Core.ClientRequestIdHeader": {
+        "name": "x-ms-client-request-id",
+        "in": "header",
+        "required": false,
+        "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+        "schema": {
+          "$ref": "#/components/schemas/Azure.Core.uuid"
+        }
+      },
+      "Azure.Core.Foundations.ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "description": "The API version to use for this operation.",
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "explode": false
+      }
+    },
+    "schemas": {
+      "ApiKeyCredentials": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ApiKey"
+            ],
+            "description": "The credential type",
+            "readOnly": true
+          },
+          "key": {
+            "type": "string",
+            "description": "API Key",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseCredentials"
+          }
+        ],
+        "description": "API Key Credential definition"
+      },
+      "AssetCredentialResponse": {
+        "type": "object",
+        "required": [
+          "blobReference"
+        ],
+        "properties": {
+          "blobReference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BlobReference"
+              }
+            ],
+            "description": "Credential info to access the storage account."
+          }
+        },
+        "description": "Represents a reference to a blob for consumption"
+      },
+      "Azure.Core.Foundations.Error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "One of a server-defined set of error codes."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable representation of the error."
+          },
+          "target": {
+            "type": "string",
+            "description": "The target of the error."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Azure.Core.Foundations.Error"
+            },
+            "description": "An array of details about specific errors that led to this reported error."
+          },
+          "innererror": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Azure.Core.Foundations.InnerError"
+              }
+            ],
+            "description": "An object containing more specific information than the current object about the error."
+          }
+        },
+        "description": "The error object."
+      },
+      "Azure.Core.Foundations.ErrorResponse": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Azure.Core.Foundations.Error"
+              }
+            ],
+            "description": "The error object."
+          }
+        },
+        "description": "A response containing error details."
+      },
+      "Azure.Core.Foundations.InnerError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "One of a server-defined set of error codes."
+          },
+          "innererror": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Azure.Core.Foundations.InnerError"
+              }
+            ],
+            "description": "Inner error."
+          }
+        },
+        "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors."
+      },
+      "Azure.Core.uuid": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Universally Unique Identifier"
+      },
+      "AzureAISearchIndex": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AzureSearch"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Index"
+          }
+        ],
+        "description": "Azure AI Search Index Definition"
+      },
+      "AzureAISearchIndexUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AzureSearch"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IndexUpdate"
+          }
+        ],
+        "description": "Azure AI Search Index Definition"
+      },
+      "BaseCredentials": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CredentialType"
+              }
+            ],
+            "description": "The type of credential used by the connection",
+            "readOnly": true
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "ApiKey": "#/components/schemas/ApiKeyCredentials",
+            "AAD": "#/components/schemas/EntraIDCredentials",
+            "CustomKeys": "#/components/schemas/CustomCredential",
+            "SAS": "#/components/schemas/SASCredentials",
+            "None": "#/components/schemas/NoAuthenticationCredentials"
+          }
+        },
+        "description": "A base class for connection credentials"
+      },
+      "BlobReference": {
+        "type": "object",
+        "required": [
+          "blobUri",
+          "storageAccountArmId",
+          "credential"
+        ],
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "description": "Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path"
+          },
+          "storageAccountArmId": {
+            "type": "string",
+            "description": "ARM ID of the storage account to use."
+          },
+          "credential": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SasCredential"
+              }
+            ],
+            "description": "Credential info to access the storage account."
+          }
+        },
+        "description": "Blob reference details."
+      },
+      "Connection": {
+        "type": "object",
+        "required": [
+          "name",
+          "id",
+          "type",
+          "target",
+          "isDefault",
+          "credentials",
+          "metadata"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The friendly name of the connection, provided by the user.",
+            "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the connection, generated by the service",
+            "readOnly": true
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectionType"
+              }
+            ],
+            "description": "Category of the connection",
+            "readOnly": true
+          },
+          "target": {
+            "type": "string",
+            "description": "The connection URL to be used for this service",
+            "readOnly": true
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "Whether the connection is tagged as the default connection of its type",
+            "readOnly": true
+          },
+          "credentials": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseCredentials"
+              }
+            ],
+            "description": "The credentials used by the connection",
+            "readOnly": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Metadata of the connection",
+            "readOnly": true
+          }
+        },
+        "description": "Response from the list and get connections operations"
+      },
+      "ConnectionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "AzureOpenAI",
+              "AzureBlob",
+              "AzureStorageAccount",
+              "CognitiveSearch",
+              "CosmosDB",
+              "ApiKey",
+              "AppConfig",
+              "AppInsights",
+              "CustomKeys"
+            ]
+          }
+        ],
+        "description": "The Type (or category) of the connection"
+      },
+      "CosmosDBIndex": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CosmosDBNoSqlVectorStore"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Index"
+          }
+        ],
+        "description": "CosmosDB Vector Store Index Definition"
+      },
+      "CosmosDBIndexUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CosmosDBNoSqlVectorStore"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IndexUpdate"
+          }
+        ],
+        "description": "CosmosDB Vector Store Index Definition"
+      },
+      "CredentialType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ApiKey",
+              "AAD",
+              "SAS",
+              "CustomKeys",
+              "None"
+            ]
+          }
+        ],
+        "description": "The credential type used by the connection"
+      },
+      "CustomCredential": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CustomKeys"
+            ],
+            "description": "The credential type",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": {
+          "type": "string"
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseCredentials"
+          }
+        ],
+        "description": "Custom credential definition"
+      },
+      "DatasetType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "uri_file",
+              "uri_folder"
+            ]
+          }
+        ],
+        "description": "Enum to determine the type of data."
+      },
+      "DatasetVersion": {
+        "type": "object",
+        "required": [
+          "dataUri",
+          "type",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "dataUri": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[a-zA-Z0-9_]",
+            "description": "URI of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330"
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetType"
+              }
+            ],
+            "description": "Dataset type"
+          },
+          "isReference": {
+            "type": "boolean",
+            "description": "Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted",
+            "readOnly": true
+          },
+          "connectionName": {
+            "type": "string",
+            "description": "The Azure Storage Account connection name. Required if startPendingUploadVersion was not called before creating the Dataset"
+          },
+          "id": {
+            "type": "string",
+            "description": "Asset ID, a unique identifier for the asset",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the resource",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the resource",
+            "readOnly": true
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "uri_file": "#/components/schemas/FileDatasetVersion",
+            "uri_folder": "#/components/schemas/FolderDatasetVersion"
+          }
+        },
+        "description": "DatasetVersion Definition"
+      },
+      "DatasetVersionUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetType"
+              }
+            ],
+            "description": "Dataset type"
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "uri_file": "#/components/schemas/FileDatasetVersionUpdate",
+            "uri_folder": "#/components/schemas/FolderDatasetVersionUpdate"
+          }
+        },
+        "description": "DatasetVersion Definition"
+      },
+      "Deployment": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeploymentType"
+              }
+            ],
+            "description": "The type of the deployment"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the deployment",
+            "readOnly": true
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "ModelDeployment": "#/components/schemas/ModelDeployment"
+          }
+        },
+        "description": "Model Deployment Definition"
+      },
+      "DeploymentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ModelDeployment"
+            ]
+          }
+        ]
+      },
+      "EntraIDCredentials": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AAD"
+            ],
+            "description": "The credential type",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseCredentials"
+          }
+        ],
+        "description": "Entra ID credential definition"
+      },
+      "FileDatasetVersion": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "uri_file"
+            ],
+            "description": "Dataset type"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DatasetVersion"
+          }
+        ],
+        "description": "FileDatasetVersion Definition"
+      },
+      "FileDatasetVersionUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "uri_file"
+            ],
+            "description": "Dataset type"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DatasetVersionUpdate"
+          }
+        ],
+        "description": "FileDatasetVersion Definition"
+      },
+      "FolderDatasetVersion": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "uri_folder"
+            ],
+            "description": "Dataset type"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DatasetVersion"
+          }
+        ],
+        "description": "FileDatasetVersion Definition"
+      },
+      "FolderDatasetVersionUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "uri_folder"
+            ],
+            "description": "Dataset type"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DatasetVersionUpdate"
+          }
+        ],
+        "description": "FileDatasetVersion Definition"
+      },
+      "Index": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndexType"
+              }
+            ],
+            "description": "Type of index"
+          },
+          "id": {
+            "type": "string",
+            "description": "Asset ID, a unique identifier for the asset",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the resource",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the resource",
+            "readOnly": true
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "AzureSearch": "#/components/schemas/AzureAISearchIndex",
+            "ManagedAzureSearch": "#/components/schemas/ManagedAzureAISearchIndex",
+            "CosmosDBNoSqlVectorStore": "#/components/schemas/CosmosDBIndex"
+          }
+        },
+        "description": "Index resource Definition"
+      },
+      "IndexType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "AzureSearch",
+              "CosmosDBNoSqlVectorStore",
+              "ManagedAzureSearch"
+            ]
+          }
+        ]
+      },
+      "IndexUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndexType"
+              }
+            ],
+            "description": "Type of index"
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "AzureSearch": "#/components/schemas/AzureAISearchIndexUpdate",
+            "ManagedAzureSearch": "#/components/schemas/ManagedAzureAISearchIndexUpdate",
+            "CosmosDBNoSqlVectorStore": "#/components/schemas/CosmosDBIndexUpdate"
+          }
+        },
+        "description": "Index resource Definition"
+      },
+      "ManagedAzureAISearchIndex": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ManagedAzureSearch"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Index"
+          }
+        ],
+        "description": "Managed Azure AI Search Index Definition"
+      },
+      "ManagedAzureAISearchIndexUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ManagedAzureSearch"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IndexUpdate"
+          }
+        ],
+        "description": "Managed Azure AI Search Index Definition"
+      },
+      "ModelDeployment": {
+        "type": "object",
+        "required": [
+          "type",
+          "modelName",
+          "modelVersion",
+          "modelPublisher",
+          "capabilities",
+          "sku"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ModelDeployment"
+            ],
+            "description": "The type of the deployment"
+          },
+          "modelName": {
+            "type": "string",
+            "description": "Publisher-specific name of the deployed model",
+            "readOnly": true
+          },
+          "modelVersion": {
+            "type": "string",
+            "description": "Publisher-specific version of the deployed model",
+            "readOnly": true
+          },
+          "modelPublisher": {
+            "type": "string",
+            "description": "Name of the deployed model's publisher",
+            "readOnly": true
+          },
+          "capabilities": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Capabilities of deployed model",
+            "readOnly": true
+          },
+          "sku": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sku"
+              }
+            ],
+            "description": "Sku of the model deployment",
+            "readOnly": true
+          },
+          "connectionName": {
+            "type": "string",
+            "description": "Name of the connection the deployment comes from",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Deployment"
+          }
+        ],
+        "description": "Model Deployment Definition"
+      },
+      "NoAuthenticationCredentials": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "None"
+            ],
+            "description": "The credential type ",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseCredentials"
+          }
+        ],
+        "description": "Credentials that do not require authentication"
+      },
+      "PagedConnection": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Connection"
+            },
+            "description": "The Connection items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Connection items"
+      },
+      "PagedDatasetVersion": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatasetVersion"
+            },
+            "description": "The DatasetVersion items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of DatasetVersion items"
+      },
+      "PagedDeployment": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Deployment"
+            },
+            "description": "The Deployment items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Deployment items"
+      },
+      "PagedIndex": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Index"
+            },
+            "description": "The Index items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Index items"
+      },
+      "PendingUploadRequest": {
+        "type": "object",
+        "required": [
+          "pendingUploadType"
+        ],
+        "properties": {
+          "pendingUploadId": {
+            "type": "string",
+            "description": "If PendingUploadId is not provided, a random GUID will be used."
+          },
+          "connectionName": {
+            "type": "string",
+            "description": "Azure Storage Account connection name to use for generating temporary SAS token"
+          },
+          "pendingUploadType": {
+            "type": "string",
+            "enum": [
+              "BlobReference"
+            ],
+            "description": "BlobReference is the only supported type."
+          }
+        },
+        "description": "Represents a request for a pending upload."
+      },
+      "PendingUploadResponse": {
+        "type": "object",
+        "required": [
+          "blobReference",
+          "pendingUploadId",
+          "pendingUploadType"
+        ],
+        "properties": {
+          "blobReference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BlobReference"
+              }
+            ],
+            "description": "Container-level read, write, list SAS."
+          },
+          "pendingUploadId": {
+            "type": "string",
+            "description": "ID for this upload request."
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of asset to be created if user did not specify version when initially creating upload"
+          },
+          "pendingUploadType": {
+            "type": "string",
+            "enum": [
+              "BlobReference"
+            ],
+            "description": "BlobReference is the only supported type"
+          }
+        },
+        "description": "Represents the response for a pending upload request"
+      },
+      "SASCredentials": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SAS"
+            ],
+            "description": "The credential type",
+            "readOnly": true
+          },
+          "SAS": {
+            "type": "string",
+            "description": "SAS token",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseCredentials"
+          }
+        ],
+        "description": "Shared Access Signature (SAS) credential definition"
+      },
+      "SasCredential": {
+        "type": "object",
+        "required": [
+          "sasUri",
+          "type"
+        ],
+        "properties": {
+          "sasUri": {
+            "type": "string",
+            "description": "SAS uri",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SAS"
+            ],
+            "description": "Type of credential",
+            "readOnly": true
+          }
+        },
+        "description": "SAS Credential definition"
+      },
+      "Sku": {
+        "type": "object",
+        "required": [
+          "capacity",
+          "family",
+          "name",
+          "size",
+          "tier"
+        ],
+        "properties": {
+          "capacity": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Sku capacity"
+          },
+          "family": {
+            "type": "string",
+            "description": "Sku family"
+          },
+          "name": {
+            "type": "string",
+            "description": "Sku name"
+          },
+          "size": {
+            "type": "string",
+            "description": "Sku size"
+          },
+          "tier": {
+            "type": "string",
+            "description": "Sku tier"
+          }
+        },
+        "description": "Sku information"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2Auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+            "scopes": {
+              "https://ai.azure.com/.default": ""
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "{endpoint}",
+      "description": "Azure AI",
+      "variables": {
+        "endpoint": {
+          "default": "",
+          "description": "Foundry Project endpoint in the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}\".\nIf you only have one Project in your Foundry Hub, or to target the default Project\nin your Hub, use the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project\""
+        }
+      }
+    }
+  ]
+}
