@@ -1089,8 +1089,8 @@ model SAMLOptionsOutput {
   @doc("<p>Describes the SAML identity provider's information.</p>")
   idp?: SAMLIdp;
 
-  @doc("<p>The key used for matching the SAML roles attribute.</p>")
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @doc("<p>The key used for matching the SAML roles attribute.</p>")
   rolesKey?: string;
 
   @doc("<p>The duration, in minutes, after which a user session becomes inactive.</p>")
