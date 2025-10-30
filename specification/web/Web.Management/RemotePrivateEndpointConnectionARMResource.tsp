@@ -71,12 +71,10 @@ interface RemotePrivateEndpointConnectionARMResources {
   @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
       @bodyRoot
       _: RemotePrivateEndpointConnectionARMResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -152,12 +150,10 @@ interface StaticSites {
   @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is StaticSiteOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
       @bodyRoot
       _: RemotePrivateEndpointConnectionARMResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -234,12 +230,10 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
       @bodyRoot
       _: RemotePrivateEndpointConnectionARMResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -321,12 +315,10 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
       @bodyRoot
       _: RemotePrivateEndpointConnectionARMResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 

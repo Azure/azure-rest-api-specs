@@ -118,12 +118,10 @@ interface Sites {
   @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   createOrUpdate is SiteOps.CreateOrUpdateAsync<
     Site,
-    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
       @bodyRoot
       _: Site;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = Site> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -867,7 +865,7 @@ interface Sites {
   startWebSiteNetworkTraceOperation is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
       @bodyRoot
       @OpenAPI.extension("x-ms-identifiers", #[])
       _?: NetworkTrace[];
@@ -1231,7 +1229,7 @@ interface Sites {
   startNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
       @bodyRoot
       @OpenAPI.extension("x-ms-identifiers", #[])
       _?: NetworkTrace[];
@@ -1477,12 +1475,10 @@ interface WebApps {
   @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   createOrUpdateSlot is WebAppOps.CreateOrUpdateAsync<
     Site,
-    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
       @bodyRoot
       _: Site;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = Site> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2082,7 +2078,7 @@ interface WebApps {
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
       @bodyRoot
       @OpenAPI.extension("x-ms-identifiers", #[])
       _?: NetworkTrace[];
@@ -2129,15 +2125,14 @@ interface WebApps {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  getNetworkTracesSlot is WebAppOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}")
+  getNetworkTracesSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
+    Request = void,
     Response = ArmResponse<NetworkTrace[]>,
     Parameters = {
-      /**
-       * GUID of the operation.
-       */
+      /** GUID of the operation. */
       @path
-      @segment("networkTrace")
       operationId: string;
     },
     OverrideErrorType = DefaultErrorResponse
@@ -2444,7 +2439,7 @@ interface WebApps {
   startNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
       @bodyRoot
       @OpenAPI.extension("x-ms-identifiers", #[])
       _?: NetworkTrace[];

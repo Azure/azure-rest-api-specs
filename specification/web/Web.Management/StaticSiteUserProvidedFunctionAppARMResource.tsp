@@ -84,12 +84,10 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
       @query("isForced")
       isForced?: boolean;
     },
-    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
       @bodyRoot
       _: StaticSiteUserProvidedFunctionAppARMResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -164,12 +162,10 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
       @query("isForced")
       isForced?: boolean;
     },
-    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
       @bodyRoot
       _: StaticSiteUserProvidedFunctionAppARMResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 

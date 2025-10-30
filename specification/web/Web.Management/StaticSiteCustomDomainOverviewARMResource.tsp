@@ -46,12 +46,10 @@ interface StaticSiteCustomDomainOverviewARMResources {
   @summary("Creates a new static site custom domain in an existing resource group and static site.")
   createOrUpdateStaticSiteCustomDomain is ArmResourceCreateOrReplaceAsync<
     StaticSiteCustomDomainOverviewARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteCustomDomainOverviewARMResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<StaticSiteCustomDomainOverviewARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteCustomDomainOverviewARMResource>> & {
       @bodyRoot
       _: StaticSiteCustomDomainOverviewARMResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteCustomDomainOverviewARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     Error = DefaultErrorResponse
   >;
 

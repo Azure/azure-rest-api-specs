@@ -73,12 +73,10 @@ interface StaticSiteARMResources {
   @summary("Creates a new static site in an existing resource group, or updates an existing static site.")
   createOrUpdateStaticSite is ArmResourceCreateOrReplaceAsync<
     StaticSiteARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteARMResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<StaticSiteARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource>> & {
       @bodyRoot
       _: StaticSiteARMResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     Error = DefaultErrorResponse
   >;
 

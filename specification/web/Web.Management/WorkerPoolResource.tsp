@@ -79,12 +79,10 @@ interface WorkerPoolResources {
   @summary("Create or update a multi-role pool.")
   createOrUpdateMultiRolePool is WorkerPoolResourceOps.CreateOrUpdateAsync<
     WorkerPoolResource,
-    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
       @bodyRoot
       _: WorkerPoolResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -223,12 +221,10 @@ interface AppServiceEnvironments {
   @summary("Create or update a worker pool.")
   createOrUpdateWorkerPool is AppServiceEnvironmentOps.CreateOrUpdateAsync<
     WorkerPoolResource,
-    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
       @bodyRoot
       _: WorkerPoolResource;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = DefaultErrorResponse
   >;
 

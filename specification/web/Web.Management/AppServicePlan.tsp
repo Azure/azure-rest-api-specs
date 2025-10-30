@@ -110,12 +110,10 @@ interface AppServicePlans {
   @summary("Creates or updates an App Service Plan.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServicePlan,
-    Response = ArmResourceUpdatedResponse<AppServicePlan> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<AppServicePlan> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan>> & {
       @bodyRoot
       _: AppServicePlan;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan> &
-      Azure.Core.Foundations.RetryAfterHeader,
     Error = DefaultErrorResponse
   >;
 
