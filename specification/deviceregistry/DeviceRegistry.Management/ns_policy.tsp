@@ -108,6 +108,10 @@ model BringYourOwnCertificateAuthority {
   @doc("The status of the BYOCA configuration, indicating the current state of the certificate lifecycle.")
   @visibility(Lifecycle.Read)
   status?: BringYourOwnCertificateAuthorityStatus;
+
+  @doc("Details about the certificate revocation. Only populated when status is 'Revoked'.")
+  @visibility(Lifecycle.Read)
+  revocationDetails?: RevocationDetails;
 }
 
 @added(Versions.v2025_02_01)
@@ -126,6 +130,56 @@ union BringYourOwnCertificateAuthorityStatus {
 
   @doc("The certificate activation or rotation has failed. Check error details for more information.")
   Failed: "Failed",
+
+  @doc("The certificate has been revoked and is no longer valid for issuing leaf certificates.")
+  Revoked: "Revoked",
+}
+
+@added(Versions.v2025_02_01)
+@doc("Reasons for certificate revocation.")
+union RevocationReason {
+  string,
+
+  @doc("The certificate's private key has been compromised.")
+  KeyCompromise: "KeyCompromise",
+
+  @doc("The Certificate Authority's private key has been compromised.")
+  CACompromise: "CACompromise",
+
+  @doc("The certificate is no longer needed for its original purpose.")
+  CessationOfOperation: "CessationOfOperation",
+
+  @doc("The certificate has been superseded by a new certificate.")
+  Superseded: "Superseded",
+
+  @doc("The reason for revocation is not specified.")
+  Unspecified: "Unspecified",
+}
+
+@added(Versions.v2025_02_01)
+@doc("Details about the certificate revocation.")
+model RevocationDetails {
+  @doc("The timestamp when the certificate was revoked. Format ISO8601.")
+  @visibility(Lifecycle.Read)
+  revokedAt: utcDateTime;
+
+  @doc("The reason for certificate revocation.")
+  @visibility(Lifecycle.Read)
+  reason: RevocationReason;
+
+  @doc("Optional additional information about the revocation.")
+  @visibility(Lifecycle.Read)
+  additionalInfo?: string;
+}
+
+@added(Versions.v2025_02_01)
+@doc("Request payload for certificate revocation.")
+model RevokeCertificateRequest {
+  @doc("The reason for revoking the certificate.")
+  reason: RevocationReason;
+
+  @doc("Optional additional information about the revocation.")
+  additionalInfo?: string;
 }
 
 @added(Versions.v2025_02_01)
@@ -146,4 +200,15 @@ interface Policies {
     >
   >;
   listByResourceGroup is ArmResourceListByParent<Policy>;
+
+  @doc("Revokes the BYOCA certificate for this policy.")
+  @action("revokeCertificate")
+  @armResourceAction(Policy)
+  @post
+  revokeCertificate(
+    ...ResourceInstanceParameters<Policy>,
+    @doc("The revocation request payload.")
+    @body
+    body: RevokeCertificateRequest
+  ): ArmResponse<Policy> | ErrorResponse;
 }

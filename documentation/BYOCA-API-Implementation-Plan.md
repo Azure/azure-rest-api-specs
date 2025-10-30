@@ -32,7 +32,11 @@ Based on the BYOCA design documents, this feature addresses scenarios where:
 2. **specification/deviceregistry/DeviceRegistry.Management/ns_policy.tsp**
    - Added `bringYourOwnCertificateAuthority` property to `PolicyProperties`
    - Created `BringYourOwnCertificateAuthority` model with activation workflow properties
-   - Created `BringYourOwnCertificateAuthorityStatus` enum (PendingActivation, Active, PendingRotation, Failed)
+   - Created `BringYourOwnCertificateAuthorityStatus` enum (PendingActivation, Active, PendingRotation, Failed, Revoked)
+   - Added `RevocationDetails` model with timestamp, reason, and additional info
+   - Added `RevocationReason` enum (KeyCompromise, CACompromise, CessationOfOperation, Superseded, Unspecified)
+   - Added `revokeCertificate` custom action for revoking BYOCA certificates
+   - Added `RevokeCertificateRequest` model for revocation API payload
 
 3. **specification/deviceregistry/DeviceRegistry.Management/examples/byoca-examples.md** (NEW)
    - Comprehensive API examples covering all BYOCA workflows
