@@ -56,6 +56,24 @@ input-file:
   - preview/2025-11-01-preview/throughputpool.json
 ```
 
+### Tag: package-2025-10-15
+
+These settings apply only when `--tag=package-2025-10-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-15'
+input-file:
+  - stable/2025-10-15/cosmos-db.json
+  - stable/2025-10-15/managedCassandra.json
+  - stable/2025-10-15/mongorbac.json
+  - stable/2025-10-15/notebook.json
+  - stable/2025-10-15/privateEndpointConnection.json
+  - stable/2025-10-15/privateLinkResources.json
+  - stable/2025-10-15/rbac.json
+  - stable/2025-10-15/restorable.json
+  - stable/2025-10-15/services.json
+  - stable/2025-10-15/fleet.json
+```
+
 ### Tag: package-preview-2025-05-01
 
 These settings apply only when `--tag=package-preview-2025-05-01` is specified on the command line.
