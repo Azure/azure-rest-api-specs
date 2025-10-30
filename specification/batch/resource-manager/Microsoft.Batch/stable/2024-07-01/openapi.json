@@ -77,7 +77,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists available operations for the Microsoft.Batch provider",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1271,6 +1271,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Lists all of the certificates in the specified account.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "parameters": [
           {
@@ -1349,6 +1350,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Gets information about the specified certificate.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "parameters": [
           {
@@ -1415,6 +1417,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Creates a new certificate inside the specified account.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "parameters": [
           {
@@ -1509,6 +1512,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Updates the properties of an existing certificate.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "parameters": [
           {
@@ -1589,6 +1593,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Deletes the specified certificate.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "parameters": [
           {
@@ -1667,6 +1672,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Cancels a failed deletion of a certificate from the specified account.",
         "description": "If you try to delete a certificate that is being used by a pool or compute node, the status of the certificate changes to deleteFailed. If you decide that you want to continue using the certificate, you can use this operation to set the status of the certificate back to active. If you intend to delete the certificate, you do not need to run this operation after the deletion failed. You must make sure that the certificate is not being used by any resources, and then you can try again to delete the certificate.\n\nWarning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "parameters": [
           {
@@ -1840,6 +1846,7 @@
         "tags": [
           "BatchAccounts"
         ],
+        "summary": "Gets the account keys for the specified Batch account.",
         "description": "This operation applies only to Batch accounts with allowedAuthenticationModes containing 'SharedKey'. If the Batch account doesn't contain 'SharedKey' in its allowedAuthenticationMode, clients cannot use shared keys to authenticate, and must use another allowedAuthenticationModes instead. In this case, getting the keys will fail.",
         "parameters": [
           {
@@ -2631,6 +2638,7 @@
         "tags": [
           "Pools"
         ],
+        "summary": "Stops an ongoing resize operation on the pool.",
         "description": "This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state. After stopping, the pool stabilizes at the number of nodes it was at when the stop operation was done. During the stop operation, the pool allocation state changes first to stopping and then to steady. A resize operation need not be an explicit resize pool request; this API can also be used to halt the initial sizing of the pool when it is created.",
         "parameters": [
           {
@@ -3097,6 +3105,7 @@
         "tags": [
           "BatchAccounts"
         ],
+        "summary": "Regenerates the specified account key for the Batch account.",
         "description": "This operation applies only to Batch accounts with allowedAuthenticationModes containing 'SharedKey'. If the Batch account doesn't contain 'SharedKey' in its allowedAuthenticationMode, clients cannot use shared keys to authenticate, and must use another allowedAuthenticationModes instead. In this case, regenerating the keys will fail.",
         "parameters": [
           {
