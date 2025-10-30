@@ -68,3 +68,4 @@ using Microsoft.DependencyMap;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id, armResourceIdentifier, "csharp");
