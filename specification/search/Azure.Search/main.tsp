@@ -30,12 +30,6 @@ namespace Search;
 
 @doc("The available API versions.")
 enum Versions {
-  @doc("The 2025-09-01 API version.")
-  v2025_09_01: "2025-09-01",
-
-  @doc("The 2025-08-01-preview API version.")
-  v2025_08_01_preview: "2025-08-01-preview",
-
   @doc("The 2025-11-01-preview API version.")
   v2025_11_01_preview: "2025-11-01-preview",
 }

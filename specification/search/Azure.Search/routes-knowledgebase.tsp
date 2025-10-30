@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models-knowledgebase.tsp";
-import "./models-shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

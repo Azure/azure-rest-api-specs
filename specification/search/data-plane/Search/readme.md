@@ -42,32 +42,6 @@ suppressions:
     reason: Legacy swagger file
 ```
 
-### Tag: package-2025-08-01-preview
-
-These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-08-01-preview'
-input-file:
-- preview/2025-08-01-preview/search.json
-suppressions:
-  - code: LroExtension 
-    from: search.json
-    reason: Legacy swagger file
-```
-
-### Tag: package-2025-09-01
-
-These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-09-01'
-input-file:
-- stable/2025-09-01/search.json
-suppressions:
-  - code: LroExtension 
-    from: search.json
-    reason: Legacy swagger file
-```
-
 ### Suppression
 ``` yaml
 directive:

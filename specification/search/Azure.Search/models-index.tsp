@@ -43,7 +43,6 @@ union QueryCaptionType {
 }
 
 @doc("This parameter is only valid if the query type is `semantic`. When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`.")
-@added(Versions.v2025_08_01_preview)
 union QueryRewritesType {
   string,
 
@@ -62,27 +61,22 @@ union QueryDebugMode {
   Disabled: "disabled",
 
   @doc("Allows the user to further explore their reranked results.")
-  @added(Versions.v2025_08_01_preview)
   Semantic: "semantic",
 
   @doc("Allows the user to further explore their hybrid and vector query results.")
   Vector: "vector",
 
   @doc("Allows the user to explore the list of query rewrites generated for their search request.")
-  @added(Versions.v2025_08_01_preview)
   QueryRewrites: "queryRewrites",
 
   @doc("Allows the user to retrieve scoring information regarding vectors matched within a collection of complex types.")
-  @added(Versions.v2025_08_01_preview)
   InnerHits: "innerHits",
 
   @doc("Turn on all debug options.")
-  @added(Versions.v2025_08_01_preview)
   All: "all",
 }
 
 @doc("The language of the query.")
-@added(Versions.v2025_08_01_preview)
 union QueryLanguage {
   string,
 
@@ -304,7 +298,6 @@ union QueryLanguage {
 }
 
 @doc("Improve search recall by spell-correcting individual search query terms.")
-@added(Versions.v2025_08_01_preview)
 union QuerySpellerType {
   string,
 
@@ -326,16 +319,13 @@ union VectorQueryKind {
   Text: "text",
 
   @doc("Vector query where an url that represents an image value that needs to be vectorized is provided.")
-  @added(Versions.v2025_08_01_preview)
   ImageUrl: "imageUrl",
 
   @doc("Vector query where a base 64 encoded binary of an image that needs to be vectorized is provided.")
-  @added(Versions.v2025_08_01_preview)
   ImageBinary: "imageBinary",
 }
 
 @doc("The kind of vector query being performed.")
-@added(Versions.v2025_08_01_preview)
 union VectorThresholdKind {
   string,
 
@@ -361,7 +351,6 @@ union VectorFilterMode {
 }
 
 @doc("Determines whether the count and facets should includes all documents that matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize' window. The default value is 'countAllResults'.")
-@added(Versions.v2025_08_01_preview)
 union HybridCountAndFacetMode {
   string,
 
@@ -373,7 +362,6 @@ union HybridCountAndFacetMode {
 }
 
 @doc("The way the field was used for the semantic enrichment process.")
-@added(Versions.v2025_08_01_preview)
 union SemanticFieldState {
   string,
 
@@ -413,7 +401,6 @@ union SemanticSearchResultsType {
 }
 
 @doc("Type of query rewrite that was used for this request.")
-@added(Versions.v2025_08_01_preview)
 union SemanticQueryRewritesResultType {
   string,
 
@@ -590,27 +577,22 @@ model SearchOptions {
   semanticQuery?: string;
 
   @doc("When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`.")
-  @added(Versions.v2025_08_01_preview)
   @query
   queryRewrites?: QueryRewritesType;
 
   @doc("Enables a debugging tool that can be used to further explore your search results.")
-  @added(Versions.v2025_08_01_preview)
   @query
   debug?: QueryDebugMode;
 
   @doc("The language of the query.")
-  @added(Versions.v2025_08_01_preview)
   @query
   queryLanguage?: QueryLanguage;
 
   @doc("Improve search recall by spell-correcting individual search query terms.")
-  @added(Versions.v2025_08_01_preview)
   @query
   speller?: QuerySpellerType;
 
   @doc("The list of field names used for semantic ranking.")
-  @added(Versions.v2025_08_01_preview)
   @query
   semanticFields?: string[];
 }
@@ -712,7 +694,6 @@ model SearchDocumentsResult {
   answers?: QueryAnswerResult[];
 
   @doc("Debug information that applies to the search results as a whole.")
-  @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.debug")
   debugInfo?: DebugInfo;
@@ -744,7 +725,6 @@ model SearchDocumentsResult {
   semanticPartialResponseType?: SemanticSearchResultsType;
 
   @doc("Type of query rewrite that was used to retrieve documents.")
-  @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.semanticQueryRewritesResultType")
   semanticQueryRewritesResultType?: SemanticQueryRewritesResultType;
@@ -757,13 +737,11 @@ model FacetResult is Record<unknown> {
   count?: int64;
 
   @doc("The nested facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not contain any nested facets.")
-  @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.facets")
   facets?: Record<FacetResult[]>;
 
   @doc("The resulting total sum for the facet when a sum metric is requested.")
-  @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
   sum?: int64;
 }
@@ -785,7 +763,6 @@ model QueryAnswerResult is Record<unknown> {
 }
 
 @doc("Contains debugging information that can be used to further explore your search results.")
-@added(Versions.v2025_08_01_preview)
 model DebugInfo {
   @doc("Contains debugging information specific to query rewrites.")
   @visibility(Lifecycle.Read)
@@ -793,7 +770,6 @@ model DebugInfo {
 }
 
 @doc("Contains debugging information specific to query rewrites.")
-@added(Versions.v2025_08_01_preview)
 model QueryRewritesDebugInfo {
   @doc("List of query rewrites generated for the text query.")
   @visibility(Lifecycle.Read)
@@ -805,7 +781,6 @@ model QueryRewritesDebugInfo {
 }
 
 @doc("Contains debugging information specific to query rewrites.")
-@added(Versions.v2025_08_01_preview)
 model QueryRewritesValuesDebugInfo {
   @doc("The input text to the generative query rewriting model. There may be cases where the user query and the input to the generative model are not identical.")
   @visibility(Lifecycle.Read)
@@ -858,7 +833,6 @@ model SearchRequest {
   scoringProfile?: string;
 
   @doc("Enables a debugging tool that can be used to further explore your reranked results.")
-  @added(Versions.v2025_08_01_preview)
   debug?: QueryDebugMode;
 
   @doc("A full-text search query expression; Use \"*\" or omit this parameter to match all documents.")
@@ -871,11 +845,9 @@ model SearchRequest {
   searchMode?: SearchMode;
 
   @doc("A value that specifies the language of the search query.")
-  @added(Versions.v2025_08_01_preview)
   queryLanguage?: QueryLanguage;
 
   @doc("A value that specified the type of the speller to use to spell-correct individual search query terms.")
-  @added(Versions.v2025_08_01_preview)
   speller?: QuerySpellerType;
 
   @doc("The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.")
@@ -907,11 +879,9 @@ model SearchRequest {
   captions?: QueryCaptionType;
 
   @doc("A value that specifies whether query rewrites should be generated to augment the search query.")
-  @added(Versions.v2025_08_01_preview)
   queryRewrites?: QueryRewritesType;
 
   @doc("The comma-separated list of field names used for semantic ranking.")
-  @added(Versions.v2025_08_01_preview)
   semanticFields?: string;
 
   @doc("The query parameters for vector and hybrid search queries.")
@@ -921,7 +891,6 @@ model SearchRequest {
   vectorFilterMode?: VectorFilterMode;
 
   @doc("The query parameters to configure hybrid search behaviors.")
-  @added(Versions.v2025_08_01_preview)
   hybridSearch?: HybridSearch;
 }
 
@@ -944,15 +913,12 @@ model VectorQuery {
   weight?: float32;
 
   @doc("The threshold used for vector queries. Note this can only be set if all 'fields' use the same similarity metric.")
-  @added(Versions.v2025_08_01_preview)
   threshold?: VectorThreshold;
 
   @doc("The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead.")
-  @added(Versions.v2025_08_01_preview)
   filterOverride?: string;
 
   @doc("The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead.")
-  @added(Versions.v2025_08_01_preview)
   perDocumentVectorLimit?: int32;
 
   @doc("Type of query.")
@@ -960,7 +926,6 @@ model VectorQuery {
 }
 
 @doc("The threshold used for vector queries.")
-@added(Versions.v2025_08_01_preview)
 @discriminator("kind")
 model VectorThreshold {
   @doc("Type of threshold.")
@@ -968,7 +933,6 @@ model VectorThreshold {
 }
 
 @doc("TThe query parameters to configure hybrid search behaviors.")
-@added(Versions.v2025_08_01_preview)
 model HybridSearch {
   @doc("Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. Those documents will be combined with the documents matching the vector queries to produce a single final list of results. Choosing a larger maxTextRecallSize value will allow retrieving and paging through more documents (using the top and skip parameters), at the cost of higher resource utilization and higher latency. The value needs to be between 1 and 10,000. Default is 1000.")
   maxTextRecallSize?: int32;
@@ -1003,7 +967,6 @@ model SearchResult {
   captions?: QueryCaptionResult[];
 
   @doc("Contains debugging information that can be used to further explore your search results.")
-  @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.documentDebugInfo")
   documentDebugInfo?: DocumentDebugInfo[];
@@ -1022,7 +985,6 @@ model QueryCaptionResult {
 }
 
 @doc("Contains debugging information that can be used to further explore your search results.")
-@added(Versions.v2025_08_01_preview)
 model DocumentDebugInfo {
   @doc("Contains debugging information specific to semantic ranking requests.")
   @visibility(Lifecycle.Read)
@@ -1038,7 +1000,6 @@ model DocumentDebugInfo {
 }
 
 @doc("Contains debugging information specific to semantic ranking requests.")
-@added(Versions.v2025_08_01_preview)
 model SemanticDebugInfo {
   @doc("The title field that was sent to the semantic enrichment process, as well as how it was used")
   @visibility(Lifecycle.Read)
@@ -1058,7 +1019,6 @@ model SemanticDebugInfo {
 }
 
 @doc("Detailed scoring information for an individual element of a complex collection.")
-@added(Versions.v2025_08_01_preview)
 model QueryResultDocumentInnerHit {
   @doc("Position of this specific matching element within it's original collection. Position starts at 0.")
   @visibility(Lifecycle.Read)
@@ -1070,7 +1030,6 @@ model QueryResultDocumentInnerHit {
 }
 
 @doc("Description of fields that were sent to the semantic enrichment process, as well as how they were used")
-@added(Versions.v2025_08_01_preview)
 model QueryResultDocumentSemanticField {
   @doc("The name of the field that was sent to the semantic enrichment process")
   @visibility(Lifecycle.Read)
@@ -1082,7 +1041,6 @@ model QueryResultDocumentSemanticField {
 }
 
 @doc("The raw concatenated strings that were sent to the semantic enrichment process.")
-@added(Versions.v2025_08_01_preview)
 model QueryResultDocumentRerankerInput {
   @doc("The raw string for the title field that was used for semantic enrichment.")
   @visibility(Lifecycle.Read)
@@ -1098,7 +1056,6 @@ model QueryResultDocumentRerankerInput {
 }
 
 @doc("\"Contains debugging information specific to vector and hybrid search.\")")
-@added(Versions.v2025_08_01_preview)
 model VectorsDebugInfo {
   @doc("The breakdown of subscores of the document prior to the chosen result set fusion/combination method such as RRF.")
   @visibility(Lifecycle.Read)
@@ -1106,7 +1063,6 @@ model VectorsDebugInfo {
 }
 
 @doc("The breakdown of subscores between the text and vector query components of the search query for this document. Each vector query is shown as a separate object in the same order they were received.")
-@added(Versions.v2025_08_01_preview)
 model QueryResultDocumentSubscores {
   @doc("The BM25 or Classic score for the text portion of the query.")
   @visibility(Lifecycle.Read)
@@ -1122,7 +1078,6 @@ model QueryResultDocumentSubscores {
 }
 
 @doc("The BM25 or Classic score for the text portion of the query.")
-@added(Versions.v2025_08_01_preview)
 model TextResult {
   @doc("The BM25 or Classic score for the text portion of the query.")
   @visibility(Lifecycle.Read)
@@ -1130,7 +1085,6 @@ model TextResult {
 }
 
 @doc("A single vector field result. Both \@search.score and vector similarity values are returned. Vector similarity is related to \@search.score by an equation.")
-@added(Versions.v2025_08_01_preview)
 model SingleVectorFieldResult {
   @doc("The \@search.score value that is calculated from the vector similarity score. This is the score that's visible in a pure single-field single-vector query.")
   @visibility(Lifecycle.Read)
@@ -1315,7 +1269,6 @@ model VectorizableTextQuery extends VectorQuery {
   text: string;
 
   @doc("Can be configured to let a generative model rewrite the query before sending it to be vectorized.")
-  @added(Versions.v2025_08_01_preview)
   queryRewrites?: QueryRewritesType;
 
   @doc("The kind of vector query being performed.")
@@ -1323,7 +1276,6 @@ model VectorizableTextQuery extends VectorQuery {
 }
 
 @doc("The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided.")
-@added(Versions.v2025_08_01_preview)
 model VectorizableImageUrlQuery extends VectorQuery {
   @doc("The URL of an image to be vectorized to perform a vector search query.")
   url?: string;
@@ -1333,7 +1285,6 @@ model VectorizableImageUrlQuery extends VectorQuery {
 }
 
 @doc("The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided.")
-@added(Versions.v2025_08_01_preview)
 model VectorizableImageBinaryQuery extends VectorQuery {
   @doc("The base 64 encoded binary of an image to be vectorized to perform a vector search query.")
   base64Image?: string;
@@ -1343,7 +1294,6 @@ model VectorizableImageBinaryQuery extends VectorQuery {
 }
 
 @doc("The results of the vector query will be filtered based on the vector similarity metric. Note this is the canonical definition of similarity metric, not the 'distance' version. The threshold direction (larger or smaller) will be chosen automatically according to the metric used by the field.")
-@added(Versions.v2025_08_01_preview)
 model VectorSimilarityThreshold extends VectorThreshold {
   @doc("The threshold will filter based on the similarity metric value. Note this is the canonical definition of similarity metric, not the 'distance' version. The threshold direction (larger or smaller) will be chosen automatically according to the metric used by the field.")
   value: float64;
@@ -1353,7 +1303,6 @@ model VectorSimilarityThreshold extends VectorThreshold {
 }
 
 @doc("The results of the vector query will filter based on the '\@search.score' value. Note this is the \@search.score returned as part of the search response. The threshold direction will be chosen for higher \@search.score.")
-@added(Versions.v2025_08_01_preview)
 model SearchScoreThreshold extends VectorThreshold {
   @doc("The threshold will filter based on the '\@search.score' value. Note this is the \@search.score returned as part of the search response. The threshold direction will be chosen for higher \@search.score.")
   value: float64;

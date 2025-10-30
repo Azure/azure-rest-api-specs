@@ -32,7 +32,6 @@ union SearchIndexerDataSourceType {
   AdlsGen2: "adlsgen2",
 
   @doc("Indicates a Microsoft Fabric OneLake datasource.")
-  @added(Versions.v2025_08_01_preview)
   OneLake: "onelake",
 }
 
@@ -59,12 +58,10 @@ union BlobIndexerParsingMode {
   JsonLines: "jsonLines",
 
   @doc("Set to markdown to extract content from markdown files.")
-  @added(Versions.v2025_08_01_preview)
   Markdown: "markdown",
 }
 
 @doc("Specifies the submode that will determine whether a markdown file will be parsed into exactly one search document or multiple search documents. Default is `oneToMany`.")
-@added(Versions.v2025_08_01_preview)
 union MarkdownParsingSubmode {
   string,
 
@@ -76,7 +73,6 @@ union MarkdownParsingSubmode {
 }
 
 @doc("Specifies the max header depth that will be considered while grouping markdown content. Default is `h6`.")
-@added(Versions.v2025_08_01_preview)
 union MarkdownHeaderDepth {
   string,
 
@@ -150,7 +146,6 @@ union IndexerExecutionEnvironment {
 }
 
 @doc("Details the status of an individual indexer execution.")
-@added(Versions.v2025_08_01_preview)
 union IndexerExecutionStatusDetail {
   string,
 
@@ -162,7 +157,6 @@ union IndexerExecutionStatusDetail {
 }
 
 @doc("Represents the mode the indexer is executing in.")
-@added(Versions.v2025_08_01_preview)
 union IndexingMode {
   string,
 
@@ -516,7 +510,6 @@ union LexicalAnalyzerName {
 }
 
 @doc("Defines the names of all text normalizers supported by the search engine.")
-@added(Versions.v2025_08_01_preview)
 union LexicalNormalizerName {
   string,
 
@@ -566,11 +559,9 @@ union VectorSearchVectorizerKind {
   CustomWebApi: "customWebApi",
 
   @doc("Generate embeddings for an image or text input at query time using the Azure AI Services Vision Vectorize API.")
-  @added(Versions.v2025_08_01_preview)
   AIServicesVision: "aiServicesVision",
 
   @doc("Generate embeddings using an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog at query time.")
-  @added(Versions.v2025_08_01_preview)
   AML: "aml",
 }
 
@@ -586,7 +577,6 @@ union VectorSearchCompressionKind {
 }
 
 @doc("The storage method for the original full-precision vectors used for rescoring and internal index operations.")
-@added(Versions.v2025_08_01_preview)
 union VectorSearchCompressionRescoreStorageMethod {
   string,
 
@@ -825,7 +815,6 @@ union AzureOpenAIModelName {
 }
 
 @doc("The name of the embedding model from the Azure AI Foundry Catalog that will be called.")
-@added(Versions.v2025_08_01_preview)
 union AIFoundryModelCatalogName {
   string,
 
@@ -1908,7 +1897,6 @@ union TextSplitMode {
 }
 
 @doc("A value indicating which unit to use.")
-@added(Versions.v2025_08_01_preview)
 union SplitSkillUnit {
   string,
 
@@ -1920,7 +1908,6 @@ union SplitSkillUnit {
 }
 
 @doc("A value indicating which tokenizer to use.")
-@added(Versions.v2025_08_01_preview)
 union SplitSkillEncoderModelName {
   string,
 
@@ -2191,7 +2178,6 @@ union TextTranslationSkillLanguage {
 }
 
 @doc("Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.")
-@added(Versions.v2025_08_01_preview)
 union DocumentIntelligenceLayoutSkillOutputMode {
   string,
 
@@ -2200,7 +2186,6 @@ union DocumentIntelligenceLayoutSkillOutputMode {
 }
 
 @doc("Controls the cardinality of the output format. Default is 'markdown'.")
-@added(Versions.v2025_08_01_preview)
 union DocumentIntelligenceLayoutSkillOutputFormat {
   string,
 
@@ -2212,7 +2197,6 @@ union DocumentIntelligenceLayoutSkillOutputFormat {
 }
 
 @doc("The depth of headers in the markdown output. Default is h6.")
-@added(Versions.v2025_08_01_preview)
 union DocumentIntelligenceLayoutSkillMarkdownHeaderDepth {
   string,
 
@@ -2236,7 +2220,6 @@ union DocumentIntelligenceLayoutSkillMarkdownHeaderDepth {
 }
 
 @doc("Controls the cardinality of the content extracted from the document by the skill.")
-@added(Versions.v2025_08_01_preview)
 union DocumentIntelligenceLayoutSkillExtractionOptions {
   string,
 
@@ -2248,7 +2231,6 @@ union DocumentIntelligenceLayoutSkillExtractionOptions {
 }
 
 @doc("Controls the cardinality of the chunk unit. Default is 'characters'")
-@added(Versions.v2025_08_01_preview)
 union DocumentIntelligenceLayoutSkillChunkingUnit {
   string,
 
@@ -3018,7 +3000,6 @@ union StopwordsList {
 }
 
 @doc("Options with various types of permission data to index.")
-@added(Versions.v2025_08_01_preview)
 union IndexerPermissionOption {
   string,
 
@@ -3033,7 +3014,6 @@ union IndexerPermissionOption {
 }
 
 @doc("A value indicating whether the field should be used as a permission filter.")
-@added(Versions.v2025_08_01_preview)
 union PermissionFilter {
   string,
 
@@ -3048,7 +3028,6 @@ union PermissionFilter {
 }
 
 @doc("A value indicating whether permission filtering is enabled for the index.")
-@added(Versions.v2025_08_01_preview)
 union SearchIndexPermissionFilterOption {
   string,
 
@@ -3060,7 +3039,6 @@ union SearchIndexPermissionFilterOption {
 }
 
 @doc("Specifies how 'extraParameters' should be handled by Azure AI Foundry. Defaults to 'error'.")
-@added(Versions.v2025_08_01_preview)
 union ChatCompletionExtraParametersBehavior {
   string,
 
@@ -3075,7 +3053,6 @@ union ChatCompletionExtraParametersBehavior {
 }
 
 @doc("Specifies how the LLM should format the response.")
-@added(Versions.v2025_08_01_preview)
 union ChatCompletionResponseFormatType {
   string,
 
@@ -3090,7 +3067,6 @@ union ChatCompletionResponseFormatType {
 }
 
 @doc("Represents score to use for sort order of documents.")
-@added(Versions.v2025_08_01_preview)
 union RankingOrder {
   string,
 
@@ -3102,7 +3078,6 @@ union RankingOrder {
 }
 
 @doc("Options with various types of permission data to index.")
-@added(Versions.v2025_08_01_preview)
 union IndexerResyncOption {
   string,
 
@@ -3111,7 +3086,6 @@ union IndexerResyncOption {
 }
 
 @doc("Request body for resync indexer operation.")
-@added(Versions.v2025_08_01_preview)
 model IndexerResyncBody {
   @doc("Indexer to re-ingest pre-selected permissions data from data source to index.")
   options?: IndexerResyncOption[];
@@ -3131,6 +3105,7 @@ model SearchIndexerDataSource {
   @doc("A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts.")
   subType?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract"
   @doc("Credentials for the datasource.")
   @flattenProperty
   credentials: DataSourceCredentials;
@@ -3139,11 +3114,9 @@ model SearchIndexerDataSource {
   container: SearchIndexerDataContainer;
 
   @doc("An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared.")
-  @added(Versions.v2025_08_01_preview)
   identity?: SearchIndexerDataIdentity;
 
   @doc("Ingestion options with various types of permission data.")
-  @added(Versions.v2025_08_01_preview)
   indexerPermissionOptions?: IndexerPermissionOption[];
 
   @doc("The data change detection policy for the datasource.")
@@ -3199,18 +3172,17 @@ model SearchResourceEncryptionKey {
   keyVaultKeyName: string;
 
   @doc("The version of your Azure Key Vault key to be used to encrypt your data at rest.")
-  @madeOptional(Versions.v2025_08_01_preview)
   keyVaultKeyVersion?: string;
 
   @doc("The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`.")
   keyVaultUri: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract"
   @doc("Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.")
   @flattenProperty
   accessCredentials?: AzureActiveDirectoryApplicationCredentials;
 
   @doc("An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared.")
-  @added(Versions.v2025_08_01_preview)
   identity?: SearchIndexerDataIdentity;
 }
 
@@ -3231,7 +3203,6 @@ model ListDataSourcesResult {
 }
 
 @doc("The type of the keysOrIds.")
-@added(Versions.v2025_08_01_preview)
 model DocumentKeysOrIds {
   @doc("document keys to be reset")
   documentKeys?: string[];
@@ -3280,7 +3251,6 @@ model SearchIndexer {
   encryptionKey?: SearchResourceEncryptionKey;
 
   @doc("Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time.")
-  @added(Versions.v2025_08_01_preview)
   cache?: SearchIndexerCache;
 }
 
@@ -3342,11 +3312,9 @@ model IndexingParametersConfiguration {
   firstLineContainsHeaders?: boolean = true;
 
   @doc("Specifies the submode that will determine whether a markdown file will be parsed into exactly one search document or multiple search documents. Default is `oneToMany`.")
-  @added(Versions.v2025_08_01_preview)
   markdownParsingSubmode?: MarkdownParsingSubmode = MarkdownParsingSubmode.OneToMany;
 
   @doc("Specifies the max header depth that will be considered while grouping markdown content. Default is `h6`.")
-  @added(Versions.v2025_08_01_preview)
   markdownHeaderDepth?: MarkdownHeaderDepth = MarkdownHeaderDepth.h6;
 
   @doc("For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property.")
@@ -3394,7 +3362,6 @@ model FieldMappingFunction {
 }
 
 @doc("The type of the cache.")
-@added(Versions.v2025_08_01_preview)
 model SearchIndexerCache {
   @doc("The connection string to the storage account where the cache data will be persisted.")
   storageConnectionString?: string;
@@ -3441,17 +3408,14 @@ model IndexerExecutionResult {
 
   @doc("The outcome of this indexer execution.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_08_01_preview)
   statusDetail?: IndexerExecutionStatusDetail;
 
   @doc("The mode the indexer is running in.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_08_01_preview)
   mode?: IndexingMode;
 
   @doc("All of the state that defines and dictates the indexer's current execution.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_08_01_preview)
   currentState?: IndexerCurrentState;
 
   @doc("The error message indicating the top-level error, if any.")
@@ -3483,7 +3447,6 @@ model IndexerExecutionResult {
 }
 
 @doc("Represents all of the state that defines and dictates the indexer's current execution.")
-@added(Versions.v2025_08_01_preview)
 model IndexerCurrentState {
   @doc("The mode the indexer is running in.")
   @visibility(Lifecycle.Read)
@@ -3671,12 +3634,10 @@ model SearchIndexerKnowledgeStore {
   projections: SearchIndexerKnowledgeStoreProjection[];
 
   @doc("The user-assigned managed identity used for connections to Azure Storage when writing knowledge store projections. If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
-  @added(Versions.v2025_08_01_preview)
   identity?: SearchIndexerDataIdentity;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   @doc("A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
-  @added(Versions.v2025_08_01_preview)
   parameters?: SearchIndexerKnowledgeStoreParameters;
 }
 
@@ -3779,7 +3740,6 @@ model ListSkillsetsResult {
 
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
 @doc("The type of the skill names.")
-@added(Versions.v2025_08_01_preview)
 model SkillNames {
   @doc("the names of skills to be reset.")
   skillNames?: string[];
@@ -3847,7 +3807,6 @@ model SearchIndex {
   charFilters?: CharFilter[];
 
   @doc("The normalizers for the index.")
-  @added(Versions.v2025_08_01_preview)
   normalizers?: LexicalNormalizer[];
 
   @doc("A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.")
@@ -3863,7 +3822,6 @@ model SearchIndex {
   vectorSearch?: VectorSearch;
 
   @doc("A value indicating whether permission filtering is enabled for the index.")
-  @added(Versions.v2025_08_01_preview)
   permissionFilterOption?: SearchIndexPermissionFilterOption;
 
   @doc("The ETag of the index.")
@@ -3901,7 +3859,6 @@ model SearchField {
   facetable?: boolean;
 
   @doc("A value indicating whether the field should be used as a permission filter.")
-  @added(Versions.v2025_08_01_preview)
   permissionFilter?: PermissionFilter;
 
   @doc("The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.")
@@ -3914,7 +3871,6 @@ model SearchField {
   indexAnalyzer?: LexicalAnalyzerName;
 
   @doc("The name of the normalizer to use for the field. This option can be used only with fields with filterable, sortable, or facetable enabled. Once the normalizer is chosen, it cannot be changed for the field. Must be null for complex fields.")
-  @added(Versions.v2025_08_01_preview)
   normalizer?: LexicalNormalizerName;
 
   @doc("The dimensionality of the vector field.")
@@ -4043,7 +3999,6 @@ model CharFilter {
 }
 
 @doc("Base type for normalizers.")
-@added(Versions.v2025_08_01_preview)
 @discriminator("@odata.type")
 model LexicalNormalizer {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4082,11 +4037,9 @@ model SemanticConfiguration {
   prioritizedFields: SemanticPrioritizedFields;
 
   @doc("Specifies the score type to be used for the sort order of the search results.")
-  @added(Versions.v2025_08_01_preview)
   rankingOrder?: RankingOrder;
 
   @doc("Determines which semantic or query rewrite models to use during model flighting/upgrades.")
-  @added(Versions.v2025_08_01_preview)
   flightingOptIn?: boolean;
 }
 
@@ -4171,11 +4124,9 @@ model VectorSearchCompression {
   defaultOversampling?: float64;
 
   @doc("Contains the options for rescoring.")
-  @added(Versions.v2025_08_01_preview)
   rescoringOptions?: RescoringOptions;
 
   @doc("The number of dimensions to truncate the vectors to. Truncating the vectors reduces the size of the vectors and the amount of data that needs to be transferred during search. This can save storage cost and improve search performance at the expense of recall. It should be only used for embeddings trained with Matryoshka Representation Learning (MRL) such as OpenAI text-embedding-3-large (small). The default value is null, which means no truncation.")
-  @added(Versions.v2025_08_01_preview)
   truncationDimension?: int32;
 
   @doc("Type of VectorSearchCompression.")
@@ -4183,7 +4134,6 @@ model VectorSearchCompression {
 }
 
 @doc("Contains the options for rescoring.")
-@added(Versions.v2025_08_01_preview)
 model RescoringOptions {
   @doc("If set to true, after the initial search on the compressed vectors, the similarity scores are recalculated using the full-precision vectors. This will improve recall at the expense of latency.")
   enableRescoring?: boolean = true;
@@ -4227,7 +4177,6 @@ model AnalyzeRequest {
   tokenizer?: LexicalTokenizerName;
 
   @doc("The name of the normalizer to use to normalize the given text.")
-  @added(Versions.v2025_08_01_preview)
   normalizer?: LexicalNormalizerName;
 
   @doc("An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter.")
@@ -4259,7 +4208,6 @@ model AnalyzedTokenInfo {
 }
 
 @doc("Represents an index alias, which describes a mapping from the alias name to an index. The alias name can be used in place of the index name for supported operations.")
-@added(Versions.v2025_08_01_preview)
 model SearchAlias {
   @doc("The name of the alias.")
   name: string;
@@ -4273,7 +4221,6 @@ model SearchAlias {
 }
 
 @doc("Response from a List Aliases request. If successful, it includes the associated index mappings for all aliases.")
-@added(Versions.v2025_08_01_preview)
 model ListAliasesResult {
   @doc("The aliases in the Search service.")
   @pageItems
@@ -4283,7 +4230,6 @@ model ListAliasesResult {
 
 // Knowledge Agent models
 @doc("Represents a knowledge agent definition.")
-@added(Versions.v2025_08_01_preview)
 model KnowledgeAgent {
   @doc("The name of the knowledge agent.")
   @key("agentName")
@@ -4291,19 +4237,15 @@ model KnowledgeAgent {
   name: string;
 
   @doc("Contains configuration options on how to connect to AI models.")
-  @added(Versions.v2025_08_01_preview)
   models: KnowledgeAgentModel[];
 
   @doc("Knowledge sources referenced by this agent.")
-  @added(Versions.v2025_08_01_preview)
   knowledgeSources: KnowledgeSourceReference[];
 
   @doc("Output configuration for the agent.")
-  @added(Versions.v2025_08_01_preview)
   outputConfiguration?: KnowledgeAgentOutputConfiguration;
 
   @doc("Request limits for the agent.")
-  @added(Versions.v2025_08_01_preview)
   requestLimits?: KnowledgeAgentRequestLimits;
 
   @doc("Instructions considered by the knowledge agent when developing query plan.")
@@ -4320,7 +4262,6 @@ model KnowledgeAgent {
 }
 
 @doc("Reference to a knowledge source.")
-@added(Versions.v2025_08_01_preview)
 model KnowledgeSourceReference {
   @doc("The name of the knowledge source.")
   name: string;
@@ -4342,7 +4283,6 @@ model KnowledgeSourceReference {
 }
 
 @doc("Output configuration for knowledge agent.")
-@added(Versions.v2025_08_01_preview)
 model KnowledgeAgentOutputConfiguration {
   @doc("The output configuration for the agent")
   modality?: KnowledgeAgentOutputConfigurationModality;
@@ -4358,7 +4298,6 @@ model KnowledgeAgentOutputConfiguration {
 }
 
 @doc("The output configuration for the agent")
-@added(Versions.v2025_08_01_preview)
 union KnowledgeAgentOutputConfigurationModality {
   string,
 
@@ -4370,7 +4309,6 @@ union KnowledgeAgentOutputConfigurationModality {
 }
 
 @doc("Guardrails to limit how much resources are utilized for a single agent retrieval request.")
-@added(Versions.v2025_08_01_preview)
 model KnowledgeAgentRequestLimits {
   @doc("The maximum runtime in seconds.")
   maxRuntimeInSeconds?: int32;
@@ -4380,7 +4318,6 @@ model KnowledgeAgentRequestLimits {
 }
 
 @doc("Result from listing knowledge agents.")
-@added(Versions.v2025_08_01_preview)
 model ListKnowledgeAgentsResult {
   @doc("The knowledge agents in the service.")
   @pageItems
@@ -4389,7 +4326,6 @@ model ListKnowledgeAgentsResult {
 
 @discriminator("kind")
 @doc("Specifies the connection parameters for the model to use for query planning.")
-@added(Versions.v2025_08_01_preview)
 model KnowledgeAgentModel {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The AI model to be used for query planning.")
@@ -4397,7 +4333,6 @@ model KnowledgeAgentModel {
 }
 
 @doc("The AI model to be used for query planning.")
-@added(Versions.v2025_08_01_preview)
 union KnowledgeAgentModelKind {
   string,
 
@@ -4406,7 +4341,6 @@ union KnowledgeAgentModelKind {
 }
 
 @doc("Specifies the Azure OpenAI resource used to do query planning.")
-@added(Versions.v2025_08_01_preview)
 model KnowledgeAgentAzureOpenAiModel extends KnowledgeAgentModel {
   kind: KnowledgeAgentModelKind.AzureOpenAI;
 
@@ -4416,7 +4350,6 @@ model KnowledgeAgentAzureOpenAiModel extends KnowledgeAgentModel {
 }
 
 @doc("Specifies the parameters for connecting to the Azure OpenAI resource.")
-@added(Versions.v2025_08_01_preview)
 model AzureOpenAiParameters {
   @doc("The resource URI of the Azure OpenAI resource.")
   resourceUri: url;
@@ -4440,7 +4373,6 @@ model AzureOpenAiParameters {
 // Knowledge Source models
 @discriminator("kind")
 @doc("Represents a knowledge source definition.")
-@added(Versions.v2025_08_01_preview)
 model KnowledgeSource {
   @doc("The name of the knowledge source.")
   @key("sourceName")
@@ -4452,7 +4384,6 @@ model KnowledgeSource {
 
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The type of the knowledge source.")
-  @added(Versions.v2025_08_01_preview)
   kind: KnowledgeSourceKind;
 
   @doc("The ETag of the agent.")
@@ -4463,7 +4394,6 @@ model KnowledgeSource {
 }
 
 @doc("The kind of the knowledge source.")
-@added(Versions.v2025_08_01_preview)
 union KnowledgeSourceKind {
   string,
 
@@ -4491,7 +4421,6 @@ union KnowledgeSourceKind {
 }
 
 @doc("Knowledge Source targeting a search index.")
-@added(Versions.v2025_08_01_preview)
 model SearchIndexKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.SearchIndex;
 
@@ -4500,7 +4429,6 @@ model SearchIndexKnowledgeSource extends KnowledgeSource {
 }
 
 @doc("Parameters for search index knowledge source.")
-@added(Versions.v2025_08_01_preview)
 model SearchIndexKnowledgeSourceParameters {
   @doc("The name of the Search index.")
   searchIndexName: string;
@@ -4510,7 +4438,6 @@ model SearchIndexKnowledgeSourceParameters {
 }
 
 @doc("Configuration for Azure Blob Storage knowledge source.")
-@added(Versions.v2025_08_01_preview)
 model AzureBlobKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.AzureBlob;
 
@@ -4519,7 +4446,6 @@ model AzureBlobKnowledgeSource extends KnowledgeSource {
 }
 
 @doc("Parameters for Azure Blob Storage knowledge source.")
-@added(Versions.v2025_08_01_preview)
 model AzureBlobKnowledgeSourceParameters {
   @doc("An explicit identity to use for this knowledge source. ")
   identity?: SearchIndexerDataIdentity;
@@ -4551,7 +4477,6 @@ model AzureBlobKnowledgeSourceParameters {
 }
 
 @doc("Result from listing knowledge sources.")
-@added(Versions.v2025_08_01_preview)
 model ListKnowledgeSourcesResult {
   @doc("The knowledge sources in the service.")
   @pageItems
@@ -4559,7 +4484,6 @@ model ListKnowledgeSourcesResult {
 }
 
 @doc("Resources created by the knowledge source. Keys represent resource types (e.g., 'datasource', 'indexer', 'skillset', 'index') and values represent resource names.")
-@added(Versions.v2025_08_01_preview)
 model CreatedResources {
   ...Record<string>;
 }
@@ -4576,7 +4500,6 @@ model SearchServiceStatistics {
 @doc("Represents service-level resource counters and quotas.")
 model SearchServiceCounters {
   @doc("Total number of aliases.")
-  @added(Versions.v2025_08_01_preview)
   aliasesCount: ResourceCounter;
 
   @doc("Total number of documents across all indexes in the service.")
@@ -4691,7 +4614,6 @@ model StopAnalyzer extends LexicalAnalyzer {
 }
 
 @doc("Allows you to configure normalization for filterable, sortable, and facetable fields, which by default operate with strict matching. This is a user-defined configuration consisting of at least one or more filters, which modify the token that is stored.")
-@added(Versions.v2025_08_01_preview)
 model CustomNormalizer extends LexicalNormalizer {
   @doc("A list of token filters used to filter out or modify the input token. For example, you can specify a lowercase filter that converts all characters to lowercase. The filters are run in the order in which they are listed.")
   tokenFilters?: TokenFilterName[];
@@ -5392,7 +5314,6 @@ model WebApiVectorizerParameters {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("Clears the identity property of a datasource.")
-@added(Versions.v2025_08_01_preview)
 model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   @doc("Contains the parameters specific to AI Services Vision embedding vectorization.")
   AIServicesVisionParameters?: AIServicesVisionParameters;
@@ -5403,7 +5324,6 @@ model AIServicesVisionVectorizer extends VectorSearchVectorizer {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("Specifies the AI Services Vision parameters for vectorizing a query image or text.")
-@added(Versions.v2025_08_01_preview)
 model AIServicesVisionParameters {
   @doc("The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.")
   modelVersion: string;
@@ -5420,7 +5340,6 @@ model AIServicesVisionParameters {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog for generating the vector embedding of a query string.")
-@added(Versions.v2025_08_01_preview)
 model AMLVectorizer extends VectorSearchVectorizer {
   @doc("Specifies the properties of the AML vectorizer.")
   amlParameters?: AMLParameters;
@@ -5431,7 +5350,6 @@ model AMLVectorizer extends VectorSearchVectorizer {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("Specifies the properties for connecting to an AML vectorizer.")
-@added(Versions.v2025_08_01_preview)
 model AMLParameters {
   @doc("(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed.")
   uri: url;
@@ -5501,7 +5419,6 @@ model SoftDeleteColumnDeletionDetectionPolicy
 }
 
 @doc("Defines a data deletion detection policy utilizing Azure Blob Storage's native soft delete feature for deletion detection.")
-@added(Versions.v2025_08_01_preview)
 model NativeBlobSoftDeleteDeletionDetectionPolicy
   extends DataDeletionDetectionPolicy {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -5606,7 +5523,6 @@ model CognitiveServicesAccountKey extends CognitiveServicesAccount {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("The account key of an Azure AI service resource that's attached to a skillset, to be used with the resource's subdomain.")
-@added(Versions.v2025_08_01_preview)
 model AIServicesAccountKey extends CognitiveServicesAccount {
   @doc("The key used to provision the Azure AI service resource attached to a skillset.")
   key: string;
@@ -5621,7 +5537,6 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("The multi-region account of an Azure AI service resource that's attached to a skillset.")
-@added(Versions.v2025_08_01_preview)
 model AIServicesAccountIdentity extends CognitiveServicesAccount {
   @doc("The user-assigned managed identity used for connections to AI Service. If not specified, the system-assigned managed identity is used. On updates to the skillset, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
   identity?: SearchIndexerDataIdentity;
@@ -5907,12 +5822,10 @@ model SplitSkill extends SearchIndexerSkill {
   maximumPagesToTake?: int32;
 
   @doc("Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character.")
-  @added(Versions.v2025_08_01_preview)
   unit?: SplitSkillUnit;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property.")
-  @added(Versions.v2025_08_01_preview)
   azureOpenAITokenizerParameters?: AzureOpenAITokenizerParameters;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -5922,7 +5835,6 @@ model SplitSkill extends SearchIndexerSkill {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("Azure OpenAI Tokenizer parameters.")
-@added(Versions.v2025_08_01_preview)
 model AzureOpenAITokenizerParameters {
   @doc("Only applies if the unit is set to azureOpenAITokens. Options include 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is 'CL100k_base'.")
   encoderModelName?: SplitSkillEncoderModelName;
@@ -5990,7 +5902,6 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
 }
 
 @doc("A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline.")
-@added(Versions.v2025_08_01_preview)
 model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
   @doc("Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.")
   outputFormat?: DocumentIntelligenceLayoutSkillOutputFormat;
@@ -6044,7 +5955,6 @@ model WebApiSkill extends SearchIndexerSkill {
 }
 
 @doc("The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment.")
-@added(Versions.v2025_08_01_preview)
 model AzureMachineLearningSkill extends SearchIndexerSkill {
   @doc("(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed.")
   uri?: url;
@@ -6083,7 +5993,6 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 }
 
 @doc("Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API.")
-@added(Versions.v2025_08_01_preview)
 model VisionVectorizeSkill extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.")
   modelVersion: string;
@@ -6094,7 +6003,6 @@ model VisionVectorizeSkill extends SearchIndexerSkill {
 }
 
 @doc("Object defining the custom schema the model will use to structure its output.")
-@added(Versions.v2025_08_01_preview)
 model ChatCompletionSchema {
   @doc("Type of schema representation. Usually 'object'. Default is 'object'.")
   type?: string = "object";
@@ -6110,7 +6018,6 @@ model ChatCompletionSchema {
 }
 
 @doc("Determines how the language model's response should be serialized. Defaults to 'text'.")
-@added(Versions.v2025_08_01_preview)
 model ChatCompletionResponseFormat {
   @doc("Specifies how the LLM should format the response.")
   type?: ChatCompletionResponseFormatType = ChatCompletionResponseFormatType.Text;
@@ -6120,7 +6027,6 @@ model ChatCompletionResponseFormat {
 }
 
 @doc("Properties for JSON schema response format.")
-@added(Versions.v2025_08_01_preview)
 model ChatCompletionSchemaProperties {
   @doc("Name of the json schema the model will adhere to.")
   name?: string;
@@ -6136,7 +6042,6 @@ model ChatCompletionSchemaProperties {
 }
 
 @doc("Common language model parameters for Chat Completions. If omitted, default values are used.")
-@added(Versions.v2025_08_01_preview)
 model ChatCompletionCommonModelParameters {
   @doc("The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.")
   modelName?: string;
@@ -6161,7 +6066,6 @@ model ChatCompletionCommonModelParameters {
 }
 
 @doc("A skill that calls a language model via Azure AI Foundry's Chat Completions endpoint.")
-@added(Versions.v2025_08_01_preview)
 model ChatCompletionSkill extends SearchIndexerSkill {
   @doc("The url for the Web API.")
   uri: string;
@@ -6209,7 +6113,6 @@ model ChatCompletionSkill extends SearchIndexerSkill {
 }
 
 @doc("Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.")
-@added(Versions.v2025_08_01_preview)
 model IndexStatisticsSummary {
   @doc("The name of the index.")
   @key
@@ -6230,7 +6133,6 @@ model IndexStatisticsSummary {
 }
 
 @doc("Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service.")
-@added(Versions.v2025_08_01_preview)
 model ListIndexStatsSummary {
   @doc("The Statistics summary of all indexes in the Search service.")
   @pageItems
@@ -6239,7 +6141,6 @@ model ListIndexStatsSummary {
 }
 
 @doc("Controls the cardinality for chunking the content.")
-@added(Versions.v2025_08_01_preview)
 model DocumentIntelligenceLayoutSkillChunkingProperties {
   @doc("The unit of the chunk.")
   unit?: DocumentIntelligenceLayoutSkillChunkingUnit;
@@ -6252,7 +6153,6 @@ model DocumentIntelligenceLayoutSkillChunkingProperties {
 }
 
 @doc("A dictionary of http request headers.")
-@added(Versions.v2025_08_01_preview)
 model WebApiHttpHeaders {
   ...Record<string>;
 }

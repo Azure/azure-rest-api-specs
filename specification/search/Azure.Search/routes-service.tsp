@@ -19,7 +19,6 @@ interface DataSources {
       ...preferHeader;
 
       @doc("Ignores cache reset requirements.")
-      @added(Versions.v2025_08_01_preview)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
@@ -98,7 +97,6 @@ interface Indexers {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Resync selective options from the datasource to be re-ingested by the indexer.\"")
-  @added(Versions.v2025_08_01_preview)
   @route("/indexers('{indexerName}')/search.resync")
   @post
   resync is SearchIndexerOperation<
@@ -112,7 +110,6 @@ interface Indexers {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Resets specific documents in the datasource to be selectively re-ingested by the indexer.")
-  @added(Versions.v2025_08_01_preview)
   @route("/indexers('{indexerName}')/search.resetdocs")
   @post
   resetDocs is SearchIndexerOperation<
@@ -156,12 +153,10 @@ interface Indexers {
       ...preferHeader;
 
       @doc("Ignores cache reset requirements.")
-      @added(Versions.v2025_08_01_preview)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
       @doc("Disables cache reprocessing change detection.")
-      @added(Versions.v2025_08_01_preview)
       @query("disableCacheReprocessingChangeDetection")
       disableCacheReprocessingChangeDetection?: boolean;
 
@@ -244,12 +239,10 @@ interface Skillsets {
       ...preferHeader;
 
       @doc("Ignores cache reset requirements.")
-      @added(Versions.v2025_08_01_preview)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
       @doc("Disables cache reprocessing change detection.")
-      @added(Versions.v2025_08_01_preview)
       @query("disableCacheReprocessingChangeDetection")
       disableCacheReprocessingChangeDetection?: boolean;
 
@@ -314,7 +307,6 @@ interface Skillsets {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Reset an existing skillset in a search service.")
-  @added(Versions.v2025_08_01_preview)
   @route("/skillsets('{skillsetName}')/search.resetskills")
   @post
   resetSkills is SearchSkillsetOperation<
@@ -493,7 +485,6 @@ interface Indexes {
   >;
 }
 
-@added(Versions.v2025_08_01_preview)
 interface Aliases {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Creates a new search alias.")
@@ -565,7 +556,6 @@ interface Aliases {
   get is SearchAliasOperation<{}, SearchAlias>;
 }
 
-@added(Versions.v2025_08_01_preview)
 interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Creates a new agent.")
@@ -636,7 +626,6 @@ interface Agents {
   get is SearchAgentOperation<{}, KnowledgeAgent>;
 }
 
-@added(Versions.v2025_08_01_preview)
 interface Sources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Creates a new knowledge source.")
@@ -717,7 +706,6 @@ op getServiceStatistics is SearchOperation<{}, SearchServiceStatistics>;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
 @doc("Retrieves a summary of statistics for all indexes in the search service.")
-@added(Versions.v2025_08_01_preview)
 @route("/indexstats")
 @list
 @get
