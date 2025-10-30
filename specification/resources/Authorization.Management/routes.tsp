@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Authorization;
 
-alias ManagementGroupParameters<Resource extends {}> = {
+alias ManagementGroupNameParameters<Resource extends {}> = {
   /** the provider namespace */
   @path
   @segment("providers")
@@ -21,6 +21,23 @@ alias ManagementGroupParameters<Resource extends {}> = {
   providerNamespace: "Microsoft.Management";
 
   ...CommonTypes.ManagementGroupNameParameter;
+  ...ProviderNamespace<Resource>;
+  ...ApiVersionParameter;
+};
+
+alias ManagementGroupIdParameters<Resource extends {}> = {
+  /** the provider namespace */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.Management";
+
+  /** The ID of the management group. */
+  @path
+  @segment("managementGroups")
+  @key
+  managementGroupId: string;
+
   ...ProviderNamespace<Resource>;
   ...ApiVersionParameter;
 };
@@ -46,7 +63,7 @@ interface PolicyDefinitionVersionsOperationGroup {
   @action("listPolicyDefinitionVersions")
   @armResourceCollectionAction
   listAllAtManagementGroup(
-    ...ManagementGroupParameters<PolicyDefinitionVersion>,
+    ...ManagementGroupNameParameters<PolicyDefinitionVersion>,
   ): ResourceListResult<PolicyDefinitionVersion> | ErrorResponse;
 
   /**
@@ -82,7 +99,7 @@ interface PolicySetDefinitionVersionsOperationGroup {
   @action("listPolicySetDefinitionVersions")
   @armResourceCollectionAction
   listAllAtManagementGroup(
-    ...ManagementGroupParameters<PolicySetDefinitionVersion>,
+    ...ManagementGroupIdParameters<PolicySetDefinitionVersion>,
   ): ResourceListResult<PolicySetDefinitionVersion> | ErrorResponse;
 
   /**
@@ -123,7 +140,7 @@ interface PolicyTokensOperationGroup {
   @action("acquirePolicyToken")
   @armResourceCollectionAction
   acquireAtManagementGroup(
-    ...ManagementGroupParameters<PolicyTokenRequest>,
+    ...ManagementGroupNameParameters<PolicyTokenRequest>,
 
     /** The policy token properties. */
     @body parameters: PolicyTokenRequest,

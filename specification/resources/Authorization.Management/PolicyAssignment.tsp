@@ -35,6 +35,28 @@ model PolicyAssignment
   identity?: Identity;
 }
 
+alias PolicyAssignmentListParameters = {
+  /**
+   * The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.
+   */
+  @query("$filter")
+  $filter?: string;
+
+  /**
+   * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
+   */
+  @query("$expand")
+  $expand?: string;
+
+  /**
+   * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
+   */
+  @maxValue(1000)
+  @minValue(1)
+  @query("$top")
+  $top?: int32;
+};
+
 @armResourceOperations
 interface PolicyAssignments {
   /**
@@ -87,28 +109,24 @@ interface PolicyAssignments {
   listForResourceGroup is Extension.ListByTarget<
     Extension.ResourceGroup,
     PolicyAssignment,
-    Parameters = {
-      /**
-       * The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
-       */
-      @query("$expand")
-      $expand?: string;
-
-      /**
-       * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
-       */
-      @maxValue(1000)
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
-    }
+    Parameters = PolicyAssignmentListParameters
   >;
+
+  /**
+   * This operation retrieves the list of all policy assignments applicable to the management group that match the given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter=atScope() is provided, the returned list includes all policy assignments that are assigned to the management group or the management group's ancestors. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the management group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the management group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Retrieves all policy assignments that apply to a management group.")
+  @autoRoute
+  @list
+  @listsResource(PolicyAssignment)
+  @segmentOf(PolicyAssignment)
+  @armResourceList(PolicyAssignment)
+  @get
+  listForManagementGroup(
+    ...ManagementGroupIdParameters<PolicyAssignment>,
+    ...PolicyAssignmentListParameters,
+  ): ResourceListResult<PolicyAssignment> | ErrorResponse;
 }
 
 @@doc(PolicyAssignment.name, "The name of the policy assignment to get.");
