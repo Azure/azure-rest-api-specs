@@ -10196,6 +10196,10 @@
         "fullTextPolicy": {
           "$ref": "#/definitions/FullTextPolicy",
           "description": "The FullText policy for the container."
+        },
+        "dataMaskingPolicy": {
+          "$ref": "#/definitions/DataMaskingPolicy",
+          "description": "The Data Masking policy for the container."
         }
       },
       "required": [
@@ -10714,6 +10718,62 @@
         "encryptionType",
         "encryptionAlgorithm"
       ]
+    },
+    "DataMaskingPolicy": {
+      "type": "object",
+      "description": "Data masking policy for the container.",
+      "properties": {
+        "includedPaths": {
+          "type": "array",
+          "description": "List of JSON paths to include in the masking policy.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "The JSON path to apply masking (e.g. \"/contact/phones\")."
+              },
+              "strategy": {
+                "type": "string",
+                "description": "Masking strategy to apply (e.g. \"MaskSubstring\")."
+              },
+              "startPosition": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Start position for substring masking (when applicable)."
+              },
+              "length": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Length of substring to mask (when applicable)."
+              }
+            },
+            "required": [
+              "path"
+            ]
+          }
+        },
+        "excludedPaths": {
+          "type": "array",
+          "description": "List of JSON paths to exclude from masking.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "The JSON path to exclude from masking (e.g. \"/id\")."
+              }
+            },
+            "required": [
+              "path"
+            ]
+          }
+        },
+        "isPolicyEnabled": {
+          "type": "boolean",
+          "description": "Flag indicating whether the data masking policy is enabled."
+        }
+      }
     },
     "MaterializedViewDefinition": {
       "type": "object",
