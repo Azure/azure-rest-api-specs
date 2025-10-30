@@ -192,6 +192,26 @@
                   ],
                   "policyFormatVersion": 1
                 },
+                "dataMaskingPolicy": {
+                  "includedPaths": [
+                    {
+                      "path": "/",
+                      "strategy": "Default"
+                    },
+                    {
+                      "path": "/contact/phones",
+                      "strategy": "MaskSubstring",
+                      "startPosition": 3,
+                      "length": 10
+                    }
+                  ],
+                  "excludedPaths": [
+                    {
+                      "path": "/id"
+                    }
+                  ],
+                  "isPolicyEnabled": true
+                },
                 "computedProperties": [],
                 "_rid": "PD5DALigDiw=",
                 "_ts": 1459200611,
