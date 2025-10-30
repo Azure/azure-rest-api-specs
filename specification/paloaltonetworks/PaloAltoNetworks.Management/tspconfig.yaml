@@ -41,6 +41,12 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "/sdk/paloaltonetworks.ngfw/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.PaloAltoNetworks.Ngfw"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
