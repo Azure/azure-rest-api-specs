@@ -2,7 +2,12 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Cdn/EdgeAction",
-    "version": "2024-07-22-preview"
+    "version": "2025-09-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
   "schemes": [
     "https"
@@ -34,9 +39,6 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "EdgeActions"
     },
     {
@@ -54,11 +56,6 @@
           "EdgeActions"
         ],
         "description": "List EdgeAction resources by subscription ID",
-        "x-ms-examples": {
-          "ListEdgeActions_bySubscription": {
-            "$ref": "./examples/EdgeActions_ListBySubscription.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -69,7 +66,7 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeAction list operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionListResult"
             }
@@ -79,6 +76,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListEdgeActions_bySubscription": {
+            "$ref": "./examples/EdgeActions_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -93,11 +95,6 @@
           "EdgeActions"
         ],
         "description": "List EdgeAction resources by resource group",
-        "x-ms-examples": {
-          "ListEdgeActions_byResourceGroup": {
-            "$ref": "./examples/EdgeActions_ListByResourceGroup.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -111,7 +108,7 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeAction list operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionListResult"
             }
@@ -121,6 +118,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListEdgeActions_byResourceGroup": {
+            "$ref": "./examples/EdgeActions_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -134,12 +136,7 @@
         "tags": [
           "EdgeActions"
         ],
-        "description": "Get EdgeAction resource",
-        "x-ms-examples": {
-          "GetEdgeAction": {
-            "$ref": "./examples/EdgeActions_Get.json"
-          }
-        },
+        "description": "Get a EdgeAction",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -151,12 +148,18 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           }
         ],
         "responses": {
           "200": {
-            "description": "EdgeAction get operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeAction"
             }
@@ -166,6 +169,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetEdgeAction": {
+            "$ref": "./examples/EdgeActions_Get.json"
           }
         }
       },
@@ -174,12 +182,7 @@
         "tags": [
           "EdgeActions"
         ],
-        "description": "Create EdgeAction resource",
-        "x-ms-examples": {
-          "CreateEdgeAction": {
-            "$ref": "./examples/EdgeActions_Create.json"
-          }
-        },
+        "description": "Create a EdgeAction",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -191,12 +194,18 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
             "name": "resource",
             "in": "body",
-            "description": "Edgeaction resource create parameters.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EdgeAction"
@@ -205,25 +214,25 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeAction create operation succeeded",
+            "description": "Resource 'EdgeAction' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeAction"
             }
           },
           "201": {
-            "description": "EdgeAction create operation succeeded",
+            "description": "Resource 'EdgeAction' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeAction"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -232,6 +241,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateEdgeAction": {
+            "$ref": "./examples/EdgeActions_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -244,12 +258,7 @@
         "tags": [
           "EdgeActions"
         ],
-        "description": "Update EdgeAction resource",
-        "x-ms-examples": {
-          "UpdateEdgeAction": {
-            "$ref": "./examples/EdgeActions_Update.json"
-          }
-        },
+        "description": "Update a EdgeAction",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -261,12 +270,18 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "EdgeAction resource properties to be updated.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EdgeActionUpdate"
@@ -275,26 +290,22 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeAction update operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeAction"
             }
           },
           "202": {
-            "description": "EdgeAction update request accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -303,6 +314,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateEdgeAction": {
+            "$ref": "./examples/EdgeActions_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -315,12 +331,7 @@
         "tags": [
           "EdgeActions"
         ],
-        "description": "Delete EdgeAction resource",
-        "x-ms-examples": {
-          "DeleteEdgeAction": {
-            "$ref": "./examples/EdgeActions_Delete.json"
-          }
-        },
+        "description": "Delete a EdgeAction",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -332,36 +343,43 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           }
         ],
         "responses": {
           "202": {
-            "description": "EdgeAction resource deletion accepted.",
+            "description": "Resource deletion accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "EdgeAction does not exist."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteEdgeAction": {
+            "$ref": "./examples/EdgeActions_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -376,12 +394,7 @@
         "tags": [
           "EdgeActions"
         ],
-        "description": "A long-running operation for adding an EdgeAction attachment.",
-        "x-ms-examples": {
-          "EdgeActions_AddAttachment": {
-            "$ref": "./examples/EdgeActions_AddAttachment.json"
-          }
-        },
+        "description": "A long-running resource action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -413,26 +426,22 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeAction addAttachment operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionAttachmentResponse"
             }
           },
           "202": {
-            "description": "EdgeAction addAttachment operation accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -441,6 +450,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AddAttachment": {
+            "$ref": "./examples/EdgeActions_AddAttachment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -455,12 +469,7 @@
         "tags": [
           "EdgeActions"
         ],
-        "description": "A long-running operation for deleting an EdgeAction attachment that returns no content.",
-        "x-ms-examples": {
-          "EdgeActions_DeleteAttachment": {
-            "$ref": "./examples/EdgeActions_DeleteAttachment.json"
-          }
-        },
+        "description": "A long-running resource action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -491,35 +500,33 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "EdgeAction deleteAttachment operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Azure.ResourceManager.ArmDeletedNoContentResponse"
-            }
-          },
           "202": {
-            "description": "EdgeAction deleteAttachment operation accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAttachment": {
+            "$ref": "./examples/EdgeActions_DeleteAttachment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -535,11 +542,6 @@
           "EdgeActionExecutionFilters"
         ],
         "description": "List EdgeActionExecutionFilter resources by EdgeAction",
-        "x-ms-examples": {
-          "ListEdgeActionsExecutionFilters_byEdgeAction": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_ListByEdgeAction.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -551,12 +553,18 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           }
         ],
         "responses": {
           "200": {
-            "description": "EdgeActionExecutionFilter list operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionExecutionFilterListResult"
             }
@@ -566,6 +574,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListEdgeActionsExecutionFiltersByEdgeAction": {
+            "$ref": "./examples/EdgeActionExecutionFilters_ListByEdgeAction.json"
           }
         },
         "x-ms-pageable": {
@@ -579,12 +592,7 @@
         "tags": [
           "EdgeActionExecutionFilters"
         ],
-        "description": "Get EdgeActionExecutionFilter resource",
-        "x-ms-examples": {
-          "GetEdgeActionExecutionFilter": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_Get.json"
-          }
-        },
+        "description": "Get a EdgeActionExecutionFilter",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -596,15 +604,27 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
-            "$ref": "#/parameters/executionFilterParameter"
+            "name": "executionFilter",
+            "in": "path",
+            "description": "The name of the execution filter",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           }
         ],
         "responses": {
           "200": {
-            "description": "EdgeActionExecutionFilter get operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionExecutionFilter"
             }
@@ -614,6 +634,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetEdgeActionExecutionFilters": {
+            "$ref": "./examples/EdgeActionExecutionFilters_Get.json"
           }
         }
       },
@@ -622,12 +647,7 @@
         "tags": [
           "EdgeActionExecutionFilters"
         ],
-        "description": "Create EdgeActionExecutionFilter resource",
-        "x-ms-examples": {
-          "CreateEdgeActionExecutionFilter": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_Create.json"
-          }
-        },
+        "description": "Create a EdgeActionExecutionFilter",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -639,15 +659,27 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
-            "$ref": "#/parameters/executionFilterParameter"
+            "name": "executionFilter",
+            "in": "path",
+            "description": "The name of the execution filter",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
             "name": "resource",
             "in": "body",
-            "description": "EdgeActionExecutionFilter create parameters.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EdgeActionExecutionFilter"
@@ -656,25 +688,25 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeActionExecutionFilter create operation succeeded",
+            "description": "Resource 'EdgeActionExecutionFilter' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeActionExecutionFilter"
             }
           },
           "201": {
-            "description": "EdgeActionExecutionFilter create operation succeeded",
+            "description": "Resource 'EdgeActionExecutionFilter' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeActionExecutionFilter"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -683,6 +715,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateEdgeActionExecutionFilters": {
+            "$ref": "./examples/EdgeActionExecutionFilters_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -695,12 +732,7 @@
         "tags": [
           "EdgeActionExecutionFilters"
         ],
-        "description": "Update EdgeActionExecutionFilter resource",
-        "x-ms-examples": {
-          "UpdateEdgeActionExecutionFilter": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_Update.json"
-          }
-        },
+        "description": "Update a EdgeActionExecutionFilter",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -712,15 +744,27 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
-            "$ref": "#/parameters/executionFilterParameter"
+            "name": "executionFilter",
+            "in": "path",
+            "description": "The name of the execution filter",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "EdgeActionExecutionFilter resource properties to be updated.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EdgeActionExecutionFilterUpdate"
@@ -729,26 +773,22 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeActionExecutionFilter update operation succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionExecutionFilter"
             }
           },
           "202": {
-            "description": "EdgeActionExecutionFilter update operation accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -757,6 +797,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateEdgeActionExecutionFilters": {
+            "$ref": "./examples/EdgeActionExecutionFilters_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -769,12 +814,7 @@
         "tags": [
           "EdgeActionExecutionFilters"
         ],
-        "description": "Delete EdgeActionExecutionFilter resource",
-        "x-ms-examples": {
-          "DeleteEdgeActionExecutionFilter": {
-            "$ref": "./examples/EdgeActionsExecutionFilters_Delete.json"
-          }
-        },
+        "description": "Delete a EdgeActionExecutionFilter",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -786,39 +826,52 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
-            "$ref": "#/parameters/executionFilterParameter"
+            "name": "executionFilter",
+            "in": "path",
+            "description": "The name of the execution filter",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           }
         ],
         "responses": {
           "202": {
-            "description": "EdgeActionExecutionFilter delete operation accepted.",
+            "description": "Resource deletion accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "EdgeActionExecutionFilter does not exist."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteEdgeActionExecutionFilters": {
+            "$ref": "./examples/EdgeActionExecutionFilters_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -834,11 +887,6 @@
           "EdgeActionVersions"
         ],
         "description": "List EdgeActionVersion resources by EdgeAction",
-        "x-ms-examples": {
-          "GetEdgeActionVersionsByEdgeAction": {
-            "$ref": "./examples/EdgeActionsVersions_ListByEdgeAction.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -850,12 +898,18 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           }
         ],
         "responses": {
           "200": {
-            "description": "List EdgeActionVersion completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionVersionListResult"
             }
@@ -865,6 +919,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetEdgeActionVersionsByEdgeAction": {
+            "$ref": "./examples/EdgeActionVersions_ListByEdgeAction.json"
           }
         },
         "x-ms-pageable": {
@@ -878,12 +937,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "Get EdgeActionVersion resource",
-        "x-ms-examples": {
-          "GetEdgeActionVersion": {
-            "$ref": "./examples/EdgeActionsVersions_Get.json"
-          }
-        },
+        "description": "Get a EdgeActionVersion",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -895,15 +949,27 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
-            "$ref": "#/parameters/versionParameter"
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           }
         ],
         "responses": {
           "200": {
-            "description": "Get EdgeActionVersion completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionVersion"
             }
@@ -913,6 +979,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetEdgeActionVersion": {
+            "$ref": "./examples/EdgeActionVersions_Get.json"
           }
         }
       },
@@ -921,12 +992,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "Create EdgeActionVersion version",
-        "x-ms-examples": {
-          "CreateEdgeActionVersion": {
-            "$ref": "./examples/EdgeActionsVersions_Create.json"
-          }
-        },
+        "description": "Create a EdgeActionVersion",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -938,15 +1004,27 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
-            "$ref": "#/parameters/versionParameter"
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource EdgeActionVersion create parameters.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EdgeActionVersion"
@@ -955,25 +1033,25 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeActionVersion create operation succeeded",
+            "description": "Resource 'EdgeActionVersion' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeActionVersion"
             }
           },
           "201": {
-            "description": "EdgeActionVersion create operation succeeded",
+            "description": "Resource 'EdgeActionVersion' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeActionVersion"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -982,6 +1060,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateEdgeActionVersion": {
+            "$ref": "./examples/EdgeActionVersions_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -994,12 +1077,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "Update EdgeActionVersion resource",
-        "x-ms-examples": {
-          "UpdateEdgeActionVersion": {
-            "$ref": "./examples/EdgeActionsVersions_Update.json"
-          }
-        },
+        "description": "Update a EdgeActionVersion",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1011,15 +1089,27 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
-            "$ref": "#/parameters/versionParameter"
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource EdgeActionVersion properties to be updated.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EdgeActionVersionUpdate"
@@ -1028,26 +1118,22 @@
         ],
         "responses": {
           "200": {
-            "description": "EdgeActionVersion update operation succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionVersion"
             }
           },
           "202": {
-            "description": "EdgeActionVersion update operation accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1056,6 +1142,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateEdgeActionVersion": {
+            "$ref": "./examples/EdgeActionVersions_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1068,12 +1159,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "Delete EdgeActionVersion resource",
-        "x-ms-examples": {
-          "DeleteEdgeActionVersion": {
-            "$ref": "./examples/EdgeActionsVersions_Delete.json"
-          }
-        },
+        "description": "Delete a EdgeActionVersion",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1085,39 +1171,52 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/edgeActionNameParameter"
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           },
           {
-            "$ref": "#/parameters/versionParameter"
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
           }
         ],
         "responses": {
           "202": {
-            "description": "EdgeActionVersion resource deletion accepted.",
+            "description": "Resource deletion accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "EdgeActionVersion resource does not exist."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteEdgeActionVersion": {
+            "$ref": "./examples/EdgeActionVersions_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1132,12 +1231,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "A long-running operation to deploy versioncode to EdgeActionVersion resource.",
-        "x-ms-examples": {
-          "DeployEdgeActionVersionCode": {
-            "$ref": "./examples/EdgeActionVersions_DeployVersionCode.json"
-          }
-        },
+        "description": "A long-running resource action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1178,26 +1272,22 @@
         ],
         "responses": {
           "200": {
-            "description": "DeployVersionCode operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EdgeActionVersionProperties"
             }
           },
           "202": {
-            "description": "DeployVersionCode operation accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1206,6 +1296,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeployVersionCode": {
+            "$ref": "./examples/EdgeActionVersions_DeployVersionCode.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1220,12 +1315,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "A long-running operation to get versioncode deployed to EdgeActionVersion resource.",
-        "x-ms-examples": {
-          "GetEdgeActionVersionCode": {
-            "$ref": "./examples/EdgeActionVersions_GetVersionCode.json"
-          }
-        },
+        "description": "A long-running resource action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1253,39 +1343,26 @@
             "type": "string",
             "maxLength": 50,
             "pattern": "[a-zA-Z0-9]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmptyBody"
-            }
           }
         ],
         "responses": {
           "200": {
-            "description": "GetVersionCode operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/VersionCode"
             }
           },
           "202": {
-            "description": "GetVersionCode operation accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1294,6 +1371,83 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetVersionCode": {
+            "$ref": "./examples/EdgeActionVersions_GetVersionCode.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault": {
+      "post": {
+        "operationId": "EdgeActionVersions_SwapDefault",
+        "tags": [
+          "EdgeActionVersions"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeActionName",
+            "in": "path",
+            "description": "The name of the Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Swap Default Version": {
+            "$ref": "./examples/EdgeActionVersions_SwapDefault.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1307,7 +1461,7 @@
     "AttachedResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id of Azure resource.",
+      "description": "ARM resource identifier for attached routes",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -1316,18 +1470,32 @@
         ]
       }
     },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "EdgeAction": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         },
         "sku": {
           "$ref": "#/definitions/SkuType",
@@ -1345,6 +1513,7 @@
     },
     "EdgeActionAttachment": {
       "type": "object",
+      "description": "Edge action attachment information",
       "properties": {
         "id": {
           "type": "string",
@@ -1368,15 +1537,12 @@
     },
     "EdgeActionAttachmentResponse": {
       "type": "object",
+      "description": "Edge action attachment response",
       "properties": {
         "edgeActionId": {
           "type": "string",
-          "description": "Non changing guid to identify edge action",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Non changing guid to identity edge action",
+          "readOnly": true
         }
       },
       "required": [
@@ -1389,12 +1555,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionExecutionFilterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1405,7 +1566,7 @@
     },
     "EdgeActionExecutionFilterListResult": {
       "type": "object",
-      "description": "The response of EdgeActionExecutionFilter resource list operation.",
+      "description": "The response of a EdgeActionExecutionFilter list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -1426,11 +1587,11 @@
     },
     "EdgeActionExecutionFilterProperties": {
       "type": "object",
-      "description": "Properties for the tracked resource execution filters.",
+      "description": "Properties for edge action execution filter",
       "properties": {
         "versionId": {
           "$ref": "#/definitions/EdgeActionVersionId",
-          "description": "The referenced versionId of the edgeAction version",
+          "description": "The referenced versionId of the edgeaction version",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1463,7 +1624,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state"
+          "description": "The provisioning state",
+          "readOnly": true
         }
       },
       "required": [
@@ -1473,30 +1635,13 @@
         "executionFilterIdentifierHeaderValue"
       ]
     },
-    "EdgeActionExecutionFilterUpdate": {
+    "EdgeActionExecutionFilterPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the EdgeActionExecutionFilter.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/EdgeActionExecutionFilterUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "EdgeActionExecutionFilterUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the EdgeActionExecutionFilter.",
+      "description": "Properties for edge action execution filter",
       "properties": {
         "versionId": {
           "$ref": "#/definitions/EdgeActionVersionId",
-          "description": "The referenced versionId of the edgeAction version",
+          "description": "The referenced versionId of the edgeaction version",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1523,21 +1668,48 @@
         }
       }
     },
+    "EdgeActionExecutionFilterUpdate": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeActionExecutionFilterPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "EdgeActionIsDefaultVersion": {
       "type": "string",
-      "description": "Indicates whether this edge action is the default version. This property can take the values 'True' or 'False'.",
+      "description": "Indicates whether this is the default version",
       "enum": [
         "True",
         "False"
       ],
       "x-ms-enum": {
         "name": "EdgeActionIsDefaultVersion",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "True",
+            "description": "This is the default version"
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "This is not the default version"
+          }
+        ]
       }
     },
     "EdgeActionListResult": {
       "type": "object",
-      "description": "The response of EdgeAction resource list operation.",
+      "description": "The response of a EdgeAction list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -1562,7 +1734,8 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the edge action"
+          "description": "The provisioning state of the edge action",
+          "readOnly": true
         },
         "attachments": {
           "type": "array",
@@ -1572,24 +1745,33 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "attachments"
+      ]
+    },
+    "EdgeActionPropertiesUpdate": {
+      "type": "object",
+      "description": "Represents an edge action properties"
     },
     "EdgeActionUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the EdgeAction.",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeActionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
         "sku": {
           "$ref": "#/definitions/SkuTypeUpdate",
           "description": "The sku type of the edge action"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "EdgeActionVersion": {
       "type": "object",
@@ -1597,12 +1779,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionVersionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1613,7 +1790,7 @@
     },
     "EdgeActionVersionDeploymentType": {
       "type": "string",
-      "description": "Indicates edge action version deployment type. We currently only accept zip or file values.",
+      "description": "The deployment type for edge action versions",
       "enum": [
         "zip",
         "file",
@@ -1621,13 +1798,30 @@
       ],
       "x-ms-enum": {
         "name": "EdgeActionVersionDeploymentType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "zip",
+            "value": "zip",
+            "description": "ZIP file deployment"
+          },
+          {
+            "name": "file",
+            "value": "file",
+            "description": "Single file deployment"
+          },
+          {
+            "name": "others",
+            "value": "others",
+            "description": "Other deployment types"
+          }
+        ]
       }
     },
     "EdgeActionVersionId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id of Azure resource.",
+      "description": "ARM resource identifier for edge action versions",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -1638,7 +1832,7 @@
     },
     "EdgeActionVersionListResult": {
       "type": "object",
-      "description": "The response of EdgeActionVersion resource list operation.",
+      "description": "The response of a EdgeActionVersion list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -1677,7 +1871,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state"
+          "description": "The provisioning state",
+          "readOnly": true
         },
         "isDefaultVersion": {
           "$ref": "#/definitions/EdgeActionIsDefaultVersion",
@@ -1702,26 +1897,9 @@
         "lastPackageUpdateTime"
       ]
     },
-    "EdgeActionVersionUpdate": {
+    "EdgeActionVersionPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the EdgeActionVersion.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/EdgeActionVersionUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "EdgeActionVersionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the EdgeActionVersion.",
+      "description": "Represents an edge action version",
       "properties": {
         "deploymentType": {
           "$ref": "#/definitions/EdgeActionVersionDeploymentType",
@@ -1743,30 +1921,43 @@
         }
       }
     },
+    "EdgeActionVersionUpdate": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeActionVersionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "EdgeActionVersionValidationStatus": {
       "type": "string",
-      "description": "Indicates if edge action version code validation succeeded or failed.",
+      "description": "The validation status for edge action versions",
       "enum": [
         "Succeeded",
         "Failed"
       ],
       "x-ms-enum": {
         "name": "EdgeActionVersionValidationStatus",
-        "modelAsString": true
-      }
-    },
-    "InvocationPoint": {
-      "type": "string",
-      "description": "Indicates what part in the request/response lifecycle edge action runs.",
-      "enum": [
-        "clientRequest",
-        "originRequest",
-        "originResponse",
-        "clientResponse"
-      ],
-      "x-ms-enum": {
-        "name": "InvocationPoint",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Validation succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Validation failed"
+          }
+        ]
       }
     },
     "ProvisioningState": {
@@ -1779,7 +1970,6 @@
         "Provisioning",
         "Upgrading"
       ],
-      "readOnly": true,
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
@@ -1787,17 +1977,17 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Resource has been created."
+            "description": "The operation completed successfully"
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Resource creation failed."
+            "description": "The operation failed"
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Resource creation was canceled."
+            "description": "The operation was canceled"
           },
           {
             "name": "Provisioning",
@@ -1814,15 +2004,15 @@
     },
     "SkuType": {
       "type": "object",
-      "description": "Sku of edge actions.",
+      "description": "The SKU type for the edge action",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the SKU for the EdgeAction."
+          "description": "The name of the SKU"
         },
         "tier": {
           "type": "string",
-          "description": "The pricing tier associated with the SKU."
+          "description": "The tier of the SKU"
         }
       },
       "required": [
@@ -1832,21 +2022,21 @@
     },
     "SkuTypeUpdate": {
       "type": "object",
-      "description": "Object to update edge actions sku.",
+      "description": "The SKU type for the edge action",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the SKU for the EdgeAction."
+          "description": "The name of the SKU"
         },
         "tier": {
           "type": "string",
-          "description": "The pricing tier associated with the SKU."
+          "description": "The tier of the SKU"
         }
       }
     },
     "VersionCode": {
       "type": "object",
-      "description": "EdgeAction version code deployment object",
+      "description": "Version code information for edge action",
       "properties": {
         "content": {
           "type": "string",
@@ -1871,53 +2061,7 @@
         "content",
         "name"
       ]
-    },
-    "EmptyBody": {
-      "type": "object",
-      "description": "void body when no value is required as input."
-    },
-    "Azure.ResourceManager.ArmDeletedNoContentResponse": {
-      "type": "object",
-      "description": "Resource deleted successfully.",
-      "properties": {}
     }
   },
-  "parameters": {
-    "edgeActionNameParameter": {
-      "name": "edgeActionName",
-      "in": "path",
-      "description": "The name of the Edge Action",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "pattern": "[a-zA-Z0-9]+"
-    },
-    "attachmentParameter": {
-      "name": "attachment",
-      "in": "path",
-      "description": "The name of attachment",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "pattern": "[a-zA-Z0-9]+"
-    },
-    "versionParameter": {
-      "name": "version",
-      "in": "path",
-      "description": "The name of the Edge Action version",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "pattern": "[a-zA-Z0-9]+"
-    },
-    "executionFilterParameter": {
-      "name": "executionFilter",
-      "in": "path",
-      "description": "The name of the execution filter",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "pattern": "[a-zA-Z0-9]+"
-    }
-  }
+  "parameters": {}
 }
