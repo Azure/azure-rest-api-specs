@@ -127,7 +127,7 @@ model TileMatrix {
 
   /**
    * Unordered list of one or more commonly used or formalized word(s) or phrase(s)
-   * used to describe this dataset
+   *   used to describe this dataset
    */
   keywords?: string[];
 
@@ -149,16 +149,16 @@ model TileMatrix {
 
   /**
    * The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin
-   * for numbering tile rows and columns. This corner is also a corner of the (0, 0)
-   * tile.
+   *  for numbering tile rows and columns. This corner is also a corner of the (0, 0)
+   *  tile.
    */
   cornerOfOrigin?: TileMatrixCornerOfOrigin;
 
   /**
    * Precise position in CRS coordinates of the corner of origin (e.g. the top-left
-   * corner) for this tile matrix. This position is also a corner of the (0, 0)
-   * tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did
-   * not exist.
+   *   corner) for this tile matrix. This position is also a corner of the (0, 0)
+   *   tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did
+   *   not exist.
    */
   pointOfOrigin: float32[];
 
