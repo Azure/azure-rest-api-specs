@@ -49,15 +49,29 @@ interface FunctionEnvelopeOps
       }
     > {}
 
-alias FunctionEnvelopesParameters = {
-  ...ResourceInstanceParameters<FunctionEnvelope>;
+alias FunctionEnvelopesOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @segment("sites")
+    @key
+    name: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @segment("keys")
-  @key
-  keyName: string;
-};
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @segment("functions")
+    @key
+    functionName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions",
+  }
+>;
 
 @armResourceOperations
 interface FunctionEnvelopeSlotOperationGroupOps
@@ -124,7 +138,8 @@ interface FunctionEnvelopeSlotOperationWithoutKeysGroupOps
         functionName: string,
       }
     > {}
-@armResourceOperations
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface FunctionEnvelopes {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
@@ -175,23 +190,38 @@ interface FunctionEnvelopes {
   /**
    * Description for Add or update a function secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Add or update a function secret.")
   @put
-  createOrUpdateFunctionSecret(
-    ...FunctionEnvelopesParameters,
-    @body key: KeyInfo,
-  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  createOrUpdateFunctionSecret is FunctionEnvelopesOps.ActionSync<
+    FunctionEnvelope,
+    KeyInfo,
+    Response = ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      keyName: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
   /**
    * Description for Delete a function secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a function secret.")
   @delete
-  deleteFunctionSecret(
-    ...FunctionEnvelopesParameters,
-  ): NoContentResponse | ArmNotFoundResponse | DefaultErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  deleteFunctionSecret is FunctionEnvelopesOps.ActionSync<
+    FunctionEnvelope,
+    void,
+    Response = NoContentResponse | ArmNotFoundResponse | DefaultErrorResponse,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      keyName: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get function keys for a function in a web site, or a deployment slot.
@@ -354,7 +384,7 @@ interface FunctionEnvelopeOperationGroup {
 @@doc(FunctionEnvelopes.createFunction::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.key,
+@@doc(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
   "The key to create or update"
 );
 @@doc(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,

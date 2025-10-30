@@ -98,53 +98,7 @@ interface WorkflowRegenerateAccessKeyOps
       }
     > {}
 
-alias HostSecretParameters = {
-  ...ResourceInstanceParameters<Site>;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @key
-  @segment("host")
-  host: "default";
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @key
-  keyType: string;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @key
-  keyName: string;
-};
-
-alias HostSecretSlotParameters = {
-  ...ResourceInstanceParameters<Site>;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @key
-  @segment("slots")
-  slot: string;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @key
-  @segment("host")
-  host: "default";
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @key
-  keyType: string;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @key
-  keyName: string;
-};
-
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface Sites {
   /**
    * Description for Gets the details of a web, mobile, or API app.
@@ -287,52 +241,32 @@ interface Sites {
   /**
    * Description for Disable all recommendations for an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Disable all recommendations for an app.")
   @post
-  disableAllForWebApp(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /** Name of the app. */
-    @path
-    @key
-    @segment("sites")
-    siteName: string,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @path
-    @key
-    @segment("recommendations")
-    disable: "disable",
-  ): NoContentResponse | DefaultErrorResponse;
+  @action("recommendations/disable")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  disableAllForWebApp is ArmResourceActionSync<
+    Site,
+    Request = void,
+    Response = NoContentResponse,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Reset all recommendation opt-out settings for an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @post
   @summary("Reset all recommendation opt-out settings for an app.")
-  resetAllFiltersForWebApp(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /** Name of the app. */
-    @path
-    @key
-    @segment("sites")
-    siteName: string,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @path
-    @key
-    @segment("recommendations")
-    reset: "reset",
-  ): NoContentResponse | DefaultErrorResponse;
+  @action("recommendations/reset")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  resetAllFiltersForWebApp is ArmResourceActionSync<
+    Site,
+    Request = void,
+    Response = NoContentResponse,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Analyze a custom hostname.
@@ -707,24 +641,54 @@ interface Sites {
   /**
    * Description for Add or update a host level secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Add or update a host level secret.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
   @put
-  createOrUpdateHostSecret(
-    ...HostSecretParameters,
-    @body body: KeyInfo,
-  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse;
+  createOrUpdateHostSecret is ActionParameterSiteWebAppOps.ActionSync<
+    Site,
+    KeyInfo,
+    Parameters = {
+      /**
+       * The type of host key.
+       */
+      @path
+      keyType: string;
 
+      /**
+       * The name of the key.
+       */
+      @path
+      keyName: string;
+    },
+    Response = ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
   /**
    * Description for Delete a host level secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a host level secret.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
   @delete
-  deleteHostSecret(
-    ...HostSecretParameters,
-  ): NoContentResponse | ArmNotFoundResponse | DefaultErrorResponse;
+  deleteHostSecret is ActionParameterSiteWebAppOps.ActionSync<
+    Site,
+    void,
+    Parameters = {
+      /**
+       * The type of host key.
+       */
+      @path
+      keyType: string;
+
+      /**
+       * The name of the key.
+       */
+      @path
+      keyName: string;
+    },
+    Response = NoContentResponse | ArmNotFoundResponse,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
@@ -948,20 +912,22 @@ interface Sites {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  getNetworkTraces(
-    ...ResourceInstanceParameters<Site>,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @path
-    @key
-    @segment("networkTrace")
-    operationId: string,
-  ): ArmResponse<NetworkTrace[]> | DefaultErrorResponse;
-
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/{operationId}")
+  getNetworkTraces is ActionParameterSiteWebAppOps.ActionSync<
+    Site,
+    void,
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    },
+    Response = ArmResponse<NetworkTrace[]>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
@@ -995,18 +961,22 @@ interface Sites {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  getNetworkTracesV2(
-    ...ResourceInstanceParameters<Site>,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @key
-    @path
-    @segment("networkTraces")
-    operationId: string,
-  ): ArmResponse<NetworkTrace[]> | DefaultErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTraces/{operationId}")
+  getNetworkTracesV2 is ActionParameterSiteWebAppOps.ActionSync<
+    Site,
+    void,
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    },
+    Response = ArmResponse<NetworkTrace[]>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Generates a new publishing password for an app (or deployment slot, if specified).
@@ -1437,7 +1407,49 @@ interface WebAppOps
       }
     > {}
 
-@armResourceOperations
+alias ActionParameterSlotWebAppOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** Name of the app. */
+    @path
+    @segment("sites")
+    @key
+    name: string;
+  },
+  {
+    /** Name of the deployment slot. By default, this API returns the production slot. */
+    @path
+    @segment("slots")
+    @key
+    slot: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots",
+  }
+>;
+
+alias ActionParameterSiteWebAppOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** Name of the app. */
+    @path
+    @segment("sites")
+    @key
+    name: string;
+  },
+  {},
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface WebApps {
   @summary("Gets an app's deployment slots.")
   @doc("Description for Gets an app's deployment slots.")
@@ -1891,29 +1903,13 @@ interface WebApps {
   /**
    * Description for Add or update a host level secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Add or update a host level secret.")
   @put
-  createOrUpdateHostSecretSlot(
-    ...HostSecretSlotParameters,
-    @body body: KeyInfo,
-  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse;
-
-  /**
-   * Description for Delete a host level secret.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Delete a host level secret.")
-  @delete
-  deleteHostSecretSlot is WebAppOps.DeleteSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
+  createOrUpdateHostSecretSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
-    Response = NoContentResponse | ArmNotFoundResponse,
+    KeyInfo,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @path
-      @segment("host")
-      default: "default";
-
       /**
        * The type of host key.
        */
@@ -1926,6 +1922,34 @@ interface WebApps {
       @path
       keyName: string;
     },
+    Response = ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Delete a host level secret.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a host level secret.")
+  @delete
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
+  deleteHostSecretSlot is ActionParameterSlotWebAppOps.ActionSync<
+    Site,
+    void,
+    Parameters = {
+      /**
+       * The type of host key.
+       */
+      @path
+      keyType: string;
+
+      /**
+       * The name of the key.
+       */
+      @path
+      keyName: string;
+    },
+    Response = NoContentResponse | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1999,8 +2023,10 @@ interface WebApps {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  getNetworkTraceOperationSlot is WebAppOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}")
+  getNetworkTraceOperationSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
+    Request = void,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
       @bodyRoot
@@ -2011,7 +2037,6 @@ interface WebApps {
        * GUID of the operation.
        */
       @path
-      @segment("networkTrace/operationresults")
       operationId: string;
     },
     OverrideErrorType = DefaultErrorResponse
@@ -2125,8 +2150,10 @@ interface WebApps {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  getNetworkTraceOperationSlotV2 is WebAppOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTraces/current/operationresults/{operationId}")
+  getNetworkTraceOperationSlotV2 is ActionParameterSlotWebAppOps.ActionSync<
     Site,
+    Request = void,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
       @bodyRoot
@@ -2137,7 +2164,6 @@ interface WebApps {
        * GUID of the operation.
        */
       @path
-      @segment("networkTraces/current/operationresults")
       operationId: string;
     },
     OverrideErrorType = DefaultErrorResponse
@@ -2146,24 +2172,20 @@ interface WebApps {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  getNetworkTracesSlotV2(
-    ...ResourceInstanceParameters<Site>,
-
-    /** Name of the deployment slot. By default, this API returns the production slot. */
-    @path
-    @segment("slots")
-    @key
-    slot: string,
-
-    /** GUID of the operation. */
-    @path
-    @key
-    @segment("networkTraces")
-    operationId: string,
-  ): DefaultErrorResponse | ArmResponse<NetworkTrace[]>;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTraces/{operationId}")
+  getNetworkTracesSlotV2 is ActionParameterSlotWebAppOps.ActionSync<
+    Site,
+    Request = void,
+    Response = ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /** GUID of the operation. */
+      @path
+      operationId: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Generates a new publishing password for an app (or deployment slot, if specified).

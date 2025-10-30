@@ -2069,3 +2069,9 @@ using Microsoft.Web;
 @@doc(Operations.list,
   "Description for Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions"
 );
+@@clientName(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
+  "key"
+);
+@@clientName(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
+  "staticSiteUserEnvelope"
+);

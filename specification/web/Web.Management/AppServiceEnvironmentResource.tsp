@@ -27,17 +27,25 @@ model AppServiceEnvironmentResource
   kind?: string;
 }
 
-alias DiagnosticsParameters = {
-  ...ResourceInstanceParameters<AppServiceEnvironmentResource>;
+alias DiagnosticsOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /** Name of the app. */
+    @path
+    @segment("hostingEnvironments")
+    @key
+    name: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments",
+  }
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  @key
-  @segment("diagnostics")
-  diagnosticsName: string;
-};
-
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface AppServiceEnvironmentResources {
   /**
    * Description for Get the properties of an App Service Environment.
@@ -124,19 +132,16 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the used, available, and total worker capacity an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get the used, available, and total worker capacity an App Service Environment.")
   @get
   @list
-  listCapacities(
-    ...ResourceInstanceParameters<AppServiceEnvironmentResource>,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @path
-    @key
-    @segment("capacities")
-    compute: "compute",
-  ): DefaultErrorResponse | ArmResponse<StampCapacityCollection>;
+  @action("capacities/compute")
+  listCapacities is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<StampCapacityCollection>,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Description for Move an App Service Environment to a different VNET.
@@ -172,12 +177,21 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get a diagnostics item for an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get a diagnostics item for an App Service Environment.")
   @get
-  getDiagnosticsItem(
-    ...DiagnosticsParameters,
-  ): ArmResponse<HostingEnvironmentDiagnostics> | DefaultErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}")
+  getDiagnosticsItem is DiagnosticsOps.ActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<HostingEnvironmentDiagnostics>,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      @key
+      diagnosticsName: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Get the network endpoints of all inbound dependencies of an App Service Environment.
@@ -427,64 +441,51 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Disable all recommendations for an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Disable all recommendations for an app.")
   @post
-  disableAllForHostingEnvironment(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /**
-     * Name of the app.
-     */
-    @query("environmentName")
-    environmentName: string,
-
-    /** Name of the app. */
-    @path
-    @key
-    @segment("hostingEnvironments")
-    hostingEnvironmentName: string,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @path
-    @key
-    @segment("recommendations")
-    disable: "disable",
-  ): NoContentResponse | DefaultErrorResponse;
-
+  @action("recommendations/disable")
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "name",
+    "hostingEnvironmentName"
+  )
+  disableAllForHostingEnvironment is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @query("environmentName")
+      environmentName: string;
+    },
+    Error = DefaultErrorResponse
+  >;
   /**
    * Description for Reset all recommendation opt-out settings for an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Reset all recommendation opt-out settings for an app.")
   @post
-  resetAllFiltersForHostingEnvironment(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /**
-     * Name of the app.
-     */
-    @query("environmentName")
-    environmentName: string,
-
-    /** Name of the app. */
-    @path
-    @key
-    @segment("hostingEnvironments")
-    hostingEnvironmentName: string,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @path
-    @key
-    @segment("recommendations")
-    reset: "reset",
-  ): NoContentResponse | DefaultErrorResponse;
+  @action("recommendations/reset")
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "name",
+    "hostingEnvironmentName"
+  )
+  resetAllFiltersForHostingEnvironment is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @query("environmentName")
+      environmentName: string;
+    },
+    Error = DefaultErrorResponse
+  >;
 }
 
 @@doc(AppServiceEnvironmentResource.name,

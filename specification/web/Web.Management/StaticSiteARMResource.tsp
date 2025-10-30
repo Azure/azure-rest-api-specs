@@ -35,8 +35,26 @@ model StaticSiteARMResource
   identity?: ManagedServiceIdentity;
 }
 
+alias StaticSiteUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    @segment("staticSites")
+    @key
+    name: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites",
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface StaticSiteARMResources {
   /**
    * Description for Gets the details of a static site.
@@ -136,59 +154,48 @@ interface StaticSiteARMResources {
   /**
    * Description for Deletes the user entry from the static site.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes the user entry from the static site.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
   @delete
-  deleteStaticSiteUser is ArmResourceDeleteSync<
+  deleteStaticSiteUser is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StaticSiteARMResource>,
-    Parameters = {
-      /**
-       * The auth provider for this user.
-       */
-      @path
-      @segment("authproviders")
-      authprovider: string;
-
-      /**
-       * The user id of the user.
-       */
-      @path
-      @segment("users")
-      userid: string;
-    },
+    void,
     Response = {
       @body body: void;
     },
-    Error = DefaultErrorResponse
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      authprovider: string;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      userid: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
    * Description for Updates a user entry with the listed roles
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Updates a user entry with the listed roles")
   @patch(#{ implicitOptionality: true })
-  updateStaticSiteUser(
-    ...ResourceInstanceParameters<StaticSiteARMResource>,
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
+  updateStaticSiteUser is StaticSiteUserOps.ActionSync<
+    StaticSiteARMResource,
+    StaticSiteUserARMResource,
+    ArmResponse<StaticSiteUserARMResource>,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      authprovider: string;
 
-    /**
-     * The auth provider for this user.
-     */
-    @path
-    @segment("authproviders")
-    authprovider: string,
-
-    /**
-     * The user id of the user.
-     */
-    @path
-    @segment("users")
-    userid: string,
-
-    @body
-    staticSiteUserEnvelope: StaticSiteUserARMResource,
-  ): ArmResponse<StaticSiteUserARMResource> | DefaultErrorResponse;
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      userid: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Description for Creates or updates the app settings of a static site.
@@ -371,7 +378,7 @@ interface StaticSiteARMResources {
 @@doc(StaticSiteARMResources.updateStaticSite::parameters.properties,
   "A JSON representation of the staticsite properties. See example."
 );
-@@doc(StaticSiteARMResources.updateStaticSiteUser::parameters.staticSiteUserEnvelope,
+@@doc(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
   "A JSON representation of the StaticSiteUser properties. See example."
 );
 @@doc(StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
