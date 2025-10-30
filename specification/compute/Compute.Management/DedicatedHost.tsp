@@ -52,7 +52,8 @@ interface DedicatedHosts {
    */
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     DedicatedHost,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedHost> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -63,7 +64,7 @@ interface DedicatedHosts {
     DedicatedHost,
     DedicatedHostUpdate,
     Response = ArmResponse<DedicatedHost> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = DedicatedHost> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

@@ -105,7 +105,8 @@ interface VirtualMachines {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachine> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -129,7 +130,7 @@ interface VirtualMachines {
       IfNoneMatch?: string;
     },
     Response = ArmResponse<VirtualMachine> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = VirtualMachine> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -231,7 +232,8 @@ interface VirtualMachines {
   convertToManagedDisks is ComputeResourceActionAsync<
     VirtualMachine,
     void,
-    Response = OkResponse
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -247,7 +249,8 @@ interface VirtualMachines {
        */
       @query("hibernate")
       hibernate?: boolean;
-    }
+    },
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -280,7 +283,8 @@ interface VirtualMachines {
   performMaintenance is ComputeResourceActionAsync<
     VirtualMachine,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -296,18 +300,29 @@ interface VirtualMachines {
        */
       @query("skipShutdown")
       skipShutdown?: boolean;
-    }
+    },
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * The operation to reapply a virtual machine's state.
    */
-  reapply is ComputeResourceActionAsync<VirtualMachine, void, OkResponse>;
+  reapply is ComputeResourceActionAsync<
+    VirtualMachine,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Shuts down the virtual machine, moves it to a new node, and powers it back on.
    */
-  redeploy is ComputeResourceActionAsync<VirtualMachine, void, OkResponse>;
+  redeploy is ComputeResourceActionAsync<
+    VirtualMachine,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Reimages (upgrade the operating system) a virtual machine which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. NOTE: The retaining of old OS disk depends on the value of deleteOption of OS disk. If deleteOption is detach, the old OS disk will be preserved after reimage. If deleteOption is delete, the old OS disk will be deleted after reimage. The deleteOption of the OS disk should be updated accordingly before performing the reimage.
@@ -316,13 +331,20 @@ interface VirtualMachines {
     VirtualMachine,
     Request = VirtualMachineReimageParameters,
     Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
   /**
    * The operation to restart a virtual machine.
    */
-  restart is ComputeResourceActionAsync<VirtualMachine, void, OkResponse>;
+  restart is ComputeResourceActionAsync<
+    VirtualMachine,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.
@@ -352,7 +374,12 @@ interface VirtualMachines {
   /**
    * The operation to start a virtual machine.
    */
-  start is ComputeResourceActionAsync<VirtualMachine, void, OkResponse>;
+  start is ComputeResourceActionAsync<
+    VirtualMachine,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.

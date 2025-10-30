@@ -50,7 +50,8 @@ interface GalleryImageVersions {
     GalleryImageVersion,
     Response = ArmResourceUpdatedResponse<GalleryImageVersion> | ArmResourceCreatedResponse<
       GalleryImageVersion,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = GalleryImageVersion> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: GalleryImageVersion;
@@ -65,7 +66,7 @@ interface GalleryImageVersions {
     GalleryImageVersion,
     PatchModel = GalleryImageVersionUpdate,
     Response = ArmResponse<GalleryImageVersion> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = GalleryImageVersion> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
