@@ -12,7 +12,7 @@ export default defineConfig({
   test: {
     coverage: {
       exclude: [
-        ...(configDefaults.coverage.exclude || []),
+        ...(configDefaults.coverage.exclude ?? []),
 
         // Not worth testing CLI code
         "cmd/**/*.js",
