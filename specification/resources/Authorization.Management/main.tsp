@@ -34,7 +34,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "PolicyClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Authorization;
 
 /**
