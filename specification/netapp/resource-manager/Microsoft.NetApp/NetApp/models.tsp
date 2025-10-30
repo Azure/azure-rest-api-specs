@@ -310,56 +310,6 @@ union NetAppProvisioningState {
   Succeeded: "Succeeded",
 }
 
-// /**
-//  * Gets the status of the VolumeQuotaRule at the time the operation was called.
-//  */
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-// @removed(Versions.v2025_08_01)
-// union ProvisioningState {
-//   string,
-
-//   /**
-//    * Resource has been accepted
-//    */
-//   Accepted: "Accepted",
-
-//   /**
-//    * Resource is being created
-//    */
-//   Creating: "Creating",
-
-//   /**
-//    * Resource is being patched
-//    */
-//   Patching: "Patching",
-
-//   /**
-//    * Resource is updating
-//    */
-//   @added(Versions.v2025_09_01)
-//   Updating: "Updating",
-
-//   /**
-//    * Resource is being deleted
-//    */
-//   Deleting: "Deleting",
-
-//   /**
-//    * Resource is being moved
-//    */
-//   Moving: "Moving",
-
-//   /**
-//    * Resource has Failed
-//    */
-//   Failed: "Failed",
-
-//   /**
-//    * Resource has Succeeded
-//    */
-//   Succeeded: "Succeeded",
-// }
-
 /**
  * Microsoft.NetApp REST API operation definition.
  */
