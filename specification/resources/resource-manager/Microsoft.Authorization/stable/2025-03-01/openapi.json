@@ -378,133 +378,6 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/managementGroups/{managementGroupName}/acquirePolicyToken": {
-      "post": {
-        "operationId": "PolicyTokens_AcquireAtManagementGroup",
-        "summary": "Acquires a policy token at management group level.",
-        "description": "This operation acquires a policy token in the given management group for the given request body.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "managementGroupName",
-            "in": "path",
-            "description": "The name of the management group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicyTokenRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PolicyTokenResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Acquire a policy token at management group level": {
-            "$ref": "./examples/acquirePolicyTokenAtManagementGroup.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Authorization/managementGroups/{managementGroupName}/listPolicyDefinitionVersions": {
-      "post": {
-        "operationId": "PolicyDefinitionVersions_ListAllAtManagementGroup",
-        "summary": "Lists all policy definition versions at management group scope.",
-        "description": "This operation lists all the policy definition versions for all policy definitions at the management group scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "managementGroupName",
-            "in": "path",
-            "description": "The name of the management group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all policy definition versions at management group": {
-            "$ref": "./examples/listAllPolicyDefinitionVersionsByManagementGroup.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Authorization/managementGroups/{managementGroupName}/listPolicySetDefinitionVersions": {
-      "post": {
-        "operationId": "PolicySetDefinitionVersions_ListAllAtManagementGroup",
-        "summary": "Lists all policy set definition versions at management group scope.",
-        "description": "This operation lists all the policy set definition versions for all policy set definitions at the management group scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "managementGroupName",
-            "in": "path",
-            "description": "The name of the management group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PolicySetDefinitionVersionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all policy definition versions at management group": {
-            "$ref": "./examples/listAllPolicySetDefinitionVersionsByManagementGroup.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Authorization/policyDefinitions": {
       "get": {
         "operationId": "PolicyDefinitions_ListBuiltIn",
@@ -923,6 +796,117 @@
         "x-ms-examples": {
           "Retrieve a built-in policy set definition version": {
             "$ref": "./examples/getBuiltInPolicySetDefinitionVersion.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/acquirePolicyToken": {
+      "post": {
+        "operationId": "PolicyTokens_AcquireAtManagementGroup",
+        "summary": "Acquires a policy token at management group level.",
+        "description": "This operation acquires a policy token in the given management group for the given request body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy token properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Acquire a policy token at management group level": {
+            "$ref": "./examples/acquirePolicyTokenAtManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "operationId": "PolicyDefinitionVersions_ListAllAtManagementGroup",
+        "summary": "Lists all policy definition versions at management group scope.",
+        "description": "This operation lists all the policy definition versions for all policy definitions at the management group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all policy definition versions at management group": {
+            "$ref": "./examples/listAllPolicyDefinitionVersionsByManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/listPolicySetDefinitionVersions": {
+      "post": {
+        "operationId": "PolicySetDefinitionVersions_ListAllAtManagementGroup",
+        "summary": "Lists all policy set definition versions at management group scope.",
+        "description": "This operation lists all the policy set definition versions for all policy set definitions at the management group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all policy definition versions at management group": {
+            "$ref": "./examples/listAllPolicySetDefinitionVersionsByManagementGroup.json"
           }
         }
       }

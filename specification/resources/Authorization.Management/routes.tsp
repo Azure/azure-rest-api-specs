@@ -13,6 +13,18 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Authorization;
 
+alias ManagementGroupParameters<Resource extends {}> = {
+  /** the provider namespace */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.Management";
+
+  ...CommonTypes.ManagementGroupNameParameter;
+  ...ProviderNamespace<Resource>;
+  ...ApiVersionParameter;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface PolicyDefinitionVersionsOperationGroup {
   /**
@@ -23,26 +35,20 @@ interface PolicyDefinitionVersionsOperationGroup {
   @autoRoute
   @action("listPolicyDefinitionVersions")
   listAllBuiltins is ArmProviderActionSync<Response = ResourceListResult<PolicyDefinitionVersion>>;
+
   /**
    * This operation lists all the policy definition versions for all policy definitions at the management group scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy definition versions at management group scope.")
   @autoRoute
+  @post
   @action("listPolicyDefinitionVersions")
-  listAllAtManagementGroup is ArmProviderActionSync<
-    Response = ResourceListResult<PolicyDefinitionVersion>,
-    Parameters = {
-      /**
-       * The name of the management group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      @segment("managementGroups")
-      managementGroupName: string;
-    }
-  >;
+  @armResourceCollectionAction
+  listAllAtManagementGroup(
+    ...ManagementGroupParameters<PolicyDefinitionVersion>,
+  ): ResourceListResult<PolicyDefinitionVersion> | ErrorResponse;
+
   /**
    * This operation lists all the policy definition versions for all policy definitions within a subscription.
    */
@@ -72,20 +78,13 @@ interface PolicySetDefinitionVersionsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Lists all policy set definition versions at management group scope.")
   @autoRoute
+  @post
   @action("listPolicySetDefinitionVersions")
-  listAllAtManagementGroup is ArmProviderActionSync<
-    Response = ResourceListResult<PolicySetDefinitionVersion>,
-    Parameters = {
-      /**
-       * The name of the management group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      @segment("managementGroups")
-      managementGroupName: string;
-    }
-  >;
+  @armResourceCollectionAction
+  listAllAtManagementGroup(
+    ...ManagementGroupParameters<PolicySetDefinitionVersion>,
+  ): ResourceListResult<PolicySetDefinitionVersion> | ErrorResponse;
+
   /**
    * This operation lists all the policy set definition versions for all policy set definitions within a subscription.
    */
@@ -113,23 +112,20 @@ interface PolicyTokensOperationGroup {
     Response = PolicyTokenResponse,
     Scope = SubscriptionActionScope
   >;
+
   /**
    * This operation acquires a policy token in the given management group for the given request body.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Acquires a policy token at management group level.")
   @autoRoute
+  @post
   @action("acquirePolicyToken")
-  acquireAtManagementGroup is ArmProviderActionSync<
-    Request = PolicyTokenRequest,
-    Response = PolicyTokenResponse,
-    Parameters = {
-      /**
-       * The name of the management group.
-       */
-      @path
-      @segment("managementGroups")
-      managementGroupName: string;
-    }
-  >;
+  @armResourceCollectionAction
+  acquireAtManagementGroup(
+    ...ManagementGroupParameters<PolicyTokenRequest>,
+
+    /** The policy token properties. */
+    @body parameters: PolicyTokenRequest,
+  ): PolicyTokenResponse | ErrorResponse;
 }
