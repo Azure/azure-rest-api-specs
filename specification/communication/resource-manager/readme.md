@@ -28,8 +28,24 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-05-01
+tag: package-2025-09-01
 ```
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Microsoft.Communication/stable/2025-09-01/CommunicationServices.json
+  - Microsoft.Communication/stable/2025-09-01/Domains.json
+  - Microsoft.Communication/stable/2025-09-01/EmailServices.json
+  - Microsoft.Communication/stable/2025-09-01/SenderUsernames.json
+  - Microsoft.Communication/stable/2025-09-01/SmtpUsernames.json
+  - Microsoft.Communication/stable/2025-09-01/SuppressionLists.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ### Tag: package-2025-05-01
 
 These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
