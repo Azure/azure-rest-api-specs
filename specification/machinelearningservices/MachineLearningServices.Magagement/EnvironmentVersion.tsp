@@ -71,11 +71,15 @@ interface EnvironmentVersions {
    * Create or update version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
   @summary("Create or update version.")
   createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<
     EnvironmentVersion,
-    Response = ArmResourceUpdatedResponse<EnvironmentVersion> | (ArmResourceCreatedResponse<EnvironmentVersion> & {
+    Response = ArmResourceUpdatedResponse<EnvironmentVersion> | (ArmResourceCreatedResponse<
+      EnvironmentVersion,
+      ArmAsyncOperationHeader
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

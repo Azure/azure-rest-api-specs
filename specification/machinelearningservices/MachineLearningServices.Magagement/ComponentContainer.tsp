@@ -65,11 +65,15 @@ interface ComponentContainers {
    * Create or update container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   @operationId("RegistryComponentContainers_CreateOrUpdate")
   @summary("Create or update container.")
   createOrUpdate is ComponentContainerOps.CreateOrUpdateAsync<
     ComponentContainer,
-    Response = ArmResourceUpdatedResponse<ComponentContainer> | (ArmResourceCreatedResponse<ComponentContainer> & {
+    Response = ArmResourceUpdatedResponse<ComponentContainer> | (ArmResourceCreatedResponse<
+      ComponentContainer,
+      ArmAsyncOperationHeader
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

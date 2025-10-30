@@ -5864,6 +5864,12 @@ model PartialBatchDeployment {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CapabilityHostProperties extends ResourceBase {
   /**
+   * List of Aca Environment connections.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  acaEnvironmentConnections?: string[] | null;
+
+  /**
    * List of AI services connections.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5903,6 +5909,13 @@ model CapabilityHostProperties extends ResourceBase {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vectorStoreConnections?: string[] | null;
+
+  /**
+   * List of messages containing errors.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  messages?: string[] | null;
 }
 
 /**
@@ -12148,6 +12161,7 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] Service principal secrets.
    */
+  @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: CertificateDatastoreSecrets;
 
@@ -13425,13 +13439,13 @@ model Forecasting extends AutoMLVertical {
   ...TableVertical;
 
   /**
-   * Primary metrics for Forecasting task.
+   * Forecasting task specific inputs.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   forecastingSettings?: ForecastingSettings | null;
 
   /**
-   * Primary metric for forecasting task.
+   * Primary metrics for Forecasting task.
    */
   primaryMetric?: ForecastingPrimaryMetrics = ForecastingPrimaryMetrics.NormalizedRootMeanSquaredError;
 
@@ -14203,7 +14217,6 @@ model ImageObjectDetectionBase extends ImageVertical {
    * Search space for sampling different combinations of models and their hyperparameters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsObjectDetection[] | null;
 }
 

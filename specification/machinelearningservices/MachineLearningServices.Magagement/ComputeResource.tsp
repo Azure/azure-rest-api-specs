@@ -244,3 +244,4 @@ interface ComputeResources {
   "The object for updating VM size setting of specified Compute Instance."
 );
 @@doc(ComputeResource.sku, "The SKU of the resource.");
+@@doc(ComputeResource.identity, "The identity of the resource.");
