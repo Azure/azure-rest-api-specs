@@ -7,9 +7,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Cdn
+  namespace: Azure.ResourceManager.Cdn
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/cdn/Microsoft.Azure.Management.Cdn/src/Generated
+  output-folder: $(csharp-sdks-folder)/cdn/Azure.ResourceManager.Cdn/src/Generated
   clear-output-folder: true
 modelerfour:
   lenient-model-deduplication: true
