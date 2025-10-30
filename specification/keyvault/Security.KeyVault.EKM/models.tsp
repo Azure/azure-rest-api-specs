@@ -10,6 +10,9 @@ using Azure.Core;
 
 namespace KeyVault;
 
+@encode("base64url")
+scalar UrlEncodedBytes extends bytes;
+
 /**
  * A EkmConnection model object.
  */
@@ -29,7 +32,7 @@ model EkmConnection {
    * The root CA certificate chain that issued the proxy server's certificate. An array of certificates in the certificate chain, each in DER format and base64url encoded.
    */
   @encodedName("application/json", "server_ca_certificates")
-  serverCaCertificates: string[];
+  serverCaCertificates: UrlEncodedBytes[];
 
   /**
    * The subject common name of the server certificate of EKM Proxy.
@@ -46,7 +49,7 @@ model EkmProxyClientCertificateInfo {
    * The client root CA certificate chain to authenticate to the EKM proxy. An array of certificates in the certificate chain, each in DER format and base64url encoded.
    */
   @encodedName("application/json", "ca_certificates")
-  caCertificates: string[];
+  caCertificates: UrlEncodedBytes[];
 
   /**
    * The subject common name of the client certificate used to authenticate to the EKM proxy.
