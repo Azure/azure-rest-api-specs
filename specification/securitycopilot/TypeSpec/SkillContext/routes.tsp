@@ -389,5 +389,5 @@ op getSuggestedPrompts(
 @route("/dummyRoute")
 op dummyRoute(
     @header("dummy-token") evaluationToken: InsTeamsConstants,
-    @body request: AdaptiveCardSampleParameterConstants
+    @body request: NotificationRequest
 ): Destination;
