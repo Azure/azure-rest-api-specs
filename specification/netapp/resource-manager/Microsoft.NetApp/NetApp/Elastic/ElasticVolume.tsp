@@ -88,7 +88,7 @@ model ElasticVolumeProperties {
 
   /** Resource identifier used to identify the Elastic Backup. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  backupResourceId?:  Azure.Core.armResourceIdentifier<[
+  backupResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.NetApp/elasticAccounts/elasticBackupVaults/elasticBackups";
     }
@@ -124,7 +124,6 @@ model ElasticMountTargetProperties {
  */
 @added(Versions.v2025_09_01_preview)
 model ElasticVolumePatchProperties {
-
   /** Maximum size allowed for a volume in bytes. Valid values are in the range 1GiB to 16TiB. Values expressed in bytes as multiples of 1 GiB. */
   @minValue(1073741824)
   @maxValue(17592186044416)
