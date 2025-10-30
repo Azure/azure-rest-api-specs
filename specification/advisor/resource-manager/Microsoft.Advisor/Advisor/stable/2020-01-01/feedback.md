@@ -7,7 +7,7 @@ Link to ARM Error model - https://github.com/Azure/azure-resource-manager-rpc/bl
 
 ### Error Response Content ###
 
-If the resource provider needs to return an error to any operation, it should return the appropriate HTTP error code and a message body as can be seen below. The message should be localized per the Accept-Language header specified in the original request such that it could be directly be exposed to users.
+If the resource provider needs to return an error to any operation, it should return the appropriate HTTP error code and a message body as can be seen below. The message should be localized per the Accept-Language header specified in the original request such that it could be directly exposed to users.
 
 The resource providers must return the \*code\* and \*message\* fields; however, the other fields are acceptable as additions. This format matches [the OData v4.0 schema](http://docs.oasis-open.org/odata/odata-json-format/v4.0/os/odata-json-format-v4.0-os.html#_Toc372793091) for error responses.
 
