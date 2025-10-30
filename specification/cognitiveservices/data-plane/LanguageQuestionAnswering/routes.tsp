@@ -43,7 +43,7 @@ interface QuestionAnswering {
        * Post body of the request.
        */
       @bodyRoot
-      knowledgeBaseQueryOptions: AnswersOptions;
+      options: AnswersOptions;
     },
     AnswersResult,
     {},

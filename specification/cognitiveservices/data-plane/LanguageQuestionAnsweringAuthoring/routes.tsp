@@ -269,7 +269,7 @@ interface QuestionAnsweringProjects {
        * All the synonyms of a project.
        */
       @bodyRoot
-      body: SynonymAssets;
+      synonymAssets: SynonymAssets;
     },
     UpdateSynonymsWithNoContentResponse,
     {},
