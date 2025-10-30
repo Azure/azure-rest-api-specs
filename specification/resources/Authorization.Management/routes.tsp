@@ -94,7 +94,7 @@ interface PolicySetDefinitionVersionsOperationGroup {
   @action("listPolicySetDefinitionVersions")
   @armResourceCollectionAction
   listAllAtManagementGroup(
-    ...ManagementGroupIdParameters<PolicySetDefinitionVersion>,
+    ...ManagementGroupNameParameters<PolicySetDefinitionVersion>,
   ): ResourceListResult<PolicySetDefinitionVersion> | ErrorResponse;
 
   /**

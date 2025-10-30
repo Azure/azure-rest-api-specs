@@ -71,3 +71,4 @@ using Microsoft.Authorization;
 @@clientLocation(PolicyTokensOperationGroup.acquireAtManagementGroup,
   "PolicyTokens"
 );
+@@clientName(PolicyTokensOperationGroup.acquire::parameters.body, "parameters");

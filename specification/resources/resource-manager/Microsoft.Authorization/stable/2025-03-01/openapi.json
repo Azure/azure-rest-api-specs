@@ -877,18 +877,14 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/listPolicySetDefinitionVersions": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/listPolicySetDefinitionVersions": {
       "post": {
         "operationId": "PolicySetDefinitionVersions_ListAllAtManagementGroup",
         "summary": "Lists all policy set definition versions at management group scope.",
         "description": "This operation lists all the policy set definition versions for all policy set definitions at the management group scope.",
         "parameters": [
           {
-            "name": "managementGroupId",
-            "in": "path",
-            "description": "The ID of the management group.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1899,7 +1895,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
