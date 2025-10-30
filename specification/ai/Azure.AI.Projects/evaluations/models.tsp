@@ -250,7 +250,7 @@ model Evaluation {
   @key("name")
   @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
-  name: string;
+  id: string;
 
   @doc("Data for evaluation.")
   data: InputData;
@@ -453,6 +453,7 @@ model AnnotationDTO {
 model EvaluationUpload {
   @doc("Identifier of the evaluation.")
   @key("name")
+  @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
   id: string;
 
