@@ -52,6 +52,7 @@ union CheckServiceProviderAvailabilityResponse {
 op checkServiceProviderAvailability is ArmProviderActionSync<
   Request = CheckServiceProviderAvailabilityInput,
   Response = {
+    @header contentType: "application/json";
     @body body: CheckServiceProviderAvailabilityResponse;
   },
   Scope = SubscriptionActionScope
