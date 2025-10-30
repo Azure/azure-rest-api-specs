@@ -83,7 +83,7 @@ model StandbyVirtualMachinePoolElasticityProfile {
 }
 
 @armResourceOperations
-interface StandbyVirtualMachinePools {
+interface StandbyVirtualMachinePoolsTesting {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @Azure.Core.useFinalStateVia("azure-async-operation")
