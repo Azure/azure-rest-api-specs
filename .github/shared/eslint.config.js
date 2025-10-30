@@ -7,10 +7,20 @@ import tseslint from "typescript-eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig(
-  { ignores: ["*.config.js", "test/**"] },
+  {
+    ignores: [
+      // must enable TSC checking of tests, before we can enable eslint type-checked
+      "test/**",
+    ],
+  },
   eslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
   {
-    languageOptions: { globals: globals.node, parserOptions: { projectService: true } },
+    languageOptions: {
+      // we only run in node, not browser
+      globals: globals.node,
+      // required to use tseslint.configs.recommendedTypeChecked
+      parserOptions: { projectService: true },
+    },
   },
 );
