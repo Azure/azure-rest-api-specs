@@ -389,5 +389,5 @@ op getSuggestedPrompts(
 @route("/dummyRoute")
 op dummyRoute(
     @header("dummy-token") evaluationToken: InsTeamsConstants,
-    @body request: NotificationRequest
+    @body request: TeamsNotificationInputs
 ): Destination;
