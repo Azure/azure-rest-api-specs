@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Planned Quota",
-    "version": "2025-10-01-preview",
-    "description": "Planned Quota Provider",
+    "title": "Microsoft.Lionrock",
+    "version": "2025-10-01",
+    "description": "Microsoft.Lionrock resource providers API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -47,7 +47,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.PlannedQuota/operations": {
+    "/providers/Microsoft.Lionrock/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -56,27 +56,24 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List Operations": {
-            "$ref": "./examples/PlannedQuota_Operations.json"
-          },
           "List Operations PlannedQuota": {
             "$ref": "./examples/PlannedQuota_Operations.json"
           }
@@ -86,7 +83,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota/plannedQuotas": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Lionrock/plannedQuotas": {
       "get": {
         "operationId": "PlannedQuota_ListBySubscription",
         "tags": [
@@ -95,10 +92,10 @@
         "description": "List PlannedQuotaResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -111,7 +108,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -125,7 +122,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota/plannedQuotas/{resourceName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Lionrock/plannedQuotas/{resourceName}": {
       "get": {
         "operationId": "PlannedQuota_Get",
         "tags": [
@@ -134,10 +131,10 @@
         "description": "Get a PlannedQuotaResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "resourceName",
@@ -145,7 +142,9 @@
             "description": "The name of resource.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
@@ -158,7 +157,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -176,10 +175,10 @@
         "description": "Create a PlannedQuotaResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "resourceName",
@@ -187,7 +186,9 @@
             "description": "The name of resource.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
             "name": "resource",
@@ -222,7 +223,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -243,7 +244,7 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "PlannedQuotaProvisioningState": {
+    "LionrockProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
       "enum": [
@@ -253,7 +254,7 @@
         "Accepted"
       ],
       "x-ms-enum": {
-        "name": "PlannedQuotaProvisioningState",
+        "name": "LionrockProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -295,7 +296,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -326,31 +327,31 @@
       "properties": {
         "plannedQuotaName": {
           "type": "string",
-          "description": "Name of the resource template"
+          "description": "Name of the Planned Quota."
         },
         "contactEmail": {
           "type": "string",
-          "description": "Contact email for manual approval"
+          "description": "Contact email address, which receives notifications about the request progress."
         },
         "subscriptionNameInPlan": {
           "type": "string",
-          "description": "Subscription Name in plan"
+          "description": "The name of the subscription definition in the plan to bind the subscription ID to."
         },
         "stage": {
           "type": "string",
-          "description": "Stage name"
+          "description": "Stage name."
         },
         "azureLocation": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure location"
+          "description": "The Azure location."
         },
         "planVersion": {
           "type": "string",
-          "description": "Plan version"
+          "description": "Plan version."
         },
         "propertyBindings": {
           "type": "array",
-          "description": "Property bindings",
+          "description": "Property bindings.",
           "items": {
             "$ref": "#/definitions/PropertyBinding"
           },
@@ -358,10 +359,10 @@
         },
         "skipUnsupportedSilently": {
           "type": "boolean",
-          "description": "Skip unsupported silently"
+          "description": "Set to true to skip the not ready resources in the plan silently without failure."
         },
         "provisioningState": {
-          "$ref": "#/definitions/PlannedQuotaProvisioningState",
+          "$ref": "#/definitions/LionrockProvisioningState",
           "description": "Provisioning status of the resource.",
           "readOnly": true
         },
@@ -390,15 +391,15 @@
     },
     "PropertyBinding": {
       "type": "object",
-      "description": "plannedQuota Property Binding",
+      "description": "Planned Quota Property Binding.",
       "properties": {
         "placeholder": {
           "type": "string",
-          "description": "Property binding placeholder"
+          "description": "Property binding placeholder."
         },
         "resourceName": {
           "type": "string",
-          "description": "Resource name of the property"
+          "description": "Actual resource name of the property."
         }
       },
       "required": [

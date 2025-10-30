@@ -1,18 +1,16 @@
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-using OpenAPI;
+using Azure.Core;
+using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-using Autorest;
 
-namespace Microsoft.PlannedQuota;
+namespace Microsoft.AzureCis;
 
 @doc("plannedQuota properties")
 model PlannedQuotaResourceProperties {
@@ -29,7 +27,13 @@ model PlannedQuotaResourceProperties {
   @doc("Stage name")
   stage?: string;
 
+  @doc("Region name")
+  @added(Versions.v2023_08_22)
+  @removed(Versions.v2024_06_24_preview)
+  region: string;
+
   @doc("The Azure location")
+  @added(Versions.v2024_06_24_preview)
   azureLocation: azureLocation;
 
   @doc("Plan version")
@@ -46,19 +50,19 @@ model PlannedQuotaResourceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: PlannedQuotaProvisioningState;
 
-  @added(Microsoft.PlannedQuota.Versions.v2025_10_01_preview)
+  @added(Versions.v2024_06_24_preview)
   @doc("The planned quota request identifier; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   requestId?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @added(Microsoft.PlannedQuota.Versions.v2025_10_01_preview)
+  @added(Versions.v2024_06_24_preview)
   @doc("Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   fulfilledPlan?: {};
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @added(Microsoft.PlannedQuota.Versions.v2025_10_01_preview)
+  @added(Versions.v2024_06_24_preview)
   @doc("Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   alternatives?: {};
@@ -86,7 +90,7 @@ model PlannedQuotaResource
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Delete operation is currently not supported by FRP."
 @armResourceOperations
 interface PlannedQuota {
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
