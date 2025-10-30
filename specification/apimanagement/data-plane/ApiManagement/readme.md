@@ -25,7 +25,7 @@ To see additional help and options, run:
 These are the global settings for the API Management Direct Control Plane API.
 
 ``` yaml
-openapi-type: default
+openapi-type: data-plane
 tag: package-2017-03
 ```
 
