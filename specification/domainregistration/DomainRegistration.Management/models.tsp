@@ -566,7 +566,7 @@ model DomainProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
+  domainNotRenewableReasons?: ResourceNotRenewableReason[];
 
   /**
    * Current DNS type
@@ -931,7 +931,7 @@ model DomainPatchResourceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
+  domainNotRenewableReasons?: ResourceNotRenewableReason[];
 
   /**
    * Current DNS type
@@ -1071,19 +1071,6 @@ model TldLegalAgreement {
 @error
 model ArmBadRequestResponse {
   ...TypeSpec.Http.Response<400>;
-}
-
-/**
- * Reasons why domain is not renewable.
- */
-union domainNotRenewableReasonsProperties {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  RegistrationStatusNotSupportedForRenewal: "RegistrationStatusNotSupportedForRenewal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ExpirationNotInRenewalTimeRange: "ExpirationNotInRenewalTimeRange",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  SubscriptionNotActive: "SubscriptionNotActive",
 }
 
 /**

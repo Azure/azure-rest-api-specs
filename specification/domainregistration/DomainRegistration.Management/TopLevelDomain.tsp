@@ -13,6 +13,7 @@ namespace Microsoft.DomainRegistration;
 /**
  * A top level domain object.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is required in envelope to match legacy API shape"
 @subscriptionResource
 model TopLevelDomain
   is Azure.ResourceManager.ProxyResource<TopLevelDomainProperties> {
@@ -22,6 +23,11 @@ model TopLevelDomain
     SegmentName = "topLevelDomains",
     NamePattern = ""
   >;
+
+  /**
+   * Kind of resource
+   */
+  kind?: string;
 }
 
 @armResourceOperations
@@ -39,6 +45,7 @@ interface TopLevelDomains {
   /**
    * Description for Get all top-level domains supported for registration.
    */
+  @summary("Get all top-level domains supported for registration.")
   list is ArmResourceListByParent<
     TopLevelDomain,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

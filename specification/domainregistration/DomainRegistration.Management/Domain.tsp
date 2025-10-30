@@ -13,6 +13,7 @@ namespace Microsoft.DomainRegistration;
 /**
  * Information about a domain.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is required in envelope to match legacy API shape"
 model Domain is Azure.ResourceManager.TrackedResource<DomainProperties> {
   ...ResourceNameParameter<
     Resource = Domain,
@@ -20,6 +21,11 @@ model Domain is Azure.ResourceManager.TrackedResource<DomainProperties> {
     SegmentName = "domains",
     NamePattern = "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
   >;
+
+  /**
+   * Kind of resource
+   */
+  kind?: string;
 }
 
 @armResourceOperations
@@ -91,6 +97,7 @@ interface Domains {
   /**
    * Description for Get all domains in a subscription.
    */
+  @summary("Get all domains in a subscription.")
   list is ArmListBySubscription<
     Domain,
     Response = ArmResponse<DomainCollection>,

@@ -15,6 +15,7 @@ namespace Microsoft.DomainRegistration;
  * Domain ownership Identifier.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is required in envelope to match legacy API shape"
 @parentResource(Domain)
 model DomainOwnershipIdentifier
   is Azure.ResourceManager.ProxyResource<DomainOwnershipIdentifierProperties> {
@@ -24,6 +25,11 @@ model DomainOwnershipIdentifier
     SegmentName = "domainOwnershipIdentifiers",
     NamePattern = ""
   >;
+
+  /**
+   * Kind of resource
+   */
+  kind?: string;
 }
 
 @armResourceOperations

@@ -58,7 +58,8 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "summary": "Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider",
+        "description": "Description for Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -137,6 +138,7 @@
         "tags": [
           "Domains"
         ],
+        "summary": "Get all domains in a subscription.",
         "description": "Description for Get all domains in a subscription.",
         "parameters": [
           {
@@ -256,6 +258,7 @@
         "tags": [
           "TopLevelDomains"
         ],
+        "summary": "Get all top-level domains supported for registration.",
         "description": "Description for Get all top-level domains supported for registration.",
         "parameters": [
           {
@@ -1367,6 +1370,10 @@
           "$ref": "#/definitions/DomainProperties",
           "description": "Domain resource specific properties",
           "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
         }
       },
       "allOf": [
@@ -1443,6 +1450,10 @@
           "$ref": "#/definitions/DomainOwnershipIdentifierProperties",
           "description": "DomainOwnershipIdentifier resource specific properties",
           "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
         }
       },
       "allOf": [
@@ -1602,7 +1613,7 @@
           "type": "array",
           "description": "Reasons why domain is not renewable.",
           "items": {
-            "$ref": "#/definitions/domainNotRenewableReasonsProperties"
+            "$ref": "#/definitions/ResourceNotRenewableReason"
           },
           "readOnly": true
         },
@@ -1739,7 +1750,7 @@
           "type": "array",
           "description": "Reasons why domain is not renewable.",
           "items": {
-            "$ref": "#/definitions/domainNotRenewableReasonsProperties"
+            "$ref": "#/definitions/ResourceNotRenewableReason"
           },
           "readOnly": true
         },
@@ -2097,6 +2108,36 @@
         }
       }
     },
+    "ResourceNotRenewableReason": {
+      "type": "string",
+      "description": "Reasons why domain is not renewable.",
+      "enum": [
+        "RegistrationStatusNotSupportedForRenewal",
+        "ExpirationNotInRenewalTimeRange",
+        "SubscriptionNotActive"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceNotRenewableReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RegistrationStatusNotSupportedForRenewal",
+            "value": "RegistrationStatusNotSupportedForRenewal",
+            "description": "Registration status is not supported for renewal."
+          },
+          {
+            "name": "ExpirationNotInRenewalTimeRange",
+            "value": "ExpirationNotInRenewalTimeRange",
+            "description": "Domain expiration is not in the renewal time range."
+          },
+          {
+            "name": "SubscriptionNotActive",
+            "value": "SubscriptionNotActive",
+            "description": "Subscription is not active."
+          }
+        ]
+      }
+    },
     "ServiceSpecification": {
       "type": "object",
       "description": "Resource metrics service provided by Microsoft.Insights resource provider.",
@@ -2182,6 +2223,10 @@
           "$ref": "#/definitions/TopLevelDomainProperties",
           "description": "TopLevelDomain resource specific properties",
           "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
         }
       },
       "allOf": [
@@ -2233,33 +2278,6 @@
           "type": "boolean",
           "description": "If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>."
         }
-      }
-    },
-    "domainNotRenewableReasonsProperties": {
-      "type": "string",
-      "description": "Reasons why domain is not renewable.",
-      "enum": [
-        "RegistrationStatusNotSupportedForRenewal",
-        "ExpirationNotInRenewalTimeRange",
-        "SubscriptionNotActive"
-      ],
-      "x-ms-enum": {
-        "name": "domainNotRenewableReasonsProperties",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RegistrationStatusNotSupportedForRenewal",
-            "value": "RegistrationStatusNotSupportedForRenewal"
-          },
-          {
-            "name": "ExpirationNotInRenewalTimeRange",
-            "value": "ExpirationNotInRenewalTimeRange"
-          },
-          {
-            "name": "SubscriptionNotActive",
-            "value": "SubscriptionNotActive"
-          }
-        ]
       }
     }
   },
