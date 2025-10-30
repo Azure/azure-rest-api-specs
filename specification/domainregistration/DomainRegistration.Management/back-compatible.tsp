@@ -13,18 +13,12 @@ using Microsoft.DomainRegistration;
 @@clientName(DomainOwnershipIdentifiers.createOrUpdateOwnershipIdentifier::parameters.resource,
   "domainOwnershipIdentifier"
 );
-@@clientLocation(DomainOwnershipIdentifiers.updateOwnershipIdentifier,
-  Domains
-);
+@@clientLocation(DomainOwnershipIdentifiers.updateOwnershipIdentifier, Domains);
 @@clientName(DomainOwnershipIdentifiers.updateOwnershipIdentifier::parameters.properties,
   "domainOwnershipIdentifier"
 );
-@@clientLocation(DomainOwnershipIdentifiers.deleteOwnershipIdentifier,
-  Domains
-);
-@@clientLocation(DomainOwnershipIdentifiers.listOwnershipIdentifiers,
-  Domains
-);
+@@clientLocation(DomainOwnershipIdentifiers.deleteOwnershipIdentifier, Domains);
+@@clientLocation(DomainOwnershipIdentifiers.listOwnershipIdentifiers, Domains);
 
 @@clientName(TopLevelDomains.listAgreements::parameters.body,
   "agreementOption"
