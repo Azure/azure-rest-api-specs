@@ -1,0 +1,73 @@
+{
+  "operationId": "Connectors_ListByStorageAccount",
+  "title": "ListConnectorsByStorageAccount",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "storageAccountName": "teststorageaccount",
+    "api-version": "2025-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/connectors/testconnector",
+            "name": "testconnector1",
+            "type": "Microsoft.Storage/storageAccounts/connectors",
+            "location": "eastus",
+            "properties": {
+              "uniqueId": "12345",
+              "state": "Active",
+              "creationTime": "2023-04-01T00:00:00Z",
+              "description": "Example connector",
+              "dataSourceType": "AWS_S3",
+              "source": {
+                "type": "Bucket",
+                "connection": {
+                  "type": "Endpoint",
+                  "endpoint": "https://example.com/bucket1",
+                  "tlsVerification": "Perform"
+                },
+                "authProperties": {
+                  "type": "AccessKey",
+                  "accessKeyId": "exampleKeyId1",
+                  "signingRegion": "us-west-2"
+                },
+                "hostOverride": "example1.com"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/connectors/Jill",
+            "name": "testconnector2",
+            "type": "Microsoft.Storage/storageAccounts/connectors",
+            "location": "westus",
+            "properties": {
+              "uniqueId": "67890",
+              "state": "Active",
+              "creationTime": "2023-04-01T00:00:00Z",
+              "description": "Example connector 2",
+              "dataSourceType": "AWS_S3",
+              "source": {
+                "type": "Bucket",
+                "connection": {
+                  "type": "Endpoint",
+                  "endpoint": "https://example.com/bucket2",
+                  "tlsVerification": "Perform"
+                },
+                "authProperties": {
+                  "type": "AccessKey",
+                  "accessKeyId": "exampleKeyId2",
+                  "signingRegion": "us-west"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
