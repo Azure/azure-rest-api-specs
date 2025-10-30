@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft NetApp",
-    "version": "2025-08-01",
+    "version": "2025-09-01",
     "description": "Microsoft NetApp Files Azure Resource Provider specification",
     "x-typespec-generated": [
       {
@@ -8748,7 +8748,9 @@
         "Microsoft.NetApp/netAppAccounts",
         "Microsoft.NetApp/netAppAccounts/capacityPools",
         "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
-        "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots"
+        "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots",
+        "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+        "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups"
       ],
       "x-ms-enum": {
         "name": "CheckNameResourceTypes",
@@ -8769,6 +8771,16 @@
           {
             "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots",
             "value": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+            "value": "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+            "description": "ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead."
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
+            "value": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
+            "description": "ANF Backup under a Backup Vault"
           }
         ]
       }
@@ -8780,7 +8792,9 @@
         "Microsoft.NetApp/netAppAccounts",
         "Microsoft.NetApp/netAppAccounts/capacityPools",
         "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
-        "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots"
+        "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots",
+        "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+        "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups"
       ],
       "x-ms-enum": {
         "name": "CheckQuotaNameResourceTypes",
@@ -8801,6 +8815,16 @@
           {
             "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots",
             "value": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+            "value": "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+            "description": "ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead."
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
+            "value": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
+            "description": "ANF Backup under a Backup Vault"
           }
         ]
       }
@@ -9878,6 +9902,7 @@
         "Accepted",
         "Creating",
         "Patching",
+        "Updating",
         "Deleting",
         "Moving",
         "Failed",
@@ -9901,6 +9926,11 @@
             "name": "Patching",
             "value": "Patching",
             "description": "Resource is being Patched"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating"
           },
           {
             "name": "Deleting",
