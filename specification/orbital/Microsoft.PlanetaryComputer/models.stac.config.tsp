@@ -190,9 +190,6 @@ union RenderOptionType {
  * Legend type to make, one of: `continuous`, `classmap`, `interval` or `none`
  * (note, `none` is a string literal).
  */
-/**
- * Defines the legend configuration types for data visualization.
- */
 union LegendConfigType {
   string,
 

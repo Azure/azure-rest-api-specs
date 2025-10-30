@@ -168,11 +168,6 @@ model BoundingBoxPathParameters {
 }
 
 /**
- * Point model.
- *
- * response model for `/point` endpoints
- */
-/**
  * Response model for point query operations providing values at a specific location
  */
 model TilerCoreModelsResponsesPoint {
