@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2025-09-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-09-01-preview'
 input-file:
-  - Microsoft.NetApp/preview/2025-09-01-preview/netapp.json
+  - preview/2025-09-01-preview/netapp.json
 ```
 
 ### Tag: package-2025-09-01
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-09-01'
 input-file:
-  - Microsoft.NetApp/stable/2025-09-01/netapp.json
+  - stable/2025-09-01/netapp.json
 ```
 
 ### Tag: package-preview-2025-08-01-preview
