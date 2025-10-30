@@ -69,14 +69,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
           "204": {
             "description": "Request successful. Resource with the specified name does not exist."
-          },
-          "200": {
-            "description": "Delete successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -176,14 +176,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Create successful. The operation returns the resulting ApplicationGateway resource.",
+          "200": {
+            "description": "Update successful. The operation returns the resulting ApplicationGateway resource.",
             "schema": {
               "$ref": "#/definitions/ApplicationGateway"
             }
           },
-          "200": {
-            "description": "Update successful. The operation returns the resulting ApplicationGateway resource.",
+          "201": {
+            "description": "Create successful. The operation returns the resulting ApplicationGateway resource.",
             "schema": {
               "$ref": "#/definitions/ApplicationGateway"
             }
@@ -688,14 +688,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
           "204": {
             "description": "Request successful. Resource with the specified name does not exist."
-          },
-          "200": {
-            "description": "Delete successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1395,6 +1395,18 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayClientRevocationOptions",
+            "modelAsString": true
+          }
+        },
+        "verifyClientAuthMode": {
+          "type": "string",
+          "description": "Verify client Authentication mode.",
+          "enum": [
+            "Strict",
+            "Passthrough"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayClientAuthVerificationModes",
             "modelAsString": true
           }
         }
@@ -2454,6 +2466,10 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Load Distribution Policy resource of the application gateway."
         },
+        "entraJWTValidationConfig": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Entra JWT validation configuration resource of the application gateway."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -3268,6 +3284,13 @@
           },
           "description": "Load distribution policies of the application gateway resource."
         },
+        "entraJWTValidationConfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayEntraJWTValidationConfig"
+          },
+          "description": "Entra JWT validation configurations for the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
+        },
         "globalConfiguration": {
           "$ref": "#/definitions/ApplicationGatewayGlobalConfiguration",
           "description": "Global Configuration."
@@ -3719,7 +3742,6 @@
           "type": "string",
           "description": "The string representation of the web application firewall rule sensitivity.",
           "enum": [
-            "None",
             "Low",
             "Medium",
             "High"
@@ -4084,6 +4106,69 @@
         "name": "ApplicationGatewayLoadDistributionAlgorithm",
         "modelAsString": true
       }
+    },
+    "ApplicationGatewayEntraJWTValidationConfigPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "unAuthorizedRequestAction": {
+          "type": "string",
+          "description": "Unauthorized request action.",
+          "enum": [
+            "Deny",
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayUnAuthorizedRequestAction",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Tenant ID of the Microsoft Entra ID application."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The Client ID of the Microsoft Entra ID application."
+        },
+        "audiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of acceptable audience claims that can be present in the token (aud claim). A maximum of 5 audiences are permitted."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the entra jwt validation configuration resource."
+        }
+      },
+      "description": "Properties of entra jwt validation configuration of the application gateway."
+    },
+    "ApplicationGatewayEntraJWTValidationConfig": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayEntraJWTValidationConfigPropertiesFormat",
+          "description": "Properties of the application gateway entra jwt validation configuration."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the entra jwt validation configuration that is unique within an application gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Entra JWT Validation Configuration of an application gateway."
     },
     "ApplicationGatewayGlobalConfiguration": {
       "properties": {
