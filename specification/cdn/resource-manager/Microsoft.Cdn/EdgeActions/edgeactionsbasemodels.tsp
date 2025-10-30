@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -11,6 +12,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Cdn;
 
@@ -129,6 +131,7 @@ model EdgeActionAttachment {
 }
 
 /** Edge action attachment response */
+@clientName("EdgeActionAttachmentResult", "csharp")
 model EdgeActionAttachmentResponse {
   @doc("Non changing guid to identity edge action")
   @visibility(Lifecycle.Read)
