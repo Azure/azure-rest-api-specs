@@ -75,7 +75,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -85,5 +84,6 @@ swagger-to-sdk:
 
 ## C#
 
-See configuration in [readme.csharp.md](./readme.csharp.md)
+C# SDK generation is configured via TypeSpec in `tspconfig.yaml`.
+The generated SDK uses the `Azure.ResourceManager.Cdn` namespace and is included in the Azure.ResourceManager.Cdn package.
 
