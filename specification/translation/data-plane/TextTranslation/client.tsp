@@ -5,3 +5,5 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(TextTranslation.TranslationLanguage.dir, "Directionality");
 @@clientName(TextTranslation.LanguageScript.dir, "Directionality");
+
+@@clientName(TextTranslation.TranslateInputItem.targets, "TranslationTargets");
