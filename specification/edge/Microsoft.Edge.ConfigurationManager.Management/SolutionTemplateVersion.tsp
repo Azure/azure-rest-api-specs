@@ -97,7 +97,7 @@ model BulkPublishTargetDetails {
       type: "Microsoft.Edge/Targets";
     }
   ]>;
-  
+
   @added(Versions.v2025_08_01)
   @doc("Solution dependencies")
   @Azure.ResourceManager.identifiers(#[])
