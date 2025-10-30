@@ -78,7 +78,7 @@ model BackupPolicyProperties {
    * A list of volumes assigned to this policy
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["volumeName"])
+  @identifiers(#["volumeName"])
   volumeBackups?: VolumeBackups[];
 }
 

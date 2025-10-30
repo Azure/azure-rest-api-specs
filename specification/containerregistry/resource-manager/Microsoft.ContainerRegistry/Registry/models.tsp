@@ -856,7 +856,7 @@ model ConnectedRegistryProperties {
    * The list of current statuses of the connected registry.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["correlationId"])
+  @identifiers(#["correlationId"])
   statusDetails?: StatusDetailProperties[];
 
   /**
@@ -1172,7 +1172,7 @@ model CredentialSetProperties {
    * List of authentication credentials stored for an upstream.
    * Usually consists of a primary and an optional secondary credential.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   authCredentials?: AuthCredential[];
 
   /**
@@ -1260,7 +1260,7 @@ model CredentialSetUpdateProperties {
    * List of authentication credentials stored for an upstream.
    * Usually consists of a primary and an optional secondary credential.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   authCredentials?: AuthCredential[];
 }
 
@@ -1524,13 +1524,13 @@ model OperationServiceSpecificationDefinition {
   /**
    * A list of Azure Monitoring metrics definition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: OperationMetricSpecificationDefinition[];
 
   /**
    * A list of Azure Monitoring log definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: OperationLogSpecificationDefinition[];
 }
 
@@ -2061,7 +2061,7 @@ model NetworkRuleSet {
   /**
    * The IP ACL rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IPRule[];
 }
 
@@ -2390,7 +2390,7 @@ model RegistryUsageListResult {
   /**
    * The list of container registry quota usages.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RegistryUsage[];
 }
 
@@ -2452,7 +2452,7 @@ model RegistryListCredentialsResult {
   /**
    * The list of passwords for a container registry.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   passwords?: RegistryPassword[];
 }
 
@@ -2638,11 +2638,11 @@ model TokenProperties {
  */
 model TokenCredentialsProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["thumbprint"])
+  @identifiers(#["thumbprint"])
   certificates?: TokenCertificate[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   passwords?: TokenPassword[];
 }
 
@@ -2763,7 +2763,7 @@ model GenerateCredentialsResult {
   /**
    * The list of passwords for a container registry.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   passwords?: TokenPassword[];
 }
 

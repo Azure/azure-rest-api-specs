@@ -717,7 +717,7 @@ model OperationDefinitionListResult {
   /**
    * The collection value.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @pageItems
   value?: OperationDefinition[];
 
@@ -736,13 +736,13 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 
   /**
    * Specifications of the Metrics for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -803,7 +803,7 @@ model MetricSpecification {
   /**
    * Dimensions of the metric
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: MetricDimension[];
 
   /**
@@ -995,7 +995,7 @@ model SnapshotProperties {
   /**
    * A list of filters used to filter the key-values included in the snapshot.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @minItems(1)
   @maxItems(3)
   filters: KeyValueFilter[];

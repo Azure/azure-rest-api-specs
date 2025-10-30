@@ -1006,7 +1006,7 @@ model GeoDataReplicationProperties {
   /**
    * A list of regions where replicas of the namespace are maintained.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locations?: NamespaceReplicaLocation[];
 }
 
@@ -1126,7 +1126,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
    * List of Provisioning Issues if any
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   provisioningIssues?: ProvisioningIssue[];
 
   /**
@@ -1901,7 +1901,7 @@ model ApplicationGroupProperties {
   /**
    * List of group policies that define the behavior of application group. The policies can support resource governance scenarios such as limiting ingress or egress traffic.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   policies?: ApplicationGroupPolicy[];
 }
 

@@ -51,7 +51,7 @@ model AccountProperties {
   /**
    * Active Directories
    */
-  @OpenAPI.extension("x-ms-identifiers", #["activeDirectoryId"])
+  @identifiers(#["activeDirectoryId"])
   activeDirectories?: ActiveDirectory[];
 
   /**
@@ -443,7 +443,7 @@ model ChangeKeyVault {
   /**
    * Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["virtualNetworkId"])
+  @identifiers(#["virtualNetworkId"])
   keyVaultPrivateEndpoints: KeyVaultPrivateEndpoint[];
 }
 

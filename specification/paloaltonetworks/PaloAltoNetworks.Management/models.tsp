@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace PaloAltoNetworks.Cloudngfw;
 
 /**
@@ -695,7 +697,7 @@ model AdvSecurityObjectModel {
   /**
    * URL entry
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   entry: NameDescriptionObject[];
 }
 
@@ -806,7 +808,7 @@ model SecurityServicesTypeList {
   /**
    * list
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   entry: NameDescriptionObject[];
 }
 
@@ -906,7 +908,7 @@ model RuleEntry {
   /**
    * tag for rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: TagInfo[];
 
   /**
@@ -1071,7 +1073,7 @@ model AppSeenData {
   /**
    * array of appSeen
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   appSeenList: AppSeenInfo[];
 }
 
@@ -1263,7 +1265,7 @@ model FirewallDeploymentProperties {
   /**
    * Frontend settings for Firewall
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   frontEndSettings?: FrontendSetting[];
 
   /**
@@ -1305,7 +1307,7 @@ model NetworkProfile {
   /**
    * List of IPs associated with the Firewall
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   publicIps: IPAddress[];
 
   /**
@@ -1316,7 +1318,7 @@ model NetworkProfile {
   /**
    * Egress nat IP to use
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   egressNatIp?: IPAddress[];
 
   /**
@@ -1517,7 +1519,7 @@ model DNSSettings {
   /**
    * List of IPs associated with the Firewall
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsServers?: IPAddress[];
 }
 
@@ -1791,7 +1793,7 @@ model FirewallResourceUpdateProperties {
   /**
    * Frontend settings for Firewall
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   frontEndSettings?: FrontendSetting[];
 
   /**

@@ -5,7 +5,6 @@ import "./deploymentsafeguards.tsp";
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 @armProviderNamespace
 @service(#{ title: "ContainerServiceDeploymentSafeguardsClient" })

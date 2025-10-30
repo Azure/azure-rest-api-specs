@@ -891,7 +891,7 @@ model ProjectUpdateProperties {
 
   /** List of Entra ID group assignments associated with this project. */
   @added(Versions.v2025_10_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   assignedGroups?: AssignedGroup[];
 }
 

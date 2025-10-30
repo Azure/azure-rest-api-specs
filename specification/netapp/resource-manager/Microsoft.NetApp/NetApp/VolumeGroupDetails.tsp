@@ -111,7 +111,7 @@ model VolumeGroupMetaData {
   /**
    * Application specific placement rules for the volume group
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   globalPlacementRules?: PlacementKeyValuePairs[];
 
   /**

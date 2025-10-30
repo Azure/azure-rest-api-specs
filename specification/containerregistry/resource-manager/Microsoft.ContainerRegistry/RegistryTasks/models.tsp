@@ -560,7 +560,7 @@ model RunProperties {
   /**
    * The list of all images that were generated from the run. This is applicable if the run generates base image dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["registry"])
+  @identifiers(#["registry"])
   outputImages?: ImageDescriptor[];
 
   /**
@@ -677,7 +677,7 @@ model ImageUpdateTrigger {
   /**
    * The list of image updates that caused the build.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["registry"])
+  @identifiers(#["registry"])
   images?: ImageDescriptor[];
 }
 
@@ -1033,7 +1033,7 @@ model TaskStepProperties {
    * List of base image dependencies for a step.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   baseImageDependencies?: BaseImageDependency[];
 
   /**
@@ -1085,16 +1085,13 @@ model TriggerProperties {
   /**
    * The collection of timer triggers.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   timerTriggers?: TimerTrigger[];
 
   /**
    * The collection of triggers based on source code repository.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "sourceRepository/repositoryUrl"]
-  )
+  @identifiers(#["name", "sourceRepository/repositoryUrl"])
   sourceTriggers?: SourceTrigger[];
 
   /**
@@ -1437,13 +1434,13 @@ model TriggerUpdateParameters {
   /**
    * The collection of timer triggers.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   timerTriggers?: TimerTriggerUpdateParameters[];
 
   /**
    * The collection of triggers based on source code repository.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   sourceTriggers?: SourceTriggerUpdateParameters[];
 
   /**
@@ -1668,7 +1665,7 @@ model DockerBuildRequest extends RunRequest {
   /**
    * The collection of override arguments to be used when executing the run.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   arguments?: Argument[];
 
   /**
@@ -1742,7 +1739,7 @@ model FileTaskRunRequest extends RunRequest {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -1835,7 +1832,7 @@ model OverrideTaskStepProperties {
    * Gets or sets the collection of override arguments to be used when
    * executing a build step.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   arguments?: Argument[];
 
   /**
@@ -1846,7 +1843,7 @@ model OverrideTaskStepProperties {
   /**
    * The collection of overridable values that can be passed when running a Task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -1873,7 +1870,7 @@ model EncodedTaskRunRequest extends RunRequest {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -1942,7 +1939,7 @@ model DockerBuildStep extends TaskStepProperties {
   /**
    * The collection of override arguments to be used when executing this build step.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   arguments?: Argument[];
 
   /**
@@ -1968,7 +1965,7 @@ model FileTaskStep extends TaskStepProperties {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -1994,7 +1991,7 @@ model EncodedTaskStep extends TaskStepProperties {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -2030,7 +2027,7 @@ model DockerBuildStepUpdateParameters extends TaskStepUpdateParameters {
   /**
    * The collection of override arguments to be used when executing this build step.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   arguments?: Argument[];
 
   /**
@@ -2061,7 +2058,7 @@ model FileTaskStepUpdateParameters extends TaskStepUpdateParameters {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -2087,7 +2084,7 @@ model EncodedTaskStepUpdateParameters extends TaskStepUpdateParameters {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**

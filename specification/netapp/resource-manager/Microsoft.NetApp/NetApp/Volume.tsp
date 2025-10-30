@@ -160,7 +160,7 @@ model VolumeProperties {
    * List of mount targets
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["fileSystemId"])
+  @identifiers(#["fileSystemId"])
   mountTargets?: MountTargetProperties[];
 
   /**
@@ -372,7 +372,7 @@ model VolumeProperties {
   /**
    * Application specific placement rules for the particular volume
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   placementRules?: PlacementKeyValuePairs[];
 
   /**
@@ -791,7 +791,7 @@ model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ExportPolicyRule[];
 }
 
@@ -1003,7 +1003,7 @@ model ReplicationObject {
    * A list of destination replications
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   destinationReplications?: DestinationReplication[];
 
   /**
@@ -1303,7 +1303,7 @@ model VolumePatchPropertiesExportPolicy {
   /**
    * Export policy rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ExportPolicyRule[];
 }
 
@@ -1995,7 +1995,7 @@ model ListQuotaReportResponse {
   /**
    * List of quota reports
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: QuotaReport[];
 }
 
