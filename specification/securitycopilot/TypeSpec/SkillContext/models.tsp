@@ -1563,8 +1563,11 @@ namespace SkillContext
 	}
 
 	@doc("Represents an arbitrary JSON object (maps to Dictionary<string, object> in C#).")
-	@extension("x-ms-client-flatten", false)
-	model JsonObject {}
+	model JsonObject {
+	  @indexer
+	  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Intentionally allowing any object value"
+	  [key: string]: unknown;
+	}
 
 	@doc("Request model TeamsNotificationInputs")
 	model TeamsNotificationInputs {
