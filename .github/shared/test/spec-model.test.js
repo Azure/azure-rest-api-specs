@@ -8,6 +8,13 @@ import { SpecModel } from "../src/spec-model.js";
 import { Duration } from "../src/time.js";
 import { repoRoot } from "./repo.js";
 
+/**
+ * @typedef {import('../src/readme.js').ReadmeJSON} ReadmeJSON
+ * @typedef {import('../src/spec-model.js').SpecModelJSON} SpecModelJSON
+ * @typedef {import('../src/swagger.js').SwaggerJSON} SwaggerJSON
+ * @typedef {import('../src/tag.js').TagJSON} TagJSON
+ */
+
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
 describe("SpecModel", () => {
@@ -91,18 +98,28 @@ describe("SpecModel", () => {
     );
     expect(inputFiles1[0].tag).toBe(tags[1]);
 
-    const jsonDefault = await specModel.toJSONAsync();
-    const readmePathDefault = jsonDefault.readmes[0].path;
+    const jsonDefault = /** @type {SpecModelJSON} */ (await specModel.toJSONAsync());
+    const readmeJSONDefault = /** @type {ReadmeJSON} */ (jsonDefault.readmes[0]);
+    const readmePathDefault = readmeJSONDefault.path;
     expect(isAbsolute(readmePathDefault)).toBe(true);
-    expect(jsonDefault.readmes[0].tags[0].inputFiles[0].refs).toBeUndefined();
+    expect(
+      /** @type {SwaggerJSON} */ (/** @type {TagJSON} */ (readmeJSONDefault.tags[0]).inputFiles[0])
+        .refs,
+    ).toBeUndefined();
 
-    const jsonRefsRelative = await specModel.toJSONAsync({
-      includeRefs: true,
-      relativePaths: true,
-    });
-    const readmePathRelative = jsonRefsRelative.readmes[0].path;
+    const jsonRefsRelative = /** @type {SpecModelJSON} */ (
+      await specModel.toJSONAsync({
+        includeRefs: true,
+        relativePaths: true,
+      })
+    );
+    const readmeJSONRelative = /** @type {ReadmeJSON} */ (jsonRefsRelative.readmes[0]);
+    const readmePathRelative = readmeJSONRelative.path;
     expect(isAbsolute(readmePathRelative)).toBe(false);
-    expect(jsonRefsRelative.readmes[0].tags[0].inputFiles[0].refs).toBeDefined();
+    expect(
+      /** @type {SwaggerJSON}*/ (/** @type {TagJSON} */ (readmeJSONRelative.tags[0]).inputFiles[0])
+        .refs,
+    ).toBeDefined();
   });
 
   it("uses strings for tag names and doesn't parse Date object", async () => {
@@ -380,6 +397,7 @@ describe.skip("Parse readmes", () => {
     "runs properly against specific services",
     { timeout: 30 * Duration.Minute },
     async ({ expect }) => {
+      /** @type {string[]} */
       const folders = [
         // Fill in services to test here
       ];
