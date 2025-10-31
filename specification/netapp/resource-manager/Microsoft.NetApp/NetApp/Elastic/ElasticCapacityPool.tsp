@@ -219,6 +219,7 @@ model CheckElasticVolumeFilePathAvailabilityRequest {
  * Information regarding availability of a resource.
  */
 @added(Versions.v2025_09_01_preview)
+@clientName("CheckElasticResourceAvailabilityResult", "csharp")
 model CheckElasticResourceAvailabilityResponse {
   /**
    * True indicates name is valid and available. False indicates the name is invalid, unavailable, or both.
