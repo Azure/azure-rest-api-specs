@@ -52,10 +52,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/deleteAttachment"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
     reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
-  # ProvisioningState properties are all marked readOnly in the emitted spec. File-scoped suppression to cover all occurrences.
-  - code: ProvisioningStateMustBeReadOnly
-    from: openapi.json
-    reason: All provisioningState properties are output-only and explicitly marked readOnly in the definitions section.
 ```
 
 ---
