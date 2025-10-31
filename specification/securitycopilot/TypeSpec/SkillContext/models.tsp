@@ -1562,6 +1562,10 @@ namespace SkillContext
 		Error,
 	}
 
+	@doc("Represents an arbitrary JSON object (maps to Dictionary<string, object> in C#).")
+	@extension("x-ms-client-flatten", false)
+	model JsonObject {}
+
 	@doc("Request model TeamsNotificationInputs")
 	model TeamsNotificationInputs {
 		@doc("The ID of the recipient for the Teams notification, which is an Entra ID.")
@@ -1592,7 +1596,7 @@ namespace SkillContext
 		description?: string;
 
 		@doc("Other parameters in selected template.")
-		parameters?: Record<unknown> | null;
+		parameters?: JsonObject | null;
 	}
 
 	@doc("Represents a notification including destinations, locale and template mapping settings.")
