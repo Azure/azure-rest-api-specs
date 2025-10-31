@@ -80,7 +80,7 @@ model AssociationUpdate {
   tags?: TrackedResource.tags;
 
   /** The resource-specific properties for this resource. */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AssociationUpdateProperties;
 }

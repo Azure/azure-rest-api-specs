@@ -29,6 +29,7 @@ model Experiment extends Azure.ResourceManager.Foundations.TrackedResource {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required implementation to avoid breaking .NET SDK changes"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
