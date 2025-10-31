@@ -1,5 +1,3 @@
-// @ts-check
-
 import { describe, expect, it } from "vitest";
 import { byDate, invert } from "../src/sort.js";
 

@@ -1,5 +1,3 @@
-// @ts-check
-
 import { isFullGitSha } from "../../shared/src/git.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "../src/context.js";

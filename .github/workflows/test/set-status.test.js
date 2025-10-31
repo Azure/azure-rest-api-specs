@@ -1,5 +1,3 @@
-// @ts-check
-
 import { beforeEach, describe, expect, it } from "vitest";
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.js";
 import { fullGitSha } from "../../shared/test/examples.js";
