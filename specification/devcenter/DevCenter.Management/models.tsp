@@ -735,7 +735,7 @@ model DevCenterUpdate is TrackedResourceUpdate {
 
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of a Dev Center to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DevCenterUpdateProperties;
 }
 
@@ -787,7 +787,7 @@ model KeyEncryptionKeyIdentity {
 model EncryptionSetUpdate is TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of a Dev Center encryption set to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DevCenterEncryptionSetUpdateProperties;
 
   @doc("Managed identity properties")
@@ -835,7 +835,7 @@ model ResourcePolicy {
 model ProjectPolicyUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of an project policy to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProjectPolicyUpdateProperties;
 }
 
@@ -985,7 +985,7 @@ model AssignedGroup {
 model ProjectUpdate is TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of a project to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProjectUpdateProperties;
 
   @doc("Managed identity properties.")
@@ -1267,7 +1267,7 @@ model GitCatalog {
 model CatalogUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Catalog properties for update.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CatalogUpdateProperties;
 }
 
@@ -1513,7 +1513,7 @@ model EnvironmentTypeUpdateProperties {
 model EnvironmentTypeUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of an environment type to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: EnvironmentTypeUpdateProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
@@ -1598,7 +1598,7 @@ model UserRoleAssignment {
 model ProjectEnvironmentTypeUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties to configure an environment type.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProjectEnvironmentTypeUpdateProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
@@ -1674,7 +1674,7 @@ model DevBoxDefinitionUpdateProperties {
 model DevBoxDefinitionUpdate is TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of a Dev Box definition to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DevBoxDefinitionUpdateProperties;
 }
 
@@ -2144,7 +2144,7 @@ model ActiveHoursConfiguration {
 model PoolUpdate is TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of a pool to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PoolUpdateProperties;
 }
 
@@ -2179,7 +2179,7 @@ model ScheduleUpdateProperties is TrackedResourceUpdate {
 model ScheduleUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of a schedule resource to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ScheduleUpdateProperties;
 }
 
@@ -2226,7 +2226,7 @@ model NetworkConnectionUpdateProperties {
 model NetworkConnectionUpdate is TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of a network connection resource to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkConnectionUpdateProperties;
 }
 

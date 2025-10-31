@@ -30,7 +30,7 @@ model Experiment extends Azure.ResourceManager.Foundations.TrackedResource {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required implementation to avoid breaking .NET SDK changes"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties?: ExperimentProperties;
 }
