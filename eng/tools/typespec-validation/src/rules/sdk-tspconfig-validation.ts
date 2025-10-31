@@ -628,20 +628,20 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
 // new Csharp sub rules should be added above this line
 export class TspConfigHttpClientCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super("@azure-tools/http-client-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
+    super("@azure-typespec/http-client-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
   }
 }
 
 export class TspConfigHttpClientCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/http-client-csharp", "namespace", new RegExp(/^Azure\./));
+    super("@azure-typespec/http-client-csharp", "namespace", new RegExp(/^Azure\./));
   }
 }
 
 export class TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super(
-      "@azure-tools/http-client-csharp-mgmt",
+      "@azure-typespec/http-client-csharp-mgmt",
       "emitter-output-dir",
       new RegExp(/^Azure\.ResourceManager\./),
     );
@@ -654,7 +654,7 @@ export class TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule extends Tspcon
 export class TspConfigHttpClientCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
-      "@azure-tools/http-client-csharp-mgmt",
+      "@azure-typespec/http-client-csharp-mgmt",
       "namespace",
       new RegExp(/^Azure\.ResourceManager\./),
     );
