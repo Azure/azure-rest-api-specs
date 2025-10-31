@@ -26113,7 +26113,14 @@
         "ApiKey",
         "CustomKeys",
         "OAuth2",
-        "AAD"
+        "AAD",
+        "DelegatedSAS",
+        "ProjectManagedIdentity",
+        "AccountManagedIdentity",
+        "UserEntraToken",
+        "AgentUserImpersonation",
+        "AgenticIdentityToken",
+        "AgenticUser"
       ],
       "x-ms-enum": {
         "name": "ConnectionAuthType",
@@ -26166,6 +26173,34 @@
           {
             "name": "AAD",
             "value": "AAD"
+          },
+          {
+            "name": "DelegatedSAS",
+            "value": "DelegatedSAS"
+          },
+          {
+            "name": "ProjectManagedIdentity",
+            "value": "ProjectManagedIdentity"
+          },
+          {
+            "name": "AccountManagedIdentity",
+            "value": "AccountManagedIdentity"
+          },
+          {
+            "name": "UserEntraToken",
+            "value": "UserEntraToken"
+          },
+          {
+            "name": "AgentUserImpersonation",
+            "value": "AgentUserImpersonation"
+          },
+          {
+            "name": "AgenticIdentityToken",
+            "value": "AgenticIdentityToken"
+          },
+          {
+            "name": "AgenticUser",
+            "value": "AgenticUser"
           }
         ]
       }
@@ -26179,11 +26214,13 @@
         "Git",
         "S3",
         "Snowflake",
+        "AzureKeyVault",
         "AzureSqlDb",
         "AzureSynapseAnalytics",
         "AzureMySqlDb",
         "AzurePostgresDb",
         "ADLSGen2",
+        "AzureContainerAppEnvironment",
         "Redis",
         "ApiKey",
         "AzureOpenAI",
@@ -26192,6 +26229,7 @@
         "CognitiveService",
         "CustomKeys",
         "AzureBlob",
+        "AzureStorageAccount",
         "AzureOneLake",
         "CosmosDb",
         "CosmosDbMongoDbApi",
@@ -26229,6 +26267,7 @@
         "Teradata",
         "Vertica",
         "Pinecone",
+        "Databricks",
         "Cassandra",
         "Couchbase",
         "MongoDbV2",
@@ -26244,6 +26283,7 @@
         "ODataRest",
         "Odbc",
         "GenericRest",
+        "RemoteTool",
         "AmazonMws",
         "Concur",
         "Dynamics",
@@ -26274,11 +26314,21 @@
         "Zoho",
         "GenericContainerRegistry",
         "Elasticsearch",
+        "AppInsights",
+        "AppConfig",
         "OpenAI",
         "Serp",
         "BingLLMSearch",
         "Serverless",
-        "ManagedOnlineEndpoint"
+        "ManagedOnlineEndpoint",
+        "ApiManagement",
+        "ModelGateway",
+        "GroundingWithBingSearch",
+        "GroundingWithCustomSearch",
+        "Sharepoint",
+        "MicrosoftFabric",
+        "PowerPlatformEnvironment",
+        "RemoteA2A"
       ],
       "x-ms-enum": {
         "name": "ConnectionCategory",
@@ -26305,6 +26355,10 @@
             "value": "Snowflake"
           },
           {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault"
+          },
+          {
             "name": "AzureSqlDb",
             "value": "AzureSqlDb"
           },
@@ -26323,6 +26377,10 @@
           {
             "name": "ADLSGen2",
             "value": "ADLSGen2"
+          },
+          {
+            "name": "AzureContainerAppEnvironment",
+            "value": "AzureContainerAppEnvironment"
           },
           {
             "name": "Redis",
@@ -26355,6 +26413,10 @@
           {
             "name": "AzureBlob",
             "value": "AzureBlob"
+          },
+          {
+            "name": "AzureStorageAccount",
+            "value": "AzureStorageAccount"
           },
           {
             "name": "AzureOneLake",
@@ -26505,6 +26567,10 @@
             "value": "Pinecone"
           },
           {
+            "name": "Databricks",
+            "value": "Databricks"
+          },
+          {
             "name": "Cassandra",
             "value": "Cassandra"
           },
@@ -26563,6 +26629,10 @@
           {
             "name": "GenericRest",
             "value": "GenericRest"
+          },
+          {
+            "name": "RemoteTool",
+            "value": "RemoteTool"
           },
           {
             "name": "AmazonMws",
@@ -26685,6 +26755,14 @@
             "value": "Elasticsearch"
           },
           {
+            "name": "AppInsights",
+            "value": "AppInsights"
+          },
+          {
+            "name": "AppConfig",
+            "value": "AppConfig"
+          },
+          {
             "name": "OpenAI",
             "value": "OpenAI"
           },
@@ -26703,6 +26781,38 @@
           {
             "name": "ManagedOnlineEndpoint",
             "value": "ManagedOnlineEndpoint"
+          },
+          {
+            "name": "ApiManagement",
+            "value": "ApiManagement"
+          },
+          {
+            "name": "ModelGateway",
+            "value": "ModelGateway"
+          },
+          {
+            "name": "GroundingWithBingSearch",
+            "value": "GroundingWithBingSearch"
+          },
+          {
+            "name": "GroundingWithCustomSearch",
+            "value": "GroundingWithCustomSearch"
+          },
+          {
+            "name": "Sharepoint",
+            "value": "Sharepoint"
+          },
+          {
+            "name": "MicrosoftFabric",
+            "value": "MicrosoftFabric"
+          },
+          {
+            "name": "PowerPlatformEnvironment",
+            "value": "PowerPlatformEnvironment"
+          },
+          {
+            "name": "RemoteA2A",
+            "value": "RemoteA2A"
           }
         ]
       }
@@ -37742,9 +37852,9 @@
         "tags": {
           "type": "object",
           "description": "Resource tags.",
-          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -37979,7 +38089,7 @@
         },
         "pendingUploadType": {
           "type": "string",
-          "description": "TemporaryBlobReference is the only supported type",
+          "description": "Type of storage to use for the pending upload location",
           "default": "TemporaryBlobReference",
           "enum": [
             "None",
@@ -39376,6 +39486,7 @@
         "properties": {
           "$ref": "#/definitions/RegistryPrivateEndpointConnectionProperties",
           "description": "Properties of the Private Endpoint Connection",
+          "x-nullable": true,
           "x-ms-client-flatten": true
         }
       }

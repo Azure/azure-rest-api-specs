@@ -1837,9 +1837,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
 | `definitions.HDInsightProperties.properties.administratorAccount['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ManagedResourceGroupAssignedIdentities.properties.principalId['x-nullable__deleted']` | deleted | `false` |
-| `definitions.PartialMinimalTrackedResource.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.PartialMinimalTrackedResource.properties.tags['x-nullable__added']` | added | `true` |
-| `definitions.RegistryPrivateEndpointConnection.properties.properties['x-nullable__deleted']` | deleted | `true` |
 
 ### Changes for `dataType`
 
@@ -2874,7 +2871,6 @@ Defaults to 500ms.
 | `definitions.OnlineRequestSettings.properties.requestTimeout.description` | `The scoring timeout in ISO 8601 format.
 Defaults to 5000ms.` | `The scoring timeout in ISO 8601 format.
 Defaults to 5000ms.` |
-| `definitions.PendingUploadResponseDto.properties.pendingUploadType.description` | `Type of storage to use for the pending upload location` | `TemporaryBlobReference is the only supported type` |
 | `definitions.PipelineJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.PrivateEndpointConnection.properties.location.description` | `Same as workspace location.` | `*Same as workspace location.` |
 | `definitions.PrivateEndpointConnectionListResult.description` | `List of private endpoint connection associated with the specified workspace` | `[Placeholder] Discription for page model` |

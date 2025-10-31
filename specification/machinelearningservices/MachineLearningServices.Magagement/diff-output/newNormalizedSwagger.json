@@ -28589,9 +28589,9 @@
         "tags": {
           "type": "object",
           "description": "Resource tags.",
-          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -28769,7 +28769,7 @@
         },
         "pendingUploadType": {
           "type": "string",
-          "description": "TemporaryBlobReference is the only supported type",
+          "description": "Type of storage to use for the pending upload location",
           "default": "TemporaryBlobReference",
           "enum": [
             "None",
@@ -29933,6 +29933,7 @@
         "properties": {
           "$ref": "#/definitions/RegistryPrivateEndpointConnectionProperties",
           "description": "Properties of the Private Endpoint Connection",
+          "x-nullable": true,
           "x-ms-client-flatten": true
         }
       }
@@ -33937,7 +33938,14 @@
             "ApiKey",
             "CustomKeys",
             "OAuth2",
-            "AAD"
+            "AAD",
+            "DelegatedSAS",
+            "ProjectManagedIdentity",
+            "AccountManagedIdentity",
+            "UserEntraToken",
+            "AgentUserImpersonation",
+            "AgenticIdentityToken",
+            "AgenticUser"
           ],
           "x-ms-enum": {
             "name": "ConnectionAuthType",
@@ -33953,11 +33961,13 @@
             "Git",
             "S3",
             "Snowflake",
+            "AzureKeyVault",
             "AzureSqlDb",
             "AzureSynapseAnalytics",
             "AzureMySqlDb",
             "AzurePostgresDb",
             "ADLSGen2",
+            "AzureContainerAppEnvironment",
             "Redis",
             "ApiKey",
             "AzureOpenAI",
@@ -33966,6 +33976,7 @@
             "CognitiveService",
             "CustomKeys",
             "AzureBlob",
+            "AzureStorageAccount",
             "AzureOneLake",
             "CosmosDb",
             "CosmosDbMongoDbApi",
@@ -34003,6 +34014,7 @@
             "Teradata",
             "Vertica",
             "Pinecone",
+            "Databricks",
             "Cassandra",
             "Couchbase",
             "MongoDbV2",
@@ -34018,6 +34030,7 @@
             "ODataRest",
             "Odbc",
             "GenericRest",
+            "RemoteTool",
             "AmazonMws",
             "Concur",
             "Dynamics",
@@ -34048,11 +34061,21 @@
             "Zoho",
             "GenericContainerRegistry",
             "Elasticsearch",
+            "AppInsights",
+            "AppConfig",
             "OpenAI",
             "Serp",
             "BingLLMSearch",
             "Serverless",
-            "ManagedOnlineEndpoint"
+            "ManagedOnlineEndpoint",
+            "ApiManagement",
+            "ModelGateway",
+            "GroundingWithBingSearch",
+            "GroundingWithCustomSearch",
+            "Sharepoint",
+            "MicrosoftFabric",
+            "PowerPlatformEnvironment",
+            "RemoteA2A"
           ],
           "x-ms-enum": {
             "name": "ConnectionCategory",
