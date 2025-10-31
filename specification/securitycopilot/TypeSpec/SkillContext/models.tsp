@@ -9,9 +9,6 @@ using TypeSpec.Rest;
 namespace SkillContext
 {
 
-    // Reusable JSON value (primitive | array | object)
-	alias Object = string | boolean | float64 | int32 | null | Array<JsonValue> | Record<Object>;
-
 	@doc("SkillContext object containing properties of the current session relevant to the invoked skill")
 	model SkillContextResponse {
 		@doc("Skill descriptor containing attributes that describe a skill (i.e. Inputs required to execute the skill)")
@@ -1595,7 +1592,7 @@ namespace SkillContext
 		description?: string;
 
 		@doc("Other parameters in selected template.")
-		parameters?: Record<Object> | null;
+		parameters?: Record<unknown> | null;
 	}
 
 	@doc("Represents a notification including destinations, locale and template mapping settings.")
