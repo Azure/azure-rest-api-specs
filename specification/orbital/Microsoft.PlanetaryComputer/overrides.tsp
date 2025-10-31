@@ -463,7 +463,7 @@ op getTileCustomized(
 
 @@override(TilerTileMatrixSets.getZxyScaleByFormat,
   getTileCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -486,7 +486,7 @@ op getWmtsCapabilitiesCustomized(
 
 @@override(TilerWmtsTileMatrixSets.getCapabilitiesXml,
   getWmtsCapabilitiesCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -509,7 +509,7 @@ op getAssetStatisticsCustomized(
 
 @@override(TilerAssetStatistics.getAll,
   getAssetStatisticsCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -536,7 +536,10 @@ op cropGeoJsonCustomized(
   body: Feature,
 ): TileResponse;
 
-@@override(TilerGeoJsons.cropFormat, cropGeoJsonCustomized, "!python,!csharp");
+@@override(TilerGeoJsons.cropFormat,
+  cropGeoJsonCustomized,
+  "!python,!csharp,!javascript"
+);
 
 /**
  * Create image from a geojson feature with dimensions with grouped parameters.
@@ -564,7 +567,7 @@ op cropGeoJsonWithDimensionsCustomized(
 
 @@override(TilerGeoJsons.cropWidthByHeightFormat,
   cropGeoJsonWithDimensionsCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -593,7 +596,7 @@ op getGeoJsonStatisticsCustomized(
 
 @@override(TilerGeoJsonStatistics.get,
   getGeoJsonStatisticsCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -616,7 +619,7 @@ op getPartCustomized(
 
 @@override(TilerParts.getCroppedToBoundingBox,
   getPartCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -639,7 +642,7 @@ op getPartWithDimensionsCustomized(
 
 @@override(TilerParts.getCroppedToBoundingBoxWidthByHeight,
   getPartWithDimensionsCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -660,7 +663,10 @@ op getPreviewCustomized(
   options: GetPreviewOptions,
 ): TileResponse;
 
-@@override(TilerPreviews.get, getPreviewCustomized, "!python,!csharp");
+@@override(TilerPreviews.get,
+  getPreviewCustomized,
+  "!python,!csharp,!javascript"
+);
 
 /**
  * Create preview of a dataset with format with grouped parameters.
@@ -682,7 +688,7 @@ op getPreviewWithFormatCustomized(
 
 @@override(TilerPreviews.getFormat,
   getPreviewWithFormatCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -703,7 +709,10 @@ op listStatisticsCustomized(
   options: GetStatisticsOptions,
 ): TilerStacItemStatistics;
 
-@@override(TilerStatistics.getAll, listStatisticsCustomized, "!python,!csharp");
+@@override(TilerStatistics.getAll,
+  listStatisticsCustomized,
+  "!python,!csharp,!javascript"
+);
 
 /**
  * Return the TileJson with grouped parameters.
@@ -725,7 +734,7 @@ op getTileJsonCustomized(
 
 @@override(TilerTileJsonTileMatrixSets.get,
   getTileJsonCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -748,7 +757,7 @@ op getMosaicsTileJsonCustomized(
 
 @@override(MosaicsTileMatrixSetsTileJson.get,
   getMosaicsTileJsonCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -771,7 +780,7 @@ op getMosaicsTileCustomized(
 
 @@override(MosaicsTileMatrixSets.getZxyScaleByFormat,
   getMosaicsTileCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
 
 /**
@@ -794,5 +803,5 @@ op getMosaicsWmtsCapabilitiesCustomized(
 
 @@override(MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
   getMosaicsWmtsCapabilitiesCustomized,
-  "!python,!csharp"
+  "!python,!csharp,!javascript"
 );
