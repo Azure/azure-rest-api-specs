@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-01-01-preview",
+    "api-version": "2024-07-01-preview",
     "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0",
     "resourceGroupName": "myResourceGroup",
     "accountName": "myMapsAccount",
@@ -10,27 +10,22 @@
         "name": "G2"
       },
       "kind": "Gen2",
-      "tags": {
-        "test": "true"
-      },
       "identity": {
-        "type": "SystemAssigned, UserAssigned",
+        "type": "UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName": {}
         }
       },
       "properties": {
-        "disableLocalAuth": false,
-        "linkedResources": [
-          {
-            "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/mystorageacc",
-            "uniqueName": "myBatchStorageAccount"
-          },
-          {
-            "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/mystorageacc",
-            "uniqueName": "myBlobDataSource"
+        "encryption": {
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "identityType": "userAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName"
+            },
+            "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
           }
-        ]
+        }
       }
     }
   },
@@ -58,7 +53,7 @@
           "tier": "Standard"
         },
         "identity": {
-          "type": "SystemAssigned, UserAssigned",
+          "type": "UserAssigned",
           "principalId": "77f72dac-e0aa-484e-9acd-e5e7075310ef",
           "tenantId": "06006684-60c1-4954-a20c-ffd8fbea7276",
           "userAssignedIdentities": {
@@ -71,17 +66,15 @@
         "properties": {
           "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593",
           "provisioningState": "Succeeded",
-          "disableLocalAuth": true,
-          "linkedResources": [
-            {
-              "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/mystorageacc",
-              "uniqueName": "myBatchStorageAccount"
-            },
-            {
-              "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/mystorageacc",
-              "uniqueName": "myBlobDataSource"
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "userAssignedIdentity",
+                "userAssignedIdentityResourceId": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName"
+              },
+              "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
             }
-          ]
+          }
         }
       }
     },
@@ -92,9 +85,6 @@
         "type": "Microsoft.Maps/accounts",
         "kind": "Gen2",
         "location": "eastus",
-        "tags": {
-          "test": "true"
-        },
         "systemData": {
           "createdBy": "string",
           "createdByType": "Application",
@@ -108,7 +98,7 @@
           "tier": "Standard"
         },
         "identity": {
-          "type": "SystemAssigned, UserAssigned",
+          "type": "UserAssigned",
           "principalId": "77f72dac-e0aa-484e-9acd-e5e7075310ef",
           "tenantId": "06006684-60c1-4954-a20c-ffd8fbea7276",
           "userAssignedIdentities": {
@@ -120,18 +110,16 @@
         },
         "properties": {
           "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593",
-          "provisioningState": "Succeeded",
-          "disableLocalAuth": true,
-          "linkedResources": [
-            {
-              "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/mystorageacc",
-              "uniqueName": "myBatchStorageAccount"
-            },
-            {
-              "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/mystorageacc",
-              "uniqueName": "myBlobDataSource"
+          "provisioningState": "Updating",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "userAssignedIdentity",
+                "userAssignedIdentityResourceId": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName"
+              },
+              "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
             }
-          ]
+          }
         }
       }
     }

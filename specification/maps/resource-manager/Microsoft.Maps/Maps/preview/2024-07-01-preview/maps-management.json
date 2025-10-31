@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Maps Resource Provider",
     "description": "Resource Provider",
-    "version": "2024-01-01-preview"
+    "version": "2024-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -294,10 +294,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -495,312 +495,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateLinkResources": {
-      "get": {
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "operationId": "PrivateLinkResources_ListByAccount",
-        "description": "Gets the private link resources that are available to be used for the Maps Account.",
-        "x-ms-examples": {
-          "PrivateLinkResources_List": {
-            "$ref": "./examples/PrivateLinkResources_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved private link resources.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceList"
-            }
-          },
-          "default": {
-            "description": "Error message indicating why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateLinkResources/{privateLinkResourceName}": {
-      "get": {
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "description": "Gets a private link resource by name which can be used for the Maps Account.",
-        "operationId": "PrivateLinkResources_Get",
-        "x-ms-examples": {
-          "Get a private link resource.": {
-            "$ref": "./examples/PrivateLinkResources_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateLinkResourceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved a specified private link resource.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Get",
-        "description": "Gets the specified private endpoint connection associated with the Maps Account.",
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Get": {
-            "$ref": "./examples/PrivateEndpointConnections_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Get the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Create",
-        "description": "Create or update the state of specified private endpoint connection associated with the Maps account.",
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Create": {
-            "$ref": "./examples/PrivateEndpointConnections_Create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            },
-            "description": "The private endpoint connection properties."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Created the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Operation Status Location URI",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the Maps Account.",
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Delete": {
-            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Asynchronous Operation Status Location",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Operation Status Location URI",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Operation Status Location URI",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Retry After",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "No Content -- The private endpoint connection does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections": {
-      "get": {
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          }
-        ],
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_ListByAccount",
-        "description": "Get a private endpoint connections on the Maps Account.",
-        "x-ms-examples": {
-          "PrivateEndpointConnections_ListByAccount": {
-            "$ref": "./examples/PrivateEndpointConnections_ListByAccount.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Array of private endpoint resources in Maps Account",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
-            }
-          },
-          "default": {
-            "description": "Error message indicating why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "parameters": {
@@ -811,73 +505,11 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "minLength": 3,
-      "maxLength": 98,
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{3,98}[a-zA-Z0-9]$"
-    },
-    "PrivateEndpointConnectionName": {
-      "name": "privateEndpointConnectionName",
-      "in": "path",
-      "description": "The name of the Private Endpoint Connection.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "minLength": 3,
-      "maxLength": 98,
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{3,98}[a-zA-Z0-9]$"
-    },
-    "PrivateLinkResourceNameParameter": {
-      "name": "privateLinkResourceName",
-      "in": "path",
-      "description": "The name of the private link resource.",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string",
-      "pattern": "^.*$"
+      "minLength": 1,
+      "pattern": "^[^%&:\\\\/#?]+$"
     }
   },
   "definitions": {
-    "PrivateLinkResourceList": {
-      "description": "A list of private link resources for a Maps Account resource type.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of the private link resources which can be used for Maps Account.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "Request URL that can be used to query next page of private link resources. Returned when the total number of requested private resources exceed maximum page size.",
-          "type": "string",
-          "format": "uri",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionList": {
-      "description": "A list of private endpoint connections",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of the private endpoint connections",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
-          "type": "string",
-          "format": "uri",
-          "readOnly": true,
-          "x-nullable": true
-        }
-      }
-    },
     "MapsAccount": {
       "description": "An Azure resource which represents access to a suite of Maps REST APIs.",
       "type": "object",
@@ -1135,33 +767,9 @@
         "encryption": {
           "$ref": "../../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/encryption"
         },
-        "privateEndpointConnections": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "x-ms-identifiers": [
-            "properties/privateEndpoint/id"
-          ],
-          "description": "List of private endpoint connections associated with the Maps Account."
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "default": "enabled",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          },
-          "description": "Property to specify whether the Maps Account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked."
-        },
         "locations": {
           "$ref": "#/definitions/Locations",
-          "description": "List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/en-us/azure/azure-maps/geographic-scope)."
+          "description": "List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/azure/azure-maps/geographic-scope)."
         }
       }
     },
@@ -1221,7 +829,7 @@
       "required": [
         "allowedOrigins"
       ],
-      "description": "Specifies a CORS rule for the Maps Account."
+      "description": "Specifies a CORS rule for the Map Account."
     },
     "Locations": {
       "description": "The list of data processing locations for the Maps Account.",

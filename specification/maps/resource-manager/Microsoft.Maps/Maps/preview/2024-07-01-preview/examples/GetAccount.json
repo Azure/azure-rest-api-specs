@@ -1,15 +1,9 @@
 {
   "parameters": {
-    "api-version": "2024-01-01-preview",
+    "api-version": "2024-07-01-preview",
     "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0",
     "resourceGroupName": "myResourceGroup",
-    "accountName": "myMapsAccount",
-    "MapsAccountUpdateParameters": {
-      "kind": "Gen2",
-      "sku": {
-        "name": "G2"
-      }
-    }
+    "accountName": "myMapsAccount"
   },
   "responses": {
     "200": {
@@ -19,10 +13,6 @@
         "type": "Microsoft.Maps/accounts",
         "location": "eastus",
         "kind": "Gen2",
-        "sku": {
-          "name": "G2",
-          "tier": "Standard"
-        },
         "systemData": {
           "createdBy": "string",
           "createdByType": "Application",
@@ -31,10 +21,17 @@
           "lastModifiedByType": "Application",
           "lastModifiedAt": "2021-07-02T01:01:01.1075056Z"
         },
+        "tags": {
+          "test": "true"
+        },
+        "sku": {
+          "name": "G2",
+          "tier": "Standard"
+        },
         "properties": {
-          "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593",
-          "provisioningState": "Succeeded",
+          "uniqueId": "string",
           "disableLocalAuth": false,
+          "provisioningState": "Succeeded",
           "linkedResources": [],
           "locations": []
         }
