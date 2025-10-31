@@ -20,7 +20,7 @@ op transcribe is Azure.Core.RpcOperation<
 
     @doc("The body of the multipart request.")
     @multipartBody
-    body: TranscribeRequestContent;
+    body: TranscriptionContent;
   },
   TranscriptionResult
 >;

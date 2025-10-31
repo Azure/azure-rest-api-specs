@@ -149,7 +149,7 @@ model TranscribedWord {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
 @doc("Request model for transcription operation.")
-model TranscribeRequestContent {
+model TranscriptionContent {
   @clientName("options")
   @doc("Metadata for a transcription request. This field contains a JSON-serialized object of type `TranscriptionOptions`.")
   definition?: HttpPart<TranscriptionOptions>;
