@@ -1,5 +1,3 @@
-// @ts-check
-
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";

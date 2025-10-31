@@ -1,5 +1,3 @@
-// @ts-check
-
 import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { flatMapAsync, mapAsync } from "./array.js";
