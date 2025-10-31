@@ -42,9 +42,9 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
   plan?: Plan;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetProperties;
 
   /**

@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ContainerRegistry;
 
-// Remove deprecated @flattenProperty decorators since they're handled by @Azure.ResourceManager.Private.conditionalClientFlatten in models.tsp
+// Remove deprecated @flattenProperty decorators since they're handled by @Azure.ClientGenerator.Core.Legacy.flattenProperty in models.tsp
 
 @@clientName(IPRule.value, "IPAddressOrRange");
 
