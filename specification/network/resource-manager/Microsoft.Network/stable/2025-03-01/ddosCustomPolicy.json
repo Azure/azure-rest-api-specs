@@ -302,9 +302,108 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the DDoS custom policy resource."
+        },
+        "detectionRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DdosDetectionRule"
+          },
+          "description": "The list of DDoS detection rules associated with the custom policy."
+        },
+        "frontEndIpConfiguration": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "The list of frontend IP configurations associated with the custom policy."
         }
       },
       "description": "DDoS custom policy properties."
+    },
+    "DdosDetectionRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the DDoS detection rule."
+        },
+        "detectionMode": {
+          "type": "string",
+          "description": "The detection mode for the DDoS detection rule.",
+          "enum": [
+            "TrafficThreshold"
+          ],
+          "x-ms-enum": {
+            "name": "DdosDetectionMode",
+            "modelAsString": true
+          }
+        },
+        "trafficDetectionRule": {
+          "$ref": "#/definitions/TrafficDetectionRule",
+          "description": "The traffic detection rule details."
+        }
+      },
+      "description": "DDoS detection rule properties."
+    },
+    "DdosDetectionRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the DDoS detection rule."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID of the DDoS detection rule."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DdosDetectionRulePropertiesFormat",
+          "description": "Properties of the DDoS detection rule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "A DDoS detection rule resource."
+    },
+    "TrafficDetectionRule": {
+      "type": "object",
+      "properties": {
+        "trafficType": {
+          "type": "string",
+          "description": "The traffic type (one of Tcp, Udp, TcpSyn) that the detection rule will be applied upon.",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "TcpSyn"
+          ],
+          "x-ms-enum": {
+            "name": "DdosTrafficType",
+            "modelAsString": true
+          }
+        },
+        "packetsPerSecond": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The customized packets per second threshold."
+        }
+      },
+      "description": "Ddos Custom Policy traffic detection rule."
     }
   }
 }
