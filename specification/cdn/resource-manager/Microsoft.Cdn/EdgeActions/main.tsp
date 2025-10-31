@@ -56,7 +56,10 @@ model EdgeActionVersion is TrackedResource<EdgeActionVersionProperties> {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(EdgeActionVersion.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
-@@extension(EdgeActionVersion.properties, "x-ms-mutability", #["read", "create"]);
+@@extension(EdgeActionVersion.properties,
+  "x-ms-mutability",
+  #["read", "create"]
+);
 
 @parentResource(EdgeAction)
 model EdgeActionExecutionFilter
@@ -72,7 +75,10 @@ model EdgeActionExecutionFilter
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(EdgeActionExecutionFilter.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
-@@extension(EdgeActionExecutionFilter.properties, "x-ms-mutability", #["read", "create"]);
+@@extension(EdgeActionExecutionFilter.properties,
+  "x-ms-mutability",
+  #["read", "create"]
+);
 
 @armResourceOperations
 interface EdgeActions {

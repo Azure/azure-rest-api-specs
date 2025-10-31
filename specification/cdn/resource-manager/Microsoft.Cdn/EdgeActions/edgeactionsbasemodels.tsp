@@ -135,8 +135,8 @@ model EdgeActionAttachment {
 /** Edge action attachment response */
 @clientName("EdgeActionAttachmentResult", "csharp")
 model EdgeActionAttachmentResponse {
-  @doc("Non changing guid to identity edge action")
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+  @doc("Non changing guid to identity edge action")
   @extension("x-ms-mutability", #["read", "update", "create"])
   edgeActionId: string;
 }
