@@ -434,7 +434,6 @@ model NameIdentifier {
   /**
    * Name of the object.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   name?: string;
 }
 
