@@ -546,7 +546,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DisassociateCloudServicePublicIpRequest"
+              "$ref": "#/definitions/DisassociateCloudServiceReservedPublicIpRequest"
             },
             "description": "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
           }
@@ -878,12 +878,20 @@
       ],
       "description": "The request for ReserveCloudServicePublicIpAddressOperation."
     },
-    "DisassociateCloudServicePublicIpRequest": {
+    "DisassociateCloudServiceReservedPublicIpRequest": {
       "type": "object",
       "properties": {
         "publicIpArmId": {
           "type": "string",
-          "description": "ARM ID of the Standalone Public IP to associate"
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPAddresses"
+              }
+            ]
+          },
+          "description": "ARM ID of the Standalone Public IP to associate. This is of the form : /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}"
         }
       },
       "required": [
