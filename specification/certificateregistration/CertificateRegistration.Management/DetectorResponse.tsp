@@ -14,7 +14,7 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Class representing Response from Detector
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is required in envelope to match legacy API shape"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(AppServiceCertificateOrder)
 model DetectorResponse
   is Azure.ResourceManager.ProxyResource<DetectorResponseProperties> {
