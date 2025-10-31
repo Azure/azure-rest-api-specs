@@ -1,0 +1,56 @@
+parameters:
+  "service-dir":
+    default: "sdk/costmanagement"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+    arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.CostManagement"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.CostManagement"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-costmanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-costmanagement"
+    namespace: "azure.mgmt.costmanagement"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-costmanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-costmanagement"
+    namespace: "com.azure.resourcemanager.costmanagement"
+    service-name: "CostManagement" # human-readable service name, whitespace allowed
+    flavor: azure
+    service-dir: "sdk/costmanagement"
+    premium: true
+    enable-sync-stack: false
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-costmanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-costmanagement"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-costmanagement"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/costmanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcostmanagement"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcostmanagement"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
