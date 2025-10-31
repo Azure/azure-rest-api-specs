@@ -46,225 +46,6 @@
   },
   "tags": [],
   "paths": {
-    "/agents": {
-      "get": {
-        "operationId": "Agents_List",
-        "description": "Lists all agents available for a search service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ListKnowledgeAgentsResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "Agents_Create",
-        "description": "Creates a new agent.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "knowledgeAgent",
-            "in": "body",
-            "description": "The definition of the agent to create.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/agents('{agentName}')": {
-      "get": {
-        "operationId": "Agents_Get",
-        "description": "Retrieves an agent definition.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "agentName",
-            "in": "path",
-            "description": "The name of the agent.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Agents_CreateOrUpdate",
-        "description": "Creates a new agent or updates an agent if it already exists.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
-            "name": "Prefer",
-            "in": "header",
-            "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "return=representation"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "prefer"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "agentName",
-            "in": "path",
-            "description": "The name of the agent.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "knowledgeAgent",
-            "in": "body",
-            "description": "The definition of the agent to create or update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Agents_Delete",
-        "description": "Deletes a search alias and its associated mapping to an index. This operation is permanent, with no recovery option. The mapped index is untouched by this operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "agentName",
-            "in": "path",
-            "description": "The name of the agent.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "404": {
-            "description": "The server cannot find the requested resource."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/aliases": {
       "get": {
         "operationId": "Aliases_List",
@@ -2419,6 +2200,231 @@
         }
       }
     },
+    "/knowledgebases": {
+      "get": {
+        "operationId": "KnowledgeBases_List",
+        "description": "Lists all knowledge bases available for a search service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListKnowledgeBasesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "KnowledgeBases_Create",
+        "description": "Creates a new knowledge base.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "knowledgeBase",
+            "in": "body",
+            "description": "The definition of the knowledge base to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBase"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/knowledgebases('{knowledgeBaseName}')": {
+      "get": {
+        "operationId": "KnowledgeBases_Get",
+        "description": "Retrieves a knowledge base definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "knowledgeBaseName",
+            "in": "path",
+            "description": "The name of the knowledge base.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "KnowledgeBases_CreateOrUpdate",
+        "description": "Creates a new knowledge base or updates a knowledge base if it already exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "return=representation"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "prefer"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "knowledgeBaseName",
+            "in": "path",
+            "description": "The name of the knowledge base.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "knowledgeBase",
+            "in": "body",
+            "description": "The definition of the knowledge base to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBase"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "KnowledgeBases_Delete",
+        "description": "Deletes a knowledge base.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "knowledgeBaseName",
+            "in": "path",
+            "description": "The name of the knowledge base.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/knowledgebases('{knowledgeBaseName}')/retrieve": {
       "post": {
         "operationId": "KnowledgeRetrieval_Retrieve",
@@ -3903,7 +3909,7 @@
           "description": "Optional vectorizer configuration for vectorizing content."
         },
         "chatCompletionModel": {
-          "$ref": "#/definitions/KnowledgeAgentModel",
+          "$ref": "#/definitions/KnowledgeBaseModel",
           "description": "Optional chat completion model for image verbalization or context extraction."
         },
         "ingestionSchedule": {
@@ -7743,44 +7749,40 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizerV2"
     },
-    "KnowledgeAgent": {
+    "KnowledgeBase": {
       "type": "object",
-      "description": "Represents a knowledge agent definition.",
+      "description": "Represents a knowledge base definition.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the knowledge agent.",
+          "description": "The name of the knowledge base.",
           "readOnly": true
+        },
+        "knowledgeSources": {
+          "type": "array",
+          "description": "Knowledge sources referenced by this knowledge base.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSourceReference"
+          }
         },
         "models": {
           "type": "array",
           "description": "Contains configuration options on how to connect to AI models.",
           "items": {
-            "$ref": "#/definitions/KnowledgeAgentModel"
+            "$ref": "#/definitions/KnowledgeBaseModel"
           }
         },
-        "knowledgeSources": {
-          "type": "array",
-          "description": "Knowledge sources referenced by this agent.",
-          "items": {
-            "$ref": "#/definitions/KnowledgeSourceReference"
-          }
+        "retrievalReasoningEffort": {
+          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort",
+          "description": "The retrieval reasoning effort configuration."
         },
-        "outputConfiguration": {
-          "$ref": "#/definitions/KnowledgeAgentOutputConfiguration",
-          "description": "Output configuration for the agent."
-        },
-        "requestLimits": {
-          "$ref": "#/definitions/KnowledgeAgentRequestLimits",
-          "description": "Request limits for the agent."
-        },
-        "retrievalInstructions": {
-          "type": "string",
-          "description": "Instructions considered by the knowledge agent when developing query plan."
+        "outputMode": {
+          "$ref": "#/definitions/KnowledgeRetrievalOutputMode",
+          "description": "The output mode for the knowledge base."
         },
         "eTag": {
           "type": "string",
-          "description": "The ETag of the agent."
+          "description": "The ETag of the knowledge base."
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
@@ -7788,127 +7790,21 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the agent."
+          "description": "The description of the knowledge base."
+        },
+        "retrievalInstructions": {
+          "type": "string",
+          "description": "Instructions considered by the knowledge base when developing query plan."
+        },
+        "answerInstructions": {
+          "type": "string",
+          "description": "Instructions considered by the knowledge base when generating answers."
         }
       },
       "required": [
         "name",
-        "models",
         "knowledgeSources"
       ]
-    },
-    "KnowledgeAgentAzureOpenAiModel": {
-      "type": "object",
-      "description": "Specifies the Azure OpenAI resource used to do query planning.",
-      "properties": {
-        "azureOpenAIParameters": {
-          "$ref": "#/definitions/AzureOpenAiParameters",
-          "description": "Azure OpenAI parameters."
-        }
-      },
-      "required": [
-        "azureOpenAIParameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentModel"
-        }
-      ],
-      "x-ms-discriminator-value": "azureOpenAI"
-    },
-    "KnowledgeAgentModel": {
-      "type": "object",
-      "description": "Specifies the connection parameters for the model to use for query planning.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/KnowledgeAgentModelKind",
-          "description": "The AI model to be used for query planning."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
-    "KnowledgeAgentModelKind": {
-      "type": "string",
-      "description": "The AI model to be used for query planning.",
-      "enum": [
-        "azureOpenAI"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeAgentModelKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureOpenAI",
-            "value": "azureOpenAI",
-            "description": "Use Azure Open AI models for query planning."
-          }
-        ]
-      }
-    },
-    "KnowledgeAgentOutputConfiguration": {
-      "type": "object",
-      "description": "Output configuration for knowledge agent.",
-      "properties": {
-        "modality": {
-          "$ref": "#/definitions/KnowledgeAgentOutputConfigurationModality",
-          "description": "The output configuration for the agent"
-        },
-        "answerInstructions": {
-          "type": "string",
-          "description": "Instructions considered by the knowledge agent when generating answers"
-        },
-        "attemptFastPath": {
-          "type": "boolean",
-          "description": "Indicates whether the agent should attempt to issue the most recent chat message as a direct query to the knowledge sources, bypassing the model calls."
-        },
-        "includeActivity": {
-          "type": "boolean",
-          "description": "Indicates retrieval results should include activity information."
-        }
-      }
-    },
-    "KnowledgeAgentOutputConfigurationModality": {
-      "type": "string",
-      "description": "The output configuration for the agent",
-      "enum": [
-        "answerSynthesis",
-        "extractiveData"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeAgentOutputConfigurationModality",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AnswerSynthesis",
-            "value": "answerSynthesis",
-            "description": "Synthesize an answer for the response payload."
-          },
-          {
-            "name": "ExtractiveData",
-            "value": "extractiveData",
-            "description": "Return data from the knowledge sources directly without generative alteration."
-          }
-        ]
-      }
-    },
-    "KnowledgeAgentRequestLimits": {
-      "type": "object",
-      "description": "Guardrails to limit how much resources are utilized for a single agent retrieval request.",
-      "properties": {
-        "maxRuntimeInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum runtime in seconds."
-        },
-        "maxOutputSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Limits the maximum size of the content in the output."
-        }
-      }
     },
     "KnowledgeBaseActivityRecord": {
       "type": "object",
@@ -8001,6 +7897,25 @@
         }
       ],
       "x-ms-discriminator-value": "azureBlob"
+    },
+    "KnowledgeBaseAzureOpenAIModel": {
+      "type": "object",
+      "description": "Specifies the Azure OpenAI resource used to do query planning.",
+      "properties": {
+        "azureOpenAIParameters": {
+          "$ref": "#/definitions/AzureOpenAiParameters",
+          "description": "Azure OpenAI parameters."
+        }
+      },
+      "required": [
+        "azureOpenAIParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseModel"
+        }
+      ],
+      "x-ms-discriminator-value": "azureOpenAI"
     },
     "KnowledgeBaseErrorAdditionalInfo": {
       "type": "object",
@@ -8245,6 +8160,20 @@
       ],
       "x-ms-discriminator-value": "text"
     },
+    "KnowledgeBaseModel": {
+      "type": "object",
+      "description": "Specifies the connection parameters for the model to use for query planning.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/KnowledgeBaseModelKind",
+          "description": "The AI model to be used for query planning."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
     "KnowledgeBaseModelAnswerSynthesisActivityRecord": {
       "type": "object",
       "description": "Represents an LLM answer synthesis activity record.",
@@ -8266,6 +8195,24 @@
         }
       ],
       "x-ms-discriminator-value": "modelAnswerSynthesis"
+    },
+    "KnowledgeBaseModelKind": {
+      "type": "string",
+      "description": "The AI model to be used for query planning.",
+      "enum": [
+        "azureOpenAI"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseModelKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureOpenAI",
+            "value": "azureOpenAI",
+            "description": "Use Azure Open AI models for query planning."
+          }
+        ]
+      }
     },
     "KnowledgeBaseModelQueryPlanningActivityRecord": {
       "type": "object",
@@ -8916,28 +8863,6 @@
         "name": {
           "type": "string",
           "description": "The name of the knowledge source."
-        },
-        "includeReferences": {
-          "type": "boolean",
-          "description": "Indicates whether references should be included for data retrieved from this source."
-        },
-        "includeReferenceSourceData": {
-          "type": "boolean",
-          "description": "Indicates whether references should include the structured data obtained during retrieval in their payload."
-        },
-        "alwaysQuerySource": {
-          "type": "boolean",
-          "description": "Indicates that this knowledge source should bypass source selection and always be queried at retrieval time."
-        },
-        "maxSubQueries": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of queries that can be issued at a time when retrieving data from this source."
-        },
-        "rerankerThreshold": {
-          "type": "number",
-          "format": "float",
-          "description": "The reranker threshold all retrieved documents must meet to be included in the response."
         }
       },
       "required": [
@@ -9853,15 +9778,15 @@
         "value"
       ]
     },
-    "ListKnowledgeAgentsResult": {
+    "ListKnowledgeBasesResult": {
       "type": "object",
-      "description": "Result from listing knowledge agents.",
+      "description": "Result from listing knowledge bases.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The knowledge agents in the service.",
+          "description": "The knowledge bases in the service.",
           "items": {
-            "$ref": "#/definitions/KnowledgeAgent"
+            "$ref": "#/definitions/KnowledgeBase"
           }
         }
       },
