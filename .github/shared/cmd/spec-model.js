@@ -42,7 +42,6 @@ const specModel = new SpecModel(specPath, { logger });
 
 console.log(
   JSON.stringify(
-    // Always embed errors, since we always want to return a valid JSON object instead of throwing
     await specModel.toJSONAsync({ embedErrors: !noEmbedErrors, includeRefs, relativePaths }),
     null,
     2,
