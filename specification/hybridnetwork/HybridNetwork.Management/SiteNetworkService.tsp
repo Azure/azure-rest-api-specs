@@ -30,6 +30,16 @@ model SiteNetworkService
   sku?: Sku;
 }
 
+alias SiteNetworkServicesForSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {},
+  ErrorType = ErrorResponse
+>;
+
 @armResourceOperations
 interface SiteNetworkServices {
   /**
@@ -40,7 +50,10 @@ interface SiteNetworkServices {
   /**
    * Creates or updates a network site.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SiteNetworkService>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    SiteNetworkService,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a site update tags.
@@ -51,7 +64,14 @@ interface SiteNetworkServices {
   /**
    * Deletes the specified site network service.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<SiteNetworkService>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    SiteNetworkService,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+      LroHeaders = ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request successful. Resource does not exist.">,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Lists all site network services.
@@ -62,6 +82,19 @@ interface SiteNetworkServices {
    * Lists all sites in the network service in a subscription.
    */
   listBySubscription is ArmListBySubscription<SiteNetworkService>;
+
+  /**
+   * Cancels an ongoing long-running PUT operation for the specified Site Network Service resource. Other operations are not supported for cancellation at this time.
+   */
+  @action("cancelSiteNetworkServiceOperation")
+  cancelOperation is SiteNetworkServicesForSubscriptionOps.ActionSync<
+    Resource = SiteNetworkService,
+    Request = CancelInformation,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. The header contains Location URL to check the status of the asynchronous operation",
+      ArmLroLocationHeader
+    >
+  >;
 }
 
 @@maxLength(SiteNetworkService.name, 64);
@@ -72,4 +105,7 @@ interface SiteNetworkServices {
 );
 @@doc(SiteNetworkServices.updateTags::parameters.properties,
   "Parameters supplied to update network site tags."
+);
+@@doc(SiteNetworkServices.cancelOperation::parameters.body,
+  "The SiteNetworkService detail and an optional operation which defaults to 'Put'."
 );

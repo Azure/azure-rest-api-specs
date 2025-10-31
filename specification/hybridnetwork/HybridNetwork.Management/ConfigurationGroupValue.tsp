@@ -33,7 +33,10 @@ interface ConfigurationGroupValues {
   /**
    * Creates or updates a hybrid configuration group value.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigurationGroupValue>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ConfigurationGroupValue,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a hybrid configuration group tags.
@@ -47,7 +50,14 @@ interface ConfigurationGroupValues {
   /**
    * Deletes the specified hybrid configuration group value.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ConfigurationGroupValue>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ConfigurationGroupValue,
+    LroHeaders = ArmLroLocationHeader,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+      ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request successful. Resource does not exist.">
+  >;
 
   /**
    * Lists all the hybrid network configurationGroupValues in a resource group.

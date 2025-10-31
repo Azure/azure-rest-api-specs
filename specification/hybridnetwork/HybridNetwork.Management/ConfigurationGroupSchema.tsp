@@ -35,7 +35,10 @@ interface ConfigurationGroupSchemas {
   /**
    * Creates or updates a configuration group schema.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigurationGroupSchema>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ConfigurationGroupSchema,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a configuration group schema resource.
@@ -49,7 +52,14 @@ interface ConfigurationGroupSchemas {
   /**
    * Deletes a specified configuration group schema.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ConfigurationGroupSchema>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ConfigurationGroupSchema,
+    LroHeaders = ArmLroLocationHeader,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+      ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">
+  >;
 
   /**
    * Gets information of the configuration group schemas under a publisher.
@@ -61,10 +71,14 @@ interface ConfigurationGroupSchemas {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationGroupSchemas_updateState")
-  updateState is ArmResourceActionAsync<
+  updateState is ArmResourceActionAsyncBase<
     ConfigurationGroupSchema,
     ConfigurationGroupSchemaVersionUpdateState,
-    ArmResponse<ConfigurationGroupSchemaVersionUpdateState>
+    ArmResponse<ConfigurationGroupSchemaVersionUpdateState> | ArmAcceptedLroResponse<
+      "The request of updating configuration group schema state is accepted.",
+      ArmLroLocationHeader
+    >,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ConfigurationGroupSchema>
   >;
 }
 

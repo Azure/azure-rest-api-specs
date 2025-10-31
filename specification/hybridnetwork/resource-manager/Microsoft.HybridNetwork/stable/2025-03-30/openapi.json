@@ -73,6 +73,9 @@
       "name": "ArtifactStores"
     },
     {
+      "name": "ProxyArtifact"
+    },
+    {
       "name": "ArtifactManifests"
     },
     {
@@ -89,7 +92,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Gets a list of the operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -122,6 +125,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/cancelSiteNetworkServiceOperation": {
       "post": {
         "operationId": "SiteNetworkServices_CancelOperation",
+        "tags": [
+          "SiteNetworkServices"
+        ],
         "description": "Cancels an ongoing long-running PUT operation for the specified Site Network Service resource. Other operations are not supported for cancellation at this time.",
         "parameters": [
           {
@@ -131,9 +137,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The request body",
+            "description": "The SiteNetworkService detail and an optional operation which defaults to 'Put'.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CancelInformation"
@@ -142,21 +148,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted. The header contains Location URL to check the status of the asynchronous operation",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -511,11 +509,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -625,21 +618,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -721,9 +709,10 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "description": "The name of the network function resource.",
+            "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           }
         ],
         "responses": {
@@ -771,9 +760,10 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "description": "The name of the network function resource.",
+            "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           },
           {
             "name": "parameters",
@@ -801,11 +791,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -857,9 +842,10 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "description": "The name of the network function resource.",
+            "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           },
           {
             "name": "parameters",
@@ -910,9 +896,10 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "description": "The name of the network function resource.",
+            "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           }
         ],
         "responses": {
@@ -920,21 +907,16 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource with the specified name does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -980,9 +962,10 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "description": "The name of the network function resource.",
+            "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           }
         ],
         "responses": {
@@ -1029,9 +1012,10 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "description": "The name of the network function resource.",
+            "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           },
           {
             "name": "componentName",
@@ -1084,9 +1068,10 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "description": "The name of the network function resource.",
+            "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           },
           {
             "name": "parameters",
@@ -1103,16 +1088,11 @@
             "description": "The request has succeeded."
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1274,11 +1254,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1382,21 +1357,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1583,11 +1553,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1715,21 +1680,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1741,108 +1701,6 @@
         "x-ms-examples": {
           "Delete a artifact store of publisher resource": {
             "$ref": "./examples/ArtifactStoreDelete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/{artifactVersionName}/{artifactVersionName}": {
-      "patch": {
-        "operationId": "ProxyArtifact_UpdateState",
-        "tags": [
-          "ArtifactStores"
-        ],
-        "description": "Change artifact state defined in artifact store.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "publisherName",
-            "in": "path",
-            "description": "The name of the publisher.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          },
-          {
-            "name": "artifactStoreName",
-            "in": "path",
-            "description": "The name of the artifact store.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          },
-          {
-            "name": "artifactName",
-            "in": "query",
-            "description": "The name of the artifact.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
-          },
-          {
-            "name": "artifactVersionName",
-            "in": "path",
-            "description": "The name of the artifact version.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters supplied to update the state of artifact manifest.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ArtifactChangeState"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProxyArtifactVersionsListOverview"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update an artifact state": {
-            "$ref": "./examples/PureProxyArtifact/ArtifactChangeState.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1898,16 +1756,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1976,16 +1829,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2201,11 +2049,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2345,21 +2188,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2507,16 +2345,11 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Request of updating artifact manifest state is accepted.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2542,7 +2375,7 @@
       "get": {
         "operationId": "ProxyArtifact_Get",
         "tags": [
-          "ArtifactStores"
+          "ProxyArtifact"
         ],
         "description": "Get a Artifact overview information.",
         "parameters": [
@@ -2601,14 +2434,114 @@
           "Get an artifact overview": {
             "$ref": "./examples/PureProxyArtifact/ArtifactGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactVersions/{artifactVersionName}": {
+      "patch": {
+        "operationId": "ProxyArtifact_UpdateState",
+        "tags": [
+          "ProxyArtifact"
+        ],
+        "description": "Change artifact state defined in artifact store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "The name of the publisher.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "artifactStoreName",
+            "in": "path",
+            "description": "The name of the artifact store.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "artifactVersionName",
+            "in": "path",
+            "description": "The name of the artifact version.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+          },
+          {
+            "name": "artifactName",
+            "in": "query",
+            "description": "The name of the artifact.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update the state of artifact manifest.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactChangeState"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProxyArtifactVersionsListOverview"
+            }
+          },
+          "202": {
+            "description": "Request of updating artifact state is accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an artifact state": {
+            "$ref": "./examples/PureProxyArtifact/ArtifactChangeState.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifacts": {
       "get": {
         "operationId": "ProxyArtifact_List",
         "tags": [
-          "ArtifactStores"
+          "ProxyArtifact"
         ],
         "description": "Lists all the available artifacts in the parent Artifact Store.",
         "parameters": [
@@ -2658,6 +2591,9 @@
           "List artifacts under an artifact store": {
             "$ref": "./examples/PureProxyArtifact/ArtifactList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2708,16 +2644,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2783,16 +2714,11 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2811,7 +2737,10 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/listPrivateEndPoints": {
@@ -2858,16 +2787,11 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2886,7 +2810,10 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/removePrivateEndPoints": {
@@ -2936,16 +2863,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3134,11 +3056,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3260,21 +3177,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3347,16 +3259,11 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request of updating configuration group schema state is accepted.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3545,11 +3452,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3671,21 +3573,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3905,11 +3802,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -4055,21 +3947,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4157,16 +4044,11 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request of updating network function definition version state is accepted.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -4355,11 +4237,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -4481,21 +4358,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4709,11 +4581,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -4853,21 +4720,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request is successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4949,16 +4811,11 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request of updating network service design version state is accepted.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -5120,11 +4977,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -5231,21 +5083,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5405,11 +5252,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -5513,21 +5355,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Request successful. Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -6083,97 +5920,6 @@
           }
         ]
       }
-    },
-    "Azure.ResourceManager.ArmResponse<ArtifactManifestUpdateState>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ArtifactManifestUpdateState",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ArtifactStoreNetworkFabricControllerEndPointsList>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsList",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ArtifactStorePrivateEndPointsListResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ArtifactStorePrivateEndPointsListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ConfigurationGroupSchemaVersionUpdateState>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ConfigurationGroupSchemaVersionUpdateState",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NetworkFunctionDefinitionVersionUpdateState>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkFunctionDefinitionVersionUpdateState",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NetworkServiceDesignVersionUpdateState>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkServiceDesignVersionUpdateState",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ProxyArtifactVersionsListOverview>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ProxyArtifactVersionsListOverview",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "AzureArcK8SClusterNfviDetails": {
       "type": "object",
@@ -7378,7 +7124,8 @@
         },
         "wait": {
           "type": "string",
-          "description": "The helm deployment wait options"
+          "description": "The helm deployment wait options",
+          "x-ms-client-name": "waitOption"
         },
         "timeout": {
           "type": "string",
@@ -7440,7 +7187,8 @@
         },
         "wait": {
           "type": "string",
-          "description": "The helm deployment wait options"
+          "description": "The helm deployment wait options",
+          "x-ms-client-name": "waitOption"
         },
         "timeout": {
           "type": "string",
@@ -9129,10 +8877,6 @@
           }
         ]
       }
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "VersionState": {
       "type": "string",

@@ -35,7 +35,10 @@ interface ArtifactStores {
   /**
    * Creates or updates a artifact store.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ArtifactStore>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ArtifactStore,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Update artifact store resource.
@@ -46,7 +49,14 @@ interface ArtifactStores {
   /**
    * Deletes the specified artifact store.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ArtifactStore>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ArtifactStore,
+    LroHeaders = ArmLroLocationHeader,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+      ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">
+  >;
 
   /**
    * Gets information of the ArtifactStores under publisher.
@@ -59,7 +69,10 @@ interface ArtifactStores {
   addNetworkFabricControllerEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     ArtifactStoreNetworkFabricControllerEndPoints,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<
+      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+      ArmLroLocationHeader
+    >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
@@ -69,17 +82,25 @@ interface ArtifactStores {
   deleteNetworkFabricControllerEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     ArtifactStoreNetworkFabricControllerEndPoints,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<
+      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+      ArmLroLocationHeader
+    >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
   /**
    * List network fabric controllers to artifact stores
    */
-  listNetworkFabricControllerPrivateEndPoints is ArmResourceActionAsync<
+  @list
+  listNetworkFabricControllerPrivateEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     void,
-    ArmResponse<ArtifactStoreNetworkFabricControllerEndPointsList>
+    ArmResponse<ArtifactStoreNetworkFabricControllerEndPointsList> | ArmAcceptedLroResponse<
+      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+      ArmLroLocationHeader
+    >,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
   /**
@@ -88,7 +109,10 @@ interface ArtifactStores {
   approvePrivateEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     ArtifactStorePrivateEndPointsFormat,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<
+      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+      ArmLroLocationHeader
+    >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
@@ -98,24 +122,35 @@ interface ArtifactStores {
   removePrivateEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     ArtifactStorePrivateEndPointsFormat,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<
+      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+      ArmLroLocationHeader
+    >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
   /**
    * List manual private endpoints on artifact stores
    */
-  listPrivateEndPoints is ArmResourceActionAsync<
+  @list
+  listPrivateEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     void,
-    ArmResponse<ArtifactStorePrivateEndPointsListResult>
+    ArmResponse<ArtifactStorePrivateEndPointsListResult> | ArmAcceptedLroResponse<
+      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+      ArmLroLocationHeader
+    >,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
+}
 
+@armResourceOperations
+interface ProxyArtifact {
   /**
    * Lists all the available artifacts in the parent Artifact Store.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProxyArtifact_List")
+  @list
   @get
   @action("artifacts")
   list is ArmResourceActionSync<
@@ -128,7 +163,7 @@ interface ArtifactStores {
    * Get a Artifact overview information.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProxyArtifact_Get")
+  @list
   @get
   @action("artifactVersions")
   proxyArtifactGet is ArmResourceActionSync<
@@ -149,32 +184,55 @@ interface ArtifactStores {
   /**
    * Change artifact state defined in artifact store.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProxyArtifact_UpdateState")
-  @patch
-  @action("{artifactVersionName}")
-  updateState is ArmResourceActionAsync<
-    ArtifactStore,
-    ArtifactChangeState,
-    ArmResponse<ProxyArtifactVersionsListOverview>,
-    Parameters = {
-      /**
-       * The name of the artifact.
-       */
-      @maxLength(64)
-      @pattern("^[^\\s]*[^\\s]+[^\\s]*$")
-      @query("artifactName")
-      artifactName: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @patch(#{ implicitOptionality: false })
+  updateState(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
 
-      /**
-       * The name of the artifact version.
-       */
-      @maxLength(64)
-      @pattern("^[^\\s]*[^\\s]+[^\\s]*$")
-      @path
-      artifactVersionName: string;
-    }
-  >;
+    /**
+     * The name of the publisher.
+     */
+    @path
+    @maxLength(64)
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+    @segment("publishers")
+    publisherName: string,
+
+    /**
+     * The name of the artifact store.
+     */
+    @path
+    @maxLength(64)
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+    @segment("artifactStores")
+    artifactStoreName: string,
+
+    /**
+     * The name of the artifact version.
+     */
+    @path
+    @maxLength(64)
+    @pattern("^[^\\s]*[^\\s]+[^\\s]*$")
+    @segment("artifactVersions")
+    artifactVersionName: string,
+
+    /**
+     * The name of the artifact.
+     */
+    @maxLength(64)
+    @pattern("^[^\\s]*[^\\s]+[^\\s]*$")
+    @query("artifactName")
+    artifactName: string,
+
+    @body
+    body: ArtifactChangeState,
+  ): ArmResponse<ProxyArtifactVersionsListOverview> | ArmAcceptedLroResponse<
+    "Request of updating artifact state is accepted.",
+    ArmLroLocationHeader
+  > | ErrorResponse;
 }
 
 @@maxLength(ArtifactStore.name, 64);
@@ -198,6 +256,6 @@ interface ArtifactStores {
 @@doc(ArtifactStores.removePrivateEndPoints::parameters.body,
   "Parameters supplied to the create or update application group operation."
 );
-@@doc(ArtifactStores.updateState::parameters.body,
+@@doc(ProxyArtifact.updateState::parameters.body,
   "Parameters supplied to update the state of artifact manifest."
 );

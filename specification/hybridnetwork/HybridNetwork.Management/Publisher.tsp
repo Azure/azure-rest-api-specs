@@ -34,7 +34,10 @@ interface Publishers {
   /**
    * Creates or updates a publisher.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Publisher>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Publisher,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Update a publisher resource.
@@ -49,7 +52,14 @@ interface Publishers {
   /**
    * Deletes the specified publisher.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Publisher>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Publisher,
+    LroHeaders = ArmLroLocationHeader,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+      LroHeaders = ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">
+  >;
 
   /**
    * Lists all the publishers in a resource group.

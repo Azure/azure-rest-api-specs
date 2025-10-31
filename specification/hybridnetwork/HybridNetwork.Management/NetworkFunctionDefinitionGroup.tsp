@@ -35,7 +35,10 @@ interface NetworkFunctionDefinitionGroups {
   /**
    * Creates or updates a network function definition group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFunctionDefinitionGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkFunctionDefinitionGroup,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a network function definition group resource.
@@ -49,7 +52,14 @@ interface NetworkFunctionDefinitionGroups {
   /**
    * Deletes a specified network function definition group.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkFunctionDefinitionGroup>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkFunctionDefinitionGroup,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+      LroHeaders = ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information of the network function definition groups under a publisher.

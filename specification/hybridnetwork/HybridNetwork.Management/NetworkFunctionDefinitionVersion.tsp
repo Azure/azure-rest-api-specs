@@ -35,7 +35,10 @@ interface NetworkFunctionDefinitionVersions {
   /**
    * Creates or updates a network function definition version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFunctionDefinitionVersion>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkFunctionDefinitionVersion,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a network function definition version resource.
@@ -49,7 +52,14 @@ interface NetworkFunctionDefinitionVersions {
   /**
    * Deletes the specified network function definition version.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkFunctionDefinitionVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkFunctionDefinitionVersion,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+      LroHeaders = ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information about a list of network function definition versions under a network function definition group.
@@ -61,10 +71,14 @@ interface NetworkFunctionDefinitionVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkFunctionDefinitionVersions_updateState")
-  updateState is ArmResourceActionAsync<
+  updateState is ArmResourceActionAsyncBase<
     NetworkFunctionDefinitionVersion,
     NetworkFunctionDefinitionVersionUpdateState,
-    ArmResponse<NetworkFunctionDefinitionVersionUpdateState>
+    ArmResponse<NetworkFunctionDefinitionVersionUpdateState> | ArmAcceptedLroResponse<
+      "The request of updating network function definition version state is accepted.",
+      ArmLroLocationHeader
+    >,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkFunctionDefinitionVersion>
   >;
 }
 

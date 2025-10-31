@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.4
- * Date: 2025-10-31T02:13:42.012Z
+ * Version: 0.11.7
+ * Date: 2025-09-19T07:10:05.856Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -54,3 +54,5 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(Operations.list, "Gets a list of the operations.");

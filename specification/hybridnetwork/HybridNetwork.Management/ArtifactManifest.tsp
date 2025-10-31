@@ -35,7 +35,10 @@ interface ArtifactManifests {
   /**
    * Creates or updates a artifact manifest.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ArtifactManifest>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ArtifactManifest,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a artifact manifest resource.
@@ -46,7 +49,14 @@ interface ArtifactManifests {
   /**
    * Deletes the specified artifact manifest.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ArtifactManifest>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ArtifactManifest,
+    LroHeaders = ArmLroLocationHeader,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+      ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">
+  >;
 
   /**
    * Gets information about the artifact manifest.
@@ -65,10 +75,14 @@ interface ArtifactManifests {
   /**
    * Update state for artifact manifest.
    */
-  updateState is ArmResourceActionAsync<
+  updateState is ArmResourceActionAsyncBase<
     ArtifactManifest,
     ArtifactManifestUpdateState,
-    ArmResponse<ArtifactManifestUpdateState>
+    ArmResponse<ArtifactManifestUpdateState> | ArmAcceptedLroResponse<
+      "Request of updating artifact manifest state is accepted.",
+      ArmLroLocationHeader
+    >,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactManifest>
   >;
 }
 

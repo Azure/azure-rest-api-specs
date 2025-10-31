@@ -35,7 +35,10 @@ interface NetworkServiceDesignGroups {
   /**
    * Creates or updates a network service design group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkServiceDesignGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkServiceDesignGroup,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a network service design groups resource.
@@ -49,7 +52,14 @@ interface NetworkServiceDesignGroups {
   /**
    * Deletes a specified network service design group.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkServiceDesignGroup>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkServiceDesignGroup,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+      LroHeaders = ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information of the network service design groups under a publisher.

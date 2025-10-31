@@ -19,7 +19,7 @@ model NetworkFunction
     Resource = NetworkFunction,
     KeyName = "networkFunctionName",
     SegmentName = "networkFunctions",
-    NamePattern = ""
+    NamePattern = "^[^\\s]*[^\\s]+[^\\s]*$"
   >;
 
   /**
@@ -41,7 +41,10 @@ interface NetworkFunctions {
   /**
    * Creates or updates a network function resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFunction>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkFunction,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates the tags for the network function resource.
@@ -55,7 +58,11 @@ interface NetworkFunctions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkFunction,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmAcceptedLroResponse<
+      "Accepted. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+      LroHeaders = ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource with the specified name does not exist.">,
+    LroHeaders = ArmLroLocationHeader
   >;
 
   /**
@@ -71,14 +78,28 @@ interface NetworkFunctions {
   /**
    * Execute a request to services on a containerized network function.
    */
-  executeRequest is ArmResourceActionAsync<
-    NetworkFunction,
-    ExecuteRequestParameters,
-    OkResponse
+  executeRequest is NetworkFunctionsOps.ActionSync<
+    Resource = NetworkFunction,
+    Request = ExecuteRequestParameters,
+    Response = OkResponse | ArmAcceptedLroResponse<
+      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+      ArmLroLocationHeader
+    >
   >;
 }
 
-@@doc(NetworkFunction.name, "The name of the network function resource.");
+alias NetworkFunctionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  KeysOf<NetworkFunction>,
+  ErrorResponse
+>;
+
+@@doc(NetworkFunction.name, "Resource name for the network function resource.");
 @@doc(NetworkFunction.properties, "Network function properties.");
 @@doc(NetworkFunctions.createOrUpdate::parameters.resource,
   "Parameters supplied in the body to the create or update network function operation."

@@ -35,7 +35,10 @@ interface NetworkServiceDesignVersions {
   /**
    * Creates or updates a network service design version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkServiceDesignVersion>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkServiceDesignVersion,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a network service design version resource.
@@ -49,7 +52,14 @@ interface NetworkServiceDesignVersions {
   /**
    * Deletes the specified network service design version.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkServiceDesignVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkServiceDesignVersion,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+      LroHeaders = ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Gets information about a list of network service design versions under a network service design group.
@@ -61,10 +71,14 @@ interface NetworkServiceDesignVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkServiceDesignVersions_updateState")
-  updateState is ArmResourceActionAsync<
+  updateState is ArmResourceActionAsyncBase<
     NetworkServiceDesignVersion,
     NetworkServiceDesignVersionUpdateState,
-    ArmResponse<NetworkServiceDesignVersionUpdateState>
+    ArmResponse<NetworkServiceDesignVersionUpdateState> | ArmAcceptedLroResponse<
+      "The request of updating network service design version state is accepted.",
+      ArmLroLocationHeader
+    >,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkServiceDesignVersion>
   >;
 }
 

@@ -32,7 +32,10 @@ interface Sites {
   /**
    * Creates or updates a network site.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Site,
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   /**
    * Updates a site update tags.
@@ -43,7 +46,14 @@ interface Sites {
   /**
    * Deletes the specified network site.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Site>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Site,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+      LroHeaders = ArmLroLocationHeader
+    > | ArmNoContentResponse<"Request successful. Resource does not exist.">,
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   /**
    * Lists all sites in the network service.

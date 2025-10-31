@@ -82,11 +82,8 @@ using Microsoft.HybridNetwork;
 @@clientName(ArtifactStores.removePrivateEndPoints::parameters.body,
   "parameters"
 );
-@@clientLocation(ArtifactStores.list, "ProxyArtifact");
-@@clientLocation(ArtifactStores.proxyArtifactGet, "ProxyArtifact");
-@@clientName(ArtifactStores.proxyArtifactGet, "Get");
-@@clientLocation(ArtifactStores.updateState, "ProxyArtifact");
-@@clientName(ArtifactStores.updateState::parameters.body, "parameters");
+@@clientName(ProxyArtifact.proxyArtifactGet, "Get");
+@@clientName(ProxyArtifact.updateState::parameters.body, "parameters");
 
 @@clientName(ArtifactManifests.createOrUpdate::parameters.resource,
   "parameters"
@@ -104,6 +101,11 @@ using Microsoft.HybridNetwork;
   "parameters"
 );
 
-@@clientLocation(SiteNetworkServicesOperationGroup.cancelOperation,
-  "SiteNetworkServices"
+@@clientLocation(SiteNetworkServices.cancelOperation, SiteNetworkServices);
+
+@@clientName(SiteNetworkServices.cancelOperation::parameters.body,
+  "parameters"
 );
+
+@@clientName(HelmInstallOptions.wait, "waitOption");
+@@clientName(HelmUpgradeOptions.wait, "waitOption");
