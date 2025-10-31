@@ -115,7 +115,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
@@ -128,7 +128,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;

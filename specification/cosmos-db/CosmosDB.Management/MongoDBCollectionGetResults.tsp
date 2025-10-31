@@ -78,7 +78,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
     MongoDBCollectionGetResults,
     MergeParameters,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MongoDBCollectionGetResults>,
-    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoDBCollectionGetResults> &
+    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
       Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;

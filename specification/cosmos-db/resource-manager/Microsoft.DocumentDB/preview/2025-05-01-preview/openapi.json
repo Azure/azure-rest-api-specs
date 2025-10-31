@@ -10443,7 +10443,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/MongoDBCollectionGetResults"
+          "final-state-schema": "#/definitions/PhysicalPartitionStorageInfoCollection"
         },
         "x-ms-long-running-operation": true
       }
@@ -11146,7 +11146,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ThroughputSettingsGetResults"
+          "final-state-schema": "#/definitions/PhysicalPartitionStorageInfoCollection"
         },
         "x-ms-long-running-operation": true
       }
@@ -17170,7 +17170,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ThroughputSettingsGetResults"
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
             }
           },
           "202": {
@@ -17206,7 +17206,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ThroughputSettingsGetResults"
+          "final-state-schema": "#/definitions/PhysicalPartitionThroughputInfoResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -17259,7 +17259,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ThroughputSettingsGetResults"
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
             }
           },
           "202": {
@@ -17295,7 +17295,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ThroughputSettingsGetResults"
+          "final-state-schema": "#/definitions/PhysicalPartitionThroughputInfoResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -21243,9 +21243,6 @@
       "type": "object",
       "description": "An Azure Blob Storage data source/sink",
       "properties": {
-        "remoteAccountName": {
-          "type": "string"
-        },
         "containerName": {
           "type": "string"
         },

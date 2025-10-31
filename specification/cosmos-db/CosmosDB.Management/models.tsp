@@ -8709,7 +8709,6 @@ model CosmosSqlDataTransferDataSourceSink extends DataTransferDataSourceSink {
   BaseCosmosDataTransferDataSourceSink
 )
 model AzureBlobDataTransferDataSourceSink extends DataTransferDataSourceSink {
-  ...BaseCosmosDataTransferDataSourceSinkProperties;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
