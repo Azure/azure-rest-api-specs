@@ -546,7 +546,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DisassociateCloudServiceReservedPublicIpRequest"
+              "$ref": "#/definitions/DisassociateCloudServicePublicIpRequest"
             },
             "description": "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
           }
@@ -869,7 +869,15 @@
       "type": "object",
       "properties": {
         "isRollback": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "IsRollback",
+            "modelAsString": true
+          },
           "description": "When true, reverts from Static to Dynamic allocation (undo reservation)."
         }
       },
@@ -878,7 +886,7 @@
       ],
       "description": "The request for ReserveCloudServicePublicIpAddressOperation."
     },
-    "DisassociateCloudServiceReservedPublicIpRequest": {
+    "DisassociateCloudServicePublicIpRequest": {
       "type": "object",
       "properties": {
         "publicIpArmId": {
