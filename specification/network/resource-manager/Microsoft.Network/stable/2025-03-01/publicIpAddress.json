@@ -438,6 +438,156 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}/reserveCloudServicePublicIpAddress": {
+      "post": {
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "operationId": "PublicIPAddresses_ReserveCloudServicePublicIpAddress",
+        "description": "Reserves the specified Cloud Service Public IP by switching its allocation method to Static. If rollback is requested, reverts the allocation method to Dynamic.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIpAddressName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the public IP address.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReserveCloudServicePublicIpAddressRequest"
+            },
+            "description": "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting PublicIPAddress resource.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddress"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reserve public IP address ": {
+            "$ref": "./examples/PublicIpAddressReserve.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}/disassociateCloudServiceReservedPublicIp": {
+      "post": {
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "operationId": "PublicIPAddresses_DisassociateCloudServiceReservedPublicIp",
+        "description": "Disassociates the Cloud Service reserved Public IP and associates the specified Standalone Public IP to the same Cloud Service frontend.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIpAddressName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the public IP address.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DisassociateCloudServicePublicIpRequest"
+            },
+            "description": "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting PublicIPAddress resource.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddress"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disassociate public IP address ": {
+            "$ref": "./examples/PublicIpAddressDisassociateCloudServiceReservedPublicIp.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -714,6 +864,48 @@
         }
       },
       "description": "Response for GetPublicIpAddressDdosProtectionStatusOperation API service call."
+    },
+    "ReserveCloudServicePublicIpAddressRequest": {
+      "type": "object",
+      "properties": {
+        "isRollback": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "IsRollback",
+            "modelAsString": true
+          },
+          "description": "When true, reverts from Static to Dynamic allocation (undo reservation)."
+        }
+      },
+      "required": [
+        "isRollback"
+      ],
+      "description": "The request for ReserveCloudServicePublicIpAddressOperation."
+    },
+    "DisassociateCloudServicePublicIpRequest": {
+      "type": "object",
+      "properties": {
+        "publicIpArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPAddresses"
+              }
+            ]
+          },
+          "description": "ARM ID of the Standalone Public IP to associate. This is of the form : /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}"
+        }
+      },
+      "required": [
+        "publicIpArmId"
+      ],
+      "description": "The request for DisassociateCloudServicePublicIpOperation."
     }
   }
 }
