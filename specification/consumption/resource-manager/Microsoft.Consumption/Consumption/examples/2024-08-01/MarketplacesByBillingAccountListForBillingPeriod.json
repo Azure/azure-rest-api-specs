@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingAccountId": "123456",
+    "billingPeriodName": "201702",
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "marketplacesId1",
+            "type": "Microsoft.Consumption/marketPlaces",
+            "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.Billing/billingPeriods/201702/providers/Microsoft.Consumption/marketplaces/marketplaceId1",
+            "properties": {
+              "accountName": "Account1",
+              "additionalProperties": "additionalProperties",
+              "billingPeriodId": "/providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.Billing/billingPeriods/201702",
+              "consumedQuantity": 0.00328,
+              "costCenter": "Center1",
+              "currency": "USD",
+              "departmentName": "Department1",
+              "instanceId": "/subscriptions/subid/resourceGroups/Default-Web-eastasia/providers/Microsoft.Web/sites/shared1",
+              "instanceName": "shared1",
+              "isEstimated": false,
+              "isRecurringCharge": false,
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "offerName": "offer1",
+              "orderNumber": "00000000-0000-0000-0000-000000000000",
+              "planName": "plan2",
+              "pretaxCost": 0.67,
+              "publisherName": "xyz",
+              "resourceGroup": "TEST",
+              "resourceRate": 0.24,
+              "subscriptionGuid": "00000000-0000-0000-0000-000000000000",
+              "subscriptionName": "azure subscription",
+              "unitOfMeasure": "10 Hours",
+              "usageEnd": "2017-02-13T23:59:59Z",
+              "usageStart": "2017-02-13T00:00:00Z"
+            },
+            "tags": {
+              "dev": "tools",
+              "env": "newcrp"
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Marketplaces_List",
+  "title": "BillingAccountMarketplacesListForBillingPeriod"
+}

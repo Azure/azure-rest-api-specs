@@ -542,7 +542,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * List of Provisioning Issues if any
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   provisioningIssues?: ProvisioningIssue[];
 
   /**
@@ -608,7 +608,7 @@ model ProvisioningIssueProperties {
   /**
    * Access rules that can be added to the same profile to remediate the issue.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   suggestedAccessRules?: NspAccessRule[];
 }
 
@@ -735,7 +735,7 @@ model Profile {
   /**
    * List of Access Rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   accessRules?: NspAccessRule[];
 
   /**

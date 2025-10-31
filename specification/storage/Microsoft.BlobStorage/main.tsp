@@ -37,6 +37,5 @@ enum Versions {
   v2025_11_05: "2025-11-05",
 
   @doc("The 2026-02-06 version of the Azure.Storage.Blob service.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2026_02_06: "2026-02-06",
 }
