@@ -41,13 +41,13 @@ input-file:
   - preview/2025-10-01-preview/maps-management.json
 ```
 
-### Tag: package-preview-2024-01
+### Tag: package-preview-2024-07
 
-These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-01'
+```yaml $(tag) == 'package-preview-2024-07'
 input-file:
-  - preview/2024-01-01-preview/maps-management.json
+  - preview/2024-07-01-preview/maps-management.json
 ```
 
 ### Tag: package-preview-2023-12
