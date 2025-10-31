@@ -40,13 +40,36 @@
                 "lastComplianceCheck": "2025-10-28T09:00:00Z"
               },
               "policies": {
-                "allowedActions": [
-                  "read",
-                  "write",
-                  "execute"
-                ],
                 "genevaActionsConfiguration": {
-                  "acisEndpoint": "https://acis.eastus.monitoring.azure.com"
+                  "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+                  "allowedActions": [
+                    {
+                      "actionName": "RestartService",
+                      "extension": "GenevaActions",
+                      "actionParameters": [
+                        {
+                          "name": "serviceName",
+                          "type": "string"
+                        }
+                      ],
+                      "approvalRequired": true
+                    },
+                    {
+                      "actionName": "GetMetrics",
+                      "extension": "GenevaActions",
+                      "actionParameters": [
+                        {
+                          "name": "metricName",
+                          "type": "string"
+                        },
+                        {
+                          "name": "timeRange",
+                          "type": "string"
+                        }
+                      ],
+                      "approvalRequired": false
+                    }
+                  ]
                 }
               }
             }

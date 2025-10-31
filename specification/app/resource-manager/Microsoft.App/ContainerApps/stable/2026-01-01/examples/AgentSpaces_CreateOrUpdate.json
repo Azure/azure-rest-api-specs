@@ -19,17 +19,40 @@
         "maxAgentCount": 15,
         "serviceTreeId": "abcdef12-3456-7890-abcd-ef1234567890",
         "policies": {
-          "allowedActions": [
-            "read",
-            "write",
-            "execute"
-          ],
           "genevaActionsConfiguration": {
             "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
             "clientId": "12345678-1234-1234-1234-123456789012",
             "certificateSubjectName": "CN=AgentSpaceAuth",
             "authenticationMode": "OAuth",
-            "extensionName": "GenevaActions"
+            "extensionName": "GenevaActions",
+            "allowedActions": [
+              {
+                "actionName": "RestartService",
+                "extension": "GenevaActions",
+                "actionParameters": [
+                  {
+                    "name": "serviceName",
+                    "type": "string"
+                  }
+                ],
+                "approvalRequired": true
+              },
+              {
+                "actionName": "GetMetrics",
+                "extension": "GenevaActions",
+                "actionParameters": [
+                  {
+                    "name": "metricName",
+                    "type": "string"
+                  },
+                  {
+                    "name": "timeRange",
+                    "type": "string"
+                  }
+                ],
+                "approvalRequired": false
+              }
+            ]
           }
         }
       }
@@ -66,17 +89,40 @@
             "lastComplianceCheck": "2025-10-28T11:00:00Z"
           },
           "policies": {
-            "allowedActions": [
-              "read",
-              "write",
-              "execute"
-            ],
             "genevaActionsConfiguration": {
               "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
               "clientId": "12345678-1234-1234-1234-123456789012",
               "certificateSubjectName": "CN=AgentSpaceAuth",
               "authenticationMode": "OAuth",
-              "extensionName": "GenevaActions"
+              "extensionName": "GenevaActions",
+              "allowedActions": [
+                {
+                  "actionName": "RestartService",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "serviceName",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": true
+                },
+                {
+                  "actionName": "GetMetrics",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "metricName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "timeRange",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": false
+                }
+              ]
             }
           }
         }
@@ -109,17 +155,40 @@
           "description": "New production agent space for AI assistant services",
           "serviceTreeId": "abcdef12-3456-7890-abcd-ef1234567890",
           "policies": {
-            "allowedActions": [
-              "read",
-              "write",
-              "execute"
-            ],
             "genevaActionsConfiguration": {
               "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
               "clientId": "12345678-1234-1234-1234-123456789012",
               "certificateSubjectName": "CN=AgentSpaceAuth",
               "authenticationMode": "OAuth",
-              "extensionName": "GenevaActions"
+              "extensionName": "GenevaActions",
+              "allowedActions": [
+                {
+                  "actionName": "RestartService",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "serviceName",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": true
+                },
+                {
+                  "actionName": "GetMetrics",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "metricName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "timeRange",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": false
+                }
+              ]
             }
           }
         }
