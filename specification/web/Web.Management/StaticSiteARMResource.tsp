@@ -140,7 +140,8 @@ interface StaticSiteARMResources {
   @summary("Gets the list of users of a static site.")
   @action("listUsers")
   @list
-  listStaticSiteUsers is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/listUsers")
+  listStaticSiteUsers is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
     void,
     ArmResponse<StaticSiteUserCollection>,
@@ -149,10 +150,9 @@ interface StaticSiteARMResources {
        * The auth provider for the users.
        */
       @path
-      @segment("authproviders")
       authprovider: string;
     },
-    Error = DefaultErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**

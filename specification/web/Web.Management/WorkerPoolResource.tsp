@@ -59,8 +59,50 @@ interface WorkerPoolResourceOps
       }
     > {}
 
+alias WorkerPoolActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /** Name of the App Service Environment. */
+    @path
+    @segment("hostingEnvironments")
+    @key
+    name: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments",
+  }
+>;
+
+alias WorkerPoolInstanceMetricActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** Name of the App Service Environment. */
+    @path
+    @segment("hostingEnvironments")
+    @key
+    name: string;
+  },
+  {
+    /** Name of the worker pool. */
+    @path
+    @segment("workerPools")
+    @key
+    workerPoolName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/workerPools",
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface WorkerPoolResources {
   /**
    * Description for Get properties of a multi-role pool.
@@ -119,9 +161,9 @@ interface WorkerPoolResources {
    */
   @summary("Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.")
   @get
-  @action("metricdefinitions")
   @list
-  listMultiRolePoolInstanceMetricDefinitions is WorkerPoolResourceOps.ActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions")
+  listMultiRolePoolInstanceMetricDefinitions is WorkerPoolActionParamsOps.ActionSync<
     WorkerPoolResource,
     void,
     ArmResponse<ResourceMetricDefinitionCollection>,
@@ -130,7 +172,6 @@ interface WorkerPoolResources {
        * Name of the instance in the multi-role pool.
        */
       @path
-      @segment("instances")
       instance: string;
     },
     OverrideErrorType = DefaultErrorResponse
@@ -202,7 +243,7 @@ interface AppServiceEnvironmentOps
       }
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface AppServiceEnvironments {
   /**
    * Description for Get properties of a worker pool.
@@ -263,7 +304,8 @@ interface AppServiceEnvironments {
   @get
   @action("metricdefinitions")
   @list
-  listWorkerPoolInstanceMetricDefinitions is AppServiceEnvironmentOps.ActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions")
+  listWorkerPoolInstanceMetricDefinitions is WorkerPoolInstanceMetricActionParamsOps.ActionSync<
     WorkerPoolResource,
     void,
     ArmResponse<ResourceMetricDefinitionCollection>,
@@ -272,7 +314,6 @@ interface AppServiceEnvironments {
        * Name of the instance in the worker pool.
        */
       @path
-      @segment("instances")
       instance: string;
     },
     OverrideErrorType = DefaultErrorResponse

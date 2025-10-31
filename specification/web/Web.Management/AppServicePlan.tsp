@@ -45,7 +45,25 @@ model AppServicePlan
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+alias AppServicePlanActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /** App Service plan. */
+    @path
+    @segment("serverfarms")
+    @key
+    name: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface AppServicePlans {
   /**
    * Description for Get the RDP password for an IsCustomMode ServerFarm.
@@ -63,23 +81,21 @@ interface AppServicePlans {
    * Description for Recycles a managed instance worker machine.
    */
   @summary("Recycles a managed instance worker machine.")
-  @action("recycleinstance")
-  recycleManagedInstanceWorker is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms/{name}/workers/{workerName}/recycleinstance")
+  recycleManagedInstanceWorker is AppServicePlanActionParamsOps.ActionSync<
     AppServicePlan,
     void,
     ArmResponse<Operation>,
     Parameters = {
       /**
-       * Name of worker machine.
+       * Name of worker machine, which typically starts with RD.
        */
       @pattern("^[a-zA-Z0-9]+$")
       @path
-      @segment("workers")
       workerName: string;
     },
-    Error = DefaultErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
-
   /**
    * Description for Get the instance details for an app service plan.
    */
@@ -286,7 +302,8 @@ interface AppServicePlans {
    */
   @summary("Reboot a worker machine in an App Service plan.")
   @action("reboot")
-  rebootWorker is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot")
+  rebootWorker is AppServicePlanActionParamsOps.ActionSync<
     AppServicePlan,
     void,
     NoContentResponse,
@@ -295,10 +312,9 @@ interface AppServicePlans {
        * Name of worker machine, which typically starts with RD.
        */
       @path
-      @segment("workers")
       workerName: string;
     },
-    Error = DefaultErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

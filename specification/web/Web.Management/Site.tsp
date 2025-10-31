@@ -807,8 +807,10 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  getNetworkTraceOperation is SiteOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}")
+  getNetworkTraceOperation is ActionParameterSiteWebAppOps.ActionSync<
     Site,
+    void,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
       @bodyRoot
@@ -819,7 +821,6 @@ interface Sites {
        * GUID of the operation.
        */
       @path
-      @segment("networkTrace/operationresults")
       operationId: string;
     },
     OverrideErrorType = DefaultErrorResponse
@@ -933,24 +934,20 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  getNetworkTraceOperationV2 is SiteOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTraces/current/operationresults/{operationId}")
+  getNetworkTraceOperationV2 is ActionParameterSiteWebAppOps.ActionSync<
     Site,
+    void,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @OpenAPI.extension("x-ms-identifiers", #[])
       @bodyRoot
       _: NetworkTrace[];
     }),
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @path
-      @segment("networkTraces")
-      current: "current";
-
       /**
        * GUID of the operation.
        */
       @path
-      @segment("operationresults")
       operationId: string;
     },
     OverrideErrorType = DefaultErrorResponse
