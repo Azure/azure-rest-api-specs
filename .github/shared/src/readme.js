@@ -9,7 +9,7 @@ import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
 
 /**
- * @typedef {import('./spec-model.js').ErrorString} ErrorString
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  * @typedef {import('./tag.js').TagJSON} TagJSON
@@ -19,7 +19,7 @@ import { Tag } from "./tag.js";
  * @typedef {Object} ReadmeJSON
  * @property {string} path
  * @property {Object} globalConfig
- * @property {(TagJSON|ErrorString)[]} tags
+ * @property {(TagJSON|ErrorJSON)[]} tags
  */
 
 /**
@@ -248,7 +248,7 @@ export class Readme {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<ReadmeJSON|ErrorString>}
+   * @returns {Promise<ReadmeJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     const { relativePaths } = options;

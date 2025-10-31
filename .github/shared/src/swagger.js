@@ -8,7 +8,7 @@ import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
 /**
- * @typedef {import('./spec-model.js').ErrorString} ErrorString
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./spec-model.js').Tag} Tag
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
@@ -207,7 +207,7 @@ export class Swagger {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<SwaggerJSON|ErrorString>}
+   * @returns {Promise<SwaggerJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     const { includeRefs, relativePaths } = options;

@@ -3,7 +3,7 @@ import { embedError } from "./spec-model.js";
 import { Swagger } from "./swagger.js";
 
 /**
- * @typedef {import('./spec-model.js').ErrorString} ErrorString
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./readme.js').Readme} Readme
  * @typedef {import('./swagger.js').SwaggerJSON} SwaggerJSON
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
@@ -12,7 +12,7 @@ import { Swagger } from "./swagger.js";
 /**
  * @typedef {Object} TagJSON
  * @property {string} name
- * @property {(SwaggerJSON|ErrorString)[]} inputFiles
+ * @property {(SwaggerJSON|ErrorJSON)[]} inputFiles
  */
 
 export class Tag {
@@ -76,7 +76,7 @@ export class Tag {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<TagJSON|ErrorString>}
+   * @returns {Promise<TagJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     return await embedError(

@@ -12,14 +12,14 @@ import { SpecModelError } from "./spec-model-error.js";
  */
 
 /**
- * @typedef {Object} ErrorString
+ * @typedef {Object} ErrorJSON
  * @prop {string} error
  */
 
 /**
  * @typedef {Object} SpecModelJSON
  * @property {string} folder
- * @property {(ReadmeJSON|ErrorString)[]} readmes
+ * @property {(ReadmeJSON|ErrorJSON)[]} readmes
  */
 
 /**
@@ -228,7 +228,7 @@ export class SpecModel {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<SpecModelJSON|ErrorString>}
+   * @returns {Promise<SpecModelJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     return await embedError(async () => {
@@ -256,7 +256,7 @@ export class SpecModel {
  * @param {() => Promise<T>} fn
  * @param {Object} [options]
  * @param {boolean} [options.embedErrors]
- * @returns {Promise<T|ErrorString>}
+ * @returns {Promise<T|ErrorJSON>}
  */
 export async function embedError(fn, options = {}) {
   const { embedErrors } = options;
