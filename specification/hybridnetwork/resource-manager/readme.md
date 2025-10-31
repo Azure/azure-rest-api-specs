@@ -39,7 +39,7 @@ input-file:
   - Microsoft.HybridNetwork/stable/2025-03-30/openapi.json
 suppressions:
   - code: PatchSkuProperty
-    from: siteNetworkService.json
+    from: openapi.json
     reason: sku cannot be patched
 ```
 
