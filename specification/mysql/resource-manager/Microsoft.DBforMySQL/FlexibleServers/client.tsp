@@ -259,6 +259,10 @@ using Microsoft.DBforMySQL;
 @@scope(Operations.list, "!csharp");
 @@scope(OperationResults.get, "!csharp");
 
+// Skip generating scopes for PrivateLinkResources in C# as they are some naming issues
+@@scope(PrivateLinkResources.get, "!csharp");
+@@scope(PrivateLinkResources.listByServer, "!csharp");
+
 @@alternateType(LocationNameParameter.locationName, azureLocation, "csharp");
 @@alternateType(AdministratorProperties.identityResourceId,
   armResourceIdentifier,
