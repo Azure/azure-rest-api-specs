@@ -1,5 +1,3 @@
-// @ts-check
-
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ConsoleLogger, debugLogger, defaultLogger } from "../src/logger";
 

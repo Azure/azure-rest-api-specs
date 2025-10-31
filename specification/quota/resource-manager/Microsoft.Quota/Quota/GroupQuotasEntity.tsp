@@ -13,9 +13,8 @@ namespace Microsoft.Quota;
 /**
  * Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.
  */
-@tenantResource
 model GroupQuotasEntity
-  is Azure.ResourceManager.ProxyResource<GroupQuotasEntityProperties> {
+  is Azure.ResourceManager.ExtensionResource<GroupQuotasEntityProperties> {
   ...ResourceNameParameter<
     Resource = GroupQuotasEntity,
     KeyName = "groupQuotaName",

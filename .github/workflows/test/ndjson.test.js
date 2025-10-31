@@ -1,5 +1,3 @@
-// @ts-check
-
 import { describe, expect, it } from "vitest";
 import { parse, stringify } from "../src/ndjson.js";
 
