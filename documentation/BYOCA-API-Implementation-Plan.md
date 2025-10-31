@@ -329,6 +329,318 @@ issuerCertificateThumbprint?: string;
 7. Status returns to `Active`
 8. Updated thumbprints propagate to Credential resources
 
+### Certificate Compromised Flow
+
+When a certificate is compromised (private key exposed, security breach, etc.), customers need rapid response options. BYOCA provides three approaches depending on the severity and scope of compromise:
+
+#### Option 1: Emergency Rotation via PATCH (Fast Path for ICA Compromise)
+
+**Use Case**: Intermediate CA (ICA) private key is compromised, but Root CA remains secure.
+
+**Advantages**:
+- Fastest option (minutes instead of hours)
+- Minimal service disruption
+- Root CA remains intact
+- Existing Policy resource is preserved
+
+**Flow**:
+1. Customer detects ICA compromise
+2. Customer issues PATCH to Policy with special flag (e.g., `forceRotation: true`)
+3. Service immediately:
+   - Transitions status to `PendingRotation` (even if not near expiration)
+   - Generates new CSR with new key pair
+   - Deactivates compromised ICA in PKI (stops all attestations)
+4. Customer signs new CSR with their Root CA (offline)
+5. Customer PATCH with new `signedCertificate` and `certificateChain`
+6. Service validates and activates new ICA
+7. Status returns to `Active`
+8. New thumbprints propagate to all Credential resources
+9. Attestations resume with new certificate chain
+
+**API Example**:
+```http
+PATCH /subscriptions/{id}/resourceGroups/{rg}/providers/Microsoft.DeviceRegistry/policies/{policy}?api-version=2025-11-01-preview
+
+{
+  "properties": {
+    "bringYourOwnCertificateAuthority": {
+      "forceRotation": true,
+      "rotationReason": "KeyCompromise"
+    }
+  }
+}
+```
+
+**Timeline**: 
+- Detection → New CSR: < 1 minute
+- Customer signing: 5-30 minutes (depends on offline Root CA access)
+- Upload → Activation: < 1 minute
+- **Total**: ~10-35 minutes
+
+#### Option 2: Revocation API (For Root CA Compromise)
+
+**Use Case**: Root CA itself is compromised, or customer needs to completely revoke and stop all operations immediately.
+
+**Advantages**:
+- Immediate cessation of all attestations
+- Clear audit trail with revocation reason
+- Prevents any further use of compromised chain
+- Explicit revocation status visible in API
+
+**Flow**:
+1. Customer detects Root CA or critical compromise
+2. Customer calls POST action on Policy: `revokeCertificate`
+3. Service immediately:
+   - Transitions status to `Revoked`
+   - Records revocation timestamp and reason
+   - Deactivates CA in PKI (stops all attestations)
+   - Marks all dependent Credentials as affected
+4. **No recovery possible** - Policy stays in `Revoked` state permanently
+5. Customer must create NEW Policy with new Root CA and CSR
+6. Customer updates all Credentials to reference new Policy
+7. Attestations resume with new certificate hierarchy
+
+**API Example**:
+```http
+POST /subscriptions/{id}/resourceGroups/{rg}/providers/Microsoft.DeviceRegistry/policies/{policy}/revokeCertificate?api-version=2025-11-01-preview
+
+{
+  "reason": "CACompromise",
+  "revocationDate": "2025-10-30T10:00:00Z",
+  "additionalInfo": "Security incident #12345 - Root CA private key potentially exposed"
+}
+```
+
+**Response**:
+```json
+{
+  "id": "/subscriptions/{id}/resourceGroups/{rg}/providers/Microsoft.DeviceRegistry/policies/{policy}",
+  "properties": {
+    "bringYourOwnCertificateAuthority": {
+      "status": "Revoked",
+      "revocationDetails": {
+        "revocationDate": "2025-10-30T10:00:00Z",
+        "reason": "CACompromise",
+        "additionalInfo": "Security incident #12345"
+      }
+    }
+  }
+}
+```
+
+**Timeline**:
+- Detection → Revocation call: < 1 minute
+- Revocation → Attestation stop: < 1 minute
+- **Total downtime until new Policy**: Depends on customer (could be hours)
+
+#### Option 3: DELETE + CREATE (Nuclear Option)
+
+**Use Case**: Complete fresh start needed, or customer wants to fully remove compromised Policy from history.
+
+**Advantages**:
+- Complete removal of compromised Policy
+- Fresh Policy resource with new identity
+- Clear separation from compromised state
+- No legacy references to old certificates
+
+**Disadvantages**:
+- Longest downtime
+- Must update all Credential references
+- Loss of historical audit trail (if Policy is deleted)
+- More complex recovery process
+
+**Flow**:
+1. Customer detects compromise
+2. Customer creates NEW Policy with BYOCA enabled
+3. Service generates new CSR for new Policy
+4. Customer signs with Root CA (could be new Root CA if old one compromised)
+5. Customer uploads signed certificate to new Policy
+6. New Policy activates
+7. Customer updates ALL Credentials to reference new Policy ID
+8. Customer deletes old compromised Policy
+9. Attestations resume with new Policy
+
+**Timeline**:
+- Create new Policy → CSR: < 1 minute
+- Customer signing: 5-30 minutes
+- Upload → Activation: < 1 minute
+- Update all Credentials: 5-60 minutes (depends on number of Credentials)
+- **Total downtime**: ~15-95 minutes
+
+#### Comparison Matrix
+
+| Criterion | Option 1: Emergency PATCH | Option 2: Revocation API | Option 3: DELETE + CREATE |
+|-----------|---------------------------|--------------------------|---------------------------|
+| **Speed** | Fastest (10-35 min) | Very fast (1-2 min to stop) | Slowest (15-95 min) |
+| **Downtime** | Minimal (minutes) | Immediate stop, longer to recover | Longest (must update all refs) |
+| **Use Case** | ICA compromise | Root CA compromise | Complete fresh start |
+| **Recovery Path** | Same Policy, new ICA | Must create new Policy | New Policy, clean slate |
+| **Audit Trail** | Preserved in Policy history | Explicit revocation record | Depends on deletion policy |
+| **Credential Updates** | Automatic (thumbprints update) | Must re-reference new Policy | Must update all Credentials |
+| **API Complexity** | Simple (PATCH) | Medium (POST action) | Complex (multi-step) |
+| **Reversibility** | Not needed (rotation) | Irreversible | Not applicable |
+
+#### Implementation Requirements for Emergency Rotation
+
+To support emergency rotation (Option 1), the TypeSpec model should be extended:
+
+```typespec
+model BringYourOwnCertificateAuthority {
+  // ... existing properties ...
+  
+  @doc("Forces immediate rotation even if certificate is not near expiration. Used in emergency scenarios like key compromise.")
+  forceRotation?: boolean;
+  
+  @doc("Reason for forced rotation. Required when forceRotation is true.")
+  rotationReason?: RevocationReason;
+}
+```
+
+#### Revocation Model (Already Implemented)
+
+The revocation API is already defined in TypeSpec:
+
+```typespec
+@doc("Details about certificate revocation.")
+model RevocationDetails {
+  @doc("Timestamp when the certificate was revoked.")
+  revocationDate: utcDateTime;
+
+  @doc("Reason for certificate revocation.")
+  reason: RevocationReason;
+
+  @doc("Additional information about the revocation.")
+  additionalInfo?: string;
+}
+
+@doc("Reason for certificate revocation.")
+enum RevocationReason {
+  @doc("The certificate's private key has been compromised.")
+  KeyCompromise,
+
+  @doc("The CA's private key has been compromised.")
+  CACompromise,
+
+  @doc("The certificate is no longer needed.")
+  CessationOfOperation,
+
+  @doc("The certificate has been superseded by a new one.")
+  Superseded,
+
+  @doc("Reason for revocation is not specified.")
+  Unspecified,
+}
+
+// Custom action on Policy resource
+@doc("Revoke a BYOCA certificate.")
+@action("revokeCertificate")
+op revokeCertificate(
+  ...ResourceInstanceParameters<Policy>,
+  @body request: RevokeCertificateRequest
+): ArmResponse<Policy> | ErrorResponse;
+```
+
+### Questions About Certificate Compromised Flow
+
+#### 1. Should we implement the revocation API, or rely on customer CRL?
+
+**Question**: The TypeSpec already defines `revokeCertificate` action and `Revoked` status. Should we fully implement this as a service-side revocation mechanism?
+
+**Options**:
+- **Option A**: Implement full revocation API (POST action) that transitions Policy to `Revoked` state
+  - Pros: Immediate effect, clear audit trail, prevents continued use
+  - Cons: Requires service-side revocation logic, additional complexity
+  
+- **Option B**: Remove revocation API, rely only on customer CRL management
+  - Pros: Simpler service, customer has full control
+  - Cons: No immediate service-side enforcement, slower propagation
+
+**Recommendation**: Implement Option A (full revocation API) because:
+- Provides rapid response to security incidents
+- Service can immediately stop all attestations
+- Clear audit trail for compliance
+- Customer still manages CRL for their infrastructure
+
+#### 2. What's the SLA for emergency rotation?
+
+**Question**: What's the target time from compromise detection to new certificate activation?
+
+**Considerations**:
+- Customer offline Root CA access time (variable, could be 5 min to hours)
+- Service processing time (should be < 1 minute)
+- CSR signing time (depends on customer process)
+
+**Recommendation**: 
+- **Service SLA**: < 1 hour from PATCH request to new CSR availability
+- **End-to-end target**: < 4 hours including customer signing
+- **Critical incidents**: < 1 hour if customer has rapid Root CA access
+
+#### 3. Should we automatically detect potential compromise?
+
+**Question**: Should the service monitor for indicators of compromise and automatically trigger rotation?
+
+**Indicators**:
+- Multiple failed attestations with invalid signatures
+- Attestations from unexpected geographic locations
+- Unusual volume of attestation requests
+- Certificate appearing in public breach databases
+
+**Recommendation**: 
+- **Phase 1 (MVP)**: Customer-initiated only
+- **Phase 2**: Add monitoring and alerting (warn customer)
+- **Phase 3**: Consider auto-rotation with customer approval workflow
+
+#### 4. How do dependent Credentials behave during revocation?
+
+**Question**: When a Policy is revoked, what happens to all Credentials that reference it?
+
+**Options**:
+- **Option A**: Credentials automatically marked as "Affected" or "Inactive"
+  - Pros: Clear status, prevents confusion
+  - Cons: Requires status propagation logic
+  
+- **Option B**: Credentials remain unchanged, attestations just fail
+  - Pros: Simpler implementation
+  - Cons: Unclear to customers why attestations fail
+
+**Recommendation**: Option A - add `affectedByPolicyRevocation` flag to Credential status
+
+#### 5. Should revoked Policies be deletable?
+
+**Question**: Can customers delete a Policy in `Revoked` state, or should it be preserved for audit?
+
+**Options**:
+- **Option A**: Allow immediate deletion
+  - Pros: Clean up compromised resources
+  - Cons: Loss of audit trail
+  
+- **Option B**: Soft-delete with retention period (e.g., 90 days)
+  - Pros: Preserves audit trail
+  - Cons: Requires soft-delete implementation
+  
+- **Option C**: Never deletable, only archivable
+  - Pros: Complete audit history
+  - Cons: Resource accumulation
+
+**Recommendation**: Option B - 90-day soft delete with audit log preservation
+
+#### 6. Should we notify customers proactively?
+
+**Question**: How should we alert customers when rotation or compromise response is needed?
+
+**Notification Channels**:
+- Azure Monitor alerts (metric-based)
+- Event Grid events (event-driven)
+- Service Health notifications
+- Email to subscription admins
+- Azure Portal in-product notifications
+
+**Recommendation**: Multi-channel approach:
+1. **Event Grid**: Real-time events for automation (`PolicyRotationRequired`, `PolicyRevoked`)
+2. **Azure Monitor**: Metrics and alerts for monitoring dashboards
+3. **Service Health**: For service-wide compromise incidents
+4. **Portal**: In-product notifications when customer views Policy
+
 ## Example API Calls
 
 See `specification/deviceregistry/DeviceRegistry.Management/examples/byoca-examples.md` for comprehensive examples including:
@@ -593,7 +905,8 @@ BYOCA implementation will be considered successful when:
 |------|--------|---------|
 | 2025-10-29 | Initial | Created initial implementation plan |
 | 2025-10-30 | Update | Added TypeSpec implementation details, build commands, and completion status |
+| 2025-10-30 | Update | Added Certificate Compromised Flow section with three options and six critical questions |
 
 ---
 
-**Status**: TypeSpec implementation complete. Ready for compilation, testing, and backend integration.
+**Status**: TypeSpec implementation complete. Certificate compromised flow documented. Ready for compilation, testing, and backend integration.
