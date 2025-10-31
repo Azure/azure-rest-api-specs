@@ -3105,7 +3105,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "FreeServicesCreate": {
@@ -3134,12 +3134,6 @@
             "description": "The resource has been created.",
             "schema": {
               "$ref": "#/definitions/FreeServices"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "URL for checking the ongoing status of the operation."
-              }
             }
           },
           "201": {
@@ -3268,12 +3262,6 @@
             "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "URL for checking the ongoing status of the operation."
-              }
             }
           }
         }
