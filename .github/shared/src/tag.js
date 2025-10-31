@@ -1,5 +1,3 @@
-// @ts-check
-
 import { mapAsync } from "./array.js";
 import { embedError } from "./spec-model.js";
 import { Swagger } from "./swagger.js";
