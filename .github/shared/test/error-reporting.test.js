@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { annotateFileError, setOutput, setSummary } from "../src/error-reporting.js";
 
 describe("ErrorReporting", () => {
+  /** @type {import("vitest").MockInstance} */
   let logSpy;
 
   beforeEach(() => {
