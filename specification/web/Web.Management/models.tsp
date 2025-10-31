@@ -15733,7 +15733,7 @@ model DefaultIdentity {
  * Represents instance details for an app service plan.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ServerFarmInstanceDetails extends ProxyOnlyResource {
+model ServerFarmInstanceDetails {
   /**
    * ServerFarmInstanceDetails resource specific properties
    */
@@ -15770,6 +15770,7 @@ model ServerFarmRdpDetails {
   /**
    * The RDP password for the server farm.
    */
+  @secret
   rdpPassword?: string;
 
   /**

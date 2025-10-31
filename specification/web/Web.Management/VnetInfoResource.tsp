@@ -22,6 +22,12 @@ model VnetInfoResource is Azure.ResourceManager.ProxyResource<VnetInfo> {
     SegmentName = "virtualNetworkConnections",
     NamePattern = ""
   >;
+
+  /**
+   * Kind of resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: string;
 }
 
 @armResourceOperations

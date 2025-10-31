@@ -25,6 +25,12 @@ model MSDeployStatus
     SegmentName = "extensions",
     NamePattern = ""
   >;
+
+  /**
+   * Kind of resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -24,6 +24,12 @@ model StaticSiteBuildARMResource
     SegmentName = "builds",
     NamePattern = "^[a-zA-Z0-9]+$"
   >;
+
+  /**
+   * Kind of resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
