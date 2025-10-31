@@ -914,5 +914,5 @@ union PiiCategoriesExclude {
 
   /** Swedish personal number */
   @added(Versions.v2025_11_15_preview)
-  SWPersonalNumber: "SWPersonalNumber"
+  SWPersonalNumber: "SWPersonalNumber",
 }
