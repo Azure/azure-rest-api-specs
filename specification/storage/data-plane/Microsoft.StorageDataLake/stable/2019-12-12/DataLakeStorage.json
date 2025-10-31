@@ -1166,6 +1166,10 @@
                 "x-ms-client-name": "LeaseRenewed",
                 "type": "boolean",
                 "description": "If the lease was auto-renewed with this request"
+              },
+              "x-ms-structured-body": {
+                "description": "Indicates that the request was processed using the structured body encoding. Will only be present if the \"x-ms-structured-body\" request header was sent.",
+                "type": "string"
               }
             },
             "schema": {
@@ -1431,7 +1435,7 @@
           },
           {
             "name": "requestBody",
-            "description": "Valid only for append operations.  The data to be uploaded and appended to the file.",
+            "description": "Valid only for append operations.  The data to be uploaded and appended to the file. If x-ms-structured-body is specified, the request data must be encoded in the structured body format.",
             "in": "body",
             "required": false,
             "schema": {
@@ -1478,6 +1482,20 @@
             "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "x-ms-structured-body",
+            "in": "header",
+            "description": "Optional. When specified, it indicates the request body is encoded in the structured body format. Currently, the header value must be set to \"XSM/1.0; properties=crc64\".",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-structured-content-length",
+            "in": "header",
+            "description": "Required if \"x-ms-structured-body\" is specified. This header specifies the length of the unencoded request content in bytes. The value of this header will always be less than the value of the Content-Length header.",
+            "required": false,
+            "type": "integer"
           }
         ]
       },
@@ -1699,7 +1717,7 @@
                 "type": "string"
               },
               "Content-Length": {
-                "description": "The size of the resource in bytes.",
+                "description": "The size of the resource in bytes. If x-ms-structured-body is specified in the request, this header returns the size of the encoded structured body.",
                 "type": "integer",
                 "format": "int64"
               },
@@ -1770,6 +1788,14 @@
               },
               "x-ms-encryption-scope": {
                 "description": "If the request used an encryption scope, so the client can ensure the contents of the request are successfully encrypted using the encryption scope.",
+                "type": "string"
+              },
+              "x-ms-structured-body": {
+                "description": "If the request specified x-ms-structured-body, this header will be echoed back in the response.",
+                "type": "string"
+              },
+              "x-ms-structured-content-length": {
+                "description": "If the request specified x-ms-structured-body, this header will contain the length of the returned object content. Note that the length will always be smaller than than the 'Content-Length' header.",
                 "type": "string"
               }
             },
@@ -1955,6 +1981,13 @@
           {
             "name": "x-ms-encryption-algorithm: AES256",
             "description": "Optional. Specifies the algorithm to use for encryption. The value of this header must be AES256.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-structured-body: XSM/1.0; properties=crc64",
+            "description": "Optional. Specifies the content returned should be encoded in the structured body format. The value of this header must be XSM/1.0; properties=crc64.",
             "in": "header",
             "required": false,
             "type": "string"
