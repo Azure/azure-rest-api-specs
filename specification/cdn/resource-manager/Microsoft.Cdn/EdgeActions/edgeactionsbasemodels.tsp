@@ -103,16 +103,7 @@ scalar EdgeActionVersionId
 /** The status of the current operation */
 @Azure.Core.lroStatus
 union ProvisioningState {
-  string,
-
-  @doc("The operation completed successfully")
-  Succeeded: "Succeeded",
-
-  @doc("The operation failed")
-  Failed: "Failed",
-
-  @doc("The operation was canceled")
-  Canceled: "Canceled",
+  ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")
   Provisioning: "Provisioning",
