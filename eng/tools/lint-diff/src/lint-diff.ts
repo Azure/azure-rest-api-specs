@@ -23,17 +23,13 @@ export async function main() {
         type: "string",
         short: "a",
       },
-      "changed-files-path": {
-        type: "string",
-        short: "c",
-      },
       "out-file": {
         type: "string",
         short: "o",
         default: "lint-diff.md",
       },
       // TODO: Consider using git commands to determine this information
-      "base-branch": {
+      "base-sha": {
         type: "string",
         short: "b",
         default: "main",
@@ -56,9 +52,8 @@ export async function main() {
     values: {
       before: beforeArg,
       after: afterArg,
-      "changed-files-path": changedFilesPath,
       "out-file": outFile,
-      "base-branch": baseBranch,
+      "base-sha": baseSha,
       "compare-sha": compareSha,
       "github-repo-path": githubRepoPath,
     },
@@ -76,11 +71,6 @@ export async function main() {
     console.log(`--after must be a valid path. Value passed: ${afterArg || "<empty>"}`);
   }
 
-  if (!changedFilesPath || !(await pathExists(changedFilesPath as string))) {
-    validArgs = false;
-    console.log("--changed-files-path missing");
-  }
-
   if (!validArgs) {
     usage();
     process.exit(1);
@@ -94,9 +84,8 @@ export async function main() {
   await runLintDiff(
     beforeArg as string,
     afterArg as string,
-    changedFilesPath as string,
     outFile as string,
-    baseBranch as string,
+    baseSha as string,
     compareSha as string,
     githubRepoPath as string,
   );
@@ -105,9 +94,8 @@ export async function main() {
 async function runLintDiff(
   beforePath: string,
   afterPath: string,
-  changedFilesPath: string,
   outFile: string,
-  baseBranch: string,
+  baseSha: string,
   compareSha: string,
   githubRepoPath: string,
 ) {
@@ -116,7 +104,8 @@ async function runLintDiff(
     [beforeList, afterList, affectedSwaggers] = await getRunList(
       beforePath,
       afterPath,
-      changedFilesPath,
+      baseSha,
+      compareSha,
     );
   } catch (error) {
     if (error instanceof SpecModelError) {
@@ -171,7 +160,7 @@ async function runLintDiff(
     runCorrelations,
     affectedSwaggers,
     outFile,
-    baseBranch,
+    baseSha,
     compareSha,
     githubRepoPath,
   );
