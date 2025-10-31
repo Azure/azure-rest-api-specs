@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "location": "West US",
+    "accountName": "softdeleted-cosmosdb-1",
+    "databaseName": "MyDatabase"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/West US/softDeletedDatabaseAccounts/softdeleted-cosmosdb-1/softDeletedSqlDatabases/MyDatabase",
+        "name": "MyDatabase",
+        "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases",
+        "properties": {
+          "databaseName": "MyDatabase",
+          "creationTime": "2025-01-15T14:30:00Z",
+          "deletionTime": "2025-10-15T10:15:30Z",
+          "purgeTime": "2025-11-14T10:15:30Z",
+          "canUndelete": false
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.DocumentDB/locations/West US/operationResults/purge-database-operation-id?api-version=2025-04-15",
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.DocumentDB/locations/West US/operationResults/purge-database-operation-id?api-version=2025-04-15"
+      }
+    },
+    "204": {}
+  }
+}
