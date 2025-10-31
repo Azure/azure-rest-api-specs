@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-01-02",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "osType": "Windows",
+        "securityProfile": {
+          "securityType": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey"
+        },
+        "creationData": {
+          "createOption": "ImportSecure",
+          "storageAccountId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
+          "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+          "securityDataUri": "https://mystorageaccount.blob.core.windows.net/osimages/vmgs.vhd"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "osType": "Windows",
+          "securityProfile": {
+            "securityType": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey"
+          },
+          "creationData": {
+            "createOption": "ImportSecure",
+            "storageAccountId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+            "securityDataUri": "https://mystorageaccount.blob.core.windows.net/osimages/vmgs.vhd"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "osType": "Windows",
+          "securityProfile": {
+            "securityType": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey"
+          },
+          "creationData": {
+            "createOption": "ImportSecure",
+            "storageAccountId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+            "securityDataUri": "https://mystorageaccount.blob.core.windows.net/osimages/vmgs.vhd"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "create a managed disk from ImportSecure create option"
+}

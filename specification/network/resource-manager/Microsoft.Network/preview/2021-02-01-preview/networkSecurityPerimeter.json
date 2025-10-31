@@ -143,6 +143,43 @@
             "$ref": "./examples/NetworkSecurityPerimeterDelete.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_Patch",
+        "description": "Patch Tags for a Network Security Perimeter.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTagsRequest"
+            },
+            "description": "Parameter supplied to the network security perimeter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns the resulting network security perimeter resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterPatch.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkSecurityPerimeters": {
@@ -1284,6 +1321,24 @@
         }
       },
       "description": "Properties of network security perimeter."
+    },
+    "UpdateTagsRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Network security perimeter identifier."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "List of tags for Network Security Perimeter"
+        }
+      },
+      "description": "Update tags request."
     },
     "NspProfile": {
       "type": "object",

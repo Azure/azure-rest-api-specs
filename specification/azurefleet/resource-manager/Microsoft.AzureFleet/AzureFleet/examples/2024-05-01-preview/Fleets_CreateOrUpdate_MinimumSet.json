@@ -1,0 +1,299 @@
+{
+  "title": "Fleets_CreateOrUpdate_MinimumSet",
+  "operationId": "Fleets_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "1DC2F28C-A625-4B0E-9748-9885A3C9E9EB",
+    "resourceGroupName": "rgazurefleet",
+    "fleetName": "testFleet",
+    "resource": {
+      "properties": {
+        "spotPriorityProfile": {
+          "capacity": 2,
+          "minCapacity": 1,
+          "evictionPolicy": "Delete",
+          "allocationStrategy": "PriceCapacityOptimized",
+          "maintain": true
+        },
+        "regularPriorityProfile": {
+          "capacity": 2,
+          "minCapacity": 1,
+          "allocationStrategy": "LowestPrice"
+        },
+        "vmSizesProfile": [
+          {
+            "name": "Standard_D2s_v3"
+          },
+          {
+            "name": "Standard_D4s_v3"
+          },
+          {
+            "name": "Standard_E2s_v3"
+          }
+        ],
+        "computeProfile": {
+          "baseVirtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "canonical",
+                "offer": "0001-com-ubuntu-server-focal",
+                "sku": "20_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "createOption": "FromImage",
+                "osType": "Linux",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "prefix",
+              "adminUsername": "azureuser",
+              "adminPassword": "TestPassword$0",
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": false
+              }
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "vmNameTest",
+                  "properties": {
+                    "primary": true,
+                    "enableAcceleratedNetworking": false,
+                    "ipConfigurations": [
+                      {
+                        "name": "vmNameTest",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
+                          },
+                          "primary": true,
+                          "loadBalancerBackendAddressPools": [
+                            {
+                              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "enableIPForwarding": true
+                  }
+                }
+              ],
+              "networkApiVersion": "2022-07-01"
+            }
+          },
+          "computeApiVersion": "2023-09-01",
+          "platformFaultDomainCount": 1
+        }
+      },
+      "tags": {
+        "key": "fleets-test"
+      },
+      "location": "eastus2euap"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "spotPriorityProfile": {
+            "capacity": 2,
+            "minCapacity": 1,
+            "evictionPolicy": "Delete",
+            "allocationStrategy": "PriceCapacityOptimized",
+            "maintain": true
+          },
+          "regularPriorityProfile": {
+            "capacity": 2,
+            "minCapacity": 1,
+            "allocationStrategy": "LowestPrice"
+          },
+          "vmSizesProfile": [
+            {
+              "name": "Standard_D2s_v3"
+            },
+            {
+              "name": "Standard_D4s_v3"
+            },
+            {
+              "name": "Standard_E2s_v3"
+            }
+          ],
+          "computeProfile": {
+            "baseVirtualMachineProfile": {
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "canonical",
+                  "offer": "0001-com-ubuntu-server-focal",
+                  "sku": "20_04-lts-gen2",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "caching": "ReadWrite",
+                  "createOption": "FromImage",
+                  "osType": "Linux",
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                  }
+                }
+              },
+              "osProfile": {
+                "computerNamePrefix": "prefix",
+                "adminUsername": "azureuser",
+                "linuxConfiguration": {
+                  "disablePasswordAuthentication": false
+                }
+              },
+              "networkProfile": {
+                "networkInterfaceConfigurations": [
+                  {
+                    "name": "vmNameTest",
+                    "properties": {
+                      "primary": true,
+                      "enableAcceleratedNetworking": false,
+                      "ipConfigurations": [
+                        {
+                          "name": "vmNameTest",
+                          "properties": {
+                            "subnet": {
+                              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
+                            },
+                            "primary": true,
+                            "loadBalancerBackendAddressPools": [
+                              {
+                                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "enableIPForwarding": true
+                    }
+                  }
+                ],
+                "networkApiVersion": "2022-07-01"
+              }
+            },
+            "computeApiVersion": "2023-09-01",
+            "platformFaultDomainCount": 1
+          },
+          "timeCreated": "2024-07-10T00:16:34.8590555+00:00",
+          "uniqueId": "a2f7fabd-bbc2-4a20-afe1-49fdb3885a28"
+        },
+        "tags": {
+          "key": "fleets-test"
+        },
+        "location": "eastus2euap",
+        "id": "/subscriptions/7B0CD4DB-3381-4013-9B31-FB6E6FD0FF1C/resourceGroups/rgazurefleet/providers/Microsoft.AzureFleet/fleets/testFleet",
+        "name": "testFleet",
+        "type": "Microsoft.AzureFleet/fleets"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "spotPriorityProfile": {
+            "capacity": 2,
+            "minCapacity": 1,
+            "evictionPolicy": "Delete",
+            "allocationStrategy": "PriceCapacityOptimized",
+            "maintain": true
+          },
+          "regularPriorityProfile": {
+            "capacity": 2,
+            "minCapacity": 1,
+            "allocationStrategy": "LowestPrice"
+          },
+          "vmSizesProfile": [
+            {
+              "name": "Standard_D2s_v3"
+            },
+            {
+              "name": "Standard_D4s_v3"
+            },
+            {
+              "name": "Standard_E2s_v3"
+            }
+          ],
+          "computeProfile": {
+            "baseVirtualMachineProfile": {
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "canonical",
+                  "offer": "0001-com-ubuntu-server-focal",
+                  "sku": "20_04-lts-gen2",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "caching": "ReadWrite",
+                  "createOption": "FromImage",
+                  "osType": "Linux",
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                  }
+                }
+              },
+              "osProfile": {
+                "computerNamePrefix": "prefix",
+                "adminUsername": "azureuser",
+                "linuxConfiguration": {
+                  "disablePasswordAuthentication": false
+                }
+              },
+              "networkProfile": {
+                "networkInterfaceConfigurations": [
+                  {
+                    "name": "vmNameTest",
+                    "properties": {
+                      "primary": true,
+                      "enableAcceleratedNetworking": false,
+                      "ipConfigurations": [
+                        {
+                          "name": "vmNameTest",
+                          "properties": {
+                            "subnet": {
+                              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
+                            },
+                            "primary": true,
+                            "loadBalancerBackendAddressPools": [
+                              {
+                                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "enableIPForwarding": true
+                    }
+                  }
+                ],
+                "networkApiVersion": "2022-07-01"
+              }
+            },
+            "computeApiVersion": "2023-09-01",
+            "platformFaultDomainCount": 1
+          },
+          "timeCreated": "2024-07-10T00:16:34.8590555+00:00",
+          "uniqueId": "a2f7fabd-bbc2-4a20-afe1-49fdb3885a28"
+        },
+        "tags": {
+          "key": "fleets-test"
+        },
+        "location": "eastus2euap",
+        "id": "/subscriptions/7B0CD4DB-3381-4013-9B31-FB6E6FD0FF1C/resourceGroups/rgazurefleet/providers/Microsoft.AzureFleet/fleets/testFleet",
+        "name": "testFleet",
+        "type": "Microsoft.AzureFleet/fleets"
+      }
+    }
+  }
+}

@@ -96,6 +96,8 @@ out/*
 tmp/*
 obj/
 
+# Coverage directory used by "vitest"
+coverage
 
 # AutoRest Nightly #
 AutoRest.*
@@ -109,17 +111,45 @@ warnings.txt
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/mcp.json
 
 # API Test outputs
 .apitest
 .assets
 
+# Blanket ignores
 *.js
+!.github/**/*.js
 *.d.ts
 *.js.map
 *.d.ts.map
 *.bak
 
 # Eng Tools
-eng/tools/TypeSpecValidation/dist
-!eng/tools/TypeSpecValidation/cmd/*.js
+eng/tools/**/dist
+!eng/tools/**/cmd/*.js
+!eng/tools/**/eslint.config.js
+
+# TypeScript cache
+*.tsbuildinfo
+
+# No package-lock.json files should be commited except the top-level.
+**/package-lock.json
+!/package-lock.json
+!/.github/package-lock.json
+!/.github/shared/package-lock.json
+
+# No Armstrong outputs should be commited except the tf files.
+**/terraform/**/*.json
+**/terraform/**/*.md
+**/terraform/**/*.html
+**/terraform/**/*.txt
+**/terraform/**/*.hcl
+**/terraform/**/*.tfstate
+**/terraform/**/*.backup
+**/terraform/**/tfplan
+**/terraform/**/.terraform
+!**/terraform/**/*.tf
+
+# No canonical swagger files should be commited
+canonical/

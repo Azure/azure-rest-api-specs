@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "nodeTypeName": "BE",
+    "api-version": "2024-06-01-preview",
+    "parameters": {
+      "properties": {
+        "isPrimary": false,
+        "dataDiskSizeGB": 200,
+        "vmSize": "Standard_D3",
+        "vmImagePublisher": "MicrosoftWindowsServer",
+        "vmImageOffer": "WindowsServer",
+        "vmImageSku": "2016-Datacenter-Server-Core",
+        "vmImageVersion": "latest",
+        "vmInstanceCount": 10
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-06-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-06-01-preview"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
+        "name": "BE",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Updating",
+          "isPrimary": false,
+          "dataDiskSizeGB": 200,
+          "dataDiskType": "StandardSSD_LRS",
+          "placementProperties": {},
+          "capacities": {},
+          "vmSize": "Standard_D3",
+          "vmImagePublisher": "MicrosoftWindowsServer",
+          "vmImageOffer": "WindowsServer",
+          "vmImageSku": "2016-Datacenter-Server-Core",
+          "vmImageVersion": "latest",
+          "vmInstanceCount": 10,
+          "isStateless": false
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-06-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-06-01-preview"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
+        "name": "BE",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Creating",
+          "isPrimary": false,
+          "dataDiskSizeGB": 200,
+          "dataDiskType": "StandardSSD_LRS",
+          "placementProperties": {},
+          "capacities": {},
+          "vmSize": "Standard_D3",
+          "vmImagePublisher": "MicrosoftWindowsServer",
+          "vmImageOffer": "WindowsServer",
+          "vmImageSku": "2016-Datacenter-Server-Core",
+          "vmImageVersion": "latest",
+          "vmInstanceCount": 10,
+          "isStateless": false
+        }
+      }
+    }
+  }
+}

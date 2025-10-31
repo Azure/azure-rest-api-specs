@@ -1,0 +1,326 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.PortalServices",
+    "version": "2024-04-01",
+    "description": "Azure Portal Services API Reference",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CopilotSettings"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PortalServices/copilotSettings/default": {
+      "get": {
+        "operationId": "CopilotSettings_Get",
+        "tags": [
+          "CopilotSettings"
+        ],
+        "description": "Get a CopilotSettingsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CopilotSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Copilot Settings": {
+            "$ref": "./examples/CopilotSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CopilotSettings_CreateOrUpdate",
+        "tags": [
+          "CopilotSettings"
+        ],
+        "description": "Create a CopilotSettingsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopilotSettingsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CopilotSettingsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CopilotSettingsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'CopilotSettingsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CopilotSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new Copilot settings or update an existing one": {
+            "$ref": "./examples/CopilotSettings_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CopilotSettings_Update",
+        "tags": [
+          "CopilotSettings"
+        ],
+        "description": "Update a CopilotSettingsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopilotSettingsResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CopilotSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Copilot Settings": {
+            "$ref": "./examples/CopilotSettings_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CopilotSettings_Delete",
+        "tags": [
+          "CopilotSettings"
+        ],
+        "description": "Delete a CopilotSettingsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Copilot Settings": {
+            "$ref": "./examples/CopilotSettings_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.PortalServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the Microsoft.PortalServices provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CopilotSettingsProperties": {
+      "type": "object",
+      "description": "The Copilot Settings properties.",
+      "properties": {
+        "accessControlEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if role-based access control is enabled for copilot in this tenant."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accessControlEnabled"
+      ]
+    },
+    "CopilotSettingsResource": {
+      "type": "object",
+      "description": "The copilot settings tenant resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CopilotSettingsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CopilotSettingsResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the CopilotSettingsResource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CopilotSettingsResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CopilotSettingsResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the CopilotSettingsResource.",
+      "properties": {
+        "accessControlEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if role-based access control is enabled for copilot in this tenant."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

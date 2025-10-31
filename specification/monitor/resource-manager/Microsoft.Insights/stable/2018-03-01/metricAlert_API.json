@@ -62,7 +62,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -104,7 +104,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -149,7 +149,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -216,7 +216,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -286,7 +286,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -326,7 +326,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -368,7 +368,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -413,7 +413,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -427,6 +427,7 @@
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -452,6 +453,7 @@
           ]
         },
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -465,6 +467,7 @@
       "description": "An azure resource object"
     },
     "MetricAlertAction": {
+      "type": "object",
       "description": "An alert action.",
       "properties": {
         "actionGroupId": {
@@ -490,6 +493,7 @@
         "criteria",
         "scopes"
       ],
+      "type": "object",
       "properties": {
         "description": {
           "type": "string",
@@ -509,7 +513,7 @@
           "items": {
             "type": "string"
           },
-          "description": "the list of resource id's that this metric alert is scoped to."
+          "description": "the list of resource id's that this metric alert is scoped to. You cannot change the scope of a metric rule based on logs."
         },
         "evaluationFrequency": {
           "type": "string",
@@ -562,6 +566,7 @@
       "description": "An alert rule."
     },
     "MetricAlertPropertiesPatch": {
+      "type": "object",
       "properties": {
         "description": {
           "type": "string",
@@ -653,8 +658,10 @@
       "description": "The metric alert resource."
     },
     "MetricAlertResourcePatch": {
+      "type": "object",
       "properties": {
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -669,30 +676,39 @@
       "description": "The metric alert resource for patch operations."
     },
     "MetricAlertResourceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricAlertResource"
           },
-          "description": "the values for the alert rule resources."
+          "description": "the values for the alert rule resources.",
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       },
       "description": "Represents a collection of alert rule resources."
     },
     "MetricAlertStatusCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricAlertStatus"
           },
-          "description": "the values for the alert rule resources."
+          "description": "the values for the alert rule resources.",
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       },
       "description": "Represents a collection of alert rule resources."
     },
     "MetricAlertStatusProperties": {
+      "type": "object",
       "description": "An alert status properties.",
       "properties": {
         "dimensions": {
@@ -714,6 +730,7 @@
       }
     },
     "MetricAlertStatus": {
+      "type": "object",
       "description": "An alert status.",
       "properties": {
         "name": {
@@ -849,6 +866,7 @@
       "description": "Criterion to filter metrics."
     },
     "MetricDimension": {
+      "type": "object",
       "required": [
         "name",
         "operator",
@@ -1018,6 +1036,7 @@
       "description": "Criterion for dynamic threshold."
     },
     "DynamicThresholdFailingPeriods": {
+      "type": "object",
       "required": [
         "numberOfEvaluationPeriods",
         "minFailingPeriodsToAlert"
@@ -1033,6 +1052,90 @@
         }
       },
       "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Unlocalized string which can be used to programmatically identify the error.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language.",
+              "type": "string"
+            },
+            "target": {
+              "description": "The target of the particular error (for example, the name of the property in error).",
+              "type": "string"
+            },
+            "details": {
+              "description": "An array of additional nested error response info objects, as described by this contract.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetail"
+              }
+            },
+            "additionalInfo": {
+              "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "description": "The type of additional information.",
+                    "type": "string"
+                  },
+                  "info": {
+                    "description": "The additional information specific to the type.",
+                    "type": "object",
+                    "additionalProperties": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "Describes details of an error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Unlocalized string which can be used to programmatically identify the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Describes the error in detail and provides debugging information.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error (for example, the name of the property in error).",
+          "type": "string"
+        },
+        "additionalInfo": {
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of additional information.",
+                "type": "string"
+              },
+              "info": {
+                "description": "The additional information specific to the type.",
+                "type": "object",
+                "additionalProperties": {}
+              }
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {

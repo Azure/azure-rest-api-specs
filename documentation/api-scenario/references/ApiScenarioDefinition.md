@@ -254,7 +254,7 @@ Step to deploy ARM template to the scope. Template parameters and outputs will a
 
 - **armTemplate**
   - **Type:** Required, String
-  - Path to ARM template json file. See [ARM Template](https://docs.microsoft.com/azure/templates/).
+  - Path to ARM template json file. See [ARM Template](https://learn.microsoft.com/azure/templates/).
 
 ### Step ARM Deployment Script
 
@@ -282,10 +282,10 @@ Step to deploy ARM deployment script to the scope. Template parameters and outpu
 
 - **armDeploymentScript**
   - **Type:** Required, String
-  - Path to script file. See [ARM Deployment Script Template](https://docs.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template).
+  - Path to script file. See [ARM Deployment Script Template](https://learn.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template).
 - **arguments**
   - **Type:** Optional, String
-  - Arguments for the script. Same as arguments in ARM Template. See [ARM Deployment Script Template](https://docs.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template).
+  - Arguments for the script. Same as arguments in ARM Template. See [ARM Deployment Script Template](https://learn.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template).
 - **environmentVariables**
   - **Type:** Optional, Array of [EnvironmentVariable](#EnvironmentVariable)
   - Specify the environment variables to pass over to the script.

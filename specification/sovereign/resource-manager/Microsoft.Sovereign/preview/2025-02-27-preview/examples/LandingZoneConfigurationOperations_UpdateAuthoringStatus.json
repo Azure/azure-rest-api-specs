@@ -1,0 +1,27 @@
+{
+  "title": "LandingZoneConfigurationOperations_UpdateAuthoringStatus",
+  "operationId": "LandingZoneConfigurationOperations_UpdateAuthoringStatus",
+  "parameters": {
+    "api-version": "2025-02-27-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-RemApiExample",
+    "landingZoneAccountName": "lza-RemApiExample",
+    "landingZoneConfigurationName": "lzc-RemApiExample",
+    "body": {
+      "authoringStatus": "ReadyForUse"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "landingZoneConfigurationName": "lzc-RemApiExample",
+        "authoringStatus": "ReadyForUse"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://example.com/operationstatus"
+      }
+    }
+  }
+}

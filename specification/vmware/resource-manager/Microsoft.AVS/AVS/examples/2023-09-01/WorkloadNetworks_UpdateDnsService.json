@@ -1,0 +1,48 @@
+{
+  "title": "WorkloadNetworks_UpdateDnsService",
+  "operationId": "WorkloadNetworks_UpdateDnsService",
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "dnsServiceId": "dnsService1",
+    "workloadNetworkDnsService": {
+      "properties": {
+        "displayName": "dnsService1",
+        "dnsServiceIp": "5.5.5.5",
+        "defaultDnsZone": "defaultDnsZone1",
+        "fqdnZones": [
+          "fqdnZone1"
+        ],
+        "logLevel": "INFO",
+        "revision": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/dnsServices/dnsService1",
+        "name": "dnsService1",
+        "properties": {
+          "displayName": "dnsService1",
+          "dnsServiceIp": "5.5.5.5",
+          "defaultDnsZone": "defaultDnsZone1",
+          "fqdnZones": [
+            "fqdnZone1"
+          ],
+          "logLevel": "INFO",
+          "status": "SUCCESS",
+          "revision": 1
+        },
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/dnsServices"
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.AVS/operationstatuses/00000000-0000-0000-0000-000000000000?api-version=2023-09-01"
+      }
+    }
+  }
+}

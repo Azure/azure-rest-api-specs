@@ -1,0 +1,323 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerConfigurations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all workspace manager configurations for a Sentinel workspace.": {
+            "$ref": "./examples/workspaceManagerConfigurations/GetAllWorkspaceManagerConfigurations.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerConfigurations"
+        ],
+        "description": "Gets all workspace manager configurations for a Sentinel workspace.",
+        "operationId": "WorkspaceManagerConfigurations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerConfigurations/{workspaceManagerConfigurationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a workspace manager configuration.": {
+            "$ref": "./examples/workspaceManagerConfigurations/GetWorkspaceManagerConfiguration.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerConfigurations"
+        ],
+        "description": "Gets a workspace manager configuration",
+        "operationId": "WorkspaceManagerConfigurations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerConfigurationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a workspace manager configuration.": {
+            "$ref": "./examples/workspaceManagerConfigurations/DeleteWorkspaceManagerConfiguration.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerConfigurations"
+        ],
+        "description": "Deletes a workspace manager configuration",
+        "operationId": "WorkspaceManagerConfigurations_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerConfigurationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or Update a workspace manager Configuration": {
+            "$ref": "./examples/workspaceManagerConfigurations/CreateOrUpdateWorkspaceManagerConfiguration.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerConfigurations"
+        ],
+        "description": "Creates or updates a workspace manager configuration.",
+        "operationId": "WorkspaceManagerConfigurations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerConfiguration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, created or updated an instance",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspaceManagerConfiguration": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+        }
+      ],
+      "description": "The workspace manager configuration",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceManagerConfigurationProperties",
+          "description": "The workspace manager configuration object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WorkspaceManagerConfigurationProperties": {
+      "description": "The workspace manager configuration properties",
+      "properties": {
+        "mode": {
+          "description": "The current mode of the workspace manager configuration",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "mode",
+            "values": [
+              {
+                "description": "The workspace manager configuration is enabled",
+                "value": "Enabled"
+              },
+              {
+                "description": "The workspace manager configuration is disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "type": "object"
+    },
+    "WorkspaceManagerConfigurationList": {
+      "description": "List all the workspace manager configurations for the workspace.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of workspace manager configurations.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of workspace manager configurations.",
+          "items": {
+            "$ref": "#/definitions/WorkspaceManagerConfiguration"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "WorkspaceManagerConfigurationName": {
+      "description": "The name of the workspace manager configuration",
+      "in": "path",
+      "name": "workspaceManagerConfigurationName",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceManagerConfiguration": {
+      "description": "The workspace manager configuration",
+      "in": "body",
+      "name": "workspaceManagerConfiguration",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkspaceManagerConfiguration"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

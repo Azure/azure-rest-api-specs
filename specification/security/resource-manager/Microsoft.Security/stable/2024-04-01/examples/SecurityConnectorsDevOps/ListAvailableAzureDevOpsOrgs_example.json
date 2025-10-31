@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
+    "resourceGroupName": "myRg",
+    "securityConnectorName": "mySecurityConnectorName",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "onboardingState": "Onboarded",
+              "actionableRemediation": {
+                "state": "Enabled"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg",
+            "name": "myAzDevOpsOrg",
+            "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs"
+          },
+          {
+            "properties": {
+              "onboardingState": "OnboardedByOtherConnector",
+              "actionableRemediation": {
+                "state": "Enabled"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/anotherOrg",
+            "name": "anotherOrg",
+            "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs"
+          },
+          {
+            "properties": {
+              "onboardingState": "NotOnboarded",
+              "actionableRemediation": {
+                "state": "None"
+              }
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/notOnboardedOrg",
+            "name": "notOnboardedOrg",
+            "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs"
+          }
+        ]
+      }
+    }
+  }
+}

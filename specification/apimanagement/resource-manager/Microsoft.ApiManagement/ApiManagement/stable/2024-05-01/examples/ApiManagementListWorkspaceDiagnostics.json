@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/diagnostics/applicationinsights",
+            "type": "Microsoft.ApiManagement/service/workspaces/diagnostics",
+            "name": "applicationinsights",
+            "properties": {
+              "alwaysLog": "allErrors",
+              "httpCorrelationProtocol": "Legacy",
+              "verbosity": "information",
+              "logClientIp": true,
+              "loggerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/loggers/aisamplingtest",
+              "sampling": {
+                "samplingType": "fixed",
+                "percentage": 100
+              },
+              "frontend": {
+                "request": {
+                  "headers": [],
+                  "body": {
+                    "bytes": 0
+                  }
+                },
+                "response": {
+                  "headers": [],
+                  "body": {
+                    "bytes": 0
+                  }
+                }
+              },
+              "backend": {
+                "request": {
+                  "headers": [],
+                  "body": {
+                    "bytes": 0
+                  }
+                },
+                "response": {
+                  "headers": [],
+                  "body": {
+                    "bytes": 0
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/diagnostics/azuremonitor",
+            "type": "Microsoft.ApiManagement/service/workspaces/diagnostics",
+            "name": "azuremonitor",
+            "properties": {
+              "logClientIp": true,
+              "loggerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/loggers/azuremonitor",
+              "sampling": {
+                "samplingType": "fixed",
+                "percentage": 100
+              }
+            }
+          }
+        ],
+        "count": 1
+      }
+    }
+  }
+}

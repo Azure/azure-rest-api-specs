@@ -1,0 +1,75 @@
+{
+  "title": "AkriConnectorTemplate_Get_MaximumSet",
+  "operationId": "AkriConnectorTemplate_Get",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "akriConnectorTemplateName": "resource-name123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "aioMetadata": {
+            "aioMinVersion": "1.2.0",
+            "aioMaxVersion": "1.4.0"
+          },
+          "runtimeConfiguration": {
+            "runtimeConfigurationType": "HelmConfiguration",
+            "helmConfigurationSettings": {
+              "releaseName": "my-install",
+              "repositoryName": "my-repo",
+              "version": "1.0.0"
+            }
+          },
+          "diagnostics": {
+            "logs": {
+              "level": "info"
+            }
+          },
+          "deviceInboundEndpointTypes": [
+            {
+              "endpointType": "Microsoft.Rest",
+              "version": "0.0.1"
+            }
+          ],
+          "mqttConnectionConfiguration": {
+            "authentication": {
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audience": "MQ-SAT"
+              }
+            },
+            "host": "aio-broker:18883",
+            "protocol": "Mqtt",
+            "keepAliveSeconds": 10,
+            "maxInflightMessages": 10,
+            "sessionExpirySeconds": 60,
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "azure-iot-operations-aio-ca-trust-bundle"
+            }
+          }
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/akriConnectorTemplates/resource-name123",
+        "name": "bfimycofjtzxduufwanuxwoudsh",
+        "type": "wnabnudmydrgpccqusxkmsmgcwzwh",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}

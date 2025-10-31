@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "environmentName": "testcontainerenv",
+    "api-version": "2023-11-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name",
+            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
+            "location": "East US",
+            "properties": {
+              "subjectName": "CN=my-subject-name.company.country.net",
+              "provisioningState": "Succeeded",
+              "domainControlValidation": "CNAME"
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name-root",
+            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
+            "location": "East US",
+            "properties": {
+              "subjectName": "CN=company.country.net",
+              "provisioningState": "Succeeded",
+              "domainControlValidation": "HTTP"
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name-txt",
+            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
+            "location": "East US",
+            "properties": {
+              "subjectName": "CN=txt.company.country.net",
+              "provisioningState": "Succeeded",
+              "domainControlValidation": "TXT"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

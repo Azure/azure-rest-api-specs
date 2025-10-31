@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "storageAccount": "contosorpstorage",
+      "containerName": "apim-backups",
+      "backupName": "backup5",
+      "accessType": "UserAssignedManagedIdentity",
+      "clientId": "XXXXX-a154-4830-XXXX-46a12da1a1e2"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2024-05-01"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {
+          "Owner": "apimService1"
+        },
+        "location": "Central US EUAP",
+        "etag": "AAAAAAAQM8o=",
+        "properties": {
+          "publisherEmail": "apimService1@corp.microsoft.com",
+          "publisherName": "MS",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2020-04-23T16:26:47.8637967Z",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-centraluseuap-01.regional.azure-api.net",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": true,
+              "certificateSource": "BuiltIn"
+            }
+          ],
+          "publicIPAddresses": [
+            "52.XXXX.160.66"
+          ],
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          },
+          "virtualNetworkType": "None",
+          "disableGateway": false,
+          "publicNetworkAccess": "Enabled",
+          "platformVersion": "stv1"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "00000000-5fb4-4916-95d4-64b306f9d924",
+          "tenantId": "00000000-86f1-0000-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/rg1UserIdentity": {
+              "principalId": "00000000-a100-4478-0000-d65d98118ba0",
+              "clientId": "00000000-a154-4830-0000-46a12da1a1e2"
+            },
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/vpnpremium": {
+              "principalId": "00000000-9208-4128-af2d-a10d2af9b5a3",
+              "clientId": "00000000-6328-4db2-0000-ab0e3e7806cf"
+            }
+          }
+        },
+        "systemData": {
+          "lastModifiedBy": "contoso@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-06-30T06:24:57.0008037Z"
+        }
+      }
+    }
+  }
+}

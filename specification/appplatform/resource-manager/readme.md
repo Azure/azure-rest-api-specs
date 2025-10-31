@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-09
+tag: package-preview-2024-05
 ```
 
 ### Suppression
@@ -60,14 +60,50 @@ suppressions:
 ```
 
 
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.AppPlatform/preview/2024-05-01-preview/appplatform.json
+```
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - Microsoft.AppPlatform/preview/2024-01-01-preview/appplatform.json
+```
+
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.AppPlatform/stable/2023-12-01/appplatform.json
+```
+
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.AppPlatform/preview/2023-11-01-preview/appplatform.json
+```
+
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-09'
+``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.AppPlatform/preview/2023-09-01-preview/appplatform.json
 ```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
@@ -215,13 +251,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-powershell
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_appplatform']
@@ -239,18 +274,3 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "sdk" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated with AutoRest.0.17.3
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.AppPlatform
-  output-folder: $(csharp-sdks-folder)/appplatform/Microsoft.Azure.Management.AppPlatform/src/Generated
-  clear-output-folder: true
-```

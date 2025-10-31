@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "namespaceName": "sdk-Namespace-6019",
+    "resourceGroupName": "ResourceGroup",
+    "api-version": "2024-01-01",
+    "subscriptionId": "Subscription"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionid/resourceGroups/Default-ServiceBus-AustraliaEast/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9659/networkruleset/default",
+        "name": "default",
+        "type": "Microsoft.ServiceBus/Namespaces/NetworkRuleSet",
+        "properties": {
+          "defaultAction": "Allow",
+          "publicNetworkAccess": "Enabled",
+          "virtualNetworkRules": [
+            {
+              "subnet": {
+                "id": "/subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2"
+              },
+              "ignoreMissingVnetServiceEndpoint": true
+            },
+            {
+              "subnet": {
+                "id": "/subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3"
+              },
+              "ignoreMissingVnetServiceEndpoint": false
+            },
+            {
+              "subnet": {
+                "id": "/subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6"
+              },
+              "ignoreMissingVnetServiceEndpoint": false
+            }
+          ],
+          "ipRules": [
+            {
+              "ipMask": "1.1.1.1",
+              "action": "Allow"
+            },
+            {
+              "ipMask": "1.1.1.2",
+              "action": "Allow"
+            },
+            {
+              "ipMask": "1.1.1.3",
+              "action": "Allow"
+            },
+            {
+              "ipMask": "1.1.1.4",
+              "action": "Allow"
+            },
+            {
+              "ipMask": "1.1.1.5",
+              "action": "Allow"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

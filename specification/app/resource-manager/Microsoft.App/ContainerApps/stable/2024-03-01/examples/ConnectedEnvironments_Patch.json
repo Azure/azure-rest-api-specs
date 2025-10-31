@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "connectedEnvironmentName": "testenv",
+    "api-version": "2024-03-01",
+    "location": "East US",
+    "environmentEnvelope": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/testenv",
+        "name": "testenv",
+        "type": "Microsoft.App/connectedEnvironments",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
+          "defaultDomain": "testenv.k4apps.io",
+          "staticIp": "20.42.33.145",
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "subjectName": "CN=www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-08-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "talking-avatar-batch-synthesis-job-2",
+            "status": "Succeeded",
+            "createdDateTime": "2024-03-15T10:31:43.7134142Z",
+            "lastActionDateTime": "2024-03-15T10:31:48.1575987",
+            "inputKind": "PlainText",
+            "customVoices": {},
+            "properties": {
+              "timeToLiveInHours": 744,
+              "sizeInBytes": 493133,
+              "durationInMilliseconds": 3530,
+              "succeededCount": 1,
+              "failedCount": 0,
+              "billingDetails": {
+                "neuralCharacters": 42,
+                "talkingAvatarDurationSeconds": 3
+              }
+            },
+            "synthesisConfig": {
+              "voice": "en-us-JennyNeural"
+            },
+            "avatarConfig": {
+              "talkingAvatarCharacter": "lisa",
+              "talkingAvatarStyle": "casual-sitting",
+              "videoFormat": "Mp4",
+              "videoCodec": "hevc",
+              "subtitleType": "soft_embedded",
+              "bitrateKbps": 2000,
+              "customized": false
+            },
+            "outputs": {
+              "result": "https://stttssvcuse.blob.core.windows.net/batchsynthesis-output/3e8138d91be947bd9e076a4cf58a20f8/talking-avatar-batch-synthesis-job-2/0001.mp4?[token redacted]",
+              "summary": "https://stttssvcuse.blob.core.windows.net/batchsynthesis-output/3e8138d91be947bd9e076a4cf58a20f8/talking-avatar-batch-synthesis-job-2/summary.json?[token redacted]"
+            }
+          },
+          {
+            "id": "talking-avatar-batch-synthesis-job-1",
+            "status": "Succeeded",
+            "createdDateTime": "2024-03-15T10:28:23.7702311Z",
+            "lastActionDateTime": "2024-03-15T10:28:46.363789",
+            "inputKind": "PlainText",
+            "customVoices": {},
+            "properties": {
+              "timeToLiveInHours": 744,
+              "sizeInBytes": 1060360,
+              "durationInMilliseconds": 3530,
+              "succeededCount": 1,
+              "failedCount": 0,
+              "billingDetails": {
+                "neuralCharacters": 34,
+                "talkingAvatarDurationSeconds": 3
+              }
+            },
+            "synthesisConfig": {
+              "voice": "zh-CN-XiaoxiaoNeural"
+            },
+            "avatarConfig": {
+              "talkingAvatarCharacter": "lisa",
+              "talkingAvatarStyle": "casual-sitting",
+              "videoFormat": "Webm",
+              "videoCodec": "vp9",
+              "subtitleType": "soft_embedded",
+              "backgroundColor": "transparent",
+              "videoCrop": {
+                "topLeft": {
+                  "x": 100,
+                  "y": 100
+                },
+                "bottomRight": {
+                  "x": 1820,
+                  "y": 1080
+                }
+              },
+              "bitrateKbps": 2000,
+              "customized": false
+            },
+            "outputs": {
+              "result": "https://stttssvcuse.blob.core.windows.net/batchsynthesis-output/3e8138d91be947bd9e076a4cf58a20f8/talking-avatar-batch-synthesis-job-1/0001.webm?[token redacted]",
+              "summary": "https://stttssvcuse.blob.core.windows.net/batchsynthesis-output/3e8138d91be947bd9e076a4cf58a20f8/talking-avatar-batch-synthesis-job-1/summary.json?[token redacted]"
+            }
+          }
+        ],
+        "nextLink": "https://eastus.api.cognitive.microsoft.com/avatar/batchsyntheses/?maxpagesize=2&skip=2&api-version=2024-08-01"
+      }
+    }
+  }
+}

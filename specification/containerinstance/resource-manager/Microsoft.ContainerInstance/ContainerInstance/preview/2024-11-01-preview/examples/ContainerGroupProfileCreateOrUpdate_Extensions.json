@@ -1,0 +1,191 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-11-01-preview",
+    "resourceGroupName": "demo",
+    "containerGroupProfileName": "demo1",
+    "ContainerGroupProfile": {
+      "location": "eastus2",
+      "zones": [
+        "1"
+      ],
+      "properties": {
+        "containers": [
+          {
+            "name": "demo1",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "nginx",
+              "ports": [
+                {
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "cpu": 1,
+                  "memoryInGB": 1.5
+                }
+              }
+            }
+          }
+        ],
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
+          "type": "Private"
+        },
+        "osType": "Linux",
+        "extensions": [
+          {
+            "name": "kube-proxy",
+            "properties": {
+              "extensionType": "kube-proxy",
+              "version": "1.0",
+              "settings": {
+                "clusterCidr": "10.240.0.0/16",
+                "kubeVersion": "v1.9.10"
+              },
+              "protectedSettings": {
+                "kubeConfig": "<kubeconfig encoded string>"
+              }
+            }
+          },
+          {
+            "name": "vk-realtime-metrics",
+            "properties": {
+              "extensionType": "realtime-metrics",
+              "version": "1.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "image": "nginx",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "extensions": [
+            {
+              "name": "kube-proxy",
+              "properties": {
+                "extensionType": "kube-proxy",
+                "version": "1.0",
+                "settings": {
+                  "clusterCidr": "10.240.0.0/16",
+                  "kubeVersion": "v1.9.10"
+                }
+              }
+            },
+            {
+              "name": "vk-realtime-metrics",
+              "properties": {
+                "extensionType": "realtime-metrics",
+                "version": "1.0"
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "osType": "Linux",
+          "revision": 0
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
+        "location": "eastus2",
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "image": "nginx",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "extensions": [
+            {
+              "name": "kube-proxy",
+              "properties": {
+                "extensionType": "kube-proxy",
+                "version": "1.0",
+                "settings": {
+                  "clusterCidr": "10.240.0.0/16",
+                  "kubeVersion": "v1.9.10"
+                }
+              }
+            },
+            {
+              "name": "vk-realtime-metrics",
+              "properties": {
+                "extensionType": "realtime-metrics",
+                "version": "1.0"
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "osType": "Linux",
+          "revision": 1
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
+        "location": "eastus2",
+        "zones": [
+          "1"
+        ]
+      }
+    }
+  }
+}

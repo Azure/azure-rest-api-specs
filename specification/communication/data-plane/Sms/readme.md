@@ -26,7 +26,18 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2020-07-20-preview1
+tag: package-sms-2026-01-23
+```
+
+### Supression
+``` yaml
+suppressions:
+ - code: LroExtension
+   from: communicationservicessms.json
+   reason: Lro attribute was not part of any previous version. Trying to add it signals breaking changes and requires adding operation-location, etc.
+ - code: XmsEnumValidation
+   from: communicationservicessms.json
+   reason: In the stable version repeatabilityResult has enum with accepted/rejected. Also SDK generation of SmsSendResponseItemRepeatabilityResult will fail without it.
 ```
 
 ### Tag: package-2020-07-20-preview1
@@ -51,6 +62,75 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-2024-01-14-preview
+
+These settings apply only when `--tag=package-2024-01-14-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-14-preview'
+input-file:
+  - preview/2024-01-14-preview/communicationservicessms.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-sms-2024-02-05-preview
+
+These settings apply only when `--tag=package-sms-2024-02-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-sms-2024-02-05-preview'
+input-file:
+  - preview/2024-02-05-preview/communicationservicessms.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-sms-2024-12-10-preview
+
+These settings apply only when `--tag=package-sms-2024-12-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-sms-2024-12-10-preview'
+input-file:
+  - preview/2024-12-10-preview/communicationservicessms.json
+title:
+  Azure Communication Services
+```
+
+---
+
+### Tag: package-sms-2025-05-29-preview
+
+These settings apply only when `--tag=package-sms-2025-05-29-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-sms-2025-05-29-preview'
+input-file:
+  - preview/2025-05-29-preview/communicationservicessms.json
+title:
+  Azure Communication Services
+```
+---
+
+### Tag: package-sms-2025-08-01-preview
+
+These settings apply only when `--tag=package-sms-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-sms-2025-08-01-preview'
+input-file:
+  - preview/2025-08-01-preview/communicationservicessms.json
+title:
+  Azure Communication Services
+```
+---
+
+### Tag: package-sms-2026-01-23
+
+These settings apply only when `--tag=package-sms-2026-01-23` is specified on the command line.
+
+```yaml $(tag) == 'package-sms-2026-01-23'
+input-file:
+  - stable/2026-01-23/communicationservicessms.json
+title:
+  Azure Communication Services
+```
 ---
 
 # Code Generation

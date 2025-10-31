@@ -1,0 +1,81 @@
+{
+  "title": "CreateOrUpdateMetric_EventRate",
+  "operationId": "CreateOrUpdateMetric",
+  "parameters": {
+    "experimentMetricId": "rate_refund",
+    "api-version": "2025-05-31-preview",
+    "If-Match": "vxexdn",
+    "If-None-Match": "ijchzdh",
+    "If-Unmodified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "If-Modified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "displayName": "Refund rate",
+      "description": "The percentage of transactions that are refunds. This metric is calculated as the number of refund transactions divided by the total number of transactions.",
+      "lifecycle": "Active",
+      "categories": [
+        "Monetization"
+      ],
+      "desiredDirection": "Neutral",
+      "definition": {
+        "type": "EventRate",
+        "event": {
+          "eventName": "Transaction"
+        },
+        "rateCondition": "Revenue < 0"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "rate_refund",
+        "displayName": "Refund rate",
+        "description": "The percentage of transactions that are refunds. This metric is calculated as the number of refund transactions divided by the total number of transactions.",
+        "lifecycle": "Active",
+        "categories": [
+          "Monetization"
+        ],
+        "desiredDirection": "Neutral",
+        "definition": {
+          "type": "EventRate",
+          "event": {
+            "eventName": "Transaction"
+          },
+          "rateCondition": "Revenue < 0"
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "rate_refund",
+        "displayName": "Refund rate",
+        "description": "The percentage of transactions that are refunds. This metric is calculated as the number of refund transactions divided by the total number of transactions.",
+        "lifecycle": "Active",
+        "categories": [
+          "Monetization"
+        ],
+        "desiredDirection": "Neutral",
+        "definition": {
+          "type": "EventRate",
+          "event": {
+            "eventName": "Transaction"
+          },
+          "rateCondition": "Revenue < 0"
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    }
+  }
+}

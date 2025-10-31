@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/costDetailsOperationResults/00000000-0000-0000-0000-000000000000",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "status": "Completed",
+        "manifest": {
+          "manifestVersion": "2023-07-01-preview",
+          "dataFormat": "Csv",
+          "blobCount": 1,
+          "byteCount": 32741,
+          "compressData": false,
+          "requestContext": {
+            "requestScope": "subscriptions/00000000-0000-0000-0000-000000000000",
+            "requestBody": {
+              "metric": "ActualCost",
+              "timePeriod": {
+                "start": "2020-03-01",
+                "end": "2020-03-15"
+              }
+            }
+          },
+          "blobs": [
+            {
+              "blobLink": "https://ccmreportstorageeastus.blob.core.windows.net/armreports/00000/00000000-0000-0000-0000-000000000000?sv=2020-05-31&sr=b&sig=abcd",
+              "byteCount": 32741
+            }
+          ]
+        },
+        "validTill": "2022-05-10T08:08:46.1973252Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/costDetailsOperationResults/00000000-0000-0000-0000-000000000000?api-version=2023-07-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  }
+}

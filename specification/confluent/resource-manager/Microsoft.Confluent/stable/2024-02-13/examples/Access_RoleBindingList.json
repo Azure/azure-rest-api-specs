@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2024-02-13",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "crn_pattern": "crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa",
+    "principal": "User:u-111aaa",
+    "body": {
+      "searchFilters": {
+        "pageSize": "10",
+        "pageToken": "asc4fts4ft"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "RoleBindingList",
+        "metadata": {
+          "first": "https://api.confluent.cloud/iam/v2/role-bindings",
+          "last": "https://api.confluent.cloud/iam/v2/role-bindings?page_token=bcAOehAY8F16YD84Z1wT",
+          "prev": "https://api.confluent.cloud/iam/v2/role-bindings?page_token=YIXRY97wWYmwzrax4dld",
+          "next": "https://api.confluent.cloud/iam/v2/role-bindings?page_token=UvmDWOB1iwfAIBPj6EYb",
+          "total_size": 123
+        },
+        "data": [
+          {
+            "kind": "RoleBinding",
+            "id": "dlz-f3a90de",
+            "metadata": {
+              "self": "https://api.confluent.cloud/iam/v2/role-bindings/rb-12345",
+              "resource_name": "crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/role-binding=rb-12345",
+              "created_at": "2006-01-02T15:04:05-07:00",
+              "updated_at": "2006-01-02T15:04:05-07:00",
+              "deleted_at": "2006-01-02T15:04:05-07:00"
+            },
+            "principal": "User:u-111aaa",
+            "role_name": "CloudClusterAdmin",
+            "crn_pattern": "crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa"
+          }
+        ]
+      }
+    }
+  }
+}

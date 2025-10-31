@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "registryName": "myRegistry",
+    "resourceGroupName": "myResourceGroup",
+    "runRequest": {
+      "type": "TaskRunRequest",
+      "overrideTaskStepProperties": {
+        "arguments": [
+          {
+            "name": "mytestargument",
+            "isSecret": false,
+            "value": "mytestvalue"
+          },
+          {
+            "name": "mysecrettestargument",
+            "isSecret": true,
+            "value": "mysecrettestvalue"
+          }
+        ],
+        "file": "overriddenDockerfile",
+        "target": "build",
+        "updateTriggerToken": "aGVsbG8gd29ybGQ=",
+        "values": [
+          {
+            "name": "mytestname",
+            "isSecret": false,
+            "value": "mytestvalue"
+          },
+          {
+            "name": "mysecrettestname",
+            "isSecret": true,
+            "value": "mysecrettestvalue"
+          }
+        ]
+      },
+      "taskId": "myTask"
+    },
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "0accec26-d6de-4757-8e74-d080f38eaaab",
+        "type": "Microsoft.ContainerRegistry/registries/run",
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/0accec26-d6de-4757-8e74-d080f38eaaab",
+        "properties": {
+          "lastUpdatedTime": "2018-01-25T05:13:51.617Z",
+          "provisioningState": "Succeeded",
+          "runId": "0accec26-d6de-4757-8e74-d080f38eaaab",
+          "status": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "Registries_ScheduleRun",
+  "title": "Registries_ScheduleRun_Task"
+}

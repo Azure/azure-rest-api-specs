@@ -19,3 +19,10 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/qumulo/azure-mgmt-qumulo/azure/mgmt/qumulo
 ```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $["definitions"]["LiftrBase.Storage.FileSystemResourceProperties"]
+    transform: $["properties"]["privateIPs"]["x-ms-client-name"] = "private_ips"
+```

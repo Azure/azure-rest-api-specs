@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-01-02",
+    "diskName": "myUltraReadOnlyDisk",
+    "disk": {
+      "location": "West US",
+      "sku": {
+        "name": "UltraSSD_LRS"
+      },
+      "properties": {
+        "creationData": {
+          "createOption": "Empty",
+          "logicalSectorSize": 4096
+        },
+        "diskSizeGB": 200,
+        "diskIOPSReadWrite": 125,
+        "diskMBpsReadWrite": 3000,
+        "encryption": {
+          "type": "EncryptionAtRestWithPlatformKey"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating",
+          "encryption": {
+            "type": "EncryptionAtRestWithPlatformKey"
+          }
+        },
+        "location": "West US",
+        "name": "myUltraReadOnlyDisk",
+        "sku": {
+          "name": "UltraSSD_LRS",
+          "tier": "Ultra"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myUltraReadOnlyDisk",
+        "sku": {
+          "name": "UltraSSD_LRS",
+          "tier": "Ultra"
+        }
+      }
+    }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "create a managed disk with ultra account type with readOnly property set."
+}

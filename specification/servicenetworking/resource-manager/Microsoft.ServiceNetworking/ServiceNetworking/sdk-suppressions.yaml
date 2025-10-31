@@ -1,0 +1,32 @@
+suppressions:
+  azure-sdk-for-js:
+    - package: "@azure/arm-servicenetworking"
+      breaking-changes:
+        - Enum KnownAssociationType no longer has value Subnets
+        - Enum KnownOrigin no longer has value System
+        - Enum KnownOrigin no longer has value User
+        - Enum KnownOrigin no longer has value UserSystem
+        - Interface AssociationsInterfaceCreateOrUpdateOptionalParams no longer has parameter resumeFrom
+        - Interface AssociationsInterfaceDeleteOptionalParams no longer has parameter resumeFrom
+        - Interface FrontendsInterfaceCreateOrUpdateOptionalParams no longer has parameter resumeFrom
+        - Interface FrontendsInterfaceDeleteOptionalParams no longer has parameter resumeFrom
+        - Interface TrafficControllerInterfaceCreateOrUpdateOptionalParams no longer has parameter resumeFrom
+        - Interface TrafficControllerInterfaceDeleteOptionalParams no longer has parameter resumeFrom
+        - Removed function getContinuationToken
+        - Removed operation AssociationsInterface.beginCreateOrUpdate
+        - Removed operation AssociationsInterface.beginCreateOrUpdateAndWait
+        - Removed operation AssociationsInterface.beginDelete
+        - Removed operation AssociationsInterface.beginDeleteAndWait
+        - Removed operation FrontendsInterface.beginCreateOrUpdate
+        - Removed operation FrontendsInterface.beginCreateOrUpdateAndWait
+        - Removed operation FrontendsInterface.beginDelete
+        - Removed operation FrontendsInterface.beginDeleteAndWait
+        - Removed operation TrafficControllerInterface.beginCreateOrUpdate
+        - Removed operation TrafficControllerInterface.beginCreateOrUpdateAndWait
+        - Removed operation TrafficControllerInterface.beginDelete
+        - Removed operation TrafficControllerInterface.beginDeleteAndWait
+        - Type of parameter subnet of interface AssociationUpdateProperties is changed from AssociationSubnetUpdate to AssociationSubnet
+        - "Type of parameter tags of interface AssociationUpdate is changed from {\n        [propertyName: string]: string;\n    } to Record<string, string>"
+        - "Type of parameter tags of interface FrontendUpdate is changed from {\n        [propertyName: string]: string;\n    } to Record<string, string>"
+        - "Type of parameter tags of interface TrackedResource is changed from {\n        [propertyName: string]: string;\n    } to Record<string, string>"
+        - "Type of parameter tags of interface TrafficControllerUpdate is changed from {\n        [propertyName: string]: string;\n    } to Record<string, string>"

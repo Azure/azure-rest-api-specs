@@ -1,0 +1,1495 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules/{automationRuleId}": {
+      "get": {
+        "tags": [
+          "automationRules"
+        ],
+        "description": "Gets the automation rule.",
+        "operationId": "AutomationRules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AutomationRules_Get": {
+            "$ref": "./examples/automationRules/AutomationRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "automationRules"
+        ],
+        "description": "Creates or updates the automation rule.",
+        "operationId": "AutomationRules_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleId"
+          },
+          {
+            "in": "body",
+            "name": "automationRuleToUpsert",
+            "description": "The automation rule",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AutomationRules_CreateOrUpdate": {
+            "$ref": "./examples/automationRules/AutomationRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "automationRules"
+        ],
+        "description": "Delete the automation rule.",
+        "operationId": "AutomationRules_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AutomationRules_Delete": {
+            "$ref": "./examples/automationRules/AutomationRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules": {
+      "get": {
+        "tags": [
+          "automationRules"
+        ],
+        "description": "Gets all automation rules.",
+        "operationId": "AutomationRules_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/AutomationRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AutomationRules_List": {
+            "$ref": "./examples/automationRules/AutomationRules_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityIdentifier}/runPlaybook": {
+      "post": {
+        "tags": [
+          "manualTrigger"
+        ],
+        "description": "Triggers playbook on a specific entity.",
+        "operationId": "Entities_RunPlaybook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "entityIdentifier",
+            "description": "Entity identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "description": "Describes the request body for triggering a playbook on an entity.",
+            "schema": {
+              "$ref": "#/definitions/EntityManualTriggerRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_RunPlaybook": {
+            "$ref": "./examples/manualTrigger/Entities_RunPlaybook.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentIdentifier}/runPlaybook": {
+      "post": {
+        "tags": [
+          "manualTrigger"
+        ],
+        "description": "Triggers playbook on a specific incident",
+        "operationId": "Incidents_RunPlaybook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "incidentIdentifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "schema": {
+              "$ref": "#/definitions/ManualTriggerRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Incidents_RunPlaybook": {
+            "$ref": "./examples/manualTrigger/Incidents_RunPlaybook.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionType": {
+      "description": "The type of the automation rule action.",
+      "enum": [
+        "ModifyProperties",
+        "RunPlaybook",
+        "AddIncidentTask"
+      ],
+      "type": "string",
+      "example": "ModifyProperties",
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ModifyProperties",
+            "description": "Modify an object's properties"
+          },
+          {
+            "value": "RunPlaybook",
+            "description": "Run a playbook on an object"
+          },
+          {
+            "value": "AddIncidentTask",
+            "description": "Add a task to an incident object"
+          }
+        ]
+      }
+    },
+    "AddIncidentTaskActionProperties": {
+      "required": [
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "The title of the task.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the task.",
+          "type": "string"
+        }
+      }
+    },
+    "AutomationRule": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRuleProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AutomationRuleAction": {
+      "description": "Describes an automation rule action.",
+      "required": [
+        "actionType",
+        "order"
+      ],
+      "type": "object",
+      "properties": {
+        "order": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType"
+        }
+      },
+      "discriminator": "actionType"
+    },
+    "AutomationRuleAddIncidentTaskAction": {
+      "description": "Describes an automation rule action to add a task to an incident",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleAction"
+        }
+      ],
+      "properties": {
+        "actionConfiguration": {
+          "type": "object",
+          "$ref": "#/definitions/AddIncidentTaskActionProperties"
+        }
+      },
+      "x-ms-discriminator-value": "AddIncidentTask",
+      "x-ms-client-flatten": true
+    },
+    "AutomationRuleBooleanCondition": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/AutomationRuleBooleanConditionSupportedOperator"
+        },
+        "innerConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRuleCondition"
+          },
+          "x-ms-identifiers": [],
+          "minItems": 2,
+          "maxItems": 10
+        }
+      }
+    },
+    "AutomationRuleBooleanConditionSupportedOperator": {
+      "enum": [
+        "And",
+        "Or"
+      ],
+      "type": "string",
+      "example": "And",
+      "x-ms-enum": {
+        "name": "AutomationRuleBooleanConditionSupportedOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "And",
+            "description": "Evaluates as true if all the item conditions are evaluated as true"
+          },
+          {
+            "value": "Or",
+            "description": "Evaluates as true if at least one of the item conditions are evaluated as true"
+          }
+        ]
+      }
+    },
+    "AutomationRuleCondition": {
+      "description": "Describes an automation rule condition.",
+      "required": [
+        "conditionType"
+      ],
+      "type": "object",
+      "properties": {
+        "conditionType": {
+          "$ref": "#/definitions/ConditionType"
+        }
+      },
+      "discriminator": "conditionType"
+    },
+    "AutomationRuleModifyPropertiesAction": {
+      "description": "Describes an automation rule action to modify an object's properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleAction"
+        }
+      ],
+      "properties": {
+        "actionConfiguration": {
+          "type": "object",
+          "$ref": "#/definitions/IncidentPropertiesAction"
+        }
+      },
+      "x-ms-discriminator-value": "ModifyProperties",
+      "x-ms-client-flatten": true
+    },
+    "AutomationRuleProperties": {
+      "description": "Automation rule properties",
+      "required": [
+        "actions",
+        "displayName",
+        "order",
+        "triggeringLogic"
+      ],
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the automation rule.",
+          "type": "string",
+          "maxLength": 500
+        },
+        "order": {
+          "format": "int32",
+          "description": "The order of execution of the automation rule.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "triggeringLogic": {
+          "$ref": "#/definitions/AutomationRuleTriggeringLogic"
+        },
+        "actions": {
+          "description": "The actions to execute when the automation rule is triggered.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRuleAction"
+          },
+          "x-ms-identifiers": [],
+          "maxItems": 20
+        },
+        "lastModifiedTimeUtc": {
+          "format": "date-time",
+          "description": "The last time the automation rule was updated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTimeUtc": {
+          "format": "date-time",
+          "description": "The time the automation rule was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "readOnly": true,
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
+        },
+        "createdBy": {
+          "readOnly": true,
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
+        }
+      }
+    },
+    "AutomationRulePropertyArrayChangedConditionSupportedArrayType": {
+      "enum": [
+        "Alerts",
+        "Labels",
+        "Tactics",
+        "Comments"
+      ],
+      "type": "string",
+      "example": "Alerts",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayChangedConditionSupportedArrayType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Alerts",
+            "description": "Evaluate the condition on the alerts"
+          },
+          {
+            "value": "Labels",
+            "description": "Evaluate the condition on the labels"
+          },
+          {
+            "value": "Tactics",
+            "description": "Evaluate the condition on the tactics"
+          },
+          {
+            "value": "Comments",
+            "description": "Evaluate the condition on the comments"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayChangedConditionSupportedChangeType": {
+      "enum": [
+        "Added"
+      ],
+      "type": "string",
+      "example": "Added",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayChangedConditionSupportedChangeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Added",
+            "description": "Evaluate the condition on items added to the array"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayChangedValuesCondition": {
+      "type": "object",
+      "properties": {
+        "arrayType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangedConditionSupportedArrayType"
+        },
+        "changeType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangedConditionSupportedChangeType"
+        }
+      }
+    },
+    "AutomationRulePropertyArrayConditionSupportedArrayConditionType": {
+      "enum": [
+        "AnyItem"
+      ],
+      "type": "string",
+      "example": "AnyItem",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayConditionSupportedArrayConditionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AnyItem",
+            "description": "Evaluate the condition as true if any item fulfills it"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayConditionSupportedArrayType": {
+      "enum": [
+        "CustomDetails",
+        "CustomDetailValues"
+      ],
+      "type": "string",
+      "example": "CustomDetails",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayConditionSupportedArrayType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CustomDetails",
+            "description": "Evaluate the condition on the custom detail keys"
+          },
+          {
+            "value": "CustomDetailValues",
+            "description": "Evaluate the condition on a custom detail's values"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayValuesCondition": {
+      "type": "object",
+      "properties": {
+        "arrayType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayConditionSupportedArrayType"
+        },
+        "arrayConditionType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayConditionSupportedArrayConditionType"
+        },
+        "itemConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRuleCondition"
+          },
+          "x-ms-identifiers": [],
+          "maxItems": 10
+        }
+      }
+    },
+    "AutomationRulePropertyChangedConditionSupportedChangedType": {
+      "enum": [
+        "ChangedFrom",
+        "ChangedTo"
+      ],
+      "type": "string",
+      "example": "ChangedFrom",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyChangedConditionSupportedChangedType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ChangedFrom",
+            "description": "Evaluate the condition on the previous value of the property"
+          },
+          {
+            "value": "ChangedTo",
+            "description": "Evaluate the condition on the updated value of the property"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyChangedConditionSupportedPropertyType": {
+      "enum": [
+        "IncidentSeverity",
+        "IncidentStatus",
+        "IncidentOwner"
+      ],
+      "type": "string",
+      "example": "IncidentSeverity",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyChangedConditionSupportedPropertyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IncidentSeverity",
+            "description": "Evaluate the condition on the incident severity"
+          },
+          {
+            "value": "IncidentStatus",
+            "description": "Evaluate the condition on the incident status"
+          },
+          {
+            "value": "IncidentOwner",
+            "description": "Evaluate the condition on the incident owner"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyConditionSupportedOperator": {
+      "enum": [
+        "Equals",
+        "NotEquals",
+        "Contains",
+        "NotContains",
+        "StartsWith",
+        "NotStartsWith",
+        "EndsWith",
+        "NotEndsWith"
+      ],
+      "type": "string",
+      "example": "Equals",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyConditionSupportedOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Equals",
+            "description": "Evaluates if the property equals at least one of the condition values"
+          },
+          {
+            "value": "NotEquals",
+            "description": "Evaluates if the property does not equal any of the condition values"
+          },
+          {
+            "value": "Contains",
+            "description": "Evaluates if the property contains at least one of the condition values"
+          },
+          {
+            "value": "NotContains",
+            "description": "Evaluates if the property does not contain any of the condition values"
+          },
+          {
+            "value": "StartsWith",
+            "description": "Evaluates if the property starts with any of the condition values"
+          },
+          {
+            "value": "NotStartsWith",
+            "description": "Evaluates if the property does not start with any of the condition values"
+          },
+          {
+            "value": "EndsWith",
+            "description": "Evaluates if the property ends with any of the condition values"
+          },
+          {
+            "value": "NotEndsWith",
+            "description": "Evaluates if the property does not end with any of the condition values"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyConditionSupportedProperty": {
+      "description": "The property to evaluate in an automation rule property condition.",
+      "enum": [
+        "IncidentTitle",
+        "IncidentDescription",
+        "IncidentSeverity",
+        "IncidentStatus",
+        "IncidentRelatedAnalyticRuleIds",
+        "IncidentTactics",
+        "IncidentLabel",
+        "IncidentProviderName",
+        "IncidentUpdatedBySource",
+        "IncidentCustomDetailsKey",
+        "IncidentCustomDetailsValue",
+        "AccountAadTenantId",
+        "AccountAadUserId",
+        "AccountName",
+        "AccountNTDomain",
+        "AccountPUID",
+        "AccountSid",
+        "AccountObjectGuid",
+        "AccountUPNSuffix",
+        "AlertProductNames",
+        "AlertAnalyticRuleIds",
+        "AzureResourceResourceId",
+        "AzureResourceSubscriptionId",
+        "CloudApplicationAppId",
+        "CloudApplicationAppName",
+        "DNSDomainName",
+        "FileDirectory",
+        "FileName",
+        "FileHashValue",
+        "HostAzureID",
+        "HostName",
+        "HostNetBiosName",
+        "HostNTDomain",
+        "HostOSVersion",
+        "IoTDeviceId",
+        "IoTDeviceName",
+        "IoTDeviceType",
+        "IoTDeviceVendor",
+        "IoTDeviceModel",
+        "IoTDeviceOperatingSystem",
+        "IPAddress",
+        "MailboxDisplayName",
+        "MailboxPrimaryAddress",
+        "MailboxUPN",
+        "MailMessageDeliveryAction",
+        "MailMessageDeliveryLocation",
+        "MailMessageRecipient",
+        "MailMessageSenderIP",
+        "MailMessageSubject",
+        "MailMessageP1Sender",
+        "MailMessageP2Sender",
+        "MalwareCategory",
+        "MalwareName",
+        "ProcessCommandLine",
+        "ProcessId",
+        "RegistryKey",
+        "RegistryValueData",
+        "Url"
+      ],
+      "type": "string",
+      "example": "IncidentTitle",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyConditionSupportedProperty",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IncidentTitle",
+            "description": "The title of the incident"
+          },
+          {
+            "value": "IncidentDescription",
+            "description": "The description of the incident"
+          },
+          {
+            "value": "IncidentSeverity",
+            "description": "The severity of the incident"
+          },
+          {
+            "value": "IncidentStatus",
+            "description": "The status of the incident"
+          },
+          {
+            "value": "IncidentRelatedAnalyticRuleIds",
+            "description": "The related Analytic rule ids of the incident"
+          },
+          {
+            "value": "IncidentTactics",
+            "description": "The tactics of the incident"
+          },
+          {
+            "value": "IncidentLabel",
+            "description": "The labels of the incident"
+          },
+          {
+            "value": "IncidentProviderName",
+            "description": "The provider name of the incident"
+          },
+          {
+            "value": "IncidentUpdatedBySource",
+            "description": "The update source of the incident"
+          },
+          {
+            "value": "IncidentCustomDetailsKey",
+            "description": "The incident custom detail key"
+          },
+          {
+            "value": "IncidentCustomDetailsValue",
+            "description": "The incident custom detail value"
+          },
+          {
+            "value": "AccountAadTenantId",
+            "description": "The account Azure Active Directory tenant id"
+          },
+          {
+            "value": "AccountAadUserId",
+            "description": "The account Azure Active Directory user id"
+          },
+          {
+            "value": "AccountName",
+            "description": "The account name"
+          },
+          {
+            "value": "AccountNTDomain",
+            "description": "The account NetBIOS domain name"
+          },
+          {
+            "value": "AccountPUID",
+            "description": "The account Azure Active Directory Passport User ID"
+          },
+          {
+            "value": "AccountSid",
+            "description": "The account security identifier"
+          },
+          {
+            "value": "AccountObjectGuid",
+            "description": "The account unique identifier"
+          },
+          {
+            "value": "AccountUPNSuffix",
+            "description": "The account user principal name suffix"
+          },
+          {
+            "value": "AlertProductNames",
+            "description": "The name of the product of the alert"
+          },
+          {
+            "value": "AlertAnalyticRuleIds",
+            "description": "The analytic rule ids of the alert"
+          },
+          {
+            "value": "AzureResourceResourceId",
+            "description": "The Azure resource id"
+          },
+          {
+            "value": "AzureResourceSubscriptionId",
+            "description": "The Azure resource subscription id"
+          },
+          {
+            "value": "CloudApplicationAppId",
+            "description": "The cloud application identifier"
+          },
+          {
+            "value": "CloudApplicationAppName",
+            "description": "The cloud application name"
+          },
+          {
+            "value": "DNSDomainName",
+            "description": "The dns record domain name"
+          },
+          {
+            "value": "FileDirectory",
+            "description": "The file directory full path"
+          },
+          {
+            "value": "FileName",
+            "description": "The file name without path"
+          },
+          {
+            "value": "FileHashValue",
+            "description": "The file hash value"
+          },
+          {
+            "value": "HostAzureID",
+            "description": "The host Azure resource id"
+          },
+          {
+            "value": "HostName",
+            "description": "The host name without domain"
+          },
+          {
+            "value": "HostNetBiosName",
+            "description": "The host NetBIOS name"
+          },
+          {
+            "value": "HostNTDomain",
+            "description": "The host NT domain"
+          },
+          {
+            "value": "HostOSVersion",
+            "description": "The host operating system"
+          },
+          {
+            "value": "IoTDeviceId",
+            "description": "\"The IoT device id"
+          },
+          {
+            "value": "IoTDeviceName",
+            "description": "The IoT device name"
+          },
+          {
+            "value": "IoTDeviceType",
+            "description": "The IoT device type"
+          },
+          {
+            "value": "IoTDeviceVendor",
+            "description": "The IoT device vendor"
+          },
+          {
+            "value": "IoTDeviceModel",
+            "description": "The IoT device model"
+          },
+          {
+            "value": "IoTDeviceOperatingSystem",
+            "description": "The IoT device operating system"
+          },
+          {
+            "value": "IPAddress",
+            "description": "The IP address"
+          },
+          {
+            "value": "MailboxDisplayName",
+            "description": "The mailbox display name"
+          },
+          {
+            "value": "MailboxPrimaryAddress",
+            "description": "The mailbox primary address"
+          },
+          {
+            "value": "MailboxUPN",
+            "description": "The mailbox user principal name"
+          },
+          {
+            "value": "MailMessageDeliveryAction",
+            "description": "The mail message delivery action"
+          },
+          {
+            "value": "MailMessageDeliveryLocation",
+            "description": "The mail message delivery location"
+          },
+          {
+            "value": "MailMessageRecipient",
+            "description": "The mail message recipient"
+          },
+          {
+            "value": "MailMessageSenderIP",
+            "description": "The mail message sender IP address"
+          },
+          {
+            "value": "MailMessageSubject",
+            "description": "The mail message subject"
+          },
+          {
+            "value": "MailMessageP1Sender",
+            "description": "The mail message P1 sender"
+          },
+          {
+            "value": "MailMessageP2Sender",
+            "description": "The mail message P2 sender"
+          },
+          {
+            "value": "MalwareCategory",
+            "description": "The malware category"
+          },
+          {
+            "value": "MalwareName",
+            "description": "The malware name"
+          },
+          {
+            "value": "ProcessCommandLine",
+            "description": "The process execution command line"
+          },
+          {
+            "value": "ProcessId",
+            "description": "The process id"
+          },
+          {
+            "value": "RegistryKey",
+            "description": "The registry key path"
+          },
+          {
+            "value": "RegistryValueData",
+            "description": "The registry key value in string formatted representation"
+          },
+          {
+            "value": "Url",
+            "description": "The url"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyValuesChangedCondition": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "$ref": "#/definitions/AutomationRulePropertyChangedConditionSupportedPropertyType"
+        },
+        "changeType": {
+          "$ref": "#/definitions/AutomationRulePropertyChangedConditionSupportedChangedType"
+        },
+        "operator": {
+          "$ref": "#/definitions/AutomationRulePropertyConditionSupportedOperator"
+        },
+        "propertyValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AutomationRulePropertyValuesCondition": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "$ref": "#/definitions/AutomationRulePropertyConditionSupportedProperty"
+        },
+        "operator": {
+          "$ref": "#/definitions/AutomationRulePropertyConditionSupportedOperator"
+        },
+        "propertyValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AutomationRuleRunPlaybookAction": {
+      "description": "Describes an automation rule action to run a playbook",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleAction"
+        }
+      ],
+      "properties": {
+        "actionConfiguration": {
+          "type": "object",
+          "$ref": "#/definitions/PlaybookActionProperties"
+        }
+      },
+      "x-ms-discriminator-value": "RunPlaybook",
+      "x-ms-client-flatten": true
+    },
+    "AutomationRulesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRule"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "AutomationRuleTriggeringLogic": {
+      "description": "Describes automation rule triggering logic.",
+      "required": [
+        "isEnabled",
+        "triggersOn",
+        "triggersWhen"
+      ],
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the automation rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "expirationTimeUtc": {
+          "format": "date-time",
+          "description": "Determines when the automation rule should automatically expire and be disabled.",
+          "type": "string"
+        },
+        "triggersOn": {
+          "$ref": "#/definitions/triggersOn"
+        },
+        "triggersWhen": {
+          "$ref": "#/definitions/triggersWhen"
+        },
+        "conditions": {
+          "description": "The conditions to evaluate to determine if the automation rule should be triggered on a given object.",
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/AutomationRuleCondition"
+          },
+          "x-ms-identifiers": [
+            "conditionType"
+          ]
+        }
+      }
+    },
+    "BooleanConditionProperties": {
+      "description": "Describes an automation rule condition that applies a boolean operator (e.g AND, OR) to conditions",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRuleBooleanCondition"
+        }
+      },
+      "x-ms-discriminator-value": "Boolean",
+      "x-ms-client-flatten": true
+    },
+    "ConditionType": {
+      "enum": [
+        "Property",
+        "PropertyArray",
+        "PropertyChanged",
+        "PropertyArrayChanged",
+        "Boolean"
+      ],
+      "type": "string",
+      "example": "Property",
+      "x-ms-enum": {
+        "name": "ConditionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Property",
+            "description": "Evaluate an object property value"
+          },
+          {
+            "value": "PropertyArray",
+            "description": "Evaluate an object array property value"
+          },
+          {
+            "value": "PropertyChanged",
+            "description": "Evaluate an object property changed value"
+          },
+          {
+            "value": "PropertyArrayChanged",
+            "description": "Evaluate an object array property changed value"
+          },
+          {
+            "value": "Boolean",
+            "description": "Apply a boolean operator (e.g AND, OR) to conditions"
+          }
+        ]
+      }
+    },
+    "EntityManualTriggerRequestBody": {
+      "type": "object",
+      "description": "Describes the request body for triggering a playbook on an entity.",
+      "required": [
+        "logicAppsResourceId"
+      ],
+      "properties": {
+        "incidentArmId": {
+          "type": "string",
+          "description": "Incident ARM id."
+        },
+        "tenantId": {
+          "format": "uuid",
+          "type": "string",
+          "description": "The tenant id of the playbook resource."
+        },
+        "logicAppsResourceId": {
+          "type": "string",
+          "description": "The resource id of the playbook resource."
+        }
+      }
+    },
+    "IncidentPropertiesAction": {
+      "type": "object",
+      "properties": {
+        "severity": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
+        },
+        "status": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
+        },
+        "classification": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum"
+        },
+        "classificationReason": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
+        },
+        "classificationComment": {
+          "description": "Describes the reason the incident was closed.",
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentOwnerInfo"
+        },
+        "labels": {
+          "description": "List of labels to add to the incident.",
+          "type": "array",
+          "x-ms-identifiers": [
+            "labelName"
+          ],
+          "items": {
+            "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
+          }
+        }
+      }
+    },
+    "ManualTriggerRequestBody": {
+      "type": "object",
+      "required": [
+        "logicAppsResourceId"
+      ],
+      "properties": {
+        "tenantId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "logicAppsResourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "PlaybookActionProperties": {
+      "type": "object",
+      "required": [
+        "logicAppResourceId"
+      ],
+      "properties": {
+        "logicAppResourceId": {
+          "description": "The resource id of the playbook resource.",
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The tenant id of the playbook resource.",
+          "type": "string"
+        }
+      }
+    },
+    "PropertyArrayChangedConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates an array property's value change",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangedValuesCondition"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyArrayChanged",
+      "x-ms-client-flatten": true
+    },
+    "PropertyArrayConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates an array property's value",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyArrayValuesCondition"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyArray",
+      "x-ms-client-flatten": true
+    },
+    "PropertyChangedConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates a property's value change",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyValuesChangedCondition"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyChanged",
+      "x-ms-client-flatten": true
+    },
+    "PropertyConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates a property's value",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyValuesCondition"
+        }
+      },
+      "x-ms-discriminator-value": "Property",
+      "x-ms-client-flatten": true
+    },
+    "triggersOn": {
+      "enum": [
+        "Incidents",
+        "Alerts"
+      ],
+      "type": "string",
+      "example": "Incidents",
+      "x-ms-enum": {
+        "name": "triggersOn",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Incidents",
+            "description": "Trigger on Incidents"
+          },
+          {
+            "value": "Alerts",
+            "description": "Trigger on Alerts"
+          }
+        ]
+      }
+    },
+    "triggersWhen": {
+      "enum": [
+        "Created",
+        "Updated"
+      ],
+      "type": "string",
+      "example": "Created",
+      "x-ms-enum": {
+        "name": "triggersWhen",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Created",
+            "description": "Trigger on created objects"
+          },
+          {
+            "value": "Updated",
+            "description": "Trigger on updated objects"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "AutomationRule": {
+      "name": "automationRule",
+      "description": "The automation rule",
+      "required": true,
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/AutomationRule"
+      }
+    },
+    "AutomationRuleId": {
+      "in": "path",
+      "name": "automationRuleId",
+      "description": "Automation rule ID",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
+}

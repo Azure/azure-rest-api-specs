@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "authorizationProviderId": "aadwithclientcred"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred/authorizations/authz1",
+            "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+            "name": "authz1",
+            "properties": {
+              "authorizationType": "OAuth2",
+              "oauth2grantType": "ClientCredentials",
+              "parameters": {
+                "clientId": "clientsecretid"
+              },
+              "status": "Connected"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred/authorizations/authz2",
+            "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+            "name": "authz2",
+            "properties": {
+              "authorizationType": "OAuth2",
+              "oauth2grantType": "ClientCredentials",
+              "parameters": {
+                "clientId": "clientsecretid"
+              },
+              "status": "Error",
+              "error": {
+                "code": "Unauthorized",
+                "message": "Failed to acquire access token for service using client credentials flow: IdentityProvider=aadwithclientcred. Correlation Id=6299d09b-03b7-46ed-b355-0453451d7e49, UTC TimeStamp=5/14/2022 4:53:19 PM, Error: Failed to exchange client credentials for token. Response code=Unauthorized, Details:\r\n{\"error\":\"invalid_client\",\"error_description\":\"AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'clientsecretid'.\\r\\nTrace ID: 4a18d3cd-9ad5-4664-b3eb-daaa2f435f00\\r\\nCorrelation ID: dde60c16-35cb-4572-8226-bfb4233af8d7\\r\\nTimestamp: 2022-05-14 16:53:19Z\",\"error_codes\":[7000215],\"timestamp\":\"2022-05-14 16:53:19Z\",\"trace_id\":\"4a18d3cd-9ad5-4664-b3eb-daaa2f435f00\",\"correlation_id\":\"dde60c16-35cb-4572-8226-bfb4233af8d7\",\"error_uri\":\"https://login.windows.net/error?code=7000215\"}"
+              }
+            }
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}

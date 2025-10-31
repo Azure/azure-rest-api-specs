@@ -1,0 +1,545 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerEsuLicenses": {
+      "get": {
+        "tags": [
+          "SqlServerEsuLicenses"
+        ],
+        "operationId": "SqlServerEsuLicenses_List",
+        "summary": "List sqlServerEsuLicense resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerEsuLicenseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server ESU licenses in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlServerEsuLicense.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerEsuLicenses": {
+      "get": {
+        "tags": [
+          "SqlServerEsuLicenses"
+        ],
+        "operationId": "SqlServerEsuLicenses_ListByResourceGroup",
+        "description": "Gets all sqlServerEsuLicenses in a resource group.",
+        "summary": "List sqlServerEsuLicense resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerEsuLicenseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server ESU licenses in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlServerEsuLicense.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerEsuLicenses/{sqlServerEsuLicenseName}": {
+      "get": {
+        "tags": [
+          "SqlServerEsuLicenses"
+        ],
+        "operationId": "SqlServerEsuLicenses_Get",
+        "description": "Retrieves a SQL Server ESU license resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sqlServerEsuLicenseName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerEsuLicense"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SQL Server ESU license.": {
+            "$ref": "./examples/GetSqlServerEsuLicense.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlServerEsuLicenses"
+        ],
+        "operationId": "SqlServerEsuLicenses_Create",
+        "description": "Creates or replaces a SQL Server ESU license resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sqlServerEsuLicenseName"
+          },
+          {
+            "name": "sqlServerEsuLicense",
+            "in": "body",
+            "description": "The SQL Server ESU license to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerEsuLicense"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerEsuLicense"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlServerEsuLicense"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server ESU license.": {
+            "$ref": "./examples/CreateOrUpdateSqlServerEsuLicense.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServerEsuLicenses"
+        ],
+        "operationId": "SqlServerEsuLicenses_Delete",
+        "description": "Deletes a SQL Server ESU license resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sqlServerEsuLicenseName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Server ESU license."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Server ESU license does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Server ESU license.": {
+            "$ref": "./examples/DeleteSqlServerEsuLicense.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlServerEsuLicenses"
+        ],
+        "operationId": "SqlServerEsuLicenses_Update",
+        "description": "Updates a SQL Server ESU license resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sqlServerEsuLicenseName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server ESU license.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerEsuLicenseUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerEsuLicense"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a SQL Server ESU license.": {
+            "$ref": "./examples/UpdateSqlServerEsuLicense.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SqlServerEsuLicense": {
+      "description": "Describe SQL Server ESU license resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerEsuLicenseProperties",
+          "description": "SQL Server ESU license properties",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlServerEsuLicenseProperties": {
+      "description": "Properties of SQL Server ESU license.",
+      "type": "object",
+      "properties": {
+        "billingPlan": {
+          "type": "string",
+          "description": "SQL Server ESU license type.",
+          "enum": [
+            "PAYG"
+          ],
+          "x-ms-enum": {
+            "name": "billingPlan",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The SQL Server version the license covers.",
+          "enum": [
+            "SQL Server 2012",
+            "SQL Server 2014"
+          ],
+          "x-ms-enum": {
+            "name": "version",
+            "modelAsString": true
+          }
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The unique ID of this license. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+          "pattern": "^[A-Za-z0-9]{8}-([A-Za-z0-9]{4}-){3}[A-Za-z0-9]{12}$",
+          "readOnly": true
+        },
+        "physicalCores": {
+          "type": "integer",
+          "format": "int32",
+          "multipleOf": 2,
+          "minimum": 16,
+          "description": "The number of total cores of the license covers."
+        },
+        "activationState": {
+          "type": "string",
+          "description": "The activation state of the license.",
+          "enum": [
+            "Inactive",
+            "Active",
+            "Terminated"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        },
+        "scopeType": {
+          "type": "string",
+          "description": "The Azure scope to which the license will apply.",
+          "enum": [
+            "Tenant",
+            "Subscription",
+            "ResourceGroup"
+          ],
+          "x-ms-enum": {
+            "name": "scopeType",
+            "modelAsString": true
+          }
+        },
+        "activatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the activation of the SqlServerEsuLicense in ISO 8601 date-time format.",
+          "readOnly": true
+        },
+        "terminatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the termination of the SqlServerEsuLicense in ISO 8601 date-time format.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId the SQL Server ESU license resource subscription resides in.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "billingPlan",
+        "version",
+        "physicalCores",
+        "scopeType",
+        "activationState"
+      ]
+    },
+    "SqlServerEsuLicenseUpdateProperties": {
+      "description": "Properties of update SqlServerEsuLicense.",
+      "type": "object",
+      "properties": {
+        "billingPlan": {
+          "type": "string",
+          "description": "SQL Server ESU license type.",
+          "enum": [
+            "PAYG"
+          ],
+          "x-ms-enum": {
+            "name": "billingPlan",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The SQL Server version the license covers.",
+          "enum": [
+            "SQL Server 2012",
+            "SQL Server 2014"
+          ],
+          "x-ms-enum": {
+            "name": "version",
+            "modelAsString": true
+          }
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The unique ID of this license. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+          "pattern": "^[A-Za-z0-9]{8}-([A-Za-z0-9]{4}-){3}[A-Za-z0-9]{12}$",
+          "readOnly": true
+        },
+        "physicalCores": {
+          "type": "integer",
+          "format": "int32",
+          "multipleOf": 2,
+          "minimum": 16,
+          "description": "The number of total cores of the license covers."
+        },
+        "activationState": {
+          "type": "string",
+          "description": "The activation state of the license.",
+          "enum": [
+            "Inactive",
+            "Active",
+            "Terminated"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        },
+        "scopeType": {
+          "type": "string",
+          "description": "The Azure scope to which the license will apply.",
+          "enum": [
+            "Tenant",
+            "Subscription",
+            "ResourceGroup"
+          ],
+          "x-ms-enum": {
+            "name": "scopeType",
+            "modelAsString": true
+          }
+        },
+        "activatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the activation of the SqlServerEsuLicense in ISO 8601 date-time format.",
+          "readOnly": true
+        },
+        "terminatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the termination of the SqlServerEsuLicense in ISO 8601 date-time format.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId the SQL Server ESU license resource subscription resides in.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlServerEsuLicenseUpdate": {
+      "description": "An update to a SQL Server ESU license resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlServerEsuLicenseUpdateProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "SqlServerEsuLicenseListResult": {
+      "description": "A list of SQL Server ESU licenses.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerEsuLicense"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "sqlServerEsuLicenseName": {
+      "name": "sqlServerEsuLicenseName",
+      "description": "Name of SQL Server ESU License",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

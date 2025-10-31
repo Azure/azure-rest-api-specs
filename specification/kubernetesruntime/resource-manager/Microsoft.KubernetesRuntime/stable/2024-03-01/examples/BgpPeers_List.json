@@ -1,0 +1,27 @@
+{
+  "operationId": "BgpPeers_List",
+  "title": "BgpPeers_List",
+  "parameters": {
+    "resourceUri": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1",
+    "api-version": "2024-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1/providers/Microsoft.KubernetesRuntime/bgpPeers/testpeer",
+            "name": "testpeer",
+            "type": "Microsoft.KubernetesRuntime/BgpPeers",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "myAsn": 64500,
+              "peerAsn": 64501,
+              "peerAddress": "10.0.0.1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

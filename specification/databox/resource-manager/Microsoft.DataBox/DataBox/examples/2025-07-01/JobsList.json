@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "$expand": "details",
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2025-07-01",
+    "subscriptionId": "YourSubscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://xxx.xxx.xx",
+        "value": [
+          {
+            "name": "TestJobName1",
+            "type": "Microsoft.DataBox/jobs",
+            "id": "/subscriptions/YourSubscriptionId/resourcegroups/TestResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
+            "identity": {
+              "type": "None"
+            },
+            "location": "australiaeast",
+            "properties": {
+              "cancellationReason": "Old job which is still in ordered state cancelled by the service",
+              "deliveryInfo": {
+                "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+              },
+              "deliveryType": "NonScheduled",
+              "isCancellable": false,
+              "isCancellableWithoutFee": false,
+              "isDeletable": true,
+              "isPrepareToShipEnabled": false,
+              "isShippingAddressEditable": false,
+              "startTime": "2018-08-30T14:44:39.77401+05:30",
+              "status": "Cancelled",
+              "transferType": "ImportToAzure"
+            },
+            "sku": {
+              "name": "DataBoxDisk",
+              "model": "DataBoxDisk"
+            },
+            "tags": {}
+          },
+          {
+            "name": "TestJobName2",
+            "type": "Microsoft.DataBox/jobs",
+            "id": "/subscriptions/YourSubscriptionId/resourcegroups/TestResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName2",
+            "identity": {
+              "type": "None"
+            },
+            "location": "australiaeast",
+            "properties": {
+              "cancellationReason": "Old job which is still in ordered state cancelled by the service",
+              "deliveryInfo": {
+                "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+              },
+              "deliveryType": "NonScheduled",
+              "isCancellable": false,
+              "isCancellableWithoutFee": false,
+              "isDeletable": true,
+              "isPrepareToShipEnabled": false,
+              "isShippingAddressEditable": false,
+              "startTime": "2018-09-10T18:03:22.2578238+05:30",
+              "status": "Cancelled",
+              "transferType": "ImportToAzure"
+            },
+            "sku": {
+              "name": "DataBoxDisk",
+              "model": "DataBoxDisk"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Jobs_List",
+  "title": "JobsList"
+}

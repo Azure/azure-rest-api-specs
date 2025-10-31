@@ -1,0 +1,161 @@
+{
+  "title": "List_NamespaceAssets_ByResourceGroup",
+  "operationId": "NamespaceAssets_ListByResourceGroup",
+  "description": "List Namespace Assets in a Resource Group",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "adr-namespace-gbk0925-n01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/assets/my-asset",
+            "name": "my-asset",
+            "type": "Microsoft.DeviceRegistry/namespaces/assets",
+            "location": "West Europe",
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+            },
+            "tags": {
+              "site": "building-1"
+            },
+            "systemData": {
+              "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+              "createdByType": "Application",
+              "createdAt": "2022-11-16T00:36:43.2516899Z",
+              "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+            },
+            "properties": {
+              "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+              "enabled": true,
+              "externalAssetId": "8ZBA6LRHU0A458969",
+              "displayName": "AssetDisplayName",
+              "description": "This is a sample Asset",
+              "deviceRef": {
+                "deviceName": "myDevice",
+                "endpointName": "opcuaendpointname"
+              },
+              "assetTypeRefs": [
+                "myAssetTypeRef1",
+                "myAssetTypeRef2"
+              ],
+              "version": 73766,
+              "manufacturer": "Contoso",
+              "manufacturerUri": "https://www.contoso.com/manufacturerUri",
+              "model": "ContosoModel",
+              "productCode": "SA34VDG",
+              "hardwareRevision": "1.0",
+              "softwareRevision": "2.0",
+              "documentationUri": "https://www.example.com/manual",
+              "serialNumber": "64-103816-519918-8",
+              "defaultDatasetsConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+              "defaultEventsConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+              "defaultManagementGroupsConfiguration": "{\"retryCount\":10,\"retryBackoffInterval\":15}",
+              "datasets": [
+                {
+                  "name": "dataset1",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/Boiler;i=5",
+                  "typeRef": "dataset1TypeRef",
+                  "datasetConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+                  "dataPoints": [
+                    {
+                      "name": "dataPoint1",
+                      "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt1",
+                      "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
+                      "typeRef": "dataset1DataPoint1TypeRef"
+                    },
+                    {
+                      "name": "dataPoint2",
+                      "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt2",
+                      "dataPointConfiguration": "{\"publishingInterval\":4,\"samplingInterval\":4,\"queueSize\":7}"
+                    }
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "name": "event1",
+                  "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
+                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}"
+                },
+                {
+                  "name": "event2",
+                  "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
+                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}"
+                }
+              ],
+              "streams": [
+                {
+                  "name": "stream1",
+                  "streamConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
+                  "typeRef": "stream1TypeRef",
+                  "destinations": [
+                    {
+                      "target": "Storage",
+                      "configuration": {
+                        "path": "/tmp/stream1"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "stream2",
+                  "streamConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
+                  "typeRef": "stream2TypeRef",
+                  "destinations": [
+                    {
+                      "target": "Mqtt",
+                      "configuration": {
+                        "topic": "/contoso/testStream2",
+                        "retain": "Never",
+                        "qos": "Qos0",
+                        "ttl": 7200
+                      }
+                    }
+                  ]
+                }
+              ],
+              "managementGroups": [
+                {
+                  "name": "managementGroup1",
+                  "managementGroupConfiguration": "{\"retryCount\":10,\"retryBackoffInterval\":15}",
+                  "typeRef": "managementGroup1TypeRef",
+                  "defaultTopic": "/contoso/managementGroup1",
+                  "defaultTimeoutInSeconds": 100,
+                  "actions": [
+                    {
+                      "name": "action1",
+                      "actionConfiguration": "{\"retryCount\":5,\"retryBackoffInterval\":5}",
+                      "targetUri": "/onvif/device_service?ONVIFProfile=Profile1",
+                      "topic": "/contoso/managementGroup1/action1",
+                      "typeRef": "action1TypeRef",
+                      "actionType": "Call",
+                      "timeoutInSeconds": 60
+                    },
+                    {
+                      "name": "action2",
+                      "actionConfiguration": "{\"retryCount\":5,\"retryBackoffInterval\":5}",
+                      "targetUri": "/onvif/device_service?ONVIFProfile=Profile2",
+                      "topic": "/contoso/managementGroup1/action2",
+                      "typeRef": "action2TypeRef",
+                      "actionType": "Call",
+                      "timeoutInSeconds": 60
+                    }
+                  ]
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

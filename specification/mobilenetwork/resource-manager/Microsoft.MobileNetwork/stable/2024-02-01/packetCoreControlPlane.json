@@ -1,0 +1,1403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to manage packet core control plane resources",
+    "version": "2024-02-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}": {
+      "delete": {
+        "tags": [
+          "PacketCoreControlPlane"
+        ],
+        "operationId": "PacketCoreControlPlanes_Delete",
+        "description": "Deletes the specified packet core control plane.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete packet core control plane": {
+            "$ref": "./examples/PacketCoreControlPlaneDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "PacketCoreControlPlane"
+        ],
+        "operationId": "PacketCoreControlPlanes_Get",
+        "description": "Gets information about the specified packet core control plane.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting packet core control plane resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlane"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get packet core control plane": {
+            "$ref": "./examples/PacketCoreControlPlaneGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PacketCoreControlPlane"
+        ],
+        "operationId": "PacketCoreControlPlanes_CreateOrUpdate",
+        "description": "Creates or updates a packet core control plane.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlane"
+            },
+            "description": "Parameters supplied to the create or update packet core control plane operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting packet core control plane resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlane"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting packet core control plane resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlane"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create packet core control plane": {
+            "$ref": "./examples/PacketCoreControlPlaneCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "PacketCoreControlPlane"
+        ],
+        "operationId": "PacketCoreControlPlanes_UpdateTags",
+        "description": "Patch packet core control plane resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/IdentityAndTagsObject"
+            },
+            "description": "Parameters supplied to patch packet core control plane resource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting packet core control plane resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlane"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch packet core control plane": {
+            "$ref": "./examples/PacketCoreControlPlanePatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes": {
+      "get": {
+        "tags": [
+          "PacketCoreControlPlanes"
+        ],
+        "operationId": "PacketCoreControlPlanes_ListBySubscription",
+        "description": "Lists all the packet core control planes in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of packet core control plane resources.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlaneListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List packet core control planes in a subscription": {
+            "$ref": "./examples/PacketCoreControlPlaneListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes": {
+      "get": {
+        "tags": [
+          "PacketCoreControlPlanes"
+        ],
+        "operationId": "PacketCoreControlPlanes_ListByResourceGroup",
+        "description": "Lists all the packet core control planes in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of packet core control plane resources.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlaneListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List packet core control planes in resource group": {
+            "$ref": "./examples/PacketCoreControlPlaneListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/rollback": {
+      "post": {
+        "tags": [
+          "PacketCoreControlPlaneRollback"
+        ],
+        "operationId": "PacketCoreControlPlanes_Rollback",
+        "description": "Roll back the specified packet core control plane to the previous version, \"rollbackVersion\". Multiple consecutive rollbacks are not possible. This action may cause a service outage.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Async operation completed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/AsyncOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rollback packet core control plane": {
+            "$ref": "./examples/PacketCoreControlPlaneRollback.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/reinstall": {
+      "post": {
+        "tags": [
+          "PacketCoreControlPlaneReinstall"
+        ],
+        "operationId": "PacketCoreControlPlanes_Reinstall",
+        "description": "Reinstall the specified packet core control plane. This action will try to restore the packet core to the installed state that was disrupted by a transient failure. This action will cause a service outage.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Async operation completed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/AsyncOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reinstall packet core control plane": {
+            "$ref": "./examples/PacketCoreControlPlaneReinstall.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/collectDiagnosticsPackage": {
+      "post": {
+        "tags": [
+          "PacketCoreControlPlaneCollectDiagnosticsPackage"
+        ],
+        "operationId": "PacketCoreControlPlanes_CollectDiagnosticsPackage",
+        "description": "Collect a diagnostics package for the specified packet core control plane. This action will upload the diagnostics to a storage account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlaneCollectDiagnosticsPackage"
+            },
+            "description": "Parameters supplied to the packet core control plane collect diagnostics package operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Async operation completed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/AsyncOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Collect diagnostics package from packet core control plane": {
+            "$ref": "./examples/PacketCoreControlPlaneCollectDiagnosticsPackage.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.MobileNetwork/packetCoreControlPlaneVersions/{versionName}": {
+      "get": {
+        "tags": [
+          "PacketCoreControlPlaneVersion"
+        ],
+        "operationId": "PacketCoreControlPlaneVersions_Get",
+        "description": "Gets information about the specified packet core control plane version.",
+        "parameters": [
+          {
+            "name": "versionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the packet core control plane version."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting packet core control plane version resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlaneVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get packet core control plane version": {
+            "$ref": "./examples/PacketCoreControlPlaneVersionGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.MobileNetwork/packetCoreControlPlaneVersions": {
+      "get": {
+        "tags": [
+          "PacketCoreControlPlaneVersion"
+        ],
+        "operationId": "PacketCoreControlPlaneVersions_List",
+        "description": "Lists all supported packet core control planes versions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get supported packet core control plane versions successful.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlaneVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get supported packet core control plane versions": {
+            "$ref": "./examples/PacketCoreControlPlaneVersionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/packetCoreControlPlaneVersions/{versionName}": {
+      "get": {
+        "tags": [
+          "PacketCoreControlPlaneVersion"
+        ],
+        "operationId": "PacketCoreControlPlaneVersions_GetBySubscription",
+        "description": "Gets information about the specified packet core control plane version.",
+        "parameters": [
+          {
+            "name": "versionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the packet core control plane version."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting packet core control plane version resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlaneVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get packet core control plane version by subscription": {
+            "$ref": "./examples/PacketCoreControlPlaneVersionGetBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/packetCoreControlPlaneVersions": {
+      "get": {
+        "tags": [
+          "PacketCoreControlPlaneVersion"
+        ],
+        "operationId": "PacketCoreControlPlaneVersions_ListBySubscription",
+        "description": "Lists all supported packet core control planes versions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get supported packet core control plane versions successful.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreControlPlaneVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get supported packet core control plane versions by subscription": {
+            "$ref": "./examples/PacketCoreControlPlaneVersionListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PacketCoreControlPlane": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PacketCoreControlPlanePropertiesFormat",
+          "description": "Packet core control plane Properties."
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity used to retrieve the ingress certificate from Azure key vault."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Packet core control plane resource."
+    },
+    "PacketCoreControlPlanePropertiesFormat": {
+      "description": "Packet core control plane properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the packet core control plane resource."
+        },
+        "installation": {
+          "$ref": "#/definitions/Installation",
+          "description": "The installation state of the packet core control plane resource."
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SiteResourceId"
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "Site(s) under which this packet core control plane should be deployed. The sites must be in the same location as the packet core control plane."
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformConfiguration",
+          "description": "The platform where the packet core is deployed."
+        },
+        "coreNetworkTechnology": {
+          "$ref": "./ts29571.json#/definitions/CoreNetworkType",
+          "description": "The core network technology generation (5G core or EPC / 4G core)."
+        },
+        "version": {
+          "type": "string",
+          "description": "The desired version of the packet core software."
+        },
+        "installedVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The currently installed version of the packet core software."
+        },
+        "rollbackVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The previous version of the packet core software that was deployed. Used when performing the rollback action."
+        },
+        "controlPlaneAccessInterface": {
+          "$ref": "./common.json#/definitions/InterfaceProperties",
+          "description": "The control plane interface on the access network. For 5G networks, this is the N2 interface. For 4G networks, this is the S1-MME interface."
+        },
+        "controlPlaneAccessVirtualIpv4Addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "./ts29571.json#/definitions/Ipv4Addr"
+          },
+          "uniqueItems": true,
+          "description": "The virtual IP address(es) for the control plane on the access network in a High Availability (HA) system. In an HA deployment the access network router should be configured to anycast traffic for this address to the control plane access interfaces on the active and standby nodes. In non-HA system this list should be omitted or empty."
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/BillingSku",
+          "description": "The SKU defining the throughput and SIM allowances for this packet core control plane deployment."
+        },
+        "ueMtu": {
+          "description": "The MTU (in bytes) signaled to the UE. The same MTU is set on the user plane data links for all data networks. The MTU set on the user plane access link is calculated to be 60 bytes greater than this value to allow for GTP encapsulation.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1280,
+          "maximum": 1930,
+          "default": 1440
+        },
+        "localDiagnosticsAccess": {
+          "$ref": "#/definitions/LocalDiagnosticsAccessConfiguration",
+          "description": "The kubernetes ingress configuration to control access to packet core diagnostics over local APIs."
+        },
+        "diagnosticsUpload": {
+          "$ref": "#/definitions/DiagnosticsUploadConfiguration",
+          "description": "Configuration for uploading packet core diagnostics"
+        },
+        "eventHub": {
+          "$ref": "#/definitions/EventHubConfiguration",
+          "description": "Configuration for sending packet core events to an Azure Event Hub."
+        },
+        "signaling": {
+          "$ref": "#/definitions/SignalingConfiguration",
+          "description": "Signaling configuration for the packet core."
+        },
+        "interopSettings": {
+          "type": "object",
+          "description": "Settings to allow interoperability with third party components e.g. RANs and UEs."
+        },
+        "homeNetworkPrivateKeysProvisioning": {
+          "readOnly": true,
+          "$ref": "#/definitions/homeNetworkPrivateKeysProvisioning",
+          "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment."
+        }
+      },
+      "required": [
+        "sites",
+        "platform",
+        "controlPlaneAccessInterface",
+        "sku",
+        "localDiagnosticsAccess"
+      ]
+    },
+    "PacketCoreControlPlaneListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PacketCoreControlPlane"
+          },
+          "description": "A list of packet core control planes in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for packet core control planes API service call."
+    },
+    "Installation": {
+      "description": "The installation state of the packet core.",
+      "type": "object",
+      "properties": {
+        "desiredState": {
+          "description": "The desired installation state",
+          "$ref": "#/definitions/DesiredInstallationState",
+          "default": "Installed"
+        },
+        "state": {
+          "description": "Installation state",
+          "readOnly": true,
+          "$ref": "#/definitions/InstallationState"
+        },
+        "reinstallRequired": {
+          "description": "Whether a reinstall of the packet core is required to pick up the latest configuration changes.",
+          "readOnly": true,
+          "$ref": "#/definitions/ReinstallRequired"
+        },
+        "reasons": {
+          "description": "Reason(s) for the current installation state of the packet core.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstallationReason"
+          },
+          "uniqueItems": true
+        },
+        "operation": {
+          "description": "A reference to an in-progress installation operation",
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/AsyncOperationId"
+        }
+      }
+    },
+    "DesiredInstallationState": {
+      "type": "string",
+      "description": "The desired installation state of the packet core.",
+      "enum": [
+        "Uninstalled",
+        "Installed"
+      ],
+      "x-ms-enum": {
+        "name": "DesiredInstallationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Uninstalled",
+            "description": "Don't install the packet core."
+          },
+          {
+            "value": "Installed",
+            "description": "Install the packet core."
+          }
+        ]
+      }
+    },
+    "InstallationState": {
+      "type": "string",
+      "description": "The installation state of the packet core.",
+      "enum": [
+        "Uninstalled",
+        "Installing",
+        "Installed",
+        "Updating",
+        "Upgrading",
+        "Uninstalling",
+        "Reinstalling",
+        "RollingBack",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "InstallationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Uninstalled",
+            "description": "The packet core is uninstalled."
+          },
+          {
+            "value": "Installing",
+            "description": "The packet core is installing."
+          },
+          {
+            "value": "Installed",
+            "description": "The packet core is installed."
+          },
+          {
+            "value": "Updating",
+            "description": "The packet core is updating its configuration."
+          },
+          {
+            "value": "Upgrading",
+            "description": "The packet core is upgrading to a different software version."
+          },
+          {
+            "value": "Uninstalling",
+            "description": "The packet core is uninstalling."
+          },
+          {
+            "value": "Reinstalling",
+            "description": "The packet core is reinstalling."
+          },
+          {
+            "value": "RollingBack",
+            "description": "The packet core is rolling back to its previous version."
+          },
+          {
+            "value": "Failed",
+            "description": "The packet core is in failed state."
+          }
+        ]
+      }
+    },
+    "ReinstallRequired": {
+      "type": "string",
+      "description": "Whether a reinstall of the packet core is required to pick up the latest configuration changes.",
+      "enum": [
+        "Required",
+        "NotRequired"
+      ],
+      "x-ms-enum": {
+        "name": "ReinstallRequired",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Required",
+            "description": "A reinstall of the packet core is required."
+          },
+          {
+            "value": "NotRequired",
+            "description": "A reinstall of the packet core is not required."
+          }
+        ]
+      }
+    },
+    "InstallationReason": {
+      "type": "string",
+      "description": "The reason or list of reasons why a packet core has not been installed or requires a reinstall.",
+      "enum": [
+        "NoSlices",
+        "NoPacketCoreDataPlane",
+        "NoAttachedDataNetworks",
+        "PublicLandMobileNetworkIdentifierHasChanged",
+        "ControlPlaneAccessInterfaceHasChanged",
+        "UserPlaneAccessInterfaceHasChanged",
+        "UserPlaneDataInterfaceHasChanged",
+        "ControlPlaneAccessVirtualIpv4AddressesHasChanged",
+        "UserPlaneAccessVirtualIpv4AddressesHasChanged"
+      ],
+      "x-ms-enum": {
+        "name": "InstallationReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NoSlices",
+            "description": "The packet core has not been installed as the mobile network does not have any applicable configured slices."
+          },
+          {
+            "value": "NoPacketCoreDataPlane",
+            "description": "The packet core has not been installed as there is no configured data plane for this packet core."
+          },
+          {
+            "value": "NoAttachedDataNetworks",
+            "description": "The packet core has not been installed as the packet core has no attached data networks."
+          },
+          {
+            "value": "PublicLandMobileNetworkIdentifierHasChanged",
+            "description": "A reinstall is required as the packet core is running with out-of-date PLMN ID."
+          },
+          {
+            "value": "ControlPlaneAccessInterfaceHasChanged",
+            "description": "A reinstall is required as the packet core is running with out-of-date control plane access interface information."
+          },
+          {
+            "value": "UserPlaneAccessInterfaceHasChanged",
+            "description": "A reinstall is required as the packet core is running with out-of-date user plane core interface."
+          },
+          {
+            "value": "UserPlaneDataInterfaceHasChanged",
+            "description": "A reinstall is required as the packet core is running with out-of-date user plane access interface."
+          },
+          {
+            "value": "ControlPlaneAccessVirtualIpv4AddressesHasChanged",
+            "description": "A reinstall is required as the packet core is running with out-of-date control plane access network virtual IP address."
+          },
+          {
+            "value": "UserPlaneAccessVirtualIpv4AddressesHasChanged",
+            "description": "A reinstall is required as the packet core is running with out-of-date user plane access network virtual IP address."
+          }
+        ]
+      }
+    },
+    "PlatformConfiguration": {
+      "description": "The platform where the packet core is deployed.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "The platform type where packet core is deployed."
+        },
+        "azureStackEdgeDevice": {
+          "$ref": "./common.json#/definitions/AzureStackEdgeDeviceResourceId",
+          "description": "The Azure Stack Edge device where the packet core is deployed. If the device is part of a fault tolerant pair, either device in the pair can be specified."
+        },
+        "azureStackEdgeDevices": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/AzureStackEdgeDeviceResourceId"
+          },
+          "description": "The Azure Stack Edge devices where the packet core is deployed. If the packet core is deployed across multiple devices, all devices will appear in this list."
+        },
+        "azureStackHciCluster": {
+          "$ref": "./common.json#/definitions/AzureStackHCIClusterResourceId",
+          "description": "The Azure Stack HCI cluster where the packet core is deployed."
+        },
+        "connectedCluster": {
+          "$ref": "./common.json#/definitions/ConnectedClusterResourceId",
+          "description": "Azure Arc connected cluster where the packet core is deployed."
+        },
+        "customLocation": {
+          "$ref": "./common.json#/definitions/CustomLocationResourceId",
+          "description": "Azure Arc custom location where the packet core is deployed."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PlatformType": {
+      "type": "string",
+      "description": "The platform type where packet core is deployed. The contents of this enum can change.",
+      "enum": [
+        "AKS-HCI",
+        "3P-AZURE-STACK-HCI"
+      ],
+      "x-ms-enum": {
+        "name": "PlatformType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AKS-HCI",
+            "description": "If this option is chosen, you must set one of \"azureStackEdgeDevice\", \"connectedCluster\" or \"customLocation\". If multiple are set, they must be consistent with each other."
+          },
+          {
+            "value": "3P-AZURE-STACK-HCI",
+            "description": "If this option is chosen, you must set one of \"azureStackHciCluster\", \"connectedCluster\" or \"customLocation\". If multiple are set, they must be consistent with each other."
+          }
+        ]
+      }
+    },
+    "LocalDiagnosticsAccessConfiguration": {
+      "description": "The kubernetes ingress configuration to control access to packet core diagnostics over local APIs.",
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "type": "string",
+          "description": "How to authenticate users who access local diagnostics APIs.",
+          "enum": [
+            "AAD",
+            "Password"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AAD",
+                "description": "Use AAD SSO to authenticate the user (this requires internet access)."
+              },
+              {
+                "value": "Password",
+                "description": "Use locally stored passwords to authenticate the user."
+              }
+            ]
+          }
+        },
+        "httpsServerCertificate": {
+          "$ref": "#/definitions/HttpsServerCertificate",
+          "description": "The HTTPS server TLS certificate used to secure local access to diagnostics."
+        }
+      },
+      "required": [
+        "authenticationType"
+      ]
+    },
+    "DiagnosticsUploadConfiguration": {
+      "description": "Configuration for uploading packet core diagnostics.",
+      "type": "object",
+      "properties": {
+        "storageAccountContainerUrl": {
+          "type": "string",
+          "description": "The Storage Account Container URL to upload diagnostics to."
+        }
+      },
+      "required": [
+        "storageAccountContainerUrl"
+      ]
+    },
+    "EventHubConfiguration": {
+      "description": "Configuration for sending packet core events to Azure Event Hub.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[eE][vV][eE][nN][tT][hH][uU][bB]/[nN][aA][mM][eE][sS][pP][aA][cC][eE][sS]/[^/?#]+/[eV][vV][eE][nN][tT][hH][uU][bB][sS]/[^/?#]+$",
+          "description": "Resource ID  of Azure Event Hub to send packet core events to."
+        },
+        "reportingInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 30,
+          "maximum": 3600,
+          "default": 1800,
+          "description": "The duration (in seconds) between UE usage reports."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SignalingConfiguration": {
+      "description": "Signaling configuration for the packet core.",
+      "type": "object",
+      "properties": {
+        "nasReroute": {
+          "$ref": "#/definitions/NASRerouteConfiguration",
+          "description": "Configuration enabling 4G NAS reroute."
+        }
+      }
+    },
+    "NASRerouteConfiguration": {
+      "description": "Configuration enabling NAS reroute.",
+      "type": "object",
+      "properties": {
+        "macroMmeGroupId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "The macro network's MME group ID. This is where unknown UEs are sent to via NAS reroute."
+        }
+      },
+      "required": [
+        "macroMmeGroupId"
+      ]
+    },
+    "HttpsServerCertificate": {
+      "description": "HTTPS server certificate configuration.",
+      "type": "object",
+      "properties": {
+        "certificateUrl": {
+          "type": "string",
+          "description": "The certificate URL, unversioned. For example: https://contosovault.vault.azure.net/certificates/ingress."
+        },
+        "provisioning": {
+          "readOnly": true,
+          "$ref": "#/definitions/CertificateProvisioning",
+          "description": "The provisioning state of the certificate."
+        }
+      },
+      "required": [
+        "certificateUrl"
+      ]
+    },
+    "CertificateProvisioning": {
+      "description": "Certificate provisioning state",
+      "type": "object",
+      "properties": {
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The certificate's provisioning state",
+          "enum": [
+            "NotProvisioned",
+            "Provisioned",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotProvisioned",
+                "description": "The certificate has not been provisioned."
+              },
+              {
+                "value": "Provisioned",
+                "description": "The certificate has been provisioned."
+              },
+              {
+                "value": "Failed",
+                "description": "The certificate failed to be provisioned. The \"reason\" property explains why."
+              }
+            ]
+          }
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Reason for certificate provisioning failure."
+        }
+      }
+    },
+    "homeNetworkPrivateKeysProvisioning": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the private keys for SUPI concealment.",
+          "enum": [
+            "NotProvisioned",
+            "Provisioned",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "homeNetworkPrivateKeysProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotProvisioned",
+                "description": "Provisioning of the private keys for SUPI concealment has not been attempted."
+              },
+              {
+                "value": "Provisioned",
+                "description": "The private keys for SUPI concealment are successfully provisioned."
+              },
+              {
+                "value": "Failed",
+                "description": "Provisioning of the private keys for SUPI concealment has failed."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "PacketCoreControlPlaneCollectDiagnosticsPackage": {
+      "description": "Packet core control plane collect diagnostics package options",
+      "type": "object",
+      "properties": {
+        "storageAccountBlobUrl": {
+          "type": "string",
+          "description": "The Storage Account Blob URL to upload the diagnostics package to."
+        }
+      },
+      "required": [
+        "storageAccountBlobUrl"
+      ]
+    },
+    "PacketCoreControlPlaneVersion": {
+      "description": "Packet core control plane version resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PacketCoreControlPlaneVersionPropertiesFormat",
+          "description": "Packet core control plane version properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "PacketCoreControlPlaneVersionPropertiesFormat": {
+      "description": "Packet core control plane version properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the packet core control plane version resource."
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Platform"
+          },
+          "description": "Platform specific packet core control plane version properties.",
+          "x-ms-identifiers": [
+            "platformType"
+          ]
+        }
+      }
+    },
+    "Platform": {
+      "description": "Platform specific packet core control plane version properties.",
+      "type": "object",
+      "properties": {
+        "platformType": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "The platform type where this version can be deployed."
+        },
+        "versionState": {
+          "$ref": "#/definitions/VersionState",
+          "description": "The state of this packet core control plane version on this platform."
+        },
+        "minimumPlatformSoftwareVersion": {
+          "type": "string",
+          "description": "The minimum software version of the platform where this packet core version can be deployed."
+        },
+        "maximumPlatformSoftwareVersion": {
+          "type": "string",
+          "description": "The maximum software version of the platform where this packet core version can be deployed."
+        },
+        "recommendedVersion": {
+          "$ref": "#/definitions/RecommendedVersion",
+          "description": "Indicates whether this is the recommended version for this platform."
+        },
+        "obsoleteVersion": {
+          "$ref": "#/definitions/ObsoleteVersion",
+          "description": "Indicates whether this version is obsoleted for this platform."
+        }
+      }
+    },
+    "VersionState": {
+      "type": "string",
+      "description": "The state of this packet core control plane version.",
+      "enum": [
+        "Unknown",
+        "Preview",
+        "Validating",
+        "ValidationFailed",
+        "Active",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "versionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "The state of this version is unknown."
+          },
+          {
+            "value": "Preview",
+            "description": "This version is a preview and is not suitable for production use."
+          },
+          {
+            "value": "Validating",
+            "description": "This version is currently being validated."
+          },
+          {
+            "value": "ValidationFailed",
+            "description": "This version failed validation."
+          },
+          {
+            "value": "Active",
+            "description": "This version is active and suitable for production use."
+          },
+          {
+            "value": "Deprecated",
+            "description": "This version is deprecated and is no longer supported."
+          }
+        ]
+      }
+    },
+    "RecommendedVersion": {
+      "type": "string",
+      "description": "Indicates whether this is the recommended version to use for new packet core control plane deployments.",
+      "enum": [
+        "Recommended",
+        "NotRecommended"
+      ],
+      "x-ms-enum": {
+        "name": "recommendedVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Recommended",
+            "description": "This is the recommended version to use for new packet core control plane deployments."
+          },
+          {
+            "value": "NotRecommended",
+            "description": "This is not the recommended version to use for new packet core control plane deployments."
+          }
+        ]
+      }
+    },
+    "ObsoleteVersion": {
+      "type": "string",
+      "description": "Indicates whether this version is obsolete.",
+      "enum": [
+        "Obsolete",
+        "NotObsolete"
+      ],
+      "x-ms-enum": {
+        "name": "obsoleteVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Obsolete",
+            "description": "This version is obsolete for use in new packet core control plane deployments."
+          },
+          {
+            "value": "NotObsolete",
+            "description": "This version is not obsolete for use in new packet core control plane deployments."
+          }
+        ]
+      }
+    },
+    "PacketCoreControlPlaneVersionListResult": {
+      "description": "Response for packet core control plane version API service call.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PacketCoreControlPlaneVersion"
+          },
+          "description": "A list of supported packet core control plane versions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    }
+  }
+}

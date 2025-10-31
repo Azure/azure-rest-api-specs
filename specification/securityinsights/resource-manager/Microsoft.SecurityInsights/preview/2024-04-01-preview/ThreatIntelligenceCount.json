@@ -1,0 +1,348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2024-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{tiType}/count": {
+      "post": {
+        "x-ms-examples": {
+          "Get TI object count": {
+            "$ref": "./examples/threatintelligence/PostThreatIntelligenceCount.json"
+          }
+        },
+        "tags": [
+          "ThreatIntelligence"
+        ],
+        "description": "Gets the count of all TI objects for the workspace.",
+        "operationId": "ThreatIntelligence_Count",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/TiType"
+          },
+          {
+            "$ref": "#/parameters/CountQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceCount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ThreatIntelligenceCount": {
+      "description": "Count of all the threat intelligence objects on the workspace that match the provided query.",
+      "properties": {
+        "count": {
+          "description": "Count of all the threat intelligence objects on the workspace that match the provided query.",
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "required": [
+        "count"
+      ]
+    },
+    "CountQuery": {
+      "description": "Represents a query to run on the TI objects in the workspace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryProperties",
+          "description": "Query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "QueryProperties": {
+      "description": "Describes the query properties",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/ConditionProperties",
+          "description": "Represents a condition used to query for TI objects.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ConditionProperties": {
+      "description": "Represents a condition used to query for TI objects.",
+      "properties": {
+        "stixObjectType": {
+          "description": "The STIX type for the objects returned by this query.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clauses": {
+          "description": "The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.",
+          "items": {
+            "$ref": "#/definitions/ConditionClause"
+          },
+          "type": "array"
+        },
+        "conditionConnective": {
+          "description": "The top level connective operator for this condition.",
+          "type": "string",
+          "$ref": "#/definitions/Connective"
+        }
+      },
+      "required": [
+        "clauses"
+      ],
+      "type": "object"
+    },
+    "ConditionClause": {
+      "description": "Represents a single clause to be evaluated by a NormalizedCondition.",
+      "properties": {
+        "clauseConnective": {
+          "description": "The connective used to join all values in this ConditionClause",
+          "type": "string",
+          "$ref": "#/definitions/Connective"
+        },
+        "field": {
+          "description": "The name of the field that is evaluated.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Represents an operator in a ConditionClause.",
+          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "LessThan",
+            "LessThanEqual",
+            "GreaterThan",
+            "GreaterThanEqual",
+            "StringContains",
+            "StringNotContains",
+            "StringStartsWith",
+            "StringNotStartsWith",
+            "StringEndsWith",
+            "StringNotEndsWith",
+            "StringIsEmpty",
+            "IsNull",
+            "IsTrue",
+            "IsFalse",
+            "ArrayContains",
+            "ArrayNotContains",
+            "OnOrAfterRelative",
+            "AfterRelative",
+            "OnOrBeforeRelative",
+            "BeforeRelative",
+            "OnOrAfterAbsolute",
+            "AfterAbsolute",
+            "OnOrBeforeAbsolute",
+            "BeforeAbsolute"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Operator",
+            "values": [
+              {
+                "value": "Equals"
+              },
+              {
+                "value": "NotEquals"
+              },
+              {
+                "value": "LessThan"
+              },
+              {
+                "value": "LessThanEqual"
+              },
+              {
+                "value": "GreaterThan"
+              },
+              {
+                "value": "GreaterThanEqual"
+              },
+              {
+                "value": "StringContains"
+              },
+              {
+                "value": "StringNotContains"
+              },
+              {
+                "value": "StringStartsWith"
+              },
+              {
+                "value": "StringNotStartsWith"
+              },
+              {
+                "value": "StringEndsWith"
+              },
+              {
+                "value": "StringNotEndsWith"
+              },
+              {
+                "value": "StringIsEmpty"
+              },
+              {
+                "value": "IsNull"
+              },
+              {
+                "value": "IsTrue"
+              },
+              {
+                "value": "IsFalse"
+              },
+              {
+                "value": "ArrayContains"
+              },
+              {
+                "value": "ArrayNotContains"
+              },
+              {
+                "value": "OnOrAfterRelative"
+              },
+              {
+                "value": "AfterRelative"
+              },
+              {
+                "value": "OnOrBeforeRelative"
+              },
+              {
+                "value": "BeforeRelative"
+              },
+              {
+                "value": "OnOrAfterAbsolute"
+              },
+              {
+                "value": "AfterAbsolute"
+              },
+              {
+                "value": "OnOrBeforeAbsolute"
+              },
+              {
+                "value": "BeforeAbsolute"
+              }
+            ]
+          }
+        },
+        "values": {
+          "description": "The top level connective operator for this condition.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "field",
+        "operator",
+        "values"
+      ],
+      "type": "object"
+    },
+    "Connective": {
+      "description": "Represents boolean connectives used to join clauses in conditions.",
+      "readOnly": true,
+      "enum": [
+        "And",
+        "Or"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Connective",
+        "values": [
+          {
+            "description": "'And' connective",
+            "value": "And"
+          },
+          {
+            "description": "'Or' connective",
+            "value": "Or"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "CountQuery": {
+      "description": "The query to run on the TI objects in the workspace.",
+      "in": "body",
+      "name": "query",
+      "schema": {
+        "$ref": "#/definitions/CountQuery"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TiType": {
+      "description": "TI type",
+      "in": "path",
+      "name": "tiType",
+      "required": true,
+      "enum": [
+        "main"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TiType",
+        "values": [
+          {
+            "value": "main"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

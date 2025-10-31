@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "WestUS"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "OpenAI",
+            "skuName": "S0",
+            "model": {
+              "format": "OpenAI",
+              "name": "ada",
+              "version": "1",
+              "maxCapacity": 3,
+              "capabilities": {
+                "fineTune": "true",
+                "inference": "false",
+                "scaleType": "Manual",
+                "completion": "true",
+                "search": "true",
+                "FineTuneTokensMaxValue": "37500000"
+              },
+              "finetuneCapabilities": {
+                "fineTune": "true",
+                "inference": "false",
+                "scaleType": "Manual,Standard",
+                "completion": "true",
+                "search": "true",
+                "FineTuneTokensMaxValue": "37500000"
+              },
+              "deprecation": {
+                "fineTune": "2024-01-01T00:00:00Z",
+                "inference": "2024-01-01T00:00:00Z"
+              },
+              "lifecycleStatus": "Preview",
+              "systemData": {
+                "createdBy": "Microsoft",
+                "createdAt": "2021-10-07T00:00:00Z",
+                "lastModifiedBy": "Microsoft",
+                "lastModifiedAt": "2021-10-07T00:00:00Z"
+              },
+              "skus": [
+                {
+                  "name": "provisioned",
+                  "usageName": "OpenAI.Provisioned.Class1",
+                  "capacity": {
+                    "minimum": 100,
+                    "maximum": 1000,
+                    "step": 100,
+                    "default": 100
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -32,9 +32,8 @@
   "paths": {
     "/custom/models": {
       "post": {
-        "summary": "Train Custom Model",
         "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Other type of content is ignored.",
-        "operationId": "TrainCustomModelAsync",
+        "operationId": "CustomModels_Train",
         "consumes": [
           "application/json"
         ],
@@ -82,9 +81,8 @@
     },
     "/custom/models/{modelId}": {
       "get": {
-        "summary": "Get Custom Model",
         "description": "Get detailed information about a custom model.",
-        "operationId": "GetCustomModel",
+        "operationId": "CustomModels_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -129,9 +127,8 @@
         }
       },
       "delete": {
-        "summary": "Delete Custom Model",
         "description": "Mark model for deletion. Model artifacts will be permanently removed within a predetermined period.",
-        "operationId": "DeleteCustomModel",
+        "operationId": "CustomModels_Delete",
         "consumes": [],
         "produces": [
           "application/json"
@@ -166,9 +163,8 @@
     },
     "/custom/models/{modelId}/analyze": {
       "post": {
-        "summary": "Analyze Form",
         "description": "Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
-        "operationId": "AnalyzeWithCustomModel",
+        "operationId": "CustomModels_AnalyzeDocument",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -232,9 +228,8 @@
     },
     "/custom/models/{modelId}/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get Analyze Form Result",
         "description": "Obtain current status and the result of the analyze form operation.",
-        "operationId": "GetAnalyzeFormResult",
+        "operationId": "CustomModels_GetAnalyzeResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -280,9 +275,8 @@
     },
     "/custom/models/{modelId}/copy": {
       "post": {
-        "summary": "Copy Custom Model",
         "description": "Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource.",
-        "operationId": "CopyCustomModel",
+        "operationId": "CustomModels_Copy",
         "consumes": [
           "application/json"
         ],
@@ -335,9 +329,8 @@
     },
     "/custom/models/{modelId}/copyResults/{resultId}": {
       "get": {
-        "summary": "Get Custom Model Copy Result",
         "description": "Obtain current status and the result of a custom model copy operation.",
-        "operationId": "GetCustomModelCopyResult",
+        "operationId": "CustomModels_GetCopyResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -386,9 +379,8 @@
     },
     "/custom/models/copyAuthorization": {
       "post": {
-        "summary": "Generate Copy Authorization",
         "description": "Generate authorization to copy a model into the target Form Recognizer resource.",
-        "operationId": "GenerateModelCopyAuthorization",
+        "operationId": "CustomModels_AuthorizeModelCopy",
         "consumes": [],
         "produces": [
           "application/json"
@@ -423,12 +415,8 @@
     },
     "/custom/models/compose": {
       "post": {
-        "tags": [
-          "Form"
-        ],
-        "summary": "Compose trained with labels models into one composed model.",
         "description": "Compose request would include list of models ids.\r\nIt would validate what all models either trained with labels model or composed model.\r\nIt would validate limit of models put together.",
-        "operationId": "ComposeCustomModelsAsync",
+        "operationId": "CustomModels_Compose",
         "consumes": [],
         "produces": [
           "application/json",
@@ -472,9 +460,8 @@
     },
     "/prebuilt/businessCard/analyze": {
       "post": {
-        "summary": "Analyze Business Card",
         "description": "Extract field text and semantic values from a given business card document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "AnalyzeBusinessCardAsync",
+        "operationId": "Analyzer_AnalyzeBusinessCard",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -533,9 +520,8 @@
     },
     "/prebuilt/businessCard/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get Analyze Business Card Result",
         "description": "Track the progress and obtain the result of the analyze business card operation.",
-        "operationId": "GetAnalyzeBusinessCardResult",
+        "operationId": "Analyzer_GetAnalyzeBusinessCardResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -573,9 +559,8 @@
     },
     "/prebuilt/invoice/analyze": {
       "post": {
-        "summary": "Analyze Invoice Document",
         "description": "Extract field text and semantic values from a given invoice document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "AnalyzeInvoiceAsync",
+        "operationId": "Analyzer_AnalyzeInvoice",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -634,9 +619,8 @@
     },
     "/prebuilt/invoice/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get Analyze Invoice Result",
         "description": "Track the progress and obtain the result of the analyze invoice operation.",
-        "operationId": "GetAnalyzeInvoiceResult",
+        "operationId": "Analyzer_GetAnalyzeInvoiceResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -674,9 +658,8 @@
     },
     "/prebuilt/idDocument/analyze": {
       "post": {
-        "summary": "Analyze ID Document",
         "description": "Extract field text and semantic values from a given ID document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "AnalyzeIdDocumentAsync",
+        "operationId": "Analyzer_AnalyzeIdDocument",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -732,9 +715,8 @@
     },
     "/prebuilt/idDocument/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get Analyze ID Document Result",
         "description": "Track the progress and obtain the result of the analyze ID operation.",
-        "operationId": "GetAnalyzeIdDocumentResult",
+        "operationId": "Analyzer_GetAnalyzeIdDocumentResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -772,9 +754,8 @@
     },
     "/prebuilt/receipt/analyze": {
       "post": {
-        "summary": "Analyze Receipt",
         "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "AnalyzeReceiptAsync",
+        "operationId": "Analyzer_AnalyzeReceipt",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -833,9 +814,8 @@
     },
     "/prebuilt/receipt/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get Analyze Receipt Result",
         "description": "Track the progress and obtain the result of the analyze receipt operation.",
-        "operationId": "GetAnalyzeReceiptResult",
+        "operationId": "Analyzer_GetAnalyzeReceiptResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -873,9 +853,8 @@
     },
     "/layout/analyze": {
       "post": {
-        "summary": "Analyze Layout",
         "description": "Extract text and layout information from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
-        "operationId": "AnalyzeLayoutAsync",
+        "operationId": "Analyzer_AnalyzeLayout",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -928,9 +907,8 @@
     },
     "/layout/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get Analyze Layout Result",
         "description": "Track the progress and obtain the result of the analyze layout operation",
-        "operationId": "GetAnalyzeLayoutResult",
+        "operationId": "Analyzer_GetAnalyzeLayoutResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -970,9 +948,8 @@
   "x-ms-paths": {
     "/custom/models?op=full": {
       "get": {
-        "summary": "List Custom Models",
         "description": "Get information about all custom models",
-        "operationId": "ListCustomModels",
+        "operationId": "CustomModels_List",
         "consumes": [],
         "produces": [
           "application/json"
@@ -1016,9 +993,8 @@
     },
     "/custom/models?op=summary": {
       "get": {
-        "summary": "Get Custom Models",
         "description": "Get information about all custom models",
-        "operationId": "GetCustomModels",
+        "operationId": "CustomModels_GetSummary",
         "consumes": [],
         "produces": [
           "application/json"

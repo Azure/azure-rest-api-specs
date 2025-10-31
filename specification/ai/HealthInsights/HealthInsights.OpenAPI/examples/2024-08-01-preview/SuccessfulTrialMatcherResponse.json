@@ -1,0 +1,116 @@
+{
+  "operationId": "TrialMatcher_GetJob",
+  "title": "Gets the status and details of the Trial Matcher job.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-08-01-preview",
+    "id": "a4d3d73e-2be3-4ca1-bd4f-66a5bdd19754"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "c7e9a8d7-6b5f-4e3d-9a2c-1f8b0e2c3f4a"
+      },
+      "body": {
+        "id": "a4d3d73e-2be3-4ca1-bd4f-66a5bdd19754",
+        "createdAt": "2021-11-28T09:13:11.046Z",
+        "expiresAt": "2021-11-28T09:13:11.046Z",
+        "updatedAt": "2021-11-28T09:13:11.046Z",
+        "status": "succeeded",
+        "result": {
+          "patientResults": [
+            {
+              "patientId": "Patient ID Example 2",
+              "inferences": [
+                {
+                  "type": "trialEligibility",
+                  "value": "Eligible",
+                  "description": "SwEaTB - Diagnosing of Acute Tuberculosis",
+                  "confidenceScore": 1,
+                  "evidence": [
+                    {
+                      "eligibilityCriteriaEvidence": "In-patients with acute tuberculosis",
+                      "patientInfoEvidence": {
+                        "system": "UMLS",
+                        "code": "C0019046",
+                        "name": "tuberculosis"
+                      },
+                      "importance": 1
+                    }
+                  ],
+                  "clinicalTrialId": "NCT03667742",
+                  "source": "clinicaltrials.gov",
+                  "metadata": {
+                    "phases": [
+                      "phase3"
+                    ],
+                    "studyType": "observational",
+                    "recruitmentStatus": "recruiting",
+                    "conditions": [
+                      "Tuberculosis"
+                    ],
+                    "sponsors": [
+                      "University Hospital, Basel, Switzerland"
+                    ],
+                    "contacts": [
+                      {
+                        "name": "John Doe, PD Dr. Med",
+                        "email": "John@contoso.com",
+                        "phone": "+55-555-5555-55"
+                      }
+                    ],
+                    "facilities": [
+                      {
+                        "name": "University Hospital, Basel",
+                        "city": "Basel",
+                        "countryOrRegion": "Switzerland"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "trialEligibility",
+                  "value": "Ineligible",
+                  "description": "Design of an Integrative Algorithm for Staging Tuberculosis (STAGE-TB)",
+                  "confidenceScore": 1,
+                  "evidence": [
+                    {
+                      "eligibilityCriteriaEvidence": "negative for Quantiferon- TB Gold Plus Test or ELISpot",
+                      "patientInfoEvidence": {
+                        "system": "UMLS",
+                        "code": "C0920508",
+                        "name": "Enzyme-Linked Immunospot Assay",
+                        "value": "30,000 PBMC cells per 10ul"
+                      },
+                      "importance": 1
+                    }
+                  ],
+                  "clinicalTrialId": "NCT03691883",
+                  "source": "clinicaltrials.gov"
+                }
+              ],
+              "neededClinicalInfo": [
+                {
+                  "system": "UMLS",
+                  "code": "C4317078",
+                  "name": "Mycobacterium Tuberculosis Measurement ",
+                  "semanticType": "Laboratory Procedure",
+                  "category": "EXAMINATION_NAME"
+                },
+                {
+                  "system": "UMLS",
+                  "code": "C0008031",
+                  "name": "Chest Pain",
+                  "semanticType": "Sign or Symptom",
+                  "category": "SYMPTOM_OR_SIGN"
+                }
+              ]
+            }
+          ],
+          "modelVersion": "2021-10-28",
+          "knowledgeGraphLastUpdateDate": "2021-11-26"
+        }
+      }
+    }
+  }
+}

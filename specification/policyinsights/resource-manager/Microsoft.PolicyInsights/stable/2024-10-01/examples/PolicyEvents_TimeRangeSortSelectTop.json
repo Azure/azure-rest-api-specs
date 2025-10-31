@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "policyEventsResource": "default",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+    "api-version": "2024-10-01",
+    "$from": "2018-02-05T18:00:00Z",
+    "$to": "2018-02-06T18:00:00Z",
+    "$orderby": "Timestamp desc, PolicyAssignmentId asc, SubscriptionId asc, ResourceGroup asc, ResourceId",
+    "$select": "Timestamp, PolicyAssignmentId, PolicyDefinitionId, SubscriptionId, ResourceGroup, ResourceId",
+    "$top": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default",
+        "@odata.count": 2,
+        "value": [
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "timestamp": "2018-02-05T22:34:02.3475017Z",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policyAssignments/89b27f38-e9e4-4468-ab81-801c84b8c017",
+            "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/201ea587-7c90-41c3-910f-c280ae01cfd6",
+            "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+            "resourceGroup": "myResourceGroup",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/Microsoft.ClassicCompute/domainNames/myDomain"
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "timestamp": "2018-02-05T22:34:01.6135357Z",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policyAssignments/Enable Monitoring in Azure Security Center",
+            "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/201ea587-7c90-41c3-910f-c280ae01cfd6",
+            "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+            "resourceGroup": "myResourceGroup",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/Microsoft.ClassicCompute/domainNames/myDomain"
+          }
+        ]
+      }
+    }
+  }
+}

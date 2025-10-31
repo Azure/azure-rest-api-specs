@@ -27,15 +27,42 @@ These are the global settings for the scvmm.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-04
+tag: package-2025-03
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+### Tag: package-2025-03
 
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03'
+input-file:
+  - Microsoft.ScVmm/stable/2025-03-13/scvmm.json
+```
+### Tag: package-2024-06
+
+These settings apply only when `--tag=package-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06'
+input-file:
+  - Microsoft.ScVmm/stable/2024-06-01/scvmm.json
+```
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10'
+input-file:
+  - Microsoft.ScVmm/stable/2023-10-07/scvmm.json
+```
 ### Tag: package-preview-2023-04
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-04'
+``` yaml $(tag) == 'package-preview-2023-04'
 input-file:
   - Microsoft.ScVmm/preview/2023-04-01-preview/scvmm.json
 suppressions:
@@ -49,6 +76,7 @@ suppressions:
     where:
       - $.definitions.VirtualMachineInstance
 ```
+
 ### Tag: package-2020-06-05-preview
 
 These settings apply only when `--tag=package-2020-06-05-preview` is specified on the command line.
@@ -78,13 +106,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_scvmm']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js scvmm/resource-manager
@@ -97,10 +121,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

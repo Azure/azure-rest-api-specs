@@ -1,0 +1,712 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Qumulo.Storage",
+    "version": "2024-06-19",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "FileSystems"
+    }
+  ],
+  "paths": {
+    "/providers/Qumulo.Storage/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Qumulo.Storage/fileSystems": {
+      "get": {
+        "operationId": "FileSystems_ListBySubscription",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "List FileSystemResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_ListBySubscription": {
+            "$ref": "./examples/FileSystems_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "FileSystems_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Qumulo.Storage/fileSystems": {
+      "get": {
+        "operationId": "FileSystems_ListByResourceGroup",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "List FileSystemResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_ListByResourceGroup": {
+            "$ref": "./examples/FileSystems_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "FileSystems_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Qumulo.Storage/fileSystems/{fileSystemName}": {
+      "get": {
+        "operationId": "FileSystems_Get",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "Get a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fileSystemName",
+            "in": "path",
+            "description": "Name of the File System resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_Get": {
+            "$ref": "./examples/FileSystems_Get_MaximumSet_Gen.json"
+          },
+          "FileSystems_Get_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FileSystems_CreateOrUpdate",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "Create a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fileSystemName",
+            "in": "path",
+            "description": "Name of the File System resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FileSystemResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'FileSystemResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_CreateOrUpdate": {
+            "$ref": "./examples/FileSystems_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "FileSystems_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FileSystems_Update",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "Update a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fileSystemName",
+            "in": "path",
+            "description": "Name of the File System resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_Update": {
+            "$ref": "./examples/FileSystems_Update_MaximumSet_Gen.json"
+          },
+          "FileSystems_Update_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FileSystems_Delete",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "Delete a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fileSystemName",
+            "in": "path",
+            "description": "Name of the File System resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_Delete": {
+            "$ref": "./examples/FileSystems_Delete_MaximumSet_Gen.json"
+          },
+          "FileSystems_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "FileSystemResourceListResult": {
+      "type": "object",
+      "description": "The response of a FileSystemResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FileSystemResource items on this page",
+          "items": {
+            "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LiftrBase.MarketplaceDetails": {
+      "type": "object",
+      "description": "MarketplaceDetails of Qumulo FileSystem resource",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "type": "string",
+          "description": "Marketplace Subscription Id"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term Unit"
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "planId",
+        "offerId"
+      ]
+    },
+    "LiftrBase.MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of the file system resource",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Fulfillment has not started"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Marketplace offer is subscribed"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Marketplace offer is suspended because of non payment"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Marketplace offer is unsubscribed"
+          }
+        ]
+      }
+    },
+    "LiftrBase.ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State of the File system resource",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "File system resource creation request accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "File system resource creation started"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "File system resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "File system resource deletion started"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "File system resource creation successful"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "File system resource creation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "File system resource creation canceled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "File system resource is deleted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "LiftrBase.Storage.FileSystemResource": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LiftrBase.Storage.FileSystemResourceProperties": {
+      "type": "object",
+      "description": "Properties specific to the Qumulo File System resource",
+      "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/LiftrBase.ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
+        },
+        "storageSku": {
+          "type": "string",
+          "description": "Storage Sku"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "description": "User Details"
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "clusterLoginUrl": {
+          "type": "string",
+          "description": "File system Id of the resource"
+        },
+        "privateIPs": {
+          "type": "array",
+          "description": "Private IPs of the resource",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adminPassword": {
+          "type": "string",
+          "description": "Initial administrator password of the resource",
+          "x-ms-secret": true
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "Availability zone"
+        }
+      },
+      "required": [
+        "marketplaceDetails",
+        "storageSku",
+        "userDetails",
+        "delegatedSubnetId",
+        "adminPassword"
+      ]
+    },
+    "LiftrBase.Storage.FileSystemResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the FileSystemResource.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceUpdateProperties",
+          "description": "The updatable properties of the FileSystemResource."
+        }
+      }
+    },
+    "LiftrBase.Storage.FileSystemResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the FileSystemResource.",
+      "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "description": "User Details"
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        }
+      }
+    },
+    "LiftrBase.UserDetails": {
+      "type": "object",
+      "description": "User Details of Qumulo FileSystem resource",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User Email",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "email"
+      ]
+    }
+  },
+  "parameters": {}
+}

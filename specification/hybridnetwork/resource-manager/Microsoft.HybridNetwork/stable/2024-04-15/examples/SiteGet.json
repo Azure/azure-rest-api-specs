@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "siteName": "testSite"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSite",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/sites/testSite",
+        "type": "Microsoft.HybridNetwork/sites",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "westUs2",
+        "properties": {
+          "provisioningState": "Accepted",
+          "nfvis": [
+            {
+              "nfviType": "AzureCore",
+              "name": "nfvi1",
+              "location": "westUs2"
+            },
+            {
+              "name": "nfvi2",
+              "nfviType": "AzureArcKubernetes",
+              "customLocationReference": {
+                "id": "/subscriptions/subid/resourceGroups/testResourceGroup/providers/Microsoft.ExtendedLocation/customLocations/testCustomLocation1"
+              }
+            },
+            {
+              "name": "nfvi3",
+              "nfviType": "AzureOperatorNexus",
+              "customLocationReference": {
+                "id": "/subscriptions/subid/resourceGroups/testResourceGroup/providers/Microsoft.ExtendedLocation/customLocations/testCustomLocation2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

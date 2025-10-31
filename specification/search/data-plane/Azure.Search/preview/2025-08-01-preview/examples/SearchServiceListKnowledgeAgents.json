@@ -1,0 +1,63 @@
+{
+  "operationId": "KnowledgeAgents_List",
+  "title": "SearchServiceListKnowledgeAgents",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "agent-preview-test",
+            "description": "Description of the agent.",
+            "retrievalInstructions": "Instructions for retrieval for the agent.",
+            "knowledgeSources": [
+              {
+                "name": "ks-preview-test",
+                "alwaysQuerySource": true,
+                "includeReferences": true,
+                "includeReferenceSourceData": true,
+                "maxSubQueries": 5,
+                "rerankerThreshold": 2.1
+              }
+            ],
+            "models": [
+              {
+                "kind": "azureOpenAI",
+                "azureOpenAIParameters": {
+                  "resourceUri": "https://test-sample.openai.azure.com",
+                  "deploymentId": "myDeployment",
+                  "apiKey": "<redacted>",
+                  "modelName": "gpt-4o-mini"
+                }
+              }
+            ],
+            "outputConfiguration": {
+              "modality": "extractiveData",
+              "answerInstructions": "Provide a concise answer to the question.",
+              "attemptFastPath": false,
+              "includeActivity": true
+            },
+            "requestLimits": {
+              "maxRuntimeInSeconds": 60,
+              "maxOutputSize": 100000
+            },
+            "encryptionKey": {
+              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+              "keyVaultUri": "https://myKeyVault.vault.azure.net",
+              "accessCredentials": {
+                "applicationId": "00000000-0000-0000-0000-000000000000",
+                "applicationSecret": "<applicationSecret>"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

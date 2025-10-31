@@ -1881,6 +1881,10 @@
       "type": "object",
       "description": "The ExternalNetwork patchable properties.",
       "properties": {
+        "networkToNetworkInterconnectId": {
+          "description": "ARM Resource ID of the networkToNetworkInterconnectId of the ExternalNetwork resource.",
+          "$ref": "./common.json#/definitions/NetworkToNetworkInterconnectIdProperty"
+        },
         "importRoutePolicyId": {
           "description": "ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.",
           "$ref": "./common.json#/definitions/RoutePolicyIdProperty"
@@ -2012,11 +2016,6 @@
         }
       ],
       "properties": {
-        "networkToNetworkInterconnectId": {
-          "type": "string",
-          "description": "Gets the networkToNetworkInterconnectId of the resource.",
-          "readOnly": true
-        },
         "peeringOption": {
           "description": "Peering option list.",
           "$ref": "./common.json#/definitions/PeeringOption"

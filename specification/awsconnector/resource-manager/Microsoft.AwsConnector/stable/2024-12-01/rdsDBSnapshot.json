@@ -1,0 +1,731 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "RdsDBSnapshots"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/rdsDBSnapshots": {
+      "get": {
+        "operationId": "RdsDbSnapshots_ListBySubscription",
+        "tags": [
+          "RdsDBSnapshots"
+        ],
+        "description": "List RdsDBSnapshot resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RdsDBSnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbSnapshots_ListBySubscription": {
+            "$ref": "./examples/RdsDbSnapshots_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/rdsDBSnapshots": {
+      "get": {
+        "operationId": "RdsDbSnapshots_ListByResourceGroup",
+        "tags": [
+          "RdsDBSnapshots"
+        ],
+        "description": "List RdsDBSnapshot resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RdsDBSnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbSnapshots_ListByResourceGroup": {
+            "$ref": "./examples/RdsDbSnapshots_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/rdsDBSnapshots/{name}": {
+      "get": {
+        "operationId": "RdsDbSnapshots_Get",
+        "tags": [
+          "RdsDBSnapshots"
+        ],
+        "description": "Get a RdsDBSnapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RdsDBSnapshot",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RdsDBSnapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbSnapshots_Get": {
+            "$ref": "./examples/RdsDbSnapshots_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RdsDbSnapshots_CreateOrReplace",
+        "tags": [
+          "RdsDBSnapshots"
+        ],
+        "description": "Create a RdsDBSnapshot. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RdsDBSnapshot",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RdsDBSnapshot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RdsDBSnapshot' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RdsDBSnapshot"
+            }
+          },
+          "201": {
+            "description": "Resource 'RdsDBSnapshot' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RdsDBSnapshot"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbSnapshots_CreateOrReplace": {
+            "$ref": "./examples/RdsDbSnapshots_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RdsDbSnapshots_Update",
+        "tags": [
+          "RdsDBSnapshots"
+        ],
+        "description": "Update a RdsDBSnapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RdsDBSnapshot",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RdsDBSnapshotTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RdsDBSnapshot"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbSnapshots_Update": {
+            "$ref": "./examples/RdsDbSnapshots_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RdsDbSnapshots_Delete",
+        "tags": [
+          "RdsDBSnapshots"
+        ],
+        "description": "Delete a RdsDBSnapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RdsDBSnapshot",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbSnapshots_Delete": {
+            "$ref": "./examples/RdsDbSnapshots_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsRdsDBSnapshotProperties": {
+      "type": "object",
+      "description": "Definition of awsRdsDBSnapshot",
+      "properties": {
+        "allocatedStorage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the allocated storage size in gibibytes (GiB).</p>"
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "<p>Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.</p>"
+        },
+        "dbInstanceIdentifier": {
+          "type": "string",
+          "description": "<p>Specifies the DB instance identifier of the DB instance this DB snapshot was created from.</p>"
+        },
+        "dbSnapshotArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) for the DB snapshot.</p>"
+        },
+        "dbSnapshotIdentifier": {
+          "type": "string",
+          "description": "<p>Specifies the identifier for the DB snapshot.</p>"
+        },
+        "dbSystemId": {
+          "type": "string",
+          "description": "<p>The Oracle system identifier (SID), which is the name of the Oracle database instance that manages your database files. The Oracle SID is also the name of your CDB.</p>"
+        },
+        "dbiResourceId": {
+          "type": "string",
+          "description": "<p>The identifier for the source DB instance, which can't be changed and which is unique to an Amazon Web Services Region.</p>"
+        },
+        "dedicatedLogVolume": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
+        },
+        "encrypted": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the DB snapshot is encrypted.</p>"
+        },
+        "engine": {
+          "type": "string",
+          "description": "<p>Specifies the name of the database engine.</p>"
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "<p>Specifies the version of the database engine.</p>"
+        },
+        "iamDatabaseAuthenticationEnabled": {
+          "type": "boolean",
+          "description": "<p>Indicates whether mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled.</p>"
+        },
+        "instanceCreateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>Specifies the time in Coordinated Universal Time (UTC) when the DB instance, from which the snapshot was taken, was created.</p>"
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.</p>"
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "<p>If <code>Encrypted</code> is true, the Amazon Web Services KMS key identifier for the encrypted DB snapshot.</p> <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p>"
+        },
+        "licenseModel": {
+          "type": "string",
+          "description": "<p>License model information for the restored DB instance.</p>"
+        },
+        "masterUsername": {
+          "type": "string",
+          "description": "<p>Provides the master username for the DB snapshot.</p>"
+        },
+        "multiTenant": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the snapshot is of a DB instance using the multi-tenant configuration (TRUE) or the single-tenant configuration (FALSE).</p>"
+        },
+        "optionGroupName": {
+          "type": "string",
+          "description": "<p>Provides the option group name for the DB snapshot.</p>"
+        },
+        "originalSnapshotCreateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>Specifies the time of the CreateDBSnapshot operation in Coordinated Universal Time (UTC). Doesn't change when the snapshot is copied.</p>"
+        },
+        "percentProgress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The percentage of the estimated data that has been transferred.</p>"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the port that the database engine was listening on at the time of the snapshot.</p>"
+        },
+        "processorFeatures": {
+          "type": "array",
+          "description": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.</p>",
+          "items": {
+            "$ref": "#/definitions/ProcessorFeature"
+          },
+          "x-ms-identifiers": []
+        },
+        "snapshotCreateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>Specifies when the snapshot was taken in Coordinated Universal Time (UTC). Changes for the copy when the snapshot is copied.</p>"
+        },
+        "snapshotDatabaseTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The timestamp of the most recent transaction applied to the database that you're backing up. Thus, if you restore a snapshot, SnapshotDatabaseTime is the most recent transaction in the restored DB instance. In contrast, originalSnapshotCreateTime specifies the system time that the snapshot completed.</p> <p>If you back up a read replica, you can determine the replica lag by comparing SnapshotDatabaseTime with originalSnapshotCreateTime. For example, if originalSnapshotCreateTime is two hours later than SnapshotDatabaseTime, then the replica lag is two hours.</p>"
+        },
+        "snapshotTarget": {
+          "type": "string",
+          "description": "<p>Specifies where manual snapshots are stored: Amazon Web Services Outposts or the Amazon Web Services Region.</p>"
+        },
+        "snapshotType": {
+          "type": "string",
+          "description": "<p>Provides the type of the DB snapshot.</p>"
+        },
+        "sourceDBSnapshotIdentifier": {
+          "type": "string",
+          "description": "<p>The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has a value in the case of a cross-account or cross-Region copy.</p>"
+        },
+        "sourceRegion": {
+          "type": "string",
+          "description": "<p>The Amazon Web Services Region that the DB snapshot was created in or copied from.</p>"
+        },
+        "status": {
+          "type": "string",
+          "description": "<p>Specifies the status of this DB snapshot.</p>"
+        },
+        "storageThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the storage throughput for the DB snapshot.</p>"
+        },
+        "storageType": {
+          "type": "string",
+          "description": "<p>Specifies the storage type associated with DB snapshot.</p>"
+        },
+        "tagList": {
+          "type": "array",
+          "description": "Property tagList",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "tdeCredentialArn": {
+          "type": "string",
+          "description": "<p>The ARN from the key store with which to associate the instance for TDE encryption.</p>"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "<p>The time zone of the DB snapshot. In most cases, the <code>Timezone</code> element is empty. <code>Timezone</code> content appears only for snapshots taken from Microsoft SQL Server DB instances that were created with a time zone specified.</p>"
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "<p>Provides the VPC ID associated with the DB snapshot.</p>"
+        }
+      }
+    },
+    "ProcessorFeature": {
+      "type": "object",
+      "description": "Definition of ProcessorFeature",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the processor feature. Valid names are <code>coreCount</code> and <code>threadsPerCore</code>.</p>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>The value of a processor feature name.</p>"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RdsDBSnapshot": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RdsDBSnapshotProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RdsDBSnapshotListResult": {
+      "type": "object",
+      "description": "The response of a RdsDBSnapshot list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RdsDBSnapshot items on this page",
+          "items": {
+            "$ref": "#/definitions/RdsDBSnapshot"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RdsDBSnapshotProperties": {
+      "type": "object",
+      "description": "Definition of RdsDBSnapshot",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsRdsDBSnapshotProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "RdsDBSnapshotTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in RdsDBSnapshot resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: '^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$').</p>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: '^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$').</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

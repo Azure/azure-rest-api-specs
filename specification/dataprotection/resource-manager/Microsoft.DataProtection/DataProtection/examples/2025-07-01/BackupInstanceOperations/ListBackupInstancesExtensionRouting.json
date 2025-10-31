@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "resourceId": "subscriptions/36d32b25-3dc7-41b0-bde1-397500644591/resourceGroups/testRG/providers/Microsoft.Compute/disks/testDisk"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testDiskBI1-testDiskBI1-7664c12f-4d0a-440f-a0dc-b64f708b10e3",
+            "type": "Microsoft.DataProtection/backupVaults/backupInstances",
+            "id": "/subscriptions/36d32b25-3dc7-41b0-bde1-397500644591/resourceGroups/testRG/providers/Microsoft.Compute/disks/testDisk/providers/Microsoft.DataProtection/backupInstances/testDiskBI1-testDiskBI1-7664c12f-4d0a-440f-a0dc-b64f708b10e3",
+            "properties": {
+              "currentProtectionState": "ProtectionConfigured",
+              "dataSourceInfo": {
+                "datasourceType": "Microsoft.Compute/disks",
+                "objectType": "Datasource",
+                "resourceID": "/subscriptions/36d32b25-3dc7-41b0-bde1-397500644591/resourceGroups/testRG/providers/Microsoft.Compute/disks/testDisk",
+                "resourceLocation": "eastus2euap",
+                "resourceName": "testDisk",
+                "resourceType": "Microsoft.Compute/disks",
+                "resourceUri": "/subscriptions/36d32b25-3dc7-41b0-bde1-397500644591/resourceGroups/testRG/providers/Microsoft.Compute/disks/testDisk"
+              },
+              "dataSourceSetInfo": {
+                "datasourceType": "Microsoft.Compute/disks",
+                "objectType": "DatasourceSet",
+                "resourceID": "/subscriptions/36d32b25-3dc7-41b0-bde1-397500644591/resourceGroups/testRG/providers/Microsoft.Compute/disks/testDisk",
+                "resourceLocation": "eastus2euap",
+                "resourceName": "testDisk",
+                "resourceType": "Microsoft.Compute/disks",
+                "resourceUri": "/subscriptions/36d32b25-3dc7-41b0-bde1-397500644591/resourceGroups/testRG/providers/Microsoft.Compute/disks/testDisk"
+              },
+              "friendlyName": "testDisk",
+              "objectType": "BackupInstance",
+              "policyInfo": {
+                "policyId": "/subscriptions/36d32b25-3dc7-41b0-bde1-397500644591/resourceGroups/policyRG/providers/Microsoft.DataProtection/backupVaults/jeczrsecy/backupPolicies/disk",
+                "policyParameters": {
+                  "dataStoreParametersList": [
+                    {
+                      "dataStoreType": "OperationalStore",
+                      "objectType": "AzureOperationalStoreParameters",
+                      "resourceGroupId": "/subscriptions/36d32b25-3dc7-41b0-bde1-397500644591/resourceGroups/policyRG"
+                    }
+                  ]
+                },
+                "policyVersion": ""
+              },
+              "protectionStatus": {
+                "status": "ProtectionConfigured"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupInstancesExtensionRouting_List",
+  "title": "List BackupInstances associated with an azure resource"
+}

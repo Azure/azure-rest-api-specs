@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "configurationName": "event_scheduler",
+    "parameters": {
+      "properties": {
+        "source": "user-override",
+        "value": "off"
+      }
+    },
+    "resourceGroupName": "TestGroup",
+    "serverName": "testserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "event_scheduler",
+        "type": "Microsoft.DBforMySQL/servers/configurations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/configurations/event_scheduler",
+        "properties": {
+          "description": "Indicates the status of the Event Scheduler.",
+          "allowedValues": "ON,OFF,DISABLED",
+          "dataType": "Enumeration",
+          "defaultValue": "OFF",
+          "source": "user-override",
+          "value": "ON"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Configurations_CreateOrUpdate",
+  "title": "ConfigurationCreateOrUpdate"
+}

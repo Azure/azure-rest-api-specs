@@ -825,6 +825,53 @@
         }
       }
     },
+    "LakeHouseReadSettings": {
+      "description": "Microsoft Fabric Lakehouse Files read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Microsoft Fabric Lakehouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Microsoft Fabric Lakehouse Files wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "StoreWriteSettings": {
       "description": "Connector write settings.",
       "discriminator": "type",
@@ -841,6 +888,16 @@
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
           "type": "object"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "additionalProperties": {
@@ -906,6 +963,15 @@
     },
     "AzureFileStorageWriteSettings": {
       "description": "Azure File Storage write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ]
+    },
+    "LakeHouseWriteSettings": {
+      "description": "Microsoft Fabric Lakehouse Files write settings.",
       "type": "object",
       "allOf": [
         {
@@ -989,6 +1055,21 @@
         "preserveCompressionFileNameAsFolder": {
           "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
+        }
+      }
+    },
+    "ParquetReadSettings": {
+      "description": "Parquet read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
         }
       }
     },
@@ -1211,6 +1292,16 @@
         "modelAsString": true
       }
     },
+    "IcebergWriteSettings": {
+      "description": "Iceberg write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {}
+    },
     "AvroSource": {
       "description": "A copy activity Avro source.",
       "type": "object",
@@ -1261,6 +1352,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Parquet store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/ParquetReadSettings",
+          "description": "Parquet format settings."
         },
         "additionalColumns": {
           "type": "object",
@@ -1862,6 +1957,21 @@
         }
       }
     },
+    "PostgreSqlV2Source": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SybaseSource": {
       "description": "A copy activity source for Sybase databases.",
       "type": "object",
@@ -2256,10 +2366,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2294,10 +2401,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2336,10 +2440,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2378,10 +2479,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2420,10 +2518,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2638,6 +2733,14 @@
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        },
+        "numberPrecision": {
+          "type": "object",
+          "description": "The decimal precision used to represent Oracle NUMBER type without precision and scale. The range is 1 to 256 and default value is 256 if not specified. Type: integer (or Expression with resultType integer). Only used for Version 2.0."
+        },
+        "numberScale": {
+          "type": "object",
+          "description": "The decimal scale used to represent Oracle NUMBER type without precision and scale. The range is 0 to 130 and default value is 130 if not specified. Type: integer (or Expression with resultType integer). Only used for Version 2.0."
         }
       }
     },
@@ -2695,6 +2798,14 @@
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        },
+        "numberPrecision": {
+          "type": "object",
+          "description": "The decimal precision used to represent Oracle NUMBER type without precision and scale. The range is 1 to 256 and default value is 256 if not specified. Type: integer (or Expression with resultType integer). Only used for Version 2.0."
+        },
+        "numberScale": {
+          "type": "object",
+          "description": "The decimal scale used to represent Oracle NUMBER type without precision and scale. The range is 0 to 130 and default value is 130 if not specified. Type: integer (or Expression with resultType integer). Only used for Version 2.0."
         }
       }
     },
@@ -2783,6 +2894,36 @@
         "partitionLowerBound": {
           "type": "object",
           "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "TeradataSink": {
+      "description": "A copy activity Teradata sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "importSettings": {
+          "$ref": "#/definitions/TeradataImportCommand",
+          "description": "Teradata import settings."
+        }
+      }
+    },
+    "TeradataImportCommand": {
+      "description": "Teradata import command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImportSettings"
+        }
+      ],
+      "properties": {
+        "additionalFormatOptions": {
+          "type": "object",
+          "description": "Additional format options for Teradata Copy Command. The format options only applies to direct copy from CSV source. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"timeFormat\": \"HHhMImSSs\" }"
         }
       }
     },
@@ -3087,7 +3228,7 @@
       }
     },
     "AzurePostgreSqlSource": {
-      "description": "A copy activity Azure PostgreSQL source.",
+      "description": "A copy activity Azure Database for PostgreSQL source.",
       "type": "object",
       "allOf": [
         {
@@ -3102,7 +3243,7 @@
       }
     },
     "AzurePostgreSqlSink": {
-      "description": "A copy activity Azure PostgreSQL sink.",
+      "description": "A copy activity Azure Database for PostgreSQL sink.",
       "type": "object",
       "allOf": [
         {
@@ -3113,6 +3254,29 @@
         "preCopyScript": {
           "type": "object",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        },
+        "writeMethod": {
+          "description": "The write behavior for the operation. Default is Bulk Insert.",
+          "type": "string",
+          "enum": [
+            "BulkInsert",
+            "CopyCommand",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "AzurePostgreSqlWriteMethodEnum",
+            "modelAsString": true
+          }
+        },
+        "upsertSettings": {
+          "description": "Azure Database for PostgreSQL upsert option settings",
+          "type": "object",
+          "properties": {
+            "keys": {
+              "type": "object",
+              "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+            }
+          }
         }
       }
     },
@@ -3192,6 +3356,21 @@
       }
     },
     "GoogleBigQuerySource": {
+      "description": "A copy activity Google BigQuery service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "GoogleBigQueryV2Source": {
       "description": "A copy activity Google BigQuery service source.",
       "type": "object",
       "allOf": [
@@ -3669,6 +3848,29 @@
         }
       }
     },
+    "LakeHouseTableSource": {
+      "description": "A copy activity source for Microsoft Fabric Lakehouse Table.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "timestampAsOf": {
+          "type": "object",
+          "description": "Query an older snapshot by timestamp. Type: string (or Expression with resultType string)."
+        },
+        "versionAsOf": {
+          "type": "object",
+          "description": "Query an older snapshot by version. Type: integer (or Expression with resultType integer)."
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
     "RedshiftUnloadSettings": {
       "description": "The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3.",
       "type": "object",
@@ -3688,6 +3890,28 @@
       ]
     },
     "SnowflakeSource": {
+      "description": "A copy activity snowflake source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Snowflake Sql query. Type: string (or Expression with resultType string)."
+        },
+        "exportSettings": {
+          "$ref": "#/definitions/SnowflakeExportCopyCommand",
+          "description": "Snowflake export settings."
+        }
+      },
+      "required": [
+        "exportSettings"
+      ]
+    },
+    "SnowflakeV2Source": {
       "description": "A copy activity snowflake source.",
       "type": "object",
       "allOf": [
@@ -3824,6 +4048,72 @@
         "timestampFormat": {
           "type": "object",
           "description": "Specify the timestamp format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "WarehouseSource": {
+      "description": "A copy activity Microsoft Fabric Warehouse source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "Microsoft Fabric Warehouse reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a Microsoft Fabric Warehouse source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "type": "object",
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
+        },
+        "isolationLevel": {
+          "description": "Specifies the transaction locking behavior for the Microsoft Fabric Warehouse source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
+        }
+      }
+    },
+    "WarehouseSink": {
+      "description": "A copy activity Microsoft Fabric Warehouse sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "allowCopyCommand": {
+          "type": "object",
+          "description": "Indicates to use Copy Command to copy data into SQL Data Warehouse. Type: boolean (or Expression with resultType boolean)."
+        },
+        "copyCommandSettings": {
+          "description": "Specifies Copy Command related settings when allowCopyCommand is true.",
+          "$ref": "#/definitions/DWCopyCommandSettings"
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into azure Microsoft Fabric Data Warehouse. Type: DWWriteBehaviorEnum (or Expression with resultType DWWriteBehaviorEnum)"
         }
       }
     },
@@ -4055,6 +4345,25 @@
         }
       }
     },
+    "IcebergSink": {
+      "description": "A copy activity Iceberg sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Iceberg store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/IcebergWriteSettings",
+          "description": "Iceberg format settings."
+        }
+      }
+    },
     "BlobSink": {
       "description": "A copy activity Azure Blob sink.",
       "type": "object",
@@ -4154,10 +4463,7 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4192,10 +4498,7 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4230,10 +4533,7 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4268,10 +4568,7 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4390,6 +4687,25 @@
       }
     },
     "SnowflakeSink": {
+      "description": "A copy activity snowflake sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "importSettings": {
+          "$ref": "#/definitions/SnowflakeImportCopyCommand",
+          "description": "Snowflake import settings."
+        }
+      }
+    },
+    "SnowflakeV2Sink": {
       "description": "A copy activity snowflake sink.",
       "type": "object",
       "allOf": [
@@ -4750,6 +5066,14 @@
         "alternateKeyName": {
           "type": "object",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -4776,6 +5100,14 @@
         "alternateKeyName": {
           "type": "object",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -4802,6 +5134,14 @@
         "alternateKeyName": {
           "type": "object",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -4908,6 +5248,29 @@
         }
       }
     },
+    "LakeHouseTableSink": {
+      "description": "A copy activity for Microsoft Fabric Lakehouse Table sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "tableActionOption": {
+          "type": "object",
+          "description": "The type of table action for Lakehouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
+        },
+        "partitionOption": {
+          "type": "object",
+          "description": "Create partitions in folder structure based on one or multiple columns. Each distinct column value (pair) will be a new partition. Possible values include: \"None\", \"PartitionByKey\"."
+        },
+        "partitionNameList": {
+          "type": "object",
+          "description": "Specify the partition column names from sink columns. Type: array of objects (or Expression with resultType array of objects)."
+        }
+      }
+    },
     "CopyTranslator": {
       "discriminator": "type",
       "description": "A copy activity translator.",
@@ -4987,6 +5350,14 @@
         "timeSpanFormat": {
           "type": "object",
           "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
+        },
+        "timeFormat": {
+          "type": "object",
+          "description": "The format for Time values. Type: string (or Expression with resultType string)."
+        },
+        "dateFormat": {
+          "type": "object",
+          "description": "The format for Date values. Type: string (or Expression with resultType string)."
         },
         "culture": {
           "type": "object",
@@ -5987,6 +6358,10 @@
         "firstRowOnly": {
           "type": "object",
           "description": "Whether to return first row or all rows. Default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "treatDecimalAsString": {
+          "type": "object",
+          "description": "Indicates whether to treat decimal values as strings to avoid value overflow issue. This option is enabled for SnowflakeV2 connector only. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -7169,26 +7544,21 @@
           "description": "The integration runtime reference.",
           "$ref": "../artifacts.json#/definitions/IntegrationRuntimeReference"
         },
+        "continuationSettings": {
+          "description": "Continuation settings for execute data flow activity.",
+          "$ref": "#/definitions/ContinuationSettingsReference"
+        },
         "compute": {
           "description": "Compute properties for data flow activity.",
           "type": "object",
           "properties": {
             "computeType": {
-              "description": "Compute type of the cluster which will execute data flow job.",
-              "type": "string",
-              "enum": [
-                "General",
-                "MemoryOptimized",
-                "ComputeOptimized"
-              ],
-              "x-ms-enum": {
-                "name": "DataFlowComputeType",
-                "modelAsString": true
-              }
+              "description": "Compute type of the cluster which will execute data flow job. Possible values include: 'General', 'MemoryOptimized', 'ComputeOptimized'. Type: string (or Expression with resultType string)",
+              "type": "object"
             },
             "coreCount": {
-              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
-              "type": "integer"
+              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272. Type: integer (or Expression with resultType integer)",
+              "type": "object"
             }
           }
         },
@@ -7212,6 +7582,37 @@
       "required": [
         "dataflow"
       ]
+    },
+    "ContinuationSettingsReference": {
+      "description": "Continuation settings for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "continuationTtlInMinutes": {
+          "description": "Continuation TTL in minutes.",
+          "type": "object"
+        },
+        "idleCondition": {
+          "description": "Idle condition.",
+          "type": "object"
+        },
+        "customizedCheckpointKey": {
+          "description": "Customized checkpoint key.",
+          "type": "object"
+        }
+      }
+    },
+    "DataFlowComputeType": {
+      "description": "All available DataFlowComputeType values.",
+      "type": "string",
+      "enum": [
+        "General",
+        "MemoryOptimized",
+        "ComputeOptimized"
+      ],
+      "x-ms-enum": {
+        "name": "DataFlowComputeType",
+        "modelAsString": true
+      }
     },
     "ScriptActivity": {
       "description": "Script activity type.",
@@ -7273,6 +7674,14 @@
           "required": [
             "logDestination"
           ]
+        },
+        "returnMultistatementResult": {
+          "type": "object",
+          "description": "Enable to retrieve result sets from multiple SQL statements and the number of rows affected by the DML statement. Supported connector: SnowflakeV2. Type: boolean (or Expression with resultType boolean)."
+        },
+        "treatDecimalAsString": {
+          "type": "object",
+          "description": "Indicates whether to treat decimal values as strings to avoid value overflow issue. This option is enabled for SnowflakeV2 connector only. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -7285,16 +7694,8 @@
           "description": "The query text. Type: string (or Expression with resultType string)."
         },
         "type": {
-          "x-ms-enum": {
-            "name": "ScriptType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Query",
-            "NonQuery"
-          ],
-          "type": "string",
-          "description": "The type of the query. Type: string."
+          "type": "object",
+          "description": "The type of the query. Please refer to the ScriptType for valid options. Type: string (or Expression with resultType string)."
         },
         "parameters": {
           "type": "array",
@@ -7382,6 +7783,18 @@
         }
       }
     },
+    "ScriptType": {
+      "description": "The type of the ScriptActivityScriptBlock.",
+      "type": "string",
+      "enum": [
+        "Query",
+        "NonQuery"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true
+      }
+    },
     "SqlPartitionOption": {
       "description": "The partition mechanism that will be used for Sql read in parallel.",
       "type": "string",
@@ -7463,6 +7876,20 @@
         "modelAsString": true
       }
     },
+    "MetadataItem": {
+      "description": "Specify the name and value of custom metadata item.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "Metadata item key name. Type: string (or Expression with resultType string)."
+        },
+        "value": {
+          "type": "object",
+          "description": "Metadata item value. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SynapseNotebookActivity": {
       "description": "Execute Synapse notebook activity.",
       "type": "object",
@@ -7540,9 +7967,12 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
-            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "authentication": {
+          "description": "Authentication method used for executing the notebook.",
+          "$ref": "#/definitions/SynapseActivityAuthentication"
         }
       },
       "required": [
@@ -7669,6 +8099,10 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "authentication": {
+          "description": "Authentication method used for executing the Spark job definition.",
+          "$ref": "#/definitions/SynapseActivityAuthentication"
         }
       },
       "required": [
@@ -7698,6 +8132,23 @@
       "required": [
         "type",
         "referenceName"
+      ]
+    },
+    "SynapseActivityAuthentication": {
+      "description": "Synapse activity authentication properties.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Synapse activity authentication (MSI/UserAssignedManagedIdentity)",
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "SqlPoolStoredProcedureActivity": {
@@ -7735,15 +8186,193 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         }
       },
       "required": [
         "storedProcedureName"
       ]
+    },
+    "SalesforceV2Source": {
+      "description": "A copy activity Salesforce V2 source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "SOQLQuery": {
+          "type": "object",
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
+        },
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size for each http request, too large pageSize will caused timeout, default 300,000. Type: integer (or Expression with resultType integer)."
+        },
+        "partitionOption": {
+          "type": "object",
+          "description": "Partition option for the SalesforceV2 connector in copy activity, AutoDetect or None. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2Source": {
+      "description": "A copy activity Salesforce Service Cloud V2 source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "SOQLQuery": {
+          "type": "object",
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
+        },
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
+    "SalesforceV2Sink": {
+      "description": "A copy activity Salesforce V2 sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceV2SinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2Sink": {
+      "description": "A copy activity Salesforce Service Cloud V2 sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceV2SinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "ServiceNowV2Source": {
+      "description": "A copy activity ServiceNowV2 server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "expression": {
+          "type": "object",
+          "description": "Expression to filter data from source.",
+          "$ref": "#/definitions/ExpressionV2"
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
+        }
+      }
+    },
+    "ExpressionV2": {
+      "description": "Nested representation of a complex expression.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "name": "ExpressionV2Type",
+            "modelAsString": true
+          },
+          "enum": [
+            "Constant",
+            "Field",
+            "Unary",
+            "Binary",
+            "NAry"
+          ],
+          "type": "string",
+          "description": "Type of expressions supported by the system. Type: string."
+        },
+        "value": {
+          "description": "Value for Constant/Field Type: object.",
+          "type": "object"
+        },
+        "operators": {
+          "description": "Expression operator value Type: list of strings.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Type: string."
+          }
+        },
+        "operands": {
+          "description": "List of nested expressions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionV2",
+            "description": "Type: ExpressionV2."
+          }
+        }
+      }
     }
   }
 }

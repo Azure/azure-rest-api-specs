@@ -8,7 +8,8 @@ This is the AutoRest configuration file for SecurityInsights.
 
 ## Getting Started
 
-To build the SDK for SecurityInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Azure Machine Learning, simply [Install AutoRest](https://aka.ms/autorest/install) and
+ in this folder, run:
 
 > `autorest`
 
@@ -26,17 +27,709 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-08
+tag: package-2025-09-01
 ```
 
 ---
 
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Microsoft.SecurityInsights/stable/2025-09-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/operations.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/SourceControls.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    where:
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
+      - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
+      - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
+      - $.definitions.JwtAuthModel.properties.userName
+      - $.definitions.JwtAuthModel.properties.password
+      - $.definitions.JwtAuthModel.properties.queryParameters
+      - $.definitions.JwtAuthModel.properties.headers
+      - $.definitions.OAuthModel.properties.tokenEndpointHeaders
+      - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
+      - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
+      - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.SessionAuthModel.properties.userName
+      - $.definitions.SessionAuthModel.properties.password
+      - $.definitions.SessionAuthModel.properties.queryParameters
+      - $.definitions.SessionAuthModel.properties.headers
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    where:
+      - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+```
+
+### Tag: package-preview-2025-07-01
+
+These settings apply only when `--tag=package-preview-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/BusinessApplicationAgents.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/EnrichmentWithWorkspace.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/ThreatIntelligenceQuery.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerMembers.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: Entities.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueries.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueryTemplates.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: Recommendations.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAnonymousTypes
+    from: Recommendations.json
+    reason: These properties are unknown (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: TriggeredAnalyticsRuleRuns.json
+    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
+  - code: AvoidAdditionalProperties
+    from: ThreatIntelligenceQuery.json
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: PutRequestResponseSchemeArm
+    from: EntityQueries.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DeleteResponseCodes
+    from: FileImports.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+```
+
+### Tag: package-2025-06-01
+
+These settings apply only when `--tag=package-2025-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-01'
+input-file:
+  - Microsoft.SecurityInsights/stable/2025-06-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/operations.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/SourceControls.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+```
+
+### Tag: package-preview-2025-04-01
+
+These settings apply only when `--tag=package-preview-2025-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-04-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/BusinessApplicationAgents.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/EnrichmentWithWorkspace.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/ThreatIntelligenceQuery.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2025-04-01-preview/WorkspaceManagerMembers.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: Entities.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueries.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueryTemplates.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: Recommendations.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAnonymousTypes
+    from: Recommendations.json
+    reason: These properties are unknown (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: TriggeredAnalyticsRuleRuns.json
+    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
+  - code: AvoidAdditionalProperties
+    from: ThreatIntelligenceQuery.json
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: PutRequestResponseSchemeArm
+    from: EntityQueries.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DeleteResponseCodes
+    from: FileImports.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+```
+
+### Tag: package-2025-03-01
+
+These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01'
+input-file:
+  - Microsoft.SecurityInsights/stable/2025-03-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/operations.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/SourceControls.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2025-03-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+```
+
+### Tag: package-preview-2025-01-01
+
+These settings apply only when `--tag=package-preview-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-01-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/BusinessApplicationAgents.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/EnrichmentWithWorkspace.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ThreatIntelligenceQuery.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/WorkspaceManagerMembers.json
+```
+
+### Tag: package-preview-2024-10-01
+
+These settings apply only when `--tag=package-preview-2024-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/BusinessApplicationAgents.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/EnrichmentWithWorkspace.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/ThreatIntelligenceQuery.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2024-10-01-preview/WorkspaceManagerMembers.json
+```
+
+### Tag: package-2024-09
+
+These settings apply only when `--tag=package-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09'
+input-file:
+  - Microsoft.SecurityInsights/stable/2024-09-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/operations.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2024-09-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+```
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/BusinessApplicationAgents.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/EnrichmentWithWorkspace.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/ThreatIntelligenceQuery.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/WorkspaceManagerMembers.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2024-04-01-preview/operations.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: Entities.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueries.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueryTemplates.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: Recommendations.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAnonymousTypes
+    from: Recommendations.json
+    reason: These properties are unknown (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: TriggeredAnalyticsRuleRuns.json
+    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
+  - code: AvoidAdditionalProperties
+    from: ThreatIntelligenceQuery.json
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: PutRequestResponseSchemeArm
+    from: EntityQueries.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+```
+
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.SecurityInsights/stable/2024-03-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/Watchlists.json
+  - Microsoft.SecurityInsights/stable/2024-03-01/operations.json
+```
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/EnrichmentWithWorkspace.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/ThreatIntelligenceQuery.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/WorkspaceManagerMembers.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2024-01-01-preview/operations.json
+```
+
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/WorkspaceManagerMembers.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2023-12-01-preview/operations.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.SecurityInsights/stable/2023-11-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/Watchlists.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/operations.json
+```
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/WorkspaceManagerMembers.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2023-10-01-preview/operations.json
+```
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/WorkspaceManagerMembers.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/operations.json
+```
 
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/AutomationRules.json
@@ -71,6 +764,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/operations.json
 ```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
@@ -749,9 +1443,9 @@ directive:
   - suppress: R4017
     reason: Our resources do not support list by subscription. They're not top-level resources. To get a SecurityInsights resource, we should have a subscription as well as a resource group and Log Analytics workspace.
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
+    reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to suppress this by Swagger reviewer.'
   - suppress: GuidUsage
-    reason: 'Tenent Id should be a Guid'
+    reason: 'Tenant Id should be a Guid'
 ```
 
 ---
@@ -765,30 +1459,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-go-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.SecurityInsights
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/securityinsights/Microsoft.Azure.Management.SecurityInsights/src/Generated
-  clear-output-folder: true
 ```
 
 ## Go

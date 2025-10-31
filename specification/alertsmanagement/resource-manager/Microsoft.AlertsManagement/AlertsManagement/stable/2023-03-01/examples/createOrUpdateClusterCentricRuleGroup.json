@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "promResourceGroup",
+    "ruleGroupName": "myPrometheusRuleGroup",
+    "api-version": "2023-03-01",
+    "parameters": {
+      "location": "East US",
+      "properties": {
+        "description": "This is a rule group with culster centric configuration",
+        "interval": "PT10M",
+        "clusterName": "myClusterName",
+        "scopes": [
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace",
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myClusterName"
+        ],
+        "rules": [
+          {
+            "alert": "Billing_Processing_Very_Slow",
+            "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
+            "enabled": true,
+            "severity": 2,
+            "for": "PT5M",
+            "labels": {
+              "team": "prod"
+            },
+            "annotations": {
+              "annotationName1": "annotationValue1"
+            },
+            "resolveConfiguration": {
+              "autoResolved": true,
+              "timeToResolve": "PT10M"
+            },
+            "actions": []
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/promResourceGroup/providers/Microsoft.AlertsManagement/prometheusRuleGroups/myPrometheusRuleGroup",
+        "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+        "location": "East US",
+        "properties": {
+          "description": "This is a rule group with culster centric configuration",
+          "interval": "PT10M",
+          "clusterName": "myClusterName",
+          "scopes": [
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace",
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myClusterName"
+          ],
+          "rules": [
+            {
+              "alert": "Billing_Processing_Very_Slow",
+              "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
+              "enabled": true,
+              "severity": 2,
+              "for": "PT5M",
+              "labels": {
+                "team": "prod"
+              },
+              "annotations": {
+                "annotationName1": "annotationValue1"
+              },
+              "resolveConfiguration": {
+                "autoResolved": true,
+                "timeToResolve": "PT10M"
+              },
+              "actions": []
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/promResourceGroup/providers/Microsoft.AlertsManagement/prometheusRuleGroups/myPrometheusRuleGroup",
+        "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+        "location": "East US",
+        "properties": {
+          "description": "This is a rule group with culster centric configuration",
+          "interval": "PT10M",
+          "clusterName": "myClusterName",
+          "scopes": [
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace",
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myClusterName"
+          ],
+          "rules": [
+            {
+              "alert": "Billing_Processing_Very_Slow",
+              "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
+              "enabled": true,
+              "severity": 2,
+              "for": "PT5M",
+              "labels": {
+                "team": "prod"
+              },
+              "annotations": {
+                "annotationName1": "annotationValue1"
+              },
+              "resolveConfiguration": {
+                "autoResolved": true,
+                "timeToResolve": "PT10M"
+              },
+              "actions": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}

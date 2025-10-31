@@ -1,0 +1,24 @@
+{
+  "operationId": "DocumentModels_AuthorizeModelCopy",
+  "title": "Authorize Copy of Document Model",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-07-31-preview",
+    "authorizeCopyRequest": {
+      "modelId": "targetModel",
+      "description": "Target model description"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "targetResourceId": "/subscriptions/targetSub/resourceGroups/targetRG/providers/Microsoft.CognitiveServices/accounts/targetService",
+        "targetResourceRegion": "targetResourceRegion",
+        "targetModelId": "targetModel",
+        "targetModelLocation": "https://targetEndpoint.cognitiveservices.azure.com/documentintelligence/documentModels/targetModel",
+        "accessToken": "accessToken",
+        "expirationDateTime": "2021-09-23T09:12:54.552Z"
+      }
+    }
+  }
+}

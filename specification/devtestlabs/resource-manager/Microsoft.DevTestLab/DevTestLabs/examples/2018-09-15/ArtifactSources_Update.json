@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "name": "{artifactSourceName}",
+    "api-version": "2018-09-15",
+    "artifactSource": {
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    },
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{artifactSourceName}",
+        "type": "Microsoft.DevTestLab/labs/artifactsources",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}",
+        "location": "{location}",
+        "properties": {
+          "armTemplateFolderPath": "{armTemplateFolderPath}",
+          "branchRef": "{branchRef}",
+          "createdDate": "2020-12-16T16:53:02.4830866-07:00",
+          "displayName": "{displayName}",
+          "folderPath": "{folderPath}",
+          "provisioningState": "Succeeded",
+          "securityToken": "{securityToken}",
+          "sourceType": "{VsoGit|GitHub|StorageAccount}",
+          "status": "{Enabled|Disabled}",
+          "uniqueIdentifier": "{uniqueIdentifier}",
+          "uri": "{artifactSourceUri}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "ArtifactSources_Update",
+  "title": "ArtifactSources_Update"
+}

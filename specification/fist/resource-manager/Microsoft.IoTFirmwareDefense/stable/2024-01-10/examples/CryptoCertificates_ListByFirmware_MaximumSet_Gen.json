@@ -1,0 +1,108 @@
+{
+  "title": "CryptoCertificates_ListByFirmware",
+  "operationId": "CryptoCertificates_ListByFirmware",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "FirmwareAnalysisRG",
+    "workspaceName": "default",
+    "firmwareId": "109a9886-50bf-85a8-9d75-000000000000",
+    "api-version": "2024-01-10"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "cryptoCertId": "d402993a-eca1-4ef4-a13d-000000000000",
+              "name": "PolarSSL Test Client 2",
+              "issuedDate": "2023-09-24T15:52:04Z",
+              "expirationDate": "2035-09-22T15:52:04Z",
+              "role": "Non-CA",
+              "signatureAlgorithm": "sha256ECDSA",
+              "keyAlgorithm": "ECC",
+              "keySize": 256,
+              "encoding": "DER",
+              "serialNumber": "0D",
+              "fingerprint": "EA:70:F9:B4:45:F3:41:BC:33:22:34:A4:98:DD:69:04:1D:E8:82:05",
+              "usage": [],
+              "filePaths": [
+                "/path/to/keys-certs/ntgr_ra_aws"
+              ],
+              "pairedKey": {
+                "type": "Private",
+                "id": "cd1bdece-0576-4ff5-8039-000000000000"
+              },
+              "isExpired": false,
+              "isSelfSigned": false,
+              "isShortKeySize": false,
+              "subject": {
+                "commonName": "PolarSSL Test Client 2",
+                "organization": "PolarSSL",
+                "organizationalUnit": "",
+                "country": "NL",
+                "state": ""
+              },
+              "issuer": {
+                "commonName": "Polarssl Test EC CA",
+                "organization": "PolarSSL",
+                "organizationalUnit": "",
+                "country": "NL",
+                "state": ""
+              }
+            },
+            "id": "/subscriptions/07aed47b-60ad-4d6e-a07a-000000000000/resourceGroups/FirmwareAnalysisRG/providers/Microsoft.IoTFirmwareDefense/workspaces/default/firmwares/109a9886-50bf-85a8-9d75-000000000000/cryptoCertificates/d402993a-eca1-4ef4-a13d-000000000000",
+            "name": "d402993a-eca1-4ef4-a13d-000000000000",
+            "type": "Microsoft.IoTFirmwareDefense/workspaces/firmwares/cryptoCertificates"
+          },
+          {
+            "properties": {
+              "cryptoCertId": "78fd7929-fac1-45cd-bfc6-000000000000",
+              "name": "DigiCert SHA2 Secure Server CA",
+              "issuedDate": "2013-03-08T12:00:00Z",
+              "expirationDate": "2023-03-08T12:00:00Z",
+              "role": "Intermediate",
+              "signatureAlgorithm": "sha256RSA",
+              "keyAlgorithm": "RSA",
+              "keySize": 2048,
+              "encoding": "DER",
+              "serialNumber": "01:FD:A3:EB:6E:CA:75:C8:88:43:8B:72:4B:CF:BC:91",
+              "fingerprint": "1F:B8:6B:11:68:EC:74:31:54:06:2E:8C:9C:C5:B1:71:A4:B7:CC:B4",
+              "usage": [
+                "CrlSign",
+                "KeyCertSign",
+                "DigitalSignature"
+              ],
+              "filePaths": [
+                "/path/to/keys-certs/revoke.pem",
+                "/path/to/keys-certs/sample.crt"
+              ],
+              "pairedKey": {},
+              "isExpired": true,
+              "isSelfSigned": false,
+              "isShortKeySize": false,
+              "subject": {
+                "commonName": "DigiCert SHA2 Secure Server CA",
+                "organization": "DigiCert Inc",
+                "organizationalUnit": "",
+                "country": "US",
+                "state": ""
+              },
+              "issuer": {
+                "commonName": "DigiCert Global Root CA",
+                "organization": "DigiCert Inc",
+                "organizationalUnit": "www.digicert.com",
+                "country": "US",
+                "state": ""
+              }
+            },
+            "id": "/subscriptions/07aed47b-60ad-4d6e-a07a-000000000000/resourceGroups/FirmwareAnalysisRG/providers/Microsoft.IoTFirmwareDefense/workspaces/default/firmwares/109a9886-50bf-85a8-9d75-000000000000/cryptoCertificates/78fd7929-fac1-45cd-bfc6-000000000000",
+            "name": "78fd7929-fac1-45cd-bfc6-000000000000",
+            "type": "Microsoft.IoTFirmwareDefense/workspaces/firmwares/cryptoCertificates"
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}

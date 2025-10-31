@@ -25,23 +25,40 @@ To see additional help and options, run:
 These are the global settings for Traffic Client.
 
 ``` yaml
+# The Azure Maps Traffic service v1.0 will be retired on March 31, 2028
 title: TrafficClient
 openapi-type: data-plane
-tag: 1.0-preview
+tag: package-stable-2025-01-01
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
+### Suppression
 
-### Tag: 1.0-preview
+``` yaml
+directive:
+  - suppress: OperationIdNounVerb
+    reason: Fixing this risks introducing breaking changes.
+```
 
-These settings apply only when `--tag=1.0-preview` is specified on the command line.
+### Tag: package-deprecated-1.0
 
-``` yaml $(tag) == '1.0-preview'
+These settings apply only when `--tag=package-deprecated-1.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-deprecated-1.0'
 input-file:
-  - preview/1.0/traffic.json
+  - stable/1.0/traffic.json
+```
+
+### Tag: package-stable-2025-01-01
+
+These settings apply only when `--tag=package-stable-2025-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-stable-2025-01-01'
+input-file:
+  - stable/2025-01-01/traffic.json
 ```
 
 # Code Generation

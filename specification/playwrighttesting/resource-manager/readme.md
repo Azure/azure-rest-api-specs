@@ -1,5 +1,9 @@
 # playwrighttesting
 
+## Deprecation Notice
+
+**This API specification has been deprecated and will no longer be maintained after March 8, 2026**. This specification will only receive security fixes until **March 8, 2026**. To receive updates on new features and non-security bug fixes, migrate to the replacement API specification at [loadtestservice/resource-manager/Microsoft.LoadTestService/playwright](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/loadtestservice/resource-manager/Microsoft.LoadTestService/playwright). Refer to the [migration guide](https://aka.ms/mpt/migration-guidance) for guidance on upgrading.
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for playwrighttesting.
@@ -25,8 +29,89 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the playwrighttesting.
 
 ```yaml
+title: PlaywrightTestingClient
+description: Azure Playwright testing management service
 openapi-type: arm
-tag: package-2023-10-01-preview
+openapi-subtype: rpaas
+tag: package-2024-12-01
+```
+
+### Tag: package-2024-12-01
+
+These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-01'
+input-file:
+  - Microsoft.AzurePlaywrightService/stable/2024-12-01/playwrighttesting.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: playwrighttesting.json
+    reason: We have enums defined for quota resource names which doesn't support string pattern validation.
+  - code: ProvisioningStateMustBeReadOnly
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
+  - code: DeleteResponseCodes
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}"].delete
+```
+
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - Microsoft.AzurePlaywrightService/preview/2024-08-01-preview/playwrighttesting.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: playwrighttesting.json
+    reason: We have enums defined for quota resource names which doesn't support string pattern validation.
+  - code: ProvisioningStateMustBeReadOnly
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
+  - code: DeleteResponseCodes
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}"].delete
+```
+
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
+### Tag: package-2024-02-01-preview
+
+These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-01-preview'
+input-file:
+  - Microsoft.AzurePlaywrightService/preview/2024-02-01-preview/playwrighttesting.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: playwrighttesting.json
+    reason: We have enums defined for quota resource names which doesn't support string pattern validation.
+  - code: ProvisioningStateMustBeReadOnly
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as the visibility is set to read only in the TypeSpec already.
+  - code: DeleteResponseCodes
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}"].delete
+```
+
+``` yaml
+modelerfour:
+  flatten-models: false
 ```
 
 ### Tag: package-2023-10-01-preview
@@ -49,10 +134,9 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -68,10 +152,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

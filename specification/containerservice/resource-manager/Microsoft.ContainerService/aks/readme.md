@@ -34,14 +34,374 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-07
+tag: package-2025-09
+```
+
+### Tag: package-2025-09
+
+These settings apply only when `--tag=package-2025-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-09'
+input-file:
+  - stable/2025-09-01/managedClusters.json
+```
+
+### Tag: package-2025-08
+
+These settings apply only when `--tag=package-2025-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-08'
+input-file:
+  - stable/2025-08-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-08
+
+These settings apply only when `--tag=package-preview-2025-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-08'
+input-file:
+  - preview/2025-08-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-07
+
+These settings apply only when `--tag=package-2025-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-07'
+input-file:
+  - stable/2025-07-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-07
+
+These settings apply only when `--tag=package-preview-2025-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-07'
+input-file:
+  - preview/2025-07-02-preview/managedClusters.json
+```
+
+### Tag: package-preview-2025-06
+
+These settings apply only when `--tag=package-preview-2025-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-06'
+input-file:
+  - preview/2025-06-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-05
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05'
+input-file:
+  - stable/2025-05-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-05
+
+These settings apply only when `--tag=package-preview-2025-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-05'
+input-file:
+  - preview/2025-05-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-04
+
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04'
+input-file:
+  - stable/2025-04-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-04
+
+These settings apply only when `--tag=package-preview-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-04'
+input-file:
+  - preview/2025-04-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-03
+
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03'
+input-file:
+  - stable/2025-03-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-03
+
+These settings apply only when `--tag=package-preview-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-03'
+input-file:
+  - preview/2025-03-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-02
+
+These settings apply only when `--tag=package-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-02'
+input-file:
+  - stable/2025-02-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-02
+
+These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-02'
+input-file:
+  - preview/2025-02-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01'
+input-file:
+  - stable/2025-01-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-01
+
+These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - preview/2025-01-02-preview/managedClusters.json
+```
+
+### Tag: package-2024-10
+
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-10'
+input-file:
+  - stable/2024-10-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - preview/2024-10-02-preview/managedClusters.json
+```
+
+### Tag: package-2024-09
+
+These settings apply only when `--tag=package-2024-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09'
+input-file:
+  - stable/2024-09-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - preview/2024-09-02-preview/managedClusters.json
+```
+
+### Tag: package-2024-08
+
+These settings apply only when `--tag=package-2024-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08'
+input-file:
+  - stable/2024-08-01/managedClusters.json
+```
+
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-07'
+input-file:
+  - stable/2024-07-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - preview/2024-07-02-preview/managedClusters.json
+```
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - preview/2024-06-02-preview/managedClusters.json
+```
+
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05'
+input-file:
+  - stable/2024-05-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - preview/2024-05-02-preview/managedClusters.json
+```
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - preview/2024-04-02-preview/managedClusters.json
+```
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - preview/2024-03-02-preview/managedClusters.json
+```
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02'
+input-file:
+  - stable/2024-02-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - preview/2024-02-02-preview/managedClusters.json
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+  - stable/2024-01-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - preview/2024-01-02-preview/managedClusters.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - stable/2023-11-01/managedClusters.json
+```
+
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - preview/2023-11-02-preview/managedClusters.json
+```
+
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-10'
+input-file:
+  - stable/2023-10-01/managedClusters.json
+```
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - preview/2023-10-02-preview/managedClusters.json
+```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09'
+input-file:
+  - stable/2023-09-01/managedClusters.json
+```
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - preview/2023-09-02-preview/managedClusters.json
+```
+
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-08'
+input-file:
+  - stable/2023-08-01/managedClusters.json
+```
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - preview/2023-08-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-07
 
 These settings apply only when `--tag=package-2023-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07'
+``` yaml $(tag) == 'package-2023-07'
 input-file:
   - stable/2023-07-01/managedClusters.json
 ```
@@ -988,32 +1348,17 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ContainerService
-  payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/containerservice/Microsoft.Azure.Management.ContainerService/src/Generated
-  clear-output-folder: true
 ```
 
 ## Go
@@ -1046,4 +1391,28 @@ directive:
     from: managedClusters.json
     where: $.definitions.ManagedClusterOIDCIssuerProfile.properties.issuerURL
     reason: For managedCluster.properties.oidcIssuerProfile.issuerURL, already used in preview API
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResultList
+    reason: The model referenced in the common type does not conform to the definition of the rule, more details see https://github.com/Azure/azure-openapi-validator/issues/773
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.NodeImageVersionsListResult
+    reason: The tool compared the stable API version and mistakenly scanned out that this model was not newly added, more details see https://github.com/Azure/azure-openapi-validator/issues/773
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.NamespaceProperties.properties.labels
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.NamespaceProperties.properties.annotations
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.MachineKubernetesProfile.properties.nodeLabels
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.LocalDNSOverrides
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
 ```

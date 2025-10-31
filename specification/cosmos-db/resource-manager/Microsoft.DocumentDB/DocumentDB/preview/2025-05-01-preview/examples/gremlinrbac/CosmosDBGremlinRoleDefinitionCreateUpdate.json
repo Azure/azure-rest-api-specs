@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "roleDefinitionId": "myRoleDefinitionId",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2025-05-01-preview",
+    "createUpdateGremlinRoleDefinitionParameters": {
+      "properties": {
+        "roleName": "myRoleName",
+        "type": "CustomRole",
+        "assignableScopes": [
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+        ],
+        "permissions": [
+          {
+            "dataActions": [
+              "Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/containers/entities/create",
+              "Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/containers/entities/read"
+            ],
+            "notDataActions": []
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/gremlinRoleDefinitions/myRoleDefinitionId",
+        "name": "myRoleDefinitionId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/gremlinRoleDefinitions",
+        "properties": {
+          "roleName": "myRoleName",
+          "type": "CustomRole",
+          "assignableScopes": [
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+          ],
+          "permissions": [
+            {
+              "dataActions": [
+                "Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/containers/entities/create",
+                "Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/containers/entities/read"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "$expand": "renewProperties",
+    "api-version": "2024-11-01-preview",
+    "savingsPlanId": "30000000-0000-0000-0000-000000000000",
+    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "20000000-0000-0000-0000-000000000000/30000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.BillingBenefits/savingsPlanOrders/savingsPlans",
+        "id": "/providers/microsoft.billingbenefits/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
+        "properties": {
+          "appliedScopeType": "Shared",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
+          "billingPlan": "P1M",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
+          "billingScopeId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000009",
+          "commitment": {
+            "amount": 0.001,
+            "currencyCode": "USD",
+            "grain": "Hourly"
+          },
+          "displayName": "Compute_SavingsPlan_patch_rename2",
+          "displayProvisioningState": "Succeeded",
+          "effectiveDateTime": "2022-10-21T18:15:42.4098626Z",
+          "expiryDateTime": "2025-10-18T21:16:13.1854959Z",
+          "provisioningState": "Succeeded",
+          "purchaseDateTime": "2022-10-18T21:14:26.8279361Z",
+          "renew": true,
+          "renewProperties": {
+            "purchaseProperties": {
+              "properties": {
+                "appliedScopeType": "Shared",
+                "billingPlan": "Upfront",
+                "billingScopeId": "/subscriptions/eef82110-c91b-4395-9420-fcfcbefc5a47",
+                "commitment": {
+                  "amount": 0.001,
+                  "currencyCode": "USD",
+                  "grain": "Hourly"
+                },
+                "displayName": "Compute_SavingsPlan_patch_rename2_renewed",
+                "term": "P1Y"
+              },
+              "sku": {
+                "name": "Compute_Savings_Plan"
+              }
+            }
+          },
+          "term": "P3Y",
+          "userFriendlyAppliedScopeType": "Shared",
+          "utilization": {
+            "aggregates": [
+              {
+                "grain": 1,
+                "grainUnit": "days",
+                "value": 100,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 7,
+                "grainUnit": "days",
+                "value": 84,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 30,
+                "grainUnit": "days",
+                "value": 83.87,
+                "valueUnit": "percentage"
+              }
+            ],
+            "trend": ""
+          }
+        },
+        "sku": {
+          "name": "Compute_Savings_Plan"
+        }
+      }
+    }
+  },
+  "operationId": "SavingsPlan_Get",
+  "title": "SavingsPlanItemWithExpandedRenewPropertiesGet"
+}

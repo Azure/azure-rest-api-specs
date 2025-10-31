@@ -112,6 +112,22 @@ input-file:
   - Microsoft.FluidRelay/stable/2022-06-01/fluidrelay.json
 ```
 
+### Tag: package-2025-06-20-preview
+
+These settings apply only when `--tag=package-2025-06-20-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-20-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2025-06-20-preview/fluidrelay.json
+suppressions:
+  - code: PathContainsResourceGroup
+    from: fluidrelay.json
+    reason: Keep the `resourceGroup` parameter as `{resourceGroup}`
+  - code: ResourceNameRestriction
+    from: fluidrelay.json
+    reason: Keep existing fluidRelayServerName in the APIs the same (this was not changed with this version)
+```
+
 ---
 
 # Code Generation
@@ -123,11 +139,10 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:

@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-05-15-preview",
+    "transcription": {
+      "contentUrls": [
+        "https://contoso.com/mystoragelocation"
+      ],
+      "properties": {
+        "diarizationEnabled": true,
+        "wordLevelTimestampsEnabled": false,
+        "displayFormWordLevelTimestampsEnabled": false,
+        "channels": [
+          0,
+          1
+        ],
+        "punctuationMode": "DictatedAndAutomatic",
+        "profanityFilterMode": "Masked",
+        "timeToLive": "P2D",
+        "diarization": {
+          "speakers": {
+            "minCount": 3,
+            "maxCount": 5
+          }
+        }
+      },
+      "locale": "en-US",
+      "displayName": "Transcription using diarization for audio that is known to contain speech from 3-5 speakers"
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683?api-version=2024-05-15-preview",
+        "model": {
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/models/827712a5-f942-4997-91c3-7c6cde35600b?api-version=2024-05-15-preview"
+        },
+        "links": {
+          "files": "https://westus.api.cognitive.microsoft.com/speechtotext/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683/files?api-version=2024-05-15-preview"
+        },
+        "properties": {
+          "diarizationEnabled": true,
+          "wordLevelTimestampsEnabled": false,
+          "displayFormWordLevelTimestampsEnabled": false,
+          "channels": [
+            0,
+            1
+          ],
+          "punctuationMode": "DictatedAndAutomatic",
+          "profanityFilterMode": "Masked",
+          "duration": "PT42S",
+          "timeToLive": "P2D",
+          "diarization": {
+            "speakers": {
+              "minCount": 3,
+              "maxCount": 5
+            }
+          }
+        },
+        "lastActionDateTime": "2019-01-07T11:36:07Z",
+        "status": "Succeeded",
+        "createdDateTime": "2019-01-07T11:34:12Z",
+        "locale": "en-US",
+        "displayName": "Transcription using diarization for audio that is known to contain speech from 3-5 speakers",
+        "customProperties": {
+          "key": "value"
+        }
+      }
+    }
+  }
+}

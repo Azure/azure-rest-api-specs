@@ -1,0 +1,22 @@
+{
+  "title": "De-identify text.",
+  "operationId": "DeidentifyText",
+  "parameters": {
+    "api-version": "2024-11-15",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "body": {
+      "inputText": "Hello my name is John Smith.",
+      "operation": "Redact",
+      "customizations": {
+        "redactionFormat": "[{type}]"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outputText": "Hello my name is [name]."
+      }
+    }
+  }
+}

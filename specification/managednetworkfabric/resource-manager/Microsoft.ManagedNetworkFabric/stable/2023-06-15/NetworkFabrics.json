@@ -497,7 +497,7 @@
             "required": true,
             "description": "Network Fabric properties to update.",
             "schema": {
-              "$ref": "./common.json#/definitions/UpdateVersion"
+              "$ref": "#/definitions/UpgradeNetworkFabricProperties"
             }
           }
         ],
@@ -1514,7 +1514,7 @@
         "fabricVersion": {
           "type": "string",
           "description": "The version of Network Fabric.",
-          "readOnly": true
+          "minLength": 1
         },
         "routerIds": {
           "type": "array",
@@ -2082,6 +2082,28 @@
         },
         {
           "$ref": "./common.json#/definitions/Layer3IpPrefixProperties"
+        }
+      ]
+    },
+    "UpgradeNetworkFabricProperties": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Action to be performed while upgrading the fabric.",
+          "enum": [
+            "Start",
+            "Complete"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkFabricUpgradeAction",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/UpdateVersion"
         }
       ]
     }
