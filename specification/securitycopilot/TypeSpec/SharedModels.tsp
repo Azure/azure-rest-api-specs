@@ -102,10 +102,7 @@ model SkillsetConfiguration {
     authType: SkillsetAuthType;
 
     @doc("The authentication configurations of the skillset")
-    //authConfigurations: SkillsetAuthentication;
     authConfigurations: Record<SkillsetAuthConfiguration>;
-
-    //authConfigurations: Dictionary<SkillsetAuthType, SkillsetAuthConfiguration>;
 
     @doc("The scope of the skillset")
     scopeIdentifier: string;
@@ -224,6 +221,16 @@ model SkillSummaryDescriptor {
     summaryEndMessage: string;
 }
 
+@doc("Specifies the identity type used when a skill runs.")
+enum SkillAgentTokenType {
+		@doc("The skill runs using the agentic user (AU) identity.")
+		AgenticUser,
+		@doc("The skill runs using the agentic app (AAI) identity.")
+		AgenticApp,
+		@doc("Short-term 1P scenario: skill runs using the agentic user on-behalf-of (OBO) identity.")
+		AgenticUserOBO,
+}
+
 @doc("The desciptor of a skill")
 model SkillDescriptor {
     @doc("The skillset descriptor")
@@ -285,6 +292,9 @@ model SkillDescriptor {
 
     @doc("Description for use with LLM to decide on skill selection, etc.  Not for end-user consumption.")
     descriptionForModel: string;
+
+    @doc("The token type used when executing the skill. Defaults to AgenticUser.")
+    skillAgentTokenType: SkillAgentTokenType = SkillAgentTokenType.AgenticUser;
 }
 
 @doc("The descriptor of a skill dependency")

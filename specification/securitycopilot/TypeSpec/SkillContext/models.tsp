@@ -9,6 +9,9 @@ using TypeSpec.Rest;
 namespace SkillContext
 {
 
+    // Reusable JSON value (primitive | array | object)
+	alias Object = string | boolean | float64 | int32 | null | Array<JsonValue> | Record<JsonValue>;
+
 	@doc("SkillContext object containing properties of the current session relevant to the invoked skill")
 	model SkillContextResponse {
 		@doc("Skill descriptor containing attributes that describe a skill (i.e. Inputs required to execute the skill)")
@@ -1592,7 +1595,7 @@ namespace SkillContext
 		description?: string;
 
 		@doc("Other parameters in selected template.")
-		parameters?: Record<unknown>;
+		parameters?: Record<Object> | null;
 	}
 
 	@doc("Represents a notification including destinations, locale and template mapping settings.")
@@ -1629,47 +1632,5 @@ namespace SkillContext
 
 		@doc("Type string for this destination (e.g., 'Email').")
 		type: string;
-	}
-
-	@doc("Notification types supported (mapped from InsNotificationTypes C# constants).")
-	enum InsNotificationType {
-		@doc("Email notification type.")
-		Email: "Email",
-
-		@doc("One-way Teams notification (no user response expected).")
-		TeamsOneWay: "1-way Teams",
-
-		@doc("Two-way Teams notification (user response expected).")
-		TeamsTwoWay: "2-way Teams",
-	}
-
-	@doc("Adaptive Card sample parameter constants converted from C# static class.")
-	model AdaptiveCardSampleParameterConstants {
-		@doc("Default template ID for Teams notifications.")
-		DefaultTemplateId: string = "demo-teams-base-template-05292025";
-
-		@doc("Default bot ID for Teams notifications, sent to the test bot.")
-		DefaultBotId: string = "873f4300-3413-4bf7-b213-17ed31741df8";
-
-		@doc("Parameter key for the subject in notification parameters.")
-		SubjectParameterKey: string = "subject";
-
-		@doc("Parameter key for the action list in notification parameters.")
-		ActionListParameterKey: string = "actionList";
-
-		@doc("Key for action title in action dictionary.")
-		ActionTitleKey: string = "actionTitle";
-
-		@doc("Key for action value in action dictionary.")
-		ActionValueKey: string = "actionValue";
-	}
-
-	@doc("INS Teams constants converted from C# static class.")
-	model InsTeamsConstants {
-		@doc("Service name for logging.")
-		ServiceName: string = "INSTeamsNotification";
-
-		@doc("INS Teams notification message Id key; must be included in parameters of the request body regardless of template.")
-		MessageIdKey: string = "messageId";
 	}
 }
