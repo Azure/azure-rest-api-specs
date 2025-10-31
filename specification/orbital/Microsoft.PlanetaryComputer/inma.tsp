@@ -163,9 +163,7 @@ union IngestionStatus {
 model IngestionParameters is CollectionParameters {
   @doc("Ingestion id")
   @path
-  @maxLength(500)
-  @pattern("^[a-zA-Za0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
-  ingestionId: string;
+  ingestionId: uuid;
 }
 
 @tag("Ingestion Management")
@@ -566,9 +564,7 @@ interface IngestionSources {
 
     @doc("Ingestion source id")
     @path
-    @maxLength(500)
-    @pattern(".*")
-    id: string,
+    id: uuid,
 
     @doc("Definition of the ingestion source")
     @body
@@ -594,9 +590,7 @@ interface IngestionSources {
 
     @doc("Ingestion source id")
     @path
-    @maxLength(500)
-    @pattern(".*")
-    id: string,
+    id: uuid,
   ): {
     @statusCode statusCode: 204;
   } | ErrorResponse;
