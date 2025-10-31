@@ -28,25 +28,21 @@ interface PeeringRegisteredAsns {
   /**
    * Gets an existing registered ASN with the specified name under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<PeeringRegisteredAsn>;
 
   /**
    * Creates a new registered ASN with the specified name under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceSync<PeeringRegisteredAsn>;
 
   /**
    * Deletes an existing registered ASN with the specified name under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteSync<PeeringRegisteredAsn>;
 
   /**
    * Lists all registered ASNs under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByPeering is ArmResourceListByParent<PeeringRegisteredAsn>;
 }
 

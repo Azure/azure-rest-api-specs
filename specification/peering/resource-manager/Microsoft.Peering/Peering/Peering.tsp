@@ -68,7 +68,6 @@ interface Peerings {
   /**
    * Lists the prefixes received over the specified peering under the given subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @list
   @get
   @action("receivedRoutes")
@@ -112,7 +111,6 @@ interface Peerings {
   /**
    * Lists all of the RP unbilled prefixes for the specified peering
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @list
   @get
   @action("rpUnbilledPrefixes")

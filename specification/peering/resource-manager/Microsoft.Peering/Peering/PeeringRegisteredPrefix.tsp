@@ -28,31 +28,26 @@ interface PeeringRegisteredPrefixes {
   /**
    * Gets an existing registered prefix with the specified name under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<PeeringRegisteredPrefix>;
 
   /**
    * Creates a new registered prefix with the specified name under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceSync<PeeringRegisteredPrefix>;
 
   /**
    * Deletes an existing registered prefix with the specified name under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteSync<PeeringRegisteredPrefix>;
 
   /**
    * Lists all registered prefixes under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByPeering is ArmResourceListByParent<PeeringRegisteredPrefix>;
 
   /**
    * Validates an existing registered prefix with the specified name under the given subscription, resource group and peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   validate is ArmResourceActionSync<
     PeeringRegisteredPrefix,
     void,

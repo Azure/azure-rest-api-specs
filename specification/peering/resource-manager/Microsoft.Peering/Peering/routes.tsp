@@ -16,7 +16,6 @@ interface CdnPeeringPrefixesOperationGroup {
   /**
    * Lists all of the advertised prefixes for the specified peering location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @list
   @get
@@ -63,7 +62,6 @@ interface LegacyPeeringsOperationGroup {
   /**
    * Lists all of the legacy peerings under the given subscription matching the specified kind and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @list
@@ -104,7 +102,6 @@ interface LookingGlassOperationGroup {
   /**
    * Run looking glass functionality
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @action("lookingGlass")
   invoke is ArmProviderActionSync<
@@ -144,7 +141,6 @@ interface PeeringLocationsOperationGroup {
   /**
    * Lists all of the available peering locations for the specified kind of peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @list
@@ -173,7 +169,6 @@ interface PeeringServiceCountriesOperationGroup {
   /**
    * Lists all of the available countries for peering service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @list
@@ -189,7 +184,6 @@ interface PeeringServiceLocationsOperationGroup {
   /**
    * Lists all of the available locations for peering service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @list
@@ -212,7 +206,6 @@ interface PeeringServiceProvidersOperationGroup {
   /**
    * Lists all of the available peering service locations for the specified kind of peering.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @list
@@ -228,7 +221,6 @@ interface PeeringServicesOperationGroup {
   /**
    * Initialize Peering Service for Connection Monitor functionality
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   initializeConnectionMonitor is ArmProviderActionSync<
     Response = OkResponse,

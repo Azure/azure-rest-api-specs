@@ -28,7 +28,6 @@ interface PeeringServicePrefixes {
   /**
    * Gets an existing prefix with the specified name under the given subscription, resource group and peering service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<
     PeeringServicePrefix,
     Parameters = {
@@ -43,19 +42,16 @@ interface PeeringServicePrefixes {
   /**
    * Creates a new prefix with the specified name under the given subscription, resource group and peering service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceSync<PeeringServicePrefix>;
 
   /**
    * Deletes an existing prefix with the specified name under the given subscription, resource group and peering service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteSync<PeeringServicePrefix>;
 
   /**
    * Lists all prefixes under the given subscription, resource group and peering service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByPeeringService is ArmResourceListByParent<
     PeeringServicePrefix,
     Parameters = {
