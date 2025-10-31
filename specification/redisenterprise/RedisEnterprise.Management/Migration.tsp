@@ -40,8 +40,8 @@ interface Migrations {
   start is ArmResourceCreateOrReplaceAsync<
     Migration,
     Response = (ArmResponse<Migration> &
-      ArmCombinedLroHeaders) | (ArmCreatedResponse<Migration> &
-      ArmCombinedLroHeaders)
+      ArmCombinedLroHeaders<FinalResult = Migration>) | (ArmCreatedResponse<Migration> &
+      ArmCombinedLroHeaders<FinalResult = Migration>)
   >;
 
   /**
