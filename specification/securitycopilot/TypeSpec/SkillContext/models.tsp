@@ -10,7 +10,7 @@ namespace SkillContext
 {
 
     // Reusable JSON value (primitive | array | object)
-	alias Object = string | boolean | float64 | int32 | null | Array<JsonValue> | Record<JsonValue>;
+	alias Object = string | boolean | float64 | int32 | null | Array<JsonValue> | Record<Object>;
 
 	@doc("SkillContext object containing properties of the current session relevant to the invoked skill")
 	model SkillContextResponse {
