@@ -5,7 +5,7 @@ import { SpecModel } from "../src/spec-model.js";
 
 const USAGE =
   "Usage: npx spec-model path/to/spec [--debug] [--include-refs] [--relative-paths] [--no-embed-errors]\n" +
-  "Example: npx spec-model specfication/contosowidgetmanager";
+  "Example: npx spec-model specification/widget";
 
 // Exclude first two args (node, script file)
 let args = process.argv.slice(2);
