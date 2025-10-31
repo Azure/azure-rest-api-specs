@@ -36,17 +36,7 @@ These settings apply only when `--tag=package-2025-03-30` is specified on the co
 
 ```yaml $(tag) == 'package-2025-03-30'
 input-file:
-  - Microsoft.HybridNetwork/stable/2025-03-30/common.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/configurationGroupSchema.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/configurationGroupValues.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/networkFunction.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/networkFunctionDefinition.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/networkServiceDesign.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/operation.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/publisher.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/pureProxyArtifact.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/site.json
-  - Microsoft.HybridNetwork/stable/2025-03-30/siteNetworkService.json
+  - Microsoft.HybridNetwork/stable/2025-03-30/openapi.json
 suppressions:
   - code: PatchSkuProperty
     from: siteNetworkService.json
