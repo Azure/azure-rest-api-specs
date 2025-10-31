@@ -1,5 +1,3 @@
-// @ts-check
-
 import { randomUUID } from "crypto";
 import { readdir } from "fs/promises";
 import { dirname, isAbsolute, join, resolve } from "path";
