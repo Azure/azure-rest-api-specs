@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "networkFunctionName": "testNf",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testNf",
+        "type": "Microsoft.HybridNetwork/networkFunctions",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf",
+        "location": "eastus",
+        "properties": {
+          "allowSoftwareUpdate": false,
+          "configurationType": "Open",
+          "deploymentValues": "{\"releaseName\":\"testReleaseName\",\"namespace\":\"testNamespace\"}",
+          "networkFunctionDefinitionGroupName": "testnetworkFunctionDefinitionGroupName",
+          "networkFunctionDefinitionOfferingLocation": "eastus",
+          "networkFunctionDefinitionVersion": "1.0.1",
+          "networkFunctionDefinitionVersionResourceReference": {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/testVendor/networkFunctionDefinitionGroups/testnetworkFunctionDefinitionGroupName/networkFunctionDefinitionVersions/1.0.1",
+            "idType": "Open"
+          },
+          "nfviId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testResourceGroup/providers/Microsoft.ExtendedLocation/customLocations/testCustomLocation",
+          "nfviType": "AzureArcKubernetes",
+          "provisioningState": "Succeeded",
+          "publisherName": "testVendor",
+          "publisherScope": "Public",
+          "roleOverrideValues": [
+            "{\"name\":\"testRoleOne\",\"deployParametersMappingRuleProfile\":{\"helmMappingRuleProfile\":{\"helmPackageVersion\":\"2.1.3\",\"values\":\"{\\\"roleOneParam\\\":\\\"roleOneOverrideValue\\\"}\"}}}",
+            "{\"name\":\"testRoleTwo\",\"deployParametersMappingRuleProfile\":{\"helmMappingRuleProfile\":{\"releaseName\":\"overrideReleaseName\",\"releaseNamespace\":\"overrideNamespace\",\"values\":\"{\\\"roleTwoParam\\\":\\\"roleTwoOverrideValue\\\"}\"}}}"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "NetworkFunctions_Get",
+  "title": "Get network function resource"
+}

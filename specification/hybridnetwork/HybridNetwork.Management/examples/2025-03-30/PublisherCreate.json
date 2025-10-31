@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "scope": "Public"
+      }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestPublisher",
+        "type": "Microsoft.HybridNetwork/publishers",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "scope": "Public"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestPublisher",
+        "type": "Microsoft.HybridNetwork/publishers",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Accepted",
+          "scope": "Public"
+        }
+      }
+    }
+  },
+  "operationId": "Publishers_CreateOrUpdate",
+  "title": "Create or update a publisher resource"
+}

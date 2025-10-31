@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "networkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestVersion",
+            "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups/networkServiceDesignVersions",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.0",
+            "location": "eastus",
+            "properties": {
+              "configurationGroupSchemaReferences": {
+                "MyVM_Configuration": {
+                  "id": "/subscriptions/subid/resourcegroups/contosorg1/providers/microsoft.hybridnetwork/publishers/contosoGroup/networkServiceDesignGroups/NSD_contoso/configurationGroupSchemas/MyVM_Configuration_Schema"
+                }
+              },
+              "resourceElementTemplates": [
+                {
+                  "name": "MyVM",
+                  "type": "ArmResourceDefinition",
+                  "configuration": {
+                    "artifactProfile": {
+                      "artifactName": "MyVMArmTemplate",
+                      "artifactStoreReference": {
+                        "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/publishers/contosoGroup/ArtifactStore/store1"
+                      },
+                      "artifactVersion": "1.0.0"
+                    },
+                    "parameterValues": "\"publisherName\": \"{configurationparameters('MyVM_Configuration').publisherName}\",\r\n                \"skuGroupName\": \"{configurationparameters('MyVM_Configuration').skuGroupName}\",\r\n                \"skuVersion\": \"{configurationparameters('MyVM_Configuration').skuVersion}\",\r\n                \"skuOfferingLocation\": \"{configurationparameters('MyVM_Configuration').skuOfferingLocation}\",\r\n                \"nfviType\": \"{nfvis().nfvisFromSitePerNfviType.AzureCore.nfviAlias1.nfviType}\",\r\n                \"nfviId\": \"{nfvis().nfvisFromSitePerNfviType.AzureCore.nfviAlias1.nfviId}\",\r\n                \"allowSoftwareUpdates\": \"{configurationparameters('MyVM_Configuration').allowSoftwareUpdates}\",\r\n                \"virtualNetworkName\": \"{configurationparameters('MyVM_Configuration').vnetName}\",\r\n                \"subnetName\": \"{configurationparameters('MyVM_Configuration').subnetName}\",\r\n                \"subnetAddressPrefix\": \"{configurationparameters('MyVM_Configuration').subnetAddressPrefix}\",\r\n                \"managedResourceGroup\": \"{configurationparameters('SNSSelf').managedResourceGroupName}\"\r\n  ",
+                    "templateType": "ArmTemplate"
+                  },
+                  "dependsOnProfile": {
+                    "installDependsOn": []
+                  }
+                }
+              ],
+              "versionState": "Active"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkServiceDesignVersions_ListByNetworkServiceDesignGroup",
+  "title": "Get Publisher resource"
+}
