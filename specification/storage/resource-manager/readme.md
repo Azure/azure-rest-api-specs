@@ -37,15 +37,7 @@ These settings apply only when `--tag=package-2025-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-06'
 input-file:
-  - Microsoft.Storage/stable/2025-06-01/blob.json
-  - Microsoft.Storage/stable/2025-06-01/common.json
-  - Microsoft.Storage/stable/2025-06-01/file.json
-  - Microsoft.Storage/stable/2025-06-01/privatelinks.json
-  - Microsoft.Storage/stable/2025-06-01/queue.json
-  - Microsoft.Storage/stable/2025-06-01/storage.json
-  - Microsoft.Storage/stable/2025-06-01/table.json
-  - Microsoft.Storage/stable/2025-06-01/networkSecurityPerimeter.json
-  - Microsoft.Storage/stable/2025-06-01/storageTaskAssignments.json
+  - Microsoft.Storage/stable/2025-06-01/openapi.json
 
 directive:
   - where:
