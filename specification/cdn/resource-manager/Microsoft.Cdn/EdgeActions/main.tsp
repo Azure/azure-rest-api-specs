@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -9,6 +10,7 @@ import "./edgeactionsbasemodels.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.Core;
 
@@ -36,6 +38,11 @@ model EdgeAction is TrackedResource<EdgeActionProperties> {
   sku: SkuType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+@@extension(EdgeAction.properties, "x-ms-client-flatten", true);
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+@@extension(EdgeAction.properties, "x-ms-mutability", #["read", "create"]);
+
 @parentResource(EdgeAction)
 model EdgeActionVersion is TrackedResource<EdgeActionVersionProperties> {
   @path
@@ -45,6 +52,11 @@ model EdgeActionVersion is TrackedResource<EdgeActionVersionProperties> {
   @visibility(Lifecycle.Read)
   name: smallString;
 }
+
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+@@extension(EdgeActionVersion.properties, "x-ms-client-flatten", true);
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+@@extension(EdgeActionVersion.properties, "x-ms-mutability", #["read", "create"]);
 
 @parentResource(EdgeAction)
 model EdgeActionExecutionFilter
@@ -56,6 +68,11 @@ model EdgeActionExecutionFilter
   @visibility(Lifecycle.Read)
   name: smallString;
 }
+
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+@@extension(EdgeActionExecutionFilter.properties, "x-ms-client-flatten", true);
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+@@extension(EdgeActionExecutionFilter.properties, "x-ms-mutability", #["read", "create"]);
 
 @armResourceOperations
 interface EdgeActions {

@@ -1461,7 +1461,7 @@
     "AttachedResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "ARM resource identifier for attached routes",
+      "description": "Azure resource identifier for attached routes",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -1495,7 +1495,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sku": {
           "$ref": "#/definitions/SkuType",
@@ -1542,7 +1547,11 @@
         "edgeActionId": {
           "type": "string",
           "description": "Non changing guid to identity edge action",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1555,7 +1564,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionExecutionFilterProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -1674,7 +1688,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionExecutionFilterPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -1760,7 +1779,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sku": {
           "$ref": "#/definitions/SkuTypeUpdate",
@@ -1779,7 +1803,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionVersionProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -1821,7 +1850,7 @@
     "EdgeActionVersionId": {
       "type": "string",
       "format": "arm-id",
-      "description": "ARM resource identifier for edge action versions",
+      "description": "Azure resource identifier for edge action versions",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -1927,7 +1956,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionVersionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [

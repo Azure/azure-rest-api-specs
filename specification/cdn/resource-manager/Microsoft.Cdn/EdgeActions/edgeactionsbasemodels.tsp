@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -9,6 +10,7 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -82,7 +84,7 @@ union OperationStatus {
 @maxLength(50)
 scalar smallString extends string;
 
-@doc("ARM resource identifier for attached routes")
+@doc("Azure resource identifier for attached routes")
 scalar AttachedResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -90,7 +92,7 @@ scalar AttachedResourceId
     }
   ]>;
 
-@doc("ARM resource identifier for edge action versions")
+@doc("Azure resource identifier for edge action versions")
 scalar EdgeActionVersionId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -134,7 +136,8 @@ model EdgeActionAttachment {
 @clientName("EdgeActionAttachmentResult", "csharp")
 model EdgeActionAttachmentResponse {
   @doc("Non changing guid to identity edge action")
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+  @extension("x-ms-mutability", #["read", "update", "create"])
   edgeActionId: string;
 }
 
