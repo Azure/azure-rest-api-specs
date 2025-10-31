@@ -556,58 +556,59 @@ interface Aliases {
   get is SearchAliasOperation<{}, SearchAlias>;
 }
 
-interface Agents {
+interface KnowledgeBases {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @doc("Creates a new agent.")
-  @route("/agents")
+  @doc("Creates a new knowledge base.")
+  @route("/knowledgebases")
   @post
   create is SearchOperation<
     {
-      @doc("The definition of the agent to create.")
+      @doc("The definition of the knowledge base to create.")
       @body
-      knowledgeAgent: KnowledgeAgent;
+      knowledgeBase: KnowledgeBase;
     },
-    KnowledgeAgent & {
+    KnowledgeBase & {
       @doc("A process exit code.")
       @statusCode
       code: "201";
     }
   >;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @doc("Lists all agents available for a search service.")
-  @route("/agents")
-  @list
-  @get
-  list is SearchOperation<{}, ListKnowledgeAgentsResult>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @doc("Creates a new agent or updates an agent if it already exists.")
-  @route("/agents('{agentName}')")
+  @doc("Lists all knowledge bases available for a search service.")
+  @route("/knowledgebases")
+  @list
+  @get
+  list is SearchOperation<{}, ListKnowledgeBasesResult>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @doc("Creates a new knowledge base or updates a knowledge base if it already exists.")
+  @route("/knowledgebases('{knowledgeBaseName}')")
   @put
-  createOrUpdate is SearchAgentOperation<
+  createOrUpdate is SearchKnowledgeBaseOperation<
     {
       ...matchingHeader;
       ...preferHeader;
 
-      @doc("The definition of the agent to create or update.")
+      @doc("The definition of the knowledge base to create or update.")
       @body
-      knowledgeAgent: KnowledgeAgent;
+      knowledgeBase: KnowledgeBase;
     },
-    KnowledgeAgent & {
+    KnowledgeBase & {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @doc("A process exit code.")
       @statusCode
-      code: "201";
+      code: "200" | "201";
     }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @doc("Deletes a search alias and its associated mapping to an index. This operation is permanent, with no recovery option. The mapped index is untouched by this operation.")
-  @route("/agents('{agentName}')")
+  @doc("Deletes a knowledge base.")
+  @route("/knowledgebases('{knowledgeBaseName}')")
   @delete
-  delete is SearchAgentOperation<
+  delete is SearchKnowledgeBaseOperation<
     {
       ...matchingHeader;
     },
@@ -620,10 +621,10 @@ interface Agents {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @doc("Retrieves an agent definition.")
-  @route("/agents('{agentName}')")
+  @doc("Retrieves a knowledge base definition.")
+  @route("/knowledgebases('{knowledgeBaseName}')")
   @get
-  get is SearchAgentOperation<{}, KnowledgeAgent>;
+  get is SearchKnowledgeBaseOperation<{}, KnowledgeBase>;
 }
 
 interface Sources {

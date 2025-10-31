@@ -4228,112 +4228,59 @@ model ListAliasesResult {
   value: SearchAlias[];
 }
 
-// Knowledge Agent models
-@doc("Represents a knowledge agent definition.")
-model KnowledgeAgent {
-  @doc("The name of the knowledge agent.")
-  @key("agentName")
+// Knowledge Base models
+@doc("Represents a knowledge base definition.")
+model KnowledgeBase {
+  @doc("The name of the knowledge base.")
+  @key("knowledgeBaseName")
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("Contains configuration options on how to connect to AI models.")
-  models: KnowledgeAgentModel[];
-
-  @doc("Knowledge sources referenced by this agent.")
+  @doc("Knowledge sources referenced by this knowledge base.")
   knowledgeSources: KnowledgeSourceReference[];
 
-  @doc("Output configuration for the agent.")
-  outputConfiguration?: KnowledgeAgentOutputConfiguration;
+  @doc("Contains configuration options on how to connect to AI models.")
+  models?: KnowledgeBaseModel[];
 
-  @doc("Request limits for the agent.")
-  requestLimits?: KnowledgeAgentRequestLimits;
+  @doc("The retrieval reasoning effort configuration.")
+  retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
-  @doc("Instructions considered by the knowledge agent when developing query plan.")
-  retrievalInstructions?: string;
+  @doc("The output mode for the knowledge base.")
+  outputMode?: KnowledgeRetrievalOutputMode;
 
-  @doc("The ETag of the agent.")
+  @doc("The ETag of the knowledge base.")
   eTag?: string;
 
   @doc("A description of an encryption key that you create in Azure Key Vault.")
   encryptionKey?: SearchResourceEncryptionKey;
 
-  @doc("The description of the agent.")
+  @doc("The description of the knowledge base.")
   description?: string;
-}
 
-@doc("Reference to a knowledge source.")
-model KnowledgeSourceReference {
-  @doc("The name of the knowledge source.")
-  name: string;
+  @doc("Instructions considered by the knowledge base when developing query plan.")
+  retrievalInstructions?: string;
 
-  @doc("Indicates whether references should be included for data retrieved from this source.")
-  includeReferences?: boolean;
-
-  @doc("Indicates whether references should include the structured data obtained during retrieval in their payload.")
-  includeReferenceSourceData?: boolean;
-
-  @doc("Indicates that this knowledge source should bypass source selection and always be queried at retrieval time.")
-  alwaysQuerySource?: boolean;
-
-  @doc("The maximum number of queries that can be issued at a time when retrieving data from this source.")
-  maxSubQueries?: int32;
-
-  @doc("The reranker threshold all retrieved documents must meet to be included in the response.")
-  rerankerThreshold?: float32;
-}
-
-@doc("Output configuration for knowledge agent.")
-model KnowledgeAgentOutputConfiguration {
-  @doc("The output configuration for the agent")
-  modality?: KnowledgeAgentOutputConfigurationModality;
-
-  @doc("Instructions considered by the knowledge agent when generating answers")
+  @doc("Instructions considered by the knowledge base when generating answers.")
   answerInstructions?: string;
-
-  @doc("Indicates whether the agent should attempt to issue the most recent chat message as a direct query to the knowledge sources, bypassing the model calls.")
-  attemptFastPath?: boolean;
-
-  @doc("Indicates retrieval results should include activity information.")
-  includeActivity?: boolean;
 }
 
-@doc("The output configuration for the agent")
-union KnowledgeAgentOutputConfigurationModality {
-  string,
-
-  @doc("Synthesize an answer for the response payload.")
-  AnswerSynthesis: "answerSynthesis",
-
-  @doc("Return data from the knowledge sources directly without generative alteration.")
-  ExtractiveData: "extractiveData",
-}
-
-@doc("Guardrails to limit how much resources are utilized for a single agent retrieval request.")
-model KnowledgeAgentRequestLimits {
-  @doc("The maximum runtime in seconds.")
-  maxRuntimeInSeconds?: int32;
-
-  @doc("Limits the maximum size of the content in the output.")
-  maxOutputSize?: int32;
-}
-
-@doc("Result from listing knowledge agents.")
-model ListKnowledgeAgentsResult {
-  @doc("The knowledge agents in the service.")
+@doc("Result from listing knowledge bases.")
+model ListKnowledgeBasesResult {
+  @doc("The knowledge bases in the service.")
   @pageItems
-  value: KnowledgeAgent[];
+  value: KnowledgeBase[];
 }
 
 @discriminator("kind")
 @doc("Specifies the connection parameters for the model to use for query planning.")
-model KnowledgeAgentModel {
+model KnowledgeBaseModel {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The AI model to be used for query planning.")
-  kind: KnowledgeAgentModelKind;
+  kind: KnowledgeBaseModelKind;
 }
 
 @doc("The AI model to be used for query planning.")
-union KnowledgeAgentModelKind {
+union KnowledgeBaseModelKind {
   string,
 
   @doc("Use Azure Open AI models for query planning.")
@@ -4341,12 +4288,19 @@ union KnowledgeAgentModelKind {
 }
 
 @doc("Specifies the Azure OpenAI resource used to do query planning.")
-model KnowledgeAgentAzureOpenAiModel extends KnowledgeAgentModel {
-  kind: KnowledgeAgentModelKind.AzureOpenAI;
+model KnowledgeBaseAzureOpenAIModel extends KnowledgeBaseModel {
+  kind: KnowledgeBaseModelKind.AzureOpenAI;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("Azure OpenAI parameters.")
   azureOpenAIParameters: AzureOpenAiParameters;
+}
+
+// Knowledge Source models
+@doc("Reference to a knowledge source.")
+model KnowledgeSourceReference {
+  @doc("The name of the knowledge source.")
+  name: string;
 }
 
 @doc("Specifies the parameters for connecting to the Azure OpenAI resource.")
@@ -4463,7 +4417,7 @@ model AzureBlobKnowledgeSourceParameters {
   embeddingModel?: VectorSearchVectorizer;
 
   @doc("Optional chat completion model for image verbalization or context extraction.")
-  chatCompletionModel?: KnowledgeAgentModel;
+  chatCompletionModel?: KnowledgeBaseModel;
 
   @doc("Optional schedule for data ingestion.")
   ingestionSchedule?: IndexingSchedule;

@@ -67,16 +67,16 @@ alias aliasNamePath = {
   aliasName: string;
 };
 
-alias agentNamePath = {
-  @doc("The name of the agent.")
-  @path
-  agentName: string;
-};
-
 alias sourceNamePath = {
   @doc("The name of the knowledge source.")
   @path
   sourceName: string;
+};
+
+alias knowledgeBaseNamePath = {
+  @doc("The name of the knowledge base.")
+  @path
+  knowledgeBaseName: string;
 };
 
 alias querySourceAuthorizationHeader = {
@@ -179,18 +179,6 @@ alias SearchAliasOperation<
   TError
 >;
 
-alias SearchAgentOperation<
-  TParams extends Reflection.Model,
-  TResponse,
-  Traits extends Reflection.Model = {},
-  TError extends Reflection.Model = ErrorResponse
-> = Foundations.Operation<
-  TParams & ClientRequestIdHeader & agentNamePath,
-  TResponse,
-  Traits,
-  TError
->;
-
 alias SearchSourceOperation<
   TParams extends Reflection.Model,
   TResponse,
@@ -198,6 +186,18 @@ alias SearchSourceOperation<
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
   TParams & ClientRequestIdHeader & sourceNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchKnowledgeBaseOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & knowledgeBaseNamePath,
   TResponse,
   Traits,
   TError

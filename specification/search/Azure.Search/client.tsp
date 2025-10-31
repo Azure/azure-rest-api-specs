@@ -133,26 +133,26 @@ namespace SearchIndexClient {
     create is Search.Aliases.create;
   }
 
-  interface Agents {
+  interface KnowledgeBases {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.Agents.createOrUpdate;
+    createOrUpdate is Search.KnowledgeBases.createOrUpdate;
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.Agents.delete;
+    delete is Search.KnowledgeBases.delete;
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.Agents.get;
+    get is Search.KnowledgeBases.get;
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.Agents.list;
+    list is Search.KnowledgeBases.list;
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.Agents.create;
+    create is Search.KnowledgeBases.create;
   }
 
   interface Sources {
@@ -305,8 +305,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(SearchIndexPermissionFilterOption, Usage.input);
 @@access(IndexerResyncBody, Access.public);
 @@usage(IndexerResyncBody, Usage.input);
-@@access(KnowledgeAgentAzureOpenAiModel, Access.public);
-@@usage(KnowledgeAgentAzureOpenAiModel, Usage.input);
+@@access(KnowledgeBaseAzureOpenAIModel, Access.public);
+@@usage(KnowledgeBaseAzureOpenAIModel, Usage.input);
 @@access(AnalyzedTokenInfo, Access.public);
 @@usage(AnalyzedTokenInfo, Usage.input);
 @@access(IndexerExecutionStatus, Access.public);
@@ -363,8 +363,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.Indexes.delete, Access.internal, "python");
 @@access(SearchIndexClient.Aliases.createOrUpdate, Access.internal);
 @@access(SearchIndexClient.Aliases.delete, Access.internal, "python");
-@@access(SearchIndexClient.Agents.createOrUpdate, Access.internal);
-@@access(SearchIndexClient.Agents.delete, Access.internal, "python");
+@@access(SearchIndexClient.KnowledgeBases.createOrUpdate, Access.internal);
+@@access(SearchIndexClient.KnowledgeBases.delete, Access.internal, "python");
 @@access(SearchIndexClient.Sources.createOrUpdate, Access.internal);
 @@access(SearchIndexClient.Sources.delete, Access.internal, "python");
 
@@ -679,27 +679,18 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.TextWeights, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ScoringFunction, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.CorsOptions, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeAgent, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeBase, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.KnowledgeSourceReference,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeAgentOutputConfiguration,
+@@clientNamespace(Search.ListKnowledgeBasesResult,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeAgentOutputConfigurationModality,
+@@clientNamespace(Search.KnowledgeBaseModel, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeBaseModelKind,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeAgentRequestLimits,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(Search.ListKnowledgeAgentsResult,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(Search.KnowledgeAgentModel, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeAgentModelKind,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(Search.KnowledgeAgentAzureOpenAiModel,
+@@clientNamespace(Search.KnowledgeBaseAzureOpenAIModel,
   "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(Search.AzureOpenAiParameters,
@@ -1068,11 +1059,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexClient.Aliases.delete, "deleteAlias");
 @@clientName(SearchIndexClient.Aliases.create, "createAlias");
 @@clientName(SearchIndexClient.Aliases.createOrUpdate, "createOrUpdateAlias");
-@@clientName(SearchIndexClient.Agents.delete, "deleteAgent");
-@@clientName(SearchIndexClient.Agents.create, "createAgent");
-@@clientName(SearchIndexClient.Agents.createOrUpdate, "createOrUpdateAgent");
-@@clientName(SearchIndexClient.Agents.get, "getAgent");
-@@clientName(SearchIndexClient.Agents.list, "listAgents");
+@@clientName(SearchIndexClient.KnowledgeBases.delete, "deleteKnowledgeBase");
+@@clientName(SearchIndexClient.KnowledgeBases.create, "createKnowledgeBase");
+@@clientName(SearchIndexClient.KnowledgeBases.createOrUpdate, "createOrUpdateKnowledgeBase");
+@@clientName(SearchIndexClient.KnowledgeBases.get, "getKnowledgeBase");
+@@clientName(SearchIndexClient.KnowledgeBases.list, "listKnowledgeBases");
 @@clientName(SearchIndexClient.Sources.delete, "deleteKnowledgeSource");
 @@clientName(SearchIndexClient.Sources.create, "createKnowledgeSource");
 @@clientName(SearchIndexClient.Sources.createOrUpdate, "createOrUpdateKnowledgeSource");
