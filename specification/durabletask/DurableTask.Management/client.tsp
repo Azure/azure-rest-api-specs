@@ -23,6 +23,7 @@ using Microsoft.DurableTask;
   "csharp"
 );
 @@clientName(SchedulerSku, "DurableTaskSchedulerSku", "csharp");
+@@clientName(SchedulerSkuName, "DurableTaskSchedulerSkuName", "csharp");
 @@clientName(SchedulerSkuUpdate, "DurableTaskSchedulerSkuUpdate", "csharp");
 @@clientName(RedundancyState, "DurableTaskResourceRedundancyState", "csharp");
 @@clientName(PurgeableOrchestrationState,
