@@ -696,12 +696,13 @@
         },
         "ipVersionType": {
           "type": "string",
-          "description": "The IP version type for private IPs on the private endpoint network interface.",
+          "description": "Specifies the IP version type for the private IPs of the private endpoint. If not defined, this defaults to IPv4.",
           "enum": [
             "IPv4",
             "IPv6",
             "DualStack"
           ],
+          "default": "IPv4",
           "x-ms-enum": {
             "name": "PrivateEndpointIPVersionType",
             "modelAsString": true,
@@ -709,17 +710,17 @@
               {
                 "name": "IPv4",
                 "value": "IPv4",
-                "description": "Indicates that the Private IPs of the PE NIC will be IPv4 only."
+                "description": "Indicates that the Private IPs of the private endpoint will be IPv4 only."
               },
               {
                 "name": "IPv6",
                 "value": "IPv6",
-                "description": "Indicates that the Private IPs of the PE NIC will be IPv6 only."
+                "description": "Indicates that the Private IPs of the private endpoint will be IPv6 only."
               },
               {
                 "name": "DualStack",
                 "value": "DualStack",
-                "description": "Indicates that the IPv6 Private IPs can exist along with IPv4 IPs on PE Nic."
+                "description": "Indicates that the Private IPs of the private endpoint can be both IPv4 and IPv6."
               }
             ]
           }
