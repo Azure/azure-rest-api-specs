@@ -1,0 +1,127 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2025-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/setAdminState": {
+      "post": {
+        "operationId": "SetAdminState",
+        "description": "Sets all the load balancer backends corresponding to the listed virtual machines to the specified admin state.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "The set admin state request.",
+            "schema": {
+              "$ref": "#/definitions/SetAdminStateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request accepted. The operation is in progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Set admin state to Down on selected VMs": {
+            "$ref": "./examples/SetAdminState.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SetAdminStateRequest": {
+      "type": "object",
+      "description": "Request to update admin state for virtual machines.",
+      "properties": {
+        "virtualMachines": {
+          "type": "array",
+          "description": "List of virtual machines and related admin state metadata.",
+          "items": {
+            "$ref": "#/definitions/VmAdminState"
+          }
+        }
+      }
+    },
+    "VmAdminState": {
+      "type": "object",
+      "description": "Admin state metadata for a virtual machine.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the virtual machine."
+        },
+        "logicalTimestamp": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true,
+          "minimum": 0,
+          "description": "Logical timestamp (unsigned 64-bit). Nullable and optional. Must be over 0."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  }
+}

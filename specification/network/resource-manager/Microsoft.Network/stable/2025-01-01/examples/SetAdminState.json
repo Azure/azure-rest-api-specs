@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "location": "westus",
+    "api-version": "2025-01-01",
+    "parameters": {
+      "virtualMachines": [
+        {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+          "logicalTimestamp": 123456789
+        },
+        {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm2",
+          "logicalTimestamp": 223456789
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Network/locations/westus/setAdminState/operationStatuses/operationId?api-version=2025-01-01"
+      }
+    }
+  }
+}
