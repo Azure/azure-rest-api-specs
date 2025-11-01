@@ -38,7 +38,7 @@ model WaveProperties is AzureResourceProperties {
 
   @doc("The status of the wave.")
   @visibility(Lifecycle.Read)
-  status?: WaveStatus;
+  status?: string;
 
   @doc("Planned start date of the wave.")
   plannedStartDate: utcDateTime;
@@ -52,7 +52,7 @@ model WaveProperties is AzureResourceProperties {
 
   @doc("The current stage of the wave.")
   @visibility(Lifecycle.Read)
-  stage?: WaveStage;
+  stage?: string;
 }
 
 @doc("ARG query and other details to create workloads within a wave.")

@@ -50,12 +50,12 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
 
   @doc("Migration Entity Group Status")
   @visibility(Lifecycle.Read)
-  executionStatus?: MigrationEntityGroupExecutionStatus;
+  executionStatus?: string;
 
   @doc("Execution Start Date")
   @visibility(Lifecycle.Read)
   executionStartDate?: utcDateTime;
 
   @doc("Migration path")
-  migrationPath?: MigrationPath;
+  migrationPath?: string;
 }

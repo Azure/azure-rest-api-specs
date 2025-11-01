@@ -55,7 +55,7 @@ model TaskProperties is AzureResourceProperties {
   isEditable: boolean;
 
   @doc("Task Status")
-  status: TaskStatus;
+  status: string;
 
   @doc("Task Scope")
   scope: TaskScope;

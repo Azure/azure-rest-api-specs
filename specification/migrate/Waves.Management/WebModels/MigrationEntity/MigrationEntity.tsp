@@ -66,7 +66,7 @@ model MigrationEntityProperties is AzureResourceProperties {
   executionStartDate?: utcDateTime;
 
   @doc("Target of the Migration Entity.")
-  target?: MigrationEntityTarget;
+  target?: string;
 
   @doc("Strategy of Migration Entity.")
   @visibility(Lifecycle.Read)
@@ -74,11 +74,11 @@ model MigrationEntityProperties is AzureResourceProperties {
 
   @doc("Execution Stage of Migration Entity.")
   @visibility(Lifecycle.Read)
-  executionStage?: MigrationEntityExecutionStage;
+  executionStage?: string;
 
   @doc("Execution Status of Migration Entity.")
   @visibility(Lifecycle.Read)
-  executionStatus?: MigrationEntityExecutionStatus;
+  executionStatus?: string;
 
   @doc("Execution Readiness of Migration Entity.")
   @visibility(Lifecycle.Read)
@@ -88,10 +88,10 @@ model MigrationEntityProperties is AzureResourceProperties {
   migrationSpecificProperties?: MigrationSpecificPropertiesBase;
 
   @doc("Migration Tool of the Migration Entity.")
-  migrationTool?: MigrationEntityMigrationTool;
+  migrationTool?: string;
 
   @doc("Migration path")
-  migrationPath?: MigrationPath;
+  migrationPath?: string;
 
   @doc("Assessed Entity ARM Id")
   assessedEntityArmId?: string;

@@ -44,7 +44,7 @@ model TaskSummaryItem {
   stage: string;
 
   @doc("Aggregated status of tasks in this stage.")
-  aggregatedStatus: TaskStatus;
+  aggregatedStatus: string;
 
   @doc("Counts of tasks in this stage by status.")
   statusCounts: TaskStatusCounts;
@@ -66,7 +66,7 @@ model TaskStatusCounts {
 @doc("Task status count mapping.")
 model TaskStatusCountMap {
   @doc("The task status.")
-  status: TaskStatus;
+  status: string;
 
   @doc("The count of tasks with this status.")
   count: int32;

@@ -1536,90 +1536,6 @@
         ]
       }
     },
-    "MigrationEntityExecutionStage": {
-      "type": "string",
-      "description": "Migration Entity Execution Stage.",
-      "enum": [
-        "Preparation",
-        "Testing",
-        "Completion"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationEntityExecutionStage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Preparation",
-            "value": "Preparation",
-            "description": "Preparation migration entity execution stage. This indicates that the migration process for the entity is in the preparation phase, where initial tasks are being executed to set up the environment and resources needed for migration."
-          },
-          {
-            "name": "Testing",
-            "value": "Testing",
-            "description": "Testing migration entity execution stage.  This indicates that the migration process for the entity is in the testing phase, where tasks are being executed to validate the migration before it is fully implemented."
-          },
-          {
-            "name": "Completion",
-            "value": "Completion",
-            "description": "Completion migration entity execution stage. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment."
-          }
-        ]
-      }
-    },
-    "MigrationEntityExecutionStatus": {
-      "type": "string",
-      "description": "Migration Entity Execution Status.",
-      "enum": [
-        "NotStarted",
-        "InProgress",
-        "ActionPending",
-        "InError",
-        "Paused",
-        "Stopped",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationEntityExecutionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Not Started migration entity status. This indicates that the migration process for the entity has not yet begun."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment."
-          },
-          {
-            "name": "ActionPending",
-            "value": "ActionPending",
-            "description": "Action Pending migration entity status. This indicates that the migration process for the entity is waiting for some action to be taken before it can proceed."
-          },
-          {
-            "name": "InError",
-            "value": "InError",
-            "description": "In error migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully."
-          },
-          {
-            "name": "Paused",
-            "value": "Paused",
-            "description": "Paused migration entity status. This indicates that the migration process for the entity has been temporarily halted and is not currently progressing."
-          },
-          {
-            "name": "Stopped",
-            "value": "Stopped",
-            "description": "Stopped migration entity status. This indicates that the migration process for the entity has been intentionally halted and will not continue unless restarted."
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment."
-          }
-        ]
-      }
-    },
     "MigrationEntityGroup": {
       "type": "object",
       "description": "Migration Entity Group resource.",
@@ -1639,48 +1555,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "MigrationEntityGroupExecutionStatus": {
-      "type": "string",
-      "description": "Migration Entity Group Migration Status.",
-      "enum": [
-        "NotStarted",
-        "InProgress",
-        "ActionPending",
-        "InError",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationEntityGroupExecutionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Not Started migration entity status. This indicates that the migration process for the entity has not yet begun."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment."
-          },
-          {
-            "name": "ActionPending",
-            "value": "ActionPending",
-            "description": "Action Pending migration entity status. This indicates that the migration process for the entity is waiting for some action to be taken before it can proceed."
-          },
-          {
-            "name": "InError",
-            "value": "InError",
-            "description": "In error migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully."
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment."
-          }
-        ]
-      }
     },
     "MigrationEntityGroupListResult": {
       "type": "object",
@@ -1749,7 +1623,7 @@
           }
         },
         "executionStatus": {
-          "$ref": "#/definitions/MigrationEntityGroupExecutionStatus",
+          "type": "string",
           "description": "Migration Entity Group Status",
           "readOnly": true
         },
@@ -1760,7 +1634,7 @@
           "readOnly": true
         },
         "migrationPath": {
-          "$ref": "#/definitions/MigrationPath",
+          "type": "string",
           "description": "Migration path"
         }
       },
@@ -1789,48 +1663,6 @@
       "required": [
         "value"
       ]
-    },
-    "MigrationEntityMigrationTool": {
-      "type": "string",
-      "description": "Migration Entity Migration Tool.",
-      "enum": [
-        "ServerMigrationAgentless",
-        "ServerMigrationAgentBased",
-        "AzureDatabaseMigrationService",
-        "Others",
-        "NotApplicable"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationEntityMigrationTool",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServerMigrationAgentless",
-            "value": "ServerMigrationAgentless",
-            "description": "Server Migration Agentless. Indicates that the migration tool is using the server migration agentless approach."
-          },
-          {
-            "name": "ServerMigrationAgentBased",
-            "value": "ServerMigrationAgentBased",
-            "description": "Server Migration Agent Based. Indicates that the migration tool is using the server migration agent-based approach."
-          },
-          {
-            "name": "AzureDatabaseMigrationService",
-            "value": "AzureDatabaseMigrationService",
-            "description": "Azure Database Migration Service. Indicates that the migration tool is using the Azure Database Migration Service."
-          },
-          {
-            "name": "Others",
-            "value": "Others",
-            "description": "Other tools. Indicates that the migration tool is using other tools."
-          },
-          {
-            "name": "NotApplicable",
-            "value": "NotApplicable",
-            "description": "Not Applicable. Indicates that the migration tool is not applicable."
-          }
-        ]
-      }
     },
     "MigrationEntityProperties": {
       "type": "object",
@@ -1904,7 +1736,7 @@
           "readOnly": true
         },
         "target": {
-          "$ref": "#/definitions/MigrationEntityTarget",
+          "type": "string",
           "description": "Target of the Migration Entity."
         },
         "migrationStrategy": {
@@ -1913,12 +1745,12 @@
           "readOnly": true
         },
         "executionStage": {
-          "$ref": "#/definitions/MigrationEntityExecutionStage",
+          "type": "string",
           "description": "Execution Stage of Migration Entity.",
           "readOnly": true
         },
         "executionStatus": {
-          "$ref": "#/definitions/MigrationEntityExecutionStatus",
+          "type": "string",
           "description": "Execution Status of Migration Entity.",
           "readOnly": true
         },
@@ -1932,11 +1764,11 @@
           "description": "Migration specific properties for the entity."
         },
         "migrationTool": {
-          "$ref": "#/definitions/MigrationEntityMigrationTool",
+          "type": "string",
           "description": "Migration Tool of the Migration Entity."
         },
         "migrationPath": {
-          "$ref": "#/definitions/MigrationPath",
+          "type": "string",
           "description": "Migration path"
         },
         "assessedEntityArmId": {
@@ -1948,174 +1780,6 @@
         "associatedInventoryResourceId",
         "inventoryDisplayName"
       ]
-    },
-    "MigrationEntityTarget": {
-      "type": "string",
-      "description": "The target of the Migration Entity.",
-      "enum": [
-        "None",
-        "AzureVM",
-        "SqlMI",
-        "SqlDatabase",
-        "AzureSQLVM",
-        "AKS",
-        "AzureAppService",
-        "AzureAppServiceContainer",
-        "AzureLocal",
-        "Others"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationEntityTarget",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None. Indicates the Migration Entity target is not specified."
-          },
-          {
-            "name": "AzureVm",
-            "value": "AzureVM",
-            "description": "AzureVM. Indicates the Migration Entity target is Azure VM."
-          },
-          {
-            "name": "SqlMI",
-            "value": "SqlMI",
-            "description": "SqlMI. Indicates the Migration Entity target is Azure SQL Managed Instance."
-          },
-          {
-            "name": "SqlDatabase",
-            "value": "SqlDatabase",
-            "description": "SqlDatabase. Indicates the Migration Entity target is Azure SQL Database."
-          },
-          {
-            "name": "AzureSQLVM",
-            "value": "AzureSQLVM",
-            "description": "AzureSQLVM. Indicates the Migration Entity target is Azure SQL Virtual Machine."
-          },
-          {
-            "name": "AKS",
-            "value": "AKS",
-            "description": "AKS. Indicates the Migration Entity target is Azure Kubernetes Service."
-          },
-          {
-            "name": "AzureAppService",
-            "value": "AzureAppService",
-            "description": "AzureAppService. Indicates the Migration Entity target is Azure App Service."
-          },
-          {
-            "name": "AzureAppServiceContainer",
-            "value": "AzureAppServiceContainer",
-            "description": "AzureAppServiceContainer. Indicates the Migration Entity target is Azure App Service Container."
-          },
-          {
-            "name": "AzureLocal",
-            "value": "AzureLocal",
-            "description": "AzureLocal. Indicates the Migration Entity target is Azure Local."
-          },
-          {
-            "name": "Others",
-            "value": "Others",
-            "description": "Others. Indicates the Migration Entity target is Others."
-          }
-        ]
-      }
-    },
-    "MigrationPath": {
-      "type": "string",
-      "description": "Migration Path Options.",
-      "enum": [
-        "PaaSPreferred",
-        "PaaSCentric",
-        "IaaSCentric",
-        "RecommendedPath",
-        "AzureVM",
-        "Avs",
-        "SqlDatabase",
-        "SqlMI",
-        "AzureSQLVM",
-        "AzureAppService",
-        "AzureAppServiceContainer",
-        "AKS",
-        "Modernize",
-        "LiftAndShift"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationPath",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PaaSPreferred",
-            "value": "PaaSPreferred",
-            "description": "PaaS Preferred"
-          },
-          {
-            "name": "PaaSCentric",
-            "value": "PaaSCentric",
-            "description": "PaaS Centric"
-          },
-          {
-            "name": "IaaSCentric",
-            "value": "IaaSCentric",
-            "description": "IaaS Centric"
-          },
-          {
-            "name": "RecommendedPath",
-            "value": "RecommendedPath",
-            "description": "Recommended Path"
-          },
-          {
-            "name": "AzureVM",
-            "value": "AzureVM",
-            "description": "Azure VM"
-          },
-          {
-            "name": "Avs",
-            "value": "Avs",
-            "description": "AVS"
-          },
-          {
-            "name": "SqlDatabase",
-            "value": "SqlDatabase",
-            "description": "SQL Database"
-          },
-          {
-            "name": "SqlMI",
-            "value": "SqlMI",
-            "description": "SQL MI"
-          },
-          {
-            "name": "AzureSQLVM",
-            "value": "AzureSQLVM",
-            "description": "Azure SQL VM"
-          },
-          {
-            "name": "AzureAppService",
-            "value": "AzureAppService",
-            "description": "Azure App Service"
-          },
-          {
-            "name": "AzureAppServiceContainer",
-            "value": "AzureAppServiceContainer",
-            "description": "Azure App Service Container"
-          },
-          {
-            "name": "AKS",
-            "value": "AKS",
-            "description": "AKS"
-          },
-          {
-            "name": "Modernize",
-            "value": "Modernize",
-            "description": "The Modernize path"
-          },
-          {
-            "name": "LiftAndShift",
-            "value": "LiftAndShift",
-            "description": "Lift and Shift"
-          }
-        ]
-      }
     },
     "MigrationSpecificPropertiesBase": {
       "type": "object",
@@ -2491,7 +2155,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/TaskStatus",
+          "type": "string",
           "description": "Task Status"
         },
         "scope": {
@@ -2548,66 +2212,12 @@
         ]
       }
     },
-    "TaskStatus": {
-      "type": "string",
-      "description": "Status represents the current state of the task",
-      "enum": [
-        "Pending",
-        "InProgress",
-        "Completed",
-        "Failed",
-        "Skipped",
-        "Paused",
-        "Stopped"
-      ],
-      "x-ms-enum": {
-        "name": "TaskStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Task is pending"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "Task is in progress"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Task is completed"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Task has failed"
-          },
-          {
-            "name": "Skipped",
-            "value": "Skipped",
-            "description": "Task is skipped"
-          },
-          {
-            "name": "Paused",
-            "value": "Paused",
-            "description": "Task is on hold"
-          },
-          {
-            "name": "Stopped",
-            "value": "Stopped",
-            "description": "Task is stopped"
-          }
-        ]
-      }
-    },
     "TaskStatusCountMap": {
       "type": "object",
       "description": "Task status count mapping.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/TaskStatus",
+          "type": "string",
           "description": "The task status."
         },
         "count": {
@@ -2649,7 +2259,7 @@
           "description": "Task Stage"
         },
         "aggregatedStatus": {
-          "$ref": "#/definitions/TaskStatus",
+          "type": "string",
           "description": "Aggregated status of tasks in this stage."
         },
         "statusCounts": {
@@ -2803,7 +2413,7 @@
           "description": "ARG query and other details to create workloads within a wave"
         },
         "status": {
-          "$ref": "#/definitions/WaveStatus",
+          "type": "string",
           "description": "The status of the wave.",
           "readOnly": true
         },
@@ -2824,7 +2434,7 @@
           "readOnly": true
         },
         "stage": {
-          "$ref": "#/definitions/WaveStage",
+          "type": "string",
           "description": "The current stage of the wave.",
           "readOnly": true
         }
@@ -2834,96 +2444,6 @@
         "arg",
         "plannedStartDate"
       ]
-    },
-    "WaveStage": {
-      "type": "string",
-      "description": "Preset stage of the wave.",
-      "enum": [
-        "Creation",
-        "Configuration",
-        "ReadyForExecution",
-        "ExecutionInProgress",
-        "ExecutionCompleted"
-      ],
-      "x-ms-enum": {
-        "name": "WaveStage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Creation",
-            "value": "Creation",
-            "description": "Creation. Indicates the wave is being created."
-          },
-          {
-            "name": "Configuration",
-            "value": "Configuration",
-            "description": "Configuration. Indicates the wave is in configuration."
-          },
-          {
-            "name": "ReadyForExecution",
-            "value": "ReadyForExecution",
-            "description": "Ready for Execution. Indicates the wave is ready for execution."
-          },
-          {
-            "name": "ExecutionInProgress",
-            "value": "ExecutionInProgress",
-            "description": "Execution in Progress. Indicates the wave is currently being executed."
-          },
-          {
-            "name": "ExecutionCompleted",
-            "value": "ExecutionCompleted",
-            "description": "Completed. Indicates the wave is completed."
-          }
-        ]
-      }
-    },
-    "WaveStatus": {
-      "type": "string",
-      "description": "The status of the wave.",
-      "enum": [
-        "NotStarted",
-        "OnTrack",
-        "OffTrack",
-        "AtRisk",
-        "Completed",
-        "New"
-      ],
-      "x-ms-enum": {
-        "name": "WaveStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Not Started. Indicates the wave is not started."
-          },
-          {
-            "name": "OnTrack",
-            "value": "OnTrack",
-            "description": "On Track. Indicates the wave is on track."
-          },
-          {
-            "name": "OffTrack",
-            "value": "OffTrack",
-            "description": "Off Track. Indicates the wave is off track."
-          },
-          {
-            "name": "AtRisk",
-            "value": "AtRisk",
-            "description": "At Risk. Indicates the wave is at risk."
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed. Indicates the wave is completed."
-          },
-          {
-            "name": "New",
-            "value": "New",
-            "description": "New. Indicates the wave is newly created."
-          }
-        ]
-      }
     }
   },
   "parameters": {}
