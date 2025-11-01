@@ -4,14 +4,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Azure.ResourceManager;
-
 namespace Microsoft.Monitor;
 
 @doc("Represents a signal model used in SLI calculations.")
 model Signal {
   @doc("Sources of metrics used for SLIs.")
-  @identifiers(#["signalSourceId"])
+  @OpenAPI.extension("x-ms-identifiers", #["signalSourceId"])
   signalSources: SignalSource[];
 
   @doc("Mathematical formula used to combine multiple metrics.")
@@ -46,7 +44,7 @@ model SignalSource {
   spatialAggregation: SpatialAggregation;
 
   @doc("Defines how measurements are aggregated over a specific time window within the same time series.")
-  temporalAggregation?: TemporalAggregation;
+  temporalAggregation: TemporalAggregation;
 }
 
 @doc("Represents a filtering condition.")
@@ -236,5 +234,5 @@ model TemporalAggregation {
   type: TemporalAggregationType;
 
   @doc("Time window size for aggregation, in minutes.")
-  windowSizeMinutes: int32;
+  windowSizeMinutes?: int32;
 }
