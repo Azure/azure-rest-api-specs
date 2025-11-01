@@ -94,6 +94,7 @@ input-file:
   - Microsoft.Network/stable/2025-01-01/serviceCommunity.json
   - Microsoft.Network/stable/2025-01-01/serviceEndpointPolicy.json
   - Microsoft.Network/stable/2025-01-01/serviceTags.json
+  - Microsoft.Network/stable/2025-01-01/setAdminState.json
   - Microsoft.Network/stable/2025-01-01/usage.json
   - Microsoft.Network/stable/2025-01-01/virtualNetwork.json
   - Microsoft.Network/stable/2025-01-01/virtualNetworkGateway.json
