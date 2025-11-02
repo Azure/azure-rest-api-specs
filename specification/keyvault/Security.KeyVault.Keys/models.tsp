@@ -404,6 +404,17 @@ model KeyCreateParameters {
 }
 
 /**
+ * External Key parameters.
+ */
+@added(KeyVault.Versions.v2026_01_01_preview)
+model ExternalKey {
+  /**
+   * The external key identifier. The valid id can only contain characters in the set [a-zA-Z0-9-]. Maximum length is 64 characters.
+   */
+  id: string;
+};
+
+/**
  * The attributes of a key managed by the key vault service.
  */
 model KeyAttributes {
@@ -438,6 +449,20 @@ model KeyAttributes {
   @added(KeyVault.Versions.`v7.6_preview.2`)
   @visibility(Lifecycle.Read)
   attestation?: KeyAttestation;
+
+  /**
+   * The external key information.
+   */
+  @added(KeyVault.Versions.v2026_01_01_preview)
+  @encodedName("application/json", "external_key")
+  externalKey?: ExternalKey;
+
+  /**
+   * The optional key size in bits for symmetric keys. For example: 128, 192, or 256 for AES keys.
+   */
+  @added(KeyVault.Versions.v2026_01_01_preview)
+  @encodedName("application/json", "key_size")
+  keySize?: int32;
 }
 
 /**
