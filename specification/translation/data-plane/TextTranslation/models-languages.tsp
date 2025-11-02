@@ -52,7 +52,7 @@ model GetSupportedLanguagesResult {
     To make subsequent requests more efficient, the client may send the `ETag` value in an 
     `If-None-Match` header field.
     """)
-  etag: string;
+  etag: eTag;
 
   @doc("Languages that support translate API.")
   translation?: Record<TranslationLanguage>;
