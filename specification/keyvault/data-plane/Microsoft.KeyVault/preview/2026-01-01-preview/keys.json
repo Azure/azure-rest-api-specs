@@ -1580,16 +1580,6 @@
         "id"
       ]
     },
-    "ExternalKeyUpdate": {
-      "type": "object",
-      "description": "External Key parameters.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The external key identifier. The valid id can only contain characters in the set [a-zA-Z0-9-]. Maximum length is 64 characters."
-        }
-      }
-    },
     "GetRandomBytesRequest": {
       "type": "object",
       "description": "The get random bytes request object.",
@@ -2208,43 +2198,6 @@
         }
       }
     },
-    "KeyAttributesUpdate": {
-      "type": "object",
-      "description": "The attributes of a key managed by the key vault service.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Determines whether the object is enabled."
-        },
-        "nbf": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "Not before date in UTC.",
-          "x-ms-client-name": "notBefore"
-        },
-        "exp": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "Expiry date in UTC.",
-          "x-ms-client-name": "expires"
-        },
-        "exportable": {
-          "type": "boolean",
-          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key."
-        },
-        "external_key": {
-          "$ref": "#/definitions/ExternalKeyUpdate",
-          "description": "The external key information.",
-          "x-ms-client-name": "externalKey"
-        },
-        "key_size": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The optional key size in bits for symmetric keys. For example: 128, 192, or 256 for AES keys.",
-          "x-ms-client-name": "keySize"
-        }
-      }
-    },
     "KeyBundle": {
       "type": "object",
       "description": "A KeyBundle consisting of a WebKey plus its attributes.",
@@ -2734,7 +2687,7 @@
           "x-ms-client-name": "keyOps"
         },
         "attributes": {
-          "$ref": "#/definitions/KeyAttributesUpdate",
+          "$ref": "#/definitions/KeyAttributes",
           "description": "The attributes of a key managed by the key vault service.",
           "x-ms-client-name": "keyAttributes"
         },
