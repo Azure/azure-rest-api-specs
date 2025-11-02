@@ -462,6 +462,7 @@ model KeyAttributes {
    */
   @added(KeyVault.Versions.v2026_01_01_preview)
   @encodedName("application/json", "key_size")
+  @visibility(Lifecycle.Read)
   keySize?: int32;
 }
 
