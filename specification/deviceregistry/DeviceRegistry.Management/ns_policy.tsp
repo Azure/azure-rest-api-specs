@@ -35,6 +35,10 @@ model PolicyProperties {
 
   @doc("The certificate configuration.")
   certificate?: CertificateConfiguration;
+
+  @added(Versions.v2026_04_01)
+  @doc("The Bring Your Own Root (BYOR) configuration.")
+  bringYourOwnRoot?: BringYourOwnRoot;
 }
 
 @added(Versions.v2025_11_01_preview)
@@ -83,6 +87,41 @@ model LeafCertificateConfiguration {
   @minValue(7)
   @maxValue(90)
   validityPeriodInDays: int32;
+}
+
+@added(Versions.v2025_11_01_preview)
+@doc("Configuration for Bring Your Own Root (BYOR). When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.")
+model BringYourOwnRoot {
+  @doc("Indicates whether BYOR is enabled for this policy. This can only be set at creation time and cannot be changed afterward.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  enabled: boolean;
+
+  @doc("The certificate is nearing expiration (within renewal window) or has expired. A new CSR has been generated and is waiting for the customer to provide a new signed certificate.")
+  @visibility(Lifecycle.Read)
+  certificateSigningRequest?: string;
+
+  @added(Versions.v2026_04_01)
+  @doc("The status of the BYOR configuration, indicating the current state of the certificate lifecycle.")
+  @visibility(Lifecycle.Read)
+  status?: BringYourOwnRootStatus;
+}
+
+@added(Versions.v2026_04_01)
+@doc("Status of the Bring Your Own Root (BYOR) configuration.")
+union BringYourOwnRootStatus {
+  string,
+
+  @doc("The CSR has been generated and is waiting for the customer to provide the signed certificate.")
+  PendingActivation: "PendingActivation",
+
+  @doc("The signed certificate has been successfully uploaded and validated, and the CA is active.")
+  Active: "Active",
+
+  @doc("The certificate is nearing expiration (within renewal window) or has expired. A new CSR has been generated and is waiting for the customer to provide a new signed certificate.")
+  ActiveButPendingRenewal: "ActiveButPendingRenewal",
+
+  @doc("The certificate activation or rotation has failed. Check error details for more information.")
+  Failed: "Failed",
 }
 
 @added(Versions.v2025_11_01_preview)
