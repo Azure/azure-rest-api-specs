@@ -9,13 +9,12 @@
       "properties": {
         "entityType": "Primary",
         "displayName": "Conditional Credit Multiple Milestones Example",
-        "systemId": "CACO-SYSTEM-MULTI-001",
         "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
         "startAt": "2025-11-01T00:00:00Z",
         "allowContributors": "Enabled",
         "milestones": [
           {
-            "milestoneId": "550e8400-e29b-41d4-a716-446655440021",
+            "name": "Milestone 1",
             "spendTarget": {
               "amount": 1000,
               "currencyCode": "USD"
@@ -30,7 +29,7 @@
             "endAt": "2025-11-30T23:59:59Z"
           },
           {
-            "milestoneId": "550e8400-e29b-41d4-a716-446655440022",
+            "name": "Milestone 2",
             "spendTarget": {
               "amount": 3000,
               "currencyCode": "USD"
@@ -45,7 +44,7 @@
             "endAt": "2025-12-31T23:59:59Z"
           },
           {
-            "milestoneId": "550e8400-e29b-41d4-a716-446655440023",
+            "name": "Milestone 3",
             "spendTarget": {
               "amount": 5000,
               "currencyCode": "USD"
@@ -83,6 +82,7 @@
           "milestones": [
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440021",
+              "name": "Milestone 1",
               "status": "Completed",
               "endAt": "2025-11-30T23:59:59Z",
               "spendTarget": {
@@ -92,13 +92,19 @@
               "award": {
                 "duration": "P1M",
                 "credit": {
+                  "grain": "FullTerm",
                   "amount": 100,
                   "currencyCode": "USD"
-                }
+                },
+                "startAt": "2025-12-01T00:00:00Z",
+                "endAt": "2025-12-31T23:59:59Z",
+                "balanceVersion": 13,
+                "systemId": "credit98765432"
               }
             },
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440022",
+              "name": "Milestone 2",
               "status": "Active",
               "endAt": "2025-12-31T23:59:59Z",
               "spendTarget": {
@@ -108,6 +114,7 @@
               "award": {
                 "duration": "P2M",
                 "credit": {
+                  "grain": "FullTerm",
                   "amount": 300,
                   "currencyCode": "USD"
                 }
@@ -115,6 +122,7 @@
             },
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440023",
+              "name": "Milestone 3",
               "status": "Scheduled",
               "endAt": "2026-02-28T23:59:59Z",
               "spendTarget": {
@@ -124,6 +132,7 @@
               "award": {
                 "duration": "P3M",
                 "credit": {
+                  "grain": "FullTerm",
                   "amount": 500,
                   "currencyCode": "USD"
                 }
@@ -153,6 +162,7 @@
           "milestones": [
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440021",
+              "name": "Milestone 1",
               "status": "Completed",
               "endAt": "2025-11-30T23:59:59Z",
               "spendTarget": {
@@ -162,13 +172,19 @@
               "award": {
                 "duration": "P1M",
                 "credit": {
+                  "grain": "FullTerm",
                   "amount": 100,
                   "currencyCode": "USD"
-                }
+                },
+                "startAt": "2025-12-01T00:00:00Z",
+                "endAt": "2025-12-31T23:59:59Z",
+                "balanceVersion": 13,
+                "systemId": "credit98765432"
               }
             },
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440022",
+              "name": "Milestone 2",
               "status": "Active",
               "endAt": "2025-12-31T23:59:59Z",
               "spendTarget": {
@@ -178,6 +194,7 @@
               "award": {
                 "duration": "P2M",
                 "credit": {
+                  "grain": "FullTerm",
                   "amount": 300,
                   "currencyCode": "USD"
                 }
@@ -185,6 +202,7 @@
             },
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440023",
+              "name": "Milestone 3",
               "status": "Scheduled",
               "endAt": "2026-02-28T23:59:59Z",
               "spendTarget": {
@@ -194,6 +212,7 @@
               "award": {
                 "duration": "P3M",
                 "credit": {
+                  "grain": "FullTerm",
                   "amount": 500,
                   "currencyCode": "USD"
                 }
