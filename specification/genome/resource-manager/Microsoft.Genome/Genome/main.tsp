@@ -62,7 +62,7 @@ interface GenomeAccounts {
   create is ArmResourceCreateOrUpdateAsync<GenomeAccount>;
 
   /** Update properties of an existing Genome account. */
-  update is ArmResourcePatchSync<GenomeAccount, GenomeAccountProperties>;
+  update is ArmResourcePatchAsync<GenomeAccount, GenomeAccountProperties>;
 
   /** Delete a Genome account. */
   delete is ArmResourceDeleteWithoutOkAsync<GenomeAccount>;
