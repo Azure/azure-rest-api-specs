@@ -1028,12 +1028,6 @@ model PrivateLinkResourcesResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: PrivateLinkResource[];
-
-  /**
-   * The URL to get the next set of private link resources, if there are any.
-   */
-  @nextLink
-  nextLink?: string;
 }
 
 /**
