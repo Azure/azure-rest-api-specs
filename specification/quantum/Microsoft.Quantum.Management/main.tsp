@@ -58,6 +58,14 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_08_11_preview: "2025-08-11-preview",
+
+  /**
+   * The 2025-11-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_11_01_preview: "2025-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

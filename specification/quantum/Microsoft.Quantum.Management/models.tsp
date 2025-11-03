@@ -91,6 +91,14 @@ union KeyType {
   Secondary: "Secondary",
 }
 
+enum WorkspaceKind {
+  /** The workspace is a general-purpose workspace. */
+  v1: "v1",
+
+  /** The workspace is a V2 workspace. */
+  v2: "v2",
+}
+
 /**
  * The response of a list Providers operation.
  */
@@ -392,6 +400,12 @@ model WorkspaceResourceProperties {
    */
   @typeChangedFrom(Versions.v2025_01_01_preview, string)
   storageAccount?: StorageAccountResourceId;
+
+  /**
+   * Whether this workspace is v1 or v2.
+   */
+  @added(Versions.v2025_11_01_preview)
+  kind?: WorkspaceKind;
 
   /**
    * The URI of the workspace endpoint.
