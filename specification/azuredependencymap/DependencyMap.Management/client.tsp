@@ -39,13 +39,11 @@ using Microsoft.DependencyMap;
   "GetConnectionsForProcessOnFocusedMachineContent",
   "csharp"
 );
-@@clientName(GetConnectionsWithConnectedMachineForFocusedMachineRequest
-  ,
+@@clientName(GetConnectionsWithConnectedMachineForFocusedMachineRequest,
   "GetConnectionsWithConnectedMachineForFocusedMachineContent",
   "csharp"
 );
-@@clientName(GetDependencyViewForAllMachinesRequest
-  ,
+@@clientName(GetDependencyViewForAllMachinesRequest,
   "GetDependencyViewForAllMachinesContent",
   "csharp"
 );
@@ -73,4 +71,7 @@ using Microsoft.DependencyMap;
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id, armResourceIdentifier, "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  armResourceIdentifier,
+  "csharp"
+);
