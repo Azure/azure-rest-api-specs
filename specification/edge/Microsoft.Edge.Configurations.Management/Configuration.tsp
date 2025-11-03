@@ -2,6 +2,7 @@ import "./Commons.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
@@ -29,13 +30,37 @@ interface Configurations {
   get is ArmResourceRead<Configuration>;
 
   @doc("Create or update a Configuration Resource")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Configuration>;
+  @removed(Versions.v2025_12_01_preview)
+  @renamedFrom(Versions.v2025_12_01_preview, "createOrUpdate")
+  @sharedRoute
+  createOrUpdateSync is ArmResourceCreateOrReplaceSync<Configuration>;
+
+  @doc("Create or update a Configuration Resource")
+  @added(Versions.v2025_12_01_preview)
+  @sharedRoute
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Configuration>;
 
   @doc("Update a Configuration Resource")
-  update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
+  @removed(Versions.v2025_12_01_preview)
+  @renamedFrom(Versions.v2025_12_01_preview, "update")
+  @sharedRoute
+  updateSync is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
+
+  @doc("Update a Configuration Resource")
+  @added(Versions.v2025_12_01_preview)
+  @sharedRoute
+  update is ArmResourcePatchAsync<Configuration, ConfigurationProperties>;
 
   @doc("Delete a Configuration Resource")
-  delete is ArmResourceDeleteSync<Configuration>;
+  @removed(Versions.v2025_12_01_preview)
+  @renamedFrom(Versions.v2025_12_01_preview, "delete")
+  @sharedRoute
+  deleteSync is ArmResourceDeleteSync<Configuration>;
+
+  @doc("Delete a Configuration Resource")
+  @added(Versions.v2025_12_01_preview)
+  @sharedRoute
+  delete is ArmResourceDeleteWithoutOkAsync<Configuration>;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Configuration>;
