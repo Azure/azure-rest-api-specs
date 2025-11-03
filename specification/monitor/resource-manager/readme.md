@@ -68,6 +68,14 @@ input-file:
   - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
   - Microsoft.Monitor/Accounts/preview/2025-05-03-preview/azuremonitorworkspace.json
   - Microsoft.Monitor/Operations/preview/2025-05-03-preview/operations.json
+
+suppressions:
+  - code: GuidUsage
+    reason: The IDs of investigation entities are GUIDs.
+    from: azuremonitorworkspace.json
+    where:
+     - $.definitions["Azure.Core.uuid"].format
+
 ```
 
 ### Tag: package-2025-01-01-preview
@@ -219,7 +227,7 @@ input-file:
  - Microsoft.Insights/preview/2018-06-01-preview/guestDiagnosticSettings_API.json
  - Microsoft.Insights/preview/2018-06-01-preview/guestDiagnosticSettingsAssociation_API.json
  - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
- - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+ - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
  - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
  - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
  - Microsoft.Insights/stable/2024-02-01/metrics_API.json

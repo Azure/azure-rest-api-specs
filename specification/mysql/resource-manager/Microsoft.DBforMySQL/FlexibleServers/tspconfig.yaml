@@ -15,10 +15,12 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.MySql"
+    namespace: "{package-name}.FlexibleServers"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "Azure.ResourceManager.MySql"
+    api-version: "2024-12-30"
   "@azure-tools/typespec-python":
     service-dir: "sdk/mysqlflexibleservers"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-mysqlflexibleservers"
