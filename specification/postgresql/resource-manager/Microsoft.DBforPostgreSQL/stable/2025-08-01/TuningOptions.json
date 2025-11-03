@@ -286,6 +286,7 @@
           "description": "Current state."
         },
         "recommendationType": {
+          "type": "string",
           "$ref": "#/definitions/RecommendationEnum",
           "description": "Type for this recommendation."
         },
@@ -387,7 +388,6 @@
       }
     },
     "RecommendationEnum": {
-      "type": "string",
       "enum": [
         "CreateIndex",
         "DropIndex",
@@ -451,6 +451,7 @@
     "RecommendationTypeParameter": {
       "name": "recommendationType",
       "in": "query",
+      "type": "string",
       "required": false,
       "schema": {
         "$ref": "#/definitions/RecommendationEnum"
