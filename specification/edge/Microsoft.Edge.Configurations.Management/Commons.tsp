@@ -1,8 +1,10 @@
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/versioning";
+import "@typespec/rest";
 
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 

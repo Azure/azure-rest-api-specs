@@ -1,15 +1,7 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
+import "./Commons.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
@@ -37,13 +29,13 @@ interface Configurations {
   get is ArmResourceRead<Configuration>;
 
   @doc("Create or update a Configuration Resource")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Configuration>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Configuration>;
 
   @doc("Update a Configuration Resource")
-  update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
+  update is ArmResourcePatchAsync<Configuration, ConfigurationProperties>;
 
   @doc("Delete a Configuration Resource")
-  delete is ArmResourceDeleteSync<Configuration>;
+  delete is ArmResourceDeleteWithoutOkAsync<Configuration>;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Configuration>;

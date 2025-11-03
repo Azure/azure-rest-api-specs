@@ -1,7 +1,4 @@
-import "@typespec/http";
-import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./ArcGatewayConfiguration.tsp";
 import "./Configuration.tsp";
@@ -13,10 +10,7 @@ import "./SecurityConfiguration.tsp";
 import "./TimeServerConfiguration.tsp";
 import "./ProvisioningConfigurations.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.Edge Resource Provider management API. */
@@ -31,6 +25,10 @@ enum Versions {
   /** 2024-09-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_09_01_preview: "2024-09-01-preview",
+
+  /** 2025-12-01-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2025_12_01_preview: "2025-12-01-preview",
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_06_01: "2025-06-01",
