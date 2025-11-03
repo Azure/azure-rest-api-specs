@@ -92,7 +92,7 @@ model Identity {
   type?: ResourceIdentityType;
 
   /** Properties for User Assigned Identities */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard ARM pattern"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -100,29 +100,17 @@ model Identity {
 union ProvisioningState {
   string,
 
-  /** Resource is being provisioned */
-  Provisioning: "Provisioning",
-
-  /** Resource is active and ready for use */
-  Active: "Active",
-
-  /** Resource is being updated */
-  Updating: "Updating",
-
-  /** Resource has been suspended */
-  Suspended: "Suspended",
-
-  /** Resource is being deleted */
-  Deleting: "Deleting",
-
-  /** Operation completed successfully */
+  /** Resource creation/update succeeded */
   Succeeded: "Succeeded",
 
-  /** Operation failed to complete */
+  /** Resource creation/update failed */
   Failed: "Failed",
 
-  /** Operation was canceled */
+  /** Resource creation/update was canceled */
   Canceled: "Canceled",
+
+  /** Resource is being created or updated */
+  Provisioning: "Provisioning",
 }
 
 /** Network rule action type. */
@@ -147,6 +135,34 @@ union VnetServiceEndpointBehavior {
   Require: "Require",
 }
 
+/** Network rule bypass options. */
+union NetworkRuleBypass {
+  string,
+
+  /** No services can bypass network rules */
+  None: "None",
+
+  /** Allow Azure services to bypass network rules */
+  AzureServices: "AzureServices",
+
+  /** Allow logging services to bypass network rules */
+  Logging: "Logging",
+
+  /** Allow metrics services to bypass network rules */
+  Metrics: "Metrics",
+}
+
+/** Public network access options. */
+union PublicNetworkAccess {
+  string,
+
+  /** Public network access is enabled */
+  Enabled: "Enabled",
+
+  /** Public network access is disabled */
+  Disabled: "Disabled",
+}
+
 /** IP rule for network access control. */
 model IpRule {
   /** An IPv4 address range in CIDR notation. */
@@ -169,6 +185,9 @@ model VirtualNetworkRule {
 model NetworkRuleSet {
   /** The default action when no rule matches. */
   defaultAction?: NetworkRuleAction;
+
+  /** Specifies which Azure services are allowed to bypass the network rules. */
+  bypass?: NetworkRuleBypass;
 
   /** The list of IP address rules. */
   @OpenAPI.extension("x-ms-identifiers", #["value"])
@@ -222,6 +241,9 @@ model GenomeAccountProperties {
   /** Endpoint of the created account. */
   @visibility(Lifecycle.Read)
   endpoint?: string;
+
+  /** Whether the resource can be accessed from public networks. */
+  publicNetworkAccess?: PublicNetworkAccess;
 
   /** Network access control rules. */
   networkAcls?: NetworkRuleSet;

@@ -505,6 +505,10 @@
           "description": "Endpoint of the created account.",
           "readOnly": true
         },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether the resource can be accessed from public networks."
+        },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network access control rules."
@@ -652,6 +656,42 @@
         ]
       }
     },
+    "NetworkRuleBypass": {
+      "type": "string",
+      "description": "Network rule bypass options.",
+      "enum": [
+        "None",
+        "AzureServices",
+        "Logging",
+        "Metrics"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkRuleBypass",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No services can bypass network rules"
+          },
+          {
+            "name": "AzureServices",
+            "value": "AzureServices",
+            "description": "Allow Azure services to bypass network rules"
+          },
+          {
+            "name": "Logging",
+            "value": "Logging",
+            "description": "Allow logging services to bypass network rules"
+          },
+          {
+            "name": "Metrics",
+            "value": "Metrics",
+            "description": "Allow metrics services to bypass network rules"
+          }
+        ]
+      }
+    },
     "NetworkRuleSet": {
       "type": "object",
       "description": "Network access control rules.",
@@ -659,6 +699,10 @@
         "defaultAction": {
           "$ref": "#/definitions/NetworkRuleAction",
           "description": "The default action when no rule matches."
+        },
+        "bypass": {
+          "$ref": "#/definitions/NetworkRuleBypass",
+          "description": "Specifies which Azure services are allowed to bypass the network rules."
         },
         "ipRules": {
           "type": "array",
@@ -683,62 +727,62 @@
       "type": "string",
       "description": "The provisioning state of the genome account.",
       "enum": [
-        "Provisioning",
-        "Active",
-        "Updating",
-        "Suspended",
-        "Deleting",
         "Succeeded",
         "Failed",
-        "Canceled"
+        "Canceled",
+        "Provisioning"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "Resource is being provisioned"
-          },
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Resource is active and ready for use"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Resource is being updated"
-          },
-          {
-            "name": "Suspended",
-            "value": "Suspended",
-            "description": "Resource has been suspended"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Resource is being deleted"
-          },
-          {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Operation completed successfully"
+            "description": "Resource creation/update succeeded"
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Operation failed to complete"
+            "description": "Resource creation/update failed"
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Operation was canceled"
+            "description": "Resource creation/update was canceled"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is being created or updated"
           }
         ]
       },
       "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Public network access options.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Public network access is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Public network access is disabled"
+          }
+        ]
+      }
     },
     "ResourceIdentityType": {
       "type": "string",
