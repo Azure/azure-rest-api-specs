@@ -376,8 +376,8 @@ model PrivateEndpointConnectionReference {
   /**
    * The properties of a private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -485,8 +485,8 @@ model ConfigurationStoreUpdateParameters {
   /**
    * The properties for updating a configuration store.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ConfigurationStorePropertiesUpdateParameters;
 
   /**

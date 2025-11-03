@@ -28,6 +28,8 @@ interface QuestionAnsweringAuthoringClientOperations {
   getExportStatus is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.getExportStatus;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"
+  // Preserve previous Python method name to avoid breaking change: begin_import_assets
+  @clientName("begin_import_assets", "python")
   `import` is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.`import`;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"
@@ -41,12 +43,14 @@ interface QuestionAnsweringAuthoringClientOperations {
   listDeployments is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.listDeployments;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "specified in routes.tsp"
+  @clientName("list_synonyms", "python")
   getSynonyms is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.getSynonyms;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"
   updateSynonyms is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.updateSynonyms;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "specified in routes.tsp"
+  @clientName("list_sources", "python")
   getSources is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.getSources;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"
@@ -58,6 +62,7 @@ interface QuestionAnsweringAuthoringClientOperations {
   getUpdateSourcesStatus is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.getUpdateSourcesStatus;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "specified in routes.tsp"
+  @clientName("list_qnas", "python")
   getQnas is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.getQnas;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"
@@ -67,3 +72,7 @@ interface QuestionAnsweringAuthoringClientOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "specified in routes.tsp"
   addFeedback is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.addFeedback;
 }
+
+@@clientName(QuestionAnsweringProjectMetadata, "QuestionAnsweringProject");
+@@clientName(ExportQueryParameters.format, "fileFormat", "python");
+@@clientName(ImportQueryParameters.format, "fileFormat", "python");
