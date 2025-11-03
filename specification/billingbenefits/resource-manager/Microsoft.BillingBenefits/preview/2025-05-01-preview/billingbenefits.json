@@ -548,7 +548,8 @@
         "operationId": "Benefit_Validate",
         "tags": [
           "Savings plan",
-          "Macc"
+          "Macc",
+          "ConditionalCredits"
         ],
         "x-ms-examples": {
           "SavingsPlanValidatePurchase": {
@@ -628,6 +629,21 @@
           },
           "MaccValidateWriteOffWithMilestones": {
             "$ref": "./examples/MaccValidateWriteOffWithMilestones.json"
+          },
+          "ConditionalCreditValidateCreate": {
+            "$ref": "./examples/ConditionalCreditValidateCreate.json"
+          },
+          "ConditionalCreditValidateCreateContributor": {
+            "$ref": "./examples/ConditionalCreditValidateCreateContributor.json"
+          },
+          "ConditionalCreditValidateCreateEmpowered": {
+            "$ref": "./examples/ConditionalCreditValidateCreateEmpowered.json"
+          },
+          "ConditionalCreditValidateCreateError": {
+            "$ref": "./examples/ConditionalCreditValidateCreateError.json"
+          },
+          "ConditionalCreditValidateCreateMultiple": {
+            "$ref": "./examples/ConditionalCreditValidateCreateMultiple.json"
           }
         },
         "parameters": [
@@ -2840,6 +2856,9 @@
           },
           "ConditionalCreditUpdateContributor": {
             "$ref": "./examples/ConditionalCreditUpdateContributor.json"
+          },
+          "ConditionalCreditUpdateContributorEndDateOnly": {
+            "$ref": "./examples/ConditionalCreditUpdateContributorEndDateOnly.json"
           }
         },
         "parameters": [
@@ -3736,17 +3755,7 @@
     },
     "Duration": {
       "type": "string",
-      "description": "Duration for which the benefit is active.",
-      "enum": [
-        "P1M",
-        "P1Y",
-        "P3Y",
-        "P5Y"
-      ],
-      "x-ms-enum": {
-        "name": "Term",
-        "modelAsString": true
-      }
+      "description": "Duration for which the benefit is active. Will be in format P{int}M or P{int}Y. Any values representing up to 12 years are valid. Upper limit examples: P144M, P12Y."
     },
     "DisplayName": {
       "type": "string",
@@ -6031,6 +6040,10 @@
               }
             ]
           }
+        },
+        "systemId": {
+          "$ref": "#/definitions/SystemId",
+          "description": "This is the globally unique identifier of the credit which will not change for its lifetime."
         }
       }
     },
@@ -6118,7 +6131,6 @@
         },
         "billingAccountResourceId": {
           "type": "string",
-          "readOnly": true,
           "format": "arm-id",
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -6152,10 +6164,14 @@
           "type": "string",
           "readOnly": true,
           "enum": [
-            "Pending",
+            "Unknown",
+            "Scheduled",
             "Active",
+            "Pending",
+            "Failed",
             "Canceled",
             "Completed",
+            "Stopped",
             "PendingSettlement"
           ],
           "x-ms-enum": {
@@ -6172,7 +6188,6 @@
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "readOnly": true,
           "description": "End date of the conditional credit (derived from last milestone)"
         },
         "productCode": {
@@ -6182,8 +6197,8 @@
         "benefitResourceId": {
           "$ref": "#/definitions/BenefitResourceId"
         },
-        "commitment": {
-          "$ref": "#/definitions/Commitment"
+        "resourceId": {
+          "$ref": "#/definitions/ResourceId"
         }
       }
     },
@@ -6294,12 +6309,16 @@
           "type": "string",
           "readOnly": true,
           "enum": [
+            "Unknown",
             "Scheduled",
             "Active",
+            "Pending",
+            "Failed",
             "Completed",
-            "Missed",
             "Canceled",
-            "PendingSettlement"
+            "Removed",
+            "PendingSettlement",
+            "Missed"
           ],
           "x-ms-enum": {
             "name": "MilestoneStatus",
@@ -6412,6 +6431,9 @@
         "displayName": {
           "type": "string",
           "description": "Display name for the conditional credit"
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt"
         },
         "milestones": {
           "type": "array",
