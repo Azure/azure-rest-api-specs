@@ -94,17 +94,13 @@ interface DataVersionBases {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryDataVersions_Get")
   @summary("Get version.")
   get is DataVersionBaseOps.Read<DataVersionBase>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @useFinalStateVia("original-uri")
-  @operationId("RegistryDataVersions_CreateOrUpdate")
   @summary("Create or update version.")
   createOrUpdate is DataVersionWithNamePatternBaseOps.CreateOrUpdateAsync<
     DataVersionBase,
@@ -124,9 +120,7 @@ interface DataVersionBases {
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryDataVersions_Delete")
   @summary("Delete version.")
   delete is DataVersionBaseOps.DeleteWithoutOkAsync<
     DataVersionBase,
@@ -142,8 +136,6 @@ interface DataVersionBases {
   /**
    * List data versions in the data container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryDataVersions_List")
   @summary("List data versions in the data container")
   list is DataVersionBaseOps.List<
     DataVersionBase,
@@ -185,8 +177,6 @@ interface DataVersionBases {
   /**
    * Generate a storage location and credential for the client to upload a data asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryDataVersions_CreateOrGetStartPendingUpload")
   @action("startPendingUpload")
   @summary("Generate a storage location and credential for the client to upload a data asset to.")
   createOrGetStartPendingUpload is DataVersionBaseOps.ActionSync<

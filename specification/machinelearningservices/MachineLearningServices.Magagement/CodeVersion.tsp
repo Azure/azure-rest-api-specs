@@ -62,17 +62,13 @@ interface CodeVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryCodeVersions_Get")
   @summary("Get version.")
   get is CodeVersionOps.Read<CodeVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("original-uri")
-  @operationId("RegistryCodeVersions_CreateOrUpdate")
   @summary("Create or update version.")
   createOrUpdate is CodeVersionOps.CreateOrUpdateAsync<
     CodeVersion,
@@ -91,9 +87,7 @@ interface CodeVersions {
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryCodeVersions_Delete")
   @summary("Delete version.")
   delete is CodeVersionOps.DeleteWithoutOkAsync<
     CodeVersion,
@@ -109,8 +103,6 @@ interface CodeVersions {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryCodeVersions_List")
   @summary("List versions.")
   list is CodeVersionOps.List<
     CodeVersion,
@@ -139,8 +131,6 @@ interface CodeVersions {
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryCodeVersions_CreateOrGetStartPendingUpload")
   @action("startPendingUpload")
   @summary("Generate a storage location and credential for the client to upload a code asset to.")
   createOrGetStartPendingUpload is CodeVersionOps.ActionSync<
@@ -185,32 +175,24 @@ interface CodeVersionOperationGroup {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get version.")
-  @operationId("CodeVersions_Get")
   get is CodeVersionOperationGroupOps.Read<CodeVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update version.")
-  @operationId("CodeVersions_CreateOrUpdate")
   createOrUpdate is CodeVersionOperationGroupOps.CreateOrUpdateSync<CodeVersion>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete version.")
-  @operationId("CodeVersions_Delete")
   delete is CodeVersionOperationGroupOps.DeleteSync<CodeVersion>;
 
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CodeVersions_List")
   @summary("List versions.")
   list is CodeVersionOperationGroupOps.List<
     CodeVersion,
@@ -251,9 +233,7 @@ interface CodeVersionOperationGroup {
   /**
    * Publish version asset into registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Publish version asset into registry.")
-  @operationId("CodeVersions_Publish")
   publish is CodeVersionOperationGroupOps.ActionAsync<
     CodeVersion,
     DestinationAsset,
@@ -265,8 +245,6 @@ interface CodeVersionOperationGroup {
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CodeVersions_CreateOrGetStartPendingUpload")
   @summary("Generate a storage location and credential for the client to upload a code asset to.")
   @action("startPendingUpload")
   createOrGetStartPendingUpload is CodeVersionOperationGroupOps.ActionSync<

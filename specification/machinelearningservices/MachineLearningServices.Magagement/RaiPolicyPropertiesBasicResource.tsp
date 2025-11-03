@@ -63,16 +63,12 @@ interface RaiPolicyPropertiesBasicResources {
   /**
    * Gets the specified Content Filters associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectionRaiPolicy_Get")
   @summary("Gets the specified Content Filters associated with the Azure OpenAI connection.")
   get is RaiPolicyPropertiesBasicResourceOps.Read<RaiPolicyPropertiesBasicResource>;
 
   /**
    * Update the state of specified Content Filters associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectionRaiPolicy_Create")
   @summary("Update the state of specified Content Filters associated with the Azure OpenAI connection.")
   create is RaiPolicyPropertiesBasicResourceOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
@@ -91,8 +87,6 @@ interface RaiPolicyPropertiesBasicResources {
   /**
    * Deletes the specified Content Filters associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectionRaiPolicy_Delete")
   @summary("Deletes the specified Content Filters associated with the Azure OpenAI connection.")
   delete is RaiPolicyPropertiesBasicResourceOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
@@ -109,8 +103,6 @@ interface RaiPolicyPropertiesBasicResources {
   /**
    * List the specified Content Filters associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectionRaiPolicies_List")
   @summary("List the specified Content Filters associated with the Azure OpenAI connection.")
   list is RaiPolicyPropertiesBasicResourceOps.List<
     RaiPolicyPropertiesBasicResource,
@@ -203,8 +195,6 @@ interface RaiPolicy {
   /**
    * List the specified Content Filters associated with the Azure OpenAI account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RaiPolicies_List")
   @summary("List the specified Content Filters associated with the Azure OpenAI account.")
   list is RaiPolicyOps.List<
     RaiPolicyPropertiesBasicResource,

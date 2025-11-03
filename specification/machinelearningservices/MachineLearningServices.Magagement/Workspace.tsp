@@ -134,8 +134,6 @@ interface Workspaces {
   /**
    * Lists all enabled features for a workspace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WorkspaceFeatures_List")
   @list
   @get
   @action("features")
@@ -233,8 +231,6 @@ interface Workspaces {
   /**
    * Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connection_GetAllModels")
   @action("listConnectionModels")
   @summary("Get all models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.")
   getAllModels is ArmResourceActionSync<
@@ -246,8 +242,6 @@ interface Workspaces {
   /**
    * Get all the deployments under the workspace scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EndpointDeployment_GetInWorkspace")
   @summary("Get all the deployments under the workspace scope")
   @list
   @get
@@ -278,8 +272,6 @@ interface Workspaces {
    * Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
    * Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkResources_List")
   @list
   @get
   @action("privateLinkResources")
@@ -293,8 +285,6 @@ interface Workspaces {
   /**
    * Provisions the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   @summary("Provisions the managed network of a machine learning workspace.")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,

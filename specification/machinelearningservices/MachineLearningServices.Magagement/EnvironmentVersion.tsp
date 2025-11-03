@@ -62,17 +62,13 @@ interface EnvironmentVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryEnvironmentVersions_Get")
   @summary("Get version.")
   get is EnvironmentVersionOps.Read<EnvironmentVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("original-uri")
-  @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
   @summary("Create or update version.")
   createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<
     EnvironmentVersion,
@@ -91,9 +87,7 @@ interface EnvironmentVersions {
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryEnvironmentVersions_Delete")
   @summary("Delete version.")
   delete is EnvironmentVersionOps.DeleteWithoutOkAsync<
     EnvironmentVersion,
@@ -109,8 +103,6 @@ interface EnvironmentVersions {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryEnvironmentVersions_List")
   @summary("List versions.")
   list is EnvironmentVersionOps.List<
     EnvironmentVersion,
@@ -178,32 +170,24 @@ interface EnvironmentVersionOperationGroup {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentVersions_Get")
   @summary("Get version.")
   get is EnvironmentVersionOperationGroupOps.Read<EnvironmentVersion>;
 
   /**
    * Creates or updates an EnvironmentVersion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentVersions_CreateOrUpdate")
   @summary("Creates or updates an EnvironmentVersion.")
   createOrUpdate is EnvironmentVersionOperationGroupOps.CreateOrUpdateSync<EnvironmentVersion>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentVersions_Delete")
   @summary("Delete version.")
   delete is EnvironmentVersionOperationGroupOps.DeleteSync<EnvironmentVersion>;
 
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentVersions_List")
   @summary("List versions.")
   list is EnvironmentVersionOperationGroupOps.List<
     EnvironmentVersion,
@@ -238,8 +222,6 @@ interface EnvironmentVersionOperationGroup {
   /**
    * Publish version asset into registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentVersions_Publish")
   @summary("Publish version asset into registry.")
   publish is EnvironmentVersionOperationGroupOps.ActionAsync<
     EnvironmentVersion,
