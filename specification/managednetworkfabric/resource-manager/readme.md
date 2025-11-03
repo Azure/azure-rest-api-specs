@@ -38,10 +38,6 @@ These settings apply only when `--tag=package-2024-06-15-preview` is specified o
 input-file:
   - Microsoft.ManagedNetworkFabric/preview/2024-06-15-preview/managednetworkfabric.json
 suppressions:
-  - code: ArmResourcePropertiesBag
-    reason: This will be fixed in the next major version
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    reason: This will be fixed in the next major version
   - code: MISSING_APIS_IN_DEFAULT_TAG
     reason: Removed deprecated APIs in the new API version
 ```
@@ -54,8 +50,12 @@ These settings apply only when `--tag=package-2024-02-15-preview` is specified o
 input-file:
   - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/managednetworkfabric.json
 suppressions:
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    reason: This will be fixed in the next major version
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing errors to conform to the exisiting published API
+    where: $.definitions.InternetGatewayProperties
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing errors to conform to the exisiting published API
+    where: $.definitions.NetworkFabricSkuProperties
 ```
 
 ### Tag: package-2023-06-15
