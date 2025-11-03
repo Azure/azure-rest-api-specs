@@ -40,6 +40,14 @@ input-file:
 suppressions:
   - code: MISSING_APIS_IN_DEFAULT_TAG
     reason: Removed deprecated APIs in the new API version
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing errors to conform to the exisiting published API
+    from: managednetworkfabric.json
+    where: $.definitions["InternetGateway"]
+  - code: ArmResourcePropertiesBag
+    from: managednetworkfabric.json
+    reason: Suppressing errors to conform to the exisiting published API
+    where: $.definitions["NetworkFabricSku"]
 ```
 
 ### Tag: package-2024-02-15-preview
@@ -51,11 +59,13 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/managednetworkfabric.json
 suppressions:
   - code: ArmResourcePropertiesBag
-    reason: Suppressing errors to conform to the exisiting published API
-    where: $.definitions.InternetGatewayProperties
+    reason: Suppressing errors to conform to the existing published API
+    from: managednetworkfabric.json
+    where: $.definitions["InternetGateway"]
   - code: ArmResourcePropertiesBag
-    reason: Suppressing errors to conform to the exisiting published API
-    where: $.definitions.NetworkFabricSkuProperties
+    from: managednetworkfabric.json
+    reason: Suppressing errors to conform to the existing published API
+    where: $.definitions["NetworkFabricSku"]
 ```
 
 ### Tag: package-2023-06-15
