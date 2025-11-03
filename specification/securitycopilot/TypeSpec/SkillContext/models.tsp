@@ -1565,13 +1565,6 @@ namespace SkillContext
 		Error,
 	}
 
-	@doc("Represents an arbitrary JSON object (maps to Dictionary<string, object> in C#).")
-	model JsonObject {
-	  @indexer
-	  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Intentionally allowing any object value"
-	  [key: string]: unknown;
-	}
-
 	@doc("Request model TeamsNotificationInputs")
 	model TeamsNotificationInputs {
 		@doc("The ID of the recipient for the Teams notification, which is an Entra ID.")
@@ -1602,7 +1595,7 @@ namespace SkillContext
 		description?: string;
 
 		@doc("Other parameters in selected template.")
-		parameters?: JsonObject | null;
+		parameters?: Record<unknown> | null;
 	}
 
 	@doc("Represents a notification including destinations, locale and template mapping settings.")
