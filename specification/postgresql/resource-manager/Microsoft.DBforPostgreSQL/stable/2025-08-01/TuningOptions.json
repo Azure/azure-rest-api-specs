@@ -117,14 +117,7 @@
             "$ref": "#/parameters/TuningOptionParameter"
           },
           {
-            "name": "recommendationType",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/RecommendationType"
-            },
-            "description": "Recommendations list filter. Retrieves recommendations based on type.",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/RecommendationTypeParameter"
           }
         ],
         "responses": {
@@ -453,6 +446,16 @@
         "name": "TuningOptionParameterEnum",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "RecommendationTypeParameter": {
+      "name": "recommendationType",
+      "in": "query",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/RecommendationType"
+      },
+      "description": "Recommendations list filter. Retrieves recommendations based on type.",
       "x-ms-parameter-location": "method"
     }
   }
