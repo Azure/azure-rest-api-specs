@@ -64,16 +64,12 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Get deployments under the Azure OpenAI connection by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connection_GetDeployment")
   @summary("Get deployments under the Azure OpenAI connection by name.")
   getDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.Read<EndpointDeploymentResourcePropertiesBasicResource>;
 
   /**
    * Create or update Azure OpenAI connection deployment resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connection_CreateOrUpdateDeployment")
   @summary("Create or update Azure OpenAI connection deployment resource with the specified parameters")
   createOrUpdateDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
@@ -92,8 +88,6 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Delete Azure OpenAI connection deployment resource by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connection_DeleteDeployment")
   @summary("Delete Azure OpenAI connection deployment resource by name")
   deleteDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
@@ -110,8 +104,6 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
    * Get all the deployments under the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connection_ListDeployments")
   @summary("Get all the deployments under the Azure OpenAI connection.")
   listDeployments is EndpointDeploymentResourcePropertiesBasicResourceOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,

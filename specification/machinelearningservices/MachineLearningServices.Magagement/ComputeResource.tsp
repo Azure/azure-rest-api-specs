@@ -36,16 +36,12 @@ interface ComputeResources {
   /**
    * Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_Get")
   get is ArmResourceRead<ComputeResource>;
 
   /**
    * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("location")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ComputeResource,
@@ -56,9 +52,7 @@ interface ComputeResources {
   /**
    * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_Update")
   @Azure.Core.useFinalStateVia("location")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -71,9 +65,7 @@ interface ComputeResources {
   /**
    * Deletes specified Machine Learning compute.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ComputeResource,
     Parameters = {
@@ -89,8 +81,6 @@ interface ComputeResources {
   /**
    * Gets computes in specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_List")
   list is ArmResourceListByParent<
     ComputeResource,
     Parameters = {
@@ -106,8 +96,6 @@ interface ComputeResources {
   /**
    * Updates the custom services list. The list of custom services provided shall be overwritten
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_UpdateCustomServices")
   @action("customServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
@@ -120,9 +108,7 @@ interface ComputeResources {
   /**
    * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
-  @operationId("Compute_ListNodes")
   listNodes is ArmResourceActionSync<
     ComputeResource,
     void,
@@ -132,8 +118,6 @@ interface ComputeResources {
   /**
    * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_ListKeys")
   listKeys is ArmResourceActionSync<
     ComputeResource,
     void,
@@ -143,8 +127,6 @@ interface ComputeResources {
   /**
    * Update Data Mounts of a Machine Learning compute.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_UpdateDataMounts")
   @summary("Update Data Mounts of a Machine Learning compute.")
   updateDataMounts is ArmResourceActionSync<
     ComputeResource,
@@ -157,8 +139,6 @@ interface ComputeResources {
   /**
    * Posts a start action to a compute instance
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_Start")
   start is ArmResourceActionAsyncBase<
     ComputeResource,
     void,
@@ -169,8 +149,6 @@ interface ComputeResources {
   /**
    * Posts a stop action to a compute instance
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_Stop")
   stop is ArmResourceActionAsyncBase<
     ComputeResource,
     void,
@@ -181,8 +159,6 @@ interface ComputeResources {
   /**
    * Posts a restart action to a compute instance
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_Restart")
   restart is ArmResourceActionAsyncBase<
     ComputeResource,
     void,
@@ -193,8 +169,6 @@ interface ComputeResources {
   /**
    * Updates the idle shutdown setting of a compute instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_UpdateIdleShutdownSetting")
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
@@ -218,8 +192,6 @@ interface ComputeResources {
   /**
    * Updates the size of a Compute Instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Compute_Resize")
   resize is ArmResourceActionAsyncBase<
     ComputeResource,
     ResizeSchema,

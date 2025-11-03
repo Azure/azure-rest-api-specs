@@ -56,17 +56,13 @@ interface ModelContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryModelContainers_Get")
   @summary("Get container.")
   get is ModelContainerOps.Read<ModelContainer>;
 
   /**
    * Create or update model container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("original-uri")
-  @operationId("RegistryModelContainers_CreateOrUpdate")
   @summary("Create or update model container.")
   createOrUpdate is ModelContainerOps.CreateOrUpdateAsync<
     ModelContainer,
@@ -85,9 +81,7 @@ interface ModelContainers {
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryModelContainers_Delete")
   @summary("Delete container.")
   delete is ModelContainerOps.DeleteWithoutOkAsync<
     ModelContainer,
@@ -103,8 +97,6 @@ interface ModelContainers {
   /**
    * List model containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryModelContainers_List")
   @summary("List model containers.")
   list is ModelContainerOps.List<
     ModelContainer,
@@ -154,32 +146,24 @@ interface ModelContainerOperationGroup {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ModelContainers_Get")
   @summary("Get container.")
   get is ModelContainerOperationGroupOps.Read<ModelContainer>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ModelContainers_CreateOrUpdate")
   @summary("Create or update container.")
   createOrUpdate is ModelContainerOperationGroupOps.CreateOrUpdateSync<ModelContainer>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ModelContainers_Delete")
   @summary("Delete container.")
   delete is ModelContainerOperationGroupOps.DeleteSync<ModelContainer>;
 
   /**
    * List model containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ModelContainers_List")
   @summary("List model containers.")
   list is ModelContainerOperationGroupOps.List<
     ModelContainer,

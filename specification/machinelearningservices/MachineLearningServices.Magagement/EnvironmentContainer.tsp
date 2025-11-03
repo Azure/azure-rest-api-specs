@@ -60,17 +60,13 @@ interface EnvironmentContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryEnvironmentContainers_Get")
   @summary("Get container.")
   get is EnvironmentContainerOps.Read<EnvironmentContainer>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @useFinalStateVia("original-uri")
-  @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
   @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<
     EnvironmentContainer,
@@ -90,9 +86,7 @@ interface EnvironmentContainers {
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryEnvironmentContainers_Delete")
   @summary("Delete container.")
   delete is EnvironmentContainerOps.DeleteWithoutOkAsync<
     EnvironmentContainer,
@@ -108,8 +102,6 @@ interface EnvironmentContainers {
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryEnvironmentContainers_List")
   @summary("List environment containers.")
   list is EnvironmentContainerOps.List<
     EnvironmentContainer,
@@ -159,32 +151,24 @@ interface EnvironmentContainerOperationGroup {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentContainers_Get")
   @summary("Get container.")
   get is EnvironmentContainerOperationGroupOps.Read<EnvironmentContainer>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentContainers_CreateOrUpdate")
   @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOperationGroupOps.CreateOrUpdateSync<EnvironmentContainer>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentContainers_Delete")
   @summary("Delete container.")
   delete is EnvironmentContainerOperationGroupOps.DeleteSync<EnvironmentContainer>;
 
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EnvironmentContainers_List")
   @summary("List environment containers.")
   list is EnvironmentContainerOperationGroupOps.List<
     EnvironmentContainer,

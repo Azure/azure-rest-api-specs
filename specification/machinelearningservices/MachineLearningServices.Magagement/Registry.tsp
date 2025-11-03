@@ -91,10 +91,8 @@ interface Registries {
   /**
    * Get blob reference SAS Uri.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryDataReferences_GetBlobReferenceSAS")
   @summary("Get blob reference SAS Uri.")
   @post
   getBlobReferenceSAS(

@@ -18,8 +18,6 @@ interface UsagesOperationGroup {
   /**
    * Gets the current usage information as well as limits for AML resources for given subscription and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Usages_List")
   @autoRoute
   @list
   @get
@@ -36,8 +34,6 @@ interface VirtualMachineSizesOperationGroup {
   /**
    * Returns supported VM Sizes in a location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineSizes_List")
   @autoRoute
   @get
   @action("vmSizes")
@@ -53,8 +49,6 @@ interface QuotasOperationGroup {
   /**
    * Update quota for each VM family in workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Quotas_Update")
   @autoRoute
   @action("updateQuotas")
   update is ArmProviderActionSync<
@@ -66,8 +60,6 @@ interface QuotasOperationGroup {
   /**
    * Gets the currently assigned Workspace Quotas based on VMFamily.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Quotas_List")
   @autoRoute
   @list
   @get
@@ -85,9 +77,7 @@ interface PTUQuotaOperationGroup {
   /**
    * List available MaaS PTU quota.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List available MaaS PTU quota.")
-  @operationId("PTUQuota_ListAvailable")
   @autoRoute
   @list
   @get
@@ -108,9 +98,7 @@ interface PTUQuotaOperationGroup {
   /**
    * Get available MaaS PTU quota.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get available MaaS PTU quota.")
-  @operationId("PTUQuota_GetAvailable")
   @autoRoute
   @get
   @action("availableQuota/default")
@@ -122,9 +110,7 @@ interface PTUQuotaOperationGroup {
   /**
    * List MaaS PTU usage and quota.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List MaaS PTU usage and quota.")
-  @operationId("PTUQuota_List")
   @autoRoute
   @list
   @get

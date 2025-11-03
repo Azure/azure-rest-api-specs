@@ -62,17 +62,13 @@ interface ComponentVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryComponentVersions_Get")
   @summary("Get version.")
   get is ComponentVersionOps.Read<ComponentVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("original-uri")
-  @operationId("RegistryComponentVersions_CreateOrUpdate")
   @summary("Create or update version.")
   createOrUpdate is ComponentVersionOps.CreateOrUpdateAsync<
     ComponentVersion,
@@ -91,9 +87,7 @@ interface ComponentVersions {
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryComponentVersions_Delete")
   @summary("Delete version.")
   delete is ComponentVersionOps.DeleteWithoutOkAsync<
     ComponentVersion,
@@ -109,8 +103,6 @@ interface ComponentVersions {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegistryComponentVersions_List")
   @summary("List versions.")
   list is ComponentVersionOps.List<
     ComponentVersion,
@@ -172,32 +164,24 @@ interface ComponentVersionOperationGroup {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ComponentVersions_Get")
   @summary("Get version.")
   get is ComponentVersionOperationGroupOps.Read<ComponentVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ComponentVersions_CreateOrUpdate")
   @summary("Create or update version.")
   createOrUpdate is ComponentVersionOperationGroupOps.CreateOrUpdateSync<ComponentVersion>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ComponentVersions_Delete")
   @summary("Delete version.")
   delete is ComponentVersionOperationGroupOps.DeleteSync<ComponentVersion>;
 
   /**
    * List component versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ComponentVersions_List")
   @summary("List component versions.")
   list is ComponentVersionOperationGroupOps.List<
     ComponentVersion,
@@ -232,8 +216,6 @@ interface ComponentVersionOperationGroup {
   /**
    * Publish version asset into registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ComponentVersions_Publish")
   @summary("Publish version asset into registry.")
   publish is ComponentVersionOperationGroupOps.ActionAsync<
     ComponentVersion,

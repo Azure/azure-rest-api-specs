@@ -29,17 +29,13 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * Get API for managed network settings of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedNetworkSettings_Get")
   @summary("Get the managed network settings for a machine learning workspace.")
   get is ArmResourceRead<ManagedNetworkSettingsPropertiesBasicResource>;
 
   /**
    * PUT API for managed network settings of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedNetworkSettings_Put")
   @summary("PUT API for managed network settings of a machine learning workspace.")
   put is ArmResourceCreateOrReplaceAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
@@ -50,8 +46,6 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * Patch API for managed network settings of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedNetworkSettings_Patch")
   @patch(#{ implicitOptionality: false })
   @summary("Patch API for managed network settings of a machine learning workspace.")
   patch is Azure.ResourceManager.Legacy.CustomPatchAsync<
@@ -63,8 +57,6 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * List API for managed network settings of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedNetworkSettings_List")
   @summary("List the managed network settings for a machine learning workspace.")
   list is ArmResourceListByParent<
     ManagedNetworkSettingsPropertiesBasicResource,
@@ -74,8 +66,6 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("OutboundRules_Post")
   @summary("The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.")
   @action("batchOutboundRules")
   @list
