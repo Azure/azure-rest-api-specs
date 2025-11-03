@@ -3602,6 +3602,34 @@
       ],
       "type": "integer"
     },
+    "MediaStreamingFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate"
+        }
+      },
+      "additionalProperties": false
+    },
     "MediaStreamingOptions": {
       "description": "Configuration of Media streaming.",
       "required": [
@@ -3638,6 +3666,93 @@
         "enableDtmfTones": {
           "description": "A value that indicates whether to stream the DTMF tones.",
           "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MediaStreamingStarted": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MediaStreamingStatus": {
+      "format": "int32",
+      "enum": [
+        "MediaStreamingStarted",
+        "MediaStreamingFailed",
+        "MediaStreamingStopped",
+        "UnspecifiedError"
+      ],
+      "type": "integer"
+    },
+    "MediaStreamingStatusDetails": {
+      "format": "int32",
+      "enum": [
+        "SubscriptionStarted",
+        "StreamConnectionReestablished",
+        "StreamConnectionUnsuccessful",
+        "StreamUrlMissing",
+        "ServiceShutdown",
+        "StreamConnectionInterrupted",
+        "SpeechServicesConnectionError",
+        "SubscriptionStopped",
+        "UnspecifiedError",
+        "AuthenticationFailure",
+        "BadRequest",
+        "TooManyRequests",
+        "Forbidden",
+        "ServiceTimeout",
+        "InitialWebSocketConnectionFailed"
+      ],
+      "type": "integer"
+    },
+    "MediaStreamingStopped": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate"
         }
       },
       "additionalProperties": false
@@ -3684,6 +3799,21 @@
         "Websocket"
       ],
       "type": "integer"
+    },
+    "MediaStreamingUpdate": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        },
+        "mediaStreamingStatus": {
+          "$ref": "#/definitions/MediaStreamingStatus"
+        },
+        "mediaStreamingStatusDetails": {
+          "$ref": "#/definitions/MediaStreamingStatusDetails"
+        }
+      },
+      "additionalProperties": false
     },
     "MicrosoftTeamsAppIdentifierModel": {
       "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
@@ -4113,6 +4243,56 @@
         },
         "operationContext": {
           "description": "Gets or sets used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PostDialDtmfTonesCompleted": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PostDialDtmfTonesFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
         "resultInformation": {
