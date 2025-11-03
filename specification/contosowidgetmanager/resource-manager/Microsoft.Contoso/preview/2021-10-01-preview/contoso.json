@@ -402,25 +402,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Employee": {
       "type": "object",
       "description": "Employee resource",
@@ -484,18 +465,40 @@
     },
     "EmployeeUpdate": {
       "type": "object",
-      "description": "Employee resource",
+      "description": "The type used for update operations of the Employee.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/EmployeeProperties",
+          "$ref": "#/definitions/EmployeeUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "EmployeeUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Employee.",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age of employee"
+        },
+        "city": {
+          "type": "string",
+          "description": "City of employee"
+        },
+        "profile": {
+          "type": "string",
+          "format": "base64url",
+          "description": "Profile of employee"
         }
-      ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
