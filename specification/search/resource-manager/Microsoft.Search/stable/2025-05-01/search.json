@@ -2709,7 +2709,8 @@
       "description": "This value can be set to 'Enabled' to avoid breaking changes on existing customer resources and templates. If set to 'Disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.",
       "enum": [
         "Enabled",
-        "Disabled"
+        "Disabled",
+        "SecuredByPerimeter"
       ],
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
@@ -2724,6 +2725,11 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections."
+          },
+          {
+            "name": "SecuredByPerimeter",
+            "value": "SecuredByPerimeter",
+            "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
           }
         ]
       }
@@ -3037,7 +3043,8 @@
           "default": "Enabled",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -3052,6 +3059,11 @@
                 "name": "Disabled",
                 "value": "Disabled",
                 "description": "The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections."
+              },
+              {
+                "name": "SecuredByPerimeter",
+                "value": "SecuredByPerimeter",
+                "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
               }
             ]
           }

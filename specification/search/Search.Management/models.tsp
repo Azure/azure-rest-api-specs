@@ -65,6 +65,11 @@ union PublicNetworkAccess {
    * The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections.
    */
   Disabled: "Disabled",
+
+  /**
+   * The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter.
+   */
+  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
