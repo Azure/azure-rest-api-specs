@@ -98,5 +98,6 @@ batch:
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: preview/2021-08-01-preview/genome.json
-    reason: Existing API
+    where: $.definitions.GenomeAccountProperties.properties.networkAcls
+    reason: Property 'networkAcls' follows existing Azure ARM naming conventions for network access control lists
 ```
