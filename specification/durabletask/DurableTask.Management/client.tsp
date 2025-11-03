@@ -39,3 +39,5 @@ using Microsoft.DurableTask;
   "DurableTaskRetentionPolicyProperties",
   "csharp"
 );
+@@clientName(SchedulerProperties.ipAllowlist, "IPAllowlist", "csharp");
+@@clientName(SchedulerPropertiesUpdate.ipAllowlist, "IPAllowlist", "csharp");
