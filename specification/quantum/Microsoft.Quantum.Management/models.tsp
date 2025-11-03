@@ -410,7 +410,7 @@ model WorkspaceResourceProperties {
    * Whether this workspace is v1 or v2.
    */
   @added(Versions.v2025_11_01_preview)
-  kind?: WorkspaceKind;
+  workspaceKind?: WorkspaceKind;
 
   /**
    * The URI of the workspace endpoint.
