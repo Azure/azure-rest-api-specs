@@ -286,7 +286,7 @@
           "description": "Current state."
         },
         "recommendationType": {
-          "$ref": "#/definitions/RecommendationType",
+          "$ref": "#/definitions/RecommendationEnum",
           "description": "Type for this recommendation."
         },
         "implementationDetails": {
@@ -386,7 +386,7 @@
         }
       }
     },
-    "RecommendationType": {
+    "RecommendationEnum": {
       "type": "string",
       "enum": [
         "CreateIndex",
@@ -452,9 +452,7 @@
       "name": "recommendationType",
       "in": "query",
       "required": false,
-      "schema": {
-        "$ref": "#/definitions/RecommendationType"
-      },
+      "$ref": "#/definitions/RecommendationEnum",
       "description": "Recommendations list filter. Retrieves recommendations based on type.",
       "x-ms-parameter-location": "method"
     }
