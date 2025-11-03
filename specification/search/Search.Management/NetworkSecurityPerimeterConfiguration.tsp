@@ -18,7 +18,7 @@ namespace Microsoft.Search;
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SearchService)
 model NetworkSecurityPerimeterConfiguration
-  is Azure.ResourceManager.ProxyResource<{}> {
+  is Azure.ResourceManager.ProxyResource<CommonTypes.NetworkSecurityPerimeterConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = NetworkSecurityPerimeterConfiguration,
     KeyName = "nspConfigName",
