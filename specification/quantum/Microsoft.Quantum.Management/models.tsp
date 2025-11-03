@@ -91,7 +91,12 @@ union KeyType {
   Secondary: "Secondary",
 }
 
-enum WorkspaceKind {
+/**
+ * The workspace type.
+ */
+union WorkspaceKind {
+  string,
+
   /** The workspace is a general-purpose workspace. */
   v1: "v1",
 
