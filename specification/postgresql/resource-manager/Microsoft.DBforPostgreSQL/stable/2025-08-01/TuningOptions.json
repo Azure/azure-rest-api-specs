@@ -117,7 +117,22 @@
             "$ref": "#/parameters/TuningOptionParameter"
           },
           {
-            "$ref": "#/parameters/RecommendationTypeParameter"
+            "name": "recommendationType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CreateIndex",
+              "DropIndex",
+              "ReIndex",
+              "AnalyzeTable"
+            ],
+            "x-ms-enum": {
+              "name": "RecommendationTypeParameterEnum",
+              "modelAsString": true
+            },
+            "description": "Recommendations list filter. Retrieves recommendations based on type.",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -287,7 +302,16 @@
         },
         "recommendationType": {
           "type": "string",
-          "$ref": "#/definitions/RecommendationEnum",
+          "enum": [
+            "CreateIndex",
+            "DropIndex",
+            "ReIndex",
+            "AnalyzeTable"
+          ],
+          "x-ms-enum": {
+            "name": "RecommendationTypeEnum",
+            "modelAsString": true
+          },
           "description": "Type for this recommendation."
         },
         "implementationDetails": {
@@ -387,18 +411,6 @@
         }
       }
     },
-    "RecommendationEnum": {
-      "enum": [
-        "CreateIndex",
-        "DropIndex",
-        "ReIndex",
-        "AnalyzeTable"
-      ],
-      "x-ms-enum": {
-        "name": "RecommendationTypeEnum",
-        "modelAsString": true
-      }
-    },
     "TuningOptions": {
       "type": "object",
       "allOf": [
@@ -446,17 +458,6 @@
         "name": "TuningOptionParameterEnum",
         "modelAsString": true
       },
-      "x-ms-parameter-location": "method"
-    },
-    "RecommendationTypeParameter": {
-      "name": "recommendationType",
-      "in": "query",
-      "type": "string",
-      "required": false,
-      "schema": {
-        "$ref": "#/definitions/RecommendationEnum"
-      },
-      "description": "Recommendations list filter. Retrieves recommendations based on type.",
       "x-ms-parameter-location": "method"
     }
   }
