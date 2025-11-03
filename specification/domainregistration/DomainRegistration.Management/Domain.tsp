@@ -13,7 +13,7 @@ namespace Microsoft.DomainRegistration;
 /**
  * Information about a domain.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is required in envelope to match legacy API shape"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Domain is Azure.ResourceManager.TrackedResource<DomainProperties> {
   ...ResourceNameParameter<
     Resource = Domain,
