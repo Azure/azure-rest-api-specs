@@ -19,7 +19,6 @@ interface ServicesOperationGroup {
    * Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Services_CheckNameAvailability")
   @externalDocs("https://aka.ms/search-manage")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
@@ -45,7 +44,6 @@ interface UsagesOperationGroup {
    * Get a list of all Azure AI Search quota usages across the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Usages_ListBySubscription")
   @autoRoute
   @get
   @action("usages")

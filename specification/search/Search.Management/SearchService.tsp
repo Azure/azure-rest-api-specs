@@ -131,7 +131,6 @@ interface SearchServices {
    * Gets the search service with the given name in the given resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Services_Get")
   @externalDocs("https://aka.ms/search-manage")
   get is ArmResourceRead<
     SearchService,
@@ -151,7 +150,6 @@ interface SearchServices {
    * Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Services_CreateOrUpdate")
   @externalDocs("https://aka.ms/search-manage")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SearchService,
@@ -173,7 +171,6 @@ interface SearchServices {
    * Updates an existing search service in the given resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Services_Update")
   @patch(#{ implicitOptionality: false })
   @externalDocs("https://aka.ms/search-manage")
   update is ArmCustomPatchSync<
@@ -196,7 +193,6 @@ interface SearchServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Services_Delete")
   @externalDocs("https://aka.ms/search-manage")
   delete is ArmResourceDeleteSync<
     SearchService,
@@ -217,7 +213,6 @@ interface SearchServices {
    * Gets a list of all Search services in the given resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Services_ListByResourceGroup")
   @externalDocs("https://aka.ms/search-manage")
   listByResourceGroup is ArmResourceListByParent<
     SearchService,
@@ -239,7 +234,6 @@ interface SearchServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
-  @operationId("Services_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     SearchService,
     Parameters = {
@@ -259,7 +253,6 @@ interface SearchServices {
    * Gets the primary and secondary admin API keys for the specified Azure AI Search service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AdminKeys_Get")
   @action("listAdminKeys")
   @externalDocs("https://aka.ms/search-manage")
   adminKeysGet is ArmResourceActionSync<
@@ -282,7 +275,6 @@ interface SearchServices {
    * Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AdminKeys_Regenerate")
   @externalDocs("https://aka.ms/search-manage")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}")
   regenerate is AdminKeysOps.ActionSync<
@@ -305,7 +297,6 @@ interface SearchServices {
    * Generates a new query key for the specified search service. You can create up to 50 query keys per service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("QueryKeys_Create")
   @post
   @externalDocs("https://aka.ms/search-manage")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}")
@@ -329,7 +320,6 @@ interface SearchServices {
    * Returns the list of query API keys for the given Azure AI Search service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("QueryKeys_ListBySearchService")
   @action("listQueryKeys")
   @externalDocs("https://aka.ms/search-manage")
   @list
@@ -353,7 +343,6 @@ interface SearchServices {
    * Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("QueryKeys_Delete")
   @delete
   @externalDocs("https://aka.ms/search-manage")
   queryKeysDelete is QueryKeysDeleteOps.ActionSync<
@@ -375,8 +364,6 @@ interface SearchServices {
   /**
    * Upgrades the Azure AI Search service to the latest version available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Services_Upgrade")
   upgrade is ArmResourceActionAsync<
     SearchService,
     void,

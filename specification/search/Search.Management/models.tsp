@@ -991,7 +991,6 @@ model SearchServiceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
    * Properties of the search service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SearchServiceProperties;
 
   /**
