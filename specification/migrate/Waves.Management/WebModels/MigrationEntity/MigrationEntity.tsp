@@ -82,7 +82,7 @@ model MigrationEntityProperties is AzureResourceProperties {
 
   @doc("Execution Readiness of Migration Entity.")
   @visibility(Lifecycle.Read)
-  executionReadiness?: MigrationEntityExecutionReadiness;
+  executionReadiness?: string;
 
   @doc("Migration specific properties for the entity.")
   migrationSpecificProperties?: MigrationSpecificPropertiesBase;

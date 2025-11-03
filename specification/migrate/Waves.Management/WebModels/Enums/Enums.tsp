@@ -32,31 +32,6 @@ union Strategy {
   string,
 }
 
-@doc("Server migration path options.")
-union ServerMigrationPath {
-  @doc("Agent less Migration Path. This path does not require an agent to be installed on the source server.")
-  Agentless: "agentless",
-
-  @doc("Agent based Migration Path. This path requires an agent to be installed on the source server.")
-  Agentbased: "agentbased",
-
-  string,
-}
-
-@doc("Wave execution readiness options.")
-union MigrationEntityExecutionReadiness {
-  @doc("Not Available. Indicates the MigrationEntity execution readiness is not available.")
-  NotAvailable: "NotAvailable",
-
-  @doc("Ready. Indicates that MigrationEntity is ready for execution")
-  Ready: "Ready",
-
-  @doc("Not Ready. Indicates that MigrationEntity is not ready for execution")
-  NotReady: "NotReady",
-
-  string,
-}
-
 @doc("TaskScope can be either 'Wave' or 'MigrationEntity' or 'MigrationEntityGroup'")
 union TaskScope {
   @doc("Wave task - typically related to a specific wave of migration")
