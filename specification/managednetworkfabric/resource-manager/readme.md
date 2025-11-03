@@ -41,12 +41,12 @@ suppressions:
   - code: MISSING_APIS_IN_DEFAULT_TAG
     reason: Removed deprecated APIs in the new API version
   - code: ArmResourcePropertiesBag
-    reason: Suppressing errors to conform to the exisiting published API
+    reason: Suppressing errors to conform to the existing published API
     from: managednetworkfabric.json
     where: $.definitions["InternetGateway"]
   - code: ArmResourcePropertiesBag
     from: managednetworkfabric.json
-    reason: Suppressing errors to conform to the exisiting published API
+    reason: Suppressing errors to conform to the existing published API
     where: $.definitions["NetworkFabricSku"]
 ```
 
