@@ -55,3 +55,12 @@ using Microsoft.DomainRegistration;
 @@summary(Operations.list,
   "Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
 );
+
+@@OpenAPI.extension(NameIdentifierCollection.value,
+  "x-ms-identifiers",
+  #["name"]
+);
+@@OpenAPI.extension(TldLegalAgreementCollection.value,
+  "x-ms-identifiers",
+  #["agreementKey"]
+);

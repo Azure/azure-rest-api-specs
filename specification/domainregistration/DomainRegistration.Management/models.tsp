@@ -1045,7 +1045,6 @@ model TldLegalAgreement {
   /**
    * Unique identifier for the agreement.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["agreementKey"])
   agreementKey: string;
 
   /**
