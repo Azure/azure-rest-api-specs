@@ -44,6 +44,11 @@ using Microsoft.DependencyMap;
   "GetConnectionsWithConnectedMachineForFocusedMachineContent",
   "csharp"
 );
+@@clientName(GetDependencyViewForAllMachinesRequest
+  ,
+  "GetDependencyViewForAllMachinesContent",
+  "csharp"
+);
 @@alternateType(GetDependencyViewForFocusedMachineRequest.focusedMachineId,
   armResourceIdentifier,
   "csharp"
