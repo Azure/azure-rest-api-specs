@@ -68,13 +68,14 @@ interface BatchDeployments {
   update is ArmCustomPatchAsync<
     BatchDeployment,
     PatchModel = PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties,
-    Response = BatchDeployment | (ArmAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = BatchDeployment | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchDeployment>> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**
