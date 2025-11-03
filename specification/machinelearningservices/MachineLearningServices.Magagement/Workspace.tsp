@@ -50,9 +50,8 @@ interface Workspaces {
   @summary("Creates or updates a workspace with the specified parameters.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Workspace> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<Workspace> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Workspace>> &
+      Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**

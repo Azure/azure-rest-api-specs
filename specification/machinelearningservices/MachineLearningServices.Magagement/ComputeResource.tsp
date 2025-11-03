@@ -44,7 +44,9 @@ interface ComputeResources {
    * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Compute_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("location")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ComputeResource,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ComputeResource> &
@@ -55,7 +57,9 @@ interface ComputeResources {
    * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Compute_Update")
+  @Azure.Core.useFinalStateVia("location")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ComputeResource,

@@ -68,9 +68,8 @@ interface OutboundRuleBasicResources {
   @summary("Creates or updates an outbound rule in the managed network of a machine learning workspace.")
   createOrUpdate is OutboundRuleBasicResourceOps.CreateOrUpdateAsync<
     OutboundRuleBasicResource,
-    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource>> &
+      Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -144,9 +143,8 @@ interface OutboundRuleBasicResourceOperationGroup {
   @operationId("OutboundRule_CreateOrUpdate")
   createOrUpdate is OutboundRuleBasicResourceOperationGroupOps.CreateOrUpdateAsync<
     OutboundRuleBasicResource,
-    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource>> &
+      Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**

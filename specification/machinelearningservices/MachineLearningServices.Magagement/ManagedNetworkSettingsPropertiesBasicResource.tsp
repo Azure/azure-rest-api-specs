@@ -43,9 +43,8 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   @summary("PUT API for managed network settings of a machine learning workspace.")
   put is ArmResourceCreateOrReplaceAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
-    Response = ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource>> &
+      Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
