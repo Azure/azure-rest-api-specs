@@ -1,5 +1,3 @@
-// @ts-check
-
 import { readFile } from "fs/promises";
 import {
   generateMarkdownTable,
