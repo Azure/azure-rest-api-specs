@@ -98,6 +98,8 @@ model Identity {
 
 /** The provisioning state of the genome account. */
 union ProvisioningState {
+  string,
+
   ResourceProvisioningState,
 
   /** Resource is being created or updated */
