@@ -410,24 +410,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
       "title": "Tracked Resource",
@@ -478,7 +460,7 @@
           "description": "The resource model definition representing SKU"
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Identity",
           "description": "Identity for the resource."
         }
       },
@@ -523,10 +505,6 @@
           "description": "Endpoint of the created account.",
           "readOnly": true
         },
-        "environmentName": {
-          "type": "string",
-          "description": "The name of the deployment environment (e.g., dev, test, ppe, prod) where the genome account resource is provisioned."
-        },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network access control rules."
@@ -554,7 +532,7 @@
           "description": "The resource model definition representing SKU"
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "$ref": "#/definitions/Identity",
           "description": "Identity for the resource."
         }
       },
@@ -566,23 +544,25 @@
     },
     "Identity": {
       "type": "object",
-      "description": "Identity for the resource.",
+      "description": "Properties to configure User Assigned Identities for Bring your Own Keys",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/ResourceIdentityType",
-          "description": "The identity type."
+        "principalId": {
+          "type": "string",
+          "description": "ObjectId from the KeyVault",
+          "readOnly": true
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenant ID of resource."
+          "description": "TenantId from the KeyVault",
+          "readOnly": true
         },
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID of resource identity."
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "Type of managed service identity."
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The list of user assigned identities associated with the resource.",
+          "description": "Properties for User Assigned Identities",
           "additionalProperties": {
             "$ref": "#/definitions/UserAssignedIdentity"
           }
@@ -901,11 +881,13 @@
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "Azure Active Directory principal ID associated with this Identity."
+          "description": "Principal Id of user assigned identity",
+          "readOnly": true
         },
         "clientId": {
           "type": "string",
-          "description": "Client App Id associated with this identity."
+          "description": "Client Id of user assigned identity",
+          "readOnly": true
         }
       }
     },

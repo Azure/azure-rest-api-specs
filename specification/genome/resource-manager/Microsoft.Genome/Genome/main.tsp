@@ -50,7 +50,7 @@ model GenomeAccount
 
   /** Identity for the resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Standard ARM envelope property"
-  identity?: CommonTypes.ManagedServiceIdentity;
+  identity?: Identity;
 }
 
 @armResourceOperations

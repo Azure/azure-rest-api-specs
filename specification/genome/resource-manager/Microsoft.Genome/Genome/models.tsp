@@ -69,26 +69,30 @@ union ResourceIdentityType {
 
 /** User-assigned managed identity. */
 model UserAssignedIdentity {
-  /** Azure Active Directory principal ID associated with this Identity. */
+  /** Principal Id of user assigned identity */
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
-  /** Client App Id associated with this identity. */
+  /** Client Id of user assigned identity */
+  @visibility(Lifecycle.Read)
   clientId?: string;
 }
 
-/** Identity for the resource. */
+/** Properties to configure User Assigned Identities for Bring your Own Keys */
 model Identity {
-  /** The identity type. */
-  type?: ResourceIdentityType;
-
-  /** The tenant ID of resource. */
-  tenantId?: string;
-
-  /** The principal ID of resource identity. */
+  /** ObjectId from the KeyVault */
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
-  /** The list of user assigned identities associated with the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard ARM pattern"
+  /** TenantId from the KeyVault */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /** Type of managed service identity. */
+  type?: ResourceIdentityType;
+
+  /** Properties for User Assigned Identities */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -218,9 +222,6 @@ model GenomeAccountProperties {
   /** Endpoint of the created account. */
   @visibility(Lifecycle.Read)
   endpoint?: string;
-
-  /** The name of the deployment environment (e.g., dev, test, ppe, prod) where the genome account resource is provisioned. */
-  environmentName?: string;
 
   /** Network access control rules. */
   networkAcls?: NetworkRuleSet;
