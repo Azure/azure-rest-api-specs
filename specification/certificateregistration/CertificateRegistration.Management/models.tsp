@@ -760,10 +760,12 @@ model SiteSealRequest {
 /**
  * Site seal
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SiteSeal {
   /**
    * HTML snippet
    */
+  @OpenAPI.extension("x-ms-client-flatten", true)
   html: string;
 }
 
