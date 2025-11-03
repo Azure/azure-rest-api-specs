@@ -4470,6 +4470,11 @@
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -4490,7 +4495,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Registry"
         },
         "x-ms-long-running-operation": true
       }
@@ -4648,7 +4654,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -4674,7 +4680,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Workspace"
         },
         "x-ms-long-running-operation": true
       },
@@ -7445,7 +7452,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/ComputeResource"
         },
         "x-ms-long-running-operation": true
@@ -11683,7 +11690,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -11709,7 +11716,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/EndpointResourcePropertiesBasicResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -11895,7 +11903,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -11921,7 +11929,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -15313,7 +15322,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InferencePool"
         },
         "x-ms-long-running-operation": true
       },
@@ -15755,7 +15765,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InferenceEndpoint"
         },
         "x-ms-long-running-operation": true
       },
@@ -16214,7 +16225,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InferenceGroup"
         },
         "x-ms-long-running-operation": true
       },
@@ -17505,7 +17517,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -17531,7 +17543,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -17885,7 +17898,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -17911,7 +17924,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OutboundRuleBasicResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -19344,7 +19358,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OnlineEndpoint"
         },
         "x-ms-long-running-operation": true
       },
@@ -19754,7 +19769,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OnlineDeployment"
         },
         "x-ms-long-running-operation": true
       },
@@ -20390,7 +20406,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -20416,7 +20432,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OutboundRuleBasicResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -21552,7 +21569,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServerlessEndpoint"
         },
         "x-ms-long-running-operation": true
       },

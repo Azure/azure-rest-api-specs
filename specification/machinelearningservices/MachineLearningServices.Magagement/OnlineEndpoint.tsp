@@ -67,13 +67,14 @@ interface OnlineEndpoints {
   update is ArmCustomPatchAsync<
     OnlineEndpoint,
     PatchModel = PartialMinimalTrackedResourceWithIdentity,
-    Response = OnlineEndpoint | (ArmAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = OnlineEndpoint | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OnlineEndpoint>> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**

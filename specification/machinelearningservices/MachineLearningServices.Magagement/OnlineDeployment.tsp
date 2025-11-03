@@ -67,13 +67,14 @@ interface OnlineDeployments {
   update is ArmCustomPatchAsync<
     OnlineDeployment,
     PatchModel = PartialMinimalTrackedResourceWithSku,
-    Response = OnlineDeployment | (ArmAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = OnlineDeployment | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OnlineDeployment>> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**

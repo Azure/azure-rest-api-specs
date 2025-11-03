@@ -108,13 +108,14 @@ interface Registries {
   removeRegions is ArmResourceActionAsyncBase<
     Registry,
     Registry,
-    Response = ArmResponse<Registry> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }),
+    Response = ArmResponse<Registry> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Registry>> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Registry>,
     Error = ErrorResponse
   >;

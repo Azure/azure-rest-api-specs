@@ -68,13 +68,14 @@ interface InferencePools {
   update is ArmCustomPatchAsync<
     InferencePool,
     PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
-    Response = InferencePool | (ArmAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = InferencePool | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferencePool>> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**

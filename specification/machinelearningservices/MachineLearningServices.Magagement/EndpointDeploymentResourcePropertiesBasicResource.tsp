@@ -174,9 +174,8 @@ interface EndpointDeployment {
   @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
-    Response = ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource>> &
+      Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
