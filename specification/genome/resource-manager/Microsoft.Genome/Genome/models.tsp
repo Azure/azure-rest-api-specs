@@ -98,16 +98,7 @@ model Identity {
 
 /** The provisioning state of the genome account. */
 union ProvisioningState {
-  string,
-
-  /** Resource creation/update succeeded */
-  Succeeded: "Succeeded",
-
-  /** Resource creation/update failed */
-  Failed: "Failed",
-
-  /** Resource creation/update was canceled */
-  Canceled: "Canceled",
+  ResourceProvisioningState,
 
   /** Resource is being created or updated */
   Provisioning: "Provisioning",
