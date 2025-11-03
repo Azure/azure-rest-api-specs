@@ -124,6 +124,23 @@ union BringYourOwnRootStatus {
   Failed: "Failed",
 }
 
+@added(Versions.v2026_04_01)
+@doc("Request payload for activating a BYOR policy with a customer-provided signed certificate.")
+model ActivatePolicyRequest {
+  @doc("The customer-provided certificate, signed by their own CA, in PEM format. This certificate will be used to activate the BYOR policy.")
+  signedCertificate: string;
+}
+
+@added(Versions.v2026_04_01)
+@doc("Response from the activate operation, indicating success or failure of the certificate activation.")
+model ActivatePolicy {
+  @doc("Indicates whether the certificate was successfully activated.")
+  success: boolean;
+
+  @doc("Error message if activation failed.")
+  errorMessage?: string;
+}
+
 @added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface Policies {
@@ -142,4 +159,17 @@ interface Policies {
     >
   >;
   listByResourceGroup is ArmResourceListByParent<Policy>;
+
+  @added(Versions.v2026_04_01)
+  @doc("Activates or renews a BYOR policy by accepting a customer-provided signed certificate.")
+  @action("activate")
+  @armResourceAction(Policy)
+  @post
+  activate(
+    ...ResourceInstanceParameters<Policy>,
+
+    @doc("The activation request containing the customer-provided signed certificate.")
+    @body
+    request: ActivatePolicyRequest,
+  ): ArmResponse<ActivatePolicy> | ErrorResponse;
 }
