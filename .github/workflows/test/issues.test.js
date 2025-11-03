@@ -1,5 +1,3 @@
-// @ts-check
-
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { defaultLogger } from "../../shared/src/logger.js";
 import { getIssueNumber } from "../src/issues.js";

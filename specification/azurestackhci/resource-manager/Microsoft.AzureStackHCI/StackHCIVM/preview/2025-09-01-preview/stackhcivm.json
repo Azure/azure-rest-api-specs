@@ -89,6 +89,9 @@
     },
     {
       "name": "LoadBalancers"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -893,6 +896,42 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AzureStackHCI/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryImages": {
@@ -6063,10 +6102,6 @@
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
         },
-        "vmImageRepositoryCredentials": {
-          "$ref": "#/definitions/VmImageRepositoryCredentials",
-          "description": "The credentials used to login to the image repository that has access to the specified image"
-        },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier",
           "description": "This is the gallery image definition identifier."
@@ -7921,10 +7956,9 @@
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
         },
-        "enableSdnPolicy": {
+        "bypassSdnPolicies": {
           "type": "boolean",
-          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations.",
-          "default": true
+          "description": "This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface."
         }
       }
     },
@@ -7972,9 +8006,9 @@
           "$ref": "#/definitions/InterfaceDNSSettings",
           "description": "DNS Settings for the interface"
         },
-        "enableSdnPolicy": {
+        "bypassSdnPolicies": {
           "type": "boolean",
-          "description": "Used to indicate whether SDN should be enabled for the network interface. By default, SDN is enabled. Customers can choose to disable SDN during network interface creation or later enable/disable it through network interface update operations."
+          "description": "This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface."
         }
       }
     },
@@ -10608,26 +10642,6 @@
           }
         }
       }
-    },
-    "VmImageRepositoryCredentials": {
-      "type": "object",
-      "description": "The credentials used to login to the image repository that has access to the specified image",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "Username for accessing image repository"
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "Password for accessing image repository",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
     },
     "VmSizeEnum": {
       "type": "string",

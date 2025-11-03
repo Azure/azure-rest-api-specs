@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @param {Set<any>} set1
  * @param {Set<any>} set2
