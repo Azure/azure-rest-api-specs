@@ -65,7 +65,7 @@ interface ComputeResources {
     ComputeResource,
     PatchModel = ClusterUpdateParameters,
     Response = ArmResponse<ComputeResource> &
-      ArmAsyncOperationHeader<FinalResult = ComputeResource>
+      ArmCombinedLroHeaders<FinalResult = ComputeResource>
   >;
 
   /**
