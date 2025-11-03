@@ -8,6 +8,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Edge;
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("ArcGatewayConfigurationProperties Properties")
 model ArcGatewayConfigurationProperties {
   @doc("Provisioning state of resource")
@@ -26,6 +27,7 @@ model ArcGatewayConfigurationProperties {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("ArcGatewayConfiguration Resource")
 @parentResource(Configuration)
 model ArcGatewayConfiguration
@@ -37,6 +39,7 @@ model ArcGatewayConfiguration
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @armResourceOperations
 interface ArcGatewayConfigurations {
   get is ArmResourceRead<ArcGatewayConfiguration>;

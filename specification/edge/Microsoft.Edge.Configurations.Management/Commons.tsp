@@ -9,6 +9,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.Edge;
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("Scenario enum")
 union Scenario {
   string,

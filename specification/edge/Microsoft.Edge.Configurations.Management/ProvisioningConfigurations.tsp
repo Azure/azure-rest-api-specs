@@ -7,6 +7,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Edge;
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @armResourceOperations
 interface ProvisioningConfigurations {
   get is ArmResourceRead<ProvisioningConfiguration>;
@@ -20,6 +21,7 @@ interface ProvisioningConfigurations {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("ProvisioningConfiguration Resource")
 @parentResource(Configuration)
 model ProvisioningConfiguration
@@ -31,6 +33,7 @@ model ProvisioningConfiguration
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("ProvisioningConfigurationProperties Properties")
 model ProvisioningConfigurationProperties {
   @doc("Provisioning state of resource")
@@ -49,6 +52,7 @@ model ProvisioningConfigurationProperties {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("OwnerKey Types")
 union OwnerKeyType {
   @doc("Microsoft Managed Key") MicrosoftManaged: "MicrosoftManaged",
