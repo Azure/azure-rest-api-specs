@@ -11,10 +11,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-  "@azure-typespec/http-client-csharp-mgmt":
+  "@azure-typespec/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    package-name: "Azure.ResourceManager.MachineLearningServices"
-    namespace: "{package-name}"
+    clear-output-folder: true
+    namespace: "Azure.ResourceManager.MachineLearningServices"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-machinelearningservices"
     namespace: "azure.mgmt.machinelearningservices"
