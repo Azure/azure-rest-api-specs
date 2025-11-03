@@ -1,4 +1,3 @@
-// @ts-check
 import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
