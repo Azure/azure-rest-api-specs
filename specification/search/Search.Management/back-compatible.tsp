@@ -3,8 +3,9 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Search;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SearchServiceUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchServiceUpdate.properties
+);
 
 @@clientName(CheckNameAvailabilityOutput.nameAvailable, "IsNameAvailable");
 
@@ -25,8 +26,8 @@ using Microsoft.Search;
 @@clientName(SearchServices.queryKeysDelete, "Delete");
 @@clientLocation(SearchServices.upgrade, "Services");
 @@clientLocation(SearchServices.listSupported, "PrivateLinkResources");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SearchService.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchService.properties);
 
 @@clientName(PrivateEndpointConnections.update::parameters.resource,
   "privateEndpointConnection"
@@ -39,3 +40,6 @@ using Microsoft.Search;
 @@clientLocation(ServicesOperationGroup.checkNameAvailability, "Services");
 
 @@clientLocation(UsagesOperationGroup.listBySubscription, "Usages");
+@@clientName(ServicesOperationGroup.checkNameAvailability::parameters.body,
+  "checkNameAvailabilityInput"
+);

@@ -31,7 +31,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "SearchManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Search;
 
 /**
@@ -41,9 +41,14 @@ enum Versions {
   /**
    * The 2025-05-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_05_01: "2025-05-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      CloudError
+    > {}
+@@doc(Operations.list,
+  "Lists all of the available REST API operations of the Microsoft.Search provider."
+);

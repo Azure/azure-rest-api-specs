@@ -1,22 +1,24 @@
 {
   "parameters": {
-    "location": "westus",
     "api-version": "2025-05-01",
-    "subscriptionId": "subid",
-    "skuName": "free"
+    "location": "westus",
+    "skuName": "free",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}",
-        "unit": "Count",
-        "currentValue": 8,
-        "limit": 16,
         "name": {
-          "value": "free",
-          "localizedValue": "F - Free"
-        }
+          "localizedValue": "F - Free",
+          "value": "free"
+        },
+        "currentValue": 8,
+        "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}",
+        "limit": 16,
+        "unit": "Count"
       }
     }
-  }
+  },
+  "operationId": "UsageBySubscriptionSku",
+  "title": "GetQuotaUsage"
 }

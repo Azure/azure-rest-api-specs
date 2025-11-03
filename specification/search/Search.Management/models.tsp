@@ -16,11 +16,11 @@ namespace Microsoft.Search;
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `user,system`: "user,system",
 }
 
@@ -29,7 +29,7 @@ union Origin {
  */
 union ActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Internal: "Internal",
 }
 
@@ -65,11 +65,6 @@ union PublicNetworkAccess {
    * The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections.
    */
   Disabled: "Disabled",
-
-  /**
-   * The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter.
-   */
-  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
@@ -165,13 +160,13 @@ union PrivateLinkServiceConnectionProvisioningState {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
@@ -205,7 +200,7 @@ union SharedPrivateLinkResourceStatus {
 /**
  * The provisioning state of the shared private link resource. Valid values are Updating, Deleting, Failed, Succeeded or Incomplete.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SharedPrivateLinkResourceProvisioningState {
   string,
 
@@ -370,9 +365,9 @@ union IssueType {
  */
 union Severity {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Error: "Error",
 }
 
@@ -381,16 +376,16 @@ union Severity {
  */
 union SharedPrivateLinkResourceAsyncOperationResult {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AdminKeyKind {
   /**
    * The primary API key for the search service.
@@ -406,7 +401,7 @@ enum AdminKeyKind {
 /**
  * Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed for any other SKU. For the standard3 SKU, the value is either 'Default' or 'HighDensity'. For all other SKUs, this value must be 'Default'.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum HostingMode {
   /**
    * The limit on number of indexes is determined by the default limits for the SKU.
@@ -422,7 +417,7 @@ enum HostingMode {
 /**
  * The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure AI Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SearchServiceStatus {
   /**
    * The search service is running and no provisioning operations are underway.
@@ -463,8 +458,8 @@ enum SearchServiceStatus {
 /**
  * The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ProvisioningState {
   /**
    * The last provisioning operation has completed successfully.
@@ -485,7 +480,7 @@ enum ProvisioningState {
 /**
  * Describes how a search service should enforce compliance if it finds objects that aren't encrypted with the customer-managed key.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SearchEncryptionWithCmk {
   /**
    * No enforcement of customer-managed key encryption will be made. Only the built-in service-managed encryption is used.
@@ -506,7 +501,7 @@ enum SearchEncryptionWithCmk {
 /**
  * Returns the status of search service compliance with respect to non-CMK-encrypted objects. If a service has more than one unencrypted object, and enforcement is enabled, the service is marked as noncompliant.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SearchEncryptionComplianceStatus {
   /**
    * Indicates that the search service is compliant, either because the number of non-CMK-encrypted objects is zero or enforcement is disabled.
@@ -522,7 +517,7 @@ enum SearchEncryptionComplianceStatus {
 /**
  * Describes what response the data plane API of a search service would send for requests that failed authentication.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AadAuthFailureMode {
   /**
    * Indicates that requests that failed authentication should be presented with an HTTP status code of 403 (Forbidden).
@@ -538,7 +533,7 @@ enum AadAuthFailureMode {
 /**
  * Status of the the private link service connection. Valid values are Pending, Approved, Rejected, or Disconnected.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum PrivateLinkServiceConnectionStatus {
   /**
    * The private endpoint connection has been created and is pending approval.
@@ -562,38 +557,11 @@ enum PrivateLinkServiceConnectionStatus {
 }
 
 /**
- * Localized display information for this particular operation.
- */
-model OperationDisplay {
-  /**
-   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
-   */
-  @visibility(Lifecycle.Read)
-  provider?: string;
-
-  /**
-   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
-   */
-  @visibility(Lifecycle.Read)
-  resource?: string;
-
-  /**
-   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
-   */
-  @visibility(Lifecycle.Read)
-  operation?: string;
-
-  /**
-   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-}
-
-/**
  * Contains information about an API error.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * Describes a particular API error with an error code and a message.
@@ -609,6 +577,8 @@ model CloudError {
 /**
  * Describes a particular API error with an error code and a message.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases.
@@ -628,6 +598,7 @@ model CloudErrorBody {
   /**
    * Contains nested errors that are related to this error.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: CloudErrorBody[];
 }
 
@@ -668,7 +639,23 @@ model QueryKey {
 /**
  * Response containing the query API keys for a given Azure AI Search service.
  */
-model ListQueryKeysResult is Azure.Core.Page<QueryKey>;
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
+model ListQueryKeysResult {
+  /**
+   * The query keys for the Azure AI Search service.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: QueryKey[];
+
+  /**
+   * Request URL that can be used to query next page of query keys. Returned when the total number of requested query keys exceed maximum page size.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Properties of the search service.
@@ -744,7 +731,8 @@ model SearchServiceProperties {
   /**
    * When set to true, calls to the search service will not be permitted to utilize API keys for authentication. This cannot be set to true if 'dataPlaneAuthOptions' are defined.
    */
-  disableLocalAuth?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  disableLocalAuth?: boolean | null;
 
   /**
    * Defines the options for how the data plane API of a search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true.
@@ -754,7 +742,8 @@ model SearchServiceProperties {
   /**
    * Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.
    */
-  semanticSearch?: SearchSemanticSearch;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  semanticSearch?: SearchSemanticSearch | null;
 
   /**
    * The list of private endpoint connections to the Azure AI Search service.
@@ -794,6 +783,7 @@ model NetworkRuleSet {
   /**
    * A list of IP restriction rules that defines the inbound network(s) with allowing access to the search service endpoint. At the meantime, all other public IP networks are blocked by the firewall. These restriction rules are applied only when the 'publicNetworkAccess' of the search service is 'enabled'; otherwise, traffic over public interface is not allowed even with any public IP rules, and private endpoint connections would be the exclusive access method.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipRules?: IpRule[];
 
   /**
@@ -835,7 +825,8 @@ model DataPlaneAuthOptions {
   /**
    * Indicates that only the API key can be used for authentication.
    */
-  apiKeyOnly?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  apiKeyOnly?: unknown;
 
   /**
    * Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication.
@@ -875,6 +866,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private link service connection. Valid values are Updating, Deleting, Failed, Succeeded, Incomplete, or Canceled.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: PrivateLinkServiceConnectionProvisioningState;
 }
 
@@ -940,18 +932,27 @@ model SharedPrivateLinkResourceProperties {
   /**
    * The provisioning state of the shared private link resource. Valid values are Updating, Deleting, Failed, Succeeded or Incomplete.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: SharedPrivateLinkResourceProvisioningState;
 }
 
 /**
  * Defines the SKU of a search service, which determines billing rate and capacity limits.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.externalDocs("https://azure.microsoft.com/documentation/articles/search-sku-tier/")
 model Sku {
   /**
    * The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'
    */
   name?: SkuName;
 }
+
+/**
+ * The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model UserAssignedManagedIdentities is Record<UserAssignedIdentity>;
 
 /**
  * Details about the search service identity. A null value indicates that the search service has no identity assigned.
@@ -977,19 +978,19 @@ model Identity {
   /**
    * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  userAssignedIdentities?: UserAssignedManagedIdentities;
 }
 
 /**
  * The parameters used to update an Azure AI Search service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SearchServiceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of the search service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SearchServiceProperties;
 
@@ -1007,7 +1008,7 @@ model SearchServiceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Tags to help categorize the resource in the Azure portal.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -1019,20 +1020,27 @@ model SearchServiceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
 /**
  * Response containing a list of supported Private Link Resources.
  */
-@pagedResult
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model PrivateLinkResourcesResult {
   /**
    * The list of supported Private Link Resources.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: PrivateLinkResource[];
+
+  /**
+   * The URL to get the next set of private link resources, if there are any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Describes a supported private link resource for the Azure AI Search service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Describes the properties of a supported private link resource for the Azure AI Search service.
@@ -1151,7 +1159,23 @@ model CheckNameAvailabilityOutput {
 /**
  * Response containing the quota usage information for all the supported SKUs of Azure AI Search.
  */
-model QuotaUsagesListResult is Azure.Core.Page<QuotaUsageResult>;
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
+model QuotaUsagesListResult {
+  /**
+   * The quota usages for the SKUs supported by Azure AI Search.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: QuotaUsageResult[];
+
+  /**
+   * Request URL that can be used to query next page of quota usages. Returned when the total number of requested quota usages exceed maximum page size.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Describes the quota usage for a particular SKU.
@@ -1217,4 +1241,82 @@ model AsyncOperationResult {
    * The current status of the long running asynchronous shared private link resource operation.
    */
   status?: SharedPrivateLinkResourceAsyncOperationResult;
+}
+/**
+ * The result of the request to list REST API operations. It contains a list of operations and a URL to get the next set of results.
+ */
+model OperationListResult {
+  /**
+   * The list of operations by Azure AI Search, some supported by the resource provider and others by data plane APIs.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: Operation[];
+
+  /**
+   * The URL to get the next set of operation list results, if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Response containing a list of private endpoint connections.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
+model PrivateEndpointConnectionListResult {
+  /**
+   * The list of private endpoint connections.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: PrivateEndpointConnection[];
+
+  /**
+   * Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+/**
+ * Response containing a list of Azure AI Search services.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
+model SearchServiceListResult {
+  /**
+   * The list of search services.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: SearchService[];
+
+  /**
+   * Request URL that can be used to query next page of search services. Returned when the total number of requested search services exceed maximum page size.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+/**
+ * Response containing a list of shared private link resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
+model SharedPrivateLinkResourceListResult {
+  /**
+   * The list of shared private link resources.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: SharedPrivateLinkResource[];
+
+  /**
+   * The URL to get the next set of shared private link resources, if there are any.
+   */
+  @nextLink
+  nextLink?: string;
 }

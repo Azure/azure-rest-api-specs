@@ -14,9 +14,11 @@ namespace Microsoft.Search;
 /**
  * Network security perimeter (NSP) configuration resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SearchService)
 model NetworkSecurityPerimeterConfiguration
-  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
+  is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = NetworkSecurityPerimeterConfiguration,
     KeyName = "nspConfigName",
@@ -30,12 +32,18 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a network security perimeter configuration.
    */
-  get is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
+  get is ArmResourceRead<
+    NetworkSecurityPerimeterConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Gets a list of network security perimeter configurations for a search service.
    */
-  listByService is ArmResourceListByParent<NetworkSecurityPerimeterConfiguration>;
+  listByService is ArmResourceListByParent<
+    NetworkSecurityPerimeterConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Reconcile network security perimeter configuration for the Azure AI Search resource provider. This triggers a manual resync with network security perimeter configurations by ensuring the search service carries the latest configuration.
@@ -44,7 +52,8 @@ interface NetworkSecurityPerimeterConfigurations {
     NetworkSecurityPerimeterConfiguration,
     void,
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkSecurityPerimeterConfiguration>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkSecurityPerimeterConfiguration>,
+    Error = CloudError
   >;
 }
 

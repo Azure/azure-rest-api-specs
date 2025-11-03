@@ -25,62 +25,157 @@ model SearchService
   /**
    * The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://azure.microsoft.com/documentation/articles/search-sku-tier/")
   sku?: Sku;
 
   /**
    * The identity of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 }
 
-@armResourceOperations
+alias AdminKeysParentParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /** The name of the Azure AI Search service associated with the specified resource group. */
+  @path
+  @segment("searchServices")
+  @key
+  @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
+  searchServiceName: string;
+};
+
+alias AdminKeysParameters = {
+  /**
+   * Specifies which key to regenerate. Valid values include 'primary' and 'secondary'.
+   */
+  @path
+  @segment("regenerateAdminKey")
+  keyKind: AdminKeyKind;
+};
+
+alias AdminKeysOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  AdminKeysParentParameters,
+  AdminKeysParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey",
+  }
+>;
+
+alias QueryKeysParentParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /** The name of the Azure AI Search service associated with the specified resource group. */
+  @path
+  @segment("searchServices")
+  @key
+  @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
+  searchServiceName: string;
+};
+
+alias QueryKeysParameters = {
+  /**
+   * The name of the new query API key.
+   */
+  @path
+  name: string;
+};
+
+alias QueryKeysOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  QueryKeysParentParameters,
+  QueryKeysParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/createQueryKey",
+  }
+>;
+
+alias QueryKeysDeleteParentParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /** The name of the Azure AI Search service associated with the specified resource group. */
+  @path
+  @segment("searchServices")
+  @key
+  @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
+  searchServiceName: string;
+};
+
+alias QueryKeysDeleteParameters = {
+  /**
+   * The query key to be deleted. Query keys are identified by value, not by name.
+   */
+  @path
+  key: string;
+};
+
+alias QueryKeysDeleteOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  QueryKeysDeleteParentParameters,
+  QueryKeysDeleteParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/deleteQueryKey/",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface SearchServices {
   /**
    * Gets the search service with the given name in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Services_Get")
+  @externalDocs("https://aka.ms/search-manage")
   get is ArmResourceRead<
     SearchService,
     Parameters = {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Services_CreateOrUpdate")
+  @externalDocs("https://aka.ms/search-manage")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SearchService,
     Parameters = {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = SearchService> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
    * Updates an existing search service in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Services_Update")
   @patch(#{ implicitOptionality: false })
+  @externalDocs("https://aka.ms/search-manage")
   update is ArmCustomPatchSync<
     SearchService,
     PatchModel = SearchServiceUpdate,
@@ -88,53 +183,62 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Deletes a search service in the given resource group, along with its associated resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Services_Delete")
+  @externalDocs("https://aka.ms/search-manage")
   delete is ArmResourceDeleteSync<
     SearchService,
     Parameters = {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    Response = OkResponse | NoContentResponse | NotFoundResponse,
+    Error = CloudError
   >;
 
   /**
    * Gets a list of all Search services in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Services_ListByResourceGroup")
+  @externalDocs("https://aka.ms/search-manage")
   listByResourceGroup is ArmResourceListByParent<
     SearchService,
     Parameters = {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    Response = SearchServiceListResult,
+    Error = CloudError
   >;
 
   /**
    * Gets a list of all Search services in the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://aka.ms/search-manage")
   @operationId("Services_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     SearchService,
@@ -142,19 +246,22 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    Response = SearchServiceListResult,
+    Error = CloudError
   >;
 
   /**
    * Gets the primary and secondary admin API keys for the specified Azure AI Search service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdminKeys_Get")
   @action("listAdminKeys")
+  @externalDocs("https://aka.ms/search-manage")
   adminKeysGet is ArmResourceActionSync<
     SearchService,
     void,
@@ -163,73 +270,69 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdminKeys_Regenerate")
-  @action("{keyKind}")
-  regenerate is ArmResourceActionSync<
+  @externalDocs("https://aka.ms/search-manage")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}")
+  regenerate is AdminKeysOps.ActionSync<
     SearchService,
     void,
     ArmResponse<AdminKeyResult>,
     Parameters = {
       /**
-       * Specifies which key to regenerate. Valid values include 'primary' and 'secondary'.
-       */
-      @path
-      keyKind: AdminKeyKind;
-
-      /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Generates a new query key for the specified search service. You can create up to 50 query keys per service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("QueryKeys_Create")
-  @action("{name}")
-  create is ArmResourceActionSync<
+  @post
+  @externalDocs("https://aka.ms/search-manage")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}")
+  create is QueryKeysOps.CreateOrUpdateSync<
     SearchService,
-    void,
-    ArmResponse<QueryKey>,
+    Request = void,
+    Response = ArmResponse<QueryKey>,
     Parameters = {
-      /**
-       * The name of the new query API key.
-       */
-      @path
-      name: string;
-
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Returns the list of query API keys for the given Azure AI Search service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("QueryKeys_ListBySearchService")
   @action("listQueryKeys")
+  @externalDocs("https://aka.ms/search-manage")
+  @list
   listBySearchService is ArmResourceActionSync<
     SearchService,
     void,
@@ -238,59 +341,58 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("QueryKeys_Delete")
   @delete
-  @action("{key}")
-  queryKeysDelete is ArmResourceActionSync<
+  @externalDocs("https://aka.ms/search-manage")
+  queryKeysDelete is QueryKeysDeleteOps.ActionSync<
     SearchService,
     void,
-    OkResponse | NoContentResponse,
+    OkResponse | NoContentResponse | NotFoundResponse,
     Parameters = {
-      /**
-       * The query key to be deleted. Query keys are identified by value, not by name.
-       */
-      @path
-      key: string;
-
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Upgrades the Azure AI Search service to the latest version available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Services_Upgrade")
   upgrade is ArmResourceActionAsync<
     SearchService,
     void,
-    ArmResponse<SearchService>
+    Response = SearchService,
+    Error = CloudError
   >;
 
   /**
    * Gets a list of all supported private link resource types for the given service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkResources_ListSupported")
+  @externalDocs("https://aka.ms/search-manage")
   @get
   @action("privateLinkResources")
+  @list
   listSupported is ArmResourceActionSync<
     SearchService,
     void,
@@ -299,11 +401,12 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 
