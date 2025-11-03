@@ -76,6 +76,9 @@ namespace SkillContext
 
 		@doc("Represents the number of prompt executions that have occurred.")
 		evaluationExecutionCount: uint32;
+
+		@doc("Actual Fidelis workspace ID. This workspace ID is a GUID generated and provided by Fidelis.")
+		actualWorkspaceId: string;
 	}
 
 	@doc("Evaluation Invocation Type")
