@@ -26,7 +26,7 @@ These are the global settings for Azure Quantum management SDK.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-08-11-preview
+tag: package-2025-11-01-preview
 
 modelerfour:
   flatten-models: false
@@ -84,6 +84,15 @@ These settings apply only when `--tag=package-2025-08-11-preview` is specified o
 ```yaml $(tag) == 'package-2025-08-11-preview'
 input-file:
   - Microsoft.Quantum/preview/2025-08-11-preview/quantum.json
+```
+
+### Tag: package-2025-11-01-preview
+
+These settings apply only when `--tag=package-2025-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01-preview'
+input-file:
+  - Microsoft.Quantum/preview/2025-11-01-preview/quantum.json
 ```
 
 ---
