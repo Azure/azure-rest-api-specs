@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 
-namespace Microsoft.DependencyMap;
+using Microsoft.DependencyMap;
 
 // Discriminated type
 // @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiscoverySourceResource.properties,

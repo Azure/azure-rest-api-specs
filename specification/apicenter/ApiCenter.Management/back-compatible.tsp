@@ -1,5 +1,5 @@
 // Contains overrides to make the Autorest Swagger2.0 back compatible
-namespace Microsoft.ApiCenter;
+using Microsoft.ApiCenter;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Api.properties, "autorest");
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiDefinition.properties,

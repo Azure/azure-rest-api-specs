@@ -1,5 +1,5 @@
 // Contains overrides to make the Autorest Swagger2.0 back compatible
-namespace Microsoft.IoTOperationsMQ;
+using Microsoft.IoTOperationsMQ;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(BrokerAuthenticationResource.properties,
   "autorest"

@@ -1,6 +1,6 @@
 // Contains overrides to make the Autorest Swagger2.0 back compatible
 
-namespace Microsoft.AzureLargeInstance;
+using Microsoft.AzureLargeInstance;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AzureLargeInstance.properties,
   "autorest"

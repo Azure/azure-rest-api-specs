@@ -1,5 +1,5 @@
 // Contains overrides to make the Autorest Swagger2.0 back compatible
-namespace Microsoft.IoTOperationsDataProcessor;
+using Microsoft.IoTOperationsDataProcessor;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Dataset.properties,
   "autorest"

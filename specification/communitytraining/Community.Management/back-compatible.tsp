@@ -1,5 +1,5 @@
 // Contains overrides to make the Autorest Swagger2.0 back compatible
-namespace Microsoft.Community;
+using Microsoft.Community;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityTraining.properties,
   "autorest"

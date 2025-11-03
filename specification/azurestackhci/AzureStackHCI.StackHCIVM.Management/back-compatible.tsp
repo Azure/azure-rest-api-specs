@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 
-namespace Microsoft.AzureStackHCI;
+using Microsoft.AzureStackHCI;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AttestationStatus.properties,
   "autorest"

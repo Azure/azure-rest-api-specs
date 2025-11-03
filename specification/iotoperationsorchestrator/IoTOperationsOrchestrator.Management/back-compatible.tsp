@@ -1,5 +1,5 @@
 // Contains overrides to make the Autorest Swagger2.0 back compatible
-namespace Microsoft.IoTOperationsOrchestrator;
+using Microsoft.IoTOperationsOrchestrator;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Instance.properties,
   "autorest"

@@ -1,5 +1,5 @@
 // Contains overrides to make the Autorest Swagger2.0 back compatible
-namespace SplitIO.Experimentation;
+using SplitIO.Experimentation;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentationWorkspace.properties,
   "autorest"

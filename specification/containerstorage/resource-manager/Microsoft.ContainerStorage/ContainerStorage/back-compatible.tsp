@@ -1,5 +1,5 @@
 // Contains overrides to make the Autorest Swagger2.0 back compatible
-namespace Microsoft.ContainerStorage;
+using Microsoft.ContainerStorage;
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Pool.properties,
   "autorest"
