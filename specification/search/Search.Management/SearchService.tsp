@@ -380,7 +380,6 @@ interface SearchServices {
   @get
   @action("privateLinkResources")
   @list
-  @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   listSupported is ArmResourceActionSync<
     SearchService,
     void,
