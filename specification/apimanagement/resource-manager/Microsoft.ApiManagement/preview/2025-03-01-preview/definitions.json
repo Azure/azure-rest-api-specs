@@ -1336,7 +1336,8 @@
           "description": "OAuth2 grant type options",
           "enum": [
             "AuthorizationCode",
-            "ClientCredentials"
+            "ClientCredentials",
+            "KeyVault"
           ],
           "x-ms-client-name": "OAuth2GrantType",
           "x-ms-enum": {
@@ -1352,6 +1353,11 @@
                 "value": "ClientCredentials",
                 "description": "Client Credential grant",
                 "name": "ClientCredentials"
+              },
+              {
+                "value": "KeyVault",
+                "description": "Key Vault grant",
+                "name": "KeyVault"
               }
             ]
           }
@@ -1564,7 +1570,7 @@
           "readOnly": true
         },
         "lastStatus": {
-          "type": "object",
+          "$ref": "#/definitions/KeyVaultLastAccessStatusContractProperties",
           "description": "Last time sync and refresh of secret from key vault.",
           "readOnly": true
         }
@@ -1576,57 +1582,14 @@
       ],
       "description": "Authorization Provider KeyVault contract properties."
     },
-    "OAuth2AuthorizationCodeParameters": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "Client identifier of the authorization server."
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client secret of the authorization server."
-        },
-        "scopes": {
-          "type": "string",
-          "description": "OAuth token scope."
-        },
-        "resourceUri": {
-          "type": "string",
-          "description": "OAuth resource URI."
-        },
-        "loginUri": {
-          "type": "string",
-          "description": "OAuth login URI."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "OAuth tenant identifier."
-        },
-        "authorizationUrl": {
-          "type": "string",
-          "description": "OAuth authorization endpoint URL."
-        },
-        "refreshUrl": {
-          "type": "string",
-          "description": "OAuth refresh token endpoint URL."
-        },
-        "tokenUrl": {
-          "type": "string",
-          "description": "OAuth token endpoint URL."
-        },
-        "keyVault": {
-          "$ref": "#/definitions/AuthorizationProviderKeyVaultContract",
-          "description": "KeyVault location details for storing OAuth2 client secret."
-        }
-      },
-      "description": "OAuth2 authorization code grant parameters with KeyVault support."
-    },
     "AuthorizationProviderOAuth2GrantTypes": {
       "type": "object",
       "properties": {
         "authorizationCode": {
-          "$ref": "#/definitions/OAuth2AuthorizationCodeParameters",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "OAuth2 authorization code grant parameters"
         },
         "clientCredentials": {
@@ -1635,6 +1598,10 @@
             "type": "string"
           },
           "description": "OAuth2 client credential grant parameters"
+        },
+        "keyVault": {
+          "$ref": "#/definitions/AuthorizationProviderKeyVaultContract",
+          "description": "Key Vault reference for client secret storage"
         }
       },
       "description": "Authorization Provider oauth2 grant types settings"
