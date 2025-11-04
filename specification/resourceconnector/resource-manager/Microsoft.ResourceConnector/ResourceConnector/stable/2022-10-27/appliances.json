@@ -321,42 +321,6 @@
           "Create/Update Appliance": {
             "$ref": "./examples/AppliancesCreate_Update.json"
           }
-        }
-      },
-      "delete": {
-        "tags": [
-          "appliances"
-        ],
-        "operationId": "Appliances_Delete",
-        "summary": "Deletes an Appliance.",
-        "description": "Deletes an Appliance with the specified Resource Name, Resource Group, and Subscription Id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The response indicates the delete operation is performed in the background."
-          },
-          "204": {
-            "description": "NoContent. The response indicates the appliance resource is already deleted."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
