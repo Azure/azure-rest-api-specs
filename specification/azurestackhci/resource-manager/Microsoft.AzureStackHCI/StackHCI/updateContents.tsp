@@ -25,6 +25,12 @@ model UpdateContent
 interface UpdateContents {
   @doc("Gets content for an update.")
   get is ArmResourceRead<UpdateContent>;
+
+  @doc("List all update contents.")
+  list is ArmResourceListByParent<
+    UpdateContent,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"

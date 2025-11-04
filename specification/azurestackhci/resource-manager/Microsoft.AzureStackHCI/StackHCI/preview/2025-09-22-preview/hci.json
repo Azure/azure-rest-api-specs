@@ -908,7 +908,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates": {
       "get": {
-        "operationId": "PlatformUpdates_ListPlatformUpdatesBySubscriptionLocationResource",
+        "operationId": "PlatformUpdates_List",
         "tags": [
           "PlatformUpdates"
         ],
@@ -992,6 +992,48 @@
           "PlatformUpdates_Get_MaximumSet": {
             "$ref": "./examples/PlatformUpdates_Get_MaximumSet_Gen.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/updateContents": {
+      "get": {
+        "operationId": "UpdateContents_List",
+        "tags": [
+          "UpdateContents"
+        ],
+        "description": "List all update contents.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateContentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContents_ListByLocation_MaximumSet": {
+            "$ref": "./examples/UpdateContents_ListByLocation_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -11923,6 +11965,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "UpdateContentListResult": {
+      "type": "object",
+      "description": "The response of a UpdateContent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateContent items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateContent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "UpdateContentProperties": {

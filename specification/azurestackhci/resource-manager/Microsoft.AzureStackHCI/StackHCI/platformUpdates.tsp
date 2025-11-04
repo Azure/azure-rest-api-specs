@@ -27,7 +27,7 @@ interface PlatformUpdates {
   get is ArmResourceRead<PlatformUpdate>;
 
   @doc("List all platform updates.")
-  listPlatformUpdatesBySubscriptionLocationResource is ArmResourceListByParent<
+  list is ArmResourceListByParent<
     PlatformUpdate,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
