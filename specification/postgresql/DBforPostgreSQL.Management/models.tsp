@@ -859,8 +859,10 @@ union FailoverMode {
   ForcedSwitchover: "ForcedSwitchover",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union TuningOption {
+/**
+ * The name of the tuning option.
+ */
+union TuningOptionParameterEnum {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   index: "index",
@@ -871,7 +873,7 @@ union TuningOption {
 /**
  * Type for this recommendation.
  */
-union RecommendationType {
+union RecommendationTypeEnum {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CreateIndex: "CreateIndex",
@@ -884,9 +886,9 @@ union RecommendationType {
 }
 
 /**
- * Type for this recommendation.
+ * Recommendations list filter. Retrieves recommendations based on type.
  */
-union TuningOptionRecommendationType {
+union RecommendationTypeParameterEnum {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CreateIndex: "CreateIndex",
@@ -3265,7 +3267,7 @@ model ObjectRecommendationProperties {
   /**
    * Type for this recommendation.
    */
-  recommendationType?: RecommendationType;
+  recommendationType?: RecommendationTypeEnum;
 
   /**
    * Implementation details for the recommended action.
