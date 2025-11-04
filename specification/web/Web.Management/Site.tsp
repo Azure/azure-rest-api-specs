@@ -302,6 +302,7 @@ interface Sites {
   /**
    * Description for Creates a backup of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Creates a backup of an app.")
   backup is SiteOps.ActionSync<
     Site,
@@ -691,6 +692,7 @@ interface Sites {
   /**
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieves all Service Bus Hybrid Connections used by this Web App.")
   @get
   @action("hybridConnectionRelays")
@@ -704,6 +706,7 @@ interface Sites {
   /**
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets hybrid connections configured for an app (or deployment slot, if specified).")
   @get
   @action("hybridconnection")
@@ -1025,6 +1028,7 @@ interface Sites {
   /**
    * Description for Gets the premier add-ons of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the premier add-ons of an app.")
   @get
   @action("premieraddons")
@@ -1345,6 +1349,7 @@ interface Sites {
   /**
    * Lists logic app's connections for web site, or a deployment slot.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Lists logic app's connections for web site, or a deployment slot.")
   listWorkflowsConnections is SiteOps.ActionSync<
     Site,
@@ -1575,6 +1580,7 @@ interface WebApps {
   /**
    * Description for Creates a backup of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Creates a backup of an app.")
   @action("backup")
   backupSlot is WebAppOps.ActionSync<
@@ -1949,6 +1955,7 @@ interface WebApps {
   /**
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieves all Service Bus Hybrid Connections used by this Web App.")
   @get
   @action("hybridConnectionRelays")
@@ -1962,6 +1969,7 @@ interface WebApps {
   /**
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets hybrid connections configured for an app (or deployment slot, if specified).")
   @get
   @action("hybridconnection")
@@ -2231,6 +2239,7 @@ interface WebApps {
   /**
    * Description for Gets the premier add-ons of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the premier add-ons of an app.")
   @get
   @action("premieraddons")
@@ -2557,6 +2566,7 @@ interface WebApps {
   /**
    * Lists logic app's connections for web site, or a deployment slot.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Lists logic app's connections for web site, or a deployment slot.")
   @action("listWorkflowsConnections")
   listWorkflowsConnectionsSlot is WebAppOps.ActionSync<
