@@ -1,6 +1,3 @@
-parameters:
-  "service-dir":
-    default: "sdk/ai"
 options:
   "@azure-tools/typespec-java":
     api-version: "2025-11-15-preview"
@@ -14,12 +11,6 @@ options:
     custom-types-subpackage: "implementation.models"
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
-  "@typespec/json-schema":
-    emitAllModels: true
-    emitAllRefs: false
-    emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
-    file-type: json
-    bundleId: azure-ai-agents-v2.json
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
