@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-01
+tag: package-preview-2025-11-01-preview
 
 directive:
   - from: edgeDevices.json
