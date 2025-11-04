@@ -6340,7 +6340,7 @@
           "$ref": "#/definitions/AgentPoolMode"
         },
         "security": {
-          "$ref": "#/definitions/AgentPoolSecurityProfile",
+          "$ref": "#/definitions/MachineSecurityProfile",
           "description": "The security settings of the machine."
         },
         "priority": {
@@ -9739,6 +9739,28 @@
         }
       },
       "description": "The security settings of an agent pool."
+    },
+    "MachineSecurityProfile": {
+      "type": "object",
+      "properties": {
+        "sshAccess": {
+          "$ref": "#/definitions/AgentPoolSSHAccess",
+          "description": "SSH access method of an agent pool."
+        },
+        "enableVTPM": {
+          "type": "boolean",
+          "description": "vTPM is a Trusted Launch feature for configuring a dedicated secure vault for keys and measurements held locally on the node. For more details, see aka.ms/aks/trustedlaunch. If not specified, the default is false."
+        },
+        "enableSecureBoot": {
+          "type": "boolean",
+          "description": "Secure Boot is a feature of Trusted Launch which ensures that only signed operating systems and drivers can boot. For more details, see aka.ms/aks/trustedlaunch.  If not specified, the default is false."
+        },
+         "enableEncryptionAtHost": {
+          "type": "boolean",
+          "description": "Whether to enable host based OS and data drive encryption. This is only supported on certain VM sizes and in certain Azure regions. For more information, see: https://docs.microsoft.com/azure/aks/enable-host-encryption"
+        }
+      },
+      "description": "The security settings of the machine."
     },
     "GPUProfile": {
       "type": "object",
