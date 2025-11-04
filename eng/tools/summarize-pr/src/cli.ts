@@ -108,9 +108,7 @@ Examples:
     }
   } catch (error: any) {
     if (error.status === 404) {
-      console.error(
-        `Error: PR #${options.number} not found in ${options.owner}/${options.repo}`,
-      );
+      console.error(`Error: PR #${options.number} not found in ${options.owner}/${options.repo}`);
     } else if (error.status === 403) {
       console.error(
         "Error: API rate limit exceeded. Set GITHUB_TOKEN environment variable to increase limits.",

@@ -6,12 +6,20 @@ import { FileCategory, FileChange, PRSummary, PRSummaryOptions } from "./types.j
  */
 function categorizeFile(filename: string): string {
   // TypeSpec files
-  if (filename.endsWith(".tsp") || filename.includes("/tsp-location.yaml") || filename.includes("/tspconfig.yaml")) {
+  if (
+    filename.endsWith(".tsp") ||
+    filename.includes("/tsp-location.yaml") ||
+    filename.includes("/tspconfig.yaml")
+  ) {
     return "TypeSpec";
   }
 
   // OpenAPI/Swagger specs
-  if (filename.match(/\.json$/) && filename.includes("/specification/") && !filename.includes("/examples/")) {
+  if (
+    filename.match(/\.json$/) &&
+    filename.includes("/specification/") &&
+    !filename.includes("/examples/")
+  ) {
     return "OpenAPI Specs";
   }
 
@@ -202,9 +210,7 @@ export function generateMarkdownSummary(summary: PRSummary): string {
         renamed: "📝",
       }[file.status];
 
-      lines.push(
-        `- ${statusIcon} \`${file.filename}\` (+${file.additions}/-${file.deletions})`,
-      );
+      lines.push(`- ${statusIcon} \`${file.filename}\` (+${file.additions}/-${file.deletions})`);
     }
 
     lines.push("");
