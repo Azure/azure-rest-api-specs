@@ -61,7 +61,7 @@ describe("generateJobSummary", () => {
 
     await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
-    expect(core.notice.mock.calls[core.notice.mock.calls.length - 1][0]).toMatchInlineSnapshot(
+    expect(core.notice.mock.calls.at(-1)?.[0]).toMatchInlineSnapshot(
       `"No messages in 'avocado.ndjson'"`,
     );
   });
