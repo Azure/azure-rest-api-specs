@@ -19,4 +19,8 @@ directive:
     where: '$.definitions.DiagnosticSettingsCategory.properties.categoryType'
     transform: >
       $["x-ms-enum"].modelAsString = false
+  - from: azuremonitorworkspace.json
+    where: '$.definitions.AlertSeverity'
+    transform: >
+      $["x-ms-enum"].name = "MonitorWorkspaceAlertSeverity"
 ```

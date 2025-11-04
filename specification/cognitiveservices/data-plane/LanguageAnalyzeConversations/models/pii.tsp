@@ -35,15 +35,15 @@ model Entity {
   confidenceScore: float64;
 
   /** Exact mask text to mask the PII entity */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   mask?: string;
 
   /** Offset of the mask text */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   maskOffset?: int32;
 
   /** Length of the mask text */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   maskLength?: int32;
 }
 
@@ -125,12 +125,12 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
   excludePiiCategories?: Array<ConversationPiiCategoriesExclude>;
 
   /** Optional parameter determine what type of redaction to use. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
 }
 
 /** Kinds of redaction policies supported. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 union RedactionPolicyKind {
   string,
 
@@ -145,7 +145,7 @@ union RedactionPolicyKind {
 }
 
 /** The abstract base class for RedactionPolicy. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
@@ -153,7 +153,7 @@ model BaseRedactionPolicy {
 }
 
 /** Represents the policy of masking with a redaction character */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -163,14 +163,14 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of not masking found PII. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of masking PII with the entity type. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntityMaskTypePolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
