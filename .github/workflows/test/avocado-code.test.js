@@ -1,9 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const readFileMock = vi.fn();
-
 // Mock fs/promises before imports
-vi.mock("fs/promises", () => ({ readFile: readFileMock }));
+vi.mock("fs/promises", () => ({ readFile: vi.fn() }));
+
+import * as fs from "fs/promises";
+
+const readFileMock = /** @type {import("vitest").Mock} */ (fs.readFile);
 
 import generateJobSummaryImpl from "../src/avocado-code.js";
 import { MessageLevel, MessageType } from "../src/message.js";
@@ -13,16 +15,16 @@ import { createMockCore } from "./mocks.js";
 const core = createMockCore();
 const outputFile = "avocado.ndjson";
 
-/**
- * @param {unknown} asyncFunctionArgs
- */
-function generateJobSummary(asyncFunctionArgs) {
-  return generateJobSummaryImpl(
-    /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (asyncFunctionArgs),
-  );
-}
-
 describe("generateJobSummary", () => {
+  /**
+   * @param {unknown} asyncFunctionArgs
+   */
+  function generateJobSummary(asyncFunctionArgs) {
+    return generateJobSummaryImpl(
+      /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (asyncFunctionArgs),
+    );
+  }
+
   beforeEach(() => {
     vi.stubEnv("AVOCADO_OUTPUT_FILE", outputFile);
     readFileMock.mockReset();
