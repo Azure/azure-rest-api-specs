@@ -619,8 +619,8 @@ model RegistryUpdateParameters {
   /**
    * The properties that the container registry will be updated with.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RegistryPropertiesUpdateParameters;
 }
 
