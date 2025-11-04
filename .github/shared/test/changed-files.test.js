@@ -1,5 +1,3 @@
-// @ts-check
-
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("simple-git", () => ({

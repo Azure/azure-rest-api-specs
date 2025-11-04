@@ -1,5 +1,3 @@
-// @ts-check
-
 import { basename, resolve, sep } from "path";
 import { describe, expect, it } from "vitest";
 import { includesSegment, untilLastSegment } from "../src/path.js";
