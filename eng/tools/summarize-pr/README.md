@@ -63,6 +63,7 @@ The tool generates a markdown summary including:
   - Other
 
 Each file includes:
+
 - Status indicator (🆕 added, ✏️ modified, 🗑️ removed, 📝 renamed)
 - File path
 - Line additions and deletions
