@@ -25,9 +25,9 @@ directive:
       $['x-ms-client-name'] = 'ErrorResponseForContainerRegistry';
 ```
 
-### Tag: package-2025-11-python
+### Tag: package-2025-11-go
 
-``` yaml $(tag) == 'package-2025-11-python'
+``` yaml $(tag) == 'package-2025-11-go'
 input-file:
   - stable/2025-11-01/containerregistry.json
   - ../RegistryTasks/preview/2019-06-01-preview/containerregistry_build.json
