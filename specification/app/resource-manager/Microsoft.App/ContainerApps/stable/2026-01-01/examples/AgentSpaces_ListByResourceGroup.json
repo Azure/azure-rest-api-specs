@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
+            "name": "testAgentSpace",
+            "type": "Microsoft.App/agentSpaces",
+            "location": "East US",
+            "tags": {
+              "environment": "production",
+              "team": "platform"
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "11111111-2222-3333-4444-555555555555",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "currentAgentCount": 3,
+              "maxAgentCount": 10,
+              "memberAgents": [
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/chatAgent",
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/dataAgent",
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/supportAgent"
+              ],
+              "lastPolicyPropagation": "2025-10-28T10:30:00Z",
+              "description": "Production agent space for customer-facing AI agents",
+              "serviceTreeId": "12345678-1234-1234-1234-123456789012",
+              "complianceStatus": {
+                "isCompliant": true,
+                "complianceIssues": [],
+                "lastComplianceCheck": "2025-10-28T09:00:00Z"
+              },
+              "policies": {
+                "genevaActionsConfiguration": {
+                  "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+                  "allowedActions": [
+                    {
+                      "actionName": "RestartService",
+                      "extension": "GenevaActions",
+                      "actionParameters": [
+                        {
+                          "name": "serviceName",
+                          "type": "string"
+                        }
+                      ],
+                      "approvalRequired": true
+                    },
+                    {
+                      "actionName": "GetMetrics",
+                      "extension": "GenevaActions",
+                      "actionParameters": [
+                        {
+                          "name": "metricName",
+                          "type": "string"
+                        },
+                        {
+                          "name": "timeRange",
+                          "type": "string"
+                        }
+                      ],
+                      "approvalRequired": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

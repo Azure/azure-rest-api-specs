@@ -1,0 +1,854 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2026-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/agents": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get all agents for a subscription.",
+        "operationId": "Agents_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List agents by subscription": {
+            "$ref": "./examples/Agents_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get all the agents in a resource group.",
+        "operationId": "Agents_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List agents by resource group": {
+            "$ref": "./examples/Agents_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get the properties of an Agent.",
+        "operationId": "Agents_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "Name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get agent by name": {
+            "$ref": "./examples/Agents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Creates or updates an Agent.",
+        "operationId": "Agents_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentEnvelope",
+            "in": "body",
+            "description": "Details of the agent.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create kube environments": {
+            "$ref": "./examples/Agents_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Update Agent's properties.",
+        "operationId": "Agents_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentEnvelope",
+            "in": "body",
+            "description": "Details of the agent.",
+            "schema": {
+              "$ref": "#/definitions/AgentPatch"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "202": {
+            "description": "Patch operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch an agent": {
+            "$ref": "./examples/Agents_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Delete an Agent.",
+        "operationId": "Agents_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Delete operation is accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an agent": {
+            "$ref": "./examples/Agents_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/start": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Start an Agent.",
+        "operationId": "Agents_Start",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "202": {
+            "description": "Starting agent is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start an agent": {
+            "$ref": "./examples/Agents_Start.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/stop": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Stop an Agent.",
+        "operationId": "Agents_Stop",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "202": {
+            "description": "Stopping agent is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop an agent": {
+            "$ref": "./examples/Agents_Stop.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentCollection": {
+      "description": "Collection of Agents",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Agent"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Agent": {
+      "description": "Site Reliability Engineer (SRE) Agent",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Managed identities for the Agent to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "Agent specific properties",
+          "$ref": "#/definitions/AgentProperties"
+        }
+      }
+    },
+    "AgentPatch": {
+      "description": "Site Reliability Engineer (SRE) Agent",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ResourceTags"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Managed identities for the Agent to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "Agent specific properties",
+          "$ref": "#/definitions/AgentProperties"
+        }
+      }
+    },
+    "AgentProperties": {
+      "description": "Properties of the agent.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Agent.",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AgentProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "agentEndpoint": {
+          "description": "The endpoint of the Agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "runningState": {
+          "description": "The running state of the Agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerState": {
+          "description": "The power state of the Agent.",
+          "enum": [
+            "Running",
+            "Stopped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AgentRunningState",
+            "modelAsString": true
+          }
+        },
+        "agentSpaceId": {
+          "description": "The agent space ID referenced by the agent.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "vnetConfiguration": {
+          "$ref": "#/definitions/AgentVnetConfiguration"
+        },
+        "knowledgeGraphConfiguration": {
+          "$ref": "#/definitions/KnowledgeGraphConfiguration"
+        },
+        "actionConfiguration": {
+          "$ref": "#/definitions/ActionConfiguration"
+        },
+        "outboundConnectionConfiguration": {
+          "$ref": "#/definitions/OutboundConnectionConfiguration"
+        },
+        "mcpServers": {
+          "description": "A list of McpServer",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McpServer"
+          }
+        },
+        "dataConnectors": {
+          "description": "A list of AgentDataConnector",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/AgentDataConnectorProperties"
+          }
+        },
+        "logConfiguration": {
+          "$ref": "#/definitions/LogConfiguration"
+        },
+        "dashboardConfiguration": {
+          "$ref": "#/definitions/DashboardConfiguration"
+        },
+        "incidentManagementConfiguration": {
+          "$ref": "#/definitions/IncidentManagementConfiguration"
+        },
+        "gitHubConfiguration": {
+          "description": "GitHub Configurations",
+          "$ref": "#/definitions/GitHubConfiguration"
+        },
+        "adminUsers": {
+          "description": "The list of admin users for the agent.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserIdentity"
+          }
+        },
+        "upgradeChannel": {
+          "description": "The upgrade channel of the agent.",
+          "enum": [
+            "Preview",
+            "Stable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpgradeChannel",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AgentVnetConfiguration": {
+      "description": "Vnet configuration for agent",
+      "type": "object",
+      "properties": {
+        "subnetResourceId": {
+          "description": "Resource ID of a subnet for agent",
+          "type": "string"
+        }
+      }
+    },
+    "KnowledgeGraphConfiguration": {
+      "description": "Knowledge graph configuration for agent",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "The identity used to access the knowledge graph.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "managedResources": {
+          "description": "The list of resources managed by agent.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id"
+          }
+        }
+      }
+    },
+    "ActionConfiguration": {
+      "description": "Configuration for action.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "The identity used by the action.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "mode": {
+          "description": "The mode of the action. \n- Autonomous: Write actions are executed automatically without user approval.\n- Review: Write actions require user approval before execution.\n- ReadOnly: No write actions are executed.",
+          "enum": [
+            "Autonomous",
+            "Review",
+            "ReadOnly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentMode ",
+            "modelAsString": true
+          }
+        },
+        "accessLevel": {
+          "description": "The access level of the action. \n- Low: Agent has read-only permissions on managed resource groups. For write actions, the agent prompts users to temporarily delegate their credentials via on-behalf-of (OBO) flow.\n- High: Agent can take approved actions on resources using its own managed identity.",
+          "enum": [
+            "Low",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAccessLevel",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OutboundConnectionConfiguration": {
+      "description": "Outbound connection configuration for agent",
+      "type": "object",
+      "properties": {
+        "azureBotConfiguration": {
+          "description": "Azure Bot Configuration",
+          "$ref": "#/definitions/AzureBotConfiguration"
+        }
+      }
+    },
+    "AzureBotConfiguration": {
+      "description": "Teams Bot Configuration",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "The identity used to access Azure Bot.",
+          "type": "string",
+          "format": "arm-id"
+        }
+      }
+    },
+    "McpServer": {
+      "description": "McpServer information",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "The URI of the McpServer.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "LogConfiguration": {
+      "description": "Log Configurations",
+      "type": "object",
+      "properties": {
+        "logAnalyticsConfiguration": {
+          "description": "Log Analytics Configuration",
+          "$ref": "#/definitions/AgentLogAnalyticsConfiguration"
+        },
+        "applicationInsightsConfiguration": {
+          "description": "Application Insights Configuration",
+          "$ref": "#/definitions/ApplicationInsightsConfiguration"
+        }
+      }
+    },
+    "AgentLogAnalyticsConfiguration": {
+      "description": "Log Analytics Configuration",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "description": "The customer ID of the Log Analytics workspace.",
+          "type": "string"
+        },
+        "sharedKey": {
+          "description": "The shared key for the Log Analytics workspace.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ApplicationInsightsConfiguration": {
+      "description": "Application Insights Configuration",
+      "type": "object",
+      "properties": {
+        "appId": {
+          "description": "The Application ID for the Application Insights resource.",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "The connection string for the Application Insights resource.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "DashboardConfiguration": {
+      "description": "Dashboard Configurations",
+      "type": "object",
+      "properties": {
+        "azureMonitorWorkspaceQueryEndpoint": {
+          "description": "The query endpoint for the Azure Monitor workspace.",
+          "type": "string"
+        },
+        "azureMonitorWorkspaceMetricsIngestionEndpoint": {
+          "description": "The metrics ingestion endpoint for the Azure Monitor workspace.",
+          "type": "string"
+        },
+        "identity": {
+          "description": "The identity used to access the Azure Monitor workspace.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "grafanaUrl": {
+          "description": "The URL of the Grafana instance.",
+          "type": "string"
+        },
+        "grafanaApiKey": {
+          "description": "The API key for the Grafana instance.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "IncidentManagementConfiguration": {
+      "description": "Incident Management Configurations",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of incident management system.",
+          "type": "string"
+        },
+        "connectionName": {
+          "description": "The name of the connection.",
+          "type": "string"
+        },
+        "connectionUrl": {
+          "description": "The URL of the connection.",
+          "type": "string"
+        },
+        "connectionKey": {
+          "description": "The key for the connection.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "oboUser": {
+          "description": "The user for the connection.",
+          "type": "string"
+        }
+      }
+    },
+    "GitHubConfiguration": {
+      "description": "GitHub Configurations",
+      "type": "object",
+      "properties": {
+        "patTokenOverride": {
+          "description": "The personal access token (PAT) to use for GitHub API requests.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "UserIdentity": {
+      "type": "object",
+      "description": "User identity properties",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "The object ID of the user identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the user identity."
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
