@@ -12,3 +12,4 @@ cli:
     - name: /ActionRules/get/GetActionRulesSubscriptionWide
     - name: /ActionRules/patch/PatchActionRule
     - name: /ActionRules/delete/DeleteActionRule
+```

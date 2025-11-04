@@ -21,3 +21,4 @@ output-folder: $(python-sdks-folder)/alertprocessingrules/azure-mgmt-alertproces
 ``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
+```

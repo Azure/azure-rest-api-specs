@@ -58,3 +58,4 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/alertprocessingrules/mgmt-v2019_05_05_preview
 regenerate-manager: true
 generate-interface: true
+```
