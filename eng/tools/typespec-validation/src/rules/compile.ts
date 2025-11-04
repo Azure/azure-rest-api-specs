@@ -1,12 +1,19 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
-import path, { basename, dirname, normalize } from "path";
+import path, { basename, dirname, normalize, relative, resolve } from "path";
 import pc from "picocolors";
+import { simpleGit } from "simple-git";
 import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
+import {
+  fileExists,
+  getSuppressions,
+  gitDiffTopSpecFolder,
+  normalizePath,
+  runNpm,
+} from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -76,6 +83,35 @@ export class CompileRule implements Rule {
 
           if (outputSwaggers.length === 0) {
             throw new Error("No generated swaggers found in output of 'tsp compile'");
+          }
+
+          // Ensure all output swaggers are under expected folder for the identified structure (v1/v2)
+
+          // TODO: Extract shared method for code shared between compile and folderStructure
+          const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
+          const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
+          // If the folder containing TypeSpec sources is under "data-plane" or "resource-manager", the spec
+          // must be using "folder structure v2".  Otherwise, it must be using v1.
+          const structureVersion =
+            relativePath.includes("data-plane") || relativePath.includes("resource-manager")
+              ? 2
+              : 1;
+          const folderStruct = relativePath.split("/").filter(Boolean);
+          const allowedOutputFolder =
+            structureVersion === 1
+              ? path.join(...folderStruct.slice(0, 2))
+              : relative(gitRoot, folder);
+
+          stdOutput += "\nAllowed output folder:\n";
+          stdOutput += allowedOutputFolder + "\n";
+
+          const invalidSwagger = outputSwaggers.find(
+            (s) => !relative(gitRoot, resolve(folder, s)).startsWith(allowedOutputFolder),
+          );
+          if (invalidSwagger) {
+            throw new Error(
+              `Output swagger ${invalidSwagger} must be under path ${allowedOutputFolder}`,
+            );
           }
 
           // ../resource-manager/Microsoft.Contoso
