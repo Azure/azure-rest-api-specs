@@ -109,10 +109,6 @@ suppressions:
       - securitySettings.json
       - edgeDeviceJobs.json
       - validatedSolutionRecipes.json
-      - kubernetesVersions.json
-      - osImages.json
-      - platformUpdates.json
-      - updateContents.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -256,7 +252,6 @@ input-file:
   - preview/2025-11-01-preview/extensions.json
   - preview/2025-11-01-preview/hciCommon.json
   - preview/2025-11-01-preview/offers.json
-  - ../operations/preview/2025-11-01-preview/operations.json
   - preview/2025-11-01-preview/publishers.json
   - preview/2025-11-01-preview/securitySettings.json
   - preview/2025-11-01-preview/skus.json
@@ -264,10 +259,7 @@ input-file:
   - preview/2025-11-01-preview/updates.json
   - preview/2025-11-01-preview/updateSummaries.json
   - preview/2025-11-01-preview/validatedSolutionRecipes.json
-  - preview/2025-11-01-preview/kubernetesVersions.json
-  - preview/2025-11-01-preview/osImages.json
-  - preview/2025-11-01-preview/platformUpdates.json
-  - preview/2025-11-01-preview/updateContents.json
+  - preview/2025-11-01-preview/hci.json
 ```
 
 ### Tag: package-2025-10-01
