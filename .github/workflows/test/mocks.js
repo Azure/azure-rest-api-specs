@@ -100,14 +100,6 @@ function createMockCoreImpl() {
 }
 
 /**
- * @returns {Core}
- * @param {any} mockCore
- */
-export function asCore(mockCore) {
-  return /** @type {Core} */ mockCore;
-}
-
-/**
  * @param {number} status
  * @returns {RequestError}
  */

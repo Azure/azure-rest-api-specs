@@ -4,7 +4,7 @@ import {
   getAdoBuildInfoFromUrl,
   getAzurePipelineArtifact,
 } from "../src/artifacts.js";
-import { asCore, createMockCore } from "./mocks.js";
+import { createMockCore } from "./mocks.js";
 
 // Mock dependencies
 vi.mock("../src/context.js", () => ({
@@ -205,7 +205,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: asCore(inputs.core),
+      core: inputs.core,
     });
 
     // Verify result uses default values when artifact fetch fails
@@ -232,7 +232,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: asCore(inputs.core),
+      core: inputs.core,
     });
 
     // Verify result uses default values when artifact fetch fails
@@ -323,7 +323,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: asCore(inputs.core),
+      core: inputs.core,
       fallbackToFailedArtifact: true,
     });
 
@@ -356,7 +356,7 @@ describe("getAzurePipelineArtifact function", () => {
         ado_project_url: inputs.ado_project_url,
         artifactName: inputs.artifactName,
         artifactFileName: inputs.artifactFileName,
-        core: asCore(inputs.core),
+        core: inputs.core,
       }),
     ).rejects.toThrow();
   });
@@ -384,7 +384,7 @@ describe("getAzurePipelineArtifact function", () => {
         ado_project_url: inputs.ado_project_url,
         artifactName: inputs.artifactName,
         artifactFileName: inputs.artifactFileName,
-        core: asCore(inputs.core),
+        core: inputs.core,
       }),
     ).rejects.toThrow();
   });
@@ -426,7 +426,7 @@ describe("getAzurePipelineArtifact function", () => {
         ado_project_url: inputs.ado_project_url,
         artifactName: inputs.artifactName,
         artifactFileName: inputs.artifactFileName,
-        core: asCore(inputs.core),
+        core: inputs.core,
       }),
     ).rejects.toThrow();
   });
@@ -443,7 +443,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: asCore(inputs.core),
+      core: inputs.core,
       // Change default retry delay from 1000ms to 1ms to reduce test time
       retryOptions: { initialDelayMs: 1 },
     });
@@ -490,7 +490,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: asCore(inputs.core),
+      core: inputs.core,
     });
     // Verify result
     expect(result).toEqual({
