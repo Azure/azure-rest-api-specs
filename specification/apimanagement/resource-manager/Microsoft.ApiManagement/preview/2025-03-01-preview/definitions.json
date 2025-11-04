@@ -1336,8 +1336,7 @@
           "description": "OAuth2 grant type options",
           "enum": [
             "AuthorizationCode",
-            "ClientCredentials",
-            "KeyVault"
+            "ClientCredentials"
           ],
           "x-ms-client-name": "OAuth2GrantType",
           "x-ms-enum": {
@@ -1353,11 +1352,6 @@
                 "value": "ClientCredentials",
                 "description": "Client Credential grant",
                 "name": "ClientCredentials"
-              },
-              {
-                "value": "KeyVault",
-                "description": "Key Vault grant",
-                "name": "KeyVault"
               }
             ]
           }
@@ -1546,6 +1540,10 @@
         "grantTypes": {
           "description": "OAuth2 settings",
           "$ref": "#/definitions/AuthorizationProviderOAuth2GrantTypes"
+        },
+        "keyVault": {
+          "$ref": "#/definitions/AuthorizationProviderKeyVaultContract",
+          "description": "Key Vault reference for client secret storage"
         }
       },
       "description": "OAuth2 settings details"
@@ -1598,10 +1596,6 @@
             "type": "string"
           },
           "description": "OAuth2 client credential grant parameters"
-        },
-        "keyVault": {
-          "$ref": "#/definitions/AuthorizationProviderKeyVaultContract",
-          "description": "Key Vault reference for client secret storage"
         }
       },
       "description": "Authorization Provider oauth2 grant types settings"
