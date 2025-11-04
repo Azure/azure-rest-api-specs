@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -316,6 +318,12 @@ model ConfigurationStoreProperties {
    */
   @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
+
+  /**
+   * Property specifying the configuration of Azure Front Door for this configuration store
+   */
+  @added(Versions.v2025_06_01_preview)
+  azureFrontDoor?: AzureFrontDoorProperties;
 }
 
 /**
@@ -368,8 +376,8 @@ model PrivateEndpointConnectionReference {
   /**
    * The properties of a private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -451,6 +459,16 @@ model TelemetryProperties {
 }
 
 /**
+ * Azure Front Door settings
+ */
+model AzureFrontDoorProperties {
+  /**
+   * Resource ID of an Azure Front Door profile
+   */
+  resourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
  * Describes a configuration store SKU.
  */
 model Sku {
@@ -467,8 +485,8 @@ model ConfigurationStoreUpdateParameters {
   /**
    * The properties for updating a configuration store.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ConfigurationStorePropertiesUpdateParameters;
 
   /**
@@ -526,6 +544,12 @@ model ConfigurationStorePropertiesUpdateParameters {
    * Property specifying the configuration of telemetry to update for this configuration store
    */
   telemetry?: TelemetryProperties;
+
+  /**
+   * Property specifying the configuration of Azure Front Door for this configuration store
+   */
+  @added(Versions.v2025_06_01_preview)
+  azureFrontDoor?: AzureFrontDoorProperties;
 }
 
 /**
