@@ -2,19 +2,10 @@ import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
 
 /**
- * @typedef {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @typedef {AsyncFunctionArguments["github"]} GitHub
- * @typedef {AsyncFunctionArguments["context"]} Context
- * @typedef {AsyncFunctionArguments["core"]} Core
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["github"]} GitHub
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["context"]} Context
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["core"]} Core
  */
-
-/**
- * @returns {AsyncFunctionArguments}
- * @param {unknown} mockAsyncFunctionArguments
- */
-export function asAsyncFunctionArguments(mockAsyncFunctionArguments) {
-  return /** @type {AsyncFunctionArguments} */ (mockAsyncFunctionArguments);
-}
 
 /**
  * @returns {GitHub & ReturnType<createMockGithubImpl>}
