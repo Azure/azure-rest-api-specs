@@ -173,6 +173,42 @@ describe("reconcileChangedFilesAndTags", () => {
     expect(afterFinal).toEqual(after);
   });
 
+  test("adds an empty tag to beforeFinal if after has multiple new tags", () => {
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag2"]),
+        },
+      ],
+    ]);
+    const after = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag2", "tag3", "tag4"]),
+        },
+      ],
+    ]);
+
+    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
+
+    expect(beforeFinal).toEqual(
+      new Map<string, ReadmeAffectedTags>([
+        [
+          "specification/1/readme.md",
+          {
+            readme: expect.any(Readme),
+            changedTags: new Set<string>(["tag2", ""]),
+          },
+        ],
+      ]),
+    );
+    expect(afterFinal).toEqual(after);
+  });
+
   test("handles a new specification in after", () => {
     const before = new Map<string, ReadmeAffectedTags>();
     const after = new Map<string, ReadmeAffectedTags>([
