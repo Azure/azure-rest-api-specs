@@ -14,8 +14,6 @@ namespace Microsoft.Batch;
 /**
  * Contains information about a certificate.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is required in envelope to match legacy API shape"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags must allow arbitrary string values for compatibility with legacy ARM shape"
 @parentResource(BatchAccount)
 model Certificate
   is Azure.ResourceManager.ProxyResource<CertificateProperties> {
@@ -29,11 +27,14 @@ model Certificate
   /***
    * The entity tag for the certificate.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * The tags of the certificate.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -42,7 +43,7 @@ interface Certificates {
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #deprecated "true"
+  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     Certificate,
     Response = ArmResponse<Certificate> & {
@@ -56,7 +57,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "true"
+  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceSync<
     Certificate,
     Parameters = {
@@ -82,7 +83,7 @@ interface Certificates {
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #deprecated "true"
+  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Certificate,
@@ -105,7 +106,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "true"
+  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Certificate,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -115,7 +116,7 @@ interface Certificates {
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #deprecated "true"
+  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByBatchAccount is ArmResourceListByParent<
     Certificate,
     Parameters = {
@@ -146,7 +147,7 @@ interface Certificates {
    *
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #deprecated "true"
+  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("cancelDelete")
   cancelDeletion is ArmResourceActionSync<
     Certificate,
@@ -172,4 +173,20 @@ interface Certificates {
 );
 @@doc(Certificates.update::parameters.properties,
   "Certificate entity to update."
+);
+@@summary(Certificates.listByBatchAccount,
+  "Lists all of the certificates in the specified account."
+);
+@@summary(Certificates.get,
+  "Gets information about the specified certificate."
+);
+@@summary(Certificates.create,
+  "Creates a new certificate inside the specified account."
+);
+@@summary(Certificates.update,
+  "Updates the properties of an existing certificate."
+);
+@@summary(Certificates.delete, "Deletes the specified certificate.");
+@@summary(Certificates.cancelDeletion,
+  "Cancels a failed deletion of a certificate from the specified account."
 );

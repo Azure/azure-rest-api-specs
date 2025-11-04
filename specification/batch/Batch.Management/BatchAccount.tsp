@@ -142,3 +142,9 @@ interface BatchAccounts {
 @@doc(BatchAccounts.regenerateKey::parameters.body,
   "The type of key to regenerate."
 );
+@@summary(BatchAccounts.getKeys,
+  "Gets the account keys for the specified Batch account."
+);
+@@summary(BatchAccounts.regenerateKey,
+  "Regenerates the specified account key for the Batch account."
+);

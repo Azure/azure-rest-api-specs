@@ -114,29 +114,6 @@ using Microsoft.Batch;
 @@clientName(LocationOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
-@@doc(Operations.list,
-  "Lists available operations for the Microsoft.Batch provider"
-);
-@@summary(Certificates.listByBatchAccount,
-  "Lists all of the certificates in the specified account."
-);
-@@summary(Certificates.get,
-  "Gets information about the specified certificate."
-);
-@@summary(Certificates.create,
-  "Creates a new certificate inside the specified account."
-);
-@@summary(Certificates.update,
-  "Updates the properties of an existing certificate."
-);
-@@summary(Certificates.delete, "Deletes the specified certificate.");
-@@summary(Certificates.cancelDeletion,
-  "Cancels a failed deletion of a certificate from the specified account."
-);
-@@summary(BatchAccounts.getKeys,
-  "Gets the account keys for the specified Batch account."
-);
-@@summary(BatchAccounts.regenerateKey,
-  "Regenerates the specified account key for the Batch account."
-);
-@@summary(Pools.stopResize, "Stops an ongoing resize operation on the pool.");
+
+
+

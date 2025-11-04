@@ -14,8 +14,6 @@ namespace Microsoft.Batch;
 /**
  * Contains the information for a detector.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is required in envelope to match legacy API shape"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags must allow arbitrary string values for compatibility with legacy ARM shape"
 @parentResource(BatchAccount)
 model DetectorResponse
   is Azure.ResourceManager.ProxyResource<DetectorResponseProperties> {
@@ -29,11 +27,14 @@ model DetectorResponse
   /***
    * The entity tag for the certificate.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * The tags of the certificate.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 

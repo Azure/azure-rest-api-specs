@@ -49,7 +49,12 @@ enum Versions {
   v2024_07_01: "2024-07-01",
 }
 
-interface Operations extends Azure.ResourceManager.Legacy.Operations<
-  ArmResponse<OperationListResult>,
-  CloudError
-> {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      CloudError
+    > {}
+
+@@doc(Operations.list,
+  "Lists available operations for the Microsoft.Batch provider"
+);
