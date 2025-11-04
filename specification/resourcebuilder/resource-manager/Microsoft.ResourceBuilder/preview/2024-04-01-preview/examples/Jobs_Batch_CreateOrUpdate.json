@@ -1,0 +1,80 @@
+{
+  "title": "Jobs_Batch_CreateOrUpdate",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline",
+    "jobName": "batch-processing-job",
+    "resource": {
+      "properties": {
+        "kind": "Batch",
+        "processingLogic": {
+          "type": "SparkSQL",
+          "value": "SELECT * FROM input_dataset WHERE column1 > 0"
+        },
+        "inputDatasets": [
+          {
+            "dataset": {
+              "type": "ResourceId",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+            },
+            "name": "input-dataset"
+          }
+        ],
+        "outputDatasets": [
+          {
+            "dataset": {
+              "type": "ResourceId",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+            },
+            "name": "output-dataset"
+          }
+        ],
+        "mergeWithPreviousSnapshot": true
+      },
+      "tags": {}
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/batch-processing-job?api-version=2024-04-01-preview"
+      },
+      "body": {
+        "properties": {
+          "kind": "Batch",
+          "processingLogic": {
+            "type": "SparkSQL",
+            "value": "SELECT * FROM input_dataset WHERE column1 > 0"
+          },
+          "inputDatasets": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "input-dataset"
+            }
+          ],
+          "outputDatasets": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "output-dataset"
+            }
+          ],
+          "mergeWithPreviousSnapshot": true
+        },
+        "tags": {},
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/batch-processing-job",
+        "name": "batch-processing-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    }
+  }
+}
