@@ -3280,6 +3280,48 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.BillingBenefits/applicableConditionalCredits/{systemId}/providers/Microsoft.BillingBenefits/applicableContributors": {
+      "get": {
+        "description": "List contributors under applicable conditional credits for a given billing account.",
+        "operationId": "ConditionalCreditContributors_ListFromApplicableConditionalCredit",
+        "tags": [
+          "Conditional Credit Contributors"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditContributorsScopeList": {
+            "$ref": "./examples/ConditionalCreditContributorsListFromApplicableConditionalCredit.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SystemIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of contributors under applicable conditional credits for a given billing account.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditContributorList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
