@@ -2,8 +2,18 @@ import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
 
 /**
- * @typedef {import('@actions/github-script').AsyncFunctionArguments["github"]} GitHub
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @typedef {AsyncFunctionArguments["github"]} GitHub
+ * @typedef {AsyncFunctionArguments["core"]} Core
  */
+
+/**
+ * @returns {AsyncFunctionArguments}
+ * @param {any} mockAsyncFunctionArguments
+ */
+export function asAsyncFunctionArguments(mockAsyncFunctionArguments) {
+  return /** @type {AsyncFunctionArguments} */ mockAsyncFunctionArguments;
+}
 
 // Partial mock of `github` parameter passed into github-script actions
 export function createMockGithub() {
@@ -81,6 +91,14 @@ export function createMockCore() {
       write: vi.fn().mockResolvedValue(undefined),
     },
   };
+}
+
+/**
+ * @returns {Core}
+ * @param {any} mockCore
+ */
+export function asCore(mockCore) {
+  return /** @type {Core} */ mockCore;
 }
 
 /**
