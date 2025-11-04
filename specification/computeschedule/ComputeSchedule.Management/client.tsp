@@ -226,3 +226,5 @@ using Microsoft.ComputeSchedule;
   "javascript"
 );
 @@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
+@@clientName(ExecuteCreateRequest.correlationid, "correlationid", "javascript");
+@@clientName(ExecuteDeleteRequest.correlationid, "correlationid", "javascript");
