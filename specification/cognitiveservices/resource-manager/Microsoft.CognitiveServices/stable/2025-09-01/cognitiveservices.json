@@ -4723,6 +4723,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/capabilityHosts": {
+      "get": {
+        "tags": [
+          "AccountCapabilityHost"
+        ],
+        "summary": "List capabilityHost.",
+        "operationId": "AccountCapabilityHosts_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Account CapabilityHosts.": {
+            "$ref": "./examples/AccountCapabilityHost/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/capabilityHosts/{capabilityHostName}": {
       "delete": {
         "tags": [
@@ -4915,6 +4963,57 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/capabilityHosts": {
+      "get": {
+        "tags": [
+          "ProjectCapabilityHost"
+        ],
+        "summary": "List capabilityHost.",
+        "operationId": "ProjectCapabilityHosts_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProjectCapabilityHostResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Project CapabilityHosts.": {
+            "$ref": "./examples/ProjectCapabilityHost/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -9255,6 +9354,46 @@
           }
         }
       }
+    },
+    "CapabilityHostResourceArmPaginatedResult": {
+      "description": "A paginated list of Capability Host entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Capability Host objects. If null, there are no additional pages.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "An array of objects of type Capability Host.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapabilityHostResource"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProjectCapabilityHostResourceArmPaginatedResult": {
+      "description": "A paginated list of Project Capability Host entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Project Capability Host objects. If null, there are no additional pages.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "An array of objects of type Project Capability Host.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectCapabilityHostResource"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
     },
     "CapabilityHostResource": {
       "description": "Azure Resource Manager resource envelope.",
