@@ -13,7 +13,6 @@ namespace Microsoft.DomainRegistration;
 /**
  * Information about a domain.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Domain is Azure.ResourceManager.TrackedResource<DomainProperties> {
   ...ResourceNameParameter<
     Resource = Domain,
@@ -25,6 +24,7 @@ model Domain is Azure.ResourceManager.TrackedResource<DomainProperties> {
   /**
    * Kind of resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 }
 

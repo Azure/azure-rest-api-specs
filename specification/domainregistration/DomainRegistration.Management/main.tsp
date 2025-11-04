@@ -49,3 +49,10 @@ interface Operations
       ArmResponse<CsmOperationCollection>,
       DefaultErrorResponse
     > {}
+
+@@doc(Operations.list,
+  "Description for Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
+);
+@@summary(Operations.list,
+  "Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
+);

@@ -34,33 +34,14 @@ using Microsoft.DomainRegistration;
   "identifier"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DomainOwnershipIdentifier.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DomainPatchResource.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TopLevelDomain.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Domain.properties);
 
 @@clientLocation(Operations.list, "DomainRegistrationProvider");
 @@clientName(Operations.list, "ListOperations");
-
-@@doc(Operations.list,
-  "Description for Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
-);
-@@summary(Operations.list,
-  "Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
-);
-
-@@OpenAPI.extension(NameIdentifierCollection.value,
-  "x-ms-identifiers",
-  #["name"]
-);
-@@OpenAPI.extension(TldLegalAgreementCollection.value,
-  "x-ms-identifiers",
-  #["agreementKey"]
-);

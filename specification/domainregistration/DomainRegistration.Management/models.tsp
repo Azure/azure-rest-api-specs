@@ -189,13 +189,13 @@ model ServiceSpecification {
   /**
    * Resource metrics service name.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 
   /**
    * Resource logs service provided by Microsoft.Insights resource provider.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -266,7 +266,7 @@ model MetricSpecification {
   /**
    * Resource metric dimensions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: Dimension[];
 
   /**
@@ -277,7 +277,7 @@ model MetricSpecification {
   /**
    * Resource metric availability.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   availabilities?: MetricAvailability[];
 
   /**
@@ -394,7 +394,7 @@ model DefaultErrorResponseError {
   /**
    * Error details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: DefaultErrorResponseErrorDetailsItem[];
 
   /**
@@ -465,7 +465,6 @@ model DomainCollection is Azure.Core.Page<Domain>;
 /**
  * Domain resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DomainProperties {
   /**
    * Administrative contact.
@@ -500,7 +499,6 @@ model DomainProperties {
   /**
    * Domain provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
@@ -551,7 +549,7 @@ model DomainProperties {
    * All hostnames derived from the domain and assigned to Azure resources.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   managedHostNames?: HostName[];
 
   /**
@@ -563,14 +561,12 @@ model DomainProperties {
   /**
    * Reasons why domain is not renewable.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   domainNotRenewableReasons?: ResourceNotRenewableReason[];
 
   /**
    * Current DNS type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dnsType?: DnsType;
 
   /**
@@ -581,7 +577,6 @@ model DomainProperties {
   /**
    * Target DNS type (would be used for migration)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetDnsType?: DnsType;
 
   /**
@@ -813,6 +808,7 @@ model DomainRecommendationSearchParameters {
 /**
  * Collection of domain name identifiers.
  */
+@@identifiers(NameIdentifierCollection.value, #["name"]);
 model NameIdentifierCollection is Azure.Core.Page<NameIdentifier>;
 
 /**
@@ -858,14 +854,12 @@ model DomainPatchResourceProperties {
   /**
    * Domain registration status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   registrationStatus?: DomainStatus;
 
   /**
    * Domain provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
@@ -916,7 +910,7 @@ model DomainPatchResourceProperties {
    * All hostnames derived from the domain and assigned to Azure resources.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   managedHostNames?: HostName[];
 
   /**
@@ -928,14 +922,12 @@ model DomainPatchResourceProperties {
   /**
    * Reasons why domain is not renewable.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   domainNotRenewableReasons?: ResourceNotRenewableReason[];
 
   /**
    * Current DNS type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dnsType?: DnsType;
 
   /**
@@ -946,7 +938,6 @@ model DomainPatchResourceProperties {
   /**
    * Target DNS type (would be used for migration)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetDnsType?: DnsType;
 
   /**
@@ -959,7 +950,6 @@ model DomainPatchResourceProperties {
 /**
  * Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyOnlyResource {
   /**
    * Resource Id.
@@ -1036,6 +1026,7 @@ model TopLevelDomainAgreementOption {
 /**
  * Collection of top-level domain legal agreements.
  */
+@@identifiers(TldLegalAgreementCollection.value, #["agreementKey"]);
 model TldLegalAgreementCollection is Azure.Core.Page<TldLegalAgreement>;
 
 /**
@@ -1079,7 +1070,7 @@ model CsmOperationCollection {
    * Collection of resources.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value: CsmOperationDescription[];
 
   /**
