@@ -14,7 +14,6 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Class representing Response from Detector
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(AppServiceCertificateOrder)
 model DetectorResponse
   is Azure.ResourceManager.ProxyResource<DetectorResponseProperties> {
@@ -28,6 +27,7 @@ model DetectorResponse
   /**
    * Kind of resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 }
 
@@ -74,4 +74,10 @@ interface CertificateOrdersDiagnostics {
 @@doc(DetectorResponse.name, "The detector name which needs to be run.");
 @@doc(DetectorResponse.properties,
   "DetectorResponse resource specific properties"
+);
+@@summary(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
+  "Microsoft.CertificateRegistration to get the list of detectors for this RP."
+);
+@@summary(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
+  "Microsoft.CertificateRegistration call to get a detector response from App Lens."
 );

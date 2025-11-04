@@ -13,7 +13,6 @@ namespace Microsoft.CertificateRegistration;
 /**
  * SSL certificate purchase order.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AppServiceCertificateOrder
   is Azure.ResourceManager.TrackedResource<AppServiceCertificateOrderProperties> {
   ...ResourceNameParameter<
@@ -26,6 +25,7 @@ model AppServiceCertificateOrder
   /**
    * Kind of resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 }
 
@@ -198,4 +198,45 @@ interface AppServiceCertificateOrders {
 );
 @@doc(AppServiceCertificateOrders.retrieveSiteSeal::parameters.body,
   "Site seal request."
+);
+@@doc(AppServiceCertificateOrder.properties,
+  "AppServiceCertificateOrder resource specific properties"
+);
+@@summary(AppServiceCertificateOrders.list,
+  "List all certificate orders in a subscription."
+);
+@@summary(AppServiceCertificateOrders.listByResourceGroup,
+  "Get certificate orders in a resource group."
+);
+@@summary(AppServiceCertificateOrders.get, "Get a certificate order.");
+@@summary(AppServiceCertificateOrders.createOrUpdate,
+  "Create or update a certificate purchase order."
+);
+@@summary(AppServiceCertificateOrders.delete,
+  "Delete an existing certificate order."
+);
+@@summary(AppServiceCertificateOrders.update,
+  "Create or update a certificate purchase order."
+);
+@@summary(AppServiceCertificateOrders.reissue,
+  "Reissue an existing certificate order."
+);
+@@summary(AppServiceCertificateOrders.renew,
+  "Renew an existing certificate order."
+);
+@@summary(AppServiceCertificateOrders.resendEmail, "Resend certificate email.");
+@@summary(AppServiceCertificateOrders.resendRequestEmails,
+  "Resend domain verification email to customer for this certificate order"
+);
+@@summary(AppServiceCertificateOrders.retrieveCertificateActions,
+  "Retrieve the list of certificate actions."
+);
+@@summary(AppServiceCertificateOrders.retrieveCertificateEmailHistory,
+  "Retrieve email history."
+);
+@@summary(AppServiceCertificateOrders.retrieveSiteSeal,
+  "This method is used to obtain the site seal information for an issued certificate. "
+);
+@@summary(AppServiceCertificateOrders.verifyDomainOwnership,
+  "Verify domain ownership for this certificate order."
 );

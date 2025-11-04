@@ -14,7 +14,6 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Key Vault container ARM resource for a certificate that is purchased through Azure.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(AppServiceCertificateOrder)
 model AppServiceCertificateResource
   is Azure.ResourceManager.TrackedResource<AppServiceCertificate> {
@@ -28,6 +27,7 @@ model AppServiceCertificateResource
   /**
    * Kind of resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 }
 
@@ -88,4 +88,19 @@ interface AppServiceCertificateResources {
 );
 @@doc(AppServiceCertificateResources.updateCertificate::parameters.properties,
   "Key vault certificate resource Id."
+);
+@@summary(AppServiceCertificateResources.deleteCertificate,
+  "Delete the certificate associated with a certificate order."
+);
+@@summary(AppServiceCertificateResources.listCertificates,
+  "List all certificates associated with a certificate order."
+);
+@@summary(AppServiceCertificateResources.getCertificate,
+  "Get the certificate associated with a certificate order."
+);
+@@summary(AppServiceCertificateResources.createOrUpdateCertificate,
+  "Creates or updates a certificate and associates with key vault secret."
+);
+@@summary(AppServiceCertificateResources.updateCertificate,
+  "Creates or updates a certificate and associates with key vault secret."
 );

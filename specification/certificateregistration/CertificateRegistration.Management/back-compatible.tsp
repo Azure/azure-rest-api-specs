@@ -80,73 +80,8 @@ using Microsoft.CertificateRegistration;
 @@clientName(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation::parameters.body,
   "appServiceCertificateOrder"
 );
-@@summary(AppServiceCertificateOrders.list,
-  "List all certificate orders in a subscription."
-);
-@@summary(AppServiceCertificateOrders.listByResourceGroup,
-  "Get certificate orders in a resource group."
-);
-@@summary(AppServiceCertificateOrders.get, "Get a certificate order.");
-@@summary(AppServiceCertificateOrders.createOrUpdate,
-  "Create or update a certificate purchase order."
-);
-@@summary(AppServiceCertificateOrders.delete,
-  "Delete an existing certificate order."
-);
-@@summary(AppServiceCertificateOrders.update,
-  "Create or update a certificate purchase order."
-);
-@@summary(AppServiceCertificateResources.deleteCertificate,
-  "Delete the certificate associated with a certificate order."
-);
-@@summary(AppServiceCertificateOrders.reissue,
-  "Reissue an existing certificate order."
-);
-@@summary(AppServiceCertificateOrders.renew,
-  "Renew an existing certificate order."
-);
-@@summary(AppServiceCertificateOrders.resendEmail, "Resend certificate email.");
-@@summary(AppServiceCertificateOrders.resendRequestEmails,
-  "Resend domain verification email to customer for this certificate order"
-);
-@@summary(AppServiceCertificateOrders.retrieveCertificateActions,
-  "Retrieve the list of certificate actions."
-);
-@@summary(AppServiceCertificateOrders.retrieveCertificateEmailHistory,
-  "Retrieve email history."
-);
-@@summary(AppServiceCertificateOrders.retrieveSiteSeal,
-  "This method is used to obtain the site seal information for an issued certificate. "
-);
-@@summary(AppServiceCertificateOrders.verifyDomainOwnership,
-  "Verify domain ownership for this certificate order."
-);
-@@summary(AppServiceCertificateResources.listCertificates,
-  "List all certificates associated with a certificate order."
-);
-@@summary(AppServiceCertificateResources.getCertificate,
-  "Get the certificate associated with a certificate order."
-);
-@@summary(AppServiceCertificateResources.createOrUpdateCertificate,
-  "Creates or updates a certificate and associates with key vault secret."
-);
-@@summary(AppServiceCertificateResources.updateCertificate,
-  "Creates or updates a certificate and associates with key vault secret."
-);
-@@summary(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
-  "Microsoft.CertificateRegistration to get the list of detectors for this RP."
-);
-@@summary(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
-  "Microsoft.CertificateRegistration call to get a detector response from App Lens."
-);
-@@doc(AppServiceCertificateOrder.properties, "App Service error response.");
+
 @@doc(AppServiceCertificateOrderCollection.value, "Collection of resources.");
 @@doc(AppServiceCertificateOrderCollection.nextLink,
   "Link to next page of resources."
-);
-@@doc(Operations.list,
-  "Description for Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
-);
-@@summary(Operations.list,
-  "Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
 );
