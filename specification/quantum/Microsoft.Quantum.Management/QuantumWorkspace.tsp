@@ -87,7 +87,16 @@ interface SuiteOffers {
   /**
    * Returns the SuiteOffer resource associated with the given name.
    */
-  listBySubscription is ArmListBySubscription<QuantumSuiteOffer>;
+  listBySubscription is ArmListBySubscription<
+    QuantumSuiteOffer,
+    Parameters = {
+      /**
+       * The filter to apply to the operation. Example: '$filter=kind eq 'v1'
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
 }
 
 @@doc(QuantumWorkspace.name, "The name of the quantum workspace resource.");
