@@ -5,7 +5,10 @@ import { setStatusImpl } from "../src/set-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("setStatusImpl", () => {
+  /** @type {ReturnType<typeof createMockCore>} */
   let core;
+
+  /** @type {ReturnType<typeof createMockGithub>} */
   let github;
 
   beforeEach(() => {
