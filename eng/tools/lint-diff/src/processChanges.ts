@@ -205,6 +205,22 @@ export function reconcileChangedFilesAndTags(
     });
   }
 
+  // If a tag exists in after but not in before, make sure that the the default
+  // tag from before is included in scans
+  // TODO: How do I get the default tag from each before? This function is synchronous
+  for (const [readme, afterTags] of afterFinal.entries()) {
+    if (!beforeFinal.has(readme)) {
+      continue;
+    }
+
+    const beforeTags = beforeFinal.get(readme)!.changedTags;
+    for (const tag of afterTags.changedTags) {
+      if (!beforeTags.has(tag)) {
+        beforeTags.add("");
+      }
+    }
+  }
+
   return [beforeFinal, afterFinal];
 }
 

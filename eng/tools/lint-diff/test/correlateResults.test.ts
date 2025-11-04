@@ -120,6 +120,43 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     });
   });
 
+  test("correlates before and after runs with matching readme and empty string tag", async () => {
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const beforeChecks: AutorestRunResult[] = [
+      {
+        rootPath: beforePath,
+        readme: new Readme(
+          resolve(beforePath, "specification/service1/resource-manager/readme.md"),
+        ),
+        tag: "",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
+        tag: "tag2",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, beforeChecks, afterChecks);
+    expect(result.size).toEqual(1);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag2")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[0],
+    });
+  });
+
   test("uses no baseline if there are no matching before checks", async () => {
     const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
     const beforePath = resolve(fixtureRoot, "before");
