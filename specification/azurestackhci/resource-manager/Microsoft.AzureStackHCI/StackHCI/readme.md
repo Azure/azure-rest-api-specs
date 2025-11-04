@@ -258,7 +258,7 @@ input-file:
   - stable/2025-10-01/extensions.json
   - stable/2025-10-01/hciCommon.json
   - stable/2025-10-01/offers.json
-  - ../operations/stable/2025-10-01/operations.json
+  - stable/2025-10-01/operations.json
   - stable/2025-10-01/publishers.json
   - stable/2025-10-01/securitySettings.json
   - stable/2025-10-01/skus.json
