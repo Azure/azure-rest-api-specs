@@ -2047,20 +2047,12 @@ using Microsoft.Web;
   "key"
 );
 
-@@OpenAPI.extension(StampCapacityCollection.value,
-  "x-ms-identifiers",
-  #["name"]
-);
-@@OpenAPI.extension(CsmUsageQuotaCollection.value,
-  "x-ms-identifiers",
-  #["name"]
-);
-@@OpenAPI.extension(SkuInfoCollection.value,
-  "x-ms-identifiers",
+@@Azure.ResourceManager.identifiers(StampCapacityCollection.value, #["name"]);
+@@Azure.ResourceManager.identifiers(CsmUsageQuotaCollection.value, #["name"]);
+@@Azure.ResourceManager.identifiers(SkuInfoCollection.value,
   #["/sku/name", "resourceType"]
 );
-@@OpenAPI.extension(OutboundEnvironmentEndpointCollection.value,
-  "x-ms-identifiers",
+@@Azure.ResourceManager.identifiers(OutboundEnvironmentEndpointCollection.value,
   #["category"]
 );
 @@summary(Operations.list,

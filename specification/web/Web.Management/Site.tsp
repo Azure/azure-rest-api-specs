@@ -815,7 +815,7 @@ interface Sites {
     Site,
     void,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       @bodyRoot
       _: NetworkTrace[];
     }),
@@ -871,7 +871,7 @@ interface Sites {
     void,
     ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
       @bodyRoot
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       _?: NetworkTrace[];
     }),
     Parameters = {
@@ -942,7 +942,7 @@ interface Sites {
     Site,
     void,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       @bodyRoot
       _: NetworkTrace[];
     }),
@@ -1232,7 +1232,7 @@ interface Sites {
     void,
     ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
       @bodyRoot
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       _?: NetworkTrace[];
     }),
     Parameters = {
@@ -2029,7 +2029,7 @@ interface WebApps {
     Site,
     Request = void,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       @bodyRoot
       _: NetworkTrace[];
     }),
@@ -2085,7 +2085,7 @@ interface WebApps {
     void,
     ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
       @bodyRoot
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       _?: NetworkTrace[];
     }),
     Parameters = {
@@ -2155,7 +2155,7 @@ interface WebApps {
     Site,
     Request = void,
     Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       @bodyRoot
       _: NetworkTrace[];
     }),
@@ -2447,7 +2447,7 @@ interface WebApps {
     void,
     ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
       @bodyRoot
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       _?: NetworkTrace[];
     }),
     Parameters = {

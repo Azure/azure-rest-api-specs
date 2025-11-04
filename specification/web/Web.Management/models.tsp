@@ -1628,7 +1628,7 @@ model AppServiceEnvironment {
   /**
    * Custom settings for changing the behavior of the App Service Environment.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   clusterSettings?: NameValuePair[];
 
   /**
@@ -1850,7 +1850,7 @@ model DefaultErrorResponseError {
   target?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: DefaultErrorResponseErrorDetailsItem[];
 
   /**
@@ -1988,7 +1988,7 @@ model AddressResponseProperties {
   /**
    * Additional virtual IPs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["virtualIP"])
+  @identifiers(#["virtualIP"])
   vipMappings?: VirtualIPMapping[];
 }
 
@@ -2078,7 +2078,7 @@ model SiteProperties {
   /**
    * Hostname SSL states are used to manage the SSL bindings for app's hostnames.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   hostNameSslStates?: HostNameSslState[];
 
   /**
@@ -2558,21 +2558,21 @@ model SiteConfig {
    * Application settings. This property is not returned in response to normal create and read requests since it may contain sensitive information.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   appSettings?: NameValuePair[];
 
   /**
    * Application metadata. This property cannot be retrieved, since it may contain secrets.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metadata?: NameValuePair[];
 
   /**
    * Connection strings. This property is not returned in response to normal create and read requests since it may contain sensitive information.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   connectionStrings?: ConnStringInfo[];
 
   /**
@@ -2584,7 +2584,7 @@ model SiteConfig {
   /**
    * Handler mappings.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["extension"])
+  @identifiers(#["extension"])
   handlerMappings?: HandlerMapping[];
 
   /**
@@ -2640,7 +2640,7 @@ model SiteConfig {
   /**
    * Virtual applications.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["virtualPath"])
+  @identifiers(#["virtualPath"])
   virtualApplications?: VirtualApplication[];
 
   /**
@@ -2737,7 +2737,7 @@ model SiteConfig {
   /**
    * IP security restrictions for main.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipSecurityRestrictions?: IpSecurityRestriction[];
 
   /**
@@ -2748,7 +2748,7 @@ model SiteConfig {
   /**
    * IP security restrictions for scm.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   scmIpSecurityRestrictions?: IpSecurityRestriction[];
 
   /**
@@ -2938,7 +2938,7 @@ model VirtualApplication {
   /**
    * Virtual directories for virtual application.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["virtualPath"])
+  @identifiers(#["virtualPath"])
   virtualDirectories?: VirtualDirectory[];
 }
 
@@ -2964,7 +2964,7 @@ model Experiments {
   /**
    * List of ramp-up rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   rampUpRules?: RampUpRule[];
 }
 
@@ -3068,7 +3068,7 @@ model AutoHealTriggers {
   /**
    * A rule based on status codes.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   statusCodes?: StatusCodesBasedTrigger[];
 
   /**
@@ -3079,13 +3079,13 @@ model AutoHealTriggers {
   /**
    * A rule based on multiple Slow Requests Rule with path
    */
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   slowRequestsWithPath?: SlowRequestsBasedTrigger[];
 
   /**
    * A rule based on status codes ranges.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   statusCodesRange?: StatusCodesRangeBasedTrigger[];
 }
 
@@ -3920,7 +3920,7 @@ model SkuDescription {
   /**
    * Capabilities of the SKU, e.g., is traffic manager enabled?
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: Capability[];
 }
 
@@ -4012,7 +4012,7 @@ model ResourceMetricDefinitionProperties {
    * List of time grains supported for the metric together with retention period.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricAvailabilities?: ResourceMetricAvailability[];
 
   /**
@@ -4164,7 +4164,7 @@ model Operation {
   /**
    * Any errors associate with the operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: ErrorEntity[];
 
   /**
@@ -4215,13 +4215,13 @@ model ErrorEntity {
   /**
    * Inner errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   innerErrors?: ErrorEntity[];
 
   /**
    * Error Details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: ErrorEntity[];
 
   /**
@@ -4258,7 +4258,7 @@ model OutboundEnvironmentEndpoint {
   /**
    * The endpoints that the App Service Environment reaches the service at.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
+  @identifiers(#["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -4274,7 +4274,7 @@ model EndpointDependency {
   /**
    * The IP Addresses and Ports used when connecting to DomainName.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ipAddress", "port"])
+  @identifiers(#["ipAddress", "port"])
   endpointDetails?: EndpointDetail[];
 }
 
@@ -4573,7 +4573,7 @@ model AppServicePlanProperties {
   /**
    * Registry adapters associated with this App Service plan.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   registryAdapters?: RegistryAdapter[];
 
   /**
@@ -5382,7 +5382,7 @@ model DetectorResponseProperties {
   /**
    * Data Set
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataset?: DiagnosticData[];
 
   /**
@@ -5393,7 +5393,7 @@ model DetectorResponseProperties {
   /**
    * Additional configuration for different data providers to be used by the UI
    */
-  @OpenAPI.extension("x-ms-identifiers", #["providerName"])
+  @identifiers(#["providerName"])
   dataProvidersMetadata?: DataProviderMetadata[];
 
   /**
@@ -5505,13 +5505,13 @@ model DataTableResponseObject {
   /**
    * List of columns with data types
    */
-  @OpenAPI.extension("x-ms-identifiers", #["columnName"])
+  @identifiers(#["columnName"])
   columns?: DataTableResponseColumn[];
 
   /**
    * Raw row values
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rows?: string[][];
 }
 
@@ -5581,7 +5581,7 @@ model DataProviderMetadata {
    * Settings for the data provider
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   propertyBag?: KeyValuePairStringObject[];
 }
 
@@ -5611,7 +5611,7 @@ model QueryUtterancesResults {
   /**
    * Array of utterance results for search query.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   results?: QueryUtterancesResult[];
 }
 
@@ -5715,19 +5715,19 @@ model DiagnosticAnalysisProperties {
   /**
    * List of time periods.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   abnormalTimePeriods?: AbnormalTimePeriod[];
 
   /**
    * Data by each detector
    */
-  @OpenAPI.extension("x-ms-identifiers", #["source"])
+  @identifiers(#["source"])
   payload?: AnalysisData[];
 
   /**
    * Data by each detector for detectors that did not corelate
    */
-  @OpenAPI.extension("x-ms-identifiers", #["displayName"])
+  @identifiers(#["displayName"])
   nonCorrelatedDetectors?: DetectorDefinition[];
 }
 
@@ -5750,7 +5750,7 @@ model AbnormalTimePeriod {
   /**
    * List of Possible Cause of downtime
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   events?: DetectorAbnormalTimePeriod[];
 
   /**
@@ -5794,7 +5794,7 @@ model DetectorAbnormalTimePeriod {
    * Downtime metadata
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metaData?: NameValuePair[][];
 
   /**
@@ -5841,14 +5841,14 @@ model Solution {
    * Solution Data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   data?: NameValuePair[][];
 
   /**
    * Solution Metadata.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metadata?: NameValuePair[][];
 }
 
@@ -5869,14 +5869,14 @@ model AnalysisData {
   /**
    * Source Metrics
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metrics?: DiagnosticMetricSet[];
 
   /**
    * Additional Source Data
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   data?: NameValuePair[][];
 
   /**
@@ -5949,7 +5949,7 @@ model DiagnosticMetricSet {
   /**
    * Collection of metric values for the selected period based on the {Microsoft.Web.Hosting.Administration.DiagnosticMetricSet.TimeGrain}
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: DiagnosticMetricSample[];
 }
 
@@ -6012,7 +6012,7 @@ model DataSource {
   /**
    * Datasource Uri Links
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dataSourceUri?: NameValuePair[];
 }
 
@@ -6063,19 +6063,19 @@ model DiagnosticDetectorResponseProperties {
   /**
    * Metrics provided by the detector
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metrics?: DiagnosticMetricSet[];
 
   /**
    * List of Correlated events found by the detector
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   abnormalTimePeriods?: DetectorAbnormalTimePeriod[];
 
   /**
    * Additional Data that detector wants to send.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   data?: NameValuePair[];
 
   /**
@@ -6385,19 +6385,19 @@ model ApplicationStack {
   /**
    * List of major versions available.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["runtimeVersion"])
+  @identifiers(#["runtimeVersion"])
   majorVersions?: StackMajorVersion[];
 
   /**
    * List of frameworks associated with application stack.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   frameworks?: ApplicationStack[];
 
   /**
    * <code>true</code> if this is the stack is deprecated; otherwise, <code>false</code>.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   isDeprecated?: ApplicationStack[];
 }
 
@@ -6423,7 +6423,7 @@ model StackMajorVersion {
   /**
    * Minor versions associated with the major version.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["runtimeVersion"])
+  @identifiers(#["runtimeVersion"])
   minorVersions?: StackMinorVersion[];
 
   /**
@@ -6533,7 +6533,7 @@ model FunctionAppStackProperties {
    * List of major versions available.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["value"])
+  @identifiers(#["value"])
   majorVersions?: FunctionAppMajorVersion[];
 
   /**
@@ -6563,7 +6563,7 @@ model FunctionAppMajorVersion {
    * Minor versions associated with the major version.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["value"])
+  @identifiers(#["value"])
   minorVersions?: FunctionAppMinorVersion[];
 }
 
@@ -6804,7 +6804,7 @@ model WebAppStackProperties {
    * List of major versions available.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["value"])
+  @identifiers(#["value"])
   majorVersions?: WebAppMajorVersion[];
 
   /**
@@ -6834,7 +6834,7 @@ model WebAppMajorVersion {
    * Minor versions associated with the major version.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["value"])
+  @identifiers(#["value"])
   minorVersions?: WebAppMinorVersion[];
 }
 
@@ -7072,7 +7072,7 @@ model CsmOperationCollection {
    * Collection of resources.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value: CsmOperationDescription[];
 
   /**
@@ -7136,11 +7136,11 @@ model CsmOperationDescriptionProperties {
  */
 model ServiceSpecification {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -7174,14 +7174,14 @@ model MetricSpecification {
   isInternal?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: Dimension[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   category?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   availabilities?: MetricAvailability[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -7694,13 +7694,13 @@ model DeploymentLocations {
   /**
    * Available App Service Environments with full descriptions of the environments.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   hostingEnvironments?: AppServiceEnvironment[];
 
   /**
    * Available App Service Environments with basic information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   hostingEnvironmentDeploymentInfos?: HostingEnvironmentDeploymentInfo[];
 }
 
@@ -7962,7 +7962,7 @@ model SkuInfos {
   /**
    * List of SKUs the subscription is able to use.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   skus?: GlobalCsmSkuDescription[];
 }
 
@@ -8003,7 +8003,7 @@ model GlobalCsmSkuDescription {
   /**
    * Capabilities of the SKU, e.g., is traffic manager enabled?
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: Capability[];
 }
 
@@ -8445,7 +8445,7 @@ model StaticSite {
    * Backends linked to the static side
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedBackends?: StaticSiteLinkedBackend[];
 
   /**
@@ -8467,7 +8467,7 @@ model StaticSite {
    * Database connections for the static site
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   databaseConnections?: DatabaseConnectionOverview[];
 }
 
@@ -8723,7 +8723,7 @@ model DatabaseConnectionOverview {
    * A list of configuration files associated with this database connection.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["fileName"])
+  @identifiers(#["fileName"])
   configurationFiles?: StaticSiteDatabaseConnectionConfigurationFileOverview[];
 
   /**
@@ -8881,14 +8881,14 @@ model StaticSiteBuildARMResourceProperties {
    * Backends linked to the static side build
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedBackends?: StaticSiteLinkedBackend[];
 
   /**
    * Database connections for the static site build
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   databaseConnections?: DatabaseConnectionOverview[];
 }
 
@@ -8939,7 +8939,7 @@ model DatabaseConnectionProperties {
    * A list of configuration files associated with this database connection.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["fileName"])
+  @identifiers(#["fileName"])
   configurationFiles?: StaticSiteDatabaseConnectionConfigurationFileOverview[];
 }
 
@@ -9410,7 +9410,7 @@ model SitePatchResourceProperties {
   /**
    * Hostname SSL states are used to manage the SSL bindings for app's hostnames.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   hostNameSslStates?: HostNameSslState[];
 
   /**
@@ -9749,7 +9749,7 @@ model BackupRequestProperties {
   /**
    * Databases included in the backup.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   databases?: DatabaseBackupSetting[];
 }
 
@@ -9875,7 +9875,7 @@ model BackupItemProperties {
    * List of databases included in the backup.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   databases?: DatabaseBackupSetting[];
 
   /**
@@ -9955,7 +9955,7 @@ model RestoreRequestProperties {
   /**
    * Collection of databases which should be restored. This list has to match the list of databases included in the backup.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   databases?: DatabaseBackupSetting[];
 
   /**
@@ -11487,7 +11487,7 @@ model CsmDeploymentStatusProperties {
   /**
    * List of errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: ErrorEntity[];
 }
 
@@ -11605,7 +11605,7 @@ model MSDeploy extends ProxyOnlyResource {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MSDeployProperties extends MSDeployCore {
   /** List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule. */
-  @OpenAPI.extension("x-ms-identifiers", #["packageUri"])
+  @identifiers(#["packageUri"])
   addOnPackages?: MSDeployCore[];
 }
 /**
@@ -11676,7 +11676,7 @@ model MSDeployLogProperties {
    * List of log entry messages
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   entries?: MSDeployLogEntry[];
 }
 
@@ -12465,20 +12465,20 @@ model SiteCloneability {
   /**
    * List of features enabled on app that prevent cloning.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   blockingFeatures?: SiteCloneabilityCriterion[];
 
   /**
    * List of features enabled on app that are non-blocking but cannot be cloned. The app can still be cloned
    * but the features in this list will not be set up on cloned app.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   unsupportedFeatures?: SiteCloneabilityCriterion[];
 
   /**
    * List of blocking application characteristics.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   blockingCharacteristics?: SiteCloneabilityCriterion[];
 }
 
@@ -12732,7 +12732,7 @@ model PerfMonSet {
   /**
    * Collection of workers that are active during this time.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: PerfMonSample[];
 }
 
@@ -12881,7 +12881,7 @@ model PrivateAccessProperties {
   /**
    * The Virtual Networks (and subnets) allowed to access the site privately.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   virtualNetworks?: PrivateAccessVirtualNetwork[];
 }
 
@@ -12907,7 +12907,7 @@ model PrivateAccessVirtualNetwork {
   /**
    * A List of subnets that access is allowed to on this Virtual Network. An empty array (but not null) is interpreted to mean that all subnets are allowed within this Virtual Network.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   subnets?: PrivateAccessSubnet[];
 }
 
@@ -13145,7 +13145,7 @@ model SiteContainerProperties {
   /**
    * List of volume mounts
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   volumeMounts?: VolumeMount[];
 
   /**
@@ -13662,7 +13662,7 @@ model TriggeredJobHistoryProperties {
   /**
    * List of triggered web job runs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["web_job_id"])
+  @identifiers(#["web_job_id"])
   runs?: TriggeredJobRun[];
 }
 
@@ -14199,7 +14199,7 @@ model WorkflowRunActionProperties {
   /**
    * Gets the retry histories.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   retryHistory?: RetryHistory[];
 }
 
@@ -14276,7 +14276,7 @@ model ExpressionTraces {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   inputs?: ExpressionRoot[];
 
   /**
@@ -14315,7 +14315,7 @@ model Expression {
   /**
    * The sub expressions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subexpressions?: Expression[];
 
   /**
@@ -14337,7 +14337,7 @@ model AzureResourceErrorInfo extends ErrorInfo {
   /**
    * The error details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: AzureResourceErrorInfo[];
 }
 
@@ -14366,7 +14366,7 @@ model WorkflowRunActionRepetitionProperties extends OperationResult {
   /**
    * The repetition indexes.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["itemIndex"])
+  @identifiers(#["itemIndex"])
   repetitionIndexes?: RepetitionIndex[];
 }
 
@@ -14432,7 +14432,7 @@ model OperationResult extends OperationResultProperties {
   /**
    * Gets the retry histories.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   retryHistory?: RetryHistory[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -14706,7 +14706,7 @@ model RecurrenceSchedule {
   /**
    * The monthly occurrences.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   monthlyOccurrences?: RecurrenceScheduleOccurrence[];
 }
 
@@ -15015,13 +15015,13 @@ model FlowEndpoints {
   /**
    * The outgoing ip address.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["address"])
+  @identifiers(#["address"])
   outgoingIpAddresses?: IpAddress[];
 
   /**
    * The access endpoint ip address.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["address"])
+  @identifiers(#["address"])
   accessEndpointIpAddresses?: IpAddress[];
 }
 
@@ -15067,7 +15067,7 @@ model FlowAccessControlConfigurationPolicy {
   /**
    * The allowed caller IP address ranges.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allowedCallerIpAddresses?: IpAddressRange[];
 
   /**
@@ -15109,7 +15109,7 @@ model OpenAuthenticationAccessPolicy {
   /**
    * The access policy claims.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   claims?: OpenAuthenticationPolicyClaim[];
 }
 
@@ -15255,7 +15255,7 @@ model Container {
   /**
    * Container environment variables.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   env?: EnvironmentVar[];
 
   /**
@@ -15318,7 +15318,7 @@ model CustomScaleRule {
   /**
    * Authentication secrets for the custom scale rule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["triggerParameter"])
+  @identifiers(#["triggerParameter"])
   auth?: ScaleRuleAuth[];
 }
 
@@ -15359,7 +15359,7 @@ model Dapr {
   /**
    * Collection of Dapr components
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   components?: DaprComponent[];
 }
 
@@ -15385,7 +15385,7 @@ model DaprComponent {
   /**
    * Component metadata
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metadata?: DaprMetadata[];
 }
 
@@ -15422,7 +15422,7 @@ model HttpScaleRule {
   /**
    * Authentication secrets for the custom scale rule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["triggerParameter"])
+  @identifiers(#["triggerParameter"])
   auth?: ScaleRuleAuth[];
 }
 
@@ -15465,7 +15465,7 @@ model QueueScaleRule {
   /**
    * Authentication secrets for the queue scale rule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["triggerParameter"])
+  @identifiers(#["triggerParameter"])
   auth?: ScaleRuleAuth[];
 }
 
@@ -15486,7 +15486,7 @@ model Scale {
   /**
    * Scaling rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   rules?: ScaleRule[];
 }
 
@@ -15529,7 +15529,7 @@ model Template {
   /**
    * List of container definitions for the Container App.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   containers?: Container[];
 
   /**
@@ -15792,7 +15792,7 @@ model ServerFarmInstanceDetailsProperties {
   /**
    * The list of server farm instances.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   instances?: ServerFarmInstance[];
 
   /**
