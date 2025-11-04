@@ -7,11 +7,9 @@ import getLabelActionsImpl, {
 } from "../src/breaking-change-add-label-artifacts.js";
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.js";
 
-const mockExtractInputs = vi.fn();
-
 // Mock dependencies
 vi.mock("../src/context.js", () => ({
-  extractInputs: mockExtractInputs,
+  extractInputs: vi.fn(),
 }));
 
 /**
@@ -63,7 +61,8 @@ describe("breaking-change-add-label-artifacts", () => {
 
   // Shared setup helpers
   const setupMockInputs = async () => {
-    mockExtractInputs.mockResolvedValue(mockInputs);
+    const { extractInputs } = await import("../src/context.js");
+    /** @type {import("vitest").Mock} */ (extractInputs).mockResolvedValue(mockInputs);
   };
 
   const setupWorkflowRunsMock = (
@@ -468,7 +467,6 @@ describe("breaking-change-add-label-artifacts", () => {
         .mockResolvedValueOnce({ data: { artifacts } });
 
       await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
-      vi.fn();
 
       // Verify all required outputs are set
       expect(mockCore.setOutput).toHaveBeenCalledWith("issue_number", mockInputs.issue_number);
