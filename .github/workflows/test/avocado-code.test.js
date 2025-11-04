@@ -39,7 +39,7 @@ describe("generateJobSummary", () => {
       `[Error: Env var AVOCADO_OUTPUT_FILE must be set]`,
     );
 
-    expect(core.info.mock.calls[core.info.mock.calls.length - 1][0]).toMatchInlineSnapshot(
+    expect(core.info.mock.calls.at(-1)?.[0]).toMatchInlineSnapshot(
       `"avocadoOutputFile: undefined"`,
     );
   });
@@ -51,7 +51,7 @@ describe("generateJobSummary", () => {
 
     await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
-    expect(core.info.mock.calls[core.info.mock.calls.length - 1][0]).toMatchInlineSnapshot(
+    expect(core.info.mock.calls.at(-1)?.[0]).toMatchInlineSnapshot(
       `"Error reading 'avocado.ndjson': Error: ENOENT: no such file or directory, open 'avocado.ndjson'"`,
     );
   });
