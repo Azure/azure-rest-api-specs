@@ -1,0 +1,710 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCIClient",
+    "version": "2025-11-01-preview",
+    "description": "Azure Stack HCI management service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "KubernetesVersions"
+    },
+    {
+      "name": "PlatformUpdates"
+    },
+    {
+      "name": "OsImages"
+    },
+    {
+      "name": "UpdateContents"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureStackHCI/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/kubernetesVersions": {
+      "get": {
+        "operationId": "KubernetesVersions_ListBySubscriptionLocationResource",
+        "tags": [
+          "KubernetesVersions"
+        ],
+        "description": "List all kubernetes versions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesVersions_ListBySubscriptionLocationResource_MaximumSet": {
+            "$ref": "./examples/KubernetesVersions_ListBySubscriptionLocationResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/osImages": {
+      "get": {
+        "operationId": "OsImages_ListBySubscriptionLocationResource",
+        "tags": [
+          "OsImages"
+        ],
+        "description": "List all os images.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OsImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OsImages_ListBySubscriptionLocationResource_MaximumSet": {
+            "$ref": "./examples/OsImages_ListBySubscriptionLocationResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/osImages/{osImageName}": {
+      "get": {
+        "operationId": "OsImages_Get",
+        "tags": [
+          "OsImages"
+        ],
+        "description": "Get a os image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "osImageName",
+            "in": "path",
+            "description": "The name of the OsImage",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OsImage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OsImages_Get_MaximumSet": {
+            "$ref": "./examples/OsImages_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates": {
+      "get": {
+        "operationId": "PlatformUpdates_List",
+        "tags": [
+          "PlatformUpdates"
+        ],
+        "description": "List all platform updates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformUpdateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlatformUpdates_ListByLocation_MaximumSet": {
+            "$ref": "./examples/PlatformUpdates_ListByLocation_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates/{platformUpdateName}": {
+      "get": {
+        "operationId": "PlatformUpdates_Get",
+        "tags": [
+          "PlatformUpdates"
+        ],
+        "description": "Get a platform update.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "platformUpdateName",
+            "in": "path",
+            "description": "The name of the PlatformUpdate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlatformUpdates_Get_MaximumSet": {
+            "$ref": "./examples/PlatformUpdates_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/updateContents": {
+      "get": {
+        "operationId": "UpdateContents_List",
+        "tags": [
+          "UpdateContents"
+        ],
+        "description": "List all update contents.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateContentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContents_ListByLocation_MaximumSet": {
+            "$ref": "./examples/UpdateContents_ListByLocation_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/updateContents/{updateContentName}": {
+      "get": {
+        "operationId": "UpdateContents_Get",
+        "tags": [
+          "UpdateContents"
+        ],
+        "description": "Gets content for an update.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "updateContentName",
+            "in": "path",
+            "description": "The name of the UpdateContent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateContent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContents_Get_MaximumSet": {
+            "$ref": "./examples/UpdateContents_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContentPayload": {
+      "type": "object",
+      "description": "Represents details of a specific update content payload.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Represents url of a update payload."
+        },
+        "hash": {
+          "type": "string",
+          "description": "Represents hash of a update payload."
+        },
+        "hashAlgorithm": {
+          "type": "string",
+          "description": "Represents hash algorithm of a update payload."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Represents identifier of a update payload."
+        },
+        "packageSizeInBytes": {
+          "type": "string",
+          "description": "Represents size in bytes of a update payload."
+        },
+        "group": {
+          "type": "string",
+          "description": "Represents the group of a update payload."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Represents the file name of a update payload."
+        }
+      },
+      "required": [
+        "url",
+        "hash",
+        "hashAlgorithm",
+        "identifier",
+        "packageSizeInBytes",
+        "group",
+        "fileName"
+      ]
+    },
+    "KubernetesVersion": {
+      "type": "object",
+      "description": "Represents a kubernetes version resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesVersionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "KubernetesVersionListResult": {
+      "type": "object",
+      "description": "The response of a KubernetesVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KubernetesVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/KubernetesVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KubernetesVersionProperties": {
+      "type": "object",
+      "description": "Represents properties of a kubernetes version.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Represents kubernetes version."
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "OsImage": {
+      "type": "object",
+      "description": "Represents a os image resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OsImageProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OsImageListResult": {
+      "type": "object",
+      "description": "The response of a OsImage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OsImage items on this page",
+          "items": {
+            "$ref": "#/definitions/OsImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OsImageProperties": {
+      "type": "object",
+      "description": "Represents properties of a os image resource.",
+      "properties": {
+        "validatedSolutionRecipeVersion": {
+          "type": "string",
+          "description": "Represents validated solution recipe version of a os image."
+        },
+        "composedImageVersion": {
+          "type": "string",
+          "description": "Represents composed image version of a os image."
+        },
+        "composedImageIsoUrl": {
+          "type": "string",
+          "description": "Represents composed image iso download url of a os image."
+        },
+        "composedImageIsoHash": {
+          "type": "string",
+          "description": "Represents composed image iso hash of a os image."
+        }
+      },
+      "required": [
+        "validatedSolutionRecipeVersion",
+        "composedImageVersion",
+        "composedImageIsoUrl",
+        "composedImageIsoHash"
+      ]
+    },
+    "PlatformPayload": {
+      "type": "object",
+      "description": "Represents details of a specific platform update payload.",
+      "properties": {
+        "payloadUrl": {
+          "type": "string",
+          "description": "Represents url of a platform update payload."
+        },
+        "payloadHash": {
+          "type": "string",
+          "description": "Represents hash of a platform update payload."
+        }
+      },
+      "required": [
+        "payloadUrl",
+        "payloadHash"
+      ]
+    },
+    "PlatformUpdate": {
+      "type": "object",
+      "description": "Represents a platform update resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlatformUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PlatformUpdateDetails": {
+      "type": "object",
+      "description": "Represents details of a specific platform update.",
+      "properties": {
+        "validatedSolutionRecipeVersion": {
+          "type": "string",
+          "description": "Represents validated solution recipe version of a platform update."
+        },
+        "platformVersion": {
+          "type": "string",
+          "description": "Represents version of a platform update."
+        },
+        "platformPayloads": {
+          "type": "array",
+          "description": "Represents the platform payloads of a platform update.",
+          "items": {
+            "$ref": "#/definitions/PlatformPayload"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "validatedSolutionRecipeVersion",
+        "platformVersion",
+        "platformPayloads"
+      ]
+    },
+    "PlatformUpdateListResult": {
+      "type": "object",
+      "description": "The response of a PlatformUpdate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PlatformUpdate items on this page",
+          "items": {
+            "$ref": "#/definitions/PlatformUpdate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlatformUpdateProperties": {
+      "type": "object",
+      "description": "Represents properties of a platform update resource.",
+      "properties": {
+        "platformUpdateDetails": {
+          "type": "array",
+          "description": "Represents applicable platform updates.",
+          "items": {
+            "$ref": "#/definitions/PlatformUpdateDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "platformUpdateDetails"
+      ]
+    },
+    "UpdateContent": {
+      "type": "object",
+      "description": "Represents a update content.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateContentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpdateContentListResult": {
+      "type": "object",
+      "description": "The response of a UpdateContent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateContent items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateContent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateContentProperties": {
+      "type": "object",
+      "description": "Represents properties of a update content resource.",
+      "properties": {
+        "updatePayloads": {
+          "type": "array",
+          "description": "Represents the payloads of a update content resource.",
+          "items": {
+            "$ref": "#/definitions/ContentPayload"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "updatePayloads"
+      ]
+    }
+  },
+  "parameters": {}
+}
