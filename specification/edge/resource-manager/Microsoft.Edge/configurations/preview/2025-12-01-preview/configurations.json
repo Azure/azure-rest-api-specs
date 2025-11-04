@@ -3015,6 +3015,42 @@
     }
   },
   "definitions": {
+    "AdditionalIdentitiesMetadata": {
+      "type": "object",
+      "description": "Metadata for additional identities.",
+      "properties": {
+        "servicePrincipalObjectId": {
+          "type": "string",
+          "description": "Object ID (GUID) of the service principal for the additional identity."
+        },
+        "name": {
+          "$ref": "#/definitions/AdditionalIdentityName",
+          "description": "Name for the additional identity."
+        }
+      },
+      "required": [
+        "servicePrincipalObjectId",
+        "name"
+      ]
+    },
+    "AdditionalIdentityName": {
+      "type": "string",
+      "description": "Allowed names for additional identities.",
+      "enum": [
+        "AzureLocal"
+      ],
+      "x-ms-enum": {
+        "name": "AdditionalIdentityName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureLocal",
+            "value": "AzureLocal",
+            "description": "Name of AzureLocal for additional identity."
+          }
+        ]
+      }
+    },
     "ArcGatewayConfiguration": {
       "type": "object",
       "description": "ArcGatewayConfiguration Resource",
@@ -3241,6 +3277,25 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
+        },
+        "managedResourcesConfiguration": {
+          "$ref": "#/definitions/ManagedResourcesConfiguration",
+          "description": "Managed Resources Configuration."
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "../../../../../../common-types/resource-management/v6/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of Configuration.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigurationPropertiesUpdate": {
+      "type": "object",
+      "description": "Configuration Properties",
+      "properties": {
+        "managedResourcesConfiguration": {
+          "$ref": "#/definitions/ManagedResourcesConfigurationUpdate",
+          "description": "Managed Resources Configuration."
         }
       }
     },
@@ -3371,7 +3426,7 @@
       "description": "Configuration Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConfigurationProperties",
+          "$ref": "#/definitions/ConfigurationPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -3883,6 +3938,66 @@
         "ipAssignments": {
           "$ref": "#/definitions/IpAssignmentUpdate",
           "description": "IP Assignment"
+        }
+      }
+    },
+    "ManagedResourcesConfiguration": {
+      "type": "object",
+      "description": "Managed Resources Configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Flag indicating whether managed resources are enabled or not",
+          "default": false
+        },
+        "managedResourceGroupNameOverride": {
+          "type": "string",
+          "description": "Name of the resource group to be used for managed resources. If not provided, a new resource group will be created with name format 'ManagedResources-<configurationName>-<randomString>'."
+        },
+        "managedResourceGroupId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ResourceId of provisioned Managed resource group. This will not be set if 'enabled' is false.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/resourceGroups"
+              }
+            ]
+          }
+        },
+        "additionalIdentitiesMetadata": {
+          "type": "array",
+          "description": "Metadata for additional identities.",
+          "items": {
+            "$ref": "#/definitions/AdditionalIdentitiesMetadata"
+          }
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "ManagedResourcesConfigurationUpdate": {
+      "type": "object",
+      "description": "Managed Resources Configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Flag indicating whether managed resources are enabled or not",
+          "default": false
+        },
+        "managedResourceGroupNameOverride": {
+          "type": "string",
+          "description": "Name of the resource group to be used for managed resources. If not provided, a new resource group will be created with name format 'ManagedResources-<configurationName>-<randomString>'."
+        },
+        "additionalIdentitiesMetadata": {
+          "type": "array",
+          "description": "Metadata for additional identities.",
+          "items": {
+            "$ref": "#/definitions/AdditionalIdentitiesMetadata"
+          }
         }
       }
     },
