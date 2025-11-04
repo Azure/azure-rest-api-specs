@@ -18842,14 +18842,14 @@
           "description": "The creation date and time of the report",
           "readOnly": true
         },
-        "severity": {
-          "$ref": "#/definitions/RansomwareReportSeverity",
-          "description": "Severity of the Advanced Ransomware Protection (ARP) report",
-          "readOnly": true
-        },
         "state": {
           "$ref": "#/definitions/RansomwareReportState",
           "description": "State of the Advanced Ransomware Protection (ARP) report",
+          "readOnly": true
+        },
+        "severity": {
+          "$ref": "#/definitions/RansomwareReportSeverity",
+          "description": "Severity of the Advanced Ransomware Protection (ARP) report",
           "readOnly": true
         },
         "clearedCount": {
@@ -18887,8 +18887,8 @@
       "description": "Severity of the Advanced Ransomware Protection (ARP) report",
       "enum": [
         "None",
-        "Moderate",
         "Low",
+        "Moderate",
         "High"
       ],
       "x-ms-enum": {
@@ -18901,14 +18901,14 @@
             "description": "No data is suspected for ransomware activity"
           },
           {
-            "name": "Moderate",
-            "value": "Moderate",
-            "description": "Moderate attack probability"
-          },
-          {
             "name": "Low",
             "value": "Low",
             "description": "Low attack probability"
+          },
+          {
+            "name": "Moderate",
+            "value": "Moderate",
+            "description": "Moderate attack probability"
           },
           {
             "name": "High",
@@ -19031,8 +19031,6 @@
         "extensions": {
           "type": "array",
           "description": "List of file extensions resolved (PotentialThreat or FalsePositive)",
-          "minItems": 1,
-          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/Extensions"
           }

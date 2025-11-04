@@ -62,16 +62,16 @@ model RansomwareReportProperties {
   eventTime?: utcDateTime;
 
   /**
-   * Severity of the Advanced Ransomware Protection (ARP) report
-   */
-  @visibility(Lifecycle.Read)
-  severity?: RansomwareReportSeverity;
-
-  /**
    * State of the Advanced Ransomware Protection (ARP) report
    */
   @visibility(Lifecycle.Read)
   state?: RansomwareReportState;
+
+  /**
+   * Severity of the Advanced Ransomware Protection (ARP) report
+   */
+  @visibility(Lifecycle.Read)
+  severity?: RansomwareReportSeverity;
 
   /**
    * The number of cleared suspects identified by the ARP report
@@ -113,8 +113,6 @@ model RansomwareSuspectsClearRequest {
   /**
    * List of file extensions resolved (PotentialThreat or FalsePositive)
    */
-  @minItems(1)
-  @maxItems(10)
   extensions: Extensions[];
 }
 
@@ -180,14 +178,14 @@ union RansomwareReportSeverity {
   None: "None",
 
   /**
-   * Moderate attack probability
-   */
-  Moderate: "Moderate",
-
-  /**
    * Low attack probability
    */
   Low: "Low",
+
+  /**
+   * Moderate attack probability
+   */
+  Moderate: "Moderate",
 
   /**
    * High amount of data is suspected for ransomware activity
