@@ -62,11 +62,10 @@ model ConfigTemplateVersionWithUpdateType {
 @added(Versions.v2025_08_01)
 @doc("Hierarchy Ids With Level for applying config Template which will further generate ARG objects")
 model HierarchySelector {
-  
   @doc("Context Id")
-  contextId:Azure.Core.armResourceIdentifier<[
+  contextId: Azure.Core.armResourceIdentifier<[
     {
-       type:"Private.Edge/Context";
+      type: "Private.Edge/Context";
     }
   ]>;
 
