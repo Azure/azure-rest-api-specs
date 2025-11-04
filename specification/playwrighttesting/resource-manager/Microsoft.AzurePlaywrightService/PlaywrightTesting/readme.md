@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-2024-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-12-01'
 input-file:
-  - Microsoft.AzurePlaywrightService/stable/2024-12-01/playwrighttesting.json
+  - stable/2024-12-01/playwrighttesting.json
 suppressions:
   - code: ResourceNameRestriction
     from: playwrighttesting.json
@@ -68,7 +68,7 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
-  - Microsoft.AzurePlaywrightService/preview/2024-08-01-preview/playwrighttesting.json
+  - preview/2024-08-01-preview/playwrighttesting.json
 suppressions:
   - code: ResourceNameRestriction
     from: playwrighttesting.json
@@ -94,7 +94,7 @@ These settings apply only when `--tag=package-2024-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
-  - Microsoft.AzurePlaywrightService/preview/2024-02-01-preview/playwrighttesting.json
+  - preview/2024-02-01-preview/playwrighttesting.json
 suppressions:
   - code: ResourceNameRestriction
     from: playwrighttesting.json
@@ -120,7 +120,7 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-  - Microsoft.AzurePlaywrightService/preview/2023-10-01-preview/playwrighttesting.json
+  - preview/2023-10-01-preview/playwrighttesting.json
 ```
 
 ---
