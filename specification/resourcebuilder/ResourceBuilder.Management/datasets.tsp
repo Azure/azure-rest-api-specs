@@ -30,8 +30,7 @@ model DatasetProperties {
   provisioningState?: ResourceProvisioningState;
 
   /** Dataset type, e.g. Snapshot or Delta. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property 'type' is at different level than envelope 'type' (resource type identifier)"
-  type?: DatasetType;
+  datasetType?: DatasetType;
 
   /** Dataset schema definition. */
   schema?: DatasetColumn[];
