@@ -98,6 +98,10 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
+  - stable/2026-01-01/Agents.json
+  - stable/2026-01-01/AgentsConnectors.json
+  - stable/2026-01-01/AgentSpaces.json
+  - stable/2026-01-01/AgentSpacesConnectors.json
   - stable/2026-01-01/AuthConfigs.json
   - stable/2026-01-01/AvailableWorkloadProfiles.json
   - stable/2026-01-01/BillingMeters.json

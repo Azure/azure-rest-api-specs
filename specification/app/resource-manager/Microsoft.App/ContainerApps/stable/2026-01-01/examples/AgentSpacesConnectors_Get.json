@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSpaceName": "testAgentSpace",
+    "dataConnectorName": "shared-sql-connector",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/shared-sql-connector",
+        "name": "shared-sql-connector",
+        "type": "Microsoft.App/agentSpaces/connectors",
+        "properties": {
+          "dataConnectorType": "SqlServer",
+          "keyVaultUri": "https://testkv.vault.azure.net/secrets/shared-sql-connection-string",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedSqlIdentity"
+        }
+      }
+    }
+  }
+}
