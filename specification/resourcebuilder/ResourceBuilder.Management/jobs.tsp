@@ -97,15 +97,11 @@ model JobProperties {
   /** Execution mode for data quality validation. Required for DataQualityValidation jobs. */
   executionMode?: DataQualityExecutionMode;
 
-  /** Metric evaluations. Required for DataQualityValidation jobs.
-   * Note: Record type is required here as metric names are dynamic/arbitrary strings. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record type is required for dynamic dictionary with arbitrary metric name keys"
-  metricEvaluations?: Record<DataQualityMetricEvaluation>;
+  /** Metric evaluations. Required for DataQualityValidation jobs. */
+  metricEvaluations?: MetricEvaluationEntry[];
 
-  /** Data quality metric validations. Required for DataQualityValidation jobs.
-   * Note: Record type is required here as validation names are dynamic/arbitrary strings. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record type is required for dynamic dictionary with arbitrary validation name keys"
-  dataQualityMetricValidations?: Record<DataQualityMetricValidation>;
+  /** Data quality metric validations. Required for DataQualityValidation jobs. */
+  dataQualityMetricValidations?: MetricValidationEntry[];
 
   /** Data quality dataset validation. Required for DataQualityValidation jobs. */
   dataQualityDatasetValidation?: DataQualityDatasetValidation;
@@ -427,6 +423,24 @@ union AnomalyMode {
   string,
 }
 
+/** Metric evaluation entry with name */
+model MetricEvaluationEntry {
+  /** Name of the metric evaluation. */
+  name: string;
+
+  /** Metric evaluation details. */
+  evaluation: DataQualityMetricEvaluation;
+}
+
+/** Metric validation entry with name */
+model MetricValidationEntry {
+  /** Name of the metric validation. */
+  name: string;
+
+  /** Metric validation details. */
+  validation: DataQualityMetricValidation;
+}
+
 /** Auto data quality parameters */
 model AutoDataQualityParameters {
   /** Sensitivity for anomaly detection. The value should be between 0 and 100. Defaults to 90. */
@@ -456,5 +470,6 @@ interface Jobs {
   get is ArmResourceRead<Job>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Job>;
   delete is ArmResourceDeleteWithoutOkAsync<Job>;
+  list is ArmResourceListByParent<Job>;
 }
 

@@ -152,5 +152,6 @@ interface Pipelines {
   get is ArmResourceRead<Pipeline>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Pipeline>;
   delete is ArmResourceDeleteWithoutOkAsync<Pipeline>;
+  list is ArmResourceListByParent<Pipeline>;
 }
 

@@ -23,9 +23,13 @@ namespace Microsoft.ResourceBuilder;
 
 /** The available API versions. */
 enum Versions {
-  /** 2025-11-04-preview version */
+  /** 2024-04-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2024_04_01_preview: "2025-11-04-preview",
+  v2024_04_01_preview: "2024-04-01-preview",
+  
+  /** 2025-11-04-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2025_11_04_preview: "2025-11-04-preview",
 }
 
 alias ProviderName = "Microsoft.ResourceBuilder";

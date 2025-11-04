@@ -33,6 +33,7 @@ model WorkspaceProperties {
 interface Workspaces {
   get is ArmResourceRead<Workspace>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
-  delete is ArmResourceDeleteWithoutOkAsync<Workspace>;
+  delete is ArmResourceDeleteWithoutOkAsync<Workspace>;\
+  list is ArmResourceListByParent<Workspace>;
 }
 
