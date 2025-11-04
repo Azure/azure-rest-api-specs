@@ -76,37 +76,78 @@ interface PolicyDefinitionVersionsOperationGroup {
   >;
 }
 
+alias PolicySetDefinitionVersionListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Authorization";
+  },
+  {},
+  {}
+>;
+
+alias PolicySetDefinitionVersionTenantListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Authorization";
+  },
+  {},
+  {}
+>;
+
+alias PolicySetDefinitionVersionManagementGroupListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Management";
+
+    ...CommonTypes.ManagementGroupNameParameter;
+    ...ApiVersionParameter;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<PolicySetDefinitionVersion>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<PolicySetDefinitionVersion>;
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface PolicySetDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the built-in policy set definition versions for all built-in policy set definitions.
    */
   @summary("Lists all built-in policy set definition versions.")
-  @autoRoute
-  @action("listPolicySetDefinitionVersions")
-  listAllBuiltins is ArmProviderActionSync<Response = ResourceListResult<PolicySetDefinitionVersion>>;
+  @post
+  @segment("listPolicySetDefinitionVersions")
+  listAllBuiltins is PolicySetDefinitionVersionTenantListOps.ListSinglePage<PolicySetDefinitionVersion>;
   /**
    * This operation lists all the policy set definition versions for all policy set definitions at the management group scope.
    */
   @summary("Lists all policy set definition versions at management group scope.")
-  @autoRoute
   @post
-  @action("listPolicySetDefinitionVersions")
-  @armResourceCollectionAction
-  listAllAtManagementGroup(
-    ...ManagementGroupNameParameters<PolicySetDefinitionVersion>,
-  ): ResourceListResult<PolicySetDefinitionVersion> | ErrorResponse;
+  @segment("listPolicySetDefinitionVersions")
+  listAllAtManagementGroup is PolicySetDefinitionVersionManagementGroupListOps.ListSinglePage<PolicySetDefinitionVersion>;
 
   /**
    * This operation lists all the policy set definition versions for all policy set definitions within a subscription.
    */
   @summary("Lists all policy set definition versions within a subscription.")
-  @autoRoute
-  @action("listPolicySetDefinitionVersions")
-  listAll is ArmProviderActionSync<
-    Response = ResourceListResult<PolicySetDefinitionVersion>,
-    Scope = SubscriptionActionScope
-  >;
+  @post
+  @segment("listPolicySetDefinitionVersions")
+  listAll is PolicySetDefinitionVersionListOps.ListSinglePage<PolicySetDefinitionVersion>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
