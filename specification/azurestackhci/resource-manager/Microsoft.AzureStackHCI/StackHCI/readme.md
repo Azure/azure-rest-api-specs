@@ -97,6 +97,7 @@ suppressions:
       - arcSettings.json
       - clusters.json
       - extensions.json
+      - hci.json
       - operations.json
       - offers.json
       - publishers.json
