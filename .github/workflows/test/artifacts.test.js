@@ -4,7 +4,7 @@ import {
   getAdoBuildInfoFromUrl,
   getAzurePipelineArtifact,
 } from "../src/artifacts.js";
-import { createMockCore } from "./mocks.js";
+import { asCore, createMockCore } from "./mocks.js";
 
 // Mock dependencies
 vi.mock("../src/context.js", () => ({
@@ -12,7 +12,8 @@ vi.mock("../src/context.js", () => ({
 }));
 
 // Mock global fetch
-global.fetch = vi.fn();
+const mockFetch = vi.fn();
+global.fetch = mockFetch;
 const mockCore = createMockCore();
 
 describe("getAzurePipelineArtifact function", () => {
@@ -78,7 +79,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch to capture headers and return appropriate responses
-    global.fetch.mockImplementation((url, options) => {
+    mockFetch.mockImplementation((url, options) => {
       // For all calls, verify the headers include the authorization token
       if (options && options.headers) {
         expect(options.headers).toEqual(expectedHeaders);
@@ -110,6 +111,7 @@ describe("getAzurePipelineArtifact function", () => {
     });
 
     // Call function with fallbackToFailedArtifact set to true
+    // @ts-expect-error: foo
     const result = await getAzurePipelineArtifact({
       ...inputs,
       token: testToken,
@@ -152,7 +154,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch with a spy to capture the headers
-    global.fetch.mockImplementation((url, options) => {
+    mockFetch.mockImplementation((url, options) => {
       if (url.includes("artifacts?artifactName=")) {
         // Verify headers contain Authorization
         expect(options.headers).toHaveProperty("Authorization", `Bearer ${testToken}`);
@@ -165,6 +167,7 @@ describe("getAzurePipelineArtifact function", () => {
     });
 
     // Call function with token
+    // @ts-expect-error foo
     const result = await getAzurePipelineArtifact({
       ...inputs,
       token: testToken,
@@ -189,7 +192,7 @@ describe("getAzurePipelineArtifact function", () => {
 
   it("should handle API failure", async () => {
     // Mock fetch failure
-    global.fetch.mockResolvedValue({
+    mockFetch.mockResolvedValue({
       ok: false,
       status: 500,
       statusText: "Server Error",
@@ -202,7 +205,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: inputs.core,
+      core: asCore(inputs.core),
     });
 
     // Verify result uses default values when artifact fetch fails
@@ -216,7 +219,7 @@ describe("getAzurePipelineArtifact function", () => {
 
   it("should complete without op when artifact does not exist", async () => {
     // Mock fetch failure
-    global.fetch.mockResolvedValue({
+    mockFetch.mockResolvedValue({
       ok: false,
       status: 404,
       statusText: "Not Found",
@@ -229,7 +232,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: inputs.core,
+      core: asCore(inputs.core),
     });
 
     // Verify result uses default values when artifact fetch fails
@@ -289,7 +292,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch to return different responses based on the URL
-    global.fetch.mockImplementation((url) => {
+    mockFetch.mockImplementation((url) => {
       // First attempted artifact request with 404
       if (url.includes(`artifacts?artifactName=${inputs.artifactName}&api-version=7.0`)) {
         return mockInitialResponse;
@@ -320,7 +323,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: inputs.core,
+      core: asCore(inputs.core),
       fallbackToFailedArtifact: true,
     });
 
@@ -340,7 +343,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch to return different responses for each call
-    global.fetch.mockImplementation((url) => {
+    mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?artifactName=")) {
         return mockArtifactResponse;
       }
@@ -353,7 +356,7 @@ describe("getAzurePipelineArtifact function", () => {
         ado_project_url: inputs.ado_project_url,
         artifactName: inputs.artifactName,
         artifactFileName: inputs.artifactFileName,
-        core: inputs.core,
+        core: asCore(inputs.core),
       }),
     ).rejects.toThrow();
   });
@@ -368,7 +371,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch to return different responses for each call
-    global.fetch.mockImplementation((url) => {
+    mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?artifactName=")) {
         return mockArtifactResponse;
       }
@@ -381,7 +384,7 @@ describe("getAzurePipelineArtifact function", () => {
         ado_project_url: inputs.ado_project_url,
         artifactName: inputs.artifactName,
         artifactFileName: inputs.artifactFileName,
-        core: inputs.core,
+        core: asCore(inputs.core),
       }),
     ).rejects.toThrow();
   });
@@ -408,7 +411,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch to return different responses for each call
-    global.fetch.mockImplementation((url) => {
+    mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?artifactName=")) {
         return mockArtifactResponse;
       } else {
@@ -423,14 +426,14 @@ describe("getAzurePipelineArtifact function", () => {
         ado_project_url: inputs.ado_project_url,
         artifactName: inputs.artifactName,
         artifactFileName: inputs.artifactFileName,
-        core: inputs.core,
+        core: asCore(inputs.core),
       }),
     ).rejects.toThrow();
   });
 
   it("should handle exception during processing", async () => {
     // Mock fetch to throw an error
-    global.fetch.mockImplementation(() => {
+    mockFetch.mockImplementation(() => {
       throw new Error("Network error");
     });
 
@@ -440,7 +443,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: inputs.core,
+      core: asCore(inputs.core),
       // Change default retry delay from 1000ms to 1ms to reduce test time
       retryOptions: { initialDelayMs: 1 },
     });
@@ -473,7 +476,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch to return different responses for each call
-    global.fetch.mockImplementation((url) => {
+    mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?artifactName=")) {
         return mockArtifactResponse;
       } else {
@@ -487,7 +490,7 @@ describe("getAzurePipelineArtifact function", () => {
       ado_project_url: inputs.ado_project_url,
       artifactName: inputs.artifactName,
       artifactFileName: inputs.artifactFileName,
-      core: inputs.core,
+      core: asCore(inputs.core),
     });
     // Verify result
     expect(result).toEqual({
@@ -587,7 +590,7 @@ describe("fetchFailedArtifact function", () => {
     };
 
     // Setup fetch with a spy to capture the headers
-    global.fetch.mockImplementation((url, options) => {
+    mockFetch.mockImplementation((url, options) => {
       // Verify that the custom headers are included in all requests
       expect(options.headers).toEqual(customHeaders);
 
@@ -599,6 +602,7 @@ describe("fetchFailedArtifact function", () => {
     });
 
     // Call the function with custom headers
+    // @ts-expect-error foo
     const response = await fetchFailedArtifact({
       ...defaultParams,
       headers: customHeaders,
@@ -654,7 +658,7 @@ describe("fetchFailedArtifact function", () => {
     };
 
     // Setup fetch to return different responses for each call
-    global.fetch.mockImplementation((url) => {
+    mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?api-version")) {
         return mockListResponse;
       } else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt2")) {
@@ -663,6 +667,7 @@ describe("fetchFailedArtifact function", () => {
     });
 
     // Call the function
+    // @ts-expect-error foo
     const response = await fetchFailedArtifact(defaultParams);
 
     // Verify response is correct
@@ -689,9 +694,10 @@ describe("fetchFailedArtifact function", () => {
       statusText: "OK",
     };
 
-    global.fetch.mockResolvedValue(mockListResponse);
+    mockFetch.mockResolvedValue(mockListResponse);
 
     // Call the function and expect it to return a 404 response
+    // @ts-expect-error foo
     const response = await fetchFailedArtifact(defaultParams);
     expect(response.ok).toBe(false);
     expect(response.status).toBe(404);
@@ -708,9 +714,10 @@ describe("fetchFailedArtifact function", () => {
       statusText: "Internal Server Error",
     };
 
-    global.fetch.mockResolvedValue(mockErrorResponse);
+    mockFetch.mockResolvedValue(mockErrorResponse);
 
     // Call the function and expect it to throw
+    // @ts-expect-error foo
     await expect(fetchFailedArtifact(defaultParams)).rejects.toThrow(
       `Failed to fetch artifacts: 500, Internal Server Error`,
     );
@@ -751,7 +758,7 @@ describe("fetchFailedArtifact function", () => {
     };
 
     // Setup fetch to return different responses for each call
-    global.fetch.mockImplementation((url) => {
+    mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?api-version")) {
         return mockListResponse;
       } else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt3")) {
@@ -760,6 +767,7 @@ describe("fetchFailedArtifact function", () => {
     });
 
     // Call the function
+    // @ts-expect-error foo
     const response = await fetchFailedArtifact(defaultParams);
 
     // Verify response is correct
