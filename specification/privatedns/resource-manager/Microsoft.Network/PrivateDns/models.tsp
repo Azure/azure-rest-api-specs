@@ -172,7 +172,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: CloudErrorBody[];
 }
 
@@ -249,13 +249,13 @@ model RecordSetProperties {
   /**
    * The list of A records in the record set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ipv4Address"])
+  @identifiers(#["ipv4Address"])
   aRecords?: ARecord[];
 
   /**
    * The list of AAAA records in the record set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ipv6Address"])
+  @identifiers(#["ipv6Address"])
   aaaaRecords?: AaaaRecord[];
 
   /**
@@ -266,13 +266,13 @@ model RecordSetProperties {
   /**
    * The list of MX records in the record set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   mxRecords?: MxRecord[];
 
   /**
    * The list of PTR records in the record set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ptrRecords?: PtrRecord[];
 
   /**
@@ -283,13 +283,13 @@ model RecordSetProperties {
   /**
    * The list of SRV records in the record set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   srvRecords?: SrvRecord[];
 
   /**
    * The list of TXT records in the record set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   txtRecords?: TxtRecord[];
 }
 

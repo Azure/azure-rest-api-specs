@@ -18,7 +18,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.ElasticSan"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-elasticsan"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-elasticsan"
     namespace: "azure.mgmt.elasticsan"
     generate-test: true
     generate-sample: true
@@ -26,12 +26,14 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-elasticsan"
     namespace: "com.azure.resourcemanager.elasticsan"
-    service-name: "ElasticSan" # human-readable service name, whitespace allowed
+    service-name: "ElasticSan"
     flavor: azure
+    client-side-validations: true
   "@azure-tools/typespec-ts":
     service-dir: "sdk/elasticsans"
-    package-dir: "arm-elasticsan"
-    is-modular-library: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-elasticsan"
+    typespec-title-map:
+      ElasticSanClient: "ElasticSanManagement"
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:

@@ -10,7 +10,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/durabletask.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-durabletask"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-durabletask"
     namespace: "azure.mgmt.durabletask"
     flavor: "azure"
     generate-test: true
@@ -30,16 +30,13 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.DurableTask"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-durabletask"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-durabletask"
     package-details:
       name: "@azure/arm-durabletask"
 linter:

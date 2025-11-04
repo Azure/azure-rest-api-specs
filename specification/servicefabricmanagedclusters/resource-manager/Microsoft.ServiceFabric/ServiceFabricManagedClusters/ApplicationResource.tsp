@@ -112,6 +112,16 @@ interface Applications {
     never,
     LroHeaders = ArmCombinedLroHeaders
   >;
+
+  /**
+   * Send a request to update the current application upgrade.
+   */
+  updateUpgrade is ArmResourceActionAsync<
+    ApplicationResource,
+    RuntimeUpdateApplicationUpgradeParameters,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 }
 
 @@doc(ApplicationResource.name, "The name of the application resource.");
@@ -125,6 +135,9 @@ interface Applications {
 @@doc(Applications.resumeUpgrade::parameters.body,
   "The parameters for resuming an application upgrade."
 );
+@@doc(Applications.updateUpgrade::parameters.body,
+  "The parameters for updating an application upgrade."
+);
 
 /**
  * The application resource properties.
@@ -133,7 +146,7 @@ model ApplicationResourceProperties {
   /**
    * List of user assigned identities for the application, each mapped to a friendly name.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   managedIdentities?: ApplicationUserAssignedIdentity[];
 
   /**
@@ -206,6 +219,51 @@ model ApplicationUpgradePolicy {
    * Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed.
    */
   recreateApplication?: boolean;
+}
+
+/**
+ * Represents the health policy used to evaluate the health of services belonging to a service type.
+ *
+ */
+model ServiceTypeHealthPolicy {
+  /**
+   * The maximum allowed percentage of unhealthy services.
+   *
+   * The percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.
+   * If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.
+   * This is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.
+   * The computation rounds up to tolerate one failure on small numbers of services.
+   *
+   */
+  @minValue(0)
+  @maxValue(100)
+  maxPercentUnhealthyServices: int32;
+
+  /**
+   * The maximum allowed percentage of unhealthy partitions per service.
+   *
+   * The percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.
+   * If the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.
+   * The computation rounds up to tolerate one failure on small numbers of partitions.
+   *
+   */
+  @minValue(0)
+  @maxValue(100)
+  maxPercentUnhealthyPartitionsPerService: int32;
+
+  /**
+   * The maximum allowed percentage of unhealthy replicas per partition.
+   *
+   * The percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.
+   * If the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.
+   * The computation rounds up to tolerate one failure on small numbers of replicas.
+   *
+   */
+  @maxValue(100)
+  @minValue(0)
+  maxPercentUnhealthyReplicasPerPartition: int32;
 }
 
 /**
@@ -335,14 +393,69 @@ union RollingUpgradeMode {
   string,
 
   /**
-   * The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding. The value is 0.
+   * The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding.
    */
   Monitored: "Monitored",
 
   /**
-   * The upgrade will proceed automatically without performing any health monitoring. The value is 1.
+   * The upgrade will proceed automatically without performing any health monitoring.
    */
   UnmonitoredAuto: "UnmonitoredAuto",
+}
+
+/**
+ * Describes the parameters for updating a rolling upgrade of application or cluster.
+ */
+model RuntimeRollingUpgradeUpdateMonitoringPolicy {
+  /**
+   * The mode used to monitor health during a rolling upgrade.
+   */
+  rollingUpgradeMode: RuntimeRollingUpgradeMode;
+
+  /**
+   * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
+   */
+  forceRestart?: boolean;
+
+  /**
+   * The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer).
+   */
+  replicaSetCheckTimeoutInMilliseconds?: int64;
+
+  /**
+   * The compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations. Invalid indicates the failure action is invalid. Rollback specifies that the upgrade will start rolling back automatically. Manual indicates that the upgrade will switch to UnmonitoredManual upgrade mode
+   */
+  failureAction?: RuntimeFailureAction;
+
+  /**
+   * The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
+   */
+  healthCheckWaitDurationInMilliseconds?: string;
+
+  /**
+   * The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
+   */
+  healthCheckStableDurationInMilliseconds?: string;
+
+  /**
+   * The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
+   */
+  healthCheckRetryTimeoutInMilliseconds?: string;
+
+  /**
+   * The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
+   */
+  upgradeTimeoutInMilliseconds?: string;
+
+  /**
+   * The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
+   */
+  upgradeDomainTimeoutInMilliseconds?: string;
+
+  /**
+   * Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description.
+   */
+  instanceCloseDelayDurationInSeconds?: int64;
 }
 
 /**
@@ -353,4 +466,155 @@ model RuntimeResumeApplicationUpgradeParameters {
    * The upgrade domain name. Expected to be the next upgrade domain if the application is upgrading.
    */
   upgradeDomainName?: string;
+}
+
+/**
+ * Cluster level definition for the kind of upgrade.
+ */
+union RuntimeUpgradeKind {
+  string,
+
+  /**
+   * The upgrade progresses one upgrade domain at a time.
+   */
+  Rolling: "Rolling",
+}
+
+/**
+ * Cluster level definition that represents the health policy used to evaluate the health of services belonging to a service type.
+ */
+model RuntimeServiceTypeHealthPolicy {
+  /**
+   * The maximum allowed percentage of unhealthy services.
+   *
+   * The percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.
+   * If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.
+   * This is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.
+   * The computation rounds up to tolerate one failure on small numbers of services.
+   *
+   */
+  @minValue(0)
+  @maxValue(100)
+  maxPercentUnhealthyServices: int32;
+
+  /**
+   * The maximum allowed percentage of unhealthy partitions per service.
+   *
+   * The percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.
+   * If the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.
+   * The computation rounds up to tolerate one failure on small numbers of partitions.
+   *
+   */
+  @minValue(0)
+  @maxValue(100)
+  maxPercentUnhealthyPartitionsPerService: int32;
+
+  /**
+   * The maximum allowed percentage of unhealthy replicas per partition.
+   *
+   * The percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.
+   * If the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.
+   * The computation rounds up to tolerate one failure on small numbers of replicas.
+   *
+   */
+  @maxValue(100)
+  @minValue(0)
+  maxPercentUnhealthyReplicasPerPartition: int32;
+}
+
+/**
+ * Cluster level definition for a health policy used to evaluate the health of an application or one of its children entities.
+ *
+ */
+model RuntimeApplicationHealthPolicy {
+  /**
+   * Indicates whether warnings are treated with the same severity as errors.
+   */
+  considerWarningAsError: boolean;
+
+  /**
+   * The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
+   * The percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.
+   * This is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.
+   * The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
+   *
+   */
+  maxPercentUnhealthyDeployedApplications: int32;
+
+  /**
+   * The health policy used by default to evaluate the health of a service type.
+   */
+  defaultServiceTypeHealthPolicy?: RuntimeServiceTypeHealthPolicy;
+
+  /**
+   * The map with service type health policy per service type name. The map is empty by default.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string as service name to ServiceTypeHealthPolicy dictionary"
+  serviceTypeHealthPolicyMap?: Record<RuntimeServiceTypeHealthPolicy>;
+}
+
+/**
+ * Cluster level definition for the compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations.
+ */
+union RuntimeFailureAction {
+  string,
+
+  /**
+   * Indicates that a rollback of the upgrade will be performed by Service Fabric if the upgrade fails.
+   */
+  Rollback: "Rollback",
+
+  /**
+   * Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically.
+   */
+  Manual: "Manual",
+}
+
+/**
+ * Cluster level definition for the mode used to monitor health during a rolling upgrade.
+ */
+union RuntimeRollingUpgradeMode {
+  string,
+
+  /**
+   * The upgrade will proceed automatically without performing any health monitoring.
+   */
+  UnmonitoredAuto: "UnmonitoredAuto",
+
+  /**
+   * The upgrade will stop after completing each upgrade domain, giving the opportunity to manually monitor health before proceeding.
+   */
+  UnmonitoredManual: "UnmonitoredManual",
+
+  /**
+   * The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding.
+   */
+  Monitored: "Monitored",
+}
+
+/**
+ * Parameters for the Update Upgrade action.
+ */
+model RuntimeUpdateApplicationUpgradeParameters {
+  /**
+   * The name of the application, including the 'fabric:' URI scheme.
+   */
+  name: string;
+
+  /**
+   * The kind of the upgrade.
+   */
+  upgradeKind: RuntimeUpgradeKind;
+
+  /**
+   * Defines a health policy used to evaluate the health of an application or one of its children entities.
+   */
+  applicationHealthPolicy?: RuntimeApplicationHealthPolicy;
+
+  /**
+   * Describes the parameters for updating a rolling upgrade of application or cluster and a monitoring policy.
+   */
+  updateDescription?: RuntimeRollingUpgradeUpdateMonitoringPolicy;
 }

@@ -14,7 +14,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
     service-dir: "sdk/sql"
-    package-dir: "azure-mgmt-sqlvirtualmachine"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sqlvirtualmachine"
     namespace: "azure.mgmt.sqlvirtualmachine"
     generate-test: true
     generate-sample: true
@@ -25,7 +25,7 @@ options:
     service-name: "SqlVirtualMachine" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-sqlvirtualmachine"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sqlvirtualmachine"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true

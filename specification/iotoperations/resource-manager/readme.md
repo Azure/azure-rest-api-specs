@@ -155,3 +155,12 @@ These settings apply only when `--tag=package-2025-07-01-preview` is specified o
 input-file:
   - Microsoft.IoTOperations/preview/2025-07-01-preview/iotoperations.json
 ```
+
+### Tag: package-2025-10-01
+
+These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-01'
+input-file:
+  - Microsoft.IoTOperations/stable/2025-10-01/iotoperations.json
+```

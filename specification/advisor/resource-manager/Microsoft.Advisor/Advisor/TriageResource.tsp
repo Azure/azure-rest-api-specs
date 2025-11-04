@@ -47,18 +47,22 @@ interface TriageResources {
    * Get a triage resource for a given review and recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get existing triage resource.")
   @operationId("triageResources_Get")
   get is TriageResourceOps.Read<
     TriageResource,
     Parameters = {
       /**
-       * The triage resource id.
+       * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
        */
       @path
       @segment("providers/Microsoft.Advisor/triageRecommendations")
       recommendationId: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      /**
+       *
+       * Existing recommendation triage resource associated with a triage recommendation. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+       */
       @path
       @segment("providers/Microsoft.Advisor/triageResources")
       recommendationResourceId: string;
@@ -69,12 +73,15 @@ interface TriageResources {
    * List all triage resources that belong to a review and recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("List triage resources based on a review and recommendation.")
   @segment("providers/Microsoft.Advisor/triageResources")
   @operationId("triageResources_List")
   list is TriageResourceOps.List<
     TriageResource,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      /**
+       * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+       */
       @path
       @segment("providers/Microsoft.Advisor/triageRecommendations")
       recommendationId: string;

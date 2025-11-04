@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
@@ -252,3 +253,7 @@ using Microsoft.Help;
 @@usage(SolutionResourceSelfHelp, Usage.input);
 @@usage(SolutionMetadataResource, Usage.input);
 @@usage(SolutionNlpMetadataResource, Usage.input);
+
+@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription::parameters.subscriptionId,
+  DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription
+);

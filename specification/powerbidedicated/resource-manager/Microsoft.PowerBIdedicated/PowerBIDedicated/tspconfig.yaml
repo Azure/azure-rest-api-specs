@@ -12,7 +12,7 @@ options:
     output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-powerbidedicated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-powerbidedicated"
     namespace: "azure.mgmt.powerbidedicated"
     generate-test: true
     generate-sample: true
@@ -24,8 +24,9 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/powerbidedicated
-    package-dir: "arm-powerbidedicated"
-    is-modular-library: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-powerbidedicated"
+    typespec-title-map:
+      PowerBIDedicatedClient: "PowerBIDedicated"
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:

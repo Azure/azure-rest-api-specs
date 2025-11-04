@@ -10,7 +10,9 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Advisor;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The list of scenarios applicable to this metadata entity.
+ */
 union Scenario {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -51,7 +53,9 @@ union Duration {
   `90`: "90",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The category of the recommendation.
+ */
 union Category {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -67,7 +71,7 @@ union Category {
 }
 
 /**
- * Control type for recommendation.
+ * The sub-category of the recommendation.
  */
 union Control {
   string,
@@ -215,7 +219,7 @@ union Aggregated {
 }
 
 /**
- * Review status string, returns the Reviews by the given status (e.g. 'New', 'Triaged', 'Completed').
+ * Review status.
  */
 union ReviewStatus {
   string,
@@ -425,7 +429,7 @@ model ConfigDataProperties {
   /**
    * Advisor digest configuration. Valid only for subscriptions
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   digests?: DigestConfig[];
 }
 
@@ -504,7 +508,7 @@ model RecommendationProperties {
   category?: Category;
 
   /**
-   * The control type for the recommendation.
+   * The sub-category of the recommendation.
    */
   control?: Control;
 
@@ -589,7 +593,7 @@ model RecommendationProperties {
   /**
    * The list of recommended actions to implement recommendation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   actions?: Record<unknown>[];
 
   /**
@@ -915,7 +919,7 @@ model AdvisorScoreEntityProperties {
    * The historic Advisor score data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   timeSeries?: TimeSeriesEntity[];
 }
 
@@ -956,7 +960,7 @@ model ScoreEntity {
 }
 
 /**
- * The data from different aggregation levels.
+ * The historic data at different aggregation levels.
  */
 model TimeSeriesEntity {
   /**
@@ -967,7 +971,7 @@ model TimeSeriesEntity {
   /**
    * The past score data
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scoreHistory?: ScoreEntity[];
 }
 
@@ -1295,10 +1299,7 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 @@doc(AdvisorScoreEntityProperties.timeSeries,
   "The historic Advisor score data."
 );
-@@OpenAPI.extension(OperationEntityListResult.value,
-  "x-ms-identifiers",
-  #["name"]
-);
+@@identifiers(OperationEntityListResult.value, #["name"]);
 @@doc(RecommendationPropertiesResourceWorkload.id, "The Id of the Workload");
 @@doc(RecommendationPropertiesResourceWorkload.name,
   "The Name of the Workload"
@@ -1306,13 +1307,13 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 
 @@doc(RecommendationPropertiesReview.id, "The ARM Resource Id of the Review");
 @@doc(RecommendationPropertiesReview.name, "The Name of the Review");
-@@doc(WorkloadListResult.value, "[Placeholder] Discription for value property");
+@@doc(WorkloadListResult.value,
+  "List of WorkloadListResult items on this page."
+);
 @@doc(WorkloadListResult.nextLink,
-  "[Placeholder] Discription for nextLink property"
+  "Url to get the next Page of WorkloadListResult items."
 );
-@@doc(TriageRecommendationCollection.value,
-  "[Placeholder] Discription for value property"
-);
+@@doc(TriageRecommendationCollection.value, "List of triage recommendations.");
 @@doc(TriageRecommendationCollection.nextLink,
-  "[Placeholder] Discription for nextLink property"
+  "The URL to get the next set of triage recommendations, if there are any."
 );

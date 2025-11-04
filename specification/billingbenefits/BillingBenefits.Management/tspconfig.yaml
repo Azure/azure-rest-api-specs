@@ -12,7 +12,7 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-billingbenefits"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-billingbenefits"
     namespace: "azure.mgmt.billingbenefits"
     generate-test: true
     generate-sample: true
@@ -23,7 +23,7 @@ options:
     service-name: "BillingBenefits" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-billingbenefits"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-billingbenefits"
     typespec-title-map:
       BillingBenefitsClient: BillingBenefitsRP
     is-modular-library: true

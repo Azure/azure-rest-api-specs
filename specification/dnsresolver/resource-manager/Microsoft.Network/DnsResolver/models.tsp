@@ -1,12 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Network;
 
@@ -207,7 +206,7 @@ model InboundEndpointProperties {
   /**
    * IP configurations for the inbound endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipConfigurations: IpConfiguration[];
 
   /**
@@ -340,7 +339,7 @@ model ForwardingRuleProperties {
   /**
    * DNS servers to forward the DNS query to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDnsServers: TargetDnsServer[];
 
   /**
@@ -383,8 +382,8 @@ model ForwardingRulePatch {
   /**
    * Updatable properties of the forwarding rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ForwardingRulePatchProperties;
 }
 
@@ -395,7 +394,7 @@ model ForwardingRulePatchProperties {
   /**
    * DNS servers to forward the DNS query to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDnsServers?: TargetDnsServer[];
 
   /**
@@ -439,8 +438,8 @@ model VirtualNetworkLinkPatch {
   /**
    * Updatable properties of the virtual network link.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualNetworkLinkPatchProperties;
 }
 
@@ -478,8 +477,8 @@ model VirtualNetworkDnsForwardingRuleset {
   /**
    * Properties of the virtual network link sub-resource reference.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualNetworkLinkSubResourceProperties;
 }
 
@@ -540,8 +539,22 @@ model DnsSecurityRuleProperties {
   /**
    * DNS resolver policy domains lists that the DNS security rule applies to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  dnsResolverDomainLists: SubResource[];
+  @removed(Versions.v2025_10_01_preview)
+  @renamedFrom(Versions.v2025_10_01_preview, "dnsResolverDomainLists")
+  @identifiers(#[])
+  oldDnsResolverDomainLists: SubResource[];
+
+  /**
+   * DNS resolver policy domains lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  dnsResolverDomainLists?: SubResource[] = #[];
+
+  /**
+   * Managed domain lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  managedDomainLists?: ManagedDomainList[] = #[];
 
   /**
    * The state of DNS security rule.
@@ -572,8 +585,8 @@ model DnsSecurityRulePatch {
   /**
    * Updatable properties of the DNS security rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DnsSecurityRulePatchProperties;
 
   /**
@@ -596,8 +609,13 @@ model DnsSecurityRulePatchProperties {
   /**
    * DNS resolver policy domains lists that the DNS security rule applies to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dnsResolverDomainLists?: SubResource[];
+
+  /**
+   * Managed domain lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  managedDomainLists?: ManagedDomainList[];
 
   /**
    * The state of DNS security rule.
@@ -675,8 +693,8 @@ model DnsResolverDomainListPatch {
   /**
    * Updatable properties of the DNS resolver domain list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DnsResolverDomainListPatchProperties;
 
   /**
@@ -704,8 +722,8 @@ model DnsResolverDomainListBulk {
   /**
    * Properties of the DNS resolver domain list upload or download request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: DnsResolverDomainListBulkProperties;
 }
 
@@ -722,4 +740,17 @@ model DnsResolverDomainListBulkProperties {
    * The action to take in the request, Upload or Download.
    */
   action: Action;
+}
+
+/**
+ * Describes Managed Domain List options for DNS security rules.
+ */
+@added(Versions.v2025_10_01_preview)
+union ManagedDomainList {
+  string,
+
+  /**
+   * Domain list managed by Azure DNS Threat Intelligence.
+   */
+  AzureDnsThreatIntel: "AzureDnsThreatIntel",
 }

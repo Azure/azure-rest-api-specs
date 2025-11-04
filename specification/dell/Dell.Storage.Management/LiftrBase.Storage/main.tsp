@@ -16,7 +16,7 @@ namespace LiftrBase.Storage;
  */
 enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
-  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2_preview: "2025-03-21-preview",
 }
 

@@ -6,12 +6,9 @@ import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.AppComplianceAutomation;
 

@@ -1,11 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
@@ -395,6 +398,19 @@ union MaintenanceProvisioningState {
 }
 
 /**
+ * The replication Mode
+ */
+union replicationMode {
+  string,
+
+  /** Binary log replication */
+  BinaryLog: "BinaryLog",
+
+  /** Redo log replication */
+  RedoLog: "RedoLog",
+}
+
+/**
  * The operation status
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -614,8 +630,8 @@ model ValidateBackupResponse {
   /**
    * The response properties of a pre backup operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ValidateBackupResponseProperties;
 }
 
@@ -735,7 +751,7 @@ model ConfigurationListForBatchUpdate {
   /**
    * The list of server configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: ConfigurationForBatchUpdate[];
 
   /**
@@ -756,8 +772,8 @@ model ConfigurationForBatchUpdate {
   /**
    * The properties can be updated for a configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ConfigurationForBatchUpdateProperties;
 }
 
@@ -988,6 +1004,13 @@ model ServerProperties {
    * Source properties for import from storage.
    */
   importSourceProperties?: ImportSourceProperties;
+
+  /**
+   * The mysql parameter lower_case_table_names. Can only be specified when the server is being created. Allowed values 1 or 2.
+   */
+  @added(Versions.v2025_06_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  lowerCaseTableNames?: int32;
 }
 
 /**
@@ -1111,6 +1134,12 @@ model HighAvailability {
    * Availability zone of the standby server.
    */
   standbyAvailabilityZone?: string;
+
+  /**
+   * HA Replication mode for a server.
+   */
+  @added(Versions.v2025_06_01_preview)
+  replicationMode?: replicationMode;
 }
 
 /**
@@ -1220,8 +1249,8 @@ model ServerForUpdate {
   /**
    * The properties that can be updated for a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ServerPropertiesForUpdate;
 
   /**
@@ -1375,8 +1404,8 @@ model AdvancedThreatProtectionForUpdate {
   /**
    * Resource update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AdvancedThreatProtectionUpdateProperties;
 }
 
@@ -1398,8 +1427,8 @@ model LogFile extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * The properties of a logFile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: LogFileProperties;
 }
 
@@ -1484,7 +1513,7 @@ model CapabilityProperties {
    * A list of supported flexible server editions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedFlexibleServerEditions?: ServerEditionCapability[];
 }
 
@@ -1502,14 +1531,14 @@ model ServerEditionCapability {
    * A list of supported storage editions
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedStorageEditions?: StorageEditionCapability[];
 
   /**
    * A list of supported server versions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedServerVersions?: ServerVersionCapability[];
 }
 
@@ -1574,7 +1603,7 @@ model ServerVersionCapability {
    * A list of supported Skus
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedSkus?: SkuCapability[];
 }
 
@@ -1643,21 +1672,21 @@ model CapabilityPropertiesV2 {
    * A list of supported flexible server editions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedFlexibleServerEditions?: ServerEditionCapabilityV2[];
 
   /**
    * A list of supported server versions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedServerVersions?: ServerVersionCapabilityV2[];
 
   /**
    * A list of supported features.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedFeatures?: FeatureProperty[];
 }
 
@@ -1687,14 +1716,14 @@ model ServerEditionCapabilityV2 {
    * A list of supported storage editions
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedStorageEditions?: StorageEditionCapability[];
 
   /**
    * A list of supported Skus
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedSkus?: SkuCapabilityV2[];
 }
 
@@ -1799,7 +1828,7 @@ model VirtualNetworkSubnetUsageResult {
    * A list of delegated subnet usage
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   delegatedSubnetsUsage?: DelegatedSubnetUsage[];
 }
 
@@ -1877,8 +1906,6 @@ model OperationProgressResult
   /**
    * The response properties specific to the operation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationProgressResponseType;
 }
 
@@ -1986,8 +2013,8 @@ model MaintenanceUpdate {
   /**
    * The properties of a maintenance update parameter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: MaintenancePropertiesForUpdate;
 }
 
@@ -2036,8 +2063,8 @@ model Provisioning extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * The properties of provisioning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProvisioningStateProperties;
 }
 

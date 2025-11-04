@@ -15,13 +15,15 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.MySql"
+    package-name: "Azure.ResourceManager.MySql"
+    namespace: "{package-name}.FlexibleServers"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    api-version: "2024-12-30"
   "@azure-tools/typespec-python":
     service-dir: "sdk/mysqlflexibleservers"
-    package-dir: "azure-mgmt-mysqlflexibleservers"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-mysqlflexibleservers"
     namespace: "azure.mgmt.mysqlflexibleservers"
     generate-test: true
     generate-sample: true
@@ -34,7 +36,7 @@ options:
     flavor: azure
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
-    package-dir: "arm-mysql-flexible"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-mysql-flexible"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

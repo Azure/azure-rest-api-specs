@@ -1,5 +1,3 @@
-// @ts-check
-
 import { isFullGitSha } from "../../shared/src/git.js";
 import {
   CheckConclusion,

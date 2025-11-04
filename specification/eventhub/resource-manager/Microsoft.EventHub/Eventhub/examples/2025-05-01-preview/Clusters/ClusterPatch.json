@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "clusterName": "testCluster",
+    "parameters": {
+      "location": "South Central US",
+      "tags": {
+        "tag3": "value3",
+        "tag4": "value4"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testCluster",
+        "type": "Microsoft.EventHub/Clusters",
+        "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/myResourceGroup/providers/Microsoft.EventHub/clusters/testCluster",
+        "location": "South Central US",
+        "properties": {
+          "createdAt": "2017-06-01T21:37:04.46Z",
+          "metricId": "SN6-008",
+          "provisioningState": "Succeeded",
+          "updatedAt": "2017-06-01T21:37:53.413Z"
+        },
+        "sku": {
+          "name": "Dedicated",
+          "capacity": 4
+        },
+        "tags": {
+          "tag3": "value3",
+          "tag4": "value4"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testCluster",
+        "type": "Microsoft.EventHub/Clusters",
+        "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/myResourceGroup/providers/Microsoft.EventHub/clusters/testCluster",
+        "location": "South Central US",
+        "properties": {
+          "createdAt": "2017-06-01T21:37:04.46Z",
+          "metricId": "SN6-008",
+          "platformCapabilities": {
+            "confidentialCompute": {
+              "mode": "Disabled"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "updatedAt": "2017-06-01T21:37:53.413Z"
+        },
+        "sku": {
+          "name": "Dedicated",
+          "capacity": 4
+        },
+        "tags": {
+          "tag3": "value3",
+          "tag4": "value4"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "Clusters_Update",
+  "title": "ClusterPatch"
+}
