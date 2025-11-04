@@ -4,6 +4,7 @@ import { vi } from "vitest";
 /**
  * @typedef {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @typedef {AsyncFunctionArguments["github"]} GitHub
+ * @typedef {AsyncFunctionArguments["context"]} Context
  * @typedef {AsyncFunctionArguments["core"]} Core
  */
 
