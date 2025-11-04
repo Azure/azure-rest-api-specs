@@ -447,7 +447,7 @@ model DefaultErrorResponseError {
   target?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: DefaultErrorResponseErrorDetailsItem[];
 
   /**
@@ -819,7 +819,7 @@ model DetectorResponseProperties {
   /**
    * Data Set
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataset?: DiagnosticData[];
 
   /**
@@ -830,7 +830,7 @@ model DetectorResponseProperties {
   /**
    * Additional configuration for different data providers to be used by the UI
    */
-  @OpenAPI.extension("x-ms-identifiers", #["providerName"])
+  @identifiers(#["providerName"])
   dataProvidersMetadata?: DataProviderMetadata[];
 
   /**
@@ -942,13 +942,13 @@ model DataTableResponseObject {
   /**
    * List of columns with data types
    */
-  @OpenAPI.extension("x-ms-identifiers", #["columnName"])
+  @identifiers(#["columnName"])
   columns?: DataTableResponseColumn[];
 
   /**
    * Raw row values
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rows?: string[][];
 }
 
@@ -1018,7 +1018,7 @@ model DataProviderMetadata {
    * Settings for the data provider
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   propertyBag?: KeyValuePairStringObject[];
 }
 
@@ -1047,7 +1047,7 @@ model QueryUtterancesResults {
   /**
    * Array of utterance results for search query.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   results?: QueryUtterancesResult[];
 }
 
@@ -1138,11 +1138,11 @@ model CsmOperationDescriptionProperties {
  */
 model ServiceSpecification {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -1176,14 +1176,14 @@ model MetricSpecification {
   isInternal?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: Dimension[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   category?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   availabilities?: MetricAvailability[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1239,7 +1239,7 @@ model CsmOperationCollection {
    * Collection of resources.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value: CsmOperationDescription[];
 
   /**
