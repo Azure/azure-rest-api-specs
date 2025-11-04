@@ -81,6 +81,7 @@ model ActiveDirectoryConfigCommonProperties {
   securityOperators?: string[];
 
   /** Status of the Active Directory */
+  @visibility(Lifecycle.Read)
   activeDirectoryStatus?: ActiveDirectoryStatus;
 }
 
@@ -110,6 +111,7 @@ model SecretPasswordKeyVaultProperties {
 @added(Versions.v2025_09_01_preview)
 model SecretPasswordIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /** The Azure resource identifier of the user assigned identity used to authenticate with key vault. Applicable if identity.type has 'UserAssigned'. It should match key of identity.userAssignedIdentities. */

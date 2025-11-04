@@ -12931,7 +12931,8 @@
         },
         "activeDirectoryStatus": {
           "$ref": "#/definitions/ActiveDirectoryStatus",
-          "description": "Status of the Active Directory"
+          "description": "Status of the Active Directory",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/NetAppProvisioningState",
@@ -13026,10 +13027,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "activeDirectoryStatus": {
-          "$ref": "#/definitions/ActiveDirectoryStatus",
-          "description": "Status of the Active Directory"
         },
         "domain": {
           "type": "string",
@@ -14285,7 +14282,10 @@
         "originClusterInformation": {
           "$ref": "#/definitions/OriginClusterInformation",
           "description": "Origin cluster information",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "cifsChangeNotifications": {
           "$ref": "#/definitions/CifsChangeNotifyState",
@@ -19524,7 +19524,8 @@
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "The principal ID (object ID) of the identity used to authenticate with key vault. Read-only."
+          "description": "The principal ID (object ID) of the identity used to authenticate with key vault. Read-only.",
+          "readOnly": true
         },
         "userAssignedIdentity": {
           "type": "string",

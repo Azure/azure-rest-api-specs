@@ -176,7 +176,7 @@ model CacheProperties {
   /**
    * Origin cluster information
    */
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   originClusterInformation: OriginClusterInformation;
 
   /**
