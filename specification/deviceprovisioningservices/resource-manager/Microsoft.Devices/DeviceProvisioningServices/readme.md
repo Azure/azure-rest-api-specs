@@ -27,10 +27,17 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 azure-arm: true
-tag: package-preview-2025-02
+tag: package-preview-2026-04
 ```
 
+### Tag: package-2026-04
 
+These settings apply only when `--tag=package-2026-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04'
+input-file:
+  - preview/2026-04-01/iotdps.json
+```
 ### Tag: package-preview-2025-02
 
 These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
