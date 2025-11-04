@@ -8,10 +8,10 @@ import { vi } from "vitest";
  */
 
 /**
- * @returns {GitHub & ReturnType<createMockGithubImpl>}
+ * @returns {GitHub & ReturnType<typeof createMockGithubImpl>}
  */
 export function createMockGithub() {
-  return /** @type {GitHub & ReturnType<createMockGithubImpl>} */ (createMockGithubImpl());
+  return /** @type {GitHub & ReturnType<typeof createMockGithubImpl>} */ (createMockGithubImpl());
 }
 
 // Partial mock of `github` parameter passed into github-script actions
@@ -21,7 +21,7 @@ function createMockGithubImpl() {
       after: vi.fn(),
       before: vi.fn(),
     },
-    paginate: async (func, params) => {
+    paginate: async (/** @type {(arg0: any) => any} */ func, /** @type {any} */ params) => {
       // Assume all test data fits in single page
       const data = (await func(params)).data;
 
@@ -64,14 +64,18 @@ function createMockGithubImpl() {
 }
 
 /**
- * @returns {Core & ReturnType<createMockCoreImpl>}
+ * @returns {Core & ReturnType<typeof createMockCoreImpl>}
  */
 export function createMockCore() {
-  return /**@type {Core & ReturnType<createMockCoreImpl>} */ (createMockCoreImpl());
+  return /** @type {Core & ReturnType<typeof createMockCoreImpl>} */ (createMockCoreImpl());
 }
 
 // Partial mock of `core` parameter passed into to github-script actions
 function createMockCoreImpl() {
+  const summary = {};
+  summary.addRaw = vi.fn().mockResolvedValue(summary);
+  summary.write = vi.fn().mockResolvedValue(undefined);
+
   return {
     debug: vi.fn(console.debug),
     info: vi.fn(console.log),
@@ -81,13 +85,7 @@ function createMockCoreImpl() {
     isDebug: vi.fn().mockReturnValue(true),
     setOutput: vi.fn((name, value) => console.log(`setOutput('${name}', '${value}')`)),
     setFailed: vi.fn((msg) => console.log(`setFailed('${msg}')`)),
-    summary: {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      addRaw: vi.fn(function (content) {
-        return this; // Return 'this' for method chaining
-      }),
-      write: vi.fn().mockResolvedValue(undefined),
-    },
+    summary,
   };
 }
 
