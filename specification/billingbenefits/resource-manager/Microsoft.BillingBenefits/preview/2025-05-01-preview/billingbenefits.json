@@ -3146,6 +3146,102 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/contributors/{contributorName}": {
+      "get": {
+        "description": "Get a contributor for primary service admin",
+        "operationId": "ConditionalCreditContributors_GetFromPrimary",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditContributor_GetFromPrimary": {
+            "$ref": "./examples/ConditionalCreditContributorGetFromPrimary.json"
+          },
+          "ConditionalCreditContributor_GetFromPrimary_WithMilestones": {
+            "$ref": "./examples/ConditionalCreditContributorWithMilestonesGetFromPrimary.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContributorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditContributor"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/contributors": {
+      "get": {
+        "description": "List contributors under a conditional credit for primary service admin",
+        "operationId": "ConditionalCreditContributors_ListFromPrimary",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditContributors_ListFromPrimary": {
+            "$ref": "./examples/ConditionalCreditContributorsListFromPrimary.json"
+          },
+          "ConditionalCreditContributorsWithMilestones_ListFromPrimary": {
+            "$ref": "./examples/ConditionalCreditContributorsWithMilestonesListFromPrimary.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List contributors under a conditional credit for primary service admin.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditContributorList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits": {
       "get": {
         "description": "List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts",
@@ -6096,6 +6192,21 @@
           "type": "string",
           "description": "Failure reason if the provided input was invalid"
         },
+        "billingAccountResourceId": {
+          "type": "string",
+          "description": "Billing account resource identifier associated with the validated benefit.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "Tenant"
+                ],
+                "type": "Microsoft.Billing/billingAccounts"
+              }
+            ]
+          }
+        },
         "resourceId": {
           "type": "string",
           "description": "Resource identifier of the benefit that was validated.",
@@ -6526,6 +6637,39 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results"
+        }
+      }
+    },
+    "ConditionalCreditContributor": {
+      "type": "object",
+      "description": "Conditional credit contributor",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Conditional credit contributor properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContributorConditionalCreditProperties"
+        }
+      }
+    },
+    "ConditionalCreditContributorList": {
+      "type": "object",
+      "description": "Conditional credit contributor list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionalCreditContributor"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
         }
       }
     },
