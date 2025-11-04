@@ -251,6 +251,13 @@ model TargetDescription {
    * List of content encodings accepted by this target.
    */
   acceptedContentEncodings?: string[];
+
+  /**
+   * The metadata of this target.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the target specification"
+  @added(Versions.v2025_11_01_preview)
+  metadata?: Record<string>;
 }
 
 /**
