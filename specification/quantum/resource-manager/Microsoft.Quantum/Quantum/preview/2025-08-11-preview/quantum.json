@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Quantum Management API",
-    "version": "2023-11-13-preview",
+    "version": "2025-08-11-preview",
     "description": "Microsoft.Quantum Resource Provider Management API",
     "x-typespec-generated": [
       {
@@ -46,6 +46,9 @@
       "name": "Workspaces"
     },
     {
+      "name": "SuiteOffers"
+    },
+    {
       "name": "Offerings"
     }
   ],
@@ -59,26 +62,26 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Operations_List": {
-            "$ref": "./examples/operations.json"
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -95,13 +98,13 @@
         "description": "Check the availability of the resource name for the given location.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -109,7 +112,7 @@
             "description": "The CheckAvailability request",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -117,19 +120,19 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_CheckNameAvailability": {
-            "$ref": "./examples/quantumWorkspacesCheckNameAvailability.json"
+            "$ref": "./examples/Workspaces_CheckNameAvailability.json"
           }
         }
       }
@@ -143,17 +146,20 @@
         "description": "Returns the list of all provider offerings available for the given location.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationName",
             "in": "path",
             "description": "Location.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "[a-z][a-z0-9]+"
           }
         ],
         "responses": {
@@ -166,13 +172,52 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Offerings_List": {
-            "$ref": "./examples/offeringsList.json"
+            "$ref": "./examples/Offerings_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/suiteOffers": {
+      "get": {
+        "operationId": "SuiteOffers_ListBySubscription",
+        "tags": [
+          "SuiteOffers"
+        ],
+        "description": "Returns the SuiteOffer resource associated with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuantumSuiteOfferListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuiteOffers_ListBySubscription": {
+            "$ref": "./examples/SuiteOffers_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -189,10 +234,10 @@
         "description": "Gets the list of Workspaces within a Subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -205,13 +250,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_ListBySubscription": {
-            "$ref": "./examples/quantumWorkspacesListSubscription.json"
+            "$ref": "./examples/Workspaces_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -228,13 +273,13 @@
         "description": "Gets the list of Workspaces within a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -247,13 +292,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_ListByResourceGroup": {
-            "$ref": "./examples/quantumWorkspacesListResourceGroup.json"
+            "$ref": "./examples/Workspaces_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -270,13 +315,13 @@
         "description": "Returns the Workspace resource associated with the given name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -297,13 +342,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_Get": {
-            "$ref": "./examples/quantumWorkspacesGet.json"
+            "$ref": "./examples/Workspaces_Get.json"
           }
         }
       },
@@ -315,13 +360,13 @@
         "description": "Creates or updates a Workspace resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -368,13 +413,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_CreateOrUpdate": {
-            "$ref": "./examples/quantumWorkspacesPut.json"
+            "$ref": "./examples/Workspaces_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -390,13 +435,13 @@
         "description": "Updates an existing Workspace's tags.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -426,13 +471,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_UpdateTags": {
-            "$ref": "./examples/quantumWorkspacesPatch.json"
+            "$ref": "./examples/Workspaces_UpdateTags.json"
           }
         }
       },
@@ -444,13 +489,13 @@
         "description": "Deletes a Workspace resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -482,13 +527,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_Delete": {
-            "$ref": "./examples/quantumWorkspacesDelete.json"
+            "$ref": "./examples/Workspaces_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -506,13 +551,13 @@
         "description": "Get the keys to use with the Quantum APIs. A key is used to authenticate and authorize access to the Quantum REST APIs. Only one key is needed at a time; two are given to provide seamless key regeneration.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -533,13 +578,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_ListKeys": {
-            "$ref": "./examples/listKeys.json"
+            "$ref": "./examples/Workspaces_ListKeys.json"
           }
         }
       }
@@ -553,13 +598,13 @@
         "description": "Regenerate either the primary or secondary key for use with the Quantum APIs. The old key will stop working immediately.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -586,13 +631,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Workspaces_RegenerateKeys": {
-            "$ref": "./examples/regenerateKey.json"
+            "$ref": "./examples/Workspaces_RegenerateKeys.json"
           }
         }
       }
@@ -920,6 +965,79 @@
         ]
       }
     },
+    "QuantumSuiteOffer": {
+      "type": "object",
+      "description": "A Quantum Suite Offer that is available to a subscription.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuantumSuiteOfferProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QuantumSuiteOfferListResult": {
+      "type": "object",
+      "description": "The response of a QuantumSuiteOffer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuantumSuiteOffer items on this page",
+          "items": {
+            "$ref": "#/definitions/QuantumSuiteOffer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuantumSuiteOfferProperties": {
+      "type": "object",
+      "description": "Properties of a Quantum Suite Offer",
+      "properties": {
+        "providerId": {
+          "type": "string",
+          "description": "The provider ID of the offer."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "The provider name of the offer."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The name of the company that is providing this offer."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location where this offer is available."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the offer."
+        },
+        "quotas": {
+          "$ref": "#/definitions/QuotaAllocations",
+          "description": "Quota allocations associated with this offer."
+        }
+      },
+      "required": [
+        "providerId",
+        "providerName",
+        "companyName",
+        "location",
+        "description"
+      ]
+    },
     "QuantumWorkspace": {
       "type": "object",
       "description": "The resource proxy definition object for Quantum Workspace.",
@@ -929,13 +1047,13 @@
           "description": "Gets or sets the properties. Define quantum workspace's specific properties."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -972,6 +1090,27 @@
           }
         }
       }
+    },
+    "QuotaAllocations": {
+      "type": "object",
+      "description": "Quota allocations with each field representing different quota type.",
+      "properties": {
+        "standardMinutesLifetime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Lifetime limit for standard priority jobs execution in minutes.",
+          "minimum": 0
+        },
+        "highMinutesLifetime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Lifetime limit for high priority jobs execution in minutes.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "standardMinutesLifetime"
+      ]
     },
     "QuotaDimension": {
       "type": "object",
@@ -1061,6 +1200,18 @@
             "$ref": "#/definitions/PricingDetail"
           }
         }
+      }
+    },
+    "StorageAccountResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "ARM Resource Id of a storage account.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Storage/storageAccounts"
+          }
+        ]
       }
     },
     "TargetDescription": {
@@ -1204,7 +1355,7 @@
           "readOnly": true
         },
         "storageAccount": {
-          "type": "string",
+          "$ref": "#/definitions/StorageAccountResourceId",
           "description": "ARM Resource Id of the storage account associated with this workspace."
         },
         "endpointUri": {
@@ -1215,6 +1366,20 @@
         "apiKeyEnabled": {
           "type": "boolean",
           "description": "Indicator of enablement of the Quantum workspace Api keys."
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "../../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of configuration.",
+          "readOnly": true
+        },
+        "managedStorageAccount": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "ARM Resource Id of the managed storage account associated with this workspace.",
+          "readOnly": true
+        },
+        "quotas": {
+          "$ref": "#/definitions/QuotaAllocations",
+          "description": "Quota allocations associated with this workspace. Available only for special providers."
         }
       }
     }
