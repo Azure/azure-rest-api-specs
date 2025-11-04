@@ -73,7 +73,7 @@ export function createMockCore() {
 // Partial mock of `core` parameter passed into to github-script actions
 function createMockCoreImpl() {
   const summary = {};
-  summary.addRaw = vi.fn().mockResolvedValue(summary);
+  summary.addRaw = vi.fn().mockReturnValue(summary);
   summary.write = vi.fn().mockResolvedValue(undefined);
 
   return {
