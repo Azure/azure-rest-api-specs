@@ -3,8 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "./models.tsp";
-import "./Registry.tsp";
+import "./Archive.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -96,7 +95,7 @@ interface AchieveOps
 /**
  * An object that represents a archive for a container registry.
  */
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @parentResource(Registry)
 model Archive is Azure.ResourceManager.ProxyResource<ArchiveProperties> {
   ...ResourceNameParameter<
@@ -107,7 +106,7 @@ model Archive is Azure.ResourceManager.ProxyResource<ArchiveProperties> {
   >;
 }
 
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface Archives {
   /**

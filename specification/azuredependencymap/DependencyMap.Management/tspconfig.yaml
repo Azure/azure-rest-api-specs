@@ -12,11 +12,8 @@ options:
     arm-resource-flattening: true
     version-enum-strategy: true
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: false
     namespace: "Azure.ResourceManager.DependencyMap"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dependencymap"
@@ -42,7 +39,7 @@ options:
     examples-directory: "{project-root}/examples"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-samples: false
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
