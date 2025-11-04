@@ -48,11 +48,12 @@ interface PrivateEndpointConnections {
   /**
    * Updates the properties of an existing private endpoint connection.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PrivateEndpointConnection,
     PatchModel = PrivateEndpointConnection,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /**
@@ -68,8 +69,11 @@ interface PrivateEndpointConnections {
    * Deletes the specified private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
