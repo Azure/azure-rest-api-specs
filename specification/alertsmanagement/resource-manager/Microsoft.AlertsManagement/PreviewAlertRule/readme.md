@@ -35,6 +35,11 @@ directive:
     reason: The rule applied incorrectly to base class.
     where:
       - $.definitions.ManagedResource
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: The API was changed in the stable version to a more general one (requests in the old format will still work)
+    from: preview/2025-05-01-preview/PreviewAlertRule.json
+  - suppress: OperationsAPIImplementation
+    reason: Operations API for all services under AlertsManagement is defined in the AlertsManagement service spec
 ```
 
 ``` yaml

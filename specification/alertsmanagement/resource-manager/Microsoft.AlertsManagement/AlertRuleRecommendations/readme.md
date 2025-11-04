@@ -42,6 +42,8 @@ directive:
     from: AlertRuleRecommendations.json
     where:
      - $.definitions.AlertRuleRecommendationProperties.properties.displayInformation
+  - suppress: OperationsAPIImplementation
+    reason: Operations API for all services under AlertsManagement is defined in the AlertsManagement service spec
 ```
 
 ``` yaml

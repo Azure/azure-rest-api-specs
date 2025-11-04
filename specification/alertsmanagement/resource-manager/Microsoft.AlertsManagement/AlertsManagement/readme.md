@@ -57,6 +57,9 @@ directive:
   - suppress: GetCollectionOnlyHasValueAndNextLink
     reason: Response models maintain compatibility with existing AlertsManagement response structures.
     from: AlertsManagement.json
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: These APIs were moved from AlertsManagement to other services
+    from: preview/2018-11-02-privatepreview/AlertsManagement.json
 ```
 
 ``` yaml

@@ -35,8 +35,8 @@ directive:
     reason: The rule applied incorrectly to base class.
     where:
       - $.definitions.ManagedResource
-  - suppress: MULTIPLE_API_VERSION
-    reason: The SmartDetectorAlertRulesApi service requires multiple API versions for comprehensive functionality.
+  - suppress: OperationsAPIImplementation
+    reason: Operations API for all services under AlertsManagement is defined in the AlertsManagement service spec
 ```
 
 ``` yaml

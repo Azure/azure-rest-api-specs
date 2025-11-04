@@ -50,7 +50,8 @@ directive:
      - $.definitions.AzureMetricData.properties.dimensions
      - $.definitions.TransactionEdge.properties.metadata
      - $.definitions.TransactionNode.properties.metadata
-
+  - suppress: OperationsAPIImplementation
+    reason: Operations API for all services under AlertsManagement is defined in the AlertsManagement service spec
 ```
 
 ``` yaml
