@@ -41,19 +41,19 @@ These settings apply only when `--tag=2024-06-24-preview` is specified on the co
 
 ```yaml $(tag) == '2024-06-24-preview'
 input-file:
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/aad.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/azcopy.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/certificate.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/dns.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/dscm.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/dsmsmanagedkeysecret.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/environment.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/eventgrid.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/ficp.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/genevaActions.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/aad.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/azcopy.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/certificate.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/dns.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/dscm.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/dsmsmanagedkeysecret.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/environment.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/eventgrid.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/ficp.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
   - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/genevaLogs.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/plannedQuota.json
-  - Microsoft.Geneva/LogsManagement/preview/2024-06-24-preview/storageAccountDsms.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/storageAccountDsms.json
 ```
 
 ### Tag: 2024-11-20-preview
