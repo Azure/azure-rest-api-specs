@@ -35,6 +35,22 @@ directive:
     reason: The rule applied incorrectly to base class.
     where:
       - $.definitions.ManagedResource
+  - suppress: OperationsAPIImplementation
+    reason: Operations API for all services under AlertsManagement is defined in the AlertsManagement service spec
+  - suppress: GuidUsage
+    reason: The IDs of investigation entities are GUIDs.
+    from: Issues.json
+    where:
+     - $.definitions.FetchInvestigationResultParameters.properties.investigationId.format
+     - $.definitions.InvestigationMetadata.properties.id.format
+  - suppress: AvoidAdditionalProperties
+    reason: These are property bags that originate from user input (directly or indirectly), such as metric dimensions.
+    from: Issues.json
+    where:
+     - $.definitions.AzureMetricData.properties.dimensions
+     - $.definitions.TransactionEdge.properties.metadata
+     - $.definitions.TransactionNode.properties.metadata
+
 ```
 
 ``` yaml

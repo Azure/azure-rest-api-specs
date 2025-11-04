@@ -35,6 +35,13 @@ directive:
     reason: The rule applied incorrectly to base class.
     where:
       - $.definitions.ManagedResource
+  - suppress: OperationsAPIImplementation
+    reason: Operations API for all services under AlertsManagement is defined in the AlertsManagement service spec
+  - suppress: AvoidAdditionalProperties
+    reason: Property bags showing display information, required for backward compatibility
+    from: AlertRuleRecommendations.json
+    where:
+     - $.definitions.AlertRuleRecommendationProperties.properties.displayInformation
 ```
 
 ``` yaml

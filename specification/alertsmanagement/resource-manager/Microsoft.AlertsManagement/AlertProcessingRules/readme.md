@@ -40,6 +40,14 @@ directive:
     from: AlertProcessingRules.json
   - suppress: MULTIPLE_API_VERSION
     reason: The AlertProcessingRules service requires multiple API versions for comprehensive functionality.
+  - suppress: OperationsAPIImplementation
+    reason: Operations API for all services under AlertsManagement is defined in the AlertsManagement service spec
+  - suppress: MissingTypeObject
+    reason: Required for backward compatibility in old API versions
+    from:
+      - stable/2021-08-08/AlertProcessingRules.json
+      - preview/2021-08-08-preview/AlertProcessingRules.json
+      - preview/2019-05-05-preview/AlertProcessingRules.json
 ```
 
 ``` yaml
