@@ -5,13 +5,22 @@ const readFileMock = vi.fn();
 // Mock fs/promises before imports
 vi.mock("fs/promises", () => ({ readFile: readFileMock }));
 
-import generateJobSummary from "../src/avocado-code.js";
+import generateJobSummaryImpl from "../src/avocado-code.js";
 import { MessageLevel, MessageType } from "../src/message.js";
 import { stringify } from "../src/ndjson.js";
-import { asAsyncFunctionArguments, createMockCore } from "./mocks.js";
+import { createMockCore } from "./mocks.js";
 
 const core = createMockCore();
 const outputFile = "avocado.ndjson";
+
+/**
+ * @param {unknown} asyncFunctionArgs
+ */
+function generateJobSummary(asyncFunctionArgs) {
+  return generateJobSummaryImpl(
+    /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (asyncFunctionArgs),
+  );
+}
 
 describe("generateJobSummary", () => {
   beforeEach(() => {
@@ -24,9 +33,7 @@ describe("generateJobSummary", () => {
   it("throws if env var not set", async () => {
     vi.unstubAllEnvs();
 
-    await expect(
-      generateJobSummary(asAsyncFunctionArguments(asAsyncFunctionArguments({ core }))),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(
+    await expect(generateJobSummary({ core })).rejects.toThrowErrorMatchingInlineSnapshot(
       `[Error: Env var AVOCADO_OUTPUT_FILE must be set]`,
     );
 
@@ -40,9 +47,7 @@ describe("generateJobSummary", () => {
       new Error(`ENOENT: no such file or directory, open '${outputFile}'`),
     );
 
-    await expect(
-      generateJobSummary(asAsyncFunctionArguments(asAsyncFunctionArguments({ core }))),
-    ).resolves.toBeUndefined();
+    await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
     expect(core.info.mock.calls[core.info.mock.calls.length - 1][0]).toMatchInlineSnapshot(
       `"Error reading 'avocado.ndjson': Error: ENOENT: no such file or directory, open 'avocado.ndjson'"`,
@@ -52,7 +57,7 @@ describe("generateJobSummary", () => {
   it("no-ops with notice if file is empty", async () => {
     readFileMock.mockResolvedValueOnce("");
 
-    await expect(generateJobSummary(asAsyncFunctionArguments({ core }))).resolves.toBeUndefined();
+    await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
     expect(core.notice.mock.calls[core.info.mock.calls.length - 1][0]).toMatchInlineSnapshot(
       `"No messages in 'avocado.ndjson'"`,
@@ -74,7 +79,7 @@ describe("generateJobSummary", () => {
 
     readFileMock.mockResolvedValueOnce(stringify(messages));
 
-    await expect(generateJobSummary(asAsyncFunctionArguments({ core }))).resolves.toBeUndefined();
+    await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
     expect(core.summary.addRaw.mock.calls[0][0]).toMatchInlineSnapshot(`"Success"`);
     expect(core.summary.write).toBeCalledTimes(1);
@@ -123,7 +128,7 @@ describe("generateJobSummary", () => {
 
     readFileMock.mockResolvedValueOnce(str);
 
-    await expect(generateJobSummary(asAsyncFunctionArguments({ core }))).resolves.toBeUndefined();
+    await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
     expect(core.summary.addRaw.mock.calls[0][0]).toMatchInlineSnapshot(`
       "| Rule                                                                                              | Message                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
