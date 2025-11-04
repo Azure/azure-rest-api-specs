@@ -140,3 +140,5 @@ interface Appliances {
 @@doc(Appliances.update::parameters.properties,
   "The updatable fields of an existing Appliance."
 );
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Appliances.update::parameters.properties
+);
