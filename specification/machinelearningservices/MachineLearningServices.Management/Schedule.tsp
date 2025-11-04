@@ -25,20 +25,6 @@ model Schedule
   >;
 }
 
-alias SchedulesListParameters = {
-  /**
-   * Continuation token for pagination.
-   */
-  @query("$skip")
-  $skip?: string;
-
-  /**
-   * Status filter for schedule.
-   */
-  @query("listViewType")
-  listViewType?: ScheduleListViewType = ScheduleListViewType.EnabledOnly;
-};
-
 @armResourceOperations
 interface Schedules {
   /**
@@ -88,7 +74,19 @@ interface Schedules {
   @summary("List schedules in specified workspace.")
   list is ArmResourceListByParent<
     Schedule,
-    Parameters = SchedulesListParameters,
+    Parameters = {
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * Status filter for schedule.
+       */
+      @query("listViewType")
+      listViewType?: ScheduleListViewType = ScheduleListViewType.EnabledOnly;
+    },
     Response = ArmResponse<ScheduleResourceArmPaginatedResult>
   >;
 }

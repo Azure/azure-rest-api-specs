@@ -73,7 +73,12 @@ interface RaiPolicyPropertiesBasicResources {
   create is RaiPolicyPropertiesBasicResourceOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiPolicyPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -86,7 +91,12 @@ interface RaiPolicyPropertiesBasicResources {
   delete is RaiPolicyPropertiesBasicResourceOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -97,7 +107,12 @@ interface RaiPolicyPropertiesBasicResources {
   list is RaiPolicyPropertiesBasicResourceOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
   >;
@@ -150,7 +165,12 @@ interface RaiPolicy {
   create is RaiPolicyOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiPolicyPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -163,7 +183,12 @@ interface RaiPolicy {
   delete is RaiPolicyOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -174,7 +199,12 @@ interface RaiPolicy {
   list is RaiPolicyOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
   >;

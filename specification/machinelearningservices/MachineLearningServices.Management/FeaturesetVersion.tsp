@@ -25,62 +25,6 @@ model FeaturesetVersion
   >;
 }
 
-alias FeaturesetVersionsListParameters = {
-  /**
-   * Continuation token for pagination.
-   */
-  @query("$skip")
-  $skip?: string;
-
-  /**
-   * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-   */
-  @query("tags")
-  tags?: string;
-
-  /**
-   * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-   */
-  @query("listViewType")
-  listViewType?: ListViewType = ListViewType.ActiveOnly;
-
-  /**
-   * page size
-   */
-  @query("pageSize")
-  pageSize?: int32 = 20;
-
-  /**
-   * name for the featureset version
-   */
-  @query("versionName")
-  versionName?: string;
-
-  /**
-   * featureset version
-   */
-  @query("version")
-  version?: string;
-
-  /**
-   * description for the feature set version
-   */
-  @query("description")
-  description?: string;
-
-  /**
-   * createdBy user name
-   */
-  @query("createdBy")
-  createdBy?: string;
-
-  /**
-   * Specifies the featurestore stage
-   */
-  @query("stage")
-  stage?: string;
-};
-
 @armResourceOperations
 interface FeaturesetVersions {
   /**
@@ -131,7 +75,61 @@ interface FeaturesetVersions {
   @summary("List versions.")
   list is ArmResourceListByParent<
     FeaturesetVersion,
-    Parameters = FeaturesetVersionsListParameters,
+    Parameters = {
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+       */
+      @query("tags")
+      tags?: string;
+
+      /**
+       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+       */
+      @query("listViewType")
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
+
+      /**
+       * page size
+       */
+      @query("pageSize")
+      pageSize?: int32 = 20;
+
+      /**
+       * name for the featureset version
+       */
+      @query("versionName")
+      versionName?: string;
+
+      /**
+       * featureset version
+       */
+      @query("version")
+      version?: string;
+
+      /**
+       * description for the feature set version
+       */
+      @query("description")
+      description?: string;
+
+      /**
+       * createdBy user name
+       */
+      @query("createdBy")
+      createdBy?: string;
+
+      /**
+       * Specifies the featurestore stage
+       */
+      @query("stage")
+      stage?: string;
+    },
     Response = ArmResponse<FeaturesetVersionResourceArmPaginatedResult>
   >;
 

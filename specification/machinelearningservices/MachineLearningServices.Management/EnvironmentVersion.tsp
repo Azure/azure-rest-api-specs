@@ -228,9 +228,7 @@ interface EnvironmentVersionOperationGroup {
     DestinationAsset,
     {
       @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    }
   >;
 }
 

@@ -38,7 +38,12 @@ interface RaiBlocklistPropertiesBasicResources {
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -51,7 +56,12 @@ interface RaiBlocklistPropertiesBasicResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -62,7 +72,12 @@ interface RaiBlocklistPropertiesBasicResources {
   list is ArmResourceListByParent<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiBlocklistPropertiesBasicResourceArmPaginatedResult>
   >;
@@ -77,11 +92,9 @@ interface RaiBlocklistPropertiesBasicResources {
     RaiBlocklistItemsBulkAddRequest,
     {
       @body
-      @identifiers(#[])
+      @OpenAPI.extension("x-ms-identifiers", #[])
       _?: RaiBlocklistItemPropertiesBasicResource[];
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = RaiBlocklistItemPropertiesBasicResource[]>
+    }
   >;
 
   /**
@@ -93,9 +106,7 @@ interface RaiBlocklistPropertiesBasicResources {
   deleteBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,
     string[],
-    Response = void,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    Response = void
   >;
 }
 

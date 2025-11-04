@@ -23,38 +23,6 @@ model EndpointResourcePropertiesBasicResource
   >;
 }
 
-alias EndpointResourceListParameters = {
-  /**
-   * Endpoint type filter
-   */
-  @query("endpointType")
-  endpointType?: EndpointType;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @query("includeOnlineEndpoints")
-  includeOnlineEndpoints?: boolean = false;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @query("includeServerlessEndpoints")
-  includeServerlessEndpoints?: boolean = false;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @query("includeConnections")
-  includeConnections?: boolean = false;
-
-  /**
-   * Continuation token for pagination.
-   */
-  @query("$skip")
-  $skip?: string;
-
-  /**
-   * Whether the endpoint resource will be expand to include deployment information, e.g. $expand=deployments
-   */
-  @query("$expand")
-  $expand?: string;
-};
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface EndpointResourcePropertiesBasicResources {
@@ -81,7 +49,37 @@ interface EndpointResourcePropertiesBasicResources {
   @summary("List All the endpoints under this workspace")
   list is ArmResourceListByParent<
     EndpointResourcePropertiesBasicResource,
-    Parameters = EndpointResourceListParameters,
+    Parameters = {
+      /**
+       * Endpoint type filter
+       */
+      @query("endpointType")
+      endpointType?: EndpointType;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("includeOnlineEndpoints")
+      includeOnlineEndpoints?: boolean = false;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("includeServerlessEndpoints")
+      includeServerlessEndpoints?: boolean = false;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("includeConnections")
+      includeConnections?: boolean = false;
+
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * Whether the endpoint resource will be expand to include deployment information, e.g. $expand=deployments
+       */
+      @query("$expand")
+      $expand?: string;
+    },
     Response = ArmResponse<EndpointResourcePropertiesBasicResourceArmPaginatedResult>
   >;
 

@@ -25,50 +25,6 @@ model FeaturesetContainer
   >;
 }
 
-alias FeaturesetContainersListParameters = {
-  /**
-   * Continuation token for pagination.
-   */
-  @query("$skip")
-  $skip?: string;
-
-  /**
-   * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-   */
-  @query("tags")
-  tags?: string;
-
-  /**
-   * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-   */
-  @query("listViewType")
-  listViewType?: ListViewType = ListViewType.ActiveOnly;
-
-  /**
-   * page size
-   */
-  @query("pageSize")
-  pageSize?: int32 = 20;
-
-  /**
-   * name for the featureset
-   */
-  @query("name")
-  name?: string;
-
-  /**
-   * description for the feature set
-   */
-  @query("description")
-  description?: string;
-
-  /**
-   * createdBy user name
-   */
-  @query("createdBy")
-  createdBy?: string;
-};
-
 @armResourceOperations
 interface FeaturesetContainers {
   /**
@@ -119,7 +75,49 @@ interface FeaturesetContainers {
   @summary("List featurestore entity containers.")
   list is ArmResourceListByParent<
     FeaturesetContainer,
-    Parameters = FeaturesetContainersListParameters,
+    Parameters = {
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+       */
+      @query("tags")
+      tags?: string;
+
+      /**
+       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+       */
+      @query("listViewType")
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
+
+      /**
+       * page size
+       */
+      @query("pageSize")
+      pageSize?: int32 = 20;
+
+      /**
+       * name for the featureset
+       */
+      @query("name")
+      name?: string;
+
+      /**
+       * description for the feature set
+       */
+      @query("description")
+      description?: string;
+
+      /**
+       * createdBy user name
+       */
+      @query("createdBy")
+      createdBy?: string;
+    },
     Response = ArmResponse<FeaturesetContainerResourceArmPaginatedResult>
   >;
 }
