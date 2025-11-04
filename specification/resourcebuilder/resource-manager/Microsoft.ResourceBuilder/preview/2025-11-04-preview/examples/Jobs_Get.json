@@ -1,0 +1,43 @@
+{
+  "title": "Jobs_Get",
+  "operationId": "Jobs_Get",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline",
+    "jobName": "batch-processing-job"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "Batch",
+        "properties": {
+          "inputDatasets": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "input-dataset"
+            }
+          ],
+          "outputDatasets": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "output-dataset"
+            }
+          ]
+        },
+        "tags": {},
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/batch-processing-job",
+        "name": "batch-processing-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    }
+  }
+}

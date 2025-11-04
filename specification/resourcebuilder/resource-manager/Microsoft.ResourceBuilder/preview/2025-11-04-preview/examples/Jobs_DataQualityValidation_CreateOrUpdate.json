@@ -1,0 +1,102 @@
+{
+  "title": "Jobs_DataQualityValidation_CreateOrUpdate",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline",
+    "jobName": "data-quality-validation-job",
+    "resource": {
+      "properties": {
+        "kind": "DataQualityValidation",
+        "inputDataset": {
+          "dataset": {
+            "type": "ResourceId",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+          },
+          "name": "input-dataset"
+        },
+        "executionMode": "inline",
+        "metricEvaluations": {
+          "tableCountMetric": {
+            "metricEvaluationType": "tableCount",
+            "metricType": "count",
+            "metricUnit": "count",
+            "filter": "",
+            "columns": []
+          }
+        },
+        "dataQualityMetricValidations": {
+          "tableCountValidation": {
+            "dataQualityMetricValidationType": "anomaly",
+            "dataQualityMetricEvaluationName": "tableCountMetric",
+            "validationAction": "warn",
+            "anomalyDetectionParameters": {
+              "sensitivity": 5,
+              "lookbackWindowInDays": 7,
+              "minimumDataPoints": 10
+            }
+          }
+        },
+        "dataQualityDatasetValidation": {
+          "datasetValidationCondition": "all",
+          "validations": ["tableCountValidation"],
+          "blockPublishingOnValidationFailure": false
+        }
+      },
+      "tags": {}
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/data-quality-validation-job?api-version=2025-11-04-preview"
+      },
+      "body": {
+        "properties": {
+          "kind": "DataQualityValidation",
+          "inputDataset": {
+            "dataset": {
+              "type": "ResourceId",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+            },
+            "name": "input-dataset"
+          },
+          "executionMode": "inline",
+          "metricEvaluations": {
+            "tableCountMetric": {
+              "metricEvaluationType": "tableCount",
+              "metricType": "count",
+              "metricUnit": "count",
+              "filter": "",
+              "columns": []
+            }
+          },
+          "dataQualityMetricValidations": {
+            "tableCountValidation": {
+              "dataQualityMetricValidationType": "anomaly",
+              "dataQualityMetricEvaluationName": "tableCountMetric",
+              "validationAction": "warn",
+              "anomalyDetectionParameters": {
+                "sensitivity": 5,
+                "lookbackWindowInDays": 7,
+                "minimumDataPoints": 10
+              }
+            }
+          },
+          "dataQualityDatasetValidation": {
+            "datasetValidationCondition": "all",
+            "validations": ["tableCountValidation"],
+            "blockPublishingOnValidationFailure": false
+          }
+        },
+        "tags": {},
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/data-quality-validation-job",
+        "name": "data-quality-validation-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    }
+  }
+}
