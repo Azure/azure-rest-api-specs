@@ -25,6 +25,12 @@ model PlatformUpdate
 interface PlatformUpdates {
   @doc("Get a platform update.")
   get is ArmResourceRead<PlatformUpdate>;
+
+  @doc("List all platform updates.")
+  listPlatformUpdatesBySubscriptionLocationResource is ArmResourceListByParent<
+    PlatformUpdate,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
