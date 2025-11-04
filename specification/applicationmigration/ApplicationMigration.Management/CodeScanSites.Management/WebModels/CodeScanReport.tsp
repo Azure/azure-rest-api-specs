@@ -75,7 +75,7 @@ model CodeScanReportProperties {
   reportDetails?: CodeScanReportDetails;
 
   @doc("The recommendations suggested by the code scan report.")
-  @OpenAPI.extension("x-ms-identifiers", #["azureTarget"])
+  @identifiers(#["azureTarget"])
   reportRecommendations?: ReportRecommendations[];
 }
 

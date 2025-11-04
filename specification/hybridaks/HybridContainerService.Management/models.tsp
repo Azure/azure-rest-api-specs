@@ -274,6 +274,11 @@ model ProvisionedClusterProperties {
   storageProfile?: StorageProfile;
 
   /**
+   * The security configuration profile for the provisioned cluster.
+   */
+  securityProfile?: SecurityProfile;
+
+  /**
    * The SSH restricted access profile for the VMs in the provisioned cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
@@ -420,6 +425,42 @@ model NetworkProfileLoadBalancerProfile {
    * Number of HA Proxy load balancer VMs. The default value is 0.
    */
   count?: int32;
+}
+
+/**
+ * The security configuration profile for the provisioned cluster.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
+model SecurityProfile {
+  /**
+   * The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided.
+   */
+  customCATrustCertificates?: SecurityProfileCustomCATrustCertificates;
+
+  /**
+   * FIPS image settings for the security profile.
+   */
+  fipsImage?: SecurityProfileFipsImage;
+}
+
+/**
+ * The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided. Certificates will be added to trust stores of all the nodes in the cluster. If updated, the new list of certificates will be installed in the trust store in place of the old certificates. Updating the value of this field will result in nodes being re-imaged.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change, CA is an acronym"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Initial suppression to prevent breaking change"
+@minItems(0)
+@maxItems(10)
+model SecurityProfileCustomCATrustCertificates is bytes[];
+
+/**
+ * FIPS image settings for the security profile.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
+model SecurityProfileFipsImage {
+  /**
+   * Indicates whether to enable FIPS image.
+   */
+  enabled?: boolean = false;
 }
 
 /**

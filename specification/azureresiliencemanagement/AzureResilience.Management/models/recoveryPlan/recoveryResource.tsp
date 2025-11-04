@@ -10,7 +10,6 @@ using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using OpenAPI;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -51,7 +50,7 @@ model RecoveryResourceProperties {
 
   @doc("A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceProtectionSolutions?: ResourceProtectionSolutionSettings[];
 
   @doc("A setting that indicates the protection solution selected.")
@@ -87,11 +86,10 @@ model RecoveryResource is ProxyResource<RecoveryResourceProperties> {
 @doc("RecoveryResources post action request to update in batch.")
 model UpdateRecoveryResourcesRequest {
   @doc("A list of recovery orchestration resources whose properties need to be updated.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourcesToUpdate?: RecoveryResource[];
 
   @doc("A list of recovery orchestration resources that need to be removed from the recovery orchestration plan.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   resourcesToRemove?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources";
@@ -102,6 +100,6 @@ model UpdateRecoveryResourcesRequest {
 @doc("RecoveryResources post action request to update in batch.")
 model UpdateRecoveryResourcesResponse {
   @doc("A list of error details associated with resources for which the update has failed.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failedResources?: RecoveryResource[];
 }

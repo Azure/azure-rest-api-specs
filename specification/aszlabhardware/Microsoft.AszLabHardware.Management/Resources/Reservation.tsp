@@ -30,7 +30,7 @@ model ReservationProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The set of Servers to create the reservation.")
-  @extension("x-ms-identifiers", #["server"])
+  @identifiers(#["server"])
   serverAssociations?: ServerAssociation[];
 
   @doc("List of reserved pool servers")

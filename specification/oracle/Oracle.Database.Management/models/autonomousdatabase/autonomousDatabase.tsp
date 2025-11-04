@@ -4,7 +4,6 @@ import "./adbCommon.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Oracle.Database;
@@ -855,7 +854,7 @@ model AutonomousDatabaseBaseProperties {
   @added(Versions.v20250601_preview)
   @doc("The list of scheduled operations.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scheduledOperationsList?: ScheduledOperationsType[];
 
   @doc("The private endpoint Ip address for the resource.")

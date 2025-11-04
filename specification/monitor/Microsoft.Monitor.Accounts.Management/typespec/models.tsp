@@ -60,7 +60,7 @@ namespace Microsoft.Monitor {
      * List of private endpoint connections
      */
     @visibility(Lifecycle.Read)
-    @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["id"])
+    @identifiers(#["id"])
     privateEndpointConnections?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnection[];
 
     /**
@@ -180,7 +180,7 @@ namespace Microsoft.Monitor {
     /**
      * Metrics to be exported
      */
-    @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
+    @identifiers(#[])
     metrics: ExportRuleMetric[];
 
     /**

@@ -548,7 +548,8 @@
         "operationId": "Benefit_Validate",
         "tags": [
           "Savings plan",
-          "Macc"
+          "Macc",
+          "ConditionalCredits"
         ],
         "x-ms-examples": {
           "SavingsPlanValidatePurchase": {
@@ -628,6 +629,21 @@
           },
           "MaccValidateWriteOffWithMilestones": {
             "$ref": "./examples/MaccValidateWriteOffWithMilestones.json"
+          },
+          "ConditionalCreditValidateCreate": {
+            "$ref": "./examples/ConditionalCreditValidateCreate.json"
+          },
+          "ConditionalCreditValidateCreateContributor": {
+            "$ref": "./examples/ConditionalCreditValidateCreateContributor.json"
+          },
+          "ConditionalCreditValidateCreateEmpowered": {
+            "$ref": "./examples/ConditionalCreditValidateCreateEmpowered.json"
+          },
+          "ConditionalCreditValidateCreateError": {
+            "$ref": "./examples/ConditionalCreditValidateCreateError.json"
+          },
+          "ConditionalCreditValidateCreateMultiple": {
+            "$ref": "./examples/ConditionalCreditValidateCreateMultiple.json"
           }
         },
         "parameters": [
@@ -2840,6 +2856,9 @@
           },
           "ConditionalCreditUpdateContributor": {
             "$ref": "./examples/ConditionalCreditUpdateContributor.json"
+          },
+          "ConditionalCreditUpdateContributorEndDateOnly": {
+            "$ref": "./examples/ConditionalCreditUpdateContributorEndDateOnly.json"
           }
         },
         "parameters": [
@@ -3733,6 +3752,10 @@
         "name": "Term",
         "modelAsString": true
       }
+    },
+    "Duration": {
+      "type": "string",
+      "description": "Duration for which the benefit is active. Will be in format P{int}M or P{int}Y. Any values representing up to 12 years are valid. Upper limit examples: P144M, P12Y."
     },
     "DisplayName": {
       "type": "string",
@@ -6017,6 +6040,10 @@
               }
             ]
           }
+        },
+        "systemId": {
+          "$ref": "#/definitions/SystemId",
+          "description": "This is the globally unique identifier of the credit which will not change for its lifetime."
         }
       }
     },
@@ -6104,7 +6131,6 @@
         },
         "billingAccountResourceId": {
           "type": "string",
-          "readOnly": true,
           "format": "arm-id",
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -6138,10 +6164,14 @@
           "type": "string",
           "readOnly": true,
           "enum": [
-            "Pending",
+            "Unknown",
+            "Scheduled",
             "Active",
+            "Pending",
+            "Failed",
             "Canceled",
             "Completed",
+            "Stopped",
             "PendingSettlement"
           ],
           "x-ms-enum": {
@@ -6158,7 +6188,6 @@
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "readOnly": true,
           "description": "End date of the conditional credit (derived from last milestone)"
         },
         "productCode": {
@@ -6167,6 +6196,9 @@
         },
         "benefitResourceId": {
           "$ref": "#/definitions/BenefitResourceId"
+        },
+        "resourceId": {
+          "$ref": "#/definitions/ResourceId"
         }
       }
     },
@@ -6178,11 +6210,6 @@
         {
           "$ref": "#/definitions/ConditionalCreditProperties"
         }
-      ],
-      "required": [
-        "productCode",
-        "startAt",
-        "systemId"
       ],
       "properties": {
         "systemId": {
@@ -6210,12 +6237,6 @@
         {
           "$ref": "#/definitions/ConditionalCreditProperties"
         }
-      ],
-      "required": [
-        "primaryResourceId",
-        "systemId",
-        "productCode",
-        "startAt"
       ],
       "properties": {
         "primaryResourceId": {
@@ -6275,12 +6296,6 @@
     "ConditionalCreditMilestoneBase": {
       "type": "object",
       "description": "Base milestone definition for conditional credits",
-      "required": [
-        "milestoneId",
-        "name",
-        "endAt",
-        "spendTarget"
-      ],
       "properties": {
         "milestoneId": {
           "type": "string",
@@ -6294,12 +6309,16 @@
           "type": "string",
           "readOnly": true,
           "enum": [
+            "Unknown",
             "Scheduled",
             "Active",
+            "Pending",
+            "Failed",
             "Completed",
-            "Missed",
             "Canceled",
-            "PendingSettlement"
+            "Removed",
+            "PendingSettlement",
+            "Missed"
           ],
           "x-ms-enum": {
             "name": "MilestoneStatus",
@@ -6330,9 +6349,6 @@
           "$ref": "#/definitions/ConditionalCreditMilestoneBase"
         }
       ],
-      "required": [
-        "award"
-      ],
       "properties": {
         "award": {
           "$ref": "#/definitions/Award",
@@ -6356,14 +6372,6 @@
     "Award": {
       "type": "object",
       "description": "Award details for milestone completion",
-      "required": [
-        "credit",
-        "startAt",
-        "endAt",
-        "resourceId",
-        "systemId",
-        "balanceVersion"
-      ],
       "properties": {
         "credit": {
           "$ref": "#/definitions/Commitment",
@@ -6392,6 +6400,9 @@
         "balanceVersion": {
           "$ref": "#/definitions/BalanceVersion",
           "readOnly": true
+        },
+        "duration": {
+          "$ref": "#/definitions/Duration"
         }
       }
     },
@@ -6421,6 +6432,9 @@
           "type": "string",
           "description": "Display name for the conditional credit"
         },
+        "endAt": {
+          "$ref": "#/definitions/EndAt"
+        },
         "milestones": {
           "type": "array",
           "items": {
@@ -6432,18 +6446,52 @@
     },
     "ConditionalCreditList": {
       "type": "object",
-      "description": "List of conditional credits",
+      "description": "List of applicable conditional credits",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConditionalCredit"
           },
-          "description": "List of conditional credits"
+          "description": "List of applicable conditional credits"
         },
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results"
+        }
+      }
+    },
+    "ApplicableConditionalCreditList": {
+      "type": "object",
+      "description": "List of applicable conditional credits",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicableConditionalCredit"
+          },
+          "description": "List of applicable conditional credits"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results"
+        }
+      }
+    },
+    "ApplicableConditionalCredit": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "Applicable Conditional Credit.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Applicable Conditional Credit properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConditionalCreditProperties"
         }
       }
     },

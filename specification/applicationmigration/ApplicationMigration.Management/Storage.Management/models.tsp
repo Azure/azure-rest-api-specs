@@ -191,7 +191,7 @@ model FileShareProperties is AzureResourceProperties {
   /**
    * Co-located shares on the same volume.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["shareId"])
+  @identifiers(#["shareId"])
   colocatedShares?: ColocatedShare[];
 
   /**
@@ -297,7 +297,7 @@ model FileShareResourcePatch {
   /**
    * Co-located shares on the same volume.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["shareId"])
+  @identifiers(#["shareId"])
   colocatedShares?: ColocatedShare[];
 
   /**

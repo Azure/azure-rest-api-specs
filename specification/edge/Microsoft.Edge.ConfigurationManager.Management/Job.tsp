@@ -149,6 +149,13 @@ model JobStep {
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
+@doc("Additional metadata or properties.")
+@added(Versions.v2025_08_01)
+model AdditionalData {
+  @doc("Id of the workflow.")
+  workflowId?: string;
+}
+
 @doc("Properties of a Job resource, including type, status, parameters, steps, and error details.")
 model JobProperties {
   @doc("The type of job.")
@@ -182,6 +189,10 @@ model JobProperties {
   @doc("Error Details if any failure is there")
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("Additional metadata or properties.")
+  @added(Versions.v2025_08_01)
+  additionalData?: AdditionalData;
 }
 
 @doc("Job extension resource for tracking job execution and substatuses.")

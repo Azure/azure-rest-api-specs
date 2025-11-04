@@ -199,6 +199,68 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/{resourceUri}/providers/Microsoft.Workloads/configurationChecksTemplates/{configurationChecksTemplateName}/onDemandEvaluation": {
+      "post": {
+        "operationId": "ConfigurationChecksTemplates_OnDemandEvaluation",
+        "tags": [
+          "ConfigurationChecksTemplates"
+        ],
+        "description": "Evaluate the configuration check template resource on demand.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "configurationChecksTemplateName",
+            "in": "path",
+            "description": "The name of the configuration check template resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluate Configuration Checks Template On-Demand": {
+            "$ref": "./examples/ConfigurationChecksTemplates_OnDemandEvaluation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.Workloads/operations": {
       "get": {
         "operationId": "Operations_List",

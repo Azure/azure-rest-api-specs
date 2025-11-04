@@ -32,6 +32,7 @@
     - edgemarketplace/resource-manager/Microsoft.EdgeMarketplace/stable/2024-01-01/edgemarketplace.json
     - footprintmonitoring/resource-manager/Microsoft.FootprintMonitoring/preview/2024-08-21-preview/footprintProfiles.json
     - hybridaks/resource-manager/Microsoft.HybridContainerService/preview/2024-09-01-preview/openapi.json
+    - hybridaks/resource-manager/Microsoft.HybridContainerService/preview/2025-02-01-preview/openapi.json
     - informatica/resource-manager/Informatica.DataManagement/preview/2023-08-20-preview/openapi.json
     - liftrneon/resource-manager/Neon.Postgres/preview/2024-08-01-preview/neon.json
     - liftrneon/resource-manager/Neon.Postgres/preview/2025-02-01-preview/neon.json
@@ -874,62 +875,25 @@
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - parameters.service-dir.default
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
-  paths: [azcis/AadApplication.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [azcis/AzCopy.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [azcis/Certificate.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [azcis/Cloudsprout.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [azcis/Dns.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [azcis/Dscm.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [azcis/Environment.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [azcis/Ficp.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [azcis/GenericGenevaActions.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [plannedquota/tspconfig.yaml]
+  paths:
+  - azcis/AadApplication.Management/tspconfig.yaml
+  - azcis/AzCopy.Management/tspconfig.yaml
+  - azcis/Certificate.Management/tspconfig.yaml
+  - azcis/Cloudsprout.Management/tspconfig.yaml
+  - azcis/Dns.Management/tspconfig.yaml
+  - azcis/Dscm.Management/tspconfig.yaml
+  - azcis/DsmsManagedKeySecret.Management/tspconfig.yaml
+  - azcis/Environment.Management/tspconfig.yaml
+  - azcis/EventGrid.Management/tspconfig.yaml
+  - azcis/Ficp.Management/tspconfig.yaml
+  - azcis/GenericGenevaActions.Management/tspconfig.yaml
+  - azcis/PlannedQuota.Management/tspconfig.yaml
+  - azcis/StorageAccountDsms.Management/tspconfig.yaml
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]

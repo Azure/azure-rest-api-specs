@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -47,7 +47,7 @@ model ServicePropertiesFormat {
 
   @doc("The set of data flow policy rules that make up this service.")
   @minItems(1)
-  @extension("x-ms-identifiers", #["ruleName"])
+  @identifiers(#["ruleName"])
   pccRules: PccRuleConfiguration[];
 }
 
@@ -91,7 +91,7 @@ model PccRuleConfiguration {
   @doc("The set of data flow templates to use for this data flow policy rule.")
   @minItems(1)
   @maxItems(15)
-  @extension("x-ms-identifiers", #["templateName"])
+  @identifiers(#["templateName"])
   serviceDataFlowTemplates: ServiceDataFlowTemplate[];
 }
 

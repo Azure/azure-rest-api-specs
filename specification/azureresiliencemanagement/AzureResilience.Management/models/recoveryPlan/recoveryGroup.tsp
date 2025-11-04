@@ -91,12 +91,12 @@ model RecoveryGroupProperties {
   description: string;
 
   @doc("Pre-actions for the recovery orchestration group.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(10)
   preActions?: RecoveryGroupBaseAction[];
 
   @doc("Post-actions for the recovery orchestration group.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(10)
   postActions?: RecoveryGroupBaseAction[];
 }
@@ -120,7 +120,7 @@ model RecoveryGroupsSetting {
   defaultGroup: RecoveryGroup;
 
   @doc("Additional recovery orchestration group settings.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(14)
   additionalGroups?: RecoveryGroup[];
 }

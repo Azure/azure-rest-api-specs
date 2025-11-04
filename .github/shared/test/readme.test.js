@@ -1,5 +1,3 @@
-// @ts-check
-
 import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";

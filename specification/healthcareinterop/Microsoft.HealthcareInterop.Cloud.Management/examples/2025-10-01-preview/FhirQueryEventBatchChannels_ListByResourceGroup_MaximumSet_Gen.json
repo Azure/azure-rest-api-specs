@@ -1,0 +1,93 @@
+{
+  "title": "FhirQueryEventBatchChannels_ListByResourceGroup_MaximumSet",
+  "operationId": "FhirQueryEventBatchChannels_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "subscriptionId": "EA9A3A92-77E8-44C3-9154-791246044458",
+    "resourceGroupName": "rgcloud"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hubResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hubs/testhub",
+              "sourceConfiguration": {
+                "connectorType": "Hl7Connector",
+                "hl7ConnectorResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hl7Connectors/hl7conn1"
+              },
+              "transformationConfiguration": {
+                "fhirQueryConfiguration": {
+                  "fhirServerConfiguration": {
+                    "emrSystem": "Epic",
+                    "serviceEndpoint": "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4",
+                    "authenticationConfiguration": {
+                      "authorizationEndpoint": "https://fhir.epic.com/test-fhir-oauth/oauth2/token",
+                      "clientId": "clientid",
+                      "clientSecret": {
+                        "type": "KeyVaultKey",
+                        "keyVaultKeyIdentifier": "https://keyvaultname.vault.azure.net/keys/testkeyname"
+                      }
+                    }
+                  }
+                }
+              },
+              "destinationConfiguration": {
+                "connectorType": "OneLakeConnector",
+                "oneLakeConnectorResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/oneLakeConnectors/onelakeconn1"
+              },
+              "jobConfiguration": {
+                "trigger": {
+                  "triggerType": "RecurringScheduleTrigger",
+                  "state": "Enabled",
+                  "startDateTimeUtc": "2025-05-24T00:22:49.321Z",
+                  "activeHours": [
+                    0,
+                    2,
+                    4,
+                    6,
+                    8,
+                    10,
+                    12,
+                    14,
+                    16,
+                    18,
+                    20,
+                    22
+                  ],
+                  "activeDays": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                  ]
+                }
+              }
+            },
+            "tags": {
+              "key2494": "zmitjztiqyrfvdg"
+            },
+            "location": "eastus2",
+            "id": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels/channel1",
+            "name": "channel1",
+            "type": "Microsoft.HealthcareInterop/fhirQueryEventBatchChannels",
+            "systemData": {
+              "createdBy": "rqgqiooxsbu",
+              "createdByType": "User",
+              "createdAt": "2025-05-24T00:22:48.973Z",
+              "lastModifiedBy": "zqtbhvndtfvwzg",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-05-24T00:22:48.973Z"
+            }
+          }
+        ],
+        "nextLink": "https://eastus2euap.management.azure.com/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels?api-version=2025-05-01-preview&$skipToken=dummySkipToken"
+      }
+    }
+  }
+}

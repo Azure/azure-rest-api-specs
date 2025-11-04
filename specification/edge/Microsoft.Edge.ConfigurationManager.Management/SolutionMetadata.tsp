@@ -35,6 +35,14 @@ model SolutionMetadataProperties {
       type: "Microsoft.Edge/SolutionTemplates";
     }
   ]>;
+
+  @doc("Latest solution template version")
+  @visibility(Lifecycle.Read)
+  latestVersion?: string;
+
+  @doc("Current solution template version")
+  @visibility(Lifecycle.Read)
+  currentVersion?: string;
 }
 
 @added(Versions.v2025_08_15_preview)

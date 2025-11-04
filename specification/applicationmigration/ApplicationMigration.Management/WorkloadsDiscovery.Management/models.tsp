@@ -738,7 +738,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Dictionary of server parameters for the instance
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @identifiers(#["key", "value"])
   serverParameters?: ServerParameter[];
 
   /**
@@ -1157,7 +1157,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
+  @identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -1267,7 +1267,7 @@ model PgsqlDatabaseResourcePatch {
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
+  @identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**

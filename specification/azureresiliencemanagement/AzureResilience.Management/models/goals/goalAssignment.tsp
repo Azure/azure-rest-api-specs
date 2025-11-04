@@ -31,7 +31,7 @@ model GoalAssignmentProperties {
   goalAssignmentType: GoalAssignmentType;
 
   @doc("List of service level resources.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serviceLevelResources?: ServiceLevelResource[];
 
   @doc("Provisioning state")

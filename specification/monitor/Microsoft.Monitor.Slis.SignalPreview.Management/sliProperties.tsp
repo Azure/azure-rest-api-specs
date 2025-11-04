@@ -4,12 +4,14 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.Monitor;
 
 @doc("Represents a signal model used in SLI calculations.")
 model Signal {
   @doc("Sources of metrics used for SLIs.")
-  @OpenAPI.extension("x-ms-identifiers", #["signalSourceId"])
+  @identifiers(#["signalSourceId"])
   signalSources: SignalSource[];
 
   @doc("Mathematical formula used to combine multiple metrics.")
