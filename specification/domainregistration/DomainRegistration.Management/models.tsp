@@ -729,45 +729,6 @@ model DomainPurchaseConsent {
 }
 
 /**
- * Azure resource. This resource is tracked in Azure Resource Manager
- */
-model Resource {
-  /**
-   * Resource Id.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource Name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Kind of resource. If the resource is an app, you can refer to https://github.com/Azure/app-service-linux-docs/blob/master/Things_You_Should_Know/kind_property.md#app-service-resource-kind-reference for details supported values for kind.
-   */
-  kind?: string;
-
-  /**
-   * Resource Location.
-   */
-  location: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
-
-/**
  * Single sign-on request information for domain management.
  */
 model DomainControlCenterSsoRequest {
