@@ -2,7 +2,12 @@ import { describe, expect, it } from "vitest";
 import { CommitStatusState } from "../../shared/src/github.js";
 import { getLabelActionImpl } from "../src/arm-auto-signoff.js";
 import { LabelAction } from "../src/label.js";
-import { createMockCore, createMockGithub as createMockGithubBase } from "./mocks.js";
+import {
+  asCore,
+  asGitHub,
+  createMockCore,
+  createMockGithub as createMockGithubBase,
+} from "./mocks.js";
 
 const core = createMockCore();
 
@@ -43,6 +48,7 @@ function createMockGithub({ incrementalTypeSpec }) {
 
 describe("getLabelActionImpl", () => {
   it("throws if inputs null", async () => {
+    // @ts-expect-error: testing invalid inputs
     await expect(getLabelActionImpl({})).rejects.toThrow();
   });
 
@@ -58,8 +64,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).rejects.toThrow();
   });
@@ -76,8 +82,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
   });
@@ -94,8 +100,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
   });
@@ -121,8 +127,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
   });
@@ -144,8 +150,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
   });
@@ -182,8 +188,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
   });
@@ -205,8 +211,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
   });
@@ -234,8 +240,8 @@ describe("getLabelActionImpl", () => {
           repo: "TestRepo",
           issue_number: 123,
           head_sha: "abc123",
-          github: github,
-          core: core,
+          github: asGitHub(github),
+          core: asCore(core),
         }),
       ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
     },
@@ -295,8 +301,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: expectedAction, headSha: "abc123", issueNumber: 123 });
   });
@@ -317,8 +323,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
 
@@ -331,8 +337,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
   });
@@ -362,8 +368,8 @@ describe("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: github,
-        core: core,
+        github: asGitHub(github),
+        core: asCore(core),
       }),
     ).resolves.toEqual({ labelAction: LabelAction.Add, headSha: "abc123", issueNumber: 123 });
   });
