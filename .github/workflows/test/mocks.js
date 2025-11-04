@@ -9,14 +9,21 @@ import { vi } from "vitest";
 
 /**
  * @returns {AsyncFunctionArguments}
- * @param {any} mockAsyncFunctionArguments
+ * @param {unknown} mockAsyncFunctionArguments
  */
 export function asAsyncFunctionArguments(mockAsyncFunctionArguments) {
-  return /** @type {AsyncFunctionArguments} */ mockAsyncFunctionArguments;
+  return /** @type {AsyncFunctionArguments} */ (mockAsyncFunctionArguments);
+}
+
+/**
+ * @returns {GitHub & ReturnType<createMockGithubImpl>}
+ */
+export function createMockGithub() {
+  return /** @type {GitHub & ReturnType<createMockGithubImpl>} */ (createMockGithubImpl());
 }
 
 // Partial mock of `github` parameter passed into github-script actions
-export function createMockGithub() {
+function createMockGithubImpl() {
   return {
     hook: {
       after: vi.fn(),
@@ -65,15 +72,14 @@ export function createMockGithub() {
 }
 
 /**
- * @returns {GitHub}
- * @param {any} mockGithub
+ * @returns {Core & ReturnType<createMockCoreImpl>}
  */
-export function asGitHub(mockGithub) {
-  return /** @type {GitHub} */ mockGithub;
+export function createMockCore() {
+  return /**@type {Core & ReturnType<createMockCoreImpl>} */ (createMockCoreImpl());
 }
 
 // Partial mock of `core` parameter passed into to github-script actions
-export function createMockCore() {
+function createMockCoreImpl() {
   return {
     debug: vi.fn(console.debug),
     info: vi.fn(console.log),
