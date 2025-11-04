@@ -32,19 +32,15 @@
         ],
         "source": {
           "type": "AzureStorageAccountDatastore",
+          "name": "my-storage-account-datastore",
           "containerUri": "https://my-storage-account.blob.core.windows.net/my-container",
-          "tenantId": "00000000-0000-0000-0000-000000000000",
-          "name": "my-storage-account-datastore"
+          "tenantId": "00000000-0000-0000-0000-000000000000"
         }
-      },
-      "tags": {}
+      }
     }
   },
   "responses": {
     "201": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset?api-version=2025-11-04-preview"
-      },
       "body": {
         "properties": {
           "type": "Snapshot",
@@ -67,9 +63,14 @@
           ],
           "locations": [
             "eastus"
-          ]
+          ],
+          "source": {
+            "type": "AzureStorageAccountDatastore",
+            "name": "my-storage-account-datastore",
+            "containerUri": "https://my-storage-account.blob.core.windows.net/my-container",
+            "tenantId": "00000000-0000-0000-0000-000000000000"
+          }
         },
-        "tags": {},
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset",
         "name": "resource-snapshot-dataset",
         "type": "Microsoft.ResourceBuilder/workspaces/datasets"

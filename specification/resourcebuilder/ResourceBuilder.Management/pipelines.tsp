@@ -123,7 +123,7 @@ union PipelineDependencyCondition {
 /** Pipeline activity policy */
 model PipelineActivityPolicy {
   /** Timeout for the activity. */
-  timeout?: duration;
+  timeout?: string;
 }
 
 /** Pipeline recurrence */
@@ -132,10 +132,10 @@ model PipelineRecurrence {
   type: ScheduleType;
 
   /** Periodicity of the recurrence. */
-  periodicity?: duration;
+  periodicity?: string;
 
   /** Timeout for the recurrence. */
-  timeout?: duration;
+  timeout?: string;
 }
 
 /** Schedule type */
@@ -150,8 +150,8 @@ union ScheduleType {
 @armResourceOperations
 interface Pipelines {
   get is ArmResourceRead<Pipeline>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Pipeline>;
-  delete is ArmResourceDeleteWithoutOkAsync<Pipeline>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Pipeline>;
+  delete is ArmResourceDeleteSync<Pipeline>;
   list is ArmResourceListByParent<Pipeline>;
 }
 

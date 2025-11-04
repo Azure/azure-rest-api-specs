@@ -13,31 +13,48 @@
       "body": {
         "properties": {
           "state": "Enabled",
+          "recurrence": {
+            "type": "Periodic",
+            "periodicity": "01:00:00"
+          },
+          "timeout": "03:00:00",
           "activities": [
             {
-              "name": "extract-activity",
+              "name": "data-processing-activity",
               "job": {
-                "kind": "Batch"
+                "type": "reference",
+                "name": "data-processing-job"
+              },
+              "policy": {
+                "timeout": "03:00:00"
               }
             },
             {
-              "name": "transform-activity",
+              "name": "dataquality-validation-activity",
               "job": {
-                "kind": "Batch"
+                "type": "reference",
+                "name": "dataquality-validation-job"
+              },
+              "policy": {
+                "timeout": "02:00:00"
               }
             },
             {
-              "name": "load-activity",
+              "name": "kusto-publish-activity",
               "job": {
-                "kind": "Batch"
+                "type": "reference",
+                "name": "kusto-publish-job"
+              },
+              "policy": {
+                "timeout": "01:00:00"
               }
             }
           ]
         },
-        "tags": {},
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline",
         "name": "data-processing-pipeline",
-        "type": "Microsoft.ResourceBuilder/workspaces/pipelines"
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines",
+        "location": "westus2"
       }
     }
   }

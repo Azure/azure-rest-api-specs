@@ -34,8 +34,7 @@
             },
             "dependsOn": [
               {
-                "activity": "data-processing",
-                "dependencyConditions": ["Succeeded"]
+                "activity": "data-processing"
               }
             ],
             "policy": {
@@ -50,8 +49,7 @@
             },
             "dependsOn": [
               {
-                "activity": "data-quality-validation",
-                "dependencyConditions": ["Succeeded"]
+                "activity": "data-quality-validation"
               }
             ],
             "policy": {
@@ -59,15 +57,11 @@
             }
           }
         ]
-      },
-      "tags": {}
+      }
     }
   },
   "responses": {
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceBuilder/locations/westus2/operationStatuses/operation-12345678"
-      },
       "body": {
         "properties": {
           "state": "Enabled",
@@ -95,8 +89,7 @@
               },
               "dependsOn": [
                 {
-                  "activity": "data-processing",
-                  "dependencyConditions": ["Succeeded"]
+                  "activity": "data-processing"
                 }
               ],
               "policy": {
@@ -111,8 +104,7 @@
               },
               "dependsOn": [
                 {
-                  "activity": "data-quality-validation",
-                  "dependencyConditions": ["Succeeded"]
+                  "activity": "data-quality-validation"
                 }
               ],
               "policy": {
@@ -121,10 +113,10 @@
             }
           ]
         },
-        "tags": {},
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline",
         "name": "data-processing-pipeline",
-        "type": "Microsoft.ResourceBuilder/workspaces/pipelines"
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines",
+        "location": "westus2"
       }
     }
   }

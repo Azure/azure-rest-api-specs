@@ -41,10 +41,10 @@ model JobProperties {
   // Common properties (available for all kinds)
   // ============================================
   /** Input datasets for the job. */
-  inputDatasets?: JobDataset[];
+  inputs?: JobDataset[];
 
   /** Output datasets for the job. */
-  outputDatasets?: JobDataset[];
+  outputs?: JobDataset[];
 
   // ============================================
   // Batch job specific properties (kind: "Batch")
@@ -60,10 +60,10 @@ model JobProperties {
   mergeWithPreviousSnapshot?: boolean;
 
   /** Lookback start offset for merging with previous snapshot. Used by Batch jobs. */
-  lookbackStartOffset?: duration;
+  lookbackStartOffset?: string;
 
   /** Retention window to evict latest records. Used by Batch jobs. */
-  retentionWindow?: duration;
+  retentionWindow?: string;
 
   // ============================================
   // AzureStorageAccountIngestion job specific properties (kind: "AzureStorageAccountIngestion")
@@ -75,7 +75,7 @@ model JobProperties {
   blobPartitionPath?: string;
 
   /** Time offset for the job execution. Used by AzureStorageAccountIngestion jobs. */
-  timeOffset?: duration;
+  timeOffset?: string;
 
   // ============================================
   // AzureDataExplorerPublish job specific properties (kind: "AzureDataExplorerPublish")
@@ -115,7 +115,7 @@ model JobProperties {
   // ============================================
   // AzureResourceGraph_Galaxy job specific properties (kind: "AzureResourceGraph_Galaxy")
   // ============================================
-  // Note: Uses processingLogic, inputDatasets, and outputDatasets (defined above)
+  // Note: Uses processingLogic, inputs, and outputs (defined above)
 }
 
 /** Job kind */
@@ -148,10 +148,10 @@ model JobDataset {
   name?: string;
 
   /** Lookback start offset of the dataset, which defines how far back in time the dataset should consider data. */
-  lookbackStartOffset?: duration;
+  lookbackStartOffset?: string;
 
   /** Lookback end offset of the dataset, which defines the end of the time range for the dataset's data. */
-  lookbackEndOffset?: duration;
+  lookbackEndOffset?: string;
 
   /** Policy for handling missing partitions. Defaults to Fail. */
   missingPartitionPolicy?: MissingPartitionPolicy;
@@ -468,8 +468,8 @@ model AutoDataQualityParameters {
 @armResourceOperations
 interface Jobs {
   get is ArmResourceRead<Job>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Job>;
-  delete is ArmResourceDeleteWithoutOkAsync<Job>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Job>;
+  delete is ArmResourceDeleteSync<Job>;
   list is ArmResourceListByParent<Job>;
 }
 

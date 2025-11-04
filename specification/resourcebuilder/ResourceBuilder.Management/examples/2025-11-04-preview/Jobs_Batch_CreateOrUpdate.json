@@ -11,11 +11,20 @@
     "resource": {
       "properties": {
         "kind": "Batch",
+        "mergeWithPreviousSnapshot": true,
+        "lookbackStartOffset": "01:00:00",
+        "retentionWindow": "01:00:00",
+        "primaryKeyAttributes": [
+          {
+            "keyAttribute": "id",
+            "timestampAttribute": "timestamp"
+          }
+        ],
         "processingLogic": {
           "type": "SparkSQL",
           "value": "SELECT * FROM input_dataset WHERE column1 > 0"
         },
-        "inputDatasets": [
+        "inputs": [
           {
             "dataset": {
               "type": "ResourceId",
@@ -24,7 +33,7 @@
             "name": "input-dataset"
           }
         ],
-        "outputDatasets": [
+        "outputs": [
           {
             "dataset": {
               "type": "ResourceId",
@@ -32,25 +41,29 @@
             },
             "name": "output-dataset"
           }
-        ],
-        "mergeWithPreviousSnapshot": true
-      },
-      "tags": {}
+        ]
+      }
     }
   },
   "responses": {
     "201": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/batch-processing-job?api-version=2025-11-04-preview"
-      },
       "body": {
         "properties": {
           "kind": "Batch",
+          "mergeWithPreviousSnapshot": true,
+          "lookbackStartOffset": "01:00:00",
+          "retentionWindow": "01:00:00",
+          "primaryKeyAttributes": [
+            {
+              "keyAttribute": "id",
+              "timestampAttribute": "timestamp"
+            }
+          ],
           "processingLogic": {
             "type": "SparkSQL",
             "value": "SELECT * FROM input_dataset WHERE column1 > 0"
           },
-          "inputDatasets": [
+          "inputs": [
             {
               "dataset": {
                 "type": "ResourceId",
@@ -59,7 +72,7 @@
               "name": "input-dataset"
             }
           ],
-          "outputDatasets": [
+          "outputs": [
             {
               "dataset": {
                 "type": "ResourceId",
@@ -67,13 +80,12 @@
               },
               "name": "output-dataset"
             }
-          ],
-          "mergeWithPreviousSnapshot": true
+          ]
         },
-        "tags": {},
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/batch-processing-job",
         "name": "batch-processing-job",
-        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs",
+        "location": "westus2"
       }
     }
   }

@@ -30,7 +30,8 @@ model DatasetProperties {
   provisioningState?: ResourceProvisioningState;
 
   /** Dataset type, e.g. Snapshot or Delta. */
-  datasetType?: DatasetType;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property 'type' is at different level than envelope 'type' (resource type identifier)"
+  type?: DatasetType;
 
   /** Dataset schema definition. */
   schema?: DatasetColumn[];
@@ -110,8 +111,8 @@ union DatastoreType {
 @armResourceOperations
 interface Datasets {
   get is ArmResourceRead<Dataset>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Dataset>;
-  delete is ArmResourceDeleteWithoutOkAsync<Dataset>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Dataset>;
+  delete is ArmResourceDeleteSync<Dataset>;
   list is ArmResourceListByParent<Dataset>;
 }
 
