@@ -1562,6 +1562,85 @@
           "description": "Resource tags."
         }
       }
+    },
+    "AgentDataConnectorProperties": {
+      "description": "Agent Data Connector Properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "properties": {
+        "dataConnectorType": {
+          "description": "The type of the data connector.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source of the data connector - \"Agent\" when directly stored in agent, \"AgentSpace\" when inherited.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AgentSpaceDataConnectorProperties": {
+      "description": "Agent Space Data Connector Properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "properties": {
+        "dataConnectorType": {
+          "description": "The type of the data connector.",
+          "enum": [
+            "Kusto",
+            "Icm"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentSpaceDataConnectorType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DataConnector": {
+      "type": "object",
+      "description": "Data Connector properties",
+      "properties": {
+        "dataSource": {
+          "description": "Data source connection string or endpoint.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "keyVaultUri": {
+          "description": "The Key Vault URI where secrets can be stored.",
+          "type": "string"
+        },
+        "identity": {
+          "description": "Identity used to access the data source.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data connector.",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DataConnectorProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {
