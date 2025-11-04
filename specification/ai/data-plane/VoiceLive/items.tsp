@@ -10,6 +10,10 @@ union ItemType {
   message: "message",
   function_call: "function_call",
   function_call_output: "function_call_output",
+  mcp_list_tools: "mcp_list_tools",
+  mcp_call: "mcp_call",
+  mcp_approval_request: "mcp_approval_request",
+  mcp_approval_response: "mcp_approval_response",
 }
 
 // Base for user content parts
@@ -291,4 +295,108 @@ model TokenUsage {
 
   /** Detailed breakdown of output tokens. */
   output_token_details: OutputTokenDetails;
+}
+
+/** Represents a mcp tool definition. */
+@usage(ResponseUsage)
+model MCPTool {
+  /** The name of the tool. */
+  name: string;
+
+  /** The description of the tool. */
+  description?: string;
+
+  /** The input schema for the tool. */
+  input_schema: unknown;
+
+  /** The annotations for the tool. */
+  annotations?: unknown;
+}
+
+/** A response item that lists the tools available on an MCP server. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ResponseMCPListToolItem extends ResponseItem {
+  /** The type of the item. */
+  type: ItemType.mcp_list_tools;
+
+  /** The tools available on the server. */
+  tools: MCPTool[];
+
+  /** The label of the server that provides the tools. */
+  server_label: string;
+}
+
+/** A response item that represents a call to an MCP tool. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ResponseMCPCallItem extends ResponseItem {
+  /** The type of the item. */
+  type: ItemType.mcp_call;
+
+  /** The ID of the approval request, if any. */
+  approval_request_id?: string;
+
+  /** The arguments for the tool call. */
+  arguments: string;
+
+  /** The label of the server that provides the tool. */
+  server_label: string;
+
+  /** The name of the tool to call. */
+  name: string;
+
+  /** The output of the tool call. */
+  output?: string;
+
+  /** The error, if any, from the tool call. */
+  error?: unknown;
+}
+
+/** A response item that represents a request for approval to call an MCP tool. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ResponseMCPApprovalRequestItem extends ResponseItem {
+  /** The type of the item. */
+  type: ItemType.mcp_approval_request;
+
+  /** The arguments for the tool call. */
+  arguments?: string;
+
+  /** The name of the tool to call. */
+  name: string;
+
+  /** The label of the server that provides the tool. */
+  server_label: string;
+}
+
+/** A response item that represents a response to an MCP approval request. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ResponseMCPApprovalResponseItem extends ResponseItem {
+  /** The type of the item. */
+  type: ItemType.mcp_approval_response;
+
+  /** The ID of the approval request. */
+  approval_request_id: string;
+
+  /** Whether the tool call was approved. */
+  approve: boolean;
+
+  /** The reason for the approval decision. */
+  reason?: string;
+}
+
+/** A request item that represents a response to an MCP approval request. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
+model MCPApprovalResponseRequestItem extends ConversationRequestItem {
+  /** The type of the item. */
+  type: ItemType.mcp_approval_response;
+
+  /** The ID of the approval request. */
+  approval_request_id: string;
+
+  /** Whether the tool call was approved. */
+  approve: boolean;
 }
