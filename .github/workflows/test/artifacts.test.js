@@ -111,7 +111,6 @@ describe("getAzurePipelineArtifact function", () => {
     });
 
     // Call function with fallbackToFailedArtifact set to true
-    // @ts-expect-error: foo
     const result = await getAzurePipelineArtifact({
       ...inputs,
       token: testToken,
@@ -167,7 +166,6 @@ describe("getAzurePipelineArtifact function", () => {
     });
 
     // Call function with token
-    // @ts-expect-error foo
     const result = await getAzurePipelineArtifact({
       ...inputs,
       token: testToken,
@@ -602,7 +600,6 @@ describe("fetchFailedArtifact function", () => {
     });
 
     // Call the function with custom headers
-    // @ts-expect-error foo
     const response = await fetchFailedArtifact({
       ...defaultParams,
       headers: customHeaders,
@@ -667,7 +664,6 @@ describe("fetchFailedArtifact function", () => {
     });
 
     // Call the function
-    // @ts-expect-error foo
     const response = await fetchFailedArtifact(defaultParams);
 
     // Verify response is correct
@@ -697,7 +693,6 @@ describe("fetchFailedArtifact function", () => {
     mockFetch.mockResolvedValue(mockListResponse);
 
     // Call the function and expect it to return a 404 response
-    // @ts-expect-error foo
     const response = await fetchFailedArtifact(defaultParams);
     expect(response.ok).toBe(false);
     expect(response.status).toBe(404);
@@ -717,7 +712,6 @@ describe("fetchFailedArtifact function", () => {
     mockFetch.mockResolvedValue(mockErrorResponse);
 
     // Call the function and expect it to throw
-    // @ts-expect-error foo
     await expect(fetchFailedArtifact(defaultParams)).rejects.toThrow(
       `Failed to fetch artifacts: 500, Internal Server Error`,
     );
@@ -767,7 +761,6 @@ describe("fetchFailedArtifact function", () => {
     });
 
     // Call the function
-    // @ts-expect-error foo
     const response = await fetchFailedArtifact(defaultParams);
 
     // Verify response is correct
