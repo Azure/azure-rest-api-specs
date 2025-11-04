@@ -880,8 +880,8 @@ model VMSSExtension {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Backwards compatibility with existing flatten"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility with existing flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: VMSSExtensionProperties;
 }
 /**

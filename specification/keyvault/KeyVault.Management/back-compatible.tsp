@@ -63,8 +63,11 @@ using Azure.Core;
 
 @@clientName(ManagedHsms.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedHsms.update::parameters.properties, "parameters");
-@@clientLocation(ManagedHsms.listByMHSMResource, "MHSMPrivateLinkResources");
-@@clientLocation(ManagedHsms.listByResource, "MHSMRegions");
+@@clientLocation(ManagedHsms.listByMHSMResource,
+  "MHSMPrivateLinkResources",
+  "!csharp,!java"
+);
+@@clientLocation(ManagedHsms.listByResource, "MHSMRegions", "!csharp,!java");
 
 @@clientLocation(MhsmPrivateEndpointConnections.get,
   "MHSMPrivateEndpointConnections",
@@ -255,16 +258,19 @@ op ManagedHsmsPurgeDeletedCustomized(
   body: void,
 ): void;
 
-@@override(DeletedVaults.getDeleted, VaultsGetDeletedCustomized, "python,go");
+@@override(DeletedVaults.getDeleted,
+  VaultsGetDeletedCustomized,
+  "python,go,java"
+);
 @@override(DeletedVaults.purgeDeleted,
   VaultsPurgeDeletedCustomized,
-  "python,go"
+  "python,go,java"
 );
 @@override(DeletedManagedHsms.getDeleted,
   ManagedHsmsGetDeletedCustomized,
-  "python,go"
+  "python,go,java"
 );
 @@override(DeletedManagedHsms.purgeDeleted,
   ManagedHsmsPurgeDeletedCustomized,
-  "python,go"
+  "python,go,java"
 );
