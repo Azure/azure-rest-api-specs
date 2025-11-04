@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-namespace Microsoft.AzureCis;
+namespace Microsoft.Geneva.LogsManagement;
 
 @doc("GenevaLogsAccounts properties")
 model GenevaLogsAccountsResourceProperties {

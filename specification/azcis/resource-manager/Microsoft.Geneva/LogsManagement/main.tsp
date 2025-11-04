@@ -10,8 +10,8 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Azure CIS FRP" })
 @doc("Geneva Logs Provider")
-@versioned(Microsoft.AzureCis.Versions)
-namespace Microsoft.AzureCis;
+@versioned(Microsoft.Geneva.LogsManagement.Versions)
+namespace Microsoft.Geneva.LogsManagement;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
