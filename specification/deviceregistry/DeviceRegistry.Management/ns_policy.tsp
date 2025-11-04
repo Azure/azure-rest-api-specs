@@ -89,7 +89,7 @@ model LeafCertificateConfiguration {
   validityPeriodInDays: int32;
 }
 
-@added(Versions.v2025_11_01_preview)
+@added(Versions.v2026_04_01)
 @doc("Configuration for Bring Your Own Root (BYOR). When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.")
 model BringYourOwnRoot {
   @doc("Indicates whether BYOR is enabled for this policy. This can only be set at creation time and cannot be changed afterward.")
