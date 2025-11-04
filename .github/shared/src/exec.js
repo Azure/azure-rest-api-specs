@@ -1,5 +1,3 @@
-// @ts-check
-
 import child_process from "child_process";
 import { dirname, join } from "path";
 import { promisify } from "util";
