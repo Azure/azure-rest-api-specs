@@ -30,7 +30,7 @@ model DatasetProperties {
   provisioningState?: ResourceProvisioningState;
 
   /** Dataset type, e.g. Snapshot or Delta. */
-  datasetType?: DatasetType;
+  kind?: DatasetType;
 
   /** Dataset schema definition. */
   schema?: DatasetColumn[];
