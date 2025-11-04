@@ -62,7 +62,7 @@ interface Servers {
     Server,
     PatchModel = ServerForPatch,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = Server> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
