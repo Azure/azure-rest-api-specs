@@ -46,7 +46,7 @@ describe("breaking-change-add-label-artifacts", () => {
   const createMockWorkflowRun = (
     /** @type {string} */ name,
     status = "completed",
-    conclusion = "success",
+    /** @type {string|null} */ conclusion = "success",
     id = 1,
     updated_at = "2024-01-01T12:00:00Z",
   ) => ({
@@ -66,7 +66,7 @@ describe("breaking-change-add-label-artifacts", () => {
   };
 
   const setupWorkflowRunsMock = (
-    /** @type {{ id: number; name: string; status: string; conclusion: string; updated_at: string; }[]} */ workflowRuns,
+    /** @type {{ id: number; name: string; status: string; conclusion: string | null; updated_at: string; }[]} */ workflowRuns,
   ) => {
     mockGithub.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: { workflow_runs: workflowRuns },
@@ -226,7 +226,7 @@ describe("breaking-change-add-label-artifacts", () => {
       await setupMockInputs();
 
       const mockWorkflowRuns = [
-        createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "in_progress", undefined, 1),
+        createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "in_progress", null, 1),
         createMockWorkflowRun(
           CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
           "completed",
@@ -247,7 +247,7 @@ describe("breaking-change-add-label-artifacts", () => {
 
       const mockWorkflowRuns = [
         createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "completed", "success", 1),
-        createMockWorkflowRun(CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME, "queued", undefined, 2),
+        createMockWorkflowRun(CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME, "queued", null, 2),
       ];
 
       setupWorkflowRunsMock(mockWorkflowRuns);
@@ -431,7 +431,7 @@ describe("breaking-change-add-label-artifacts", () => {
           ...createMockWorkflowRun(
             CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
             "in_progress",
-            undefined,
+            null,
             2,
           ),
         },
