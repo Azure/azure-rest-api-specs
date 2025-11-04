@@ -102,8 +102,15 @@ export function createMockRequestError(status) {
   });
 }
 
-// Partial mock of `context` parameter passed into github-script actions
+/**
+ * @returns {Context & ReturnType<createMockContextImpl>}
+ */
 export function createMockContext() {
+  return /** @type {Context & ReturnType<createMockContextImpl>} */ (createMockContextImpl());
+}
+
+// Partial mock of `context` parameter passed into github-script actions
+function createMockContextImpl() {
   return {
     payload: {},
     repo: {
