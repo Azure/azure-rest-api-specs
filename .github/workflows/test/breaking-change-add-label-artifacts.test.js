@@ -5,17 +5,24 @@ import getLabelActions, {
   CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
   SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME,
 } from "../src/breaking-change-add-label-artifacts.js";
-import { createMockContext, createMockCore, createMockGithub } from "./mocks.js";
+import {
+  asAsyncFunctionArguments,
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "./mocks.js";
+
+const mockExtractInputs = vi.fn();
 
 // Mock dependencies
 vi.mock("../src/context.js", () => ({
-  extractInputs: vi.fn(),
+  extractInputs: mockExtractInputs,
 }));
 
 describe("breaking-change-add-label-artifacts", () => {
-  let mockGithub;
-  let mockContext;
-  let mockCore;
+  /** @type {ReturnType<typeof createMockGithub>} */ let mockGithub;
+  /** @type {ReturnType<typeof createMockContext>} */ let mockContext;
+  /** @type {ReturnType<typeof createMockCore>} */ let mockCore;
 
   beforeEach(() => {
     // Reset all mocks before each test
@@ -35,7 +42,7 @@ describe("breaking-change-add-label-artifacts", () => {
   };
 
   const createMockWorkflowRun = (
-    name,
+    /** @type {string} */ name,
     status = "completed",
     conclusion = "success",
     id = 1,
@@ -48,21 +55,25 @@ describe("breaking-change-add-label-artifacts", () => {
     updated_at,
   });
 
-  const createMockArtifact = (name) => ({ name });
+  const createMockArtifact = (/** @type {string} */ name) => ({ name });
 
   // Shared setup helpers
   const setupMockInputs = async () => {
-    const { extractInputs } = await import("../src/context.js");
-    extractInputs.mockResolvedValue(mockInputs);
+    mockExtractInputs.mockResolvedValue(mockInputs);
   };
 
-  const setupWorkflowRunsMock = (workflowRuns) => {
+  const setupWorkflowRunsMock = (
+    /** @type {{ id: number; name: string; status: string; conclusion: string; updated_at: string; }[]} */ workflowRuns,
+  ) => {
     mockGithub.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: { workflow_runs: workflowRuns },
     });
   };
 
-  const setupArtifactsMock = (breakingChangeArtifacts, crossVersionArtifacts) => {
+  const setupArtifactsMock = (
+    /** @type {{ name: string; }[]} */ breakingChangeArtifacts,
+    /** @type {{ name: string; }[]} */ crossVersionArtifacts,
+  ) => {
     mockGithub.rest.actions.listWorkflowRunArtifacts
       .mockResolvedValueOnce({ data: { artifacts: breakingChangeArtifacts } })
       .mockResolvedValueOnce({ data: { artifacts: crossVersionArtifacts } });
@@ -78,7 +89,10 @@ describe("breaking-change-add-label-artifacts", () => {
     expect(mockCore.setOutput).toHaveBeenCalledWith("issue_number", mockInputs.issue_number);
   };
 
-  const expectStandardOutputs = (breakingChangeValue, versioningValue) => {
+  const expectStandardOutputs = (
+    /** @type {boolean} */ breakingChangeValue,
+    /** @type {boolean} */ versioningValue,
+  ) => {
     expectRequiredOutputs();
 
     expect(mockCore.setOutput).toHaveBeenCalledWith(
@@ -96,7 +110,7 @@ describe("breaking-change-add-label-artifacts", () => {
     expect(mockCore.setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", versioningValue);
   };
 
-  const expectEarlyReturn = (infoMessage) => {
+  const expectEarlyReturn = (/** @type {string} */ infoMessage) => {
     expectRequiredOutputs();
 
     // Ensure setOutput was *only* called with the two required outputs
@@ -143,7 +157,9 @@ describe("breaking-change-add-label-artifacts", () => {
       setupArtifactsMock(breakingChangeArtifacts, crossVersionArtifacts);
 
       // Execute the function
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       // Verify API calls
       expect(mockGithub.rest.actions.listWorkflowRunsForRepo).toHaveBeenCalledWith({
@@ -184,7 +200,9 @@ describe("breaking-change-add-label-artifacts", () => {
       setupWorkflowRunsMock(createStandardWorkflowRuns());
       setupArtifactsMock(breakingChangeArtifacts, crossVersionArtifacts);
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       expectStandardOutputs(false, true); // only versioning label should be true
     });
@@ -198,7 +216,9 @@ describe("breaking-change-add-label-artifacts", () => {
       setupWorkflowRunsMock(createStandardWorkflowRuns());
       setupArtifactsMock(breakingChangeArtifacts, crossVersionArtifacts);
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       expectStandardOutputs(false, false); // no labels should be true
     });
@@ -209,7 +229,7 @@ describe("breaking-change-add-label-artifacts", () => {
       await setupMockInputs();
 
       const mockWorkflowRuns = [
-        createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "in_progress", null, 1),
+        createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "in_progress", undefined, 1),
         createMockWorkflowRun(
           CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
           "completed",
@@ -220,7 +240,9 @@ describe("breaking-change-add-label-artifacts", () => {
 
       setupWorkflowRunsMock(mockWorkflowRuns);
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       expectEarlyReturn("No completed breaking changes workflow run found");
     });
@@ -230,12 +252,14 @@ describe("breaking-change-add-label-artifacts", () => {
 
       const mockWorkflowRuns = [
         createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "completed", "success", 1),
-        createMockWorkflowRun(CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME, "queued", null, 2),
+        createMockWorkflowRun(CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME, "queued", undefined, 2),
       ];
 
       setupWorkflowRunsMock(mockWorkflowRuns);
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       expectEarlyReturn("No completed cross-version breaking changes workflow run found");
     });
@@ -255,7 +279,9 @@ describe("breaking-change-add-label-artifacts", () => {
 
       setupWorkflowRunsMock(mockWorkflowRuns);
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       expect(mockCore.info).toHaveBeenCalledWith(
         "No completed breaking changes workflow run found",
@@ -272,7 +298,9 @@ describe("breaking-change-add-label-artifacts", () => {
 
       setupWorkflowRunsMock(mockWorkflowRuns);
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       expect(mockCore.info).toHaveBeenCalledWith(
         "No completed cross-version breaking changes workflow run found",
@@ -296,7 +324,9 @@ describe("breaking-change-add-label-artifacts", () => {
         .mockResolvedValueOnce({ data: { artifacts: breakingChangeArtifacts } })
         .mockResolvedValueOnce({ data: { artifacts: crossVersionArtifacts } });
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       expect(mockCore.setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", true);
       expect(mockCore.setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", false);
@@ -319,7 +349,9 @@ describe("breaking-change-add-label-artifacts", () => {
         .mockResolvedValueOnce({ data: { artifacts: breakingChangeArtifacts } })
         .mockResolvedValueOnce({ data: { artifacts: crossVersionArtifacts } });
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       // Breaking change should take precedence
       expect(mockCore.setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", true);
@@ -335,7 +367,9 @@ describe("breaking-change-add-label-artifacts", () => {
         data: { workflow_runs: [] },
       });
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       expect(mockCore.info).toHaveBeenCalledWith(
         "No completed breaking changes workflow run found",
@@ -353,7 +387,9 @@ describe("breaking-change-add-label-artifacts", () => {
         .mockResolvedValueOnce({ data: { artifacts: [] } }) // Empty breaking change artifacts
         .mockResolvedValueOnce({ data: { artifacts: [] } }); // Empty cross-version artifacts
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       // Should log the info message about no artifacts found
       expect(mockCore.info).toHaveBeenCalledWith(
@@ -384,7 +420,9 @@ describe("breaking-change-add-label-artifacts", () => {
           data: { artifacts: [createMockArtifact("some-other-artifact")] },
         }); // Non-label artifacts
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       // Should NOT return early because there are artifacts (even though they're not label artifacts)
       // The function should continue and set outputs with false values
@@ -414,7 +452,7 @@ describe("breaking-change-add-label-artifacts", () => {
           ...createMockWorkflowRun(
             CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
             "in_progress",
-            null,
+            undefined,
             2,
           ),
         },
@@ -424,7 +462,9 @@ describe("breaking-change-add-label-artifacts", () => {
         data: { workflow_runs: mockWorkflowRuns },
       });
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
 
       // Should log status for in_progress and conclusion for completed
       expect(mockCore.info).toHaveBeenCalledWith(
@@ -449,7 +489,10 @@ describe("breaking-change-add-label-artifacts", () => {
         .mockResolvedValueOnce({ data: { artifacts } })
         .mockResolvedValueOnce({ data: { artifacts } });
 
-      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+      await getLabelActions(
+        asAsyncFunctionArguments({ github: mockGithub, context: mockContext, core: mockCore }),
+      );
+      vi.fn();
 
       // Verify all required outputs are set
       expect(mockCore.setOutput).toHaveBeenCalledWith("issue_number", mockInputs.issue_number);
