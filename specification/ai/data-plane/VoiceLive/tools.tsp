@@ -11,6 +11,7 @@ namespace VoiceLive;
 union ToolType {
   string,
   function: "function",
+  mcp: "mcp",
 }
 
 /**
@@ -76,4 +77,28 @@ model ToolChoiceObject {
 model ToolChoiceFunctionObject extends ToolChoiceObject {
   type: ToolType.function;
   name: string;
+}
+
+@usage(RequestUsage)
+model MCPServer extends Tool {
+  type: ToolType.mcp;
+  server_label: string;
+  server_url: string;
+  authorization?: string;
+  headers?: Record<string>;
+  allowed_tools?: string[];
+  require_approval?: MCPApprovalType | Record<MCPApprovalType, string[]>;
+}
+
+/**
+ * The available set of MCP approval types.
+ */
+union MCPApprovalType {
+  string,
+
+  /** Approval is never required. */
+  Never: "never",
+
+  /** Approval is always required. */
+  Always: "always",
 }

@@ -1,5 +1,6 @@
 import "./client.tsp";
 import "./custom.tsp";
+import "./events.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -1245,4 +1246,37 @@ model ServerEventResponseFunctionCallArgumentsDone extends ServerEvent {
 
   /** The name of the function call. */
   name: string;
+}
+
+/** MCP list tools in progress message. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@usage(ResponseUsage)
+model ServerEventMcpListToolsInProgress extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.mcp_list_tools_in_progress;
+
+  /** The item ID. */
+  item_id: string;
+}
+
+/** MCP list tools completed message. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@usage(ResponseUsage)
+model ServerEventMcpListToolsCompleted extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.mcp_list_tools_completed;
+
+  /** The item ID. */
+  item_id: string;
+}
+
+/** MCP list tools failed message. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@usage(ResponseUsage)
+model ServerEventMcpListToolsFailed extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.mcp_list_tools_failed;
+
+  /** The item ID. */
+  item_id: string;
 }

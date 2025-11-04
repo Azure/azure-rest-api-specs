@@ -21,6 +21,7 @@ union ClientEventType {
   response_create: "response.create",
   response_cancel: "response.cancel",
   session_avatar_connect: "session.avatar.connect",
+  mcp_approval_response: "mcp.approval_response",
 }
 
 /** Server event types used in VoiceLive protocol. */
@@ -61,4 +62,14 @@ union ServerEventType {
   response_animation_viseme_done: "response.animation_viseme.done",
   response_function_call_arguments_delta: "response.function_call_arguments.delta",
   response_function_call_arguments_done: "response.function_call_arguments.done",
+  mcp_list_tools_in_progress: "mcp_list_tools.in_progress",
+  mcp_list_tools_completed: "mcp_list_tools.completed",
+  mcp_list_tools_failed: "mcp_list_tools.failed",
+  response_mcp_call_arguments_delta: "response.mcp_call_arguments.delta",
+  response_mcp_call_arguments_done: "response.mcp_call_arguments.done",
+  mcp_approval_request: "mcp_approval_request",
+  mcp_approval_response: "mcp_approval_response",
+  response_mcp_call_in_progress: "response.mcp_call.in_progress",
+  response_mcp_call_completed: "response.mcp_call.completed",
+  response_mcp_call_failed: "response.mcp_call.failed",
 }
