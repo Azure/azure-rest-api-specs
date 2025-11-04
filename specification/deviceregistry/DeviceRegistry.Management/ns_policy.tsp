@@ -126,14 +126,14 @@ union BringYourOwnRootStatus {
 
 @added(Versions.v2026_04_01)
 @doc("Request payload for activating a BYOR policy with a customer-provided signed certificate.")
-model ActivatePolicyRequest {
+model ActivateBringYourOwnRootRequest {
   @doc("The customer-provided certificate, signed by their own CA, in PEM format. This certificate will be used to activate the BYOR policy.")
   signedCertificate: string;
 }
 
 @added(Versions.v2026_04_01)
 @doc("Response from the activate operation, indicating success or failure of the certificate activation.")
-model ActivatePolicy {
+model ActivateBringYourOwnRootResponse {
   @doc("Indicates whether the certificate was successfully activated.")
   success: boolean;
 
@@ -162,14 +162,14 @@ interface Policies {
 
   @added(Versions.v2026_04_01)
   @doc("Activates or renews a BYOR policy by accepting a customer-provided signed certificate.")
-  @action("activate")
+  @action("activateBringYourOwnRoot")
   @armResourceAction(Policy)
   @post
-  activate(
+  activateBringYourOwnRoot(
     ...ResourceInstanceParameters<Policy>,
 
     @doc("The activation request containing the customer-provided signed certificate.")
     @body
-    request: ActivatePolicyRequest,
-  ): ArmResponse<ActivatePolicy> | ErrorResponse;
+    request: ActivateBringYourOwnRootRequest,
+  ): ArmResponse<ActivateBringYourOwnRootResponse> | ErrorResponse;
 }
