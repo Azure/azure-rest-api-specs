@@ -9,7 +9,6 @@ import { createMockCore, createMockGithub } from "./mocks.js";
  * @param {import("./mocks.js").GitHub} github
  * @param {unknown} context
  * @param {import("./mocks.js").Core} core
- * @returns
  */
 function extractInputs(github, context, core) {
   return extractInputsImpl(github, /** @type {import("./mocks.js").Context} */ (context), core);
