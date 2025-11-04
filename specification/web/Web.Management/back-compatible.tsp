@@ -2046,15 +2046,6 @@ using Microsoft.Web;
 @@clientName(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
   "key"
 );
-
-@@Azure.ResourceManager.identifiers(StampCapacityCollection.value, #["name"]);
-@@Azure.ResourceManager.identifiers(CsmUsageQuotaCollection.value, #["name"]);
-@@Azure.ResourceManager.identifiers(SkuInfoCollection.value,
-  #["/sku/name", "resourceType"]
-);
-@@Azure.ResourceManager.identifiers(OutboundEnvironmentEndpointCollection.value,
-  #["category"]
-);
 @@summary(Operations.list,
   "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions"
 );

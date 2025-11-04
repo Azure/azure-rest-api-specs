@@ -1899,6 +1899,7 @@ model AppServiceEnvironmentPatchResource extends ProxyOnlyResource {
 /**
  * Collection of stamp capacities.
  */
+@@Azure.ResourceManager.identifiers(StampCapacityCollection.value, #["name"]);
 model StampCapacityCollection is Azure.Core.Page<StampCapacity>;
 
 /**
@@ -4049,6 +4050,9 @@ model ResourceMetricAvailability {
 /**
  * Collection of SKU information.
  */
+@@Azure.ResourceManager.identifiers(SkuInfoCollection.value,
+  #["/sku/name", "resourceType"]
+);
 model SkuInfoCollection is Azure.Core.Page<SkuInfo>;
 
 /**
@@ -4243,6 +4247,9 @@ model ErrorEntity {
 /**
  * Collection of Outbound Environment Endpoints
  */
+@@Azure.ResourceManager.identifiers(OutboundEnvironmentEndpointCollection.value,
+  #["category"]
+);
 model OutboundEnvironmentEndpointCollection
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
 
@@ -4623,6 +4630,7 @@ model KubeEnvironmentProfile {
 /**
  * Collection of CSM usage quotas.
  */
+@@Azure.ResourceManager.identifiers(CsmUsageQuotaCollection.value, #["name"]);
 model CsmUsageQuotaCollection is Azure.Core.Page<CsmUsageQuota>;
 
 /**
