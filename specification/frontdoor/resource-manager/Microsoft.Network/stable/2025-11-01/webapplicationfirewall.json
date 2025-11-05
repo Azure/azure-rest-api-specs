@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-10-01",
+    "version": "2025-11-01",
     "title": "WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules."
   },
@@ -772,6 +772,155 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleSet"
           }
+        },
+        "exceptionsList": {
+          "description": "List of exceptions applied on the managed rule sets.",
+          "$ref": "#/definitions/ManagedRuleSetExceptionList"
+        }
+      }
+    },
+    "ManagedRuleSetExceptionList": {
+      "description": "A list of managed ruleset exceptions.",
+      "type": "object",
+      "properties": {
+        "exceptions": {
+          "description": "List of exceptions applied on the managed rule sets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetException"
+          }
+        }
+      }
+    },
+    "ManagedRuleSetException": {
+      "description": "Excludes whole requests from managed rule evaluation according to match conditions.",
+      "type": "object",
+      "required": [
+        "matchVariable",
+        "valueMatchOperator",
+        "matchValues",
+        "scopes"
+      ],
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestUri",
+            "SocketAddr",
+            "RequestHeaderNames"
+          ],
+          "description": "The variable to be evaluated for excluding the request.",
+          "x-ms-enum": {
+            "name": "ExceptionMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+            "EqualsAny"
+          ],
+          "description": "Comparison operator to apply to the selector when specifying which elements in the collection this exception applies to.",
+          "x-ms-enum": {
+            "name": "ExceptionSelectorMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exception applies to. Currently, the only matchVariable to support selector is 'RequestHeaderNames', and the selector value can be any HTTP request header, e.g 'User-Agent'."
+        },
+        "valueMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+            "EqualsAny",
+            "IPMatch"
+          ],
+          "description": "Comparison operator to apply to the value to be matched.",
+          "x-ms-enum": {
+            "name": "ExceptionValueMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "matchValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of values to be matched with."
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetScope"
+          },
+          "description": "Scope(s) of the exception."
+        }
+      }
+    },
+    "ManagedRuleSetScope": {
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ],
+      "description": "Defines the scope of the managed rules.",
+      "type": "object",
+      "properties": {
+        "ruleSetType": {
+          "description": "Defines the rule set type. Currently supports: DefaultRuleSet, Microsoft_DefaultRuleSet, Microsoft_BotManagerRuleSet, Microsoft_HTTPDDoSRuleSet, BotProtection",
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "description": "Defines the version of the rule set.",
+          "type": "string"
+        },
+        "ruleGroupScopes": {
+          "description": "List of rule group scopes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleGroupScope"
+          }
+        }
+      }
+    },
+    "RuleGroupScope": {
+      "required": [
+        "ruleGroupName"
+      ],
+      "description": "Defines the scope of the rule group.",
+      "type": "object",
+      "properties": {
+        "ruleGroupName": {
+          "description": "Defines the rule group name.",
+          "type": "string"
+        },
+        "ruleScopes": {
+          "description": "List of rule scopes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleScope"
+          }
+        }
+      }
+    },
+    "RuleScope": {
+      "required": [
+        "ruleId"
+      ],
+      "description": "Defines the scope of the rule.",
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "description": "Defines the rule id.",
+          "type": "string"
         }
       }
     },

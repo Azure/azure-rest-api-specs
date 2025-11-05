@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-10-01",
+    "api-version": "2025-11-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "policyName": "Policy1"
@@ -89,8 +89,8 @@
           "managedRules": {
             "managedRuleSets": [
               {
-                "ruleSetType": "DefaultRuleSet",
-                "ruleSetVersion": "1.0",
+                "ruleSetType": "Microsoft_DefaultRuleSet",
+                "ruleSetVersion": "2.2",
                 "ruleSetAction": "Block",
                 "exclusions": [
                   {
@@ -135,7 +135,30 @@
                   }
                 ]
               }
-            ]
+            ],
+            "exceptionsList": {
+              "exceptions": [
+                {
+                  "matchVariable": "RequestHeaderNames",
+                  "selectorMatchOperator": "Equals",
+                  "selector": "User-Agent",
+                  "valueMatchOperator": "Contains",
+                  "matchValues": [
+                    "Mozilla"
+                  ],
+                  "scopes": [
+                    {
+                      "ruleSetType": "Microsoft_DefaultRuleSet",
+                      "ruleSetVersion": "2.2"
+                    },
+                    {
+                      "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                      "ruleSetVersion": "1.0"
+                    }
+                  ]
+                }
+              ]
+            }
           },
           "frontendEndpointLinks": [
             {
