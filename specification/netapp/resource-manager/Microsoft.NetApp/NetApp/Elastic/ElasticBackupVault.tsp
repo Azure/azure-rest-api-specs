@@ -81,3 +81,6 @@ interface ElasticBackupVaults {
 
 @@clientName(ElasticBackupVaults.createOrUpdate::parameters.resource, "body");
 @@clientName(ElasticBackupVaults.update::parameters.properties, "body");
+
+@@maxLength(ElasticBackupVault.name, 64);
+@@minLength(ElasticBackupVault.name, 1);
