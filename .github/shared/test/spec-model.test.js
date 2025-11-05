@@ -220,10 +220,9 @@ describe("SpecModel", () => {
       );
       const specModel = new SpecModel(folder, options);
 
-      const swaggerPath = resolve(folder, "data-plane/a.json");
-      await expect(specModel.getAffectedReadmeTags(swaggerPath)).rejects.toThrowError(
-        resolve(folder, "does-not-exist.json"),
-      );
+      await expect(
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
+      ).rejects.toThrowError(/Failed to read file for swagger/i);
     });
 
     it("throws when an input-file is invalid JSON", async () => {
