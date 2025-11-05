@@ -23,19 +23,19 @@ model Job is ProxyResource<JobProperties> {
   @path
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$")
   name: string;
+
+  /** Job kind discriminator. Determines which properties are valid for this job. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is a valid top-level property for Job resource"
+  kind: JobKind;
 }
 
 /** Job properties - properties vary by kind.
- * This is a polymorphic model where properties depend on the `kind` discriminator.
  * Each job kind has specific required and optional properties as documented below.
  */
 model JobProperties {
   /** Provisioning state of the job. */
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
-
-  /** Job kind discriminator. Determines which properties are valid for this job. */
-  kind: JobKind;
 
   // ============================================
   // Common properties (available for all kinds)

@@ -18,8 +18,8 @@
           "lookbackStartOffset": "01:00:00",
           "retentionWindow": "01:00:00",
           "processingLogic": {
-            "type": "Batch",
-            "name": "batch-processing-job"
+            "type": "SparkSQL",
+            "value": "SELECT * FROM input_dataset WHERE column1 > 0"
           },
           "primaryKeyAttributes": [
             {
@@ -55,7 +55,6 @@
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/batch-processing-job",
         "name": "batch-processing-job",
-        "location": "westus2",
         "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
       }
     }

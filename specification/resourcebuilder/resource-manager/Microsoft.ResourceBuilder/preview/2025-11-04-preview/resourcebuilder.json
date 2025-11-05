@@ -1895,8 +1895,15 @@
         "properties": {
           "$ref": "#/definitions/JobProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/JobKind",
+          "description": "Job kind discriminator. Determines which properties are valid for this job."
         }
       },
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -2015,16 +2022,12 @@
     },
     "JobProperties": {
       "type": "object",
-      "description": "Job properties - properties vary by kind.\nThis is a polymorphic model where properties depend on the `kind` discriminator.\nEach job kind has specific required and optional properties as documented below.",
+      "description": "Job properties - properties vary by kind.\nEach job kind has specific required and optional properties as documented below.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the job.",
           "readOnly": true
-        },
-        "kind": {
-          "$ref": "#/definitions/JobKind",
-          "description": "Job kind discriminator. Determines which properties are valid for this job."
         },
         "inputs": {
           "type": "array",
@@ -2112,10 +2115,7 @@
           "$ref": "#/definitions/ResourceNotificationResourceType",
           "description": "Resource type (resource or relationship). Required for AzureResourceNotificationPublish jobs."
         }
-      },
-      "required": [
-        "kind"
-      ]
+      }
     },
     "MetricEvaluationEntry": {
       "type": "object",
