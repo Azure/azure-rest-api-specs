@@ -127,9 +127,22 @@ export class Swagger {
       // Only read file if #content is exactly undefined, to allow setting #content to empty string
       // to simulate an empty file
       if (this.#content === undefined) {
-        this.#content = await readFile(this.#path, {
-          encoding: "utf8",
-        });
+        try {
+          this.#content = await readFile(this.#path, {
+            encoding: "utf8",
+          });
+        } catch (error) {
+          if (error instanceof Error) {
+            throw new SpecModelError(`Failed to read file for swagger: ${this.#path}`, {
+              cause: error,
+              source: this.#path,
+              tag: this.#tag?.name,
+              readme: this.#tag?.readme?.path,
+            });
+          }
+
+          throw error;
+        }
       }
 
       /** @type {Map<string, Operation>} */
