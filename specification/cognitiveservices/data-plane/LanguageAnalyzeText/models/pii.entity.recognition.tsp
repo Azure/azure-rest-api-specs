@@ -126,7 +126,7 @@ model BaseRedactionPolicy {
 
   /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
   @added(Versions.v2025_11_15_preview)
-  isDefaultPolicy?: boolean = false;
+  isDefault?: boolean = false;
 }
 
 /** Represents the policy of redacting with a redaction character */
