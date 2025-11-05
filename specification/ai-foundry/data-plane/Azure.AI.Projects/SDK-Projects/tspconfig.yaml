@@ -26,9 +26,12 @@ options:
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/.external-readonly/"
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/agents/"
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/common/"
       - "specification/ai-foundry/data-plane/Azure.AI.Projects/connections/"
       - "specification/ai-foundry/data-plane/Azure.AI.Projects/datasets/"
-      - "specification/ai-foundry/data-plane/Azure.AI.Projects/indexes
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/indexes/"
       - "specification/ai-foundry/data-plane/Azure.AI.Projects/deployments/"
       - "specification/ai-foundry/data-plane/Azure.AI.Projects/red-teams/"
       - "specification/ai-foundry/data-plane/Azure.AI.Projects/evaluationrules/"
@@ -37,6 +40,10 @@ options:
       - "specification/ai-foundry/data-plane/Azure.AI.Projects/evaluators/"
       - "specification/ai-foundry/data-plane/Azure.AI.Projects/insights/"
       - "specification/ai-foundry/data-plane/Azure.AI.Projects/schedules/"
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/memory_stores/"
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/conversations/"
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/responses/"
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/tools/"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
