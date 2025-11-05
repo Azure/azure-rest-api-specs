@@ -32,17 +32,21 @@ directive:
     transform: >
       $.identity['$ref'] = '../../../Registry/stable/2025-11-01/containerregistry.json#/definitions/IdentityProperties';
   - from: containerregistry_build.json
+    where: $.definitions.TaskRunUpdateParameters.properties
+    transform: >
+      $.identity['$ref'] = '../../../Registry/stable/2025-11-01/containerregistry.json#/definitions/IdentityProperties';
+  - from: containerregistry_build.json
     where: $.definitions.TaskUpdateParameters.properties
     transform: >
       $.identity['$ref'] = '../../../Registry/stable/2025-11-01/containerregistry.json#/definitions/IdentityProperties';
   - from: containerregistry_build.json
-    where: $.definitions.Run
+    where: $.definitions.Run.allOf
     transform: >
-      $.allOf['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource';
+      $['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource';
   - from: containerregistry_build.json
-    where: $.definitions.TaskRun
+    where: $.definitions.TaskRun.allOf
     transform: >
-      $.allOf['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource';
+      $['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource';
   - from: containerregistry_build.json
     where: $.definitions.Resource.properties
     transform: >
