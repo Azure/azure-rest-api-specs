@@ -239,7 +239,7 @@ model CheckElasticResourceAvailabilityResponse {
 
 @armResourceOperations
 interface ElasticCapacityPools {
-  /** Get the NetApp elastic account */
+  /** Get the NetApp Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
   get is ArmResourceRead<ElasticCapacityPool>;
 
@@ -264,7 +264,7 @@ interface ElasticCapacityPools {
 
   /** List and describe all NetApp Elastic Capacity Pools in the Elastic NetApp Account. */
   @added(Versions.v2025_09_01_preview)
-  listByNetAppAccount is ArmResourceListByParent<ElasticCapacityPool>;
+  listByElasticAccount is ArmResourceListByParent<ElasticCapacityPool>;
 
   /**
    * Moves pool to another zone
