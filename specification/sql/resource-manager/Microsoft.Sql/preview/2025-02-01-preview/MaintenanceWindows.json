@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindows/{maintenanceWindowName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindows/current": {
       "get": {
         "tags": [
           "MaintenanceWindows"
@@ -39,7 +39,7 @@
           },
           {
             "name": "maintenanceWindowName",
-            "in": "path",
+            "in": "query",
             "description": "Maintenance window name.",
             "required": true,
             "type": "string"
@@ -59,10 +59,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+            "description": "*** Error Responses: ***"
           }
         },
         "x-ms-examples": {
@@ -93,7 +90,7 @@
           },
           {
             "name": "maintenanceWindowName",
-            "in": "path",
+            "in": "query",
             "description": "Maintenance window name.",
             "required": true,
             "type": "string"
@@ -118,10 +115,7 @@
             "description": "Successfully set maintenance windows settings."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidMaintenanceWindowSelection - Invalid maintenance window selection.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+            "description": "*** Error Responses: ***\n\n * 400 InvalidMaintenanceWindowSelection - Invalid maintenance window selection."
           }
         },
         "x-ms-examples": {
