@@ -65,7 +65,7 @@ model HierarchySelector {
   @doc("Context Id")
   contextId: Azure.Core.armResourceIdentifier<[
     {
-      type: "Private.Edge/Context";
+      type: "Microsoft.Edge/Contexts";
     }
   ]>;
 
