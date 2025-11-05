@@ -32,7 +32,6 @@ input-file:
 - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
