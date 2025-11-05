@@ -255,6 +255,7 @@ model TargetDescription {
   /**
    * The metadata of this target.
    */
+  // If we can make it to be free format, e.g., Record<Any> or an object {}, then it will be great
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the target specification"
   @added(Versions.v2025_11_01_preview)
   metadata?: Record<string>;
