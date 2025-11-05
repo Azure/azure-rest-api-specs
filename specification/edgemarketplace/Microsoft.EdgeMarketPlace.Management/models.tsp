@@ -215,7 +215,7 @@ model MarketplaceSku {
   @doc("The operating system supported")
   operatingSystem?: SkuOperatingSystem;
 
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @doc("The marketplace sku version")
   marketplaceSkuVersions?: MarketplaceSkuVersion[];
 }

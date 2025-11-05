@@ -251,7 +251,7 @@ model NetworkInterface {
 
   /** IP configurations (1-1024). */
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipConfigurations: NetworkInterfaceIpConfiguration[];
 }
 

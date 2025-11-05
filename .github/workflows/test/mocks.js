@@ -1,5 +1,3 @@
-// @ts-check
-
 import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
 

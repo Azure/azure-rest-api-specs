@@ -26,4 +26,7 @@ model ConnectionHubProperties {
   @doc("The status of the ConnectionHub resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @doc("Migrate project ID.")
+  migrateProjectId: string;
 }

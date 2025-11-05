@@ -5033,11 +5033,14 @@
         "resourceLists": {
           "$ref": "#/definitions/ResourceLists",
           "description": "Add, Update, Delete resource lists"
+        },
+        "forceInclusionAndUpdate": {
+          "$ref": "#/definitions/ForceInclusionAndUpdate",
+          "description": "Whether to allow inclusion and update despite attention reasons."
         }
       },
       "required": [
-        "faultDurationInMin",
-        "resourceLists"
+        "faultDurationInMin"
       ]
     },
     "AddOrUpdateResourcesResponse": {
@@ -5187,6 +5190,17 @@
             "type": "string"
           }
         },
+        "drillRbacOnAzureHealthModel": {
+          "$ref": "#/definitions/RBACState",
+          "description": "Drill object does not have the necessary RBAC to read the Azure Health Model."
+        },
+        "rbacNeededForDrillOnAzureHealthModel": {
+          "type": "array",
+          "description": "Permissions needed by the Drill MSI to read Azure Health Model.",
+          "items": {
+            "type": "string"
+          }
+        },
         "roReadiness": {
           "$ref": "#/definitions/RecoveryPlanState",
           "description": "Associated RO ready or not."
@@ -5194,6 +5208,10 @@
         "faultRbacOnTargets": {
           "$ref": "#/definitions/RBACState",
           "description": "RBAC required by Experiment MSI not setup on the target resources."
+        },
+        "runbookFaultRbacOnTargets": {
+          "$ref": "#/definitions/RBACState",
+          "description": "RBAC required by AutomationAccount for runbook MSI not setup on the target resources."
         },
         "targets": {
           "$ref": "#/definitions/ExtensionObjectState",
@@ -5214,6 +5232,10 @@
         "chaosExperimentUserMsi": {
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "User MSI associated with chaos experiment object is deleted."
+        },
+        "includedResourceInDrill": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "Included resource in Drill."
         }
       }
     },
@@ -5237,6 +5259,30 @@
             "name": "ManuallyAttested",
             "value": "ManuallyAttested",
             "description": "Resource is manually attested."
+          }
+        ]
+      }
+    },
+    "AutoFailover": {
+      "type": "string",
+      "description": "Enum for AutoFailover",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "AutoFailover",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable AutoFailover."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable AutoFailover."
           }
         ]
       }
@@ -5369,6 +5415,13 @@
               }
             ]
           }
+        },
+        "faultDurationInMin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of faults.",
+          "minimum": 0,
+          "readOnly": true
         }
       },
       "required": [
@@ -5859,6 +5912,10 @@
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
         },
+        "healthModelProperties": {
+          "$ref": "#/definitions/HealthModelPropertiesOfDrill",
+          "description": "HealthModel properties."
+        },
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
@@ -5980,6 +6037,10 @@
         "faultRbacOnTarget": {
           "$ref": "#/definitions/RBACState",
           "description": "Experiment MSI does not have the desired RBAC on the resource."
+        },
+        "runbookFaultRbacOnTargets": {
+          "$ref": "#/definitions/RBACState",
+          "description": "RBAC required by AutomationAccount for runbook MSI not setup on the target resources."
         },
         "target": {
           "$ref": "#/definitions/ExtensionObjectState",
@@ -6119,6 +6180,11 @@
           "description": "Fault Properties",
           "readOnly": true
         },
+        "forceInclusionState": {
+          "$ref": "#/definitions/ForceInclusionAndUpdate",
+          "description": "ForceInclusion status for this resource. Has the customer forceIncluded it?",
+          "readOnly": true
+        },
         "haStatus": {
           "$ref": "#/definitions/HAStatus",
           "description": "HA status of the Drill resource",
@@ -6127,6 +6193,11 @@
         "attentionReason": {
           "$ref": "#/definitions/DrillResourceAttentionReason",
           "description": "Attention reason if the Status is 'NeedsAttention'.",
+          "readOnly": true
+        },
+        "advisorRecommendationTypeId": {
+          "type": "string",
+          "description": "Recommendation Type Id for the recommendation.",
           "readOnly": true
         },
         "advisorHaRecommendationId": {
@@ -6160,8 +6231,7 @@
       },
       "required": [
         "resourceId",
-        "resourceType",
-        "inclusionState"
+        "resourceType"
       ]
     },
     "DrillResourceReadinessState": {
@@ -6342,12 +6412,17 @@
       "type": "object",
       "description": "Request body for Failover API.",
       "properties": {
+        "autoFailover": {
+          "$ref": "#/definitions/AutoFailover",
+          "description": "AutoFailover - whether to pause between Fault and Failover for manual input."
+        },
         "failoverProperties": {
           "$ref": "#/definitions/FailoverRequest",
           "description": "The failover properties."
         }
       },
       "required": [
+        "autoFailover",
         "failoverProperties"
       ]
     },
@@ -6378,7 +6453,8 @@
       "enum": [
         "Start",
         "Retry",
-        "MarkAsComplete"
+        "MarkAsComplete",
+        "Cancel"
       ],
       "x-ms-enum": {
         "name": "DrillRunOperationVerbs",
@@ -6398,6 +6474,11 @@
             "name": "MarkAsComplete",
             "value": "MarkAsComplete",
             "description": "MarkAsComplete Action."
+          },
+          {
+            "name": "Cancel",
+            "value": "Cancel",
+            "description": "Cancel Action."
           }
         ]
       }
@@ -6445,8 +6526,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "supportedVerbsForStage": {
           "type": "array",
@@ -6729,6 +6809,10 @@
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrillUpdate",
           "description": "Chaos Experiment properties."
         },
+        "healthModelProperties": {
+          "$ref": "#/definitions/HealthModelPropertiesOfDrillUpdate",
+          "description": "HealthModel properties."
+        },
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
@@ -6969,8 +7053,7 @@
           "description": "Source locations from where resources to be failed-over.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -7066,6 +7149,30 @@
           "$ref": "#/definitions/CustomFaultDetails",
           "description": "Custom Fault Details selected by user"
         }
+      }
+    },
+    "ForceInclusionAndUpdate": {
+      "type": "string",
+      "description": "Enum for ForceInclusionAndUpdate",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "ForceInclusionAndUpdate",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable ForceInclusionAndUpdate."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable ForceInclusionAndUpdate."
+          }
+        ]
       }
     },
     "GoalAssignment": {
@@ -7545,6 +7652,28 @@
         "healthModelId"
       ]
     },
+    "HealthModelPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Health Model properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for Health Model operations."
+        },
+        "healthModelId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Health Model.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CloudHealth/healthmodels"
+              }
+            ]
+          }
+        }
+      }
+    },
     "HealthStatus": {
       "type": "string",
       "description": "Enum for Health Status.",
@@ -7680,8 +7809,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -7898,16 +8026,11 @@
         "jobResourceType": {
           "$ref": "#/definitions/JobResourceType",
           "description": "Discriminator for the JobResource object hierarchy."
-        },
-        "protectionSolutionType": {
-          "$ref": "#/definitions/ResourceProtectionSolutionType",
-          "description": "A setting that indicates the protection solution selected."
         }
       },
       "discriminator": "jobResourceType",
       "required": [
-        "jobResourceType",
-        "protectionSolutionType"
+        "jobResourceType"
       ]
     },
     "JobResourceType": {
@@ -8114,8 +8237,7 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "userComments": {
           "type": "array",
@@ -8472,8 +8594,7 @@
           "description": "Reasons for resource not qualified for the operation.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -8707,6 +8828,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the recovery child job.",
+          "readOnly": true
+        },
+        "protectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected.",
           "readOnly": true
         }
       },
@@ -9075,6 +9201,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the recovery job resource.",
+          "readOnly": true
+        },
+        "protectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected.",
           "readOnly": true
         }
       },
@@ -9871,8 +10002,7 @@
             "x-ms-arm-id-details": {
               "allowedResources": []
             }
-          },
-          "x-ms-identifiers": []
+          }
         },
         "updateResources": {
           "type": "array",
@@ -10144,7 +10274,7 @@
         "serviceGroupName": {
           "type": "string",
           "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          "pattern": "^[a-zA-Z0-9\\-_().~]{1,90}$"
         },
         "apiVersion": {
           "type": "string",
@@ -10183,7 +10313,7 @@
         "serviceGroupName": {
           "type": "string",
           "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          "pattern": "^[a-zA-Z0-9\\-_().~]{1,90}$"
         },
         "apiVersion": {
           "type": "string",
@@ -10203,7 +10333,7 @@
         "serviceGroupName": {
           "type": "string",
           "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          "pattern": "^[a-zA-Z0-9\\-_().~]{1,90}$"
         },
         "apiVersion": {
           "type": "string",
@@ -10260,8 +10390,7 @@
           "description": "Supported Verbs for stage.",
           "items": {
             "$ref": "#/definitions/DrillRunOperationVerbs"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -10470,8 +10599,7 @@
                 }
               ]
             }
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -10617,7 +10745,7 @@
       "description": "The name of the service group.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$",
+      "pattern": "^[a-zA-Z0-9\\-_().~]{1,90}$",
       "x-ms-parameter-location": "method"
     }
   }

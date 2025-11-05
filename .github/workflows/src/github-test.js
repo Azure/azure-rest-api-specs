@@ -1,5 +1,3 @@
-// @ts-check
-
 import { readdir } from "fs/promises";
 import { basename, join, normalize, sep } from "path";
 import { pathToFileURL } from "url";

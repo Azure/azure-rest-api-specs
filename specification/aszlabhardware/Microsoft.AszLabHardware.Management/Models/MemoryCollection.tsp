@@ -1,6 +1,6 @@
 import "./MemoryModule.tsp";
 
-using OpenAPI;
+using Azure.ResourceManager;
 
 @doc("Information regarding the RAM of the server")
 model MemoryCollection {
@@ -11,6 +11,6 @@ model MemoryCollection {
   totalSystemMemoryGiB: int64;
 
   @doc("Information of individual memory modules")
-  @extension("x-ms-identifiers", #["moduleName"])
+  @identifiers(#["moduleName"])
   memoryModules: MemoryModule[];
 }

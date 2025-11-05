@@ -208,7 +208,7 @@ model UeIpAddress {
 @doc("Managed-On-Behalf-Of configuration properties. This configuration exists for the resources where a resource provider manages those resources on behalf of the resource owner.")
 model ManagedOnBehalfOfConfiguration {
   @doc("Managed-On-Behalf-Of broker resources")
-  @extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   moboBrokerResources?: MoboBrokerResource[];
 }
 

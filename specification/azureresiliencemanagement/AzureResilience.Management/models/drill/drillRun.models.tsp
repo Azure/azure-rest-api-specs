@@ -15,7 +15,6 @@ using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -65,12 +64,11 @@ model DrillRunProperties extends JobProperties {
 
   @doc("Notes for this Drill.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   notes?: string[];
 
   @doc("Matrix of Actions supported on Operations.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedVerbsForStage?: SupportedVerbsForStage[];
 
   @doc("The currently active operationID on this Drill Run. There can be only one active.")
@@ -94,6 +92,9 @@ model DrillRunAddNotesRequest {
 
 @doc("Request body for Failover API.")
 model DrillRunFailoverRequest {
+  @doc("AutoFailover - whether to pause between Fault and Failover for manual input.")
+  autoFailover: AutoFailover;
+
   @doc("The failover properties.")
   failoverProperties: FailoverRequest;
 }
@@ -131,7 +132,7 @@ model MarkAsCompleteRequest {
 model MarkAsCompleteResponse {
   @doc("Matrix of Actions supported on Operations.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedVerbsForStage?: SupportedVerbsForStage[];
 }
 
@@ -141,6 +142,5 @@ model SupportedVerbsForStage {
   drillRunStage: DrillRunSubtasks;
 
   @doc("Supported Verbs for stage.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   supportedVerbs: DrillRunOperationVerbs[];
 }

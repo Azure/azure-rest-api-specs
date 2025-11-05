@@ -25,13 +25,21 @@ model DeviceLogicalPortProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: TopologicalProvisioningState;
 
+  /** The bus:device:function of the port. */
+  @visibility(Lifecycle.Read)
+  busDeviceFunction?: string;
+
   /** The Azure resource ID of the device (e.g., NIC or Switch) this port resides on. */
   @visibility(Lifecycle.Read)
-  deviceId: DeviceResourceId;
+  deviceId?: DeviceResourceId;
+
+  /** The MAC address of the port. */
+  @visibility(Lifecycle.Read)
+  macAddress?: string;
 
   /** The port's name on the device (e.g., Ethernet 1/1). */
   @visibility(Lifecycle.Read)
-  nameOnDevice: string;
+  nameOnDevice?: string;
 
   /** The Azure resource ID of the link that the port is interfaced with. */
   @visibility(Lifecycle.Read)

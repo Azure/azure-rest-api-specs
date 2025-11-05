@@ -1,6 +1,6 @@
 import "./Processor.tsp";
 
-using OpenAPI;
+using Azure.ResourceManager;
 
 @doc("Information regarding the processors of the server")
 model ProcessorCollection {
@@ -11,6 +11,6 @@ model ProcessorCollection {
   logicalProcessorCount: int32;
 
   @doc("The processors of the server")
-  @extension("x-ms-identifiers", #["processorName"])
+  @identifiers(#["processorName"])
   processors: Processor[];
 }

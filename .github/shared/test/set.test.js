@@ -1,7 +1,5 @@
-// @ts-check
-
 import { describe, expect, it } from "vitest";
-import { equals, intersect } from "../src/set";
+import { equals, intersect } from "../src/set.js";
 
 describe("set", () => {
   it.each([

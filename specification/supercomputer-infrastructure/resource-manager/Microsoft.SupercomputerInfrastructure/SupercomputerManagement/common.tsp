@@ -28,7 +28,7 @@ scalar DeviceResourceId
       type: "Microsoft.SupercomputerInfrastructure/supercomputers/switches",
     },
     {
-      type: "Microsoft.SupercomputerInfrastructure/supercomputers/nics",
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nics",
     }
   ]>;
 
@@ -42,7 +42,7 @@ scalar LinkResourceId
 scalar NodeResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.SupercomputerInfrastructure/supercomputers/nodes",
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nodes",
     }
   ]>;
 
@@ -50,5 +50,51 @@ scalar DeviceLogicalPortResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts",
+    }
+  ]>;
+
+scalar MaintenanceRequestResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/maintenanceRequests",
+    }
+  ]>;
+
+scalar RackResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/racks",
+    }
+  ]>;
+
+scalar ReportableWithinMaintenanceRequestResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/clusters",
+    },
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/switches",
+    },
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nics",
+    },
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/links",
+    },
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nodes",
+    },
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts",
+    },
+    {
+      type: "Microsoft.Compute/virtualMachines",
+    }
+  ]>;
+
+scalar WorkloadImpactResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Impact/workloadImpacts",
     }
   ]>;

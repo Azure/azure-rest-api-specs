@@ -3,7 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using OpenAPI;
+using Azure.ResourceManager;
 using Versioning;
 
 @versioned(Versions)
@@ -391,12 +391,12 @@ model CveResult {
   effectiveCvssVersion?: int32;
 
   @doc("All known CVSS scores for the CVE.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   cvssScores?: CvssScore[];
 
   @doc("The list of reference links for the CVE.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["href"])
+  @identifiers(#["href"])
   links?: CveLink[];
 
   @doc("The CVE description.")
@@ -461,7 +461,7 @@ model FirmwareProperties {
   status?: Status;
 
   @doc("A list of errors or other messages generated during firmware analysis")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statusMessages?: StatusMessage[];
 
   @doc("Provisioning state of the resource.")

@@ -1,0 +1,1431 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.GcpConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.GcpConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SQLAdminInstances"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.GcpConnector/sqlAdminInstances": {
+      "get": {
+        "operationId": "SQLAdminInstances_ListBySubscription",
+        "tags": [
+          "SQLAdminInstances"
+        ],
+        "description": "List SQLAdminInstance resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SQLAdminInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SQLAdminInstances_ListBySubscription": {
+            "$ref": "./examples/SQLAdminInstances_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/sqlAdminInstances": {
+      "get": {
+        "operationId": "SQLAdminInstances_ListByResourceGroup",
+        "tags": [
+          "SQLAdminInstances"
+        ],
+        "description": "List SQLAdminInstance resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SQLAdminInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SQLAdminInstances_ListByResourceGroup": {
+            "$ref": "./examples/SQLAdminInstances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/sqlAdminInstances/{name}": {
+      "get": {
+        "operationId": "SQLAdminInstances_Get",
+        "tags": [
+          "SQLAdminInstances"
+        ],
+        "description": "Get a SQLAdminInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SQLAdminInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SQLAdminInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SQLAdminInstances_Get": {
+            "$ref": "./examples/SQLAdminInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SQLAdminInstances_CreateOrReplace",
+        "tags": [
+          "SQLAdminInstances"
+        ],
+        "description": "Create a SQL admin instance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SQLAdminInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SQLAdminInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SQLAdminInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SQLAdminInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'SQLAdminInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SQLAdminInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SQLAdminInstances_CreateOrReplace": {
+            "$ref": "./examples/SQLAdminInstances_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SQLAdminInstances_Update",
+        "tags": [
+          "SQLAdminInstances"
+        ],
+        "description": "Update a SQLAdminInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SQLAdminInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SQLAdminInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SQLAdminInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SQLAdminInstances_Update": {
+            "$ref": "./examples/SQLAdminInstances_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SQLAdminInstances_Delete",
+        "tags": [
+          "SQLAdminInstances"
+        ],
+        "description": "Delete a SQLAdminInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SQLAdminInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SQLAdminInstances_Delete": {
+            "$ref": "./examples/SQLAdminInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AclEntry": {
+      "type": "object",
+      "description": "An entry for an Access Control list.",
+      "properties": {
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when this access control entry expires in RFC 3339 format."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#aclEntry."
+        },
+        "name": {
+          "type": "string",
+          "description": "A label to identify this entry."
+        },
+        "value": {
+          "type": "string",
+          "description": "The allowlisted value for the access control list."
+        }
+      }
+    },
+    "AvailableDatabaseVersion": {
+      "type": "object",
+      "description": "Database version that can be used for the instance.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The database engine version."
+        },
+        "supportedEditions": {
+          "type": "array",
+          "description": "List of database editions supported.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BackupConfiguration": {
+      "type": "object",
+      "description": "Database instance backup configuration.",
+      "properties": {
+        "backupRetentionSettings": {
+          "$ref": "#/definitions/BackupRetentionSettings",
+          "description": "Backup retention settings."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether backup configuration is enabled."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#backupConfiguration."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the backup."
+        },
+        "pointInTimeRecoveryEnabled": {
+          "type": "boolean",
+          "description": "True if Point-in-time recovery is enabled."
+        },
+        "replicationLogArchivingEnabled": {
+          "type": "boolean",
+          "description": "Reserved for future use."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start time for the daily backup configuration in UTC timezone."
+        },
+        "transactionLogRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days of transaction logs we retain for point in time restore."
+        }
+      }
+    },
+    "BackupRetentionSettings": {
+      "type": "object",
+      "description": "Backup retention settings.",
+      "properties": {
+        "retainedBackups": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of backup runs to retain."
+        },
+        "retentionUnit": {
+          "type": "string",
+          "description": "The unit that 'retainedBackups' represents."
+        }
+      }
+    },
+    "DatabaseFlags": {
+      "type": "object",
+      "description": "Database flags for Cloud SQL instances.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the flag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the flag."
+        }
+      }
+    },
+    "DiskEncryptionConfiguration": {
+      "type": "object",
+      "description": "Disk encryption configuration.",
+      "properties": {
+        "kmsKeyName": {
+          "type": "string",
+          "description": "KMS key resource name."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#diskEncryptionConfiguration."
+        }
+      }
+    },
+    "DiskEncryptionStatus": {
+      "type": "object",
+      "description": "Disk encryption status.",
+      "properties": {
+        "kmsKeyVersionName": {
+          "type": "string",
+          "description": "KMS key version used to encrypt the Cloud SQL instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#diskEncryptionStatus."
+        }
+      }
+    },
+    "DnsNameMapping": {
+      "type": "object",
+      "description": "DNS name mapping configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The DNS record name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of DNS record."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the DNS record."
+        }
+      }
+    },
+    "GcpSqlAdminInstanceProperties": {
+      "type": "object",
+      "description": "A Cloud SQL instance resource.",
+      "properties": {
+        "backendType": {
+          "type": "string",
+          "description": "FIRST_GEN: First Generation instance. V1 is a legacy version and should not be used for new instances."
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Connection name of the Cloud SQL instance used in connection strings."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the instance was created in RFC 3339 format."
+        },
+        "databaseVersion": {
+          "type": "string",
+          "description": "The database engine type and version."
+        },
+        "diskEncryptionConfiguration": {
+          "$ref": "#/definitions/DiskEncryptionConfiguration",
+          "description": "Disk encryption configuration specific to an instance."
+        },
+        "diskEncryptionStatus": {
+          "$ref": "#/definitions/DiskEncryptionStatus",
+          "description": "Disk encryption status specific to an instance."
+        },
+        "etag": {
+          "type": "string",
+          "description": "This field is deprecated and will be removed from a future version of the API."
+        },
+        "failoverReplica": {
+          "type": "object",
+          "description": "The name and status of the failover replica.",
+          "properties": {
+            "available": {
+              "type": "boolean",
+              "description": "The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The primary instance can only failover to the failover replica when the status is true."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the failover replica. This property is applicable only if the instance has a failover replica."
+            }
+          }
+        },
+        "gceZone": {
+          "type": "string",
+          "description": "The Compute Engine zone that the instance is serving from."
+        },
+        "instanceType": {
+          "type": "string",
+          "description": "The instance type."
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "The assigned IP addresses for the instance.",
+          "items": {
+            "$ref": "#/definitions/IpMapping"
+          },
+          "x-ms-identifiers": []
+        },
+        "ipv6Address": {
+          "type": "string",
+          "description": "The IPv6 address assigned to the instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#instance."
+        },
+        "masterInstanceName": {
+          "type": "string",
+          "description": "The name of the instance which will act as primary in the replication setup."
+        },
+        "maxDiskSize": {
+          "type": "string",
+          "description": "The maximum disk size in bytes."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Cloud SQL instance."
+        },
+        "onPremisesConfiguration": {
+          "$ref": "#/definitions/OnPremisesConfiguration",
+          "description": "The on-premises instance configuration."
+        },
+        "project": {
+          "type": "string",
+          "description": "The project ID of the project containing the Cloud SQL instance."
+        },
+        "region": {
+          "type": "string",
+          "description": "The geographical region."
+        },
+        "replicaConfiguration": {
+          "$ref": "#/definitions/ReplicaConfiguration",
+          "description": "The replica configuration."
+        },
+        "replicaNames": {
+          "type": "array",
+          "description": "The replicas of the instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rootPassword": {
+          "type": "string",
+          "description": "Initial root password."
+        },
+        "satisfiesPzs": {
+          "type": "boolean",
+          "description": "The status indicating if instance satisfies physical zone separation."
+        },
+        "scheduledMaintenance": {
+          "$ref": "#/definitions/SqlScheduledMaintenance",
+          "description": "The scheduled maintenance for the instance."
+        },
+        "secondaryGceZone": {
+          "type": "string",
+          "description": "The Compute Engine zone that the failover instance is currently serving from."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The URI of this resource."
+        },
+        "serverCaCert": {
+          "$ref": "#/definitions/SslCert",
+          "description": "The server CA certificate used to connect to the instance via SSL."
+        },
+        "serviceAccountEmailAddress": {
+          "type": "string",
+          "description": "The service account email address assigned to the instance."
+        },
+        "settings": {
+          "$ref": "#/definitions/Settings",
+          "description": "The settings for the instance."
+        },
+        "state": {
+          "type": "string",
+          "description": "The current serving state of the Cloud SQL instance."
+        },
+        "suspensionReason": {
+          "type": "array",
+          "description": "If the instance state is SUSPENDED, the reason for the suspension.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "databaseInstalledVersion": {
+          "type": "string",
+          "description": "The database engine version currently installed on the instance."
+        },
+        "currentDiskSize": {
+          "type": "string",
+          "description": "The current disk size of the instance in bytes."
+        },
+        "availableMaintenanceVersions": {
+          "type": "array",
+          "description": "List of maintenance versions available for this instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maintenanceVersion": {
+          "type": "string",
+          "description": "The current software version on the instance."
+        },
+        "upgradableDatabaseVersions": {
+          "type": "array",
+          "description": "List of database versions to which this instance could be upgraded.",
+          "items": {
+            "$ref": "#/definitions/AvailableDatabaseVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nodes": {
+          "type": "array",
+          "description": "List of nodes in the instance.",
+          "items": {
+            "$ref": "#/definitions/PoolNodeConfig"
+          }
+        },
+        "dnsNames": {
+          "type": "array",
+          "description": "List of DNS mappings configured for the instance.",
+          "items": {
+            "$ref": "#/definitions/DnsNameMapping"
+          }
+        },
+        "outOfDiskReport": {
+          "$ref": "#/definitions/SqlOutOfDiskReport",
+          "description": "Report for out of disk conditions."
+        },
+        "sqlNetworkArchitecture": {
+          "type": "string",
+          "description": "The network architecture of the instance."
+        },
+        "pscServiceAttachmentLink": {
+          "type": "string",
+          "description": "PSC service attachment link."
+        },
+        "dnsName": {
+          "type": "string",
+          "description": "DNS name of the instance."
+        },
+        "primaryDnsName": {
+          "type": "string",
+          "description": "Primary DNS name of the instance."
+        },
+        "writeEndpoint": {
+          "type": "string",
+          "description": "Write endpoint for the instance."
+        },
+        "replicationCluster": {
+          "$ref": "#/definitions/ReplicationCluster",
+          "description": "Replication cluster configuration."
+        },
+        "geminiConfig": {
+          "$ref": "#/definitions/GeminiInstanceConfig",
+          "description": "Gemini instance configuration."
+        },
+        "switchTransactionLogsToCloudStorageEnabled": {
+          "type": "boolean",
+          "description": "Whether transaction logs switch to cloud storage is enabled."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes in the instance."
+        }
+      }
+    },
+    "GeminiInstanceConfig": {
+      "type": "object",
+      "description": "Gemini instance configuration.",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "The tier of the Gemini instance."
+        },
+        "configVersion": {
+          "type": "string",
+          "description": "Version of the configuration."
+        }
+      }
+    },
+    "IpConfiguration": {
+      "type": "object",
+      "description": "IP configuration for a Cloud SQL instance.",
+      "properties": {
+        "allocatedIpRange": {
+          "type": "string",
+          "description": "The name of the allocated IP range for the private IP Cloud SQL instance."
+        },
+        "authorizedNetworks": {
+          "type": "array",
+          "description": "The list of external networks that are allowed to connect to the instance using the IP.",
+          "items": {
+            "$ref": "#/definitions/AclEntry"
+          }
+        },
+        "ipv4Enabled": {
+          "type": "boolean",
+          "description": "Whether the instance is assigned a public IP address or not."
+        },
+        "privateNetwork": {
+          "type": "string",
+          "description": "The resource link for the VPC network from which the Cloud SQL instance is accessible for private IP."
+        },
+        "requireSsl": {
+          "type": "boolean",
+          "description": "Whether SSL connections over IP are enforced or not."
+        }
+      }
+    },
+    "IpMapping": {
+      "type": "object",
+      "description": "Database instance IP Mapping.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address assigned."
+        },
+        "timeToRetire": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The due time for this IP to be retired in RFC 3339 format."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of this IP address."
+        }
+      }
+    },
+    "LocationPreference": {
+      "type": "object",
+      "description": "Preferred location settings.",
+      "properties": {
+        "followGaeApplication": {
+          "type": "string",
+          "description": "The App Engine application to follow."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#locationPreference."
+        },
+        "secondaryZone": {
+          "type": "string",
+          "description": "The preferred Compute Engine zone for the secondary/failover."
+        },
+        "zone": {
+          "type": "string",
+          "description": "The preferred Compute Engine zone for the instance."
+        }
+      }
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Maintenance window for Cloud SQL instances.",
+      "properties": {
+        "day": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Day of week (1-7), starting on Monday."
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hour of day (0-23)."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#maintenanceWindow."
+        },
+        "updateTrack": {
+          "type": "string",
+          "description": "Maintenance timing setting."
+        }
+      }
+    },
+    "MySqlReplicaConfiguration": {
+      "type": "object",
+      "description": "Read-replica configuration specific to MySQL databases.",
+      "properties": {
+        "caCertificate": {
+          "type": "string",
+          "description": "PEM representation of the trusted CA's x509 certificate."
+        },
+        "clientCertificate": {
+          "type": "string",
+          "description": "PEM representation of the replica's x509 certificate."
+        },
+        "clientKey": {
+          "type": "string",
+          "description": "PEM representation of the replica's private key."
+        },
+        "connectRetryInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds to wait between connect retries."
+        },
+        "dumpFilePath": {
+          "type": "string",
+          "description": "Path to a SQL dump file in Google Cloud Storage."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#mysqlReplicaConfiguration."
+        },
+        "masterHeartbeatPeriod": {
+          "type": "string",
+          "description": "Interval in milliseconds between replication heartbeats."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password for the replication connection."
+        },
+        "sslCipher": {
+          "type": "string",
+          "description": "A list of permissible ciphers to use for SSL encryption."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username for the replication connection."
+        },
+        "verifyServerCertificate": {
+          "type": "boolean",
+          "description": "Whether or not to check the primary instance's Common Name value."
+        }
+      }
+    },
+    "OnPremisesConfiguration": {
+      "type": "object",
+      "description": "On-premises instance configuration.",
+      "properties": {
+        "caCertificate": {
+          "type": "string",
+          "description": "PEM representation of the trusted CA's x509 certificate."
+        },
+        "clientCertificate": {
+          "type": "string",
+          "description": "PEM representation of the replica's x509 certificate."
+        },
+        "clientKey": {
+          "type": "string",
+          "description": "PEM representation of the replica's private key."
+        },
+        "dumpFilePath": {
+          "type": "string",
+          "description": "The dump file to create the Cloud SQL replica."
+        },
+        "hostPort": {
+          "type": "string",
+          "description": "The host and port of the on-premises instance in host:port format."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#onPremisesConfiguration."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password for connecting to on-premises instance."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username for connecting to on-premises instance."
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "An Operation resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of this operation."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The type of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "type": "object",
+          "description": "If errors occurred during processing of this operation, this field will be populated.",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OperationError"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        }
+      }
+    },
+    "OperationError": {
+      "type": "object",
+      "description": "Database instance operation error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Identifies the specific error that occurred."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#operationError."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information about the error encountered."
+        }
+      }
+    },
+    "PoolNodeConfig": {
+      "type": "object",
+      "description": "Configuration for a node in the instance pool.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the node."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the node."
+        },
+        "zone": {
+          "type": "string",
+          "description": "The zone where the node is located."
+        },
+        "state": {
+          "type": "string",
+          "description": "Current state of the node."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address of the node."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ReplicaConfiguration": {
+      "type": "object",
+      "description": "Read-replica configuration for connecting to the primary instance.",
+      "properties": {
+        "failoverTarget": {
+          "type": "boolean",
+          "description": "Whether this replica can be used as a failover target."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#replicaConfiguration."
+        },
+        "mysqlReplicaConfiguration": {
+          "$ref": "#/definitions/MySqlReplicaConfiguration",
+          "description": "MySQL specific configuration when replicating from a MySQL primary instance."
+        }
+      }
+    },
+    "ReplicationCluster": {
+      "type": "object",
+      "description": "Configuration for replication cluster.",
+      "properties": {
+        "clusterId": {
+          "type": "string",
+          "description": "ID of the replication cluster."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the replication cluster."
+        },
+        "leaderInstanceName": {
+          "type": "string",
+          "description": "Name of the leader instance."
+        }
+      }
+    },
+    "SQLAdminInstance": {
+      "type": "object",
+      "description": "A Microsoft.GcpConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SQLAdminInstanceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SQLAdminInstanceListResult": {
+      "type": "object",
+      "description": "The response of a SQLAdminInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SQLAdminInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/SQLAdminInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SQLAdminInstanceProperties": {
+      "type": "object",
+      "description": "Definition of SQLAdminInstanceProperties",
+      "properties": {
+        "gcpProperties": {
+          "$ref": "#/definitions/GcpSqlAdminInstanceProperties",
+          "description": "GCP Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "gcpProjectNumber": {
+          "type": "string",
+          "description": "GCP Project Number"
+        },
+        "gcpProjectId": {
+          "type": "string",
+          "description": "GCP Project Id"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Fully qualified resource name of the GCP resource"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "gcpSourceSchema": {
+          "type": "string",
+          "description": "GCP Source Schema"
+        },
+        "gcpRegion": {
+          "type": "string",
+          "description": "GCP Region"
+        },
+        "gcpTags": {
+          "type": "object",
+          "description": "GCP Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SQLAdminInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SQLAdminInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "type": "object",
+      "description": "Database instance settings.",
+      "properties": {
+        "activationPolicy": {
+          "type": "string",
+          "description": "The activation policy specifies when the instance is activated."
+        },
+        "activeDirectoryConfig": {
+          "$ref": "#/definitions/SqlActiveDirectoryConfig",
+          "description": "Active Directory configuration."
+        },
+        "authorizedGaeApplications": {
+          "type": "array",
+          "description": "The App Engine app IDs that can access this instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availabilityType": {
+          "type": "string",
+          "description": "Availability type."
+        },
+        "backupConfiguration": {
+          "$ref": "#/definitions/BackupConfiguration",
+          "description": "Database instance backup configuration."
+        },
+        "collation": {
+          "type": "string",
+          "description": "The name of server Instance collation."
+        },
+        "crashSafeReplicationEnabled": {
+          "type": "boolean",
+          "description": "Configuration specific to read replicas replication."
+        },
+        "dataDiskSizeGb": {
+          "type": "string",
+          "description": "The size of data disk, in GB."
+        },
+        "dataDiskType": {
+          "type": "string",
+          "description": "The type of data disk."
+        },
+        "databaseFlags": {
+          "type": "array",
+          "description": "The database flags passed to the instance at startup.",
+          "items": {
+            "$ref": "#/definitions/DatabaseFlags"
+          }
+        },
+        "ipConfiguration": {
+          "$ref": "#/definitions/IpConfiguration",
+          "description": "The default IAM policy for new databases created in the instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#settings."
+        },
+        "locationPreference": {
+          "$ref": "#/definitions/LocationPreference",
+          "description": "The location preference for the instance."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window for the instance."
+        },
+        "pricingPlan": {
+          "type": "string",
+          "description": "The pricing plan for this instance."
+        },
+        "replicationType": {
+          "type": "string",
+          "description": "The type of replication this instance uses."
+        },
+        "settingsVersion": {
+          "type": "string",
+          "description": "The version of instance settings."
+        },
+        "storageAutoResize": {
+          "type": "boolean",
+          "description": "Configuration to increase storage size automatically."
+        },
+        "storageAutoResizeLimit": {
+          "type": "string",
+          "description": "The maximum size to which storage capacity can be automatically increased."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of service for this instance."
+        },
+        "userLabels": {
+          "type": "object",
+          "description": "User-provided labels, represented as a dictionary.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version of instance settings."
+        }
+      }
+    },
+    "SqlActiveDirectoryConfig": {
+      "type": "object",
+      "description": "Active Directory configuration for SQL Server instances.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The name of the domain directory."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#activeDirectoryConfig."
+        }
+      }
+    },
+    "SqlOutOfDiskReport": {
+      "type": "object",
+      "description": "Report about out of disk conditions.",
+      "properties": {
+        "sqlMinRecommendedIncreaseSizeGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum recommended increase size in GB."
+        },
+        "sqlOutOfDiskState": {
+          "type": "string",
+          "description": "Current out of disk state."
+        }
+      }
+    },
+    "SqlScheduledMaintenance": {
+      "type": "object",
+      "description": "SQL Server scheduled maintenance settings.",
+      "properties": {
+        "canDefer": {
+          "type": "boolean",
+          "description": "If the scheduled maintenance can be deferred."
+        },
+        "canReschedule": {
+          "type": "boolean",
+          "description": "If the scheduled maintenance can be rescheduled."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of any upcoming scheduled maintenance for this instance."
+        }
+      }
+    },
+    "SslCert": {
+      "type": "object",
+      "description": "SSL certificate resource.",
+      "properties": {
+        "cert": {
+          "type": "string",
+          "description": "PEM representation of the X.509 certificate."
+        },
+        "certSerialNumber": {
+          "type": "string",
+          "description": "Serial number, as extracted from the certificate."
+        },
+        "commonName": {
+          "type": "string",
+          "description": "User supplied name. Constrained to [a-zA-Z.-_ ]+."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the certificate was created in RFC 3339 format."
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the certificate expires in RFC 3339 format."
+        },
+        "instance": {
+          "type": "string",
+          "description": "Name of the database instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#sslCert."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The URI of this resource."
+        },
+        "sha1Fingerprint": {
+          "type": "string",
+          "description": "SHA-1 fingerprint of the certificate."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

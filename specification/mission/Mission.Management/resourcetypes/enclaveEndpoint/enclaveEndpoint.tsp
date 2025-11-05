@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-using OpenAPI;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -43,7 +43,7 @@ model EnclaveEndpointDestinationRule {
 
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Enclave Endpoint Rule Collection.")
   ruleCollection: EnclaveEndpointDestinationRule[];
 

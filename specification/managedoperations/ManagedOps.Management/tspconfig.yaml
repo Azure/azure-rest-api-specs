@@ -11,26 +11,26 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/managedops.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.ManagedOps"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ManagedOps"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ManagedOps"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-managedops"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-managedops"
     namespace: "azure.mgmt.managedops"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-ts":
-    package-dir: "arm-managedops"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-managedops"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-managedops"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/managedops"
-    package-dir: "armmanagedops"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmanagedops"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmanagedops"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -38,7 +38,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-managedops"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-managedops"
     namespace: "com.azure.resourcemanager.managedops"
     service-name: "ManagedOps"
     flavor: "azure"

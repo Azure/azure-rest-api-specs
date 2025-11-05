@@ -13,7 +13,6 @@ using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -175,7 +174,7 @@ model MetricsPropertiesOfDrill {
   identity: AssociatedIdentity;
 
   @doc("Metrics associated with this Drill. These will be tracked through the Drill Run.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricsToTrack: MetricsToTrack[];
 }
 
@@ -264,6 +263,11 @@ model ChaosExperimentPropertiesOfDrill {
       type: "Microsoft.Chaos/experiments";
     }
   ]>;
+
+  @doc("Duration of faults.")
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  faultDurationInMin?: int32;
 }
 
 @doc("Reason why the Drill is in NeedsAttention state, and not ready to run.")
@@ -292,11 +296,20 @@ model AttentionReason {
   @doc("Permissions needed by the Drill MSI to read SLO object.")
   rbacNeededForDrillOnSlo?: string[];
 
+  @doc("Drill object does not have the necessary RBAC to read the Azure Health Model.")
+  drillRbacOnAzureHealthModel?: RBACState;
+
+  @doc("Permissions needed by the Drill MSI to read Azure Health Model.")
+  rbacNeededForDrillOnAzureHealthModel?: string[];
+
   @doc("Associated RO ready or not.")
   roReadiness?: RecoveryPlanState;
 
   @doc("RBAC required by Experiment MSI not setup on the target resources.")
   faultRbacOnTargets?: RBACState;
+
+  @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
+  runbookFaultRbacOnTargets?: RBACState;
 
   @doc("One or more Target or Capability object is deleted.")
   targets?: ExtensionObjectState;
@@ -312,6 +325,9 @@ model AttentionReason {
 
   @doc("User MSI associated with chaos experiment object is deleted.")
   chaosExperimentUserMsi?: ExtensionObjectState;
+
+  @doc("Included resource in Drill.")
+  includedResourceInDrill?: ExtensionObjectState;
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")
@@ -360,21 +376,23 @@ model AddOrUpdateResourcesRequest {
   faultDurationInMin: int32;
 
   @doc("Add, Update, Delete resource lists")
-  resourceLists: ResourceLists;
+  resourceLists?: ResourceLists;
+
+  @doc("Whether to allow inclusion and update despite attention reasons.")
+  forceInclusionAndUpdate?: ForceInclusionAndUpdate;
 }
 
 @doc("Add, Update, Delete resource lists")
 model ResourceLists {
   @doc("Include resource")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   includeResources?: IncludeOrUpdateResource[];
 
   @doc("Excluded resource")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   excludeResources?: armResourceIdentifier<[]>[];
 
   @doc("Update resource")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   updateResources?: IncludeOrUpdateResource[];
 }
 
@@ -395,17 +413,17 @@ model IncludeOrUpdateResource {
 model AddOrUpdateResourcesResponse {
   @doc("Failed Include resources.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failedIncludeResourceList?: FailedDrillResource[];
 
   @doc("Failed Exclude resources.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failedExcludeResourceList?: FailedDrillResource[];
 
   @doc("Failed Update resources.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failedUpdateResourceList?: FailedDrillResource[];
 }
 
@@ -440,6 +458,9 @@ model DrillPatchProperties {
 
   @doc("Chaos Experiment properties.")
   chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
+
+  @doc("HealthModel properties.")
+  healthModelProperties?: HealthModelPropertiesOfDrill;
 
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;

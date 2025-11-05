@@ -18,6 +18,7 @@ namespace Microsoft.Edge;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Hierarchy Configuration Metadata Version Properties")
 model HierarchyConfigurationMetadataVersionProperties {
   @doc("Display name of the hierarchy configuration metadata resource")
@@ -25,7 +26,7 @@ model HierarchyConfigurationMetadataVersionProperties {
   @maxLength(61)
   @minLength(3)
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
-  displayName?: string;
+  parentDisplayName?: string;
 
   @doc("Configuration template version Id")
   @visibility(Lifecycle.Read)
@@ -57,6 +58,7 @@ model HierarchyConfigurationMetadataVersionProperties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Configuration State Enums")
 union ConfigTemplateConfigurationState {
   @doc("Configuration Completed")
@@ -69,6 +71,7 @@ union ConfigTemplateConfigurationState {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Configuration Metadata Version Resource")
 @parentResource(HierarchyConfigurationMetadata)
 @resource("versions")
@@ -85,6 +88,7 @@ model HierarchyConfigurationMetadataVersion
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface HierarchyConfigurationMetadataVersions {
   @doc("Get a Hierarchy Configuration Metadata Version resource")

@@ -1,4 +1,3 @@
-// @ts-check
 import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";

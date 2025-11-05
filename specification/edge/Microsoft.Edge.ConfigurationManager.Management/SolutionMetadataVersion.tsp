@@ -18,6 +18,7 @@ namespace Microsoft.Edge;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Solution Metadata Version Properties")
 model SolutionMetadataVersionProperties {
   @doc("Display name of the solution metadata resource")
@@ -25,7 +26,7 @@ model SolutionMetadataVersionProperties {
   @maxLength(61)
   @minLength(3)
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
-  displayName?: string;
+  parentDisplayName?: string;
 
   @doc("Solution template version Id")
   @visibility(Lifecycle.Read)
@@ -57,6 +58,7 @@ model SolutionMetadataVersionProperties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Configuration State Enums")
 union ConfigurationState {
   @doc("Configuration Completed")
@@ -69,6 +71,7 @@ union ConfigurationState {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Solution Metadata Version Resource")
 @parentResource(SolutionMetadata)
 @resource("versions")
@@ -85,6 +88,7 @@ model SolutionMetadataVersion
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface SolutionMetadataVersions {
   @doc("Get a Solution resource")
