@@ -126,7 +126,7 @@ interface Stac {
   getCollection is StacCollections.get;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listCollections is StacCollections.getAll;
+  getCollections is StacCollections.getAll;
 
   // Collection Partition Types
   getPartitionType is StacCollectionPartitionTypes.get;
