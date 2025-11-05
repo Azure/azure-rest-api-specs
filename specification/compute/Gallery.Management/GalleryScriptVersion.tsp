@@ -34,8 +34,7 @@ namespace Microsoft.Compute {
   /**
    * Common LRO headers (Azure-AsyncOperation required Jan 2025). Keep Location + Retry-After for backward compatibility.
    */
-  alias GalleryScriptVersionLroHeaders =
-    ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
+  alias GalleryScriptVersionLroHeaders = ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
     ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader;
 
@@ -50,7 +49,10 @@ namespace Microsoft.Compute {
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
     #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-    @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "azure-async-operation" })
+    @extension(
+      "x-ms-long-running-operation-options",
+      #{ `final-state-via`: "azure-async-operation" }
+    )
     @added(Versions.v2025_03_03)
     createOrUpdate is ComputeResourceCreateOrReplaceAsync<
       GalleryScriptVersion,
@@ -66,7 +68,10 @@ namespace Microsoft.Compute {
     /**
      * Update a gallery Script Version.
      */
-    @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "azure-async-operation" })
+    @extension(
+      "x-ms-long-running-operation-options",
+      #{ `final-state-via`: "azure-async-operation" }
+    )
     @added(Versions.v2025_03_03)
     @patch(#{ implicitOptionality: false })
     update is ComputeCustomPatchAsync<
@@ -85,7 +90,10 @@ namespace Microsoft.Compute {
      * Delete a gallery Script Version.
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-    @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "azure-async-operation" })
+    @extension(
+      "x-ms-long-running-operation-options",
+      #{ `final-state-via`: "azure-async-operation" }
+    )
     @added(Versions.v2025_03_03)
     delete is ComputeResourceDeleteAsync<
       GalleryScriptVersion,
