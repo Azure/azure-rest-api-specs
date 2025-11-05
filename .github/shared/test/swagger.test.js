@@ -19,7 +19,7 @@ describe("Swagger", () => {
     await expect(swagger.getRefs()).rejects.toThrowError(/Failed to resolve file for swagger/i);
   });
 
-  it("resolves path against Tag.readme", async () => {
+  it("resolves path against Tag.readme", () => {
     const readme = new Readme("/specs/foo/readme.md");
     const tag = new Tag("2025-01-01", [], { readme });
     const swagger = new Swagger("test.json", { tag });
@@ -42,7 +42,7 @@ describe("Swagger", () => {
         [
           expectedIncludedPath,
           expect.objectContaining({
-            path: expect.stringContaining(expectedIncludedPath),
+            path: /** @type {unknown} */ (expect.stringContaining(expectedIncludedPath)),
           }),
         ],
       ]),
@@ -62,7 +62,7 @@ describe("Swagger", () => {
         [
           expectedExamplePath,
           expect.objectContaining({
-            path: expect.stringContaining(expectedExamplePath),
+            path: /** @type {unknown} */ (expect.stringContaining(expectedExamplePath)),
           }),
         ],
       ]),
