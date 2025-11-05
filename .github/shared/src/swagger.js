@@ -148,8 +148,10 @@ export class Swagger {
       /** @type {Map<string, Operation>} */
       const operations = new Map();
 
+      const swaggerJson = /** @type {unknown } */ (JSON.parse(this.#content));
+
       // TODO: wrap ZodError in SpecModelError, like readme.js
-      const swagger = swaggerSchema.parse(JSON.parse(this.#content));
+      const swagger = swaggerSchema.parse(swaggerJson);
       // Process regular paths
       if (swagger.paths) {
         for (const [path, pathObject] of Object.entries(swagger.paths)) {
@@ -166,7 +168,7 @@ export class Swagger {
 
       let schema;
       try {
-        schema = await $RefParser.resolve(this.#path, this.#content, {
+        schema = await $RefParser.resolve(this.#path, swaggerJson, {
           resolve: { file: excludeExamples, http: false },
         });
       } catch (error) {
