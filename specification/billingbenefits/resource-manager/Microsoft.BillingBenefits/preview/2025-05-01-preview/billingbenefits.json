@@ -645,8 +645,8 @@
           "ConditionalCreditValidateUpdate": {
             "$ref": "./examples/ConditionalCreditValidateUpdate.json"
           },
-          "ConditionalCreditValidateUpdate_RemoveMilestone": {
-            "$ref": "./examples/ConditionalCreditValidateUpdate_RemoveMilestone.json"
+          "ConditionalCreditValidateUpdateRemoveMilestone": {
+            "$ref": "./examples/ConditionalCreditValidateUpdateRemoveMilestone.json"
           },
           "ConditionalCreditValidateCancel": {
             "$ref": "./examples/ConditionalCreditValidateCancel.json"
@@ -3148,7 +3148,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/contributors/{contributorName}": {
       "get": {
-        "description": "Get a contributor for primary service admin",
+        "description": "Get a conditional credit contributor for primary service admin",
         "operationId": "ConditionalCreditContributors_GetFromPrimary",
         "tags": [
           "Conditional Credits"
@@ -3156,9 +3156,6 @@
         "x-ms-examples": {
           "ConditionalCreditContributor_GetFromPrimary": {
             "$ref": "./examples/ConditionalCreditContributorGetFromPrimary.json"
-          },
-          "ConditionalCreditContributor_GetFromPrimary_WithMilestones": {
-            "$ref": "./examples/ConditionalCreditContributorWithMilestonesGetFromPrimary.json"
           }
         },
         "parameters": [
@@ -3196,7 +3193,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/contributors": {
       "get": {
-        "description": "List contributors under a conditional credit for primary service admin",
+        "description": "List contributors under a primary conditional credit for primary service admin",
         "operationId": "ConditionalCreditContributors_ListFromPrimary",
         "tags": [
           "Conditional Credits"
@@ -3204,9 +3201,6 @@
         "x-ms-examples": {
           "ConditionalCreditContributors_ListFromPrimary": {
             "$ref": "./examples/ConditionalCreditContributorsListFromPrimary.json"
-          },
-          "ConditionalCreditContributorsWithMilestones_ListFromPrimary": {
-            "$ref": "./examples/ConditionalCreditContributorsWithMilestonesListFromPrimary.json"
           }
         },
         "x-ms-pageable": {
