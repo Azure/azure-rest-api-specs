@@ -130,6 +130,10 @@ suppressions:
     where: 
       - $.definitions.RaiExternalSafetyProvider
       - $.definitions.RaiExternalSafetyProviderSchema
+  - code: GuidUsage
+    reason: applicationId is a system-generated GUID identifier for the application.
+    where:
+      - $.definitions.AgenticApplication.properties.applicationId.format
   - code: ResourceNameRestriction
     reason: Parameter exists in previous API versions without pattern, cannot add now without breaking change.
     from: cognitiveservices.json
