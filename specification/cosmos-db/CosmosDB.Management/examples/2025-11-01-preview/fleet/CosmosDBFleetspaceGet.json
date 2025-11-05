@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "fleetName": "fleet1",
+    "fleetspaceName": "fleetspace1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fleetspace1",
+        "type": "Microsoft.DocumentDB/fleets/fleetspaces",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "throughputPoolConfiguration": {
+            "dataRegions": [
+              "westus2"
+            ],
+            "maxThroughput": 500000,
+            "minThroughput": 100000,
+            "serviceTier": "GeneralPurpose"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Fleetspace_Get",
+  "title": "CosmosDB Fleetspace Get"
+}

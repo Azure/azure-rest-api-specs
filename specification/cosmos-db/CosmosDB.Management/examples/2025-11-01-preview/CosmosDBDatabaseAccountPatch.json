@@ -1,0 +1,234 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "updateParameters": {
+      "identity": {
+        "type": "SystemAssigned,UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      },
+      "location": "westus",
+      "properties": {
+        "analyticalStorageConfiguration": {
+          "schemaType": "WellDefined"
+        },
+        "backupPolicy": {
+          "type": "Periodic",
+          "periodicModeProperties": {
+            "backupIntervalInMinutes": 240,
+            "backupRetentionIntervalInHours": 720,
+            "backupStorageRedundancy": "Geo"
+          }
+        },
+        "capacity": {
+          "totalThroughputLimit": 2000
+        },
+        "capacityMode": "Provisioned",
+        "consistencyPolicy": {
+          "defaultConsistencyLevel": "BoundedStaleness",
+          "maxIntervalInSeconds": 10,
+          "maxStalenessPrefix": 200
+        },
+        "defaultIdentity": "FirstPartyIdentity",
+        "defaultPriorityLevel": "Low",
+        "diagnosticLogSettings": {
+          "enableFullTextQuery": "True"
+        },
+        "enableAnalyticalStorage": true,
+        "enableBurstCapacity": true,
+        "enableFreeTier": false,
+        "enablePartitionMerge": true,
+        "enablePerRegionPerPartitionAutoscale": true,
+        "enablePriorityBasedExecution": true,
+        "ipRules": [
+          {
+            "ipAddressOrRange": "23.43.230.120"
+          },
+          {
+            "ipAddressOrRange": "110.12.240.0/12"
+          }
+        ],
+        "isVirtualNetworkFilterEnabled": true,
+        "minimalTlsVersion": "Tls",
+        "networkAclBypass": "AzureServices",
+        "networkAclBypassResourceIds": [
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+        ],
+        "virtualNetworkRules": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+            "ignoreMissingVNetServiceEndpoint": false
+          }
+        ]
+      },
+      "tags": {
+        "dept": "finance"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ddb1",
+        "type": "Microsoft.DocumentDB/databaseAccounts",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "52f4fef3-3c3f-4ff3-b52e-b5c9eeb68656",
+          "tenantId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d",
+          "userAssignedIdentities": {
+            "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
+              "principalId": "075a0ca6-43f6-4434-9abf-c9b1b79f9219"
+            }
+          }
+        },
+        "kind": "GlobalDocumentDB",
+        "location": "West US",
+        "properties": {
+          "analyticalStorageConfiguration": {
+            "schemaType": "WellDefined"
+          },
+          "apiProperties": {},
+          "backupPolicy": {
+            "type": "Periodic",
+            "periodicModeProperties": {
+              "backupIntervalInMinutes": 240,
+              "backupRetentionIntervalInHours": 720,
+              "backupStorageRedundancy": "Geo"
+            }
+          },
+          "capacity": {
+            "totalThroughputLimit": 2000
+          },
+          "capacityMode": "Provisioned",
+          "capacityModeChangeTransitionState": {
+            "capacityModeLastSuccessfulTransitionEndTimestamp": "2024-03-24T03:02:18.8758329Z",
+            "capacityModeTransitionBeginTimestamp": "2024-03-24T03:02:16.2747253Z",
+            "capacityModeTransitionEndTimestamp": "2024-03-24T03:02:18.8758329Z",
+            "capacityModeTransitionStatus": "Completed",
+            "currentCapacityMode": "Provisioned",
+            "previousCapacityMode": "Serverless"
+          },
+          "consistencyPolicy": {
+            "defaultConsistencyLevel": "BoundedStaleness",
+            "maxIntervalInSeconds": 10,
+            "maxStalenessPrefix": 200
+          },
+          "cors": [],
+          "createMode": "Default",
+          "databaseAccountOfferType": "Standard",
+          "defaultIdentity": "FirstPartyIdentity",
+          "defaultPriorityLevel": "Low",
+          "diagnosticLogSettings": {
+            "enableFullTextQuery": "True"
+          },
+          "disableKeyBasedMetadataWriteAccess": false,
+          "documentEndpoint": "https://ddb1.documents.azure.com:443/",
+          "enableAnalyticalStorage": true,
+          "enableBurstCapacity": true,
+          "enableFreeTier": false,
+          "enableMaterializedViews": false,
+          "enablePerRegionPerPartitionAutoscale": true,
+          "enablePriorityBasedExecution": true,
+          "failoverPolicies": [
+            {
+              "failoverPriority": 0,
+              "id": "ddb1-eastus",
+              "locationName": "East US"
+            }
+          ],
+          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "ipRules": [
+            {
+              "ipAddressOrRange": "23.43.230.120"
+            },
+            {
+              "ipAddressOrRange": "110.12.240.0/12"
+            }
+          ],
+          "isVirtualNetworkFilterEnabled": true,
+          "keysMetadata": {
+            "primaryMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            },
+            "primaryReadonlyMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            },
+            "secondaryMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            },
+            "secondaryReadonlyMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            }
+          },
+          "locations": [
+            {
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "failoverPriority": 0,
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "provisioningState": "Succeeded"
+            }
+          ],
+          "minimalTlsVersion": "Tls",
+          "networkAclBypass": "AzureServices",
+          "networkAclBypassResourceIds": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+          ],
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.DocumentDB/databaseAccounts/account1/privateEndpointConnections/pe1",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe1"
+                },
+                "privateLinkServiceConnectionState": {
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "readLocations": [
+            {
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "failoverPriority": 0,
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "provisioningState": "Succeeded"
+            }
+          ],
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+              "ignoreMissingVNetServiceEndpoint": false
+            }
+          ],
+          "writeLocations": [
+            {
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "failoverPriority": 0,
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "provisioningState": "Succeeded"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-03-12T22:05:09Z"
+        },
+        "tags": {
+          "dept": "finance"
+        }
+      }
+    }
+  },
+  "operationId": "DatabaseAccounts_Update",
+  "title": "CosmosDBDatabaseAccountPatch"
+}

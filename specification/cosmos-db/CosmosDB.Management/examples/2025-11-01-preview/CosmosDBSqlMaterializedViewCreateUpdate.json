@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "containerName": "mvContainerName",
+    "createUpdateSqlContainerParameters": {
+      "location": "West US",
+      "properties": {
+        "options": {},
+        "resource": {
+          "id": "mvContainerName",
+          "indexingPolicy": {
+            "automatic": true,
+            "excludedPaths": [],
+            "includedPaths": [
+              {
+                "path": "/*",
+                "indexes": [
+                  {
+                    "dataType": "String",
+                    "kind": "Range",
+                    "precision": -1
+                  },
+                  {
+                    "dataType": "Number",
+                    "kind": "Range",
+                    "precision": -1
+                  }
+                ]
+              }
+            ],
+            "indexingMode": "consistent"
+          },
+          "materializedViewDefinition": {
+            "definition": "select * from ROOT",
+            "sourceCollectionId": "sourceContainerName"
+          },
+          "partitionKey": {
+            "kind": "Hash",
+            "paths": [
+              "/mvpk"
+            ]
+          }
+        }
+      },
+      "tags": {}
+    },
+    "databaseName": "databaseName",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mvContainerName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/containers/mvContainerName",
+        "location": "West US",
+        "properties": {
+          "resource": {
+            "_etag": "\"00000800-0000-0200-0000-639ff6480000\"",
+            "_rid": "vb0sn8MDxLw=",
+            "_ts": 1671427656,
+            "conflictResolutionPolicy": {
+              "conflictResolutionPath": "/_ts",
+              "conflictResolutionProcedure": "",
+              "mode": "LastWriterWins"
+            },
+            "defaultTtl": -1,
+            "id": "mvContainerName",
+            "indexingPolicy": {
+              "automatic": true,
+              "excludedPaths": [
+                {
+                  "path": "/\"_etag\"/?"
+                }
+              ],
+              "includedPaths": [
+                {
+                  "path": "/*"
+                }
+              ],
+              "indexingMode": "consistent"
+            },
+            "materializedViewDefinition": {
+              "definition": "select * from ROOT",
+              "sourceCollectionId": "sourceContainerName",
+              "sourceCollectionRid": "vb0sn6nEu9A="
+            },
+            "partitionKey": {
+              "kind": "Hash",
+              "paths": [
+                "/mvpk"
+              ]
+            },
+            "uniqueKeyPolicy": {
+              "uniqueKeys": []
+            }
+          }
+        },
+        "tags": {}
+      }
+    },
+    "202": {}
+  },
+  "operationId": "SqlResources_CreateUpdateSqlContainer",
+  "title": "CosmosDBSqlMaterializedViewCreateUpdate"
+}
