@@ -23,6 +23,14 @@ directive:
     where: $.definitions.ErrorResponse
     transform: >
       $['x-ms-client-name'] = 'ErrorResponseForContainerRegistry';
+  - from: containerregistry_build.json
+    where: $.definitions.Task.properties
+    transform: >
+      $.identity['$ref'] = '../../../Registry/stable/2025-11-01/containerregistry.json#/definitions/IdentityProperties';
+  - from: containerregistry_build.json
+    where: $.definitions.TaskUpdateParameters.properties
+    transform: >
+      $.identity['$ref'] = '../../../Registry/stable/2025-11-01/containerregistry.json#/definitions/IdentityProperties';
 ```
 
 ### Tag: package-2025-11
