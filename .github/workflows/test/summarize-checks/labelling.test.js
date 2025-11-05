@@ -303,7 +303,7 @@ describe("ARM review process labelling", () => {
   it.each(testCases)(
     "$description",
     async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
-      /** @type {import("./labelling.js").LabelContext} */
+      /** @type {import("../../src/summarize-checks/labelling.js").LabelContext} */
       const labelContext = {
         present: new Set(),
         toAdd: new Set(),
