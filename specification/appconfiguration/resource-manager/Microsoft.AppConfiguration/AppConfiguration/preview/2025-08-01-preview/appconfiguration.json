@@ -2912,10 +2912,11 @@
     },
     "PublicNetworkAccess": {
       "type": "string",
-      "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+      "description": "Control permission for data plane traffic coming from public networks.",
       "enum": [
         "Enabled",
-        "Disabled"
+        "Disabled",
+        "SecuredByPerimeter"
       ],
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
@@ -2923,11 +2924,18 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Allow public network access to the data plane."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Disallow public network access to the data plane."
+          },
+          {
+            "name": "SecuredByPerimeter",
+            "value": "SecuredByPerimeter",
+            "description": "Let network security perimeter configuration control public network access to the data plane."
           }
         ]
       }
