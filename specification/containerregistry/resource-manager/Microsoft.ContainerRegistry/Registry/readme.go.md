@@ -46,7 +46,7 @@ directive:
   - from: containerregistry_build.json
     where: $.definitions.Resource.properties
     transform: >
-      $.systemData['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/SystemData';
+      $.systemData['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData';
 ```
 
 ### Tag: package-2025-11
