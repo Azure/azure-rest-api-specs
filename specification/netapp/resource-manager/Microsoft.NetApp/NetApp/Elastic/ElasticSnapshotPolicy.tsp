@@ -15,7 +15,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.NetApp;
 
 /**
- * NetApp Elastic Snapshot policy under an elastic account
+ * NetApp Elastic Snapshot Policy under an Elastic Account
  */
 @added(Versions.v2025_09_01_preview)
 @parentResource(ElasticAccount)
@@ -190,7 +190,7 @@ union DayOfWeek {
   Saturday: "Saturday",
 }
 /**
- * Elastic Volumes associated with snapshot policy
+ * Elastic Volumes associated with Elastic Snapshot Policy
  */
 model ElasticSnapshotPolicyVolumeList is Azure.Core.Page<ElasticVolume>;
 
@@ -217,7 +217,7 @@ interface ElasticSnapshotPolicies {
   listByElasticAccount is ArmResourceListByParent<ElasticSnapshotPolicy>;
 
   /**
-   * Get elastic volumes associated with elastic snapshot policy
+   * Get elastic volumes associated with Elastic Snapshot Policy
    */
   @list
   @get

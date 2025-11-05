@@ -16,7 +16,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.NetApp;
 
 /**
- * NetApp elastic capacity pool resource
+ * NetApp Elastic Volume resource
  */
 @added(Versions.v2025_09_01_preview)
 @parentResource(ElasticCapacityPool)
@@ -347,7 +347,7 @@ union ElasticProtocolType {
   SMB: "SMB",
 }
 
-/** Controls the visibility of the volume's read-only snapshot directory, which provides access to each of the volume's snapshots. */
+/** Controls the visibility of the Elastic Volume's read-only snapshot directory, which provides access to each of the volume's snapshots. */
 @added(Versions.v2025_09_01_preview)
 union SnapshotDirectoryVisibility {
   string,
@@ -380,15 +380,15 @@ interface ElasticVolumes {
     >
   >;
 
-  /** Delete the specified volume */
+  /** Delete the specified Elastic Volume */
   @added(Versions.v2025_09_01_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticVolume>;
 
-  /** List all elastic volumes within the elastic capacity pool */
+  /** List all Elastic Volumes within the Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
   listByElasticPool is ArmResourceListByParent<ElasticVolume>;
 
-  /** Revert a volume to the snapshot specified in the body */
+  /** Revert an Elastic Volume to the snapshot specified in the body */
   @added(Versions.v2025_09_01_preview)
   revert is ArmResourceActionAsync<
     ElasticVolume,

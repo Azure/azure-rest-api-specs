@@ -15,7 +15,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.NetApp;
 
 /**
- * NetApp Elastic Snapshot under an elastic volume
+ * NetApp Elastic Snapshot under an Elastic Volume
  */
 @added(Versions.v2025_09_01_preview)
 @parentResource(ElasticVolume)

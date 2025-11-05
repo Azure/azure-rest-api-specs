@@ -127,15 +127,15 @@ model ElasticEncryptionIdentity {
 
 @armResourceOperations
 interface ElasticAccounts {
-  /** Get the NetApp elastic account */
+  /** Get the NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
   get is ArmResourceRead<ElasticAccount>;
 
-  /** Create or update the specified NetApp elastic account within the resource group */
+  /** Create or update the specified NetApp Elastic Account within the resource group */
   @added(Versions.v2025_09_01_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticAccount>;
 
-  /** Patch the specified NetApp elastic account */
+  /** Patch the specified NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<

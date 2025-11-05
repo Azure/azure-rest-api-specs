@@ -15,7 +15,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.NetApp;
 
 /**
- * NetApp elastic capacity pool resource
+ * NetApp Elastic Capacity Pool resource
  */
 @added(Versions.v2025_09_01_preview)
 @parentResource(ElasticAccount)
@@ -243,11 +243,11 @@ interface ElasticCapacityPools {
   @added(Versions.v2025_09_01_preview)
   get is ArmResourceRead<ElasticCapacityPool>;
 
-  /** Create or update the specified NetApp elastic account within the resource group */
+  /** Create or update the specified NetApp Elastic Capacity Pool within the resource group and NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticCapacityPool>;
 
-  /** Patch the specified NetApp elastic account */
+  /** Patch the specified NetApp Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
@@ -258,11 +258,11 @@ interface ElasticCapacityPools {
     >
   >;
 
-  /** Delete the specified NetApp elastic account */
+  /** Delete the specified NetApp Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticCapacityPool>;
 
-  /** List and describe all NetApp elastic accounts in the Elastic NetAppAccount. */
+  /** List and describe all NetApp Elastic Capacity Pools in the Elastic NetApp Account. */
   @added(Versions.v2025_09_01_preview)
   listByNetAppAccount is ArmResourceListByParent<ElasticCapacityPool>;
 
@@ -276,7 +276,7 @@ interface ElasticCapacityPools {
     ElasticCapacityPool
   >;
 
-  /** Check if a volume file path is available within the given elastic capacityPool. */
+  /** Check if an Elastic Volume file path is available within the given Elastic Capacity Pool. */
   @added(Versions.v2025_09_01_preview)
   checkVolumeFilePathAvailability is ArmResourceActionSync<
     ElasticCapacityPool,

@@ -15,7 +15,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.NetApp;
 
 /**
- * NetApp elastic backup policy resource
+ * NetApp Elastic Backup Policy resource
  */
 @added(Versions.v2025_09_01_preview)
 @parentResource(ElasticAccount)
@@ -53,16 +53,16 @@ model ElasticBackupPolicyProperties {
   @maxValue(1019)
   monthlyBackupsToKeep?: int32;
 
-  /** The number of volumes currently using this backup policy. */
+  /** The number of volumes currently using this Backup Policy. */
   @visibility(Lifecycle.Read)
   assignedVolumesCount?: int32;
 
-  /** The property to identify whether backup policy is enabled or not */
+  /** The property to identify whether Backup Policy is enabled or not */
   policyState?: ElasticBackupPolicyState;
 }
 
 /**
- * Elastic backup policy Policy state
+ * Elastic Backup Policy state
  */
 @added(Versions.v2025_09_01_preview)
 union ElasticBackupPolicyState {

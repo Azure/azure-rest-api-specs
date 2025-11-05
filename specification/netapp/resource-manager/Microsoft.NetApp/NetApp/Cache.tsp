@@ -30,7 +30,7 @@ model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
 }
 
 /**
- * List of cache resources
+ * List of Cache resources
  */
 @added(Versions.v2025_09_01_preview)
 model CacheList is Azure.Core.Page<Cache>;
@@ -41,7 +41,7 @@ model CacheList is Azure.Core.Page<Cache>;
 @added(Versions.v2025_09_01_preview)
 model CacheProperties {
   /**
-   * The file path of the cache.
+   * The file path of the Cache.
    */
   @maxLength(80)
   @minLength(1)
@@ -139,7 +139,7 @@ model CacheProperties {
    */
   keyVaultPrivateEndpointResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.KeyVault/vaults";
+      type: "Microsoft.Network/privateEndpoints";
     }
   ]>;
 
@@ -521,12 +521,12 @@ interface Caches {
   get is ArmResourceRead<Cache>;
 
   /**
-   * Create or update the specified cache within the capacity pool
+   * Create or update the specified Cache within the Capacity Pool
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Cache>;
 
   /**
-   * Patch the specified cache
+   * Patch the specified Cache
    */
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
@@ -544,7 +544,7 @@ interface Caches {
   delete is ArmResourceDeleteWithoutOkAsync<Cache>;
 
   /**
-   * List all caches within the capacity pool
+   * List all Caches within the Capacity Pool
    */
   listByCapacityPools is ArmResourceListByParent<
     Cache,
@@ -561,7 +561,7 @@ interface Caches {
   >;
 
   /**
-   * Moves cache to another pool
+   * Moves Cache  to another Capacity Pool
    */
   poolChange is ArmResourceActionAsync<
     Cache,

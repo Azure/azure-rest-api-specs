@@ -50,7 +50,7 @@ interface ElasticBackupVaults {
   get is ArmResourceRead<ElasticBackupVault>;
 
   /**
-   * Create or update the specified Elastic Backup Vault in the NetApp account
+   * Create or update the specified Elastic Backup Vault in the Elastic NetApp account
    */
   @added(Versions.v2025_09_01_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupVault>;
