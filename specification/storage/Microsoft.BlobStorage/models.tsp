@@ -343,7 +343,9 @@ model KeyInfo {
   @Xml.name("Expiry") expiry: string;
 
   /** The delegated user tenant id in Azure AD. */
-  @Xml.name("DelegatedUserTid") @added(Versions.v2026_04_06) delegatedUserTid?: uuid;
+  @Xml.name("DelegatedUserTid")
+  @added(Versions.v2026_04_06)
+  delegatedUserTid?: uuid;
 }
 
 /** A user delegation key. */
@@ -367,7 +369,9 @@ model UserDelegationKey {
   @Xml.name("SignedVersion") signedVersion: string;
 
   /** The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified. */
-  @Xml.name("SignedDelegatedUserTid") @added(Versions.v2026_04_06) signedDelegatedUserTid?: uuid;
+  @Xml.name("SignedDelegatedUserTid")
+  @added(Versions.v2026_04_06)
+  signedDelegatedUserTid?: uuid;
 
   /** The key as a base64 string. */
   @Xml.name("Value")
