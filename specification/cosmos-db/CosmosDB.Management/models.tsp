@@ -11,6 +11,83 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
 
+/**
+ * Represents the full text index path.
+ */
+model FullTextIndexPath {
+  /**
+   * The path to the full text field in the document.
+   */
+  path: string;
+}
+
+/**
+ * Data masking policy for the container.
+ */
+model DataMaskingPolicy {
+  /**
+   * List of JSON paths to include in the masking policy.
+   */
+  @identifiers(#[""])
+  includedPaths?: DataMaskingPolicyIncludedPath[];
+
+  /**
+   * List of JSON paths to exclude from masking.
+   */
+  @identifiers(#[""])
+  excludedPaths?: DataMaskingPolicyExcludedPath[];
+
+  /**
+   * Flag indicating whether the data masking policy is enabled.
+   */
+  isPolicyEnabled?: boolean;
+}
+
+/**
+ * JSON path to include in the masking policy.
+ */
+model DataMaskingPolicyIncludedPath {
+  /**
+   * The JSON path to apply masking (e.g. "/contact/phones").
+   */
+  path: string;
+
+  /**
+   * Masking strategy to apply (e.g. "MaskSubstring").
+   */
+  strategy?: string;
+
+  /**
+   * Start position for substring masking (when applicable).
+   */
+  startPosition?: int32;
+
+  /**
+   * Length of substring to mask (when applicable).
+   */
+  length?: int32;
+}
+
+/**
+ * JSON path to exclude from masking.
+ */
+model DataMaskingPolicyExcludedPath {
+  /**
+   * The JSON path to exclude from masking (e.g. "/id").
+   */
+  path: string;
+}
+
+/**
+ * Materialized Views Properties for the source container.
+ */
+model MaterializedViewsProperties {
+  /**
+   * Throughput bucket assigned for the materialized view operations on source container.
+   */
+  throughputBucketForBuild?: int32;
+}
+
 model FleetListResult is ResourceListResult<FleetResource>;
 model ThroughputPoolsListResult is ResourceListResult<ThroughputPoolResource>;
 model TableRoleDefinitionListResult
@@ -484,6 +561,8 @@ union VectorDataType {
   Uint8: "uint8",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Int8: "int8",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Float16: "float16",
 }
 
 /**
@@ -2164,6 +2243,12 @@ model DatabaseAccountUpdateProperties {
   customerManagedKeyStatus?: string;
 
   /**
+   * The version of the Customer Managed Key currently being used by the account
+   */
+  @visibility(Lifecycle.Read)
+  keyVaultKeyUriVersion?: string;
+
+  /**
    * Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account
    */
   enablePriorityBasedExecution?: boolean;
@@ -2182,6 +2267,18 @@ model DatabaseAccountUpdateProperties {
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
   enableAllVersionsAndDeletesChangeFeed?: boolean;
+
+  /**
+   * Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  throughputPoolDedicatedRUs?: int64;
+
+  /**
+   * When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  throughputPoolMaxConsumableRUs?: int64;
 }
 
 /**
@@ -3284,7 +3381,7 @@ model ThroughputSettingsResource {
   softAllowedMaximumThroughput?: string;
 
   /**
-   * Array of Throughput Bucket limits to be applied to the Cosmos DB container
+   * Array of throughput bucket limits to be applied to the Cosmos DB container
    */
   throughputBuckets?: ThroughputBucketResource[];
 }
@@ -3348,6 +3445,11 @@ model ThroughputBucketResource {
    * Represents maximum percentage throughput that can be used by the bucket
    */
   maxThroughputPercentage: int32;
+
+  /**
+   * Indicates whether this is the default throughput bucket
+   */
+  isDefaultBucket?: boolean;
 }
 
 /**
@@ -3570,6 +3672,11 @@ model SqlContainerResource {
   materializedViews?: MaterializedViewDetails[];
 
   /**
+   * Materialized Views Properties defined for source container.
+   */
+  materializedViewsProperties?: MaterializedViewsProperties;
+
+  /**
    * List of computed properties
    */
   computedProperties?: ComputedProperty[];
@@ -3583,6 +3690,11 @@ model SqlContainerResource {
    * The FullText policy for the container.
    */
   fullTextPolicy?: FullTextPolicy;
+
+  /**
+   * The Data Masking policy for the container.
+   */
+  dataMaskingPolicy?: DataMaskingPolicy;
 }
 
 /**
@@ -3628,6 +3740,11 @@ model IndexingPolicy {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   vectorIndexes?: VectorIndex[];
+
+  /**
+   * List of paths to include in the full text indexing
+   */
+  fullTextIndexes?: FullTextIndexPath[];
 }
 
 /**
@@ -3711,6 +3828,24 @@ model VectorIndex {
    * The index type of the vector. Currently, flat, diskANN, and quantizedFlat are supported.
    */
   type: VectorIndexType;
+
+  /**
+   * The number of bytes used in product quantization of the vectors. A larger value may result in better recall for vector searches at the expense of latency. This is only applicable for the quantizedFlat and diskANN vector index types.
+   */
+  @minValue(4)
+  quantizationByteSize?: int64;
+
+  /**
+   * This is the size of the candidate list of approximate neighbors stored while building the DiskANN index as part of the optimization processes. Large values may improve recall at the expense of latency. This is only applicable for the diskANN vector index type.
+   */
+  @minValue(25)
+  @maxValue(500)
+  indexingSearchListSize?: int64 = 100;
+
+  /**
+   * Array of shard keys for the vector index. This is only applicable for the quantizedFlat and diskANN vector index types.
+   */
+  vectorIndexShardKey?: string[];
 }
 
 /**
@@ -3844,6 +3979,11 @@ model MaterializedViewDefinition {
    * The definition should be an SQL query which would be used to fetch data from the source container to populate into the Materialized View container.
    */
   definition: string;
+
+  /**
+   * Throughput bucket assigned for the materialized view operations on target container.
+   */
+  throughputBucketForBuild?: int32;
 }
 
 /**
@@ -8103,6 +8243,17 @@ model FleetspaceProperties {
   fleetspaceApiKind?: FleetspacePropertiesFleetspaceApiKind;
 
   /**
+   * Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region.
+   */
+  serviceTier?: FleetspacePropertiesThroughputPoolConfigurationServiceTier;
+
+  /**
+   * List of data regions assigned to the fleetspace. Eg [westus2]
+   */
+  @minItems(1)
+  dataRegions?: string[];
+
+  /**
    * Configuration for throughput pool in the fleetspace.
    */
   throughputPoolConfiguration?: FleetspacePropertiesThroughputPoolConfiguration;
@@ -8123,14 +8274,16 @@ model FleetspacePropertiesThroughputPoolConfiguration {
   maxThroughput?: int32;
 
   /**
-   * Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region.
+   * Total dedicated throughput (RU/s) for fleetspace. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers across all accounts in the fleetspace for 1 region.
    */
-  serviceTier?: FleetspacePropertiesThroughputPoolConfigurationServiceTier;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  dedicatedRUs?: int64;
 
   /**
-   * List of data regions assigned to the fleetspace. Eg [westus2]
+   * Maximum consumable throughput (RU/s) for fleetspace. Represents the maximum throughput that resources in the fleetspace can consume from the fleetspace's pool in 1 region.
    */
-  dataRegions?: string[];
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  maxConsumableRUs?: int64;
 }
 
 /**
