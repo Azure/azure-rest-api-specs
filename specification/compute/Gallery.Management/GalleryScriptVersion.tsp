@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
@@ -11,7 +10,7 @@ using TypeSpec.Rest;
 using Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using Azure.Core; // Needed for @useFinalStateVia decorator
 
 namespace Microsoft.Compute {
   @pattern("^[0-9]+\\.[0-9]+\\.[0-9]+$")
@@ -45,14 +44,10 @@ namespace Microsoft.Compute {
 
     /**
      * Create or update a gallery Script Version.
-     * Ensures final-state-via is azure-async-operation (policy requirement) and emits Azure-AsyncOperation header.
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
     #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-    @extension(
-      "x-ms-long-running-operation-options",
-      #{ `final-state-via`: "azure-async-operation" }
-    )
+    @useFinalStateVia("azure-async-operation")
     @added(Versions.v2025_03_03)
     createOrUpdate is ComputeResourceCreateOrReplaceAsync<
       GalleryScriptVersion,
@@ -68,10 +63,7 @@ namespace Microsoft.Compute {
     /**
      * Update a gallery Script Version.
      */
-    @extension(
-      "x-ms-long-running-operation-options",
-      #{ `final-state-via`: "azure-async-operation" }
-    )
+    @useFinalStateVia("azure-async-operation")
     @added(Versions.v2025_03_03)
     @patch(#{ implicitOptionality: false })
     update is ComputeCustomPatchAsync<
@@ -90,10 +82,7 @@ namespace Microsoft.Compute {
      * Delete a gallery Script Version.
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-    @extension(
-      "x-ms-long-running-operation-options",
-      #{ `final-state-via`: "azure-async-operation" }
-    )
+    @useFinalStateVia("azure-async-operation")
     @added(Versions.v2025_03_03)
     delete is ComputeResourceDeleteAsync<
       GalleryScriptVersion,
