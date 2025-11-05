@@ -28,9 +28,25 @@ directive:
     transform: >
       $.identity['$ref'] = '../../../Registry/stable/2025-11-01/containerregistry.json#/definitions/IdentityProperties';
   - from: containerregistry_build.json
+    where: $.definitions.TaskRun.properties
+    transform: >
+      $.identity['$ref'] = '../../../Registry/stable/2025-11-01/containerregistry.json#/definitions/IdentityProperties';
+  - from: containerregistry_build.json
     where: $.definitions.TaskUpdateParameters.properties
     transform: >
       $.identity['$ref'] = '../../../Registry/stable/2025-11-01/containerregistry.json#/definitions/IdentityProperties';
+  - from: containerregistry_build.json
+    where: $.definitions.Run
+    transform: >
+      $.allOf['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource';
+  - from: containerregistry_build.json
+    where: $.definitions.TaskRun
+    transform: >
+      $.allOf['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource';
+  - from: containerregistry_build.json
+    where: $.definitions.Resource.properties
+    transform: >
+      $.systemData['$ref'] = '../../../../../../common-types/resource-management/v6/types.json#/definitions/SystemData';
 ```
 
 ### Tag: package-2025-11
