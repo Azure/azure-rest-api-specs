@@ -1,15 +1,14 @@
-// @ts-check
-
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { example } from "./changed-files.js";
-import { includesFolder } from "./path.js";
+import { includesSegment } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
 /**
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./spec-model.js').Tag} Tag
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
@@ -19,6 +18,12 @@ import { embedError } from "./spec-model.js";
  * @property {string} id - The operation ID
  * @property {string} path - API path
  * @property {string} httpMethod - HTTP method (GET, POST, etc.)
+ */
+
+/**
+ * @typedef {Object} SwaggerJSON
+ * @property {string} path
+ * @property {Object[]} [refs]
  */
 
 /**
@@ -195,14 +200,14 @@ export class Swagger {
    * @returns {string} version kind (stable or preview)
    */
   get versionKind() {
-    return includesFolder(this.#path, "preview")
+    return includesSegment(this.#path, "preview")
       ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
       : API_VERSION_LIFECYCLE_STAGES.STABLE;
   }
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<Object>}
+   * @returns {Promise<SwaggerJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     const { includeRefs, relativePaths } = options;
