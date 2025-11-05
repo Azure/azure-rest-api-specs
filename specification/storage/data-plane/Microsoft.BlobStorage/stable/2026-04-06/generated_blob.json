@@ -17223,6 +17223,11 @@
           "type": "string",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "expiry"
+        },
+        "DelegatedUserTid": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The delegated user tenant id in Azure AD.",
+          "x-ms-client-name": "delegatedUserTid"
         }
       },
       "required": [
@@ -18266,6 +18271,11 @@
           "type": "string",
           "description": "The service version that created the key.",
           "x-ms-client-name": "signedVersion"
+        },
+        "SignedDelegatedUserTid": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified.",
+          "x-ms-client-name": "signedDelegatedUserTid"
         },
         "Value": {
           "$ref": "#/definitions/base64Bytes",
