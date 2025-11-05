@@ -55,9 +55,23 @@ model GetSupportedLanguagesResult {
   etag: eTag;
 
   @doc("Languages that support translate API.")
+  @renamedFrom(APIVersion.v2025_10_01_preview, "translation")
+  @removed(APIVersion.v2025_10_01_preview)
+  translationV3?: Record<TranslationLanguage>;
+
+  @doc("Languages that support transliteration API.")
+  @renamedFrom(APIVersion.v2025_10_01_preview, "transliteration")
+  @removed(APIVersion.v2025_10_01_preview)
+  transliterationV3?: Record<TransliterationLanguage>;
+
+  @doc("Languages that support translate API.")
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
   translation?: Record<TranslationLanguage>;
 
   @doc("Languages that support transliteration API.")
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
   transliteration?: Record<TransliterationLanguage>;
 
   @doc("Languages that support dictionary API.")
