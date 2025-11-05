@@ -1,3 +1,7 @@
+# SDK Workflow
+
+For anything related to SDK generation/development/verification/release see [here](../eng/common/instructions/azsdk-tools/)
+
 # New TypeSpec projects
 
 Before creating or initializing a TypeSpec project, you must know your org name, service name, and the type of service: data-plane or control-plane (ARM).
