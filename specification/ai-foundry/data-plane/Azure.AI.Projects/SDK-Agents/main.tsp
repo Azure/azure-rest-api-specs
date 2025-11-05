@@ -10,5 +10,5 @@ import "../agents/operations.tsp";
 import "../memory_stores/operations.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
-import "../responses/models.tsp";
-import "../conversations/models.tsp";
+import "../responses/operations.tsp";
+import "../conversations/operations.tsp";
