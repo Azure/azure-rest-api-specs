@@ -2,7 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../service.tsp";
+import "../common/service.tsp";
 import "../common/models.tsp";
 import "@typespec/openapi";
 

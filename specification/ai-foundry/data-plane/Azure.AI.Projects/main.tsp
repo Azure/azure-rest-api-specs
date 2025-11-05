@@ -21,7 +21,7 @@ import "./evaluators/routes.tsp";
 import "./insights/routes.tsp";
 import "./schedules/routes.tsp";
 
-import "./service.tsp";
+import "./common/service.tsp";
 
 namespace OpenAI {
   scalar integer extends TypeSpec.int64;
