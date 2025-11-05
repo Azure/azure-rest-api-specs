@@ -15729,18 +15729,18 @@ union StorageMountType {
   FileShare: "FileShare",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefaultIdentity {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identityType?: ManagedServiceIdentityType;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentityResourceId?: string;
 }
 
 /**
  * Represents instance details for an app service plan.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerFarmInstanceDetails {
   /**
    * ServerFarmInstanceDetails resource specific properties
