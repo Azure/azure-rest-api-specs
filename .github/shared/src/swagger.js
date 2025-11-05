@@ -139,15 +139,17 @@ export class Swagger {
               tag: this.#tag?.name,
               readme: this.#tag?.readme?.path,
             });
+          } /* v8 ignore start: defensive rethrow */ else {
+            throw error;
           }
-
-          throw error;
+          /* v8 ignore stop */
         }
       }
 
       /** @type {Map<string, Operation>} */
       const operations = new Map();
 
+      // TODO: wrap ZodError in SpecModelError, like readme.js
       const swagger = swaggerSchema.parse(JSON.parse(this.#content));
       // Process regular paths
       if (swagger.paths) {
