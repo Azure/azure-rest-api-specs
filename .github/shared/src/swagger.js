@@ -171,6 +171,7 @@ export class Swagger {
           resolve: { file: excludeExamples, http: false },
         });
       } catch (error) {
+        // TODO: Add test coverage
         if (error instanceof ResolverError) {
           throw new SpecModelError(`Failed to resolve file for swagger: ${this.#path}`, {
             cause: error,
@@ -178,9 +179,10 @@ export class Swagger {
             tag: this.#tag?.name,
             readme: this.#tag?.readme?.path,
           });
+        } /* v8 ignore start: defensive rethrow */ else {
+          throw error;
         }
-
-        throw error;
+        /* v8 ignore stop */
       }
 
       const refPaths = schema
