@@ -28,25 +28,6 @@ import { embedError } from "./spec-model.js";
  * @property {Object[]} [refs]
  */
 
-// Example Swagger
-//
-// {
-//   "paths": {
-//     "/foo": {
-//       "get": {
-//         "operationId": "Foo_Get"
-//       },
-//       "put": {
-//         "operationId": "Foo_CreateOrUpdate"
-//       }
-//     },
-//     "/bar": { ... }
-//   },
-//   "x-ms-paths": {
-//     "/baz": { ... }
-//   }
-// }
-
 const pathSchema = z.record(z.string(), z.object({ operationId: z.string().optional() }));
 /**
  * @typedef {import("zod").infer<typeof pathSchema>} PathObject
@@ -63,6 +44,24 @@ const swaggerSchema = z.object({
 });
 /**
  * @typedef {import("zod").infer<typeof swaggerSchema>} SwaggerObject
+ *
+ * @example
+ * const swagger = {
+ *   "paths": {
+ *     "/foo": {
+ *       "get": {
+ *         "operationId": "Foo_Get"
+ *       },
+ *       "put": {
+ *         "operationId": "Foo_CreateOrUpdate"
+ *       }
+ *     },
+ *     "/bar": { ... }
+ *   },
+ *   "x-ms-paths": {
+ *     "/baz": { ... }
+ *   }
+ * };
  */
 
 /**
