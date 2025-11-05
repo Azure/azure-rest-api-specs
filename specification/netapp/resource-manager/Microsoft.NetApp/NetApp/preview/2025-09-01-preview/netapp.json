@@ -1715,7 +1715,7 @@
         "tags": [
           "ElasticBackupPolicies"
         ],
-        "description": "Delete the specified Elastic Policy Vault",
+        "description": "Delete the specified Elastic Policy",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -15282,7 +15282,7 @@
     },
     "ElasticBackupPolicy": {
       "type": "object",
-      "description": "NetApp elastic backup vault resource",
+      "description": "NetApp elastic backup policy resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ElasticBackupPolicyProperties",
@@ -15359,14 +15359,38 @@
           "readOnly": true
         },
         "policyState": {
-          "$ref": "#/definitions/PolicyState",
+          "$ref": "#/definitions/ElasticBackupPolicyState",
           "description": "The property to identify whether backup policy is enabled or not"
         }
       }
     },
+    "ElasticBackupPolicyState": {
+      "type": "string",
+      "description": "Elastic backup policy Policy state",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ElasticBackupPolicyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Value indicating the policy is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Value indicating the policy is disabled"
+          }
+        ]
+      }
+    },
     "ElasticBackupPolicyUpdate": {
       "type": "object",
-      "description": "NetApp elastic backup vault resource",
+      "description": "NetApp elastic backup policy resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ElasticBackupPolicyProperties",
@@ -18464,30 +18488,6 @@
         "key",
         "value"
       ]
-    },
-    "PolicyState": {
-      "type": "string",
-      "description": "Policy state",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "PolicyState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Value indicating the policy is enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Value indicating the policy is disabled"
-          }
-        ]
-      }
     },
     "PolicyStatus": {
       "type": "string",

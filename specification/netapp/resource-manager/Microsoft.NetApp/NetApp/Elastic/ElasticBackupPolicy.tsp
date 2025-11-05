@@ -15,7 +15,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.NetApp;
 
 /**
- * NetApp elastic backup vault resource
+ * NetApp elastic backup policy resource
  */
 @added(Versions.v2025_09_01_preview)
 @parentResource(ElasticAccount)
@@ -58,14 +58,14 @@ model ElasticBackupPolicyProperties {
   assignedVolumesCount?: int32;
 
   /** The property to identify whether backup policy is enabled or not */
-  policyState?: PolicyState;
+  policyState?: ElasticBackupPolicyState;
 }
 
 /**
- * Policy state
+ * Elastic backup policy Policy state
  */
 @added(Versions.v2025_09_01_preview)
-union PolicyState {
+union ElasticBackupPolicyState {
   string,
 
   /** Value indicating the policy is enabled */
@@ -102,7 +102,7 @@ interface ElasticBackupPolicies {
   >;
 
   /**
-   * Delete the specified Elastic Policy Vault
+   * Delete the specified Elastic Policy
    */
   @added(Versions.v2025_09_01_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupPolicy>;
