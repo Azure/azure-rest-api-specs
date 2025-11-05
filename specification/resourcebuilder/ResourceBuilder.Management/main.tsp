@@ -22,7 +22,7 @@ using Azure.ResourceManager;
 namespace Microsoft.ResourceBuilder;
 
 /** The available API versions. */
-enum Versions {  
+enum Versions {
   /** 2025-11-04-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_11_04_preview: "2025-11-04-preview",

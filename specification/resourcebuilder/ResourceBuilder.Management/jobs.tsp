@@ -16,8 +16,8 @@ namespace Microsoft.ResourceBuilder;
 /** Job resource */
 @parentResource(Pipeline)
 model Job is ProxyResource<JobProperties> {
-  @segment("jobs")
   /** The name of the job. */
+  @segment("jobs")
   @key("jobName")
   @visibility(Lifecycle.Read)
   @path
@@ -122,20 +122,28 @@ model JobProperties {
 union JobKind {
   /** Batch job kind. */
   Batch: "Batch",
+
   /** Stream job kind. */
   Stream: "Stream",
+
   /** Azure Storage Account Ingestion job kind. */
   AzureStorageAccountIngestion: "AzureStorageAccountIngestion",
+
   /** Azure Data Explorer Publish job kind. */
   AzureDataExplorerPublish: "AzureDataExplorerPublish",
+
   /** Azure Data Explorer Ingestion job kind. */
   AzureDataExplorerIngestion: "AzureDataExplorerIngestion",
+
   /** Data Quality Validation job kind. */
   DataQualityValidation: "DataQualityValidation",
+
   /** Azure Resource Notification Publish job kind. */
   AzureResourceNotificationPublish: "AzureResourceNotificationPublish",
+
   /** Azure Resource Graph Galaxy job kind. */
   AzureResourceGraph_Galaxy: "AzureResourceGraph_Galaxy",
+
   string,
 }
 
@@ -173,8 +181,10 @@ model DatasetReference {
 union DatasetReferenceType {
   /** Resource ID reference type. */
   ResourceId: "ResourceId",
+
   /** Catalog reference type. */
   Catalog: "Catalog",
+
   string,
 }
 
@@ -182,8 +192,10 @@ union DatasetReferenceType {
 union MissingPartitionPolicy {
   /** Fail policy. */
   Fail: "Fail",
+
   /** Ignore policy. */
   Ignore: "Ignore",
+
   string,
 }
 
@@ -200,10 +212,13 @@ model ProcessingLogic {
 union ProcessingLogicType {
   /** Spark SQL processing logic type. */
   SparkSQL: "SparkSQL",
+
   /** KQL processing logic type. */
   KQL: "KQL",
+
   /** Azure Resource Graph KQL processing logic type. */
   ARG_KQL: "ARG_KQL",
+
   string,
 }
 
@@ -220,8 +235,10 @@ model PrimaryKeyAttribute {
 union SinkType {
   /** Azure Data Explorer sink type. */
   AzureDataExplorerSink: "AzureDataExplorerSink",
+
   /** Resource Notification sink type. */
   ResourceNotificationSink: "ResourceNotificationSink",
+
   string,
 }
 
@@ -266,8 +283,10 @@ model ResourceNotificationSink extends DatasetSink {
 union PublishMode {
   /** Overwrite publish mode. */
   Overwrite: "Overwrite",
+
   /** Append publish mode. */
   Append: "Append",
+
   string,
 }
 
@@ -275,10 +294,13 @@ union PublishMode {
 union ResourceNotificationResourceType {
   /** Default resource notification type. */
   Default: "Default",
+
   /** Resource notification for a resource. */
   Resource: "Resource",
+
   /** Resource notification for a relationship. */
   Relationship: "Relationship",
+
   string,
 }
 
@@ -286,8 +308,10 @@ union ResourceNotificationResourceType {
 union DataQualityExecutionMode {
   /** Inline execution mode executes data quality metric collection inline, post curation job processing. */
   Inline: "inline",
+
   /** Standalone execution mode executes data quality metric collection in a standalone data quality pipeline. */
   StandAlone: "standAlone",
+
   string,
 }
 
@@ -307,10 +331,13 @@ model DataQualityDatasetValidation {
 union DataQualityDatasetValidationCondition {
   /** Always succeed condition. */
   AlwaysSucceed: "alwaysSucceed",
+
   /** Any validation succeeds condition. */
   Any: "any",
+
   /** All validations succeed condition. */
   All: "all",
+
   string,
 }
 
@@ -342,8 +369,10 @@ model DataQualityMetricEvaluation {
 union DataQualityMetricEvaluationType {
   /** Unknown evaluation type. */
   Unknown: "unknown",
+
   /** Table count evaluation type. */
   TableCount: "tableCount",
+
   string,
 }
 
@@ -351,8 +380,10 @@ union DataQualityMetricEvaluationType {
 union DataQualityMetricType {
   /** Unknown metric type. */
   Unknown: "unknown",
+
   /** Count metric type. */
   Count: "count",
+
   string,
 }
 
@@ -360,8 +391,10 @@ union DataQualityMetricType {
 union DataQualityMetricUnit {
   /** Count unit. */
   Count: "count",
+
   /** Seconds unit. */
   Seconds: "seconds",
+
   string,
 }
 
@@ -396,8 +429,10 @@ model DataQualityMetricValidation {
 union DataQualityMetricValidationType {
   /** Unknown validation type. */
   Unknown: "unknown",
+
   /** Anomaly validation type. */
   Anomaly: "anomaly",
+
   string,
 }
 
@@ -405,10 +440,13 @@ union DataQualityMetricValidationType {
 union DataQualityMetricValidationAction {
   /** Ignore action. */
   Ignore: "ignore",
+
   /** Warn action. */
   Warn: "warn",
+
   /** Fail action. */
   Fail: "fail",
+
   string,
 }
 
@@ -416,10 +454,13 @@ union DataQualityMetricValidationAction {
 union AnomalyMode {
   /** Detects anomalies in either the negative or positive direction. */
   IsAnomaly: "isAnomaly",
+
   /** Detects anomalies only in the positive direction. */
   IsPositiveAnomaly: "isPositiveAnomaly",
+
   /** Detects anomalies only in the negative direction. */
   IsNegativeAnomaly: "isNegativeAnomaly",
+
   string,
 }
 
@@ -445,7 +486,7 @@ model MetricValidationEntry {
 model AutoDataQualityParameters {
   /** Sensitivity for anomaly detection. The value should be between 0 and 100. Defaults to 90. */
   sensitivity?: int32;
-  
+
   /** Anomaly detection mode. */
   anomalyMode?: AnomalyMode;
 
@@ -472,4 +513,3 @@ interface Jobs {
   delete is ArmResourceDeleteSync<Job>;
   list is ArmResourceListByParent<Job>;
 }
-

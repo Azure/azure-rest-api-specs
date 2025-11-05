@@ -13,8 +13,8 @@ namespace Microsoft.ResourceBuilder;
 
 /** Workspace resource */
 model Workspace is TrackedResource<WorkspaceProperties> {
-  @segment("workspaces")
   /** The name of the workspace. */
+  @segment("workspaces")
   @key("workspaceName")
   @visibility(Lifecycle.Read)
   @path
@@ -37,4 +37,3 @@ interface Workspaces {
   delete is ArmResourceDeleteSync<Workspace>;
   list is ArmResourceListByParent<Workspace>;
 }
-

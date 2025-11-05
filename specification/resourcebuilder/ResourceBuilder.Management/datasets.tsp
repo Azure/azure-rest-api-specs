@@ -14,8 +14,8 @@ namespace Microsoft.ResourceBuilder;
 /** Dataset resource */
 @parentResource(Workspace)
 model Dataset is ProxyResource<DatasetProperties> {
-  @segment("datasets")
   /** The name of the dataset. */
+  @segment("datasets")
   @key("datasetName")
   @visibility(Lifecycle.Read)
   @path
@@ -46,8 +46,10 @@ model DatasetProperties {
 union DatasetType {
   /** Snapshot dataset type. */
   Snapshot: "Snapshot",
+
   /** Delta dataset type. */
   Delta: "Delta",
+
   string,
 }
 
@@ -67,24 +69,34 @@ model DatasetColumn {
 union DatasetColumnType {
   /** String column type. */
   String: "String",
+
   /** Integer column type. */
   Integer: "Integer",
+
   /** Boolean column type. */
   Boolean: "Boolean",
+
   /** DateTime column type. */
   DateTime: "DateTime",
+
   /** Dynamic column type. */
   Dynamic: "Dynamic",
+
   /** Guid column type. */
   Guid: "Guid",
+
   /** Long column type. */
   Long: "Long",
+
   /** Real column type. */
   Real: "Real",
+
   /** Timespan column type. */
   Timespan: "Timespan",
+
   /** Decimal column type. */
   Decimal: "Decimal",
+
   string,
 }
 
@@ -93,6 +105,7 @@ union DatasetColumnType {
 model Datastore {
   /** Datastore type discriminator */
   type: DatastoreType;
+
   /** Datastore name */
   name: string;
 }
@@ -101,10 +114,13 @@ model Datastore {
 union DatastoreType {
   /** Azure Storage Account datastore type. */
   AzureStorageAccountDatastore: "AzureStorageAccountDatastore",
+
   /** Azure Data Explorer datastore type. */
   AzureDataExplorerDatastore: "AzureDataExplorerDatastore",
+
   /** Azure Resource Notification datastore type. */
   AzureResourceNotificationDatastore: "AzureResourceNotificationDatastore",
+
   string,
 }
 
@@ -112,10 +128,10 @@ union DatastoreType {
 model AzureStorageAccountDatastore extends Datastore {
   /** Datastore type */
   type: "AzureStorageAccountDatastore";
-  
+
   /** Container URI */
   containerUri: string;
-  
+
   /** Tenant ID */
   tenantId: string;
 }
@@ -124,13 +140,13 @@ model AzureStorageAccountDatastore extends Datastore {
 model AzureDataExplorerDatastore extends Datastore {
   /** Datastore type */
   type: "AzureDataExplorerDatastore";
-  
+
   /** Cluster URI */
   clusterUri: string;
-  
+
   /** Database name */
   database: string;
-  
+
   /** Table name */
   table: string;
 }
@@ -148,4 +164,3 @@ interface Datasets {
   delete is ArmResourceDeleteSync<Dataset>;
   list is ArmResourceListByParent<Dataset>;
 }
-

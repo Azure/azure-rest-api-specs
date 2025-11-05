@@ -45,8 +45,10 @@ model PipelineProperties {
 union PipelineState {
   /** Enabled state. */
   Enabled: "Enabled",
+
   /** Disabled state. */
   Disabled: "Disabled",
+
   string,
 }
 
@@ -77,8 +79,10 @@ model PipelineJobBase {
 union PipelineJobType {
   /** Reference job type. */
   Reference: "reference",
+
   /** Inline job type. */
   Inline: "inline",
+
   string,
 }
 
@@ -113,10 +117,13 @@ model PipelineActivityDependency {
 union PipelineDependencyCondition {
   /** Succeeded condition. */
   Succeeded: "Succeeded",
+
   /** Failed condition. */
   Failed: "Failed",
+
   /** Skipped condition. */
   Skipped: "Skipped",
+
   string,
 }
 
@@ -142,8 +149,10 @@ model PipelineRecurrence {
 union ScheduleType {
   /** Periodic schedule type. */
   Periodic: "Periodic",
+
   /** Manual trigger schedule type. */
   ManualTrigger: "ManualTrigger",
+
   string,
 }
 
@@ -154,4 +163,3 @@ interface Pipelines {
   delete is ArmResourceDeleteSync<Pipeline>;
   list is ArmResourceListByParent<Pipeline>;
 }
-
