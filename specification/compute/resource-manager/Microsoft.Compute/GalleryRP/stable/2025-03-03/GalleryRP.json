@@ -3793,7 +3793,7 @@
         "tags": [
           "GalleryScriptVersions"
         ],
-        "description": "Retrieves information about a gallery Script Version.",
+        "description": "Custom ArmResourceRead operation template with CloudError as Error",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3857,7 +3857,7 @@
         "tags": [
           "GalleryScriptVersions"
         ],
-        "description": "Create or update a gallery Script Version. Script versions helps save different states/iterations of a Gallery script. They are referred in format: <MajorVersion>.<MinorVersion>.<Patch>",
+        "description": "Create or update a gallery Script Version.\nEnsures final-state-via is azure-async-operation (policy requirement) and emits Azure-AsyncOperation header.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3943,7 +3943,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -4081,9 +4081,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -6422,7 +6419,7 @@
     },
     "GalleryScriptVersion": {
       "type": "object",
-      "description": "Specifies information about the gallery Script Version that you want to create or update.",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryScriptVersionProperties",
@@ -6437,7 +6434,7 @@
     },
     "GalleryScriptVersionList": {
       "type": "object",
-      "description": "The List Gallery Script version operation response.",
+      "description": "Paged collection of GalleryScriptVersion items",
       "properties": {
         "value": {
           "type": "array",

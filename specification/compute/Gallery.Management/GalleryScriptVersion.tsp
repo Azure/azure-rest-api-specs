@@ -11,24 +11,16 @@ using TypeSpec.Rest;
 using Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute {
-  /**
-   * Gallery script version name with semantic version pattern validation
-   */
   @pattern("^[0-9]+\\.[0-9]+\\.[0-9]+$")
   @doc("The name of the gallery Script Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>")
   scalar GalleryScriptVersionName extends string;
 
-  /**
-   * The List Gallery Script version operation response.
-   */
   @added(Versions.v2025_03_03)
   model GalleryScriptVersionList is Azure.Core.Page<GalleryScriptVersion>;
 
-  /**
-   * Specifies information about the gallery Script Version that you want to create or update.
-   */
   @added(Versions.v2025_03_03)
   @parentResource(GalleryScript)
   model GalleryScriptVersion
@@ -40,25 +32,25 @@ namespace Microsoft.Compute {
   }
 
   /**
-   * Common LRO headers including Azure-AsyncOperation (required Jan 2025), Location (for compatibility) and Retry-After.
+   * Common LRO headers (Azure-AsyncOperation required Jan 2025). Keep Location + Retry-After for backward compatibility.
    */
-  alias GalleryScriptVersionLroHeaders = ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
+  alias GalleryScriptVersionLroHeaders =
+    ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
     ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader;
 
   @armResourceOperations
   interface GalleryScriptVersions {
-    /**
-     * Retrieves information about a gallery Script Version.
-     */
     @added(Versions.v2025_03_03)
     get is ComputeResourceRead<GalleryScriptVersion>;
 
     /**
-     * Create or update a gallery Script Version. Script versions helps save different states/iterations of a Gallery script. They are referred in format: <MajorVersion>.<MinorVersion>.<Patch>
+     * Create or update a gallery Script Version.
+     * Ensures final-state-via is azure-async-operation (policy requirement) and emits Azure-AsyncOperation header.
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
     #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+    @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "azure-async-operation" })
     @added(Versions.v2025_03_03)
     createOrUpdate is ComputeResourceCreateOrReplaceAsync<
       GalleryScriptVersion,
@@ -74,6 +66,7 @@ namespace Microsoft.Compute {
     /**
      * Update a gallery Script Version.
      */
+    @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "azure-async-operation" })
     @added(Versions.v2025_03_03)
     @patch(#{ implicitOptionality: false })
     update is ComputeCustomPatchAsync<
@@ -92,13 +85,14 @@ namespace Microsoft.Compute {
      * Delete a gallery Script Version.
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+    @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "azure-async-operation" })
     @added(Versions.v2025_03_03)
     delete is ComputeResourceDeleteAsync<
       GalleryScriptVersion,
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-      ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders> | ArmDeletedNoContentResponse | ArmDeletedResponse
+      ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders> | ArmDeletedNoContentResponse
     >;
 
     /**
