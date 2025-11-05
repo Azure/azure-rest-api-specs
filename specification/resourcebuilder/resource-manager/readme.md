@@ -30,15 +30,6 @@ openapi-subtype: rpaas
 tag: package-2025-11-04-preview
 ```
 
-### Tag: package-2024-07-01-preview
-
-These settings apply only when `--tag=package-2024-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-07-01-preview'
-input-file:
-  - Microsoft.ResourceBuilder/preview/2024-07-01-preview/resourcebuilder.json
-```
-
 ### Tag: package-2025-11-04-preview
 
 These settings apply only when `--tag=package-2025-11-04-preview` is specified on the command line.
