@@ -227,17 +227,37 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
 
-    // @ts-expect-error foo
-    const showSpy = vi.mocked(simpleGit.simpleGit().show).mockImplementation(async ([treePath]) => {
-      const path = treePath.split(":")[1];
-      if (path === swaggerPath) {
-        return swaggerTypeSpecGenerated;
-      } else if (path === readmePath) {
-        return contosoReadme;
-      } else {
-        throw new Error("does not exist");
-      }
-    });
+    const showSpy = vi
+      .mocked(simpleGit.simpleGit().show)
+      .mockImplementation(
+        (
+          /** @type {import("simple-git").SimpleGitTaskCallback|string|string[]|undefined} */ optionsOrCallback,
+        ) => {
+          /** @type {string} */
+          let option;
+
+          if (Array.isArray(optionsOrCallback)) {
+            option = optionsOrCallback[0];
+          } else if (typeof optionsOrCallback === "string") {
+            option = optionsOrCallback;
+          } else {
+            throw new Error(`Unexpected argument: ${optionsOrCallback}`);
+          }
+
+          const path = option.split(":")[1];
+          if (path === swaggerPath) {
+            return /** @type {import("simple-git").Response<string>} */ (
+              Promise.resolve(swaggerTypeSpecGenerated)
+            );
+          } else if (path === readmePath) {
+            return /** @type {import("simple-git").Response<string>} */ (
+              Promise.resolve(contosoReadme)
+            );
+          } else {
+            throw new Error("does not exist");
+          }
+        },
+      );
 
     const lsTreeSpy = vi.mocked(simpleGit.simpleGit().raw).mockResolvedValue(swaggerPath);
 
