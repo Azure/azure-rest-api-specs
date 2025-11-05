@@ -175,7 +175,7 @@ export class Readme {
           } /* v8 ignore start: defensive rethrow */ else {
             throw error;
           }
-          /* v8 ignore end */
+          /* v8 ignore stop */
         }
 
         if (!parsedObj["input-file"]) {
