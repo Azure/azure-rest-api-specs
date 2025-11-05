@@ -319,7 +319,7 @@ describe("buildState", () => {
         [
           "specification/edit-in-place/readme.md",
           {
-            changedTags: new Set<string>(),
+            changedTags: new Set<string>([""]),
             readme: expect.any(Readme),
           },
         ],
@@ -333,7 +333,7 @@ describe("buildState", () => {
   });
 
   test("does not throw if a file is missing", async () => {
-    expect(() =>
+    await expect(() =>
       buildState(
         ["specification/edit-in-place/data-plane/does-not-exist.json"],
         "test/fixtures/buildState/",
