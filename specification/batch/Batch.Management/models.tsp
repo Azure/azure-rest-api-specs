@@ -3661,3 +3661,5 @@ union NspAccessRuleDirection {
   /** Outbound access rule */
   Outbound: "Outbound",
 }
+
+model DetectorListResult is Azure.Core.Page<DetectorListResult>;

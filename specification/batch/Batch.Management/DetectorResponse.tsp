@@ -50,6 +50,7 @@ interface DetectorResponses {
    */
   listDetectors is ArmResourceListByParent<
     DetectorResponse,
+    Response = ArmResponse<DetectorListResult>,
     Error = CloudError
   >;
 }

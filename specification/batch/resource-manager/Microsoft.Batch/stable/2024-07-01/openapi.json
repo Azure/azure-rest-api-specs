@@ -471,7 +471,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BatchAccount"
         },
         "x-ms-long-running-operation": true
       },
@@ -1764,7 +1765,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DetectorResponseListResult"
+              "$ref": "#/definitions/DetectorListResult"
             }
           },
           "default": {
@@ -2908,7 +2909,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/PrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -2955,12 +2957,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -4810,6 +4807,27 @@
         }
       }
     },
+    "DetectorListResult": {
+      "type": "object",
+      "description": "Paged collection of DetectorListResult items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DetectorListResult items on this page",
+          "items": {
+            "$ref": "#/definitions/DetectorListResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DetectorResponse": {
       "type": "object",
       "description": "Contains the information for a detector.",
@@ -4835,27 +4853,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "DetectorResponseListResult": {
-      "type": "object",
-      "description": "The response of a DetectorResponse list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DetectorResponse items on this page",
-          "items": {
-            "$ref": "#/definitions/DetectorResponse"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "DetectorResponseProperties": {

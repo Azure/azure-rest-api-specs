@@ -53,7 +53,7 @@ interface PrivateEndpointConnections {
   update is ArmCustomPatchAsync<
     PrivateEndpointConnection,
     PatchModel = PrivateEndpointConnection,
-    LroHeaders = ArmCombinedLroHeaders &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /**
@@ -72,7 +72,7 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    LroHeaders = ArmCombinedLroHeaders &
+    LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
