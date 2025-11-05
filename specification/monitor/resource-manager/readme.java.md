@@ -25,9 +25,9 @@ directive:
       $["x-ms-enum"].name = "MonitorWorkspaceAlertSeverity"
 ```
 
-### Tag: package-composite-v1
+### Tag: package-composite-v1-java
 
-``` yaml $(java) && $(tag) == 'package-composite-v1'
+``` yaml $(java) && $(tag) == 'package-composite-v1-java'
 input-file:
 - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
@@ -40,8 +40,8 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
-- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2021-05-01/metrics_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
 - Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json
