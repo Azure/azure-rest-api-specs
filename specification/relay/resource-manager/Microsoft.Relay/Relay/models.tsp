@@ -440,8 +440,8 @@ model RelayUpdateParameters extends ResourceNamespacePatch {
   /**
    * Description of Relay namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RelayNamespaceProperties;
 }
 
@@ -552,9 +552,9 @@ model Operation {
   /**
    * Properties of the operation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: Record<unknown>;
 }
 
