@@ -1,56 +1,21 @@
 {
   "parameters": {
     "accountName": "ddb1",
+    "resourceGroupName": "rg1",
     "api-version": "2025-11-01-preview",
+    "subscriptionId": "subid",
     "createUpdateParameters": {
+      "location": "westus",
+      "tags": {},
+      "kind": "MongoDB",
       "identity": {
         "type": "SystemAssigned,UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
         }
       },
-      "kind": "MongoDB",
-      "location": "westus",
       "properties": {
-        "analyticalStorageConfiguration": {
-          "schemaType": "WellDefined"
-        },
-        "apiProperties": {
-          "serverVersion": "3.2"
-        },
-        "backupPolicy": {
-          "type": "Periodic",
-          "periodicModeProperties": {
-            "backupIntervalInMinutes": 240,
-            "backupRetentionIntervalInHours": 8,
-            "backupStorageRedundancy": "Geo"
-          }
-        },
-        "capacity": {
-          "totalThroughputLimit": 2000
-        },
-        "capacityMode": "Provisioned",
-        "consistencyPolicy": {
-          "defaultConsistencyLevel": "BoundedStaleness",
-          "maxIntervalInSeconds": 10,
-          "maxStalenessPrefix": 200
-        },
-        "cors": [
-          {
-            "allowedOrigins": "https://test"
-          }
-        ],
-        "createMode": "Default",
         "databaseAccountOfferType": "Standard",
-        "defaultIdentity": "FirstPartyIdentity",
-        "defaultPriorityLevel": "Low",
-        "enableAllVersionsAndDeletesChangeFeed": false,
-        "enableAnalyticalStorage": true,
-        "enableBurstCapacity": true,
-        "enableFreeTier": false,
-        "enableMaterializedViews": false,
-        "enablePerRegionPerPartitionAutoscale": true,
-        "enablePriorityBasedExecution": true,
         "ipRules": [
           {
             "ipAddressOrRange": "23.43.230.120"
@@ -60,43 +25,81 @@
           }
         ],
         "isVirtualNetworkFilterEnabled": true,
-        "keyVaultKeyUri": "https://myKeyVault.vault.azure.net",
+        "virtualNetworkRules": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+            "ignoreMissingVNetServiceEndpoint": false
+          }
+        ],
+        "publicNetworkAccess": "Enabled",
         "locations": [
           {
             "failoverPriority": 0,
-            "isZoneRedundant": false,
-            "locationName": "southcentralus"
+            "locationName": "southcentralus",
+            "isZoneRedundant": false
           },
           {
             "failoverPriority": 1,
-            "isZoneRedundant": false,
-            "locationName": "eastus"
+            "locationName": "eastus",
+            "isZoneRedundant": false
           }
         ],
-        "minimalTlsVersion": "Tls12",
+        "createMode": "Default",
+        "consistencyPolicy": {
+          "defaultConsistencyLevel": "BoundedStaleness",
+          "maxIntervalInSeconds": 10,
+          "maxStalenessPrefix": 200
+        },
+        "keyVaultKeyUri": "https://myKeyVault.vault.azure.net",
+        "defaultIdentity": "FirstPartyIdentity",
+        "enableFreeTier": false,
+        "apiProperties": {
+          "serverVersion": "3.2"
+        },
+        "enableAnalyticalStorage": true,
+        "analyticalStorageConfiguration": {
+          "schemaType": "WellDefined"
+        },
+        "backupPolicy": {
+          "type": "Periodic",
+          "periodicModeProperties": {
+            "backupIntervalInMinutes": 240,
+            "backupRetentionIntervalInHours": 8,
+            "backupStorageRedundancy": "Geo"
+          }
+        },
+        "cors": [
+          {
+            "allowedOrigins": "https://test"
+          }
+        ],
         "networkAclBypass": "AzureServices",
         "networkAclBypassResourceIds": [
-          "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+          "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
         ],
-        "publicNetworkAccess": "Enabled",
-        "virtualNetworkRules": [
-          {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-            "ignoreMissingVNetServiceEndpoint": false
-          }
-        ]
-      },
-      "tags": {}
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+        "capacity": {
+          "totalThroughputLimit": 2000
+        },
+        "capacityMode": "Provisioned",
+        "enableMaterializedViews": false,
+        "enableBurstCapacity": true,
+        "minimalTlsVersion": "Tls12",
+        "enablePriorityBasedExecution": true,
+        "defaultPriorityLevel": "Low",
+        "enablePerRegionPerPartitionAutoscale": true,
+        "enableAllVersionsAndDeletesChangeFeed": false
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
         "name": "ddb1",
+        "location": "West US",
         "type": "Microsoft.DocumentDB/databaseAccounts",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+        "kind": "MongoDB",
+        "tags": {},
         "identity": {
           "type": "SystemAssigned,UserAssigned",
           "principalId": "52f4fef3-3c3f-4ff3-b52e-b5c9eeb68656",
@@ -108,61 +111,79 @@
             }
           }
         },
-        "kind": "MongoDB",
-        "location": "West US",
         "properties": {
-          "analyticalStorageConfiguration": {
-            "schemaType": "WellDefined"
-          },
-          "apiProperties": {
-            "serverVersion": "3.2"
-          },
-          "backupPolicy": {
-            "type": "Periodic",
-            "periodicModeProperties": {
-              "backupIntervalInMinutes": 240,
-              "backupRetentionIntervalInHours": 8,
-              "backupStorageRedundancy": "Geo"
-            }
-          },
-          "capacity": {
-            "totalThroughputLimit": 2000
-          },
-          "capacityMode": "Provisioned",
+          "provisioningState": "Initializing",
+          "isVirtualNetworkFilterEnabled": true,
+          "databaseAccountOfferType": "Standard",
+          "disableKeyBasedMetadataWriteAccess": false,
           "consistencyPolicy": {
             "defaultConsistencyLevel": "BoundedStaleness",
             "maxIntervalInSeconds": 10,
             "maxStalenessPrefix": 200
           },
-          "cors": [
+          "writeLocations": [
             {
-              "allowedOrigins": "https://test"
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
             }
           ],
-          "createMode": "Default",
-          "databaseAccountOfferType": "Standard",
-          "defaultIdentity": "FirstPartyIdentity",
-          "defaultPriorityLevel": "Low",
-          "disableKeyBasedMetadataWriteAccess": false,
-          "enableAnalyticalStorage": true,
-          "enableBurstCapacity": true,
-          "enableFreeTier": false,
-          "enableMaterializedViews": false,
-          "enablePerRegionPerPartitionAutoscale": true,
-          "enablePriorityBasedExecution": true,
-          "failoverPolicies": [
+          "readLocations": [
             {
-              "failoverPriority": 0,
               "id": "ddb1-southcentralus",
-              "locationName": "South Central US"
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
             },
             {
-              "failoverPriority": 1,
               "id": "ddb1-eastus",
-              "locationName": "East US"
+              "locationName": "East US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 1,
+              "isZoneRedundant": false
             }
           ],
-          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "locations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            },
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 1,
+              "isZoneRedundant": false
+            }
+          ],
+          "failoverPolicies": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "failoverPriority": 0
+            },
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "failoverPriority": 1
+            }
+          ],
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+            }
+          ],
+          "publicNetworkAccess": "Enabled",
+          "keyVaultKeyUri": "https://myKeyVault.vault.azure.net",
+          "keyVaultKeyUriVersion": "009d400efbef459bac31fb86fcce8884",
+          "defaultIdentity": "FirstPartyIdentity",
+          "enableFreeTier": false,
           "ipRules": [
             {
               "ipAddressOrRange": "23.43.230.120"
@@ -171,80 +192,62 @@
               "ipAddressOrRange": "110.12.240.0/12"
             }
           ],
-          "isVirtualNetworkFilterEnabled": true,
-          "keyVaultKeyUri": "https://myKeyVault.vault.azure.net",
+          "apiProperties": {
+            "serverVersion": "3.2"
+          },
+          "enableAnalyticalStorage": true,
+          "analyticalStorageConfiguration": {
+            "schemaType": "WellDefined"
+          },
+          "createMode": "Default",
+          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "backupPolicy": {
+            "type": "Periodic",
+            "periodicModeProperties": {
+              "backupIntervalInMinutes": 240,
+              "backupRetentionIntervalInHours": 8,
+              "backupStorageRedundancy": "Geo"
+            }
+          },
+          "cors": [
+            {
+              "allowedOrigins": "https://test"
+            }
+          ],
+          "networkAclBypass": "AzureServices",
+          "networkAclBypassResourceIds": [
+            "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+          ],
+          "capacity": {
+            "totalThroughputLimit": 2000
+          },
+          "capacityMode": "Provisioned",
+          "enableMaterializedViews": false,
+          "enableBurstCapacity": true,
+          "minimalTlsVersion": "Tls12",
           "keysMetadata": {
             "primaryMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             },
-            "primaryReadonlyMasterKey": {
+            "secondaryMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             },
-            "secondaryMasterKey": {
+            "primaryReadonlyMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             },
             "secondaryReadonlyMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             }
           },
-          "locations": [
-            {
-              "failoverPriority": 0,
-              "id": "ddb1-southcentralus",
-              "isZoneRedundant": false,
-              "locationName": "South Central US",
-              "provisioningState": "Initializing"
-            },
-            {
-              "failoverPriority": 1,
-              "id": "ddb1-eastus",
-              "isZoneRedundant": false,
-              "locationName": "East US",
-              "provisioningState": "Initializing"
-            }
-          ],
-          "minimalTlsVersion": "Tls12",
-          "networkAclBypass": "AzureServices",
-          "networkAclBypassResourceIds": [
-            "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
-          ],
-          "provisioningState": "Initializing",
-          "publicNetworkAccess": "Enabled",
-          "readLocations": [
-            {
-              "failoverPriority": 0,
-              "id": "ddb1-southcentralus",
-              "isZoneRedundant": false,
-              "locationName": "South Central US",
-              "provisioningState": "Initializing"
-            },
-            {
-              "failoverPriority": 1,
-              "id": "ddb1-eastus",
-              "isZoneRedundant": false,
-              "locationName": "East US",
-              "provisioningState": "Initializing"
-            }
-          ],
-          "virtualNetworkRules": [
-            {
-              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
-            }
-          ],
-          "writeLocations": [
-            {
-              "failoverPriority": 0,
-              "id": "ddb1-southcentralus",
-              "isZoneRedundant": false,
-              "locationName": "South Central US",
-              "provisioningState": "Initializing"
-            }
-          ]
+          "enablePriorityBasedExecution": true,
+          "defaultPriorityLevel": "Low",
+          "enablePerRegionPerPartitionAutoscale": true,
+          "throughputPoolDedicatedRUs": 0,
+          "throughputPoolMaxConsumableRUs": 0
         },
         "systemData": {
           "createdAt": "2021-03-12T22:05:09Z"
-        },
-        "tags": {}
+        }
       }
     }
   },

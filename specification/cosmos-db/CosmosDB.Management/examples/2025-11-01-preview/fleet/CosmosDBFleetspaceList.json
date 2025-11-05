@@ -1,43 +1,50 @@
 {
   "parameters": {
     "api-version": "2025-11-01-preview",
-    "fleetName": "fleet1",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "rg1",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "fleetName": "fleet1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
             "name": "fleetspace1",
             "type": "Microsoft.DocumentDB/fleets/fleetspaces",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
             "properties": {
               "provisioningState": "Succeeded",
+              "fleetspaceApiKind": "NoSQL",
+              "serviceTier": "BusinessCritical",
+              "dataRegions": [
+                "westus2",
+                "eastus2"
+              ],
               "throughputPoolConfiguration": {
-                "dataRegions": [
-                  "westus2"
-                ],
-                "maxThroughput": 500000,
                 "minThroughput": 100000,
-                "serviceTier": "BusinessCritical"
+                "maxThroughput": 500000,
+                "dedicatedRUs": 200000,
+                "maxConsumableRUs": 800000
               }
             }
           },
           {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace2",
             "name": "fleetspace2",
             "type": "Microsoft.DocumentDB/fleets/fleetspaces",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace2",
             "properties": {
               "provisioningState": "Succeeded",
+              "fleetspaceApiKind": "NoSQL",
+              "serviceTier": "GeneralPurpose",
+              "dataRegions": [
+                "eastus"
+              ],
               "throughputPoolConfiguration": {
-                "dataRegions": [
-                  "eastus"
-                ],
-                "maxThroughput": 600000,
                 "minThroughput": 200000,
-                "serviceTier": "GeneralPurpose"
+                "maxThroughput": 600000,
+                "dedicatedRUs": 300000,
+                "maxConsumableRUs": 700000
               }
             }
           }

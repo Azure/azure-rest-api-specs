@@ -1,39 +1,38 @@
 {
   "parameters": {
     "api-version": "2025-11-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1",
+    "fleetspaceName": "fleetspace1",
     "body": {
       "properties": {
         "fleetspaceApiKind": "NoSQL",
         "throughputPoolConfiguration": {
-          "dataRegions": [
-            "westus2"
-          ],
-          "maxThroughput": 4000,
-          "minThroughput": 3000
+          "minThroughput": 100000,
+          "maxThroughput": 1000000
         }
       }
-    },
-    "fleetName": "fleet1",
-    "fleetspaceName": "fleetspace1",
-    "resourceGroupName": "rg1",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
         "name": "fleetspace1",
         "type": "Microsoft.DocumentDB/fleets/fleetspaces",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
         "properties": {
-          "fleetspaceApiKind": "NoSQL",
           "provisioningState": "Succeeded",
+          "fleetspaceApiKind": "NoSQL",
+          "serviceTier": "GeneralPurpose",
+          "dataRegions": [
+            "westus2"
+          ],
           "throughputPoolConfiguration": {
-            "dataRegions": [
-              "westus2"
-            ],
-            "maxThroughput": 4000,
-            "minThroughput": 3000,
-            "serviceTier": "GeneralPurpose"
+            "minThroughput": 100000,
+            "maxThroughput": 1000000,
+            "dedicatedRUs": 2000,
+            "maxConsumableRUs": 8000
           }
         }
       }

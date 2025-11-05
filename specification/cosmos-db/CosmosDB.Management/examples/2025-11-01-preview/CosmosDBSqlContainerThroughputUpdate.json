@@ -1,36 +1,34 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "api-version": "2025-11-01-preview",
-    "containerName": "containerName",
-    "databaseName": "databaseName",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2025-11-01-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "containerName": "containerName",
     "updateThroughputParameters": {
       "location": "West US",
+      "tags": {},
       "properties": {
         "resource": {
           "throughput": 400
         }
-      },
-      "tags": {}
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/throughputSettings/default",
         "name": "default",
         "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers/throughputSettings",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName/throughputSettings/default",
         "location": "West US",
+        "tags": {},
         "properties": {
           "resource": {
-            "_etag": "\"00005900-0000-0000-0000-56f9a2630000\"",
-            "_rid": "PD5DALigDgw=",
-            "_ts": 1459200611,
+            "throughput": 400,
             "minimumThroughput": "400",
             "offerReplacePending": "true",
-            "throughput": 400,
             "throughputBuckets": [
               {
                 "id": 1,
@@ -38,7 +36,8 @@
               },
               {
                 "id": 2,
-                "maxThroughputPercentage": 5
+                "maxThroughputPercentage": 5,
+                "isDefaultBucket": true
               },
               {
                 "id": 3,
@@ -52,10 +51,12 @@
                 "id": 5,
                 "maxThroughputPercentage": 20
               }
-            ]
+            ],
+            "_rid": "PD5DALigDgw=",
+            "_ts": 1459200611,
+            "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
           }
-        },
-        "tags": {}
+        }
       }
     },
     "202": {}
