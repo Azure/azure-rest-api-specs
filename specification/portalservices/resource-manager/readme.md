@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-04-01'
 input-file:
-  - Microsoft.PortalServices/copilotSettings/stable/2024-04-01/copilotSettings.json
+  - Microsoft.PortalServices/CopilotSettings/stable/2024-04-01/copilotSettings.json
 suppressions:
   - code: TenantLevelAPIsNotAllowed
     reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, and has received exception sign-off approval by PAS team and ARM team.
@@ -52,7 +52,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-  - Microsoft.PortalServices/copilotSettings/preview/2024-04-01-preview/copilotSettings.json
+  - Microsoft.PortalServices/CopilotSettings/preview/2024-04-01-preview/copilotSettings.json
   - Microsoft.PortalServices/extensions/preview/2024-04-01-preview/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation

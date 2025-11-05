@@ -2,7 +2,7 @@
 
 ```cmd
 npm ci
-npx tsv specification/portalservices/CopilotSettings.Management
+npx tsv specification/portalservices/resource-manager/Microsoft.PortalServices/CopilotSettings
 ```
 
 # References
