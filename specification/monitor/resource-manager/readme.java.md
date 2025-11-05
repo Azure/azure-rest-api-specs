@@ -44,12 +44,12 @@ input-file:
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
-- Microsoft.Insights/stable/2022-06-15/scheduledQueryRule_API.json
+- Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
 - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
-- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
-- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
-- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
+- Microsoft.Insights/stable/2024-03-11/dataCollectionEndpoints_API.json
+- Microsoft.Insights/stable/2024-03-11/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/stable/2024-03-11/dataCollectionRules_API.json
 ```
