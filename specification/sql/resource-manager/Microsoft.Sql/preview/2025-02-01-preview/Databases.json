@@ -425,6 +425,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/getCurrentAvailabilityZone": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Get the current availability zone of a database.",
+        "operationId": "Databases_CurrentAvailabilityZone",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the current availability zone of the database.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseCurrentAvailabilityZoneResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets current availability zone of a database.": {
+            "$ref": "./examples/GetDatabaseCurrentAvailabilityZone.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export": {
       "post": {
         "tags": [
@@ -1066,6 +1111,16 @@
           "description": "The database key's version.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DatabaseCurrentAvailabilityZoneResult": {
+      "description": "The result of getting the current availability zone of a database.",
+      "type": "object",
+      "properties": {
+        "currentAvailabilityZone": {
+          "description": "The current availability zone of the database.",
+          "type": "string"
         }
       }
     },
