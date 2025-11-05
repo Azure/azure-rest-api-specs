@@ -441,7 +441,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the current availability zone of the database."
+            "description": "Successfully retrieved the current availability zone of the database.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseCurrentAvailabilityZoneResult"
+            }
           },
           "default": {
             "description": "*** Error Responses: ***",
@@ -1098,6 +1101,16 @@
           "description": "The database key's version.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DatabaseCurrentAvailabilityZoneResult": {
+      "description": "The result of getting the current availability zone of a database.",
+      "type": "object",
+      "properties": {
+        "currentAvailabilityZone": {
+          "description": "The current availability zone of the database.",
+          "type": "string"
         }
       }
     },
