@@ -42,8 +42,7 @@ namespace Microsoft.Compute {
   /**
    * Common LRO headers including Azure-AsyncOperation (required Jan 2025), Location (for compatibility) and Retry-After.
    */
-  alias GalleryScriptVersionLroHeaders =
-    ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
+  alias GalleryScriptVersionLroHeaders = ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
     ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader;
 
@@ -99,9 +98,7 @@ namespace Microsoft.Compute {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-      ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders> |
-        ArmDeletedNoContentResponse |
-        ArmDeletedResponse
+      ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders> | ArmDeletedNoContentResponse | ArmDeletedResponse
     >;
 
     /**
