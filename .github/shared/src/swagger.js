@@ -1,6 +1,8 @@
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";
+import { inspect } from "util";
+import { z } from "zod";
 import { mapAsync } from "./array.js";
 import { example } from "./changed-files.js";
 import { includesSegment } from "./path.js";
@@ -24,6 +26,43 @@ import { embedError } from "./spec-model.js";
  * @typedef {Object} SwaggerJSON
  * @property {string} path
  * @property {Object[]} [refs]
+ */
+
+// Example Swagger
+//
+// {
+//   "paths": {
+//     "/foo": {
+//       "get": {
+//         "operationId": "Foo_Get"
+//       },
+//       "put": {
+//         "operationId": "Foo_CreateOrUpdate"
+//       }
+//     },
+//     "/bar": { ... }
+//   },
+//   "x-ms-paths": {
+//     "/baz": { ... }
+//   }
+// }
+
+const pathSchema = z.record(z.string(), z.object({ operationId: z.string().optional() }));
+/**
+ * @typedef {import("zod").infer<typeof pathSchema>} PathObject
+ */
+
+const pathsSchema = z.record(z.string(), pathSchema);
+/**
+ * @typedef {import("zod").infer<typeof pathsSchema>} PathsObject
+ */
+
+const swaggerSchema = z.object({
+  paths: pathsSchema.optional(),
+  "x-ms-paths": pathsSchema.optional(),
+});
+/**
+ * @typedef {import("zod").infer<typeof swaggerSchema>} SwaggerObject
  */
 
 /**
@@ -144,18 +183,18 @@ export class Swagger {
     if (!this.#operations) {
       this.#operations = new Map();
       const content = await readFile(this.#path, "utf8");
-      const swagger = JSON.parse(content);
+      const swagger = swaggerSchema.parse(JSON.parse(content));
       // Process regular paths
       if (swagger.paths) {
-        for (const [path, pathItem] of Object.entries(swagger.paths)) {
-          this.addOperations(this.#operations, path, pathItem);
+        for (const [path, pathObject] of Object.entries(swagger.paths)) {
+          this.addOperations(this.#operations, path, pathObject);
         }
       }
 
       // Process x-ms-paths (Azure extension)
       if (swagger["x-ms-paths"]) {
-        for (const [path, pathItem] of Object.entries(swagger["x-ms-paths"])) {
-          this.addOperations(this.#operations, path, pathItem);
+        for (const [path, pathObject] of Object.entries(swagger["x-ms-paths"])) {
+          this.addOperations(this.#operations, path, pathObject);
         }
       }
     }
@@ -166,12 +205,12 @@ export class Swagger {
    *
    * @param {Map<string, Operation>} operations
    * @param {string} path
-   * @param {any} pathItem
+   * @param {PathObject} pathObject
    * @returns {void}
    */
-  addOperations(operations, path, pathItem) {
-    for (const [method, operation] of Object.entries(pathItem)) {
-      if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+  addOperations(operations, path, pathObject) {
+    for (const [method, operation] of Object.entries(pathObject)) {
+      if (operation.operationId !== undefined && method !== "parameters") {
         const operationObj = {
           id: operation.operationId,
           httpMethod: method.toUpperCase(),
@@ -232,7 +271,7 @@ export class Swagger {
   }
 
   toString() {
-    return `Swagger(${this.#path}, {logger: ${this.#logger}})`;
+    return `Swagger(${this.#path}, {logger: ${inspect(this.#logger)}})`;
   }
 }
 
