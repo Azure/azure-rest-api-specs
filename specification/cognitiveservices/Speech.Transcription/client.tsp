@@ -19,4 +19,14 @@ namespace Azure.Ai.Speech.Transcription;
 
 @@clientName(TranscriptionOptions.diarization, "diarizationOptions");
 @@clientName(TranscriptionOptions.channels, "activeChannels");
+@@clientName(TranscriptionOptions.phraseList, "phraseListOptions", "java");
+@@clientName(TranscriptionOptions.enhancedMode, "enhancedModeOptions", "java");
+@@clientName(EnhancedModeProperties, "EnhancedModeOptions", "java");
+@@clientName(EnhancedModeProperties.prompt, "prompts", "java");
+@@clientName(PhraseListProperties, "PhraseListOptions", "java");
+@@clientName(TranscriptionResult.durationMilliseconds, "duration", "java");
+@@clientName(TranscribedPhrase.offsetMilliseconds, "offset", "java");
+@@clientName(TranscribedPhrase.durationMilliseconds, "duration", "java");
+@@clientName(TranscribedWord.offsetMilliseconds, "offset", "java");
+@@clientName(TranscribedWord.durationMilliseconds, "duration", "java");
 @@access(transcribe, Access.internal, "csharp");
