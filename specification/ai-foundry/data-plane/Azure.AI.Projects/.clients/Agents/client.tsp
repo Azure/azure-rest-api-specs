@@ -3,8 +3,10 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@clientNamespace("Azure.AI.Agents")
 namespace Azure.AI.Projects;
+
+@@clientNamespace(Azure.AI.Projects, "Azure.AI.Agents", "csharp");
+@@clientNamespace(Azure.AI.Projects, "com.azure.ai.agents", "java");
 
 // ------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate Responses. We will use OpenAI client for those

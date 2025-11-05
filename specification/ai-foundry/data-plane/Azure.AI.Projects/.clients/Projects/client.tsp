@@ -118,3 +118,6 @@ namespace Azure.AI.Projects;
   "operationStatus",
   "csharp"
 );
+
+// The fix for ambiguous import of OperationState
+@@clientName(Azure.Core.Foundations.OperationState, "operationStatus", "java");

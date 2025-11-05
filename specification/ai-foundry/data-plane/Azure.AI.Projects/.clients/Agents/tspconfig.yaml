@@ -1,4 +1,17 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+emit:
 options:
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.Agents
+    api-version: "2025-11-15-preview"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.Agents.Contracts.V2
+    namespace: Azure.AI.Agents.Contracts.V2
+    flavor: azure
   "@azure-tools/typespec-java":
     api-version: "2025-11-15-preview"
     package-dir: "azure-ai-agents"
@@ -11,6 +24,9 @@ options:
     custom-types-subpackage: "implementation.models"
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/ai-foundry/data-plane/Azure.AI.Projects/"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
