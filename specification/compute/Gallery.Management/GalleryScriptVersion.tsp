@@ -39,6 +39,14 @@ namespace Microsoft.Compute {
     name: GalleryScriptVersionName;
   }
 
+  /**
+   * Common LRO headers including Azure-AsyncOperation (required Jan 2025), Location (for compatibility) and Retry-After.
+   */
+  alias GalleryScriptVersionLroHeaders =
+    ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
+    ArmLroLocationHeader &
+    Azure.Core.Foundations.RetryAfterHeader;
+
   @armResourceOperations
   interface GalleryScriptVersions {
     /**
@@ -55,9 +63,12 @@ namespace Microsoft.Compute {
     @added(Versions.v2025_03_03)
     createOrUpdate is ComputeResourceCreateOrReplaceAsync<
       GalleryScriptVersion,
-      Response = ArmResourceUpdatedResponse<GalleryScriptVersion> | ArmResourceCreatedResponse<
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
+      GalleryScriptVersionLroHeaders,
+      {},
+      ArmResourceUpdatedResponse<GalleryScriptVersion> | ArmResourceCreatedResponse<
         GalleryScriptVersion,
-        ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> & Azure.Core.Foundations.RetryAfterHeader
+        GalleryScriptVersionLroHeaders
       >
     >;
 
@@ -68,14 +79,13 @@ namespace Microsoft.Compute {
     @patch(#{ implicitOptionality: false })
     update is ComputeCustomPatchAsync<
       GalleryScriptVersion,
-      PatchModel = GalleryScriptVersionUpdate,
-      // Include Azure-AsyncOperation (and keep Location for broader client compatibility) plus Retry-After
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
-        ArmLroLocationHeader &
-        Azure.Core.Foundations.RetryAfterHeader,
-      Response = ArmResponse<GalleryScriptVersion> | ArmAcceptedLroResponse<
+      GalleryScriptVersionUpdate,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
+      GalleryScriptVersionLroHeaders,
+      {},
+      ArmResponse<GalleryScriptVersion> | ArmAcceptedLroResponse<
         "Resource update request accepted.",
-        LroHeaders
+        GalleryScriptVersionLroHeaders
       >
     >;
 
@@ -86,13 +96,12 @@ namespace Microsoft.Compute {
     @added(Versions.v2025_03_03)
     delete is ComputeResourceDeleteAsync<
       GalleryScriptVersion,
-      BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
-      // Add Azure-AsyncOperation header (keep Location + Retry-After for compatibility)
-      LroHeaders = ArmAsyncOperationHeader &
-        ArmLroLocationHeader &
-        Azure.Core.Foundations.RetryAfterHeader,
-      Parameters = {},
-      Response = ArmDeleteAcceptedLroResponse<LroHeaders> | ArmDeletedNoContentResponse
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
+      GalleryScriptVersionLroHeaders,
+      {},
+      ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders> |
+        ArmDeletedNoContentResponse |
+        ArmDeletedResponse
     >;
 
     /**
