@@ -39,6 +39,5 @@ namespace Storage.Queues;
 @doc("The Azure.Storage.Queue service versions.")
 enum Versions {
   @doc("The 2018-03-28 version of the Azure.Storage.Queue service.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2018_03_28: "2018-03-28",
 }
