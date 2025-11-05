@@ -1,5 +1,3 @@
-// @ts-check
-
 import { basename, dirname, resolve } from "path";
 
 /**

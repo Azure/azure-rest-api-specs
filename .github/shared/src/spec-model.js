@@ -1,5 +1,3 @@
-// @ts-check
-
 import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { flatMapAsync, mapAsync } from "./array.js";
@@ -7,18 +5,32 @@ import { readme } from "./changed-files.js";
 import { Readme } from "./readme.js";
 import { SpecModelError } from "./spec-model-error.js";
 
-/** @type {Map<string, SpecModel>} */
-const specModelCache = new Map();
+/**
+ * @typedef {import('./readme.js').ReadmeJSON} ReadmeJSON
+ * @typedef {import('./swagger.js').Swagger} Swagger
+ * @typedef {import('./tag.js').Tag} Tag
+ */
+
+/**
+ * @typedef {Object} ErrorJSON
+ * @prop {string} error
+ */
+
+/**
+ * @typedef {Object} SpecModelJSON
+ * @property {string} folder
+ * @property {(ReadmeJSON|ErrorJSON)[]} readmes
+ */
 
 /**
  * @typedef {Object} ToJSONOptions
  * @prop {boolean} [embedErrors]
  * @prop {boolean} [includeRefs]
  * @prop {boolean} [relativePaths]
- *
- * @typedef {import('./swagger.js').Swagger} Swagger
- * @typedef {import('./tag.js').Tag} Tag
  */
+
+/** @type {Map<string, SpecModel>} */
+const specModelCache = new Map();
 
 export class SpecModel {
   /** @type {string} absolute path */
@@ -216,7 +228,7 @@ export class SpecModel {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<Object>}
+   * @returns {Promise<SpecModelJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     return await embedError(async () => {
@@ -244,7 +256,7 @@ export class SpecModel {
  * @param {() => Promise<T>} fn
  * @param {Object} [options]
  * @param {boolean} [options.embedErrors]
- * @returns {Promise<T | {error: string}>}
+ * @returns {Promise<T|ErrorJSON>}
  */
 export async function embedError(fn, options = {}) {
   const { embedErrors } = options;

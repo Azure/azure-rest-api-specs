@@ -1,5 +1,3 @@
-// @ts-check
-
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";
@@ -10,6 +8,7 @@ import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
 /**
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./spec-model.js').Tag} Tag
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
@@ -19,6 +18,12 @@ import { embedError } from "./spec-model.js";
  * @property {string} id - The operation ID
  * @property {string} path - API path
  * @property {string} httpMethod - HTTP method (GET, POST, etc.)
+ */
+
+/**
+ * @typedef {Object} SwaggerJSON
+ * @property {string} path
+ * @property {Object[]} [refs]
  */
 
 /**
@@ -202,7 +207,7 @@ export class Swagger {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<Object>}
+   * @returns {Promise<SwaggerJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     const { includeRefs, relativePaths } = options;
