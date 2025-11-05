@@ -181,7 +181,7 @@ interface Stac {
 // === Tiles for STAC Items ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
-@clientName("TilerClient", "csharp")
+@clientName("DataClient", "csharp")
 interface Data {
   // Tile Matrix Sets
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
