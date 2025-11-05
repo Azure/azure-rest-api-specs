@@ -2,59 +2,106 @@
   "operationId": "UpdateObserver",
   "parameters": {
     "api-version": "2025-09-01-preview",
-    "body": {
-      "name": "CustomerDataObserver",
+    "request": {
+      "id": "oracle-customer-observer-001",
+      "name": "OracleCustomerDataObserver_Updated",
       "type": "Basic",
       "businessDomain": {
         "type": "BusinessDomain",
         "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
       },
-      "dataAsset": {
-        "type": "DataAsset",
-        "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
-      },
       "dataProduct": {
         "type": "DataProduct",
         "referenceId": "dp-323e4567-e89b-12d3-a456-426614174222"
       },
-      "eTag": "etag-1234567890",
-      "id": "123e4567-e89b-12d3-a456-426614174000",
-      "isDeleted": false
+      "dataAsset": {
+        "type": "DataAsset",
+        "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
+      },
+      "createdAt": "2025-11-05T08:00:00Z",
+      "createdBy": "oracle-admin@company.com",
+      "lastModifiedAt": "2025-11-05T14:15:00Z",
+      "lastModifiedBy": "data-quality-engineer@company.com",
+      "isDeleted": false,
+      "eTag": "oracle-etag-1234567890-v2",
+      "typeProperties": {
+        "inputDatasets": [
+          {
+            "datasetAliasName": "customer_data_enhanced",
+            "datasourceId": "oracle-onprem-001"
+          }
+        ],
+        "projection": {
+          "customerId": {
+            "type": "NUMBER",
+            "value": "CUSTOMER_ID"
+          },
+          "customerName": {
+            "type": "VARCHAR2",
+            "value": "CUSTOMER_NAME"
+          },
+          "email": {
+            "type": "VARCHAR2",
+            "value": "EMAIL_ADDRESS"
+          },
+          "phoneNumber": {
+            "type": "VARCHAR2",
+            "value": "PHONE_NUMBER"
+          },
+          "registrationDate": {
+            "type": "DATE",
+            "value": "REGISTRATION_DATE"
+          },
+          "customerStatus": {
+            "type": "VARCHAR2",
+            "value": "STATUS"
+          },
+          "lastUpdated": {
+            "type": "TIMESTAMP",
+            "value": "LAST_UPDATED"
+          }
+        }
+      },
+      "location": [],
+      "format": null,
+      "schemaName": "SALES",
+      "tableName": "CUSTOMERS",
+      "hostName": "oracle-db-server.company.com"
     },
     "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
-    "dataAssetId": "123e4567-e89b-12d3-a456-426614174000",
-    "dataProductId": "223e4567-e89b-12d3-a456-426614174111"
+    "dataAssetId": "asset-223e4567-e89b-12d3-a456-426614174111",
+    "dataProductId": "dp-323e4567-e89b-12d3-a456-426614174222"
   },
   "title": "AssetMetaData_Update",
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "CustomerDataObserver",
-        "type": "Basic",
+        "id": "oracle-customer-observer-001",
+        "name": "OracleCustomerDataObserver_Updated",
         "businessDomain": {
           "type": "BusinessDomain",
           "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
-        },
-        "createdAt": "2025-09-17T08:00:00Z",
-        "createdBy": "user-11111111-2222-3333-4444-555555555555",
-        "dataAsset": {
-          "type": "DataAsset",
-          "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
         },
         "dataProduct": {
           "type": "DataProduct",
           "referenceId": "dp-323e4567-e89b-12d3-a456-426614174222"
         },
-        "eTag": "etag-1234567890",
-        "executionData": {
-          "durationInSeconds": "1800",
-          "lastRunStatus": "Succeeded",
-          "totalRecordsProcessed": "15000"
+        "dataAsset": {
+          "type": "DataAsset",
+          "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
         },
-        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "createdAt": "2025-11-05T08:00:00Z",
+        "createdBy": "oracle-admin@company.com",
+        "lastModifiedAt": "2025-11-05T14:15:00Z",
+        "lastModifiedBy": "data-quality-engineer@company.com",
         "isDeleted": false,
-        "lastModifiedAt": "2025-09-17T12:00:00Z",
-        "lastModifiedBy": "user-22222222-3333-4444-5555-666666666666"
+        "eTag": "oracle-etag-1234567890-v2-updated",
+        "executionData": {
+          "durationInSeconds": "2100",
+          "lastRunStatus": "Succeeded",
+          "totalRecordsProcessed": "28500"
+        },
+        "type": "Basic"
       }
     }
   }

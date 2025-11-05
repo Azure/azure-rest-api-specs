@@ -9,543 +9,1015 @@ using Azure.Core;
 namespace PurviewDataQuality;
 
 /**
- * AssetMetaDataObserverType
+ * Defines the type of asset metadata observer used for data quality monitoring.
+ * Observers monitor data assets and execute quality checks based on their configuration.
  */
+@doc("Type of asset metadata observer for data quality monitoring")
 union AssetMetadataObserverType {
   string,
 
-  /**
-   * Basic
-   */
+  /** Basic observer type for standard data quality monitoring operations */
   Basic: "Basic",
 }
 
 /**
- * Rule Parameters
+ * Parameters for data quality rule operations within a specific data asset.
+ * Rules define validation logic and quality checks that can be applied to datasets.
  */
+@doc("Parameters for rule operations including rule identifier and optional response data")
 @parentResource(DataAsset)
 @resource("rules")
 model RuleParameters {
   /**
-   * Unique Identifier for Rule
+   * Unique identifier for the data quality rule within the data asset context
    */
+  @doc("Unique identifier for the data quality rule")
   @key("ruleId")
   @visibility(Lifecycle.Create)
   ruleId: string;
 
   /**
-   * Rule Entity response
+   * Optional rule entity response containing rule configuration and metadata
    */
+  @doc("Rule entity response data")
   response?: RuleEntity;
 }
 
 /**
- * Rule Entities
+ * Container for data quality rule entities associated with a specific data asset.
+ * Encapsulates both the rule identifier and the complete rule configuration.
  */
+@doc("Rule entities containing rule identifier and complete rule configuration")
 @parentResource(DataAsset)
 @resource("rules")
 model RuleEntities {
   /**
-   * Unique Identifier for Rule
+   * Unique identifier for the data quality rule within the data asset context
    */
+  @doc("Unique identifier for the data quality rule")
   @key("ruleId")
   @visibility(Lifecycle.Create)
   ruleId: string;
 
   /**
-   * ruleEntity
+   * Complete rule entity containing configuration, validation logic, and metadata
    */
+  @doc("Complete rule entity with configuration and metadata")
   ruleEntity: RuleEntity;
 }
 
 /**
- * Business Domain
+ * Represents a business domain which serves as the top-level organizational unit for data governance.
+ * Business domains group related data products and provide governance context and policies.
  */
+@doc("Business domain representing a top-level organizational unit for data governance")
 @resource("business-domains")
 model BusinessDomain {
   /**
-   * Get Business Domain
+   * Unique identifier for the business domain used in API path parameters
    */
+  @doc("Unique identifier for the business domain")
   @key
   @visibility(Lifecycle.Create)
-  businessDomainId: string; // This tells TypeSpec this is the path parameter
+  businessDomainId: string;
 }
 
 /**
- * Data Product
+ * Represents a data product within a business domain, containing related data assets.
+ * Data products serve specific business purposes and analytical use cases.
  */
+@doc("Data product containing related data assets for specific business purposes")
 @parentResource(BusinessDomain)
 @resource("data-products")
 model DataProduct {
   /**
-   * Get Data Product
+   * Unique identifier for the data product within its parent business domain
    */
+  @doc("Unique identifier for the data product")
   @key
   @visibility(Lifecycle.Create)
-  dataProductId: string; // This tells TypeSpec this is the path parameter
+  dataProductId: string;
 }
 
 /**
- * Data Asset
+ * Represents an individual data asset such as a dataset, table, or data source.
+ * Data assets can be monitored for quality, profiled, and have rules applied to them.
  */
+@doc("Individual data asset such as dataset, table, or data source for quality monitoring")
 @parentResource(DataProduct)
 @resource("data-assets")
 model DataAsset {
   /**
-   * Get Data Asset
+   * Unique identifier for the data asset within its parent data product
    */
+  @doc("Unique identifier for the data asset")
   @key
   @visibility(Lifecycle.Create)
-  dataAssetId: string; // This tells TypeSpec this is the path parameter
+  dataAssetId: string;
 }
 
 /**
- * Status of a rule or operation
+ * Represents a specific execution instance of a scheduled data quality operation.
+ * Schedule runs track the execution status and results of automated quality checks.
  */
+@doc("Execution instance of a scheduled data quality operation with status tracking")
+@parentResource(BusinessDomain)
+@resource("runs")
+model ScheduleRun {
+  /**
+   * Unique identifier for the schedule run execution within the business domain
+   */
+  @doc("Unique identifier for the schedule run execution")
+  @key
+  @visibility(Lifecycle.Create)
+  runId: string;
+}
+
+/**
+ * Represents a data source connection within a business domain.
+ * Data sources provide connectivity to external systems, databases, or storage locations.
+ */
+@doc("Data source connection to external systems or databases within a business domain")
+@parentResource(BusinessDomain)
+@resource("data-sources")
+model DataSource {
+  /**
+   * Unique identifier for the data source within the business domain context
+   */
+  @doc("Unique identifier for the data source")
+  @key
+  @visibility(Lifecycle.Create)
+  dataSourceId: string;
+}
+
+/**
+ * Represents a schedule configuration within a business domain.
+ * Schedules define automated execution patterns for data quality operations and scans.
+ */
+@doc("Schedule configuration for automated data quality operations and scans")
+@parentResource(BusinessDomain)
+@resource("schedule")
+model Schedule {
+  /**
+   * Unique identifier for the schedule within the business domain context
+   */
+  @doc("Unique identifier for the schedule")
+  @key
+  @visibility(Lifecycle.Create)
+  scheduleId: string;
+}
+
+/**
+ * Represents a data quality scan operation within a schedule context.
+ * Scans execute quality checks and validations on specified data assets.
+ */
+@doc("Data quality scan operation for executing quality checks on data assets")
+@parentResource(Schedule)
+@resource("scan")
+model ScanEntity {
+  /**
+   * Unique identifier for the scan within the schedule context
+   */
+  @doc("Unique identifier for the scan")
+  @key
+  @visibility(Lifecycle.Create)
+  scanId: string;
+}
+
+/**
+ * Represents an execution instance of a data profiling operation on a data asset.
+ * Profile runs collect statistical information and data characteristics for quality assessment.
+ */
+@doc("Execution instance of data profiling operation collecting statistical information")
+@parentResource(DataAsset)
+@resource("profiles")
+model ProfileRun {
+  /**
+   * Unique identifier for the profile run execution within the data asset context
+   */
+  @doc("Unique identifier for the profile run execution")
+  @key("profileRunId")
+  @visibility(Lifecycle.Create)
+  profileRunId: string;
+}
+
+/**
+ * Represents a run execution at the business domain level.
+ * Business domain runs coordinate multiple operations across all data products and assets.
+ */
+@doc("Run execution coordinating operations across business domain data products and assets")
+@parentResource(BusinessDomain)
+@resource("runs")
+model BusinessDomainRun {
+  /**
+   * Unique identifier for the business domain run execution
+   */
+  @doc("Unique identifier for the business domain run execution")
+  @key("runId")
+  @visibility(Lifecycle.Create)
+  runId: string;
+}
+
+/**
+ * Represents a profiling rule applied to a data asset for statistical analysis.
+ * Profile rules define what statistical measures and patterns to collect during profiling.
+ */
+@doc("Profiling rule for collecting statistical measures and data patterns")
+@parentResource(DataAsset)
+@resource("asset-metadata")
+model ProfileRule {
+  /**
+   * Unique identifier for the profile rule within the data asset context
+   */
+  @doc("Unique identifier for the profile rule")
+  @key("ruleId")
+  @visibility(Lifecycle.Create)
+  ruleId: string;
+}
+
+/**
+ * Represents observational metadata captured during data quality monitoring.
+ * Contains monitoring results, anomaly detection, and observability data for assets.
+ */
+@doc("Observational metadata from data quality monitoring with results and anomaly detection")
+@parentResource(DataAsset)
+@resource("observations")
+model ObservationAssetMetadata {
+  /**
+   * Unique identifier for the observation metadata within the data asset context
+   */
+  @doc("Unique identifier for the observation metadata")
+  @key("observationId")
+  @visibility(Lifecycle.Create)
+  observationId: string;
+}
+
+/**
+ * Represents descriptive and operational metadata associated with a data asset.
+ * Contains business context, ownership information, and tracking details for governance.
+ */
+@doc("Descriptive and operational metadata for data asset governance and discovery")
+@parentResource(DataAsset)
+@resource("asset-metadata")
+model AssetMetadata {
+  /**
+   * Unique identifier for the asset metadata within the data asset context
+   */
+  @doc("Unique identifier for the asset metadata")
+  @key("metadataId")
+  @visibility(Lifecycle.Create)
+  metadataId: string;
+
+  /**
+   * Detailed business description providing context about the data asset's purpose and usage
+   */
+  @doc("Business description and context of the data asset")
+  description?: string;
+
+  /**
+   * Identifier of the user or service principal who originally created this metadata entry
+   */
+  @doc("Creator of the metadata entry")
+  createdBy?: string;
+
+  /**
+   * Timestamp of the most recent update to this metadata entry
+   */
+  @doc("Last update timestamp")
+  lastUpdated?: utcDateTime;
+}
+
+/**
+ * Defines the execution status of data quality rules and operations.
+ * Used to track the current state and lifecycle of various data quality processes.
+ */
+@doc("Execution status for data quality rules and operations")
 union Status {
   string,
 
-  /** The rule or operation is active and running */
+  /** The rule or operation is active and currently executing */
   Active: "Active",
 
-  /** The rule or operation is currently suspended */
+  /** The rule or operation is temporarily suspended */
   Suspended: "Suspended",
 
-  /** The rule or operation has completed successfully */
+  /** The rule or operation has finished successfully */
   Completed: "Completed",
 
-  /** The rule or operation has failed */
+  /** The rule or operation encountered an error and failed */
   Failed: "Failed",
 
-  /** The rule or operation is currently in progress */
+  /** The rule or operation is currently executing */
   InProgress: "InProgress",
 }
 
 /**
- * Model for monitoring the status of rules and operations
+ * Provides comprehensive status monitoring for data quality rules and operations.
+ * Includes execution state, progress tracking, and error reporting capabilities.
  */
+@doc("Status monitoring with execution state, progress tracking, and error reporting")
 model StatusMonitor {
   /**
-   * Current status of the rule or operation
+   * Current execution status of the monitored rule or operation
    */
+  @doc("Current execution status")
   status: Status;
 
   /**
-   * Timestamp of the last status update
+   * Timestamp when the status was last updated or changed
    */
+  @doc("Last status update timestamp")
   lastUpdated: utcDateTime;
 
   /**
-   * Detailed message about the current status
+   * Human-readable message providing additional context about the current status
    */
+  @doc("Status description message")
   statusMessage?: string;
 
   /**
-   * Percentage of completion for in-progress operations
+   * Completion percentage for operations that are currently in progress (0-100)
    */
+  @doc("Completion percentage (0-100)")
   progressPercentage?: int32;
 
   /**
-   * Error details if the status is Failed
+   * Detailed error information when the status indicates a failure
    */
+  @doc("Error details for failed operations")
   errorDetails?: ErrorDetails;
 }
 
 /**
- * Details about an error that occurred
+ * Comprehensive error information for failed operations.
+ * Provides structured error reporting with codes, messages, and contextual details.
  */
+@doc("Structured error information with codes, messages, and contextual details")
 model ErrorDetails {
   /**
-   * Error code
+   * Standardized error code identifying the type of error that occurred
    */
+  @doc("Standardized error code")
   code: string;
 
   /**
-   * Error message
+   * Human-readable error message describing what went wrong
    */
+  @doc("Human-readable error message")
   message: string;
 
   /**
-   * Additional details about the error
+   * Additional contextual information about the error as key-value pairs
    */
+  @doc("Additional error context as key-value pairs")
   details?: Record<string>;
 }
 
 /**
- * Resource ID parameters for hierarchical path binding
+ * Contains the hierarchical resource identifiers for data asset rule operations.
+ * Provides the complete path context from business domain down to the data asset level.
  */
+@doc("Hierarchical resource identifiers for data asset rule operations")
 model DataAssetRuleResourceId {
   /**
-   * Get Business Domain
+   * Unique identifier of the business domain containing the data product
    */
+  @doc("Business domain identifier")
   @path
   businessDomainId: string;
 
   /**
-   * Get Data Product
+   * Unique identifier of the data product containing the data asset
    */
+  @doc("Data product identifier")
   @path
   dataProductId: string;
 
   /**
-   * Get Data Asset
+   * Unique identifier of the data asset where rules are applied
    */
+  @doc("Data asset identifier")
   @path
   dataAssetId: string;
 }
 
 /**
- * Represents a business/data quality rule entity.
+ * Represents a comprehensive data quality rule entity with validation logic and scoring.
+ * Rules define validation criteria, execution parameters, and track quality scores for data assets.
  */
+@doc("Data quality rule entity with validation logic, execution parameters, and scoring")
 model RuleEntity {
   /**
-   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   * Descriptive name of the rule that identifies its purpose or validation type
    */
+  @doc("Descriptive name of the rule")
   name: string;
 
   /**
-   * Represents description of the rule.
+   * Detailed explanation of what the rule validates and its business purpose
    */
+  @doc("Detailed description of rule validation and business purpose")
   description?: string;
 
   /**
-   * Represents the type of rule.
+   * Classification of the rule type (e.g., CustomTruth, Completeness, Accuracy)
    */
+  @doc("Rule type classification")
   type: string;
 
   /**
-   * Represents the status of the rule.
+   * Current execution status of the rule (Active, Suspended, etc.)
    */
+  @doc("Current execution status")
   status: string;
 
   /**
-   * Holds additional properties related to rule type.
+   * Type-specific configuration properties for rule execution and validation logic
    */
+  @doc("Type-specific configuration properties")
   typeProperties?: TypeProperties;
 
   /**
-   * Unique identifier of the rule.
+   * Unique identifier for the rule within the system
    */
+  @doc("Unique rule identifier")
   id: string;
 
   /**
-   * Reference to the related BusinessDomain entity.
+   * Reference to the business domain where this rule is applied
    */
+  @doc("Business domain reference")
   businessDomain?: Reference;
 
   /**
-   * Reference to the related DataProduct entity.
+   * Reference to the data product where this rule is applied
    */
+  @doc("Data product reference")
   dataProduct?: Reference;
 
   /**
-   * Reference to the related DataAsset entity.
+   * Reference to the data asset where this rule is applied
    */
+  @doc("Data asset reference")
   dataAsset?: Reference;
 
   /**
-   * Represents the rule's score.
+   * Quality score (0.0 to 1.0) representing how well the data passes this rule
    */
+  @doc("Quality score (0.0 to 1.0)")
   score?: float64;
 }
 
+/**
+ * Parameter alias for rule operations requiring hierarchical resource context.
+ * Provides the complete path identifiers needed for rule management within the resource hierarchy.
+ */
 alias rulesParameter = {
   /**
-   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   * Unique identifier of the business domain containing the rule context
    */
+  @doc("Business domain identifier")
   businessDomainId: string;
 
   /**
-   * Represents description of the rule.
+   * Unique identifier of the data product containing the rule context
    */
+  @doc("Data product identifier")
   dataProductId: string;
 
   /**
-   * Represents the type of rule.
+   * Unique identifier of the data asset where the rule is applied
    */
+  @doc("Data asset identifier")
   dataAssetId: string;
 };
 
 /**
- * Holds additional properties related to rule type.
+ * Contains type-specific configuration properties for data quality rules.
+ * Provides flexible configuration options that vary based on the rule type being implemented.
  */
+@doc("Type-specific configuration properties for data quality rules")
 model TypeProperties {
   /**
-   * Represents a column in a dataset.
+   * Column specification when the rule applies to specific dataset columns
    */
+  @doc("Column specification for column-specific rules")
   column?: Column;
 }
 
 /**
- * Represents a column in a dataset.
+ * Represents a column definition within a dataset for rule applications.
+ * Used to specify which columns are subject to validation or quality checks.
  */
+@doc("Column definition for dataset validation and quality checks")
 model Column {
   /**
-   * The type of the column.
+   * Data type or classification of the column (e.g., string, integer, date)
    */
+  @doc("Column data type or classification")
   type?: string;
 
   /**
-   * The value of the column.
+   * Column name or identifier within the dataset schema
    */
+  @doc("Column name or identifier")
   value?: string;
 }
 
 /**
- * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+ * Reference to another entity within the data governance hierarchy.
+ * Used to establish relationships between business domains, data products, and data assets.
  */
+@doc("Reference to entities in the data governance hierarchy for relationship establishment")
 model Reference {
   /**
-   * Type of the referenced entity.
+   * Type classification of the referenced entity (BusinessDomainReference, DataProductReference, DataAssetReference)
    */
+  @doc("Type classification of the referenced entity")
   type?: string;
 
   /**
-   * Unique identifier of the referenced entity.
+   * Unique identifier of the entity being referenced
    */
+  @doc("Unique identifier of the referenced entity")
   referenceId?: string;
 }
 
 /**
- * Represents a business/data quality rule entity.
+ * HTTP response model for data quality rule entity operations.
+ * Contains the complete rule definition with execution status and quality scoring.
  */
+@doc("HTTP response containing complete data quality rule information")
 model RuleEntityResponse {
   /**
-   * Status Code
+   * HTTP status code indicating successful rule creation (201 Created)
    */
+  @doc("HTTP status code for rule creation")
   @statusCode
   statusCode: 201;
 
   /**
-   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   * Human-readable name identifying the data quality rule
    */
+  @doc("Descriptive name of the data quality rule")
   name: string;
 
   /**
-   * Represents description of the rule.
+   * Detailed explanation of the rule's validation logic and business purpose
    */
+  @doc("Detailed description of rule validation logic and purpose")
   description?: string;
 
   /**
-   * Represents the type of rule.
+   * Classification of the rule type (e.g., completeness, accuracy, consistency)
    */
+  @doc("Classification of the data quality rule type")
   type: string;
 
   /**
-   * Represents the status of the rule.
+   * Current execution status of the rule (active, inactive, error)
    */
+  @doc("Current execution status of the rule")
   status: string;
 
   /**
-   * Holds additional properties related to rule type.
+   * Type-specific configuration parameters and validation settings
    */
+  @doc("Type-specific configuration parameters for rule validation")
   typeProperties?: TypeProperties;
 
   /**
-   * Unique identifier of the rule.
+   * Unique system identifier for the rule entity
    */
+  @doc("Unique system identifier for the rule")
   id: string;
 
   /**
-   * Reference to the related BusinessDomain entity.
+   * Reference to the business domain where this rule applies
    */
+  @doc("Reference to the associated business domain")
   businessDomain?: Reference;
 
   /**
-   * Reference to the related DataProduct entity.
+   * Reference to the data product where this rule applies
    */
+  @doc("Reference to the associated data product")
   dataProduct?: Reference;
 
   /**
-   * Reference to the related DataAsset entity.
+   * Reference to the specific data asset where this rule is executed
    */
+  @doc("Reference to the target data asset")
   dataAsset?: Reference;
 
   /**
-   * Represents the rule's score.
+   * Current quality score calculated by this rule (0.0 to 100.0)
    */
+  @doc("Current quality score from rule execution")
   score?: float64;
 }
 
 /**
- * Represents a business/data quality rule entity.
+ * Individual rule entity within bulk operation responses.
+ * Contains complete rule information without HTTP status codes for collection responses.
  */
+@doc("Individual rule entity for bulk operations")
 model RuleEntityBulkResponse {
   /**
-   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   * Human-readable name identifying the data quality rule
    */
+  @doc("Descriptive name of the data quality rule")
   name: string;
 
   /**
-   * Represents description of the rule.
+   * Detailed explanation of the rule's validation logic and business purpose
    */
+  @doc("Detailed description of rule validation and purpose")
   description?: string;
 
   /**
-   * Represents the type of rule.
+   * Classification of the rule type (e.g., completeness, accuracy, consistency)
    */
+  @doc("Classification of the data quality rule type")
   type: string;
 
   /**
-   * Represents the status of the rule.
+   * Current execution status of the rule (active, inactive, error)
    */
+  @doc("Current execution status of the rule")
   status: string;
 
   /**
-   * Holds additional properties related to rule type.
+   * Type-specific configuration parameters and validation settings
    */
+  @doc("Type-specific configuration for rule validation")
   typeProperties?: TypeProperties;
 
   /**
-   * Unique identifier of the rule.
+   * Unique system identifier for the rule entity
    */
+  @doc("Unique system identifier for the rule")
   id: string;
 
   /**
-   * Reference to the related BusinessDomain entity.
+   * Reference to the business domain where this rule applies
    */
+  @doc("Reference to the associated business domain")
   businessDomain?: Reference;
 
   /**
-   * Reference to the related DataProduct entity.
+   * Reference to the data product where this rule applies
    */
+  @doc("Reference to the associated data product")
   dataProduct?: Reference;
 
   /**
-   * Reference to the related DataAsset entity.
+   * Reference to the specific data asset where this rule is executed
    */
+  @doc("Reference to the target data asset")
   dataAsset?: Reference;
 
   /**
-   * Represents the rule's score.
+   * Current quality score calculated by this rule (0.0 to 100.0)
    */
+  @doc("Current quality score from rule execution")
   score?: float64;
 }
 
 /**
- * Rule entity response
+ * Paginated HTTP response containing a collection of data quality rule entities.
+ * Used for list operations returning multiple rules with their complete configurations.
  */
+@doc("Paginated response for rule entity list operations")
 model RuleEntityListResponse {
   /**
-   * Status Code
+   * HTTP status code indicating successful rule retrieval (201 Created)
    */
+  @doc("HTTP status code for successful operation")
   @statusCode
   statusCode: 201;
 
   /**
-   * Value RuleEntity
+   * Collection of rule entities with their complete configurations and current status
    */
+  @doc("Collection of rule entities in the response")
   value: RuleEntityBulkResponse[];
 }
 
 /**
- * Represents metadata observer entity for a data asset.
+ * Request model for creating multiple data quality rules in bulk for a specific data asset.
+ * Contains an array of rule entities to be created with their complete configurations.
  */
-model AssetMetadataObserver {
+@doc("Request model for bulk rule creation operations")
+model BulkRulesRequest {
   /**
-   * Unique identifier of the observer.
+   * Array of rule entities to be created in the bulk operation
    */
-  id?: string;
-
-  /**
-   * Name of the observer.
-   */
-  name?: string;
-
-  /**
-   * Reference to the associated DataAsset entity.
-   */
-  dataAsset?: Reference;
-
-  /**
-   * Timestamp when the observer was created.
-   */
-  createdAt?: utcDateTime;
-
-  /**
-   * User who created the observer.
-   */
-  createdBy?: string;
-
-  /**
-   * Timestamp when the observer was last modified.
-   */
-  lastModifiedAt?: utcDateTime;
-
-  /**
-   * User who last modified the observer.
-   */
-  lastModifiedBy?: string;
-
-  /**
-   * Dictionary containing execution data.
-   */
-  executionData?: Record<string>;
-
-  /**
-   * Indicates if the observer is deleted.
-   */
-  isDeleted?: boolean;
-
-  /**
-   * Reference to the related BusinessDomain entity.
-   */
-  businessDomain?: Reference;
-
-  /**
-   * Reference to the related DataProduct entity.
-   */
-  dataProduct?: Reference;
-
-  /**
-   * ETag used for concurrency control.
-   */
-  eTag?: string;
-
-  /**
-   * Type of the observer.
-   */
-  type?: AssetMetadataObserverType;
+  @doc("Array of rule entities for bulk creation")
+  rules: RuleEntity[];
 }
 
 /**
- * Represents a scheduled scan entity.
+ * Response model for bulk rule creation operations.
+ * Returns the created rules with their assigned identifiers and current status.
  */
+@doc("Response model for bulk rule creation operations")
+model BulkRulesResponse {
+  /**
+   * Array of successfully created rule entities with their assigned identifiers
+   */
+  @doc("Array of created rule entities")
+  rules: RuleEntityBulkResponse[];
+}
+
+/**
+ * Represents a storage or file location where data assets are physically stored.
+ * Supports various storage types including Azure Data Lake, blob storage, and file systems.
+ */
+@doc("Physical storage location for data assets across different storage types")
+model Location {
+  /**
+   * Storage type identifier (e.g., 'AdlsGen2FileLocation', 'BlobStorageLocation', 'FileSystemLocation')
+   */
+  @doc("Storage type classification")
+  type: string;
+
+  /**
+   * Storage-specific configuration properties including paths, containers, and access details
+   */
+  @doc("Storage-specific configuration properties")
+  typeProperties: LocationTypeProperties;
+}
+
+/**
+ * Storage-specific configuration properties that vary by location type.
+ * Contains connection details, paths, and access parameters for different storage systems.
+ */
+@doc("Storage-specific configuration properties for different location types")
+model LocationTypeProperties {
+  /**
+   * Name of the file system, container, or database where data is stored
+   */
+  @doc("File system or container name")
+  fileSystem?: string;
+
+  /**
+   * Hierarchical path to the specific folder, table, or data object within the storage
+   */
+  @doc("Hierarchical path within the storage location")
+  folderPath?: string;
+
+  /**
+   * Storage account name or endpoint identifier for accessing the location
+   */
+  @doc("Storage account name or endpoint identifier")
+  accountName?: string;
+
+  /**
+   * Geographic region or environment where the storage is located
+   */
+  @doc("Geographic region or environment location")
+  region?: string;
+}
+
+/**
+ * Unified metadata observer that monitors and tracks data assets across different storage platforms.
+ * Supports multiple data source types including Lakehouse, Snowflake, SQL Server, and Oracle systems.
+ */
+@doc("Unified metadata observer for monitoring data assets across platforms")
+model AssetMetadataObserver {
+  /**
+   * Unique system identifier for the metadata observer instance
+   */
+  @key
+  @doc("Unique identifier of the asset metadata observer")
+  id: string;
+
+  /**
+   * Human-readable display name for the metadata observer
+   */
+  @doc("Display name of the asset metadata observer")
+  name?: string;
+
+  /**
+   * Reference to the business domain that governs this data asset
+   */
+  @doc("Reference to the associated business domain")
+  businessDomain?: Reference;
+
+  /**
+   * Reference to the data product that contains this data asset
+   */
+  @doc("Reference to the associated data product")
+  dataProduct?: Reference;
+
+  /**
+   * Reference to the specific data asset being observed
+   */
+  @doc("Reference to the associated data asset")
+  dataAsset?: Reference;
+
+  /**
+   * UTC timestamp when the metadata observer was initially created
+   */
+  @doc("Creation timestamp (UTC)")
+  createdAt?: utcDateTime;
+
+  /**
+   * Identity of the user who created this metadata observer
+   */
+  @doc("Identity of the creating user")
+  createdBy?: string;
+
+  /**
+   * UTC timestamp when the metadata observer was last updated
+   */
+  @doc("Last modification timestamp (UTC)")
+  lastModifiedAt?: utcDateTime;
+
+  /**
+   * Identity of the user who last modified this metadata observer
+   */
+  @doc("Identity of the last modifying user")
+  lastModifiedBy?: string;
+
+  /**
+   * Soft deletion flag indicating if the observer has been logically deleted
+   */
+  @doc("Soft deletion flag")
+  isDeleted?: boolean;
+
+  /**
+   * Entity tag for optimistic concurrency control and change detection
+   */
+  @doc("Entity tag for concurrency control")
+  eTag?: string;
+
+  /**
+   * Data source type classification (Lakehouse, Snowflake, SQLServer, Oracle)
+   */
+  @doc("Data source type classification")
+  type: string;
+
+  /**
+   * Common metadata properties applicable to all data asset types
+   */
+  @doc("Common metadata properties across all asset types")
+  typeProperties?: AssetMetadataCommonProperties;
+
+  /**
+   * Physical storage locations for Lakehouse and file-based data assets
+   */
+  @doc("Physical storage locations for file-based assets")
+  location?: Location[];
+
+  /**
+   * Data format specification for structured assets (CSV, Parquet, JSON, etc.)
+   */
+  @doc("Data format specification for structured assets")
+  format?: string;
+
+  /**
+   * Database schema name for SQL-based data assets (Snowflake, SQL Server, Oracle)
+   */
+  @doc("Database schema name for SQL-based assets")
+  schemaName?: string;
+
+  /**
+   * Table name within the database schema for SQL-based data assets
+   */
+  @doc("Table name for SQL-based data assets")
+  tableName?: string;
+
+  /**
+   * Host server name or endpoint for on-premises database connections (Oracle, SQL Server)
+   */
+  @doc("Host server name for on-premises database connections")
+  hostName?: string;
+}
+
+/**
+ * Request model for updating asset metadata observer properties.
+ * Contains optional fields that can be updated for an existing metadata observer.
+ */
+@doc("Request model for asset metadata observer updates")
+model AssetMetadataObserverUpdateRequest {
+  /**
+   * Updated human-readable display name for the metadata observer
+   */
+  @doc("Updated display name of the asset metadata observer")
+  name?: string;
+
+  /**
+   * Updated data source type classification (Lakehouse, Snowflake, SQLServer, Oracle)
+   */
+  @doc("Updated data source type classification")
+  type?: string;
+
+  /**
+   * Updated common metadata properties applicable to all data asset types
+   */
+  @doc("Updated common metadata properties across all asset types")
+  typeProperties?: AssetMetadataCommonProperties;
+
+  /**
+   * Updated physical storage locations for Lakehouse and file-based data assets
+   */
+  @doc("Updated physical storage locations for file-based assets")
+  location?: Location[];
+
+  /**
+   * Updated data format specification for structured assets (CSV, Parquet, JSON, etc.)
+   */
+  @doc("Updated data format specification for structured assets")
+  format?: string;
+
+  /**
+   * Updated database schema name for SQL-based data assets (Snowflake, SQL Server, Oracle)
+   */
+  @doc("Updated database schema name for SQL-based assets")
+  schemaName?: string;
+
+  /**
+   * Updated table name within the database schema for SQL-based data assets
+   */
+  @doc("Updated table name for SQL-based data assets")
+  tableName?: string;
+
+  /**
+   * Updated host server name or endpoint for on-premises database connections (Oracle, SQL Server)
+   */
+  @doc("Updated host server name for on-premises database connections")
+  hostName?: string;
+}
+
+/**
+ * Shared metadata properties that apply to all data asset types regardless of their source platform.
+ * Contains common configuration and structural information for data governance and quality monitoring.
+ */
+@doc("Shared metadata properties across all data asset types")
+model AssetMetadataCommonProperties {
+  /**
+   * Collection of input dataset definitions and schemas associated with this asset
+   */
+  @doc("Input dataset definitions and schemas")
+  inputDatasets?: unknown[];
+
+  /**
+   * Projection configuration for data transformation and mapping operations
+   */
+  @encodedName("application/json", "projection")
+  @doc("Data projection and mapping configuration")
+  projectionValue?: unknown;
+}
+
+/**
+ * HTTP response model for schedule creation and update operations.
+ * Contains complete schedule configuration including timing, scope, and execution parameters.
+ */
+@doc("HTTP response for schedule operations with complete configuration")
 model ScheduleEntityResponse {
   /**
-   * Status Code
+   * HTTP status code indicating successful schedule creation or update (201 Created)
    */
+  @doc("HTTP status code for successful operation")
   @statusCode
   statusCode: 201;
 
   /**
-   * Name of the schedule.
+   * Human-readable name identifying the schedule
    */
+  @doc("Human-readable schedule name")
   name?: string;
 
   /**
-   * Unique identifier of the schedule.
+   * Unique system identifier for the schedule entity
    */
+  @doc("Unique schedule identifier")
   id?: string;
 
   /**
-   * Description of the schedule.
+   * Detailed description of the schedule's purpose and execution logic
    */
+  @doc("Detailed schedule description and purpose")
   description?: string;
 
   /**
-   * Dictionary of annotations for the schedule.
+   * Key-value metadata annotations for schedule categorization and tagging
    */
+  @doc("Metadata annotations for categorization")
   annotations?: Record<string>;
 
   /**
-   * Reference to the related BusinessDomain entity.
+   * Reference to the business domain that governs this schedule
    */
+  @doc("Reference to the governing business domain")
   businessDomain?: Reference;
 
   /**
-   * Scope of the scan, including data products and data assets.
+   * Execution scope defining which data products and assets are included in scheduled runs
    */
+  @doc("Execution scope for data products and assets")
   scope?: {
     items: Array<{
       dataProduct: {
@@ -560,8 +1032,9 @@ model ScheduleEntityResponse {
   };
 
   /**
-   * Trigger configuration for the schedule.
+   * Trigger configuration defining when and how often the schedule executes
    */
+  @doc("Trigger configuration for schedule timing")
   trigger?: {
     type: string;
     typeProperties: {
@@ -572,959 +1045,1724 @@ model ScheduleEntityResponse {
   };
 
   /**
-   * Timestamp when the schedule was last modified.
+   * UTC timestamp when the schedule was last modified
    */
+  @doc("Last modification timestamp (UTC)")
   lastModifiedAt?: utcDateTime;
 
   /**
-   * User who last modified the schedule.
+   * Identity of the user who last modified the schedule
    */
+  @doc("Identity of the last modifying user")
   lastModifiedBy?: string;
 
   /**
-   * Timestamp when the schedule was created.
+   * UTC timestamp when the schedule was initially created
    */
+  @doc("Creation timestamp (UTC)")
   createdAt?: utcDateTime;
 
   /**
-   * User who created the schedule.
+   * Identity of the user who created the schedule
    */
+  @doc("Identity of the creating user")
   createdBy?: string;
 
   /**
-   * Dictionary of execution data for the schedule.
+   * Runtime execution parameters and configuration data for schedule runs
    */
+  @doc("Runtime execution parameters and configuration")
   executionData?: Record<string>;
 }
 
 /**
- * Represents a scheduled scan entity.
+ * Schedule entity that defines automated data quality scanning and validation jobs.
+ * Manages execution timing, scope definition, and tracks changes within a business domain context.
  */
+@doc("Schedule entity for automated data quality scanning and validation")
+@parentResource(BusinessDomain)
+@resource("schedules")
 model ScheduleEntity {
   /**
-   * Unique identifier of the schedule.
+   * Unique system identifier for the schedule entity
    */
-  id?: string;
+  @key("scheduleId")
+  @visibility(Lifecycle.Create)
+  @doc("Unique identifier of the schedule")
+  id: string;
 
   /**
-   * Name of the schedule.
+   * Human-readable display name for the schedule
    */
+  @doc("Human-readable schedule display name")
   name?: string;
 
   /**
-   * Description of the schedule.
+   * Detailed description explaining the schedule's purpose and execution strategy
    */
+  @doc("Detailed description of schedule purpose and strategy")
   description?: string;
 
   /**
-   * Trigger configuration for the schedule.
+   * Trigger configuration defining execution timing and scheduling behavior
    */
+  @doc("Trigger configuration for execution timing and scheduling")
   trigger?: {
+    /**
+     * Trigger type classification (Manual, TimeBased, EventDriven)
+     */
+    @doc("Trigger type classification")
     type: string;
+
+    /**
+     * Type-specific configuration properties for trigger behavior
+     */
+    @doc("Type-specific trigger configuration properties")
     typeProperties: {
+      /**
+       * Time zone identifier for schedule evaluation (e.g., 'UTC', 'America/New_York')
+       */
+      @doc("Time zone identifier for schedule evaluation")
       timezone?: string;
+
+      /**
+       * Flag indicating if the schedule is active for automatic execution
+       */
+      @doc("Flag for automatic execution activation")
       isScheduled?: boolean;
+
+      /**
+       * Next scheduled execution time in UTC format
+       */
+      @doc("Next scheduled execution time (UTC)")
       triggerTime?: utcDateTime;
     };
   };
 
   /**
-   * Scope of the scan, including data products and data assets.
+   * Execution scope defining the data products and assets targeted for quality scanning
    */
+  @doc("Execution scope for data quality scanning")
   scope?: {
+    /**
+     * Collection of data product and asset pairs that define the scanning boundary
+     */
+    @doc("Collection of target data products and assets")
     items: Array<{
+      /**
+       * Reference to the data product containing the target assets
+       */
+      @doc("Data product reference within scope")
       dataProduct: {
+        /**
+         * Unique identifier of the referenced data product
+         */
+        @doc("Data product unique identifier")
         referenceId: string;
+
+        /**
+         * Reference type classification for data product
+         */
+        @doc("Data product reference type")
         type: string;
       };
+
+      /**
+       * Reference to the specific data asset to be scanned
+       */
+      @doc("Data asset reference within scope")
       dataAsset: {
+        /**
+         * Unique identifier of the referenced data asset
+         */
+        @doc("Data asset unique identifier")
         referenceId: string;
+
+        /**
+         * Reference type classification for data asset
+         */
+        @doc("Data asset reference type")
         type: string;
       };
     }>;
   };
 
   /**
-   * Reference to the related BusinessDomain entity.
+   * Reference to the parent business domain that governs this schedule
    */
+  @doc("Reference to the governing business domain")
   businessDomain?: {
+    /**
+     * Reference type classification for business domain
+     */
+    @doc("Business domain reference type")
     type: string;
+
+    /**
+     * Unique identifier of the associated business domain
+     */
+    @doc("Business domain unique identifier")
     referenceId: string;
   };
 
   /**
-   * Timestamp when the schedule was created.
+   * UTC timestamp when the schedule was initially created
    */
+  @doc("Creation timestamp (UTC)")
   createdAt?: utcDateTime;
 
   /**
-   * Timestamp when the schedule was last modified.
+   * UTC timestamp when the schedule was last modified
    */
+  @doc("Last modification timestamp (UTC)")
   lastModifiedAt?: utcDateTime;
 
   /**
-   * User who created the schedule.
+   * Identity of the user who created this schedule
    */
+  @doc("Identity of the creating user")
   createdBy?: string;
 
   /**
-   * User who last modified the schedule.
+   * Identity of the user who last modified this schedule
    */
+  @doc("Identity of the last modifying user")
   lastModifiedBy?: string;
 
   /**
-   * Entity tag for concurrency control.
+   * Entity tag for optimistic concurrency control and change detection
    */
+  @doc("Entity tag for concurrency control")
   eTag?: string;
 }
 
 /**
- * Defines the scan scope.
+ * Path parameters for accessing schedules within business domain hierarchical resources.
+ * Used in REST API operations to identify specific schedule entities.
  */
+@doc("Path parameters for business domain schedule resource identification")
+model BusinessDomainScheduleParameters {
+  /**
+   * Unique identifier of the parent business domain containing the schedule
+   */
+  @doc("Parent business domain identifier")
+  @path
+  businessDomainId: string;
+
+  /**
+   * Unique identifier of the schedule within the business domain scope
+   */
+  @doc("Schedule identifier within domain")
+  @path
+  scheduleId: string;
+}
+
+/**
+ * Defines the execution scope for data quality scans and validation operations.
+ * Specifies which data entities or hierarchical levels are included in scan execution.
+ */
+@doc("Execution scope definition for data quality scans")
 model ScanScope {
   /**
-   * Type of the scope.
+   * Scope type classification (BusinessDomainScope, DataProductScope, DataAssetScope)
    */
+  @doc("Scope type classification")
   type?: string;
 
   /**
-   * Identifier of the referenced entity for the scope.
+   * Unique identifier of the entity that defines the scan boundary
    */
+  @doc("Scope boundary entity identifier")
   referenceId?: string;
 }
 
 /**
- * Defines a trigger for scans.
+ * Trigger configuration for automated scan execution.
+ * Defines timing mechanisms including manual triggers and scheduled cron-based execution.
  */
+@doc("Trigger configuration for automated scan execution")
 model Trigger {
   /**
-   * Type of trigger (e.g., manual, scheduled).
+   * Trigger mechanism type (Manual, Scheduled, EventDriven)
    */
+  @doc("Trigger mechanism type")
   type?: string;
 
   /**
-   * Cron expression for scheduled triggers.
+   * Cron expression defining scheduled execution pattern (e.g., '0 9 * * MON-FRI')
    */
+  @doc("Cron expression for scheduled execution")
   cron?: string;
 }
 
 /**
- * Data transfer object for scan information.
+ * Data transfer object containing basic scan configuration information.
+ * Used for lightweight scan operations and API transfers.
  */
+@doc("Data transfer object for scan configuration")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 model ScanDTO {
   /**
-   * Type of the scan.
+   * Classification of scan type (FullScan, IncrementalScan, TargetedScan)
    */
+  @doc("Scan type classification")
   scanType?: string;
 }
 
 /**
- * Monitoring information for schedule scans.
+ * Comprehensive monitoring and execution metrics for scheduled data quality scans.
+ * Tracks success rates, execution timing, and provides audit trail for scheduled operations.
  */
+@doc("Monitoring metrics and execution information for scheduled scans")
 model ScheduleScanMonitoringEntity {
   /**
-   * Number of succeeded scans.
+   * Count of successfully completed scan executions
    */
+  @doc("Number of successful scan executions")
   succeeded?: int64;
 
   /**
-   * Number of failed scans.
+   * Count of failed scan executions with error conditions
    */
+  @doc("Number of failed scan executions")
   failed?: int64;
 
   /**
-   * Number of skipped scans.
+   * Count of skipped scan executions due to conditions or policies
    */
+  @doc("Number of skipped scan executions")
   skipped?: int64;
 
   /**
-   * Status of the schedule.
+   * Current operational status of the schedule (Active, Paused, Error)
    */
+  @doc("Current schedule operational status")
   scheduleStatus?: string;
 
   /**
-   * Name of the schedule.
+   * Human-readable name of the associated schedule
    */
+  @doc("Associated schedule name")
   scheduleName?: string;
 
   /**
-   * Unique identifier of the schedule.
+   * Unique identifier of the associated schedule entity
    */
+  @doc("Associated schedule identifier")
   scheduleId?: string;
 
   /**
-   * Unique identifier of the scan.
+   * Unique identifier of the specific scan execution
    */
+  @doc("Specific scan execution identifier")
   scanId?: string;
 
   /**
-   * Timestamp when the scan started.
+   * UTC timestamp when the scan execution began
    */
+  @doc("Scan execution start time (UTC)")
   startTime?: utcDateTime;
 
   /**
-   * Timestamp when the scan ended.
+   * UTC timestamp when the scan execution completed
    */
+  @doc("Scan execution end time (UTC)")
   endTime?: utcDateTime;
 
   /**
-   * Identifier of the account.
+   * Account identifier under which the scan was executed
    */
+  @doc("Executing account identifier")
   accountId?: string;
 
   /**
-   * Identifier of the business domain.
+   * Business domain identifier where the scan was performed
    */
+  @doc("Business domain identifier")
   businessDomainId?: string;
 
   /**
-   * Total number of jobs in the scan.
+   * Total count of individual jobs or tasks within the scan execution
    */
+  @doc("Total job count within scan execution")
   totalJobCount?: int64;
 
   /**
-   * Status of the scan.
+   * Current execution status of the scan (Running, Completed, Failed, Cancelled)
    */
+  @doc("Current scan execution status")
   status?: string;
 
   /**
-   * Type of schedule run.
+   * Schedule run type classification (Automatic, Manual, OnDemand)
    */
+  @doc("Schedule run type classification")
   scheduleRunType?: string;
 
   /**
-   * Type of the scan.
+   * Scan type classification indicating the scanning strategy used
    */
+  @doc("Scan type classification")
   scanType?: string;
 
   /**
-   * User who started the scan.
+   * Identity of the user who initiated the scan execution
    */
+  @doc("Identity of the scan initiating user")
   startedBy?: string;
 
   /**
-   * User who cancelled the scan.
+   * Identity of the user who cancelled the scan execution
    */
+  @doc("Identity of the scan cancelling user")
   cancelledBy?: string;
 
   /**
-   * Timestamp when a cancel request was made.
+   * UTC timestamp when a cancellation request was submitted
    */
+  @doc("Cancellation request timestamp (UTC)")
   cancelRequestTime?: utcDateTime;
 
   /**
-   * Partition key for storage.
+   * Storage partition key for data organization and query optimization
    */
+  @doc("Storage partition key for data organization")
   partitionKey?: string;
 
   /**
-   * Row key for storage.
+   * Storage row key for unique record identification within partition
    */
+  @doc("Storage row key for unique record identification")
   rowKey?: string;
 
   /**
-   * Timestamp of the record.
+   * Record timestamp for temporal tracking and versioning
    */
+  @doc("Record timestamp for temporal tracking")
   timestamp?: utcDateTime;
 
   /**
-   * ETag for concurrency control.
+   * Entity tag for optimistic concurrency control and change detection
    */
+  @doc("Entity tag for concurrency control")
   eTag?: string;
 }
 
 /**
- * Metadata for jobs.
+ * Comprehensive metadata tracking entity for data quality and processing jobs.
+ * Manages execution lifecycle, performance metrics, and audit information for job operations.
  */
+@doc("Comprehensive metadata for data quality job tracking and lifecycle management")
 model JobMetadataEntity {
   /**
-   * Unique run identifier for the job.
+   * Unique execution run identifier linking this job to its parent operation
    */
+  @doc("Unique execution run identifier")
   runId?: string;
 
   /**
-   * Identifier of the data product.
+   * Identifier of the data product containing the data assets being processed
    */
+  @doc("Data product identifier containing target assets")
   dataProductId?: string;
 
   /**
-   * Indicates if redundancy check is enabled.
+   * Flag indicating whether redundancy validation checks are enabled for this job
    */
+  @doc("Flag for redundancy validation checks")
   redundancyCheck?: boolean;
 
   /**
-   * Account identifier.
+   * Account identifier under which this job is executing
    */
+  @doc("Executing account identifier")
   accountId?: string;
 
   /**
-   * Business domain identifier.
+   * Business domain identifier governing this job execution
    */
+  @doc("Governing business domain identifier")
   businessDomainId?: string;
 
   /**
-   * Timestamp when the job was submitted.
+   * UTC timestamp when the job was submitted to the execution queue
    */
+  @doc("Job submission timestamp (UTC)")
   submissionTime?: utcDateTime;
 
   /**
-   * Timestamp when the job started.
+   * UTC timestamp when job execution actually began
    */
+  @doc("Job execution start timestamp (UTC)")
   startTime?: utcDateTime;
 
   /**
-   * Timestamp when the job ended.
+   * UTC timestamp when job execution completed or failed
    */
+  @doc("Job execution end timestamp (UTC)")
   endTime?: utcDateTime;
 
   /**
-   * Timestamp when a cancel request was made.
+   * UTC timestamp when a cancellation request was submitted for this job
    */
+  @doc("Job cancellation request timestamp (UTC)")
   cancelRequestTime?: utcDateTime;
 
   /**
-   * Current job status.
+   * Current execution status of the job (Queued, Running, Completed, Failed, Cancelled)
    */
+  @doc("Current job execution status")
   status?: string;
 
   /**
-   * Platform job ID.
+   * Platform-specific job identifier for tracking in external execution systems
    */
+  @doc("Platform-specific external job identifier")
   pfsJobId?: string;
 
   /**
-   * Job-related message.
+   * Descriptive message providing job execution details, status updates, or error information
    */
+  @doc("Job execution message with status or error details")
   message?: string;
 
   /**
-   * Duration of the job in milliseconds.
+   * Total execution duration in milliseconds for performance tracking and optimization
    */
+  @doc("Job execution duration in milliseconds")
   duration?: int64;
 
   /**
-   * User who started the job.
+   * Identity of the user who initiated the job execution
    */
+  @doc("Identity of the job initiating user")
   startedBy?: string;
 
   /**
-   * User who cancelled the job.
+   * Identity of the user who cancelled the job execution
    */
+  @doc("Identity of the job cancelling user")
   cancelledBy?: string;
 
   /**
-   * Type of job.
+   * Job type classification (DataQualityScan, ProfileAnalysis, MetadataExtraction)
    */
+  @doc("Job type classification")
   jobType?: string;
 
   /**
-   * Region where the job executed.
+   * Geographic region where the job was executed for locality tracking
    */
+  @doc("Job execution geographic region")
   jobExecutionRegion?: string;
 
   /**
-   * Identifier of the associated data asset.
+   * Unique identifier of the primary data asset being processed by this job
    */
+  @doc("Primary data asset identifier")
   dataAssetId?: string;
 
   /**
-   * Name of the associated data asset.
+   * Human-readable name of the primary data asset being processed
    */
+  @doc("Primary data asset name")
   dataAssetName?: string;
 
   /**
-   * Schedule identifier if job is scheduled.
+   * Identifier of the schedule that triggered this job (if scheduled execution)
    */
+  @doc("Triggering schedule identifier")
   scheduleId?: string;
 
   /**
-   * Schedule name if job is scheduled.
+   * Human-readable name of the schedule that triggered this job
    */
+  @doc("Triggering schedule name")
   scheduleName?: string;
 
   /**
-   * Fully qualified path related to the job.
+   * Fully qualified path to the data resource or location being processed
    */
+  @doc("Fully qualified data resource path")
   qualifiedPath?: string;
 
   /**
-   * Scan identifier associated with the job.
+   * Identifier of the scan operation associated with this job execution
    */
+  @doc("Associated scan operation identifier")
   scanId?: string;
 
   /**
-   * Type of schedule scan.
+   * Schedule scan type classification for scheduled job executions
    */
+  @doc("Schedule scan type classification")
   scheduleScanType?: string;
 
   /**
-   * Spark SKU used for job billing.
+   * Spark compute SKU used for job execution billing and resource allocation
    */
+  @doc("Spark compute SKU for billing and resource allocation")
   jobBillingSparkSku?: string;
 
   /**
-   * Type of data source.
+   * Data source type classification (ADLSGen2, Blob, SQL, Snowflake, etc.)
    */
+  @doc("Data source type classification")
   dataSourceType?: string;
 
   /**
-   * Primary data source identifier.
+   * Primary data source identifier for the main data connection
    */
+  @doc("Primary data source identifier")
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   primaryDataSourceID?: string;
 
   /**
-   * Additional details related to Purview.
+   * Additional Purview-specific details and metadata for governance tracking
    */
+  @doc("Additional Purview-specific governance details")
   puDetail?: string;
 }
 
 /**
- * Job history information.
+ * Historical record entity tracking completed job executions and their outcomes.
+ * Maintains execution history for audit, compliance, and performance analysis purposes.
  */
+@doc("Historical execution record for completed data quality jobs")
 model JobHistoryEntity {
   /**
-   * Identifier of the data asset.
+   * Unique identifier of the data asset that was processed by the job
    */
+  @doc("Processed data asset identifier")
   @minLength(1)
   dataAssetId: string;
 
   /**
-   * Job run identifier.
+   * Unique execution run identifier linking this history record to the job
    */
+  @doc("Job execution run identifier")
   @minLength(1)
   runId: string;
 
   /**
-   * Identifier of the data product.
+   * Identifier of the data product containing the processed data asset
    */
+  @doc("Parent data product identifier")
   @minLength(1)
   dataProductId: string;
 
   /**
-   * Business domain identifier.
+   * Identifier of the business domain governing the job execution
    */
+  @doc("Governing business domain identifier")
   @minLength(1)
   businessDomainId: string;
 
   /**
-   * Timestamp when the job started.
+   * UTC timestamp when job execution actually began
    */
+  @doc("Job execution start timestamp (UTC)")
   startTime?: utcDateTime;
 
   /**
-   * Timestamp when the job ended.
+   * UTC timestamp when job execution completed or terminated
    */
+  @doc("Job execution end timestamp (UTC)")
   endTime?: utcDateTime;
 
   /**
-   * Timestamp when the job was submitted.
+   * UTC timestamp when the job was initially submitted for execution
    */
+  @doc("Job submission timestamp (UTC)")
   submissionTime?: utcDateTime;
 
   /**
-   * Status of the job.
+   * Final execution status of the completed job (Completed, Failed, Cancelled)
    */
+  @doc("Final job execution status")
   status?: string;
 
   /**
-   * Type of job.
+   * Job type classification for categorizing different execution patterns
    */
+  @doc("Job type classification")
   jobType?: string;
 
   /**
-   * Account identifier.
+   * Account identifier under which the job was executed
    */
+  @doc("Job execution account identifier")
   accountId?: string;
 }
 
 /**
- * Configuration for jobs.
+ * Job execution configuration data transfer object containing runtime parameters and mappings.
+ * Defines how jobs should execute including validation settings and data source relationships.
  */
+@doc("Job execution configuration with runtime parameters and data mappings")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 model JobConfigDTO {
   /**
-   * Indicates if redundancy check is enabled.
+   * Flag enabling redundancy validation checks to prevent duplicate processing
    */
+  @doc("Flag for redundancy validation checks")
   redundancyCheck?: boolean;
 
   /**
-   * Mappings between datasets and data sources.
+   * Collection of mappings linking logical datasets to their physical data sources
    */
+  @doc("Dataset to data source mapping configurations")
   datasetToDatasourceMappings?: DatasetToDatasourceMapping[];
 }
 
 /**
- * rule creation status
+ * Status tracking model for long-running rule creation operations.
+ * Provides real-time status updates during asynchronous rule deployment and configuration.
  */
+@doc("Long-running operation status for rule creation processes")
 model RuleCreationStatus {
   /**
-   * Current state of the long-running operation
+   * Current execution state of the long-running rule creation operation
    */
+  @doc("Current state of the rule creation operation")
   @lroStatus
   status: LroStatus;
 }
 
 /**
- * lro status
+ * Standardized status values for long-running operations with extensibility.
+ * Covers the complete lifecycle of asynchronous operations from initiation to completion.
  */
+@doc("Long-running operation status enumeration with extensibility")
 union LroStatus {
   /**
-   * In Progress status
+   * Operation is currently executing and has not yet completed
    */
+  @doc("Operation in progress")
   InProgress: "InProgress",
 
   /**
-   * Succeeded status
+   * Operation completed successfully with expected results
    */
+  @doc("Operation completed successfully")
   Succeeded: "Succeeded",
 
   /**
-   * Failed status
+   * Operation terminated with errors or unexpected conditions
    */
+  @doc("Operation failed with errors")
   Failed: "Failed",
 
   string,
 }
 
 /**
- * Maps a dataset to a datasource.
+ * Mapping configuration that links logical dataset names to their physical data source connections.
+ * Enables abstraction layer for job execution across different storage systems and environments.
  */
+@doc("Dataset to data source mapping for job execution abstraction")
 model DatasetToDatasourceMapping {
   /**
-   * Alias name of the dataset.
+   * Logical alias name used to reference the dataset within job configurations
    */
+  @doc("Logical dataset alias name")
   datasetAliasName?: string;
 
   /**
-   * Identifier of the datasource.
+   * Unique identifier of the physical data source where the dataset resides
    */
+  @doc("Physical data source identifier")
   datasourceId?: string;
 }
 
 /**
- * Job Config DTO Response
+ * HTTP response model for job configuration operations with long-running operation support.
+ * Provides immediate acknowledgment with status tracking for asynchronous configuration updates.
  */
+@doc("HTTP response for job configuration operations with LRO support")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 model JobConfigDTOResponse {
   /**
-   * Status Code
+   * HTTP status code indicating accepted request for processing (202 Accepted)
    */
+  @doc("HTTP status code for accepted operation")
   @statusCode
   statusCode: 202;
 
   /**
-   * Value
+   * Response value containing operation result or reference identifier
    */
+  @doc("Operation result value or reference")
   value: string;
 
   /**
-   * lro status
+   * Long-running operation status for tracking asynchronous completion
    */
+  @doc("Long-running operation status")
   @lroStatus
   statuslro: LroStatus;
 }
 
 /**
- * Job Config DTO Response
+ * HTTP response model for scan operations with comprehensive status tracking and monitoring.
+ * Provides scan execution details and real-time status updates for long-running scan processes.
  */
+@doc("HTTP response for scan operations with status tracking and monitoring")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 model ScanDTOResponse {
   /**
-   * Status Code
+   * HTTP status code indicating accepted scan request for processing (202 Accepted)
    */
+  @doc("HTTP status code for accepted scan operation")
   @statusCode
   statusCode: 202;
 
   /**
-   * Scan Id
+   * Unique identifier of the initiated scan operation for tracking and reference
    */
+  @doc("Unique scan operation identifier")
   scanId?: string;
 
   /**
-   * lro status
+   * Long-running operation status indicating current execution state
    */
+  @doc("Long-running operation execution status")
   @lroStatus
   statuslro: LroStatus;
 
   /**
-   * Monitoring information for the scan status
+   * Detailed monitoring information providing real-time scan execution metrics
    */
+  @doc("Real-time scan execution monitoring information")
   statusMonitor?: StatusMonitor;
 }
 
 /**
- * Represents metadata observer entity for a data asset.
+ * Empty parameter model for operations that require no input parameters.
+ * Used for API operations that need explicit parameter structure without content.
  */
+@doc("Empty parameter model for operations without input parameters")
+model EmptyParams {}
+
+/**
+ * HTTP response model for asset metadata observer operations.
+ * Contains complete observer configuration with hierarchical references and audit information.
+ */
+@doc("HTTP response for asset metadata observer operations")
 model AssetMetadataObserverResponse {
   /**
-   * Status Code
+   * HTTP status code indicating successful observer creation or update (201 Created)
    */
+  @doc("HTTP status code for successful operation")
   @statusCode
   statusCode: 201;
 
   /**
-   * id
+   * Unique system identifier for the metadata observer instance
    */
+  @doc("Unique metadata observer identifier")
   id?: string;
 
   /**
-   * name
+   * Human-readable display name for the metadata observer
    */
+  @doc("Human-readable observer display name")
   name?: string;
 
   /**
-   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   * Reference to the specific data asset being observed for metadata changes
    */
+  @doc("Reference to the observed data asset")
   dataAsset?: Reference;
 
   /**
-   * created at
+   * UTC timestamp when the metadata observer was initially created
    */
+  @doc("Observer creation timestamp (UTC)")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
-   * created by
+   * Identity of the user who created this metadata observer
    */
+  @doc("Identity of the creating user")
   createdBy?: string;
 
   /**
-   * last modified by
+   * UTC timestamp when the metadata observer was last modified
    */
+  @doc("Observer last modification timestamp (UTC)")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 
   /**
-   * last modified
+   * Identity of the user who last modified this metadata observer
    */
+  @doc("Identity of the last modifying user")
   lastModifiedBy?: string;
 
   /**
-   * Dictionary of <any>
+   * Runtime execution parameters and configuration data for observer operations
    */
+  @doc("Runtime execution parameters and configuration")
   executionData?: Record<string>;
 
   /**
-   * isDeleted
+   * Soft deletion flag indicating if the observer has been logically deleted
    */
+  @doc("Soft deletion flag")
   isDeleted?: boolean;
 
   /**
-   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   * Reference to the business domain that governs this metadata observer
    */
+  @doc("Reference to the governing business domain")
   businessDomain?: Reference;
 
   /**
-   * Reference to another entity (BusinessDomain, DataProduct, DataAsset).
+   * Reference to the data product containing the observed data asset
    */
+  @doc("Reference to the containing data product")
   dataProduct?: Reference;
 
   /**
-   * eTag
+   * Entity tag for optimistic concurrency control and change detection
    */
+  @doc("Entity tag for concurrency control")
   eTag?: string;
 
   /**
-   * type
+   * Observer type classification determining monitoring capabilities and scope
    */
+  @doc("Observer type classification")
   type?: AssetMetadataObserverType;
 }
 
 /**
- * Represents a data source entity with metadata, configuration, and optional scopes.
+ * Comprehensive data source entity representing external data connections and their configurations.
+ * Manages access credentials, network settings, and scope definitions for various data platforms.
  */
+@doc("Data source entity with connection metadata, configuration, and access scopes")
 model DataSourceEntity {
   /**
-   * The display name of the data source connection.
+   * Human-readable display name identifying the data source connection
    */
+  @doc("Display name of the data source connection")
   name: string;
 
   /**
-   * Unique identifier for the data source.
+   * Unique system identifier for the data source entity
    */
+  @doc("Unique data source identifier")
   id?: string;
 
   /**
-   * Indicates whether the data source is enabled with Virtual Network (VNet).
+   * Flag indicating if the data source is configured for Virtual Network connectivity
    */
+  @doc("Virtual Network connectivity flag")
   isVnetEnabled: boolean;
 
   /**
-   * The Azure resource ID of the target resource (if applicable).
+   * Azure resource identifier of the target data platform (if Azure-based)
    */
+  @doc("Azure resource identifier for target platform")
   targetResourceId?: string;
 
   /**
-   * The business domain this data source belongs to.
+   * Reference to the business domain that governs this data source
    */
+  @doc("Business domain governance reference")
   businessDomain: {
     /**
-     * Type of business domain reference.
+     * Reference type classification for business domain relationship
      */
+    @doc("Business domain reference type")
     type: string;
 
     /**
-     * Unique identifier for the business domain.
+     * Unique identifier of the governing business domain
      */
+    @doc("Business domain unique identifier")
     referenceId: string;
   };
 
   /**
-   * ISO 8601 timestamp when the data source was last modified.
+   * ISO 8601 timestamp when the data source configuration was last modified
    */
+  @doc("Last modification timestamp (ISO 8601)")
   lastModifiedAt?: string;
 
   /**
-   * Identifier (GUID or user ID) of the last modifier.
+   * Identity of the user who last modified the data source configuration
    */
+  @doc("Identity of the last modifying user")
   lastModifiedBy?: string;
 
   /**
-   * The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics).
+   * Data source platform type (AzureSqlDatabase, Snowflake, AzureSynapseAnalytics, Oracle, etc.)
    */
+  @doc("Data source platform type classification")
   type: string;
 
   /**
-   * A dictionary of key-value pairs with additional properties
-   * specific to the data source type.
+   * Platform-specific configuration properties including connection strings, authentication, and settings
    */
+  @doc("Platform-specific configuration properties")
   typeProperties: Record<string>;
 
   /**
-   * Optional list of scopes that define access levels or boundaries for this data source.
+   * Access scope definitions that control which data objects are included or excluded from operations
    */
+  @doc("Access scope definitions for data object inclusion/exclusion")
   scopes?: Array<{
     /**
-     * The scope definition containing type and included objects.
+     * Scope configuration defining access boundaries and included objects
      */
+    @doc("Scope configuration for access boundaries")
     scope: {
       /**
-       * The scope type (e.g., Sql).
+       * Scope type classification (SQL, NoSQL, File, etc.)
        */
+      @doc("Scope type classification")
       type: string;
 
       /**
-       * List of included items in the scope.
+       * Collection of data object names or patterns included in this scope
        */
+      @doc("Included data object names or patterns")
       includes: string[];
     };
 
     /**
-     * Unique identifier for the scope.
+     * Unique identifier for the scope definition
      */
+    @doc("Scope definition unique identifier")
     id: string;
   }>;
 }
 
 /**
- * Represents a data source entity with metadata, configuration, and optional scopes.
+ * Query parameters for filtering and paginating data source listing operations.
+ * Supports name-based filtering and continuation token pagination for large result sets.
  */
+@doc("Query parameters for data source listing with filtering and pagination")
+model DataSourceListQueryParams {
+  /**
+   * Pagination continuation token for retrieving subsequent result pages
+   */
+  @doc("Pagination continuation token")
+  @query("skipToken")
+  skipToken?: string;
+
+  /**
+   * Name filter for matching data sources by exact or partial name
+   */
+  @doc("Name filter for data source matching")
+  @query("name")
+  name?: string;
+}
+
+/**
+ * HTTP response model for data source operations containing complete connection configuration.
+ * Includes platform-specific settings, network configuration, and governance relationships.
+ */
+@doc("HTTP response for data source operations with complete configuration")
 model DataSourceEntityResponse {
   /**
-   * Status Code
+   * HTTP status code indicating successful data source creation or update (201 Created)
    */
+  @doc("HTTP status code for successful operation")
   @statusCode
   statusCode: 201;
 
   /**
-   * The display name of the data source connection.
+   * Human-readable display name identifying the data source connection
    */
+  @doc("Display name of the data source connection")
   name: string;
 
   /**
-   * Unique identifier for the data source.
+   * Unique system identifier for the data source entity
    */
+  @doc("Unique data source identifier")
   id: string;
 
   /**
-   * Indicates whether the data source is enabled with Virtual Network (VNet).
+   * Flag indicating if the data source is configured for Virtual Network connectivity
    */
+  @doc("Virtual Network connectivity flag")
   isVnetEnabled: boolean;
 
   /**
-   * The Azure resource ID of the target resource (if applicable).
+   * Azure resource identifier of the target data platform (if Azure-based)
    */
+  @doc("Azure resource identifier for target platform")
   targetResourceId?: string;
 
   /**
-   * The business domain this data source belongs to.
+   * Reference to the business domain that governs this data source
    */
+  @doc("Business domain governance reference")
   businessDomain: {
     /**
-     * Type of business domain reference.
+     * Reference type classification for business domain relationship
      */
+    @doc("Business domain reference type")
     type: string;
 
     /**
-     * Unique identifier for the business domain.
+     * Unique identifier of the governing business domain
      */
+    @doc("Business domain unique identifier")
     referenceId: string;
   };
 
   /**
-   * ISO 8601 timestamp when the data source was last modified.
+   * ISO 8601 timestamp when the data source configuration was last modified
    */
+  @doc("Last modification timestamp (ISO 8601)")
   lastModifiedAt: string;
 
   /**
-   * Identifier (GUID or user ID) of the last modifier.
+   * Identity of the user who last modified the data source configuration
    */
+  @doc("Identity of the last modifying user")
   lastModifiedBy: string;
 
   /**
-   * The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics).
+   * Data source platform type (AzureSqlDatabase, Snowflake, AzureSynapseAnalytics, Oracle, etc.)
    */
+  @doc("Data source platform type classification")
   type: string;
 
   /**
-   * A dictionary of key-value pairs with additional properties
-   * specific to the data source type.
+   * Platform-specific configuration properties including connection strings, authentication, and settings
    */
+  @doc("Platform-specific configuration properties")
   typeProperties: Record<string>;
 
   /**
-   * Optional list of scopes that define access levels or boundaries for this data source.
+   * Access scope definitions that control which data objects are included or excluded from operations
    */
+  @doc("Access scope definitions for data object inclusion/exclusion")
   scopes?: Array<{
     /**
-     * The scope definition containing type and included objects.
+     * Scope configuration defining access boundaries and included objects
      */
+    @doc("Scope configuration for access boundaries")
     scope: {
       /**
-       * The scope type (e.g., Sql).
+       * Scope type classification (SQL, NoSQL, File, etc.)
        */
+      @doc("Scope type classification")
       type: string;
 
       /**
-       * List of included items in the scope.
+       * Collection of data object names or patterns included in this scope
        */
+      @doc("Included data object names or patterns")
       includes: string[];
     };
 
     /**
-     * Unique identifier for the scope.
+     * Unique identifier for the scope definition
      */
+    @doc("Scope definition unique identifier")
     id: string;
   }>;
 }
 
 /**
- * Profile Entity
+ * Paginated response model for data source listing operations within a business domain.
+ * Contains collection of data sources with their complete configuration and metadata.
  */
+@doc("Paginated response for data source listing operations")
+model DataSourceEntityListResponse {
+  /**
+   * Collection of data source entities with their complete configuration details
+   */
+  @doc("Collection of data source entities")
+  value: DataSourceEntity[];
+}
+
+/**
+ * HTTP response model for schedule scan monitoring operations.
+ * Contains collection of monitoring entities with execution metrics and status information.
+ */
+@doc("HTTP response for schedule scan monitoring with execution metrics")
+model ScheduleScanMonitoringResponse {
+  /**
+   * HTTP status code indicating successful monitoring data retrieval (200 OK)
+   */
+  @doc("HTTP status code for successful retrieval")
+  @statusCode
+  statusCode: 200;
+
+  /**
+   * Collection of monitoring entities with execution metrics, timing, and status details
+   */
+  @doc("Collection of schedule scan monitoring entities")
+  value: ScheduleScanMonitoringEntity[];
+}
+
+/**
+ * Profile entity configuration for data profiling and analysis operations.
+ * Defines data source locations, key columns, and profiling parameters for quality assessment.
+ */
+@doc("Profile entity for data profiling and quality analysis configuration")
 model ProfileEntity {
   /**
-   * type
+   * Profile type classification determining the profiling strategy and analysis scope
    */
+  @doc("Profile type classification")
   type: string;
 
   /**
-   * Type properties
+   * Type-specific configuration properties including location definitions and access parameters
    */
+  @doc("Type-specific profiling configuration properties")
   typeProperties: {
+    /**
+     * Collection of data location definitions specifying where profiling should be performed
+     */
     location: {
+      /**
+       * Location type classification (AdlsGen2FileLocation, BlobStorageLocation, etc.)
+       */
       type: string;
+      /**
+       * Location-specific properties defining file system and path details
+       */
       typeProperties: {
+        /**
+         * File system or container name where data resides
+         */
         fileSystem: string;
+        /**
+         * Folder path within the file system containing target data
+         */
         folderPath: string;
       };
     }[];
   };
 
   /**
-   * data source id
+   * Unique identifier of the data source containing the data to be profiled
    */
+  @doc("Data source identifier for profiling target")
   dataSourceId: string;
 
   /**
-   * configuration
+   * Profiling configuration including key column definitions and analysis parameters
    */
+  @doc("Profiling configuration with key columns and parameters")
   configuration: {
+    /**
+     * Collection of key columns that serve as primary identifiers for profiling analysis
+     */
     keyColumns: {
+      /**
+       * Name of the key column used for data identification and grouping
+       */
       name: string;
     }[];
   };
 }
 
 /**
- * Profile Entity
+ * HTTP response model for profile entity operations with long-running operation support.
+ * Provides immediate acknowledgment with profile run tracking for asynchronous profiling execution.
  */
+@doc("HTTP response for profile operations with LRO support and run tracking")
 model ProfileEntityResponse {
   /**
-   * status code
+   * HTTP status code indicating accepted request for profiling processing (202 Accepted)
    */
+  @doc("HTTP status code for accepted profiling operation")
   @statusCode
   statusCode: 202;
 
   /**
-   * profile run id
+   * Unique identifier for the profile run execution to track profiling progress
    */
+  @doc("Profile run execution identifier")
   profileRunId: string;
 
   /**
-   * lro status
+   * Long-running operation status for tracking asynchronous profiling completion
    */
+  @doc("Long-running operation status for profiling")
   @lroStatus
   statuslro: LroStatus;
 }
 
 /**
- * Opinion Entity
+ * Opinion entity representing stakeholder feedback and assessment results for data quality controls.
+ * Captures evaluation outcomes, timing, and contextual information for governance decision-making.
  */
+@doc("Opinion entity for stakeholder feedback and data quality control assessments")
 model OpinionEntity {
   /**
-   * Get Business domain Id
+   * Unique identifier of the business domain where the opinion was recorded
    */
+  @doc("Business domain identifier for opinion context")
   businessDomainId: string;
 
   /**
-   * Get data product id
+   * Unique identifier of the data product associated with this opinion
    */
+  @doc("Data product identifier for opinion scope")
   dataProductId: string;
 
   /**
-   * Get data asset id
+   * Unique identifier of the specific data asset being evaluated in the opinion
    */
+  @doc("Data asset identifier for opinion target")
   dataAssetId: string;
 
   /**
-   * Get control id
+   * Unique identifier of the data quality control being assessed
    */
+  @doc("Data quality control identifier")
   controlId: string;
 
   /**
-   * Get opinion id
+   * Unique identifier for this specific opinion record
    */
+  @doc("Opinion record unique identifier")
   opinionId: string;
 
   /**
-   * Get value
+   * Opinion value or assessment result (e.g., "Approved", "Rejected", "Needs Review")
    */
+  @doc("Opinion assessment value or result")
   value?: string;
 
   /**
-   * Get result At
+   * UTC timestamp when the opinion assessment was completed
    */
+  @doc("Opinion completion timestamp (UTC)")
   resultedAt: utcDateTime;
 
   /**
-   * Get outcomeId
+   * Unique identifier of the assessment outcome or decision result
    */
+  @doc("Assessment outcome identifier")
   outcomeId: string;
 
   /**
-   * Get queryExecutionId
+   * Optional identifier of the query execution that generated supporting data for this opinion
    */
+  @doc("Supporting query execution identifier")
   queryExecuted?: string;
+}
+
+/**
+ * Response model for job history listing operations with historical execution records.
+ * Contains collection of completed job executions with their outcomes and performance metrics.
+ */
+@doc("Response for job history listing with execution records and metrics")
+model JobHistoryResponse {
+  /**
+   * Collection of historical job execution records with completion details and performance data
+   */
+  @doc("Collection of job history execution records")
+  value: JobHistoryEntity[];
 }
 
 /**
  * Empty response
  */
 model EmptyResponse {}
+
+/**
+ * Asset scoped metadata containing configuration specific to a data asset
+ */
+@doc("Asset scoped metadata with runtime configuration and references to business domain, data product, and data asset")
+model AssetScopedMetadata {
+  @doc("Description of the asset scoped metadata")
+  description?: string;
+
+  @doc("List of favorite column paths for the asset")
+  favouriteColumnPaths?: string[];
+
+  @doc("Unique identifier for the asset scoped metadata")
+  id: string;
+
+  @doc("Reference to the business domain")
+  businessDomain: Reference;
+
+  @doc("Reference to the data product")
+  dataProduct: Reference;
+
+  @doc("Reference to the data asset")
+  dataAsset: Reference;
+
+  @doc("Runtime configuration for the asset")
+  runtime?: AssetRuntimeConfiguration;
+
+  @doc("Timestamp when the metadata was created")
+  createdAt: utcDateTime;
+
+  @doc("Timestamp when the metadata was last modified")
+  lastModifiedAt: utcDateTime;
+
+  @doc("User ID who created the metadata")
+  createdBy: string;
+
+  @doc("User ID who last modified the metadata")
+  lastModifiedBy: string;
+
+  @doc("Entity tag for optimistic concurrency control")
+  ETag: string;
+}
+
+/**
+ * Runtime configuration for asset processing
+ */
+@doc("Runtime configuration settings for asset processing")
+model AssetRuntimeConfiguration {
+  @doc("Whether error row is required during processing")
+  isErrorRowRequired?: boolean;
+
+  @doc("Format for writing error rows")
+  errorRowWriteFormat?: string;
+}
+
+/**
+ * Global rules applied to assets
+ */
+@doc("Global rule definition with scoring and metadata")
+model GlobalRule {
+  @doc("Name of the rule")
+  name: string;
+
+  @doc("Unique identifier for the rule")
+  id: string;
+
+  @doc("Description of the rule")
+  description?: string;
+
+  @doc("Type of the rule")
+  type: string;
+
+  @doc("Type-specific properties of the rule")
+  typeProperties?: RuleTypeProperties;
+
+  @doc("Status of the rule (Active, Inactive)")
+  status: string;
+
+  @doc("Score associated with the rule")
+  score?: float64;
+
+  @doc("Dimension of the rule (e.g., Conformity, Completeness)")
+  dimension?: string;
+
+  @doc("Reference to the business domain")
+  businessDomain?: Reference;
+
+  @doc("Reference to the data product")
+  dataProduct?: Reference;
+
+  @doc("Reference to the data asset")
+  dataAsset?: Reference;
+
+  @doc("Timestamp when the rule was last modified")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("User ID who last modified the rule")
+  lastModifiedBy?: string;
+
+  @doc("Timestamp when the rule was created")
+  createdAt?: utcDateTime;
+
+  @doc("User ID who created the rule")
+  createdBy?: string;
+}
+
+/**
+ * Type-specific properties for rules
+ */
+@doc("Type-specific properties configuration for rules")
+model RuleTypeProperties {
+  @doc("Condition expression for the rule")
+  condition?: string;
+
+  @doc("Filter criteria for the rule")
+  filterCriteria?: string;
+
+  @doc("Columns associated with the rule")
+  columns?: RuleColumn[];
+}
+
+/**
+ * Column definition for rules
+ */
+@doc("Column definition used in rule configurations")
+model RuleColumn {
+  @doc("Value or name of the column")
+  value: string;
+
+  @doc("Type of the column reference")
+  type: string;
+}
+
+/**
+ * Score snapshot containing comprehensive scoring and validation results
+ */
+@doc("Comprehensive score snapshot with business domain, data product, asset scoring, and validation results")
+model ScoreSnapshot {
+  @doc("Business domain identifier")
+  businessDomainId: string;
+
+  @doc("Data product identifier")
+  dataProductId: string;
+
+  @doc("Asset identifier")
+  assetId: string;
+
+  @doc("Overall score for the asset")
+  assetScore: float64;
+
+  @doc("Detailed snapshot with observers and validation results")
+  snapshot: SnapshotDetails;
+
+  @doc("Rules with their scores and validation results")
+  rules?: ScoredRule[];
+
+  @doc("Job information for the snapshot")
+  job?: SnapshotJob;
+}
+
+/**
+ * Detailed snapshot information
+ */
+@doc("Detailed snapshot containing observers, data sources, and validation results")
+model SnapshotDetails {
+  @doc("List of observers in the snapshot")
+  observers?: SnapshotObserver[];
+
+  @doc("List of data sources")
+  dataSources?: SnapshotDataSource[];
+
+  @doc("Observer validation results")
+  observerValidationResults?: unknown[];
+
+  @doc("Observer schemas")
+  observerSchemas?: unknown[];
+
+  @doc("Dataset to datasource mappings")
+  datasetToDatasourceMappings?: DatasetMapping[];
+}
+
+/**
+ * Observer in snapshot
+ */
+@doc("Observer configuration and properties within a snapshot")
+model SnapshotObserver {
+  @doc("Name of the observer")
+  name?: string;
+
+  @doc("Type of the observer")
+  type?: string;
+
+  @doc("Reference to the data asset")
+  dataAsset?: Reference;
+
+  @doc("Type-specific properties of the observer")
+  typeProperties?: unknown;
+
+  @doc("Entity tag for the observer")
+  ETag?: string;
+
+  @doc("Creation timestamp")
+  createdAt?: utcDateTime;
+
+  @doc("Creator user ID")
+  createdBy?: string;
+
+  @doc("Observer ID")
+  id?: string;
+
+  @doc("Last modification timestamp")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Last modifier user ID")
+  lastModifiedBy?: string;
+
+  @doc("Reference to the business domain")
+  businessDomain?: Reference;
+
+  @doc("Reference to the data product")
+  dataProduct?: Reference;
+}
+
+/**
+ * Data source in snapshot
+ */
+@doc("Data source configuration within a snapshot")
+model SnapshotDataSource {
+  @doc("Name of the data source")
+  name?: string;
+
+  @doc("Description of the data source")
+  description?: string;
+
+  @doc("Type of the data source")
+  type?: string;
+
+  @doc("Credential configuration")
+  credential?: unknown;
+
+  @doc("Type-specific properties")
+  typeProperties?: unknown;
+
+  @doc("Target resource ID")
+  targetResourceId?: string;
+
+  @doc("Region of the data source")
+  region?: string;
+
+  @doc("Whether VNet is enabled")
+  isVNetEnabled?: boolean;
+
+  @doc("Compute ID")
+  computeId?: string;
+
+  @doc("Data source type")
+  dataSourceType?: string;
+
+  @doc("Manage private endpoint ID")
+  managePrivateEndPointId?: string;
+
+  @doc("Manage private endpoint status")
+  managePrivateEndpointStatus?: string;
+
+  @doc("Reference to the business domain")
+  businessDomain?: Reference;
+
+  @doc("Creation timestamp")
+  createdAt?: utcDateTime;
+
+  @doc("Creator user ID")
+  createdBy?: string;
+
+  @doc("Data source ID")
+  id?: string;
+
+  @doc("Last modification timestamp")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Last modifier user ID")
+  lastModifiedBy?: string;
+}
+
+/**
+ * Dataset to datasource mapping
+ */
+@doc("Mapping between dataset alias and datasource ID")
+model DatasetMapping {
+  @doc("Dataset alias name")
+  datasetAliasName?: string;
+
+  @doc("Datasource identifier")
+  datasourceId?: string;
+}
+
+/**
+ * Rule with scoring information
+ */
+@doc("Rule definition with scoring and validation results")
+model ScoredRule {
+  @doc("Rule identifier")
+  ruleId?: string;
+
+  @doc("Score for the rule")
+  score?: float64;
+
+  @doc("Name of the rule")
+  name?: string;
+
+  @doc("Description of the rule")
+  description?: string;
+
+  @doc("Type of the rule")
+  type?: string;
+
+  @doc("Status of the rule")
+  status?: string;
+
+  @doc("Columns associated with the rule")
+  columns?: unknown[];
+
+  @doc("Total number of rows processed")
+  totalRows?: int64;
+
+  @doc("Number of failed rows")
+  failedRows?: int64;
+
+  @doc("Number of passed rows")
+  passedRows?: int64;
+
+  @doc("Number of empty rows")
+  emptyRows?: int64;
+
+  @doc("Number of miscast rows")
+  miscastRows?: int64;
+}
+
+/**
+ * Job information for snapshot
+ */
+@doc("Job information associated with a score snapshot")
+model SnapshotJob {
+  @doc("Job identifier")
+  jobId?: string;
+
+  @doc("Business domain identifier")
+  businessDomainId?: string;
+}
+
+/**
+ * Metadata entry for bulk operations containing all asset-related metadata
+ */
+@doc("Complete metadata entry for bulk operations including asset metadata, scoped metadata, rules, and score snapshot")
+model BulkAssetMetadataEntry {
+  @doc("Asset metadata information")
+  assetMetadata: AssetMetadataObserver;
+
+  @doc("Asset scoped metadata information")
+  assetScopedMetadata: AssetScopedMetadata;
+
+  @doc("Global rules applied to the asset")
+  globalRules: GlobalRule[];
+
+  @doc("Score snapshot for the asset")
+  scoreSnapshot: ScoreSnapshot;
+}
+
+/**
+ * Response model for bulk asset metadata GET operations
+ */
+@doc("Response containing bulk asset metadata with pagination support")
+model BulkAssetMetadataResponse {
+  @doc("Continuation token for pagination. Null when no more results are available.")
+  continuationToken?: string;
+
+  @doc("Array of metadata entries (up to 10 per response)")
+  metadata: BulkAssetMetadataEntry[];
+}
+
+/**
+ * Request model for bulk asset metadata POST operations
+ */
+@doc("Request containing bulk asset metadata for insertion")
+model BulkAssetMetadataRequest {
+  @doc("Array of metadata entries to insert")
+  metadata: BulkAssetMetadataEntry[];
+}
