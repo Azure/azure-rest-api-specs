@@ -33,10 +33,6 @@ namespace Customizations;
 // To use maps instead of binary data for non-primitive union types
 @@alternateType(IntervalLegendsResponse.body, Record<unknown>[]);
 
-// Use CQL2-TEXT for strongly typed languages
-@@alternateType(StacSearchParameters.filter, string, "csharp,java");
-@@alternateType(RegisterMosaic.filter, string, "csharp,java");
-
 // Workaround errors CS0019 and CS0019
 @@alternateType(StacCollectionTemporalExtent.interval, string[][], "csharp");
 
