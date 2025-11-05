@@ -563,3 +563,5 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(AnalyzeTextJobState, "AnalyzeTextOperationState", "python");
 @@clientName(AnalyzeTextJobState.tasks, "Actions", "python");
+
+@@clientName(BaseRedactionPolicy.isDefaultPolicy, "isDefault", "python");
