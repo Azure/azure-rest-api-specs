@@ -4,8 +4,7 @@ import { dirname, relative, resolve } from "path";
 import { inspect } from "util";
 import { z } from "zod";
 import { mapAsync } from "./array.js";
-import { example } from "./changed-files.js";
-import { includesSegment } from "./path.js";
+import { example, preview } from "./changed-files.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
@@ -154,14 +153,14 @@ export class Swagger {
       // Process regular paths
       if (swagger.paths) {
         for (const [path, pathObject] of Object.entries(swagger.paths)) {
-          this.addOperations(operations, path, pathObject);
+          this.#addOperations(operations, path, pathObject);
         }
       }
 
       // Process x-ms-paths (Azure extension)
       if (swagger["x-ms-paths"]) {
         for (const [path, pathObject] of Object.entries(swagger["x-ms-paths"])) {
-          this.addOperations(operations, path, pathObject);
+          this.#addOperations(operations, path, pathObject);
         }
       }
 
@@ -251,7 +250,7 @@ export class Swagger {
    * @param {PathObject} pathObject
    * @returns {void}
    */
-  addOperations(operations, path, pathObject) {
+  #addOperations(operations, path, pathObject) {
     for (const [method, operation] of Object.entries(pathObject)) {
       if (operation.operationId !== undefined && method !== "parameters") {
         const operationObj = {
@@ -282,7 +281,7 @@ export class Swagger {
    * @returns {string} version kind (stable or preview)
    */
   get versionKind() {
-    return includesSegment(this.#path, "preview")
+    return preview(this.#path)
       ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
       : API_VERSION_LIFECYCLE_STAGES.STABLE;
   }
