@@ -17,8 +17,9 @@ options:
     emit-common-types-schema: "never"
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
-    emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/playwrighttesting.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     omit-unreachable-types: true
     use-read-only-status-schema: true
   #  "@azure-tools/typespec-providerhub-controller":

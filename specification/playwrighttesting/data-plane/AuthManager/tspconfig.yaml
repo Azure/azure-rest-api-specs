@@ -11,8 +11,8 @@ parameters:
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-    emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/playwrighttesting.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-microsoftplaywrighttesting"
@@ -49,4 +49,4 @@ options:
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
-      - "specification/playwrighttesting/PlaywrightTesting.Shared/"
+      - "specification/playwrighttesting/data-plane/AuthManager/shared/"
