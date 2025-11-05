@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/contosowidgetmanager"
+    default: "sdk/contoso"
   "dependencies":
     default: ""
 emit:
@@ -12,8 +12,8 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
-    emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/widgets.json"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/widgets.json"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-contoso-widgetmanager"
     namespace: "azure.contoso.widgetmanager"
@@ -50,4 +50,4 @@ options:
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
-      - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"
+      - "specification/contoso/data-plane/WidgetManager/"
