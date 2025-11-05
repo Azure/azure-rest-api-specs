@@ -1,4 +1,5 @@
 import "@typespec/http";
+import "./back-compatible.tsp";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
