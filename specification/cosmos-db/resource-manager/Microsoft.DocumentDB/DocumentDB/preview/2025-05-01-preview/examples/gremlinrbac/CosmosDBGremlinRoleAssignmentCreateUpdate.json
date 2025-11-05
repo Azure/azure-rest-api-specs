@@ -1,28 +1,28 @@
 {
   "parameters": {
+    "roleAssignmentId": "myRoleAssignmentId",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
     "api-version": "2025-05-01-preview",
     "createUpdateGremlinRoleAssignmentParameters": {
       "properties": {
-        "principalId": "myPrincipalId",
         "roleDefinitionId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/gremlinRoleDefinitions/myRoleDefinitionId",
-        "scope": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases/colls/redmond-purchases"
+        "scope": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases/colls/redmond-purchases",
+        "principalId": "myPrincipalId"
       }
-    },
-    "resourceGroupName": "myResourceGroupName",
-    "roleAssignmentId": "myRoleAssignmentId",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/gremlinRoleAssignments/myRoleAssignmentId",
         "name": "myRoleAssignmentId",
         "type": "Microsoft.DocumentDB/databaseAccounts/gremlinRoleAssignments",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/gremlinRoleAssignments/myRoleAssignmentId",
         "properties": {
-          "principalId": "myPrincipalId",
           "roleDefinitionId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/gremlinRoleDefinitions/myRoleDefinitionId",
-          "scope": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases/colls/redmond-purchases"
+          "scope": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases/colls/redmond-purchases",
+          "principalId": "myPrincipalId"
         }
       }
     },
@@ -32,7 +32,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  },
-  "operationId": "GremlinResources_CreateUpdateGremlinRoleAssignment",
-  "title": "CosmosDBGremlinRoleAssignmentCreateUpdate"
+  }
 }

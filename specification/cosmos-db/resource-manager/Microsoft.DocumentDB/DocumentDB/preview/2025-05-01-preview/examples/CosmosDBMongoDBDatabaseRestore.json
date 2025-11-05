@@ -1,40 +1,40 @@
 {
   "parameters": {
     "accountName": "ddb1",
+    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
     "createUpdateMongoDBDatabaseParameters": {
       "location": "West US",
+      "tags": {},
       "properties": {
-        "options": {},
         "resource": {
-          "createMode": "Restore",
           "id": "databaseName",
+          "createMode": "Restore",
           "restoreParameters": {
-            "restoreSource": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId",
             "restoreTimestampInUtc": "2022-07-20T18:28:00Z",
+            "restoreSource": "/subscriptions/subid/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId",
             "restoreWithTtlDisabled": false
           }
-        }
-      },
-      "tags": {}
-    },
-    "databaseName": "databaseName",
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+        },
+        "options": {}
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/mongodbDatabases/databaseName",
         "name": "databaseName",
         "type": "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/mongodbDatabases/databaseName",
         "location": "West US",
+        "tags": {},
         "properties": {
           "resource": {
             "id": "updatedDatabaseName"
           }
-        },
-        "tags": {}
+        }
       }
     },
     "202": {
@@ -43,7 +43,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  },
-  "operationId": "MongoDBResources_CreateUpdateMongoDBDatabase",
-  "title": "CosmosDBMongoDBDatabaseRestore"
+  }
 }

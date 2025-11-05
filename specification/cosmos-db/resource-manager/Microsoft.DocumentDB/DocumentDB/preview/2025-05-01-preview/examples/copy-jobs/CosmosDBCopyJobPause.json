@@ -1,52 +1,50 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "api-version": "2025-05-01-preview",
-    "jobName": "j1",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
+    "jobName": "j1"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "ab1b6f34-b33c-46b1-98c7-3a0a63fd0d16",
         "type": "Microsoft.DocumentDB/databaseAccounts/copyJobs",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/copyJobs/j1",
         "properties": {
-          "duration": "00:05:00",
           "jobProperties": {
             "jobType": "NoSqlRUToNoSqlRU",
             "tasks": [
               {
-                "destination": {
-                  "containerName": "destTable1",
-                  "databaseName": "destDB1"
-                },
                 "source": {
-                  "containerName": "sourceTable1",
-                  "databaseName": "sourceDb1"
+                  "databaseName": "sourceDb1",
+                  "containerName": "sourceTable1"
+                },
+                "destination": {
+                  "databaseName": "destDB1",
+                  "containerName": "destTable1"
                 }
               },
               {
-                "destination": {
-                  "containerName": "destTable2",
-                  "databaseName": "destDB2"
-                },
                 "source": {
-                  "containerName": "sourceTable2",
-                  "databaseName": "sourceDb2"
+                  "databaseName": "sourceDb2",
+                  "containerName": "sourceTable2"
+                },
+                "destination": {
+                  "databaseName": "destDB2",
+                  "containerName": "destTable2"
                 }
               }
             ]
           },
-          "lastUpdatedUtcTime": "2021-06-12T11:10:55.2780000Z",
+          "status": "Paused",
           "mode": "Offline",
           "processedCount": 20,
-          "status": "Paused",
-          "totalCount": 100
+          "totalCount": 100,
+          "lastUpdatedUtcTime": "2021-06-12T11:10:55.2780000Z",
+          "duration": "00:05:00"
         }
       }
     }
-  },
-  "operationId": "CopyJobs_Pause",
-  "title": "CosmosDBCopyJobPause"
+  }
 }

@@ -1,21 +1,21 @@
 {
   "parameters": {
     "accountName": "ddb1-failover",
+    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
     "failoverParameters": {
       "failoverPolicies": [
         {
-          "failoverPriority": 0,
-          "locationName": "eastus"
+          "locationName": "eastus",
+          "failoverPriority": 0
         },
         {
-          "failoverPriority": 1,
-          "locationName": "westus"
+          "locationName": "westus",
+          "failoverPriority": 1
         }
       ]
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
   "responses": {
     "202": {
@@ -25,7 +25,5 @@
       }
     },
     "204": {}
-  },
-  "operationId": "DatabaseAccounts_FailoverPriorityChange",
-  "title": "CosmosDBDatabaseAccountFailoverPriorityChange"
+  }
 }

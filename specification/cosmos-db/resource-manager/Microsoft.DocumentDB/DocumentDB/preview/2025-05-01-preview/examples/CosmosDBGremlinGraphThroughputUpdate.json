@@ -1,39 +1,39 @@
 {
   "parameters": {
     "accountName": "ddb1",
+    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
     "databaseName": "databaseName",
     "graphName": "graphName",
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "updateThroughputParameters": {
       "location": "West US",
+      "tags": {},
       "properties": {
         "resource": {
           "throughput": 400
         }
-      },
-      "tags": {}
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/gremlinDatabases/databaseName/gremlinGraphs/graphName/throughputSettings/default",
         "name": "default",
         "type": "Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/throughputSettings",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/gremlinDatabases/databaseName/gremlinGraphs/graphName/throughputSettings/default",
         "location": "West US",
+        "tags": {},
         "properties": {
           "resource": {
-            "_etag": "\"00005900-0000-0000-0000-56f9a2630000\"",
-            "_rid": "PD5DALigDgw=",
-            "_ts": 1459200611,
+            "throughput": 400,
             "minimumThroughput": "400",
             "offerReplacePending": "true",
-            "throughput": 400
+            "_rid": "PD5DALigDgw=",
+            "_ts": 1459200611,
+            "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
           }
-        },
-        "tags": {}
+        }
       }
     },
     "202": {
@@ -42,7 +42,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  },
-  "operationId": "GremlinResources_UpdateGremlinGraphThroughput",
-  "title": "CosmosDBGremlinGraphThroughputUpdate"
+  }
 }

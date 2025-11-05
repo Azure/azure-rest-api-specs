@@ -1,35 +1,86 @@
 {
   "parameters": {
     "accountName": "ddb1",
+    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
     "createUpdateParameters": {
       "location": "westus",
       "properties": {
-        "createMode": "Default",
         "databaseAccountOfferType": "Standard",
         "locations": [
           {
             "failoverPriority": 0,
-            "isZoneRedundant": false,
-            "locationName": "southcentralus"
+            "locationName": "southcentralus",
+            "isZoneRedundant": false
           }
-        ]
+        ],
+        "createMode": "Default"
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
         "name": "ddb1",
-        "type": "Microsoft.DocumentDB/databaseAccounts",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
-        "kind": "GlobalDocumentDB",
         "location": "West US",
+        "type": "Microsoft.DocumentDB/databaseAccounts",
+        "kind": "GlobalDocumentDB",
+        "tags": {},
         "properties": {
-          "analyticalStorageConfiguration": null,
+          "provisioningState": "Initializing",
+          "ipRules": [],
+          "databaseAccountOfferType": "Standard",
+          "disableKeyBasedMetadataWriteAccess": false,
+          "consistencyPolicy": {
+            "defaultConsistencyLevel": "Session",
+            "maxIntervalInSeconds": 5,
+            "maxStalenessPrefix": 100
+          },
+          "writeLocations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "readLocations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "locations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "failoverPolicies": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "failoverPriority": 0
+            }
+          ],
+          "cors": [],
+          "enableFreeTier": false,
           "apiProperties": {},
+          "enableAnalyticalStorage": false,
+          "analyticalStorageConfiguration": null,
+          "networkAclBypass": "None",
+          "networkAclBypassResourceIds": [],
+          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "createMode": "Default",
           "backupPolicy": {
             "type": "Periodic",
             "periodicModeProperties": {
@@ -39,80 +90,27 @@
             }
           },
           "capacityMode": "Provisioned",
-          "consistencyPolicy": {
-            "defaultConsistencyLevel": "Session",
-            "maxIntervalInSeconds": 5,
-            "maxStalenessPrefix": 100
-          },
-          "cors": [],
-          "createMode": "Default",
-          "databaseAccountOfferType": "Standard",
-          "disableKeyBasedMetadataWriteAccess": false,
-          "enableAnalyticalStorage": false,
-          "enableFreeTier": false,
           "enableMaterializedViews": false,
-          "failoverPolicies": [
-            {
-              "failoverPriority": 0,
-              "id": "ddb1-southcentralus",
-              "locationName": "South Central US"
-            }
-          ],
-          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
-          "ipRules": [],
+          "minimalTlsVersion": "Tls",
           "keysMetadata": {
             "primaryMasterKey": {
-              "generationTime": "2022-02-25T20:30:11Z"
-            },
-            "primaryReadonlyMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             },
             "secondaryMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             },
+            "primaryReadonlyMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            },
             "secondaryReadonlyMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             }
-          },
-          "locations": [
-            {
-              "failoverPriority": 0,
-              "id": "ddb1-southcentralus",
-              "isZoneRedundant": false,
-              "locationName": "South Central US",
-              "provisioningState": "Initializing"
-            }
-          ],
-          "minimalTlsVersion": "Tls",
-          "networkAclBypass": "None",
-          "networkAclBypassResourceIds": [],
-          "provisioningState": "Initializing",
-          "readLocations": [
-            {
-              "failoverPriority": 0,
-              "id": "ddb1-southcentralus",
-              "isZoneRedundant": false,
-              "locationName": "South Central US",
-              "provisioningState": "Initializing"
-            }
-          ],
-          "writeLocations": [
-            {
-              "failoverPriority": 0,
-              "id": "ddb1-southcentralus",
-              "isZoneRedundant": false,
-              "locationName": "South Central US",
-              "provisioningState": "Initializing"
-            }
-          ]
+          }
         },
         "systemData": {
           "createdAt": "2021-03-12T22:05:09Z"
-        },
-        "tags": {}
+        }
       }
     }
-  },
-  "operationId": "DatabaseAccounts_CreateOrUpdate",
-  "title": "CosmosDBDatabaseAccountCreateMin"
+  }
 }

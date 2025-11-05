@@ -1,29 +1,29 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
-    "api-version": "2025-05-01-preview",
     "chaosFault": "ServiceUnavailability",
+    "api-version": "2025-05-01-preview",
     "chaosFaultRequest": {
       "properties": {
         "action": "Enable",
-        "containerName": "testCollection",
+        "region": "EastUS",
         "databaseName": "testDatabase",
-        "region": "EastUS"
+        "containerName": "testCollection"
       }
-    },
-    "resourceGroupName": "myResourceGroupName",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/chaosFaults/ServiceUnavailability",
         "properties": {
-          "action": "Enable",
-          "containerName": "testCollection",
-          "databaseName": "testDatabase",
           "provisioningState": "Completed",
-          "region": "EastUS"
+          "action": "Enable",
+          "region": "EastUS",
+          "databaseName": "testDatabase",
+          "containerName": "testCollection"
         }
       }
     },
@@ -31,15 +31,13 @@
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/chaosFaults/ServiceUnavailability",
         "properties": {
-          "action": "Enable",
-          "containerName": "testCollection",
-          "databaseName": "testDatabase",
           "provisioningState": "Completed",
-          "region": "EastUS"
+          "action": "Enable",
+          "region": "EastUS",
+          "databaseName": "testDatabase",
+          "containerName": "testCollection"
         }
       }
     }
-  },
-  "operationId": "ChaosFault_EnableDisable",
-  "title": "ChaosFaultEnableDisable"
+  }
 }

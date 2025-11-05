@@ -1,34 +1,34 @@
 {
   "parameters": {
-    "accountName": "myAccountName",
-    "api-version": "2025-05-01-preview",
+    "subscriptionId": "mySubscriptionId",
     "resourceGroupName": "myResourceGroupName",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "accountName": "myAccountName",
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbRoleDefinitions/myRoleDefinitionId",
             "name": "myRoleDefinitionId",
             "type": "Microsoft.DocumentDB/databaseAccounts/mongodbRoleDefinitions",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbRoleDefinitions/myRoleDefinitionId",
             "properties": {
+              "roleName": "myRoleName",
               "type": "CustomRole",
               "databaseName": "sales",
               "privileges": [
                 {
+                  "resource": {
+                    "db": "sales",
+                    "collection": "coll"
+                  },
                   "actions": [
                     "find",
                     "insert"
-                  ],
-                  "resource": {
-                    "collection": "coll",
-                    "db": "sales"
-                  }
+                  ]
                 }
               ],
-              "roleName": "myRoleName",
               "roles": [
                 {
                   "db": "sales",
@@ -40,7 +40,5 @@
         ]
       }
     }
-  },
-  "operationId": "MongoDBResources_ListMongoRoleDefinitions",
-  "title": "CosmosDBMongoDBRoleDefinitionList"
+  }
 }

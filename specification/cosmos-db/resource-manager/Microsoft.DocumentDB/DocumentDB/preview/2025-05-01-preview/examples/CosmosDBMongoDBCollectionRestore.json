@@ -1,38 +1,38 @@
 {
   "parameters": {
     "accountName": "ddb1",
+    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
     "collectionName": "collectionName",
     "createUpdateMongoDBCollectionParameters": {
       "location": "West US",
+      "tags": {},
       "properties": {
-        "options": {},
         "resource": {
-          "createMode": "Restore",
           "id": "collectionName",
+          "createMode": "Restore",
           "restoreParameters": {
-            "restoreSource": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId",
             "restoreTimestampInUtc": "2022-07-20T18:28:00Z",
+            "restoreSource": "/subscriptions/subid/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId",
             "restoreWithTtlDisabled": false
           }
-        }
-      },
-      "tags": {}
-    },
-    "databaseName": "databaseName",
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+        },
+        "options": {}
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/mongodbDatabases/databaseName/mongodbCollections/collectionName",
         "name": "collectionName",
         "type": "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/mongodbCollections",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/mongodbDatabases/databaseName/mongodbCollections/collectionName",
         "location": "West US",
+        "tags": {},
         "properties": {
           "resource": {
-            "analyticalStorageTtl": 500,
             "id": "collectionName",
             "indexes": [
               {
@@ -56,10 +56,10 @@
             ],
             "shardKey": {
               "testKey": "Hash"
-            }
+            },
+            "analyticalStorageTtl": 500
           }
-        },
-        "tags": {}
+        }
       }
     },
     "202": {
@@ -68,7 +68,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  },
-  "operationId": "MongoDBResources_CreateUpdateMongoDBCollection",
-  "title": "CosmosDBMongoDBCollectionRestore"
+  }
 }

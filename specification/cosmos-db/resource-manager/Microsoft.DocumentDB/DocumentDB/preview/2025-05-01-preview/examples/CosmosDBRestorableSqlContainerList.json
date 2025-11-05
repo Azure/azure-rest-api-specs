@@ -1,40 +1,32 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "instanceId": "98a570f2-63db-4117-91f0-366327b7b353",
+    "subscriptionId": "subid",
     "location": "WestUS",
-    "restorableSqlDatabaseRid": "3fu-hg==",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "instanceId": "98a570f2-63db-4117-91f0-366327b7b353",
+    "restorableSqlDatabaseRid": "3fu-hg=="
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "79609a98-3394-41f8-911f-cfab0c075c86",
+            "id": "/subscriptions/subid/providers/Microsoft.DocumentDb/locations/westus/restorableDatabaseAccounts/98a570f2-63db-4117-91f0-366327b7b353/restorableSqlContainers/79609a98-3394-41f8-911f-cfab0c075c86",
             "type": "Microsoft.DocumentDB/locations/restorableDatabaseAccounts/restorableSqlContainers",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DocumentDb/locations/westus/restorableDatabaseAccounts/98a570f2-63db-4117-91f0-366327b7b353/restorableSqlContainers/79609a98-3394-41f8-911f-cfab0c075c86",
+            "name": "79609a98-3394-41f8-911f-cfab0c075c86",
             "properties": {
               "resource": {
                 "_rid": "zAyAPQAAAA==",
+                "eventTimestamp": "2020-10-13T04:56:42Z",
+                "ownerId": "Container1",
+                "ownerResourceId": "V18LoLrv-qA=",
+                "operationType": "Create",
                 "canUndelete": "invalid",
                 "container": {
-                  "_etag": "\"00003e00-0000-0700-0000-5f85338a0000\"",
-                  "_rid": "V18LoLrv-qA=",
-                  "_self": "dbs/V18LoA==/colls/V18LoLrv-qA=/",
-                  "conflictResolutionPolicy": {
-                    "conflictResolutionPath": "/_ts",
-                    "conflictResolutionProcedure": "",
-                    "mode": "LastWriterWins"
-                  },
                   "id": "Container1",
                   "indexingPolicy": {
+                    "indexingMode": "consistent",
                     "automatic": true,
-                    "excludedPaths": [
-                      {
-                        "path": "/\"_etag\"/?"
-                      }
-                    ],
                     "includedPaths": [
                       {
                         "path": "/*"
@@ -43,42 +35,41 @@
                         "path": "/\"_ts\"/?"
                       }
                     ],
-                    "indexingMode": "consistent"
-                  }
-                },
-                "eventTimestamp": "2020-10-13T04:56:42Z",
-                "operationType": "Create",
-                "ownerId": "Container1",
-                "ownerResourceId": "V18LoLrv-qA="
+                    "excludedPaths": [
+                      {
+                        "path": "/\"_etag\"/?"
+                      }
+                    ]
+                  },
+                  "conflictResolutionPolicy": {
+                    "mode": "LastWriterWins",
+                    "conflictResolutionPath": "/_ts",
+                    "conflictResolutionProcedure": ""
+                  },
+                  "_rid": "V18LoLrv-qA=",
+                  "_self": "dbs/V18LoA==/colls/V18LoLrv-qA=/",
+                  "_etag": "\"00003e00-0000-0700-0000-5f85338a0000\""
+                }
               }
             }
           },
           {
-            "name": "e85298a1-c631-4726-825e-a7ca092e9098",
+            "id": "/subscriptions/subid/providers/Microsoft.DocumentDb/locations/westus/restorableDatabaseAccounts/98a570f2-63db-4117-91f0-366327b7b353/restorableSqlContainers/e85298a1-c631-4726-825e-a7ca092e9098",
             "type": "Microsoft.DocumentDB/locations/restorableDatabaseAccounts/restorableSqlContainers",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DocumentDb/locations/westus/restorableDatabaseAccounts/98a570f2-63db-4117-91f0-366327b7b353/restorableSqlContainers/e85298a1-c631-4726-825e-a7ca092e9098",
+            "name": "e85298a1-c631-4726-825e-a7ca092e9098",
             "properties": {
               "resource": {
                 "_rid": "PrArcgAAAA==",
+                "eventTimestamp": "2020-10-13T05:03:27Z",
+                "ownerId": "Container1",
+                "ownerResourceId": "V18LoLrv-qA=",
+                "operationType": "Replace",
                 "canUndelete": "invalid",
                 "container": {
-                  "_etag": "\"00004400-0000-0700-0000-5f85351f0000\"",
-                  "_rid": "V18LoLrv-qA=",
-                  "_self": "dbs/V18LoA==/colls/V18LoLrv-qA=/",
-                  "conflictResolutionPolicy": {
-                    "conflictResolutionPath": "/_ts",
-                    "conflictResolutionProcedure": "",
-                    "mode": "LastWriterWins"
-                  },
-                  "defaultTtl": 12345,
                   "id": "Container1",
                   "indexingPolicy": {
+                    "indexingMode": "consistent",
                     "automatic": true,
-                    "excludedPaths": [
-                      {
-                        "path": "/\"_etag\"/?"
-                      }
-                    ],
                     "includedPaths": [
                       {
                         "path": "/*"
@@ -87,20 +78,27 @@
                         "path": "/\"_ts\"/?"
                       }
                     ],
-                    "indexingMode": "consistent"
-                  }
-                },
-                "eventTimestamp": "2020-10-13T05:03:27Z",
-                "operationType": "Replace",
-                "ownerId": "Container1",
-                "ownerResourceId": "V18LoLrv-qA="
+                    "excludedPaths": [
+                      {
+                        "path": "/\"_etag\"/?"
+                      }
+                    ]
+                  },
+                  "defaultTtl": 12345,
+                  "conflictResolutionPolicy": {
+                    "mode": "LastWriterWins",
+                    "conflictResolutionPath": "/_ts",
+                    "conflictResolutionProcedure": ""
+                  },
+                  "_rid": "V18LoLrv-qA=",
+                  "_self": "dbs/V18LoA==/colls/V18LoLrv-qA=/",
+                  "_etag": "\"00004400-0000-0700-0000-5f85351f0000\""
+                }
               }
             }
           }
         ]
       }
     }
-  },
-  "operationId": "RestorableSqlContainers_List",
-  "title": "CosmosDBRestorableSqlContainerList"
+  }
 }

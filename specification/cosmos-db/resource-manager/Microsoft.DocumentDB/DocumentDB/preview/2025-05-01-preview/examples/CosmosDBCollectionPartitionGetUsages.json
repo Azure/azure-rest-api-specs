@@ -1,33 +1,31 @@
 {
   "parameters": {
-    "$filter": "$filter=name.value eq 'Partition Storage'",
     "accountName": "ddb1",
-    "api-version": "2025-05-01-preview",
-    "collectionRid": "collectionRid",
-    "databaseRid": "databaseRid",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "api-version": "2025-05-01-preview",
+    "databaseRid": "databaseRid",
+    "collectionRid": "collectionRid",
+    "subscriptionId": "subid",
+    "$filter": "$filter=name.value eq 'Partition Storage'"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": {
-              "localizedValue": "Storage",
-              "value": "Storage"
-            },
-            "currentValue": 0,
+            "unit": "Bytes",
+            "quotaPeriod": "P1D",
             "limit": 10737418240,
+            "currentValue": 0,
             "partitionId": "00000000-0000-0000-0000-000000000000",
             "partitionKeyRangeId": "0",
-            "quotaPeriod": "P1D",
-            "unit": "Bytes"
+            "name": {
+              "value": "Storage",
+              "localizedValue": "Storage"
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "CollectionPartition_ListUsages",
-  "title": "CosmosDBCollectionGetUsages"
+  }
 }

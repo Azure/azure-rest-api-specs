@@ -1,23 +1,24 @@
 {
   "parameters": {
-    "accountName": "myAccountName",
-    "api-version": "2025-05-01-preview",
+    "subscriptionId": "mySubscriptionId",
     "resourceGroupName": "myResourceGroupName",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "accountName": "myAccountName",
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
             "name": "myRoleDefinitionId",
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
             "properties": {
+              "roleName": "myRoleName",
               "type": "CustomRole",
               "assignableScopes": [
-                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
-                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+                "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+                "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
               ],
               "permissions": [
                 {
@@ -27,14 +28,11 @@
                   ],
                   "notDataActions": []
                 }
-              ],
-              "roleName": "myRoleName"
+              ]
             }
           }
         ]
       }
     }
-  },
-  "operationId": "SqlResources_ListSqlRoleDefinitions",
-  "title": "CosmosDBSqlRoleDefinitionList"
+  }
 }

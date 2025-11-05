@@ -1,53 +1,51 @@
 {
   "parameters": {
-    "accountName": "accountName",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "accountName": "accountName",
+    "databaseName": "databaseName",
     "clientEncryptionKeyName": "cekName",
     "createUpdateClientEncryptionKeyParameters": {
       "properties": {
         "resource": {
-          "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
           "id": "cekName",
+          "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+          "wrappedDataEncryptionKey": "VGhpcyBpcyBhY3R1YWxseSBhbiBhcnJheSBvZiBieXRlcy4gVGhpcyByZXF1ZXN0L3Jlc3BvbnNlIGlzIGJlaW5nIHByZXNlbnRlZCBhcyBhIHN0cmluZyBmb3IgcmVhZGFiaWxpdHkgaW4gdGhlIGV4YW1wbGU=",
           "keyWrapMetadata": {
             "name": "customerManagedKey",
             "type": "AzureKeyVault",
-            "algorithm": "RSA-OAEP",
-            "value": "AzureKeyVault Key URL"
-          },
-          "wrappedDataEncryptionKey": "VGhpcyBpcyBhY3R1YWxseSBhbiBhcnJheSBvZiBieXRlcy4gVGhpcyByZXF1ZXN0L3Jlc3BvbnNlIGlzIGJlaW5nIHByZXNlbnRlZCBhcyBhIHN0cmluZyBmb3IgcmVhZGFiaWxpdHkgaW4gdGhlIGV4YW1wbGU="
+            "value": "AzureKeyVault Key URL",
+            "algorithm": "RSA-OAEP"
+          }
         }
       }
-    },
-    "databaseName": "databaseName",
-    "resourceGroupName": "rgName",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.DocumentDB/databaseAccounts/accountName/sqlDatabases/databaseName/clientEncryptionKeys/cekName",
         "name": "cekName",
         "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/clientEncryptionKey",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgName/providers/Microsoft.DocumentDB/databaseAccounts/accountName/sqlDatabases/databaseName/clientEncryptionKeys/cekName",
         "properties": {
           "resource": {
-            "_etag": "00000000-0000-0000-7a1f-bc0828e801d7",
-            "_rid": "tNc4AAAAAAAQkjzWAgAAAA==",
-            "_ts": 1626425552,
-            "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
             "id": "cekName",
+            "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+            "wrappedDataEncryptionKey": "VGhpcyBpcyBhY3R1YWxseSBhbiBhcnJheSBvZiBieXRlcy4gVGhpcyByZXF1ZXN0L3Jlc3BvbnNlIGlzIGJlaW5nIHByZXNlbnRlZCBhcyBhIHN0cmluZyBmb3IgcmVhZGFiaWxpdHkgaW4gdGhlIGV4YW1wbGU=",
             "keyWrapMetadata": {
               "name": "customerManagedKey",
               "type": "AzureKeyVault",
-              "algorithm": "RSA-OAEP",
-              "value": "AzureKeyVault Key URL"
+              "value": "AzureKeyVault Key URL",
+              "algorithm": "RSA-OAEP"
             },
-            "wrappedDataEncryptionKey": "VGhpcyBpcyBhY3R1YWxseSBhbiBhcnJheSBvZiBieXRlcy4gVGhpcyByZXF1ZXN0L3Jlc3BvbnNlIGlzIGJlaW5nIHByZXNlbnRlZCBhcyBhIHN0cmluZyBmb3IgcmVhZGFiaWxpdHkgaW4gdGhlIGV4YW1wbGU="
+            "_rid": "tNc4AAAAAAAQkjzWAgAAAA==",
+            "_ts": 1626425552,
+            "_etag": "00000000-0000-0000-7a1f-bc0828e801d7"
           }
         }
       }
     },
     "202": {}
-  },
-  "operationId": "SqlResources_CreateUpdateClientEncryptionKey",
-  "title": "CosmosDBClientEncryptionKeyCreateUpdate"
+  }
 }

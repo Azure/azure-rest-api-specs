@@ -1,9 +1,9 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "api-version": "2025-05-01-preview",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
@@ -12,27 +12,25 @@
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/chaosFaults/ServiceUnavailability",
             "properties": {
-              "action": "Enable",
-              "containerName": "testCollection",
-              "databaseName": "testDatabase",
               "provisioningState": "Completed",
-              "region": "EastUS"
+              "action": "Enable",
+              "region": "EastUS",
+              "databaseName": "testDatabase",
+              "containerName": "testCollection"
             }
           },
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/chaosFaults/PerPartitionAutomaticFailover",
             "properties": {
-              "action": "Enable",
-              "containerName": "testCollection2",
-              "databaseName": "testDatabase2",
               "provisioningState": "Completed",
-              "region": "EastUS"
+              "action": "Enable",
+              "region": "EastUS",
+              "databaseName": "testDatabase2",
+              "containerName": "testCollection2"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "ChaosFault_List",
-  "title": "ChaosFaultList"
+  }
 }

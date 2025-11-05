@@ -1,20 +1,14 @@
 {
   "parameters": {
     "accountName": "ddb1",
+    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
     "databaseName": "databaseName",
     "redistributeThroughputParameters": {
       "properties": {
         "resource": {
-          "sourcePhysicalPartitionThroughputInfo": [
-            {
-              "id": "2",
-              "throughput": 5000
-            },
-            {
-              "id": "3"
-            }
-          ],
+          "throughputPolicy": "custom",
           "targetPhysicalPartitionThroughputInfo": [
             {
               "id": "0",
@@ -25,12 +19,18 @@
               "throughput": 5000
             }
           ],
-          "throughputPolicy": "custom"
+          "sourcePhysicalPartitionThroughputInfo": [
+            {
+              "id": "2",
+              "throughput": 5000
+            },
+            {
+              "id": "3"
+            }
+          ]
         }
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
   "responses": {
     "200": {
@@ -40,23 +40,23 @@
             "physicalPartitionThroughputInfo": [
               {
                 "id": "0",
-                "targetThroughput": 5000,
-                "throughput": 5000
+                "throughput": 5000,
+                "targetThroughput": 5000
               },
               {
                 "id": "1",
-                "targetThroughput": 5000,
-                "throughput": 5000
+                "throughput": 5000,
+                "targetThroughput": 5000
               },
               {
                 "id": "2",
-                "targetThroughput": 5000,
-                "throughput": 5000
+                "throughput": 5000,
+                "targetThroughput": 5000
               },
               {
                 "id": "3",
-                "targetThroughput": 3000,
-                "throughput": 3000
+                "throughput": 3000,
+                "targetThroughput": 3000
               }
             ]
           }
@@ -69,7 +69,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  },
-  "operationId": "MongoDBResources_MongoDBDatabaseRedistributeThroughput",
-  "title": "CosmosDBMongoDBDatabaseRedistributeThroughput"
+  }
 }

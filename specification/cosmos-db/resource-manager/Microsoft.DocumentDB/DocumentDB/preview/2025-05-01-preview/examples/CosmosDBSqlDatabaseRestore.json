@@ -1,47 +1,45 @@
 {
   "parameters": {
     "accountName": "ddb1",
+    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
     "createUpdateSqlDatabaseParameters": {
       "location": "West US",
+      "tags": {},
       "properties": {
-        "options": {},
         "resource": {
-          "createMode": "Restore",
           "id": "databaseName",
+          "createMode": "Restore",
           "restoreParameters": {
-            "restoreSource": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId",
             "restoreTimestampInUtc": "2022-07-20T18:28:00Z",
+            "restoreSource": "/subscriptions/subid/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId",
             "restoreWithTtlDisabled": true
           }
-        }
-      },
-      "tags": {}
-    },
-    "databaseName": "databaseName",
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+        },
+        "options": {}
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName",
         "name": "databaseName",
         "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName",
         "location": "West US",
+        "tags": {},
         "properties": {
           "resource": {
-            "_etag": "\"00000a00-0000-0000-0000-56672f920000\"",
+            "id": "databaseName",
             "_rid": "CqNBAA==",
             "_ts": 1449602962,
-            "id": "databaseName"
+            "_etag": "\"00000a00-0000-0000-0000-56672f920000\""
           }
-        },
-        "tags": {}
+        }
       }
     },
     "202": {}
-  },
-  "operationId": "SqlResources_CreateUpdateSqlDatabase",
-  "title": "CosmosDBSqlDatabaseRestore"
+  }
 }

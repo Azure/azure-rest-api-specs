@@ -1,41 +1,41 @@
 {
   "parameters": {
-    "accountName": "ddb1",
     "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
     "databaseName": "databaseName",
     "mergeParameters": {
       "isDryRun": false
-    },
-    "resourceGroupName": "rgName",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "physicalPartitionStorageInfoCollection": [
           {
-            "id": "0",
-            "storageInKB": 333
+            "storageInKB": 333.0,
+            "id": "0"
           },
           {
-            "id": "1",
-            "storageInKB": 305
+            "storageInKB": 305.0,
+            "id": "1"
           },
           {
-            "id": "177",
-            "storageInKB": 368
+            "storageInKB": 368.0,
+            "id": "177"
           },
           {
-            "id": "178",
-            "storageInKB": 96313
+            "storageInKB": 96313.0,
+            "id": "178"
           },
           {
-            "id": "5",
-            "storageInKB": 194
+            "storageInKB": 194.0,
+            "id": "5"
           },
           {
-            "id": "6",
-            "storageInKB": 331
+            "storageInKB": 331.0,
+            "id": "6"
           }
         ]
       }
@@ -46,7 +46,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2022-11-15-preview"
       }
     }
-  },
-  "operationId": "SqlResources_SqlDatabasePartitionMerge",
-  "title": "CosmosDBSqlDatabasePartitionMerge"
+  }
 }

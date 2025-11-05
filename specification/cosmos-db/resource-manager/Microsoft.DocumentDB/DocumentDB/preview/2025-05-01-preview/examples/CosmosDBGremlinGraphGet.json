@@ -1,57 +1,50 @@
 {
   "parameters": {
-    "accountName": "ddb1",
     "api-version": "2025-05-01-preview",
-    "databaseName": "databaseName",
-    "graphName": "graphName",
+    "subscriptionId": "subid",
     "resourceGroupName": "rgName",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "accountName": "ddb1",
+    "databaseName": "databaseName",
+    "graphName": "graphName"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "graphName",
         "name": "graphName",
         "type": "Microsoft.DocumentDB/databaseAccounts/apis/databases/graphs",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgName/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/gremlinDatabases/databaseName/graphs/graphName",
         "properties": {
           "resource": {
-            "_etag": "\"00005900-0000-0000-0000-56f9a2630000\"",
-            "_rid": "PD5DALigDgw=",
-            "_ts": 1459200611,
-            "conflictResolutionPolicy": {
-              "conflictResolutionPath": "/path",
-              "mode": "LastWriterWins"
-            },
-            "defaultTtl": 100,
             "id": "graphName",
             "indexingPolicy": {
+              "indexingMode": "consistent",
               "automatic": true,
-              "excludedPaths": [],
               "includedPaths": [
                 {
                   "path": "/*",
                   "indexes": [
                     {
-                      "dataType": "String",
                       "kind": "Range",
+                      "dataType": "String",
                       "precision": -1
                     },
                     {
-                      "dataType": "Number",
                       "kind": "Range",
+                      "dataType": "Number",
                       "precision": -1
                     }
                   ]
                 }
               ],
-              "indexingMode": "consistent"
+              "excludedPaths": []
             },
             "partitionKey": {
-              "kind": "Hash",
               "paths": [
                 "/AccountNumber"
-              ]
+              ],
+              "kind": "Hash"
             },
+            "defaultTtl": 100,
             "uniqueKeyPolicy": {
               "uniqueKeys": [
                 {
@@ -60,12 +53,17 @@
                   ]
                 }
               ]
-            }
+            },
+            "conflictResolutionPolicy": {
+              "mode": "LastWriterWins",
+              "conflictResolutionPath": "/path"
+            },
+            "_rid": "PD5DALigDgw=",
+            "_ts": 1459200611,
+            "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
           }
         }
       }
     }
-  },
-  "operationId": "GremlinResources_GetGremlinGraph",
-  "title": "CosmosDBGremlinGraphGet"
+  }
 }

@@ -1,27 +1,25 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "fleetName": "fleet1",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "rg1",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "fleetName": "fleet1"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1",
         "name": "fleet1",
         "type": "Microsoft.DocumentDB/fleets",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1",
         "location": "West US",
-        "properties": {
-          "provisioningState": "Succeeded"
-        },
         "tags": {
           "Dept": "Finance",
           "Environment": "Production"
+        },
+        "properties": {
+          "provisioningState": "Succeeded"
         }
       }
     }
-  },
-  "operationId": "Fleet_Get",
-  "title": "CosmosDB Fleet Get"
+  }
 }

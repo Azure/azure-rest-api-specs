@@ -1,10 +1,10 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "api-version": "2025-05-01-preview",
-    "keyspaceName": "keyspacename",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
+    "keyspaceName": "keyspacename",
     "viewName": "viewname"
   },
   "responses": {
@@ -12,9 +12,9 @@
       "body": {
         "properties": {
           "resource": {
+            "throughput": 400,
             "minimumThroughput": "400",
-            "offerReplacePending": "false",
-            "throughput": 400
+            "offerReplacePending": "false"
           }
         }
       }
@@ -25,7 +25,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  },
-  "operationId": "CassandraResources_MigrateCassandraViewToManualThroughput",
-  "title": "CosmosDBCassandraViewMigrateToManualThroughput"
+  }
 }

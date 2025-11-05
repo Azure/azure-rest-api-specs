@@ -1,24 +1,22 @@
 {
   "parameters": {
-    "accountName": "ddb1",
     "api-version": "2025-05-01-preview",
-    "notebookWorkspaceName": "default",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "accountName": "ddb1",
+    "notebookWorkspaceName": "default"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/notebookWorkspaces/default",
         "name": "default",
         "type": "Microsoft.DocumentDB/databaseAccounts/notebookWorkspaces",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/notebookWorkspaces/default",
         "properties": {
           "notebookServerEndpoint": "endpoint",
           "status": "Online"
         }
       }
     }
-  },
-  "operationId": "NotebookWorkspaces_Get",
-  "title": "CosmosDBNotebookWorkspaceGet"
+  }
 }

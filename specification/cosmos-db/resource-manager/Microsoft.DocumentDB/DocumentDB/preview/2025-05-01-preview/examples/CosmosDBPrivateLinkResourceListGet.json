@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "accountName": "ddb1",
-    "api-version": "2025-05-01-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "accountName": "ddb1",
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.DocumentDb/databaseAccounts/ddb1/privateLinkResources/sql",
             "name": "sql",
             "type": "Microsoft.DocumentDB/databaseAccounts/privateLinkResources",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/privateLinkResources/sql",
             "properties": {
               "groupId": "sql",
               "requiredMembers": [
@@ -27,7 +27,5 @@
         ]
       }
     }
-  },
-  "operationId": "PrivateLinkResources_ListByDatabaseAccount",
-  "title": "Gets private endpoint connection."
+  }
 }

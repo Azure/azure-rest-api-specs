@@ -1,44 +1,44 @@
 {
   "parameters": {
+    "mongoUserDefinitionId": "myMongoUserDefinitionId",
+    "databaseName": "sales",
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
     "api-version": "2025-05-01-preview",
     "createUpdateMongoUserDefinitionParameters": {
       "properties": {
-        "customData": "My custom data",
-        "databaseName": "sales",
-        "mechanisms": "SCRAM-SHA-256",
+        "userName": "myUserName",
         "password": "myPassword",
+        "databaseName": "sales",
+        "customData": "My custom data",
         "roles": [
           {
-            "db": "sales",
-            "role": "myReadRole"
+            "role": "myReadRole",
+            "db": "sales"
           }
         ],
-        "userName": "myUserName"
+        "mechanisms": "SCRAM-SHA-256"
       }
-    },
-    "databaseName": "sales",
-    "mongoUserDefinitionId": "myMongoUserDefinitionId",
-    "resourceGroupName": "myResourceGroupName",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbUserDefinitions/myUserId",
         "name": "myUserName",
         "type": "Microsoft.DocumentDB/databaseAccounts/mongodbUserDefinitions",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbUserDefinitions/myUserId",
         "properties": {
-          "customData": "My custom data",
+          "userName": "myUserName",
           "databaseName": "sales",
-          "mechanisms": "SCRAM-SHA-256",
+          "customData": "My custom data",
           "roles": [
             {
               "db": "sales",
               "role": "myReadRole"
             }
           ],
-          "userName": "myUserName"
+          "mechanisms": "SCRAM-SHA-256"
         }
       }
     },
@@ -48,7 +48,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  },
-  "operationId": "MongoDBResources_CreateUpdateMongoUserDefinition",
-  "title": "CosmosDBMongoDBUserDefinitionCreateUpdate"
+  }
 }

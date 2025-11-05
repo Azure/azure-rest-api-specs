@@ -1,18 +1,19 @@
 {
   "parameters": {
-    "accountName": "myAccountName",
-    "api-version": "2025-05-01-preview",
-    "resourceGroupName": "myResourceGroupName",
     "roleDefinitionId": "myRoleDefinitionId",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongoMIRoleDefinitions/myRoleDefinitionId",
         "name": "myRoleDefinitionId",
         "type": "Microsoft.DocumentDB/databaseAccounts/mongoMIRoleDefinitions",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongoMIRoleDefinitions/myRoleDefinitionId",
         "properties": {
+          "roleName": "myRoleName",
           "type": "CustomRole",
           "assignableScopes": [
             "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
@@ -26,12 +27,9 @@
               ],
               "notDataActions": []
             }
-          ],
-          "roleName": "myRoleName"
+          ]
         }
       }
     }
-  },
-  "operationId": "MongoMIResources_GetMongoMIRoleDefinition",
-  "title": "CosmosDBMongoMIRoleDefinitionGet"
+  }
 }

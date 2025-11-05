@@ -1,29 +1,27 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "location": "westus",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "westus"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "westus",
-        "type": "Microsoft.DocumentDB/locations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus",
+        "type": "Microsoft.DocumentDB/locations",
+        "name": "westus",
         "properties": {
+          "supportsAvailabilityZone": true,
+          "isResidencyRestricted": true,
           "backupStorageRedundancies": [
             "Local",
             "Geo"
           ],
-          "isResidencyRestricted": true,
-          "isSubscriptionRegionAccessAllowedForAz": true,
           "isSubscriptionRegionAccessAllowedForRegular": true,
-          "status": "Online",
-          "supportsAvailabilityZone": true
+          "isSubscriptionRegionAccessAllowedForAz": true,
+          "status": "Online"
         }
       }
     }
-  },
-  "operationId": "Locations_Get",
-  "title": "CosmosDBLocationGet"
+  }
 }

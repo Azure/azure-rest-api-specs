@@ -1,59 +1,57 @@
 {
   "parameters": {
-    "$filter": "$filter=(name.value eq 'Max RUs Per Second') and timeGrain eq duration'PT1M' and startTime eq '2017-11-19T23:53:55.2780000Z' and endTime eq '2017-11-20T23:58:55.2780000Z",
     "accountName": "ddb1",
-    "api-version": "2025-05-01-preview",
-    "collectionRid": "collectionRid",
-    "databaseRid": "databaseRid",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
+    "databaseRid": "databaseRid",
+    "collectionRid": "collectionRid",
+    "$filter": "$filter=(name.value eq 'Max RUs Per Second') and timeGrain eq duration'PT1M' and startTime eq '2017-11-19T23:53:55.2780000Z' and endTime eq '2017-11-20T23:58:55.2780000Z"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": {
-              "localizedValue": "Max RUs Per Second",
-              "value": "Max RUs Per Second"
-            },
+            "timeGrain": "PT1M",
+            "startTime": "2017-11-19T23:53:55.2780000Z",
             "endTime": "2017-11-20T23:58:55.2780000Z",
-            "metricValues": [
-              {
-                "maximum": 5,
-                "timestamp": "2017-11-19T23:53:55.2780000Z"
-              },
-              {
-                "maximum": 5,
-                "timestamp": "2017-11-19T23:54:55.2780000Z"
-              },
-              {
-                "maximum": 5,
-                "timestamp": "2017-11-19T23:55:55.2780000Z"
-              },
-              {
-                "maximum": 5,
-                "timestamp": "2017-11-19T23:56:55.2780000Z"
-              },
-              {
-                "maximum": 5,
-                "timestamp": "2017-11-19T23:57:55.2780000Z"
-              },
-              {
-                "maximum": 5,
-                "timestamp": "2017-11-19T23:58:55.2780000Z"
-              }
-            ],
+            "unit": "Count",
             "partitionId": "00000000-0000-0000-0000-000000000000",
             "partitionKeyRangeId": "0",
-            "startTime": "2017-11-19T23:53:55.2780000Z",
-            "timeGrain": "PT1M",
-            "unit": "Count"
+            "metricValues": [
+              {
+                "timestamp": "2017-11-19T23:53:55.2780000Z",
+                "maximum": 5
+              },
+              {
+                "timestamp": "2017-11-19T23:54:55.2780000Z",
+                "maximum": 5
+              },
+              {
+                "timestamp": "2017-11-19T23:55:55.2780000Z",
+                "maximum": 5
+              },
+              {
+                "timestamp": "2017-11-19T23:56:55.2780000Z",
+                "maximum": 5
+              },
+              {
+                "timestamp": "2017-11-19T23:57:55.2780000Z",
+                "maximum": 5
+              },
+              {
+                "timestamp": "2017-11-19T23:58:55.2780000Z",
+                "maximum": 5
+              }
+            ],
+            "name": {
+              "value": "Max RUs Per Second",
+              "localizedValue": "Max RUs Per Second"
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "CollectionPartition_ListMetrics",
-  "title": "CosmosDBDatabaseAccountRegionGetMetrics"
+  }
 }

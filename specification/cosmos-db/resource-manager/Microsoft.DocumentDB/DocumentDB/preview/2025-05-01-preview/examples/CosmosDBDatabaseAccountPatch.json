@@ -1,18 +1,44 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "api-version": "2025-05-01-preview",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
     "updateParameters": {
+      "location": "westus",
+      "tags": {
+        "dept": "finance"
+      },
       "identity": {
         "type": "SystemAssigned,UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
         }
       },
-      "location": "westus",
       "properties": {
+        "ipRules": [
+          {
+            "ipAddressOrRange": "23.43.230.120"
+          },
+          {
+            "ipAddressOrRange": "110.12.240.0/12"
+          }
+        ],
+        "isVirtualNetworkFilterEnabled": true,
+        "virtualNetworkRules": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+            "ignoreMissingVNetServiceEndpoint": false
+          }
+        ],
+        "consistencyPolicy": {
+          "defaultConsistencyLevel": "BoundedStaleness",
+          "maxIntervalInSeconds": 10,
+          "maxStalenessPrefix": 200
+        },
+        "defaultIdentity": "FirstPartyIdentity",
+        "enableFreeTier": false,
+        "enableAnalyticalStorage": true,
         "analyticalStorageConfiguration": {
           "schemaType": "WellDefined"
         },
@@ -24,58 +50,37 @@
             "backupStorageRedundancy": "Geo"
           }
         },
+        "networkAclBypass": "AzureServices",
+        "networkAclBypassResourceIds": [
+          "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+        ],
         "capacity": {
           "totalThroughputLimit": 2000
         },
         "capacityMode": "Provisioned",
-        "consistencyPolicy": {
-          "defaultConsistencyLevel": "BoundedStaleness",
-          "maxIntervalInSeconds": 10,
-          "maxStalenessPrefix": 200
-        },
-        "defaultIdentity": "FirstPartyIdentity",
-        "defaultPriorityLevel": "Low",
         "diagnosticLogSettings": {
           "enableFullTextQuery": "True"
         },
-        "enableAnalyticalStorage": true,
-        "enableBurstCapacity": true,
-        "enableFreeTier": false,
         "enablePartitionMerge": true,
-        "enablePerRegionPerPartitionAutoscale": true,
-        "enablePriorityBasedExecution": true,
-        "ipRules": [
-          {
-            "ipAddressOrRange": "23.43.230.120"
-          },
-          {
-            "ipAddressOrRange": "110.12.240.0/12"
-          }
-        ],
-        "isVirtualNetworkFilterEnabled": true,
+        "enableBurstCapacity": true,
         "minimalTlsVersion": "Tls",
-        "networkAclBypass": "AzureServices",
-        "networkAclBypassResourceIds": [
-          "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
-        ],
-        "virtualNetworkRules": [
-          {
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-            "ignoreMissingVNetServiceEndpoint": false
-          }
-        ]
-      },
-      "tags": {
-        "dept": "finance"
+        "enablePriorityBasedExecution": true,
+        "defaultPriorityLevel": "Low",
+        "enablePerRegionPerPartitionAutoscale": true
       }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
         "name": "ddb1",
+        "location": "West US",
         "type": "Microsoft.DocumentDB/databaseAccounts",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+        "kind": "GlobalDocumentDB",
+        "tags": {
+          "dept": "finance"
+        },
         "identity": {
           "type": "SystemAssigned,UserAssigned",
           "principalId": "52f4fef3-3c3f-4ff3-b52e-b5c9eeb68656",
@@ -87,62 +92,10 @@
             }
           }
         },
-        "kind": "GlobalDocumentDB",
-        "location": "West US",
         "properties": {
-          "analyticalStorageConfiguration": {
-            "schemaType": "WellDefined"
-          },
-          "apiProperties": {},
-          "backupPolicy": {
-            "type": "Periodic",
-            "periodicModeProperties": {
-              "backupIntervalInMinutes": 240,
-              "backupRetentionIntervalInHours": 720,
-              "backupStorageRedundancy": "Geo"
-            }
-          },
-          "capacity": {
-            "totalThroughputLimit": 2000
-          },
-          "capacityMode": "Provisioned",
-          "capacityModeChangeTransitionState": {
-            "capacityModeLastSuccessfulTransitionEndTimestamp": "2024-03-24T03:02:18.8758329Z",
-            "capacityModeTransitionBeginTimestamp": "2024-03-24T03:02:16.2747253Z",
-            "capacityModeTransitionEndTimestamp": "2024-03-24T03:02:18.8758329Z",
-            "capacityModeTransitionStatus": "Completed",
-            "currentCapacityMode": "Provisioned",
-            "previousCapacityMode": "Serverless"
-          },
-          "consistencyPolicy": {
-            "defaultConsistencyLevel": "BoundedStaleness",
-            "maxIntervalInSeconds": 10,
-            "maxStalenessPrefix": 200
-          },
-          "cors": [],
-          "createMode": "Default",
-          "databaseAccountOfferType": "Standard",
-          "defaultIdentity": "FirstPartyIdentity",
-          "defaultPriorityLevel": "Low",
-          "diagnosticLogSettings": {
-            "enableFullTextQuery": "True"
-          },
-          "disableKeyBasedMetadataWriteAccess": false,
+          "provisioningState": "Succeeded",
           "documentEndpoint": "https://ddb1.documents.azure.com:443/",
-          "enableAnalyticalStorage": true,
-          "enableBurstCapacity": true,
-          "enableFreeTier": false,
-          "enableMaterializedViews": false,
-          "enablePerRegionPerPartitionAutoscale": true,
-          "enablePriorityBasedExecution": true,
-          "failoverPolicies": [
-            {
-              "failoverPriority": 0,
-              "id": "ddb1-eastus",
-              "locationName": "East US"
-            }
-          ],
-          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "databaseAccountOfferType": "Standard",
           "ipRules": [
             {
               "ipAddressOrRange": "23.43.230.120"
@@ -152,83 +105,128 @@
             }
           ],
           "isVirtualNetworkFilterEnabled": true,
+          "disableKeyBasedMetadataWriteAccess": false,
+          "consistencyPolicy": {
+            "defaultConsistencyLevel": "BoundedStaleness",
+            "maxIntervalInSeconds": 10,
+            "maxStalenessPrefix": 200
+          },
+          "writeLocations": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0
+            }
+          ],
+          "readLocations": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0
+            }
+          ],
+          "locations": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0
+            }
+          ],
+          "failoverPolicies": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "failoverPriority": 0
+            }
+          ],
+          "cors": [],
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+              "ignoreMissingVNetServiceEndpoint": false
+            }
+          ],
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.DocumentDB/databaseAccounts/account1/privateEndpointConnections/pe1",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe1"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ],
+          "defaultIdentity": "FirstPartyIdentity",
+          "enableFreeTier": false,
+          "apiProperties": {},
+          "enableAnalyticalStorage": true,
+          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "createMode": "Default",
+          "analyticalStorageConfiguration": {
+            "schemaType": "WellDefined"
+          },
+          "backupPolicy": {
+            "type": "Periodic",
+            "periodicModeProperties": {
+              "backupIntervalInMinutes": 240,
+              "backupRetentionIntervalInHours": 720,
+              "backupStorageRedundancy": "Geo"
+            }
+          },
+          "networkAclBypass": "AzureServices",
+          "networkAclBypassResourceIds": [
+            "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+          ],
+          "capacity": {
+            "totalThroughputLimit": 2000
+          },
+          "diagnosticLogSettings": {
+            "enableFullTextQuery": "True"
+          },
+          "capacityMode": "Provisioned",
+          "capacityModeChangeTransitionState": {
+            "capacityModeTransitionBeginTimestamp": "2024-03-24T03:02:16.2747253Z",
+            "capacityModeTransitionStatus": "Completed",
+            "capacityModeLastSuccessfulTransitionEndTimestamp": "2024-03-24T03:02:18.8758329Z",
+            "capacityModeTransitionEndTimestamp": "2024-03-24T03:02:18.8758329Z",
+            "currentCapacityMode": "Provisioned",
+            "previousCapacityMode": "Serverless"
+          },
+          "enableMaterializedViews": false,
+          "enableBurstCapacity": true,
+          "minimalTlsVersion": "Tls",
           "keysMetadata": {
             "primaryMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             },
-            "primaryReadonlyMasterKey": {
+            "secondaryMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             },
-            "secondaryMasterKey": {
+            "primaryReadonlyMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             },
             "secondaryReadonlyMasterKey": {
               "generationTime": "2022-02-25T20:30:11Z"
             }
           },
-          "locations": [
-            {
-              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
-              "failoverPriority": 0,
-              "id": "ddb1-eastus",
-              "locationName": "East US",
-              "provisioningState": "Succeeded"
-            }
-          ],
-          "minimalTlsVersion": "Tls",
-          "networkAclBypass": "AzureServices",
-          "networkAclBypassResourceIds": [
-            "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
-          ],
-          "privateEndpointConnections": [
-            {
-              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.DocumentDB/databaseAccounts/account1/privateEndpointConnections/pe1",
-              "properties": {
-                "privateEndpoint": {
-                  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe1"
-                },
-                "privateLinkServiceConnectionState": {
-                  "actionsRequired": "None",
-                  "status": "Approved"
-                }
-              }
-            }
-          ],
-          "provisioningState": "Succeeded",
-          "readLocations": [
-            {
-              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
-              "failoverPriority": 0,
-              "id": "ddb1-eastus",
-              "locationName": "East US",
-              "provisioningState": "Succeeded"
-            }
-          ],
-          "virtualNetworkRules": [
-            {
-              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-              "ignoreMissingVNetServiceEndpoint": false
-            }
-          ],
-          "writeLocations": [
-            {
-              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
-              "failoverPriority": 0,
-              "id": "ddb1-eastus",
-              "locationName": "East US",
-              "provisioningState": "Succeeded"
-            }
-          ]
+          "enablePriorityBasedExecution": true,
+          "defaultPriorityLevel": "Low",
+          "enablePerRegionPerPartitionAutoscale": true
         },
         "systemData": {
           "createdAt": "2021-03-12T22:05:09Z"
-        },
-        "tags": {
-          "dept": "finance"
         }
       }
     }
-  },
-  "operationId": "DatabaseAccounts_Update",
-  "title": "CosmosDBDatabaseAccountPatch"
+  }
 }

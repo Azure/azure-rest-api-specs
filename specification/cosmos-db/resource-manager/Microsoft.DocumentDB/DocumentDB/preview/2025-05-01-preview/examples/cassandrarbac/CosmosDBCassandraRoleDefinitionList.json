@@ -1,19 +1,20 @@
 {
   "parameters": {
-    "accountName": "myAccountName",
-    "api-version": "2025-05-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "myResourceGroupName",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "accountName": "myAccountName",
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/cassandraRoleDefinitions/myRoleDefinitionId",
             "name": "myRoleDefinitionId",
             "type": "Microsoft.DocumentDB/databaseAccounts/cassandraRoleDefinitions",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/cassandraRoleDefinitions/myRoleDefinitionId",
             "properties": {
+              "roleName": "myRoleName",
               "type": "CustomRole",
               "assignableScopes": [
                 "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
@@ -27,14 +28,11 @@
                   ],
                   "notDataActions": []
                 }
-              ],
-              "roleName": "myRoleName"
+              ]
             }
           }
         ]
       }
     }
-  },
-  "operationId": "CassandraResources_ListCassandraRoleDefinitions",
-  "title": "CosmosDBCassandraRoleDefinitionList"
+  }
 }

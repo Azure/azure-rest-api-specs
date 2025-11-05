@@ -1,27 +1,25 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "api-version": "2025-05-01-preview",
-    "graphName": "graphName",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "subid",
+    "graphName": "graphName"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/graphs/graphName",
         "name": "graphName",
         "type": "Microsoft.DocumentDB/databaseAccounts/graphs",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/graphs/graphName",
         "location": "West US",
+        "tags": {},
         "properties": {
           "resource": {
             "id": "graphName"
           }
-        },
-        "tags": {}
+        }
       }
     }
-  },
-  "operationId": "GraphResources_GetGraph",
-  "title": "CosmosDBSqlDatabaseGet"
+  }
 }

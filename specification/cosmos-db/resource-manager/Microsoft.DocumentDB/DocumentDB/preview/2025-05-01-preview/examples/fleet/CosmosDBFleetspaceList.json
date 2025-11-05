@@ -1,50 +1,48 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "fleetName": "fleet1",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "rg1",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "fleetName": "fleet1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
             "name": "fleetspace1",
             "type": "Microsoft.DocumentDB/fleets/fleetspaces",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
             "properties": {
               "provisioningState": "Succeeded",
               "throughputPoolConfiguration": {
+                "minThroughput": 100000,
+                "maxThroughput": 500000,
+                "serviceTier": "BusinessCritical",
                 "dataRegions": [
                   "westus2"
-                ],
-                "maxThroughput": 500000,
-                "minThroughput": 100000,
-                "serviceTier": "BusinessCritical"
+                ]
               }
             }
           },
           {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace2",
             "name": "fleetspace2",
             "type": "Microsoft.DocumentDB/fleets/fleetspaces",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace2",
             "properties": {
               "provisioningState": "Succeeded",
               "throughputPoolConfiguration": {
+                "minThroughput": 200000,
+                "maxThroughput": 600000,
+                "serviceTier": "GeneralPurpose",
                 "dataRegions": [
                   "eastus"
-                ],
-                "maxThroughput": 600000,
-                "minThroughput": 200000,
-                "serviceTier": "GeneralPurpose"
+                ]
               }
             }
           }
         ]
       }
     }
-  },
-  "operationId": "Fleetspace_List",
-  "title": "CosmosDB Fleetspace List"
+  }
 }

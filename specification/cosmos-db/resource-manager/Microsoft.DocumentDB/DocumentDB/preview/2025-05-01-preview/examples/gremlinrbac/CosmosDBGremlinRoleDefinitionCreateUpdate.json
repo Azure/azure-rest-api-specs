@@ -1,9 +1,13 @@
 {
   "parameters": {
+    "roleDefinitionId": "myRoleDefinitionId",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
     "api-version": "2025-05-01-preview",
     "createUpdateGremlinRoleDefinitionParameters": {
       "properties": {
+        "roleName": "myRoleName",
         "type": "CustomRole",
         "assignableScopes": [
           "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
@@ -17,21 +21,18 @@
             ],
             "notDataActions": []
           }
-        ],
-        "roleName": "myRoleName"
+        ]
       }
-    },
-    "resourceGroupName": "myResourceGroupName",
-    "roleDefinitionId": "myRoleDefinitionId",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/gremlinRoleDefinitions/myRoleDefinitionId",
         "name": "myRoleDefinitionId",
         "type": "Microsoft.DocumentDB/databaseAccounts/gremlinRoleDefinitions",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/gremlinRoleDefinitions/myRoleDefinitionId",
         "properties": {
+          "roleName": "myRoleName",
           "type": "CustomRole",
           "assignableScopes": [
             "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
@@ -44,8 +45,7 @@
                 "Microsoft.DocumentDB/databaseAccounts/gremlinDatabases/containers/entities/read"
               ]
             }
-          ],
-          "roleName": "myRoleName"
+          ]
         }
       }
     },
@@ -55,7 +55,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  },
-  "operationId": "GremlinResources_CreateUpdateGremlinRoleDefinition",
-  "title": "CosmosDBGremlinRoleDefinitionCreateUpdate"
+  }
 }

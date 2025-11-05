@@ -1,25 +1,66 @@
 {
   "parameters": {
-    "accountName": "ddb1",
     "api-version": "2025-05-01-preview",
-    "databaseName": "databaseName",
+    "subscriptionId": "subid",
     "resourceGroupName": "rgName",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "accountName": "ddb1",
+    "databaseName": "databaseName"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/containers/containerName",
             "name": "containerName",
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/containers/containerName",
             "location": "West US",
+            "tags": {},
             "properties": {
               "resource": {
-                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\"",
-                "_rid": "PD5DALigDgw=",
-                "_ts": 1459200611,
+                "id": "testctn",
+                "indexingPolicy": {
+                  "indexingMode": "consistent",
+                  "automatic": true,
+                  "includedPaths": [
+                    {
+                      "path": "/*",
+                      "indexes": [
+                        {
+                          "kind": "Range",
+                          "dataType": "String",
+                          "precision": -1
+                        },
+                        {
+                          "kind": "Range",
+                          "dataType": "Number",
+                          "precision": -1
+                        }
+                      ]
+                    }
+                  ],
+                  "excludedPaths": []
+                },
+                "partitionKey": {
+                  "paths": [
+                    "/AccountNumber"
+                  ],
+                  "kind": "Hash"
+                },
+                "defaultTtl": 100,
+                "uniqueKeyPolicy": {
+                  "uniqueKeys": [
+                    {
+                      "paths": [
+                        "/testPath"
+                      ]
+                    }
+                  ]
+                },
+                "conflictResolutionPolicy": {
+                  "mode": "LastWriterWins",
+                  "conflictResolutionPath": "/path"
+                },
                 "clientEncryptionPolicy": {
                   "includedPaths": [
                     {
@@ -37,140 +78,46 @@
                     "query": "SELECT VALUE LOWER(c.name) FROM c"
                   }
                 ],
-                "conflictResolutionPolicy": {
-                  "conflictResolutionPath": "/path",
-                  "mode": "LastWriterWins"
-                },
-                "defaultTtl": 100,
-                "id": "testctn",
-                "indexingPolicy": {
-                  "automatic": true,
-                  "excludedPaths": [],
-                  "includedPaths": [
-                    {
-                      "path": "/*",
-                      "indexes": [
-                        {
-                          "dataType": "String",
-                          "kind": "Range",
-                          "precision": -1
-                        },
-                        {
-                          "dataType": "Number",
-                          "kind": "Range",
-                          "precision": -1
-                        }
-                      ]
-                    }
-                  ],
-                  "indexingMode": "consistent"
-                },
-                "partitionKey": {
-                  "kind": "Hash",
-                  "paths": [
-                    "/AccountNumber"
-                  ]
-                },
-                "uniqueKeyPolicy": {
-                  "uniqueKeys": [
-                    {
-                      "paths": [
-                        "/testPath"
-                      ]
-                    }
-                  ]
-                }
+                "_rid": "PD5DALigDgw=",
+                "_ts": 1459200611,
+                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
               }
-            },
-            "tags": {}
+            }
           },
           {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName1",
             "name": "containerName1",
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName1",
             "location": "West US",
+            "tags": {},
             "properties": {
               "resource": {
-                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\"",
-                "_rid": "PD5DALigDiw=",
-                "_ts": 1459200611,
-                "clientEncryptionPolicy": {
-                  "includedPaths": [
-                    {
-                      "path": "/path",
-                      "clientEncryptionKeyId": "keyId",
-                      "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
-                      "encryptionType": "Deterministic"
-                    }
-                  ],
-                  "policyFormatVersion": 1
-                },
-                "computedProperties": [],
-                "conflictResolutionPolicy": {
-                  "conflictResolutionPath": "/path",
-                  "mode": "LastWriterWins"
-                },
-                "defaultTtl": 100,
-                "fullTextPolicy": {
-                  "defaultLanguage": "1033",
-                  "fullTextPaths": [
-                    {
-                      "path": "/ftPath1",
-                      "language": "en-US"
-                    },
-                    {
-                      "path": "/ftPath2",
-                      "language": "fr-FR"
-                    },
-                    {
-                      "path": "/ftPath3",
-                      "language": "de-DE"
-                    }
-                  ]
-                },
                 "id": "testctn1",
                 "indexingPolicy": {
+                  "indexingMode": "consistent",
                   "automatic": true,
-                  "excludedPaths": [],
                   "includedPaths": [
                     {
                       "path": "/*",
                       "indexes": [
                         {
-                          "dataType": "String",
                           "kind": "Range",
+                          "dataType": "String",
                           "precision": -1
                         },
                         {
-                          "dataType": "Number",
                           "kind": "Range",
+                          "dataType": "Number",
                           "precision": -1
                         }
                       ]
                     }
                   ],
-                  "indexingMode": "consistent",
+                  "excludedPaths": [],
                   "vectorIndexes": [
                     {
-                      "type": "flat",
-                      "path": "/vectorPath1"
-                    }
-                  ]
-                },
-                "partitionKey": {
-                  "kind": "MultiHash",
-                  "paths": [
-                    "/AccountNumber",
-                    "/AccountLocation"
-                  ],
-                  "version": 2
-                },
-                "uniqueKeyPolicy": {
-                  "uniqueKeys": [
-                    {
-                      "paths": [
-                        "/testPath"
-                      ]
+                      "path": "/vectorPath1",
+                      "type": "flat"
                     }
                   ]
                 },
@@ -183,37 +130,7 @@
                       "distanceFunction": "euclidean"
                     }
                   ]
-                }
-              }
-            },
-            "tags": {}
-          },
-          {
-            "name": "containerName2",
-            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName2",
-            "location": "West US",
-            "properties": {
-              "resource": {
-                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\"",
-                "_rid": "PD5DALigDhw=",
-                "_ts": 1459200611,
-                "clientEncryptionPolicy": {
-                  "includedPaths": [
-                    {
-                      "path": "/path",
-                      "clientEncryptionKeyId": "keyId",
-                      "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
-                      "encryptionType": "Deterministic"
-                    }
-                  ],
-                  "policyFormatVersion": 1
                 },
-                "conflictResolutionPolicy": {
-                  "conflictResolutionPath": "/path",
-                  "mode": "LastWriterWins"
-                },
-                "defaultTtl": 100,
                 "fullTextPolicy": {
                   "defaultLanguage": "1033",
                   "fullTextPaths": [
@@ -231,57 +148,88 @@
                     }
                   ]
                 },
-                "id": "testctn2",
-                "indexingPolicy": {
-                  "automatic": true,
-                  "excludedPaths": [],
-                  "includedPaths": [
-                    {
-                      "path": "/*",
-                      "indexes": [
-                        {
-                          "dataType": "String",
-                          "kind": "Range",
-                          "precision": -1
-                        },
-                        {
-                          "dataType": "Number",
-                          "kind": "Range",
-                          "precision": -1
-                        }
-                      ]
-                    }
-                  ],
-                  "indexingMode": "consistent",
-                  "vectorIndexes": [
-                    {
-                      "type": "flat",
-                      "path": "/vectorPath1"
-                    },
-                    {
-                      "type": "quantizedFlat",
-                      "path": "/vectorPath2"
-                    },
-                    {
-                      "type": "diskANN",
-                      "path": "/vectorPath3"
-                    }
-                  ]
-                },
                 "partitionKey": {
-                  "kind": "Hash",
                   "paths": [
-                    "/_partitionKey"
+                    "/AccountNumber",
+                    "/AccountLocation"
                   ],
-                  "systemKey": true,
+                  "kind": "MultiHash",
                   "version": 2
                 },
+                "defaultTtl": 100,
                 "uniqueKeyPolicy": {
                   "uniqueKeys": [
                     {
                       "paths": [
                         "/testPath"
                       ]
+                    }
+                  ]
+                },
+                "conflictResolutionPolicy": {
+                  "mode": "LastWriterWins",
+                  "conflictResolutionPath": "/path"
+                },
+                "clientEncryptionPolicy": {
+                  "includedPaths": [
+                    {
+                      "path": "/path",
+                      "clientEncryptionKeyId": "keyId",
+                      "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+                      "encryptionType": "Deterministic"
+                    }
+                  ],
+                  "policyFormatVersion": 1
+                },
+                "computedProperties": [],
+                "_rid": "PD5DALigDiw=",
+                "_ts": 1459200611,
+                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName2",
+            "name": "containerName2",
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
+            "location": "West US",
+            "tags": {},
+            "properties": {
+              "resource": {
+                "id": "testctn2",
+                "indexingPolicy": {
+                  "indexingMode": "consistent",
+                  "automatic": true,
+                  "includedPaths": [
+                    {
+                      "path": "/*",
+                      "indexes": [
+                        {
+                          "kind": "Range",
+                          "dataType": "String",
+                          "precision": -1
+                        },
+                        {
+                          "kind": "Range",
+                          "dataType": "Number",
+                          "precision": -1
+                        }
+                      ]
+                    }
+                  ],
+                  "excludedPaths": [],
+                  "vectorIndexes": [
+                    {
+                      "path": "/vectorPath1",
+                      "type": "flat"
+                    },
+                    {
+                      "path": "/vectorPath2",
+                      "type": "quantizedFlat"
+                    },
+                    {
+                      "path": "/vectorPath3",
+                      "type": "diskANN"
                     }
                   ]
                 },
@@ -306,15 +254,65 @@
                       "distanceFunction": "dotproduct"
                     }
                   ]
-                }
+                },
+                "fullTextPolicy": {
+                  "defaultLanguage": "1033",
+                  "fullTextPaths": [
+                    {
+                      "path": "/ftPath1",
+                      "language": "en-US"
+                    },
+                    {
+                      "path": "/ftPath2",
+                      "language": "fr-FR"
+                    },
+                    {
+                      "path": "/ftPath3",
+                      "language": "de-DE"
+                    }
+                  ]
+                },
+                "partitionKey": {
+                  "paths": [
+                    "/_partitionKey"
+                  ],
+                  "kind": "Hash",
+                  "version": 2,
+                  "systemKey": true
+                },
+                "defaultTtl": 100,
+                "uniqueKeyPolicy": {
+                  "uniqueKeys": [
+                    {
+                      "paths": [
+                        "/testPath"
+                      ]
+                    }
+                  ]
+                },
+                "conflictResolutionPolicy": {
+                  "mode": "LastWriterWins",
+                  "conflictResolutionPath": "/path"
+                },
+                "clientEncryptionPolicy": {
+                  "includedPaths": [
+                    {
+                      "path": "/path",
+                      "clientEncryptionKeyId": "keyId",
+                      "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+                      "encryptionType": "Deterministic"
+                    }
+                  ],
+                  "policyFormatVersion": 1
+                },
+                "_rid": "PD5DALigDhw=",
+                "_ts": 1459200611,
+                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
               }
-            },
-            "tags": {}
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "SqlResources_ListSqlContainers",
-  "title": "CosmosDBSqlContainerList"
+  }
 }
