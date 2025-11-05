@@ -89,6 +89,7 @@ union DatasetColumnType {
 }
 
 /** A datastore represents a data source or destination for datasets. */
+@discriminator("type")
 model Datastore {
   /** Datastore type discriminator */
   type: DatastoreType;
@@ -105,6 +106,39 @@ union DatastoreType {
   /** Azure Resource Notification datastore type. */
   AzureResourceNotificationDatastore: "AzureResourceNotificationDatastore",
   string,
+}
+
+/** Azure Storage Account datastore */
+model AzureStorageAccountDatastore extends Datastore {
+  /** Datastore type */
+  type: "AzureStorageAccountDatastore";
+  
+  /** Container URI */
+  containerUri: string;
+  
+  /** Tenant ID */
+  tenantId: string;
+}
+
+/** Azure Data Explorer datastore */
+model AzureDataExplorerDatastore extends Datastore {
+  /** Datastore type */
+  type: "AzureDataExplorerDatastore";
+  
+  /** Cluster URI */
+  clusterUri: string;
+  
+  /** Database name */
+  database: string;
+  
+  /** Table name */
+  table: string;
+}
+
+/** Azure Resource Notification datastore */
+model AzureResourceNotificationDatastore extends Datastore {
+  /** Datastore type */
+  type: "AzureResourceNotificationDatastore";
 }
 
 @armResourceOperations

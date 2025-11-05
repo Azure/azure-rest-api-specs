@@ -124,6 +124,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Workspaces_List": {
+            "$ref": "./examples/Workspaces_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -282,6 +287,11 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Workspaces_Update": {
+            "$ref": "./examples/Workspaces_Update.json"
+          }
         }
       },
       "delete": {
@@ -368,6 +378,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_List": {
+            "$ref": "./examples/Datasets_List.json"
           }
         },
         "x-ms-pageable": {
@@ -592,6 +607,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_List": {
+            "$ref": "./examples/Pipelines_List.json"
           }
         },
         "x-ms-pageable": {
@@ -821,6 +841,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_List": {
+            "$ref": "./examples/Jobs_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1156,6 +1181,35 @@
       },
       "readOnly": true
     },
+    "AzureDataExplorerDatastore": {
+      "type": "object",
+      "description": "Azure Data Explorer datastore",
+      "properties": {
+        "clusterUri": {
+          "type": "string",
+          "description": "Cluster URI"
+        },
+        "database": {
+          "type": "string",
+          "description": "Database name"
+        },
+        "table": {
+          "type": "string",
+          "description": "Table name"
+        }
+      },
+      "required": [
+        "clusterUri",
+        "database",
+        "table"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Datastore"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureDataExplorerDatastore"
+    },
     "AzureDataExplorerSink": {
       "type": "object",
       "description": "Azure Data Explorer sink",
@@ -1191,6 +1245,40 @@
         }
       ],
       "x-ms-discriminator-value": "AzureDataExplorerSink"
+    },
+    "AzureResourceNotificationDatastore": {
+      "type": "object",
+      "description": "Azure Resource Notification datastore",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Datastore"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureResourceNotificationDatastore"
+    },
+    "AzureStorageAccountDatastore": {
+      "type": "object",
+      "description": "Azure Storage Account datastore",
+      "properties": {
+        "containerUri": {
+          "type": "string",
+          "description": "Container URI"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID"
+        }
+      },
+      "required": [
+        "containerUri",
+        "tenantId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Datastore"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageAccountDatastore"
     },
     "DataQualityDatasetValidation": {
       "type": "object",
@@ -1620,7 +1708,7 @@
           "description": "Provisioning state of the dataset.",
           "readOnly": true
         },
-        "datasetType": {
+        "kind": {
           "$ref": "#/definitions/DatasetType",
           "description": "Dataset type, e.g. Snapshot or Delta."
         },
@@ -1745,6 +1833,7 @@
           "description": "Datastore name"
         }
       },
+      "discriminator": "type",
       "required": [
         "type",
         "name"
