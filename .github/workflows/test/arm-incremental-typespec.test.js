@@ -140,10 +140,27 @@ describe("incrementalTypeSpec", () => {
 
     const showSpy = vi
       .mocked(simpleGit.simpleGit().show)
-      // @ts-expect-error foo
-      .mockImplementation(async ([treePath]) =>
-        // @ts-expect-error foo
-        treePath.split(":")[0] == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
+      .mockImplementation(
+        (
+          /** @type {import("simple-git").SimpleGitTaskCallback|string|string[]|undefined} */ optionsOrCallback,
+        ) => {
+          /** @type {string} */
+          let option;
+
+          if (Array.isArray(optionsOrCallback)) {
+            option = optionsOrCallback[0];
+          } else if (typeof optionsOrCallback === "string") {
+            option = optionsOrCallback;
+          } else {
+            throw new Error(`Unexpected argument: ${optionsOrCallback}`);
+          }
+
+          return /** @type {import("simple-git").Response<string>} */ (
+            Promise.resolve(
+              option?.split(":")[0] == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
+            )
+          );
+        },
       );
 
     const lsTreeSpy = vi.mocked(simpleGit.simpleGit().raw).mockResolvedValue(swaggerPath);
