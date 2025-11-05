@@ -117,6 +117,13 @@ model TransliterationLanguage {
   ...BaseLanguage;
 
   @doc("List of scripts to convert from.")
+  @removed(APIVersion.v2025_10_01_preview)
+  @renamedFrom(APIVersion.v2025_10_01_preview, "scripts")
+  scriptsV3: TransliterableScript[];
+
+  @doc("List of scripts to convert from.")
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
   scripts: TransliterableScript[];
 }
 
