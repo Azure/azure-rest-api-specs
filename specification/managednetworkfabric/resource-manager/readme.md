@@ -38,8 +38,6 @@ These settings apply only when `--tag=package-2024-06-15-preview` is specified o
 input-file:
   - Microsoft.ManagedNetworkFabric/preview/2024-06-15-preview/managednetworkfabric.json
 suppressions:
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: Removed deprecated APIs in the new API version
   - code: ArmResourcePropertiesBag
     reason: Suppressing errors to conform to the existing published API
     from: managednetworkfabric.json
