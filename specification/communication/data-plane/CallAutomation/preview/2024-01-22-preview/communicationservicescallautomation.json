@@ -2073,11 +2073,6 @@
         },
         "customCallingContext": {
           "$ref": "#/definitions/CustomCallingContext"
-        },
-        "postDialTones": {
-          "description": "DTMF tones to send as part of the call for a participant.",
-          "maxLength": 30,
-          "type": "string"
         }
       },
       "additionalProperties": false
@@ -2226,7 +2221,7 @@
           "description": "Dialog context.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/JToken"
+            "type": "Object"
           }
         }
       },
@@ -2904,11 +2899,6 @@
         },
         "dtmfOptions": {
           "$ref": "#/definitions/DtmfConfigurationOptions"
-        },
-        "postDialTones": {
-          "description": "DTMF tones to send as part of the call for a participant.",
-          "maxLength": 30,
-          "type": "string"
         }
       },
       "additionalProperties": false
@@ -3579,12 +3569,6 @@
       },
       "additionalProperties": false
     },
-    "JToken": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/JToken"
-      }
-    },
     "MediaStreamingAudioChannelType": {
       "format": "int32",
       "description": "Channel type of media streaming audio",
@@ -3774,10 +3758,6 @@
           "items": {
             "$ref": "#/definitions/MediaStreamingContentType"
           }
-        },
-        "streamUrl": {
-          "description": "Media streaming subscription stream URL.",
-          "type": "string"
         }
       },
       "additionalProperties": false
@@ -4243,56 +4223,6 @@
         },
         "operationContext": {
           "description": "Gets or sets used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation"
-        }
-      },
-      "additionalProperties": false
-    },
-    "PostDialDtmfTonesCompleted": {
-      "type": "object",
-      "properties": {
-        "callConnectionId": {
-          "description": "Call connection ID.",
-          "type": "string"
-        },
-        "serverCallId": {
-          "description": "Server call ID.",
-          "type": "string"
-        },
-        "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
-          "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation"
-        }
-      },
-      "additionalProperties": false
-    },
-    "PostDialDtmfTonesFailed": {
-      "type": "object",
-      "properties": {
-        "callConnectionId": {
-          "description": "Call connection ID.",
-          "type": "string"
-        },
-        "serverCallId": {
-          "description": "Server call ID.",
-          "type": "string"
-        },
-        "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
-          "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
         "resultInformation": {
@@ -5034,7 +4964,7 @@
     },
     "Tone": {
       "format": "int32",
-      "description": "Represents DTMF (Dual-tone multi-frequency) tones used in telephony signaling.",
+      "description": "List of valid stop tones",
       "enum": [
         "Zero",
         "One",
@@ -5051,8 +4981,7 @@
         "C",
         "D",
         "Pound",
-        "Asterisk",
-        "Comma"
+        "Asterisk"
       ],
       "type": "integer"
     },
