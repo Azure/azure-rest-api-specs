@@ -82,53 +82,77 @@ const excludeExamples = {
 };
 
 export class Swagger {
+  /**
+   * Content of swagger file, either loaded from `#path` or passed in via `options`.
+   *
+   * Reset to `undefined` after `#data` is loaded to save memory.
+   *
+   * @type {string | undefined}
+   */
+  #content;
+
+  // map of the operations in this swagger with key as 'operation_id
+  /** @type {{operations: Map<string, Operation>, refs: Map<string, Swagger>} | undefined} */
+  #data;
+
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
   /** @type {string} absolute path */
   #path;
 
-  /** @type {Map<string, Swagger> | undefined} */
-  #refs;
-
   /** @type {Tag | undefined} Tag that contains this Swagger */
   #tag;
-
-  /** @type {Map<string, Operation> | undefined} map of the operations in this swagger with key as 'operation_id*/
-  #operations;
 
   /**
    * @param {string} path
    * @param {Object} [options]
+   * @param {string} [options.content] If specified, is used instead of reading path from disk
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {Tag} [options.tag]
    */
   constructor(path, options = {}) {
-    const { logger, tag } = options;
+    const { content, logger, tag } = options;
 
     const rootDir = dirname(tag?.readme?.path ?? "");
     this.#path = resolve(rootDir, path);
+
+    this.#content = content;
     this.#logger = logger;
     this.#tag = tag;
   }
 
-  /**
-   * @returns {Promise<Map<string, Swagger>>}
-   */
-  async getRefs() {
-    const allRefs = await this.#getRefs();
+  async #getData() {
+    if (!this.#data) {
+      // Only read file if #content is exactly undefined, to allow setting #content to empty string
+      // to simulate an empty file
+      if (this.#content === undefined) {
+        this.#content = await readFile(this.#path, {
+          encoding: "utf8",
+        });
+      }
 
-    // filter out any paths that are examples
-    const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
+      /** @type {Map<string, Operation>} */
+      const operations = new Map();
 
-    return filtered;
-  }
+      const swagger = swaggerSchema.parse(JSON.parse(this.#content));
+      // Process regular paths
+      if (swagger.paths) {
+        for (const [path, pathObject] of Object.entries(swagger.paths)) {
+          this.addOperations(operations, path, pathObject);
+        }
+      }
 
-  async #getRefs() {
-    if (!this.#refs) {
+      // Process x-ms-paths (Azure extension)
+      if (swagger["x-ms-paths"]) {
+        for (const [path, pathObject] of Object.entries(swagger["x-ms-paths"])) {
+          this.addOperations(operations, path, pathObject);
+        }
+      }
+
       let schema;
       try {
-        schema = await $RefParser.resolve(this.#path, {
+        schema = await $RefParser.resolve(this.#path, this.#content, {
           resolve: { file: excludeExamples, http: false },
         });
       } catch (error) {
@@ -149,7 +173,7 @@ export class Swagger {
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
-      this.#refs = new Map(
+      const refs = new Map(
         refPaths.map((p) => {
           const swagger = new Swagger(p, {
             logger: this.#logger,
@@ -158,9 +182,30 @@ export class Swagger {
           return [swagger.path, swagger];
         }),
       );
+
+      this.#data = { operations, refs };
+
+      // Clear #content to save memory, since it's no longer needed after #data is loaded
+      this.#content = undefined;
     }
 
-    return this.#refs;
+    return this.#data;
+  }
+
+  /**
+   * @returns {Promise<Map<string, Swagger>>}
+   */
+  async getRefs() {
+    const allRefs = await this.#getRefs();
+
+    // filter out any paths that are examples
+    const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
+
+    return filtered;
+  }
+
+  async #getRefs() {
+    return (await this.#getData()).refs;
   }
 
   /**
@@ -179,25 +224,7 @@ export class Swagger {
    * @returns {Promise<Map<string, Operation>>}
    */
   async getOperations() {
-    if (!this.#operations) {
-      this.#operations = new Map();
-      const content = await readFile(this.#path, "utf8");
-      const swagger = swaggerSchema.parse(JSON.parse(content));
-      // Process regular paths
-      if (swagger.paths) {
-        for (const [path, pathObject] of Object.entries(swagger.paths)) {
-          this.addOperations(this.#operations, path, pathObject);
-        }
-      }
-
-      // Process x-ms-paths (Azure extension)
-      if (swagger["x-ms-paths"]) {
-        for (const [path, pathObject] of Object.entries(swagger["x-ms-paths"])) {
-          this.addOperations(this.#operations, path, pathObject);
-        }
-      }
-    }
-    return this.#operations;
+    return (await this.#getData()).operations;
   }
 
   /**

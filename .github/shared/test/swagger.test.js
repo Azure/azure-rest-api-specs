@@ -16,7 +16,7 @@ describe("Swagger", () => {
     expect(swagger.path).toBe(resolve("bar"));
     expect(swagger.tag).toBeUndefined();
 
-    await expect(swagger.getRefs()).rejects.toThrowError(/Failed to resolve file for swagger/i);
+    await expect(swagger.getRefs()).rejects.toThrowError(swagger.path);
   });
 
   it("resolves path against Tag.readme", () => {

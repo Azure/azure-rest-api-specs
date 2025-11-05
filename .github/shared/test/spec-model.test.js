@@ -220,9 +220,10 @@ describe("SpecModel", () => {
       );
       const specModel = new SpecModel(folder, options);
 
-      await expect(
-        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
-      ).rejects.toThrowError(/Failed to resolve file for swagger/i);
+      const swaggerPath = resolve(folder, "data-plane/a.json");
+      await expect(specModel.getAffectedReadmeTags(swaggerPath)).rejects.toThrowError(
+        resolve(folder, "does-not-exist.json"),
+      );
     });
 
     it("throws when an input-file is invalid JSON", async () => {
@@ -234,10 +235,14 @@ describe("SpecModel", () => {
 
       await expect(
         specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
-      ).rejects.toThrowError(/is not a valid JSON Schema/i);
+      ).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON]`,
+      );
 
-      await expect(specModel.toJSONAsync({ includeRefs: true })).rejects.toThrowError(
-        /is not a valid JSON Schema/i,
+      await expect(
+        specModel.toJSONAsync({ includeRefs: true }),
+      ).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON]`,
       );
 
       await expect(
@@ -249,9 +254,7 @@ describe("SpecModel", () => {
               {
                 inputFiles: [
                   {
-                    error: /** @type {unknown} */ (
-                      expect.stringMatching(/is not a valid JSON Schema/i)
-                    ),
+                    error: "Unexpected token 'i', \"invalid json\" is not valid JSON",
                   },
                 ],
                 name: "package-2021-11-01",
