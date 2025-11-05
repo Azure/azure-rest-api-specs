@@ -25,9 +25,33 @@ model ProductContract
   >;
 }
 
-alias ProductApiParameters = {
-  ...ResourceInstanceParameters<ProductContract>;
+alias ProductApiParentParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
 
+  /**
+   *  The name of the API Management service.
+   */
+  @path
+  @segment("service")
+  @key
+  @minLength(1)
+  @maxLength(50)
+  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  serviceName: string;
+
+  /**
+   * Product identifier. Must be unique in the current API Management service instance.
+   */
+  @path
+  @minLength(1)
+  @maxLength(256)
+  @segment("products")
+  productId: string;
+};
+
+alias ProductApiParameters = {
   /**
    * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
    */
@@ -39,9 +63,41 @@ alias ProductApiParameters = {
   apiId: string;
 };
 
-alias ProductGroupParameters = {
-  ...ResourceInstanceParameters<ProductContract>;
+alias ProductApiOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  ProductApiParentParameters,
+  ProductApiParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis",
+  }
+>;
 
+alias ProductGroupParentParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /**
+   *  The name of the API Management service.
+   */
+  @path
+  @segment("service")
+  @key
+  @minLength(1)
+  @maxLength(50)
+  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  serviceName: string;
+
+  /**
+   * Product identifier. Must be unique in the current API Management service instance.
+   */
+  @path
+  @minLength(1)
+  @maxLength(256)
+  @segment("products")
+  productId: string;
+};
+
+alias ProductGroupParameters = {
   /**
    * Group identifier. Must be unique in the current API Management service instance.
    */
@@ -51,6 +107,14 @@ alias ProductGroupParameters = {
   @segment("groups")
   groupId: string;
 };
+
+alias ProductGroupOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  ProductGroupParentParameters,
+  ProductGroupParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups",
+  }
+>;
 
 @armResourceOperations
 interface ProductContractOps
@@ -81,7 +145,7 @@ interface ProductContractOps
       }
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface ProductContracts {
   /**
    * Gets the details of the product specified by its identifier.
@@ -262,11 +326,17 @@ interface ProductContracts {
    * Checks that API entity specified by identifier is associated with the Product entity.
    */
   @head
-  checkEntityExists(...ProductApiParameters): NoContentResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}")
+  checkEntityExists is ProductApiOps.ActionSync<
+    ProductContract,
+    void,
+    Response = NoContentResponse
+  >;
 
   /**
    * Adds an API to the specified product.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   productApiCreateOrUpdate is ProductContractOps.CreateOrUpdateSync<
     ProductContract,
@@ -290,9 +360,12 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  productApiDelete(
-    ...ProductApiParameters,
-  ): OkResponse | NoContentResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}")
+  productApiDelete is ProductApiOps.ActionSync<
+    ProductContract,
+    void,
+    Response = OkResponse | NoContentResponse
+  >;
 
   /**
    * Lists the collection of developer groups associated with the specified product.
@@ -331,9 +404,12 @@ interface ProductContracts {
    * Checks that Group entity specified by identifier is associated with the Product entity.
    */
   @head
-  productGroupCheckEntityExists(
-    ...ProductGroupParameters,
-  ): NoContentResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}")
+  productGroupCheckEntityExists is ProductGroupOps.ActionSync<
+    ProductContract,
+    void,
+    Response = NoContentResponse
+  >;
 
   /**
    * Adds the association between the specified developer group with the specified product.
@@ -360,9 +436,12 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  productGroupDelete(
-    ...ProductGroupParameters,
-  ): OkResponse | NoContentResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}")
+  productGroupDelete is ProductGroupOps.ActionSync<
+    ProductContract,
+    void,
+    Response = OkResponse | NoContentResponse
+  >;
 
   /**
    * Lists the collection of subscriptions to the specified product.

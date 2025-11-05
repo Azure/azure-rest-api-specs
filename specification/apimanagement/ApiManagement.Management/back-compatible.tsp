@@ -1517,3 +1517,6 @@ using Microsoft.ApiManagement;
 @@clientName(GlobalSchemaContractProperties.schemaType, "SchemaType");
 @@clientName(LlmDiagnosticSettings, "Llm-diagnostic-settings");
 @@clientName(LlmMessageLogTypes, "Llm-message-log-types");
+@@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
+  "parameters"
+);

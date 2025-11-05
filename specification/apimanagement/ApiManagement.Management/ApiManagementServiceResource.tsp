@@ -50,8 +50,56 @@ model ApiManagementServiceResource
 @@minLength(ApiManagementServiceResource.name, 1);
 @@maxLength(ApiManagementServiceResource.name, 50);
 
+alias QuotaCounterKeyParentParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /**
+   *  The name of the API Management service.
+   */
+  @path
+  @segment("service")
+  @key
+  @minLength(1)
+  @maxLength(50)
+  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  serviceName: string;
+};
+
 alias QuotaCounterKeyParameters = {
-  ...ResourceInstanceParameters<ApiManagementServiceResource>;
+  /**
+   * Quota counter key identifier. This is the result of expression defined in `counter-key` attribute of the quota-by-key policy. For example, if you specify `counter-key="boo"` in the policy, then it’s accessible by `"boo"` counter key. But if it’s defined as `counter-key="@("b"+"a")"` then it will be accessible by `"ba"` key.
+   */
+  @path
+  @key
+  @segment("quotas")
+  quotaCounterKey: string;
+};
+
+alias QuotaCounterKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  QuotaCounterKeyParentParameters,
+  QuotaCounterKeyParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}",
+  }
+>;
+
+alias QuotaPeriodKeyParentParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /**
+   *  The name of the API Management service.
+   */
+  @path
+  @segment("service")
+  @key
+  @minLength(1)
+  @maxLength(50)
+  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  serviceName: string;
 
   /**
    * Quota counter key identifier. This is the result of expression defined in `counter-key` attribute of the quota-by-key policy. For example, if you specify `counter-key="boo"` in the policy, then it’s accessible by `"boo"` counter key. But if it’s defined as `counter-key="@("b"+"a")"` then it will be accessible by `"ba"` key.
@@ -63,16 +111,6 @@ alias QuotaCounterKeyParameters = {
 };
 
 alias QuotaPeriodKeyParameters = {
-  ...ResourceInstanceParameters<ApiManagementServiceResource>;
-
-  /**
-   * Quota counter key identifier. This is the result of expression defined in `counter-key` attribute of the quota-by-key policy. For example, if you specify `counter-key="boo"` in the policy, then it’s accessible by `"boo"` counter key. But if it’s defined as `counter-key="@("b"+"a")"` then it will be accessible by `"ba"` key.
-   */
-  @path
-  @key
-  @segment("quotas")
-  quotaCounterKey: string;
-
   /**
    * Quota period key identifier.
    */
@@ -82,7 +120,15 @@ alias QuotaPeriodKeyParameters = {
   quotaPeriodKey: string;
 };
 
-@armResourceOperations
+alias QuotaPeriodKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  QuotaPeriodKeyParentParameters,
+  QuotaPeriodKeyParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface ApiManagementServiceResources {
   /**
    * Gets an API Management service resource description.
@@ -391,21 +437,24 @@ interface ApiManagementServiceResources {
     "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
     "Document describing how to configure the quota policies."
   )
-  quotaByCounterKeysListByService(
-    ...QuotaCounterKeyParameters,
-  ): ArmResponse<QuotaCounterCollection> | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
+  quotaByCounterKeysListByService is QuotaCounterKeyOps.ActionSync<
+    ApiManagementServiceResource,
+    void,
+    Response = ArmResponse<QuotaCounterCollection>
+  >;
 
   /**
    * Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: true })
-  quotaByCounterKeysUpdate(
-    ...QuotaCounterKeyParameters,
-
-    @body
-    parameters: QuotaCounterValueUpdateContract,
-  ): ArmResponse<QuotaCounterCollection> | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
+  quotaByCounterKeysUpdate is QuotaCounterKeyOps.ActionSync<
+    ApiManagementServiceResource,
+    Request = QuotaCounterValueUpdateContract,
+    Response = ArmResponse<QuotaCounterCollection>
+  >;
 
   /**
    * Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.
@@ -413,28 +462,28 @@ interface ApiManagementServiceResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}")
   @externalDocs(
     "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
     "Document describing how to configure the quota policies."
   )
-  quotaByPeriodKeysGet(
-    ...QuotaPeriodKeyParameters,
-  ): ArmResponse<QuotaCounterContract> | ErrorResponse;
+  quotaByPeriodKeysGet is QuotaPeriodKeyOps.ActionSync<
+    ApiManagementServiceResource,
+    void,
+    Response = ArmResponse<QuotaCounterContract>
+  >;
 
   /**
    * Updates an existing quota counter value in the specified service instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: true })
-  quotaByPeriodKeysUpdate(
-    ...QuotaPeriodKeyParameters,
-
-    /**
-     * The value of the Quota counter to be applied on the specified period.
-     */
-    @body
-    body: QuotaCounterValueUpdateContract,
-  ): ArmResponse<QuotaCounterContract> | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}")
+  quotaByPeriodKeysUpdate is QuotaPeriodKeyOps.ActionSync<
+    ApiManagementServiceResource,
+    QuotaCounterValueUpdateContract,
+    Response = ArmResponse<QuotaCounterContract>
+  >;
 
   /**
    * Lists all azure regions in which the service exists.
@@ -818,7 +867,7 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
 );
-@@doc(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.parameters,
+@@doc(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "The value of the quota counter to be applied to all quota counter periods."
 );
 @@doc(ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,

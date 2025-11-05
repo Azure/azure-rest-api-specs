@@ -54,17 +54,18 @@ interface GroupContractOps
       }
     > {}
 
-alias GroupUserParameters = {
+alias GroupUserParentParameters = {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
   ...ResourceGroupParameter;
-  ...Azure.ResourceManager.Legacy.Provider;
 
   /** The name of the API Management service. */
   @path
   @segment("service")
   @key
   @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  @minLength(1)
+  @maxLength(50)
   serviceName: string;
 
   /** Group identifier. Must be unique in the current API Management service instance. */
@@ -74,7 +75,9 @@ alias GroupUserParameters = {
   @minLength(1)
   @maxLength(256)
   groupId: string;
+};
 
+alias GroupUserParameters = {
   /**
    * User identifier. Must be unique in the current API Management service instance.
    */
@@ -86,11 +89,18 @@ alias GroupUserParameters = {
   userId: string;
 };
 
-alias WorkspaceGroupUserParameters = {
+alias GroupUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  GroupUserParentParameters,
+  GroupUserParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users",
+  }
+>;
+
+alias WorkspaceGroupUserParentParameters = {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
   ...ResourceGroupParameter;
-  ...Azure.ResourceManager.Legacy.Provider;
 
   /** The name of the API Management service. */
   @path
@@ -119,7 +129,9 @@ alias WorkspaceGroupUserParameters = {
   @minLength(1)
   @maxLength(256)
   groupId: string;
+};
 
+alias WorkspaceGroupUserParameters = {
   /**
    * User identifier. Must be unique in the current API Management service instance.
    */
@@ -131,7 +143,15 @@ alias WorkspaceGroupUserParameters = {
   userId: string;
 };
 
-@armResourceOperations
+alias WorkspaceGroupUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  WorkspaceGroupUserParentParameters,
+  WorkspaceGroupUserParameters,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/groups/{groupId}/users",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface GroupContracts {
   /**
    * Gets the details of the group specified by its identifier.
@@ -297,9 +317,12 @@ interface GroupContracts {
    * Checks that user entity specified by identifier is associated with the group entity.
    */
   @head
-  checkEntityExists(
-    ...GroupUserParameters,
-  ): NoContentResponse | NotFoundResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}")
+  checkEntityExists is GroupUserOps.ActionSync<
+    GroupContract,
+    void,
+    Response = NoContentResponse | NotFoundResponse
+  >;
 
   /**
    * Add existing user to existing group
@@ -326,9 +349,12 @@ interface GroupContracts {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  groupUserDelete(
-    ...GroupUserParameters,
-  ): OkResponse | NoContentResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}")
+  groupUserDelete is GroupUserOps.ActionSync<
+    GroupContract,
+    void,
+    Response = OkResponse | NoContentResponse
+  >;
 }
 @armResourceOperations
 interface WorkspaceGroupOps
@@ -368,7 +394,7 @@ interface WorkspaceGroupOps
       }
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface WorkspaceGroup {
   /**
    * Gets the details of the group specified by its identifier.
@@ -534,9 +560,12 @@ interface WorkspaceGroup {
    * Checks that user entity specified by identifier is associated with the group entity.
    */
   @head
-  checkEntityExists(
-    ...WorkspaceGroupUserParameters,
-  ): NoContentResponse | NotFoundResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/groups/{groupId}/users/{userId}")
+  checkEntityExists is WorkspaceGroupUserOps.ActionSync<
+    GroupContract,
+    void,
+    Response = NoContentResponse | NotFoundResponse
+  >;
 
   /**
    * Add existing user to existing group
@@ -564,9 +593,12 @@ interface WorkspaceGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  workspaceGroupUserDelete(
-    ...WorkspaceGroupUserParameters,
-  ): OkResponse | NoContentResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/groups/{groupId}/users/{userId}")
+  workspaceGroupUserDelete is WorkspaceGroupUserOps.ActionSync<
+    GroupContract,
+    void,
+    Response = OkResponse | NoContentResponse
+  >;
 }
 
 @@maxLength(GroupContract.name, 256);
