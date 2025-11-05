@@ -1,0 +1,74 @@
+{
+  "title": "Create PlannedQuota",
+  "operationId": "PlannedQuota_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceName": "planned-quota-test-provisioning",
+    "api-version": "2025-10-01",
+    "resource": {
+      "properties": {
+        "plannedQuotaName": "planned-quota-test",
+        "contactEmail": "provisioning-test@microsoft.com",
+        "subscriptionNameInPlan": "DataSub1",
+        "stage": "GA",
+        "azureLocation": "useast",
+        "skipUnsupportedSilently": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/providers/Microsoft.Lionrock/plannedQuotas/planned-quota-test-provisioning",
+        "name": "planned-quota-test-provisioning",
+        "type": "Microsoft.Lionrock/plannedQuotas",
+        "properties": {
+          "plannedQuotaName": "planned-quota-test",
+          "contactEmail": "provisioning-test@microsoft.com",
+          "subscriptionNameInPlan": "DataSub1",
+          "stage": "GA",
+          "azureLocation": "useast",
+          "skipUnsupportedSilently": false,
+          "provisioningState": "Succeeded",
+          "requestId": "10728186",
+          "fulfilledPlan": {
+            "arm": {
+              "vm": {
+                "cores": {
+                  "DV2F": 228,
+                  "EV3F": 212
+                }
+              }
+            },
+            "rdfe": {
+              "storage": {
+                "accounts": 100
+              }
+            },
+            "isAzEnabled": true
+          },
+          "alternatives": {
+            "DV2F": "DV3F",
+            "EV3F": "EV4F"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/providers/Microsoft.Lionrock/plannedQuotas/planned-quota-test-provisioning",
+        "name": "planned-quota-test-provisioning",
+        "type": "Microsoft.Lionrock/plannedQuotas",
+        "properties": {
+          "plannedQuotaName": "planned-quota-test",
+          "contactEmail": "provisioning-test@microsoft.com",
+          "subscriptionNameInPlan": "DataSub1",
+          "stage": "GA",
+          "azureLocation": "useast",
+          "skipUnsupportedSilently": false,
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

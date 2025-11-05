@@ -35,15 +35,9 @@ model DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties {
   @doc("Cloud identifier for the service client identity group. Optional.")
   cloudId?: CloudId;
 
-  @doc("Account version for the service client identity group. Optional.")
-  accountVersion?: string;
-
   @doc("List of claim expansions for the service client identity group. Optional.")
   @Azure.ResourceManager.identifiers(#[])
   claimExpansions?: Array<ClaimExpansion>;
-
-  @doc("List of dSTS instances for the service client identity group. A list contains specific dSTS instances to create identities on. Optional.")
-  dstsInstances?: Array<string>;
 
   @doc("It is used only during update request. List of member SCI ids to enforce group properties on. Each element should be a valid GUID. Optional.")
   enforceServiceClientIdentityIds?: Array<string>;
@@ -66,6 +60,8 @@ model DstsSubjectNameBasedServiceClientIdentityGroupResource
   is ProxyResource<DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties> {
   @doc("The name of resource.")
   @pattern("^[a-zA-Z0-9-]*$")
+  @minLength(3)
+  @maxLength(80)
   @key("resourceName")
   @segment("dstsSubjectNameBasedServiceClientIdentityGroups") // Start with lower case. Should be plural
   @visibility(Lifecycle.Read)
