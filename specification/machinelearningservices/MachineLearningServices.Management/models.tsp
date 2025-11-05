@@ -4223,8 +4223,6 @@ model ClusterUpdateParameters {
   /**
    * The properties of the amlCompute.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ClusterUpdateProperties;
 }
 
@@ -7796,9 +7794,7 @@ model RegistryPrivateEndpointConnection {
   /**
    * Properties of the Private Endpoint Connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RegistryPrivateEndpointConnectionProperties | null;
 }
 
@@ -8606,8 +8602,6 @@ model SharedPrivateLinkResource {
   /**
    * Properties of a shared private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SharedPrivateLinkResourceProperty;
 }
 
@@ -8656,8 +8650,6 @@ model WorkspaceUpdateParameters {
   /**
    * The properties that the machine learning workspace will be updated with.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: WorkspacePropertiesUpdateParameters;
 
   /**
@@ -9625,8 +9617,6 @@ model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of a private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 
   /**
