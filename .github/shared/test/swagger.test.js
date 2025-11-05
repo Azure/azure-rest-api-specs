@@ -27,6 +27,37 @@ describe("Swagger", () => {
     expect(swagger.path).toBe(resolve("/specs/foo/test.json"));
   });
 
+  it("can be created with string content", async () => {
+    const folder = "/fake";
+    const swagger = new Swagger(resolve(folder, "widget.json"), {
+      content: "{}",
+    });
+
+    const operations = await swagger.getOperations();
+    expect(operations).toBeDefined();
+
+    const examples = await swagger.getExamples();
+    expect(examples).toBeDefined();
+
+    const refs = await swagger.getRefs();
+    expect(refs).toBeDefined();
+
+    // const tags = await readme.getTags();
+    // const tagNames = [...tags.keys()];
+    // const expectedTagNames = ["package-2021-11-01", "package-2021-10-01-preview"];
+
+    // expect(tagNames.sort()).toEqual(expectedTagNames.sort());
+
+    // const swaggerPaths = [...tags.values()].flatMap((t) => [...t.inputFiles.keys()]);
+
+    // const expectedPaths = [
+    //   resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
+    //   resolve(folder, "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json"),
+    // ];
+
+    // expect(swaggerPaths.sort()).toEqual(expectedPaths.sort());
+  });
+
   // TODO: Test that path is resolved against backpointer
 
   it("excludes example files", async () => {
