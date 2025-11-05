@@ -36,16 +36,20 @@ model PolicyProperties {
   @doc("The certificate configuration.")
   certificate?: CertificateConfiguration;
 
-  @added(Versions.v2026_04_01)
-  @doc("The Bring Your Own Root (BYOR) configuration.")
-  bringYourOwnRoot?: BringYourOwnRoot;
+  @doc("Indicates whether BYOR is enabled for this policy. This can only be set at creation time and cannot be changed afterward.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  byorEnabled: boolean;
 }
 
 @added(Versions.v2025_11_01_preview)
 @doc("The certificate configuration.")
 model CertificateConfiguration {
-  @doc("The configuration to set up an ICA.")
-  certificateAuthorityConfiguration: CertificateAuthorityConfiguration;
+  @doc("Service-managed Certificate Authority configuration. Used when the policy's byorEnabled flag is false. Cannot be provided if byorEnabled is true.")
+  certificateAuthorityConfiguration?: CertificateAuthorityConfiguration;
+
+  @added(Versions.v2026_04_01)
+  @doc("Configuration for Bring Your Own Root (BYOR). This object is automatically populated by the service when byorEnabled is true. The service generates a Certificate Signing Request (CSR) that the customer signs with their own Certificate Authority, then activates via the activateBringYourOwnRoot action. All fields are read-only and managed by the service.")
+  bringYourOwnRootConfiguration?: BringYourOwnRootConfiguration;
 
   @doc("The leaf certificate configuration.")
   leafCertificateConfiguration: LeafCertificateConfiguration;
@@ -91,14 +95,14 @@ model LeafCertificateConfiguration {
 
 @added(Versions.v2026_04_01)
 @doc("Configuration for Bring Your Own Root (BYOR). When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.")
-model BringYourOwnRoot {
-  @doc("Indicates whether BYOR is enabled for this policy. This can only be set at creation time and cannot be changed afterward.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  enabled: boolean;
-
+model BringYourOwnRootConfiguration {
   @doc("The certificate is nearing expiration (within renewal window) or has expired. A new CSR has been generated and is waiting for the customer to provide a new signed certificate.")
   @visibility(Lifecycle.Read)
   certificateSigningRequest?: string;
+
+  @doc("Thumbprint of the customer-provided signed certificate.")
+  @visibility(Lifecycle.Read)
+  certificateThumbprint?: string;
 
   @added(Versions.v2026_04_01)
   @doc("The status of the BYOR configuration, indicating the current state of the certificate lifecycle.")
