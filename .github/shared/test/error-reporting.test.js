@@ -1,10 +1,9 @@
-// @ts-check
-
 import fs from "fs/promises";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { annotateFileError, setOutput, setSummary } from "../src/error-reporting.js";
 
 describe("ErrorReporting", () => {
+  /** @type {import("vitest").MockInstance} */
   let logSpy;
 
   beforeEach(() => {
@@ -44,7 +43,7 @@ describe("ErrorReporting", () => {
 
     const content = await fs.readFile(process.env.GITHUB_STEP_SUMMARY, "utf-8");
 
-    // cleanup after the test so nothing is left behi
+    // cleanup after the test so nothing is left behind
     await fs.rm(process.env.GITHUB_STEP_SUMMARY, { force: true });
 
     expect(content).toBe("# Title");
