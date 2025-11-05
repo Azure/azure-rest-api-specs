@@ -30,12 +30,18 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets information about the specified NSP configuration.
    */
-  getConfiguration is ArmResourceRead<NetworkSecurityPerimeterConfiguration, Error = CloudError>;
+  getConfiguration is ArmResourceRead<
+    NetworkSecurityPerimeterConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Lists all of the NSP configurations in the specified account.
    */
-  listConfigurations is ArmResourceListByParent<NetworkSecurityPerimeterConfiguration, Error = CloudError>;
+  listConfigurations is ArmResourceListByParent<
+    NetworkSecurityPerimeterConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Reconciles the specified NSP configuration.

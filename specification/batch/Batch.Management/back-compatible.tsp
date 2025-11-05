@@ -114,6 +114,3 @@ using Microsoft.Batch;
 @@clientName(LocationOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
-
-
-
