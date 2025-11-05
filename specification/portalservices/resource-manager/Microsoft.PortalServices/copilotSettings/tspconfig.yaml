@@ -9,9 +9,10 @@ options:
     emit-common-types-schema: "never"
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
     omit-unreachable-types: true
-    output-file: "{azure-resource-provider-folder}/{service-name}/copilotSettings/{version-status}/{version}/copilotSettings.json"
+    output-file: "{version-status}/{version}/copilotSettings.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
