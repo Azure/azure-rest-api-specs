@@ -1,5 +1,3 @@
-// @ts-check
-
 import { dirname, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { API_VERSION_LIFECYCLE_STAGES, Swagger } from "../src/swagger.js";

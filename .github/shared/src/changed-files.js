@@ -1,5 +1,3 @@
-// @ts-check
-
 import debug from "debug";
 import { simpleGit } from "simple-git";
 import { includesSegment } from "./path.js";
