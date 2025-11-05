@@ -19,7 +19,7 @@ namespace Microsoft.NetApp;
 model ActiveDirectoryConfig
   is TrackedResource<ActiveDirectoryConfigProperties> {
   ...ResourceNameParameter<
-    Resource = NetAppAccount,
+    Resource = ActiveDirectoryConfig,
     KeyName = "activeDirectoryConfigName",
     SegmentName = "activeDirectoryConfigs",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"

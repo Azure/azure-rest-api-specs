@@ -187,6 +187,7 @@ model CacheProperties {
   /**
    * Flag indicating whether the global file lock is enabled for the cache.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   globalFileLocking?: GlobalFileLockingState;
 
   /**
@@ -287,6 +288,7 @@ model CacheMountTargetProperties {
   /**
    * The SMB server's Fully Qualified Domain Name, FQDN
    */
+  @visibility(Lifecycle.Read)
   smbServerFqdn?: string;
 }
 
@@ -573,3 +575,8 @@ interface Caches {
 @@doc(Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
 );
+
+@@maxLength(Cache.name, 64);
+@@minLength(Cache.name, 3);
+@@doc(Cache.name, "The name of the cache resource.");
+@@doc(Cache.properties, "Cache properties");

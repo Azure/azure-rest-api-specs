@@ -115,3 +115,6 @@ interface ElasticBackupPolicies {
 
 @@clientName(ElasticBackupPolicies.createOrUpdate::parameters.resource, "body");
 @@clientName(ElasticBackupPolicies.update::parameters.properties, "body");
+
+@@maxLength(ElasticBackupPolicy.name, 64);
+@@minLength(ElasticBackupPolicy.name, 1);

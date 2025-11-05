@@ -23,7 +23,7 @@ model ElasticBackup is ProxyResource<ElasticBackupProperties> {
   ...ResourceNameParameter<
     Resource = ElasticBackup,
     KeyName = "backupName",
-    SegmentName = "backups",
+    SegmentName = "elasticBackups",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
   >;
 }
@@ -171,3 +171,6 @@ interface ElasticBackups {
 
 @@clientName(ElasticBackups.createOrUpdate::parameters.resource, "body");
 @@clientName(ElasticBackups.update::parameters.properties, "body");
+
+@@maxLength(ElasticBackup.name, 256);
+@@minLength(ElasticBackup.name, 1);
