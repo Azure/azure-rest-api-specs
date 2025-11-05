@@ -1,5 +1,3 @@
-// @ts-check
-
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
@@ -11,8 +9,17 @@ import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
 
 /**
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
+ * @typedef {import('./tag.js').TagJSON} TagJSON
+ */
+
+/**
+ * @typedef {Object} ReadmeJSON
+ * @property {string} path
+ * @property {Object} globalConfig
+ * @property {(TagJSON|ErrorJSON)[]} tags
  */
 
 /**
@@ -45,7 +52,7 @@ export class Readme {
    */
   #content;
 
-  /** @type {{globalConfig: Object, tags: Map<string, Tag>} | undefined} */
+  /** @type {{globalConfig: Record<string, any>, tags: Map<string, Tag>} | undefined} */
   #data;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -212,7 +219,7 @@ export class Readme {
   }
 
   /**
-   * @returns {Promise<Object>}
+   * @returns {Promise<Record<string, any>>}
    */
   async getGlobalConfig() {
     return (await this.#getData()).globalConfig;
@@ -241,7 +248,7 @@ export class Readme {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<Object>}
+   * @returns {Promise<ReadmeJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     const { relativePaths } = options;
