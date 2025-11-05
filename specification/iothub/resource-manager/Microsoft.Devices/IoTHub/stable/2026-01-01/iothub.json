@@ -129,6 +129,9 @@
           },
           "IotHubResource_AddCosmosDbEndpoint": {
             "$ref": "./examples/iothub_addRoutingCosmosDBEndpoint.json"
+          },
+          "CreateOrReplace_IoTHub_With_DeviceRegistry": {
+            "$ref": "./examples/CreateOrReplace_IoTHub_With_DeviceRegistry.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -164,6 +167,12 @@
         ],
         "responses": {
           "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
             "schema": {
               "$ref": "#/definitions/IotHubDescription"
@@ -230,6 +239,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "description": "Iot Hub was successfully updated",
             "schema": {
               "$ref": "#/definitions/IotHubDescription"
@@ -1447,6 +1462,9 @@
         "x-ms-examples": {
           "Certificates_CreateOrUpdate": {
             "$ref": "./examples/iothub_certificatescreateorupdate.json"
+          },
+          "CreateOrReplace_Certificates_With_DeviceRegistryPolicy": {
+            "$ref": "./examples/CreateOrReplace_Certificates_With_DeviceRegistryPolicy.json"
           }
         },
         "parameters": [
@@ -1972,6 +1990,12 @@
         ],
         "responses": {
           "201": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
@@ -2242,6 +2266,11 @@
         "certificate": {
           "description": "The certificate content",
           "type": "string"
+        },
+        "policyResourceId": {
+          "description": "The reference to policy stored in Azure Device Registry (ADR).",
+          "type": "string",
+          "format": "arm-id"
         }
       }
     },
@@ -2291,6 +2320,11 @@
           "description": "The certificate content",
           "type": "string",
           "readOnly": true
+        },
+        "policyResourceId": {
+          "description": "The reference to policy stored in Azure Device Registry (ADR).",
+          "type": "string",
+          "format": "arm-id"
         }
       }
     },
@@ -2444,6 +2478,10 @@
         "enableDataResidency": {
           "description": "This property when set to true, will enable data residency, thus, disabling disaster recovery.",
           "type": "boolean"
+        },
+        "deviceRegistry": {
+          "description": "Represents properties related to the Azure Device Registry (ADR).",
+          "$ref": "#/definitions/DeviceRegistry"
         }
       }
     },
@@ -2460,7 +2498,8 @@
             "S3",
             "B1",
             "B2",
-            "B3"
+            "B3",
+            "GEN2"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2473,7 +2512,8 @@
           "enum": [
             "Free",
             "Standard",
-            "Basic"
+            "Basic",
+            "Generation2"
           ],
           "type": "string",
           "readOnly": true,
@@ -2971,7 +3011,8 @@
         },
         "connectionString": {
           "description": "The connection string of the service bus queue endpoint.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointUri": {
           "description": "The url of the service bus queue endpoint. It must include the protocol sb://",
@@ -3025,7 +3066,8 @@
         },
         "connectionString": {
           "description": "The connection string of the service bus topic endpoint.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointUri": {
           "description": "The url of the service bus topic endpoint. It must include the protocol sb://",
@@ -3079,7 +3121,8 @@
         },
         "connectionString": {
           "description": "The connection string of the event hub endpoint. ",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointUri": {
           "description": "The url of the event hub endpoint. It must include the protocol sb://",
@@ -3133,7 +3176,8 @@
         },
         "connectionString": {
           "description": "The connection string of the storage account.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointUri": {
           "description": "The url of the storage endpoint. It must include the protocol https://",
@@ -4541,6 +4585,22 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "DeviceRegistry": {
+      "description": "Represents properties related to the Azure Device Registry (ADR).",
+      "type": "object",
+      "properties": {
+        "namespaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The identifier of the Azure Device Registry namespace associated with the GEN2 SKU hub."
+        },
+        "identityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The identity used to manage the ADR namespace from the data plane. "
         }
       }
     }
