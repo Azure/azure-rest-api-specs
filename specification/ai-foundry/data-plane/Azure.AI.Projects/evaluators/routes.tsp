@@ -5,7 +5,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "./models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 
 using TypeSpec.Versioning;
 

@@ -3,7 +3,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "../common/models.tsp";
 
 using TypeSpec.Versioning;
