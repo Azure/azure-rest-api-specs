@@ -50,7 +50,7 @@ namespace Storage.Blob {
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
     TError = StorageError
-  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
+  >(...ApiVersionHeader, ...TParams, ...ClientRequestIdHeader): (TResponse & {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
