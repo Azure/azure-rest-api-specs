@@ -7,6 +7,7 @@ using Language.Conversations;
 namespace Language.ConversationsClientCustomizations;
 
 @@clientName(Conversations, "ConversationAnalysis");
+@@clientName(Conversations, "ConversationAnalysisClient", "python");
 @@clientName(analyzeConversations, "AnalyzeConversation");
 
 @@clientName(ConversationEntity.confidenceScore, "confidence");
