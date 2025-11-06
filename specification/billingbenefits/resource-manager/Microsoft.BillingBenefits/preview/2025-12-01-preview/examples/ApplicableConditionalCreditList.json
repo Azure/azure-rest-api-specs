@@ -8,19 +8,19 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/applicableConditionalCredits/conditionalCredit_20250801",
-            "name": "conditionalCredit_20250801",
-            "type": "Microsoft.BillingBenefits/conditionalCredits",
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28/providers/microsoft.billingbenefits/applicableConditionalCredits/C20251028000000000000",
+            "name": "C20251028000000000000",
+            "type": "Microsoft.BillingBenefits/applicableConditionalCredits",
             "properties": {
               "benefitResourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/conditionalcredits/testprimaryconditionalcredit",
               "entityType": "Primary",
               "displayName": "Conditional Credit 20250801",
-              "systemId": "CACO-SYSTEM-20250801",
-              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+              "systemId": "C20251028000000000000",
+              "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
               "startAt": "2025-07-01T00:00:00Z",
-              "endAt": "2026-04-01T00:00:00Z",
+              "endAt": "2026-03-31T23:59:59Z",
               "allowContributors": "Enabled",
-              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
               "provisioningState": "Succeeded",
               "status": "Active",
               "milestones": [
@@ -40,8 +40,7 @@
                       "currencyCode": "USD"
                     },
                     "startAt": "2025-10-01T00:00:00Z",
-                    "endAt": "2026-01-01T00:00:00Z",
-                    "resourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/credits/testcredit",
+                    "endAt": "2025-12-31T23:59:59Z",
                     "balanceVersion": 13,
                     "systemId": "credit98765432"
                   }
@@ -50,22 +49,18 @@
                   "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
                   "name": "Q2 Milestone",
                   "status": "Active",
-                  "endAt": "2026-01-01T00:00:00Z",
+                  "endAt": "2026-03-31T23:59:59Z",
                   "spendTarget": {
                     "amount": 100000,
                     "currencyCode": "USD"
                   },
                   "award": {
+                    "duration": "P3M",
                     "credit": {
                       "grain": "FullTerm",
                       "amount": 10000,
                       "currencyCode": "USD"
-                    },
-                    "startAt": "2026-01-01T00:00:00Z",
-                    "endAt": "2026-04-01T00:00:00Z",
-                    "resourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/credits/testcredit",
-                    "balanceVersion": 13,
-                    "systemId": "credit98765432"
+                    }
                   }
                 }
               ]
@@ -83,30 +78,38 @@
             }
           },
           {
-            "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/applicableConditionalCredits/conditionalCredit_20250802",
-            "name": "conditionalCredit_20250802",
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28/providers/microsoft.billingbenefits/applicableConditionalCredits/C20251028000000000000",
+            "name": "C20251028000000000000",
             "type": "Microsoft.BillingBenefits/conditionalCredits",
             "properties": {
               "benefitResourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/conditionalcredits/testprimaryconditionalcredit2",
               "entityType": "Contributor",
               "displayName": "Conditional Credit 20250802",
-              "systemId": "CACO-SYSTEM-20250802",
+              "systemId": "C20251028000000000000",
               "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
-              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc5",
-              "startAt": "2025-09-01T00:00:00Z",
-              "endAt": "2026-05-01T00:00:00Z",
-              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+              "startAt": "2026-04-01T00:00:00Z",
+              "endAt": "2026-07-31T23:59:59Z",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
               "provisioningState": "Succeeded",
               "status": "Active",
               "milestones": [
                 {
                   "milestoneId": "550e8400-e29b-41d4-a716-446655440003",
                   "name": "Q3 Milestone",
-                  "status": "Scheduled",
-                  "endAt": "2026-02-01T00:00:00Z",
+                  "status": "Active",
+                  "endAt": "2026-07-31T23:59:59Z",
                   "spendTarget": {
                     "amount": 75000,
                     "currencyCode": "USD"
+                  },
+                  "award": {
+                    "duration": "P3M",
+                    "credit": {
+                      "grain": "FullTerm",
+                      "amount": 7500,
+                      "currencyCode": "USD"
+                    }
                   }
                 }
               ],

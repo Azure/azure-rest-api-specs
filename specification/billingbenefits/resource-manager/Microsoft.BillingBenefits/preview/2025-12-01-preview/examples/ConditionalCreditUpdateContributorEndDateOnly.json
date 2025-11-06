@@ -1,27 +1,32 @@
 {
   "parameters": {
-    "subscriptionId": "10000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resource_group_name_01",
-    "conditionalCreditName": "conditionalCredit_20250801",
-    "api-version": "2025-12-01-preview"
+    "subscriptionId": "20000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource_group_name_02",
+    "conditionalCreditName": "conditionalCreditContributor_20250801",
+    "api-version": "2025-12-01-preview",
+    "body": {
+      "properties": {
+        "endAt": "2025-12-31T23:59:59Z"
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
-        "name": "conditionalCredit_20250801",
+        "id": "/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCreditContributor_20250801",
+        "name": "conditionalCreditContributor_20250801",
         "type": "Microsoft.BillingBenefits/conditionalCredits",
         "properties": {
-          "entityType": "Primary",
-          "displayName": "Conditional Credit 20250801",
-          "systemId": "CACO-SYSTEM-20250801",
+          "entityType": "Contributor",
+          "displayName": "Updated Contributor Conditional Credit 20250801",
+          "systemId": "CONDITIONALCREDITS-SYSTEM-20250801",
+          "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
           "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
-          "startAt": "2025-07-01T00:00:00Z",
+          "startAt": "2025-09-01T00:00:00Z",
           "endAt": "2025-12-31T23:59:59Z",
-          "allowContributors": "Enabled",
           "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
           "provisioningState": "Succeeded",
-          "status": "Active",
+          "status": "Stopped",
           "milestones": [
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
@@ -56,26 +61,32 @@
                 "duration": "P3M",
                 "credit": {
                   "grain": "FullTerm",
-                  "amount": 10000,
+                  "amount": 5000,
                   "currencyCode": "USD"
-                },
-                "balanceVersion": 13,
-                "systemId": "credit98765433"
+                }
               }
             }
-          ]
+          ],
+          "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}"
         },
         "location": "global",
         "tags": {
-          "key1": "value1",
-          "key2": "value2"
+          "environment": "test",
+          "team": "finance"
         },
         "systemData": {
           "createdByType": "User",
           "createdAt": "2025-09-01T01:01:01.1075056Z",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-09-01T01:01:01.1075056Z"
+          "lastModifiedAt": "2025-09-01T02:15:30.2080047Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/operationStatus/7e3ffff7-b331-4fcb-ab11-b5fa49368199?api-version=2025-12-01-preview",
+        "Location": "https://management.azure.com/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/operationStatus/5f3gggg8-c442-5gdc-bc22-c6gb5a479299?api-version=2025-12-01-preview",
+        "Retry-After": 5
       }
     }
   }

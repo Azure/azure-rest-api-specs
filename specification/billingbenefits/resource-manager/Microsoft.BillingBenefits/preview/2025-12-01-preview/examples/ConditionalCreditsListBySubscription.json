@@ -15,19 +15,19 @@
               "entityType": "Primary",
               "displayName": "Conditional Credit 20250801",
               "systemId": "CACO-SYSTEM-20250801",
-              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+              "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
               "startAt": "2025-07-01T00:00:00Z",
-              "endAt": "2026-04-01T00:00:00Z",
+              "endAt": "2025-12-31T23:59:59Z",
               "allowContributors": "Enabled",
-              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
               "provisioningState": "Succeeded",
               "status": "Active",
               "milestones": [
                 {
                   "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
-                  "name": "Q1 Milestone",
+                  "name": "Milestone 1",
                   "status": "Completed",
-                  "endAt": "2025-10-01T00:00:00Z",
+                  "endAt": "2025-09-30T23:59:59Z",
                   "spendTarget": {
                     "amount": 50000,
                     "currencyCode": "USD"
@@ -39,18 +39,17 @@
                       "currencyCode": "USD"
                     },
                     "startAt": "2025-10-01T00:00:00Z",
-                    "endAt": "2026-01-01T00:00:00Z",
+                    "endAt": "2025-12-31T23:59:59Z",
                     "duration": "P3M",
-                    "resourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/credits/testcredit",
                     "balanceVersion": 13,
                     "systemId": "credit98765432"
                   }
                 },
                 {
                   "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
-                  "name": "Q2 Milestone",
+                  "name": "Milestone 2",
                   "status": "Active",
-                  "endAt": "2026-01-01T00:00:00Z",
+                  "endAt": "2025-12-31T23:59:59Z",
                   "spendTarget": {
                     "amount": 100000,
                     "currencyCode": "USD"
@@ -61,12 +60,7 @@
                       "amount": 10000,
                       "currencyCode": "USD"
                     },
-                    "startAt": "2026-01-01T00:00:00Z",
-                    "endAt": "2026-04-01T00:00:00Z",
-                    "duration": "P3M",
-                    "resourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/credits/testcredit",
-                    "balanceVersion": 13,
-                    "systemId": "credit98765432"
+                    "duration": "P3M"
                   }
                 }
               ]
@@ -91,32 +85,52 @@
               "entityType": "Contributor",
               "displayName": "Contributor Conditional Credit 20250801",
               "systemId": "CACO-SYSTEM-20250801",
-              "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+              "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
               "startAt": "2025-09-01T00:00:00Z",
               "primaryResourceId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
-              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{contributorAcctId:orgId}",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
               "provisioningState": "Succeeded",
               "status": "Active",
-              "endAt": "2026-04-01T00:00:00Z",
+              "endAt": "2025-12-31T23:59:59Z",
               "milestones": [
                 {
                   "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
-                  "name": "Q1 Milestone",
+                  "name": "Milestone 1",
                   "status": "Completed",
-                  "endAt": "2025-10-01T00:00:00Z",
+                  "endAt": "2025-09-30T23:59:59Z",
                   "spendTarget": {
                     "amount": 50000,
                     "currencyCode": "USD"
+                  },
+                  "award": {
+                    "credit": {
+                      "grain": "FullTerm",
+                      "amount": 5000,
+                      "currencyCode": "USD"
+                    },
+                    "startAt": "2025-10-01T00:00:00Z",
+                    "endAt": "2025-12-31T23:59:59Z",
+                    "duration": "P3M",
+                    "balanceVersion": 13,
+                    "systemId": "credit98765432"
                   }
                 },
                 {
                   "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
-                  "name": "Q2 Milestone",
+                  "name": "Milestone 2",
                   "status": "Active",
-                  "endAt": "2026-01-01T00:00:00Z",
+                  "endAt": "2025-12-31T23:59:59Z",
                   "spendTarget": {
                     "amount": 100000,
                     "currencyCode": "USD"
+                  },
+                  "award": {
+                    "credit": {
+                      "grain": "FullTerm",
+                      "amount": 10000,
+                      "currencyCode": "USD"
+                    },
+                    "duration": "P3M"
                   }
                 }
               ],
@@ -142,12 +156,33 @@
               "entityType": "Primary",
               "displayName": "Simple Conditional Credit",
               "systemId": "CACO-SYSTEM-SIMPLE-20250801",
-              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+              "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
               "startAt": "2025-09-01T00:00:00Z",
+              "endAt": "2025-12-31T23:59:59Z",
               "allowContributors": "Disabled",
-              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
               "provisioningState": "Succeeded",
-              "status": "Active"
+              "status": "Active",
+              "milestones": [
+                {
+                  "milestoneId": "550e8400-e29b-41d4-a716-446655440003",
+                  "name": "Milestone 1",
+                  "status": "Active",
+                  "endAt": "2025-12-31T23:59:59Z",
+                  "spendTarget": {
+                    "amount": 25000,
+                    "currencyCode": "USD"
+                  },
+                  "award": {
+                    "duration": "P1M",
+                    "credit": {
+                      "grain": "FullTerm",
+                      "amount": 2500,
+                      "currencyCode": "USD"
+                    }
+                  }
+                }
+              ]
             },
             "location": "global",
             "tags": {
