@@ -2199,13 +2199,16 @@
       "additionalProperties": false
     },
     "AudioFormat": {
-      "format": "int32",
       "description": "The format of the audio received from the audio subscription option.",
       "enum": [
         "Pcm16KMono",
         "Pcm24KMono"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AudioFormat",
+        "modelAsString": true
+      }
     },
     "BaseDialog": {
       "required": [
@@ -2311,7 +2314,6 @@
       "additionalProperties": false
     },
     "CallConnectionStateModel": {
-      "format": "int32",
       "description": "The states of a call connection.",
       "enum": [
         "Unknown",
@@ -2322,7 +2324,11 @@
         "Disconnecting",
         "Disconnected"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallConnectionStateModel",
+        "modelAsString": true
+      }
     },
     "CallDisconnected": {
       "description": "The call disconnected event.",
@@ -2388,14 +2394,17 @@
       "additionalProperties": false
     },
     "CallLocatorKind": {
-      "format": "int32",
       "description": "The call locator kind",
       "enum": [
         "GroupCallLocator",
         "ServerCallLocator",
         "RoomCallLocator"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallLocatorKind",
+        "modelAsString": true
+      }
     },
     "CallParticipant": {
       "description": "A call participant.",
@@ -2416,14 +2425,17 @@
       "additionalProperties": false
     },
     "CallRejectReason": {
-      "format": "int32",
       "description": "Reason of rejecting a call",
       "enum": [
         "None",
         "Busy",
         "Forbidden"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallRejectReason",
+        "modelAsString": true
+      }
     },
     "CallTransferAccepted": {
       "description": "The call transfer accepted event.",
@@ -3072,12 +3084,15 @@
       "additionalProperties": false
     },
     "DialogInputType": {
-      "format": "int32",
       "description": "Defines the type of the dialog input",
       "enum": [
         "PowerVirtualAgents"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DialogInputType",
+        "modelAsString": true
+      }
     },
     "DialogLanguageChange": {
       "type": "object",
@@ -3570,25 +3585,34 @@
       "additionalProperties": false
     },
     "MediaStreamingAudioChannelType": {
-      "format": "int32",
       "description": "Channel type of media streaming audio",
       "enum": [
         "Mixed",
         "Unmixed"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingAudioChannelTypeDto",
+        "modelAsString": true
+      }
     },
     "MediaStreamingContentType": {
-      "format": "int32",
       "description": "Type of content in Media streaming.",
       "enum": [
         "Audio"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingContentTypeDto",
+        "modelAsString": true
+      }
     },
     "MediaStreamingFailed": {
       "type": "object",
       "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string"
@@ -3607,9 +3631,6 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation"
-        },
-        "mediaStreamingUpdate": {
-          "$ref": "#/definitions/MediaStreamingUpdate"
         }
       },
       "additionalProperties": false
@@ -3657,6 +3678,9 @@
     "MediaStreamingStarted": {
       "type": "object",
       "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string"
@@ -3675,25 +3699,24 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation"
-        },
-        "mediaStreamingUpdate": {
-          "$ref": "#/definitions/MediaStreamingUpdate"
         }
       },
       "additionalProperties": false
     },
     "MediaStreamingStatus": {
-      "format": "int32",
       "enum": [
         "MediaStreamingStarted",
         "MediaStreamingFailed",
         "MediaStreamingStopped",
         "UnspecifiedError"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingStatus",
+        "modelAsString": true
+      }
     },
     "MediaStreamingStatusDetails": {
-      "format": "int32",
       "enum": [
         "SubscriptionStarted",
         "StreamConnectionReestablished",
@@ -3711,11 +3734,18 @@
         "ServiceTimeout",
         "InitialWebSocketConnectionFailed"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingStatusDetails",
+        "modelAsString": true
+      }
     },
     "MediaStreamingStopped": {
       "type": "object",
       "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string"
@@ -3734,9 +3764,6 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation"
-        },
-        "mediaStreamingUpdate": {
-          "$ref": "#/definitions/MediaStreamingUpdate"
         }
       },
       "additionalProperties": false
@@ -3763,22 +3790,28 @@
       "additionalProperties": false
     },
     "MediaStreamingSubscriptionState": {
-      "format": "int32",
       "description": "Current state of media streaming session",
       "enum": [
         "Disabled",
         "Inactive",
         "Active"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingSubscriptionStateDto",
+        "modelAsString": true
+      }
     },
     "MediaStreamingTransportType": {
-      "format": "int32",
       "description": "Transport type for Media streaming.",
       "enum": [
         "Websocket"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingTransportTypeDto",
+        "modelAsString": true
+      }
     },
     "MediaStreamingUpdate": {
       "type": "object",
@@ -3805,6 +3838,10 @@
       "description": "Moving the participant failed event.",
       "type": "object",
       "properties": {
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string"
@@ -3826,10 +3863,6 @@
         },
         "participant": {
           "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "fromCall": {
-          "description": "The CallConnectionId for the call you want to move the participant from",
-          "type": "string"
         }
       },
       "additionalProperties": false
@@ -3838,6 +3871,10 @@
       "description": "Moving the participant successfully event.",
       "type": "object",
       "properties": {
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string"
@@ -3859,10 +3896,6 @@
         },
         "participant": {
           "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "fromCall": {
-          "description": "The CallConnectionId for the call you want to move the participant from",
-          "type": "string"
         }
       },
       "additionalProperties": false
@@ -4196,14 +4229,17 @@
       "additionalProperties": false
     },
     "PlaySourceType": {
-      "format": "int32",
       "description": "Defines the types of play source",
       "enum": [
         "File",
         "Text",
         "Ssml"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PlaySourceType",
+        "modelAsString": true
+      }
     },
     "PlayStarted": {
       "description": "Play started event.",
@@ -4257,14 +4293,17 @@
       "x-ms-discriminator-value": "powerVirtualAgents"
     },
     "RecognitionType": {
-      "format": "int32",
       "description": "Recognition type determines the sub-type of the recognition operation\r\nPossible values will be Dtmf, Speech, or Choices",
       "enum": [
         "Dtmf",
         "Speech",
         "Choices"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecognitionType",
+        "modelAsString": true
+      }
     },
     "RecognizeCanceled": {
       "type": "object",
@@ -4351,7 +4390,6 @@
       "additionalProperties": false
     },
     "RecognizeInputType": {
-      "format": "int32",
       "description": "Defines the type of the recognize input",
       "enum": [
         "Dtmf",
@@ -4359,7 +4397,7 @@
         "SpeechOrDtmf",
         "Choices"
       ],
-      "type": "integer"
+      "type": "string"
     },
     "RecognizeOptions": {
       "required": [
@@ -4437,48 +4475,51 @@
       "additionalProperties": false
     },
     "RecordingChannelType": {
-      "format": "int32",
       "description": "Defines the channel type of call recording.",
       "enum": [
         "Mixed",
         "Unmixed"
       ],
-      "type": "integer"
+      "type": "string"
     },
     "RecordingContentType": {
-      "format": "int32",
       "enum": [
         "Audio",
         "AudioVideo"
       ],
-      "type": "integer"
+      "type": "string"
     },
     "RecordingFormatType": {
-      "format": "int32",
       "description": "Defines the format type of call recording.",
       "enum": [
         "Wav",
         "Mp3",
         "Mp4"
       ],
-      "type": "integer"
+      "type": "string"
     },
     "RecordingKind": {
-      "format": "int32",
       "enum": [
         "AzureCommunicationServices",
         "Teams",
         "TeamsCompliance"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingKind",
+        "modelAsString": true
+      }
     },
     "RecordingState": {
-      "format": "int32",
       "enum": [
         "Active",
         "Inactive"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingState",
+        "modelAsString": true
+      }
     },
     "RecordingStateResponse": {
       "type": "object",
@@ -4963,7 +5004,6 @@
       "additionalProperties": false
     },
     "Tone": {
-      "format": "int32",
       "description": "List of valid stop tones",
       "enum": [
         "Zero",
@@ -4983,7 +5023,11 @@
         "Pound",
         "Asterisk"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Tone",
+        "modelAsString": true
+      }
     },
     "TranscriptionConfiguration": {
       "description": "Configuration of live transcription.",
@@ -5076,7 +5120,6 @@
       "additionalProperties": false
     },
     "TranscriptionStatus": {
-      "format": "int32",
       "enum": [
         "TranscriptionStarted",
         "TranscriptionFailed",
@@ -5086,10 +5129,13 @@
         "CallSummaryUpdated",
         "UnspecifiedError"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionStatus",
+        "modelAsString": true
+      }
     },
     "TranscriptionStatusDetails": {
-      "format": "int32",
       "enum": [
         "SubscriptionStarted",
         "StreamConnectionReestablished",
@@ -5109,7 +5155,11 @@
         "CallSummarySuccess",
         "CallSummaryFailure"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionStatusDetails",
+        "modelAsString": true
+      }
     },
     "TranscriptionStopped": {
       "type": "object",
@@ -5142,12 +5192,15 @@
       "additionalProperties": false
     },
     "TranscriptionTransportType": {
-      "format": "int32",
       "description": "Transport type for Transcription.",
       "enum": [
         "Websocket"
       ],
-      "type": "integer"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionTransportTypeDto",
+        "modelAsString": true
+      }
     },
     "TranscriptionUpdate": {
       "type": "object",
@@ -5277,13 +5330,12 @@
       "additionalProperties": false
     },
     "VoiceKind": {
-      "format": "int32",
       "description": "Audio kind type",
       "enum": [
         "Male",
         "Female"
       ],
-      "type": "integer"
+      "type": "string"
     }
   },
   "parameters": {
