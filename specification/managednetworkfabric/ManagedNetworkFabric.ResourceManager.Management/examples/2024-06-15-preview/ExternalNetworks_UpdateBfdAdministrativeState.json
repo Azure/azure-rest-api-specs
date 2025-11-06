@@ -1,0 +1,40 @@
+{
+  "title": "ExternalNetworks_UpdateBfdAdministrativeState",
+  "operationId": "ExternalNetworks_UpdateBfdAdministrativeState",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "l3IsolationDomainName": "example-externalnetwork",
+    "externalNetworkName": "example-ext",
+    "body": {
+      "routeType": "Static",
+      "administrativeState": "Enable"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "routeType": "Static",
+        "administrativeState": "Enable",
+        "error": {
+          "code": "",
+          "message": "",
+          "target": "",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "",
+              "info": {}
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

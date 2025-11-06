@@ -5,10 +5,9 @@ vi.mock("fs/promises", () => ({ readFile: vi.fn() }));
 
 import * as fs from "fs/promises";
 
-/** @type {import("vitest").Mock} */
-const readFileMock = fs.readFile;
+const readFileMock = /** @type {import("vitest").Mock} */ (fs.readFile);
 
-import generateJobSummary from "../src/avocado-code.js";
+import generateJobSummaryImpl from "../src/avocado-code.js";
 import { MessageLevel, MessageType } from "../src/message.js";
 import { stringify } from "../src/ndjson.js";
 import { createMockCore } from "./mocks.js";
@@ -17,6 +16,15 @@ const core = createMockCore();
 const outputFile = "avocado.ndjson";
 
 describe("generateJobSummary", () => {
+  /**
+   * @param {unknown} asyncFunctionArgs
+   */
+  function generateJobSummary(asyncFunctionArgs) {
+    return generateJobSummaryImpl(
+      /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (asyncFunctionArgs),
+    );
+  }
+
   beforeEach(() => {
     vi.stubEnv("AVOCADO_OUTPUT_FILE", outputFile);
     readFileMock.mockReset();
@@ -31,7 +39,9 @@ describe("generateJobSummary", () => {
       `[Error: Env var AVOCADO_OUTPUT_FILE must be set]`,
     );
 
-    expect(core.info.mock.calls.at(-1)[0]).toMatchInlineSnapshot(`"avocadoOutputFile: undefined"`);
+    expect(core.info.mock.calls.at(-1)?.[0]).toMatchInlineSnapshot(
+      `"avocadoOutputFile: undefined"`,
+    );
   });
 
   it("no-ops if file cannot be read", async () => {
@@ -41,7 +51,7 @@ describe("generateJobSummary", () => {
 
     await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
-    expect(core.info.mock.calls.at(-1)[0]).toMatchInlineSnapshot(
+    expect(core.info.mock.calls.at(-1)?.[0]).toMatchInlineSnapshot(
       `"Error reading 'avocado.ndjson': Error: ENOENT: no such file or directory, open 'avocado.ndjson'"`,
     );
   });
@@ -51,7 +61,7 @@ describe("generateJobSummary", () => {
 
     await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
-    expect(core.notice.mock.calls.at(-1)[0]).toMatchInlineSnapshot(
+    expect(core.notice.mock.calls.at(-1)?.[0]).toMatchInlineSnapshot(
       `"No messages in 'avocado.ndjson'"`,
     );
   });
