@@ -100,15 +100,7 @@ interface Configurations {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Configuration>;
 
   @doc("Update a Configuration Resource")
-  @removed(Versions.v2025_12_01_preview)
-  @renamedFrom(Versions.v2025_12_01_preview, "update")
-  @sharedRoute
-  updateSync is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
-
-  @doc("Update a Configuration Resource")
-  @added(Versions.v2025_12_01_preview)
-  @sharedRoute
-  update is ArmResourcePatchAsync<Configuration, ConfigurationProperties>;
+  update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
 
   @doc("Delete a Configuration Resource")
   @removed(Versions.v2025_12_01_preview)
