@@ -23,9 +23,14 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-trafficmanager-generated"
-    namespace: "com.azure.resourcemanager.trafficmanager.generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-trafficmanager"
+    namespace: "com.azure.resourcemanager.trafficmanager"
     service-name: "TrafficManager"
+    premium: true
+    enable-sync-stack: true
+    client-side-validations: true
+    rename-model:
+      EndpointType: EndpointTypes
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-trafficmanager"
