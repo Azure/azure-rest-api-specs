@@ -1975,6 +1975,22 @@ alias EncryptionKeyParameter = {
   encryptionKey?: string;
 };
 
+alias AccessTierIfModifiedSinceParameter = {
+  /** Specify this header value to operate only on a blob if the access-tier has been modified since the specified date/time. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-access-tier-if-modified-since")
+  @encode("rfc7231")
+  accessTierIfModifiedSince?: utcDateTime;
+};
+
+alias AccessTierIfUnmodifiedSinceParameter = {
+  /** Specify this header value to operate only on a blob if the access-tier has not been modified since the specified date/time. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-access-tier-if-unmodified-since")
+  @encode("rfc7231")
+  accessTierIfUnmodifiedSince?: utcDateTime;
+};
+
 /** The If-Tags parameters. */
 alias IfTagsParameter = {
   /** Specify a SQL where clause on blob tags to operate only on blobs with a matching value. */

@@ -915,6 +915,9 @@ namespace Storage.Blob {
           @query
           @clientName("blobDeleteType")
           deletetype?: BlobDeleteType;
+
+          ...AccessTierIfModifiedSinceParameter;
+          ...AccessTierIfUnmodifiedSinceParameter;
         },
         {
           @statusCode statusCode: 202;
