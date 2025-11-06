@@ -24,11 +24,11 @@ model NetworkSecurityPerimeterConfiguration
 }
 
 @armResourceOperations
+@added(Versions.v2025_08_01_preview)
 interface NetworkSecurityPerimeterConfigurations {
 
   /**
    * Gets the specified network security perimeter configuration associated with the configuration store.
    */
-  @added(Versions.v2025_08_01_preview)
   get is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
 }
