@@ -52,18 +52,14 @@ describe("runChecks", () => {
     );
   });
 
-  test("coalesces null tag when no tags specified", async () => {
+  test("throws when no tags specified", async () => {
     (execNpmExec as Mock).mockResolvedValue({ stdout: "", stderr: "" });
     const runList = new Map<string, ReadmeAffectedTags>([
       ["readme.md", { readme: new Readme(""), changedTags: new Set<string>() }],
     ]);
 
-    const actual = await runChecks("root", runList);
-    expect(actual).toHaveLength(1);
-    expect(execNpmExec).toHaveBeenCalledWith(
-      expect.not.arrayContaining([expect.stringContaining("--tag")]),
-      expect.anything(),
-    );
+    const actual = runChecks("root", runList);
+    await expect(actual).rejects.toThrowError("No changed tags found for readme");
   });
 
   test("error path populates error, stdout, stderr", async () => {
