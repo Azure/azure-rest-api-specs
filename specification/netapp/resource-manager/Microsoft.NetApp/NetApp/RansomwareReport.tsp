@@ -261,6 +261,8 @@ interface RansomwareReports {
   >;
 }
 
+@@maxLength(RansomwareReport.name, 64);
+@@minLength(RansomwareReport.name, 1);
 @@doc(RansomwareReport.name, "The name of the ransomware report");
 @@doc(RansomwareReport.properties,
   "Advanced Ransomware Protection reports Properties"
