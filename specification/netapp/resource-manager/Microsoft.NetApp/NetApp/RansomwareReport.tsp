@@ -113,6 +113,7 @@ model RansomwareSuspectsClearRequest {
   /**
    * List of file extensions resolved (PotentialThreat or FalsePositive)
    */
+  @minItems(1)
   extensions: Extensions[];
 }
 
