@@ -517,7 +517,6 @@ model BingGroundingSearchConfiguration {
  * The bing grounding search tool parameters.
  */
 model BingGroundingSearchToolParameters {
-
   /**
    * The search configurations attached to this tool. There can be a maximum of 1
    * search configuration resource attached to the tool.
