@@ -893,6 +893,7 @@ model VirtualMachineNetworkInterfaceConfiguration {
   @doc("Describes a virtual machine network profile's IP configuration.")
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This field is using the existing compute context for tags where this field is a free-form JSON object."
   @doc("Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration")
   tags?: Record<string>;
 }
@@ -993,6 +994,7 @@ model VirtualMachinePublicIPAddressConfiguration {
   @doc("Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.")
   sku?: PublicIPAddressSku;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This field is using the existing compute context for tags where this field is a free-form JSON object."
   @doc("Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration")
   tags?: Record<string>;
 }

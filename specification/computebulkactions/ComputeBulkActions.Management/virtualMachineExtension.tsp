@@ -38,9 +38,11 @@ model VirtualMachineExtensionProperties {
   @doc("Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.")
   enableAutomaticUpgrade?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This field is using the existing compute context for settings where this field is a free-form JSON object."
   @doc("JSON formatted public settings for the extension.")
   settings?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This field is using the existing compute context for protectedSettings where this field is a free-form JSON object."
   @doc("The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.")
   protectedSettings?: Record<unknown>;
 
