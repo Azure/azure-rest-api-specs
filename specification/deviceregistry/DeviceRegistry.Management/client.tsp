@@ -16,7 +16,7 @@ using Microsoft.DeviceRegistry;
 );
 
 // Python Client configuration
-@@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmt", "python");
+@@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmtClient", "python");
 
 // CSharp Client configuration
 @@scope(OperationStatus.get, "!csharp");
@@ -154,6 +154,9 @@ using Microsoft.DeviceRegistry;
 );
 @@clientName(StatusConfig, "DeviceRegistryStatusConfig", "csharp");
 @@clientName(StatusError, "DeviceRegistryStatusError", "csharp");
+@@clientName(NamespaceMigrateRequest, "NamespaceMigrateContent", "csharp");
+@@clientName(BillingContainer.etag, "ETag", "csharp");
+@@clientName(MqttDestinationQos, "MqttDestinationQo", "csharp");
 
 // JavaScript Client configuration
 @@clientName(Microsoft.DeviceRegistry,
