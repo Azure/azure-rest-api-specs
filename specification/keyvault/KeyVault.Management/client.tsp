@@ -217,15 +217,18 @@ enum NameAvailabilityReason {
   AlreadyExists: "AlreadyExists",
 }
 
-@@clientName(NameAvailabilityReason,
-  "Reason",
-  "java"
-);
+@@clientName(NameAvailabilityReason, "Reason", "java");
 
 @@clientName(Reason, "NameAvailabilityReason", "java");
 
-@@alternateType(CheckNameAvailabilityResult.reason, NameAvailabilityReason, "java");
-@@alternateType(CheckMhsmNameAvailabilityResult.reason, NameAvailabilityReason, "java");
+@@alternateType(CheckNameAvailabilityResult.reason,
+  NameAvailabilityReason,
+  "java"
+);
+@@alternateType(CheckMhsmNameAvailabilityResult.reason,
+  NameAvailabilityReason,
+  "java"
+);
 
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "python");
