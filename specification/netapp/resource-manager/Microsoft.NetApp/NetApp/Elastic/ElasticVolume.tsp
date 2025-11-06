@@ -73,7 +73,7 @@ model ElasticVolumeProperties {
   ]>;
 
   /** List of mount targets that can be used to mount this volume */
-  @OpenAPI.extension("x-ms-identifiers", #["ipAddress", "smbServerFqdn"])
+  @OpenAPI.extension("x-ms-identifiers", #["ipAddress"])
   @visibility(Lifecycle.Read)
   mountTargets?: ElasticMountTargetProperties[];
 
@@ -123,9 +123,11 @@ model ElasticVolumeDataProtectionPatchProperties {
 @added(Versions.v2025_09_01_preview)
 model ElasticMountTargetProperties {
   /** The mount target's IPv4 address, used to mount the volume */
+  @visibility(Lifecycle.Read)
   ipAddress?: ipV4Address;
 
   /** The SMB server's Fully Qualified Domain Name, FQDN */
+  @visibility(Lifecycle.Read)
   smbServerFqdn?: string;
 }
 
@@ -274,9 +276,10 @@ model ElasticExportPolicyRule {
 @added(Versions.v2025_09_01_preview)
 model ElasticVolumeRevert {
   /** Resource identifier used to identify the Elastic Snapshot. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   snapshotResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.NetApp/elasticAccounts/elasticSnapshots";
+      type: "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes/elasticSnapshots";
     }
   ]>;
 }

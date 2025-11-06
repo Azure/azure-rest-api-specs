@@ -223,15 +223,15 @@ interface ElasticSnapshotPolicies {
   @get
   @action("elasticvolumes")
   @added(Versions.v2025_09_01_preview)
-  listVolumes is ArmResourceActionSync<
+  listElasticVolumes is ArmResourceActionSync<
     ElasticSnapshotPolicy,
     void,
     ElasticSnapshotPolicyVolumeList
   >;
 }
 
-@@maxLength(ElasticSnapshot.name, 64);
-@@minLength(ElasticSnapshot.name, 1);
+@@maxLength(ElasticSnapshotPolicy.name, 64);
+@@minLength(ElasticSnapshotPolicy.name, 1);
 
 @@clientName(ElasticSnapshotPolicies.createOrUpdate::parameters.resource,
   "body"

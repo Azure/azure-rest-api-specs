@@ -3922,6 +3922,8 @@
             "description": "The name of the ElasticSnapshotPolicy",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
           }
         ],
@@ -3975,6 +3977,8 @@
             "description": "The name of the ElasticSnapshotPolicy",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
           },
           {
@@ -4059,6 +4063,8 @@
             "description": "The name of the ElasticSnapshotPolicy",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
           },
           {
@@ -4140,6 +4146,8 @@
             "description": "The name of the ElasticSnapshotPolicy",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
           }
         ],
@@ -4181,7 +4189,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/elasticAccounts/{accountName}/elasticSnapshotPolicies/{snapshotPolicyName}/elasticvolumes": {
       "get": {
-        "operationId": "ElasticSnapshotPolicies_ListVolumes",
+        "operationId": "ElasticSnapshotPolicies_ListElasticVolumes",
         "tags": [
           "ElasticSnapshotPolicies"
         ],
@@ -4210,6 +4218,8 @@
             "description": "The name of the ElasticSnapshotPolicy",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
           }
         ],
@@ -4225,11 +4235,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ElasticSnapshotPolicies_ListVolumes": {
-            "$ref": "./examples/ElasticSnapshotPolicies_ListVolumes.json"
           }
         },
         "x-ms-pageable": {
@@ -16071,11 +16076,13 @@
       "properties": {
         "ipAddress": {
           "$ref": "#/definitions/Azure.Core.ipV4Address",
-          "description": "The mount target's IPv4 address, used to mount the volume"
+          "description": "The mount target's IPv4 address, used to mount the volume",
+          "readOnly": true
         },
         "smbServerFqdn": {
           "type": "string",
-          "description": "The SMB server's Fully Qualified Domain Name, FQDN"
+          "description": "The SMB server's Fully Qualified Domain Name, FQDN",
+          "readOnly": true
         }
       }
     },
@@ -16716,8 +16723,7 @@
           },
           "readOnly": true,
           "x-ms-identifiers": [
-            "ipAddress",
-            "smbServerFqdn"
+            "ipAddress"
           ]
         },
         "dataProtection": {
@@ -16798,10 +16804,14 @@
           "type": "string",
           "format": "arm-id",
           "description": "Resource identifier used to identify the Elastic Snapshot.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.NetApp/elasticAccounts/elasticSnapshots"
+                "type": "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes/elasticSnapshots"
               }
             ]
           }
