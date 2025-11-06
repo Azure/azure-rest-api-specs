@@ -3,6 +3,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+import "./back-compatible.tsp";
 
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
@@ -79,8 +81,8 @@ model AssociationUpdate {
   tags?: TrackedResource.tags;
 
   /** The resource-specific properties for this resource. */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AssociationUpdateProperties;
 }
 
