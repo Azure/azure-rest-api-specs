@@ -16,41 +16,57 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface BulkActions {
   @doc("Gets a list of LaunchBulkInstancesOperations.")
-  get is ArmResourceRead<
-    Resource = LaunchBulkInstancesOperation,
-    BaseParameters = CustomParams
-  >;
+  @get
+  @armResourceRead(LaunchBulkInstancesOperation)
+  get(
+    ...CommonParams,
+    ...ProviderNamespace<LaunchBulkInstancesOperation>,
+    ...LocationParameter,
+    ...ResourceNameParameter<
+      LaunchBulkInstancesOperation,
+      NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    >,
+  ): LaunchBulkInstancesOperation | ErrorResponse;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Creates or updates LaunchBulkInstancesOperations.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    Resource = LaunchBulkInstancesOperation,
-    BaseParameters = CustomParams
-  >;
+  @put
+  @armResourceCreateOrUpdate(LaunchBulkInstancesOperation)
+  createOrUpdate(...CustomParams): LaunchBulkInstancesOperation;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The field name `name` is the valid field name."
   @doc("Deletes the LaunchBulkInstancesOperations.")
-  delete is ArmResourceDeleteSync<
-    Resource = LaunchBulkInstancesOperation,
-    BaseParameters = CustomParams
-  >;
+  @delete
+  @armResourceDelete(LaunchBulkInstancesOperation)
+  delete(
+    ...CustomParams,
+  ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
 
-  @doc("List LaunchBulkInstancesOperation resources by resource group.")
-  listByResourceGroup is ArmResourceListByParent<
-    Resource = LaunchBulkInstancesOperation,
-    BaseParameters = CustomParams
-  >;
-
-  @doc("List LaunchBulkInstancesOperation resources by resource group.")
-  listBySubscription is ArmListBySubscription<Resource = LaunchBulkInstancesOperation>;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @doc("Cancels the instances that have not yet launched.")
-  cancel is ArmResourceActionNoContentSync<
-    Resource = LaunchBulkInstancesOperation,
-    Request = void,
-    BaseParameters = CustomParams
-  >;
+  @post
+  @armResourceAction(LaunchBulkInstancesOperation)
+  cancel(...CustomParams): ArmNoContentResponse | ErrorResponse;
+
+  @doc("List LaunchBulkInstancesOperation resources by resource group.")
+  @get
+  @list
+  @listsResource(LaunchBulkInstancesOperation)
+  @armResourceList(LaunchBulkInstancesOperation)
+  listByResourceGroup(
+    ...CommonParams,
+    ...ProviderNamespace<LaunchBulkInstancesOperation>,
+    ...LocationParameter,
+  ): LaunchBulkInstancesOperationListResult | ErrorResponse;
+
+  @doc("List LaunchBulkInstancesOperation resources by subscriptionId.")
+  @get
+  @list
+  @listsResource(LaunchBulkInstancesOperation)
+  @armResourceList(LaunchBulkInstancesOperation)
+  listBySubscription(
+    ...SubscriptionParams,
+    ...ProviderNamespace<LaunchBulkInstancesOperation>,
+    ...LocationParameter,
+  ): LaunchBulkInstancesOperationListResult;
 
   @doc("List VirtualMachine resources of a LaunchBulkInstancesOperation.")
   @autoRoute
@@ -60,8 +76,8 @@ interface BulkActions {
   @get
   listVirtualMachines(
     ...CommonParams,
-    ...LocationParameter,
     ...ProviderNamespace<LaunchBulkInstancesOperation>,
+    ...LocationParameter,
     ...ResourceNameParameter<
       LaunchBulkInstancesOperation,
       NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"

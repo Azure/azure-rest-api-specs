@@ -42,6 +42,14 @@ suppressions:
     reason: SSD is the abbreviation for solid state drive used in the property name.
     from: computebulkactions.json
     where: $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
+  - code:  AvoidAdditionalProperties
+    reason: Tags are mimicing the existing object structure from compute, bulkactions is a passthrough API and will deliver the object as is to compute.
+    from: computebulkactions.json
+    where: $.definitions.VirtualMachineExtensionProperties.properties.settings
+  - code:  AvoidAdditionalProperties
+    reason: Tags are mimicing the existing object structure from compute, bulkactions is a passthrough API and will deliver the object as is to compute.
+    from: computebulkactions.json
+    where: $.definitions.VirtualMachineExtensionProperties.properties.protectedSettings
 ```
 
 # Code Generation

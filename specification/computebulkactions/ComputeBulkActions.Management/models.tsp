@@ -30,9 +30,19 @@ alias LocationParameter = {
   location: azureLocation;
 };
 
+alias SubscriptionParams = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+};
+
 alias CustomParams = {
   ...CommonParams;
+  ...ProviderNamespace<LaunchBulkInstancesOperation>;
   ...LocationParameter;
+  ...ResourceNameParameter<
+    LaunchBulkInstancesOperation,
+    NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+  >;
 };
 
 // ------------------ Union --------------- //
@@ -267,16 +277,16 @@ model ManagedServiceIdentityUpdate
 model ResourcePlanUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.Plan>>;
 
-@resourceGroupResource
 @doc("A LaunchBulkInstancesOperation resource")
 model LaunchBulkInstancesOperation
   is ProxyResource<LaunchBulkInstancesOperationProperties> {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The field name `name` is the valid field name."
+  @visibility(Lifecycle.Read)
   @doc("The ID of the LaunchBulkInstancesOperation")
-  @key("launchBulkInstancesOperationID")
   @segment("launchBulkInstancesOperations")
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @path
+  @key
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid property"
@@ -288,6 +298,15 @@ model LaunchBulkInstancesOperation
 }
 
 // ------------------ Models --------------- //
+@doc("List of LaunchBulkInstancesOperation resources.")
+model LaunchBulkInstancesOperationListResult {
+  @pageItems
+  @doc("The list of LaunchBulkInstancesOperation resources.")
+  value: LaunchBulkInstancesOperation[];
+
+  @doc("The URL to get the next set of results.")
+  nextLink?: string;
+}
 
 @doc("Details of the LaunchBulkInstancesOperation.")
 model LaunchBulkInstancesOperationProperties {
