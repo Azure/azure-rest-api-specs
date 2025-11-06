@@ -1617,7 +1617,7 @@
           }
         },
         "serviceExtensions": {
-          "description": "Toggles for service extensions to enforce private link validation",
+          "description": "Enable private link validation for an Azure Arc Extension.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceExtension"
@@ -1738,21 +1738,21 @@
     },
     "ServiceExtension": {
       "type": "object",
-      "description": "Toggle for private link validation for a given service extension",
+      "description": "Enable private link validation for an Azure Arc Extension",
       "properties": {
         "serviceExtensionType": {
-          "description": "The type/name of the Service Extension.",
+          "description": "The name of the Azure Arc Extension.",
           "$ref": "#/definitions/ServiceExtensionType"
         },
         "serviceExtensionPublicNetworkAccess": {
-          "description": "Determines whether private link validation is enforced for the given service extension.",
+          "description": "The network access policy to determine if the specified Azure Arc Extension can use public Azure Arc Extension service endpoints.",
           "$ref": "#/definitions/ServiceExtensionPublicNetworkAccess"
         }
       }
     },
     "ServiceExtensionType": {
       "type": "string",
-      "description": "The service extension type/name",
+      "description": "The name of the Azure Arc Extension.",
       "x-ms-enum": {
         "name": "ServiceExtensionType",
         "modelAsString": true
@@ -1760,7 +1760,7 @@
     },
     "ServiceExtensionPublicNetworkAccess": {
       "type": "string",
-      "description": "Property to control enforcement of private link validation for a given service extension.",
+      "description": "The network access policy to determine if the specified Azure Arc Extension can use public Azure Arc Extension service endpoints.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -1771,11 +1771,11 @@
         "values": [
           {
             "value": "enabled",
-            "description": "Private link validation is enabled for the given service extension."
+            "description": "Allows Azure Arc agents to communicate with Azure Arc services over both public (internet) and private endpoints."
           },
           {
             "value": "disabled",
-            "description": "Private link validation is disabled for the given service extension, but logs will be generated for traffic that would have been blocked if private link validation were enabled."
+            "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
           }
         ]
       }
