@@ -1,8 +1,10 @@
 import "../Common/StandardizedContracts/SummaryProperties.tsp";
+import "../WACAApiVersions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Migrate;
 
@@ -27,6 +29,10 @@ model WebAppCompoundAssessmentSummaryProperties is SummaryProperties {
 
   @doc("Light summary of the compound assessment.")
   discoveredLightSummary?: DiscoveredLightSummary;
+
+  @doc("Assessed summary of the compound assessment.")
+  @added(WACAApiVersions.v2025_09_09_preview)
+  assessedLightSummary?: CompoundAssessmentAssessedSummary;
 }
 
 @doc("Summary of the compound assessment.")
@@ -65,4 +71,15 @@ model WebAppsPerType {
 
   @doc("Count of the web app type.")
   count: int32;
+}
+
+@doc("The assessment summary of the compound assessment.")
+@added(WACAApiVersions.v2025_09_09_preview)
+model CompoundAssessmentAssessedSummary {
+  @doc("The total number of web apps.")
+  totalNumberOfWebApps?: int32;
+
+  @doc("The summary per source and target pair.")
+  @identifiers(#[])
+  summaryPerSourceTargetPair?: TargetSourcePair[];
 }
