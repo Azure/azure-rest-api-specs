@@ -14,7 +14,7 @@ namespace Microsoft.AppConfiguration;
 @parentResource(ConfigurationStore)
 @added(Versions.v2025_08_01_preview)
 model NetworkSecurityPerimeterConfiguration
-  is Azure.ResourceManager.ProxyResource<CommonTypes.NetworkSecurityPerimeterConfiguration> {
+  is CommonTypes.NetworkSecurityPerimeterConfiguration {
   ...ResourceNameParameter<
     Resource = NetworkSecurityPerimeterConfiguration,
     KeyName = "networkSecurityPerimeterConfigurationName",
