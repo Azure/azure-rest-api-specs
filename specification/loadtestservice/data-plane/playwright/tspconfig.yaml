@@ -17,14 +17,14 @@ options:
     output-file: "{version-status}/{version}/playwright.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-developer-playwright"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-playwright"
     namespace: "azure.developer.playwright"
     generate-test: true
     generate-sample: true
     package-mode: azure-dataplane
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "playwright-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/playwright-rest"
     title: PlaywrightServiceClient
     description: Microsoft Playwright Service Client
     generate-metadata: true
@@ -42,7 +42,7 @@ options:
     namespace: "Azure.Developer.Playwright"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-developer-playwright"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-playwright"
     namespace: com.azure.developer.playwright
     partial-update: true
     generate-tests: false

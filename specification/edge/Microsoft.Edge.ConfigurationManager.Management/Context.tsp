@@ -17,7 +17,7 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
-@doc("Capability, to match in Solution Templates & Targets")
+@doc("Capability, to match in Solution Templates and Targets")
 model Capability {
   @doc("Name of Capability")
   name: string;

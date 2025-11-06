@@ -37,14 +37,14 @@ options:
     model-namespace: false
   "@azure-tools/typespec-python":
     package-pprint-name: '"Communication JobRouter"'
-    package-dir: "azure-communication-jobrouter"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-jobrouter"
     namespace: "azure.communication.jobrouter"
     package-version: 1.1.0b1
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-communication-jobrouter"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-jobrouter"
     namespace: com.azure.communication.jobrouter
     partial-update: true
     service-name: JobRouter
@@ -55,8 +55,7 @@ options:
     use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/communication-job-router-rest"
-    package-dir: "communication-job-router-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/communication-job-router-rest"
     is-modular-library: false
     package-details:
       name: "@azure-rest/communication-job-router"

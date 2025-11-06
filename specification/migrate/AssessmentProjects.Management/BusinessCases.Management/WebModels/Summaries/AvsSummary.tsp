@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/Models.tsp";
 import "../Common/Enums.tsp";
-import "../../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../../Common/ArmModels/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -92,22 +92,22 @@ model AvsNodeSummary {
 
   @doc("Estimated cost by offer.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   estimatedCostByRecommendedOffer?: EstimatedCostByOffer[];
 
   @doc("The recommended VM family summary.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   recommendedAvsNodeTypeSummary?: RecommendedAvsNodeTypeSummary[];
 
   @doc("Estimated External Storage")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   estimatedExternalStorage?: EstimatedExternalStorage[];
 
   @doc("Estimated Network")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   estimatedNetwork?: EstimatedNetwork[];
 
   @doc("Estimated Cost With VCF BYOL")
@@ -116,7 +116,7 @@ model AvsNodeSummary {
 
   @doc("Represents errors which might have occurred while calculating AVS Node Summary")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: ErrorDetail[];
 }
 

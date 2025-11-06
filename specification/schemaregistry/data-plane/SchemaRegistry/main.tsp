@@ -41,15 +41,12 @@ namespace SchemaRegistry;
 
 @doc("Represents the Schema Registry API version to use for requests.")
 enum ServiceVersion {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("Azure Schema Registry 2021-10 Version")
   V2021_10: "2021-10",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("Azure Schema Registry 2022-10 Version")
   V2022_10: "2022-10",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("Azure Schema Registry 2023-07-01 Version. This is the default version.")
   V2023_07_01: "2023-07-01",
 }

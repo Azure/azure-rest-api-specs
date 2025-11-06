@@ -14,8 +14,6 @@ options:
     emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{version-status}/{version}/azurefleet.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
@@ -27,20 +25,20 @@ options:
     use-model-reader-writer: true
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-computefleet"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computefleet"
     namespace: "azure.mgmt.computefleet"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-computefleet"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-computefleet"
     namespace: com.azure.resourcemanager.computefleet
     service-name: Compute Fleet
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/computefleet"
-    package-dir: "armcomputefleet"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcomputefleet"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcomputefleet/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -49,7 +47,7 @@ options:
     inject-spans: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-computefleet"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computefleet"
     flavor: azure
     package-details:
       name: "@azure/arm-computefleet"
