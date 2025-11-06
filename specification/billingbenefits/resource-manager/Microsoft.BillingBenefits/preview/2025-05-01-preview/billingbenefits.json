@@ -636,14 +636,20 @@
           "ConditionalCreditValidateCreateContributor": {
             "$ref": "./examples/ConditionalCreditValidateCreateContributor.json"
           },
-          "ConditionalCreditValidateCreateEmpowered": {
-            "$ref": "./examples/ConditionalCreditValidateCreateEmpowered.json"
-          },
           "ConditionalCreditValidateCreateError": {
             "$ref": "./examples/ConditionalCreditValidateCreateError.json"
           },
           "ConditionalCreditValidateCreateMultiple": {
             "$ref": "./examples/ConditionalCreditValidateCreateMultiple.json"
+          },
+          "ConditionalCreditValidateUpdate": {
+            "$ref": "./examples/ConditionalCreditValidateUpdate.json"
+          },
+          "ConditionalCreditValidateUpdateRemoveMilestone": {
+            "$ref": "./examples/ConditionalCreditValidateUpdateRemoveMilestone.json"
+          },
+          "ConditionalCreditValidateCancel": {
+            "$ref": "./examples/ConditionalCreditValidateCancel.json"
           }
         },
         "parameters": [
@@ -3076,6 +3082,160 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/cancel": {
+      "post": {
+        "description": "Cancel conditional credit. Stops applying the benefit.",
+        "operationId": "ConditionalCredits_Cancel",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConditionalCreditCancel": {
+            "$ref": "./examples/ConditionalCreditCancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "200": {
+            "description": "Get conditional credit under the given resource group.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/contributors/{contributorName}": {
+      "get": {
+        "description": "Get a conditional credit contributor for primary service admin",
+        "operationId": "ConditionalCreditContributors_GetFromPrimary",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditContributor_GetFromPrimary": {
+            "$ref": "./examples/ConditionalCreditContributorGetFromPrimary.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContributorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditContributor"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/contributors": {
+      "get": {
+        "description": "List contributors under a primary conditional credit for primary service admin",
+        "operationId": "ConditionalCreditContributors_ListFromPrimary",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditContributors_ListFromPrimary": {
+            "$ref": "./examples/ConditionalCreditContributorsListFromPrimary.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List contributors under a conditional credit for primary service admin.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditContributorList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits": {
       "get": {
         "description": "List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts",
@@ -3104,6 +3264,48 @@
             "description": "List of conditional credits that are applicable for a given scope.",
             "schema": {
               "$ref": "#/definitions/ConditionalCreditList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.BillingBenefits/applicableConditionalCredits/{systemId}/providers/Microsoft.BillingBenefits/applicableContributors": {
+      "get": {
+        "description": "List contributors under applicable conditional credits for a given billing account.",
+        "operationId": "ConditionalCreditContributors_ListFromApplicableConditionalCredit",
+        "tags": [
+          "Conditional Credit Contributors"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditContributorsScopeList": {
+            "$ref": "./examples/ConditionalCreditContributorsListFromApplicableConditionalCredit.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SystemIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of contributors under applicable conditional credits for a given billing account.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditContributorList"
             }
           },
           "default": {
@@ -6162,7 +6364,6 @@
         },
         "status": {
           "type": "string",
-          "readOnly": true,
           "enum": [
             "Unknown",
             "Scheduled",
@@ -6307,7 +6508,6 @@
         },
         "status": {
           "type": "string",
-          "readOnly": true,
           "enum": [
             "Unknown",
             "Scheduled",
@@ -6435,6 +6635,10 @@
         "endAt": {
           "$ref": "#/definitions/EndAt"
         },
+        "allowContributors": {
+          "$ref": "#/definitions/EnablementMode",
+          "description": "Whether this conditional credit allows contributor billing accounts"
+        },
         "milestones": {
           "type": "array",
           "items": {
@@ -6458,6 +6662,39 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results"
+        }
+      }
+    },
+    "ConditionalCreditContributor": {
+      "type": "object",
+      "description": "Conditional credit contributor",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Conditional credit contributor properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContributorConditionalCreditProperties"
+        }
+      }
+    },
+    "ConditionalCreditContributorList": {
+      "type": "object",
+      "description": "Conditional credit contributor list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionalCreditContributor"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
         }
       }
     },
