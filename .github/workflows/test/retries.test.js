@@ -55,9 +55,13 @@ describe("retry function", () => {
 });
 
 describe("fetchWithRetry function", () => {
+  /** @type {import("vitest").Mock} */
+  let mockFetch;
+
   beforeEach(() => {
+    mockFetch = vi.fn();
     // Mock global fetch
-    global.fetch = vi.fn();
+    global.fetch = mockFetch;
   });
 
   it("should call fetch with provided url and options", async () => {
@@ -65,7 +69,7 @@ describe("fetchWithRetry function", () => {
       ok: true,
       json: () => Promise.resolve({ data: "test" }),
     };
-    global.fetch.mockResolvedValue(mockResponse);
+    mockFetch.mockResolvedValue(mockResponse);
 
     const url = "https://example.com/api";
     const options = { method: "POST", body: JSON.stringify({ key: "value" }) };
