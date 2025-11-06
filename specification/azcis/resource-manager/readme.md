@@ -65,6 +65,7 @@ input-file:
 ```
 
 ### Tag: 2025-11-04-preview
+
 These settings apply only when `--tag=2025-11-04-preview` is specified on the command line.
 
 ```yaml $(tag) == '2025-11-04-preview'
