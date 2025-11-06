@@ -115,3 +115,8 @@ using Microsoft.Peering;
   "ArmResource",
   "python"
 );
+
+@@clientLocation(Microsoft.Peering.checkServiceProviderAvailability,
+  "Management",
+  "go"
+);
