@@ -19,6 +19,7 @@ namespace Azure.Ai.Speech.Transcription;
 
 @@clientName(TranscriptionOptions.diarization, "diarizationOptions");
 @@clientName(TranscriptionOptions.channels, "activeChannels");
+@@clientName(TranscriptionOptions.models, "localeModelMapping", "java");
 @@clientName(TranscriptionOptions.phraseList, "phraseListOptions", "java");
 @@clientName(TranscriptionOptions.enhancedMode, "enhancedModeOptions", "java");
 @@clientName(EnhancedModeProperties, "EnhancedModeOptions", "java");
@@ -30,3 +31,4 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(TranscribedWord.offsetMilliseconds, "offset", "java");
 @@clientName(TranscribedWord.durationMilliseconds, "duration", "java");
 @@access(transcribe, Access.internal, "csharp");
+@@access(TranscriptionContent, Access.internal, "java");
