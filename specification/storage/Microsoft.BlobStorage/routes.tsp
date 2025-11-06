@@ -2284,7 +2284,6 @@ namespace Storage.Blob {
             ...SourceEncryptionKeyParameter;
             ...SourceEncryptionKeySha256Parameter;
             ...SourceEncryptionAlgorithmParameter;
-
           },
           {
             @statusCode statusCode: 201;
