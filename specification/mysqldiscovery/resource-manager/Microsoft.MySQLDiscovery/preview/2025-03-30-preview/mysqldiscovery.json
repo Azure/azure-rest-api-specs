@@ -1458,6 +1458,64 @@
         ]
       }
     },
+    "CustomProperties": {
+      "type": "object",
+      "description": "Represents a custom property with a key and value that can be of different types (string, boolean, or integer).",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name/key of the custom property."
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          "description": "The value of the custom property, which can be a string, boolean, or 32-bit integer."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "SoftwareAttributes": {
+      "type": "object",
+      "description": "Contains software-related attributes and metadata for the discovered MySQL server instance.",
+      "properties": {
+        "softwareName": {
+          "type": "string",
+          "description": "The name of the MySQL software or distribution."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "The name of the software provider or vendor."
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "The version of the MySQL software."
+        },
+        "softwareId": {
+          "type": "string",
+          "description": "A unique identifier for the software instance."
+        },
+        "customProperties": {
+          "type": "array",
+          "description": "Additional custom properties as key-value pairs.",
+          "items": {
+            "$ref": "#/definitions/CustomProperties"
+          }
+        }
+      }
+    },
     "ExtendedLocation": {
       "type": "object",
       "description": "Defines the extended location configuration for MySQL Discovery resources deployed outside of Azure, enabling hybrid and on-premises discovery scenarios.",
@@ -1847,6 +1905,10 @@
             "type": "string"
           },
           "description": "Resource labels."
+        },
+        "softwareAttributes": {
+          "$ref": "#/definitions/SoftwareAttributes",
+          "description": "Software-related attributes and metadata for the discovered MySQL server instance."
         }
       },
       "required": [
@@ -2159,6 +2221,10 @@
             "type": "string"
           },
           "description": "Resource labels."
+        },
+        "softwareAttributes": {
+          "$ref": "#/definitions/SoftwareAttributes",
+          "description": "Software-related attributes and metadata for the discovered MySQL server instance."
         }
       }
     }

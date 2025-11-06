@@ -5,7 +5,26 @@
     "resourceGroupName": "testrg",
     "siteName": "testSite",
     "serverName": "testDatabaseName",
-    "body": {}
+    "body": {
+      "properties": {
+        "softwareAttributes": {
+          "softwareName": "MySQL Community Server",
+          "providerName": "Oracle Corporation",
+          "softwareVersion": "8.0.33",
+          "softwareId": "mysql-8.0-community-updated",
+          "customProperties": [
+            {
+              "key": "binaryLogEnabled",
+              "value": false
+            },
+            {
+              "key": "maxConnections",
+              "value": 200
+            }
+          ]
+        }
+      }
+    }
   },
   "responses": {
     "200": {
