@@ -149,7 +149,7 @@ interface ProxyArtifact {
   /**
    * Lists all the available artifacts in the parent Artifact Store.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
   @get
   @action("artifacts")
@@ -162,7 +162,7 @@ interface ProxyArtifact {
   /**
    * Get a Artifact overview information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
   @get
   @action("artifactVersions")

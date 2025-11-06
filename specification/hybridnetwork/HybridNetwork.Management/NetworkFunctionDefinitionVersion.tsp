@@ -69,7 +69,7 @@ interface NetworkFunctionDefinitionVersions {
   /**
    * Update network function definition version state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkFunctionDefinitionVersions_updateState")
   updateState is ArmResourceActionAsyncBase<
     NetworkFunctionDefinitionVersion,
