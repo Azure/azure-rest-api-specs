@@ -200,6 +200,18 @@ enum SkuName {
 
   /** The premium LRS SKU. */
   PremiumLRS: "Premium_LRS",
+
+  /** The standard GZRS SKU. */
+  @added(Versions.v2026_04_06)
+  StandardGZRS: "Standard_GZRS",
+
+  /** The premium ZRS SKU. */
+  @added(Versions.v2026_04_06)
+  PremiumZRS: "Premium_ZRS",
+
+  /** The standard RAGZRS SKU. */
+  @added(Versions.v2026_04_06)
+  StandardRAGZRS: "Standard_RAGZRS",
 }
 
 /** The list container segment response */
