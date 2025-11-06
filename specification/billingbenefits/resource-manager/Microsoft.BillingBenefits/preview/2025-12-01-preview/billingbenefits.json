@@ -6698,7 +6698,6 @@
         },
         "billingAccountResourceId": {
           "type": "string",
-          "readOnly": true,
           "format": "arm-id",
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -6730,12 +6729,15 @@
         },
         "status": {
           "type": "string",
-          "readOnly": true,
           "enum": [
-            "Pending",
+            "Unknown",
+            "Scheduled",
             "Active",
+            "Pending",
+            "Failed",
             "Canceled",
             "Completed",
+            "Stopped",
             "PendingSettlement"
           ],
           "x-ms-enum": {
@@ -6752,7 +6754,6 @@
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "readOnly": true,
           "description": "End date of the conditional credit (derived from last milestone)"
         },
         "productCode": {
@@ -6762,8 +6763,8 @@
         "benefitResourceId": {
           "$ref": "#/definitions/BenefitResourceId"
         },
-        "commitment": {
-          "$ref": "#/definitions/Commitment"
+        "resourceId": {
+          "$ref": "#/definitions/ResourceId"
         }
       }
     },
@@ -6872,14 +6873,17 @@
         },
         "status": {
           "type": "string",
-          "readOnly": true,
           "enum": [
+            "Unknown",
             "Scheduled",
             "Active",
+            "Pending",
+            "Failed",
             "Completed",
-            "Missed",
             "Canceled",
-            "PendingSettlement"
+            "Removed",
+            "PendingSettlement",
+            "Missed"
           ],
           "x-ms-enum": {
             "name": "MilestoneStatus",
@@ -6992,6 +6996,13 @@
         "displayName": {
           "type": "string",
           "description": "Display name for the conditional credit"
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt"
+        },
+        "allowContributors": {
+          "$ref": "#/definitions/EnablementMode",
+          "description": "Whether this conditional credit allows contributor billing accounts"
         },
         "milestones": {
           "type": "array",
