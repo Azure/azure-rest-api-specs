@@ -1609,8 +1609,8 @@ model LabVirtualMachineCreationParameter {
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: LabVirtualMachineCreationParameterProperties;
 
   /**
@@ -1985,8 +1985,8 @@ model ScheduleCreationParameter {
   /**
    * The properties of the schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ScheduleCreationParameterProperties;
 
   /**
@@ -2739,8 +2739,8 @@ model ApplicableSchedule extends Resource {
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: ApplicableScheduleProperties;
 }
 

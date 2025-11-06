@@ -385,8 +385,8 @@ model AgentPoolUpdateParameters {
   /**
    * The properties associated with the agent pool
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AgentPoolPropertiesUpdateParameters;
 
   /**
@@ -918,8 +918,8 @@ model TaskRunUpdateParameters {
   /**
    * The properties for updating a task run.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: TaskRunPropertiesUpdateParameters;
 
   /**
@@ -1325,8 +1325,8 @@ model TaskUpdateParameters {
   /**
    * The properties for updating a task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: TaskPropertiesUpdateParameters;
 
   /**

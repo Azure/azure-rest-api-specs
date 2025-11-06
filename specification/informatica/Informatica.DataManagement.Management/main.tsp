@@ -1,4 +1,6 @@
 import "@typespec/rest";
+import "./back-compatible.tsp";
+
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
