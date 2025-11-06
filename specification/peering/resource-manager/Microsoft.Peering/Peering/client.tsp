@@ -4,3 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Peering, "PeeringManagementClient", "python");
+@@clientLocation(Microsoft.Peering.checkServiceProviderAvailability,
+  "Management",
+  "go"
+);
