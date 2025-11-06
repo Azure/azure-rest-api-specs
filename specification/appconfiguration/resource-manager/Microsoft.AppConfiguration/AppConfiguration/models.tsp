@@ -77,14 +77,17 @@ union ActionsRequired {
  */
 union PublicNetworkAccess {
   string,
+
   /**
    * Allow public network access to the data plane.
    */
   Enabled: "Enabled",
+
   /**
    * Disallow public network access to the data plane.
    */
   Disabled: "Disabled",
+
   /**
    * Let network security perimeter configuration control public network access to the data plane.
    */
