@@ -905,7 +905,7 @@ model SubscriptionList {
   /**
    * List of subscriptions and the state of the monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   monitoredSubscriptionList?: MonitoredSubscription[];
 }
 
