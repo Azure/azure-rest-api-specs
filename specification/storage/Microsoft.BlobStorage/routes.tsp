@@ -1717,10 +1717,10 @@ namespace Storage.Blob {
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
+            ...PageWriteParameter<"update">;
             ...SourceEncryptionKeyParameter;
             ...SourceEncryptionKeySha256Parameter;
             ...SourceEncryptionAlgorithmParameter;
-            ...PageWriteParameter<"update">;
           },
           {
             @statusCode statusCode: 201;
