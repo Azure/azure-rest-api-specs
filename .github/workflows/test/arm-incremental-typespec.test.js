@@ -16,10 +16,19 @@ import {
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
 } from "../../shared/test/examples.js";
-import incrementalTypeSpec from "../src/arm-incremental-typespec.js";
+import incrementalTypeSpecImpl from "../src/arm-incremental-typespec.js";
 import { createMockCore } from "./mocks.js";
 
 const core = createMockCore();
+
+/**
+ * @param {unknown} asyncFunctionArgs
+ */
+function incrementalTypeSpec(asyncFunctionArgs) {
+  return incrementalTypeSpecImpl(
+    /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (asyncFunctionArgs),
+  );
+}
 
 describe("incrementalTypeSpec", () => {
   afterEach(() => {
@@ -131,8 +140,27 @@ describe("incrementalTypeSpec", () => {
 
     const showSpy = vi
       .mocked(simpleGit.simpleGit().show)
-      .mockImplementation(async ([treePath]) =>
-        treePath.split(":")[0] == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
+      .mockImplementation(
+        (
+          /** @type {import("simple-git").SimpleGitTaskCallback|string|string[]|undefined} */ optionsOrCallback,
+        ) => {
+          /** @type {string} */
+          let option;
+
+          if (Array.isArray(optionsOrCallback)) {
+            option = optionsOrCallback[0];
+          } else if (typeof optionsOrCallback === "string") {
+            option = optionsOrCallback;
+          } else {
+            throw new Error(`Unexpected argument: ${optionsOrCallback}`);
+          }
+
+          return /** @type {import("simple-git").Response<string>} */ (
+            Promise.resolve(
+              option?.split(":")[0] == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
+            )
+          );
+        },
       );
 
     const lsTreeSpy = vi.mocked(simpleGit.simpleGit().raw).mockResolvedValue(swaggerPath);
@@ -199,16 +227,37 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
 
-    const showSpy = vi.mocked(simpleGit.simpleGit().show).mockImplementation(async ([treePath]) => {
-      const path = treePath.split(":")[1];
-      if (path === swaggerPath) {
-        return swaggerTypeSpecGenerated;
-      } else if (path === readmePath) {
-        return contosoReadme;
-      } else {
-        throw new Error("does not exist");
-      }
-    });
+    const showSpy = vi
+      .mocked(simpleGit.simpleGit().show)
+      .mockImplementation(
+        (
+          /** @type {import("simple-git").SimpleGitTaskCallback|string|string[]|undefined} */ optionsOrCallback,
+        ) => {
+          /** @type {string} */
+          let option;
+
+          if (Array.isArray(optionsOrCallback)) {
+            option = optionsOrCallback[0];
+          } else if (typeof optionsOrCallback === "string") {
+            option = optionsOrCallback;
+          } else {
+            throw new Error(`Unexpected argument: ${optionsOrCallback}`);
+          }
+
+          const path = option.split(":")[1];
+          if (path === swaggerPath) {
+            return /** @type {import("simple-git").Response<string>} */ (
+              Promise.resolve(swaggerTypeSpecGenerated)
+            );
+          } else if (path === readmePath) {
+            return /** @type {import("simple-git").Response<string>} */ (
+              Promise.resolve(contosoReadme)
+            );
+          } else {
+            throw new Error("does not exist");
+          }
+        },
+      );
 
     const lsTreeSpy = vi.mocked(simpleGit.simpleGit().raw).mockResolvedValue(swaggerPath);
 
