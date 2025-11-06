@@ -63,7 +63,6 @@ interface SkuResources {
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is SkuResourceOps.CreateOrUpdateSync<
     SkuResource,
     Response = ArmResourceUpdatedResponse<SkuResource>
@@ -128,7 +127,6 @@ interface Skus {
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateNestedResourceTypeFirst is SkusOps.CreateOrUpdateSync<
     SkuResource,
     Response = ArmResourceUpdatedResponse<SkuResource>
@@ -199,7 +197,6 @@ interface SkuResourceOperationGroup {
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateNestedResourceTypeSecond is SkuResourceOperationGroupOps.CreateOrUpdateSync<
     SkuResource,
     Response = ArmResourceUpdatedResponse<SkuResource>
@@ -276,7 +273,6 @@ interface SkuResourceOperationGroupThird {
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateNestedResourceTypeThird is SkuResourceOperationGroupOpsThird.CreateOrUpdateSync<
     SkuResource,
     Response = ArmResourceUpdatedResponse<SkuResource>
