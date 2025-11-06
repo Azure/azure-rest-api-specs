@@ -49,6 +49,9 @@
       "name": "PrivateEndpointConnections"
     },
     {
+      "name": "NetworkSecurityPerimeterConfigurations"
+    },
+    {
       "name": "PrivateLinkResources"
     },
     {
@@ -991,6 +994,57 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets the specified network security perimeter configuration associated with the configuration store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configStoreName",
+            "in": "path",
+            "description": "The name of the configuration store.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "description": "The name of the NetworkSecurityPerimeterConfiguration",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -2585,6 +2639,22 @@
           "readOnly": true
         }
       }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "OperationDefinition": {
       "type": "object",
