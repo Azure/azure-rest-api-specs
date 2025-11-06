@@ -44,7 +44,7 @@ interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Mo
 
   /** Returns property-level changes that will be made by the deployment if executed. */
   @action("whatIf")
-  whatIf is ArmResourceActionSync<
+  whatIf is ArmResourceActionAsync<
     DeploymentStacksWhatIfResult,
     void,
     ArmResponse<DeploymentStacksWhatIfResult>,

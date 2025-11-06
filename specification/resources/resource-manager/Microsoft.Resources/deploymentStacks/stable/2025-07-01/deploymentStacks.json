@@ -665,6 +665,20 @@
               "$ref": "#/definitions/DeploymentStacksWhatIfResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -676,7 +690,11 @@
           "Get a detailed management group Deployment stack what-if result": {
             "$ref": "./examples/DeploymentStackWhatIfResultsManagementGroupWhatIf.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStacks": {
@@ -1285,6 +1303,20 @@
               "$ref": "#/definitions/DeploymentStacksWhatIfResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1296,7 +1328,11 @@
           "Get a detailed subscription Deployment stack what-if result": {
             "$ref": "./examples/DeploymentStackWhatIfResultsSubscriptionWhatIf.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStacks": {
@@ -1938,6 +1974,20 @@
               "$ref": "#/definitions/DeploymentStacksWhatIfResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1949,7 +1999,11 @@
           "Get a detailed resource group Deployment stack what-if result": {
             "$ref": "./examples/DeploymentStackWhatIfResultsResourceGroupWhatIf.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1977,6 +2031,19 @@
       },
       "required": [
         "resources"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<DeploymentStacksWhatIfResult>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/DeploymentStacksWhatIfResult",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "DenySettings": {
@@ -3054,26 +3121,6 @@
           "description": "The API version the resource was deployed with",
           "readOnly": true
         },
-        "before": {
-          "type": "object",
-          "description": "The predicted value before the deployment is executed.",
-          "additionalProperties": {}
-        },
-        "after": {
-          "type": "object",
-          "description": "The predicted value after the deployment is executed.",
-          "additionalProperties": {}
-        },
-        "delta": {
-          "type": "array",
-          "description": "The predicted changes to the properties.\"",
-          "items": {
-            "$ref": "#/definitions/DeploymentStacksWhatIfPropertyChange"
-          },
-          "x-ms-identifiers": [
-            "path"
-          ]
-        },
         "deploymentId": {
           "type": "string",
           "description": "The resource id of the Deployment responsible for this change."
@@ -3121,6 +3168,32 @@
         "unsupportedReason": {
           "type": "string",
           "description": "The explanation about why the resource is unsupported by What-If."
+        },
+        "resourceConfigurationChanges": {
+          "type": "object",
+          "description": "The predicted changes to the resource configuration.",
+          "properties": {
+            "before": {
+              "type": "object",
+              "description": "The predicted value before the deployment is executed.",
+              "additionalProperties": {}
+            },
+            "after": {
+              "type": "object",
+              "description": "The predicted value after the deployment is executed.",
+              "additionalProperties": {}
+            },
+            "delta": {
+              "type": "array",
+              "description": "The predicted changes to the properties.\"",
+              "items": {
+                "$ref": "#/definitions/DeploymentStacksWhatIfPropertyChange"
+              },
+              "x-ms-identifiers": [
+                "path"
+              ]
+            }
+          }
         }
       },
       "required": [

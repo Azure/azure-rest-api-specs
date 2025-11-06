@@ -108,7 +108,6 @@ model DeploymentStacksWhatIfChange {
 @added(Versions.v2025_07_01)
 model DeploymentStacksWhatIfResourceChange {
   ...ResourceReference;
-  ...ResourceChangeDelta;
 
   /**
    * The resource id of the Deployment responsible for this change.
@@ -144,6 +143,12 @@ model DeploymentStacksWhatIfResourceChange {
    * The explanation about why the resource is unsupported by What-If.
    */
   unsupportedReason?: string;
+
+  /**
+   * The predicted changes to the resource configuration.
+   */
+  resourceConfigurationChanges?: DeploymentStacksChangeDelta<Record<unknown>>;
+
 }
 
 /**
@@ -186,11 +191,6 @@ model DeploymentStacksChangeBase<T> {
  * Model for resource changes to show the before-and-after property values for resource properties.
  */
 model ResourceChangeBase is DeploymentStacksChangeBase<Record<unknown>>;
-
-/**
- * Model for resource changes to show the before-and-after property values, along with the delta between them.
- */
-model ResourceChangeDelta is DeploymentStacksChangeDelta<Record<unknown>>;
 
 /**
  * Model to show the before-and-after property values, along with the delta between them.
