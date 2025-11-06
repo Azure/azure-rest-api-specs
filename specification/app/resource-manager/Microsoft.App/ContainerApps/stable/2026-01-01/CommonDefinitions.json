@@ -1639,6 +1639,27 @@
             "name": "DataConnectorProvisioningState",
             "modelAsString": true
           }
+        },
+        "extendedProperties": {
+          "type": "array",
+          "description": "Additional properties for the data connector.",
+          "items": {
+            "$ref": "#/definitions/ExtendedProperties"
+          }
+        }
+      }
+    },
+    "ExtendedProperties": {
+      "type": "object",
+      "description": "Additional properties for the data connector.",
+      "properties": {
+        "name": {
+          "description": "Name of the additional property.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the additional property.",
+          "type": "object"
         }
       }
     }
