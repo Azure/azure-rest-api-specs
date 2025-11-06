@@ -98,7 +98,7 @@ interface ArtifactStores {
     void,
     ArmResponse<ArtifactStoreNetworkFabricControllerEndPointsList> | ArmAcceptedLroResponse<
       "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
-      ArmLroLocationHeader
+      ArmLroLocationHeader<FinalResult = ArtifactStoreNetworkFabricControllerEndPointsList>
     >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
@@ -138,7 +138,7 @@ interface ArtifactStores {
     void,
     ArmResponse<ArtifactStorePrivateEndPointsListResult> | ArmAcceptedLroResponse<
       "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
-      ArmLroLocationHeader
+      ArmLroLocationHeader<FinalResult = ArtifactStorePrivateEndPointsListResult>
     >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
@@ -231,7 +231,7 @@ interface ProxyArtifact {
     body: ArtifactChangeState,
   ): ArmResponse<ProxyArtifactVersionsListOverview> | ArmAcceptedLroResponse<
     "Request of updating artifact state is accepted.",
-    ArmLroLocationHeader
+    ArmLroLocationHeader<FinalResult = ProxyArtifactVersionsListOverview>
   > | ErrorResponse;
 }
 

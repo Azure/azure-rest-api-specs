@@ -35,7 +35,7 @@ interface ConfigurationGroupValues {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ConfigurationGroupValue,
-    LroHeaders = ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ConfigurationGroupValue>
   >;
 
   /**

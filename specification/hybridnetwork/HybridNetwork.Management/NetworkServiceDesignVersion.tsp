@@ -37,7 +37,7 @@ interface NetworkServiceDesignVersions {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NetworkServiceDesignVersion,
-    LroHeaders = ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkServiceDesignVersion>
   >;
 
   /**
@@ -76,7 +76,7 @@ interface NetworkServiceDesignVersions {
     NetworkServiceDesignVersionUpdateState,
     ArmResponse<NetworkServiceDesignVersionUpdateState> | ArmAcceptedLroResponse<
       "The request of updating network service design version state is accepted.",
-      ArmLroLocationHeader
+      ArmLroLocationHeader<FinalResult = NetworkServiceDesignVersionUpdateState>
     >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkServiceDesignVersion>
   >;

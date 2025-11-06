@@ -76,7 +76,7 @@ interface ConfigurationGroupSchemas {
     ConfigurationGroupSchemaVersionUpdateState,
     ArmResponse<ConfigurationGroupSchemaVersionUpdateState> | ArmAcceptedLroResponse<
       "The request of updating configuration group schema state is accepted.",
-      ArmLroLocationHeader
+      ArmLroLocationHeader<FinalResult = ConfigurationGroupSchemaVersionUpdateState>
     >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ConfigurationGroupSchema>
   >;
