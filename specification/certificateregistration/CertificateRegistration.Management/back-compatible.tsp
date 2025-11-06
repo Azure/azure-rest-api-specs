@@ -81,7 +81,3 @@ using Microsoft.CertificateRegistration;
   "appServiceCertificateOrder"
 );
 
-@@doc(AppServiceCertificateOrderCollection.value, "Collection of resources.");
-@@doc(AppServiceCertificateOrderCollection.nextLink,
-  "Link to next page of resources."
-);

@@ -202,6 +202,10 @@ interface AppServiceCertificateOrders {
 @@doc(AppServiceCertificateOrder.properties,
   "AppServiceCertificateOrder resource specific properties"
 );
+@@doc(AppServiceCertificateOrderCollection.value, "Collection of resources.");
+@@doc(AppServiceCertificateOrderCollection.nextLink,
+  "Link to next page of resources."
+);
 @@summary(AppServiceCertificateOrders.list,
   "List all certificate orders in a subscription."
 );
