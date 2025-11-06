@@ -30,6 +30,37 @@ model ElasticRegionInfoResource
 }
 
 /**
+ * Contains information about the logical availability zones available within a specific Azure region for a given subscription, used to determine where elastic resources can be provisioned.
+ */
+@added(Versions.v2025_09_01_preview)
+model ElasticRegionInfo {
+  /** Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy or elastic resources. */
+  @OpenAPI.extension("x-ms-identifiers", #["availabilityZone"])
+  availabilityZoneMappings?: AvailabilityZoneMapping[];
+}
+
+/**
+ * Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy or elastic resources.
+ */
+model AvailabilityZoneMapping {
+  /** The identifier of the logical availability zone within the region (e.g., '1', '2', '3') */
+  availabilityZone?: string;
+
+  /** Indicates whether the specified availability zone is currently available for provisioning elastic resources */
+  availabilityStatus?: ZoneAvailabilityStatus;
+}
+
+union ZoneAvailabilityStatus {
+  string,
+
+  /** The availabilityZone is available */
+  Available: "Available",
+
+  /** The availabilityZone is unavailable */
+  Unavailable: "Unavailable",
+}
+
+/**
  * List of regionInfo resources
  */
 @added(Versions.v2025_09_01_preview)

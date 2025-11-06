@@ -666,24 +666,6 @@ model RegionInfo {
   availabilityZoneMappings?: RegionInfoAvailabilityZoneMappingsItem[];
 }
 
-/**
- * Provides region specific information.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@added(Versions.v2025_09_01_preview)
-model ElasticRegionInfo {
-  /**
-   * Provides storage to network proximity information in the region.
-   */
-  storageToNetworkProximity?: RegionStorageToNetworkProximity;
-
-  /**
-   * Provides logical availability zone mappings for the subscription for a region.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["availabilityZone"])
-  availabilityZoneMappings?: RegionInfoAvailabilityZoneMappingsItem[];
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @clientName("AvailabilityZoneMapping", "csharp")
 model RegionInfoAvailabilityZoneMappingsItem {

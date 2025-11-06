@@ -162,7 +162,5 @@ interface ElasticAccounts {
 @@clientName(ElasticAccounts.createOrUpdate::parameters.resource, "body");
 @@clientName(ElasticAccounts.update::parameters.properties, "body");
 
-@@maxLength(ElasticAccount.name, 64);
-@@minLength(ElasticAccount.name, 3);
 @@doc(ElasticAccount.name, "The name of the elastic account resource.");
 @@doc(ElasticAccount.properties, "Elastic account properties");

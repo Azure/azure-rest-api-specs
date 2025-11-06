@@ -178,7 +178,7 @@ union DayOfWeek {
   Tuesday: "Tuesday",
 
   /** Take a snapshot each Wednesday */
-  `Wednesday `: "Wednesday ",
+  Wednesday: "Wednesday",
 
   /** Take a snapshot each Thursday */
   Thursday: "Thursday",

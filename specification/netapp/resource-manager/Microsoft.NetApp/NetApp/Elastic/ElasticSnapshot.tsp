@@ -24,7 +24,7 @@ model ElasticSnapshot is ProxyResource<ElasticSnapshotProperties> {
     Resource = ElasticSnapshot,
     KeyName = "snapshotName",
     SegmentName = "elasticSnapshots",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
+    NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
   >;
 }
 

@@ -57,7 +57,7 @@ model ElasticCapacityPoolProperties {
   /**
    * Encryption settings
    */
-  encryption?: ElasticEncryptionConfiguration;
+  encryption: ElasticEncryptionConfiguration;
 
   /**
    * Total throughput of the pool in MiB/s
