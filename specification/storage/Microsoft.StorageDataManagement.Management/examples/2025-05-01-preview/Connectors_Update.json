@@ -1,0 +1,67 @@
+{
+  "operationId": "Connectors_Update",
+  "title": "UpdateConnector",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "storageAccountName": "teststorageaccount",
+    "api-version": "2025-05-01-preview",
+    "connectorName": "testconnector",
+    "properties": {
+      "properties": {
+        "source": {
+          "type": "Bucket",
+          "authProperties": {
+            "type": "AccessKey",
+            "accessKeyId": "exampleKeyId1",
+            "secretAccessKey": "exampleSecret1",
+            "signingRegion": "us-west-2"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/connectors/testconnector",
+        "name": "testconnector",
+        "type": "Microsoft.Storage/storageAccounts/connectors",
+        "location": "eastus",
+        "properties": {
+          "uniqueId": "12345678-1234-1234-1234-12345678912",
+          "state": "Active",
+          "creationTime": "2023-04-01T00:00:00Z",
+          "description": "Example connector",
+          "dataSourceType": "AWS_S3",
+          "source": {
+            "type": "Bucket",
+            "connection": {
+              "type": "PrivateLink",
+              "privateEndpointName": "AZURE-STORAGE-CONNECT-123e4567-e89b-12d3-a456-426614174000",
+              "privateLinkId": "/subscriptions/xxxxxx/resourceGroups/rg-name/providers/Microsoft.Network/privateEndpoints/pe-name",
+              "privateLinkGroupId": "group-1",
+              "requestMessage": "Requesting access to the private link service.",
+              "endpoint": "https://private-endpoint.example.com",
+              "tlsVerification": "Perform"
+            },
+            "authProperties": {
+              "type": "AccessKey",
+              "accessKeyId": "exampleKeyId1",
+              "signingRegion": "us-west-2"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "status": "Accepted",
+      "message": "The resource operation has been received and is being processed.",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/DataManagementRPOperationStatuses/operation-98765",
+        "Retry-After": 30
+      }
+    }
+  }
+}
