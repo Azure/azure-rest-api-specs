@@ -3370,10 +3370,7 @@ model ResourceTypeRegistrationPropertiesResourceManagementOptions {
   /**
    * Delete dependencies.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["linkedType", "linkedProperty", "requiredFeatures"]
-  )
+  @identifiers(#["linkedType", "linkedProperty", "requiredFeatures"])
   deleteDependencies?: DeleteDependency[];
 
   /**
