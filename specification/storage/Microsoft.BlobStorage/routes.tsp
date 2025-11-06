@@ -341,7 +341,7 @@ interface Container {
     {
       /** The access control list for the container. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
-      @body
+      @bodyRoot
       containerAcl?: SignedIdentifiers;
 
       ...TimeoutParameter;
