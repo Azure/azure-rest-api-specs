@@ -24,7 +24,6 @@ These are the global settings.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: rpaas
 tag: package-2025-08-15
 ```
 
