@@ -80,4 +80,3 @@ using Microsoft.CertificateRegistration;
 @@clientName(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation::parameters.body,
   "appServiceCertificateOrder"
 );
-
