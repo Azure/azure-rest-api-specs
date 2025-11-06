@@ -1,5 +1,3 @@
-// @ts-check
-
 export class SpecModelError extends Error {
   /**
    * Path to file that caused the error
