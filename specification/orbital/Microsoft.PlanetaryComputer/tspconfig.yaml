@@ -21,6 +21,7 @@ options:
     flavor: azure
   "@azure-typespec/http-client-csharp":
     namespace: "Azure.Analytics.PlanetaryComputer"
+    generate-protocol-methods: false
     model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "planetarycomputer"
@@ -28,12 +29,13 @@ options:
       name: "@azure/planetarycomputer"
     flavor: azure
     is-modular-library: true
-    generate-test: true
-    generate-sample: true
+    # generate-test: true
+    # generate-sample: true
     experimental-extensible-enums: true
   "@azure-tools/typespec-java":
     package-dir: "azure-analytics-planetarycomputer"
     namespace: com.azure.analytics.planetarycomputer
+    use-object-for-unknown: true
     # partial-update: true
     # use-eclipse-language-server: false
     # enable-subclient: true
@@ -47,16 +49,6 @@ options:
     namespace: "Azure.Analytics.PlanetaryComputer"
     flavor: azure
     package-dir: "Azure.Analytics.PlanetaryComputer"
-  # "@azure-tools/typespec-ts":
-  #   package-dir: "planetarycomputer-rest"
-  #   is-modular-library: false
-  #   package-details:
-  #     name: "@azure-rest/planetarycomputer-rest"
-  #   flavor: azure
-  # "@azure-tools/typespec-java":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/azure-planetarycomputer"
-  #   namespace: com.azure.planetarycomputer
-  #   flavor: azure
   # "@azure-tools/typespec-go":
   #   module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
   #   service-dir: "sdk/planetarycomputer"
