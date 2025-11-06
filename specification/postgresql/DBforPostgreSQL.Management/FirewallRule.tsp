@@ -40,7 +40,7 @@ interface FirewallRules {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = FirewallRule> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

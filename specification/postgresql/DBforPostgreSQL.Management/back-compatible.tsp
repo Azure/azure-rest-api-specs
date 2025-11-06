@@ -181,3 +181,11 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(VirtualNetworkSubnetUsageOperationGroup.list::parameters.body,
   "parameters"
 );
+
+@@clientLocation(VirtualEndpoints.get, "VirtualNetworkRules", "!csharp");
+@@clientLocation(VirtualEndpoints.delete, "VirtualNetworkRules", "!csharp");
+@@clientLocation(VirtualEndpoints.create, "VirtualNetworkRules", "!csharp");
+@@clientLocation(VirtualEndpoints.listByServer,
+  "VirtualNetworkRules",
+  "!csharp"
+);
