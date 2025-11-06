@@ -26,6 +26,9 @@ union AttackStrategy {
   @doc("Represents a default set of difficult complexity attacks. Difficult complexity attacks include attacks that require access to significant resources and effort to execute an attack such as knowledge of search-based algorithms in addition to a generative AI model.")
   Difficult: "difficult",
 
+  @doc("Utilizes ANSI escape sequences to manipulate text appearance and behavior.")
+  AnsiAttack: "ansi_attack",
+
   @doc("Generates visual art using ASCII characters, often used for creative or obfuscation purposes.")
   AsciiArt: "ascii_art",
 
@@ -47,12 +50,6 @@ union AttackStrategy {
   @doc("Alters text by adding spaces between characters, often used for obfuscation.")
   CharacterSpace: "character_space",
 
-  @doc("Injects specially crafted prompts to bypass AI safeguards, known as User Injected Prompt Attacks (UPIA).")
-  Jailbreak: "jailbreak",
-
-  @doc("Utilizes ANSI escape sequences to manipulate text appearance and behavior.")
-  AnsiiAttack: "ansii_attack",
-
   @doc("Swaps characters within text to create variations or obfuscate the original content.")
   CharacterSwap: "character_swap",
 
@@ -61,6 +58,9 @@ union AttackStrategy {
 
   @doc("Joins multiple strings together, often used for concatenation or obfuscation.")
   StringJoin: "string_join",
+
+  @doc("Alters verb tenses to past tense within the prompt to subtly change meaning while keeping structure familiar.")
+  Tense: "tense",
 
   @doc("Uses Unicode characters that look similar to standard characters, creating visual confusion.")
   UnicodeConfusable: "unicode_confusable",
@@ -88,6 +88,18 @@ union AttackStrategy {
 
   @doc("Represents the baseline direct adversarial probing, which is used by attack strategies as the attack objective.")
   Baseline: "baseline",
+
+  @doc("Injects specially crafted prompts to bypass AI safeguards, known as User Injected Prompt Attacks (UPIA).")
+  Jailbreak: "jailbreak",
+
+  @doc("Stages multi-turn attack sequences.")
+  MultiTurn: "multi_turn",
+
+  @doc("Gradually escalates prompt intensity across turns to overwhelm defenses.")
+  Crescendo: "crescendo",
+
+  @doc("Employs Cross-Domain Prompt Injection (XPIA) to achieve jailbreak outcomes.")
+  IndirectJailbreak: "indirect_jailbreak",
 }
 
 @doc("Risk category for the attack objective.")
@@ -107,6 +119,24 @@ union RiskCategory {
 
   @doc("Represents content related to self-harm.")
   SelfHarm: "SelfHarm",
+
+  @doc("Represents content containing copyrighted or otherwise protected material.")
+  ProtectedMaterial: "ProtectedMaterial",
+
+  @doc("Represents disclosures of code weaknesses or exploit details.")
+  CodeVulnerability: "CodeVulnerability",
+
+  @doc("Represents claims about individuals or entities that cannot be substantiated.")
+  UngroundedAttributes: "UngroundedAttributes",
+
+  @doc("Represents leaks of private or confidential data. Agent-target only.")
+  SensitiveDataLeakage: "SensitiveDataLeakage",
+
+  @doc("Represents attempts to keep the assistant aligned with the requested task. Agent-target only.")
+  TaskAdherence: "TaskAdherence",
+
+  @doc("Represents instructions that elicit disallowed actions. Agent-target only.")
+  ProhibitedActions: "ProhibitedActions",
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
