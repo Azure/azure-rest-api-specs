@@ -1666,6 +1666,27 @@ alias EtagResponseHeaderPrivate = {
   eTag: string;
 };
 
+alias SourceEncryptionKeyParameter = {
+  /** Optional. Specifies the source encryption key to use to encrypt the source data provided in the request. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-key")
+  sourceEncryptionKey?: string;
+};
+
+alias SourceEncryptionKeySha256Parameter = {
+  /** The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-key-sha256")
+  sourceEncryptionKeySha256?: string;
+};
+
+alias SourceEncryptionAlgorithmParameter = {
+  /** The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-source-encryption-key is provided. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-algorithm")
+  sourceEncryptionAlgorithm?: EncryptionAlgorithmType;
+};
+
 /** The copy source tags header parameter. */
 alias CopySourceTagsParameter = {
   /** Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags. */

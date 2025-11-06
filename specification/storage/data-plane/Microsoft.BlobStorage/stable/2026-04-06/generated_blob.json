@@ -9858,6 +9858,44 @@
             "x-ms-client-name": "fileRequestIntent"
           },
           {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
+          },
+          {
             "name": "x-ms-page-write",
             "in": "header",
             "description": "Required. You may specify one of the following options:\\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size.",
@@ -11576,6 +11614,44 @@
             "x-ms-client-name": "fileRequestIntent"
           },
           {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -12827,6 +12903,44 @@
             "x-ms-client-name": "fileRequestIntent"
           },
           {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -13367,6 +13481,44 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           },
           {
             "name": "x-ms-client-request-id",
