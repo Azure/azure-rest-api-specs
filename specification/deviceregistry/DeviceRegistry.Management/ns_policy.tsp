@@ -131,16 +131,6 @@ model ActivateBringYourOwnRootRequest {
   certificateChain: string;
 }
 
-@added(Versions.v2026_04_01)
-@doc("Response from the activate operation, indicating success or failure of the certificate activation.")
-model ActivateBringYourOwnRootResponse {
-  @doc("Indicates whether the certificate was successfully activated.")
-  success: boolean;
-
-  @doc("Error message if activation failed.")
-  errorMessage?: string;
-}
-
 @added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface Policies {
@@ -161,15 +151,9 @@ interface Policies {
   listByResourceGroup is ArmResourceListByParent<Policy>;
 
   @added(Versions.v2026_04_01)
-  @doc("Activates or renews a BYOR policy by accepting a customer-provided signed certificate.")
-  @action("activateBringYourOwnRoot")
-  @armResourceAction(Policy)
-  @post
-  activateBringYourOwnRoot(
-    ...ResourceInstanceParameters<Policy>,
-
-    @doc("The activation request containing the customer-provided signed certificate.")
-    @body
-    request: ActivateBringYourOwnRootRequest,
-  ): ArmResponse<ActivateBringYourOwnRootResponse> | ErrorResponse;
+  @doc("Activates or renews a BYOR policy by accepting a customer-provided signed certificate. This is a long-running operation that returns no content upon completion.")
+  activateBringYourOwnRoot is ArmResourceActionNoResponseContentAsync<
+    Policy,
+    ActivateBringYourOwnRootRequest
+  >;
 }
