@@ -31,4 +31,9 @@ interface NetworkSecurityPerimeterConfigurations {
    * Gets the specified network security perimeter configuration associated with the configuration store.
    */
   get is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
+
+  /**
+   * Lists all network security perimeter configurations for a configuration store.
+   */
+  listByConfigurationStore is ArmResourceListByParent<NetworkSecurityPerimeterConfiguration>;
 }

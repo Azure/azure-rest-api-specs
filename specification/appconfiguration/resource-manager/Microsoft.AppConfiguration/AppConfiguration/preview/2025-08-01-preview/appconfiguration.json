@@ -997,6 +997,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListByConfigurationStore",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Lists all network security perimeter configurations for a configuration store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configStoreName",
+            "in": "path",
+            "description": "The name of the configuration store.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
       "get": {
         "operationId": "NetworkSecurityPerimeterConfigurations_Get",
@@ -2654,6 +2701,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a NetworkSecurityPerimeterConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkSecurityPerimeterConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "OperationDefinition": {
