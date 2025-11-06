@@ -309,7 +309,7 @@ Step 2: Identify API spec status
 **Success Criteria**: User decision on spec readiness obtained
 
 Step 3: Validate TypeSpec Specification
-**Goal**: Ensure TypeSpec specification compiles without errors. Povide a complete summary after running the tool. Highlight any errors and help user fix them.
+**Goal**: Ensure TypeSpec specification compiles without errors. Provide a complete summary after running the tool. Highlight any errors and help user fix them.
 **Condition**: Only if the spec is not already merged (from Step 2)
 **Message to user**: "TypeSpec validation takes around 20 - 30 seconds."
 **Actions**:

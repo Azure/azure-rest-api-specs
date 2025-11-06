@@ -227,7 +227,7 @@ input-file:
  - Microsoft.Insights/preview/2018-06-01-preview/guestDiagnosticSettings_API.json
  - Microsoft.Insights/preview/2018-06-01-preview/guestDiagnosticSettingsAssociation_API.json
  - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
- - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+ - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
  - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
  - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
  - Microsoft.Insights/stable/2024-02-01/metrics_API.json

@@ -21,12 +21,9 @@ options:
     generate-test: true
     generate-sample: true
     flavor: azure
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.WidgetAnalytics"
-    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.Template"
+    emitter-output-dir: "{output-dir}/sdk/template/{namespace}"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/sdk/template/template"
     generate-sample: true
