@@ -1,13 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/versioning";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "@typespec/versioning";
 import "./ConfigurationStore.tsp";
+import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Microsoft.AppConfiguration;
@@ -36,4 +36,18 @@ interface NetworkSecurityPerimeterConfigurations {
    * Lists all network security perimeter configurations for a configuration store.
    */
   listByConfigurationStore is ArmResourceListByParent<NetworkSecurityPerimeterConfiguration>;
+
+  /**
+   * Forces a refresh of the specified network security perimeter configuration.
+   */
+  reconcile is ArmResourceActionAsync<
+    NetworkSecurityPerimeterConfiguration,
+    void,
+    NetworkSecurityPerimeterConfiguration,
+    LroHeaders = 
+      Azure.ResourceManager.ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader &
+      Azure.ResourceManager.ArmAsyncOperationHeader,
+    Error = ErrorResponse
+  >;
 }
