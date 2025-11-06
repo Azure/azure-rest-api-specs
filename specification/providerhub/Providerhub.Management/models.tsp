@@ -1349,7 +1349,7 @@ model ProviderHubMetadata {
   /**
    * The provider authorizations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   providerAuthorizations?: ResourceProviderAuthorization[];
 
   /**
@@ -1403,7 +1403,7 @@ model ResourceProviderAuthorization {
   /**
    * The allowed third party extensions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   allowedThirdPartyExtensions?: ThirdPartyExtension[];
 
   /**
@@ -1417,7 +1417,7 @@ model ResourceProviderAuthorization {
  */
 model ResourceProviderAuthorizationManagedByAuthorization {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["applicationId", "roleDefinitionId"])
+  @identifiers(#["applicationId", "roleDefinitionId"])
   additionalAuthorizations?: AdditionalAuthorization[];
 
   /**
@@ -1476,7 +1476,7 @@ model ThirdPartyProviderAuthorization {
   /**
    * The authorizations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   authorizations?: LightHouseAuthorization[];
 
   /**
@@ -1511,7 +1511,7 @@ model SubscriptionLifecycleNotificationSpecifications {
   /**
    * The subscription state override actions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subscriptionStateOverrideActions?: SubscriptionStateOverrideAction[];
 
   /**
@@ -1579,7 +1579,7 @@ model ResourceProviderManifestProperties {
   /**
    * The provider authorizations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   providerAuthorizations?: ResourceProviderAuthorization[];
 
   /**
@@ -1590,7 +1590,7 @@ model ResourceProviderManifestProperties {
   /**
    * The services.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   services?: ResourceProviderService[];
 
   /**
@@ -1631,7 +1631,7 @@ model ResourceProviderManifestProperties {
   /**
    * The capabilities.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["quotaId"])
+  @identifiers(#["quotaId"])
   capabilities?: ResourceProviderCapabilities[];
 
   /**
@@ -1653,7 +1653,7 @@ model ResourceProviderManifestProperties {
   /**
    * The global notification endpoints.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   globalNotificationEndpoints?: ResourceProviderEndpoint[];
 
   /**
@@ -1670,7 +1670,7 @@ model ResourceProviderManifestProperties {
   /**
    * The linked notification rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedNotificationRules?: FanoutLinkedNotificationRule[];
 
   /**
@@ -1691,7 +1691,7 @@ model ResourceProviderManifestProperties {
   /**
    * resource hydration accounts
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceHydrationAccounts?: ResourceHydrationAccount[];
 
   /**
@@ -1702,7 +1702,7 @@ model ResourceProviderManifestProperties {
   /**
    * Management groups global notification endpoints.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   managementGroupGlobalNotificationEndpoints?: ResourceProviderEndpoint[];
 
   /**
@@ -1840,7 +1840,7 @@ model ResourceProviderManagement {
   /**
    * The service tree infos.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serviceTreeInfos?: ServiceTreeInfo[];
 
   /**
@@ -1851,7 +1851,7 @@ model ResourceProviderManagement {
   /**
    * The resource access roles.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceAccessRoles?: ResourceAccessRole[];
 
   /**
@@ -2065,7 +2065,7 @@ model FanoutLinkedNotificationRule {
   /**
    * The endpoints.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpoints?: ResourceProviderEndpoint[];
 
   /**
@@ -2152,7 +2152,7 @@ model ResourceHydrationAccount {
  */
 model ResourceProviderManifestPropertiesNotificationSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subscriberSettings?: SubscriberSetting[];
 }
 
@@ -2161,7 +2161,7 @@ model SubscriberSetting {
   /**
    * The filter rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filterRules?: FilterRule[];
 }
 
@@ -2175,7 +2175,7 @@ model FilterRule {
   /**
    * The endpoint information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpointInformation?: EndpointInformation[];
 }
 
@@ -2240,7 +2240,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The extensions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpoints?: ResourceTypeEndpoint[];
 
   /**
@@ -2256,7 +2256,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The swagger specifications.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["swaggerSpecFolderUri"])
+  @identifiers(#["swaggerSpecFolderUri"])
   swaggerSpecifications?: SwaggerSpecification[];
 
   /**
@@ -2273,13 +2273,13 @@ model ResourceTypeRegistrationProperties {
   /**
    * The authorization action mappings
    */
-  @OpenAPI.extension("x-ms-identifiers", #["original"])
+  @identifiers(#["original"])
   authorizationActionMappings?: AuthorizationActionMapping[];
 
   /**
    * The linked access checks.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedAccessChecks?: LinkedAccessCheck[];
 
   /**
@@ -2290,13 +2290,13 @@ model ResourceTypeRegistrationProperties {
   /**
    * The logging rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   loggingRules?: LoggingRule[];
 
   /**
    * The throttling rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   throttlingRules?: ThrottlingRule[];
 
   /**
@@ -2353,7 +2353,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The service tree infos.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serviceTreeInfos?: ServiceTreeInfo[];
 
   /**
@@ -2364,7 +2364,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The subscription state rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subscriptionStateRules?: SubscriptionStateRule[];
 
   /**
@@ -2375,7 +2375,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The extended locations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   extendedLocations?: ExtendedLocationOptions[];
 
   /**
@@ -2455,7 +2455,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The linked notification rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedNotificationRules?: LinkedNotificationRule[];
 
   /**
@@ -2496,7 +2496,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * Async timeout rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   asyncTimeoutRules?: AsyncTimeoutRule[];
 
   /**
@@ -2507,13 +2507,13 @@ model ResourceTypeRegistrationProperties {
   /**
    * The api profiles.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["profileVersion", "apiVersion"])
+  @identifiers(#["profileVersion", "apiVersion"])
   apiProfiles?: ApiProfile[];
 
   /**
    * The linked operation rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["linkedOperation", "linkedAction"])
+  @identifiers(#["linkedOperation", "linkedAction"])
   linkedOperationRules?: LinkedOperationRule[];
 
   /**
@@ -2554,7 +2554,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The allowed resource names.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "getActionVerb"])
+  @identifiers(#["name", "getActionVerb"])
   allowedResourceNames?: AllowedResourceName[];
 
   /**
@@ -2648,7 +2648,7 @@ model ResourceTypeEndpoint {
   /**
    * The extensions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["endpointUri"])
+  @identifiers(#["endpointUri"])
   extensions?: ResourceTypeExtension[];
 
   /**
@@ -2886,7 +2886,7 @@ model ThrottlingRule {
   /**
    * The metrics.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metrics: ThrottlingMetric[];
 
   /**
@@ -3129,7 +3129,7 @@ model QuotaRule {
   /**
    * The location rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locationRules?: LocationQuotaRule[];
 
   /**
@@ -3277,7 +3277,7 @@ model ResourceTypeRegistrationPropertiesLegacyPolicy {
   disallowedLegacyOperations?: LegacyOperation[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disallowedConditions?: LegacyDisallowedCondition[];
 }
 
@@ -3489,13 +3489,13 @@ model ExtendedErrorInfo {
   /**
    * The error details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: ExtendedErrorInfo[];
 
   /**
    * The additional error information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   additionalInfo?: TypedErrorInfo[];
 }
 
@@ -3511,8 +3511,8 @@ model TypedErrorInfo {
   /**
    * The error information.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   info?: {};
 }
 
@@ -3806,7 +3806,7 @@ model ResourceProviderManifest {
   /**
    * The provider authorizations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   providerAuthorizations?: ResourceProviderAuthorization[];
 
   /**
@@ -3817,7 +3817,7 @@ model ResourceProviderManifest {
   /**
    * The services.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   services?: ResourceProviderService[];
 
   /**
@@ -3853,7 +3853,7 @@ model ResourceProviderManifest {
   /**
    * The resource types.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   resourceTypes?: ResourceType[];
 
   /**
@@ -3864,7 +3864,7 @@ model ResourceProviderManifest {
   /**
    * The capabilities.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["quotaId"])
+  @identifiers(#["quotaId"])
   capabilities?: ResourceProviderCapabilities[];
 
   /**
@@ -3881,7 +3881,7 @@ model ResourceProviderManifest {
   /**
    * The global notification endpoints.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   globalNotificationEndpoints?: ResourceProviderEndpoint[];
 
   /**
@@ -3903,7 +3903,7 @@ model ResourceProviderManifest {
   /**
    * The linked notification rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedNotificationRules?: FanoutLinkedNotificationRule[];
 
   /**
@@ -3976,13 +3976,13 @@ model ResourceType {
   /**
    * The authorization action mappings.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["original"])
+  @identifiers(#["original"])
   authorizationActionMappings?: AuthorizationActionMapping[];
 
   /**
    * The linked access checks.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedAccessChecks?: LinkedAccessCheck[];
 
   /**
@@ -3993,19 +3993,19 @@ model ResourceType {
   /**
    * The logging rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   loggingRules?: LoggingRule[];
 
   /**
    * The throttling rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   throttlingRules?: ThrottlingRule[];
 
   /**
    * The endpoints.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpoints?: ResourceProviderEndpoint[];
 
   /**
@@ -4037,13 +4037,13 @@ model ResourceType {
   /**
    * The subscription state rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subscriptionStateRules?: SubscriptionStateRule[];
 
   /**
    * The service tree infos.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serviceTreeInfos?: ServiceTreeInfo[];
 
   /**
@@ -4069,13 +4069,13 @@ model ResourceType {
   /**
    * The extended locations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   extendedLocations?: ExtendedLocationOptions[];
 
   /**
    * The linked operation rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedOperationRules?: LinkedOperationRule[];
 
   /**
@@ -4096,7 +4096,7 @@ model ResourceType {
   /**
    * The linked notification rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedNotificationRules?: LinkedNotificationRule[];
 
   /**
@@ -4202,7 +4202,7 @@ model NotificationRegistrationProperties {
   /**
    * The notification endpoints.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["notificationDestination"])
+  @identifiers(#["notificationDestination"])
   notificationEndpoints?: NotificationEndpoint[];
 
   /**
@@ -4308,7 +4308,7 @@ model OperationsContentProperties {
    * Operations content.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @Azure.ResourceManager.Private.conditionalClientFlatten
   contents?: LocalizedOperationDefinition[];
 }
@@ -4601,7 +4601,6 @@ model ResourceTypeRegistrationArrayResponseWithContinuation
   is Azure.Core.Page<ResourceTypeRegistration>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SkuResourceProperties extends ResourceTypeSku {}
@@ -4611,7 +4610,7 @@ model ResourceTypeSku {
   /**
    * The sku settings.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   skuSettings: SkuSetting[];
 
   /**
@@ -4656,7 +4655,7 @@ model SkuSetting {
   /**
    * The location info.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["location"])
+  @identifiers(#["location"])
   locationInfo?: SkuLocationInfo[];
 
   /**
@@ -4677,13 +4676,13 @@ model SkuSetting {
   /**
    * The costs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["meterId"])
+  @identifiers(#["meterId"])
   costs?: SkuCost[];
 
   /**
    * The capabilities.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities?: SkuCapability[];
 }
 
@@ -4702,7 +4701,7 @@ model SkuLocationInfo {
   /**
    * The zone details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   zoneDetails?: SkuZoneDetail[];
 
   /**
@@ -4726,7 +4725,7 @@ model SkuZoneDetail {
   /**
    * The capabilities.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: SkuCapability[];
 }
 
@@ -4800,7 +4799,7 @@ model ResourceManagementAction {
    * resource management action content.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @Azure.ResourceManager.Private.conditionalClientFlatten
   resources?: ResourceManagementEntity[];
 }
@@ -4837,7 +4836,7 @@ model AuthorizedApplicationProperties {
   /**
    * The authorizations that determine the level of data access permissions on the specified resource types.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["role"])
+  @identifiers(#["role"])
   dataAuthorizations?: ApplicationDataAuthorization[];
 
   /**
@@ -4969,7 +4968,7 @@ model ManifestLevelPropertyBag {
   /**
    * The resource hydration accounts.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["accountName"])
+  @identifiers(#["accountName"])
   resourceHydrationAccounts?: ResourceHydrationAccount[];
 }
 
@@ -5093,17 +5092,17 @@ model GroupConnectivityInformation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model OperationsDefinitionArrayResponseWithContinuation {  
-  /**  
-   * The value. 
-   */  
+model OperationsDefinitionArrayResponseWithContinuation {
+  /**
+   * The value.
+   */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
-  value: OperationsDefinition[];  
-  
-  /**  
-   * The URL to get to the next set of results, if there are any. 
-   */  
+  @identifiers(#["name"])
+  value: OperationsDefinition[];
+
+  /**
+   * The URL to get to the next set of results, if there are any.
+   */
   @nextLink
-  nextLink?: string;  
+  nextLink?: string;
 }

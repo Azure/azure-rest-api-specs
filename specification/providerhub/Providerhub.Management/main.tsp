@@ -48,7 +48,7 @@ enum Versions {
   v2024_09_01: "2024-09-01",
 }
 
-interface Operations 
+interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
       ArmResponse<OperationsDefinitionArrayResponseWithContinuation>,
       ErrorResponse
