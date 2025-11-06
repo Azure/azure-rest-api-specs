@@ -9,7 +9,7 @@ modelerfour:
 enable-sync-stack: false
 ```
 
-### Tag: package-2025-11
+### Tag: package-2025-11 and java
 
 ``` yaml $(java) && $(tag) == 'package-2025-11'
 input-file:
