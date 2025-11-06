@@ -551,6 +551,63 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/migrateNetwork": {
+      "post": {
+        "operationId": "Servers_MigrateNetworkMode",
+        "description": "Migrates the network configuration of a PostgreSQL flexible server from customer owned VNET to Microsoft owned VNET with support for private endpoints, or from Microsoft owned VNET with no support for private endpoints to Microsoft owned VNET with support for private endpoints.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Migrate the existing Azure Database for PostgreSQL - Flexible Server server's network mode to Private Endpoint": {
+            "$ref": "./examples/ServersMigrateNetwork.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/MigrateNetworkStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2110,6 +2167,40 @@
         }
       },
       "description": "PostgreSQL database engine restart parameters."
+    },
+    "MigrateNetworkStatus": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The ID of the subscription."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The name of the server."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the network migration operation.",
+          "readOnly": true,
+          "enum": [
+            "Pending",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "CancelInProgress",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkMigrationState",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {}
