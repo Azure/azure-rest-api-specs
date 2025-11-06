@@ -61,7 +61,19 @@ model L2IsolationDomainPatch {
   ...TagsUpdate;
 
   @doc("Resource properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: L2IsolationDomainPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("L2 Isolation Domain resource patch properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: L2IsolationDomainPatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
 @doc("L2 Isolation Domain Patch Properties defines the patchable properties of the resource.")

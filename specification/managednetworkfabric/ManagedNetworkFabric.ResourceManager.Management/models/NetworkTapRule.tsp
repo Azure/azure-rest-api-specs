@@ -1,5 +1,6 @@
 import "./common.tsp";
-
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -14,6 +15,10 @@ model NetworkTapRuleProperties {
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
 
+  @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
+  @added(Versions.v2025_07_15)
+  identitySelector?: IdentitySelector;
+
   @doc("List of match configurations.")
   @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
@@ -26,10 +31,26 @@ model NetworkTapRuleProperties {
 
   @doc("The ARM resource Id of the NetworkTap.")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_07_15)
   networkTapId?: string;
 
+  @doc("The ARM resource Id of the NetworkTap Rules.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_07_15)
+  networkTapIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkTaps";
+    }
+  ]>[];
+
   @doc("Polling interval in seconds.")
-  pollingIntervalInSeconds?: PollingIntervalInSeconds = PollingIntervalInSeconds.Thirty;
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "pollingIntervalInSeconds")
+  pollingIntervalInSecondsDeprecated?: PollingIntervalInSeconds = PollingIntervalInSeconds.Thirty;
+
+  @doc("Polling interval in seconds.")
+  @added(Versions.v2025_07_15)
+  pollingIntervalInSeconds?: int32 = 30;
 
   @doc("The last sync timestamp.")
   @visibility(Lifecycle.Read)
@@ -43,6 +64,15 @@ model NetworkTapRuleProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
+
+  @doc("Associated Network Fabric Resource IDs")
+  @added(Versions.v2025_07_15)
+  @visibility(Lifecycle.Read)
+  networkFabricIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
+    }
+  ]>[];
 
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
@@ -169,7 +199,19 @@ model NetworkTapRulePatch {
   ...TagsUpdate;
 
   @doc("Network Tap Rule Patch properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: NetworkTapRulePatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("Network Tap Rule Patch properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkTapRulePatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
 @doc("Network Tap Rule Patch properties.")
@@ -181,6 +223,10 @@ model NetworkTapRulePatchProperties {
 
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
+
+  @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
+  @added(Versions.v2025_07_15)
+  identitySelector?: IdentitySelectorPatch;
 
   @doc("Global network tap rule actions")
   @added(Versions.v2024_06_15_preview)
@@ -194,11 +240,20 @@ model NetworkTapRulePatchProperties {
   @doc("List of dynamic match configurations.")
   @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "dynamicMatchConfigurations")
+  dynamicMatchConfigurationsDeprecated?: CommonDynamicMatchConfigurationPatch[];
+
+  @doc("List of dynamic match configurations.")
+  @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2025_07_15)
   dynamicMatchConfigurations?: CommonDynamicMatchConfigurationPatch[];
 }
 
 @doc("Polling interval in seconds.")
 union PollingIntervalInSeconds {
+  int32,
+
   @doc("30 PollingIntervalInSeconds")
   Thirty: 30,
 
@@ -210,8 +265,6 @@ union PollingIntervalInSeconds {
 
   @doc("120 PollingIntervalInSeconds")
   OneTwenty: 120,
-
-  int32,
 }
 
 @doc("Type of actions that can be performed.")
@@ -271,4 +324,9 @@ model GlobalNetworkTapRuleActionPatchProperties {
   @doc("Truncate. 0 indicates do not truncate.")
   @minLength(1)
   truncate?: string;
+}
+
+@doc("Response for Network Tap Rule resync operation.")
+model NetworkTapRuleResyncResponse {
+  ...OperationStatusResult;
 }

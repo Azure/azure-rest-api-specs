@@ -3,7 +3,7 @@ import "../models/NetworkDeviceSku.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -22,6 +22,14 @@ model NetworkDeviceSku extends Azure.ResourceManager.Foundations.ProxyResource {
   name: string;
 
   /** The NetworkDeviceSku properties */
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated: NetworkDeviceSkuProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("The Network Device SKU properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: NetworkDeviceSkuProperties;
 }
 

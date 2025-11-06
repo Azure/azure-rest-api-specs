@@ -1,8 +1,8 @@
 import "./common.tsp";
 
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -124,6 +124,15 @@ model InternalNetworkProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
+
+  @doc("Associated Network Fabric Resource ID")
+  @added(Versions.v2025_07_15)
+  @visibility(Lifecycle.Read)
+  networkFabricId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
+    }
+  ]>;
 
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
@@ -293,6 +302,14 @@ model ConnectedSubnetPatch is ConnectedSubnet;
 @doc("The InternalNetwork patch resource definition.")
 model InternalNetworkPatch {
   @doc("InternalNetwork Patch properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: InternalNetworkPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("InternalNetwork Patch properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: InternalNetworkPatchProperties;
 }
 
@@ -309,12 +326,28 @@ model InternalNetworkPatchProperties {
   @doc("List of Connected IPv4 Subnets.")
   @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "connectedIPv4Subnets")
+  connectedIPv4SubnetsDeprecated?: ConnectedSubnetPatch[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("List of Connected IPv4 Subnets.")
+  @Azure.ResourceManager.identifiers(#["prefix"])
+  @added(Versions.v2025_07_15)
   connectedIPv4Subnets?: ConnectedSubnetPatch[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("List of connected IPv6 Subnets.")
   @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "connectedIPv6Subnets")
+  connectedIPv6SubnetsDeprecated?: ConnectedSubnetPatch[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("List of connected IPv6 Subnets.")
+  @Azure.ResourceManager.identifiers(#["prefix"])
+  @added(Versions.v2025_07_15)
   connectedIPv6Subnets?: ConnectedSubnetPatch[];
 
   @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
@@ -446,6 +479,16 @@ model InternalNetworkBgpAdministrativeStateRequest {
   administrativeState?: BgpAdministrativeState;
 }
 
+@doc("Internal Network Administrative State Request")
+@added(Versions.v2025_07_15)
+model InternalNetworkUpdateBgpAdministrativeStateRequest {
+  @doc("NeighborAddress - Input should be either All or Specific Ipv4 Address or Specific Ipv6 Address.")
+  neighborAddress?: string;
+
+  @doc("BGP Administrative state.")
+  administrativeState?: BgpAdministrativeState;
+}
+
 @doc("Internal Network Administrative State Response")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBgpAdministrativeStateResponse {
@@ -459,6 +502,23 @@ model InternalNetworkBgpAdministrativeStateResponse {
   ...ErrorResponse;
 }
 
+@doc("Internal Network Administrative State Response")
+@added(Versions.v2025_07_15)
+model InternalNetworkUpdateBgpAdministrativeStateResponse {
+  ...OperationStatusResult;
+
+  @doc("Internal Network BGP Administrative State response properties")
+  properties?: InternalNetworkUpdateBgpAdministrativeStateResponseProperties;
+}
+
+@doc("Internal Network BGP Administrative State response properties")
+@added(Versions.v2024_06_15_preview)
+model InternalNetworkUpdateBgpAdministrativeStateResponseProperties {
+  @doc("NeighborAddress administrative status")
+  @Azure.ResourceManager.identifiers(#[])
+  neighborAddressAdministrativeStatus?: NeighborAddressBgpAdministrativeStatus[];
+}
+
 @doc("Internal Network BFD Administrative State request")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBfdAdministrativeStateRequest {
@@ -470,6 +530,36 @@ model InternalNetworkBfdAdministrativeStateRequest {
 
   @doc("BFD Administrative state.")
   administrativeState?: BfdAdministrativeState;
+}
+
+@doc("Internal Network BFD Administrative State request")
+@added(Versions.v2025_07_15)
+model InternalNetworkUpdateBfdAdministrativeStateRequest {
+  @doc("Route Type that helps to know which bfd we are updating.")
+  routeType?: InternalNetworkRouteType;
+
+  @doc("NeighborAddress - Input should be either All or Specific Ipv4 Address or Specific Ipv6 Address.")
+  neighborAddress?: string;
+
+  @doc("BFD Administrative state.")
+  administrativeState?: BfdAdministrativeState;
+}
+
+@doc("Internal Network BFD Administrative State response")
+@added(Versions.v2025_07_15)
+model InternalNetworkUpdateBfdAdministrativeStateResponse {
+  ...OperationStatusResult;
+
+  @doc("Internal Network BFD Administrative State response properties")
+  properties?: InternalNetworkUpdateBfdAdministrativeStateResponseProperties;
+}
+
+@doc("Internal Network BFD Administrative State response properties")
+@added(Versions.v2025_07_15)
+model InternalNetworkUpdateBfdAdministrativeStateResponseProperties {
+  @doc("NeighborAddress administrative status")
+  @Azure.ResourceManager.identifiers(#[])
+  neighborAddressAdministrativeStatus?: NeighborAddressBfdAdministrativeStatus[];
 }
 
 @doc("Internal Network BFD Administrative State response")
@@ -508,11 +598,30 @@ model InternalNetworkBmpProperties {
   @doc("BMP Monitoring configuration state.")
   @added(Versions.v2024_06_15_preview)
   bmpConfigurationState?: BmpConfigurationState;
+
+  @doc("BMP Export Policy configuration.")
+  @added(Versions.v2025_07_15)
+  exportPolicyConfiguration?: BmpExportPolicyProperties;
 }
 
 @doc("Internal Network BMP Configuration")
 @added(Versions.v2024_06_15_preview)
-model InternalNetworkBmpPatchProperties is InternalNetworkBmpProperties;
+model InternalNetworkBmpPatchProperties {
+  @doc("BMP Collector Address.")
+  @added(Versions.v2024_06_15_preview)
+  @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "neighborIpExclusions")
+  neighborIpExclusionsDeprecated?: string[];
+
+  @doc("Neighbor IP Address exclusions for BMP.")
+  @added(Versions.v2025_07_15)
+  neighborIpExclusions?: string[];
+
+  @doc("BMP Monitoring configuration state.")
+  @added(Versions.v2024_06_15_preview)
+  bmpConfigurationState?: BmpConfigurationState;
+}
 
 @doc("Neighbor Address BGP Administrative Status")
 @added(Versions.v2024_06_15_preview)

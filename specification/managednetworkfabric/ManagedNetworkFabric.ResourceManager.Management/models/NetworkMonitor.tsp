@@ -90,20 +90,6 @@ model StationConnectionPatchProperties {
   probeCount?: int32;
 }
 
-@doc("Export Policy for the BGP Monitoring Protocol (BMP) Configuration.")
-union BmpExportPolicy {
-  @doc("BMP ExportPolicy Pre-Policy")
-  PrePolicy: "Pre-Policy",
-
-  @doc("BMP ExportPolicy Post-Policy")
-  PostPolicy: "Post-Policy",
-
-  @doc("BMP ExportPolicy All")
-  All: "All",
-
-  string,
-}
-
 @doc("Monitored Address Family.")
 union BmpMonitoredAddressFamily {
   @doc("IPv4 Unicast")
@@ -173,6 +159,10 @@ model BmpConfigurationProperties {
   @doc("Export Policy for the BMP Configuration.")
   exportPolicy?: BmpExportPolicy = BmpExportPolicy.All;
 
+  @doc("Export Policy configuration properties for the BMP.")
+  @added(Versions.v2025_07_15)
+  exportPolicyConfiguration?: BmpExportPolicyProperties;
+
   @doc("Monitored Address Families for the BMP Configuration.")
   monitoredAddressFamilies?: BmpMonitoredAddressFamily[] = #[
     BmpMonitoredAddressFamily.All
@@ -228,6 +218,10 @@ model BmpConfigurationPatchProperties {
   @doc("Export Policy for the BMP Configuration.")
   exportPolicy?: BmpExportPolicy;
 
+  @doc("Export Policy configuration properties for the BMP.")
+  @added(Versions.v2025_07_15)
+  exportPolicyConfiguration?: BmpExportPolicyPatchProperties;
+
   @doc("Monitored Address Families for the BMP Configuration.")
   monitoredAddressFamilies?: BmpMonitoredAddressFamily[];
 }
@@ -238,6 +232,14 @@ model NetworkMonitorPatch {
   ...TagsUpdate;
 
   @doc("Network Monitor Patch properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: NetworkMonitorPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("Network Monitor Patch properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkMonitorPatchProperties;
 }
 

@@ -1,0 +1,38 @@
+{
+  "title": "NetworkFabrics_LockFabric_MaximumSet",
+  "operationId": "NetworkFabrics_LockFabric",
+  "parameters": {
+    "api-version": "2025-07-15",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricName": "example-networkFabric",
+    "body": {
+      "lockType": "Administrative",
+      "action": "Lock"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Failed",
+        "error": {
+          "code": "",
+          "message": "",
+          "target": "",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "",
+              "info": {}
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

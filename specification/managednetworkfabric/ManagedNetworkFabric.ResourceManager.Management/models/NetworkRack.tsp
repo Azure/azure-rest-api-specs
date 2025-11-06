@@ -33,6 +33,11 @@ model NetworkRackProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2025_07_15)
+  @doc("Configuration state of the resource.")
+  @visibility(Lifecycle.Read)
+  configurationState?: ConfigurationState;
 }
 
 @doc("Network Rack patch resource definition.")

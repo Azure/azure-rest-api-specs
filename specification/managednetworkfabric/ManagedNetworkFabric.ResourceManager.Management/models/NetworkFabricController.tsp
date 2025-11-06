@@ -111,7 +111,19 @@ model NetworkFabricControllerPatch {
   ...TagsUpdate;
 
   @doc("Network Fabric Controller patch properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: NetworkFabricControllerPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("Network Fabric Controller patch properties.")
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @added(Versions.v2025_07_15)
   properties?: NetworkFabricControllerPatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
 @doc("Network Fabric Controller patch properties.")

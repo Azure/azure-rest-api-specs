@@ -3,6 +3,7 @@ import "./common.tsp";
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -70,6 +71,15 @@ model ExternalNetworkProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
+
+  @doc("Associated Network Fabric Resource ID")
+  @added(Versions.v2025_07_15)
+  @visibility(Lifecycle.Read)
+  networkFabricId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
+    }
+  ]>;
 
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
@@ -199,6 +209,14 @@ model ExternalNetworkPropertiesOptionAProperties {
 @doc("The ExternalNetwork patch resource definition.")
 model ExternalNetworkPatch {
   @doc("External Network Patch properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: ExternalNetworkPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("External Network Patch properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ExternalNetworkPatchProperties;
 }
 
@@ -425,4 +443,33 @@ model ExternalNetworkBmpProperties {
 model ExternalNetworkBmpPatchProperties {
   @doc("BMP Configuration State.")
   configurationState?: BmpConfigurationState;
+}
+
+@doc("External Network Update Administrative State request")
+@added(Versions.v2025_07_15)
+model ExternalNetworkUpdateBfdAdministrativeStateRequest {
+  @doc("Route Type that helps to know which bfd we are updating.")
+  routeType?: ExternalNetworkRouteType;
+
+  @doc("Administrative state.")
+  administrativeState?: BfdAdministrativeState;
+}
+
+@doc("External Network Update Administrative State response")
+@added(Versions.v2025_07_15)
+model ExternalNetworkUpdateBfdAdministrativeStateResponse {
+  ...OperationStatusResult;
+
+  @doc("Response properties.")
+  properties?: ExternalNetworkUpdateBfdAdministrativeStateResponseProperties;
+}
+
+@doc("Response properties for External Network BFD Administrative State.")
+@added(Versions.v2025_07_15)
+model ExternalNetworkUpdateBfdAdministrativeStateResponseProperties {
+  @doc("Route Type that helps to know which bfd we are updating.")
+  routeType?: ExternalNetworkRouteType;
+
+  @doc("Administrative state.")
+  administrativeState?: BfdAdministrativeState;
 }

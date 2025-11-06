@@ -1,4 +1,5 @@
 import "./common.tsp";
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -22,6 +23,15 @@ model NetworkTapProperties {
       type: "Microsoft.ManagedNetworkFabric/networkTapRules";
     }
   ]>;
+
+  @doc("Associated Network Fabric Resource IDs")
+  @added(Versions.v2025_07_15)
+  @visibility(Lifecycle.Read)
+  networkFabricIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
+    }
+  ]>[];
 
   @doc("List of destinations to send the filter traffic.")
   @Azure.ResourceManager.identifiers(#[])
@@ -129,7 +139,19 @@ model NetworkTapPatch {
   ...TagsUpdate;
 
   @doc("Resource properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: NetworkTapPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("NetworkTap resource patch properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkTapPatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
 @doc("The Network Tap resource patch definition.")
@@ -164,4 +186,10 @@ union Encapsulation {
   GRE: "GRE",
 
   string,
+}
+
+@doc("Response for NetworkTap Resync operation.")
+@added(Versions.v2025_07_15)
+model NetworkTapResyncResponse {
+  ...OperationStatusResult;
 }
