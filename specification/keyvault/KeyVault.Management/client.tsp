@@ -205,5 +205,27 @@ using Azure.Core;
 );
 @@clientName(ManagedHsms.listByMHSMResource, "listByMhsmResource", "java");
 
+// Mitigate Java breaking change of enum "Reason" now being expandable.
+/**
+ * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Avoid breaking changes for Java"
+enum NameAvailabilityReason {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  AccountNameInvalid: "AccountNameInvalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  AlreadyExists: "AlreadyExists",
+}
+
+@@clientName(NameAvailabilityReason,
+  "Reason",
+  "java"
+);
+
+@@clientName(Reason, "NameAvailabilityReason", "java");
+
+@@alternateType(CheckNameAvailabilityResult.reason, NameAvailabilityReason, "java");
+@@alternateType(CheckMhsmNameAvailabilityResult.reason, NameAvailabilityReason, "java");
+
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "python");
