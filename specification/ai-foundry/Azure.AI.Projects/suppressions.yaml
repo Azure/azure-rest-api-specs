@@ -4,7 +4,14 @@
   rules:
     - SdkTspConfigValidation
   sub-rules:
+    # Suppress validation for C# and Java emitter options since those are configured in the SDK-* directories
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-csharp.namespace
+    - options.@azure-tools/typespec-csharp.clear-output-folder
+    - options.@azure-tools/typespec-csharp.emitter-output-dir
     # Suppress validation for a Go emitter options
+    - options.@azure-tools/typespec-go.emitter-output-dir
+    - options.@azure-tools/typespec-go.module
     - options.@azure-tools/typespec-go.generate-fakes
     - options.@azure-tools/typespec-go.inject-spans
     - options.@azure-tools/typespec-go.service-dir
@@ -14,4 +21,4 @@
     - options.@azure-tools/typespec-ts.package-details.name
     # Do not force me to generate Python samples
     - options.@azure-tools/typespec-python.generate-sample
-  reason: 'See above comments for details'
+  reason: "See above comments for details"
