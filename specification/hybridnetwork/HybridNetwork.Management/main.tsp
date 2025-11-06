@@ -35,7 +35,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * The definitions in this swagger specification will be used to manage the Hybrid Network resources.
+ * The resources in this swagger specification will be used to manage the hybrid network site network service.
  */
 @armProviderNamespace
 @service(#{ title: "HybridNetworkManagementClient" })
