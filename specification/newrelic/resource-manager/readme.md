@@ -127,9 +127,6 @@ suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: NewRelic.json
     reason: Temporary solution, to be fixed in next iteration - Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
-  - code: LroLocationHeader
-    from: NewRelic.json
-    reason: The API does not include a location header in LRO responses.
 ```
 
 ---
