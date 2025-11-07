@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -22,6 +23,17 @@ model AzCopyResourceProperties {
 
   @doc("The SAS token for the destination object. This should be the full URL. This can target an account, container, virtual directory, or blob.")
   destination: string;
+
+  // New secret properties added for testing in new version so as to not break existing clients.
+  @added(Versions.v2025_11_05_preview)
+  @doc("The SAS token for the source object. This should be the full URL. This can target an account, container, virtual directory, or blob.")
+  @secret
+  sourceSAS?: string;
+
+  @added(Versions.v2025_11_05_preview)
+  @doc("The SAS token for the destination object. This should be the full URL. This can target an account, container, virtual directory, or blob.")
+  @secret
+  destinationSAS?: string;
 
   @doc("Source and destination combo. Any combination of Blob and/or File side by side (ex. BlobBlob, FileBlob).")
   fromTo: FromToType;

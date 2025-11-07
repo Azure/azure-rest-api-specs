@@ -64,6 +64,15 @@ input-file:
   - Microsoft.AzureCis/preview/2024-11-20-preview/cloudSprout.json
 ```
 
+### Tag: 2025-11-05-preview
+
+These settings apply only when `--tag=2025-11-05-preview` is specified on the command line.
+
+```yaml $(tag) == '2025-11-05-preview'
+input-file:
+  - Microsoft.AzureCis/preview/2025-11-05-preview/azcopy.json
+```
+
 ## Suppression
 
 ``` yaml
