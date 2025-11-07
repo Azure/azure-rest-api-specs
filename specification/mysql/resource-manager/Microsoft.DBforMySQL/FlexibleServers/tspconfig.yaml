@@ -10,16 +10,16 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: true
+
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.MySql"
-    package-name: "{package-dir}"
+    package-name: "Azure.ResourceManager.MySql"
+    namespace: "{package-name}.FlexibleServers"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}.FlexibleServers"
     api-version: "2024-12-30"
   "@azure-tools/typespec-python":
     service-dir: "sdk/mysqlflexibleservers"
