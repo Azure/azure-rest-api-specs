@@ -412,7 +412,7 @@ model ExternalKey {
    * The external key identifier. The valid id can only contain characters in the set [a-zA-Z0-9-]. Maximum length is 64 characters.
    */
   id?: string;
-};
+}
 
 /**
  * The attributes of a key managed by the key vault service.
