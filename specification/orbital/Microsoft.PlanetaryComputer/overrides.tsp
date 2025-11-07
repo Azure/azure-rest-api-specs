@@ -513,6 +513,29 @@ op getAssetStatisticsCustomized(
 );
 
 /**
+ * Per Asset statistics with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getAssetStatisticsCustomizedForCSharp(
+  ...getAssetStatisticsCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for asset statistics including asset selection and statistical calculation parameters
+   */
+  options: GetAssetStatisticsOptions,
+): Record<unknown>;
+
+@@override(TilerAssetStatistics.getAll,
+  getAssetStatisticsCustomizedForCSharp,
+  "csharp"
+);
+
+/**
  * Create image from a geojson feature with grouped parameters.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
