@@ -269,10 +269,10 @@ model TargetDescription {
   /**
    * The metadata of this target.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the target specification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved by ARM API review for metadata property."
   @added(Versions.v2025_11_01_preview)
   @visibility(Lifecycle.Read)
-  metadata?: Record<string>;
+  metadata?: Record<unknown>;
 }
 
 /**
