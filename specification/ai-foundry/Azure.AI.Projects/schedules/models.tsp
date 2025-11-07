@@ -265,7 +265,6 @@ model InsightScheduleTask extends ScheduleTask {
 model Schedule {
   @doc("Identifier of the schedule.")
   @key("id")
-  @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
   id: string;
 
@@ -308,7 +307,6 @@ model ScheduleRun {
   @doc("Identifier of the schedule run.")
   @key("id")
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "id")
   id: string;
 
   @doc("Identifier of the schedule.")
