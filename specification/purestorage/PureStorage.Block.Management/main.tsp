@@ -1,6 +1,8 @@
 import "./LiftrBase.Storage/main.tsp";
 import "@typespec/openapi";
 
+import "./back-compatible.tsp";
+
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @useLibraryNamespace(LiftrBase.Storage)

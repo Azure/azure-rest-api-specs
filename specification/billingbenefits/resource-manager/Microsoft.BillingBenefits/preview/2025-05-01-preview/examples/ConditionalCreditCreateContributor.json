@@ -10,7 +10,6 @@
         "entityType": "Contributor",
         "displayName": "Contributor Conditional Credit 20250801",
         "primaryResourceId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
-        "systemId": "CACO-SYSTEM-001",
         "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
         "startAt": "2025-09-01T00:00:00Z"
       },
@@ -23,7 +22,8 @@
   "responses": {
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/operationResults/5f3gggg8-c442-5gdc-bc22-c6gb5a479299?api-version=2025-05-01-preview",
+        "Location": "https://management.azure.com/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/operationStatus/5f3gggg8-c442-5gdc-bc22-c6gb5a479299?api-version=2025-05-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/operationStatus/5f3gggg8-c442-5gdc-bc22-c6gb5a479299?api-version=2025-05-01-preview",
         "Retry-After": 5
       },
       "body": {
@@ -74,6 +74,7 @@
           "milestones": [
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+              "name": "Milestone 1",
               "status": "Active",
               "endAt": "2025-09-30T23:59:59Z",
               "spendTarget": {
@@ -83,7 +84,8 @@
             },
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
-              "status": "Scheduled",
+              "name": "Milestone 2",
+              "status": "Active",
               "endAt": "2025-12-31T23:59:59Z",
               "spendTarget": {
                 "amount": 100000,

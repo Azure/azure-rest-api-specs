@@ -23,7 +23,7 @@ jobs:
           sparse-checkout: |
             .github
 
-      # Only run the login and get token steps when the respository is azure-rest-api-specs-pr
+      # Only run the login and get token steps when the repository is azure-rest-api-specs-pr
       - if: github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Azure Login with Workload Identity Federation
         uses: azure/login@v2

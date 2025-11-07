@@ -1,7 +1,5 @@
 /* v8 ignore start */
 
-// @ts-check
-
 /**
  * @typedef {'azure-sdk-for-go' | 'azure-sdk-for-java' | 'azure-sdk-for-js' | 'azure-sdk-for-net' | 'azure-sdk-for-python'} SdkName
  */
