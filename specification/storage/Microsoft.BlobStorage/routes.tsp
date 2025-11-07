@@ -1718,6 +1718,9 @@ namespace Storage.Blob {
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
             ...PageWriteParameter<"update">;
+            ...SourceEncryptionKeyParameter;
+            ...SourceEncryptionKeySha256Parameter;
+            ...SourceEncryptionAlgorithmParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2034,6 +2037,9 @@ namespace Storage.Blob {
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
+            ...SourceEncryptionKeyParameter;
+            ...SourceEncryptionKeySha256Parameter;
+            ...SourceEncryptionAlgorithmParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2190,6 +2196,9 @@ namespace Storage.Blob {
             blobType: "BlockBlob";
 
             ...FileRequestIntentParameter;
+            ...SourceEncryptionKeyParameter;
+            ...SourceEncryptionKeySha256Parameter;
+            ...SourceEncryptionAlgorithmParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2272,6 +2281,9 @@ namespace Storage.Blob {
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
+            ...SourceEncryptionKeyParameter;
+            ...SourceEncryptionKeySha256Parameter;
+            ...SourceEncryptionAlgorithmParameter;
           },
           {
             @statusCode statusCode: 201;
