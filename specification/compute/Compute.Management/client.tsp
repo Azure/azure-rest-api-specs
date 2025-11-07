@@ -39,8 +39,8 @@ using Microsoft.Compute;
 );
 @@clientName(VirtualMachineSizeTypes.Standard_M64ms, "StandardM64Ms", "go");
 
-@@alternateType(AdditionalUnattendContent.passName, "OobeSystem", "!java");
+@@alternateType(AdditionalUnattendContent.passName, "OobeSystem", "go");
 @@alternateType(AdditionalUnattendContent.componentName,
   "Microsoft-Windows-Shell-Setup",
-  "!java"
+  "go"
 );
