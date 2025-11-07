@@ -11,22 +11,22 @@ options:
     output-file: "{version-status}/{version}/storagesync.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
+
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
     service-dir: "sdk/storage"
-    package-dir: "azure-mgmt-storagesync"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storagesync"
     namespace: "azure.mgmt.storagesync"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-storagesync"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storagesync"
     namespace: "com.azure.resourcemanager.storagesync"
     service-name: "StorageSync" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-storagesync"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-storagesync"
     flavor: azure
     typespec-title-map:
       StorageSyncClient: "MicrosoftStorageSync"

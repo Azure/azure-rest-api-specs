@@ -210,6 +210,11 @@ model ExadbVmClusterProperties {
   @doc("Cluster subnet ocid")
   @visibility(Lifecycle.Read)
   subnetOcid?: Ocid;
+
+  @added(Versions.v20250801_preview)
+  @doc("The type of Exascale storage used for Exadata VM cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  shapeAttribute?: ShapeAttribute;
 }
 
 @added(Versions.v20241201_preview)

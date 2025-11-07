@@ -16,4 +16,7 @@ enum QuantumWorkspaceAPIVersion {
 
   /** 2024-10-01-preview */
   v2024_10_01_preview: "2024-10-01-preview",
+
+  /** 2025-09-01-preview */
+  v2025_09_01_preview: "2025-09-01-preview",
 }

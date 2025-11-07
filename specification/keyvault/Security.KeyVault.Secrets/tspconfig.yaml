@@ -24,7 +24,7 @@ options:
     "package-pprint-name": "Key Vault Secrets"
     "package-version": "4.9.0"
     "namespace": "azure.keyvault.secrets._generated"
-    "package-dir": "azure-keyvault-secrets"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-secrets"
   "@azure-tools/typespec-java":
     api-version: "7.6"
     flavor: azure
@@ -39,7 +39,7 @@ options:
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
-    package-dir: "keyvault-secrets"
+    emitter-output-dir: "{output-dir}/{service-dir}/keyvault-secrets"
     generate-metadata: true
     src-folder: "src/generated"
     experimental-extensible-enums: true
@@ -53,12 +53,11 @@ options:
     service-dir: "sdk/security/keyvault"
     emitter-output-dir: "{output-dir}/{service-dir}/azsecrets"
     go-generate: build.go
-    api-version: "7.6"
     single-client: true
     inject-spans: true
     generate-fakes: true
+    omit-constructors: true
   "@azure-tools/typespec-rust":
-    api-version: "7.6"
     crate-name: "azure_security_keyvault_secrets"
     crate-version: "0.0.1"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"

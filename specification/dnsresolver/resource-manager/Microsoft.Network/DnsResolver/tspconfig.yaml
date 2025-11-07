@@ -11,11 +11,12 @@ options:
     output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
+
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dnsresolver"
     namespace: "azure.mgmt.dnsresolver"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dnsresolver"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -28,6 +29,7 @@ options:
     package-dir: "arm-dnsresolver"
     flavor: azure
     experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-dnsresolver"
     package-details:
       name: "@azure/arm-dnsresolver"
   "@azure-tools/typespec-go":
