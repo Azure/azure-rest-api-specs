@@ -2420,12 +2420,12 @@
           "readOnly": true
         },
         "municipality": {
-          "description": "City / Town <BR>Note:  `municipality` represents the residential municipality. Depending on the location, the `municipality` value may differ from the commonly known name of a city or town. For the commonly known name of the city or town, it’s suggested that the `localName` value be used instead of the `municipality` value.",
+          "description": "City / Town <BR>Note:  `municipality` represents the residential municipality. Depending on the location, the `municipality` value may differ from the commonly known name of a city or town. For the commonly known name of the city or town, it's suggested that the `localName` value be used instead of the `municipality` value.",
           "type": "string",
           "readOnly": true
         },
         "countrySubdivision": {
-          "description": "the primary administrative division within a country, such as a state, province. It is used to represent the first-level subdivision below the national level.",
+          "description": "The primary administrative division within a country, such as a state, province. It is used to represent the first-level subdivision below the national level.",
           "type": "string",
           "readOnly": true
         },
@@ -2441,6 +2441,11 @@
         },
         "municipalitySubdivision": {
           "description": "A subdivision within a municipality. It represents a smaller administrative or geographic unit inside a city, town, or other municipal entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "countrySubdivisionName": {
+          "description": "Represents the full name of the first-level administrative division (such as state, province, or region) within a country or region. This property is included only when the `countrySubdivision` value is provided in abbreviated form. Currently supported for the United States, Canada, and the United Kingdom.",
           "type": "string",
           "readOnly": true
         },
@@ -2476,11 +2481,6 @@
         },
         "freeformAddress": {
           "description": "An address line formatted according to the formatting rules of a result's country/region of origin, or in the case of a country/region, its full country/region name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "countrySubdivisionName": {
-          "description": "Represents the full name of the first-level administrative division (such as state, province, or region) within a country or region. This property is included only when the `countrySubdivision` value is provided in abbreviated form. Currently supported for the United States, Canada, and the United Kingdom.",
           "type": "string",
           "readOnly": true
         },
