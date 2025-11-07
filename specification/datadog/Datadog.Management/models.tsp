@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Datadog;
 /**
@@ -283,6 +285,28 @@ model CreateResourceSupportedProperties {
 }
 
 /**
+ * Represents a Datadog Application key and its associated properties.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+model DatadogApplicationKey {
+  /**
+   * The user that created the Application key.
+   */
+  createdBy?: string;
+
+  /**
+   * The name of the Application key.
+   */
+  name?: string;
+
+  /**
+   * The value of the Application key.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  key: string;
+}
+
+/**
  * Response of a list operation.
  */
 model DatadogApiKeyListResponse is Azure.Core.Page<DatadogApiKey>;
@@ -527,6 +551,13 @@ model MonitorProperties {
    */
   @visibility(Lifecycle.Read)
   liftrResourcePreference?: int32;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Datadog for given organization.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
+  @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
@@ -594,6 +625,29 @@ model DatadogOrganizationProperties {
    * The configuration which describes the state of resource collection. This collects configuration information for all resources in a subscription.
    */
   resourceCollection?: boolean;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Datadog for given organization.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
+  @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+  sreAgentConfiguration?: SreAgentConfiguration[];
+}
+
+/**
+ * SRE Agent configuration to connect to MCP server of Datadog for a given organization.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+model SreAgentConfiguration {
+  /**
+   * The ARM resource ID of the SRE Agent resource.
+   */
+  sreAgentResourceId: string;
+
+  /**
+   * The MCP server names associated with the SRE Agent resource.
+   */
+  mcpServerName: string[];
 }
 
 /**
