@@ -82,12 +82,13 @@ describe("reconcileChangedFilesAndTags", () => {
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(
-      new Map<string, string[]>([
+      new Map<string, ReadmeAffectedTags>([
         [
           "specification/1/readme.md",
-          expect.objectContaining({
+          {
+            readme: expect.any(Readme),
             changedTags: new Set<string>(["tag1"]),
-          }),
+          },
         ],
       ]),
     );
@@ -133,6 +134,96 @@ describe("reconcileChangedFilesAndTags", () => {
 
     const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(before);
+    expect(afterFinal).toEqual(after);
+  });
+
+  test("adds an empty tag to beforeFinal if after has a new tag", () => {
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag2"]),
+        },
+      ],
+    ]);
+    const after = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag2", "tag3"]),
+        },
+      ],
+    ]);
+
+    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
+
+    expect(beforeFinal).toEqual(
+      new Map<string, ReadmeAffectedTags>([
+        [
+          "specification/1/readme.md",
+          {
+            readme: expect.any(Readme),
+            changedTags: new Set<string>(["tag2", ""]),
+          },
+        ],
+      ]),
+    );
+    expect(afterFinal).toEqual(after);
+  });
+
+  test("adds an empty tag to beforeFinal if after has multiple new tags", () => {
+    const before = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag2"]),
+        },
+      ],
+    ]);
+    const after = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag2", "tag3", "tag4"]),
+        },
+      ],
+    ]);
+
+    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
+
+    expect(beforeFinal).toEqual(
+      new Map<string, ReadmeAffectedTags>([
+        [
+          "specification/1/readme.md",
+          {
+            readme: expect.any(Readme),
+            changedTags: new Set<string>(["tag2", ""]),
+          },
+        ],
+      ]),
+    );
+    expect(afterFinal).toEqual(after);
+  });
+
+  test("handles a new specification in after", () => {
+    const before = new Map<string, ReadmeAffectedTags>();
+    const after = new Map<string, ReadmeAffectedTags>([
+      [
+        "specification/1/readme.md",
+        {
+          readme: new Readme("specification/1/readme.md"),
+          changedTags: new Set<string>(["tag1"]),
+        },
+      ],
+    ]);
+
+    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
+
+    expect(beforeFinal).toEqual(new Map<string, ReadmeAffectedTags>());
     expect(afterFinal).toEqual(after);
   });
 });
@@ -228,7 +319,7 @@ describe("buildState", () => {
         [
           "specification/edit-in-place/readme.md",
           {
-            changedTags: new Set<string>(),
+            changedTags: new Set<string>([""]),
             readme: expect.any(Readme),
           },
         ],
@@ -242,7 +333,7 @@ describe("buildState", () => {
   });
 
   test("does not throw if a file is missing", async () => {
-    expect(() =>
+    await expect(() =>
       buildState(
         ["specification/edit-in-place/data-plane/does-not-exist.json"],
         "test/fixtures/buildState/",

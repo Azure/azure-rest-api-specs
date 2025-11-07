@@ -7080,7 +7080,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments": {
       "get": {
         "tags": [
           "AgentDeployment"
@@ -7171,7 +7171,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}": {
       "delete": {
         "tags": [
           "AgentDeployment"
@@ -7374,7 +7374,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}/start": {
       "post": {
         "tags": [
           "AgentDeployment"
@@ -7425,7 +7425,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}/stop": {
       "post": {
         "tags": [
           "AgentDeployment"
@@ -11906,6 +11906,10 @@
             "type": "string"
           },
           "x-nullable": true
+        },
+        "enablePublicHostingEnvironment": {
+          "type": "boolean",
+          "description": "Whether public hosting environment is enabled for the capability host"
         }
       },
       "x-ms-client-name": "CapabilityHostProperties",
@@ -13090,7 +13094,7 @@
       "enum": [
         "Default",
         "OrganizationScope",
-        "Microsoft365",
+        "Channels",
         "Custom"
       ],
       "x-ms-enum": {
@@ -13106,8 +13110,8 @@
             "description": "Claim-based, requires membership in the tenant"
           },
           {
-            "value": "Microsoft365",
-            "description": "Microsoft365-specific (AzureBotService) authorization"
+            "value": "Channels",
+            "description": "Channels-specific (AzureBotService) authorization"
           },
           {
             "value": "Custom",
@@ -13153,15 +13157,15 @@
       "x-ms-discriminator-value": "OrganizationScope",
       "additionalProperties": false
     },
-    "M365BuiltInAuthorizationPolicy": {
-      "description": "Represents a built-in authorization policy specific to Azure Bot Service/M365 authentication.",
+    "ChannelsBuiltInAuthorizationPolicy": {
+      "description": "Represents a built-in authorization policy specific to Azure Bot Service/Channels authentication.",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ApplicationAuthorizationPolicy"
         }
       ],
-      "x-ms-discriminator-value": "Microsoft365",
+      "x-ms-discriminator-value": "Channels",
       "additionalProperties": false
     },
     "ApplicationTrafficRoutingPolicy": {
