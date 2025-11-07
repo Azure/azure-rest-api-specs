@@ -67,14 +67,16 @@ interface Pools {
       /**
        * The entity state (ETag) version of the pool to update. A value of "*" can be used to apply the operation only if the pool already exists. If omitted, this operation will always be applied.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      ifMatch?: string;
+      `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new pool to be created, but to prevent updating an existing pool. Other values will be ignored.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-None-Match")
-      ifNoneMatch?: string;
+      `If-None-Match`?: string;
     },
     Response = ArmResourceUpdatedResponse<Pool> & {
       @header("ETag")
@@ -94,8 +96,9 @@ interface Pools {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      ifMatch?: string;
+      `If-Match`?: string;
     },
     Response = ArmResourceUpdatedResponse<Pool> & {
       @header("ETag")

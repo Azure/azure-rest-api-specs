@@ -59,8 +59,9 @@ interface PrivateEndpointConnections {
       /**
        * The state (ETag) version of the private endpoint connection to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      ifMatch?: string;
+      `If-Match`?: string;
     },
     Error = CloudError
   >;
@@ -72,7 +73,7 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;

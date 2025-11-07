@@ -40,8 +40,9 @@ interface BatchAccounts {
    * Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is ArmResourceCreateOrReplaceAsync<
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     BatchAccount,
+    Request = BatchAccountCreateParameters,
     Response = ArmResourceUpdatedResponse<BatchAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchAccount> &
       Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
@@ -72,13 +73,18 @@ interface BatchAccounts {
    */
   listByResourceGroup is ArmResourceListByParent<
     BatchAccount,
+    Response = BatchAccountListResult,
     Error = CloudError
   >;
 
   /**
    * Gets information about the Batch accounts associated with the subscription.
    */
-  list is ArmListBySubscription<BatchAccount, Error = CloudError>;
+  list is ArmListBySubscription<
+    BatchAccount,
+    Response = BatchAccountListResult,
+    Error = CloudError
+  >;
 
   /**
    * Synchronizes access keys for the auto-storage account configured for the specified Batch account, only if storage key authentication is being used.

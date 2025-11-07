@@ -28,6 +28,7 @@ model Certificate
    * The entity tag for the certificate.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
@@ -58,20 +59,23 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is ArmResourceCreateOrReplaceSync<
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Certificate,
+    Request = CertificateCreateOrUpdateParameters,
     Parameters = {
       /**
        * The entity state (ETag) version of the certificate to update. A value of "*" can be used to apply the operation only if the certificate already exists. If omitted, this operation will always be applied.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      idMatch?: string;
+      `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new certificate to be created, but to prevent updating an existing certificate. Other values will be ignored.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-None-Match")
-      ifNoneMatch?: string;
+      `If-None-Match`?: string;
     },
     Response = ArmResourceUpdatedResponse<Certificate> & {
       @header("ETag")
@@ -92,8 +96,9 @@ interface Certificates {
       /**
        * The entity state (ETag) version of the certificate to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      ifMatch?: string;
+      `If-Match`?: string;
     },
     Response = ArmResponse<Certificate> & {
       @header("ETag")

@@ -1,0 +1,2430 @@
+{
+  "paths": {
+    "/providers/microsoft.Batch/operations": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/OperationListResult",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}": {
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern": {
+                "__old": "^[a-z0-9]+$",
+                "__new": "^[a-zA-Z0-9]+$"
+              }
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}": {
+      "get": {
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CertificateCreateOrUpdateParameters"
+              }
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CertificateCreateOrUpdateParameters"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}/cancelDelete": {
+      "post": {
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "./BatchManagement.json#/parameters/AccountNameParameter",
+              "name__added": "accountName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 3,
+              "maxLength__added": 24,
+              "pattern__added": "^[a-zA-Z0-9]+$"
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult",
+                "__new": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./BatchManagement.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./BatchManagement.json#/parameters/AccountNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "accountName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 24,
+              "pattern": "^[a-zA-Z0-9]+$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration",
+                "__new": "#/definitions/NetworkSecurityPerimeterConfiguration"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./BatchManagement.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./BatchManagement.json#/parameters/AccountNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "accountName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 24,
+              "pattern": "^[a-zA-Z0-9]+$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "x-ms-error-response__deleted": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}": {
+      "get": {
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Pool"
+              }
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Pool"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}/disableAutoScale": {
+      "post": {
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}/stopResize": {
+      "post": {
+        "responses": {
+          "200": {
+            "headers": {
+              "ETag": {
+                "description__deleted": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Azure-AsyncOperation__added": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/PrivateEndpointConnection"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Azure-AsyncOperation__added": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureResource__deleted": {
+      "type": "object",
+      "description": "A definition of an Azure resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CIFSMountConfiguration__deleted": {
+      "type": "object",
+      "title": "Information used to connect to a CIFS file system.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "title": "The user to use for authentication against the CIFS file system."
+        },
+        "source": {
+          "type": "string",
+          "title": "The URI of the file system to mount."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "The relative path on the compute node where the file system will be mounted",
+          "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        },
+        "mountOptions": {
+          "type": "string",
+          "title": "Additional command line options to pass to the mount command.",
+          "description": "These are 'net use' options in Windows and 'mount' options in Linux."
+        },
+        "password": {
+          "type": "string",
+          "title": "The password to use for authentication against the CIFS file system.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "password",
+        "relativeMountPath",
+        "source",
+        "userName"
+      ]
+    },
+    "Operation__deleted": {
+      "type": "object",
+      "title": "A REST API operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "type": "object",
+          "title": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "title": "Friendly name of the resource provider."
+            },
+            "operation": {
+              "type": "string",
+              "title": "The operation type.",
+              "description": "For example: read, write, delete, or listKeys/action"
+            },
+            "resource": {
+              "type": "string",
+              "title": "The resource type on which the operation is performed."
+            },
+            "description": {
+              "type": "string",
+              "title": "The friendly name of the operation"
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "title": "The intended executor of the operation."
+        },
+        "properties": {
+          "type": "object",
+          "title": "Properties of the operation."
+        }
+      }
+    },
+    "OperationListResult__deleted": {
+      "type": "object",
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "The list of operations supported by the resource provider.",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "title": "The URL to get the next set of operation list results if there are any.",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "AccessRulePropertiesSubscriptionsItem__added": {
+      "type": "object",
+      "description": "Subscription identifiers",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000')"
+        }
+      }
+    },
+    "CifsMountConfiguration__added": {
+      "type": "object",
+      "description": "Information used to connect to a CIFS file system.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user to use for authentication against the CIFS file system."
+        },
+        "source": {
+          "type": "string",
+          "description": "The URI of the file system to mount."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        },
+        "mountOptions": {
+          "type": "string",
+          "description": "These are 'net use' options in Windows and 'mount' options in Linux."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "The password to use for authentication against the CIFS file system.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "password",
+        "relativeMountPath",
+        "source",
+        "userName"
+      ]
+    },
+    "NetworkSecurityPerimeter__added": {
+      "type": "object",
+      "description": "NetworkSecurityPerimeter related information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified identifier of the resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          }
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "description": "Guid of the resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration__added": {
+      "type": "object",
+      "description": "Network security perimeter (NSP) configuration resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Network security configuration properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationListResult__added": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationProperties__added": {
+      "type": "object",
+      "description": "Properties of NetworkSecurityPerimeterConfiguration",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of NetworkSecurityPerimeter configuration propagation",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Updating",
+            "Accepted",
+            "InvalidResponse",
+            "Succeeded",
+            "SucceededWithIssues",
+            "Failed",
+            "Deleting",
+            "Deleted",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "description": "List of Provisioning Issues if any",
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter",
+          "description": "NetworkSecurityPerimeter related information"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation",
+          "description": "Information about resource association",
+          "readOnly": true
+        },
+        "profile": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationPropertiesProfile",
+          "description": "Information about current network profile",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationPropertiesProfile__added": {
+      "type": "object",
+      "description": "Information about current network profile",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource"
+        },
+        "accessRulesVersion": {
+          "type": "string",
+          "description": "Current access rules version"
+        },
+        "accessRules": {
+          "type": "array",
+          "description": "List of Access Rules",
+          "items": {
+            "$ref": "#/definitions/NspAccessRule"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation__added": {
+      "type": "object",
+      "description": "Information about resource association",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource association"
+        },
+        "accessMode": {
+          "type": "string",
+          "description": "Access Mode of the resource association",
+          "enum": [
+            "NoAssociationMode",
+            "EnforcedMode",
+            "LearningMode",
+            "AuditMode"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceAssociationAccessMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "NspAccessRule__added": {
+      "type": "object",
+      "description": "Network security perimeter access rule",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the NSP access rule"
+        },
+        "properties": {
+          "$ref": "#/definitions/NspAccessRuleProperties",
+          "description": "Properties of the NSP access rule"
+        }
+      }
+    },
+    "NspAccessRuleProperties__added": {
+      "type": "object",
+      "description": "Properties of NSP access rule",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "Direction of the access rule",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "NspAccessRuleDirection",
+            "modelAsString": true
+          }
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "Address prefixes in the CIDR format for inbound rules",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "Subscriptions for inbound rules",
+          "items": {
+            "$ref": "#/definitions/AccessRulePropertiesSubscriptionsItem"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "description": "Network security perimeters for inbound rules",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "description": "Fully qualified domain names (FQDNs) for outbound rules",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "type": "array",
+          "description": "Email addresses for notifications",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "description": "Phone numbers for notifications",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningIssue__added": {
+      "type": "object",
+      "description": "Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the issue"
+        },
+        "properties": {
+          "$ref": "#/definitions/ProvisioningIssueProperties",
+          "description": "Properties of Provisioning Issue",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningIssueProperties__added": {
+      "type": "object",
+      "description": "Properties of Provisioning Issue",
+      "properties": {
+        "issueType": {
+          "type": "string",
+          "description": "Type of issue",
+          "enum": [
+            "Unknown",
+            "ConfigurationPropagationFailure",
+            "MissingPerimeterConfiguration",
+            "MissingIdentityConfiguration"
+          ],
+          "x-ms-enum": {
+            "name": "IssueType",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity of the issue.",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the issue"
+        }
+      }
+    },
+    "Application": {
+      "properties": {
+        "etag__added": {
+          "type": "string",
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "readOnly": true
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "The tags of the certificate.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureProxyResource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ApplicationPackage": {
+      "properties": {
+        "etag__added": {
+          "type": "string",
+          "description": "*\nThe entity tag for the certificate."
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "The tags of the certificate.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureProxyResource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ApplicationPackageReference": {
+      "description__added": "Link to an application package inside the batch account",
+      "properties": {
+        "id": {
+          "description__added": "The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists."
+        }
+      }
+    },
+    "AutoScaleRun": {
+      "description__added": "The results and errors from an execution of a pool autoscale formula.",
+      "properties": {
+        "evaluationTime": {
+          "description__added": "The time at which the autoscale formula was last evaluated."
+        },
+        "error": {
+          "description__added": "An error that occurred when autoscaling a pool."
+        }
+      }
+    },
+    "AutoScaleRunError": {
+      "description__added": "An error that occurred when autoscaling a pool.",
+      "properties": {
+        "details": {
+          "description__added": "Additional details about the error."
+        }
+      }
+    },
+    "AutoScaleSettings": {
+      "description__added": "AutoScale settings for the pool.",
+      "properties": {
+        "formula": {
+          "externalDocs__deleted": {
+            "description": "Create an automatic scaling formula for scaling compute nodes in a Batch pool",
+            "url": "https://learn.microsoft.com/azure/batch/batch-automatic-scaling"
+          },
+          "description__added": "A formula for the desired number of compute nodes in the pool."
+        }
+      }
+    },
+    "AutoUserSpecification": {
+      "description__added": "Specifies the parameters for the auto user that runs a task on the Batch service.",
+      "properties": {
+        "scope": {
+          "title": {
+            "__old": "The scope for the auto user",
+            "__new": "The scope of the auto user."
+          }
+        },
+        "elevationLevel": {
+          "title": {
+            "__old": "The elevation level of the user.",
+            "__new": "The elevation level of the auto user."
+          },
+          "description": {
+            "__old": "The default value is nonAdmin.",
+            "__new": "The elevation level of the user."
+          }
+        }
+      }
+    },
+    "AzureBlobFileSystemConfiguration": {
+      "description__added": "Information used to connect to an Azure Storage Container using Blobfuse.",
+      "properties": {
+        "accountName": {
+          "description__added": "The Azure Storage Account name."
+        },
+        "containerName": {
+          "description__added": "The Azure Blob Storage Container name."
+        },
+        "accountKey": {
+          "format__added": "password"
+        },
+        "sasKey": {
+          "format__added": "password"
+        }
+      }
+    },
+    "AzureFileShareConfiguration": {
+      "description__added": "Information used to connect to an Azure Fileshare.",
+      "properties": {
+        "accountName": {
+          "description__added": "The Azure Storage account name."
+        },
+        "accountKey": {
+          "format__added": "password",
+          "description__added": "The Azure Storage account key."
+        }
+      }
+    },
+    "BatchAccount": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureResource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "BatchAccountListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "BatchAccountProperties": {
+      "properties": {
+        "provisioningState": {
+          "x-nullable__deleted": false
+        },
+        "poolAllocationMode": {
+          "x-nullable__deleted": false,
+          "title": {
+            "__old": "The allocation mode to use for creating pools in the Batch account.",
+            "__new": "The allocation mode used for creating pools in the Batch account."
+          }
+        },
+        "keyVaultReference": {
+          "description__added": "Identifies the Azure key vault associated with a Batch account."
+        },
+        "publicNetworkAccess": {
+          "title": {
+            "__old": "The network interface type for accessing Azure Batch service and Batch account operations.",
+            "__new": "The network access type for accessing Azure Batch account."
+          },
+          "x-ms-enum": {
+            "name__deleted": "PublicNetworkAccessType"
+          }
+        },
+        "networkProfile": {
+          "title__deleted": "Network profile for Batch account, which contains network rule settings for each endpoint."
+        },
+        "autoStorage": {
+          "title__deleted": "The properties and status of any auto-storage account associated with the Batch account.",
+          "description__added": "Contains information about the auto-storage account associated with a Batch account."
+        },
+        "encryption": {
+          "title__deleted": "The encryption configuration for the Batch account."
+        },
+        "dedicatedCoreQuota": {
+          "title__deleted": "The dedicated core quota for the Batch account."
+        },
+        "lowPriorityCoreQuota": {
+          "title__deleted": "The Spot/low-priority core quota for the Batch account."
+        },
+        "dedicatedCoreQuotaPerVMFamilyEnforced": {
+          "title__deleted": "A value indicating whether core quotas per Virtual Machine family are enforced for this account",
+          "x-nullable__deleted": false
+        },
+        "poolQuota": {
+          "title__deleted": "The pool quota for the Batch account.",
+          "x-nullable__deleted": false,
+          "description__added": "The pool quota for the Batch account."
+        },
+        "activeJobAndJobScheduleQuota": {
+          "title__deleted": "The active job and job schedule quota for the Batch account.",
+          "x-nullable__deleted": false,
+          "description__added": "The active job and job schedule quota for the Batch account."
+        }
+      }
+    },
+    "BatchAccountUpdateProperties": {
+      "properties": {
+        "encryption": {
+          "title__deleted": "The encryption configuration for the Batch account."
+        },
+        "publicNetworkAccess": {
+          "title__deleted": "The network access type for accessing Azure Batch account.",
+          "description": {
+            "__old": "The network access type for operating on the resources in the Batch account.",
+            "__new": "If not specified, the default value is 'enabled'."
+          }
+        },
+        "networkProfile": {
+          "title__deleted": "Network profile for Batch account, which contains network rule settings for each endpoint."
+        }
+      }
+    },
+    "Certificate": {
+      "properties": {
+        "etag__added": {
+          "type": "string",
+          "description": "*\nThe entity tag for the certificate."
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "The tags of the certificate.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureProxyResource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "CertificateBaseProperties": {
+      "properties": {
+        "thumbprintAlgorithm": {
+          "title__deleted": "The algorithm of the certificate thumbprint."
+        },
+        "thumbprint": {
+          "title__deleted": "The thumbprint of the certificate."
+        },
+        "format": {
+          "x-nullable__deleted": false
+        }
+      }
+    },
+    "CertificateCreateOrUpdateProperties": {
+      "properties": {
+        "data": {
+          "title__deleted": "The base64-encoded contents of the certificate."
+        },
+        "password": {
+          "title__deleted": "The password to access the certificate's private key.",
+          "format__added": "password"
+        }
+      }
+    },
+    "CertificateProperties": {
+      "properties": {
+        "provisioningState": {
+          "title__deleted": "The provisioned state of the resource",
+          "x-nullable__deleted": false
+        },
+        "provisioningStateTransitionTime": {
+          "title__deleted": "The time at which the certificate entered its current state.",
+          "description__added": "The time at which the certificate entered its current state."
+        },
+        "previousProvisioningState": {
+          "x-nullable__deleted": false
+        },
+        "previousProvisioningStateTransitionTime": {
+          "title__deleted": "The time at which the certificate entered its previous state.",
+          "description__added": "The time at which the certificate entered its previous state."
+        },
+        "deleteCertificateError": {
+          "title__deleted": "The error which occurred while deleting the certificate"
+        }
+      }
+    },
+    "CertificateReference": {
+      "title__deleted": "A reference to a certificate to be installed on compute nodes in a pool. This must exist inside the same account as the pool.",
+      "properties": {
+        "id": {
+          "title__deleted": "The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool.",
+          "description__added": "The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool."
+        },
+        "storeLocation": {
+          "title__deleted": "The location of the certificate store on the compute node into which to install the certificate."
+        },
+        "storeName": {
+          "title__deleted": "The name of the certificate store on the compute node into which to install the certificate."
+        },
+        "visibility": {
+          "title__deleted": "Which user accounts on the compute node should have access to the private data of the certificate.",
+          "description__added": "Which user accounts on the compute node should have access to the private data of the certificate.",
+          "items": {
+            "x-nullable__deleted": false
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "properties": {
+        "type": {
+          "default__added": "Microsoft.Batch/batchAccounts",
+          "x-ms-enum": {
+            "modelAsString": {
+              "__old": false,
+              "__new": true
+            }
+          }
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external__deleted": true
+    },
+    "CloudErrorBody": {
+      "x-ms-external__deleted": true
+    },
+    "ContainerConfiguration": {
+      "title__deleted": "The configuration for container-enabled pools.",
+      "description__added": "The configuration for container-enabled pools.",
+      "properties": {
+        "type": {
+          "title__deleted": "The container technology to be used.",
+          "description__added": "The container technology to be used."
+        },
+        "containerImageNames": {
+          "title__deleted": "The collection of container image names."
+        },
+        "containerRegistries": {
+          "title__deleted": "Additional private registries from which containers can be pulled."
+        }
+      }
+    },
+    "ContainerHostBatchBindMountEntry": {
+      "title__deleted": "The entry of path and mount mode you want to mount into task container.",
+      "description__added": "The entry of path and mount mode you want to mount into task container.",
+      "properties": {
+        "source": {
+          "title__deleted": "The paths which will be mounted to container task's container.",
+          "description__added": "The paths which will be mounted to container task's container."
+        },
+        "isReadOnly": {
+          "title__deleted": "Mount this source path as read-only mode or not. Default value is false (read/write mode)."
+        }
+      }
+    },
+    "ContainerRegistry": {
+      "title__deleted": "A private container registry.",
+      "description__added": "A private container registry.",
+      "properties": {
+        "username": {
+          "title__deleted": "The user name to log into the registry server.",
+          "description__added": "The user name to log into the registry server."
+        },
+        "password": {
+          "title__deleted": "The password to log into the registry server.",
+          "format__added": "password",
+          "description__added": "The password to log into the registry server."
+        },
+        "registryServer": {
+          "title__deleted": "The registry URL."
+        },
+        "identityReference": {
+          "title__deleted": "The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.",
+          "description__added": "The reference to a user assigned identity associated with the Batch pool which a compute node will use."
+        }
+      }
+    },
+    "DataDisk": {
+      "properties": {
+        "lun": {
+          "title__deleted": "The logical unit number."
+        },
+        "caching": {
+          "title__deleted": "The type of caching to enable for the disk.",
+          "description": {
+            "__old": "Values are:\n\n none - The caching mode for the disk is not enabled.\n readOnly - The caching mode for the disk is read only.\n readWrite - The caching mode for the disk is read and write.\n\n The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.",
+            "__new": "The type of caching to enable for the disk."
+          }
+        },
+        "diskSizeGB": {
+          "title__deleted": "The initial disk size in GB when creating new data disk.",
+          "description__added": "The initial disk size in GB when creating new data disk."
+        },
+        "storageAccountType": {
+          "title__deleted": "The storage account type for use in creating data disks or OS disk.",
+          "description": {
+            "__old": "If omitted, the default is \"Standard_LRS\". Values are:\n\n Standard_LRS - The data disk should use standard locally redundant storage.\n Premium_LRS - The data disk should use premium locally redundant storage.",
+            "__new": "The storage account type for use in creating data disks or OS disk."
+          }
+        }
+      }
+    },
+    "DeploymentConfiguration": {
+      "title__deleted": "Deployment configuration properties.",
+      "description__added": "Deployment configuration properties.",
+      "properties": {
+        "virtualMachineConfiguration": {
+          "title__deleted": "The virtual machine configuration for the pool.",
+          "description__added": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
+        }
+      }
+    },
+    "DetectorListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/DetectorResponse",
+              "__new": "#/definitions/DetectorListResult"
+            }
+          }
+        }
+      }
+    },
+    "DetectorResponse": {
+      "properties": {
+        "etag__added": {
+          "type": "string",
+          "description": "*\nThe entity tag for the certificate."
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "The tags of the certificate.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureProxyResource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "DiffDiskSettings": {
+      "title__deleted": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
+      "description__added": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
+      "properties": {
+        "placement": {
+          "title__deleted": "Specifies the ephemeral disk placement for operating system disk for all VMs in the pool.",
+          "default__added": "CacheDisk",
+          "description": {
+            "__old": "This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements",
+            "__new": "This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements."
+          },
+          "x-ms-enum": {
+            "modelAsString": {
+              "__old": false,
+              "__new": true
+            }
+          }
+        }
+      }
+    },
+    "DiskEncryptionConfiguration": {
+      "properties": {
+        "targets": {
+          "title__deleted": "The list of disk targets Batch Service will encrypt on the compute node",
+          "items": {
+            "title__deleted": "The disks to encrypt on each compute node.",
+            "x-nullable__deleted": false
+          }
+        }
+      }
+    },
+    "EndpointAccessProfile": {
+      "properties": {
+        "defaultAction": {
+          "title__deleted": "The default action when there is no IPRule matched."
+        }
+      }
+    },
+    "EnvironmentSetting": {
+      "title__deleted": "An environment variable to be set on a task process.",
+      "description__added": "An environment variable to be set on a task process.",
+      "properties": {
+        "name": {
+          "title__deleted": "The name of the environment variable.",
+          "description__added": "The name of the environment variable."
+        },
+        "value": {
+          "title__deleted": "The value of the environment variable.",
+          "description__added": "The value of the environment variable."
+        }
+      }
+    },
+    "FixedScaleSettings": {
+      "title__deleted": "Fixed scale settings for the pool.",
+      "description__added": "Fixed scale settings for the pool.",
+      "properties": {
+        "resizeTimeout": {
+          "title__deleted": "The timeout for allocation of compute nodes to the pool.",
+          "default__deleted": "PT15M"
+        },
+        "targetDedicatedNodes": {
+          "title__deleted": "The desired number of dedicated compute nodes in the pool."
+        },
+        "targetLowPriorityNodes": {
+          "title__deleted": "The desired number of Spot/low-priority compute nodes in the pool."
+        },
+        "nodeDeallocationOption": {
+          "title__deleted": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
+          "description": {
+            "__old": "If omitted, the default value is Requeue.",
+            "__new": "Determines what to do with a node and its running task(s) after it has been selected for deallocation."
+          }
+        }
+      }
+    },
+    "IPRule": {
+      "properties": {
+        "action": {
+          "default__added": "Allow",
+          "x-ms-enum": {
+            "modelAsString": {
+              "__old": false,
+              "__new": true
+            }
+          }
+        },
+        "value": {
+          "title__deleted": "The IP address or IP address range to filter"
+        }
+      }
+    },
+    "ImageReference": {
+      "title__deleted": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.",
+      "description__added": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.",
+      "properties": {
+        "publisher": {
+          "title__deleted": "The publisher of the Azure Virtual Machines Marketplace image."
+        },
+        "offer": {
+          "title__deleted": "The offer type of the Azure Virtual Machines Marketplace image."
+        },
+        "sku": {
+          "title__deleted": "The SKU of the Azure Virtual Machines Marketplace image."
+        },
+        "version": {
+          "title__deleted": "The version of the Azure Virtual Machines Marketplace image."
+        },
+        "id": {
+          "title__deleted": "The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId}."
+        },
+        "sharedGalleryImageId": {
+          "title__deleted": "The shared gallery image unique identifier"
+        },
+        "communityGalleryImageId": {
+          "title__deleted": "The community gallery image unique identifier"
+        }
+      }
+    },
+    "InboundNatPool": {
+      "title__deleted": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.",
+      "description__added": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.",
+      "properties": {
+        "name": {
+          "title__deleted": "The name of the endpoint."
+        },
+        "protocol": {
+          "title__deleted": "The protocol of the endpoint.",
+          "description__added": "The protocol of the endpoint."
+        },
+        "backendPort": {
+          "title__deleted": "The port number on the compute node."
+        },
+        "frontendPortRangeStart": {
+          "title__deleted": "The first port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes."
+        },
+        "frontendPortRangeEnd": {
+          "title__deleted": "The last port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes."
+        },
+        "networkSecurityGroupRules": {
+          "title__deleted": "A list of network security group rules that will be applied to the endpoint."
+        }
+      }
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyIdentifier": {
+          "description": {
+            "__old": "Full path to the secret with or without version. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. or https://mykeyvault.vault.azure.net/keys/testkey. To be usable the following prerequisites must be met:\n\n The Batch Account has a System Assigned identity\n The account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions\n The KeyVault has soft-delete and purge protection enabled",
+            "__new": "Full path to the secret with or without version. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. or https://mykeyvault.vault.azure.net/keys/testkey. To be usable the following prerequisites must be met:\n\nThe Batch Account has a System Assigned identity\nThe account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions\nThe KeyVault has soft-delete and purge protection enabled"
+          }
+        }
+      }
+    },
+    "LinuxUserConfiguration": {
+      "title__deleted": "Properties used to create a user account on a Linux node.",
+      "description__added": "Properties used to create a user account on a Linux node.",
+      "properties": {
+        "uid": {
+          "title__deleted": "The user ID of the user account."
+        },
+        "gid": {
+          "title__deleted": "The group ID for the user account."
+        },
+        "sshPrivateKey": {
+          "title__deleted": "The SSH private key for the user account.",
+          "format__added": "password"
+        }
+      }
+    },
+    "ListApplicationPackagesResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListApplicationsResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListCertificatesResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListPoolsResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListPrivateEndpointConnectionsResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListPrivateLinkResourcesResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ManagedDisk": {
+      "properties": {
+        "storageAccountType": {
+          "title__deleted": "The storage account type for use in creating data disks or OS disk.",
+          "description__added": "The storage account type for use in creating data disks or OS disk."
+        },
+        "securityProfile": {
+          "title__deleted": "Specifies the security profile for the managed disk.",
+          "description__added": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs."
+        }
+      }
+    },
+    "MetadataItem": {
+      "title__deleted": "A name-value pair associated with a Batch service resource.",
+      "properties": {
+        "name": {
+          "title__deleted": "The name of the metadata item.",
+          "description__added": "The name of the metadata item."
+        },
+        "value": {
+          "title__deleted": "The value of the metadata item.",
+          "description__added": "The value of the metadata item."
+        }
+      }
+    },
+    "MountConfiguration": {
+      "title__deleted": "The file system to mount on each node.",
+      "description__added": "The file system to mount on each node.",
+      "properties": {
+        "azureBlobFileSystemConfiguration": {
+          "title__deleted": "The Azure Storage Container to mount using blob FUSE on each node."
+        },
+        "nfsMountConfiguration": {
+          "title__deleted": "The NFS file system to mount on each node."
+        },
+        "cifsMountConfiguration": {
+          "title__deleted": "The CIFS/SMB file system to mount on each node.",
+          "$ref": {
+            "__old": "#/definitions/CIFSMountConfiguration",
+            "__new": "#/definitions/CifsMountConfiguration"
+          }
+        },
+        "azureFileShareConfiguration": {
+          "title__deleted": "The Azure File Share to mount on each node."
+        }
+      }
+    },
+    "NFSMountConfiguration": {
+      "title__deleted": "Information used to connect to an NFS file system.",
+      "description__added": "Information used to connect to an NFS file system.",
+      "properties": {
+        "source": {
+          "title__deleted": "The URI of the file system to mount.",
+          "description__added": "The URI of the file system to mount."
+        },
+        "relativeMountPath": {
+          "title__deleted": "The relative path on the compute node where the file system will be mounted"
+        },
+        "mountOptions": {
+          "title__deleted": "Additional command line options to pass to the mount command."
+        }
+      }
+    },
+    "NetworkConfiguration": {
+      "properties": {
+        "subnetId": {
+          "title__deleted": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
+          "externalDocs__deleted": {
+            "description": "Create an Azure Batch pool in a virtual network",
+            "url": "https://learn.microsoft.com/azure/batch/batch-virtual-network"
+          }
+        },
+        "dynamicVnetAssignmentScope": {
+          "title__deleted": "The scope of dynamic vnet assignment.",
+          "description__added": "The scope of dynamic vnet assignment."
+        },
+        "endpointConfiguration": {
+          "title__deleted": "The configuration for endpoints on compute nodes in the Batch pool.",
+          "description__added": "The endpoint configuration for a pool."
+        },
+        "publicIPAddressConfiguration": {
+          "title__deleted": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
+          "description__added": "The public IP Address configuration of the networking configuration of a Pool."
+        },
+        "enableAcceleratedNetworking": {
+          "title__deleted": "Whether this pool should enable accelerated networking.",
+          "externalDocs__deleted": {
+            "description": "Create a VM with Accelerated Networking.",
+            "url": "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview"
+          }
+        }
+      }
+    },
+    "NetworkSecurityGroupRule": {
+      "title__deleted": "A network security group rule to apply to an inbound endpoint.",
+      "description__added": "A network security group rule to apply to an inbound endpoint.",
+      "properties": {
+        "priority": {
+          "title__deleted": "The priority for this rule."
+        },
+        "access": {
+          "title__deleted": "The action that should be taken for a specified IP address, subnet range or tag.",
+          "description__added": "The action that should be taken for a specified IP address, subnet range or tag."
+        },
+        "sourceAddressPrefix": {
+          "title__deleted": "The source address prefix or tag to match for the rule."
+        },
+        "sourcePortRanges": {
+          "title__deleted": "The source port ranges to match for the rule."
+        }
+      }
+    },
+    "NodePlacementConfiguration": {
+      "title__deleted": "Node placement configuration for batch pools.",
+      "properties": {
+        "policy": {
+          "title__deleted": "The placement policy for allocating nodes in the pool."
+        }
+      }
+    },
+    "OSDisk": {
+      "title__deleted": "Settings for the operating system disk of the virtual machine.",
+      "description__added": "Settings for the operating system disk of the virtual machine.",
+      "properties": {
+        "ephemeralOSDiskSettings": {
+          "title__deleted": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
+          "description__added": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
+        },
+        "caching": {
+          "title__deleted": "The type of caching to enable for the disk.",
+          "description__added": "The type of caching to enable for the disk."
+        },
+        "managedDisk": {
+          "title__deleted": "The managed disk parameters."
+        },
+        "diskSizeGB": {
+          "title__deleted": "The initial disk size in GB when creating new OS disk.",
+          "description__added": "The initial disk size in GB when creating new OS disk."
+        },
+        "writeAcceleratorEnabled": {
+          "title__deleted": "Specifies whether writeAccelerator should be enabled or disabled on the disk.",
+          "description__added": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "Pool": {
+      "properties": {
+        "etag__added": {
+          "type": "string",
+          "description": "*\nThe entity tag for the certificate."
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "The tags of the certificate.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "title__deleted": "The type of identity used for the Batch Pool."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureProxyResource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "PoolEndpointConfiguration": {
+      "title__deleted": "The endpoint configuration for a pool.",
+      "description__added": "The endpoint configuration for a pool.",
+      "properties": {
+        "inboundNatPools": {
+          "title__deleted": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally."
+        }
+      }
+    },
+    "PoolProperties": {
+      "properties": {
+        "displayName": {
+          "title__deleted": "The display name for the pool."
+        },
+        "lastModified": {
+          "title__deleted": "The last modified time of the pool."
+        },
+        "creationTime": {
+          "title__deleted": "The creation time of the pool.",
+          "description__added": "The creation time of the pool."
+        },
+        "provisioningState": {
+          "title__deleted": "The current state of the pool.",
+          "description__added": "The current state of the pool."
+        },
+        "provisioningStateTransitionTime": {
+          "title__deleted": "The time at which the pool entered its current state.",
+          "description__added": "The time at which the pool entered its current state."
+        },
+        "allocationState": {
+          "title__deleted": "Whether the pool is resizing.",
+          "description__added": "Whether the pool is resizing."
+        },
+        "allocationStateTransitionTime": {
+          "title__deleted": "The time at which the pool entered its current allocation state.",
+          "description__added": "The time at which the pool entered its current allocation state."
+        },
+        "vmSize": {
+          "title__deleted": "The size of virtual machines in the pool. All VMs in a pool are the same size."
+        },
+        "deploymentConfiguration": {
+          "title__deleted": "This property describes the virtual machines that the pool nodes will be deployed on.",
+          "description__added": "Deployment configuration properties."
+        },
+        "currentDedicatedNodes": {
+          "title__deleted": "The number of dedicated compute nodes currently in the pool.",
+          "description__added": "The number of dedicated compute nodes currently in the pool."
+        },
+        "currentLowPriorityNodes": {
+          "title__deleted": "The number of Spot/low-priority compute nodes currently in the pool.",
+          "description__added": "The number of Spot/low-priority compute nodes currently in the pool."
+        },
+        "scaleSettings": {
+          "title__deleted": "Settings which configure the number of nodes in the pool.",
+          "description__added": "Defines the desired size of the pool. This can either be 'fixedScale' where the requested targetDedicatedNodes is specified, or 'autoScale' which defines a formula which is periodically reevaluated. If this property is not specified, the pool will have a fixed scale with 0 targetDedicatedNodes."
+        },
+        "autoScaleRun": {
+          "title__deleted": "The results and errors from the last execution of the autoscale formula."
+        },
+        "interNodeCommunication": {
+          "title__deleted": "Whether the pool permits direct communication between nodes."
+        },
+        "networkConfiguration": {
+          "title__deleted": "The network configuration for the pool.",
+          "description__added": "The network configuration for a pool."
+        },
+        "taskSlotsPerNode": {
+          "title__deleted": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool."
+        },
+        "taskSchedulingPolicy": {
+          "title__deleted": "How tasks are distributed across compute nodes in a pool."
+        },
+        "userAccounts": {
+          "title__deleted": "The list of user accounts to be created on each node in the pool.",
+          "description__added": "The list of user accounts to be created on each node in the pool."
+        },
+        "metadata": {
+          "title__deleted": "A list of name-value pairs associated with the pool as metadata."
+        },
+        "startTask": {
+          "title__deleted": "A task specified to run on each compute node as it joins the pool."
+        },
+        "certificates": {
+          "title__deleted": "The list of certificates to be installed on each compute node in the pool."
+        },
+        "applicationPackages": {
+          "title__deleted": "The list of application packages to be installed on each compute node in the pool."
+        },
+        "applicationLicenses": {
+          "title__deleted": "The list of application licenses the Batch service will make available on each compute node in the pool."
+        },
+        "resizeOperationStatus": {
+          "title__deleted": "Contains details about the current or last completed resize operation.",
+          "description__added": "Describes either the current operation (if the pool AllocationState is Resizing) or the previously completed operation (if the AllocationState is Steady)."
+        },
+        "mountConfiguration": {
+          "title__deleted": "A list of file systems to mount on each node in the pool."
+        },
+        "targetNodeCommunicationMode": {
+          "title__deleted": "Determines how a pool communicates with the Batch service.",
+          "description": {
+            "__old": "If omitted, the default value is Default.",
+            "__new": "Determines how a pool communicates with the Batch service."
+          }
+        },
+        "currentNodeCommunicationMode": {
+          "title__deleted": "Determines how a pool communicates with the Batch service.",
+          "description__added": "Determines how a pool communicates with the Batch service."
+        },
+        "upgradePolicy": {
+          "title__deleted": "The upgrade policy for the pool.",
+          "description__added": "Describes an upgrade policy - automatic, manual, or rolling."
+        },
+        "resourceTags": {
+          "title__deleted": "The user-specified tags associated with the pool."
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "properties": {
+        "id": {
+          "title__deleted": "The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.",
+          "description__added": "The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "etag__added": {
+          "type": "string",
+          "description": "*\nThe entity tag for the certificate."
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "The tags of the certificate.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureProxyResource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "title__deleted": "The provisioning state of the private endpoint connection.",
+          "x-nullable__deleted": false,
+          "description__added": "The provisioning state of the private endpoint connection."
+        },
+        "privateEndpoint": {
+          "title__deleted": "The ARM resource identifier of the private endpoint.",
+          "description__added": "The private endpoint of the private endpoint connection."
+        },
+        "groupIds": {
+          "title__deleted": "The group id of the private endpoint connection."
+        },
+        "privateLinkServiceConnectionState": {
+          "title__deleted": "The private link service connection state of the private endpoint connection.",
+          "description__added": "The private link service connection state of the private endpoint connection"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "etag__added": {
+          "type": "string",
+          "description": "*\nThe entity tag for the certificate."
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "The tags of the certificate.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureProxyResource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "title__deleted": "The group id of the private link resource."
+        },
+        "requiredMembers": {
+          "title__deleted": "The list of required members that are used to establish the private link connection.",
+          "description__added": "The list of required members that are used to establish the private link connection."
+        },
+        "requiredZoneNames": {
+          "title__deleted": "The list of required zone names for the private DNS resource name",
+          "description__added": "The list of required zone names for the private DNS resource name"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "properties": {
+        "status": {
+          "title__deleted": "The status of the Batch private endpoint connection",
+          "description__added": "The status of the Batch private endpoint connection"
+        },
+        "description": {
+          "title__deleted": "Description of the private Connection state",
+          "description__added": "Description of the private Connection state"
+        },
+        "actionsRequired": {
+          "title__deleted": "Action required on the private connection state",
+          "description__added": "Action required on the private connection state"
+        }
+      }
+    },
+    "PublicIPAddressConfiguration": {
+      "properties": {
+        "provision": {
+          "title__deleted": "The provisioning type for Public IP Addresses for the Batch Pool.",
+          "description": {
+            "__old": "The default value is BatchManaged",
+            "__new": "The provisioning type for Public IP Addresses for the Batch Pool."
+          }
+        },
+        "ipAddressIds": {
+          "title__deleted": "The list of public IPs which the Batch service will use when provisioning Compute Nodes."
+        }
+      }
+    },
+    "ResizeError": {
+      "title__deleted": "An error that occurred when resizing a pool.",
+      "description__added": "An error that occurred when resizing a pool.",
+      "properties": {
+        "details": {
+          "title__deleted": "Additional details about the error.",
+          "description__added": "Additional details about the error."
+        }
+      }
+    },
+    "ResizeOperationStatus": {
+      "title__deleted": "Details about the current or last completed resize operation.",
+      "properties": {
+        "targetDedicatedNodes": {
+          "title__deleted": "The desired number of dedicated compute nodes in the pool.",
+          "description__added": "The desired number of dedicated compute nodes in the pool."
+        },
+        "targetLowPriorityNodes": {
+          "title__deleted": "The desired number of Spot/low-priority compute nodes in the pool.",
+          "description__added": "The desired number of Spot/low-priority compute nodes in the pool."
+        },
+        "resizeTimeout": {
+          "title__deleted": "The timeout for allocation of compute nodes to the pool or removal of compute nodes from the pool."
+        },
+        "nodeDeallocationOption": {
+          "title__deleted": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
+          "description": {
+            "__old": "The default value is requeue.",
+            "__new": "Determines what to do with a node and its running task(s) after it has been selected for deallocation."
+          }
+        },
+        "startTime": {
+          "title__deleted": "The time when this resize operation was started.",
+          "description__added": "The time when this resize operation was started."
+        },
+        "errors": {
+          "title__deleted": "Details of any errors encountered while performing the last resize on the pool."
+        }
+      }
+    },
+    "ResourceFile": {
+      "title__deleted": "A single file or multiple files to be downloaded to a compute node.",
+      "description__added": "A single file or multiple files to be downloaded to a compute node.",
+      "properties": {
+        "autoStorageContainerName": {
+          "title__deleted": "The storage container name in the auto storage account."
+        },
+        "storageContainerUrl": {
+          "title__deleted": "The URL of the blob container within Azure Blob Storage."
+        },
+        "httpUrl": {
+          "title__deleted": "The URL of the file to download."
+        },
+        "blobPrefix": {
+          "title__deleted": "The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded."
+        },
+        "filePath": {
+          "title__deleted": "The location on the compute node to which to download the file, relative to the task's working directory."
+        },
+        "fileMode": {
+          "title__deleted": "The file permission mode attribute in octal format."
+        },
+        "identityReference": {
+          "title__deleted": "The reference to the user assigned identity to use to access Azure Blob Storage specified by storageContainerUrl or httpUrl",
+          "description__added": "The reference to a user assigned identity associated with the Batch pool which a compute node will use."
+        }
+      }
+    },
+    "ScaleSettings": {
+      "title__deleted": "Scale settings for the pool",
+      "properties": {
+        "fixedScale": {
+          "title__deleted": "Fixed scale settings for the pool."
+        },
+        "autoScale": {
+          "title__deleted": "AutoScale settings for the pool."
+        }
+      }
+    },
+    "SecurityProfile": {
+      "properties": {
+        "securityType": {
+          "title__deleted": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.",
+          "description__added": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings."
+        },
+        "uefiSettings": {
+          "title__deleted": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
+        }
+      }
+    },
+    "ServiceArtifactReference": {
+      "properties": {
+        "id": {
+          "title__deleted": "The service artifact reference id of ServiceArtifactReference"
+        }
+      }
+    },
+    "StartTask": {
+      "title__deleted": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged.",
+      "properties": {
+        "commandLine": {
+          "title__deleted": "The command line of the start task."
+        },
+        "resourceFiles": {
+          "title__deleted": "A list of files that the Batch service will download to the compute node before running the command line.",
+          "description__added": "A list of files that the Batch service will download to the compute node before running the command line."
+        },
+        "environmentSettings": {
+          "title__deleted": "A list of environment variable settings for the start task.",
+          "description__added": "A list of environment variable settings for the start task."
+        },
+        "userIdentity": {
+          "title__deleted": "The user identity under which the start task runs."
+        },
+        "maxTaskRetryCount": {
+          "title__deleted": "The maximum number of times the task may be retried."
+        },
+        "waitForSuccess": {
+          "title__deleted": "Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node."
+        },
+        "containerSettings": {
+          "title__deleted": "The settings for the container under which the start task runs."
+        }
+      }
+    },
+    "SupportedSkusResult": {
+      "properties": {
+        "value": {
+          "x-ms-identifiers__deleted": [
+            "name"
+          ]
+        }
+      }
+    },
+    "TaskContainerSettings": {
+      "title__deleted": "The container settings for a task.",
+      "description__added": "The container settings for a task.",
+      "properties": {
+        "containerRunOptions": {
+          "title__deleted": "Additional options to the container create command."
+        },
+        "imageName": {
+          "title__deleted": "The image to use to create the container in which the task will run."
+        },
+        "registry": {
+          "title__deleted": "The private registry which contains the container image."
+        },
+        "workingDirectory": {
+          "title__deleted": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.",
+          "description__added": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'."
+        },
+        "containerHostBatchBindMounts": {
+          "title__deleted": "The paths you want to mounted to container task."
+        }
+      }
+    },
+    "TaskSchedulingPolicy": {
+      "title__deleted": "Specifies how tasks should be distributed across compute nodes.",
+      "description__added": "Specifies how tasks should be distributed across compute nodes.",
+      "properties": {
+        "nodeFillType": {
+          "title__deleted": "How tasks should be distributed across compute nodes.",
+          "description__added": "How tasks should be distributed across compute nodes."
+        }
+      }
+    },
+    "UpgradePolicy": {
+      "properties": {
+        "mode": {
+          "title__deleted": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.",
+          "description__added": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between."
+        },
+        "automaticOSUpgradePolicy": {
+          "title__deleted": "Configuration parameters used for performing automatic OS Upgrade."
+        },
+        "rollingUpgradePolicy": {
+          "title__deleted": "The configuration parameters used while performing a rolling upgrade.",
+          "description__added": "The configuration parameters used while performing a rolling upgrade."
+        }
+      }
+    },
+    "UserAccount": {
+      "title__deleted": "Properties used to create a user on an Azure Batch node.",
+      "description__added": "Properties used to create a user on an Azure Batch node.",
+      "properties": {
+        "name": {
+          "title__deleted": "The name of the user account. Names can contain any Unicode characters up to a maximum length of 20.",
+          "description__added": "The name of the user account. Names can contain any Unicode characters up to a maximum length of 20."
+        },
+        "password": {
+          "title__deleted": "The password for the user account.",
+          "format__added": "password",
+          "description__added": "The password for the user account."
+        },
+        "elevationLevel": {
+          "title__deleted": "The elevation level of the user.",
+          "description": {
+            "__old": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
+            "__new": "The elevation level of the user."
+          }
+        },
+        "linuxUserConfiguration": {
+          "title__deleted": "The Linux-specific user configuration for the user account."
+        },
+        "windowsUserConfiguration": {
+          "title__deleted": "The Windows-specific user configuration for the user account."
+        }
+      }
+    },
+    "UserIdentity": {
+      "title__deleted": "The definition of the user identity under which the task is run.",
+      "properties": {
+        "userName": {
+          "title__deleted": "The name of the user identity under which the task is run."
+        },
+        "autoUser": {
+          "title__deleted": "The auto user under which the task is run."
+        }
+      }
+    },
+    "VMDiskSecurityProfile": {
+      "properties": {
+        "securityEncryptionType": {
+          "title__deleted": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
+          "description__added": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs."
+        }
+      }
+    },
+    "VMExtension": {
+      "title__deleted": "The configuration for virtual machine extensions.",
+      "description__added": "The configuration for virtual machine extensions.",
+      "properties": {
+        "name": {
+          "title__deleted": "The name of the virtual machine extension.",
+          "description__added": "The name of the virtual machine extension."
+        },
+        "publisher": {
+          "title__deleted": "The name of the extension handler publisher.",
+          "description__added": "The name of the extension handler publisher."
+        },
+        "type": {
+          "title__deleted": "The type of the extensions.",
+          "description__added": "The type of the extensions."
+        },
+        "typeHandlerVersion": {
+          "title__deleted": "The version of script handler.",
+          "description__added": "The version of script handler."
+        },
+        "settings": {
+          "title__deleted": "JSON formatted public settings for the extension.",
+          "description__added": "JSON formatted public settings for the extension.",
+          "additionalProperties__added": {}
+        },
+        "protectedSettings": {
+          "x-ms-secret__deleted": true,
+          "additionalProperties__added": {},
+          "description": {
+            "__old": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. ",
+            "__new": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+          }
+        },
+        "provisionAfterExtensions": {
+          "title__deleted": "The collection of extension names."
+        }
+      }
+    },
+    "VirtualMachineConfiguration": {
+      "title__deleted": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.",
+      "description__added": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.",
+      "properties": {
+        "imageReference": {
+          "title__deleted": "A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.",
+          "description__added": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
+        },
+        "nodeAgentSkuId": {
+          "title__deleted": "The SKU of the Batch node agent to be provisioned on compute nodes in the pool."
+        },
+        "windowsConfiguration": {
+          "title__deleted": "Windows operating system settings on the virtual machine."
+        },
+        "dataDisks": {
+          "title__deleted": "The configuration for data disks attached to the compute nodes in the pool."
+        },
+        "licenseType": {
+          "title__deleted": "The type of on-premises license to be used when deploying the operating system.",
+          "description": {
+            "__old": "This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:\n\n Windows_Server - The on-premises license is for Windows Server.\n Windows_Client - The on-premises license is for Windows Client.\n",
+            "__new": "This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:\n\nWindows_Server - The on-premises license is for Windows Server.\nWindows_Client - The on-premises license is for Windows Client."
+          }
+        },
+        "containerConfiguration": {
+          "title__deleted": "The container configuration for the pool."
+        },
+        "diskEncryptionConfiguration": {
+          "title__deleted": "The disk encryption configuration for the pool."
+        },
+        "nodePlacementConfiguration": {
+          "title__deleted": "The node placement configuration for the pool."
+        },
+        "extensions": {
+          "title__deleted": "The virtual machine extension for the pool."
+        },
+        "osDisk": {
+          "title__deleted": "Settings for the operating system disk of the Virtual Machine."
+        },
+        "securityProfile": {
+          "title__deleted": "Specifies the security profile settings for the virtual machine or virtual machine scale set.",
+          "description__added": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
+        },
+        "serviceArtifactReference": {
+          "title__deleted": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version."
+        }
+      }
+    },
+    "VirtualMachineFamilyCoreQuota": {
+      "properties": {
+        "name": {
+          "x-nullable__deleted": false
+        },
+        "coreQuota": {
+          "x-nullable__deleted": false
+        }
+      }
+    },
+    "WindowsConfiguration": {
+      "title__deleted": "Windows operating system settings to apply to the virtual machine.",
+      "description__added": "Windows operating system settings to apply to the virtual machine.",
+      "properties": {
+        "enableAutomaticUpdates": {
+          "title__deleted": "Whether automatic updates are enabled on the virtual machine."
+        }
+      }
+    },
+    "WindowsUserConfiguration": {
+      "title__deleted": "Properties used to create a user account on a Windows node.",
+      "description__added": "Properties used to create a user account on a Windows node.",
+      "properties": {
+        "loginMode": {
+          "title__deleted": "Login mode for user"
+        }
+      }
+    }
+  }
+}

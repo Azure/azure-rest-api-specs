@@ -890,6 +890,7 @@ model BatchAccountCreateProperties {
   /**
    * The pool allocation mode also affects how clients may authenticate to the Batch Service API. If the mode is BatchService, clients may authenticate using access keys or Microsoft Entra ID. If the mode is UserSubscription, clients must use Microsoft Entra ID. The default is BatchService.
    */
+  @summary("The allocation mode to use for creating pools in the Batch account.")
   poolAllocationMode?: PoolAllocationMode;
 
   /**
@@ -898,18 +899,21 @@ model BatchAccountCreateProperties {
   keyVaultReference?: KeyVaultReference;
 
   /**
-   * If not specified, the default value is 'enabled'.
+   * The network access type for operating on the resources in the Batch account.
    */
+  @summary("The network access type for accessing Azure Batch account.")
   publicNetworkAccess?: PublicNetworkAccessType = PublicNetworkAccessType.Enabled;
 
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.
    */
+  @summary("Network profile for Batch account, which contains network rule settings for each endpoint.")
   networkProfile?: NetworkProfile;
 
   /**
    * Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.
    */
+  @summary("The encryption configuration for the Batch account.")
   encryption?: EncryptionProperties;
 
   /**
@@ -940,6 +944,7 @@ model AutoStorageBaseProperties {
   /**
    * The identity referenced here must be assigned to pools which have compute nodes that need access to auto-storage.
    */
+  @summary("The reference to the user assigned identity which compute nodes will use to access auto-storage.")
   nodeIdentityReference?: ComputeNodeIdentityReference;
 }
 
@@ -1129,23 +1134,29 @@ model BatchAccountProperties {
    * The allocation mode for creating pools in the Batch account.
    */
   @visibility(Lifecycle.Read)
+  @summary("The allocation mode used for creating pools in the Batch account.")
   poolAllocationMode?: PoolAllocationMode;
 
   /**
    * Identifies the Azure key vault associated with a Batch account.
    */
   @visibility(Lifecycle.Read)
+  @summary("A reference to the Azure key vault associated with the Batch account.")
   keyVaultReference?: KeyVaultReference;
 
   /**
-   * If not specified, the default value is 'enabled'.
+   * The network access type for operating on the resources in the Batch account.
    */
-  publicNetworkAccess?: PublicNetworkAccessType = PublicNetworkAccessType.Enabled;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("The network interface type for accessing Azure Batch service and Batch account operations.")
+  publicNetworkAccess?: PublicNetworkAccessType | null = PublicNetworkAccessType.Enabled;
 
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Network profile for Batch account, which contains network rule settings for each endpoint.")
   networkProfile?: NetworkProfile | null;
 
   /**
@@ -1159,12 +1170,14 @@ model BatchAccountProperties {
    * Contains information about the auto-storage account associated with a Batch account.
    */
   @visibility(Lifecycle.Read)
+  @summary("The properties and status of any auto-storage account associated with the Batch account.")
   autoStorage?: AutoStorageProperties;
 
   /**
    * Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.
    */
   @visibility(Lifecycle.Read)
+  @summary("The encryption configuration for the Batch account.")
   encryption?: EncryptionProperties;
 
   /**
@@ -1172,6 +1185,7 @@ model BatchAccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
+  @summary("The dedicated core quota for the Batch account.")
   dedicatedCoreQuota?: int32 | null;
 
   /**
@@ -1179,6 +1193,7 @@ model BatchAccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
+  @summary("The Spot/low-priority core quota for the Batch account.")
   lowPriorityCoreQuota?: int32 | null;
 
   /**
@@ -1195,18 +1210,21 @@ model BatchAccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
+  @summary("A value indicating whether core quotas per Virtual Machine family are enforced for this account")
   dedicatedCoreQuotaPerVMFamilyEnforced?: boolean;
 
   /**
    * The pool quota for the Batch account.
    */
   @visibility(Lifecycle.Read)
+  @summary("The pool quota for the Batch account.")
   poolQuota?: int32;
 
   /**
    * The active job and job schedule quota for the Batch account.
    */
   @visibility(Lifecycle.Read)
+  @summary("The active job and job schedule quota for the Batch account.")
   activeJobAndJobScheduleQuota?: int32;
 
   /**
@@ -1380,7 +1398,9 @@ model AzureResource {
 /**
  * An error response from the Batch service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * The body of the error response.
@@ -1391,6 +1411,8 @@ model CloudError {
 /**
  * An error response from the Batch service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -1448,6 +1470,7 @@ model BatchAccountUpdateProperties {
   /**
    * Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.
    */
+  @summary("The encryption configuration for the Batch account.")
   encryption?: EncryptionProperties;
 
   /**
@@ -1457,13 +1480,15 @@ model BatchAccountUpdateProperties {
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 
   /**
-   * If not specified, the default value is 'enabled'.
+   * The network access type for operating on the resources in the Batch account.
    */
+  @summary("The network access type for accessing Azure Batch account.")
   publicNetworkAccess?: PublicNetworkAccessType = PublicNetworkAccessType.Enabled;
 
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.
    */
+  @summary("Network profile for Batch account, which contains network rule settings for each endpoint.")
   networkProfile?: NetworkProfile;
 }
 
@@ -1723,7 +1748,7 @@ model CheckNameAvailabilityParameters {
   /**
    * The resource type.
    */
-  type: ResourceType = ResourceType.MicrosoftBatchBatchAccounts;
+  type: ResourceType;
 }
 
 /**
@@ -1760,6 +1785,7 @@ model ListCertificatesResult is Azure.Core.Page<Certificate>;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CertificateProperties extends CertificateBaseProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("The provisioned state of the resource")
   @visibility(Lifecycle.Read)
   provisioningState?: CertificateProvisioningState;
 
@@ -1768,6 +1794,7 @@ model CertificateProperties extends CertificateBaseProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @summary("The time at which the certificate entered its current state.")
   provisioningStateTransitionTime?: utcDateTime;
 
   /**
@@ -1781,6 +1808,7 @@ model CertificateProperties extends CertificateBaseProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @summary("The time at which the certificate entered its previous state.")
   previousProvisioningStateTransitionTime?: utcDateTime;
 
   /**
@@ -1793,6 +1821,7 @@ model CertificateProperties extends CertificateBaseProperties {
    * This is only returned when the certificate provisioningState is 'Failed'.
    */
   @visibility(Lifecycle.Read)
+  @summary("The error which occurred while deleting the certificate")
   deleteCertificateError?: DeleteCertificateError;
 }
 
@@ -1829,11 +1858,13 @@ model CertificateBaseProperties {
   /**
    * This must match the first portion of the certificate name. Currently required to be 'SHA1'.
    */
+  @summary("The algorithm of the certificate thumbprint.")
   thumbprintAlgorithm?: string;
 
   /**
    * This must match the thumbprint from the name.
    */
+  @summary("The thumbprint of the certificate.")
   thumbprint?: string;
 
   /**
@@ -1863,11 +1894,13 @@ model CertificateCreateOrUpdateProperties extends CertificateBaseProperties {
    * The maximum size is 10KB.
    */
   @visibility(Lifecycle.Read, Lifecycle.Update)
+  @summary("The base64-encoded contents of the certificate.")
   data: string;
 
   /**
    * This must not be specified if the certificate format is Cer.
    */
+  @summary("The password to access the certificate's private key.")
   @secret
   password?: string;
 }
@@ -2546,42 +2579,54 @@ model FixedScaleSettings {
 /**
  * AutoScale settings for the pool.
  */
+@summary("AutoScale settings for the pool.")
 model AutoScaleSettings {
   /**
    * A formula for the desired number of compute nodes in the pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("A formula for the desired number of compute nodes in the pool.")
+  @OpenAPI.externalDocs(
+    "https://learn.microsoft.com/azure/batch/batch-automatic-scaling",
+    "Create an automatic scaling formula for scaling compute nodes in a Batch pool"
+  )
   formula: string;
 
   /**
    * If omitted, the default value is 15 minutes (PT15M).
    */
+  @summary("The time interval at which to automatically adjust the pool size according to the autoscale formula.")
   evaluationInterval?: duration;
 }
 
 /**
  * The results and errors from an execution of a pool autoscale formula.
  */
+@summary("The results and errors from an execution of a pool autoscale formula.")
 model AutoScaleRun {
   /**
    * The time at which the autoscale formula was last evaluated.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @summary("The time at which the autoscale formula was last evaluated.")
   evaluationTime: utcDateTime;
 
   /**
    * Each variable value is returned in the form $variable=value, and variables are separated by semicolons.
    */
+  @summary("The final values of all variables used in the evaluation of the autoscale formula.")
   results?: string;
 
   /**
    * An error that occurred when autoscaling a pool.
    */
+  @summary("Details of the error encountered evaluating the autoscale formula on the pool, if the evaluation was unsuccessful.")
   error?: AutoScaleRunError;
 }
 
 /**
  * An error that occurred when autoscaling a pool.
  */
+@summary("An error that occurred when autoscaling a pool.")
 model AutoScaleRunError {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -2596,6 +2641,7 @@ model AutoScaleRunError {
   /**
    * Additional details about the error.
    */
+  @summary("Additional details about the error.")
   @OpenAPI.extension("x-ms-identifiers", #["code"])
   details?: AutoScaleRunError[];
 }
@@ -2921,15 +2967,18 @@ model UserIdentity {
 /**
  * Specifies the parameters for the auto user that runs a task on the Batch service.
  */
+@summary("Specifies the parameters for the auto user that runs a task on the Batch service.")
 model AutoUserSpecification {
   /**
    * The default value is Pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by start tasks.
    */
+  @summary("The scope of the auto user.")
   scope?: AutoUserScope;
 
   /**
    * The default value is nonAdmin.
    */
+  @summary("The elevation level of the auto user.")
   elevationLevel?: ElevationLevel;
 }
 
@@ -2982,40 +3031,48 @@ model ContainerHostBatchBindMountEntry {
 /**
  * Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
  */
+@summary("A reference to a certificate to be installed on compute nodes in a pool. This must exist inside the same account as the pool.")
 model CertificateReference {
   /**
    * The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool.
    */
+  @summary("The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool.")
   id: string;
 
   /**
    * The default value is currentUser. This property is applicable only for pools configured with Windows compute nodes. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.
    */
+  @summary("The location of the certificate store on the compute node into which to install the certificate.")
   storeLocation?: CertificateStoreLocation;
 
   /**
    * This property is applicable only for pools configured with Windows compute nodes. Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My.
    */
+  @summary("The name of the certificate store on the compute node into which to install the certificate.")
   storeName?: string;
 
   /**
    * Which user accounts on the compute node should have access to the private data of the certificate.
    */
+  @summary("Which user accounts on the compute node should have access to the private data of the certificate.")
   visibility?: CertificateVisibility[];
 }
 
 /**
  * Link to an application package inside the batch account
  */
+@summary("Link to an application package inside the batch account")
 model ApplicationPackageReference {
   /**
    * The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.
    */
+  @summary("The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.")
   id: string;
 
   /**
    * If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
    */
+  @summary("The version of the application to deploy. If omitted, the default version is deployed.")
   version?: string;
 }
 
@@ -3105,42 +3162,50 @@ model MountConfiguration {
 /**
  * Information used to connect to an Azure Storage Container using Blobfuse.
  */
+@summary("Information used to connect to an Azure Storage Container using Blobfuse.")
 model AzureBlobFileSystemConfiguration {
   /**
    * The Azure Storage Account name.
    */
+  @summary("The Azure Storage Account name.")
   accountName: string;
 
   /**
    * The Azure Blob Storage Container name.
    */
+  @summary("The Azure Blob Storage Container name.")
   containerName: string;
 
   /**
    * This property is mutually exclusive with both sasKey and identity; exactly one must be specified.
    */
+  @summary("The Azure Storage Account key.")
   @secret
   accountKey?: string;
 
   /**
    * This property is mutually exclusive with both accountKey and identity; exactly one must be specified.
    */
+  @summary("The Azure Storage SAS token.")
   @secret
   sasKey?: string;
 
   /**
    * These are 'net use' options in Windows and 'mount' options in Linux.
    */
+  @summary("Additional command line options to pass to the mount command.")
   blobfuseOptions?: string;
 
   /**
    * All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
    */
+  @summary("The relative path on the compute node where the file system will be mounted")
   relativeMountPath: string;
 
   /**
    * This property is mutually exclusive with both accountKey and sasKey; exactly one must be specified.
    */
+  @summary("The reference to the user assigned identity to use to access containerName")
   identityReference?: ComputeNodeIdentityReference;
 }
 
@@ -3172,26 +3237,31 @@ model CifsMountConfiguration {
   /**
    * The user to use for authentication against the CIFS file system.
    */
+  @summary("The user to use for authentication against the CIFS file system.")
   userName: string;
 
   /**
    * The URI of the file system to mount.
    */
+  @summary("The URI of the file system to mount.")
   source: string;
 
   /**
    * All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
    */
+  @summary("The relative path on the compute node where the file system will be mounted")
   relativeMountPath: string;
 
   /**
    * These are 'net use' options in Windows and 'mount' options in Linux.
    */
+  @summary("Additional command line options to pass to the mount command.")
   mountOptions?: string;
 
   /**
    * The password to use for authentication against the CIFS file system.
    */
+  @summary("The password to use for authentication against the CIFS file system.")
   @secret
   password: string;
 }
@@ -3199,31 +3269,37 @@ model CifsMountConfiguration {
 /**
  * Information used to connect to an Azure Fileshare.
  */
+@summary("Information used to connect to an Azure Fileshare.")
 model AzureFileShareConfiguration {
   /**
    * The Azure Storage account name.
    */
+  @summary("The Azure Storage account name.")
   accountName: string;
 
   /**
    * This is of the form 'https://{account}.file.core.windows.net/'.
    */
+  @summary("The Azure Files URL.")
   azureFileUrl: string;
 
   /**
    * The Azure Storage account key.
    */
+  @summary("The Azure Storage account key.")
   @secret
   accountKey: string;
 
   /**
    * All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
    */
+  @summary("The relative path on the compute node where the file system will be mounted")
   relativeMountPath: string;
 
   /**
    * These are 'net use' options in Windows and 'mount' options in Linux.
    */
+  @summary("Additional command line options to pass to the mount command.")
   mountOptions?: string;
 }
 
@@ -3663,3 +3739,6 @@ union NspAccessRuleDirection {
 }
 
 model DetectorListResult is Azure.Core.Page<DetectorListResult>;
+
+model BatchAccountListResult is Azure.Core.Page<BatchAccount>;
+@@identifiers(BatchAccountListResult.value, #["/properties/accountEndpoint"]);
