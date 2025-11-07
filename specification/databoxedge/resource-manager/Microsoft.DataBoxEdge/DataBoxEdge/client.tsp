@@ -4,6 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DataBoxEdge;
 using Http;
 
+@@clientName(Sku, "SkuInfo", "go");
 @@clientName(DataBoxEdgeSku, "AvailableDataBoxEdgeSku", "csharp");
 
 @@clientName(SSLStatus, "SslStatus", "java");
