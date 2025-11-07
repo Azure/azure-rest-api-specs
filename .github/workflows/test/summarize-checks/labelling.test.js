@@ -257,6 +257,36 @@ describe("update labels", () => {
         targetBranch: "main",
       },
     },
+    {
+      description:
+        "Should remove WaitForARMFeedback when ARMSignedOff, CI-NewRPNamespaceWithoutRPaaS, and RPaaSException",
+      existingLabels: [
+        "ARMReview",
+        "ARMSignedOff",
+        "CI-NewRPNamespaceWithoutRPaaS",
+        "new-api-version",
+        "new-rp-namespace",
+        "resource-manager",
+        "RPaaSException",
+        "TypeSpec",
+        "WaitForARMFeedback",
+      ],
+      expectedLabelsToAdd: [],
+      expectedLabelsToRemove: ["WaitForARMFeedback"],
+      impactAssessment: {
+        suppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: true,
+        rpaasRPMissing: true,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        typeSpecChanged: true,
+        isNewApiVersion: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
   ];
   it.each(testCases)(
     "$description",
