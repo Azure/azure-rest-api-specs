@@ -12,3 +12,5 @@ import "../memory_stores/operations.tsp";
 // so we can customize visibility where necessary.
 import "../responses/operations.tsp";
 import "../conversations/operations.tsp";
+
+namespace Azure.AI.Projects;
