@@ -17,3 +17,5 @@ import "../evaluation_taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../schedules/routes.tsp";
+
+namespace Azure.AI.Projects;

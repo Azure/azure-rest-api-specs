@@ -4589,16 +4589,14 @@
           "items": {}
         },
         "created_at": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/OpenAI.integer",
           "description": "The Unix timestamp (in seconds) for when the eval was created."
         },
         "metadata": {
           "$ref": "#/definitions/OpenAI.Metadata"
         },
         "modified_at": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/integer",
           "description": "Unix timestamp (in seconds) when the evaluation run was last modified."
         },
         "created_by": {
@@ -4722,8 +4720,7 @@
           "description": "The name of the evaluation run."
         },
         "created_at": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/OpenAI.integer",
           "description": "Unix timestamp (in seconds) when the evaluation run was created."
         },
         "report_url": {
@@ -4758,8 +4755,7 @@
           "$ref": "#/definitions/OpenAI.EvalApiError"
         },
         "modified_at": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/integer",
           "description": "Unix timestamp (in seconds) when the evaluation run was last modified."
         },
         "created_by": {
@@ -4826,8 +4822,7 @@
           "description": "The identifier of the evaluation group."
         },
         "created_at": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/OpenAI.integer",
           "description": "Unix timestamp (in seconds) when the evaluation run was created."
         },
         "status": {
@@ -4835,8 +4830,7 @@
           "description": "The status of the evaluation run."
         },
         "datasource_item_id": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/OpenAI.integer",
           "description": "The identifier for the data source item."
         },
         "datasource_item": {
@@ -4888,8 +4882,7 @@
           "description": "The grader type (for example, \"string-check-grader\")."
         },
         "score": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/OpenAI.numeric",
           "description": "The numeric score produced by the grader."
         },
         "passed": {
@@ -6440,20 +6433,16 @@
           "$ref": "#/definitions/OpenAI.EvalApiError"
         },
         "temperature": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.numeric"
         },
         "max_completion_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "top_p": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.numeric"
         },
         "seed": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         }
       },
       "required": [
@@ -6499,20 +6488,16 @@
       "type": "object",
       "properties": {
         "total_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "completion_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "prompt_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "cached_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         }
       },
       "required": [
@@ -6534,24 +6519,19 @@
           }
         },
         "invocation_count": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "prompt_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "completion_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "total_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "cached_tokens": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         }
       },
       "required": [
@@ -6570,12 +6550,10 @@
           "type": "string"
         },
         "passed": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "failed": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         }
       },
       "required": [
@@ -6588,20 +6566,16 @@
       "type": "object",
       "properties": {
         "total": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "errored": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "failed": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         },
         "passed": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/OpenAI.integer"
         }
       },
       "required": [
@@ -6615,6 +6589,14 @@
       "type": "object",
       "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
       "x-oaiTypeLabel": "map"
+    },
+    "OpenAI.integer": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "OpenAI.numeric": {
+      "type": "number",
+      "format": "double"
     },
     "PagedConnection": {
       "type": "object",
@@ -7671,6 +7653,10 @@
         }
       ],
       "x-ms-discriminator-value": "Weekly"
+    },
+    "integer": {
+      "type": "integer",
+      "format": "int64"
     }
   },
   "parameters": {
