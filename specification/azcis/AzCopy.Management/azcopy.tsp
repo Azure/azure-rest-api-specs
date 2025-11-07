@@ -28,12 +28,12 @@ model AzCopyResourceProperties {
   @added(Versions.v2025_11_05_preview)
   @doc("The SAS token for the source object. This should be the full URL. This can target an account, container, virtual directory, or blob.")
   @secret
-  sourceSAS?: string;
+  sourceSas?: string;
 
   @added(Versions.v2025_11_05_preview)
   @doc("The SAS token for the destination object. This should be the full URL. This can target an account, container, virtual directory, or blob.")
   @secret
-  destinationSAS?: string;
+  destinationSas?: string;
 
   @doc("Source and destination combo. Any combination of Blob and/or File side by side (ex. BlobBlob, FileBlob).")
   fromTo: FromToType;
