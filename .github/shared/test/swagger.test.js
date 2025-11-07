@@ -43,6 +43,22 @@ describe("Swagger", () => {
     expect(new Set(refs.keys())).toEqual(new Set());
   });
 
+  it("throws when created with invalid JSON content", async () => {
+    const folder = "/fake";
+    const swagger = new Swagger(resolve(folder, "invalid.json"), {
+      content: `not json`,
+      tag: new Tag("test-tag", [], { readme: new Readme("/fake/readme.md") }),
+    });
+
+    await expect(swagger.getRefs()).rejects.toThrowErrorMatchingInlineSnapshot(`
+      [SpecModelError: Failed to parse JSON for swagger: ${resolve("/fake/invalid.json")}
+        Problem File: ${resolve("/fake/invalid.json")}
+        Readme: ${resolve("/fake/readme.md")}
+        Tag: test-tag
+        Cause: SyntaxError: Unexpected token 'o', "not json" is not valid JSON]
+    `);
+  });
+
   it("throws when created with invalid ref content", async () => {
     const invalidRefContent = `
       {
