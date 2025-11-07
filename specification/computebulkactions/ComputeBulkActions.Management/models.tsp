@@ -304,6 +304,7 @@ model LaunchBulkInstancesOperationListResult {
   value: LaunchBulkInstancesOperation[];
 
   @doc("The URL to get the next set of results.")
+  @nextLink
   nextLink?: string;
 }
 
