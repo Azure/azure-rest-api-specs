@@ -129,8 +129,7 @@ suppressions:
     reason: Temporary solution, to be fixed in next iteration - Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
   - code: LroLocationHeader
     from: NewRelic.json
-    where: $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/switchBilling'].post
-    reason: The Monitors_SwitchBilling operation is asynchronous POST operation that returns 202 for accepted requests. No Location header is needed as per all the previous versions and we do no intend to make any change here as per business logic.
+    reason: The Monitors_SwitchBilling operation is synchronous POST operation that returns 202 for accepted requests. No Location header is needed as per all the previous versions and we do not intend to make any change here as per business logic.
 ```
 
 ---
