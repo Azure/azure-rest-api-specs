@@ -568,12 +568,14 @@ union BrokerMemoryProfile {
 model ClientConfig {
   @doc("Upper bound of Session Expiry Interval, in seconds.")
   @minValue(1)
-  @maxValue(4294967295)
+  // TODO: verify values/type -> 4294967295 is not an int32
+  // @maxValue(4294967295)
   maxSessionExpirySeconds?: int32;
 
   @doc("Upper bound of Message Expiry Interval, in seconds.")
   @minValue(1)
-  @maxValue(4294967295)
+  // TODO: verify values/type -> 4294967295 is not an int32
+  // @maxValue(4294967295)
   maxMessageExpirySeconds?: int32;
 
   @doc("Max message size for a packet in Bytes.")
