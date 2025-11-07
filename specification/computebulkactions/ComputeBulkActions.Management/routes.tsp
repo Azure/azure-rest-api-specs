@@ -31,7 +31,9 @@ interface BulkActions {
   @doc("Creates or updates LaunchBulkInstancesOperations.")
   @put
   @armResourceCreateOrUpdate(LaunchBulkInstancesOperation)
-  createOrUpdate(...CustomParams): LaunchBulkInstancesOperation | ErrorResponse;
+  createOrUpdate(
+    ...CustomParams,
+  ): ArmResourceUpdatedResponse<LaunchBulkInstancesOperation> | ArmResourceCreatedResponse<LaunchBulkInstancesOperation> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The field name `name` is the valid field name."
   @doc("Deletes the LaunchBulkInstancesOperations.")
