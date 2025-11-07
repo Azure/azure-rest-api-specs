@@ -12217,24 +12217,12 @@
       "description": "Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied.",
       "properties": {
         "passName": {
-          "type": "string",
-          "description": "The pass name. Currently, the only allowable value is OobeSystem.",
-          "enum": [
-            "OobeSystem"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/PassNames",
+          "description": "The pass name. Currently, the only allowable value is OobeSystem."
         },
         "componentName": {
-          "type": "string",
-          "description": "The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.",
-          "enum": [
-            "Microsoft-Windows-Shell-Setup"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ComponentNames",
+          "description": "The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup."
         },
         "settingName": {
           "$ref": "#/definitions/SettingNames",
@@ -13029,6 +13017,16 @@
           "readOnly": true
         }
       }
+    },
+    "ComponentNames": {
+      "type": "string",
+      "enum": [
+        "Microsoft-Windows-Shell-Setup"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-nullable": false
     },
     "ConsistencyModeTypes": {
       "type": "string",
@@ -15479,6 +15477,16 @@
           "readOnly": true
         }
       }
+    },
+    "PassNames": {
+      "type": "string",
+      "enum": [
+        "OobeSystem"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-nullable": false
     },
     "PatchAssessmentState": {
       "type": "string",

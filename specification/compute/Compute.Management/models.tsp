@@ -2175,12 +2175,12 @@ model AdditionalUnattendContent {
   /**
    * The pass name. Currently, the only allowable value is OobeSystem.
    */
-  passName?: "OobeSystem";
+  passName?: PassNames;
 
   /**
    * The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.
    */
-  componentName?: "Microsoft-Windows-Shell-Setup";
+  componentName?: ComponentNames;
 
   /**
    * Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.
@@ -2191,6 +2191,22 @@ model AdditionalUnattendContent {
    * Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted.
    */
   content?: string;
+}
+
+/**
+ * The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
+union ComponentNames {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  "Microsoft-Windows-Shell-Setup",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
+union PassNames {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  "OobeSystem",
 }
 
 /**
