@@ -1,5 +1,3 @@
-// @ts-check
-
 import { describe, expect, it } from "vitest";
 import { parse, stringify } from "../src/ndjson.js";
 
@@ -23,6 +21,7 @@ describe("ndjson", () => {
   });
 
   it("empty array", () => {
+    /** @type {string[]} */
     let values = [];
 
     const stringifiedValues = stringify(values);
