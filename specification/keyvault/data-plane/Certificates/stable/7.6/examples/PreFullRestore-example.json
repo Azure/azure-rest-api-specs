@@ -1,0 +1,30 @@
+{
+  "operationId": "PreFullRestoreOperation",
+  "title": "Check whether the customer can perform a full restore operation",
+  "parameters": {
+    "vaultBaseUrl": "https://myhsm.managedhsm.azure.net",
+    "preRestoreOperationParameters": {
+      "sasTokenParameters": {
+        "storageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+        "token": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=REDACTED"
+      },
+      "folderToRestore": "mhsm-mypool-20200303062926785"
+    },
+    "api-version": "7.6"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": 5,
+        "Azure-AsyncOperation": "https://myvault.vault.azure.net/restore/45aacd568ab049a2803861e8dd3ae21f/pending"
+      },
+      "body": {
+        "status": "InProgress",
+        "statusDetails": "Pre Full restore operation is in progress",
+        "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+        "startTime": 1490790000,
+        "endTime": 0
+      }
+    }
+  }
+}

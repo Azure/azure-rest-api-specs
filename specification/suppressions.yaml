@@ -34,13 +34,13 @@
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/iotoperations.json
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/iotoperations.json
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-09-15-preview/iotoperations.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/backuprestore.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/backuprestore.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/certificates.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/keys.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/rbac.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/secrets.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/settings.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/backuprestore.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/backuprestore.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/certificates.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/keys.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/rbac.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/secrets.json
+    - keyvault/data-plane/Legacy/preview/7.6-preview.1/settings.json
     - liftrneon/resource-manager/Neon.Postgres/preview/2024-08-01-preview/neon.json
     - liftrqumulo/resource-manager/Qumulo.Storage/preview/2022-06-27-preview/Qumulo.Storage.json
     - playwrighttesting/data-plane/Microsoft.PlaywrightTesting.AuthManager/preview/2023-10-01-preview/playwrighttesting.json
@@ -650,7 +650,7 @@
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
-    - keyvault/Security.KeyVault.Administration/tspconfig.yaml
+    - keyvault/data-plane/Administration/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -661,9 +661,9 @@
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
   paths:
-    - keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml
-    - keyvault/Security.KeyVault.RBAC/tspconfig.yaml
-    - keyvault/Security.KeyVault.Settings/tspconfig.yaml
+    - keyvault/data-plane/BackupRestore/tspconfig.yaml
+    - keyvault/data-plane/RBAC/tspconfig.yaml
+    - keyvault/data-plane/Settings/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -677,9 +677,9 @@
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
-    - keyvault/Security.KeyVault.Certificates/tspconfig.yaml
-    - keyvault/Security.KeyVault.Keys/tspconfig.yaml
-    - keyvault/Security.KeyVault.Secrets/tspconfig.yaml
+    - keyvault/data-plane/Certificates/tspconfig.yaml
+    - keyvault/data-plane/Keys/tspconfig.yaml
+    - keyvault/data-plane/Secrets/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -696,7 +696,7 @@
     - options.@azure-tools/typespec-python.generate-test
     - options.@azure-tools/typespec-ts.*
   paths:
-    - keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml
+    - keyvault/data-plane/SecurityDomain/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -1238,8 +1238,8 @@
     - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
     - devcenter/DevCenter/tspconfig.yaml
     - healthdataaiservices/HealthDataAIServices.DeidServices/tspconfig.yaml
-    - keyvault/Security.KeyVault.Administration/tspconfig.yaml
-    - keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml
+    - keyvault/data-plane/Administration/tspconfig.yaml
+    - keyvault/data-plane/SecurityDomain/tspconfig.yaml
     - loadtestservice/data-plane/loadtesting/tspconfig.yaml
     - loadtestservice/data-plane/playwright/tspconfig.yaml
     - machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml
