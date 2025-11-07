@@ -148,7 +148,7 @@ export async function buildState(
     if (!changedFileAndTagsMap.has(changedReadme)) {
       changedFileAndTagsMap.set(changedReadme, {
         readme: readmeObject,
-        changedTags: new Set<string>([""]),
+        changedTags: new Set<string>(),
       });
     }
   }
@@ -203,22 +203,6 @@ export function reconcileChangedFilesAndTags(
       readme: tags.readme,
       changedTags: new Set([...tags.changedTags].filter((t) => afterTags.has(t))),
     });
-  }
-
-  // If a tag exists in after but not in before, make sure that the the default
-  // tag from before is included in scans
-  for (const [readme, afterTags] of afterFinal.entries()) {
-    if (!beforeFinal.has(readme)) {
-      continue;
-    }
-
-    const beforeTags = beforeFinal.get(readme)!.changedTags;
-    for (const tag of afterTags.changedTags) {
-      if (!beforeTags.has(tag)) {
-        beforeTags.add("");
-        break;
-      }
-    }
   }
 
   return [beforeFinal, afterFinal];
