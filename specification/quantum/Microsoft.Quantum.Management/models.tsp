@@ -257,6 +257,8 @@ model TargetDescription {
    */
   @added(Versions.v2025_11_01_preview)
   @visibility(Lifecycle.Read)
+  @minValue(1)
+  @maxValue(100000)
   numQubits?: int32;
 
   /**
