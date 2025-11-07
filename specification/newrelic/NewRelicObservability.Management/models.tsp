@@ -1407,10 +1407,7 @@ model MetricsStatusRequestParameter {
 @mediaTypeHint("application/json")
 scalar email extends string;
 
-@@OpenAPI.extension(AppServicesListResponse.value,
-  "x-ms-identifiers",
-  #["azureResourceId"]
-);
+@@identifiers(AppServicesListResponse.value, #["azureResourceId"]);
 @@visibility(NewRelicMonitorResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
