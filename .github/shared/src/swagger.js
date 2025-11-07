@@ -90,7 +90,7 @@ export class Swagger {
    */
   #content;
 
-  // map of the operations in this swagger with key as 'operation_id
+  // operations: Map of the operations in this swagger, using `operationId` as key
   /** @type {{operations: Map<string, Operation>, refs: Map<string, Swagger>} | undefined} */
   #data;
 
@@ -172,7 +172,6 @@ export class Swagger {
           resolve: { file: excludeExamples, http: false },
         });
       } catch (error) {
-        // TODO: Add test coverage
         if (error instanceof ResolverError) {
           throw new SpecModelError(`Failed to resolve file for swagger: ${this.#path}`, {
             cause: error,
@@ -211,7 +210,7 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<Map<string, Swagger>>}
+   * @returns {Promise<Map<string, Swagger>>} Map of swaggers referenced from this swagger, using `path` as key
    */
   async getRefs() {
     const allRefs = await this.#getRefs();
@@ -227,7 +226,7 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<Map<string, Swagger>>}
+   * @returns {Promise<Map<string, Swagger>>} Map of examples referenced from this swagger, using `path` as key
    */
   async getExamples() {
     const allRefs = await this.#getRefs();
@@ -239,7 +238,7 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<Map<string, Operation>>}
+   * @returns {Promise<Map<string, Operation>>} Map of the operations in this swagger, using `operationId` as key
    */
   async getOperations() {
     return (await this.#getData()).operations;
