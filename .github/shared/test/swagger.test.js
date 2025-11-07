@@ -110,7 +110,7 @@ describe("Swagger", () => {
         Problem File: ${resolve("/fake/invalid.json")}
         Readme: ${resolve("/fake/readme.md")}
         Tag: test-tag
-        Cause: ResolverError: Error reading file "${resolve("/does/not/exist.json").replace(/\\/g, "/")}"]
+        Cause: ResolverError: Error reading file "${resolve("/does/not/exist.json").replace(/\\/g, "/").toLowerCase()}"]
     `,
     );
   });
