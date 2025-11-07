@@ -49,7 +49,7 @@ interface BulkActions {
     ...CommonParams,
     ...ProviderNamespace<LaunchBulkInstancesOperation>,
     ...LocationParameter,
-  ): LaunchBulkInstancesOperationListResult | ErrorResponse;
+  ): ArmResponse<LaunchBulkInstancesOperationListResult> | ErrorResponse;
 
   @doc("List LaunchBulkInstancesOperation resources by subscriptionId.")
   @get
@@ -60,7 +60,7 @@ interface BulkActions {
     ...SubscriptionParams,
     ...ProviderNamespace<LaunchBulkInstancesOperation>,
     ...LocationParameter,
-  ): LaunchBulkInstancesOperationListResult | ErrorResponse;
+  ): ArmResponse<LaunchBulkInstancesOperationListResult> | ErrorResponse;
 
   @doc("List VirtualMachine resources of a LaunchBulkInstancesOperation.")
   @autoRoute
