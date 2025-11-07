@@ -174,4 +174,8 @@ suppressions:
     where: 
       - $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
     reason: Typespec generated definitions contain anonymous types.
+  - code: AvoidAdditionalProperties
+    where: 
+      - $.definitions.TargetDescription.properties.metadata.additionalProperties
+    reason: These metadata are decided by downstream providers that we do not have control, some of them are confidential, and providers may change very often.
 ```
