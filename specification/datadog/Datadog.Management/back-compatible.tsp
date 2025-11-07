@@ -26,11 +26,6 @@ using Microsoft.Datadog;
 @@clientLocation(DatadogMonitorResources.list, "Monitors", "!csharp");
 @@clientName(DatadogMonitorResources.list, "List", "!csharp");
 
-@@clientLocation(DatadogMonitorResources.getDefaultApplicationKey, "Monitors");
-@@clientName(DatadogMonitorResources.getDefaultApplicationKey,
-  "GetDefaultApplicationKey"
-);
-
 @@clientLocation(DatadogMonitorResources.listApiKeys, "Monitors");
 @@clientName(DatadogMonitorResources.listApiKeys, "ListApiKeys");
 
