@@ -44,23 +44,23 @@ model UpdateContentProperties {
 @doc("Represents details of a specific update content payload.")
 model ContentPayload {
   @doc("Represents url of a update payload.")
-  url: string;
+  url?: string;
 
   @doc("Represents hash of a update payload.")
-  hash: string;
+  hash?: string;
 
   @doc("Represents hash algorithm of a update payload.")
-  hashAlgorithm: string;
+  hashAlgorithm?: string;
 
   @doc("Represents identifier of a update payload.")
-  identifier: string;
+  identifier?: string;
 
   @doc("Represents size in bytes of a update payload.")
-  packageSizeInBytes: string;
+  packageSizeInBytes?: string;
 
   @doc("Represents the group of a update payload.")
-  group: string;
+  group?: string;
 
   @doc("Represents the file name of a update payload.")
-  fileName: string;
+  fileName?: string;
 }

@@ -435,16 +435,7 @@
           "type": "string",
           "description": "Represents the file name of a update payload."
         }
-      },
-      "required": [
-        "url",
-        "hash",
-        "hashAlgorithm",
-        "identifier",
-        "packageSizeInBytes",
-        "group",
-        "fileName"
-      ]
+      }
     },
     "KubernetesVersion": {
       "type": "object",
@@ -551,13 +542,7 @@
           "type": "string",
           "description": "Represents composed image iso hash of a os image."
         }
-      },
-      "required": [
-        "validatedSolutionRecipeVersion",
-        "composedImageVersion",
-        "composedImageIsoUrl",
-        "composedImageIsoHash"
-      ]
+      }
     },
     "PlatformPayload": {
       "type": "object",
@@ -570,12 +555,16 @@
         "payloadHash": {
           "type": "string",
           "description": "Represents hash of a platform update payload."
+        },
+        "payloadPackageSizeInBytes": {
+          "type": "string",
+          "description": "Represents size in bytes of a platform update payload."
+        },
+        "payloadIdentifier": {
+          "type": "string",
+          "description": "Represents identifier of a platform update payload."
         }
-      },
-      "required": [
-        "payloadUrl",
-        "payloadHash"
-      ]
+      }
     },
     "PlatformUpdate": {
       "type": "object",
@@ -614,8 +603,6 @@
         }
       },
       "required": [
-        "validatedSolutionRecipeVersion",
-        "platformVersion",
         "platformPayloads"
       ]
     },

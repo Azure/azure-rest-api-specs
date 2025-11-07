@@ -44,10 +44,10 @@ model PlatformUpdateProperties {
 @doc("Represents details of a specific platform update.")
 model PlatformUpdateDetails {
   @doc("Represents validated solution recipe version of a platform update.")
-  validatedSolutionRecipeVersion: string;
+  validatedSolutionRecipeVersion?: string;
 
   @doc("Represents version of a platform update.")
-  platformVersion: string;
+  platformVersion?: string;
 
   @doc("Represents the platform payloads of a platform update.")
   @Azure.ResourceManager.identifiers(#[])
@@ -57,14 +57,14 @@ model PlatformUpdateDetails {
 @doc("Represents details of a specific platform update payload.")
 model PlatformPayload {
   @doc("Represents url of a platform update payload.")
-  payloadUrl: string;
+  payloadUrl?: string;
 
   @doc("Represents hash of a platform update payload.")
-  payloadHash: string;
+  payloadHash?: string;
 
   @doc("Represents size in bytes of a platform update payload.")
-  payloadPackageSizeInBytes: string;
+  payloadPackageSizeInBytes?: string;
 
   @doc("Represents identifier of a platform update payload.")
-  payloadIdentifier: string;
+  payloadIdentifier?: string;
 }

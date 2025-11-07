@@ -33,14 +33,14 @@ interface OsImages {
 @doc("Represents properties of a os image resource.")
 model OsImageProperties {
   @doc("Represents validated solution recipe version of a os image.")
-  validatedSolutionRecipeVersion: string;
+  validatedSolutionRecipeVersion?: string;
 
   @doc("Represents composed image version of a os image.")
-  composedImageVersion: string;
+  composedImageVersion?: string;
 
   @doc("Represents composed image iso download url of a os image.")
-  composedImageIsoUrl: string;
+  composedImageIsoUrl?: string;
 
   @doc("Represents composed image iso hash of a os image.")
-  composedImageIsoHash: string;
+  composedImageIsoHash?: string;
 }
