@@ -25,7 +25,7 @@ model SafeRollout is ProxyResource<SafeRolloutProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, location is needed for MSI"
   @doc("The location of the safeRollout")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: Azure.Core.azureLocation;
+  location?: Azure.Core.azureLocation;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, MSI support for proxy resource"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
