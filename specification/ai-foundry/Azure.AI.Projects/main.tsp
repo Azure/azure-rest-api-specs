@@ -2,7 +2,6 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
 import "./agents/operations.tsp"; // TODO: Rename file agents/operations.tsp to agents/routes.tsp
 import "./conversations/operations.tsp"; // TODO: Rename conversations/operations.tsp to conversations/routes.tsp
 import "./finetuning/operations.tsp";
