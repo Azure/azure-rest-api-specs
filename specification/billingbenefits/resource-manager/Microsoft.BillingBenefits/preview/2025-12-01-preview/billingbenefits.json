@@ -3995,22 +3995,22 @@
     },
     "FreeServicesProperties": {
       "type": "object",
-      "description": "Properties of a free service",
+      "description": "Properties of free services",
       "properties": {
         "productCode": {
           "description": "This is the catalog UPN for the product.",
           "$ref": "#/definitions/ProductCode"
         },
         "status": {
-          "description": "Current status of the free service",
+          "description": "Current status of the free services",
           "$ref": "#/definitions/FreeServicesStatus"
         },
         "startAt": {
-          "description": "Date and time when the free service becomes active",
+          "description": "Date and time when the free services becomes active",
           "$ref": "#/definitions/StartAt"
         },
         "endAt": {
-          "description": "Date and time when the free service expires",
+          "description": "Date and time when the free services expires",
           "$ref": "#/definitions/EndAt"
         },
         "provisioningState": {
@@ -4018,26 +4018,26 @@
         },
         "billingAccountResourceId": {
           "$ref": "#/definitions/BillingAccountResourceId",
-          "description": "Billing account resource id where the free service metadata is present.",
+          "description": "Billing account resource id where the free services metadata is present.",
           "readOnly": true
         },
         "billingProfileResourceId": {
           "$ref": "#/definitions/BillingProfileResourceId",
-          "description": "Billing profile resource id where the free service is scoped to."
+          "description": "Billing profile resource id where the free services is scoped to."
         },
         "customerResourceId": {
           "$ref": "#/definitions/CustomerResourceId",
-          "description": "Customer resource id where the free service is scoped to."
+          "description": "Customer resource id where the free services is scoped to."
         },
         "systemId": {
           "$ref": "#/definitions/SystemId",
-          "description": "This is the globally unique identifier of the credit which will not change for its lifetime."
+          "description": "This is the globally unique identifier of the free services which will not change for its lifetime."
         }
       }
     },
     "FreeServicesStatus": {
       "type": "string",
-      "description": "Status of the free service",
+      "description": "Status of the free services",
       "enum": [
         "Unknown",
         "Pending",
@@ -4051,30 +4051,30 @@
         "values": [
           {
             "value": "Unknown",
-            "description": "Free service status is unknown"
+            "description": "Free services status is unknown"
           },
           {
             "value": "Pending",
-            "description": "Free service is pending activation"
+            "description": "Free services is pending activation"
           },
           {
             "value": "Active",
-            "description": "Free service is active"
+            "description": "Free services is active"
           },
           {
             "value": "Canceled",
-            "description": "Free service has been canceled"
+            "description": "Free services has been canceled"
           },
           {
             "value": "Completed",
-            "description": "Free service has been completed"
+            "description": "Properties of free services"
           }
         ]
       }
     },
     "FreeServicesProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of Free Service as assigned by RPaaS. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of Free Service resource, refer to FreeServicesStatus.",
+      "description": "Provisioning state of Free Services as assigned by RPaaS. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of Free Services resource, refer to FreeServicesStatus.",
       "readOnly": true
     },
     "FreeServicesList": {
