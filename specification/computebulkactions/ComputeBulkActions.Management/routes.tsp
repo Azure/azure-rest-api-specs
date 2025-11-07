@@ -18,15 +18,7 @@ interface BulkActions {
   @doc("Gets a list of LaunchBulkInstancesOperations.")
   @get
   @armResourceRead(LaunchBulkInstancesOperation)
-  get(
-    ...CommonParams,
-    ...ProviderNamespace<LaunchBulkInstancesOperation>,
-    ...LocationParameter,
-    ...ResourceNameParameter<
-      LaunchBulkInstancesOperation,
-      NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-    >,
-  ): LaunchBulkInstancesOperation | ErrorResponse;
+  get(...CustomParams): LaunchBulkInstancesOperation | ErrorResponse;
 
   @doc("Creates or updates LaunchBulkInstancesOperations.")
   @put
