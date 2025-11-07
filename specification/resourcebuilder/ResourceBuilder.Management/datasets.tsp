@@ -6,7 +6,6 @@ import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.ResourceBuilder;
@@ -29,9 +28,6 @@ model DatasetProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
-  /** Dataset type, e.g. Snapshot or Delta. */
-  kind?: DatasetType;
-
   /** Dataset schema definition. */
   schema?: DatasetColumn[];
 
@@ -40,17 +36,6 @@ model DatasetProperties {
 
   /** Source from which data will be ingested for the dataset. */
   source?: Datastore;
-}
-
-/** Dataset type */
-union DatasetType {
-  /** Snapshot dataset type. */
-  Snapshot: "Snapshot",
-
-  /** Delta dataset type. */
-  Delta: "Delta",
-
-  string,
 }
 
 /** Dataset column */

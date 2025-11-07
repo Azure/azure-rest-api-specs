@@ -1294,10 +1294,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "blockPublishingOnValidationFailure": {
-          "type": "boolean",
-          "description": "Whether to block publishing on validation failure."
         }
       },
       "required": [
@@ -1331,30 +1327,6 @@
             "name": "All",
             "value": "all",
             "description": "All validations succeed condition."
-          }
-        ]
-      }
-    },
-    "DataQualityExecutionMode": {
-      "type": "string",
-      "description": "Data quality execution mode",
-      "enum": [
-        "inline",
-        "standAlone"
-      ],
-      "x-ms-enum": {
-        "name": "DataQualityExecutionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Inline",
-            "value": "inline",
-            "description": "Inline execution mode executes data quality metric collection inline, post curation job processing."
-          },
-          {
-            "name": "StandAlone",
-            "value": "standAlone",
-            "description": "Standalone execution mode executes data quality metric collection in a standalone data quality pipeline."
           }
         ]
       }
@@ -1708,10 +1680,6 @@
           "description": "Provisioning state of the dataset.",
           "readOnly": true
         },
-        "kind": {
-          "$ref": "#/definitions/DatasetType",
-          "description": "Dataset type, e.g. Snapshot or Delta."
-        },
         "schema": {
           "type": "array",
           "description": "Dataset schema definition.",
@@ -1795,30 +1763,6 @@
         "type",
         "name"
       ]
-    },
-    "DatasetType": {
-      "type": "string",
-      "description": "Dataset type",
-      "enum": [
-        "Snapshot",
-        "Delta"
-      ],
-      "x-ms-enum": {
-        "name": "DatasetType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Snapshot",
-            "value": "Snapshot",
-            "description": "Snapshot dataset type."
-          },
-          {
-            "name": "Delta",
-            "value": "Delta",
-            "description": "Delta dataset type."
-          }
-        ]
-      }
     },
     "Datastore": {
       "type": "object",
@@ -2057,9 +2001,9 @@
             "keyAttribute"
           ]
         },
-        "mergeWithPreviousSnapshot": {
-          "type": "boolean",
-          "description": "Whether to merge with previous snapshot. Defaults to true. Used by Batch jobs."
+        "snapshotMergeStrategy": {
+          "$ref": "#/definitions/SnapshotMergeStrategy",
+          "description": "Snapshot merge strategy. Used by Batch jobs."
         },
         "lookbackStartOffset": {
           "type": "string",
@@ -2088,10 +2032,6 @@
         "sink": {
           "$ref": "#/definitions/AzureDataExplorerSink",
           "description": "Sink to which data will be published in Azure Data Explorer. Required for AzureDataExplorerPublish jobs."
-        },
-        "executionMode": {
-          "$ref": "#/definitions/DataQualityExecutionMode",
-          "description": "Execution mode for data quality validation. Required for DataQualityValidation jobs."
         },
         "metricEvaluations": {
           "type": "array",
@@ -2611,6 +2551,30 @@
             "name": "ResourceNotificationSink",
             "value": "ResourceNotificationSink",
             "description": "Resource Notification sink type."
+          }
+        ]
+      }
+    },
+    "SnapshotMergeStrategy": {
+      "type": "string",
+      "description": "Snapshot merge strategy",
+      "enum": [
+        "NoMerge",
+        "IncrementalMerge"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotMergeStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoMerge",
+            "value": "NoMerge",
+            "description": "No merge strategy."
+          },
+          {
+            "name": "IncrementalMerge",
+            "value": "IncrementalMerge",
+            "description": "Incremental merge strategy."
           }
         ]
       }

@@ -7,8 +7,6 @@ import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.ResourceBuilder;
@@ -56,8 +54,8 @@ model JobProperties {
   @OpenAPI.extension("x-ms-identifiers", #["keyAttribute"])
   primaryKeyAttributes?: PrimaryKeyAttribute[];
 
-  /** Whether to merge with previous snapshot. Defaults to true. Used by Batch jobs. */
-  mergeWithPreviousSnapshot?: boolean;
+  /** Snapshot merge strategy. Used by Batch jobs. */
+  snapshotMergeStrategy?: SnapshotMergeStrategy;
 
   /** Lookback start offset for merging with previous snapshot. Used by Batch jobs. */
   lookbackStartOffset?: string;
@@ -94,8 +92,6 @@ model JobProperties {
   // ============================================
   // DataQualityValidation job specific properties (kind: "DataQualityValidation")
   // ============================================
-  /** Execution mode for data quality validation. Required for DataQualityValidation jobs. */
-  executionMode?: DataQualityExecutionMode;
 
   /** Metric evaluations. Required for DataQualityValidation jobs. */
   metricEvaluations?: MetricEvaluationEntry[];
@@ -195,6 +191,17 @@ union MissingPartitionPolicy {
 
   /** Ignore policy. */
   Ignore: "Ignore",
+
+  string,
+}
+
+/** Snapshot merge strategy */
+union SnapshotMergeStrategy {
+  /** No merge strategy. */
+  NoMerge: "NoMerge",
+
+  /** Incremental merge strategy. */
+  IncrementalMerge: "IncrementalMerge",
 
   string,
 }
@@ -304,17 +311,6 @@ union ResourceNotificationResourceType {
   string,
 }
 
-/** Data quality execution mode */
-union DataQualityExecutionMode {
-  /** Inline execution mode executes data quality metric collection inline, post curation job processing. */
-  Inline: "inline",
-
-  /** Standalone execution mode executes data quality metric collection in a standalone data quality pipeline. */
-  StandAlone: "standAlone",
-
-  string,
-}
-
 /** Data quality dataset validation */
 model DataQualityDatasetValidation {
   /** Dataset validation condition. */
@@ -322,9 +318,6 @@ model DataQualityDatasetValidation {
 
   /** Validations to perform. */
   validations: string[];
-
-  /** Whether to block publishing on validation failure. */
-  blockPublishingOnValidationFailure?: boolean;
 }
 
 /** Data quality dataset validation condition */

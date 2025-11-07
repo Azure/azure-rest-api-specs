@@ -7,8 +7,6 @@ import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.ResourceBuilder;
