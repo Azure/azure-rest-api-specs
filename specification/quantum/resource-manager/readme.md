@@ -176,6 +176,6 @@ suppressions:
     reason: Typespec generated definitions contain anonymous types.
   - code: AvoidAdditionalProperties
     where: 
-      - $.definitions.TargetDescription.properties.metadata.additionalProperties
+      - $.definitions.TargetDescription.properties.metadata
     reason: These metadata are decided by downstream providers that we do not have control, some of them are confidential, and providers may change very often.
 ```
