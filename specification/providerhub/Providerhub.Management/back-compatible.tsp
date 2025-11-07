@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.ProviderHub;
 
 @@clientName(CustomRollouts.createOrUpdate::parameters.resource, "properties");
@@ -104,3 +105,9 @@ using Microsoft.ProviderHub;
 @@clientName(SkuResourceOperationGroupThird.createOrUpdateNestedResourceTypeThird::parameters.resource,
   "properties"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(OperationsContentProperties.contents);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(ResourceManagementAction.resources);
