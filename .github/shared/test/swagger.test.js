@@ -27,35 +27,51 @@ describe("Swagger", () => {
     expect(swagger.path).toBe(resolve("/specs/foo/test.json"));
   });
 
-  it("can be created with string content", async () => {
+  it("can be created with empty string content", async () => {
     const folder = "/fake";
-    const swagger = new Swagger(resolve(folder, "widget.json"), {
+    const swagger = new Swagger(resolve(folder, "empty.json"), {
       content: "{}",
     });
 
     const operations = await swagger.getOperations();
-    expect(operations).toBeDefined();
+    expect(new Set(operations.keys())).toEqual(new Set());
 
     const examples = await swagger.getExamples();
-    expect(examples).toBeDefined();
+    expect(new Set(examples.keys())).toEqual(new Set());
 
     const refs = await swagger.getRefs();
-    expect(refs).toBeDefined();
+    expect(new Set(refs.keys())).toEqual(new Set());
+  });
 
-    // const tags = await readme.getTags();
-    // const tagNames = [...tags.keys()];
-    // const expectedTagNames = ["package-2021-11-01", "package-2021-10-01-preview"];
+  it("throws when created with invalid ref content", async () => {
+    const invalidRefContent = `
+      {
+        "paths": {
+          "/foo": {
+            "get": {
+              "operationId": "Foo_Get",
+              "$ref": "/does/not/exist.json"
+            }
+          }
+        }
+      }
+    `;
 
-    // expect(tagNames.sort()).toEqual(expectedTagNames.sort());
+    const folder = "/fake";
+    const swagger = new Swagger(resolve(folder, "invalid.json"), {
+      content: invalidRefContent,
+      tag: new Tag("test-tag", [], { readme: new Readme("/fake/readme.md") }),
+    });
 
-    // const swaggerPaths = [...tags.values()].flatMap((t) => [...t.inputFiles.keys()]);
-
-    // const expectedPaths = [
-    //   resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
-    //   resolve(folder, "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json"),
-    // ];
-
-    // expect(swaggerPaths.sort()).toEqual(expectedPaths.sort());
+    await expect(swagger.getRefs()).rejects.toThrowErrorMatchingInlineSnapshot(
+      `
+      [SpecModelError: Failed to resolve file for swagger: /fake/invalid.json
+        Problem File: /does/not/exist.json
+        Readme: /fake/readme.md
+        Tag: test-tag
+        Cause: ResolverError: Error reading file "/does/not/exist.json"]
+    `,
+    );
   });
 
   // TODO: Test that path is resolved against backpointer
