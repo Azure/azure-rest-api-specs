@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "knowledgeSourceName": "myKnowledgeSource1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "webAgentName": "myWebAgent1"
+  },
+  "responses": {
+    "200": {
+      "description": "OK. The knowledge source cache has been purged successfully."
+    },
+    "202": {
+      "description": "Accepted. The knowledge source cache purge operation has been accepted and will be completed asynchronously.",
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1/knowledgeSources/myKnowledgeSource1/operationResults/12345"
+      }
+    }
+  },
+  "operationId": "KnowledgeSources_Purge",
+  "title": "Purge Knowledge Source Cache"
+}

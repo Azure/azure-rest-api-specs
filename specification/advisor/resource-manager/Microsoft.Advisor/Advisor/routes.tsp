@@ -32,7 +32,7 @@ interface ConfigurationsOperationGroup {
    * Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.")
+  @summary("Create/Overwrite Azure Advisor configuration.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}")
   @put
   createInSubscription(
@@ -56,7 +56,7 @@ interface ConfigurationsOperationGroup {
    * Retrieve Azure Advisor configurations.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.")
+  @summary("Retrieve Azure Advisor configurations.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations")
   @list
   @get
@@ -105,11 +105,11 @@ interface ConfigurationsOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RecommendationsOperationGroup {
   /**
-   * Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a database so they can be retrieved later.
+   * Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a database so they can be retrieved later.")
+  @summary("Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.")
   @autoRoute
   @action("generateRecommendations")
   generate is ArmProviderActionSync<
@@ -128,7 +128,7 @@ interface RecommendationsOperationGroup {
    * Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Retrieves the status of the recommendation computation or generation process. Invoke it after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.")
+  @summary("Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}")
   @get
   getGenerateStatus(
@@ -180,7 +180,6 @@ interface SuppressionsOperationGroup {
  */
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@summary("Predicts Microsoft.Advisor services.")
 @autoRoute
 op predict is ArmProviderActionSync<
   Request = PredictionRequest,
