@@ -165,7 +165,7 @@
             "pattern": "[a-z][a-z0-9]+"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "description": "The filter to apply to the operation. Example: '$filter=kind eq 'v1'",
             "required": false,
@@ -1936,12 +1936,24 @@
             "type": "string"
           }
         },
+        "qubitNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The qubit number",
+          "readOnly": true
+        },
+        "targetProfile": {
+          "type": "string",
+          "description": "Target QIR profile",
+          "readOnly": true
+        },
         "metadata": {
           "type": "object",
           "description": "The metadata of this target.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -1979,21 +1991,21 @@
       "type": "string",
       "description": "The workspace type.",
       "enum": [
-        "v1",
-        "v2"
+        "V1",
+        "V2"
       ],
       "x-ms-enum": {
         "name": "WorkspaceKind",
         "modelAsString": true,
         "values": [
           {
-            "name": "v1",
-            "value": "v1",
+            "name": "V1",
+            "value": "V1",
             "description": "The workspace is a general-purpose workspace."
           },
           {
-            "name": "v2",
-            "value": "v2",
+            "name": "V2",
+            "value": "V2",
             "description": "The workspace is a V2 workspace."
           }
         ]

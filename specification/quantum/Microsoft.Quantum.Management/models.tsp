@@ -98,10 +98,10 @@ union WorkspaceKind {
   string,
 
   /** The workspace is a general-purpose workspace. */
-  v1: "v1",
+  V1: "V1",
 
   /** The workspace is a V2 workspace. */
-  v2: "v2",
+  V2: "V2",
 }
 
 /**
@@ -253,11 +253,25 @@ model TargetDescription {
   acceptedContentEncodings?: string[];
 
   /**
+   * The qubit number
+   */
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  qubitNumber?: int32;
+
+  /**
+   * Target QIR profile
+   */
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  targetProfile?: string;
+
+  /**
    * The metadata of this target.
    */
-  // If we can make it to be free format, e.g., Record<Any> or an object {}, then it will be great
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the target specification"
   @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 }
 

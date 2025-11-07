@@ -47,8 +47,8 @@ interface Offerings {
        * The filter to apply to the operation. Example: '$filter=kind eq 'v1'
        */
       @added(Versions.v2025_11_01_preview)
-      @query("$filter")
-      $filter?: string;
+      @query("filter")
+      filter?: string;
     }
   >;
 }
