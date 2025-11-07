@@ -1665,7 +1665,8 @@ model ResourceProviderManifestProperties {
   /**
    * The notifications.
    */
-  notifications?: Notification;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  notifications?: Notifications;
 
   /**
    * The linked notification rules.
@@ -2450,7 +2451,8 @@ model ResourceTypeRegistrationProperties {
   /**
    * The notifications.
    */
-  notifications?: Notification;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  notifications?: Notifications;
 
   /**
    * The linked notification rules.
@@ -3895,7 +3897,8 @@ model ResourceProviderManifest {
   /**
    * The notifications.
    */
-  notifications?: Notification;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  notifications?: Notifications;
 
   /**
    * The linked notification rules.
@@ -4088,7 +4091,8 @@ model ResourceType {
   /**
    * The notifications.
    */
-  notifications?: Notification;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  notifications?: Notifications;
 
   /**
    * The linked notification rules.
@@ -5101,3 +5105,8 @@ model OperationsDefinitionArrayResponseWithContinuation {
   @nextLink
   nextLink?: string;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.extension("x-ms-identifiers", #["notificationType"])
+model Notifications is Notification[];
