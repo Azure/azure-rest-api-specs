@@ -2,7 +2,9 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
-namespace Azure.AI.Projects;
+using Azure.AI.Projects;
+
+namespace Customizations;
 
 // --------------------------------------------------------------------------------
 // Root client

@@ -3,7 +3,9 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-namespace Azure.AI.Projects;
+using Azure.AI.Projects;
+
+namespace Customizations;
 
 @@clientNamespace(Azure.AI.Projects, "Azure.AI.Agents", "csharp");
 @@clientNamespace(Azure.AI.Projects, "com.azure.ai.agents", "java");
