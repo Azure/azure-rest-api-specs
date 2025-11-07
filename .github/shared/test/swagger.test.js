@@ -59,6 +59,31 @@ describe("Swagger", () => {
     `);
   });
 
+  it("throws when created with invalid schema content", async () => {
+    const folder = "/fake";
+    const swagger = new Swagger(resolve(folder, "invalid.json"), {
+      content: `{"paths": "invalid"}`,
+      tag: new Tag("test-tag", [], { readme: new Readme("/fake/readme.md") }),
+    });
+
+    await expect(swagger.getRefs()).rejects.toThrowErrorMatchingInlineSnapshot(`
+      [SpecModelError: Failed to parse schema for swagger: ${resolve("/fake/invalid.json")}
+        Problem File: ${resolve("/fake/invalid.json")}
+        Readme: ${resolve("/fake/readme.md")}
+        Tag: test-tag
+        Cause: [
+        {
+          "expected": "record",
+          "code": "invalid_type",
+          "path": [
+            "paths"
+          ],
+          "message": "Invalid input: expected record, received string"
+        }
+      ]]
+    `);
+  });
+
   it("throws when created with invalid ref content", async () => {
     const invalidRefContent = `
       {
