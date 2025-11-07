@@ -61,8 +61,7 @@ interface Servers {
   update is ArmCustomPatchAsync<
     Server,
     PatchModel = ServerForPatch,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Server> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
