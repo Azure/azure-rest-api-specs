@@ -53,3 +53,7 @@ interface Operations
       ArmResponse<OperationsDefinitionArrayResponseWithContinuation>,
       ErrorResponse
     > {}
+
+@@doc(Operations.list,
+  "Lists all the operations supported by Microsoft.ProviderHub."
+);

@@ -4588,12 +4588,10 @@ model LocalizedOperationDisplayDefinitionZhHant
   extends OperationsDisplayDefinition {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProviderRegistrationArrayResponseWithContinuation
   is Azure.Core.Page<ProviderRegistration>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeRegistrationArrayResponseWithContinuation
   is Azure.Core.Page<ResourceTypeRegistration>;
 
