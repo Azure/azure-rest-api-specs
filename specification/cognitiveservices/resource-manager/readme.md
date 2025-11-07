@@ -50,9 +50,9 @@ suppressions:
   - code:  ProvisioningStateMustBeReadOnly
     reason: Schema ref is AgentDeploymentResource -> AgentDeployment. AgentDeployment has a readonly provisioning state.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].get.responses.200.schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].put.responses.200.schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].put.responses.201.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].put.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].put.responses.201.schema
   - code: ArmResourcePropertiesBag
     reason: This API is copied from Machine Learning Services RP where this behavior is already established.
     where:
