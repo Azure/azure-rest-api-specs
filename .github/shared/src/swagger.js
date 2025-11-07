@@ -148,10 +148,42 @@ export class Swagger {
       /** @type {Map<string, Operation>} */
       const operations = new Map();
 
-      const swaggerJson = /** @type {unknown } */ (JSON.parse(this.#content));
+      /** @type {unknown} */
+      let swaggerJson;
+      try {
+        swaggerJson = JSON.parse(this.#content);
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new SpecModelError(`Failed to parse JSON for swagger: ${this.#path}`, {
+            cause: error,
+            source: this.#path,
+            tag: this.#tag?.name,
+            readme: this.#tag?.readme?.path,
+          });
+        } /* v8 ignore start: defensive rethrow */ else {
+          throw error;
+        }
+        /* v8 ignore stop */
+      }
 
-      // TODO: wrap ZodError in SpecModelError, like readme.js
-      const swagger = swaggerSchema.parse(swaggerJson);
+      /** @type {SwaggerObject} */
+      let swagger;
+      try {
+        swagger = swaggerSchema.parse(swaggerJson);
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new SpecModelError(`Failed to parse schema for swagger: ${this.#path}`, {
+            cause: error,
+            source: this.#path,
+            tag: this.#tag?.name,
+            readme: this.#tag?.readme?.path,
+          });
+        } /* v8 ignore start: defensive rethrow */ else {
+          throw error;
+        }
+        /* v8 ignore stop */
+      }
+
       // Process regular paths
       if (swagger.paths) {
         for (const [path, pathObject] of Object.entries(swagger.paths)) {
