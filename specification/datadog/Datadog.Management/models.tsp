@@ -731,6 +731,13 @@ model MonitorUpdateProperties {
    * The new resource collection value of the monitor resource. This collects configuration information for all resources in a subscription.
    */
   resourceCollection?: boolean;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Datadog for given organization.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
+  @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
