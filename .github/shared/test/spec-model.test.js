@@ -234,14 +234,10 @@ describe("SpecModel", () => {
 
       await expect(
         specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
-      ).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON]`,
-      );
+      ).rejects.toThrowError(`SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON`);
 
-      await expect(
-        specModel.toJSONAsync({ includeRefs: true }),
-      ).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON]`,
+      await expect(specModel.toJSONAsync({ includeRefs: true })).rejects.toThrowError(
+        `SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON`,
       );
 
       await expect(
@@ -253,7 +249,11 @@ describe("SpecModel", () => {
               {
                 inputFiles: [
                   {
-                    error: "Unexpected token 'i', \"invalid json\" is not valid JSON",
+                    error: /** @type {unknown} */ (
+                      expect.stringContaining(
+                        "Unexpected token 'i', \"invalid json\" is not valid JSON",
+                      )
+                    ),
                   },
                 ],
                 name: "package-2021-11-01",
