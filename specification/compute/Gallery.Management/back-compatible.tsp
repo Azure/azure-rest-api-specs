@@ -59,6 +59,19 @@ using Microsoft.Compute;
 @@clientName(GalleryApplications.update::parameters.properties,
   "galleryApplication"
 );
+
+@@clientName(GalleryScripts.createOrUpdate::parameters.resource,
+  "galleryScript"
+);
+@@clientName(GalleryScripts.update::parameters.properties, "galleryScript");
+
+@@clientName(GalleryScriptVersions.createOrUpdate::parameters.resource,
+  "galleryScriptVersion"
+);
+@@clientName(GalleryScriptVersions.update::parameters.properties,
+  "galleryScriptVersion"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplication.properties);
 
