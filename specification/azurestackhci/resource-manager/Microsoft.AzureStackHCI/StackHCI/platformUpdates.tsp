@@ -7,10 +7,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Versioning;
 
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents a platform update resource.")
 @parentResource(SubscriptionLocationResource)
 model PlatformUpdate
@@ -21,6 +23,7 @@ model PlatformUpdate
   >;
 }
 
+@added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface PlatformUpdates {
   @doc("Get a platform update.")
@@ -33,6 +36,7 @@ interface PlatformUpdates {
   >;
 }
 
+@added(Versions.v2025_11_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Represents properties of a platform update resource.")
 model PlatformUpdateProperties {
@@ -41,30 +45,26 @@ model PlatformUpdateProperties {
   platformUpdateDetails: Array<PlatformUpdateDetails>;
 }
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents details of a specific platform update.")
 model PlatformUpdateDetails {
   @doc("Represents validated solution recipe version of a platform update.")
-  validatedSolutionRecipeVersion?: string;
+  validatedSolutionRecipeVersion: string;
 
   @doc("Represents version of a platform update.")
-  platformVersion?: string;
+  platformVersion: string;
 
   @doc("Represents the platform payloads of a platform update.")
   @Azure.ResourceManager.identifiers(#[])
   platformPayloads: Array<PlatformPayload>;
 }
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents details of a specific platform update payload.")
 model PlatformPayload {
   @doc("Represents url of a platform update payload.")
-  payloadUrl?: string;
+  payloadUrl: string;
 
   @doc("Represents hash of a platform update payload.")
-  payloadHash?: string;
-
-  @doc("Represents size in bytes of a platform update payload.")
-  payloadPackageSizeInBytes?: string;
-
-  @doc("Represents identifier of a platform update payload.")
-  payloadIdentifier?: string;
+  payloadHash: string;
 }

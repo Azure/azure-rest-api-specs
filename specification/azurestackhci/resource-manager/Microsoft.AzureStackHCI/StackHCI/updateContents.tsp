@@ -7,10 +7,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Versioning;
 
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents a update content.")
 @parentResource(SubscriptionLocationResource)
 model UpdateContent
@@ -21,6 +23,7 @@ model UpdateContent
   >;
 }
 
+@added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface UpdateContents {
   @doc("Gets content for an update.")
@@ -33,6 +36,7 @@ interface UpdateContents {
   >;
 }
 
+@added(Versions.v2025_11_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Represents properties of a update content resource.")
 model UpdateContentProperties {
@@ -41,26 +45,27 @@ model UpdateContentProperties {
   updatePayloads: Array<ContentPayload>;
 }
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents details of a specific update content payload.")
 model ContentPayload {
   @doc("Represents url of a update payload.")
-  url?: string;
+  url: string;
 
   @doc("Represents hash of a update payload.")
-  hash?: string;
+  hash: string;
 
   @doc("Represents hash algorithm of a update payload.")
-  hashAlgorithm?: string;
+  hashAlgorithm: string;
 
   @doc("Represents identifier of a update payload.")
-  identifier?: string;
+  identifier: string;
 
   @doc("Represents size in bytes of a update payload.")
-  packageSizeInBytes?: string;
+  packageSizeInBytes: string;
 
   @doc("Represents the group of a update payload.")
-  group?: string;
+  group: string;
 
   @doc("Represents the file name of a update payload.")
-  fileName?: string;
+  fileName: string;
 }

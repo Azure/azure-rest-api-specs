@@ -7,10 +7,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Versioning;
 
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents a os image resource.")
 @parentResource(SubscriptionLocationResource)
 model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
@@ -20,6 +22,7 @@ model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
   >;
 }
 
+@added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface OsImages {
   @doc("Get a os image.")
@@ -29,18 +32,19 @@ interface OsImages {
   list is ArmResourceListAtScope<OsImage>;
 }
 
+@added(Versions.v2025_11_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Represents properties of a os image resource.")
 model OsImageProperties {
   @doc("Represents validated solution recipe version of a os image.")
-  validatedSolutionRecipeVersion?: string;
+  validatedSolutionRecipeVersion: string;
 
   @doc("Represents composed image version of a os image.")
-  composedImageVersion?: string;
+  composedImageVersion: string;
 
   @doc("Represents composed image iso download url of a os image.")
-  composedImageIsoUrl?: string;
+  composedImageIsoUrl: string;
 
   @doc("Represents composed image iso hash of a os image.")
-  composedImageIsoHash?: string;
+  composedImageIsoHash: string;
 }
