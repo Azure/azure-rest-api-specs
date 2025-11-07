@@ -17,12 +17,23 @@ alias ServiceTraits = NoRepeatableRequests &
 alias DataQualityOperation = Azure.Core.ResourceOperations<ServiceTraits>;
 
 /** Version information */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Required for versioning decorator"
 enum Versions {
   /** API version 2025-09-01-preview */
   v2025_09_01_preview: "2025-09-01-preview",
 }
 
 @service(#{ title: "Purview Data Quality API" })
+@versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://purview.azure.net/.default"],
+    }
+  ]>
+)
 namespace PurviewDataQuality {
   /**
    * Create Rules for Assets
@@ -30,6 +41,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules")
   @put
   @tag("Rules")
@@ -70,7 +82,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @patch
+  @patch(#{implicitOptionality: true})
   @tag("Rules")
   op updateRule is DataQualityOperation.ResourceUpdate<RuleEntities>;
 
@@ -100,10 +112,11 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk/rules")
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules")
   @put
   @tag("Rules")
-  op createBulkRules is RpcOperation<
+  op createBulkRules is RpcOperation< 
     {
       @doc("Business domain identifier")
       @path
@@ -124,35 +137,36 @@ namespace PurviewDataQuality {
     BulkRulesResponse
   >;
 
-  /**
-   * Create Asset Metadata Observer
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
-  @put
-  @tag("AssetMetadata")
-  op createAssetMetaData is RpcOperation<
-    {
-      @doc("Business domain identifier")
-      @path
-      businessDomainId: string;
+  // /**
+  //  * Create Asset Metadata Observer
+  //  */
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  // #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  // @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
+  // @put
+  // @tag("AssetMetadata")
+  // op createAssetMetaData is RpcOperation<
+  //   {
+  //     @doc("Business domain identifier")
+  //     @path
+  //     businessDomainId: string;
 
-      @doc("Data product identifier")
-      @path
-      dataProductId: string;
+  //     @doc("Data product identifier")
+  //     @path
+  //     dataProductId: string;
 
-      @doc("Data asset identifier")
-      @path
-      dataAssetId: string;
+  //     @doc("Data asset identifier")
+  //     @path
+  //     dataAssetId: string;
 
-      @doc("Asset metadata creation request")
-      @body
-      request: AssetMetadataObserver;
-    },
-    AssetMetadataObserverResponse
-  >;
+  //     @doc("Asset metadata creation request")
+  //     @body
+  //     request: AssetMetadataObserver;
+  //   },
+  //   AssetMetadataObserverResponse
+  // >;
 
   /**
    * Get Observer
@@ -160,6 +174,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @doc("Retrieves the metadata observer associated with a Data Asset.")
   @get
   @tag("AssetMetadata")
@@ -202,19 +217,12 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
-  @patch
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  @route("/data-assets/{dataAssetId}/asset-metadata")
+  @patch(#{implicitOptionality: true})
   @tag("AssetMetadata")
   op updateObserver is RpcOperation<
     {
-      @doc("Business domain identifier")
-      @path
-      businessDomainId: string;
-
-      @doc("Data product identifier")
-      @path
-      dataProductId: string;
-
       @doc("Data asset identifier")
       @path
       dataAssetId: string;
@@ -250,12 +258,35 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("Schedules")
   @doc("Creates a new schedule under a business domain.")
-  @route("/business-domains/{businessDomainId}/schedules")
+  @route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
   @put
   op createSchedule is RpcOperation<
-    BusinessDomain & {
+
+
+
+
+    {
+      /**
+       * The unique identifier for the business domain that contains the data product.
+       * Business domains represent high-level organizational units for data governance
+       * and provide the top-level context for all data products and assets within them.
+       */
+      @doc("Unique identifier for the business domain containing the data product")
+      @path
+      businessDomainId: string;
+
+      /**
+       * The unique identifier for the scan within the business domain.
+       * Scans define automated execution patterns for data quality operations,
+       * and monitoring activities within the context of a business domain.
+       */
+      @doc("Unique identifier for the scheduled job within the business domain")
+      @path
+      scheduleId: string;
+
       @doc("The payload for creating schedule")
       @bodyRoot
       request: ScheduleEntity;
@@ -283,9 +314,10 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @tag("Schedules")
   @doc("Updates the details of an existing schedule under a specific business domain.")
-  @patch
+  @patch(#{implicitOptionality: true})
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
   op updateSchedule is RpcOperation<
     {
@@ -331,7 +363,8 @@ namespace PurviewDataQuality {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  @tag("Scans")
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  @tag("ScheduleScan")
   @doc("Creates a scan under a specific business domain and schedule.")
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans")
   @put
@@ -358,8 +391,9 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @post
-  @tag("Scans")
+  @tag("ScheduleScan")
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}:cancel")
   op cancelScan is RpcOperation<
     {
@@ -391,7 +425,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("Scans")
+  @tag("ScheduleScan")
   @doc("Retrieves details of a specific scan under a given schedule within a business domain.")
   @get
   op scanByScanId is DataQualityOperation.ResourceRead<
@@ -405,7 +439,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("ScheduleRuns")
+  @tag("JobRunMonitoring")
   @doc("Retrieves execution metadata and status for a specific schedule run within a business domain.")
   @get
   op getRunStatus is DataQualityOperation.ResourceRead<
@@ -418,9 +452,10 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @route("/business-domains/{businessDomainId}/runs/{runId}:cancel")
   @post
-  @tag("Monitoring")
+  @tag("JobRunMonitoring")
   op cancelScanByRunId is RpcOperation<
     {
       @doc("Business domain identifier")
@@ -446,7 +481,8 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("Monitoring")
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  @tag("JobRunMonitoring")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/runs")
   @get
   op getRunsForAsset is RpcOperation<
@@ -476,7 +512,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("Observations")
+  @tag("DQ Assessment Observations")
   @doc("Triggers a long-running observation job for a specific data asset.")
   @post
   @pollingOperation(observations)
@@ -493,7 +529,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @delete
-  @tag("Observations")
+  @tag("DQ Assessment Observations")
   op deleteObservation is DataQualityOperation.ResourceDelete<ObservationAssetMetadata>;
 
   /**
@@ -502,6 +538,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("DataSources")
   @doc("Retrieves all data sources for a given business domain, with optional name filtering and pagination.")
   @route("/business-domains/{businessDomainId}/data-sources")
@@ -533,6 +570,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @tag("DataSources")
   @doc("Retrieves a specific data source by its ID within a given business domain, with optional query parameters.")
   @route("/business-domains/{businessDomainId}/data-sources/{dataSourceId}")
@@ -585,10 +623,11 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @tag("DataSources")
   @doc("Updates an existing data source within a given business domain.")
   @route("/business-domains/{businessDomainId}/data-sources/{dataSourceId}")
-  @patch
+  @patch(#{implicitOptionality: true})
   op updateDataSource is RpcOperation<
     {
       /**
@@ -625,9 +664,10 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("DataSources")
   @doc("Creates a new data source under a given business domain.")
-  @route("/business-domains/{businessDomainId}/data-sources")
+  @route("/business-domains/{businessDomainId}/data-sources/{dataSourceId}")
   @put
   op createDataSource is RpcOperation<
     {
@@ -639,6 +679,15 @@ namespace PurviewDataQuality {
       @doc("Unique identifier for the business domain that will contain the new data source")
       @path
       businessDomainId: string;
+
+      /**
+       * The unique identifier for the data source within the business domain.
+       * Data sources represent connections to external systems or databases
+       * that provide data for quality monitoring and governance activities.
+       */
+      @doc("Unique identifier for the data source to be created")
+      @path
+      dataSourceId: string;
 
       /**
        * The data source entity containing the configuration and properties for the new data source.
@@ -658,7 +707,11 @@ namespace PurviewDataQuality {
    * DELETE /business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata
    * ```
    */
-  @tag("AssetMetadata")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  @tag("Scoped Asset Metadata")
   @doc("Deletes the scoped asset metadata for a given data asset within a business domain.")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @delete
@@ -700,7 +753,8 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("Observer")
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  @tag("Scoped Asset Metadata")
   @doc("Retrieves the scoped asset metadata for a given data asset within a business domain.")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @get
@@ -742,10 +796,11 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("Observer")
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  @tag("Scoped Asset Metadata")
   @doc("Updates the scoped asset metadata for a given data asset within a business domain.")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata")
-  @patch
+  @patch(#{implicitOptionality: true})
   op updateScopedAssetMetaData is RpcOperation<
     {
       /**
@@ -785,7 +840,11 @@ namespace PurviewDataQuality {
     DataSourceEntity
   >;
 
-  @tag("Observer")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  @tag("Scoped Asset Metadata")
   @doc("Creates or replaces the scoped asset metadata for a given data asset within a business domain.")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @put
@@ -831,10 +890,11 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("Profiles")
   @doc("Creates or updates the profile for a given data asset within a business domain. Supports polling as a long-running operation.")
-  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles")
-  @put
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:profiles")
+  @post
   @pollingOperation(profile)
   op profile is RpcOperation<
     {
@@ -883,28 +943,29 @@ namespace PurviewDataQuality {
   @delete
   op deleteProfileRun is DataQualityOperation.ResourceDelete<ProfileRun>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("Scans")
-  @doc("Retrieves all runs associated with a specific scan under a given schedule.")
-  @get
-  @route("runs")
-  op getRuns is DataQualityOperation.ResourceList<
-    ScanEntity,  // Context → businessDomainId, scheduleId, scanId
-    {
-      @query("offset")
-      @doc("Offset value for pagination or incremental retrieval of runs.")
-      offset: int64;
-    }
-  >;
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  // @tag("Scans")
+  // @doc("Retrieves all runs associated with a specific scan under a given schedule.")
+  // @get
+  // @route("runs")
+  // op getRuns is DataQualityOperation.ResourceList<
+  //   ScanEntity,  // Context → businessDomainId, scheduleId, scanId
+  //   {
+  //     @query("offset")
+  //     @doc("Offset value for pagination or incremental retrieval of runs.")
+  //     offset: int64;
+  //   }
+  // >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("Reports")
   @doc("Retrieves the latest data quality snapshot report for a given business domain.")
-  @route("/business-domains/{businessDomainId}/report/snapshots/dataquality/latest")
+  @route("/business-domains/{businessDomainId}/report/snapshots")
   @get
   op getLatestSnapshot is RpcOperation<
     {
@@ -927,6 +988,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("Trend")
   @doc("Retrieves the opinion trend for a specific profile rule under a given data asset.")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-opinions/{ruleId}")

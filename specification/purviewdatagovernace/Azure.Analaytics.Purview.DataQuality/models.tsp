@@ -173,7 +173,7 @@ model Schedule {
  */
 @doc("Data quality scan operation for executing quality checks on data assets")
 @parentResource(Schedule)
-@resource("scan")
+@resource("scans")
 model ScanEntity {
   /**
    * Unique identifier for the scan within the schedule context
@@ -196,9 +196,9 @@ model ProfileRun {
    * Unique identifier for the profile run execution within the data asset context
    */
   @doc("Unique identifier for the profile run execution")
-  @key("profileRunId")
+  @key("profileId")
   @visibility(Lifecycle.Create)
-  profileRunId: string;
+  profileId: string;
 }
 
 /**
@@ -790,6 +790,7 @@ model AssetMetadataObserver {
    * Unique system identifier for the metadata observer instance
    */
   @key
+  @visibility(Lifecycle.Create)
   @doc("Unique identifier of the asset metadata observer")
   id: string;
 
@@ -1299,9 +1300,9 @@ model Trigger {
  * Data transfer object containing basic scan configuration information.
  * Used for lightweight scan operations and API transfers.
  */
-@doc("Data transfer object for scan configuration")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@doc("Data transfer object for scan configuration")
 model ScanDTO {
   /**
    * Classification of scan type (FullScan, IncrementalScan, TargetedScan)
@@ -1614,9 +1615,9 @@ model JobMetadataEntity {
   /**
    * Primary data source identifier for the main data connection
    */
-  @doc("Primary data source identifier")
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  @doc("Primary data source identifier")
   primaryDataSourceID?: string;
 
   /**
@@ -1701,9 +1702,9 @@ model JobHistoryEntity {
  * Job execution configuration data transfer object containing runtime parameters and mappings.
  * Defines how jobs should execute including validation settings and data source relationships.
  */
-@doc("Job execution configuration with runtime parameters and data mappings")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@doc("Job execution configuration with runtime parameters and data mappings")
 model JobConfigDTO {
   /**
    * Flag enabling redundancy validation checks to prevent duplicate processing
@@ -1782,9 +1783,9 @@ model DatasetToDatasourceMapping {
  * HTTP response model for job configuration operations with long-running operation support.
  * Provides immediate acknowledgment with status tracking for asynchronous configuration updates.
  */
-@doc("HTTP response for job configuration operations with LRO support")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@doc("HTTP response for job configuration operations with LRO support")
 model JobConfigDTOResponse {
   /**
    * HTTP status code indicating accepted request for processing (202 Accepted)
@@ -1811,9 +1812,9 @@ model JobConfigDTOResponse {
  * HTTP response model for scan operations with comprehensive status tracking and monitoring.
  * Provides scan execution details and real-time status updates for long-running scan processes.
  */
-@doc("HTTP response for scan operations with status tracking and monitoring")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@doc("HTTP response for scan operations with status tracking and monitoring")
 model ScanDTOResponse {
   /**
    * HTTP status code indicating accepted scan request for processing (202 Accepted)
@@ -1947,101 +1948,181 @@ model AssetMetadataObserverResponse {
  * Comprehensive data source entity representing external data connections and their configurations.
  * Manages access credentials, network settings, and scope definitions for various data platforms.
  */
-@doc("Data source entity with connection metadata, configuration, and access scopes")
+@doc("Unified data source entity model combining all supported data source types and their configuration properties.")
 model DataSourceEntity {
   /**
-   * Human-readable display name identifying the data source connection
+   * Unique identifier for the data source entity.
    */
-  @doc("Display name of the data source connection")
+  @key
+  @doc("Unique system identifier for the data source entity.")
+  id: string;
+
+  /**
+   * Display name of the data source connection.
+   */
+  @doc("Human-readable display name identifying the data source connection.")
   name: string;
 
   /**
-   * Unique system identifier for the data source entity
+   * Indicates whether the data source is configured for Virtual Network connectivity.
    */
-  @doc("Unique data source identifier")
-  id?: string;
-
-  /**
-   * Flag indicating if the data source is configured for Virtual Network connectivity
-   */
-  @doc("Virtual Network connectivity flag")
+  @doc("Virtual Network connectivity flag.")
   isVnetEnabled: boolean;
 
   /**
-   * Azure resource identifier of the target data platform (if Azure-based)
+   * Azure resource identifier of the target data platform, if applicable.
    */
-  @doc("Azure resource identifier for target platform")
+  @doc("Azure resource identifier for target platform (if applicable).")
   targetResourceId?: string;
 
   /**
-   * Reference to the business domain that governs this data source
+   * Reference to the business domain that governs this data source.
    */
-  @doc("Business domain governance reference")
+  @doc("Business domain governance reference for this data source.")
   businessDomain: {
     /**
-     * Reference type classification for business domain relationship
+     * Type classification for the business domain reference.
      */
-    @doc("Business domain reference type")
+    @doc("Business domain reference type classification.")
     type: string;
 
     /**
-     * Unique identifier of the governing business domain
+     * Unique identifier of the governing business domain.
      */
-    @doc("Business domain unique identifier")
+    @doc("Unique business domain identifier associated with this data source.")
     referenceId: string;
   };
 
   /**
-   * ISO 8601 timestamp when the data source configuration was last modified
+   * Timestamp when the data source was last modified.
    */
-  @doc("Last modification timestamp (ISO 8601)")
+  @doc("ISO 8601 timestamp representing the last modification time.")
   lastModifiedAt?: string;
 
   /**
-   * Identity of the user who last modified the data source configuration
+   * Identity of the user who last modified the data source configuration.
    */
-  @doc("Identity of the last modifying user")
+  @doc("Identifier or name of the last modifying user.")
   lastModifiedBy?: string;
 
   /**
-   * Data source platform type (AzureSqlDatabase, Snowflake, AzureSynapseAnalytics, Oracle, etc.)
+   * Type of data source platform, such as AzureSqlDatabase, Snowflake, or OneLake.
    */
-  @doc("Data source platform type classification")
+  @doc("Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.).")
   type: string;
 
   /**
-   * Platform-specific configuration properties including connection strings, authentication, and settings
+   * Consolidated configuration properties covering all supported data source types.
    */
-  @doc("Platform-specific configuration properties")
-  typeProperties: Record<string>;
+  @doc("Combined configuration properties for all supported data source platforms.")
+  typeProperties: {
+    // ---------- Azure SQL ----------
+    @doc("Azure SQL server name (for AzureSqlDatabase).")
+    server?: string;
+
+    @doc("Database name (for AzureSqlDatabase, Snowflake, Synapse).")
+    database?: string;
+
+    // ---------- Oracle ----------
+    @doc("Oracle host IP or DNS (for OnPremiseOracleDatabase).")
+    host?: string;
+
+    @doc("Oracle database port (for OnPremiseOracleDatabase).")
+    port?: string;
+
+    @doc("Oracle username (for OnPremiseOracleDatabase).")
+    username?: string;
+
+    @doc("Schema name (for Oracle, Snowflake, or Databricks).")
+    schema?: string;
+
+    @doc("Oracle service name (for OnPremiseOracleDatabase).")
+    service?: string;
+
+    @doc("Integration runtime ID (for OnPremiseOracleDatabase).")
+    dataIntegrationRuntimeId?: string;
+
+    // ---------- Snowflake ----------
+    @doc("Snowflake account URL.")
+    url?: string;
+
+    @doc("Snowflake warehouse name.")
+    warehouse?: string;
+
+    @doc("Schema name used for test connection (for Snowflake).")
+    testConnectionSchemaName?: string;
+
+    @doc("Table name used for test connection (for Snowflake).")
+    testConnectionTableName?: string;
+
+    // ---------- ADLS Gen2 ----------
+    @doc("Primary DFS endpoint for ADLS Gen2.")
+    endpoint?: string;
+
+    // ---------- Azure Databricks Unity Catalog ----------
+    @doc("Databricks workspace URL.")
+    workspaceUrl?: string;
+
+    @doc("HTTP path for Databricks SQL warehouse.")
+    httpPath?: string;
+
+    @doc("Unity Catalog name.")
+    catalog?: string;
+
+    @doc("Metastore identifier for Unity Catalog.")
+    metastoreId?: string;
+
+    // ---------- Azure Synapse Analytics ----------
+    @doc("Synapse workspace name.")
+    workspaceName?: string;
+
+    @doc("Dedicated SQL endpoint for Synapse.")
+    dedicatedEndpoint?: string;
+
+    @doc("Serverless SQL endpoint for Synapse.")
+    serverlessEndpoint?: string;
+
+    @doc("Endpoint type classification (e.g., sql).")
+    endpointType?: string;
+
+    // ---------- OneLake ----------
+    @doc("Microsoft Entra tenant ID (for OneLake).")
+    tenantId?: string;
+
+    @doc("Fabric workspace ID (for OneLake).")
+    workspaceId?: string;
+
+    @doc("Lakehouse ID (for OneLake).")
+    lakehouseId?: string;
+  };
 
   /**
-   * Access scope definitions that control which data objects are included or excluded from operations
+   * Access scope definitions controlling data object inclusion or exclusion for operations.
    */
-  @doc("Access scope definitions for data object inclusion/exclusion")
+  @doc("Access scope definitions controlling which data objects are included or excluded from operations.")
   scopes?: Array<{
     /**
-     * Scope configuration defining access boundaries and included objects
+     * Scope configuration defining access boundaries and included objects.
      */
-    @doc("Scope configuration for access boundaries")
+    @doc("Scope configuration defining inclusion and exclusion boundaries.")
     scope: {
       /**
-       * Scope type classification (SQL, NoSQL, File, etc.)
+       * Type classification for the scope (e.g., SQL, NoSQL, File, etc.).
        */
-      @doc("Scope type classification")
+      @doc("Scope type classification (SQL, NoSQL, File, etc.).")
       type: string;
 
       /**
-       * Collection of data object names or patterns included in this scope
+       * Collection of included data object names or patterns.
        */
-      @doc("Included data object names or patterns")
+      @doc("List of included data object names or patterns within this scope.")
       includes: string[];
     };
 
     /**
-     * Unique identifier for the scope definition
+     * Unique identifier for this scope definition.
      */
-    @doc("Scope definition unique identifier")
+    @doc("Unique identifier for this scope definition.")
     id: string;
   }>;
 }
@@ -2071,108 +2152,108 @@ model DataSourceListQueryParams {
  * HTTP response model for data source operations containing complete connection configuration.
  * Includes platform-specific settings, network configuration, and governance relationships.
  */
-@doc("HTTP response for data source operations with complete configuration")
+@doc("HTTP response model for data source operations with complete configuration and metadata.")
 model DataSourceEntityResponse {
   /**
    * HTTP status code indicating successful data source creation or update (201 Created)
    */
-  @doc("HTTP status code for successful operation")
+  @doc("HTTP status code for successful operation.")
   @statusCode
   statusCode: 201;
 
   /**
-   * Human-readable display name identifying the data source connection
+   * Human-readable display name identifying the data source connection.
    */
-  @doc("Display name of the data source connection")
+  @doc("Display name of the data source connection.")
   name: string;
 
   /**
-   * Unique system identifier for the data source entity
+   * Unique system identifier for the data source entity.
    */
-  @doc("Unique data source identifier")
+  @doc("Unique data source identifier.")
   id: string;
 
   /**
-   * Flag indicating if the data source is configured for Virtual Network connectivity
+   * Flag indicating if the data source is configured for Virtual Network connectivity.
    */
-  @doc("Virtual Network connectivity flag")
+  @doc("Virtual Network connectivity flag.")
   isVnetEnabled: boolean;
 
   /**
-   * Azure resource identifier of the target data platform (if Azure-based)
+   * Azure resource identifier of the target data platform, if Azure-based.
    */
-  @doc("Azure resource identifier for target platform")
+  @doc("Azure resource identifier for target platform (if applicable).")
   targetResourceId?: string;
 
   /**
-   * Reference to the business domain that governs this data source
+   * Reference to the business domain that governs this data source.
    */
-  @doc("Business domain governance reference")
+  @doc("Business domain governance reference for this data source.")
   businessDomain: {
     /**
-     * Reference type classification for business domain relationship
+     * Reference type classification for the business domain relationship.
      */
-    @doc("Business domain reference type")
+    @doc("Business domain reference type classification.")
     type: string;
 
     /**
-     * Unique identifier of the governing business domain
+     * Unique identifier of the governing business domain.
      */
-    @doc("Business domain unique identifier")
+    @doc("Unique identifier of the governing business domain.")
     referenceId: string;
   };
 
   /**
-   * ISO 8601 timestamp when the data source configuration was last modified
+   * ISO 8601 timestamp when the data source configuration was last modified.
    */
-  @doc("Last modification timestamp (ISO 8601)")
+  @doc("Timestamp when the data source configuration was last modified (ISO 8601).")
   lastModifiedAt: string;
 
   /**
-   * Identity of the user who last modified the data source configuration
+   * Identity of the user who last modified the data source configuration.
    */
-  @doc("Identity of the last modifying user")
+  @doc("Identity of the last modifying user.")
   lastModifiedBy: string;
 
   /**
    * Data source platform type (AzureSqlDatabase, Snowflake, AzureSynapseAnalytics, Oracle, etc.)
    */
-  @doc("Data source platform type classification")
+  @doc("Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.).")
   type: string;
 
   /**
-   * Platform-specific configuration properties including connection strings, authentication, and settings
+   * Platform-specific configuration properties including connection strings, authentication, and settings.
    */
-  @doc("Platform-specific configuration properties")
+  @doc("Platform-specific configuration properties and credentials (key-value pairs).")
   typeProperties: Record<string>;
 
   /**
-   * Access scope definitions that control which data objects are included or excluded from operations
+   * Access scope definitions that control which data objects are included or excluded from operations.
    */
-  @doc("Access scope definitions for data object inclusion/exclusion")
+  @doc("Access scope definitions controlling inclusion and exclusion of data objects.")
   scopes?: Array<{
     /**
-     * Scope configuration defining access boundaries and included objects
+     * Scope configuration defining access boundaries and included objects.
      */
-    @doc("Scope configuration for access boundaries")
+    @doc("Scope configuration defining inclusion and exclusion boundaries.")
     scope: {
       /**
        * Scope type classification (SQL, NoSQL, File, etc.)
        */
-      @doc("Scope type classification")
+      @doc("Scope type classification (e.g., SQL, NoSQL, File, etc.).")
       type: string;
 
       /**
-       * Collection of data object names or patterns included in this scope
+       * Collection of data object names or patterns included in this scope.
        */
-      @doc("Included data object names or patterns")
+      @doc("Collection of included data object names or patterns.")
       includes: string[];
     };
 
     /**
-     * Unique identifier for the scope definition
+     * Unique identifier for the scope definition.
      */
-    @doc("Scope definition unique identifier")
+    @doc("Unique identifier for the scope definition.")
     id: string;
   }>;
 }
@@ -2235,6 +2316,7 @@ model ProfileEntity {
        * Location type classification (AdlsGen2FileLocation, BlobStorageLocation, etc.)
        */
       type: string;
+
       /**
        * Location-specific properties defining file system and path details
        */
@@ -2243,6 +2325,7 @@ model ProfileEntity {
          * File system or container name where data resides
          */
         fileSystem: string;
+
         /**
          * Folder path within the file system containing target data
          */
@@ -2419,7 +2502,7 @@ model AssetScopedMetadata {
   lastModifiedBy: string;
 
   @doc("Entity tag for optimistic concurrency control")
-  ETag: string;
+  eTag: string;
 }
 
 /**
@@ -2741,9 +2824,6 @@ model BulkAssetMetadataEntry {
 
   @doc("Global rules applied to the asset")
   globalRules: GlobalRule[];
-
-  @doc("Score snapshot for the asset")
-  scoreSnapshot: ScoreSnapshot;
 }
 
 /**
