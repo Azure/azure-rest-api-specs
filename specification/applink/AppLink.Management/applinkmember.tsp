@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./applink.tsp";
@@ -107,7 +108,14 @@ model MetricsProfile {
 interface AppLinkMembers {
   get is ArmResourceRead<AppLinkMember>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
-  update is ArmResourcePatchAsync<AppLinkMember, AppLinkMemberProperties>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  update is ArmResourcePatchAsync<
+    AppLinkMember,
+    AppLinkMemberProperties,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = AppLinkMember> &
+      ArmLroLocationHeader<FinalResult = AppLinkMember> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<AppLinkMember>;
   listByAppLink is ArmResourceListByParent<AppLinkMember>;
 }
