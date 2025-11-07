@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { isFullGitSha } from "../src/git";
-import { fullGitSha } from "./examples";
+import { isFullGitSha } from "../src/git.js";
+import { fullGitSha } from "./examples.js";
 
 describe("git", () => {
   it.each([
