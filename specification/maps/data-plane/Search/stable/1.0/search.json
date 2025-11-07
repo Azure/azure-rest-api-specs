@@ -1025,7 +1025,7 @@
             "name": "number",
             "x-ms-client-name": "streetNumber",
             "in": "query",
-            "description": "Street number as a string. If a number is sent in along with the request, the response may include the side of the street (Left/Right) and also an offset position for that number",
+            "description": "Street number as a string. If a number is sent in along with the request, the response may include the side of the street (Left/Right) and also an offset position for that number.",
             "type": "string"
           },
           {
@@ -1199,7 +1199,7 @@
           {
             "name": "crossStreet",
             "in": "query",
-            "description": "The cross street name for the structured address",
+            "description": "The cross street name for the structured address.\n\nThis property is only supported in the `Get Search Address Reverse Cross Street` API",
             "type": "string"
           },
           {
@@ -2391,12 +2391,12 @@
           "readOnly": true
         },
         "streetNumber": {
-          "description": "The building number on the street.",
+          "description": "The building number on the street.\n\nNot available in the `Get Search Address Reverse Cross Street` API.",
           "type": "string",
           "readOnly": true
         },
         "routeNumbers": {
-          "description": "The codes used to unambiguously identify the street",
+          "description": "The codes used to unambiguously identify the street.\n\nOnly available for the Search Address Reverse APIs.",
           "type": "array",
           "items": {
             "type": "string",
@@ -2410,7 +2410,7 @@
           "readOnly": true
         },
         "streetNameAndNumber": {
-          "description": "The street name and number.\nOnly available for the Search Address Reverse APIs.",
+          "description": "The street name and number.\n\nOnly available for the Search Address Reverse APIs.",
           "type": "string",
           "readOnly": true
         },
@@ -2435,7 +2435,7 @@
           "readOnly": true
         },
         "countrySubdivisionCode": {
-          "description": "`countrySubdivisionCode` prefixed by `countryCode` ( countryCode-countrySubdivisionCode ) and the hyphen forms the ISO 3166-2 code. Examples: TX for Texas, SCT for Scotland and ON for Ontario.",
+          "description": "`countrySubdivisionCode` prefixed by `countryCode` ( countryCode-countrySubdivisionCode ) and the hyphen forms the ISO 3166-2 code. Examples: TX for Texas, SCT for Scotland and ON for Ontario.\n\nThis property is not available in the `Get Search Nearby` and `Get Search POI` API.",
           "type": "string",
           "readOnly": true
         },
@@ -2455,7 +2455,7 @@
           "readOnly": true
         },
         "extendedPostalCode": {
-          "description": "Extended postal code (availability is dependent on the region).",
+          "description": "Extended postal code (availability is dependent on the region).\n\nThis property is not available in the `Get Search Address Reverse Cross Street` API.",
           "type": "string",
           "readOnly": true
         },
