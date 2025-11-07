@@ -1599,6 +1599,24 @@
               ]
             },
             "x-ms-client-name": "blobDeleteType"
+          },
+          {
+            "name": "x-ms-access-tier-if-modified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if the access-tier has been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "accessTierIfModifiedSince"
+          },
+          {
+            "name": "x-ms-access-tier-if-unmodified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if the access-tier has not been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "accessTierIfUnmodifiedSince"
           }
         ],
         "responses": {
