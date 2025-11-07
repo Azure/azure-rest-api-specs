@@ -1,4 +1,4 @@
-import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
+import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";
 import { inspect } from "util";
@@ -123,55 +123,28 @@ export class Swagger {
 
   async #getData() {
     if (!this.#data) {
-      let content = this.#content;
+      const path = this.#path;
 
-      // Only read file if #content is exactly undefined, to allow setting #content to empty string
-      // to simulate an empty file
-      if (content === undefined) {
-        try {
-          content = await readFile(this.#path, {
-            encoding: "utf8",
-          });
-        } catch (error) {
-          if (error instanceof Error) {
-            throw new SpecModelError(`Failed to read file for swagger: ${this.#path}`, {
-              cause: error,
-              source: this.#path,
-              tag: this.#tag?.name,
-              readme: this.#tag?.readme?.path,
-            });
-          } /* v8 ignore start: defensive rethrow */ else {
-            throw error;
-          }
-          /* v8 ignore stop */
-        }
-      }
+      const content =
+        this.#content ??
+        (await this.#wrapError(
+          async () => await readFile(path, { encoding: "utf8" }),
+          "Failed to read file for swagger",
+        ));
 
       /** @type {Map<string, Operation>} */
       const operations = new Map();
 
-      const swaggerJson = this.#wrapError(
+      const swaggerJson = await this.#wrapError(
         () => /** @type {unknown} */ (JSON.parse(content)),
         "Failed to parse JSON for swagger",
       );
 
       /** @type {SwaggerObject} */
-      let swagger;
-      try {
-        swagger = swaggerSchema.parse(swaggerJson);
-      } catch (error) {
-        if (error instanceof Error) {
-          throw new SpecModelError(`Failed to parse schema for swagger: ${this.#path}`, {
-            cause: error,
-            source: this.#path,
-            tag: this.#tag?.name,
-            readme: this.#tag?.readme?.path,
-          });
-        } /* v8 ignore start: defensive rethrow */ else {
-          throw error;
-        }
-        /* v8 ignore stop */
-      }
+      const swagger = await this.#wrapError(
+        () => swaggerSchema.parse(swaggerJson),
+        "Failed to parse schema for swagger",
+      );
 
       // Process regular paths
       if (swagger.paths) {
@@ -187,24 +160,13 @@ export class Swagger {
         }
       }
 
-      let schema;
-      try {
-        schema = await $RefParser.resolve(this.#path, swaggerJson, {
-          resolve: { file: excludeExamples, http: false },
-        });
-      } catch (error) {
-        if (error instanceof ResolverError) {
-          throw new SpecModelError(`Failed to resolve file for swagger: ${this.#path}`, {
-            cause: error,
-            source: error.source,
-            tag: this.#tag?.name,
-            readme: this.#tag?.readme?.path,
-          });
-        } /* v8 ignore start: defensive rethrow */ else {
-          throw error;
-        }
-        /* v8 ignore stop */
-      }
+      const schema = await this.#wrapError(
+        async () =>
+          await $RefParser.resolve(this.#path, swaggerJson, {
+            resolve: { file: excludeExamples, http: false },
+          }),
+        "Failed to resolve file for swagger",
+      );
 
       const refPaths = schema
         .paths("file")
@@ -342,14 +304,14 @@ export class Swagger {
    * Returns value of `func()`, wrapping any `Error` in `SpecModelError`
    *
    * @template T
-   * @param {() => T} func
+   * @param {() => T | Promise<T>} func
    * @param {string} message
-   * @returns {T}
+   * @returns {Promise<T>}
    * @throws {SpecModelError}
    */
-  #wrapError(func, message) {
+  async #wrapError(func, message) {
     try {
-      return func();
+      return await func();
     } catch (error) {
       if (error instanceof Error) {
         throw new SpecModelError(`${message}: ${this.#path}`, {
