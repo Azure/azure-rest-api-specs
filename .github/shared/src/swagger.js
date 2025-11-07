@@ -123,11 +123,13 @@ export class Swagger {
 
   async #getData() {
     if (!this.#data) {
+      let content = this.#content;
+
       // Only read file if #content is exactly undefined, to allow setting #content to empty string
       // to simulate an empty file
-      if (this.#content === undefined) {
+      if (content === undefined) {
         try {
-          this.#content = await readFile(this.#path, {
+          content = await readFile(this.#path, {
             encoding: "utf8",
           });
         } catch (error) {
@@ -148,23 +150,10 @@ export class Swagger {
       /** @type {Map<string, Operation>} */
       const operations = new Map();
 
-      /** @type {unknown} */
-      let swaggerJson;
-      try {
-        swaggerJson = JSON.parse(this.#content);
-      } catch (error) {
-        if (error instanceof Error) {
-          throw new SpecModelError(`Failed to parse JSON for swagger: ${this.#path}`, {
-            cause: error,
-            source: this.#path,
-            tag: this.#tag?.name,
-            readme: this.#tag?.readme?.path,
-          });
-        } /* v8 ignore start: defensive rethrow */ else {
-          throw error;
-        }
-        /* v8 ignore stop */
-      }
+      const swaggerJson = this.#wrapError(
+        () => /** @type {unknown} */ (JSON.parse(content)),
+        "Failed to parse JSON for swagger",
+      );
 
       /** @type {SwaggerObject} */
       let swagger;
@@ -347,6 +336,33 @@ export class Swagger {
 
   toString() {
     return `Swagger(${this.#path}, {logger: ${inspect(this.#logger)}})`;
+  }
+
+  /**
+   * Returns value of `func()`, wrapping any `Error` in `SpecModelError`
+   *
+   * @template T
+   * @param {() => T} func
+   * @param {string} message
+   * @returns {T}
+   * @throws {SpecModelError}
+   */
+  #wrapError(func, message) {
+    try {
+      return func();
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new SpecModelError(`${message}: ${this.#path}`, {
+          cause: error,
+          source: this.#path,
+          tag: this.#tag?.name,
+          readme: this.#tag?.readme?.path,
+        });
+      } /* v8 ignore start: defensive rethrow */ else {
+        throw error;
+      }
+      /* v8 ignore stop */
+    }
   }
 }
 
