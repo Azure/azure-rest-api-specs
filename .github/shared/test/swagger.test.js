@@ -65,11 +65,11 @@ describe("Swagger", () => {
 
     await expect(swagger.getRefs()).rejects.toThrowErrorMatchingInlineSnapshot(
       `
-      [SpecModelError: Failed to resolve file for swagger: /fake/invalid.json
-        Problem File: /does/not/exist.json
-        Readme: /fake/readme.md
+      [SpecModelError: Failed to resolve file for swagger: ${resolve("/fake/invalid.json")}
+        Problem File: ${resolve("/does/not/exist.json")}
+        Readme: ${resolve("/fake/readme.md")}
         Tag: test-tag
-        Cause: ResolverError: Error reading file "/does/not/exist.json"]
+        Cause: ResolverError: Error reading file "${resolve("/does/not/exist.json")}"]
     `,
     );
   });
