@@ -228,6 +228,35 @@ describe("update labels", () => {
         targetBranch: "RPSaaSMaster",
       },
     },
+    {
+      description:
+        "Should remove NotReadyForArmReview and add WaitForARMFeedback when CI-NewRPNamespaceWithoutRPaaS and RPaaSException",
+      existingLabels: [
+        "ARMReview",
+        "CI-NewRPNamespaceWithoutRPaaS",
+        "new-api-version",
+        "new-rp-namespace",
+        "NotReadyForARMReview",
+        "resource-manager",
+        "RPaaSException",
+        "TypeSpec",
+      ],
+      expectedLabelsToAdd: ["WaitForARMFeedback"],
+      expectedLabelsToRemove: ["NotReadyForARMReview"],
+      impactAssessment: {
+        suppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: true,
+        rpaasRPMissing: true,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        typeSpecChanged: true,
+        isNewApiVersion: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
   ];
   it.each(testCases)(
     "$description",
