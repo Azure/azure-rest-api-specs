@@ -161,6 +161,3 @@ interface ElasticAccounts {
 
 @@clientName(ElasticAccounts.createOrUpdate::parameters.resource, "body");
 @@clientName(ElasticAccounts.update::parameters.properties, "body");
-
-@@doc(ElasticAccount.name, "The name of the elastic account resource.");
-@@doc(ElasticAccount.properties, "Elastic account properties");
