@@ -257,7 +257,7 @@ model TargetDescription {
    */
   @added(Versions.v2025_11_01_preview)
   @visibility(Lifecycle.Read)
-  qubitNumber?: int32;
+  numQubits?: int32;
 
   /**
    * Target QIR profile
