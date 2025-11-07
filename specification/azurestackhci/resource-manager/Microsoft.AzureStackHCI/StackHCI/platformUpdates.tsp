@@ -61,4 +61,10 @@ model PlatformPayload {
 
   @doc("Represents hash of a platform update payload.")
   payloadHash: string;
+
+  @doc("Represents size in bytes of a platform update payload.")
+  payloadPackageSizeInBytes: string;
+
+  @doc("Represents identifier of a platform update payload.")
+  payloadIdentifier: string;
 }
