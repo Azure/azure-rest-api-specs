@@ -281,7 +281,6 @@ model ResourcePlanUpdate
 model LaunchBulkInstancesOperation
   is ProxyResource<LaunchBulkInstancesOperationProperties> {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The field name `name` is the valid field name."
-  @visibility(Lifecycle.Read)
   @doc("The ID of the LaunchBulkInstancesOperation")
   @segment("launchBulkInstancesOperations")
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")

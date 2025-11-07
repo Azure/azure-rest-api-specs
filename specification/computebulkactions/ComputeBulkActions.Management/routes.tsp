@@ -18,7 +18,9 @@ interface BulkActions {
   @doc("Gets a list of LaunchBulkInstancesOperations.")
   @get
   @armResourceRead(LaunchBulkInstancesOperation)
-  get(...CustomParams): LaunchBulkInstancesOperation | ErrorResponse;
+  get(
+    ...CustomParams,
+  ): ArmResponse<LaunchBulkInstancesOperation> | ErrorResponse;
 
   @doc("Creates or updates LaunchBulkInstancesOperations.")
   @put
