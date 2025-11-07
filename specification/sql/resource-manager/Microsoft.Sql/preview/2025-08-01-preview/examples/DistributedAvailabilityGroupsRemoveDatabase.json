@@ -6,7 +6,11 @@
     "distributedAvailabilityGroupName": "dag",
     "api-version": "2025-08-01-preview",
     "parameters": {
-      "failoverType": "ForcedAllowDataLoss"
+      "databases": [
+        {
+          "databaseName": "testdb2"
+        }
+      ]
     }
   },
   "responses": {
@@ -23,13 +27,13 @@
           "instanceAvailabilityGroupName": "testcl",
           "failoverMode": "None",
           "seedingMode": "Automatic",
-          "linkMode": "SingleDatabase",
+          "linkMode": "MultiDatabase",
           "databases": [
             {
-              "databaseName": "testdb",
+              "databaseName": "testdb1",
               "instanceReplicaId": "4713ed91-1e8c-497d-9bd4-d8a3935ae49a",
               "partnerReplicaId": "8ffa9723-a1ec-4323-b929-c4aedee3894b",
-              "replicaState": "Catchup",
+              "replicaState": "Connected",
               "synchronizationHealth": "HEALTHY",
               "connectedState": "CONNECTED",
               "lastReceivedLsn": "71000009407900001",
@@ -42,6 +46,24 @@
               "lastBackupTime": "2025-08-01T00:00:00Z",
               "instanceSendReplicationLagSeconds": 1,
               "instanceRedoReplicationLagSeconds": 1
+            },
+            {
+              "databaseName": "testdb3",
+              "instanceReplicaId": "6935gf13-3g0e-619f-1df6-f0c5f5bg6016",
+              "partnerReplicaId": "a117b945-c3ge-6545-db4b-e6cgfg6096d",
+              "replicaState": "Connected",
+              "synchronizationHealth": "HEALTHY",
+              "connectedState": "CONNECTED",
+              "lastReceivedLsn": "72000010508000002",
+              "lastReceivedTime": "2025-08-01T00:05:00Z",
+              "lastCommitLsn": "72000010508000005",
+              "lastCommitTime": "2025-08-01T00:05:00Z",
+              "lastHardenedLsn": "72000010509200002",
+              "lastHardenedTime": "2025-08-01T00:05:00Z",
+              "lastBackupLsn": "72000010506800002",
+              "lastBackupTime": "2025-08-01T00:05:00Z",
+              "instanceSendReplicationLagSeconds": 1,
+              "instanceRedoReplicationLagSeconds": 1
             }
           ]
         },
@@ -52,7 +74,8 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/f2669dff-5f08-45dd-b857-b2a60b72cdc9/providers/Microsoft.Sql/locations/westus/distributedAvailabilityGroupsOperationResults/00000000-1111-2222-3333-444444444444?api-version=2025-08-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/locations/southeastasia/distributedAvailabilityGroupsAzureAsyncOperation/22222222-3333-4444-5555-666666666666?api-version=2025-08-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/locations/southeastasia/distributedAvailabilityGroupsOperationResults/22222222-3333-4444-5555-666666666666?api-version=2025-08-01"
       }
     }
   }
