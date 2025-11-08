@@ -7,6 +7,7 @@ import { ConsoleLogger } from "../src/logger.js";
 import { Readme } from "../src/readme.js";
 import { SpecModel } from "../src/spec-model.js";
 import { Tag } from "../src/tag.js";
+import { swaggerTypeSpecGenerated } from "./examples.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -41,6 +42,26 @@ describe("Swagger", () => {
 
     const refs = await swagger.getRefs();
     expect(new Set(refs.keys())).toEqual(new Set());
+
+    expect(await swagger.getTypeSpecGenerated()).toEqual(false);
+  });
+
+  it("can be created with typespec-generated string content", async () => {
+    const folder = "/fake";
+    const swagger = new Swagger(resolve(folder, "empty.json"), {
+      content: swaggerTypeSpecGenerated,
+    });
+
+    const operations = await swagger.getOperations();
+    expect(new Set(operations.keys())).toEqual(new Set());
+
+    const examples = await swagger.getExamples();
+    expect(new Set(examples.keys())).toEqual(new Set());
+
+    const refs = await swagger.getRefs();
+    expect(new Set(refs.keys())).toEqual(new Set());
+
+    expect(await swagger.getTypeSpecGenerated()).toEqual(true);
   });
 
   it("throws when created with invalid JSON content", async () => {

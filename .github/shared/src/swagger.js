@@ -285,6 +285,14 @@ export class Swagger {
   }
 
   /**
+   * @returns {Promise<boolean>} True if the spec was generated from TypeSpec
+   */
+  async getTypeSpecGenerated() {
+    const contentObject = await this.#getContentObject();
+    return contentObject.info?.["x-typespec-generated"] !== undefined;
+  }
+
+  /**
    *
    * @param {Map<string, Operation>} operations
    * @param {string} path
