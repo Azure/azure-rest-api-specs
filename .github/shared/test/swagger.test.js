@@ -66,7 +66,12 @@ describe("Swagger", () => {
       tag: new Tag("test-tag", [], { readme: new Readme("/fake/readme.md") }),
     });
 
-    await expect(swagger.getRefs()).rejects.toThrowErrorMatchingInlineSnapshot(`
+    // getRefs() shouldn't throw, since it doesn't care about the zod schema
+    // ensures we are evaluating each data method lazily
+    await expect(swagger.getRefs().then((m) => new Set(m.keys()))).resolves.toEqual(new Set());
+
+    // getOperations() should throw, since the input wasn't valid per the zod schema
+    await expect(swagger.getOperations()).rejects.toThrowErrorMatchingInlineSnapshot(`
       [SpecModelError: Failed to parse schema for swagger: ${resolve("/fake/invalid.json")}
         Problem File: ${resolve("/fake/invalid.json")}
         Readme: ${resolve("/fake/readme.md")}
