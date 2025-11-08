@@ -14,11 +14,11 @@ options:
     clear-output-folder: true
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/disconnectedOperations/{version-status}/{version}/disconnectedOperations.json"
+    output-file: "{version-status}/{version}/disconnectedOperations.json"
     examples-dir: "{project-root}/examples"
-    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/disconnectedoperations #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
     emitter-output-dir: "{output-dir}/{service-dir}/armdisconnectedoperations" #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
@@ -48,7 +48,7 @@ options:
     generate-sample: true
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
-      - "specification/edge/Microsoft.Edge.Shared/"
+      - "specification/edge/resource-manager/Microsoft.Edge/disconnectedOperations/shared/"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
