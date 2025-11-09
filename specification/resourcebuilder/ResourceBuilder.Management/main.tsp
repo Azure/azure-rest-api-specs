@@ -9,10 +9,7 @@ import "./pipelines.tsp";
 import "./jobs.tsp";
 import "./operation.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.ResourceBuilder Resource Provider management API. */
