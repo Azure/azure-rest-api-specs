@@ -38,7 +38,7 @@ model JobProperties {
   // ============================================
   // Common properties (available for all kinds)
   // ============================================
-  /** Input datasets for the job. */
+  /** Input datasets for the job. Required for AzureDataExplorerPublish and DataQualityValidation jobs. */
   inputs?: JobDataset[];
 
   /** Output datasets for the job. */
@@ -78,9 +78,6 @@ model JobProperties {
   // ============================================
   // AzureDataExplorerPublish job specific properties (kind: "AzureDataExplorerPublish")
   // ============================================
-  /** Input dataset for the job. Required for AzureDataExplorerPublish and DataQualityValidation jobs. */
-  inputDataset?: JobDataset;
-
   /** Sink to which data will be published in Azure Data Explorer. Required for AzureDataExplorerPublish jobs. */
   sink?: AzureDataExplorerSink;
 
