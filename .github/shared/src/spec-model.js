@@ -1,5 +1,6 @@
 import { readdir } from "fs/promises";
 import { resolve } from "path";
+import { inspect } from "util";
 import { flatMapAsync, mapAsync } from "./array.js";
 import { readme } from "./changed-files.js";
 import { Readme } from "./readme.js";
@@ -247,7 +248,7 @@ export class SpecModel {
    * @returns {string}
    */
   toString() {
-    return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
+    return `SpecModel(${this.#folder}, {logger: ${inspect(this.#logger)}}})`;
   }
 }
 
