@@ -4227,9 +4227,8 @@
           "readOnly": true
         },
         "retentionPeriodInDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention period, in days",
+          "$ref": "#/definitions/LongTermBackUpRetentionPeriod",
+          "description": "Retention period, in days, for long-term backups.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -8560,6 +8559,13 @@
         ]
       }
     },
+    "LongTermBackUpRetentionPeriod": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Retention period, in days, for long-term backups",
+      "minimum": 90,
+      "maximum": 3650
+    },
     "LongTermBackUpScheduleDetails": {
       "type": "object",
       "description": "Details for the long-term backup schedule.",
@@ -8574,8 +8580,8 @@
           "description": "The timestamp for the long-term backup schedule. For a MONTHLY cadence, months having fewer days than the provided date will have the backup taken on the last day of that month."
         },
         "retentionPeriodInDays": {
-          "$ref": "#/definitions/RetentionPeriod",
-          "description": "Retention period, in days, for backups."
+          "$ref": "#/definitions/LongTermBackUpRetentionPeriod",
+          "description": "Retention period, in days, for long-term backups"
         },
         "isDisabled": {
           "type": "boolean",
