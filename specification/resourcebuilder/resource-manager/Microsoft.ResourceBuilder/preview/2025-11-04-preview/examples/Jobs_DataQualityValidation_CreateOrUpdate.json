@@ -11,44 +11,38 @@
     "resource": {
       "kind": "DataQualityValidation",
       "properties": {
-        "inputDataset": {
-          "dataset": {
-            "type": "ResourceId",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
-          },
-          "name": "input-dataset"
-        },
-        "metricEvaluations": [
+        "inputs": [
           {
-            "name": "tableCountMetric",
+            "dataset": {
+              "type": "ResourceId",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+            },
+            "name": "input-dataset"
+          }
+        ],
+        "dataQualityMetricEvaluations": [
+          {
+            "name": "tableRowCountMetric",
             "evaluation": {
-              "metricEvaluationType": "tableCount",
+              "metricEvaluationType": "tableRowCount",
               "metricType": "count",
-              "metricUnit": "count",
-              "filter": "",
-              "columns": []
+              "metricUnit": "count"
             }
           }
         ],
         "dataQualityMetricValidations": [
           {
-            "name": "tableCountValidation",
+            "name": "tableRowCountValidation",
             "validation": {
-              "dataQualityMetricValidationType": "anomaly",
-              "dataQualityMetricEvaluationName": "tableCountMetric",
-              "validationAction": "warn",
-              "anomalyDetectionParameters": {
-                "sensitivity": 5,
-                "lookbackWindowInDays": 7,
-                "minimumDataPoints": 10
-              }
+              "dataQualityMetricValidationType": "anomalyValidation",
+              "dataQualityMetricEvaluationName": "tableRowCountMetric"
             }
           }
         ],
-        "dataQualityDatasetValidation": {
-          "datasetValidationCondition": "all",
+        "dataQualityValidation": {
+          "validationCondition": "all",
           "validations": [
-            "tableCountValidation"
+            "tableRowCountValidation"
           ]
         }
       }
@@ -59,32 +53,31 @@
       "body": {
         "kind": "DataQualityValidation",
         "properties": {
-          "inputDataset": {
-            "dataset": {
-              "type": "ResourceId",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
-            },
-            "name": "input-dataset"
-          },
-          "metricEvaluations": [
+          "inputs": [
             {
-              "name": "tableCountMetric",
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "input-dataset"
+            }
+          ],
+          "dataQualityMetricEvaluations": [
+            {
+              "name": "tableRowCountMetric",
               "evaluation": {
-                "metricEvaluationType": "tableCount",
+                "metricEvaluationType": "tableRowCount",
                 "metricType": "count",
-                "metricUnit": "count",
-                "filter": "",
-                "columns": []
+                "metricUnit": "count"
               }
             }
           ],
           "dataQualityMetricValidations": [
             {
-              "name": "tableCountValidation",
+              "name": "tableRowCountValidation",
               "validation": {
-                "dataQualityMetricValidationType": "anomaly",
-                "dataQualityMetricEvaluationName": "tableCountMetric",
-                "validationAction": "warn",
+                "dataQualityMetricValidationType": "anomalyValidation",
+                "dataQualityMetricEvaluationName": "tableRowCountMetric",
                 "anomalyDetectionParameters": {
                   "sensitivity": 5,
                   "lookbackWindowInDays": 7,
@@ -93,10 +86,10 @@
               }
             }
           ],
-          "dataQualityDatasetValidation": {
-            "datasetValidationCondition": "all",
+          "dataQualityValidation": {
+            "validationCondition": "all",
             "validations": [
-              "tableCountValidation"
+              "tableRowCountValidation"
             ]
           }
         },
@@ -109,18 +102,20 @@
       "body": {
         "kind": "DataQualityValidation",
         "properties": {
-          "inputDataset": {
-            "dataset": {
-              "type": "ResourceId",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
-            },
-            "name": "input-dataset"
-          },
-          "metricEvaluations": [
+          "inputs": [
             {
-              "name": "tableCountMetric",
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "input-dataset"
+            }
+          ],
+          "dataQualityMetricEvaluations": [
+            {
+              "name": "tableRowCountMetric",
               "evaluation": {
-                "metricEvaluationType": "tableCount",
+                "metricEvaluationType": "tableRowCount",
                 "metricType": "count",
                 "metricUnit": "count",
                 "filter": "",
@@ -130,11 +125,10 @@
           ],
           "dataQualityMetricValidations": [
             {
-              "name": "tableCountValidation",
+              "name": "tableRowCountValidation",
               "validation": {
-                "dataQualityMetricValidationType": "anomaly",
-                "dataQualityMetricEvaluationName": "tableCountMetric",
-                "validationAction": "warn",
+                "dataQualityMetricValidationType": "anomalyValidation",
+                "dataQualityMetricEvaluationName": "tableRowCountMetric",
                 "anomalyDetectionParameters": {
                   "sensitivity": 5,
                   "lookbackWindowInDays": 7,
@@ -143,10 +137,10 @@
               }
             }
           ],
-          "dataQualityDatasetValidation": {
-            "datasetValidationCondition": "all",
+          "dataQualityValidation": {
+            "validationCondition": "all",
             "validations": [
-              "tableCountValidation"
+              "tableRowCountValidation"
             ]
           }
         },

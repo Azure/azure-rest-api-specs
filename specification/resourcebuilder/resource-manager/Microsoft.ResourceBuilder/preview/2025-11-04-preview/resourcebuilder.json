@@ -1181,35 +1181,6 @@
       },
       "readOnly": true
     },
-    "AzureDataExplorerDatastore": {
-      "type": "object",
-      "description": "Azure Data Explorer datastore",
-      "properties": {
-        "clusterUri": {
-          "type": "string",
-          "description": "Cluster URI"
-        },
-        "database": {
-          "type": "string",
-          "description": "Database name"
-        },
-        "table": {
-          "type": "string",
-          "description": "Table name"
-        }
-      },
-      "required": [
-        "clusterUri",
-        "database",
-        "table"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Datastore"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureDataExplorerDatastore"
-    },
     "AzureDataExplorerSink": {
       "type": "object",
       "description": "Azure Data Explorer sink",
@@ -1245,91 +1216,6 @@
         }
       ],
       "x-ms-discriminator-value": "AzureDataExplorerSink"
-    },
-    "AzureResourceNotificationDatastore": {
-      "type": "object",
-      "description": "Azure Resource Notification datastore",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Datastore"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureResourceNotificationDatastore"
-    },
-    "AzureStorageAccountDatastore": {
-      "type": "object",
-      "description": "Azure Storage Account datastore",
-      "properties": {
-        "containerUri": {
-          "type": "string",
-          "description": "Container URI"
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant ID"
-        }
-      },
-      "required": [
-        "containerUri",
-        "tenantId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Datastore"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureStorageAccountDatastore"
-    },
-    "DataQualityDatasetValidation": {
-      "type": "object",
-      "description": "Data quality dataset validation",
-      "properties": {
-        "datasetValidationCondition": {
-          "$ref": "#/definitions/DataQualityDatasetValidationCondition",
-          "description": "Dataset validation condition."
-        },
-        "validations": {
-          "type": "array",
-          "description": "Validations to perform.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "datasetValidationCondition",
-        "validations"
-      ]
-    },
-    "DataQualityDatasetValidationCondition": {
-      "type": "string",
-      "description": "Data quality dataset validation condition",
-      "enum": [
-        "alwaysSucceed",
-        "any",
-        "all"
-      ],
-      "x-ms-enum": {
-        "name": "DataQualityDatasetValidationCondition",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AlwaysSucceed",
-            "value": "alwaysSucceed",
-            "description": "Always succeed condition."
-          },
-          {
-            "name": "Any",
-            "value": "any",
-            "description": "Any validation succeeds condition."
-          },
-          {
-            "name": "All",
-            "value": "all",
-            "description": "All validations succeed condition."
-          }
-        ]
-      }
     },
     "DataQualityMetricEvaluation": {
       "type": "object",
@@ -1372,12 +1258,33 @@
         "metricType"
       ]
     },
+    "DataQualityMetricEvaluationEntry": {
+      "type": "object",
+      "description": "Data quality metric evaluation entry with name",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric evaluation."
+        },
+        "evaluation": {
+          "$ref": "#/definitions/DataQualityMetricEvaluation",
+          "description": "Metric evaluation details."
+        }
+      },
+      "required": [
+        "name",
+        "evaluation"
+      ]
+    },
     "DataQualityMetricEvaluationType": {
       "type": "string",
       "description": "Data quality metric evaluation type",
       "enum": [
         "unknown",
-        "tableCount"
+        "tableRowCount",
+        "nonNullColumnCount",
+        "latency",
+        "size"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricEvaluationType",
@@ -1390,8 +1297,23 @@
           },
           {
             "name": "TableCount",
-            "value": "tableCount",
+            "value": "tableRowCount",
             "description": "Table count evaluation type."
+          },
+          {
+            "name": "NonNullColumnCount",
+            "value": "nonNullColumnCount",
+            "description": "Non-null column count evaluation type."
+          },
+          {
+            "name": "Latency",
+            "value": "latency",
+            "description": "Latency evaluation type."
+          },
+          {
+            "name": "Size",
+            "value": "size",
+            "description": "Size evaluation type."
           }
         ]
       }
@@ -1401,7 +1323,12 @@
       "description": "Data quality metric type",
       "enum": [
         "unknown",
-        "count"
+        "count",
+        "minimum",
+        "maximum",
+        "P50",
+        "P90",
+        "distinctCount"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricType",
@@ -1416,6 +1343,31 @@
             "name": "Count",
             "value": "count",
             "description": "Count metric type."
+          },
+          {
+            "name": "Minimum",
+            "value": "minimum",
+            "description": "Minimum metric type."
+          },
+          {
+            "name": "Maximum",
+            "value": "maximum",
+            "description": "Maximum metric type."
+          },
+          {
+            "name": "P50",
+            "value": "P50",
+            "description": "P50 metric type."
+          },
+          {
+            "name": "P90",
+            "value": "P90",
+            "description": "P90 metric type."
+          },
+          {
+            "name": "DistinctCount",
+            "value": "distinctCount",
+            "description": "Distinct count metric type."
           }
         ]
       }
@@ -1425,7 +1377,9 @@
       "description": "Data quality metric unit",
       "enum": [
         "count",
-        "seconds"
+        "seconds",
+        "minutes",
+        "hours"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricUnit",
@@ -1440,6 +1394,16 @@
             "name": "Seconds",
             "value": "seconds",
             "description": "Seconds unit."
+          },
+          {
+            "name": "Minutes",
+            "value": "minutes",
+            "description": "Minutes unit."
+          },
+          {
+            "name": "Hours",
+            "value": "hours",
+            "description": "Hours unit."
           }
         ]
       }
@@ -1455,10 +1419,6 @@
         "dataQualityMetricEvaluationName": {
           "type": "string",
           "description": "Data quality metric evaluation name."
-        },
-        "validationAction": {
-          "$ref": "#/definitions/DataQualityMetricValidationAction",
-          "description": "Validation action. Defaults to Ignore."
         },
         "columns": {
           "type": "array",
@@ -1487,42 +1447,32 @@
         }
       }
     },
-    "DataQualityMetricValidationAction": {
-      "type": "string",
-      "description": "Data quality metric validation action",
-      "enum": [
-        "ignore",
-        "warn",
-        "fail"
-      ],
-      "x-ms-enum": {
-        "name": "DataQualityMetricValidationAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Ignore",
-            "value": "ignore",
-            "description": "Ignore action."
-          },
-          {
-            "name": "Warn",
-            "value": "warn",
-            "description": "Warn action."
-          },
-          {
-            "name": "Fail",
-            "value": "fail",
-            "description": "Fail action."
-          }
-        ]
-      }
+    "DataQualityMetricValidationEntry": {
+      "type": "object",
+      "description": "Data quality metric validation entry with name",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric validation."
+        },
+        "validation": {
+          "$ref": "#/definitions/DataQualityMetricValidation",
+          "description": "Metric validation details."
+        }
+      },
+      "required": [
+        "name",
+        "validation"
+      ]
     },
     "DataQualityMetricValidationType": {
       "type": "string",
       "description": "Data quality metric validation type",
       "enum": [
         "unknown",
-        "anomaly"
+        "anomalyValidation",
+        "ratioValidation",
+        "thresholdValidation"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricValidationType",
@@ -1534,9 +1484,70 @@
             "description": "Unknown validation type."
           },
           {
-            "name": "Anomaly",
-            "value": "anomaly",
+            "name": "AnomalyValidation",
+            "value": "anomalyValidation",
             "description": "Anomaly validation type."
+          },
+          {
+            "name": "RatioValidation",
+            "value": "ratioValidation",
+            "description": "Ratio validation type."
+          },
+          {
+            "name": "ThresholdValidation",
+            "value": "thresholdValidation",
+            "description": "Threshold validation type."
+          }
+        ]
+      }
+    },
+    "DataQualityValidation": {
+      "type": "object",
+      "description": "Data quality validation",
+      "properties": {
+        "validationCondition": {
+          "$ref": "#/definitions/DataQualityValidationCondition",
+          "description": "Dataset validation condition."
+        },
+        "validations": {
+          "type": "array",
+          "description": "Validations to perform.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "validationCondition",
+        "validations"
+      ]
+    },
+    "DataQualityValidationCondition": {
+      "type": "string",
+      "description": "Data quality validation condition",
+      "enum": [
+        "alwaysSucceed",
+        "any",
+        "all"
+      ],
+      "x-ms-enum": {
+        "name": "DataQualityValidationCondition",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AlwaysSucceed",
+            "value": "alwaysSucceed",
+            "description": "Always succeed condition."
+          },
+          {
+            "name": "Any",
+            "value": "any",
+            "description": "Any validation succeeds condition."
+          },
+          {
+            "name": "All",
+            "value": "all",
+            "description": "All validations succeed condition."
           }
         ]
       }
@@ -1693,10 +1704,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "source": {
-          "$ref": "#/definitions/Datastore",
-          "description": "Source from which data will be ingested for the dataset."
         }
       }
     },
@@ -1763,55 +1770,6 @@
         "type",
         "name"
       ]
-    },
-    "Datastore": {
-      "type": "object",
-      "description": "A datastore represents a data source or destination for datasets.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DatastoreType",
-          "description": "Datastore type discriminator"
-        },
-        "name": {
-          "type": "string",
-          "description": "Datastore name"
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type",
-        "name"
-      ]
-    },
-    "DatastoreType": {
-      "type": "string",
-      "description": "Datastore type",
-      "enum": [
-        "AzureStorageAccountDatastore",
-        "AzureDataExplorerDatastore",
-        "AzureResourceNotificationDatastore"
-      ],
-      "x-ms-enum": {
-        "name": "DatastoreType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureStorageAccountDatastore",
-            "value": "AzureStorageAccountDatastore",
-            "description": "Azure Storage Account datastore type."
-          },
-          {
-            "name": "AzureDataExplorerDatastore",
-            "value": "AzureDataExplorerDatastore",
-            "description": "Azure Data Explorer datastore type."
-          },
-          {
-            "name": "AzureResourceNotificationDatastore",
-            "value": "AzureResourceNotificationDatastore",
-            "description": "Azure Resource Notification datastore type."
-          }
-        ]
-      }
     },
     "InlinePipelineJob": {
       "type": "object",
@@ -1975,7 +1933,7 @@
         },
         "inputs": {
           "type": "array",
-          "description": "Input datasets for the job.",
+          "description": "Input datasets for the job. Required for AzureDataExplorerPublish and DataQualityValidation jobs.",
           "items": {
             "$ref": "#/definitions/JobDataset"
           }
@@ -2025,30 +1983,26 @@
           "type": "string",
           "description": "Time offset for the job execution. Used by AzureStorageAccountIngestion jobs."
         },
-        "inputDataset": {
-          "$ref": "#/definitions/JobDataset",
-          "description": "Input dataset for the job. Required for AzureDataExplorerPublish and DataQualityValidation jobs."
-        },
         "sink": {
           "$ref": "#/definitions/AzureDataExplorerSink",
           "description": "Sink to which data will be published in Azure Data Explorer. Required for AzureDataExplorerPublish jobs."
         },
-        "metricEvaluations": {
+        "dataQualityMetricEvaluations": {
           "type": "array",
           "description": "Metric evaluations. Required for DataQualityValidation jobs.",
           "items": {
-            "$ref": "#/definitions/MetricEvaluationEntry"
+            "$ref": "#/definitions/DataQualityMetricEvaluationEntry"
           }
         },
         "dataQualityMetricValidations": {
           "type": "array",
           "description": "Data quality metric validations. Required for DataQualityValidation jobs.",
           "items": {
-            "$ref": "#/definitions/MetricValidationEntry"
+            "$ref": "#/definitions/DataQualityMetricValidationEntry"
           }
         },
-        "dataQualityDatasetValidation": {
-          "$ref": "#/definitions/DataQualityDatasetValidation",
+        "dataQualityValidation": {
+          "$ref": "#/definitions/DataQualityValidation",
           "description": "Data quality dataset validation. Required for DataQualityValidation jobs."
         },
         "resourceType": {
@@ -2057,48 +2011,12 @@
         }
       }
     },
-    "MetricEvaluationEntry": {
-      "type": "object",
-      "description": "Metric evaluation entry with name",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the metric evaluation."
-        },
-        "evaluation": {
-          "$ref": "#/definitions/DataQualityMetricEvaluation",
-          "description": "Metric evaluation details."
-        }
-      },
-      "required": [
-        "name",
-        "evaluation"
-      ]
-    },
-    "MetricValidationEntry": {
-      "type": "object",
-      "description": "Metric validation entry with name",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the metric validation."
-        },
-        "validation": {
-          "$ref": "#/definitions/DataQualityMetricValidation",
-          "description": "Metric validation details."
-        }
-      },
-      "required": [
-        "name",
-        "validation"
-      ]
-    },
     "MissingPartitionPolicy": {
       "type": "string",
       "description": "Missing partition policy",
       "enum": [
         "Fail",
-        "Ignore"
+        "Skip"
       ],
       "x-ms-enum": {
         "name": "MissingPartitionPolicy",
@@ -2110,8 +2028,8 @@
             "description": "Fail policy."
           },
           {
-            "name": "Ignore",
-            "value": "Ignore",
+            "name": "Skip",
+            "value": "Skip",
             "description": "Ignore policy."
           }
         ]
