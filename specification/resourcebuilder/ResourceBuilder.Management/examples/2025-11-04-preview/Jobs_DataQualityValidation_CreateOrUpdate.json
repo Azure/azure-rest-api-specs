@@ -18,37 +18,29 @@
           },
           "name": "input-dataset"
         },
-        "metricEvaluations": [
+        "dataQualityMetricEvaluations": [
           {
-            "name": "tableCountMetric",
+            "name": "tableRowCountMetric",
             "evaluation": {
-              "metricEvaluationType": "tableCount",
+              "metricEvaluationType": "tableRowCount",
               "metricType": "count",
-              "metricUnit": "count",
-              "filter": "",
-              "columns": []
+              "metricUnit": "count"
             }
           }
         ],
         "dataQualityMetricValidations": [
           {
-            "name": "tableCountValidation",
+            "name": "tableRowCountValidation",
             "validation": {
-              "dataQualityMetricValidationType": "anomaly",
-              "dataQualityMetricEvaluationName": "tableCountMetric",
-              "validationAction": "warn",
-              "anomalyDetectionParameters": {
-                "sensitivity": 5,
-                "lookbackWindowInDays": 7,
-                "minimumDataPoints": 10
-              }
+              "dataQualityMetricValidationType": "anomalyValidation",
+              "dataQualityMetricEvaluationName": "tableRowCountMetric"
             }
           }
         ],
-        "dataQualityDatasetValidation": {
-          "datasetValidationCondition": "all",
+        "dataQualityValidation": {
+          "validationCondition": "all",
           "validations": [
-            "tableCountValidation"
+            "tableRowCountValidation"
           ]
         }
       }
@@ -66,25 +58,22 @@
             },
             "name": "input-dataset"
           },
-          "metricEvaluations": [
+          "dataQualityMetricEvaluations": [
             {
-              "name": "tableCountMetric",
+              "name": "tableRowCountMetric",
               "evaluation": {
-                "metricEvaluationType": "tableCount",
+                "metricEvaluationType": "tableRowCount",
                 "metricType": "count",
-                "metricUnit": "count",
-                "filter": "",
-                "columns": []
+                "metricUnit": "count"
               }
             }
           ],
           "dataQualityMetricValidations": [
             {
-              "name": "tableCountValidation",
+              "name": "tableRowCountValidation",
               "validation": {
-                "dataQualityMetricValidationType": "anomaly",
-                "dataQualityMetricEvaluationName": "tableCountMetric",
-                "validationAction": "warn",
+                "dataQualityMetricValidationType": "anomalyValidation",
+                "dataQualityMetricEvaluationName": "tableRowCountMetric",
                 "anomalyDetectionParameters": {
                   "sensitivity": 5,
                   "lookbackWindowInDays": 7,
@@ -93,10 +82,10 @@
               }
             }
           ],
-          "dataQualityDatasetValidation": {
-            "datasetValidationCondition": "all",
+          "dataQualityValidation": {
+            "validationCondition": "all",
             "validations": [
-              "tableCountValidation"
+              "tableRowCountValidation"
             ]
           }
         },
@@ -116,11 +105,11 @@
             },
             "name": "input-dataset"
           },
-          "metricEvaluations": [
+          "dataQualityMetricEvaluations": [
             {
-              "name": "tableCountMetric",
+              "name": "tableRowCountMetric",
               "evaluation": {
-                "metricEvaluationType": "tableCount",
+                "metricEvaluationType": "tableRowCount",
                 "metricType": "count",
                 "metricUnit": "count",
                 "filter": "",
@@ -130,11 +119,10 @@
           ],
           "dataQualityMetricValidations": [
             {
-              "name": "tableCountValidation",
+              "name": "tableRowCountValidation",
               "validation": {
-                "dataQualityMetricValidationType": "anomaly",
-                "dataQualityMetricEvaluationName": "tableCountMetric",
-                "validationAction": "warn",
+                "dataQualityMetricValidationType": "anomalyValidation",
+                "dataQualityMetricEvaluationName": "tableRowCountMetric",
                 "anomalyDetectionParameters": {
                   "sensitivity": 5,
                   "lookbackWindowInDays": 7,
@@ -143,10 +131,10 @@
               }
             }
           ],
-          "dataQualityDatasetValidation": {
-            "datasetValidationCondition": "all",
+          "dataQualityValidation": {
+            "validationCondition": "all",
             "validations": [
-              "tableCountValidation"
+              "tableRowCountValidation"
             ]
           }
         },

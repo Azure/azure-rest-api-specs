@@ -94,13 +94,13 @@ model JobProperties {
   // ============================================
 
   /** Metric evaluations. Required for DataQualityValidation jobs. */
-  metricEvaluations?: MetricEvaluationEntry[];
+  dataQualityMetricEvaluations?:DataQualityMetricEvaluationEntry[];
 
   /** Data quality metric validations. Required for DataQualityValidation jobs. */
-  dataQualityMetricValidations?: MetricValidationEntry[];
+  dataQualityMetricValidations?: DataQualityMetricValidationEntry[];
 
   /** Data quality dataset validation. Required for DataQualityValidation jobs. */
-  dataQualityDatasetValidation?: DataQualityDatasetValidation;
+  dataQualityValidation?: DataQualityValidation;
 
   // ============================================
   // AzureResourceNotificationPublish job specific properties (kind: "AzureResourceNotificationPublish")
@@ -190,7 +190,7 @@ union MissingPartitionPolicy {
   Fail: "Fail",
 
   /** Ignore policy. */
-  Ignore: "Ignore",
+  Skip: "Skip",
 
   string,
 }
@@ -311,17 +311,17 @@ union ResourceNotificationResourceType {
   string,
 }
 
-/** Data quality dataset validation */
-model DataQualityDatasetValidation {
+/** Data quality validation */
+model DataQualityValidation {
   /** Dataset validation condition. */
-  datasetValidationCondition: DataQualityDatasetValidationCondition;
+  validationCondition: DataQualityValidationCondition;
 
   /** Validations to perform. */
   validations: string[];
 }
 
-/** Data quality dataset validation condition */
-union DataQualityDatasetValidationCondition {
+/** Data quality validation condition */
+union DataQualityValidationCondition {
   /** Always succeed condition. */
   AlwaysSucceed: "alwaysSucceed",
 
@@ -364,7 +364,16 @@ union DataQualityMetricEvaluationType {
   Unknown: "unknown",
 
   /** Table count evaluation type. */
-  TableCount: "tableCount",
+  TableCount: "tableRowCount",
+
+  /** Non-null column count evaluation type. */
+  NonNullColumnCount: "nonNullColumnCount",
+
+  /** Latency evaluation type. */
+  Latency: "latency",
+
+  /** Size evaluation type. */
+  Size: "size",
 
   string,
 }
@@ -377,6 +386,21 @@ union DataQualityMetricType {
   /** Count metric type. */
   Count: "count",
 
+  /** Minimum metric type. */
+  Minimum: "minimum",
+
+  /** Maximum metric type. */
+  Maximum: "maximum",
+
+  /** P50 metric type. */
+  P50: "P50",
+
+  /** P90 metric type. */
+  P90: "P90",
+
+  /** Distinct count metric type. */
+  DistinctCount: "distinctCount",
+
   string,
 }
 
@@ -388,6 +412,12 @@ union DataQualityMetricUnit {
   /** Seconds unit. */
   Seconds: "seconds",
 
+  /** Minutes unit. */
+  Minutes: "minutes",
+
+  /** Hours unit. */
+  Hours: "hours",
+
   string,
 }
 
@@ -398,9 +428,6 @@ model DataQualityMetricValidation {
 
   /** Data quality metric evaluation name. */
   dataQualityMetricEvaluationName?: string;
-
-  /** Validation action. Defaults to Ignore. */
-  validationAction?: DataQualityMetricValidationAction;
 
   /** Columns to validate. */
   columns?: string[];
@@ -424,21 +451,13 @@ union DataQualityMetricValidationType {
   Unknown: "unknown",
 
   /** Anomaly validation type. */
-  Anomaly: "anomaly",
+  AnomalyValidation: "anomalyValidation",
 
-  string,
-}
+  /** Ratio validation type. */
+  RatioValidation: "ratioValidation",
 
-/** Data quality metric validation action */
-union DataQualityMetricValidationAction {
-  /** Ignore action. */
-  Ignore: "ignore",
-
-  /** Warn action. */
-  Warn: "warn",
-
-  /** Fail action. */
-  Fail: "fail",
+  /** Threshold validation type. */
+  ThresholdValidation: "thresholdValidation",
 
   string,
 }
@@ -457,8 +476,8 @@ union AnomalyMode {
   string,
 }
 
-/** Metric evaluation entry with name */
-model MetricEvaluationEntry {
+/** Data quality metric evaluation entry with name */
+model DataQualityMetricEvaluationEntry {
   /** Name of the metric evaluation. */
   name: string;
 
@@ -466,8 +485,8 @@ model MetricEvaluationEntry {
   evaluation: DataQualityMetricEvaluation;
 }
 
-/** Metric validation entry with name */
-model MetricValidationEntry {
+/** Data quality metric validation entry with name */
+model DataQualityMetricValidationEntry {
   /** Name of the metric validation. */
   name: string;
 
