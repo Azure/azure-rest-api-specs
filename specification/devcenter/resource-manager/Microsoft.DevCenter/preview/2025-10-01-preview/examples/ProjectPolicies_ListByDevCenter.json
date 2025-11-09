@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "devCenterName": "Contoso",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DevOnlyResources",
+            "type": "Microsoft.DevCenter/devcenters/projectpolicies",
+            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/projectPolicies/DevOnlyResources",
+            "properties": {
+              "resourcePolicies": [
+                {
+                  "resources": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/attachednetworks/network-westus3"
+                },
+                {
+                  "resourceType": "Images",
+                  "action": "Deny"
+                },
+                {
+                  "resourceType": "Skus",
+                  "action": "Allow"
+                }
+              ],
+              "scopes": [
+                "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/DevProject"
+              ],
+              "configurationPolicies": {
+                "devBoxLimitsFeatureStatus": {
+                  "statusModifiable": "Modifiable",
+                  "valuesModifiable": "Modifiable",
+                  "defaultStatus": "Enabled",
+                  "defaultValues": [
+                    {
+                      "name": "maxDevBoxesPerUser",
+                      "value": "10"
+                    }
+                  ]
+                },
+                "azureAiServicesFeatureStatus": {
+                  "statusModifiable": "Modifiable"
+                },
+                "devBoxScheduleDeleteFeatureStatus": {
+                  "statusModifiable": "Modifiable",
+                  "valuesModifiable": "Modifiable"
+                },
+                "displayNameFeatureStatus": {
+                  "statusModifiable": "Modifiable"
+                },
+                "devBoxTunnelFeatureStatus": {
+                  "statusModifiable": "Modifiable"
+                },
+                "projectCatalogFeatureStatus": {
+                  "valuesModifiable": "Modifiable"
+                },
+                "serverlessGpuSessionsFeatureStatus": {
+                  "statusModifiable": "Modifiable",
+                  "valuesModifiable": "Modifiable"
+                },
+                "userCustomizationsFeatureStatus": {
+                  "statusModifiable": "Modifiable"
+                },
+                "workspaceStorageFeatureStatus": {
+                  "statusModifiable": "Modifiable"
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2020-11-18T18:24:24.818Z",
+              "createdBy": "User1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-11-18T18:24:24.818Z",
+              "lastModifiedBy": "User1",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProjectPolicies_ListByDevCenter",
+  "title": "ProjectPolicies_ListByDevCenter"
+}

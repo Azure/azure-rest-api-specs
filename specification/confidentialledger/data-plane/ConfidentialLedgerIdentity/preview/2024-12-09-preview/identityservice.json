@@ -1,0 +1,138 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Confidential Ledger Certificate",
+    "version": "2024-12-09-preview",
+    "description": "The Confidential Ledger Certificate endpoint is used to retrieve the TLS certificate\nrequired for connecting to a Confidential Ledger.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{certificateEndpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "certificateEndpoint",
+        "in": "path",
+        "description": "The certificate endpoint (or \"Identity Service Endpoint\" in the Azure portal), for example https://identity.confidential-ledger.core.azure.com.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "default": "https://identity.confidential-ledger.core.azure.com",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/ledgerIdentity/{ledgerId}": {
+      "get": {
+        "operationId": "GetLedgerIdentity",
+        "summary": "Gets identity information for a Confidential Ledger instance.",
+        "description": "Gets identity information for a Confidential Ledger instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "ledgerId",
+            "in": "path",
+            "description": "Id of the Confidential Ledger instance to get information for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LedgerIdentityInformation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Ledger Identity": {
+            "$ref": "./examples/GetLedgerIdentity.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfidentialLedgerCommon.ConfidentialLedgerError": {
+      "type": "object",
+      "description": "An error response from Confidential Ledger.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerErrorBody",
+          "description": "An error response from Confidential Ledger.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfidentialLedgerCommon.ConfidentialLedgerErrorBody": {
+      "type": "object",
+      "description": "An error response from Confidential Ledger.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        }
+      }
+    },
+    "LedgerIdentityInformation": {
+      "type": "object",
+      "description": "Contains the information about a Confidential Ledger.",
+      "properties": {
+        "ledgerId": {
+          "type": "string",
+          "description": "Id for the ledger.",
+          "readOnly": true
+        },
+        "ledgerTlsCertificate": {
+          "type": "string",
+          "description": "PEM-encoded certificate used for TLS by the Confidential Ledger."
+        }
+      },
+      "required": [
+        "ledgerTlsCertificate"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
