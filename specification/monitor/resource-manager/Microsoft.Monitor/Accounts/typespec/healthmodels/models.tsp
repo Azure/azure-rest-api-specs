@@ -7,6 +7,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
 namespace Microsoft.Monitor;
@@ -419,6 +420,7 @@ union AlertSeverity {
   Sev4: "Sev4",
 }
 
+@clientName("IconDetails", "csharp")
 @doc("Visual icon definition of an entity")
 model IconDefinition {
   @doc("Name of the built-in icon, or 'Custom' to use customData")
