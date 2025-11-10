@@ -38,7 +38,6 @@
 | `definitions.ContainerRegistry.properties.username.description__added` | added | `The user name to log into the registry server.` |
 | `definitions.DataDisk.properties.diskSizeGB.description__added` | added | `The initial disk size in GB when creating new data disk.` |
 | `definitions.DeploymentConfiguration.description__added` | added | `Deployment configuration properties.` |
-| `definitions.DeploymentConfiguration.properties.virtualMachineConfiguration.description__added` | added | `The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.` |
 | `definitions.DiffDiskSettings.description__added` | added | `Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.` |
 | `definitions.EnvironmentSetting.description__added` | added | `An environment variable to be set on a task process.` |
 | `definitions.EnvironmentSetting.properties.name.description__added` | added | `The name of the environment variable.` |
@@ -309,8 +308,8 @@
 |------|------------|-------|
 | `definitions.Application.properties.etag__added` | added | `{"type":"string","description":"*\\nThe ETag of the resource, used for concurrency statements.","read...` |
 | `definitions.ApplicationPackage.properties.etag__added` | added | `{"type":"string","description":"*\\nThe entity tag for the certificate."}` |
-| `definitions.Certificate.properties.etag__added` | added | `{"type":"string","description":"*\\nThe entity tag for the certificate."}` |
-| `definitions.DetectorResponse.properties.etag__added` | added | `{"type":"string","description":"*\\nThe entity tag for the certificate."}` |
+| `definitions.Certificate.properties.etag__added` | added | `{"type":"string","description":"*\\nThe entity tag for the certificate.","readOnly":true}` |
+| `definitions.DetectorResponse.properties.etag__added` | added | `{"type":"string","description":"*\\nThe entity tag for the certificate.","readOnly":true}` |
 | `definitions.Pool.properties.etag__added` | added | `{"type":"string","description":"*\\nThe entity tag for the certificate."}` |
 | `definitions.PrivateEndpointConnection.properties.etag__added` | added | `{"type":"string","description":"*\\nThe entity tag for the certificate."}` |
 | `definitions.PrivateLinkResource.properties.etag__added` | added | `{"type":"string","description":"*\\nThe entity tag for the certificate."}` |
@@ -365,56 +364,23 @@
 | `definitions.VirtualMachineFamilyCoreQuota.properties.coreQuota['x-nullable__deleted']` | deleted | `false` |
 | `definitions.VirtualMachineFamilyCoreQuota.properties.name['x-nullable__deleted']` | deleted | `false` |
 
+### Changes for `virtualMachineConfiguration`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.DeploymentConfiguration.properties.virtualMachineConfiguration__deleted` | deleted | `{"$ref":"#/definitions/VirtualMachineConfiguration","title":"The virtual machine configuration for t...` |
+
+### Changes for `virtualMachineConfiugration`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.DeploymentConfiguration.properties.virtualMachineConfiugration__added` | added | `{"$ref":"#/definitions/VirtualMachineConfiguration","title":"The virtual machine configuration for t...` |
+
 ### Changes for `title`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchAccountProperties.properties.activeJobAndJobScheduleQuota.title__deleted` | deleted | `The active job and job schedule quota for the Batch account.` |
-| `definitions.BatchAccountProperties.properties.autoStorage.title__deleted` | deleted | `The properties and status of any auto-storage account associated with the Batch account.` |
-| `definitions.BatchAccountProperties.properties.dedicatedCoreQuota.title__deleted` | deleted | `The dedicated core quota for the Batch account.` |
-| `definitions.BatchAccountProperties.properties.dedicatedCoreQuotaPerVMFamilyEnforced.title__deleted` | deleted | `A value indicating whether core quotas per Virtual Machine family are enforced for this account` |
-| `definitions.BatchAccountProperties.properties.encryption.title__deleted` | deleted | `The encryption configuration for the Batch account.` |
-| `definitions.BatchAccountProperties.properties.lowPriorityCoreQuota.title__deleted` | deleted | `The Spot/low-priority core quota for the Batch account.` |
-| `definitions.BatchAccountProperties.properties.networkProfile.title__deleted` | deleted | `Network profile for Batch account, which contains network rule settings for each endpoint.` |
-| `definitions.BatchAccountProperties.properties.poolQuota.title__deleted` | deleted | `The pool quota for the Batch account.` |
-| `definitions.BatchAccountUpdateProperties.properties.encryption.title__deleted` | deleted | `The encryption configuration for the Batch account.` |
-| `definitions.BatchAccountUpdateProperties.properties.networkProfile.title__deleted` | deleted | `Network profile for Batch account, which contains network rule settings for each endpoint.` |
-| `definitions.BatchAccountUpdateProperties.properties.publicNetworkAccess.title__deleted` | deleted | `The network access type for accessing Azure Batch account.` |
-| `definitions.CertificateBaseProperties.properties.thumbprint.title__deleted` | deleted | `The thumbprint of the certificate.` |
-| `definitions.CertificateBaseProperties.properties.thumbprintAlgorithm.title__deleted` | deleted | `The algorithm of the certificate thumbprint.` |
-| `definitions.CertificateCreateOrUpdateProperties.properties.data.title__deleted` | deleted | `The base64-encoded contents of the certificate.` |
-| `definitions.CertificateCreateOrUpdateProperties.properties.password.title__deleted` | deleted | `The password to access the certificate's private key.` |
-| `definitions.CertificateProperties.properties.deleteCertificateError.title__deleted` | deleted | `The error which occurred while deleting the certificate` |
-| `definitions.CertificateProperties.properties.previousProvisioningStateTransitionTime.title__deleted` | deleted | `The time at which the certificate entered its previous state.` |
-| `definitions.CertificateProperties.properties.provisioningState.title__deleted` | deleted | `The provisioned state of the resource` |
-| `definitions.CertificateProperties.properties.provisioningStateTransitionTime.title__deleted` | deleted | `The time at which the certificate entered its current state.` |
-| `definitions.CertificateReference.properties.id.title__deleted` | deleted | `The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool.` |
-| `definitions.CertificateReference.properties.storeLocation.title__deleted` | deleted | `The location of the certificate store on the compute node into which to install the certificate.` |
-| `definitions.CertificateReference.properties.storeName.title__deleted` | deleted | `The name of the certificate store on the compute node into which to install the certificate.` |
-| `definitions.CertificateReference.properties.visibility.title__deleted` | deleted | `Which user accounts on the compute node should have access to the private data of the certificate.` |
-| `definitions.CertificateReference.title__deleted` | deleted | `A reference to a certificate to be installed on compute nodes in a pool. This must exist inside the same account as the pool.` |
-| `definitions.ContainerConfiguration.properties.containerImageNames.title__deleted` | deleted | `The collection of container image names.` |
-| `definitions.ContainerConfiguration.properties.containerRegistries.title__deleted` | deleted | `Additional private registries from which containers can be pulled.` |
-| `definitions.ContainerConfiguration.properties.type.title__deleted` | deleted | `The container technology to be used.` |
-| `definitions.ContainerConfiguration.title__deleted` | deleted | `The configuration for container-enabled pools.` |
-| `definitions.ContainerHostBatchBindMountEntry.properties.isReadOnly.title__deleted` | deleted | `Mount this source path as read-only mode or not. Default value is false (read/write mode).` |
-| `definitions.ContainerHostBatchBindMountEntry.properties.source.title__deleted` | deleted | `The paths which will be mounted to container task's container.` |
-| `definitions.ContainerHostBatchBindMountEntry.title__deleted` | deleted | `The entry of path and mount mode you want to mount into task container.` |
-| `definitions.ContainerRegistry.properties.identityReference.title__deleted` | deleted | `The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.` |
-| `definitions.ContainerRegistry.properties.password.title__deleted` | deleted | `The password to log into the registry server.` |
-| `definitions.ContainerRegistry.properties.registryServer.title__deleted` | deleted | `The registry URL.` |
-| `definitions.ContainerRegistry.properties.username.title__deleted` | deleted | `The user name to log into the registry server.` |
-| `definitions.ContainerRegistry.title__deleted` | deleted | `A private container registry.` |
-| `definitions.DataDisk.properties.caching.title__deleted` | deleted | `The type of caching to enable for the disk.` |
-| `definitions.DataDisk.properties.diskSizeGB.title__deleted` | deleted | `The initial disk size in GB when creating new data disk.` |
-| `definitions.DataDisk.properties.lun.title__deleted` | deleted | `The logical unit number.` |
-| `definitions.DataDisk.properties.storageAccountType.title__deleted` | deleted | `The storage account type for use in creating data disks or OS disk.` |
-| `definitions.DeploymentConfiguration.properties.virtualMachineConfiguration.title__deleted` | deleted | `The virtual machine configuration for the pool.` |
-| `definitions.DeploymentConfiguration.title__deleted` | deleted | `Deployment configuration properties.` |
-| `definitions.DiffDiskSettings.properties.placement.title__deleted` | deleted | `Specifies the ephemeral disk placement for operating system disk for all VMs in the pool.` |
-| `definitions.DiffDiskSettings.title__deleted` | deleted | `Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.` |
 | `definitions.DiskEncryptionConfiguration.properties.targets.items.title__deleted` | deleted | `The disks to encrypt on each compute node.` |
-| `definitions.DiskEncryptionConfiguration.properties.targets.title__deleted` | deleted | `The list of disk targets Batch Service will encrypt on the compute node` |
 | `definitions.EndpointAccessProfile.properties.defaultAction.title__deleted` | deleted | `The default action when there is no IPRule matched.` |
 | `definitions.EnvironmentSetting.properties.name.title__deleted` | deleted | `The name of the environment variable.` |
 | `definitions.EnvironmentSetting.properties.value.title__deleted` | deleted | `The value of the environment variable.` |
@@ -602,17 +568,8 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CheckNameAvailabilityParameters.properties.type.default__added` | added | `Microsoft.Batch/batchAccounts` |
-| `definitions.DiffDiskSettings.properties.placement.default__added` | added | `CacheDisk` |
 | `definitions.FixedScaleSettings.properties.resizeTimeout.default__deleted` | deleted | `PT15M` |
 | `definitions.IPRule.properties.action.default__added` | added | `Allow` |
-
-### Changes for `x-ms-external`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CloudError['x-ms-external__deleted']` | deleted | `true` |
-| `definitions.CloudErrorBody['x-ms-external__deleted']` | deleted | `true` |
 
 ### Changes for `readOnly`
 
@@ -650,9 +607,8 @@
 | `definitions.AutoUserSpecification.properties.scope.title` | `The scope for the auto user` | `The scope of the auto user.` |
 | `definitions.BatchAccount.allOf[0].$ref` | `#/definitions/AzureResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource` |
 | `definitions.BatchAccountProperties.properties.poolAllocationMode.title` | `The allocation mode to use for creating pools in the Batch account.` | `The allocation mode used for creating pools in the Batch account.` |
-| `definitions.BatchAccountProperties.properties.publicNetworkAccess.title` | `The network interface type for accessing Azure Batch service and Batch account operations.` | `The network access type for accessing Azure Batch account.` |
-| `definitions.BatchAccountUpdateProperties.properties.publicNetworkAccess.description` | `The network access type for operating on the resources in the Batch account.` | `If not specified, the default value is 'enabled'.` |
 | `definitions.Certificate.allOf[0].$ref` | `#/definitions/AzureProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.CheckNameAvailabilityParameters.properties.type.description` | `The resource type.` | `The result of the request to list operations.` |
 | `definitions.CheckNameAvailabilityParameters.properties.type['x-ms-enum'].modelAsString` | `false` | `true` |
 | `definitions.DataDisk.properties.caching.description` | `Values are:
 
@@ -665,10 +621,8 @@
 
  Standard_LRS - The data disk should use standard locally redundant storage.
  Premium_LRS - The data disk should use premium locally redundant storage.` | `The storage account type for use in creating data disks or OS disk.` |
-| `definitions.DetectorListResult.properties.value.items.$ref` | `#/definitions/DetectorResponse` | `#/definitions/DetectorListResult` |
 | `definitions.DetectorResponse.allOf[0].$ref` | `#/definitions/AzureProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.DiffDiskSettings.properties.placement.description` | `This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements` | `This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.` |
-| `definitions.DiffDiskSettings.properties.placement['x-ms-enum'].modelAsString` | `false` | `true` |
+| `definitions.DiffDiskSettings.properties.placement.description` | `This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements` | `The location where the OS disk should be placed.` |
 | `definitions.FixedScaleSettings.properties.nodeDeallocationOption.description` | `If omitted, the default value is Requeue.` | `Determines what to do with a node and its running task(s) after it has been selected for deallocation.` |
 | `definitions.IPRule.properties.action['x-ms-enum'].modelAsString` | `false` | `true` |
 | `definitions.KeyVaultProperties.properties.keyIdentifier.description` | `Full path to the secret with or without version. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. or https://mykeyvault.vault.azure.net/keys/testkey. To be usable the following prerequisites must be met:

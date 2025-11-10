@@ -523,6 +523,7 @@ enum StorageAccountType {
  * If omitted, no disks on the compute nodes in the pool will be encrypted.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@summary("The disks to encrypt on each compute node.")
 enum DiskEncryptionTarget {
   /**
    * The OS Disk on the compute node is encrypted.
@@ -2132,11 +2133,13 @@ model PoolProperties {
 /**
  * Deployment configuration properties.
  */
+@summary("Deployment configuration properties.")
 model DeploymentConfiguration {
   /**
    * The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.
    */
-  virtualMachineConfiguration?: VirtualMachineConfiguration;
+  @summary("The virtual machine configuration for the pool.")
+  virtualMachineConfiugration?: VirtualMachineConfiguration;
 }
 
 /**
@@ -2267,6 +2270,7 @@ model DataDisk {
   /**
    * The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive.
    */
+  @summary("The logical unit number.")
   lun: int32;
 
   /**
@@ -2278,12 +2282,14 @@ model DataDisk {
    *
    *  The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
    */
+  @summary("The type of caching to enable for the disk.")
   caching?: CachingType;
 
   /**
    * The initial disk size in GB when creating new data disk.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("The initial disk size in GB when creating new data disk.")
   diskSizeGB: int32;
 
   /**
@@ -2292,53 +2298,63 @@ model DataDisk {
    *  Standard_LRS - The data disk should use standard locally redundant storage.
    *  Premium_LRS - The data disk should use premium locally redundant storage.
    */
+  @summary("The storage account type for use in creating data disks or OS disk.")
   storageAccountType?: StorageAccountType;
 }
 
 /**
  * The configuration for container-enabled pools.
  */
+@summary("The configuration for container-enabled pools.")
 model ContainerConfiguration {
   /**
    * The container technology to be used.
    */
+  @summary("The container technology to be used.")
   type: ContainerType;
 
   /**
    * This is the full image reference, as would be specified to "docker pull". An image will be sourced from the default Docker registry unless the image is fully qualified with an alternative registry.
    */
+  @summary("The collection of container image names.")
   containerImageNames?: string[];
 
   /**
    * If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.
    */
   @OpenAPI.extension("x-ms-identifiers", #["registryServer"])
+  @summary("Additional private registries from which containers can be pulled.")
   containerRegistries?: ContainerRegistry[];
 }
 
 /**
  * A private container registry.
  */
+@summary("A private container registry.")
 model ContainerRegistry {
   /**
    * The user name to log into the registry server.
    */
+  @summary("The user name to log into the registry server.")
   username?: string;
 
   /**
    * The password to log into the registry server.
    */
+  @summary("The password to log into the registry server.")
   @secret
   password?: string;
 
   /**
    * If omitted, the default is "docker.io".
    */
+  @summary("The registry URL.")
   registryServer?: string;
 
   /**
    * The reference to a user assigned identity associated with the Batch pool which a compute node will use.
    */
+  @summary("The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.")
   identityReference?: ComputeNodeIdentityReference;
 }
 
@@ -2349,6 +2365,7 @@ model DiskEncryptionConfiguration {
   /**
    * On Linux pool, only "TemporaryDisk" is supported; on Windows pool, "OsDisk" and "TemporaryDisk" must be specified.
    */
+  @summary("The list of disk targets Batch Service will encrypt on the compute node")
   targets?: DiskEncryptionTarget[];
 }
 
@@ -2447,23 +2464,23 @@ model OSDisk {
 /**
  * The location where the OS disk should be placed.
  */
-union DiffDiskPlacement {
+enum DiffDiskPlacement {
   /**
    * The OS disk will be placed on the cache disk of the VM.
    */
   CacheDisk: "CacheDisk",
-
-  string,
 }
 
 /**
  * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
  */
+@summary("Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.")
 model DiffDiskSettings {
   /**
    * This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.
    */
-  placement?: DiffDiskPlacement = DiffDiskPlacement.CacheDisk;
+  @summary("Specifies the ephemeral disk placement for operating system disk for all VMs in the pool.")
+  placement?: DiffDiskPlacement;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3016,15 +3033,18 @@ model TaskContainerSettings {
 /**
  * The entry of path and mount mode you want to mount into task container.
  */
+@summary("The entry of path and mount mode you want to mount into task container.")
 model ContainerHostBatchBindMountEntry {
   /**
    * The paths which will be mounted to container task's container.
    */
+  @summary("The paths which will be mounted to container task's container.")
   source?: ContainerHostDataPath;
 
   /**
    * For Linux, if you mount this path as a read/write mode, this does not mean that all users in container have the read/write access for the path, it depends on the access in host VM. If this path is mounted read-only, all users within the container will not be able to modify the path.
    */
+  @summary("Mount this source path as read-only mode or not. Default value is false (read/write mode).")
   isReadOnly?: boolean;
 }
 
@@ -3738,7 +3758,7 @@ union NspAccessRuleDirection {
   Outbound: "Outbound",
 }
 
-model DetectorListResult is Azure.Core.Page<DetectorListResult>;
+model DetectorListResult is Azure.Core.Page<DetectorResponse>;
 
 model BatchAccountListResult is Azure.Core.Page<BatchAccount>;
 @@identifiers(BatchAccountListResult.value, #["/properties/accountEndpoint"]);

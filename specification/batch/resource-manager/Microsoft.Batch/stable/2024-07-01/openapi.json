@@ -4005,7 +4005,7 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "title": "The network access type for accessing Azure Batch account.",
+          "title": "The network interface type for accessing Azure Batch service and Batch account operations.",
           "description": "The network access type for operating on the resources in the Batch account.",
           "default": "Enabled",
           "enum": [
@@ -4037,6 +4037,7 @@
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
+          "title": "Network profile for Batch account, which contains network rule settings for each endpoint.",
           "description": "The network profile only takes effect when publicNetworkAccess is enabled.",
           "x-nullable": true
         },
@@ -4051,17 +4052,20 @@
         },
         "autoStorage": {
           "$ref": "#/definitions/AutoStorageProperties",
+          "title": "The properties and status of any auto-storage account associated with the Batch account.",
           "description": "Contains information about the auto-storage account associated with a Batch account.",
           "readOnly": true
         },
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
+          "title": "The encryption configuration for the Batch account.",
           "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.",
           "readOnly": true
         },
         "dedicatedCoreQuota": {
           "type": "integer",
           "format": "int32",
+          "title": "The dedicated core quota for the Batch account.",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.",
           "x-nullable": true,
           "readOnly": true
@@ -4069,6 +4073,7 @@
         "lowPriorityCoreQuota": {
           "type": "integer",
           "format": "int32",
+          "title": "The Spot/low-priority core quota for the Batch account.",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.",
           "x-nullable": true,
           "readOnly": true
@@ -4087,18 +4092,21 @@
         },
         "dedicatedCoreQuotaPerVMFamilyEnforced": {
           "type": "boolean",
+          "title": "A value indicating whether core quotas per Virtual Machine family are enforced for this account",
           "description": "If this flag is true, dedicated core quota is enforced via both the dedicatedCoreQuotaPerVMFamily and dedicatedCoreQuota properties on the account. If this flag is false, dedicated core quota is enforced only via the dedicatedCoreQuota property on the account and does not consider Virtual Machine family.",
           "readOnly": true
         },
         "poolQuota": {
           "type": "integer",
           "format": "int32",
+          "title": "The pool quota for the Batch account.",
           "description": "The pool quota for the Batch account.",
           "readOnly": true
         },
         "activeJobAndJobScheduleQuota": {
           "type": "integer",
           "format": "int32",
+          "title": "The active job and job schedule quota for the Batch account.",
           "description": "The active job and job schedule quota for the Batch account.",
           "readOnly": true
         },
@@ -4158,6 +4166,7 @@
         },
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
+          "title": "The encryption configuration for the Batch account.",
           "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead."
         },
         "allowedAuthenticationModes": {
@@ -4170,7 +4179,8 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "If not specified, the default value is 'enabled'.",
+          "title": "The network access type for accessing Azure Batch account.",
+          "description": "The network access type for operating on the resources in the Batch account.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -4201,6 +4211,7 @@
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
+          "title": "Network profile for Batch account, which contains network rule settings for each endpoint.",
           "description": "The network profile only takes effect when publicNetworkAccess is enabled."
         }
       }
@@ -4278,7 +4289,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe entity tag for the certificate.",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -4300,10 +4312,12 @@
       "properties": {
         "thumbprintAlgorithm": {
           "type": "string",
+          "title": "The algorithm of the certificate thumbprint.",
           "description": "This must match the first portion of the certificate name. Currently required to be 'SHA1'."
         },
         "thumbprint": {
           "type": "string",
+          "title": "The thumbprint of the certificate.",
           "description": "This must match the thumbprint from the name."
         },
         "format": {
@@ -4334,6 +4348,7 @@
       "properties": {
         "data": {
           "type": "string",
+          "title": "The base64-encoded contents of the certificate.",
           "description": "The maximum size is 10KB.",
           "x-ms-mutability": [
             "read",
@@ -4343,6 +4358,7 @@
         "password": {
           "type": "string",
           "format": "password",
+          "title": "The password to access the certificate's private key.",
           "description": "This must not be specified if the certificate format is Cer.",
           "x-ms-secret": true
         }
@@ -4386,11 +4402,13 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/CertificateProvisioningState",
+          "title": "The provisioned state of the resource",
           "readOnly": true
         },
         "provisioningStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the certificate entered its current state.",
           "description": "The time at which the certificate entered its current state.",
           "readOnly": true
         },
@@ -4402,6 +4420,7 @@
         "previousProvisioningStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the certificate entered its previous state.",
           "description": "The time at which the certificate entered its previous state.",
           "readOnly": true
         },
@@ -4412,6 +4431,7 @@
         },
         "deleteCertificateError": {
           "$ref": "#/definitions/DeleteCertificateError",
+          "title": "The error which occurred while deleting the certificate",
           "description": "This is only returned when the certificate provisioningState is 'Failed'.",
           "readOnly": true
         }
@@ -4453,22 +4473,27 @@
     },
     "CertificateReference": {
       "type": "object",
+      "title": "A reference to a certificate to be installed on compute nodes in a pool. This must exist inside the same account as the pool.",
       "description": "Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
       "properties": {
         "id": {
           "type": "string",
+          "title": "The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool.",
           "description": "The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool."
         },
         "storeLocation": {
           "$ref": "#/definitions/CertificateStoreLocation",
+          "title": "The location of the certificate store on the compute node into which to install the certificate.",
           "description": "The default value is currentUser. This property is applicable only for pools configured with Windows compute nodes. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory."
         },
         "storeName": {
           "type": "string",
+          "title": "The name of the certificate store on the compute node into which to install the certificate.",
           "description": "This property is applicable only for pools configured with Windows compute nodes. Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My."
         },
         "visibility": {
           "type": "array",
+          "title": "Which user accounts on the compute node should have access to the private data of the certificate.",
           "description": "Which user accounts on the compute node should have access to the private data of the certificate.",
           "items": {
             "$ref": "#/definitions/CertificateVisibility"
@@ -4541,23 +4566,8 @@
           "description": "The name to check for availability"
         },
         "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "default": "Microsoft.Batch/batchAccounts",
-          "enum": [
-            "Microsoft.Batch/batchAccounts"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "MicrosoftBatchBatchAccounts",
-                "value": "Microsoft.Batch/batchAccounts",
-                "description": "The resource type for Microsoft.Batch/batchAccounts"
-              }
-            ]
-          }
+          "$ref": "#/definitions/ResourceType",
+          "description": "The resource type."
         }
       },
       "required": [
@@ -4592,23 +4602,28 @@
       "properties": {
         "userName": {
           "type": "string",
+          "title": "The user to use for authentication against the CIFS file system.",
           "description": "The user to use for authentication against the CIFS file system."
         },
         "source": {
           "type": "string",
+          "title": "The URI of the file system to mount.",
           "description": "The URI of the file system to mount."
         },
         "relativeMountPath": {
           "type": "string",
+          "title": "The relative path on the compute node where the file system will be mounted",
           "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
         },
         "mountOptions": {
           "type": "string",
+          "title": "Additional command line options to pass to the mount command.",
           "description": "These are 'net use' options in Windows and 'mount' options in Linux."
         },
         "password": {
           "type": "string",
           "format": "password",
+          "title": "The password to use for authentication against the CIFS file system.",
           "description": "The password to use for authentication against the CIFS file system.",
           "x-ms-secret": true
         }
@@ -4628,7 +4643,8 @@
           "$ref": "#/definitions/CloudErrorBody",
           "description": "The body of the error response."
         }
-      }
+      },
+      "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
@@ -4657,7 +4673,8 @@
             "target"
           ]
         }
-      }
+      },
+      "x-ms-external": true
     },
     "ComputeNodeDeallocationOption": {
       "type": "string",
@@ -4707,14 +4724,17 @@
     },
     "ContainerConfiguration": {
       "type": "object",
+      "title": "The configuration for container-enabled pools.",
       "description": "The configuration for container-enabled pools.",
       "properties": {
         "type": {
           "$ref": "#/definitions/ContainerType",
+          "title": "The container technology to be used.",
           "description": "The container technology to be used."
         },
         "containerImageNames": {
           "type": "array",
+          "title": "The collection of container image names.",
           "description": "This is the full image reference, as would be specified to \"docker pull\". An image will be sourced from the default Docker registry unless the image is fully qualified with an alternative registry.",
           "items": {
             "type": "string"
@@ -4722,6 +4742,7 @@
         },
         "containerRegistries": {
           "type": "array",
+          "title": "Additional private registries from which containers can be pulled.",
           "description": "If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
           "items": {
             "$ref": "#/definitions/ContainerRegistry"
@@ -4737,14 +4758,17 @@
     },
     "ContainerHostBatchBindMountEntry": {
       "type": "object",
+      "title": "The entry of path and mount mode you want to mount into task container.",
       "description": "The entry of path and mount mode you want to mount into task container.",
       "properties": {
         "source": {
           "$ref": "#/definitions/ContainerHostDataPath",
+          "title": "The paths which will be mounted to container task's container.",
           "description": "The paths which will be mounted to container task's container."
         },
         "isReadOnly": {
           "type": "boolean",
+          "title": "Mount this source path as read-only mode or not. Default value is false (read/write mode).",
           "description": "For Linux, if you mount this path as a read/write mode, this does not mean that all users in container have the read/write access for the path, it depends on the access in host VM. If this path is mounted read-only, all users within the container will not be able to modify the path."
         }
       }
@@ -4799,25 +4823,30 @@
     },
     "ContainerRegistry": {
       "type": "object",
+      "title": "A private container registry.",
       "description": "A private container registry.",
       "properties": {
         "username": {
           "type": "string",
+          "title": "The user name to log into the registry server.",
           "description": "The user name to log into the registry server.",
           "x-ms-client-name": "userName"
         },
         "password": {
           "type": "string",
           "format": "password",
+          "title": "The password to log into the registry server.",
           "description": "The password to log into the registry server.",
           "x-ms-secret": true
         },
         "registryServer": {
           "type": "string",
+          "title": "The registry URL.",
           "description": "If omitted, the default is \"docker.io\"."
         },
         "identityReference": {
           "$ref": "#/definitions/ComputeNodeIdentityReference",
+          "title": "The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.",
           "description": "The reference to a user assigned identity associated with the Batch pool which a compute node will use."
         }
       }
@@ -4877,19 +4906,23 @@
         "lun": {
           "type": "integer",
           "format": "int32",
+          "title": "The logical unit number.",
           "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive."
         },
         "caching": {
           "$ref": "#/definitions/CachingType",
+          "title": "The type of caching to enable for the disk.",
           "description": "Values are:\n\nnone - The caching mode for the disk is not enabled.\nreadOnly - The caching mode for the disk is read only.\nreadWrite - The caching mode for the disk is read and write.\n\nThe default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/."
         },
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
+          "title": "The initial disk size in GB when creating new data disk.",
           "description": "The initial disk size in GB when creating new data disk."
         },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
+          "title": "The storage account type for use in creating data disks or OS disk.",
           "description": "If omitted, the default is \"Standard_LRS\". Values are:\n\nStandard_LRS - The data disk should use standard locally redundant storage.\nPremium_LRS - The data disk should use premium locally redundant storage."
         }
       },
@@ -4932,23 +4965,25 @@
     },
     "DeploymentConfiguration": {
       "type": "object",
+      "title": "Deployment configuration properties.",
       "description": "Deployment configuration properties.",
       "properties": {
-        "virtualMachineConfiguration": {
+        "virtualMachineConfiugration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
+          "title": "The virtual machine configuration for the pool.",
           "description": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
         }
       }
     },
     "DetectorListResult": {
       "type": "object",
-      "description": "Paged collection of DetectorListResult items",
+      "description": "Paged collection of DetectorResponse items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DetectorListResult items on this page",
+          "description": "The DetectorResponse items on this page",
           "items": {
-            "$ref": "#/definitions/DetectorListResult"
+            "$ref": "#/definitions/DetectorResponse"
           }
         },
         "nextLink": {
@@ -4972,7 +5007,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe entity tag for the certificate.",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -4998,28 +5034,33 @@
         }
       }
     },
+    "DiffDiskPlacement": {
+      "type": "string",
+      "description": "The location where the OS disk should be placed.",
+      "enum": [
+        "CacheDisk"
+      ],
+      "x-ms-enum": {
+        "name": "DiffDiskPlacement",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "CacheDisk",
+            "value": "CacheDisk",
+            "description": "The OS disk will be placed on the cache disk of the VM."
+          }
+        ]
+      }
+    },
     "DiffDiskSettings": {
       "type": "object",
+      "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
       "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
       "properties": {
         "placement": {
-          "type": "string",
-          "description": "This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.",
-          "default": "CacheDisk",
-          "enum": [
-            "CacheDisk"
-          ],
-          "x-ms-enum": {
-            "name": "DiffDiskPlacement",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "CacheDisk",
-                "value": "CacheDisk",
-                "description": "The OS disk will be placed on the cache disk of the VM."
-              }
-            ]
-          }
+          "$ref": "#/definitions/DiffDiskPlacement",
+          "title": "Specifies the ephemeral disk placement for operating system disk for all VMs in the pool.",
+          "description": "This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements."
         }
       }
     },
@@ -5029,6 +5070,7 @@
       "properties": {
         "targets": {
           "type": "array",
+          "title": "The list of disk targets Batch Service will encrypt on the compute node",
           "description": "On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified.",
           "items": {
             "$ref": "#/definitions/DiskEncryptionTarget"
@@ -7139,6 +7181,24 @@
             "name": "None",
             "value": "None",
             "description": "Batch account has no identity associated with it. Setting `None` in update account will remove existing identities."
+          }
+        ]
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "The result of the request to list operations.",
+      "enum": [
+        "Microsoft.Batch/batchAccounts"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftBatchBatchAccounts",
+            "value": "Microsoft.Batch/batchAccounts",
+            "description": "The resource type for Microsoft.Batch/batchAccounts"
           }
         ]
       }
