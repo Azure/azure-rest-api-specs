@@ -625,13 +625,6 @@ model DatadogOrganizationProperties {
    * The configuration which describes the state of resource collection. This collects configuration information for all resources in a subscription.
    */
   resourceCollection?: boolean;
-
-  /**
-   * SRE Agent configuration to connect to MCP server of Datadog for given organization.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
-  @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
-  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
