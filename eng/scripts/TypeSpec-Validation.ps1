@@ -65,7 +65,7 @@ if ($typespecFolders) {
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
       $errorString += "`n > npm ci"
       $errorString += "`n > npx tsv $typespecFolder"
-      $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
+      $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/spec-validation"
       LogError $errorString
     }
     if ($GitClean) {
@@ -89,7 +89,7 @@ if ($typespecFoldersWithFailures.Count -gt 0) {
   foreach ($typespecFolderWithFailure in $typespecFoldersWithFailures) {
     LogInfo " > npx tsv $typespecFolderWithFailure"
   }
-  LogInfo "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
+  LogInfo "For more detailed docs see https://aka.ms/azsdk/specs/spec-validation"
   LogJobFailure
   exit 1
 }
