@@ -4,26 +4,31 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Network;
 using TypeSpec.Rest;
+using Azure.ResourceManager;
 
 using TypeSpec.Http;
-
-op get_override(
-    @query("apiVersion")
-    apiVersion?: string;
-
-    @query("subscriptionId")
-    subscriptionId: Azure.Core.uuid;
-
-    @query("resourceGroupName")
-    resourceGroupName: string;
-
-    // Removed provider parameter to match HeatMapModels.get signature
-
-    @query("profileName")
+/**
+ * override for HeatMapModels.get
+ */
+op getOverride(
+     ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider<HeatMapModel>;
+    ...ParentKeysOf<HeatMapModel>;
+     /**
+     * The name of the Traffic Manager profile.
+     */
+    @path
+    @segment("trafficmanagerprofiles")
     profileName: string;
-
-    @query("heatMapType")
-    heatMapType: Microsoft.Network.HeatMapType;
+     /**
+     * The type of the heatmap.
+     */
+    @path
+    @segment("heatMaps")
+    @key("heatMapType")
+    heatMapType: HeatMapType;
 
     @query("topLeft")
     @minItems(2)
@@ -36,7 +41,7 @@ op get_override(
     botRight?: float64[];
 ) :  Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel> | Microsoft.Network.CloudError;
 
-@@override(HeatMapModels.get, get_override, "go"); 
+@@override(HeatMapModels.get, getOverride, "go"); 
 
-@@alternateType(get_override::parameters.heatMapType, "default", "go");
+@@alternateType(getOverride::parameters.heatMapType, "default", "go");
 
