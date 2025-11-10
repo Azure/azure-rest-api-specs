@@ -13,40 +13,38 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.ServiceLinker"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.ServiceLinker"
+    namespace: "{package-name}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-servicelinker"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicelinker"
     namespace: "azure.mgmt.servicelinker"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-servicelinker"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicelinker"
     namespace: "com.azure.resourcemanager.servicelinker"
     service-name: "ServiceLinker" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-servicelinker"
-    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-servicelinker"
+    is-modular-library: true
+    flavor: "azure"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-servicelinker"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/servicelinker"
-    package-dir: "armservicelinker"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armservicelinker"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armservicelinker"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    factory-gather-all-params: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
