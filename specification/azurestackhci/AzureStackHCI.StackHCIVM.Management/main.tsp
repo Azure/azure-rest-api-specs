@@ -17,6 +17,11 @@ import "./HybridIdentityMetadata.tsp";
 import "./AttestationStatus.tsp";
 import "./GuestAgent.tsp";
 import "./back-compatible.tsp";
+import "./VirtualNetworks.tsp";
+import "./VirtualNetworkSubnets.tsp";
+import "./PublicIPAddresses.tsp";
+import "./NatGateways.tsp";
+import "./LoadBalancers.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

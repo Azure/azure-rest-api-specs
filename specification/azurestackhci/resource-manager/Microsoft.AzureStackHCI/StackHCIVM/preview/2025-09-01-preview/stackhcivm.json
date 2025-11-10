@@ -74,6 +74,24 @@
     },
     {
       "name": "GuestAgents"
+    },
+    {
+      "name": "VirtualNetworks"
+    },
+    {
+      "name": "VirtualNetworkSubnets"
+    },
+    {
+      "name": "PublicIPAddresses"
+    },
+    {
+      "name": "NatGateways"
+    },
+    {
+      "name": "LoadBalancers"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -104,6 +122,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualMachineInstances": {
+            "$ref": "./examples/VirtualMachineInstances_List.json"
           }
         },
         "x-ms-pageable": {
@@ -138,6 +161,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualMachineInstance": {
+            "$ref": "./examples/VirtualMachineInstances_Get.json"
           }
         }
       },
@@ -177,6 +205,10 @@
               "$ref": "#/definitions/VirtualMachineInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -189,6 +221,26 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateVirtualMachineInstanceFromLocal": {
+            "$ref": "./examples/VirtualMachineInstances__CreateOrUpdate_CreateFromLocal.json"
+          },
+          "PutVirtualMachineInstanceWithGalleryImage": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gallery_Image.json"
+          },
+          "PutVirtualMachineInstanceWithGpu": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gpu.json"
+          },
+          "PutVirtualMachineInstanceWithMarketplaceGalleryImage": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Marketplace_Gallery_Image.json"
+          },
+          "PutVirtualMachineInstanceWithOsDisk": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Os_Disk.json"
+          },
+          "PutVirtualMachineInstanceWithVMConfigAgent": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Vm_Config_Agent.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -247,6 +299,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -291,6 +348,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -325,6 +387,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetAttestationStatus": {
+            "$ref": "./examples/AttestationStatuses_Get.json"
+          }
         }
       }
     },
@@ -355,6 +422,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GuestAgentListByVirtualMachineInstances": {
+            "$ref": "./examples/GuestAgents_ListByVirtualMachineInstance.json"
           }
         },
         "x-ms-pageable": {
@@ -389,6 +461,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetGuestAgent": {
+            "$ref": "./examples/GuestAgents_Get.json"
           }
         }
       },
@@ -428,6 +505,10 @@
               "$ref": "#/definitions/GuestAgent"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -440,6 +521,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateGuestAgent": {
+            "$ref": "./examples/GuestAgents_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -486,6 +572,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteGuestAgent": {
+            "$ref": "./examples/GuestAgents_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -521,6 +612,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVirtualMachineInstances": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVirtualMachineInstance.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -553,6 +649,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/HybridIdentityMetadataGroup_Get.json"
           }
         }
       }
@@ -592,6 +693,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PauseVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Pause.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -637,6 +743,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RestartVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Restart.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -678,6 +789,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SaveVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Save.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -723,6 +839,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Start.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -766,10 +887,51 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StopVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Stop.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AzureStackHCI/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryImages": {
@@ -799,6 +961,50 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListGalleryImageBySubscription": {
+            "$ref": "./examples/GalleryImages_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/loadBalancers": {
+      "get": {
+        "operationId": "LoadBalancers_ListAll",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "Lists all of the loadBalancers in the specified subscription. Use the nextLink property in the response to get the next page of LoadBalancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListLoadBalancerBySubscription": {
+            "$ref": "./examples/LoadBalancers_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -835,6 +1041,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListLogicalNetworkBySubscription": {
+            "$ref": "./examples/LogicalNetworks_ListAll.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -867,6 +1078,50 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListMarketplaceGalleryImageBySubscription": {
+            "$ref": "./examples/MarketplaceGalleryImages_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/natGateways": {
+      "get": {
+        "operationId": "NatGateways_ListAll",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "Lists all of the natGateways in the specified subscription. Use the nextLink property in the response to get the next page of NatGateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NatGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListNatGatewayBySubscription": {
+            "$ref": "./examples/NatGateways_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -903,6 +1158,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListNetworkInterfaceBySubscription": {
+            "$ref": "./examples/NetworkInterfaces_ListAll.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -935,6 +1195,50 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all network security groups": {
+            "$ref": "./examples/NetworkSecurityGroups_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/publicIPAddresses": {
+      "get": {
+        "operationId": "PublicIPAddresses_ListAll",
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "description": "Lists all of the publicIPAddresses in the specified subscription. Use the nextLink property in the response to get the next page of PublicIP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddressListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all public IP addresses": {
+            "$ref": "./examples/PublicIPAddresses_ListALL.json"
           }
         },
         "x-ms-pageable": {
@@ -971,6 +1275,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListStorageContainerBySubscription": {
+            "$ref": "./examples/StorageContainers_ListAll.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1003,6 +1312,50 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualHardDiskBySubscription": {
+            "$ref": "./examples/VirtualHardDisks_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/virtualNetworks": {
+      "get": {
+        "operationId": "VirtualNetworks_ListAll",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Lists all of the virtual networks in the specified subscription. Use the nextLink property in the response to get the next page of virtualNetwork networks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualNetworkBySubscription": {
+            "$ref": "./examples/VirtualNetworks_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -1040,6 +1393,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListGalleryImageByResourceGroup": {
+            "$ref": "./examples/GalleryImages_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1085,6 +1443,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetGalleryImage": {
+            "$ref": "./examples/GalleryImages_Get.json"
           }
         }
       },
@@ -1135,6 +1498,10 @@
               "$ref": "#/definitions/GalleryImage"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1147,6 +1514,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutGalleryImage": {
+            "$ref": "./examples/GalleryImages_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1216,6 +1588,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateGalleryImage": {
+            "$ref": "./examples/GalleryImages_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1271,6 +1648,307 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteGalleryImage": {
+            "$ref": "./examples/GalleryImages_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers": {
+      "get": {
+        "operationId": "LoadBalancers_ListByResourceGroup",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "Lists all of the loadBalancers in the specified resource group. Use the nextLink property in the response to get the next page of LoadBalancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListLoadBalancerByResourceGroup": {
+            "$ref": "./examples/LoadBalancers_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}": {
+      "get": {
+        "operationId": "LoadBalancers_Get",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "The operation to get a loadBalancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetLoadBalancers": {
+            "$ref": "./examples/LoadBalancers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LoadBalancers_CreateOrUpdate",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "The operation to create or update a loadBalancer. Please note some properties can be set only during LoadBalancer creation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LoadBalancer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          },
+          "201": {
+            "description": "Resource 'LoadBalancer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutLoadBalancer": {
+            "$ref": "./examples/LoadBalancers_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LoadBalancers_UpdateTags",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "Updates a loadBalancer tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update LoadBalancers tags": {
+            "$ref": "./examples/LoadBalancers_UpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LoadBalancers_Delete",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "The operation to delete a loadBalancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteLoadBalancers": {
+            "$ref": "./examples/LoadBalancers_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1307,6 +1985,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListLogicalNetworkByResourceGroup": {
+            "$ref": "./examples/LogicalNetworks_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1352,6 +2035,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetLogicalNetwork": {
+            "$ref": "./examples/LogicalNetworks_Get.json"
           }
         }
       },
@@ -1402,6 +2090,10 @@
               "$ref": "#/definitions/LogicalNetwork"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1414,6 +2106,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutLogicalNetwork": {
+            "$ref": "./examples/LogicalNetworks_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1483,6 +2180,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateLogicalNetwork": {
+            "$ref": "./examples/LogicalNetworks_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1538,6 +2240,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteLogicalNetwork": {
+            "$ref": "./examples/LogicalNetworks_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1574,6 +2281,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListMarketplaceGalleryImageByResourceGroup": {
+            "$ref": "./examples/MarketplaceGalleryImages_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1619,6 +2331,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetMarketplaceGalleryImage": {
+            "$ref": "./examples/MarketplaceGalleryImages_Get.json"
           }
         }
       },
@@ -1669,6 +2386,10 @@
               "$ref": "#/definitions/MarketplaceGalleryImage"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1681,6 +2402,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutMarketplaceGalleryImage": {
+            "$ref": "./examples/MarketplaceGalleryImages_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1750,6 +2476,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateMarketplaceGalleryImage": {
+            "$ref": "./examples/MarketplaceGalleryImages_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1805,6 +2536,307 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteMarketplaceGalleryImage": {
+            "$ref": "./examples/MarketplaceGalleryImages_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/natGateways": {
+      "get": {
+        "operationId": "NatGateways_ListByResourceGroup",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "Lists all of the natGateways in the specified resource group. Use the nextLink property in the response to get the next page of NatGateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NatGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListNatGatewayByResourceGroup": {
+            "$ref": "./examples/NatGateways_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/natGateways/{natGatewayName}": {
+      "get": {
+        "operationId": "NatGateways_Get",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "The operation to get a natGateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "natGatewayName",
+            "in": "path",
+            "description": "Name of the nat gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetNatGateway": {
+            "$ref": "./examples/NatGateways_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NatGateways_CreateOrUpdate",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "The operation to create or update a natGateway. Please note some properties can be set only during NatGateway creation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "natGatewayName",
+            "in": "path",
+            "description": "Name of the nat gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NatGateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'NatGateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutNatGateway": {
+            "$ref": "./examples/NatGateways_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NatGateways_UpdateTags",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "Updates a natGateway tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "natGatewayName",
+            "in": "path",
+            "description": "Name of the nat gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NatGatewayTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update natGateway tags": {
+            "$ref": "./examples/NatGateways_UpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NatGateways_Delete",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "The operation to delete a natGateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "natGatewayName",
+            "in": "path",
+            "description": "Name of the nat gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteNatGateway": {
+            "$ref": "./examples/NatGateways_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1841,6 +2873,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListNetworkInterfaceByResourceGroup": {
+            "$ref": "./examples/NetworkInterfaces_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1886,6 +2923,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetNetworkInterface": {
+            "$ref": "./examples/NetworkInterfaces_Get.json"
           }
         }
       },
@@ -1936,6 +2978,10 @@
               "$ref": "#/definitions/NetworkInterface"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1948,6 +2994,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateNetworkInterfaceFromLocal": {
+            "$ref": "./examples/NetworkInterfaces__CreateOrUpdate_CreateFromLocal.json"
+          },
+          "PutNetworkInterface": {
+            "$ref": "./examples/NetworkInterfaces_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2017,6 +3071,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateNetworkInterface": {
+            "$ref": "./examples/NetworkInterfaces_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2072,6 +3131,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteNetworkInterface": {
+            "$ref": "./examples/NetworkInterfaces_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2108,6 +3172,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List network security groups in resource group": {
+            "$ref": "./examples/NetworkSecurityGroups_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2153,6 +3222,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get network security group": {
+            "$ref": "./examples/NetworkSecurityGroups_Get.json"
           }
         }
       },
@@ -2203,6 +3277,10 @@
               "$ref": "#/definitions/NetworkSecurityGroup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2215,6 +3293,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateNetworkSecurityGroup": {
+            "$ref": "./examples/NetworkSecurityGroups_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2284,6 +3367,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update network security group tags": {
+            "$ref": "./examples/NetworkSecurityGroups_UpdateTags.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2339,6 +3427,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete network security group": {
+            "$ref": "./examples/NetworkSecurityGroups_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2383,6 +3476,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List network security rules in network security group": {
+            "$ref": "./examples/SecurityRules_ListByNetworkSecurityGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2436,6 +3534,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get network security rule in network security group": {
+            "$ref": "./examples/SecurityRules_Get.json"
           }
         }
       },
@@ -2494,6 +3597,10 @@
               "$ref": "#/definitions/SecurityRule"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2506,6 +3613,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SecurityRulesCreateOrUpdate": {
+            "$ref": "./examples/SecurityRules_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2571,6 +3683,307 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SecurityRulesDelete": {
+            "$ref": "./examples/SecurityRules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPAddresses": {
+      "get": {
+        "operationId": "PublicIPAddresses_ListByResourceGroup",
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "description": "Lists all of the publicIPAddresses in the specified resource group. Use the nextLink property in the response to get the next page of PublicIP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddressListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List public IPs in resource group": {
+            "$ref": "./examples/PublicIPAddresses_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPAddresses/{publicIPAddressName}": {
+      "get": {
+        "operationId": "PublicIPAddresses_Get",
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "description": "The operation to get a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIPAddressName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddress"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get public IP address": {
+            "$ref": "./examples/PublicIPAddresses_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PublicIPAddresses_CreateOrUpdate",
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "description": "The operation to create or update a publicIPAddress. Please note some properties can be set only during PublicIP creation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIPAddressName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddress"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PublicIPAddress' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddress"
+            }
+          },
+          "201": {
+            "description": "Resource 'PublicIPAddress' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddress"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreatePublicIPAddress": {
+            "$ref": "./examples/PublicIPAddresses_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PublicIPAddresses_UpdateTags",
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "description": "Updates a publicIPAddress tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIPAddressName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddressTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddress"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update public IP addresses tags": {
+            "$ref": "./examples/PublicIPAddresses_UpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PublicIPAddresses_Delete",
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "description": "The operation to delete a publicIPAddresses.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIPAddressName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete public IP address": {
+            "$ref": "./examples/PublicIPAddresses_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2607,6 +4020,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListStorageContainerByResourceGroup": {
+            "$ref": "./examples/StorageContainers_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2652,6 +4070,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetStorageContainer": {
+            "$ref": "./examples/StorageContainers_Get.json"
           }
         }
       },
@@ -2702,6 +4125,10 @@
               "$ref": "#/definitions/StorageContainer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2714,6 +4141,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutStorageContainer": {
+            "$ref": "./examples/StorageContainers_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2783,6 +4215,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateStorageContainer": {
+            "$ref": "./examples/StorageContainers_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2838,6 +4275,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteStorageContainer": {
+            "$ref": "./examples/StorageContainers_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2874,6 +4316,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualHardDiskByResourceGroup": {
+            "$ref": "./examples/VirtualHardDisks_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2919,6 +4366,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Get.json"
           }
         }
       },
@@ -2969,6 +4421,10 @@
               "$ref": "#/definitions/VirtualHardDisk"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2981,6 +4437,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateVirtualHardDiskFromLocal": {
+            "$ref": "./examples/VirtualHardDisks__CreateOrUpdate_CreateFromLocal.json"
+          },
+          "PutVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3050,6 +4514,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3103,6 +4572,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3172,6 +4646,643 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "UploadVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Upload.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualNetworks": {
+      "get": {
+        "operationId": "VirtualNetworks_ListByResourceGroup",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Lists all of the virtual networks in the specified resource group. Use the nextLink property in the response to get the next page of virtualNetwork networks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualNetworkByResourceGroup": {
+            "$ref": "./examples/VirtualNetworks_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualNetworks/{virtualNetworkName}": {
+      "get": {
+        "operationId": "VirtualNetworks_Get",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "The operation to get a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetwork": {
+            "$ref": "./examples/VirtualNetworks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworks_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "The operation to create or update a virtual network. Please note some properties can be set only during virtualNetwork network creation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualNetwork' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualNetwork' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutVirtualNetwork": {
+            "$ref": "./examples/VirtualNetworks_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualNetworks_UpdateTags",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Updates a virtual network tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update virtual Network tags": {
+            "$ref": "./examples/VirtualNetworks_UpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualNetworks_Delete",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "The operation to delete a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteVirtualNetwork": {
+            "$ref": "./examples/VirtualNetworks_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualNetworks/{virtualNetworkName}/subnets": {
+      "get": {
+        "operationId": "VirtualNetworkSubnets_ListByVirtualNetwork",
+        "tags": [
+          "VirtualNetworkSubnets"
+        ],
+        "description": "Lists all of the virtual network subnets in a  virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualNetworkSubnetsByVirtualNetwork": {
+            "$ref": "./examples/VirtualNetworkSubnets_ListByVirtualNetwork.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}": {
+      "get": {
+        "operationId": "VirtualNetworkSubnets_Get",
+        "tags": [
+          "VirtualNetworkSubnets"
+        ],
+        "description": "The operation to get a virtual network subnet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "description": "Name of the virtual network subnet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkSubnet": {
+            "$ref": "./examples/VirtualNetworkSubnets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworkSubnets_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworkSubnets"
+        ],
+        "description": "The operation to create or update a virtual network subnet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "description": "Name of the virtual network subnet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualNetworkSubnet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnet"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualNetworkSubnet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutVirtualNetworkSubnet": {
+            "$ref": "./examples/VirtualNetworkSubnets_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualNetworkSubnets_Update",
+        "tags": [
+          "VirtualNetworkSubnets"
+        ],
+        "description": "The operation to update a virtual network subnet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "description": "Name of the virtual network subnet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnet"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateVirtualNetworkUpdates": {
+            "$ref": "./examples/VirtualNetworkSubnets_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualNetworkSubnets_Delete",
+        "tags": [
+          "VirtualNetworkSubnets"
+        ],
+        "description": "The operation to delete a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Name of the virtual network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "description": "Name of the virtual network subnet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteVirtualNetworkSubnet": {
+            "$ref": "./examples/VirtualNetworkSubnets_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3362,8 +5473,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AttestationStatusProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3542,6 +5652,51 @@
         }
       }
     },
+    "BackendAddressPool": {
+      "type": "object",
+      "description": "Backend address pool for the load balancer.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the backend pool.",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/BackendAddressPoolProperties",
+          "description": "properties for the backend pool"
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "BackendAddressPoolProperties": {
+      "type": "object",
+      "description": "Backend address pool for the load balancer.",
+      "properties": {
+        "loadBalancerBackendAddresses": {
+          "type": "array",
+          "description": "List of backend addresses for the backend pool",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerBackendAddress"
+          },
+          "x-ms-identifiers": []
+        },
+        "virtualNetwork": {
+          "$ref": "#/definitions/VirtualNetworkArmReference",
+          "description": "Reference to the virtual network for this backend pool. Mutually exclusive with logicalNetwork"
+        },
+        "logicalNetwork": {
+          "$ref": "#/definitions/LogicalNetworkArmReference",
+          "description": "Reference to the logical network for this backend pool. Mutually exclusive with virtualNetwork"
+        }
+      }
+    },
     "CloudInitDataSource": {
       "type": "string",
       "description": "Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]",
@@ -3622,6 +5777,221 @@
         ]
       }
     },
+    "FabricConnectionHealthEnum": {
+      "type": "string",
+      "description": "Fabric connection health state type",
+      "enum": [
+        "Healthy",
+        "Warning",
+        "Error",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "FabricConnectionHealthEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Fabric connection health state - healthy type"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Fabric connection health state - warning type"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Fabric connection health state - error type"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Fabric connection health state - unknown type"
+          }
+        ]
+      }
+    },
+    "FabricIntegrationStateEnum": {
+      "type": "string",
+      "description": "Fabric integration state type",
+      "enum": [
+        "Connected",
+        "Disconnected",
+        "Misconfigured",
+        "NotApplicable",
+        "Connecting"
+      ],
+      "x-ms-enum": {
+        "name": "FabricIntegrationStateEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Fabric integration state - connected type"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Fabric integration state - disconnected type"
+          },
+          {
+            "name": "Misconfigured",
+            "value": "Misconfigured",
+            "description": "Fabric integration state - misconfigured type"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Fabric integration state - notapplicable type"
+          },
+          {
+            "name": "Connecting",
+            "value": "Connecting",
+            "description": "Fabric integration state - connecting type"
+          }
+        ]
+      }
+    },
+    "FabricIntegrationStatus": {
+      "type": "object",
+      "description": "Enhanced fabric integration status with detailed health monitoring and connectivity state.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/FabricIntegrationStateEnum",
+          "description": "Current fabric integration state.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/FabricConnectionHealthEnum",
+          "description": "Health status of the fabric connection.",
+          "readOnly": true
+        },
+        "lastChecked": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last fabric health check as ISO 8601 string",
+          "readOnly": true
+        },
+        "resourceType": {
+          "$ref": "#/definitions/FabricResourceTypeEnum",
+          "description": "Type of fabric resource referenced.",
+          "readOnly": true
+        },
+        "issues": {
+          "type": "array",
+          "description": "Issues raised by fabric",
+          "items": {
+            "$ref": "#/definitions/FabricIssue"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FabricIssue": {
+      "type": "object",
+      "description": "Issues exposed by managed network fabric",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Specific error/warning code.",
+          "readOnly": true
+        },
+        "severity": {
+          "type": "string",
+          "description": "issue severity",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the issue",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "specific property or resource that has the issue",
+          "readOnly": true
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the issue as ISO 8601 string",
+          "readOnly": true
+        }
+      }
+    },
+    "FabricResourceTypeEnum": {
+      "type": "string",
+      "description": "Fabric resource type",
+      "enum": [
+        "L2IsolationDomain",
+        "L3InternalNetwork"
+      ],
+      "x-ms-enum": {
+        "name": "FabricResourceTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "L2IsolationDomain",
+            "value": "L2IsolationDomain",
+            "description": "Fabric resource of L2IsolationDomain type"
+          },
+          {
+            "name": "L3InternalNetwork",
+            "value": "L3InternalNetwork",
+            "description": "Fabric resource of L3InternalNetwork type"
+          }
+        ]
+      }
+    },
+    "FrontendIPConfiguration": {
+      "type": "object",
+      "description": "FrontendIP Configuration object for a load balancer.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name for the frontend IP configuration.",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/FrontendIPConfigurationProperties",
+          "description": "properties for this frontendIPConfiguration"
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "FrontendIPConfigurationProperties": {
+      "type": "object",
+      "description": "FrontendIP Configuration object for a load balancer.",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Private IP Address that was allocated (dynamic) or is to be allocated (static) from the subnet."
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "#/definitions/IpAllocationMethodEnum",
+          "description": "privateIPAllocationMethod - set to Static for requesting a specific IP"
+        },
+        "subnet": {
+          "$ref": "#/definitions/VirtualNetworkSubnetArmReference",
+          "description": "subnet - the subnet from which to allocate the private IP"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddressArmReference",
+          "description": "Public IP "
+        }
+      }
+    },
     "GalleryDiskImage": {
       "type": "object",
       "description": "This is the disk image base class.",
@@ -3640,8 +6010,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryImageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3732,10 +6101,6 @@
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
-        },
-        "vmImageRepositoryCredentials": {
-          "$ref": "#/definitions/VmImageRepositoryCredentials",
-          "description": "The credentials used to login to the image repository that has access to the specified image"
         },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier",
@@ -3930,8 +6295,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GuestAgentProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4104,8 +6468,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/HybridIdentityMetadataProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4165,7 +6528,8 @@
       "description": "The hypervisor generation of the Virtual Machine [V1, V2]",
       "enum": [
         "V1",
-        "V2"
+        "V2",
+        "NA"
       ],
       "x-ms-enum": {
         "name": "HyperVGeneration",
@@ -4180,6 +6544,11 @@
             "name": "V2",
             "value": "V2",
             "description": "Generation 2 (V2) hypervisor"
+          },
+          {
+            "name": "NA",
+            "value": "NA",
+            "description": "Not applicable/determined by platform"
           }
         ]
       }
@@ -4200,6 +6569,27 @@
         "properties": {
           "$ref": "#/definitions/IPConfigurationProperties",
           "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
+        }
+      }
+    },
+    "IPConfigurationArmReference": {
+      "type": "object",
+      "description": "The Azure Resource ID of an IPConfiguration resource",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of an IPConfiguration resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations"
+              },
+              {
+                "type": "Microsoft.AzureStackHCI/networkInterfaces"
+              }
+            ]
+          }
         }
       }
     },
@@ -4321,12 +6711,12 @@
     },
     "ImageArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Gallery Image.",
+      "description": "The Azure Resource ID for a Gallery Image.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for an image resource used by the virtual machine instance.",
+          "description": "The Azure Resource ID for an image resource used by the virtual machine instance.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4342,6 +6732,88 @@
             ]
           }
         }
+      }
+    },
+    "InboundNATRule": {
+      "type": "object",
+      "description": "Inbound nat rule properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the inbound nat rule",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/InboundNATRuleProperties",
+          "description": "properties of the inbound nat rule"
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "InboundNATRuleProperties": {
+      "type": "object",
+      "description": "Inbound nat rule properties",
+      "properties": {
+        "protocol": {
+          "$ref": "#/definitions/InboundNATRuleProtocol",
+          "description": "Protocol for the NAT rule"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frontend Port for the inbound rule"
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "backend Port for the inbound rule"
+        },
+        "backendIPConfiguration": {
+          "$ref": "#/definitions/IPConfigurationArmReference",
+          "description": "IP configuration for the target backend."
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddressArmReference",
+          "description": "Public IP Address for this NAT rule"
+        }
+      },
+      "required": [
+        "protocol",
+        "frontendPort",
+        "backendPort",
+        "backendIPConfiguration",
+        "publicIPAddress"
+      ]
+    },
+    "InboundNATRuleProtocol": {
+      "type": "string",
+      "description": "Protocol for inbound NAT rules",
+      "enum": [
+        "Tcp",
+        "Udp"
+      ],
+      "x-ms-enum": {
+        "name": "InboundNATRuleProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TCP",
+            "value": "Tcp",
+            "description": "TCP - load balance only tcp traffic"
+          },
+          {
+            "name": "UDP",
+            "value": "Udp",
+            "description": "Udp - load balance only UDP traffic"
+          }
+        ]
       }
     },
     "InstanceViewStatus": {
@@ -4408,14 +6880,448 @@
         ]
       }
     },
+    "LoadBalancer": {
+      "type": "object",
+      "description": "The LoadBalancer resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "LoadBalancerBackendAddress": {
+      "type": "object",
+      "description": "LoadBalancer Backend Address",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the backend address",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerBackendAddressProperties",
+          "description": "backend address properties"
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "LoadBalancerBackendAddressAdminState": {
+      "type": "string",
+      "description": "Backend Address Admin states",
+      "enum": [
+        "Up",
+        "Down"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerBackendAddressAdminState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Up",
+            "value": "Up",
+            "description": "Up - forced admin state up"
+          },
+          {
+            "name": "Down",
+            "value": "Down",
+            "description": "Down - forced admin state down"
+          }
+        ]
+      }
+    },
+    "LoadBalancerBackendAddressPoolReference": {
+      "type": "object",
+      "description": "Reference to a LoadBalancer backend address pool reference",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the backend address pool"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "LoadBalancerBackendAddressProperties": {
+      "type": "object",
+      "description": "LoadBalancer Backend Address properties",
+      "properties": {
+        "adminState": {
+          "$ref": "#/definitions/LoadBalancerBackendAddressAdminState",
+          "description": "admin state - if set to false, the address is removed from the pool"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address of the backend target. Populated automatically from the referenced IP configuration.",
+          "readOnly": true
+        },
+        "subnet": {
+          "$ref": "#/definitions/VirtualNetworkSubnetArmReference",
+          "description": "Reference to the subnet containing the backend address. Populated automatically from the referenced IP configuration. Mutually exclusive with logicalNetwork.",
+          "readOnly": true
+        },
+        "virtualNetwork": {
+          "$ref": "#/definitions/VirtualNetworkArmReference",
+          "description": "Reference to the virtual network containing the backend address. Populated automatically from the referenced IP configuration. Mutually exclusive with logicalNetwork.",
+          "readOnly": true
+        },
+        "logicalNetwork": {
+          "$ref": "#/definitions/LogicalNetworkArmReference",
+          "description": "Reference to the logical network containing this backend address. Populated automatically from the referenced IP configuration. Mutually exclusive with subnet and virtualNetwork.",
+          "readOnly": true
+        },
+        "networkInterfaceIPConfiguration": {
+          "$ref": "#/definitions/IPConfigurationArmReference",
+          "description": "Nic Based backend-ip association"
+        }
+      }
+    },
+    "LoadBalancerFrontendIPConfigurationReference": {
+      "type": "object",
+      "description": "Reference to a LoadBalancer Frontend IPConfiguration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the frontnedIPConfiguration"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "LoadBalancerListResult": {
+      "type": "object",
+      "description": "The response of a LoadBalancer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LoadBalancer items on this page",
+          "items": {
+            "$ref": "#/definitions/LoadBalancer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LoadBalancerProbeProtocol": {
+      "type": "string",
+      "description": "Protocol for health probes",
+      "enum": [
+        "Tcp",
+        "Http"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerProbeProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TCP",
+            "value": "Tcp",
+            "description": "TCP - TCP port checking"
+          },
+          {
+            "name": "HTTP",
+            "value": "Http",
+            "description": "HTTP - HTTP request"
+          }
+        ]
+      }
+    },
+    "LoadBalancerProbeReference": {
+      "type": "object",
+      "description": "Reference to a LoadBalancer health probe",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the health probe"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "LoadBalancerProperties": {
+      "type": "object",
+      "description": "Load Balancer resource properties",
+      "properties": {
+        "frontendIPConfigurations": {
+          "type": "array",
+          "description": "Frontend IPs for the loadbalancer.",
+          "items": {
+            "$ref": "#/definitions/FrontendIPConfiguration"
+          }
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "description": "backendAddressPools for the loadbalancer",
+          "items": {
+            "$ref": "#/definitions/BackendAddressPool"
+          }
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "description": "load balancer rules",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerRule"
+          }
+        },
+        "probes": {
+          "type": "array",
+          "description": "load balancer health probes",
+          "items": {
+            "$ref": "#/definitions/Probe"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "Provisioning state of the Load Balancer",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/LoadBalancerStatus",
+          "description": "observed state of the load balancer",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "frontendIPConfigurations"
+      ]
+    },
+    "LoadBalancerRule": {
+      "type": "object",
+      "description": "LoadBalancer Rules",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the load balancer rule",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerRuleProperties",
+          "description": "load balancer rule properties"
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "LoadBalancerRuleProperties": {
+      "type": "object",
+      "description": "Properties for LoadBalancerRules",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "#/definitions/LoadBalancerFrontendIPConfigurationReference",
+          "description": "arm reference to frontend IP being used by this LB"
+        },
+        "backendAddressPool": {
+          "$ref": "#/definitions/LoadBalancerBackendAddressPoolReference",
+          "description": "arm reference to backend pool being used by ths pool"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frontend port to accept connections"
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "backendPort to forward connections"
+        },
+        "protocol": {
+          "$ref": "#/definitions/LoadBalancerRuleTransportProtocol",
+          "description": "IP Protocol that the rule must load-balance"
+        },
+        "probe": {
+          "$ref": "#/definitions/LoadBalancerProbeReference",
+          "description": "Reference for the health probe for this connection"
+        },
+        "loadDistribution": {
+          "type": "string",
+          "description": "SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)",
+          "default": "Default",
+          "enum": [
+            "Default",
+            "SourceIP",
+            "SourceIPProtocol"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerRuleSessionPersistenceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "Default - 5-tuple hashing"
+              },
+              {
+                "name": "SourceIP",
+                "value": "SourceIP",
+                "description": "Source IP - 2-tuple hashing looking at src-dst ip"
+              },
+              {
+                "name": "SourceIPProtocol",
+                "value": "SourceIPProtocol",
+                "description": "SourceIPProtocol - 3-tuple hashing looking at src-dst ip and ip protocol"
+              }
+            ]
+          }
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time for which connections are preserved before being torn down."
+        }
+      },
+      "required": [
+        "frontendIPConfiguration",
+        "backendAddressPool",
+        "frontendPort",
+        "backendPort",
+        "protocol"
+      ]
+    },
+    "LoadBalancerRuleSessionPersistenceType": {
+      "type": "string",
+      "description": "Type of session persistence [Default, SourceIP, SourceIPProtocol]",
+      "enum": [
+        "Default",
+        "SourceIP",
+        "SourceIPProtocol"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerRuleSessionPersistenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default - 5-tuple hashing"
+          },
+          {
+            "name": "SourceIP",
+            "value": "SourceIP",
+            "description": "Source IP - 2-tuple hashing looking at src-dst ip"
+          },
+          {
+            "name": "SourceIPProtocol",
+            "value": "SourceIPProtocol",
+            "description": "SourceIPProtocol - 3-tuple hashing looking at src-dst ip and ip protocol"
+          }
+        ]
+      }
+    },
+    "LoadBalancerRuleTransportProtocol": {
+      "type": "string",
+      "description": "Protocol for load balancing rules",
+      "enum": [
+        "Tcp",
+        "Udp",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerRuleTransportProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TCP",
+            "value": "Tcp",
+            "description": "TCP - load balance only tcp traffic"
+          },
+          {
+            "name": "UDP",
+            "value": "Udp",
+            "description": "Udp - load balance only UDP traffic"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All - load balance all UDP and TCP traffic"
+          }
+        ]
+      }
+    },
+    "LoadBalancerStatus": {
+      "type": "object",
+      "description": "The observed status of the virtual network",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "LoadBalancer provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/LoadBalancerStatusProvisioningStatus",
+          "description": "virtual network provisioning status"
+        }
+      }
+    },
+    "LoadBalancerStatusProvisioningStatus": {
+      "type": "object",
+      "description": "Status of load balancer operations",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The ID of the operation performed on the load balancer"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the operation performed on the loadbalancer [Succeeded, Failed, InProgress]"
+        }
+      }
+    },
+    "LoadBalancerTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in LoadBalancer resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "LogicalNetwork": {
       "type": "object",
       "description": "The logical network resource definition.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LogicalNetworkProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4431,28 +7337,19 @@
     },
     "LogicalNetworkArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Logical Network.",
+      "description": "The Azure Resource ID for a Logical Network.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Logical Network.",
+          "description": "The Azure Resource ID for a Logical Network.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
               },
               {
-                "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/l2Networks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/l3Networks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/trunkedNetworks"
+                "type": "Microsoft.AzureStackHCI/virtualNetwork/subnets"
               }
             ]
           }
@@ -4487,6 +7384,10 @@
         "dhcpOptions": {
           "$ref": "#/definitions/LogicalNetworkPropertiesDhcpOptions",
           "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options."
+        },
+        "fabricNetworkConfiguration": {
+          "$ref": "#/definitions/ManagedNetworkFabricArmReference",
+          "description": "Managed network fabric l2/l3 ISD for this logical network. If set empty, the logical network remains entirely local."
         },
         "subnets": {
           "type": "array",
@@ -4545,6 +7446,10 @@
         "provisioningStatus": {
           "$ref": "#/definitions/LogicalNetworkStatusProvisioningStatus",
           "description": "Logical network provisioning status"
+        },
+        "fabricIntegration": {
+          "$ref": "#/definitions/FabricIntegrationStatus",
+          "description": "Enhanced fabric integration status with detailed health monitoring and connectivity state."
         }
       }
     },
@@ -4586,6 +7491,20 @@
         ]
       }
     },
+    "LogicalNetworkUpdateProperties": {
+      "type": "object",
+      "description": "Properties under the logical network resource",
+      "properties": {
+        "subnets": {
+          "type": "array",
+          "description": "Subnet - list of subnets under the logical network",
+          "items": {
+            "$ref": "#/definitions/SubnetUpdate"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "LogicalNetworksUpdateRequest": {
       "type": "object",
       "description": "The logical network resource patch definition.",
@@ -4596,6 +7515,31 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/LogicalNetworkUpdateProperties",
+          "description": "Defines the resource properties for the update."
+        }
+      }
+    },
+    "ManagedNetworkFabricArmReference": {
+      "type": "object",
+      "description": "The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/l2isolationdomains"
+              },
+              {
+                "type": "Microsoft.ManagedNetworkFabric/l3isolationdomain/internalnetworks"
+              }
+            ]
+          }
         }
       }
     },
@@ -4605,8 +7549,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MarketplaceGalleryImageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4770,14 +7713,158 @@
         }
       }
     },
+    "NatGateway": {
+      "type": "object",
+      "description": "The NatGateway resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NatGatewayProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "NatGatewayArmReference": {
+      "type": "object",
+      "description": "The ARM ID for a Network Security Group.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM ID for a Network Security Group.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/natGateways"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "NatGatewayListResult": {
+      "type": "object",
+      "description": "The response of a NatGateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NatGateway items on this page",
+          "items": {
+            "$ref": "#/definitions/NatGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NatGatewayProperties": {
+      "type": "object",
+      "description": "Nat Gateway resource properties",
+      "properties": {
+        "publicIPAddresses": {
+          "type": "array",
+          "description": "List of public ip addresses that the gateway can use for NAT.",
+          "items": {
+            "$ref": "#/definitions/PublicIPAddressArmReference"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnets": {
+          "type": "array",
+          "description": "List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkSubnetArmReference"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "inboundNATRules": {
+          "type": "array",
+          "description": "List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet",
+          "items": {
+            "$ref": "#/definitions/InboundNATRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "Provisioning state of the public IP",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/NatGatewayStatus",
+          "description": "The observed state of Nat Gateway",
+          "readOnly": true
+        }
+      }
+    },
+    "NatGatewayStatus": {
+      "type": "object",
+      "description": "Nat Gateway resource status",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "NatGateway provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/NatGatewayStatusProvisioningStatus",
+          "description": "NatGateway provisioning status"
+        }
+      }
+    },
+    "NatGatewayStatusProvisioningStatus": {
+      "type": "object",
+      "description": "Provisioning status of Nat Gateway ",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The ID of the operation performed on the nat gateway"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the operation performed on the nat gateway [Succeeded, Failed, InProgress]"
+        }
+      }
+    },
+    "NatGatewayTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in NatGateway resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "NetworkInterface": {
       "type": "object",
       "description": "The network interface resource definition.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkInterfaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4793,12 +7880,12 @@
     },
     "NetworkInterfaceArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Network Interface.",
+      "description": "The Azure Resource ID for a Network Interface.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Network Interface.",
+          "description": "The Azure Resource ID for a Network Interface.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -4871,7 +7958,7 @@
         },
         "bypassSdnPolicies": {
           "type": "boolean",
-          "description": "This setting is applicable only when Software Defined Networking (SDN) is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface."
+          "description": "This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface."
         }
       }
     },
@@ -4921,7 +8008,7 @@
         },
         "bypassSdnPolicies": {
           "type": "boolean",
-          "description": "This setting is applicable only when Software Defined Networking (SDN) is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface."
+          "description": "This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface."
         }
       }
     },
@@ -4962,8 +8049,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSecurityGroupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4983,12 +8069,12 @@
     },
     "NetworkSecurityGroupArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Network Security Group.",
+      "description": "The Azure Resource ID for a Network Security Group.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Network Security Group.",
+          "description": "The Azure Resource ID for a Network Security Group.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5234,6 +8320,64 @@
         ]
       }
     },
+    "Probe": {
+      "type": "object",
+      "description": "Load balancer health probes",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the load balancer health probe",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/ProbeProperties",
+          "description": "load balancer rule properties"
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "ProbeProperties": {
+      "type": "object",
+      "description": "properties for LoadBalancer health probes",
+      "properties": {
+        "protocol": {
+          "$ref": "#/definitions/LoadBalancerProbeProtocol",
+          "description": "Protocol for this probe: Can be Tcp or Http - Diverges from Azure where Https is also an option"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port on the backend address to probe"
+        },
+        "requestPath": {
+          "type": "string",
+          "description": "For http probes, specify the request path e.g. /health"
+        },
+        "intervalInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Probe interval in seconds (5-300) default 15",
+          "default": 15
+        },
+        "numberOfProbes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of consecutive probe failures before marking unhealthy (1-20) default 2",
+          "default": 2
+        }
+      },
+      "required": [
+        "protocol",
+        "port"
+      ]
+    },
     "ProvisioningAction": {
       "type": "string",
       "description": "Defines the different types of operations for guest agent.",
@@ -5312,6 +8456,146 @@
         ]
       },
       "readOnly": true
+    },
+    "PublicIPAddress": {
+      "type": "object",
+      "description": "The publicIP resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicIPAddressProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "PublicIPAddressArmReference": {
+      "type": "object",
+      "description": "The Azure Resource ID of a Public IP resource",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of a Public IP resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/publicIPAddresses"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "PublicIPAddressListResult": {
+      "type": "object",
+      "description": "The response of a PublicIPAddress list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicIPAddress items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicIPAddress"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublicIPAddressProperties": {
+      "type": "object",
+      "description": "Public IP Properties resource.",
+      "properties": {
+        "publicIPAddressVersion": {
+          "$ref": "#/definitions/PublicIPAddressType",
+          "description": "Whether the public IP is v4 or v6. Defaults to IPv4"
+        },
+        "ipAllocationScope": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ipAllocationScope: Azure Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/logicalNetworks"
+              },
+              {
+                "type": "Microsoft.AzureStackHCI/publicIPAddresses"
+              }
+            ]
+          }
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space."
+        },
+        "ipConfiguration": {
+          "$ref": "#/definitions/IPConfigurationArmReference",
+          "description": "network interface or LoadBalancer frontendIPconfiguration using this public IP",
+          "readOnly": true
+        },
+        "natGateway": {
+          "$ref": "#/definitions/NatGatewayArmReference",
+          "description": "natGateway using this public IP",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "Provisioning state of the public IP",
+          "readOnly": true
+        }
+      }
+    },
+    "PublicIPAddressTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in PublicIPAddress resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PublicIPAddressType": {
+      "type": "string",
+      "description": "Type of public IP addresses",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "PublicIPAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4 IP Address"
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6 IP Address"
+          }
+        ]
+      }
     },
     "Route": {
       "type": "object",
@@ -5407,8 +8691,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SecurityRuleProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5744,8 +9027,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageContainerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5761,12 +9043,12 @@
     },
     "StorageContainerArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Storage Container.",
+      "description": "The Azure Resource ID for a Storage Container.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Storage Container.",
+          "description": "The Azure Resource ID for a Storage Container.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5920,12 +9202,12 @@
     },
     "SubnetIpConfigurationReference": {
       "type": "object",
-      "description": "The ARM ID for a Network Interface.",
+      "description": "The Azure Resource ID for a Network Interface.",
       "properties": {
         "ID": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Network Interface.",
+          "description": "The Azure Resource ID for a Network Interface.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5983,6 +9265,32 @@
           "type": "integer",
           "format": "int32",
           "description": "Vlan to use for the subnet"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "Provisioning state of the subnet resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubnetUpdate": {
+      "type": "object",
+      "description": "Subnet resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubnetUpdateProperties",
+          "description": "Properties of the subnet.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SubnetUpdateProperties": {
+      "type": "object",
+      "description": "Properties of the subnet.",
+      "properties": {
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroupArmReference",
+          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
         }
       }
     },
@@ -6015,8 +9323,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualHardDiskProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6032,12 +9339,12 @@
     },
     "VirtualHardDiskArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Virtual Hard Disk.",
+      "description": "The Azure Resource ID for a Virtual Hard Disk.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Virtual Hard Disk.",
+          "description": "The Azure Resource ID for a Virtual Hard Disk.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6064,9 +9371,7 @@
         "progressPercentage": {
           "type": "integer",
           "format": "int64",
-          "description": "The progress of the operation in percentage",
-          "minimum": 0,
-          "maximum": 100
+          "description": "The progress of the operation in percentage"
         }
       }
     },
@@ -6138,6 +9443,12 @@
           "description": "Boolean indicating whether it is an existing local hard disk or if one should be created.",
           "default": false
         },
+        "localVhdPath": {
+          "type": "string",
+          "format": "password",
+          "description": "Absolute path of the VHD. This is only applicable when createFromLocal is true.",
+          "x-ms-secret": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual hard disk.",
@@ -6193,7 +9504,7 @@
         },
         "managedBy": {
           "type": "array",
-          "description": "ARM IDs of the VMs that are consuming the VHD.",
+          "description": "Azure Resource IDs of the VMs that are consuming the VHD.",
           "items": {
             "type": "string"
           }
@@ -6240,7 +9551,7 @@
         "virtualHardDiskId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Virtual Hard Disk.",
+          "description": "The Azure Resource ID for a Virtual Hard Disk.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6271,9 +9582,7 @@
         "progressPercentage": {
           "type": "integer",
           "format": "int64",
-          "description": "The progress of the operation in percentage",
-          "minimum": 0,
-          "maximum": 100
+          "description": "The progress of the operation in percentage"
         },
         "errorCode": {
           "type": "string",
@@ -6315,12 +9624,12 @@
     },
     "VirtualMachineArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Virtual Machine.",
+      "description": "The Azure Resource ID for a Virtual Machine.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Virtual Machine.",
+          "description": "The Azure Resource ID for a Virtual Machine.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6355,8 +9664,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6441,6 +9749,10 @@
           "type": "boolean",
           "description": "Boolean indicating whether this is an existing local virtual machine or if one should be created.",
           "default": false
+        },
+        "localVmName": {
+          "type": "string",
+          "description": "HyperV name of the VM. This is only applicable when createFromLocal is true."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
@@ -6894,7 +10206,7 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Virtual Hard Disk.",
+          "description": "The Azure Resource ID for a Virtual Hard Disk.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6995,25 +10307,341 @@
         }
       }
     },
-    "VmImageRepositoryCredentials": {
+    "VirtualNetwork": {
       "type": "object",
-      "description": "The credentials used to login to the image repository that has access to the specified image",
+      "description": "The virtual network resource definition.",
       "properties": {
-        "username": {
-          "type": "string",
-          "description": "Username for accessing image repository"
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkProperties",
+          "description": "The resource-specific properties for this resource."
         },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "Password for accessing image repository",
-          "x-ms-secret": true
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "VirtualNetworkAddressSpace": {
+      "type": "object",
+      "description": "Address Space Information",
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "description": "A list of one or more CIDR blocks that define the address space.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
-        "username",
-        "password"
+        "addressPrefixes"
       ]
+    },
+    "VirtualNetworkArmReference": {
+      "type": "object",
+      "description": "The Azure Resource ID for a Virtual Network",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID for a Virtual Network.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualnetworks"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "VirtualNetworkDhcpOptions": {
+      "type": "object",
+      "description": "DHCP options for virtual networks",
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "description": "An array of DNS server IP addresses that VMs or wokloads in the vnet can inherit",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VirtualNetworkListResult": {
+      "type": "object",
+      "description": "The response of a VirtualNetwork list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualNetwork items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualNetworkProperties": {
+      "type": "object",
+      "description": "Virtual network resource properties",
+      "properties": {
+        "addressSpace": {
+          "$ref": "#/definitions/VirtualNetworkAddressSpace",
+          "description": "Virtual Network address space. All subnets must be within the defined range."
+        },
+        "dhcpOptions": {
+          "$ref": "#/definitions/VirtualNetworkDhcpOptions",
+          "description": "Virtual Network DHCP options. Inherited by all subnets and VMs."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "The provisioning state of the virtual network resource.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/VirtualNetworkStatus",
+          "description": "The observed status of Virtual Network"
+        }
+      },
+      "required": [
+        "addressSpace",
+        "dhcpOptions"
+      ]
+    },
+    "VirtualNetworkStatus": {
+      "type": "object",
+      "description": "The observed status of the virtual network",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "VirtualNetwork provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/VirtualNetworkStatusProvisioningStatus",
+          "description": "virtual network provisioning status"
+        }
+      }
+    },
+    "VirtualNetworkStatusProvisioningStatus": {
+      "type": "object",
+      "description": "Status of virtual network operations",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The ID of the operation performed on the virtual network"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the operation performed on the virtual network [Succeeded, Failed, InProgress]"
+        }
+      }
+    },
+    "VirtualNetworkSubnet": {
+      "type": "object",
+      "description": "The virtual network resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkSubnetProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "VirtualNetworkSubnetArmReference": {
+      "type": "object",
+      "description": "The Azure Resource ID for a Virtual Network subnet",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID for a Virtual Network subnet.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualnetwork/subnets"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "VirtualNetworkSubnetIpConfigurationReference": {
+      "type": "object",
+      "description": "The Azure Resource ID for a resource consuming IP on a subnet",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID for a Network Interface.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/networkInterfaces"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "VirtualNetworkSubnetListResult": {
+      "type": "object",
+      "description": "The response of a VirtualNetworkSubnet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualNetworkSubnet items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkSubnet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualNetworkSubnetProperties": {
+      "type": "object",
+      "description": "VirtualNetwork subnet resource",
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "Subnet CIDR"
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroupArmReference",
+          "description": "Network Security Group attached to the subnet."
+        },
+        "natGateway": {
+          "$ref": "#/definitions/NatGatewayArmReference",
+          "description": "Nat Gateway attached to the subnet for non-vnet traffic."
+        },
+        "routeTable": {
+          "$ref": "#/definitions/RouteTable",
+          "description": "RouteTable defining custom routes for the subnet."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "description": "List of ip configurations for the subnet",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkSubnetIpConfigurationReference"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "The provisioning state of the virtual network subnet resource.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/VirtualNetworkSubnetStatus",
+          "description": "The observed status of the virtual network subnet resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "addressPrefix"
+      ]
+    },
+    "VirtualNetworkSubnetStatus": {
+      "type": "object",
+      "description": "Status of virtual network subnet operations",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "VirtualNetworkSubnet provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/VirtualNetworkSubnetStatusProvisioningStatus",
+          "description": "Public IP provisioning status"
+        }
+      }
+    },
+    "VirtualNetworkSubnetStatusProvisioningStatus": {
+      "type": "object",
+      "description": "Status of virtual network subnet operations",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The ID of the operation performed on the virtual network subnet"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the operation performed on the virtual network subnet [Succeeded, Failed, InProgress]"
+        }
+      }
+    },
+    "VirtualNetworkSubnetUpdateProperties": {
+      "type": "object",
+      "description": "The virtual network subnet resource patch properties definition.",
+      "properties": {
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroupArmReference",
+          "description": "NetworkSecurityGroup - Network Security Group attached to the subnet."
+        },
+        "natGateway": {
+          "$ref": "#/definitions/NatGatewayArmReference",
+          "description": "NatGateway - NatGateway attached to the subnet."
+        }
+      }
+    },
+    "VirtualNetworkSubnetUpdateRequest": {
+      "type": "object",
+      "description": "The virtual network subnet resource patch definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkSubnetUpdateProperties",
+          "description": "properties to update"
+        }
+      }
+    },
+    "VirtualNetworkTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in VirtualNetwork resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "VmSizeEnum": {
       "type": "string",
