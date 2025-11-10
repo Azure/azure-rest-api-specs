@@ -30,6 +30,16 @@ openapi-subtype: rpaas
 tag: package-2024-04-24
 ```
 
+### Tag: package-2025-11-03-preview
+
+These settings apply only when `--tag=package-2025-11-03-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-03-preview'
+input-file:
+  - Dynatrace.Observability/preview/2025-11-03-preview/dynatrace.json
+```
+
+
 ### Tag: package-2024-04-24
 
 These settings apply only when `--tag=package-2024-04-24` is specified on the command line.
