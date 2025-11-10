@@ -702,9 +702,9 @@ model SreAgentConfiguration {
   sreAgentResourceId: string;
 
   /**
-   * The MCP server names associated with the SRE Agent resource.
+   * The MCP server name associated with the SRE Agent resource.
    */
-  mcpServerName: string[];
+  mcpServerName: string;
 }
 
 /**
