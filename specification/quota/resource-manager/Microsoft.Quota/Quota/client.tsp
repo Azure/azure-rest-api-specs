@@ -51,6 +51,10 @@ using Microsoft.Quota;
   "GetGroupQuotaLimitsRequests",
   "csharp"
 );
+@@clientName(GroupQuotasEntities.groupQuotaUsagesList,
+  "GetGroupQuotaUsages",
+  "csharp"
+);
 @@usage(QuotaAllocationRequestStatus, Usage.input, "csharp");
 @@usage(QuotaAllocationRequestBase, Usage.input, "csharp");
 @@usage(GroupQuotaSubscriptionRequestStatusProperties, Usage.input, "csharp");
