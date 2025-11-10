@@ -3,8 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "./models.tsp";
-import "./Archive.tsp";
+import "./ArchiveVersion.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -117,7 +116,7 @@ interface ArchiveVersionListOps
 /**
  * An object that represents an export pipeline for a container registry.
  */
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @parentResource(Archive)
 model ArchiveVersion
   is Azure.ResourceManager.ProxyResource<ArchiveVersionProperties> {
@@ -129,7 +128,7 @@ model ArchiveVersion
   >;
 }
 
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface ArchiveVersions {
   /**
