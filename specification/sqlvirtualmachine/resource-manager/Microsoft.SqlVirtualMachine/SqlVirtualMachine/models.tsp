@@ -3,9 +3,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.CommonTypes;
+using Azure.ResourceManager;
 
 namespace Microsoft.SqlVirtualMachine;
 
@@ -380,13 +378,13 @@ model AvailabilityGroupListenerProperties {
   /**
    * List of load balancer configurations for an availability group listener.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   loadBalancerConfigurations?: LoadBalancerConfiguration[];
 
   /**
    * List of multi subnet IP configurations for an AG listener.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   multiSubnetIpConfigurations?: MultiSubnetIpConfiguration[];
 
   /**
@@ -472,7 +470,7 @@ model AgConfiguration {
   /**
    * Replica configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   replicas?: AgReplica[];
 }
 

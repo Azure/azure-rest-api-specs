@@ -635,8 +635,8 @@
         "tags": [
           "Registry"
         ],
-        "description": "Get repository attributes",
-        "operationId": "ContainerRegistry_GetProperties",
+        "description": "Get repository properties",
+        "operationId": "ContainerRegistry_GetRepositoryProperties",
         "x-ms-examples": {
           "Get details of repository": {
             "$ref": "./examples/GetRepositoryAttributes.json"
@@ -697,8 +697,8 @@
         "tags": [
           "Registry"
         ],
-        "description": "Update the attribute identified by `name` where `reference` is the name of the repository.",
-        "operationId": "ContainerRegistry_UpdateProperties",
+        "description": "Update repository properties. `reference` is the name of the repository. The property is identified by `name`.",
+        "operationId": "ContainerRegistry_UpdateRepositoryProperties",
         "x-ms-examples": {
           "Update repository attributes": {
             "$ref": "./examples/UpdateRepositoryAttributes.json"
@@ -1845,7 +1845,7 @@
         }
       },
       "example": {
-        "registry": "acrapi.azurecr-test.io",
+        "registry": "acrapi.azurecr.io",
         "imageName": "nanoserver",
         "manifest": {
           "digest": "sha256:110d2b6c84592561338aa040b1b14b7ab81c2f9edbd564c2285dd7d70d777086",

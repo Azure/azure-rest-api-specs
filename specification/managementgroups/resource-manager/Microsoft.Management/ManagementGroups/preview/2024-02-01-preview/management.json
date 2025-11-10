@@ -732,7 +732,7 @@
           "CheckNameAvailability"
         ],
         "operationId": "CheckNameAvailability",
-        "description": "Checks if the specified management group name is valid and unique",
+        "description": "Checks if the specified management group or service group name is valid and unique",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -758,6 +758,12 @@
         "x-ms-examples": {
           "CheckManagementGroupNameAvailability": {
             "$ref": "./examples/CheckManagementGroupNameAvailability.json"
+          },
+          "CheckServiceGroupNameAvailability_Available": {
+            "$ref": "./examples/CheckServiceGroupNameAvailability_Available.json"
+          },
+          "CheckServiceGroupNameAvailability_Unavailable": {
+            "$ref": "./examples/CheckServiceGroupNameAvailability_Unavailable.json"
           }
         }
       }
@@ -981,7 +987,7 @@
       }
     },
     "CheckNameAvailabilityResult": {
-      "description": "Describes the result of the request to check management group name availability.",
+      "description": "Describes the result of the request to check management group name or service group name availability.",
       "properties": {
         "nameAvailable": {
           "description": "Required. True indicates name is valid and available. False indicates the name is invalid, unavailable, or both.",
@@ -1959,7 +1965,7 @@
       "description": "The users specific permissions to this item."
     },
     "CheckNameAvailabilityRequest": {
-      "description": "Management group name availability check parameters.",
+      "description": "Management group or service group name availability check parameters.",
       "type": "object",
       "properties": {
         "name": {
@@ -1969,7 +1975,8 @@
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Management/managementGroups"
+            "Microsoft.Management/managementGroups",
+            "Microsoft.Management/serviceGroups"
           ],
           "x-ms-enum": {
             "name": "Type",
@@ -1977,6 +1984,9 @@
             "values": [
               {
                 "value": "Microsoft.Management/managementGroups"
+              },
+              {
+                "value": "Microsoft.Management/serviceGroups"
               }
             ]
           },
@@ -2119,7 +2129,7 @@
       "name": "checkNameAvailabilityRequest",
       "in": "body",
       "required": true,
-      "description": "Management group name availability check parameters.",
+      "description": "Management group or service group name availability check parameters.",
       "schema": {
         "$ref": "#/definitions/CheckNameAvailabilityRequest"
       },
