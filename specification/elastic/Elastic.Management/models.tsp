@@ -200,7 +200,7 @@ model OperationListResult {
    * The list of operations.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: OperationResult[];
 
   /**
@@ -294,7 +294,7 @@ model ErrorResponseBody {
   /**
    * Error details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: ErrorResponseBody[];
 }
 
@@ -668,7 +668,7 @@ model SubscriptionList {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["properties/subscriptionId"])
+  @identifiers(#["properties/subscriptionId"])
   monitoredSubscriptionList?: MonitoredSubscription[];
 
   /**
@@ -741,7 +741,7 @@ model LogRules {
   /**
    * List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filteringTags?: FilteringTag[];
 }
 
@@ -934,7 +934,6 @@ model ExternalUserInfo {
   /**
    * Roles to be assigned for  created or updated user
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   roles?: string[];
 }
 
@@ -1159,7 +1158,6 @@ model UpgradableVersionsList {
   /**
    * Stack Versions that this version can upgrade to
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   upgradableVersions?: string[];
 }
 
@@ -1180,7 +1178,7 @@ model ElasticTrafficFilterResponse {
   /**
    * List of elastic traffic filters in the account
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rulesets?: ElasticTrafficFilter[];
 }
 

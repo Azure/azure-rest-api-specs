@@ -18,19 +18,19 @@ options:
     namespace: "Azure.ResourceManager.Elastic"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-elastic"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-elastic"
     namespace: "azure.mgmt.elastic"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-elastic"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-elastic"
     namespace: "com.azure.resourcemanager.elastic"
     service-name: "Elastic" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/elastic
-    package-dir: "arm-elastic"
+    emitter-output-dir: "{output-dir}/sdk/elastic/arm-elastic"
     typespec-title-map:
       ElasticClient: "MicrosoftElastic"
     flavor: "azure"
