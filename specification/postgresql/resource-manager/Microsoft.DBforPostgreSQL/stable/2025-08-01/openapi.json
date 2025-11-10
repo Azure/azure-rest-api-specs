@@ -662,6 +662,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -715,7 +716,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Server"
         },
         "x-ms-long-running-operation": true
       },
@@ -2340,6 +2342,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -2366,7 +2369,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FirewallRule"
         },
         "x-ms-long-running-operation": true
       },
@@ -3853,7 +3857,7 @@
               "table"
             ],
             "x-ms-enum": {
-              "name": "TuningOption",
+              "name": "TuningOptionParameterEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -3927,7 +3931,7 @@
               "table"
             ],
             "x-ms-enum": {
-              "name": "TuningOption",
+              "name": "TuningOptionParameterEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -3954,7 +3958,7 @@
               "AnalyzeTable"
             ],
             "x-ms-enum": {
-              "name": "RecommendationType",
+              "name": "RecommendationTypeParameterEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -7234,7 +7238,7 @@
           "description": "Current state."
         },
         "recommendationType": {
-          "$ref": "#/definitions/RecommendationType",
+          "$ref": "#/definitions/RecommendationTypeEnum",
           "description": "Type for this recommendation."
         },
         "implementationDetails": {
@@ -7753,7 +7757,7 @@
         ]
       }
     },
-    "RecommendationType": {
+    "RecommendationTypeEnum": {
       "type": "string",
       "description": "Type for this recommendation.",
       "enum": [
@@ -7763,7 +7767,7 @@
         "AnalyzeTable"
       ],
       "x-ms-enum": {
-        "name": "RecommendationType",
+        "name": "RecommendationTypeEnum",
         "modelAsString": true,
         "values": [
           {

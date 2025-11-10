@@ -39,8 +39,7 @@ interface FirewallRules {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader<FinalResult = FirewallRule> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FirewallRule> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

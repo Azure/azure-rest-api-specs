@@ -25,7 +25,7 @@ model TuningOptions is Azure.ResourceManager.ProxyResource<never> {
     KeyName = "tuningOption",
     SegmentName = "tuningOptions",
     NamePattern = "",
-    Type = TuningOption
+    Type = TuningOptionParameterEnum
   >;
 }
 
@@ -59,7 +59,7 @@ interface TuningOptionsOperationGroup {
        * Recommendations list filter. Retrieves recommendations based on type.
        */
       @query("recommendationType")
-      recommendationType?: RecommendationType;
+      recommendationType?: RecommendationTypeParameterEnum;
     }
   >;
 }
