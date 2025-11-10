@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-12-01'
 input-file:
-  - stable/2023-12-01/openapi.json
+  - stable/2023-12-01/databoxedge.json
 ```
 ### Tag: package-2023-07
 
