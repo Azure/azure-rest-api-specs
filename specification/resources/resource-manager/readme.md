@@ -79,12 +79,7 @@ These settings apply only when `--tag=package-policy-2025-03-stable` is specifie
 
 ```yaml $(tag) == 'package-policy-2025-03-stable'
 input-file:
-  - Microsoft.Authorization/stable/2025-03-01/policyAssignments.json
-  - Microsoft.Authorization/stable/2025-03-01/policyDefinitions.json
-  - Microsoft.Authorization/stable/2025-03-01/policyDefinitionVersions.json
-  - Microsoft.Authorization/stable/2025-03-01/policySetDefinitions.json
-  - Microsoft.Authorization/stable/2025-03-01/policySetDefinitionVersions.json
-  - Microsoft.Authorization/stable/2025-03-01/policyTokens.json
+  - Microsoft.Authorization/stable/2025-03-01/openapi.json
 
 # Needed when there is more than one input file
 override-info:
