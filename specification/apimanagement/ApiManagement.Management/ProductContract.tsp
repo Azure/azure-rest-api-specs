@@ -414,6 +414,7 @@ interface ProductContracts {
   /**
    * Adds the association between the specified developer group with the specified product.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   productGroupCreateOrUpdate is ProductContractOps.CreateOrUpdateSync<
     ProductContract,
