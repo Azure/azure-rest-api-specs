@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Quantum Management API",
-    "version": "2025-08-11-preview",
+    "version": "2025-11-01-preview",
     "description": "Microsoft.Quantum Resource Provider Management API",
     "x-typespec-generated": [
       {
@@ -160,6 +160,13 @@
             "minLength": 1,
             "maxLength": 90,
             "pattern": "[a-z][a-z0-9]+"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=kind eq 'v1'",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1243,6 +1250,25 @@
           "items": {
             "type": "string"
           }
+        },
+        "numQubits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The qubit number",
+          "minimum": 1,
+          "maximum": 100000,
+          "readOnly": true
+        },
+        "targetProfile": {
+          "type": "string",
+          "description": "Target QIR profile",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata of this target.",
+          "additionalProperties": {},
+          "readOnly": true
         }
       }
     },
@@ -1272,6 +1298,30 @@
             "name": "Partial",
             "value": "Partial",
             "description": "The workspace is partially usable."
+          }
+        ]
+      }
+    },
+    "WorkspaceKind": {
+      "type": "string",
+      "description": "The workspace type.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V1",
+            "value": "V1",
+            "description": "The workspace is a general-purpose workspace."
+          },
+          {
+            "name": "V2",
+            "value": "V2",
+            "description": "The workspace is a V2 workspace."
           }
         ]
       }
@@ -1357,6 +1407,10 @@
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountResourceId",
           "description": "ARM Resource Id of the storage account associated with this workspace."
+        },
+        "workspaceKind": {
+          "$ref": "#/definitions/WorkspaceKind",
+          "description": "Whether this workspace is V1 or V2."
         },
         "endpointUri": {
           "type": "string",
