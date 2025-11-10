@@ -1061,6 +1061,68 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/manageSreAgentConnectors": {
+      "post": {
+        "operationId": "Monitors_ManageSreAgentConnectors",
+        "tags": [
+          "MonitorResources"
+        ],
+        "description": "Manages Dynatrace MCP connectors to add/remove through the Azure Dynatrace resource on the provided list of resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Monitor resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SreAgentConnectorRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SreAgentConfiguration"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_ManageSreAgentConnectors_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ManageSreAgentConnectors_MaximumSet_Gen.json"
+          },
+          "Monitors_ManageSreAgentConnectors_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ManageSreAgentConnectors_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/monitoredSubscriptions": {
       "get": {
         "operationId": "MonitoredSubscriptions_List",
@@ -2098,6 +2160,30 @@
           "format": "int64",
           "description": "Count of the connected resources"
         }
+      }
+    },
+    "ConnectorAction": {
+      "type": "string",
+      "description": "Add or Remove connectors for SRE agents.",
+      "enum": [
+        "Add",
+        "Remove"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Add",
+            "value": "Add",
+            "description": "Add connector actions"
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove connector action"
+          }
+        ]
       }
     },
     "CreateResourceSupportedProperties": {
@@ -3250,11 +3336,35 @@
       "properties": {
         "mcpConnectorResourceId": {
           "type": "string",
-          "description": "The ARM resource ID of the datad connector integrated with SRE Agent resource."
+          "description": "The ARM resource ID of the MCP connector integrated with SRE Agent resource."
         }
       },
       "required": [
         "mcpConnectorResourceId"
+      ]
+    },
+    "SreAgentConnectorRequest": {
+      "type": "object",
+      "description": "Request for adding/removing Dynatrace MCP connectors on SRE Agent resource.",
+      "properties": {
+        "mcpConnectorResourceIdList": {
+          "type": "array",
+          "description": "The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.",
+          "items": {
+            "$ref": "#/definitions/SreAgentConfiguration"
+          },
+          "x-ms-identifiers": [
+            "mcpConnectorResourceId"
+          ]
+        },
+        "action": {
+          "$ref": "#/definitions/ConnectorAction",
+          "description": "Add/Remove action."
+        }
+      },
+      "required": [
+        "mcpConnectorResourceIdList",
+        "action"
       ]
     },
     "Status": {

@@ -147,6 +147,22 @@ union Action {
 }
 
 /**
+ * Add or Remove connectors for SRE agents.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+union ConnectorAction {
+  string,
+  /**
+   * Add connector actions
+   */
+  Add: "Add",
+  /**
+   * Remove connector action
+   */
+  Remove: "Remove",
+}
+
+/**
  * Flag specifying if the resource monitoring is enabled or disabled.
  */
 union MonitoringStatus {
@@ -597,6 +613,23 @@ model ManageAgentInstallationRequest {
 }
 
 /**
+ * Request for adding/removing Dynatrace MCP connectors on SRE Agent resource.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConnectorRequest {
+  /**
+   * The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["mcpConnectorResourceId"])
+  mcpConnectorResourceIdList: SreAgentConfiguration[];
+
+  /**
+   * Add/Remove action.
+   */
+  action: ConnectorAction;
+}
+
+/**
  * Details of resource that has Dynatrace agent installed through the Azure Dynatrace resource.
  */
 model ManageAgentList {
@@ -698,7 +731,7 @@ model DynatraceEnvironmentProperties {
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 model SreAgentConfiguration {
   /**
-   * The ARM resource ID of the datad connector integrated with SRE Agent resource.
+   * The ARM resource ID of the MCP connector integrated with SRE Agent resource.
    */
   mcpConnectorResourceId: string;
 }
