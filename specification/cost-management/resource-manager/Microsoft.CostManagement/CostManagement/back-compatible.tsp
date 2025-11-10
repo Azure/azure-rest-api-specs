@@ -226,3 +226,10 @@ using Microsoft.CostManagement;
 @@clientName(SingleScopeBenefitRecommendationProperties,
   "singleScopeBenefitRecommendationProperties"
 );
+@@visibility(Setting.kind,
+  Lifecycle.Create,
+  Lifecycle.Read,
+  Lifecycle.Update,
+  Lifecycle.Delete,
+  Lifecycle.Query
+);
