@@ -46,7 +46,7 @@ model ApprovalWorkflowInstanceProperties {
 
   @doc("The latest status of each stage.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   stageStatuses: ApprovalStageExecutionStatus[];
 }
 
@@ -79,7 +79,7 @@ model ApprovalStageExecutionStatus {
   state: ApprovalStageExecutionState;
 
   @doc("The approvers' sign-off statuses for the stage.")
-  @extension("x-ms-identifiers", #["approver"])
+  @identifiers(#["approver"])
   signoffs: ApproverSignoffStatus[];
 }
 
@@ -98,6 +98,9 @@ union ApprovalStageExecutionState {
 
   @doc("The stage has ended with rejected result.")
   Rejected: "Rejected",
+
+  @doc("The stage has been timed out.")
+  Timedout: "Timedout",
 
   @doc("The stage has been faulted.")
   Faulted: "Faulted",

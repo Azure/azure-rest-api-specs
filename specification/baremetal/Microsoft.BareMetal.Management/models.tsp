@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.BareMetal;
 
@@ -185,6 +187,114 @@ model BareMetalConnectionUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Type exists as previously approved by ARM"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
+}
+
+/**
+ * Network Interface Attachment resource.
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachment
+  is TrackedResource<NetworkInterfaceAttachmentProperties> {
+  /**
+   * The name of the Network Interface Attachment resource.
+   */
+  @maxLength(72)
+  @minLength(3)
+  @pattern("^[-\\w\\._\\(\\)]+$")
+  @path
+  @key("networkInterfaceAttachmentName")
+  @segment("networkInterfaceAttachments")
+  @visibility(Lifecycle.Read)
+  name: string;
+}
+
+/**
+ * Properties for creating Network Interface Attachment via PUT.
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachmentCreateProperties {
+  /** Subnet resource id. */
+  subnetResourceId: Azure.Core.armResourceIdentifier<[]>;
+
+  /** Single digit physical AZ in string format (e.g., "1"). */
+  @pattern("^[0-9]$")
+  sddcPhysicalAz: string;
+
+  /** SDDC identifier (GUID). */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  sddcId: string;
+}
+
+/**
+ * IP configuration under an anchor NIC.
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceIpConfiguration {
+  /** Private IP address in CIDR. */
+  @pattern("^(([0-9]{1,3}\\.){3}[0-9]{1,3}|([a-fA-F0-9:]+))(\\/([0-9]{1,3}))?$")
+  privateIpAddress: string;
+
+  /** IP version. */
+  privateIpAddressVersion: "IPv4" | "IPv6" | string;
+
+  /** Whether this is primary. */
+  primary: boolean;
+}
+
+/**
+ * Anchor NIC entry.
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterface {
+  /** NIC ARM resource id. */
+  id: Azure.Core.armResourceIdentifier<[]>;
+
+  /** IP configurations (1-1024). */
+  @minItems(1)
+  @identifiers(#[])
+  ipConfigurations: NetworkInterfaceIpConfiguration[];
+}
+
+/**
+ * Full properties of Network Interface Attachment.
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachmentProperties
+  is NetworkInterfaceAttachmentCreateProperties {
+  /** BGP NICs (always exactly 2, read-only). */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["id"])
+  bgpNics?: NetworkInterface[];
+
+  /** Anchor NICs. Not provided in PUT request body (service populates after create). Returned in all responses. */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["id"])
+  anchorNics?: NetworkInterface[];
+
+  /** Provisioning state. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * PATCH model for Network Interface Attachment (anchor NICs + tags).
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachmentPatchModel {
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Patch tags object"
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /** Updatable properties. */
+  properties?: NetworkInterfaceAttachmentPatchProperties;
+}
+
+/** Properties updatable via PATCH. */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachmentPatchProperties {
+  /** Anchor NICs (minimum 1). */
+  anchorNics?: NetworkInterface[];
 }
 
 /**

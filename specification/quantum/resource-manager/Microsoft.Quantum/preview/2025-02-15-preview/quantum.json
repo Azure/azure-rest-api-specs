@@ -1207,25 +1207,11 @@
           "minLength": 2,
           "maxLength": 50
         },
-        "allowedSubscriptions": {
-          "type": "array",
-          "description": "Deprecated. List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
-          "items": {
-            "$ref": "#/definitions/ProviderAccount.SubscriptionId"
-          }
-        },
         "subscriptions": {
           "type": "array",
           "description": "List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
           "items": {
             "$ref": "#/definitions/ProviderAccount.ProviderAccountSubscription"
-          }
-        },
-        "targets": {
-          "type": "array",
-          "description": "Deprecated. List of Targets available in this ProviderAccount.",
-          "items": {
-            "$ref": "#/definitions/ProviderAccount.ProviderAccountTarget"
           }
         },
         "queues": {
@@ -1277,25 +1263,11 @@
           "minLength": 2,
           "maxLength": 50
         },
-        "allowedSubscriptions": {
-          "type": "array",
-          "description": "Deprecated. List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
-          "items": {
-            "$ref": "#/definitions/ProviderAccount.SubscriptionId"
-          }
-        },
         "subscriptions": {
           "type": "array",
           "description": "List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
           "items": {
             "$ref": "#/definitions/ProviderAccount.ProviderAccountSubscription"
-          }
-        },
-        "targets": {
-          "type": "array",
-          "description": "Deprecated. List of Targets available in this ProviderAccount.",
-          "items": {
-            "$ref": "#/definitions/ProviderAccount.ProviderAccountTarget"
           }
         }
       }
@@ -1336,17 +1308,23 @@
       "description": "A subscription that is allowed to access resources from a ProviderAccount.",
       "properties": {
         "id": {
-          "type": "string",
-          "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-          "minLength": 36,
-          "maxLength": 36,
-          "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$"
+          "$ref": "#/definitions/ProviderAccount.SubscriptionId",
+          "description": "The Azure subscription ID."
         },
         "name": {
           "type": "string",
           "description": "The display name of the Azure subscription.",
           "default": "",
           "maxLength": 50
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether this subscription is enabled for access to the ProviderAccount resources.",
+          "default": true
+        },
+        "quotas": {
+          "$ref": "#/definitions/ProviderAccount.SubscriptionQuotaAllocations",
+          "description": "Quota allocations for this subscription."
         }
       },
       "required": [
@@ -1426,6 +1404,27 @@
       "minLength": 36,
       "maxLength": 36,
       "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$"
+    },
+    "ProviderAccount.SubscriptionQuotaAllocations": {
+      "type": "object",
+      "description": "Quota allocations with each field representing different quota type.",
+      "properties": {
+        "standardMinutesLifetime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limit for standard priority jobs execution in minutes for a lifetime of the subscription.",
+          "minimum": 0
+        },
+        "highMinutesLifetime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limit for high priority jobs execution in minutes for a lifetime of the subscription.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "standardMinutesLifetime"
+      ]
     },
     "ProviderDescription": {
       "type": "object",

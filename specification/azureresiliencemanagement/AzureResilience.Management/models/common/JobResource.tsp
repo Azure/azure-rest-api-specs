@@ -34,7 +34,4 @@ model JobResourceProperties {
 
   @doc("Discriminator for the JobResource object hierarchy.")
   jobResourceType: JobResourceType;
-
-  @doc("A setting that indicates the protection solution selected.")
-  protectionSolutionType: ResourceProtectionSolutionType;
 }

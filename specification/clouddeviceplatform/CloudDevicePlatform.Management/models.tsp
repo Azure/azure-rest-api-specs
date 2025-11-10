@@ -15,7 +15,10 @@ namespace Microsoft.CloudDevicePlatform;
 @added(Versions.v2024_06_01_preview)
 @doc("Represents a CloudDevicePlatform delegated identity resource.")
 model DelegatedIdentity is TrackedResource<DelegatedIdentityProperties> {
-  ...ResourceNameParameter<DelegatedIdentity>;
+  ...ResourceNameParameter<
+    Resource = DelegatedIdentity,
+    NamePattern = "^[a-zA-Z0-9-]{3,128}$"
+  >;
   ...Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationProperty;
 }
 
@@ -37,7 +40,7 @@ model DelegatedIdentityUpdate {
   identity?: Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate;
 }
 
-/**
+/*
  * Currently, the ManagedIdentityWithDelegation common type is not available to use. Below is a workaround provided by
  * the follow stack overflow post: https://stackoverflow.microsoft.com/questions/406446/407138#407138
  *

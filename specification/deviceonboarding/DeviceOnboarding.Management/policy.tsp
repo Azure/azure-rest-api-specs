@@ -49,7 +49,7 @@ model PolicyProperties {
 
   @doc("Allocation rules.")
   @removed(Versions.v2025_05_01_preview)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @maxItems(1)
   allocations?: Array<AllocationRule>;
 
@@ -671,7 +671,7 @@ model PolicyPatchProperties {
 
   @doc("Allocation rules.")
   @removed(Versions.v2025_05_01_preview)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @maxItems(1)
   allocations?: Array<AllocationRulePatch>;
 

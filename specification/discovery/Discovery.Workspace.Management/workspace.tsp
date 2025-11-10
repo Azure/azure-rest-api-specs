@@ -31,12 +31,10 @@ model WorkspaceProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("List of linked Storages.")
-  @extension("x-ms-identifiers", #["id"])
   storageIds?: Array<Microsoft.Discovery.Shared.DiscoveryStorageId>;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("List of linked SuperComputers.")
-  @extension("x-ms-identifiers", #["id"])
   supercomputerIds?: Array<Microsoft.Discovery.Shared.SuperComputerId>;
 
   @doc("workspace API endpoint Uri.")

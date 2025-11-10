@@ -39,6 +39,21 @@ union FeedbackControlPolicyState {
   Disabled: "Disabled",
 }
 
+@doc("Available values for Operations 360 status.")
+@added(Versions.v2025_09_01_preview)
+union Ops360Status {
+  string,
+
+  @doc("Operations 360 feature has been denied.")
+  Denied: "Denied",
+
+  @doc("Operations 360 feature has been approved.")
+  Approved: "Approved",
+
+  @doc("Operations 360 feature is pending approval.")
+  Pending: "Pending",
+}
+
 @doc("Multi-Factor Authentication settings.")
 model MultiFactorAuthenticationSettings {
   @doc("The setting for Multi-Factor Authentication enforcement when signing into this tenant.")
@@ -89,6 +104,13 @@ model FeedbackControlPolicySettings {
   policyContentSamplesDefault?: FeedbackControlPolicyState;
 }
 
+@doc("Operations 360 settings for Azure Portal users.")
+@added(Versions.v2025_09_01_preview)
+model Ops360Settings {
+  @doc("The current status of Operations 360 feature. Can be null when the status has been cleared.")
+  status?: Ops360Status;
+}
+
 @doc("The Azure Portal tenant-level settings properties.")
 model SettingsProperties {
   @added(Versions.v2024_09_01_preview)
@@ -98,6 +120,10 @@ model SettingsProperties {
   @added(Versions.v2024_09_01_preview)
   @doc("Settings related to feedback control policies for all Azure Portal users in the tenant.")
   feedbackControlPolicy?: FeedbackControlPolicySettings;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Operations 360 settings for Azure Portal users in the tenant. Can be null to remove the configuration entirely.")
+  ops360Settings?: Ops360Settings;
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)

@@ -1,0 +1,37 @@
+{
+  "title": "Update a copilot",
+  "operationId": "Copilots_Update",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-copilot",
+    "copilotName": "my-copilot",
+    "api-version": "2025-10-01-preview",
+    "properties": {
+      "properties": {
+        "spendingLimit": 1500
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-copilot/providers/Microsoft.PortalServices/copilots/my-copilot",
+        "name": "my-copilot",
+        "type": "Microsoft.PortalServices/copilots",
+        "location": "East US",
+        "properties": {
+          "spendingLimit": 1500,
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2024-12-01T10:00:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-12-01T11:30:00.000Z"
+        }
+      }
+    }
+  }
+}

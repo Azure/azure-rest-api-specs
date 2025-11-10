@@ -152,12 +152,12 @@ model FileShareProperties is AzureResourceProperties {
   /**
    * FileShare Estimated Volume Size in GB.
    */
-  fileShareEstimatedVolSizeInGb?: string;
+  fileShareEstimatedVolSizeInGb?: float64;
 
   /**
    * FileShare Estimated Size in GB.
    */
-  fileShareEstimatedSizeInGb?: string;
+  fileShareEstimatedSizeInGb?: float64;
 
   /**
    * The list of errors.
@@ -191,7 +191,7 @@ model FileShareProperties is AzureResourceProperties {
   /**
    * Co-located shares on the same volume.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["shareId"])
+  @identifiers(#["shareId"])
   colocatedShares?: ColocatedShare[];
 
   /**
@@ -258,12 +258,12 @@ model FileShareResourcePatch {
   /**
    * FileShare Estimated Volume Size in GB.
    */
-  fileShareEstimatedVolSizeInGb?: string;
+  fileShareEstimatedVolSizeInGb?: float64;
 
   /**
    * FileShare Estimated Size in GB.
    */
-  fileShareEstimatedSizeInGb?: string;
+  fileShareEstimatedSizeInGb?: float64;
 
   /**
    * The list of errors.
@@ -297,7 +297,7 @@ model FileShareResourcePatch {
   /**
    * Co-located shares on the same volume.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["shareId"])
+  @identifiers(#["shareId"])
   colocatedShares?: ColocatedShare[];
 
   /**

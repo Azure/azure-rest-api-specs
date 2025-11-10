@@ -1,4 +1,4 @@
-# Code Signing
+# Trusted Signing
 
 > see https://aka.ms/autorest
 
@@ -26,17 +26,34 @@ These are the global settings for the CodeSigning API.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-02-05-preview
+tag: package-2025-10-13
 ```
 
+### Tag: package-2025-10-13
 
-### Tag: package-2020-12-14-preview
+These settings apply only when `--tag=package-2025-10-13` is specified on the command line.
 
-These settings apply only when `--tag=package-2020-12-14-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-12-14-preview'
+```yaml $(tag) == 'package-2025-10-13'
 input-file:
-- Microsoft.CodeSigning/preview/2020-12-14-preview/codeSigningAccount.json
+- Microsoft.CodeSigning/stable/2025-10-13/codeSigningAccount.json
+```
+
+### Tag: package-2024-09-30-preview
+
+These settings apply only when `--tag=package-2024-09-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-30-preview'
+input-file:
+- Microsoft.CodeSigning/preview/2024-09-30-preview/codeSigningAccount.json
+```
+
+### Tag: package-2024-02-05-preview
+
+These settings apply only when `--tag=package-2024-02-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-05-preview'
+input-file:
+- Microsoft.CodeSigning/preview/2024-02-05-preview/codeSigningAccount.json
 ```
 
 ### Tag: package-2023-04-30-preview
@@ -48,13 +65,13 @@ input-file:
 - Microsoft.CodeSigning/preview/2023-04-30-preview/codeSigningAccount.json
 ```
 
-### Tag: package-2024-02-05-preview
+### Tag: package-2020-12-14-preview
 
-These settings apply only when `--tag=package-2024-02-05-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-12-14-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-02-05-preview'
+```yaml $(tag) == 'package-2020-12-14-preview'
 input-file:
-- Microsoft.CodeSigning/preview/2024-02-05-preview/codeSigningAccount.json
+- Microsoft.CodeSigning/preview/2020-12-14-preview/codeSigningAccount.json
 ```
 
 ---
@@ -68,12 +85,10 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-cli-extensions
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-typescript
 ```
 
@@ -85,10 +100,6 @@ See configuration in [readme.az.md](./readme.az.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
@@ -97,10 +108,4 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Typescript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
 ## 
-
-

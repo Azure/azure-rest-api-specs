@@ -14,7 +14,6 @@
           {
             "properties": {
               "provisioningState": "Succeeded",
-              "sgId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
               "metricsProperties": {
                 "identity": {
                   "type": "UserAssigned",
@@ -28,14 +27,6 @@
                   }
                 ]
               },
-              "roPlanProperties": {
-                "identity": {
-                  "type": "UserAssigned",
-                  "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
-                },
-                "roPlanId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/rePlan1",
-                "roResourceExcludedCount": 16
-              },
               "chaosExperimentProperties": {
                 "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
                 "region": "westus",
@@ -47,23 +38,15 @@
                   "type": "UserAssigned",
                   "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
                 },
-                "chaosExperimentId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/009278f9-04c0-4e1e-88a1-1b6323e2f209/providers/Microsoft.Chaos/experiments/asdas"
+                "chaosExperimentId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/009278f9-04c0-4e1e-88a1-1b6323e2f209/providers/Microsoft.Chaos/experiments/asdas",
+                "faultDurationInMin": 0
               },
               "executionState": "NotRunning",
-              "readinessState": "Ready",
               "rbacSetupMode": "AutomatedCustomRole",
               "attentionReason": {
                 "drillRbacOnExperiment": "Set",
                 "rbacNeededForDrillOnExperiment": [
                   "lcjjnucz"
-                ],
-                "drillRbacOnRo": "Set",
-                "rbacNeededForDrillOnRo": [
-                  "ba"
-                ],
-                "drillRbacOnAmw": "Set",
-                "rbacNeededForDrillOnAmw": [
-                  "skthovtgoqwviiisr"
                 ],
                 "drillRbacOnSlo": "Set",
                 "rbacNeededForDrillOnSlo": [
@@ -72,10 +55,23 @@
                 "roReadiness": "UnderEdit",
                 "faultRbacOnTargets": "Set",
                 "targets": "Exists",
-                "roAndDrillResourcesState": "InSync",
-                "sgAndDrillResourcesState": "InSync",
                 "drillUserMsi": "Exists",
-                "chaosExperimentUserMsi": "Exists"
+                "chaosExperimentUserMsi": "Exists",
+                "drillRbacOnRecoveryPlan": "Set",
+                "rbacNeededForDrillOnRecoveryPlan": [
+                  "giyenueocputjwie"
+                ],
+                "drillRbacOnAzureMonitoringWorkspace": "Set",
+                "rbacNeededForDrillOnAzureMonitoringWorkspace": [
+                  "kzbpbpzhjgsmvdppr"
+                ],
+                "recoveryPlanAndDrillResourcesState": "InSync",
+                "serviceGroupAndDrillResourcesState": "InSync",
+                "drillRbacOnAzureHealthModel": "Set",
+                "rbacNeededForDrillOnAzureHealthModel": [
+                  "w"
+                ],
+                "runbookFaultRbacOnTargets": "Set"
               },
               "systemMetadata": {
                 "initialConfig": "Pending"
@@ -94,6 +90,23 @@
                     "id": "lvukttgzvssiupnypauorkyzvzf"
                   }
                 ]
+              },
+              "healthModelProperties": {
+                "identity": {
+                  "type": "UserAssigned",
+                  "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+                },
+                "healthModelId": "/subscriptions/ef4ab5a7-c2c0-4304-af80-af49f48af3d1/resourceGroups/DeleteDemoRG/providers/Microsoft.CloudHealth/healthmodels/ahm-demo"
+              },
+              "executionReadinessState": "Ready",
+              "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
+              "recoveryPlanProperties": {
+                "identity": {
+                  "type": "UserAssigned",
+                  "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+                },
+                "recoveryPlanId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/rePlan1",
+                "recoveryPlanResourceExcludedCount": 29
               }
             },
             "identity": {

@@ -1,5 +1,3 @@
-// @ts-check
-
 import child_process from "child_process";
 import { dirname, join } from "path";
 import { promisify } from "util";
@@ -38,7 +36,7 @@ export function isExecError(error) {
  * Wraps `child_process.execFile()`, adding logging and a larger default maxBuffer.
  *
  * @param {string} file
- * @param {string[]} args
+ * @param {string[]} [args]
  * @param {ExecOptions} [options]
  * @returns {Promise<ExecResult>}
  * @throws {ExecError}

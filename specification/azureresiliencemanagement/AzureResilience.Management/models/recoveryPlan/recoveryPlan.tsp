@@ -25,15 +25,47 @@ union RecoveryPlanType {
   string,
 }
 
+@doc("Specifies the operation status for failover and validation.")
+union RecoveryOperationStatus {
+  @doc("Operation has not started or ran.")
+  NotStarted: "NotStarted",
+
+  @doc("Operation is in the process of being validated.")
+  ValidationInProgress: "ValidationInProgress",
+
+  @doc("Operation is in progress.")
+  InProgress: "InProgress",
+
+  @doc("Operation has completed successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("Operation has completed but ran into some warning state.")
+  CompletedWithWarning: "CompletedWithWarning",
+
+  @doc("Operation has completed but ran into some validation error state.")
+  ValidationFailed: "ValidationFailed",
+
+  @doc("Operation has completed but ran into some error state.")
+  Failed: "Failed",
+
+  @doc("Operation has been canceled by the user.")
+  Canceled: "Canceled",
+
+  string,
+}
+
 @doc("Details of the recovery orchestration plan operation execution.")
 model RecoveryPlanOperationStatus {
   @doc("The most recent execution time of the recovery orchestration plan in UTC.")
-  lastExecutedAt: utcDateTime;
+  @visibility(Lifecycle.Read)
+  lastExecutedAt?: utcDateTime;
 
   @doc("The status of the most recent execution of the recovery orchestration plan.")
-  operationStatus: string;
+  @visibility(Lifecycle.Read)
+  operationStatus?: RecoveryOperationStatus;
 
   @doc("Error details for the most recent execution of the recovery orchestration plan.")
+  @visibility(Lifecycle.Read)
   errorDetails?: CommonTypes.ErrorDetail;
 }
 

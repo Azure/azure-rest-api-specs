@@ -1,0 +1,48 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageAccountDsms.json"
+    use-read-only-status-schema: "true"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.StorageAccountDsms"
+    namespace: "Azure.ResourceManager.StorageAccountDsms"
+    clear-output-folder: true
+  "@azure-tools/typespec-go":
+    service-dir: sdk/resourcemanager/storageaccountdsms
+    emitter-output-dir: "{output-dir}/{service-dir}/armstorageaccountdsms"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armstorageaccountdsms
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storageaccountdsms"
+    namespace: azure.mgmt.storageaccountdsms
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storageaccountdsms"
+    flavor: azure
+    namespace: com.azure.resourcemanager.storageaccountdsms
+    service-name: Storage Account dSMS
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-storageaccountdsms"
+    package-details:
+      name: "@azure/arm-storageaccountdsms"
+parameters:
+  service-dir:
+    default: sdk/storageaccountdsms

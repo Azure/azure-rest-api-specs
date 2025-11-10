@@ -28,8 +28,6 @@ namespace Microsoft.ScVmm;
 /** The available API versions. */
 enum Versions {
   /** Service version 2025-03-13. */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_03_13: "2025-03-13",
 }

@@ -24,7 +24,6 @@ namespace Microsoft.GcpConnector;
 /** Api versions */
 enum Versions {
   /** 2025-12-01-preview api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-12-01-preview`,
 }
 

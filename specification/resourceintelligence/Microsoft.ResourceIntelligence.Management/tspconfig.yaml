@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/resourceintelligence"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/resourcecopilot.json"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ResourceIntelligence"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ResourceIntelligence"
+    examples-dir: "{project-root}/examples"
+    enable-bicep-serialization: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resourceintelligence"
+    namespace: "azure.mgmt.resourceintelligence"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resourceintelligence"
+    namespace: "com.azure.resourcemanager.resourceintelligence"
+    service-name: "ResourceIntelligence"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourceintelligence"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourceintelligence"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resourceintelligence"
+    emitter-output-dir: "{output-dir}/{service-dir}/armresourceintelligence"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armresourceintelligence"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

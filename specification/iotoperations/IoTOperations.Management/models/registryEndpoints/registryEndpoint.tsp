@@ -44,12 +44,21 @@ model RegistryEndpointProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  ...ResourceHealth;
+
   /** Trust settings for the registry endpoint */
+  @removed(Versions.`2025-09-01-preview`)
   trustSettings?: RegistryEndpointTrustedSettings;
+
+  /** The signing certificate authorities used by artifacts in the registry endpoint */
+  @added(Versions.`2025-09-01-preview`)
+  @identifiers(#[])
+  codeSigningCas?: RegistryEndpointTrustedSigningKey[];
 }
 
 /** RegistryEndpointTrustedSettings properties */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-09-01-preview`)
 model RegistryEndpointTrustedSettings {
   /** The trust properties for the registry endpoint. */
   trustedSigningKeys: RegistryEndpointTrustedSigningKey;

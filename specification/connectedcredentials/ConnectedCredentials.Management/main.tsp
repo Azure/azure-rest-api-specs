@@ -21,7 +21,6 @@ using OpenAPI;
 namespace Microsoft.ConnectedCredentials;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-06-12-preview`,
 }
 
@@ -93,7 +92,7 @@ model CredentialProperties {
   target?: Target;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-identifiers", #["remoteRef"])
+  @identifiers(#["remoteRef"])
   @doc(" Data defines the connection between the Kubernetes Secret keys and the Provider data, Array.")
   data?: Data[];
 

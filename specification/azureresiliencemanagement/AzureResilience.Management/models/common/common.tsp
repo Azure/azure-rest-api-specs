@@ -68,8 +68,8 @@ model QueryParameters {
 @doc("ServiceGroup as parameter")
 model ServiceGroupBaseParameters {
   @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @doc("The name of the service group.")
+  @pattern("^[a-zA-Z0-9\\-_().~]{1,90}$")
   serviceGroupName: string;
 }
 
@@ -204,7 +204,6 @@ union FailoverDirectionTypes {
 
 @doc("Additional properties for Failover.")
 model FailoverRequestProperties {
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Source locations from where resources to be failed-over.")
   sourceLocations: string[];
 }

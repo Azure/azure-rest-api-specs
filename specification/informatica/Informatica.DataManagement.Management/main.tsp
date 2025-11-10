@@ -51,29 +51,21 @@ enum Versions {
   /**
    * The 2023-03-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_03_01_preview: "2023-03-01-preview",
 
   /**
    * The 2024-05-08 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_05_08: "2024-05-08",
 
   /**
    * The 2024-07-22-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_07_22_preview: "2024-07-22-preview",
 
   /**
    * The 2024-11-29-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_11_29_preview: "2024-11-29-preview",
 }
 
@@ -91,6 +83,7 @@ interface Organizations
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
     InformaticaOrganizationResourceUpdate
@@ -122,6 +115,7 @@ interface ServerlessRuntimes
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeResourceUpdate
@@ -526,7 +520,7 @@ model ServerlessConfigProperties {
   executionTimeout?: string;
 
   @doc("List of supported serverless informatica regions")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   regions?: RegionsMetadata[];
 }
 

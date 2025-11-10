@@ -18,7 +18,6 @@ namespace Microsoft.SustainabilityServices;
 @doc("Supported API versions for the Microsoft.SustainabilityServices resource provider.")
 enum Versions {
   @doc("The 2024-10-01-preview version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_10_01_preview: "2024-10-01-preview",
 }
@@ -203,6 +202,7 @@ model DenyAssignmentExclusion {
 interface Calculations {
   get is ArmResourceRead<CalculationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CalculationResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     CalculationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

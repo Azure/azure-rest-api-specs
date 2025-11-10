@@ -1,16 +1,14 @@
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-using OpenAPI;
+using Azure.Core;
+using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-using Autorest;
 
 namespace Microsoft.AzureCis;
 
@@ -73,15 +71,6 @@ model DstsServiceAccountResourceProperties {
 model DstsAuthenticationRequirement {
   @doc("Authentication requirement value. E.g. \"PTH\".")
   value: string;
-}
-
-@doc("Realm information of the account.")
-model DstsRealm {
-  @doc("Realm's name. This is case-insensitive. E.g. \"svc://crpadmin@%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)/\".")
-  name: string;
-
-  @doc("Realm's redirection URL. This is case-insensitive. E.g. \"https://%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)/\".")
-  redirectionUrl?: string;
 }
 
 @doc("Claim mapping for authorization of the account.")

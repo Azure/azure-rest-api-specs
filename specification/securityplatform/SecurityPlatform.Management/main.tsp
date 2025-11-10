@@ -17,7 +17,6 @@ using Azure.ResourceManager;
 namespace Microsoft.SecurityPlatform;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-10-01-preview`,
 }
@@ -68,6 +67,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface AccountLinks {
   get is ArmResourceRead<AccountLink>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<AccountLink>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     AccountLink,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

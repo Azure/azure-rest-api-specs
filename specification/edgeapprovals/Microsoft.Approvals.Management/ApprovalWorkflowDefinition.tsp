@@ -38,7 +38,7 @@ model LogicAppRef {
 @doc("Rule rule about the stages, approvers and their orders for the approval workflow.")
 model ApprovalRule {
   @doc("The definitions of all the stages in the approval workflow.")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   stages: ApprovalStage[];
 
   @doc("The maximum time in minutes that the approval workflow can be executed. The min value is 1 minute. The max value is 90 days. The default value is 7 days in the backend service.")
@@ -68,11 +68,11 @@ model ApprovalStageDependency {
   stages?: string[];
 
   @doc("The list of nested dependencies which this stage depends on with a logical AND operation.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   and?: ApprovalStageDependency[];
 
   @doc("The list of nested dependencies which this stage depends on with a logical OR operation.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   or?: ApprovalStageDependency[];
 }
 

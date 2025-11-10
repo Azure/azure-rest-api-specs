@@ -1,5 +1,3 @@
-// @ts-check
-
 import { beforeEach, describe, expect, it } from "vitest";
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.js";
 import { fullGitSha } from "../../shared/test/examples.js";
@@ -7,7 +5,10 @@ import { setStatusImpl } from "../src/set-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("setStatusImpl", () => {
+  /** @type {ReturnType<typeof createMockCore>} */
   let core;
+
+  /** @type {ReturnType<typeof createMockGithub>} */
   let github;
 
   beforeEach(() => {
@@ -16,10 +17,9 @@ describe("setStatusImpl", () => {
   });
 
   it("throws if inputs null", async () => {
-    // @ts-expect-error Testing invalid input type
-    await expect(setStatusImpl({})).rejects.toMatchInlineSnapshot(
-      `[Error: head_sha is not a valid full git SHA: 'undefined']`,
-    );
+    await expect(
+      setStatusImpl(/** @type {Parameters<typeof setStatusImpl>[0]} */ ({})),
+    ).rejects.toMatchInlineSnapshot(`[Error: head_sha is not a valid full git SHA: 'undefined']`);
   });
 
   it.each([null, undefined, "", "abc123"])("throws when head_sha is %o", async (head_sha) => {
@@ -27,8 +27,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        // @ts-expect-error - Testing invalid input
-        head_sha,
+        head_sha: /** @type {string} */ (head_sha),
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -46,8 +45,7 @@ describe("setStatusImpl", () => {
         owner: "test-owner",
         repo: "test-repo",
         head_sha: fullGitSha,
-        // @ts-expect-error - Testing invalid input
-        issue_number,
+        issue_number: /** @type {Number} */ (issue_number),
         target_url: "https://test.com/set_status_url",
         github,
         core,
@@ -72,8 +70,8 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-        requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
+        monitoredWorkflowName: "Swagger Avocado - Analyze Code",
+        requiredStatusName: "Swagger Avocado",
         overridingLabel: "Approved-Avocado",
       }),
     ).resolves.toBeUndefined();
@@ -83,7 +81,7 @@ describe("setStatusImpl", () => {
       repo: "test-repo",
       sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
-      context: "[TEST-IGNORE] Swagger Avocado",
+      context: "Swagger Avocado",
       description: "Found label 'Approved-Avocado'",
       target_url: "https://test.com/set_status_url",
     });
@@ -103,8 +101,8 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-        requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
+        monitoredWorkflowName: "Swagger BreakingChange - Analyze Code",
+        requiredStatusName: "Swagger BreakingChange",
         overridingLabel:
           "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact",
       }),
@@ -115,7 +113,7 @@ describe("setStatusImpl", () => {
       repo: "test-repo",
       sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
-      context: "[TEST-IGNORE] Swagger BreakingChange",
+      context: "Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-Benign'",
       target_url: "https://test.com/set_status_url",
     });
@@ -138,8 +136,8 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-        requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
+        monitoredWorkflowName: "Swagger BreakingChange - Analyze Code",
+        requiredStatusName: "Swagger BreakingChange",
         overridingLabel:
           "BreakingChange-Approved-Benign, BreakingChange-Approved-BugFix , BreakingChange-Approved-UserImpact",
       }),
@@ -150,7 +148,7 @@ describe("setStatusImpl", () => {
       repo: "test-repo",
       sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
-      context: "[TEST-IGNORE] Swagger BreakingChange",
+      context: "Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-UserImpact'",
       target_url: "https://test.com/set_status_url",
     });
@@ -170,8 +168,8 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-        requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
+        monitoredWorkflowName: "Swagger BreakingChange - Analyze Code",
+        requiredStatusName: "Swagger BreakingChange",
         overridingLabel: "BreakingChange-Approved-Benign,,BreakingChange-Approved-Security,",
       }),
     ).resolves.toBeUndefined();
@@ -181,7 +179,7 @@ describe("setStatusImpl", () => {
       repo: "test-repo",
       sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
-      context: "[TEST-IGNORE] Swagger BreakingChange",
+      context: "Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-Security'",
       target_url: "https://test.com/set_status_url",
     });
@@ -205,8 +203,8 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-        requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
+        monitoredWorkflowName: "Swagger BreakingChange - Analyze Code",
+        requiredStatusName: "Swagger BreakingChange",
         overridingLabel:
           "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact",
       }),
@@ -217,7 +215,7 @@ describe("setStatusImpl", () => {
       repo: "test-repo",
       sha: fullGitSha,
       state: CommitStatusState.PENDING,
-      context: "[TEST-IGNORE] Swagger BreakingChange",
+      context: "Swagger BreakingChange",
       target_url: "https://test.com/set_status_url",
     });
   });
@@ -240,8 +238,8 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-        requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
+        monitoredWorkflowName: "Swagger BreakingChange - Analyze Code",
+        requiredStatusName: "Swagger BreakingChange",
         overridingLabel: "",
       }),
     ).resolves.toBeUndefined();
@@ -251,7 +249,7 @@ describe("setStatusImpl", () => {
       repo: "test-repo",
       sha: fullGitSha,
       state: CommitStatusState.PENDING,
-      context: "[TEST-IGNORE] Swagger BreakingChange",
+      context: "Swagger BreakingChange",
       target_url: "https://test.com/set_status_url",
     });
   });
@@ -294,7 +292,7 @@ describe("setStatusImpl", () => {
         github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
           data: [
             {
-              name: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+              name: "Swagger Avocado - Analyze Code",
               status: checkStatus,
               conclusion: checkConclusion,
               updated_at: "2025-01-01",
@@ -333,8 +331,8 @@ describe("setStatusImpl", () => {
           target_url: "https://test.com/set_status_url",
           github,
           core,
-          monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-          requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
+          monitoredWorkflowName: "Swagger Avocado - Analyze Code",
+          requiredStatusName: "Swagger Avocado",
           overridingLabel: "Approved-Avocado",
         }),
       ).resolves.toBeUndefined();
@@ -344,7 +342,7 @@ describe("setStatusImpl", () => {
         repo: "test-repo",
         sha: fullGitSha,
         state: commitStatusState,
-        context: "[TEST-IGNORE] Swagger Avocado",
+        context: "Swagger Avocado",
         target_url: targetUrl,
       });
     },

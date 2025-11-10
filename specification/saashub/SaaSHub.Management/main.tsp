@@ -8,9 +8,15 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
+import "./versions.tsp";
+import "./SharedModels.tsp";
+import "./SaasResourceModels.tsp";
+import "./CloudServiceModels.tsp";
 import "./SaasResource.tsp";
+import "./CloudService.tsp";
+import "./Operations.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -22,21 +28,8 @@ using TypeSpec.Versioning;
  * SaaSHub Resource Client
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaSHub is an existing onboarded RP"
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Has an operation api defined in earlier version"
 @armProviderNamespace
 @service(#{ title: "SaaSHubResourcesClient" })
-@versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(SaaSHubVersions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.SaaSHub;
-
-/**
- * The available API versions.
- */
-enum Versions {
-  /**
-   * The 2024-09-30-preview API version.
-   */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_09_30_preview: "2024-09-30-preview",
-}

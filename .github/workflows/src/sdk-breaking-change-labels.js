@@ -1,4 +1,3 @@
-// @ts-check
 import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
@@ -99,8 +98,8 @@ export async function getLabelAndActionImpl({ details_url, core, retryOptions = 
     }
   }
 
-  if (!labelAction) {
-    core.info("No label action found, defaulting to None");
+  if (!labelAction || !labelName) {
+    core.info("No label action or name found, defaulting to None");
     labelAction = LabelAction.None;
   }
 

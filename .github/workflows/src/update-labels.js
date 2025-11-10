@@ -1,5 +1,3 @@
-// @ts-check
-
 import { isFullGitSha } from "../../shared/src/git.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "../src/context.js";
@@ -85,6 +83,11 @@ export async function updateLabelsImpl({
 
       if (key.startsWith("label-")) {
         const name = key.substring("label-".length);
+
+        if (!name) {
+          throw new Error(`Invalid value for label name: '${name}'`);
+        }
+
         if (value === "true") {
           labelsToAdd.push(name);
         } else if (value === "false") {

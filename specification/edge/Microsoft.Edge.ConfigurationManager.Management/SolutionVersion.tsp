@@ -57,6 +57,17 @@ model SolutionVersionProperties {
   @visibility(Lifecycle.Read)
   state?: State;
 
+  @added(Versions.v2025_08_01)
+  @doc("Current Stage of revision")
+  @visibility(Lifecycle.Read)
+  currentStage?: StageMap;
+
+  @added(Versions.v2025_08_01)
+  @doc("Stages of revision")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  stages?: StageMap[];
+
   @doc("Solution instance name")
   @visibility(Lifecycle.Read)
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
@@ -74,6 +85,11 @@ model SolutionVersionProperties {
   @doc("The URI for tracking the latest action performed on this solution version.")
   @visibility(Lifecycle.Read)
   latestActionTrackingUri?: string;
+
+  @added(Versions.v2025_08_01)
+  @doc("Object Id of user who triggered the latest action on this solution version.")
+  @visibility(Lifecycle.Read)
+  latestActionTriggeredBy?: string;
 
   @doc("The type of the latest action performed on this solution version.")
   @visibility(Lifecycle.Read)

@@ -310,6 +310,10 @@
           "type": "string",
           "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
         },
+        "witnessAuthenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'."
+        },
         "cloudAccountName": {
           "type": "string",
           "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
@@ -400,6 +404,18 @@
         "hostNetwork": {
           "$ref": "#/definitions/HostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
+        },
+        "hostedApplication": {
+          "$ref": "#/definitions/HostedApplicationIntent",
+          "description": "Hosted Application details of the cluster."
+        },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )"
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters"
         },
         "sdnIntegration": {
           "$ref": "#/definitions/SdnIntegration",
@@ -547,6 +563,24 @@
         "deploymentConfiguration"
       ]
     },
+    "HostedApplicationIntent": {
+      "type": "object",
+      "description": "HostedApplication properties of the cluster.",
+      "properties": {
+        "applicationType": {
+          "type": "string",
+          "description": "Type of the hosted application."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Name of the hosted application."
+        },
+        "scaleUnitType": {
+          "type": "string",
+          "description": "Scale unit type of the hosted application."
+        }
+      }
+    },
     "HostNetwork": {
       "type": "object",
       "description": "The HostNetwork of a cluster.",
@@ -681,24 +715,6 @@
         }
       }
     },
-    "NetworkController": {
-      "type": "object",
-      "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster.",
-      "properties": {
-        "macAddressPoolStart": {
-          "type": "string",
-          "description": "macAddressPoolStart of network controller used for SDN Integration."
-        },
-        "macAddressPoolStop": {
-          "type": "string",
-          "description": "macAddressPoolStop of network controller used for SDN Integration."
-        },
-        "networkVirtualizationEnabled": {
-          "type": "boolean",
-          "description": "NetworkVirtualizationEnabled of network controller used for SDN Integration."
-        }
-      }
-    },
     "Observability": {
       "type": "object",
       "description": "The Observability of AzureStackHCI Cluster.",
@@ -727,6 +743,10 @@
         "customLocation": {
           "type": "string",
           "description": "The name of custom location."
+        },
+        "confidentialVmIntent": {
+          "$ref": "./hciCommon.json#/definitions/ConfidentialVmIntent",
+          "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster during initial deployment."
         }
       }
     },
@@ -921,9 +941,57 @@
       "type": "object",
       "description": "SDN Integration config to deploy AzureStackHCI Cluster.",
       "properties": {
+        "sdnPrefix": {
+          "type": "string",
+          "maxLength": 8,
+          "pattern": "^(?!.*--)(?!.*-$)[A-Za-z0-9-]{1,8}$",
+          "description": "A string identifier used to construct the Network Controller (NC) REST resource name. This prefix helps group and distinguish SDN-managed network components and must follow specific formatting rules: Must not be empty or contain only whitespace. Must be 8 characters or fewer. Allowed characters: letters (A–Z, a–z), digits (0–9), and hyphens (-). Cannot end with a hyphen. Cannot contain consecutive hyphens."
+        },
+        "enabled": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "SdnIntegrationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "true",
+                "value": "true",
+                "description": "SDN integration is enabled for the deployment."
+              },
+              {
+                "name": "false",
+                "value": "false",
+                "description": "SDN integration is disabled for the deployment."
+              }
+            ]
+          },
+          "description": "Specifies whether SDN integration is enabled for the deployment. If this property is not provided, it defaults to 'Disabled' for backward compatibility. The value is set to 'Enabled' when the user opts to enable SDN during initial deployment."
+        },
         "networkController": {
           "$ref": "#/definitions/NetworkController",
-          "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster."
+          "description": "Configuration settings for the Network Controller"
+        }
+      }
+    },
+    "NetworkController": {
+      "type": "object",
+      "description": "Configuration settings for the Network Controller used in SDN integration during Azure Stack HCI cluster deployment.",
+      "properties": {
+        "macAddressPoolStart": {
+          "type": "string",
+          "description": "The starting MAC address in the pool allocated for SDN-managed virtual network interfaces."
+        },
+        "macAddressPoolStop": {
+          "type": "string",
+          "description": "The ending MAC address in the pool allocated for SDN-managed virtual network interfaces."
+        },
+        "networkVirtualizationEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether network virtualization is enabled for the Network Controller. This allows virtual networks to be isolated and managed independently over shared physical infrastructure."
         }
       }
     },

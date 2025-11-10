@@ -16,7 +16,6 @@ using Azure.ResourceManager;
 namespace Microsoft.Community;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-08-01-preview`,
 }
 
@@ -129,6 +128,7 @@ model CommunityTrainingProperties {
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
   create is ArmResourceCreateOrUpdateAsync<CommunityTraining>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     CommunityTraining,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -22,8 +22,6 @@ namespace Microsoft.ContainerNetworking;
 enum Versions {
   /** 2025-03-31-preview version */
   @doc("2025-03-31-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_03_31_preview: "2025-03-31-preview",
 }

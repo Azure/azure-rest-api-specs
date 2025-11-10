@@ -839,7 +839,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CertificateProfileProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -968,7 +969,6 @@
             "$ref": "#/definitions/Certificate"
           },
           "readOnly": true,
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": []
         }
       },
@@ -1040,12 +1040,17 @@
       "type": "object",
       "description": "The parameters used to check the availability of the trusted signing account name.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource, \"Microsoft.CodeSigning/codeSigningAccounts\"."
+        },
         "name": {
           "type": "string",
           "description": "Trusted signing account name."
         }
       },
       "required": [
+        "type",
         "name"
       ]
     },
@@ -1076,7 +1081,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CodeSigningAccountProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1186,8 +1192,7 @@
         "PrivateTrust",
         "PrivateTrustCIPolicy",
         "VBSEnclave",
-        "PublicTrustTest",
-        "C2PAContentCredentials"
+        "PublicTrustTest"
       ],
       "x-ms-enum": {
         "name": "ProfileType",
@@ -1196,12 +1201,12 @@
           {
             "name": "PublicTrust",
             "value": "PublicTrust",
-            "description": "Used for signing code files which are distributed publicly."
+            "description": "Used for signing files which are distributed publicly."
           },
           {
             "name": "PrivateTrust",
             "value": "PrivateTrust",
-            "description": "Used for signing code files which are distributed internally within organization or group boundary."
+            "description": "Used for signing files which are distributed internally within organization or group boundary."
           },
           {
             "name": "PrivateTrustCIPolicy",
@@ -1211,17 +1216,12 @@
           {
             "name": "VBSEnclave",
             "value": "VBSEnclave",
-            "description": "Used for signing code files which are run in secure vbs enclave."
+            "description": "Used for signing files which are run in secure vbs enclave."
           },
           {
             "name": "PublicTrustTest",
             "value": "PublicTrustTest",
-            "description": "Used for signing code files for testing purpose."
-          },
-          {
-            "name": "C2PAContentCredentials",
-            "value": "C2PAContentCredentials",
-            "description": "Used for signing content files."
+            "description": "Used for signing files for testing purpose."
           }
         ]
       }

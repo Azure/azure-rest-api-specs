@@ -40,6 +40,9 @@ model GenerateGcpTemplateRequest {
   @doc("The list of solution types and their settings")
   @identifiers(#[])
   solutionTypes?: Array<SolutionTypeSettings>;
+
+  @doc("The GCP cloud profile.")
+  gcpCloudProfile?: GcpCloudProfile;
 }
 
 @doc("The properties of Solution Type")
@@ -108,14 +111,20 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @path
   @segment("publicCloudConnectors")
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @added(Versions.v2025_12_01_preview)
+  @doc("The kind of the public cloud connector.")
+  @visibility(Lifecycle.Read)
+  kind?: HostType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Public Cloud Connector")
 model PublicCloudConnectorUpdate extends TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PublicCloudConnectorPropertiesUpdate;
 }
 
@@ -231,6 +240,10 @@ model GcpProjectProperties {
   @doc("The project number of the GCP project.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   projectNumber: string;
+
+  @doc("The project id of the GCP project.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  projectId: string;
 }
 
 @added(Versions.v2025_12_01_preview)
@@ -243,6 +256,10 @@ model GcpOrganizationProperties {
   @doc("The project number of the management project under the GCP organization.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   managementProjectNumber: string;
+
+  @doc("The project Id of the management project under the GCP organization.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  managementProjectId: string;
 
   @doc("List of GCP projects which need to be excluded.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -296,9 +313,9 @@ model SolutionConfigurationProperties {
 @doc("Solution Configuration")
 model SolutionConfigurationUpdate
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SolutionConfigurationPropertiesUpdate;
 }
 
