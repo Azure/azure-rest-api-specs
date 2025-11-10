@@ -537,7 +537,7 @@ model PublicNetworkSolution {
   deleteOrUpdateBehavior?: DeleteOrUpdateBehavior;
 
   /**
-   * Optional. Indicates public network solution. If enable, enable public network access of target service with best try. Default is enable. If optOut, opt out public network access configuration.
+   * Indicates how to apply the connector operations, such as opt out network configuration, opt in configuration.
    */
   action?: ActionType;
 
@@ -578,7 +578,7 @@ model ConfigurationInfo {
   deleteOrUpdateBehavior?: DeleteOrUpdateBehavior;
 
   /**
-   * Optional, indicate whether to apply configurations on source application. If enable, generate configurations and applied to the source application. Default is enable. If optOut, no configuration change will be made on source.
+   * Indicates how to apply the connector operations, such as opt out network configuration, opt in configuration.
    */
   action?: ActionType;
 
