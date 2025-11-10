@@ -51,4 +51,4 @@ op getReplace(
 ): Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel> | Microsoft.Network.CloudError;
 
 @@override(HeatMapModels.get, getReplace, "go");
-@@alternateType(getReplace::parameters.heatMapType, "default", "go");
+@@alternateType(getReplace::parameters.heatMapType, "default", "go,javascript");
