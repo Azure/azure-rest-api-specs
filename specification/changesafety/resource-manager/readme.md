@@ -60,6 +60,52 @@ input-file:
   - Microsoft.ChangeSafety/SafeRollout/preview/2025-03-01-preview/SafeRollout.json
 ```
 
+---
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Need to use Record for key-value pair properties, got sign-off during design meeting.
+    from: ChangeControl.json
+    where:
+      - $.definitions.ChangeStateProperties.properties.stageParameters
+      - $.definitions.Parameter.properties.metadata
+      - $.definitions.ParameterUpdate.properties.metadata
+      - $.definitions.Stage.properties.parameterValues
+      - $.definitions.StageProgressionProperties.properties.parameterValues
+      - $.definitions.StageProgressionPropertiesUpdate.properties.parameterValues
+      - $.definitions.RetrieveNextStagesResponseItem.properties.parameterValues
+      - $.definitions.StageMapProperties.properties.parameters
+      - $.definitions.StageMapPropertiesUpdate.properties.parameters
+      - $.definitions.OperationContent.properties.properties
+      - $.definitions.ChangeStateProperties.properties.parameters
+      - $.definitions.ChangeStatePropertiesUpdate.properties.parameters
+      - $.definitions.StageProgressionProperties.properties.stageVariables
+      - $.definitions.StageProgressionPropertiesUpdate.properties.stageVariables
+      - $.definitions.RetrieveNextStagesResponseItem.properties.stageVariables
+      - $.definitions.ChangeStateProperties.properties.additionalData
+      - $.definitions.ChangeStatePropertiesUpdate.properties.additionalData
+      - $.definitions.StageProgressionProperties.properties.additionalData
+      - $.definitions.StageProgressionPropertiesUpdate.properties.additionalData
+      - $.definitions.RetrieveNextStagesResponseItem.properties.additionalData
+      - $.definitions.StageVariables
+      - $.definitions.ChangeDefinition.properties.details
+      - $.definitions.Stage.properties.stageVariables
+      - $.definitions.Stage.properties.nestedStageMap.parameters
+      - $.definitions.RetrieveNextStagesResponseItem.properties.parameters
+      - $.definitions.StageProgressionProperties.properties.parameters
+      - $.definitions.StageProgressionPropertiesUpdate.properties.parameters
+      - $.definitions.NestedStageMap.properties.parameters
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: SafeRollout.json
+    reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/safeRollouts/{safeRolloutName}"]
+```
+
+---
+
 ### Tag: package-2025-07-01-preview
 
 These settings apply only when `--tag=package-2025-07-01-preview` is specified on the command line.
@@ -123,7 +169,7 @@ directive:
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: SafeRollout.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/safeRollouts/{safeRolloutName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/safeRollouts/{safeRolloutName}"].put
 ```
 
 ---
