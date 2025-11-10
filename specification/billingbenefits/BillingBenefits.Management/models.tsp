@@ -3,12 +3,17 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/openapi";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.BillingBenefits;
 
@@ -1101,9 +1106,23 @@ model SavingsPlanValidResponseProperty {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2025_05_01_preview)
 model SavingsPlanPurchaseValidateRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   benefits?: SavingsPlanOrderAliasModel[];
+}
+
+/**
+ * Savings plan validate model
+ */
+@added(Versions.v2025_05_01_preview)
+model SavingsPlanValidateModel extends BenefitValidateModel {
+  ...SavingsPlanOrderAliasModel;
+
+  /**
+   * Type of benefit to validate. This is used to determine the model type for validation.
+   */
+  benefitType: "SavingsPlan";
 }
 
 /**
@@ -1858,4 +1877,1404 @@ model ExpandParameter {
    */
   @query("$expand")
   $expand?: string;
+}
+
+/**
+ * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+ */
+@added(Versions.v2025_05_01_preview)
+union Origin {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  user: "user",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  system: "system",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `user,system`: "user,system",
+}
+
+/**
+ * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
+ */
+@added(Versions.v2025_05_01_preview)
+union ActionType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Internal: "Internal",
+}
+
+/**
+ * The type of identity that created the resource.
+ */
+@added(Versions.v2025_05_01_preview)
+union CreatedByType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Key: "Key",
+}
+
+/**
+ * Represents benefit model type for validation.
+ */
+@added(Versions.v2025_05_01_preview)
+union BenefitType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SavingsPlan: "SavingsPlan",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  MACC: "MACC",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ConditionalCredits: "ConditionalCredits",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Credits: "Credits",
+}
+
+/**
+ * Abstract benefit model to validate.
+ */
+@added(Versions.v2025_05_01_preview)
+@discriminator("benefitType")
+model BenefitValidateModel {
+  /**
+   * Type of benefit to validate. This is used to determine the model type for validation.
+   */
+  benefitType: BenefitType;
+}
+
+/**
+ * Request to validate any benefit.
+ */
+@added(Versions.v2025_05_01_preview)
+model BenefitValidateRequest {
+  /**
+   * Defines benefits for validation.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  benefits?: BenefitValidateModel[];
+}
+
+/**
+ * Benefit validate response.
+ */
+@added(Versions.v2025_05_01_preview)
+model BenefitValidateResponse {
+  /**
+   * Defines benefit validation response for benefits.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  benefits?: BenefitValidateResponseProperty[];
+
+  /**
+   * Url to get the next page.
+   */
+  nextLink?: string;
+}
+
+/**
+ * Benefit validate response property
+ */
+@added(Versions.v2025_05_01_preview)
+model BenefitValidateResponseProperty {
+  /**
+   * Indicates if the provided input was valid
+   */
+  valid?: boolean;
+
+  /**
+   * Failure reason code if the provided input was invalid
+   */
+  reasonCode?: string;
+
+  /**
+   * Failure reason if the provided input was invalid
+   */
+  reason?: string;
+
+  /**
+   * Resource identifier of the benefit that was validated.
+   */
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.BillingBenefits/*";
+    }
+  ]>;
+}
+
+// ===================================================================
+// MACC (Microsoft Azure Consumption Commitment) MODELS - Added in 2025-05-01-preview
+// ===================================================================
+
+/**
+ * Represents the current status of the MACC.
+ */
+@added(Versions.v2025_05_01_preview)
+union MaccStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Scheduled: "Scheduled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Completed: "Completed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Stopped: "Stopped",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  PendingSettlement: "PendingSettlement",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ShortfallCharged: "ShortfallCharged",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ShortfallWaived: "ShortfallWaived",
+}
+
+/**
+ * Provisioning states of MACC.
+ */
+@added(Versions.v2025_05_01_preview)
+union MaccProvisioningState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Scheduled: "Scheduled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ShortfallPending: "ShortfallPending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Stopped: "Stopped",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  PendingSettlement: "PendingSettlement",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ShortfallCharged: "ShortfallCharged",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ShortfallWaived: "ShortfallWaived",
+}
+
+/**
+ * Represents type of the object being operated on. Possible values are primary or contributor.
+ */
+@added(Versions.v2025_05_01_preview)
+union MaccEntityType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Primary: "Primary",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Contributor: "Contributor",
+}
+
+/**
+ * Represents the enablement status of a feature or settings.
+ */
+@added(Versions.v2025_05_01_preview)
+union EnablementMode {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
+}
+
+/**
+ * Represents the current status of the Milestone.
+ */
+@added(Versions.v2025_05_01_preview)
+union MaccMilestoneStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Scheduled: "Scheduled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Completed: "Completed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Removed: "Removed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  PendingSettlement: "PendingSettlement",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ShortfallCharged: "ShortfallCharged",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ShortfallWaived: "ShortfallWaived",
+}
+
+/**
+ * MACC properties
+ */
+@added(Versions.v2025_05_01_preview)
+model MaccModelProperties {
+  /**
+   * Provisioning state of MACC as assigned by RPaaS. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of MACC resource, refer to MaccStatus.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: MaccProvisioningState;
+
+  /**
+   * Represents the current status of the MACC.
+   */
+  status?: MaccStatus;
+
+  /**
+   * Represents type of the object being operated on. Possible values are primary or contributor.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  entityType: MaccEntityType;
+
+  /**
+   * Display name
+   */
+  displayName?: string;
+
+  /**
+   * Represents catalog UPN.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  productCode?: string;
+
+  /**
+   * Fully-qualified identifier of the billing account where the MACC is applied. Present only for Enterprise Agreement customers. Format must be Azure Resource ID: /providers/Microsoft.Billing/billingAccounts/{acctId:orgId}
+   */
+  billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+
+  /**
+   * Commitment towards the benefit.
+   */
+  commitment?: Commitment;
+
+  /**
+   * Must be start of month. Timestamp must be in the ISO date format YYYY-MM-DDT00:00:00Z.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startAt?: utcDateTime;
+
+  /**
+   * Must be end of month. Timestamp must be in the ISO date format YYYY-MM-DDT23:59:59Z.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * This is the globally unique identifier of the MACC which will not change for the lifetime of the MACC.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  systemId?: string;
+
+  /**
+   * Setting this to 'Enable' enables automatic shortfall charging when commitment is not met.
+   */
+  automaticShortfall?: EnablementMode;
+
+  /**
+   * Optional field to record suppression reason for automatic shortfall.
+   */
+  automaticShortfallSuppressReason?: AutomaticShortfallSuppressReason;
+
+  /**
+   * MACC shortfall
+   */
+  shortfall?: Shortfall;
+
+  /**
+   * List of milestones associated with this MACC.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["milestoneId"])
+  milestones?: MaccMilestone[];
+
+  /**
+   * This is the resource identifier of either the primary MACC or the contributor. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}.
+   */
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Setting this to true means multi-entity.
+   */
+  allowContributors?: boolean;
+
+  /**
+   * Fully-qualified resource identifier of the primary MACC. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}.
+   */
+  primaryResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Fully-qualified billing account resource identifier of the primary MACC. Format must be Azure Resource ID: /providers/Microsoft.Billing/billingAccounts/{acctId:orgId}.
+   */
+  primaryBillingAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+}
+
+/**
+ * Optional field to record suppression reason for automatic shortfall.
+ */
+@added(Versions.v2025_05_01_preview)
+model AutomaticShortfallSuppressReason {
+  /**
+   * Code for the suppression reason.
+   */
+  code?: string;
+
+  /**
+   * Message for suppression reason.
+   */
+  message?: string;
+}
+
+/**
+ * MACC shortfall
+ */
+@added(Versions.v2025_05_01_preview)
+model Shortfall {
+  /**
+   * Represents catalog UPN.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  productCode?: string;
+
+  /**
+   * Shortfall amount with grain.
+   */
+  charge?: Commitment;
+
+  /**
+   * Start DateTime.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startAt?: utcDateTime;
+
+  /**
+   * End DateTime in UTC.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Fully-qualified resource identifier of the credits associated with the shortfall.
+   */
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created.
+   */
+  balanceVersion?: float32;
+
+  /**
+   * This is an identifier of the shortfall which will not change for its lifetime.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  systemId?: string;
+}
+
+/**
+ * MACC milestone represents interim targets within the period of MACC.
+ */
+@added(Versions.v2025_05_01_preview)
+model MaccMilestone {
+  /**
+   * Globally unique identifier for the milestone. Format: {guid}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  milestoneId?: string;
+
+  /**
+   * Commitment associated with this milestone.
+   */
+  commitment?: Price;
+
+  /**
+   * End date time for the milestone. Timestamp must be in the ISO date format YYYY-MM-DDT23:59:59Z.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Setting this to 'Enable' enables automatic shortfall invoicing when milestone commitment is not met.
+   */
+  automaticShortfall?: EnablementMode;
+
+  /**
+   * Optional field to record suppression reason for automatic shortfall.
+   */
+  automaticShortfallSuppressReason?: AutomaticShortfallSuppressReason;
+
+  /**
+   * Represents the current status of the Milestone.
+   */
+  status?: MaccMilestoneStatus;
+
+  /**
+   * Details of the shortfall associated with this milestone.
+   */
+  shortfall?: Shortfall;
+}
+
+/**
+ * Macc patch request
+ */
+@added(Versions.v2025_05_01_preview)
+model MaccPatchRequest {
+  /**
+   * Macc patch request properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: MaccPatchRequestProperties;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+/**
+ * Macc patch request properties
+ */
+@added(Versions.v2025_05_01_preview)
+model MaccPatchRequestProperties {
+  /**
+   * Commitment towards the benefit.
+   */
+  commitment?: Commitment;
+
+  /**
+   * End DateTime in UTC.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Setting this to true means multi-entity.
+   */
+  allowContributors?: boolean;
+
+  /**
+   * Represents the enablement status of a feature or settings.
+   */
+  automaticShortfall?: EnablementMode;
+
+  /**
+   * Optional field to record suppression reason for automatic shortfall.
+   */
+  automaticShortfallSuppressReason?: AutomaticShortfallSuppressReason;
+
+  /**
+   * Display name
+   */
+  displayName?: string;
+
+  /**
+   * Represents the current status of the Milestone.
+   */
+  status?: MaccMilestoneStatus;
+
+  /**
+   * List of milestones to update or add.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["milestoneId"])
+  milestones?: MaccMilestone[];
+
+  /**
+   * Fully-qualified resource identifier of the primary MACC. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}.
+   */
+  primaryResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Fully-qualified billing account resource identifier of the primary MACC. Format must be Azure Resource ID: /providers/Microsoft.Billing/billingAccounts/{acctId:orgId}.
+   */
+  primaryBillingAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+}
+
+/**
+ * MACC list
+ */
+@added(Versions.v2025_05_01_preview)
+model MaccList is Azure.Core.Page<Macc>;
+
+/**
+ * MACC validate model
+ */
+@added(Versions.v2025_05_01_preview)
+model MaccValidateModel extends BenefitValidateModel {
+  /**
+   * MACC validate properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: MaccModelProperties;
+
+  /**
+   * Type of benefit to validate. This is used to determine the model type for validation.
+   */
+  benefitType: "MACC";
+}
+
+/**
+ * Contributor list
+ */
+@added(Versions.v2025_05_01_preview)
+model ContributorList is Azure.Core.Page<Contributor>;
+
+/**
+ * List MACCs under a billing account
+ */
+@added(Versions.v2025_05_01_preview)
+model SellerResourceListRequest {
+  /**
+   * Request properties to list maccs under a billing account
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SellerResourceListRequestProperties;
+}
+
+/**
+ * Request properties to list maccs under a billing account
+ */
+@added(Versions.v2025_05_01_preview)
+model SellerResourceListRequestProperties {
+  /**
+   * Fully-qualified billing account resource identifier where the benefit is applied. Present only for Enterprise Agreement customers.
+   */
+  billingAccountResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+
+  /**
+   * This is an OData expresssion to filter the list of MACCs based on the properties of MACC passed in the filter.
+   */
+  $filter?: string;
+
+  /**
+   * Setting it to true will return the list of contributors associated with the MACC.
+   */
+  contributors?: boolean;
+
+  /**
+   * Setting it to true will return the list of milestones associated with the MACC.
+   */
+  milestones?: boolean;
+
+  /**
+   * Fully-qualified resource identifier of the primary MACC. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}.
+   */
+  primaryResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Applicable MACC list
+ */
+@added(Versions.v2025_05_01_preview)
+model ApplicableMaccList is Azure.Core.Page<ApplicableMacc>;
+
+/**
+ * Applicable MACC.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_05_01_preview)
+model ApplicableMacc extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * Applicable MACC properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: MaccModelProperties;
+}
+
+/**
+ * Applicable Contributor list
+ */
+@added(Versions.v2025_05_01_preview)
+model ApplicableContributorList is Azure.Core.Page<ApplicableContributor>;
+
+/**
+ * Applicable Contributor.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_05_01_preview)
+model ApplicableContributor
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * Applicable Contributor properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: MaccModelProperties;
+}
+
+// ===================================================================
+// CREDITS MODELS - Added in 2025-05-01-preview
+// ===================================================================
+
+/**
+ * Properties of a credit
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditProperties {
+  /**
+   * Status of the credit
+   */
+  status?: CreditStatus;
+
+  /**
+   * Product UPN for the credit type
+   */
+  productCode?: string;
+
+  /**
+   * The reason for the credit. Not required if not applicable.
+   */
+  reason?: CreditReason;
+
+  /**
+   * The entire investment amount for the credit contract, including currency and amount
+   */
+  credit?: Commitment;
+
+  /**
+   * Start DateTime.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startAt?: utcDateTime;
+
+  /**
+   * End DateTime in UTC.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Credit breakdown item representing a milestone, line-item, or no-charge service
+   */
+  policies?: CreditPolicies;
+
+  /**
+   * Fully-qualified identifier of the billing account where the benefit is applied. Present only for Enterprise Agreement customers.
+   */
+  billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+
+  /**
+   * Fully-qualified identifier of the billing profile where the benefit is applied. Present only for Field-led or Customer-led customers.
+   */
+  @visibility(Lifecycle.Read)
+  billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+
+  /**
+   * Credit line-items/milestones/no-charge services breakdown
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  breakdown?: CreditBreakdownItem[];
+
+  /**
+   * Provisioning state
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * System identifier
+   */
+  systemId?: string;
+
+  /**
+   * Fully-qualified identifier of the customer where the savings plan is applied. Present only for Partner-led customers. Format is /providers/Microsoft.Billing/billingAccounts/{acctId:orgId}
+   */
+  @visibility(Lifecycle.Read)
+  customerId?: string;
+
+  /**
+   * Fully-qualified resource identifier of the resource. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/{benefitType}/{benefitName}.
+   */
+  resourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Status of the credit
+ */
+@added(Versions.v2025_05_01_preview)
+union CreditStatus {
+  string,
+
+  /**
+   * Credit status is unknown
+   */
+  Unknown: "Unknown",
+
+  /**
+   * Credit is pending activation
+   */
+  Pending: "Pending",
+
+  /**
+   * Credit is active and available for use
+   */
+  Active: "Active",
+
+  /**
+   * Credit operation succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Credit has been cancelled
+   */
+  Canceled: "Canceled",
+
+  /**
+   * Credit operation failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Credit has expired
+   */
+  Expired: "Expired",
+
+  /**
+   * Credit has been fully consumed
+   */
+  Exhausted: "Exhausted",
+
+  /**
+   * Credit application has not started yet
+   */
+  NotStarted: "NotStarted",
+}
+
+/**
+ * Expiration policy of the Credit
+ */
+@added(Versions.v2025_05_01_preview)
+union CreditExpirationPolicy {
+  string,
+
+  /**
+   * No policy applied to the expiration of this credit
+   */
+  None: "None",
+
+  /**
+   * Billing profile is suspended when the credit expires
+   */
+  SuspendBillingProfile: "SuspendBillingProfile",
+}
+
+/**
+ * The reason for the credit. Not required if not applicable.
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditReason {
+  /**
+   * The reason code for credit.
+   */
+  @visibility(Lifecycle.Read)
+  code?: float32;
+
+  /**
+   * The free string description of the credit.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
+}
+
+/**
+ * Credit breakdown item representing a milestone, line-item, or no-charge service
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditPolicies {
+  /**
+   * Redemption policy of the Credit
+   */
+  redemption?: CreditRedemptionPolicy;
+
+  /**
+   * Expiration policy of the Credit
+   */
+  expiration?: CreditExpirationPolicy;
+}
+
+/**
+ * Redemption policy of the Credit
+ */
+@added(Versions.v2025_05_01_preview)
+union CreditRedemptionPolicy {
+  string,
+
+  /**
+   * Redemption policy is not applicable for this credit
+   */
+  NotApplicable: "NotApplicable",
+
+  /**
+   * Credit is automatically redeemed
+   */
+  AutoRedeem: "AutoRedeem",
+
+  /**
+   * Credit is manually redeemed
+   */
+  ManualRedeem: "ManualRedeem",
+}
+
+/**
+ * Credit breakdown item representing a milestone, line-item, or no-charge service
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditBreakdownItem {
+  /**
+   * Allocation details including currency and amount for this breakdown item
+   */
+  allocation?: Commitment;
+
+  /**
+   * Start DateTime.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startAt?: utcDateTime;
+
+  /**
+   * End DateTime in UTC.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Key-value pairs for additional parameters and metadata
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  dimensions?: CreditDimension[];
+}
+
+/**
+ * Key-value pair for additional credit parameters and metadata
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditDimension {
+  /**
+   * The dimension key (e.g., productFamily, description, creditType)
+   */
+  key?: string;
+
+  /**
+   * The dimension value
+   */
+  value?: string;
+}
+
+/**
+ * Credit patch request
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditPatchRequest {
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Credit patch properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: CreditPatchProperties;
+}
+
+/**
+ * Credit patch properties
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditPatchProperties {
+  /**
+   * The entire investment amount for the credit contract, including currency and amount. Only amount can be modified.
+   */
+  credit?: Commitment;
+
+  /**
+   * End DateTime in UTC.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Credit line-items/milestones/no-charge services breakdown. Entire breakdown will be replaced in a PATCH operation.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  breakdown?: CreditBreakdownItem[];
+}
+
+/**
+ * List of credits
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditsList is Azure.Core.Page<Credit>;
+
+/**
+ * Properties of a credit source
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_05_01_preview)
+model CreditSourceProperties {
+  /**
+   * Status of the credit
+   */
+  status?: CreditStatus;
+
+  /**
+   * The uri of the resource impacted which lead to the grant of the credit.
+   */
+  sourceResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.BillingBenefits/credits";
+    }
+  ]>;
+
+  /**
+   * The billing period of the impact for the resource. Format YYYYMM
+   */
+  impactedBillingPeriod?: string;
+
+  /**
+   * Commitment towards the benefit.
+   */
+  credit?: Commitment;
+}
+
+/**
+ * Credit patch request
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditSourcePatchRequest {
+  /**
+   * Resource Tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+}
+
+/**
+ * List of credit sources
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditSourcesList is Azure.Core.Page<CreditSource>;
+
+/**
+ * Credits validate model
+ */
+@added(Versions.v2025_05_01_preview)
+model CreditsValidateModel extends BenefitValidateModel {
+  /**
+   * Credits validate properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: Credit;
+
+  /**
+   * Type of benefit to validate. This is used to determine the model type for validation.
+   */
+  benefitType: "Credits";
+}
+
+// ===================================================================
+// CONDITIONAL CREDITS MODELS - Added in 2025-05-01-preview
+// ===================================================================
+
+/**
+ * Properties belonging to conditional credits.
+ */
+@discriminator("entityType")
+@added(Versions.v2025_05_01_preview)
+model ConditionalCreditProperties {
+  /**
+   * Type of conditional credit entity
+   */
+  entityType: ConditionalCreditEntityType;
+
+  /**
+   * Display name for the conditional credit
+   */
+  displayName?: string;
+
+  /**
+   * The billing account resource ID
+   */
+  @visibility(Lifecycle.Read)
+  billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+
+  /**
+   * The provisioning state of the resource
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ConditionalCreditsProvisioningState;
+
+  /**
+   * The status of the conditional credit
+   */
+  @visibility(Lifecycle.Read)
+  status?: ConditionalCreditStatus;
+
+  /**
+   * Start date of the conditional credit
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startAt?: utcDateTime;
+
+  /**
+   * End date of the conditional credit (derived from last milestone)
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Product code for the conditional credit
+   */
+  productCode?: string;
+
+  /**
+   * Fully-qualified identifier of the benefit under applicable benefit list.
+   */
+  @visibility(Lifecycle.Read)
+  benefitResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.BillingBenefits/*";
+    }
+  ]>;
+}
+
+/**
+ * Type of conditional credit entity
+ */
+@added(Versions.v2025_05_01_preview)
+union ConditionalCreditEntityType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Primary: "Primary",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Contributor: "Contributor",
+}
+
+/**
+ * The provisioning state of the resource
+ */
+@added(Versions.v2025_05_01_preview)
+union ConditionalCreditsProvisioningState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+}
+
+/**
+ * The status of the conditional credit
+ */
+@added(Versions.v2025_05_01_preview)
+union ConditionalCreditStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Completed: "Completed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  PendingSettlement: "PendingSettlement",
+}
+
+/**
+ * Conditional credit patch request
+ */
+@added(Versions.v2025_05_01_preview)
+model ConditionalCreditPatchRequest {
+  /**
+   * Conditional credit patch request properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: ConditionalCreditPatchRequestProperties;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+/**
+ * Conditional credit patch request properties
+ */
+@added(Versions.v2025_05_01_preview)
+model ConditionalCreditPatchRequestProperties {
+  /**
+   * Display name for the conditional credit
+   */
+  displayName?: string;
+
+  /**
+   * Updated milestones list (only applicable for primary conditional credits)
+   */
+  milestones?: ConditionalCreditMilestone[];
+}
+
+/**
+ * Milestone definition within a conditional credit
+ */
+alias ConditionalCreditMilestone = ConditionalCreditMilestoneBase;
+
+/**
+ * Base milestone definition for conditional credits
+ */
+@added(Versions.v2025_05_01_preview)
+model ConditionalCreditMilestoneBase {
+  /**
+   * Unique identifier for the milestone
+   */
+  milestoneId?: string;
+
+  /**
+   * Display name for the milestone
+   */
+  name?: string;
+
+  /**
+   * Current status of the conditional credit milestone
+   */
+  @visibility(Lifecycle.Read)
+  status?: ConditionalCreditMilestoneStatus;
+
+  /**
+   * End date for this milestone
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Spend target for this milestone
+   */
+  spendTarget?: Price;
+
+  /**
+   * Award details for this milestone (only present for primary conditional credits)
+   */
+  award?: Award;
+}
+
+/**
+ * Current status of the conditional credit milestone
+ */
+@added(Versions.v2025_05_01_preview)
+union ConditionalCreditMilestoneStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Scheduled: "Scheduled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Completed: "Completed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Missed: "Missed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  PendingSettlement: "PendingSettlement",
+}
+
+/**
+ * Award details for milestone completion
+ */
+@added(Versions.v2025_05_01_preview)
+model Award {
+  /**
+   * Credit amount to be awarded
+   */
+  credit?: Commitment;
+
+  /**
+   * Start date when the credit becomes effective
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startAt?: utcDateTime;
+
+  /**
+   * End date when the credit expires
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endAt?: utcDateTime;
+
+  /**
+   * Resource ID for the awarded credit.
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * This is the globally unique identifier of the credit which will not change for its lifetime.
+   */
+  @visibility(Lifecycle.Read)
+  systemId?: string;
+
+  /**
+   * Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created.
+   */
+  @visibility(Lifecycle.Read)
+  balanceVersion?: float32;
+}
+
+/**
+ * List of conditional credits
+ */
+@added(Versions.v2025_05_01_preview)
+model ConditionalCreditList is Azure.Core.Page<ConditionalCredit>;
+
+/**
+ * Properties for primary conditional credit.
+ */
+@added(Versions.v2025_05_01_preview)
+model PrimaryConditionalCreditProperties extends ConditionalCreditProperties {
+  /**
+   * System identifier shared between primary and contributor conditional credits representing the same conditional credit program
+   */
+  systemId: string;
+
+  /**
+   * Whether this conditional credit allows contributor billing accounts
+   */
+  allowContributors?: EnablementMode;
+
+  /**
+   * List of milestones for this conditional credit (must include awards)
+   */
+  milestones?: ConditionalCreditMilestone[];
+
+  /**
+   * Type of conditional credit entity
+   */
+  entityType: "Primary";
+}
+
+/**
+ * Properties for contributor conditional credit.
+ */
+@added(Versions.v2025_05_01_preview)
+model ContributorConditionalCreditProperties
+  extends ConditionalCreditProperties {
+  /**
+   * Resource ID of the primary conditional credit (required for contributors)
+   */
+  primaryResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.BillingBenefits/conditionalCredits";
+    }
+  ]>;
+
+  /**
+   * System identifier shared between primary and contributor conditional credits representing the same conditional credit program
+   */
+  systemId: string;
+
+  /**
+   * List of milestones copied from primary conditional credit (excludes award details)
+   */
+  @visibility(Lifecycle.Read)
+  milestones?: ContributorConditionalCreditMilestone[];
+
+  /**
+   * Fully-qualified billing account resource identifier of the primary CACO. Format must be Azure Resource ID: /providers/Microsoft.Billing/billingAccounts/{acctId:orgId}.
+   */
+  primaryBillingAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+
+  /**
+   * Type of conditional credit entity
+   */
+  entityType: "Contributor";
+}
+
+/**
+ * Milestone definition for contributor conditional credit (excludes award details)
+ */
+alias ContributorConditionalCreditMilestone = ConditionalCreditMilestoneBase;
+
+/**
+ * Conditional Credits validate model
+ */
+@added(Versions.v2025_05_01_preview)
+model ConditionalCreditsValidateModel extends BenefitValidateModel {
+  /**
+   * Conditional Credits validate properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  properties?: ConditionalCreditProperties;
+
+  /**
+   * Type of benefit to validate. This is used to determine the model type for validation.
+   */
+  benefitType: "ConditionalCredits";
 }

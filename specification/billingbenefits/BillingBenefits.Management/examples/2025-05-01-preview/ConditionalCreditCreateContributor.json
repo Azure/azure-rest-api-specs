@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "location": "global",
+      "properties": {
+        "displayName": "Contributor Conditional Credit 20250801",
+        "entityType": "Contributor",
+        "primaryResourceId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
+        "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+        "startAt": "2025-09-01T00:00:00Z",
+        "systemId": "CACO-SYSTEM-001"
+      },
+      "tags": {
+        "environment": "dev",
+        "team": "finance"
+      }
+    },
+    "conditionalCreditName": "conditionalCredit_contributor_20250801",
+    "resourceGroupName": "resource_group_name_02",
+    "subscriptionId": "20000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "conditionalCredit_contributor_20250801",
+        "type": "Microsoft.BillingBenefits/conditionalCredits",
+        "id": "/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_contributor_20250801",
+        "location": "global",
+        "properties": {
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{contributorAcctId:orgId}",
+          "displayName": "Contributor Conditional Credit 20250801",
+          "endAt": "2026-04-01T00:00:00Z",
+          "entityType": "Contributor",
+          "milestones": [
+            {
+              "name": "Q1 Milestone",
+              "endAt": "2025-10-01T00:00:00Z",
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+              "spendTarget": {
+                "amount": 50000,
+                "currencyCode": "USD"
+              },
+              "status": "Active"
+            },
+            {
+              "name": "Q2 Milestone",
+              "endAt": "2026-01-01T00:00:00Z",
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
+              "spendTarget": {
+                "amount": 100000,
+                "currencyCode": "USD"
+              },
+              "status": "Scheduled"
+            }
+          ],
+          "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "primaryResourceId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
+          "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+          "provisioningState": "Succeeded",
+          "startAt": "2025-09-01T00:00:00Z",
+          "status": "Active",
+          "systemId": "CACO-SYSTEM-001"
+        },
+        "systemData": {
+          "createdAt": "2025-09-01T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-09-01T01:01:01.1075056Z",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "environment": "dev",
+          "team": "finance"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "conditionalCredit_contributor_20250801",
+        "type": "Microsoft.BillingBenefits/conditionalCredits",
+        "id": "/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_contributor_20250801",
+        "location": "global",
+        "properties": {
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{contributorAcctId:orgId}",
+          "displayName": "Contributor Conditional Credit 20250801",
+          "entityType": "Contributor",
+          "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "primaryResourceId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
+          "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+          "provisioningState": "Pending",
+          "startAt": "2025-09-01T00:00:00Z",
+          "status": "Pending",
+          "systemId": "CACO-SYSTEM-001"
+        },
+        "systemData": {
+          "createdAt": "2025-09-01T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-09-01T01:01:01.1075056Z",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "environment": "dev",
+          "team": "finance"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/operationResults/5f3gggg8-c442-5gdc-bc22-c6gb5a479299?api-version=2025-05-01-preview",
+        "Retry-After": 5
+      }
+    }
+  },
+  "operationId": "ConditionalCredits_CreateOrUpdate",
+  "title": "ConditionalCreditCreateContributor"
+}
