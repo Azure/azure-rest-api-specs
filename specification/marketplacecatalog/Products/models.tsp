@@ -156,9 +156,8 @@ model OfferingProperties {
   type?: string;
 }
 
-@doc("Returns a subset of Product attributes")
-@resource("products")
-model ProductSummary {
+@doc("Base model containing common product attributes shared between ProductSummary and ProductDetails")
+model ProductBase {
   @doc("Product display name")
   displayName?: string;
 
@@ -191,7 +190,7 @@ model ProductSummary {
   @doc("Unique product identifier")
   uniqueProductId: string;
 
-  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product stored in the Marketplace Catalog.\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
+  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product stored in the Marketplace Catalog. Possible values include, but are not limited to:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
   productType: string;
 
   @doc("Product sub type")
@@ -242,9 +241,6 @@ model ProductSummary {
   @doc("Retail price of the product's cheapest plan")
   startingPrice?: MarketStartPrice;
 
-  @doc("Full set of plan/SKU attributes")
-  plans?: PlanSummary[];
-
   @doc("Maps to the list of compatible products")
   supportedProducts?: string[];
 
@@ -279,6 +275,15 @@ model ProductSummary {
   activeDirectoryAppId?: string;
 }
 
+@doc("Returns a subset of Product attributes")
+@resource("products")
+model ProductSummary {
+  ...ProductBase;
+
+  @doc("Full set of plan/SKU attributes")
+  plans?: PlanSummary[];
+}
+
 @doc("Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services")
 model Attribute {
   @doc("The attribute key")
@@ -309,10 +314,11 @@ model MarketStartPrice {
   currency?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending ProductSummary with additional details"
 @doc("Summary description of the product")
 @resource("product")
-model ProductDetails extends ProductSummary {
+model ProductDetails {
+  ...ProductBase;
+
   @doc("List of product videos")
   videos?: ProductVideo[];
 
@@ -397,7 +403,6 @@ model ProductDetails extends ProductSummary {
   @doc("List of artifacts")
   artifacts?: Artifact[];
 
-  // Override properties that differ from base class
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
 }
@@ -435,9 +440,10 @@ model PlanMetadata {
   relatedSkus?: PlanSkuRelation[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
 @doc("Returns a subset of Plan attributes")
-model PlanDetails extends PlanSummary {
+model PlanDetails {
+  ...PlanSummary;
+
   @doc("The id")
   id?: string;
 
@@ -868,7 +874,7 @@ model ListingSkusMarketParameter {
 @doc("Parameters for language selection")
 model LanguageParameter {
   @query
-  @doc("Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"")
+  @doc("Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"")
   language?: string = "en";
 }
 

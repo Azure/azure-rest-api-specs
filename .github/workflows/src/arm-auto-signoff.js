@@ -1,5 +1,3 @@
-// @ts-check
-
 import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
 import { equals } from "../../shared/src/set.js";
 import { byDate, invert } from "../../shared/src/sort.js";

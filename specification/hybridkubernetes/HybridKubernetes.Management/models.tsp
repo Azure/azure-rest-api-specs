@@ -578,7 +578,7 @@ model CredentialResults {
    * Base64-encoded Kubernetes configuration file.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   kubeconfigs?: CredentialResult[];
 }
 
@@ -654,7 +654,7 @@ model OperationList {
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value: Operation[];
 
   /**
