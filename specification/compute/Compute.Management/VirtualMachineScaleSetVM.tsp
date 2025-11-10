@@ -232,15 +232,11 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_Reimage")
   reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
-    {
-      /**
-       * Parameters for the Reimaging Virtual machine in ScaleSet.
-       */
-      @bodyRoot
-      vmScaleSetVMReimageInput?: VirtualMachineScaleSetVMReimageParameters;
-    },
-    OkResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Request = VirtualMachineScaleSetVMReimageParameters,
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**

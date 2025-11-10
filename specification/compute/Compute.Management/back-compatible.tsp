@@ -329,6 +329,13 @@ using Microsoft.Compute;
 // @@clientName(VirtualMachineScaleSetVMExtension.vmName, "name");
 @@clientName(VirtualMachineScaleSetVMExtension.vmType, "type");
 
+@@clientName(AvailabilitySets.convertToVirtualMachineScaleSet::parameters.body,
+  "parameters"
+);
+@@clientName(VirtualMachines.migrateToVMScaleSet::parameters.body,
+  "parameters"
+);
+
 @@clientLocation(VirtualMachineScaleSetVMS.approveRollingUpgrade,
   "VirtualMachineScaleSetVMs",
   "!csharp"

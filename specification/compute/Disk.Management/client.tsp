@@ -1,10 +1,13 @@
-import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
-// Mitigate breaking changes for Java SDK migration from Swagger to TypeSpec
+@@clientName(DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey,
+  "ConfidentialVMVmguestStateOnlyEncryptedWithPlatformKey",
+  "go"
+);
 
 // Property name changes - diskIOPS properties should be lowercase "iops" for Java compatibility
 @@clientName(DiskProperties.diskIOPSReadWrite, "diskIopsReadWrite", "java");
@@ -27,9 +30,4 @@ using Microsoft.Compute;
 @@clientName(GrantAccessData.getSecureVMGuestStateSAS,
   "getSecureVMGuestStateSas",
   "java"
-);
-
-@@clientName(DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey,
-  "ConfidentialVMVmguestStateOnlyEncryptedWithPlatformKey",
-  "go"
 );

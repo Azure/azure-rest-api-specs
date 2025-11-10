@@ -1,5 +1,3 @@
-// @ts-check
-
 // For now, treat all paths as posix, since this is the format returned from git commands
 import debug from "debug";
 import { dirname, join, relative, resolve } from "path";

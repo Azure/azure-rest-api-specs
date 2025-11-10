@@ -42,9 +42,9 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
   plan?: Plan;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetProperties;
 
   /**
@@ -177,13 +177,9 @@ interface VirtualMachineScaleSets {
    */
   approveRollingUpgrade is ComputeResourceActionNoResponseContentAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    Error = CloudError
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Error = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -200,12 +196,7 @@ interface VirtualMachineScaleSets {
    */
   deallocate is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
+    Request = VirtualMachineScaleSetVMInstanceIDs,
     Response = OkResponse,
     Parameters = {
       /**
@@ -214,7 +205,9 @@ interface VirtualMachineScaleSets {
       @query("hibernate")
       hibernate?: boolean;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -304,14 +297,11 @@ interface VirtualMachineScaleSets {
    */
   performMaintenance is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
+    Request = VirtualMachineScaleSetVMInstanceIDs,
     Response = OkResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -320,13 +310,8 @@ interface VirtualMachineScaleSets {
   @action("poweroff")
   powerOff is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse,
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
     Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
@@ -334,7 +319,9 @@ interface VirtualMachineScaleSets {
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -352,14 +339,11 @@ interface VirtualMachineScaleSets {
    */
   redeploy is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -367,15 +351,11 @@ interface VirtualMachineScaleSets {
    */
   reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * Parameters for Reimaging VM ScaleSet.
-       */
-      @bodyRoot
-      vmScaleSetReimageInput?: VirtualMachineScaleSetReimageParameters;
-    },
-    OkResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Request = VirtualMachineScaleSetReimageParameters,
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -384,14 +364,11 @@ interface VirtualMachineScaleSets {
   @action("reimageall")
   reimageAll is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -399,14 +376,11 @@ interface VirtualMachineScaleSets {
    */
   restart is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -436,14 +410,11 @@ interface VirtualMachineScaleSets {
    */
   start is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Request = VirtualMachineScaleSetVMInstanceIDs,
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**

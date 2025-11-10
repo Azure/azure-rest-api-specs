@@ -228,6 +228,65 @@ describe("update labels", () => {
         targetBranch: "RPSaaSMaster",
       },
     },
+    {
+      description:
+        "Should remove NotReadyForArmReview and add WaitForARMFeedback when CI-NewRPNamespaceWithoutRPaaS and RPaaSException",
+      existingLabels: [
+        "ARMReview",
+        "CI-NewRPNamespaceWithoutRPaaS",
+        "new-api-version",
+        "new-rp-namespace",
+        "NotReadyForARMReview",
+        "resource-manager",
+        "RPaaSException",
+        "TypeSpec",
+      ],
+      expectedLabelsToAdd: ["WaitForARMFeedback"],
+      expectedLabelsToRemove: ["NotReadyForARMReview"],
+      impactAssessment: {
+        suppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: true,
+        rpaasRPMissing: true,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        typeSpecChanged: true,
+        isNewApiVersion: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
+    {
+      description:
+        "Should remove WaitForARMFeedback when ARMSignedOff, CI-NewRPNamespaceWithoutRPaaS, and RPaaSException",
+      existingLabels: [
+        "ARMReview",
+        "ARMSignedOff",
+        "CI-NewRPNamespaceWithoutRPaaS",
+        "new-api-version",
+        "new-rp-namespace",
+        "resource-manager",
+        "RPaaSException",
+        "TypeSpec",
+        "WaitForARMFeedback",
+      ],
+      expectedLabelsToAdd: [],
+      expectedLabelsToRemove: ["WaitForARMFeedback"],
+      impactAssessment: {
+        suppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: true,
+        rpaasRPMissing: true,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        typeSpecChanged: true,
+        isNewApiVersion: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
   ];
   it.each(testCases)(
     "$description",
@@ -303,7 +362,7 @@ describe("ARM review process labelling", () => {
   it.each(testCases)(
     "$description",
     async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
-      /** @type {import("./labelling.js").LabelContext} */
+      /** @type {import("../../src/summarize-checks/labelling.js").LabelContext} */
       const labelContext = {
         present: new Set(),
         toAdd: new Set(),

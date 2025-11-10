@@ -7,14 +7,6 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/GalleryRP/{version-status}/{version}/GalleryRP.json"
     examples-dir: "{project-root}/examples"
-    emit-lro-options: "all"
-  "@azure-tools/typespec-java":
-    service-dir: "sdk/compute"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-gallery"
-    namespace: "com.azure.resourcemanager.compute.gallery"
-    service-name: "Compute Gallery"
-    flavor: azure
-    client-side-validations: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
