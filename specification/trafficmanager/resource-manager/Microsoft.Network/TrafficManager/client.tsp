@@ -6,11 +6,10 @@ using Microsoft.Network;
 
 using TypeSpec.Http;
 
-@@override(HeatMapModels.get, get_override,"go");
-op get_override is HeatMapModelsOps.Read<
-  HeatMapModel,
-  Parameters = {
-    // ARM/TypeSpec core parameters
+op get_override(
+    @query("provider")
+    provider: string;
+
     @query("subscriptionId")
     subscriptionId: string;
 
@@ -21,7 +20,7 @@ op get_override is HeatMapModelsOps.Read<
     profileName: string;
 
     @query("heatMapType")
-    heatMapType: HeatMapType; // path param for ARM
+    heatMapType: HeatMapType;
 
     @query("topLeft")
     @minItems(2)
@@ -33,8 +32,11 @@ op get_override is HeatMapModelsOps.Read<
     @maxItems(2)
     botRight?: float64[];
 
-    @query
-    apiVersion?: string; // optional query for API version
-  }
->;
-  @@alternateType(get_override::parameters.heatMapType, "default", "go");
+    @query("apiVersion")
+    apiVersion?: string;
+) : HeatMapModel;
+
+@@override(HeatMapModels.get, get_override, "go"); 
+
+@@alternateType(get_override::parameters.heatMapType, "default", "go");
+
