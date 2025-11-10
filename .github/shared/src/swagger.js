@@ -249,8 +249,10 @@ export class Swagger {
    * @returns {void}
    */
   #addOperations(operations, path, pathObject) {
-    for (const [method, operation] of Object.entries(pathObject)) {
-      if (operation.operationId !== undefined && method !== "parameters") {
+    for (const [method, operation] of Object.entries(
+      /** @type {Omit<PathObject, "parameters">} */ (pathObject),
+    )) {
+      if (method !== "parameters" && operation.operationId !== undefined) {
         const operationObj = {
           id: operation.operationId,
           httpMethod: method.toUpperCase(),
