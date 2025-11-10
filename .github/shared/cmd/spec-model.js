@@ -5,7 +5,9 @@ import { SpecModel } from "../src/spec-model.js";
 
 const USAGE =
   "Usage: npx spec-model path/to/spec [--debug] [--include-operations] [--include-refs] [--relative-paths] [--no-embed-errors]\n" +
-  "Example: npx spec-model specification/widget";
+  "Examples:\n" +
+  "  npx spec-model specification/widget\n" +
+  "  npx spec-model specification --include-operations --include-refs > out.txt; grep out.txt '\"error\":'";
 
 // Exclude first two args (node, script file)
 let args = process.argv.slice(2);
