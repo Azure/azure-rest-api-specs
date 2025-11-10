@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { equals, intersect } from "../src/set";
+import { equals, intersect } from "../src/set.js";
 
 describe("set", () => {
   it.each([
@@ -56,7 +56,7 @@ describe("set", () => {
     ],
   ])(
     "intersect(%o, %o) = %o",
-    async (
+    (
       /** @type {(string|number)[]} */ a,
       /** @type {(string|number)[]} */ b,
       /** @type {(string|number)[]} */ result,
