@@ -74,46 +74,6 @@ interface HeatMapModels {
       botRight?: float64[];
     }
   >;
-
-    /**
-   * override for HeatMapModels.get
-   */
-  op getReplace(
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-      ...Azure.ResourceManager.Legacy.Provider<HeatMapModel>;
-      ...ParentKeysOf<HeatMapModel>;
-      /**
-       * The name of the Traffic Manager profile.
-       */
-      @path
-      @segment("trafficmanagerprofiles")
-      profileName: string;
-      /**
-       * The type of the heatmap.
-       */
-      @path
-      @segment("heatMaps")
-      @key("heatMapType")
-      heatMapType: HeatMapType;
-
-      /**
-      * The top left latitude,longitude pair of the rectangular viewport to query for.
-      */
-      @query("topLeft")
-      @minItems(2)
-      @maxItems(2)
-      topLeft?: float64[];
-
-      /**
-      * The bottom right latitude,longitude pair of the rectangular viewport to query for.
-      */
-      @query("botRight")
-      @minItems(2)
-      @maxItems(2)
-      botRight?: float64[];
-  ) :  Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel> | Microsoft.Network.CloudError;
 }
 
 @@doc(HeatMapModel.properties,
