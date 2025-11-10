@@ -894,7 +894,7 @@ model PolicySetDefinitionVersionProperties {
    * The policy set definition parameters that can be used in policy definition references.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  parameters?: Record<ParameterDefinitionsValue>;
+  parameters?: ParameterDefinitions;
 
   /**
    * An array of policy definition references.
