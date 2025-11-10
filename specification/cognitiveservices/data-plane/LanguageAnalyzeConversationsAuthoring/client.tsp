@@ -794,19 +794,19 @@ namespace ConversationAuthoringProjectClient {
 
     listTrainingJobs is Language.Conversations.Authoring.conversationAuthoringListTrainingJobs;
 
-    listDeploymentResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
+    listProjectResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
 
     listDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
 
     listExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;
 
-    assignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignProjectResources;
+    assignProjectResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignProjectResources;
 
-    unassignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignProjectResources;
+    unassignProjectResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignProjectResources;
 
-    getAssignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignProjectResourcesStatus;
+    getAssignProjectResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignProjectResourcesStatus;
 
-    getUnassignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignProjectResourcesStatus;
+    getUnassignProjectResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignProjectResourcesStatus;
 
     swapDeployments is Language.Conversations.Authoring.ConversationAuthoringProject.swapDeployments;
 
