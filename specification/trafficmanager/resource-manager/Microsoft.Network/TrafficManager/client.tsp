@@ -35,5 +35,5 @@ using TypeSpec.Http;
     }
   >;
 
-  @@override(HeatMapModels.get, get, "go")
+  @@override(HeatMapModels.get, get, "go");
   @@alternateType(get::parameters.heatMapType, "default", "go");
