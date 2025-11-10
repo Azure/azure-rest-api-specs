@@ -97,7 +97,7 @@ model AutonomousDatabaseBackupProperties {
 
   @doc("Retention period, in days, for long-term backups.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  retentionPeriodInDays?: LongTermBackUpRetentionPeriod;
+  retentionPeriodInDays?: int32;
 
   @doc("The backup size in terabytes (TB).")
   @visibility(Lifecycle.Read)
