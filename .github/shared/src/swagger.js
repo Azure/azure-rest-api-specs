@@ -62,6 +62,7 @@ const swaggerSchema = z.object({
  * const swagger = {
  *   "paths": {
  *     "/foo": {
+ *       "parameters": [ ... ],
  *       "get": {
  *         "operationId": "Foo_Get"
  *       },
