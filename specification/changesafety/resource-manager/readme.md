@@ -120,6 +120,9 @@ directive:
       - $.definitions.StageProgressionProperties.properties.parameters
       - $.definitions.StageProgressionPropertiesUpdate.properties.parameters
       - $.definitions.NestedStageMap.properties.parameters
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: SafeRollout.json
+    reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
 ```
 
 ---
