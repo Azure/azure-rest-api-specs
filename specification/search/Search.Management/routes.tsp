@@ -31,7 +31,7 @@ interface ServicesOperationGroup {
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
-      @header
+      @header("x-ms-client-request-id")
       clientRequestId?: string;
     },
     Error = CloudError
