@@ -109,6 +109,7 @@ describe("SpecModel", () => {
 
     const jsonRefsRelative = /** @type {SpecModelJSON} */ (
       await specModel.toJSONAsync({
+        includeOperations: true,
         includeRefs: true,
         relativePaths: true,
       })
@@ -116,6 +117,10 @@ describe("SpecModel", () => {
     const readmeJSONRelative = /** @type {ReadmeJSON} */ (jsonRefsRelative.readmes[0]);
     const readmePathRelative = readmeJSONRelative.path;
     expect(isAbsolute(readmePathRelative)).toBe(false);
+    expect(
+      /** @type {SwaggerJSON}*/ (/** @type {TagJSON} */ (readmeJSONRelative.tags[0]).inputFiles[0])
+        .operations,
+    ).toBeDefined();
     expect(
       /** @type {SwaggerJSON}*/ (/** @type {TagJSON} */ (readmeJSONRelative.tags[0]).inputFiles[0])
         .refs,
