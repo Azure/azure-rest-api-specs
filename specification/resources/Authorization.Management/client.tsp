@@ -26,7 +26,7 @@ namespace Microsoft.Authorization {
   @scope("java")
   @clientLocation(PolicyAssignments)
   @get
-  @route("/{policyAssignmentId}")
+  @route("/{+policyAssignmentId}")
   op getById(
     ...PolicyAssignmentIdParameter,
     ...Azure.Core.Foundations.ApiVersionParameter,
@@ -40,7 +40,7 @@ namespace Microsoft.Authorization {
   @scope("java")
   @clientLocation(PolicyAssignments)
   @put
-  @route("/{policyAssignmentId}")
+  @route("/{+policyAssignmentId}")
   op createById(
     ...PolicyAssignmentIdParameter,
 
@@ -61,7 +61,7 @@ namespace Microsoft.Authorization {
   @scope("java")
   @clientLocation(PolicyAssignments)
   @patch
-  @route("/{policyAssignmentId}")
+  @route("/{+policyAssignmentId}")
   op updateById(
     ...PolicyAssignmentIdParameter,
 
@@ -81,7 +81,7 @@ namespace Microsoft.Authorization {
   @scope("java")
   @clientLocation(PolicyAssignments)
   @delete
-  @route("/{policyAssignmentId}")
+  @route("/{+policyAssignmentId}")
   op deleteById(
     ...PolicyAssignmentIdParameter,
     ...Azure.Core.Foundations.ApiVersionParameter,
