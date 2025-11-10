@@ -302,7 +302,7 @@ model DatadogApplicationKey {
   /**
    * The value of the Application key.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   key: string;
 }
 
