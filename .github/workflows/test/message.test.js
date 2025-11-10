@@ -9,6 +9,11 @@ import {
   generateMarkdownTable,
 } from "../src/message.js";
 
+/**
+ * @param {import("zod").ZodType} schema
+ * @param {unknown} input
+ * @param {string | RegExp | import("@vitest/utils").Constructable | Error | undefined} expectedError
+ */
 function testSchemaParse(schema, input, expectedError) {
   if (expectedError) {
     expect(() => schema.parse(input)).toThrowError(expectedError);
@@ -18,19 +23,24 @@ function testSchemaParse(schema, input, expectedError) {
 }
 
 describe("MessageLevelSchema", () => {
-  it.each([["foo", ZodError], [MessageLevel.Error], [MessageLevel.Info], [MessageLevel.Warning]])(
-    "parse(%o)",
-    (input, expectedError) => {
-      testSchemaParse(MessageLevelSchema, input, expectedError);
-    },
-  );
+  it.each([
+    ["foo", ZodError],
+    [MessageLevel.Error, undefined],
+    [MessageLevel.Info, undefined],
+    [MessageLevel.Warning, undefined],
+  ])("parse(%o)", (input, expectedError) => {
+    testSchemaParse(MessageLevelSchema, input, expectedError);
+  });
 });
 
 describe("BaseMessageRecordSchema", () => {
   it.each([
     [{}, ZodError],
     [{ level: "foo", message: 1, time: "bar" }, ZodError],
-    [{ level: MessageLevel.Error, message: "test-message", time: new Date().toISOString() }],
+    [
+      { level: MessageLevel.Error, message: "test-message", time: new Date().toISOString() },
+      undefined,
+    ],
     [
       {
         level: MessageLevel.Warning,
@@ -41,6 +51,7 @@ describe("BaseMessageRecordSchema", () => {
         extra: { extraKey: "extraVal" },
         groupName: "test-group-name",
       },
+      undefined,
     ],
   ])("parse(%o)", (input, expectedError) => {
     testSchemaParse(BaseMessageRecordSchema, input, expectedError);
@@ -67,6 +78,7 @@ describe("MessageRecordSchema", () => {
         message: "test-message",
         time: new Date().toISOString(),
       },
+      undefined,
     ],
     [
       {
@@ -79,6 +91,7 @@ describe("MessageRecordSchema", () => {
         extra: { extraKey: "extraVal" },
         groupName: "test-group-name",
       },
+      undefined,
     ],
     [
       {
@@ -98,6 +111,7 @@ describe("MessageRecordSchema", () => {
           { tag: "tag2", path: "path2" },
         ],
       },
+      undefined,
     ],
   ])("parse(%o)", (input, expectedError) => {
     testSchemaParse(MessageRecordSchema, input, expectedError);
@@ -106,6 +120,9 @@ describe("MessageRecordSchema", () => {
 
 describe("generateMarkdownTable", () => {
   it("no messages", () => {
+    /**
+     * @type {import("../src/message.js").MessageRecord[]}
+     */
     const messages = [];
 
     expect(generateMarkdownTable(messages)).toMatchInlineSnapshot(`
