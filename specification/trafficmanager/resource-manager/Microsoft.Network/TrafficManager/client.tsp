@@ -14,9 +14,12 @@ using TypeSpec.Http;
   /**
    * Gets latest heatmap for Traffic Manager profile.
    */
+  @@override(HeatMapModels.get, get,"go");
   op get is HeatMapModelsOps.Read<
     HeatMapModel,
     Parameters = {
+      @query("heatMapType")
+      heatMapType?: string;
       /**
        * The top left latitude,longitude pair of the rectangular viewport to query for.
        */
@@ -34,6 +37,4 @@ using TypeSpec.Http;
       botRight?: float64[];
     }
   >;
-
-  @@override(HeatMapModels.get, get, "go");
-  @@alternateType(get::parameters.heatMapType, "default", "go");
+  @@alternateType(HeatMapType, "default", "go");
