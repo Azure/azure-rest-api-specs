@@ -82,3 +82,6 @@ interface Publishers {
 @@doc(Publishers.update::parameters.properties,
   "Parameters supplied to the create publisher operation."
 );
+@@doc(Publisher.identity,
+  "The managed identity of the publisher, if configured."
+);

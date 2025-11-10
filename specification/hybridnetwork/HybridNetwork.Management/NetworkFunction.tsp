@@ -109,3 +109,9 @@ alias NetworkFunctionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 @@doc(NetworkFunctions.executeRequest::parameters.body,
   "Payload for execute request post call."
 );
+@@doc(NetworkFunction.identity,
+  "The managed identity of the network function."
+);
+@@doc(NetworkFunction.etag,
+  "A unique read-only string that changes whenever the resource is updated."
+);

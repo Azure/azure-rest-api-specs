@@ -83,3 +83,6 @@ interface SiteNetworkServices {
 @@doc(SiteNetworkServices.updateTags::parameters.properties,
   "Parameters supplied to update network site tags."
 );
+@@doc(SiteNetworkService.identity,
+  "The managed identity of the Site network service, if configured."
+);
