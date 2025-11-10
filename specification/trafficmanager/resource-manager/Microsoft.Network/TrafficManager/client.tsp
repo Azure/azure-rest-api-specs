@@ -18,8 +18,6 @@ using TypeSpec.Http;
   op get is HeatMapModelsOps.Read<
     HeatMapModel,
     Parameters = {
-      @query("heatMapType")
-      heatMapType?: string;
       /**
        * The top left latitude,longitude pair of the rectangular viewport to query for.
        */
