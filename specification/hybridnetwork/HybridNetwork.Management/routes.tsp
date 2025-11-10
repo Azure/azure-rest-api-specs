@@ -12,3 +12,25 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.HybridNetwork;
+
+@armResourceOperations
+interface SiteNetworkServicesOperationGroup {
+  /**
+   * Cancels an ongoing long-running PUT operation for the specified Site Network Service resource. Other operations are not supported for cancellation at this time.
+   */
+  @action("cancelSiteNetworkServiceOperation")
+  cancelOperation is ArmProviderActionAsync<
+    Request = CancelInformation,
+    Response = ArmAcceptedLroResponse<
+      "Accepted. The header contains Location URL to check the status of the asynchronous operation",
+      ArmLroLocationHeader
+    >,
+    Scope = SubscriptionActionScope,
+    Parameters = {},
+    LroHeaders = ArmLroLocationHeader
+  >;
+}
+
+@@doc(SiteNetworkServicesOperationGroup.cancelOperation::parameters.body,
+  "The SiteNetworkService detail and an optional operation which defaults to 'Put'."
+);

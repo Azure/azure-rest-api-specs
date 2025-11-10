@@ -11,14 +11,6 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: true
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.ResourceManager.HybridNetwork"
-    use-model-reader-writer: true
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.HybridNetwork"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-hybridnetwork"
     namespace: "azure.mgmt.hybridnetwork"
@@ -31,9 +23,6 @@ options:
     namespace: "com.azure.resourcemanager.hybridnetwork"
     service-name: "HybridNetwork"
     flavor: azure
-    rename-model:
-      ProxyArtifactListOverviewListResult: "ProxyArtifactOverviewListResult"
-      ProxyArtifactVersionsListOverviewListResult: "ProxyArtifactVersionsOverviewListResult"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/hybridnetwork"
     emitter-output-dir: "{output-dir}/{service-dir}/armhybridnetwork"

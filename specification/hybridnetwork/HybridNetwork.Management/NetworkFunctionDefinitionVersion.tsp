@@ -78,7 +78,7 @@ interface NetworkFunctionDefinitionVersions {
       "The request of updating network function definition version state is accepted.",
       ArmLroLocationHeader<FinalResult = NetworkFunctionDefinitionVersionUpdateState>
     >,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkFunctionDefinitionVersionUpdateState>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkFunctionDefinitionVersion>
   >;
 }
 

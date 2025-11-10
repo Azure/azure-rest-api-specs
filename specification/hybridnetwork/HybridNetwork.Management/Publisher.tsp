@@ -34,9 +34,10 @@ interface Publishers {
   /**
    * Creates or updates a publisher.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Publisher,
-    LroHeaders = ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader,
+    OptionalRequestBody = true
   >;
 
   /**

@@ -156,7 +156,7 @@ interface ProxyArtifact {
   list is ArmResourceActionSync<
     ArtifactStore,
     void,
-    ArmResponse<ResourceListResult<ProxyArtifactListOverview>>
+    ArmResponse<ProxyArtifactOverviewListResult>
   >;
 
   /**
@@ -169,7 +169,7 @@ interface ProxyArtifact {
   proxyArtifactGet is ArmResourceActionSync<
     ArtifactStore,
     void,
-    ArmResponse<ResourceListResult<ProxyArtifactVersionsListOverview>>,
+    ArmResponse<ProxyArtifactVersionsOverviewListResult>,
     Parameters = {
       /**
        * The name of the artifact.

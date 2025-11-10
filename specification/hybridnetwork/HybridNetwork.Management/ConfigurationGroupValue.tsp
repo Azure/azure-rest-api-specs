@@ -13,10 +13,12 @@ namespace Microsoft.HybridNetwork;
 /**
  * Hybrid configuration group value resource.
  */
-model ConfigurationGroupValue
-  is Azure.ResourceManager.TrackedResource<ConfigurationGroupValuePropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model configurationGroupValue
+  is Azure.ResourceManager.TrackedResource<configurationGroupValuePropertiesFormat> {
   ...ResourceNameParameter<
-    Resource = ConfigurationGroupValue,
+    Resource = configurationGroupValue,
     KeyName = "configurationGroupValueName",
     SegmentName = "configurationGroupValues",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
@@ -28,14 +30,14 @@ interface ConfigurationGroupValues {
   /**
    * Gets information about the specified hybrid configuration group values.
    */
-  get is ArmResourceRead<ConfigurationGroupValue>;
+  get is ArmResourceRead<configurationGroupValue>;
 
   /**
    * Creates or updates a hybrid configuration group value.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    ConfigurationGroupValue,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ConfigurationGroupValue>
+    configurationGroupValue,
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   /**
@@ -43,7 +45,7 @@ interface ConfigurationGroupValues {
    */
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
-    ConfigurationGroupValue,
+    configurationGroupValue,
     PatchModel = TagsObject
   >;
 
@@ -51,7 +53,7 @@ interface ConfigurationGroupValues {
    * Deletes the specified hybrid configuration group value.
    */
   delete is ArmResourceDeleteWithoutOkAsync<
-    ConfigurationGroupValue,
+    configurationGroupValue,
     LroHeaders = ArmLroLocationHeader,
     Response = ArmAcceptedLroResponse<
       "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
@@ -62,19 +64,19 @@ interface ConfigurationGroupValues {
   /**
    * Lists all the hybrid network configurationGroupValues in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<ConfigurationGroupValue>;
+  listByResourceGroup is ArmResourceListByParent<configurationGroupValue>;
 
   /**
    * Lists all sites in the configuration group value in a subscription.
    */
-  listBySubscription is ArmListBySubscription<ConfigurationGroupValue>;
+  listBySubscription is ArmListBySubscription<configurationGroupValue>;
 }
 
-@@maxLength(ConfigurationGroupValue.name, 64);
-@@doc(ConfigurationGroupValue.name,
+@@maxLength(configurationGroupValue.name, 64);
+@@doc(configurationGroupValue.name,
   "The name of the configuration group value."
 );
-@@doc(ConfigurationGroupValue.properties,
+@@doc(configurationGroupValue.properties,
   "Hybrid configuration group value properties."
 );
 @@doc(ConfigurationGroupValues.createOrUpdate::parameters.resource,

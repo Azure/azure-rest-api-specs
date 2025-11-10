@@ -83,6 +83,9 @@
     },
     {
       "name": "SiteNetworkServices"
+    },
+    {
+      "name": "SiteNetworkServicesOperationGroup"
     }
   ],
   "paths": {
@@ -126,7 +129,7 @@
       "post": {
         "operationId": "SiteNetworkServices_CancelOperation",
         "tags": [
-          "SiteNetworkServices"
+          "SiteNetworkServicesOperationGroup"
         ],
         "description": "Cancels an ongoing long-running PUT operation for the specified Site Network Service resource. Other operations are not supported for cancellation at this time.",
         "parameters": [
@@ -148,7 +151,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. The header contains Location URL to check the status of the asynchronous operation",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -193,7 +196,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationGroupValueListResult"
+              "$ref": "#/definitions/configurationGroupValueListResult"
             }
           },
           "default": {
@@ -391,7 +394,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationGroupValueListResult"
+              "$ref": "#/definitions/configurationGroupValueListResult"
             }
           },
           "default": {
@@ -442,7 +445,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationGroupValue"
+              "$ref": "#/definitions/configurationGroupValue"
             }
           },
           "default": {
@@ -489,21 +492,21 @@
             "description": "Parameters supplied to the create or update configuration group value resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConfigurationGroupValue"
+              "$ref": "#/definitions/configurationGroupValue"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ConfigurationGroupValue' update operation succeeded",
+            "description": "Resource 'configurationGroupValue' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConfigurationGroupValue"
+              "$ref": "#/definitions/configurationGroupValue"
             }
           },
           "201": {
-            "description": "Resource 'ConfigurationGroupValue' create operation succeeded",
+            "description": "Resource 'configurationGroupValue' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConfigurationGroupValue"
+              "$ref": "#/definitions/configurationGroupValue"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -532,7 +535,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/ConfigurationGroupValue"
+          "final-state-schema": "#/definitions/configurationGroupValue"
         },
         "x-ms-long-running-operation": true
       },
@@ -575,7 +578,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationGroupValue"
+              "$ref": "#/definitions/configurationGroupValue"
             }
           },
           "default": {
@@ -712,8 +715,7 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string",
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -763,8 +765,7 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string",
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -846,8 +847,7 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string",
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -900,8 +900,7 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string",
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -966,8 +965,7 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string",
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1016,8 +1014,7 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string",
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+            "type": "string"
           },
           {
             "name": "componentName",
@@ -1072,8 +1069,7 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string",
-            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -1234,7 +1230,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameters supplied to the create publisher operation.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/Publisher"
             }
@@ -2426,7 +2422,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProxyArtifactVersionsListOverviewListResult"
+              "$ref": "#/definitions/ProxyArtifactVersionsOverviewListResult"
             }
           },
           "default": {
@@ -2584,7 +2580,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProxyArtifactListOverviewListResult"
+              "$ref": "#/definitions/ProxyArtifactOverviewListResult"
             }
           },
           "default": {
@@ -4442,7 +4438,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkServiceDesignVersionListResult"
+              "$ref": "#/definitions/networkServiceDesignVersionListResult"
             }
           },
           "default": {
@@ -4511,7 +4507,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkServiceDesignVersion"
+              "$ref": "#/definitions/networkServiceDesignVersion"
             }
           },
           "default": {
@@ -4576,21 +4572,21 @@
             "description": "Parameters supplied to the create or update network service design version operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkServiceDesignVersion"
+              "$ref": "#/definitions/networkServiceDesignVersion"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NetworkServiceDesignVersion' update operation succeeded",
+            "description": "Resource 'networkServiceDesignVersion' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NetworkServiceDesignVersion"
+              "$ref": "#/definitions/networkServiceDesignVersion"
             }
           },
           "201": {
-            "description": "Resource 'NetworkServiceDesignVersion' create operation succeeded",
+            "description": "Resource 'networkServiceDesignVersion' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NetworkServiceDesignVersion"
+              "$ref": "#/definitions/networkServiceDesignVersion"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -4613,7 +4609,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/NetworkServiceDesignVersion"
+          "final-state-schema": "#/definitions/networkServiceDesignVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -4674,7 +4670,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkServiceDesignVersion"
+              "$ref": "#/definitions/networkServiceDesignVersion"
             }
           },
           "default": {
@@ -5530,8 +5526,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ArtifactManifestPropertiesFormat",
-          "description": "Artifact manifest properties.",
-          "x-ms-client-flatten": true
+          "description": "Artifact manifest properties."
         }
       },
       "allOf": [
@@ -5715,8 +5710,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ArtifactStorePropertiesFormat",
-          "description": "ArtifactStores properties.",
-          "x-ms-client-flatten": true
+          "description": "ArtifactStores properties."
         }
       },
       "allOf": [
@@ -5940,7 +5934,7 @@
         ]
       }
     },
-    "AzureArcK8SClusterNfviDetails": {
+    "AzureArcK8sClusterNFVIDetails": {
       "type": "object",
       "description": "The AzureArcK8sCluster NFVI detail.",
       "properties": {
@@ -6162,6 +6156,22 @@
         ]
       }
     },
+    "AzureCoreNFVIDetails": {
+      "type": "object",
+      "description": "The Azure Core NFVI detail.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the Azure core."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NFVIs"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCore"
+    },
     "AzureCoreNetworkFunctionApplication": {
       "type": "object",
       "description": "Azure virtual network function application definition.",
@@ -6242,22 +6252,6 @@
         }
       ],
       "x-ms-discriminator-value": "VhdImageFile"
-    },
-    "AzureCoreNfviDetails": {
-      "type": "object",
-      "description": "The Azure Core NFVI detail.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location of the Azure core."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/NFVIs"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureCore"
     },
     "AzureCoreVhdImageArtifactProfile": {
       "type": "object",
@@ -6346,7 +6340,7 @@
         ]
       }
     },
-    "AzureOperatorNexusClusterNfviDetails": {
+    "AzureOperatorNexusClusterNFVIDetails": {
       "type": "object",
       "description": "The AzureOperatorNexusCluster NFVI detail.",
       "properties": {
@@ -6561,8 +6555,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ComponentProperties",
-          "description": "The component properties.",
-          "x-ms-client-flatten": true
+          "description": "The component properties."
         }
       },
       "allOf": [
@@ -6619,8 +6612,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationGroupSchemaPropertiesFormat",
-          "description": "Configuration group schema properties.",
-          "x-ms-client-flatten": true
+          "description": "Configuration group schema properties."
         }
       },
       "allOf": [
@@ -6688,22 +6680,6 @@
         }
       }
     },
-    "ConfigurationGroupValue": {
-      "type": "object",
-      "description": "Hybrid configuration group value resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConfigurationGroupValuePropertiesFormat",
-          "description": "Hybrid configuration group value properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "ConfigurationGroupValueConfigurationType": {
       "type": "string",
       "description": "The secret type which indicates if secret or not.",
@@ -6731,86 +6707,24 @@
         ]
       }
     },
-    "ConfigurationGroupValueListResult": {
-      "type": "object",
-      "description": "The response of a ConfigurationGroupValue list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ConfigurationGroupValue items on this page",
-          "items": {
-            "$ref": "#/definitions/ConfigurationGroupValue"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ConfigurationGroupValuePropertiesFormat": {
-      "type": "object",
-      "description": "Hybrid configuration group value properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the site resource.",
-          "readOnly": true
-        },
-        "publisherName": {
-          "type": "string",
-          "description": "The publisher name for the configuration group schema.",
-          "readOnly": true
-        },
-        "publisherScope": {
-          "$ref": "#/definitions/PublisherScope",
-          "description": "The scope of the publisher.",
-          "readOnly": true
-        },
-        "configurationGroupSchemaName": {
-          "type": "string",
-          "description": "The configuration group schema name.",
-          "readOnly": true
-        },
-        "configurationGroupSchemaOfferingLocation": {
-          "type": "string",
-          "description": "The location of the configuration group schema offering.",
-          "readOnly": true
-        },
-        "configurationGroupSchemaResourceReference": {
-          "$ref": "#/definitions/DeploymentResourceIdReference",
-          "description": "The configuration group schema resource reference."
-        },
-        "configurationType": {
-          "$ref": "#/definitions/ConfigurationGroupValueConfigurationType",
-          "description": "The value which indicates if configuration values are secrets"
-        }
-      },
-      "discriminator": "configurationType",
-      "required": [
-        "configurationType"
-      ]
-    },
     "ConfigurationValueWithSecrets": {
       "type": "object",
       "description": "The ConfigurationValue with secrets.",
       "properties": {
         "secretConfigurationValue": {
           "type": "string",
+          "format": "password",
           "description": "Name and value pairs that define the configuration value secrets. It can be a well formed escaped JSON string.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ConfigurationGroupValuePropertiesFormat"
+          "$ref": "#/definitions/configurationGroupValuePropertiesFormat"
         }
       ],
       "x-ms-discriminator-value": "Secret"
@@ -6826,7 +6740,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ConfigurationGroupValuePropertiesFormat"
+          "$ref": "#/definitions/configurationGroupValuePropertiesFormat"
         }
       ],
       "x-ms-discriminator-value": "Open"
@@ -6847,7 +6761,7 @@
       ],
       "x-ms-discriminator-value": "ContainerizedNetworkFunction"
     },
-    "ContainerizedNetworkFunctionNfviType": {
+    "ContainerizedNetworkFunctionNFVIType": {
       "type": "string",
       "description": "The network function type.",
       "enum": [
@@ -6855,7 +6769,7 @@
         "AzureArcKubernetes"
       ],
       "x-ms-enum": {
-        "name": "ContainerizedNetworkFunctionNfviType",
+        "name": "ContainerizedNetworkFunctionNFVIType",
         "modelAsString": true,
         "values": [
           {
@@ -6874,7 +6788,7 @@
       "description": "Containerized network function template.",
       "properties": {
         "nfviType": {
-          "$ref": "#/definitions/ContainerizedNetworkFunctionNfviType",
+          "$ref": "#/definitions/ContainerizedNetworkFunctionNFVIType",
           "description": "The network function type.",
           "x-ms-mutability": [
             "read",
@@ -7137,8 +7051,7 @@
         },
         "wait": {
           "type": "string",
-          "description": "The helm deployment wait options",
-          "x-ms-client-name": "waitOption"
+          "description": "The helm deployment wait options"
         },
         "timeout": {
           "type": "string",
@@ -7200,8 +7113,7 @@
         },
         "wait": {
           "type": "string",
-          "description": "The helm deployment wait options",
-          "x-ms-client-name": "waitOption"
+          "description": "The helm deployment wait options"
         },
         "timeout": {
           "type": "string",
@@ -7393,16 +7305,16 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkFunctionPropertiesFormat",
-          "description": "Network function properties.",
-          "x-ms-client-flatten": true
+          "description": "Network function properties."
         },
         "etag": {
           "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed identity of the network function."
         }
       },
       "allOf": [
@@ -7458,8 +7370,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkFunctionDefinitionGroupPropertiesFormat",
-          "description": "Network function definition group properties.",
-          "x-ms-client-flatten": true
+          "description": "Network function definition group properties."
         }
       },
       "allOf": [
@@ -7526,8 +7437,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkFunctionDefinitionVersionPropertiesFormat",
-          "description": "Network function definition version properties.",
-          "x-ms-client-flatten": true
+          "description": "Network function definition version properties."
         }
       },
       "allOf": [
@@ -7595,7 +7505,7 @@
       "properties": {
         "versionState": {
           "$ref": "#/definitions/VersionState",
-          "description": "The network function definition version state. Only the 'Active' and 'Deprecated' states are allowed for updates. Other states are used for internal state transitioning.",
+          "description": "The network function definition version state.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7719,11 +7629,13 @@
       "properties": {
         "secretDeploymentValues": {
           "type": "string",
+          "format": "password",
           "description": "The JSON-serialized secret deployment values from the user. This contains secrets like passwords,keys etc",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -7755,8 +7667,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkServiceDesignGroupPropertiesFormat",
-          "description": "network service design group properties.",
-          "x-ms-client-flatten": true
+          "description": "network service design group properties."
         }
       },
       "allOf": [
@@ -7798,87 +7709,6 @@
         "description": {
           "type": "string",
           "description": "The network service design group description."
-        }
-      }
-    },
-    "NetworkServiceDesignVersion": {
-      "type": "object",
-      "description": "network service design version.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkServiceDesignVersionPropertiesFormat",
-          "description": "network service design version properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "NetworkServiceDesignVersionListResult": {
-      "type": "object",
-      "description": "The response of a NetworkServiceDesignVersion list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The NetworkServiceDesignVersion items on this page",
-          "items": {
-            "$ref": "#/definitions/NetworkServiceDesignVersion"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "NetworkServiceDesignVersionPropertiesFormat": {
-      "type": "object",
-      "description": "network service design version properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the network service design version resource.",
-          "readOnly": true
-        },
-        "versionState": {
-          "$ref": "#/definitions/VersionState",
-          "description": "The network service design version state.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "The network service design version description."
-        },
-        "configurationGroupSchemaReferences": {
-          "type": "object",
-          "description": "The configuration schemas to used to define the values.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ReferencedResource"
-          }
-        },
-        "nfvisFromSite": {
-          "type": "object",
-          "description": "The nfvis from the site.",
-          "additionalProperties": {
-            "$ref": "#/definitions/NfviDetails"
-          }
-        },
-        "resourceElementTemplates": {
-          "type": "array",
-          "description": "List of resource element template",
-          "items": {
-            "$ref": "#/definitions/ResourceElementTemplate"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
         }
       }
     },
@@ -8157,21 +7987,20 @@
         }
       ]
     },
-    "ProxyArtifactListOverviewListResult": {
+    "ProxyArtifactOverviewListResult": {
       "type": "object",
-      "description": "The response of a ProxyArtifactListOverview list operation.",
+      "description": "The description for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProxyArtifactListOverview items on this page",
+          "description": "The description for value property",
           "items": {
             "$ref": "#/definitions/ProxyArtifactListOverview"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The description for nextLink property"
         }
       },
       "required": [
@@ -8211,21 +8040,20 @@
         }
       ]
     },
-    "ProxyArtifactVersionsListOverviewListResult": {
+    "ProxyArtifactVersionsOverviewListResult": {
       "type": "object",
-      "description": "The response of a ProxyArtifactVersionsListOverview list operation.",
+      "description": "The description for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProxyArtifactVersionsListOverview items on this page",
+          "description": "The description for value property",
           "items": {
             "$ref": "#/definitions/ProxyArtifactVersionsListOverview"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The description for nextLink property"
         }
       },
       "required": [
@@ -8238,12 +8066,11 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PublisherPropertiesFormat",
-          "description": "Publisher properties.",
-          "x-ms-client-flatten": true
+          "description": "Publisher properties."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed identity of the publisher, if configured."
         }
       },
       "allOf": [
@@ -8396,7 +8223,7 @@
         "type": {
           "$ref": "#/definitions/Type",
           "description": "The resource element template type.",
-          "x-ms-client-name": "resourceElementType"
+          "x-ms-client-name": "ResourceElementType"
         },
         "dependsOnProfile": {
           "$ref": "#/definitions/DependsOnProfile",
@@ -8455,11 +8282,13 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "password",
           "description": "Resource ID.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -8475,8 +8304,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SitePropertiesFormat",
-          "description": "Site properties.",
-          "x-ms-client-flatten": true
+          "description": "Site properties."
         }
       },
       "allOf": [
@@ -8512,12 +8340,11 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SiteNetworkServicePropertiesFormat",
-          "description": "Site network service properties.",
-          "x-ms-client-flatten": true
+          "description": "Site network service properties."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed identity of the Site network service, if configured."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -8952,23 +8779,7 @@
         }
       }
     },
-    "VirtualNetworkFunctionNetworkFunctionDefinitionVersion": {
-      "type": "object",
-      "description": "Virtual network function network function definition version properties.",
-      "properties": {
-        "networkFunctionTemplate": {
-          "$ref": "#/definitions/VirtualNetworkFunctionTemplate",
-          "description": "Virtual network function template."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/NetworkFunctionDefinitionVersionPropertiesFormat"
-        }
-      ],
-      "x-ms-discriminator-value": "VirtualNetworkFunction"
-    },
-    "VirtualNetworkFunctionNfviType": {
+    "VirtualNetworkFunctionNFVIType": {
       "type": "string",
       "description": "The network function type.",
       "enum": [
@@ -8977,7 +8788,7 @@
         "AzureOperatorNexus"
       ],
       "x-ms-enum": {
-        "name": "VirtualNetworkFunctionNfviType",
+        "name": "VirtualNetworkFunctionNFVIType",
         "modelAsString": true,
         "values": [
           {
@@ -8995,12 +8806,28 @@
         ]
       }
     },
+    "VirtualNetworkFunctionNetworkFunctionDefinitionVersion": {
+      "type": "object",
+      "description": "Virtual network function network function definition version properties.",
+      "properties": {
+        "networkFunctionTemplate": {
+          "$ref": "#/definitions/VirtualNetworkFunctionTemplate",
+          "description": "Virtual network function template."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionDefinitionVersionPropertiesFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "VirtualNetworkFunction"
+    },
     "VirtualNetworkFunctionTemplate": {
       "type": "object",
       "description": "Virtual network function template.",
       "properties": {
         "nfviType": {
-          "$ref": "#/definitions/VirtualNetworkFunctionNfviType",
+          "$ref": "#/definitions/VirtualNetworkFunctionNFVIType",
           "description": "The network function type.",
           "x-ms-mutability": [
             "read",
@@ -9012,6 +8839,165 @@
       "required": [
         "nfviType"
       ]
+    },
+    "configurationGroupValue": {
+      "type": "object",
+      "description": "Hybrid configuration group value resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/configurationGroupValuePropertiesFormat",
+          "description": "Hybrid configuration group value properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "configurationGroupValueListResult": {
+      "type": "object",
+      "description": "The response of a configurationGroupValue list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The configurationGroupValue items on this page",
+          "items": {
+            "$ref": "#/definitions/configurationGroupValue"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "configurationGroupValuePropertiesFormat": {
+      "type": "object",
+      "description": "Hybrid configuration group value properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the site resource.",
+          "readOnly": true
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name for the configuration group schema.",
+          "readOnly": true
+        },
+        "publisherScope": {
+          "$ref": "#/definitions/PublisherScope",
+          "description": "The scope of the publisher.",
+          "readOnly": true
+        },
+        "configurationGroupSchemaName": {
+          "type": "string",
+          "description": "The configuration group schema name.",
+          "readOnly": true
+        },
+        "configurationGroupSchemaOfferingLocation": {
+          "type": "string",
+          "description": "The location of the configuration group schema offering.",
+          "readOnly": true
+        },
+        "configurationGroupSchemaResourceReference": {
+          "$ref": "#/definitions/DeploymentResourceIdReference",
+          "description": "The configuration group schema resource reference."
+        },
+        "configurationType": {
+          "$ref": "#/definitions/ConfigurationGroupValueConfigurationType",
+          "description": "The value which indicates if configuration values are secrets"
+        }
+      },
+      "discriminator": "configurationType",
+      "required": [
+        "configurationType"
+      ]
+    },
+    "networkServiceDesignVersion": {
+      "type": "object",
+      "description": "network service design version.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/networkServiceDesignVersionPropertiesFormat",
+          "description": "network service design version properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "networkServiceDesignVersionListResult": {
+      "type": "object",
+      "description": "The response of a networkServiceDesignVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The networkServiceDesignVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/networkServiceDesignVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "networkServiceDesignVersionPropertiesFormat": {
+      "type": "object",
+      "description": "network service design version properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the network service design version resource.",
+          "readOnly": true
+        },
+        "versionState": {
+          "$ref": "#/definitions/VersionState",
+          "description": "The network service design version state.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The network service design version description."
+        },
+        "configurationGroupSchemaReferences": {
+          "type": "object",
+          "description": "The configuration schemas to used to define the values.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ReferencedResource"
+          }
+        },
+        "nfvisFromSite": {
+          "type": "object",
+          "description": "The nfvis from the site.",
+          "additionalProperties": {
+            "$ref": "#/definitions/NfviDetails"
+          }
+        },
+        "resourceElementTemplates": {
+          "type": "array",
+          "description": "List of resource element template",
+          "items": {
+            "$ref": "#/definitions/ResourceElementTemplate"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     }
   },
   "parameters": {}

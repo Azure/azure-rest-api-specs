@@ -14,11 +14,13 @@ namespace Microsoft.HybridNetwork;
 /**
  * network service design version.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NetworkServiceDesignGroup)
-model NetworkServiceDesignVersion
-  is Azure.ResourceManager.TrackedResource<NetworkServiceDesignVersionPropertiesFormat> {
+model networkServiceDesignVersion
+  is Azure.ResourceManager.TrackedResource<networkServiceDesignVersionPropertiesFormat> {
   ...ResourceNameParameter<
-    Resource = NetworkServiceDesignVersion,
+    Resource = networkServiceDesignVersion,
     KeyName = "networkServiceDesignVersionName",
     SegmentName = "networkServiceDesignVersions",
     NamePattern = "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
@@ -30,14 +32,14 @@ interface NetworkServiceDesignVersions {
   /**
    * Gets information about a network service design version.
    */
-  get is ArmResourceRead<NetworkServiceDesignVersion>;
+  get is ArmResourceRead<networkServiceDesignVersion>;
 
   /**
    * Creates or updates a network service design version.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NetworkServiceDesignVersion,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkServiceDesignVersion>
+    networkServiceDesignVersion,
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   /**
@@ -45,7 +47,7 @@ interface NetworkServiceDesignVersions {
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
-    NetworkServiceDesignVersion,
+    networkServiceDesignVersion,
     PatchModel = TagsObject
   >;
 
@@ -53,7 +55,7 @@ interface NetworkServiceDesignVersions {
    * Deletes the specified network service design version.
    */
   delete is ArmResourceDeleteWithoutOkAsync<
-    NetworkServiceDesignVersion,
+    networkServiceDesignVersion,
     Response = ArmAcceptedLroResponse<
       "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
       LroHeaders = ArmLroLocationHeader
@@ -64,7 +66,7 @@ interface NetworkServiceDesignVersions {
   /**
    * Gets information about a list of network service design versions under a network service design group.
    */
-  listByNetworkServiceDesignGroup is ArmResourceListByParent<NetworkServiceDesignVersion>;
+  listByNetworkServiceDesignGroup is ArmResourceListByParent<networkServiceDesignVersion>;
 
   /**
    * Update network service design version state.
@@ -72,21 +74,21 @@ interface NetworkServiceDesignVersions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkServiceDesignVersions_updateState")
   updateState is ArmResourceActionAsyncBase<
-    NetworkServiceDesignVersion,
+    networkServiceDesignVersion,
     NetworkServiceDesignVersionUpdateState,
     ArmResponse<NetworkServiceDesignVersionUpdateState> | ArmAcceptedLroResponse<
       "The request of updating network service design version state is accepted.",
       ArmLroLocationHeader<FinalResult = NetworkServiceDesignVersionUpdateState>
     >,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkServiceDesignVersion>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<networkServiceDesignVersion>
   >;
 }
 
-@@maxLength(NetworkServiceDesignVersion.name, 64);
-@@doc(NetworkServiceDesignVersion.name,
+@@maxLength(networkServiceDesignVersion.name, 64);
+@@doc(networkServiceDesignVersion.name,
   "The name of the network service design version. The name should conform to the SemVer 2.0.0 specification: https://semver.org/spec/v2.0.0.html."
 );
-@@doc(NetworkServiceDesignVersion.properties,
+@@doc(networkServiceDesignVersion.properties,
   "network service design version properties."
 );
 @@doc(NetworkServiceDesignVersions.createOrUpdate::parameters.resource,

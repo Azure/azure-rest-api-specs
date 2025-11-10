@@ -416,7 +416,7 @@ union ApplicationEnablement {
 /**
  * The network function type.
  */
-union ContainerizedNetworkFunctionNfviType {
+union ContainerizedNetworkFunctionNFVIType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
@@ -427,7 +427,7 @@ union ContainerizedNetworkFunctionNfviType {
 /**
  * The network function type.
  */
-union VirtualNetworkFunctionNfviType {
+union VirtualNetworkFunctionNFVIType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
@@ -549,8 +549,9 @@ model ConfigurationGroupSchemaVersionUpdateState {
 /**
  * Hybrid configuration group value properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("configurationType")
-model ConfigurationGroupValuePropertiesFormat {
+model configurationGroupValuePropertiesFormat {
   /**
    * The provisioning state of the site resource.
    */
@@ -1085,7 +1086,8 @@ model NetworkServiceDesignGroupPropertiesFormat {
 /**
  * network service design version properties.
  */
-model NetworkServiceDesignVersionPropertiesFormat {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model networkServiceDesignVersionPropertiesFormat {
   /**
    * The provisioning state of the network service design version resource.
    */
@@ -1752,6 +1754,7 @@ model SecretDeploymentResourceReference extends DeploymentResourceIdReference {
   /**
    * Resource ID.
    */
+  @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   id?: string;
 
@@ -1779,12 +1782,14 @@ model OpenDeploymentResourceReference extends DeploymentResourceIdReference {
 /**
  * The ConfigurationValue with secrets.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConfigurationValueWithSecrets
-  extends ConfigurationGroupValuePropertiesFormat {
+  extends configurationGroupValuePropertiesFormat {
   /**
    * Name and value pairs that define the configuration value secrets. It can be a well formed escaped JSON string.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   secretConfigurationValue?: string;
 
   /**
@@ -1796,8 +1801,9 @@ model ConfigurationValueWithSecrets
 /**
  * The ConfigurationValue with no secrets.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConfigurationValueWithoutSecrets
-  extends ConfigurationGroupValuePropertiesFormat {
+  extends configurationGroupValuePropertiesFormat {
   /**
    * Name and value pairs that define the configuration value. It can be a well formed escaped JSON string.
    */
@@ -1817,6 +1823,7 @@ model NetworkFunctionValueWithSecrets extends NetworkFunctionPropertiesFormat {
    * The JSON-serialized secret deployment values from the user. This contains secrets like passwords,keys etc
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   secretDeploymentValues?: string;
 
   /**
@@ -1866,7 +1873,7 @@ model ContainerizedNetworkFunctionTemplate {
    * The network function type.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  nfviType: ContainerizedNetworkFunctionNfviType;
+  nfviType: ContainerizedNetworkFunctionNFVIType;
 }
 
 /**
@@ -1894,7 +1901,7 @@ model VirtualNetworkFunctionTemplate {
    * The network function type.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  nfviType: VirtualNetworkFunctionNfviType;
+  nfviType: VirtualNetworkFunctionNFVIType;
 }
 
 /**
@@ -2033,11 +2040,13 @@ model HelmMappingRuleProfileOptions {
   /**
    * The helm deployment install options
    */
+  @doc("The helm deployment install options")
   installOptions?: HelmInstallOptions;
 
   /**
    * The helm deployment upgrade options
    */
+  @doc("The helm deployment upgrade options")
   upgradeOptions?: HelmUpgradeOptions;
 }
 
@@ -2462,21 +2471,9 @@ model NetworkFunctionDefinitionResourceElementTemplateDetails
 }
 
 /**
- * The proxy artifact overview.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ProxyArtifactOverview
-  extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  /**
-   * Proxy Artifact properties overview.
-   */
-  @visibility(Lifecycle.Read)
-  properties?: ProxyArtifactOverviewPropertiesFormat;
-}
-
-/**
  * Proxy Artifact overview properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyArtifactOverviewPropertiesFormat {
   /**
    * The proxy artifact overview properties.
@@ -2488,7 +2485,8 @@ model ProxyArtifactOverviewPropertiesFormat {
 /**
  * The Azure Core NFVI detail.
  */
-model AzureCoreNfviDetails extends NFVIs {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AzureCoreNFVIDetails extends NFVIs {
   /**
    * Location of the Azure core.
    */
@@ -2504,7 +2502,7 @@ model AzureCoreNfviDetails extends NFVIs {
  * The AzureArcK8sCluster NFVI detail.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AzureArcK8SClusterNfviDetails extends NFVIs {
+model AzureArcK8sClusterNFVIDetails extends NFVIs {
   /**
    * The reference to the custom location.
    */
@@ -2519,7 +2517,8 @@ model AzureArcK8SClusterNfviDetails extends NFVIs {
 /**
  * The AzureOperatorNexusCluster NFVI detail.
  */
-model AzureOperatorNexusClusterNfviDetails extends NFVIs {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AzureOperatorNexusClusterNFVIDetails extends NFVIs {
   /**
    * The reference to the custom location.
    */
@@ -2529,4 +2528,38 @@ model AzureOperatorNexusClusterNfviDetails extends NFVIs {
    * The NFVI type.
    */
   nfviType: "AzureOperatorNexus";
+}
+
+/**
+ * The description for page model
+ */
+model ProxyArtifactVersionsOverviewListResult {
+  /**
+   * The description for value property
+   */
+  @pageItems
+  value: ProxyArtifactVersionsListOverview[];
+
+  /**
+   * The description for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The description for page model
+ */
+model ProxyArtifactOverviewListResult {
+  /**
+   * The description for value property
+   */
+  @pageItems
+  value: ProxyArtifactListOverview[];
+
+  /**
+   * The description for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
 }
