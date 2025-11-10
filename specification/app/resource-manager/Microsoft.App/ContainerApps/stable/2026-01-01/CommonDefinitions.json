@@ -1641,25 +1641,11 @@
           }
         },
         "extendedProperties": {
-          "type": "array",
-          "description": "Additional properties for the data connector.",
-          "items": {
-            "$ref": "#/definitions/ExtendedProperties"
+          "type": "object",
+          "description": "Additional properties for the data connector which can be used to store custom key-value pairs.",
+          "additionalProperties": {
+            "type": "object"
           }
-        }
-      }
-    },
-    "ExtendedProperties": {
-      "type": "object",
-      "description": "Additional properties for the data connector.",
-      "properties": {
-        "name": {
-          "description": "Name of the additional property.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Value of the additional property.",
-          "type": "object"
         }
       }
     }
