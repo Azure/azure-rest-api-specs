@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AzureStackHCIClient",
+    "title": "Microsoft.AzureStackHCI",
     "version": "2025-10-01",
-    "description": "Azure Stack HCI management service",
+    "description": "Azure Stack HCI service",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -340,6 +340,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_ListByEdgeDevice": {
+            "$ref": "./examples/EdgeDeviceJobs_ListByEdgeDevice.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -393,6 +398,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Get_RemoteSupport": {
+            "$ref": "./examples/EdgeDeviceJobs_Get_RemoteSupport.json"
           }
         }
       },
@@ -471,6 +481,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_CreateOrUpdate_CollectLog": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_CollectLog.json"
+          },
+          "EdgeDeviceJobs_CreateOrUpdate_RemoteSupport": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_RemoteSupport.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -534,6 +552,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Delete": {
+            "$ref": "./examples/EdgeDeviceJobs_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -710,6 +733,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ValidatedSolutionRecipes_ListBySubscriptionLocationResource": {
+            "$ref": "./examples/ValidatedSolutionRecipes_ListBySubscriptionLocationResource.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -753,6 +781,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ValidatedSolutionRecipes_Get": {
+            "$ref": "./examples/ValidatedSolutionRecipes_Get.json"
           }
         }
       }
@@ -3209,6 +3242,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update secrets locations for a Cluster": {
+            "$ref": "./examples/Clusters_UpdateSecretsLocations.json"
           }
         },
         "x-ms-long-running-operation-options": {

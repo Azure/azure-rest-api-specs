@@ -41,11 +41,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Stack HCI management service
+ * Azure Stack HCI service
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-@armProviderNamespace
-@service(#{ title: "AzureStackHCIClient" })
+@armProviderNamespace("Microsoft.AzureStackHCI")
+@service(#{ title: "Microsoft.AzureStackHCI" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.AzureStackHCI;
@@ -58,6 +58,7 @@ enum Versions {
    * The 2025-10-01 API version.
    */
   v2025_10_01: "2025-10-01",
+
   /**
    * The 2025-11-01-preview API version.
    */

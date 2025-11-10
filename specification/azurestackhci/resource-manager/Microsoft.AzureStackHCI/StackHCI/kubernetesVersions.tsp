@@ -30,8 +30,8 @@ interface KubernetesVersions {
   list is ArmResourceListAtScope<KubernetesVersion>;
 }
 
-@added(Versions.v2025_11_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@added(Versions.v2025_11_01_preview)
 @doc("Represents properties of a kubernetes version.")
 model KubernetesVersionProperties {
   @doc("Represents kubernetes version.")

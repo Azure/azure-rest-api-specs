@@ -5,7 +5,6 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ResourceManager;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureStackHCI;
 // FIXME: EdgeDevice has no properties property
@@ -29,8 +28,6 @@ model EdgeDevice
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: DeviceKind = DeviceKind.HCI;
 }
-
-@@clientName(EdgeDevices.createOrUpdate::parameters.resource, "edgeDeviceName");
 
 @armResourceOperations
 interface EdgeDevices {

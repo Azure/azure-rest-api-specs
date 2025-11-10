@@ -32,8 +32,8 @@ interface OsImages {
   list is ArmResourceListAtScope<OsImage>;
 }
 
-@added(Versions.v2025_11_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@added(Versions.v2025_11_01_preview)
 @doc("Represents properties of a os image resource.")
 model OsImageProperties {
   @doc("Represents validated solution recipe version of a os image.")

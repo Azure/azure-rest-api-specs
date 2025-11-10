@@ -36,8 +36,8 @@ interface UpdateContents {
   >;
 }
 
-@added(Versions.v2025_11_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@added(Versions.v2025_11_01_preview)
 @doc("Represents properties of a update content resource.")
 model UpdateContentProperties {
   @doc("Represents the payloads of a update content resource.")

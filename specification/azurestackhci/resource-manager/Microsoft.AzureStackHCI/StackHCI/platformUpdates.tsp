@@ -36,8 +36,8 @@ interface PlatformUpdates {
   >;
 }
 
-@added(Versions.v2025_11_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@added(Versions.v2025_11_01_preview)
 @doc("Represents properties of a platform update resource.")
 model PlatformUpdateProperties {
   @doc("Represents applicable platform updates.")
