@@ -27,6 +27,7 @@ import { embedError } from "./spec-model.js";
  * @property {Object[]} [refs]
  */
 
+// https://swagger.io/specification/v2/#operation-object
 const operationSchema = z.object({ operationId: z.string().optional() });
 /**
  * @typedef {import("zod").infer<typeof operationSchema>} OperationObject
@@ -43,11 +44,13 @@ const pathSchema = z
  * @typedef {import("zod").infer<typeof pathSchema>} PathObject
  */
 
+// https://swagger.io/specification/v2/#paths-object
 const pathsSchema = z.record(z.string(), pathSchema);
 /**
  * @typedef {import("zod").infer<typeof pathsSchema>} PathsObject
  */
 
+// https://swagger.io/specification/v2/#swagger-object
 const swaggerSchema = z.object({
   paths: pathsSchema.optional(),
   "x-ms-paths": pathsSchema.optional(),
