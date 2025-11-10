@@ -6,33 +6,35 @@ using Microsoft.Network;
 
 using TypeSpec.Http;
 
+@@override(HeatMapModels.get, get_override,"go");
+op get_override is HeatMapModelsOps.Read<
+  HeatMapModel,
+  Parameters = {
+    // ARM/TypeSpec core parameters
+    @query("subscriptionId")
+    subscriptionId: string;
 
-// @@alternateType(HeatMapType, "default", "go");
-// @@alternateType(HeatMapType, string, "go");
+    @query("resourceGroupName")
+    resourceGroupName: string;
 
+    @query("profileName")
+    profileName: string;
 
-  /**
-   * Gets latest heatmap for Traffic Manager profile.
-   */
-  @@override(HeatMapModels.get, get,"go");
-  op get is HeatMapModelsOps.Read<
-    HeatMapModel,
-    Parameters = {
-      /**
-       * The top left latitude,longitude pair of the rectangular viewport to query for.
-       */
-      @query("topLeft")
-      @minItems(2)
-      @maxItems(2)
-      topLeft?: float64[];
+    @query("heatMapType")
+    heatMapType: HeatMapType; // path param for ARM
 
-      /**
-       * The bottom right latitude,longitude pair of the rectangular viewport to query for.
-       */
-      @query("botRight")
-      @minItems(2)
-      @maxItems(2)
-      botRight?: float64[];
-    }
-  >;
-  @@alternateType(HeatMapType, "default", "go");
+    @query("topLeft")
+    @minItems(2)
+    @maxItems(2)
+    topLeft?: float64[];
+
+    @query("botRight")
+    @minItems(2)
+    @maxItems(2)
+    botRight?: float64[];
+
+    @query
+    apiVersion?: string; // optional query for API version
+  }
+>;
+  @@alternateType(get_override::parameters.heatMapType, "default", "go");
