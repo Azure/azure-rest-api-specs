@@ -303,6 +303,7 @@ export class Swagger {
             : this.#path,
         operations: includeOperations
           ? [...(await this.getOperations()).values()].map((o) => {
+              // Create new object with properties in preferred output order
               return { path: o.path, httpMethod: o.httpMethod, id: o.id };
             })
           : undefined,
