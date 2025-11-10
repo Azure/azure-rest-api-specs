@@ -3479,11 +3479,11 @@
           "items": {
             "type": "string"
           },
-          "description": "Optional. Gets or sets the pinned logical availability zone for the storage account."
+          "description": "Optional. Sets the pinned logical availability zone for the storage account."
         },
         "placement": {
           "$ref": "#/definitions/Placement",
-          "description": "Optional. Gets or sets the zonal placement details for the storage account."
+          "description": "Optional. Sets the zonal placement details for the storage account. On create, if 'zonePlacementPolicy' is provided, 'zones' must not be included."
         },
         "tags": {
           "type": "object",
@@ -4243,11 +4243,11 @@
           "items": {
             "type": "string"
           },
-          "description": "Optional. Gets or sets the pinned logical availability zone for the storage account."
+          "description": "Optional. Gets the pinned logical availability zone for the storage account."
         },
         "placement": {
           "$ref": "#/definitions/Placement",
-          "description": "Optional. Gets or sets the zonal placement details for the storage account."
+          "description": "Optional. Gets the zonal placement details for the storage account."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4553,7 +4553,7 @@
         },
         "placement": {
           "$ref": "#/definitions/Placement",
-          "description": "Optional. Gets or sets the zonal placement details for the storage account."
+          "description": "Optional. Gets or sets the zonal placement details for the storage account. On update, if 'zones' is provided, then 'zonePlacementPolicy' must not be set to 'None'. It may be 'Any' or null."
         }
       },
       "description": "The parameters that can be provided when updating the storage account properties."
