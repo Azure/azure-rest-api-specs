@@ -152,10 +152,12 @@ union Action {
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 union ConnectorAction {
   string,
+
   /**
    * Add connector actions
    */
   Add: "Add",
+
   /**
    * Remove connector action
    */
