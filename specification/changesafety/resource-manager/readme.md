@@ -123,6 +123,7 @@ directive:
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: SafeRollout.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
+    where: $.paths["/providers/Microsoft.ChangeSafety/saferollouts/{saferolloutname}"]
 ```
 
 ---
