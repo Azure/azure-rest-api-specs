@@ -24,6 +24,7 @@ import { embedError } from "./spec-model.js";
 /**
  * @typedef {Object} SwaggerJSON
  * @property {string} path
+ * @property {Operation[]} operations
  * @property {Object[]} [refs]
  */
 
@@ -300,6 +301,10 @@ export class Swagger {
           relativePaths && this.#tag?.readme?.specModel
             ? relative(this.#tag?.readme?.specModel.folder, this.#path)
             : this.#path,
+        // TODO: Measure perf of including this, say on the whole specs repo.  Probably needs to be optional.
+        operations: [...(await this.getOperations()).values()].map((o) => {
+          return { path: o.path, httpMethod: o.httpMethod, id: o.id };
+        }),
         refs: includeRefs
           ? await mapAsync(
               [...(await this.getRefs()).values()].sort((a, b) => a.path.localeCompare(b.path)),
