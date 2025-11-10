@@ -555,8 +555,9 @@ model MonitorProperties {
   /**
    * SRE Agent configuration to connect to MCP server of Datadog for given organization.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
+  @OpenAPI.extension("x-ms-identifiers", #["mcpConnectorResourceId"])
   @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+  @visibility(Lifecycle.Update)
   sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
@@ -633,14 +634,9 @@ model DatadogOrganizationProperties {
 @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
 model SreAgentConfiguration {
   /**
-   * The ARM resource ID of the SRE Agent resource.
+   * The ARM resource ID of the MCP connector integrated with SRE Agent resource.
    */
-  sreAgentResourceId: string;
-
-  /**
-   * The MCP server names associated with the SRE Agent resource.
-   */
-  mcpServerName: string[];
+  mcpConnectorResourceId: string;
 }
 
 /**
@@ -724,13 +720,41 @@ model MonitorUpdateProperties {
    * The new resource collection value of the monitor resource. This collects configuration information for all resources in a subscription.
    */
   resourceCollection?: boolean;
+}
+
+/**
+ * Add or Remove connectors for SRE agents.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+union ConnectorAction {
+  string,
 
   /**
-   * SRE Agent configuration to connect to MCP server of Datadog for given organization.
+   * Add connector actions
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
-  @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
-  sreAgentConfiguration?: SreAgentConfiguration[];
+  Add: "Add",
+
+  /**
+   * Remove connector action
+   */
+  Remove: "Remove",
+}
+
+/**
+ * Request for adding/removing Datadog MCP connectors on SRE Agent resource.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+model SreAgentConnectorRequest {
+  /**
+   * The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["mcpConnectorResourceId"])
+  mcpConnectorResourceIdList: SreAgentConfiguration[];
+
+  /**
+   * Add/Remove action.
+   */
+  action: ConnectorAction;
 }
 
 /**

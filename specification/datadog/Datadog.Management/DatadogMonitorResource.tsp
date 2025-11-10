@@ -92,6 +92,16 @@ interface DatadogMonitorResources {
   >;
 
   /**
+   * Manages Datadog MCP connectors to add/remove for the SRE Agent.
+   */
+  @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+  manageSreAgentConnectors is ArmResourceActionSync<
+    DatadogMonitorResource,
+    SreAgentConnectorRequest,
+    ArmResponse<SreAgentConfiguration[]>
+  >;
+
+  /**
    * Get the default application key.
    */
   @summary("Get the default application key.")
