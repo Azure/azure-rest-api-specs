@@ -46,3 +46,5 @@ using Microsoft.CloudHealth;
 @@clientName(SignalGroup, "EntitySignalGroup", "csharp");
 @@clientName(SignalKind, "EntitySignalKind", "csharp");
 @@clientName(SignalOperator, "EntitySignalOperator", "csharp");
+
+@@clientName(SignalOperator.Equals, "EqualsValue", "csharp");
