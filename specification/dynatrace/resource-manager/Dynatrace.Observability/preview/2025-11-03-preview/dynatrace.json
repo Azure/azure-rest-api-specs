@@ -2691,7 +2691,10 @@
             "$ref": "#/definitions/SreAgentConfiguration"
           },
           "x-ms-identifiers": [
-            "sreAgentResourceId"
+            "mcpConnectorResourceId"
+          ],
+          "x-ms-mutability": [
+            "update"
           ]
         }
       }
@@ -2773,16 +2776,6 @@
         "planData": {
           "$ref": "#/definitions/PlanData",
           "description": "The new Billing plan information."
-        },
-        "sreAgentConfiguration": {
-          "type": "array",
-          "description": "SRE Agent configuration to connect to MCP server of Dynatrace for given environment.",
-          "items": {
-            "$ref": "#/definitions/SreAgentConfiguration"
-          },
-          "x-ms-identifiers": [
-            "sreAgentResourceId"
-          ]
         }
       }
     },
@@ -3255,18 +3248,13 @@
       "type": "object",
       "description": "SRE Agent configuration to connect to MCP server of Dynatrace for a given organization.",
       "properties": {
-        "sreAgentResourceId": {
+        "mcpConnectorResourceId": {
           "type": "string",
-          "description": "The ARM resource ID of the SRE Agent resource."
-        },
-        "mcpServerName": {
-          "type": "string",
-          "description": "The MCP server name associated with the SRE Agent resource."
+          "description": "The ARM resource ID of the datad connector integrated with SRE Agent resource."
         }
       },
       "required": [
-        "sreAgentResourceId",
-        "mcpServerName"
+        "mcpConnectorResourceId"
       ]
     },
     "Status": {

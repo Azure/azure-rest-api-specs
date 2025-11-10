@@ -661,8 +661,9 @@ model MonitorProperties {
   /**
    * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
+  @OpenAPI.extension("x-ms-identifiers", #["mcpConnectorResourceId"])
   @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  @visibility(Lifecycle.Update)
   sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
@@ -697,14 +698,9 @@ model DynatraceEnvironmentProperties {
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 model SreAgentConfiguration {
   /**
-   * The ARM resource ID of the SRE Agent resource.
+   * The ARM resource ID of the datad connector integrated with SRE Agent resource.
    */
-  sreAgentResourceId: string;
-
-  /**
-   * The MCP server name associated with the SRE Agent resource.
-   */
-  mcpServerName: string;
+  mcpConnectorResourceId: string;
 }
 
 /**
@@ -900,13 +896,6 @@ model MonitorUpdateProperties {
    * The new Billing plan information.
    */
   planData?: PlanData;
-
-  /**
-   * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
-  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
-  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
