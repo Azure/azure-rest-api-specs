@@ -27,7 +27,18 @@ import { embedError } from "./spec-model.js";
  * @property {Object[]} [refs]
  */
 
-const pathSchema = z.record(z.string(), z.object({ operationId: z.string().optional() }));
+const operationSchema = z.object({ operationId: z.string().optional() });
+/**
+ * @typedef {import("zod").infer<typeof operationSchema>} OperationObject
+ */
+
+// TODO: Consider narrowing to only the field names in the spec ("get", "put", etc)
+// https://swagger.io/specification/v2/#path-item-object
+const pathSchema = z
+  .object({
+    parameters: z.array(z.unknown()).optional(),
+  })
+  .catchall(operationSchema);
 /**
  * @typedef {import("zod").infer<typeof pathSchema>} PathObject
  */
