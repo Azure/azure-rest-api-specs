@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 
@@ -655,6 +657,13 @@ model MonitorProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
+  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
@@ -680,6 +689,22 @@ model DynatraceEnvironmentProperties {
    * The details of a Dynatrace single sign-on.
    */
   singleSignOnProperties?: DynatraceSingleSignOnProperties;
+}
+
+/**
+ * SRE Agent configuration to connect to MCP server of Dynatrace for a given organization.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConfiguration {
+  /**
+   * The ARM resource ID of the SRE Agent resource.
+   */
+  sreAgentResourceId: string;
+
+  /**
+   * The MCP server names associated with the SRE Agent resource.
+   */
+  mcpServerName: string[];
 }
 
 /**
@@ -875,6 +900,13 @@ model MonitorUpdateProperties {
    * The new Billing plan information.
    */
   planData?: PlanData;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["sreAgentResourceId"])
+  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
