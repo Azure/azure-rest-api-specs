@@ -10,7 +10,8 @@ using TypeSpec.Rest;
 /**
  * override for HeatMapModels.get
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op getReplace(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
