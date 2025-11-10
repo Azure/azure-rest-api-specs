@@ -24,11 +24,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Stack HCI management service
+ * Azure Stack HCI service
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 @armProviderNamespace
-@service(#{ title: "AzureStackHCIClient" })
+@service(#{ title: "Microsoft.AzureStackHCI" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.AzureStackHCI;
