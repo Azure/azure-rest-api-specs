@@ -6,10 +6,19 @@ import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("spec-gen-sdk-status", () => {
+  /** @type {ReturnType<typeof createMockGithub>} */
   let mockGithub;
+
+  /** @type {ReturnType<typeof createMockCore>} */
   let mockCore;
+
+  /** @type {import("vitest").MockInstance} */
   let getAzurePipelineArtifactMock;
+
+  /** @type {import("vitest").MockInstance} */
   let writeToActionsSummaryMock;
+
+  /** @type {import("vitest").MockInstance} */
   let appendFileSyncMock;
 
   beforeEach(() => {
@@ -128,6 +137,7 @@ describe("spec-gen-sdk-status", () => {
       target_url: "https://example.com",
       github: mockGithub,
       core: mockCore,
+      issue_number: 123,
     });
 
     // Verify the right status was set
@@ -194,6 +204,7 @@ describe("spec-gen-sdk-status", () => {
       target_url: "https://example.com",
       github: mockGithub,
       core: mockCore,
+      issue_number: 123,
     });
 
     // Verify the right status was set
@@ -232,6 +243,7 @@ describe("spec-gen-sdk-status", () => {
       target_url: "https://example.com",
       github: mockGithub,
       core: mockCore,
+      issue_number: 123,
     });
 
     // Verify summary was written
@@ -267,6 +279,7 @@ describe("spec-gen-sdk-status", () => {
         target_url: "https://example.com",
         github: mockGithub,
         core: mockCore,
+        issue_number: 123,
       }),
     ).rejects.toThrow("Artifact 'spec-gen-sdk-artifact' not found");
   });
@@ -323,6 +336,7 @@ describe("spec-gen-sdk-status", () => {
       target_url: "https://example.com",
       github: mockGithub,
       core: mockCore,
+      issue_number: 123,
     });
 
     // Verify the right status was set (success since only non-required failed)
