@@ -31,21 +31,21 @@ describe("spec-gen-sdk-status", () => {
       .spyOn(artifacts, "getAzurePipelineArtifact")
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .mockImplementation(async ({ ado_build_id, ado_project_url, artifactName }) => {
-        return {
+        return Promise.resolve({
           artifactData: JSON.stringify({
             language: "test-language",
             result: "succeeded",
             isSpecGenSdkCheckRequired: true,
           }),
-        };
+        });
       });
 
     writeToActionsSummaryMock = vi
       .spyOn(github, "writeToActionsSummary")
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .mockImplementation(async (content, core) => {
+      .mockImplementation((content, core) => {
         // Implementation that just returns
-        return;
+        return Promise.resolve();
       });
 
     appendFileSyncMock = vi.spyOn(fs, "appendFileSync").mockImplementation(vi.fn());
