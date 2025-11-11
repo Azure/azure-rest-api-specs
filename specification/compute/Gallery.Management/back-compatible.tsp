@@ -93,10 +93,7 @@ using Microsoft.Compute;
   "galleryScriptVersion"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryApplication.properties);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten retained for backward compatibility."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryApplication.properties
 );
 
