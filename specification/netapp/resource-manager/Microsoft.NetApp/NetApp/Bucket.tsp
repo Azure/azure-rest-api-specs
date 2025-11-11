@@ -18,6 +18,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 @parentResource(Volume)
 model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
   ...ResourceNameParameter<
@@ -34,6 +36,8 @@ model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model BucketList is Azure.Core.Page<Bucket>;
 
 /**
@@ -42,6 +46,8 @@ model BucketList is Azure.Core.Page<Bucket>;
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model BucketProperties {
   /**
    * The volume path mounted inside the bucket. The default is the root path '/' if no value is provided when the bucket is created.
@@ -86,6 +92,8 @@ model BucketProperties {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model FileSystemUser {
   /**
    * The effective NFS User ID and Group ID when accessing the volume data.
@@ -104,6 +112,8 @@ model FileSystemUser {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model NfsUser {
   /**
    * The NFS user's UID
@@ -122,6 +132,8 @@ model NfsUser {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model CifsUser {
   /**
    * The CIFS user's username
@@ -135,6 +147,8 @@ model CifsUser {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model BucketServerProperties {
   /**
    * The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.
@@ -178,6 +192,8 @@ model BucketServerProperties {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Bucket properties
@@ -191,6 +207,8 @@ model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model BucketPatchProperties {
   /**
    * The volume path mounted inside the bucket.
@@ -225,6 +243,8 @@ model BucketPatchProperties {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model BucketServerPatchProperties {
   /**
    * The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.
@@ -246,6 +266,8 @@ model BucketServerPatchProperties {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model BucketCredentialsExpiry {
   /**
    * The number of days from now until the newly generated Access and Secret key pair will expire.
@@ -260,6 +282,8 @@ model BucketCredentialsExpiry {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 model BucketGenerateCredentials {
   /**
    * The Access Key that is required along with the Secret Key to access the bucket.
@@ -291,6 +315,8 @@ model BucketGenerateCredentials {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 union CredentialsStatus {
   string,
 
@@ -316,6 +342,8 @@ union CredentialsStatus {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 union BucketPermissions {
   string,
 
@@ -336,6 +364,8 @@ union BucketPermissions {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 union BucketPatchPermissions {
   string,
 
@@ -353,6 +383,8 @@ union BucketPatchPermissions {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_09_01)
+@added(Versions.v2025_09_01_preview)
 @armResourceOperations
 interface Buckets {
   /**
