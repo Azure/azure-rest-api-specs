@@ -359,6 +359,10 @@ Follow the steps in [typespec to sdk](..\eng\common\instructions\azsdk-tools\typ
 
 Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
 
+## SDK customizations in TypeSpec projects
+
+TypeSpec supports making client-specific customizations to a TypeSpec project to change how an SDK is generated. When making client-specific changes, read the [typespec client customizations reference](../eng/common/knowledge/customizing-client-tsp.md) to understand the types of customizations supported and how to apply them.
+
 # Instructions for GitHub coding agent to generate SDKs using GitHub.com
 
 Run only SDK generation step and Update SDK details back in issue description and release plan. Do not run TypeSpec validation, or service label check. This is applicable only when GitHub copilot coding agent is used to generate SDK and if a Release Plan is available in the context. Run SDK generation tool even if release plan already has SDK generation pipeline URL to support regenerating SDK.
