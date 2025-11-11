@@ -504,7 +504,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   );
   ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
 
-  const rpaasExceptionLabelPresent = "RPaaSException" in labelContext.present;
+  const rpaasExceptionLabelPresent = labelContext.present.has("RPaaSException");
 
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
     "CI-RpaaSRPNotInPrivateRepo",
