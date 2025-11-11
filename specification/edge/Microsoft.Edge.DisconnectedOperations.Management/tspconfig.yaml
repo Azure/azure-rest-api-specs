@@ -83,12 +83,22 @@ options:
           verb: Set
         remove: true
       - where:
+          subject: Artifact
           variant: GetViaIdentityDisconnectedOperation|GetViaIdentityImage
           parameter-name: Name
         set:
           parameter-name: ArtifactName
       - where:
           parameter-name: ArtifactName
+        clear-alias: true
+      - where:
+          subject: Image
+          variant: GetViaIdentityDisconnectedOperation
+          parameter-name: Name
+        set:
+          parameter-name: ImageName
+      - where:
+          parameter-name: ImageName
         clear-alias: true
 
 linter:
