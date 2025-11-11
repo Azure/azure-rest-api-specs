@@ -414,8 +414,8 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 
-@@clientName(Applications.update, "beginUpdate", "python");
-@@clientName(ManagedClusters.update, "beginUpdate", "python");
+@@clientName(Applications.update, "update", "python");
+@@clientName(ManagedClusters.update, "update", "python");
 
 @@alternateType(ManagedClusterVersion.list::parameters.location,
   azureLocation,
