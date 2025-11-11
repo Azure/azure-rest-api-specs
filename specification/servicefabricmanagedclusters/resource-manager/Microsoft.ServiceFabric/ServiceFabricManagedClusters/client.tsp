@@ -414,6 +414,15 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 
+@@clientName(Applications.update,
+  "begin_update",
+  "python"
+);
+@@clientName(ManagedClusters.update,
+  "begin_update",
+  "python"
+);
+
 @@alternateType(ManagedClusterVersion.list::parameters.location,
   azureLocation,
   "csharp"
