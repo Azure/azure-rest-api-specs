@@ -5,11 +5,11 @@ import "@azure-tools/typespec-azure-core";
 
 import "../common/service.tsp";
 
-import "../agents/operations.tsp";
-import "../memory_stores/operations.tsp";
+import "../agents/routes.tsp";
+import "../memory_stores/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
-import "../responses/operations.tsp";
-import "../conversations/operations.tsp";
+import "../responses/routes.tsp";
+import "../conversations/routes.tsp";
 
 namespace Azure.AI.Projects;

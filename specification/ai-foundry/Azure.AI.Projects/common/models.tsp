@@ -1,12 +1,11 @@
 import "@typespec/http";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-namespace Azure.AI.Projects;
-
 using TypeSpec.Http;
+
+namespace Azure.AI.Projects;
 
 /** Error response for API failures. */
 @error

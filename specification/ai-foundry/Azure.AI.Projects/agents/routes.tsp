@@ -1,5 +1,4 @@
 import "@typespec/http";
-import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
@@ -7,10 +6,7 @@ import "../common/models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
