@@ -1329,39 +1329,6 @@ model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
-
-  @added(Versions.v2024_10_01_preview)
-  @doc("Defines the resource properties for the update.")
-  properties?: LogicalNetworkUpdateProperties;
-}
-
-@added(Versions.v2024_10_01_preview)
-@doc("Properties under the logical network resource")
-model LogicalNetworkUpdateProperties {
-  @doc("Subnet - list of subnets under the logical network")
-  @Azure.ResourceManager.identifiers(#[])
-  subnets?: SubnetUpdate[];
-}
-
-@added(Versions.v2024_10_01_preview)
-@doc("Subnet resource")
-model SubnetUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Properties of the subnet.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
-  properties?: SubnetUpdateProperties;
-
-  @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
-  @removed(Versions.v2025_09_01_preview)
-  name?: string;
-}
-
-@added(Versions.v2024_10_01_preview)
-@doc("Properties of the subnet.")
-model SubnetUpdateProperties {
-  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
-  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 @added(Versions.v2025_09_01_preview)
