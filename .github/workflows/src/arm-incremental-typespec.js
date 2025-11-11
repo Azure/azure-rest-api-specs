@@ -146,7 +146,7 @@ export default async function incrementalTypeSpec({ core }) {
     for (const file of specRmSwaggerFilesBaseBranch) {
       const baseSwaggerContent = await git.show([`HEAD^:${file}`]);
       const baseSwagger = new Swagger(file, { content: baseSwaggerContent });
-      if (!(await baseSwagger.getTypeSpecGenerated())) {
+      if (await baseSwagger.getTypeSpecGenerated()) {
         core.info(
           `Spec folder '${changedSpecDir}' in base branch contains typespec-generated swagger: '${file}'`,
         );
