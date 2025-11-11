@@ -3461,6 +3461,7 @@ model BareMetalMachineInternalMetadata {
   /**
    * The list of statuses that represent secret rotation activity.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   secretRotationStatus?: SecretRotationStatus[];
 
   /**
@@ -4085,11 +4086,13 @@ model InfraProxyConfig {
   /**
    * List of dynamic endpoints provided by the cluster operator.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dynamicCMEndpoints?: string[];
 
   /**
    * List of endpoints provided by the RP at the time of creation or upgrade of the Cluster Manager.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   staticRPEndpoints?: string[];
 }
 
@@ -4110,6 +4113,7 @@ model ClusterManagerInternalMetadataNfcInfrastructureConfiguration {
   /**
    * The Subnet Ipv4 Prefix for the NC AKS
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkCloudSubnetIPv4Prefix?: string;
 
   /**
@@ -4216,6 +4220,7 @@ model ClusterManagerInternalMetadataRelay {
   /**
    * custom IP Rules injected into the Relays NetworkRuleSet.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkRuleSetsCustomIpRules?: ClusterManagerInternalMetadataRelayNetworkRuleSetsCustomIpRules[];
 
   /**
@@ -4667,6 +4672,7 @@ model ClusterCapacity {
   /**
    * The remaining appliance-based storage in GB available for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableApplianceStorageGB?: int64;
 
   /**
@@ -4677,16 +4683,19 @@ model ClusterCapacity {
   /**
    * The remaining machine or host-based storage in GB available for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableHostStorageGB?: int64;
 
   /**
    * The remaining memory in GB that are available in this cluster for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableMemoryGB?: int64;
 
   /**
    * The total appliance-based storage in GB supported by this cluster for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalApplianceStorageGB?: int64;
 
   /**
@@ -4697,11 +4706,13 @@ model ClusterCapacity {
   /**
    * The total machine or host-based storage in GB supported by this cluster for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalHostStorageGB?: int64;
 
   /**
    * The total memory supported by this cluster for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalMemoryGB?: int64;
 }
 
@@ -4823,6 +4834,7 @@ model ClusterInternalMetadata {
   /**
    * The history of the management bundle upgrades that have been attempted for this cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managementBundleUpdateHistory?: ManagementBundleUpdateHistory[];
 
   /**
@@ -5118,6 +5130,7 @@ model AdministratorConfiguration {
   /**
    * The SSH configuration for the operating systems that run the nodes in the Kubernetes cluster. In some cases, specification of public keys may be required to produce a working environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sshPublicKeys?: SshPublicKey[];
 }
 
@@ -5238,6 +5251,7 @@ model InitialAgentPoolConfiguration {
   /**
    * The labels applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   labels?: KubernetesLabel[];
 
@@ -5257,6 +5271,7 @@ model InitialAgentPoolConfiguration {
   /**
    * The taints applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taints?: KubernetesLabel[];
 
@@ -5295,18 +5310,21 @@ model AttachedNetworkConfiguration {
   /**
    * The list of Layer 2 Networks and related configuration for attachment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   l2Networks?: L2NetworkAttachmentConfiguration[];
 
   /**
    * The list of Layer 3 Networks and related configuration for attachment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   l3Networks?: L3NetworkAttachmentConfiguration[];
 
   /**
    * The list of Trunked Networks and related configuration for attachment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   trunkedNetworks?: TrunkedNetworkAttachmentConfiguration[];
 }
@@ -5432,6 +5450,7 @@ model KubernetesClusterInternalMetadata {
   /**
    * The list of Arc enrolled servers
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   arcServers?: ArcServer[];
 
   /**
@@ -5442,6 +5461,7 @@ model KubernetesClusterInternalMetadata {
   /**
    * A copy of the current kubernetes conditions on this cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   conditions?: KubernetesCondition[];
 
   /**
@@ -5824,6 +5844,7 @@ model KubernetesClusterNode {
   /**
    * The size of the disk configured for this node. Allocations are measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeGB?: int64;
 
   /**
@@ -5845,6 +5866,7 @@ model KubernetesClusterNode {
   /**
    * The amount of memory configured for this node, derived from the vm SKU specified. Allocations are measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memorySizeGB?: int64;
 
   /**
@@ -5948,6 +5970,7 @@ model KubernetesVersionProperties {
   /**
    * The list of available Kubernetes versions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   values?: KubernetesVersionValue[];
 }
 
@@ -6236,6 +6259,7 @@ model MachineSkuProperties {
   /**
    * The maximum amount of memory. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memoryCapacityGB?: int64;
 
   /**
@@ -6267,6 +6291,7 @@ model MachineDisk {
   /**
    * The maximum amount of storage. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capacityGB?: int64;
 
   /**
@@ -6342,6 +6367,7 @@ model StorageApplianceSkuProperties {
   /**
    * The maximum capacity of the storage appliance. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capacityGB?: int64;
 
   /**
@@ -6639,6 +6665,7 @@ model StorageApplianceInternalMetadata {
   /**
    * The list of statuses that represent secret rotation activity.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   secretRotationStatus?: SecretRotationStatus[];
 
   /**
@@ -6830,6 +6857,7 @@ model VirtualMachineProperties {
   /**
    * The memory size of the virtual machine. Allocations are measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minValue(1)
   memorySizeGB: int64;
@@ -6995,6 +7023,7 @@ model OsDisk {
   /**
    * The size of the disk. Required if the createOption is Ephemeral. Allocations are measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeGB: int64;
 }
 
@@ -8174,6 +8203,7 @@ model AgentPoolProperties {
   /**
    * The labels applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   labels?: KubernetesLabel[];
 
@@ -8191,6 +8221,7 @@ model AgentPoolProperties {
   /**
    * The taints applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taints?: KubernetesLabel[];
 
@@ -8764,6 +8795,7 @@ model AgentPoolConfiguration {
   /**
    * The labels applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   labels?: KubernetesLabel[];
 
@@ -8776,6 +8808,7 @@ model AgentPoolConfiguration {
   /**
    * The taints applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taints?: KubernetesLabel[];
 
