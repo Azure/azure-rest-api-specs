@@ -629,6 +629,13 @@ model DatadogOrganizationProperties {
 }
 
 /**
+ * Response of a list operation.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+model SreAgentConfigurationListResponse
+  is Azure.Core.Page<SreAgentConfiguration>;
+
+/**
  * SRE Agent configuration to connect to MCP server of Datadog for a given organization.
  */
 @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
