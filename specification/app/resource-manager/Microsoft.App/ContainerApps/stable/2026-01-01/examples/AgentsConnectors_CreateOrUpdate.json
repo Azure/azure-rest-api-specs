@@ -10,7 +10,14 @@
         "dataConnectorType": "SqlServer",
         "dataSource": "Server=newserver.database.windows.net;Database=NewDB;",
         "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-sql-connection-string",
-        "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity"
+        "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
+        "extendedProperties": {
+          "AuthType": "Custom",
+          "CustomHeader": {
+            "DD_API_KEY": "value 1",
+            "DD_APPLICATION_KEY": "value 2"
+          }
+        }
       }
     }
   },
@@ -24,7 +31,14 @@
           "dataConnectorType": "SqlServer",
           "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-sql-connection-string",
           "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
-          "source": "Agent"
+          "source": "Agent",
+          "extendedProperties": {
+            "AuthType": "Custom",
+            "CustomHeader": {
+              "DD_API_KEY": "value 1",
+              "DD_APPLICATION_KEY": "value 2"
+            }
+          }
         }
       }
     },
@@ -41,6 +55,13 @@
           "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-sql-connection-string",
           "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
           "source": "Agent",
+          "extendedProperties": {
+            "AuthType": "Custom",
+            "CustomHeader": {
+              "DD_API_KEY": "value 1",
+              "DD_APPLICATION_KEY": "value 2"
+            }
+          },
           "provisioningState": "InProgress"
         }
       }
