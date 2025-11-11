@@ -185,9 +185,25 @@ interface ResourceSubscriptions {
   delete is ArmResourceDeleteSync<ResourceSubscription>;
 
   /** Lists all resource subscriptions in a resource group */
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      `List all resource subscriptions in a resource group`: #{
+        $ref: "./examples/ResourceSubscriptions_List.json",
+      },
+    }
+  )
   listByResourceGroup is ArmResourceListByParent<ResourceSubscription>;
 
   /** Lists all resource subscriptions in a subscription */
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      `List all resource subscriptions in a subscription`: #{
+        $ref: "./examples/ResourceSubscriptions_List.json",
+      },
+    }
+  )
   listBySubscription is ArmListBySubscription<ResourceSubscription>;
 }
 
@@ -394,6 +410,14 @@ interface Destinations {
   delete is ArmResourceDeleteSync<Destination>;
 
   /** Lists all destinations for a resource subscription */
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      `List all destinations for a resource subscription`: #{
+        $ref: "./examples/Destinations_List.json",
+      },
+    }
+  )
   @operationId("ResourceSubscriptionDestinations_List")
   list is ArmResourceListByParent<Destination>;
 }

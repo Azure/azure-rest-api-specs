@@ -1,0 +1,60 @@
+{
+  "operationId": "ResourceSubscriptions_ListByResourceGroup",
+  "title": "List all resource subscriptions in a resource group",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "example-rg",
+    "api-version": "2025-11-11-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription",
+            "name": "example-subscription",
+            "type": "Microsoft.ResourceNotifications/resourceSubscriptions",
+            "location": "eastus",
+            "properties": {
+              "query": "resources",
+              "scope": {
+                "kind": "tenant",
+                "tenantId": "12345678-1234-1234-1234-123456789012",
+                "servicePrincipal": "app12345"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/cloud-subscription",
+            "name": "cloud-subscription",
+            "type": "Microsoft.ResourceNotifications/resourceSubscriptions",
+            "location": "westus",
+            "properties": {
+              "query": "resources | where type == 'Microsoft.Compute/virtualMachines'",
+              "scope": {
+                "kind": "cloud",
+                "providerNamespace": "Microsoft.Compute",
+                "appId": "app67890"
+              },
+              "partitioningConfiguration": {
+                "kind": "arnLocation",
+                "partitions": [
+                  {
+                    "name": "eastus-partition",
+                    "regions": ["eastus", "eastus2"]
+                  },
+                  {
+                    "name": "westus-partition",
+                    "regions": ["westus", "westus2"]
+                  }
+                ]
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
