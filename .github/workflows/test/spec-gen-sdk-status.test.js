@@ -176,7 +176,7 @@ describe("spec-gen-sdk-status", () => {
     });
 
     // Mock getAzurePipelineArtifact to return mixed results
-    getAzurePipelineArtifactMock.mockImplementation(async ({ ado_build_id }) => {
+    getAzurePipelineArtifactMock.mockImplementation(({ ado_build_id }) => {
       if (ado_build_id === "123") {
         return {
           artifactData: JSON.stringify({
@@ -214,7 +214,7 @@ describe("spec-gen-sdk-status", () => {
         repo: "testRepo",
         sha: "testSha",
         state: "failure",
-        description: expect.stringContaining("failed for"),
+        description: /** @type {unknown} */ (expect.stringContaining("failed for")),
       }),
     );
   });
@@ -308,7 +308,7 @@ describe("spec-gen-sdk-status", () => {
     });
 
     // Mock getAzurePipelineArtifact to return mixed results
-    getAzurePipelineArtifactMock.mockImplementation(async ({ ado_build_id }) => {
+    getAzurePipelineArtifactMock.mockImplementation(({ ado_build_id }) => {
       if (ado_build_id === "123") {
         return {
           artifactData: JSON.stringify({
