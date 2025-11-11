@@ -1,19 +1,5 @@
 {
   "paths": {
-    "/providers/microsoft.Batch/operations": {
-      "get": {
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OperationListResult",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-              }
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}": {
       "put": {
         "parameters": [
@@ -586,76 +572,6 @@
         "userName"
       ]
     },
-    "Operation__deleted": {
-      "type": "object",
-      "title": "A REST API operation",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "The operation name.",
-          "description": "This is of the format {provider}/{resource}/{operation}"
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "Indicates whether the operation is a data action"
-        },
-        "display": {
-          "type": "object",
-          "title": "The object that describes the operation.",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "title": "Friendly name of the resource provider."
-            },
-            "operation": {
-              "type": "string",
-              "title": "The operation type.",
-              "description": "For example: read, write, delete, or listKeys/action"
-            },
-            "resource": {
-              "type": "string",
-              "title": "The resource type on which the operation is performed."
-            },
-            "description": {
-              "type": "string",
-              "title": "The friendly name of the operation"
-            }
-          }
-        },
-        "origin": {
-          "type": "string",
-          "title": "The intended executor of the operation."
-        },
-        "properties": {
-          "type": "object",
-          "title": "Properties of the operation."
-        }
-      }
-    },
-    "OperationListResult__deleted": {
-      "type": "object",
-      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "title": "The list of operations supported by the resource provider.",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "title": "The URL to get the next set of operation list results if there are any.",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "AccessRulePropertiesSubscriptionsItem__added": {
       "type": "object",
       "description": "Subscription identifiers",
@@ -939,6 +855,32 @@
         }
       }
     },
+    "OperationDisplay__added": {
+      "type": "object",
+      "description": "The object that describes the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "title": "Friendly name of the resource provider.",
+          "description": "Friendly name of the resource provider."
+        },
+        "operation": {
+          "type": "string",
+          "title": "For example: read, write, delete, or listKeys/action",
+          "description": "For example: read, write, delete, or listKeys/action"
+        },
+        "resource": {
+          "type": "string",
+          "title": "The resource type on which the operation is performed.",
+          "description": "The resource type on which the operation is performed."
+        },
+        "description": {
+          "type": "string",
+          "title": "The friendly name of the operation",
+          "description": "The friendly name of the operation"
+        }
+      }
+    },
     "ProvisioningIssue__added": {
       "type": "object",
       "description": "Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration",
@@ -1021,7 +963,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe ETag of the resource, used for concurrency statements."
         },
         "tags__added": {
           "type": "object",
@@ -1190,7 +1132,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate.",
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags__added": {
@@ -1345,7 +1287,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate.",
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags__added": {
@@ -1389,43 +1331,21 @@
         }
       }
     },
-    "EndpointAccessProfile": {
-      "properties": {
-        "defaultAction": {
-          "title__deleted": "The default action when there is no IPRule matched."
-        }
-      }
-    },
     "EnvironmentSetting": {
-      "title__deleted": "An environment variable to be set on a task process.",
       "description__added": "An environment variable to be set on a task process.",
       "properties": {
         "name": {
-          "title__deleted": "The name of the environment variable.",
           "description__added": "The name of the environment variable."
         },
         "value": {
-          "title__deleted": "The value of the environment variable.",
           "description__added": "The value of the environment variable."
         }
       }
     },
     "FixedScaleSettings": {
-      "title__deleted": "Fixed scale settings for the pool.",
       "description__added": "Fixed scale settings for the pool.",
       "properties": {
-        "resizeTimeout": {
-          "title__deleted": "The timeout for allocation of compute nodes to the pool.",
-          "default__deleted": "PT15M"
-        },
-        "targetDedicatedNodes": {
-          "title__deleted": "The desired number of dedicated compute nodes in the pool."
-        },
-        "targetLowPriorityNodes": {
-          "title__deleted": "The desired number of Spot/low-priority compute nodes in the pool."
-        },
         "nodeDeallocationOption": {
-          "title__deleted": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
           "description": {
             "__old": "If omitted, the default value is Requeue.",
             "__new": "Determines what to do with a node and its running task(s) after it has been selected for deallocation."
@@ -1436,68 +1356,21 @@
     "IPRule": {
       "properties": {
         "action": {
-          "default__added": "Allow",
-          "x-ms-enum": {
-            "modelAsString": {
-              "__old": false,
-              "__new": true
-            }
+          "description": {
+            "__old": "Action when client IP address is matched.",
+            "__new": "The action when client IP address is matched."
           }
-        },
-        "value": {
-          "title__deleted": "The IP address or IP address range to filter"
         }
       }
     },
     "ImageReference": {
-      "title__deleted": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.",
-      "description__added": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.",
-      "properties": {
-        "publisher": {
-          "title__deleted": "The publisher of the Azure Virtual Machines Marketplace image."
-        },
-        "offer": {
-          "title__deleted": "The offer type of the Azure Virtual Machines Marketplace image."
-        },
-        "sku": {
-          "title__deleted": "The SKU of the Azure Virtual Machines Marketplace image."
-        },
-        "version": {
-          "title__deleted": "The version of the Azure Virtual Machines Marketplace image."
-        },
-        "id": {
-          "title__deleted": "The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId}."
-        },
-        "sharedGalleryImageId": {
-          "title__deleted": "The shared gallery image unique identifier"
-        },
-        "communityGalleryImageId": {
-          "title__deleted": "The community gallery image unique identifier"
-        }
-      }
+      "description__added": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
     },
     "InboundNatPool": {
-      "title__deleted": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.",
       "description__added": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.",
       "properties": {
-        "name": {
-          "title__deleted": "The name of the endpoint."
-        },
         "protocol": {
-          "title__deleted": "The protocol of the endpoint.",
           "description__added": "The protocol of the endpoint."
-        },
-        "backendPort": {
-          "title__deleted": "The port number on the compute node."
-        },
-        "frontendPortRangeStart": {
-          "title__deleted": "The first port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes."
-        },
-        "frontendPortRangeEnd": {
-          "title__deleted": "The last port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes."
-        },
-        "networkSecurityGroupRules": {
-          "title__deleted": "A list of network security group rules that will be applied to the endpoint."
         }
       }
     },
@@ -1512,17 +1385,9 @@
       }
     },
     "LinuxUserConfiguration": {
-      "title__deleted": "Properties used to create a user account on a Linux node.",
       "description__added": "Properties used to create a user account on a Linux node.",
       "properties": {
-        "uid": {
-          "title__deleted": "The user ID of the user account."
-        },
-        "gid": {
-          "title__deleted": "The group ID for the user account."
-        },
         "sshPrivateKey": {
-          "title__deleted": "The SSH private key for the user account.",
           "format__added": "password"
         }
       }
@@ -1560,89 +1425,60 @@
     "ManagedDisk": {
       "properties": {
         "storageAccountType": {
-          "title__deleted": "The storage account type for use in creating data disks or OS disk.",
           "description__added": "The storage account type for use in creating data disks or OS disk."
         },
         "securityProfile": {
-          "title__deleted": "Specifies the security profile for the managed disk.",
           "description__added": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs."
         }
       }
     },
     "MetadataItem": {
-      "title__deleted": "A name-value pair associated with a Batch service resource.",
       "properties": {
         "name": {
-          "title__deleted": "The name of the metadata item.",
           "description__added": "The name of the metadata item."
         },
         "value": {
-          "title__deleted": "The value of the metadata item.",
           "description__added": "The value of the metadata item."
         }
       }
     },
     "MountConfiguration": {
-      "title__deleted": "The file system to mount on each node.",
       "description__added": "The file system to mount on each node.",
       "properties": {
-        "azureBlobFileSystemConfiguration": {
-          "title__deleted": "The Azure Storage Container to mount using blob FUSE on each node."
-        },
-        "nfsMountConfiguration": {
-          "title__deleted": "The NFS file system to mount on each node."
-        },
         "cifsMountConfiguration": {
-          "title__deleted": "The CIFS/SMB file system to mount on each node.",
           "$ref": {
             "__old": "#/definitions/CIFSMountConfiguration",
             "__new": "#/definitions/CifsMountConfiguration"
           }
-        },
-        "azureFileShareConfiguration": {
-          "title__deleted": "The Azure File Share to mount on each node."
         }
       }
     },
     "NFSMountConfiguration": {
-      "title__deleted": "Information used to connect to an NFS file system.",
       "description__added": "Information used to connect to an NFS file system.",
       "properties": {
         "source": {
-          "title__deleted": "The URI of the file system to mount.",
           "description__added": "The URI of the file system to mount."
-        },
-        "relativeMountPath": {
-          "title__deleted": "The relative path on the compute node where the file system will be mounted"
-        },
-        "mountOptions": {
-          "title__deleted": "Additional command line options to pass to the mount command."
         }
       }
     },
     "NetworkConfiguration": {
       "properties": {
         "subnetId": {
-          "title__deleted": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
           "externalDocs__deleted": {
             "description": "Create an Azure Batch pool in a virtual network",
             "url": "https://learn.microsoft.com/azure/batch/batch-virtual-network"
           }
         },
         "dynamicVnetAssignmentScope": {
-          "title__deleted": "The scope of dynamic vnet assignment.",
           "description__added": "The scope of dynamic vnet assignment."
         },
         "endpointConfiguration": {
-          "title__deleted": "The configuration for endpoints on compute nodes in the Batch pool.",
           "description__added": "The endpoint configuration for a pool."
         },
         "publicIPAddressConfiguration": {
-          "title__deleted": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
           "description__added": "The public IP Address configuration of the networking configuration of a Pool."
         },
         "enableAcceleratedNetworking": {
-          "title__deleted": "Whether this pool should enable accelerated networking.",
           "externalDocs__deleted": {
             "description": "Create a VM with Accelerated Networking.",
             "url": "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview"
@@ -1651,72 +1487,86 @@
       }
     },
     "NetworkSecurityGroupRule": {
-      "title__deleted": "A network security group rule to apply to an inbound endpoint.",
       "description__added": "A network security group rule to apply to an inbound endpoint.",
       "properties": {
-        "priority": {
-          "title__deleted": "The priority for this rule."
-        },
         "access": {
-          "title__deleted": "The action that should be taken for a specified IP address, subnet range or tag.",
           "description__added": "The action that should be taken for a specified IP address, subnet range or tag."
-        },
-        "sourceAddressPrefix": {
-          "title__deleted": "The source address prefix or tag to match for the rule."
-        },
-        "sourcePortRanges": {
-          "title__deleted": "The source port ranges to match for the rule."
-        }
-      }
-    },
-    "NodePlacementConfiguration": {
-      "title__deleted": "Node placement configuration for batch pools.",
-      "properties": {
-        "policy": {
-          "title__deleted": "The placement policy for allocating nodes in the pool."
         }
       }
     },
     "OSDisk": {
-      "title__deleted": "Settings for the operating system disk of the virtual machine.",
       "description__added": "Settings for the operating system disk of the virtual machine.",
       "properties": {
         "ephemeralOSDiskSettings": {
-          "title__deleted": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
           "description__added": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
         },
         "caching": {
-          "title__deleted": "The type of caching to enable for the disk.",
           "description__added": "The type of caching to enable for the disk."
         },
-        "managedDisk": {
-          "title__deleted": "The managed disk parameters."
-        },
         "diskSizeGB": {
-          "title__deleted": "The initial disk size in GB when creating new OS disk.",
           "description__added": "The initial disk size in GB when creating new OS disk."
         },
         "writeAcceleratorEnabled": {
-          "title__deleted": "Specifies whether writeAccelerator should be enabled or disabled on the disk.",
           "description__added": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
         }
       }
     },
+    "Operation": {
+      "description__added": "A REST API operation",
+      "properties": {
+        "display": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "provider": {
+              "type": "string",
+              "title": "Friendly name of the resource provider."
+            },
+            "operation": {
+              "type": "string",
+              "title": "The operation type.",
+              "description": "For example: read, write, delete, or listKeys/action"
+            },
+            "resource": {
+              "type": "string",
+              "title": "The resource type on which the operation is performed."
+            },
+            "description": {
+              "type": "string",
+              "title": "The friendly name of the operation"
+            }
+          },
+          "$ref__added": "#/definitions/OperationDisplay",
+          "description__added": "The object that describes the operation."
+        },
+        "origin": {
+          "description__added": "The intended executor of the operation.",
+          "title": {
+            "__old": "The intended executor of the operation.",
+            "__new": "The operation type."
+          }
+        },
+        "properties": {
+          "type__deleted": "object",
+          "description__added": "Properties of the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "OutboundEnvironmentEndpointCollection": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "Pool": {
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "readOnly": true
         },
         "tags__added": {
           "type": "object",
@@ -1742,127 +1592,63 @@
       ]
     },
     "PoolEndpointConfiguration": {
-      "title__deleted": "The endpoint configuration for a pool.",
-      "description__added": "The endpoint configuration for a pool.",
-      "properties": {
-        "inboundNatPools": {
-          "title__deleted": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally."
-        }
-      }
+      "description__added": "The endpoint configuration for a pool."
     },
     "PoolProperties": {
       "properties": {
-        "displayName": {
-          "title__deleted": "The display name for the pool."
-        },
-        "lastModified": {
-          "title__deleted": "The last modified time of the pool."
-        },
         "creationTime": {
-          "title__deleted": "The creation time of the pool.",
           "description__added": "The creation time of the pool."
         },
         "provisioningState": {
-          "title__deleted": "The current state of the pool.",
           "description__added": "The current state of the pool."
         },
         "provisioningStateTransitionTime": {
-          "title__deleted": "The time at which the pool entered its current state.",
           "description__added": "The time at which the pool entered its current state."
         },
         "allocationState": {
-          "title__deleted": "Whether the pool is resizing.",
           "description__added": "Whether the pool is resizing."
         },
         "allocationStateTransitionTime": {
-          "title__deleted": "The time at which the pool entered its current allocation state.",
           "description__added": "The time at which the pool entered its current allocation state."
         },
-        "vmSize": {
-          "title__deleted": "The size of virtual machines in the pool. All VMs in a pool are the same size."
-        },
         "deploymentConfiguration": {
-          "title__deleted": "This property describes the virtual machines that the pool nodes will be deployed on.",
           "description__added": "Deployment configuration properties."
         },
         "currentDedicatedNodes": {
-          "title__deleted": "The number of dedicated compute nodes currently in the pool.",
           "description__added": "The number of dedicated compute nodes currently in the pool."
         },
         "currentLowPriorityNodes": {
-          "title__deleted": "The number of Spot/low-priority compute nodes currently in the pool.",
           "description__added": "The number of Spot/low-priority compute nodes currently in the pool."
         },
         "scaleSettings": {
-          "title__deleted": "Settings which configure the number of nodes in the pool.",
           "description__added": "Defines the desired size of the pool. This can either be 'fixedScale' where the requested targetDedicatedNodes is specified, or 'autoScale' which defines a formula which is periodically reevaluated. If this property is not specified, the pool will have a fixed scale with 0 targetDedicatedNodes."
         },
-        "autoScaleRun": {
-          "title__deleted": "The results and errors from the last execution of the autoscale formula."
-        },
-        "interNodeCommunication": {
-          "title__deleted": "Whether the pool permits direct communication between nodes."
-        },
         "networkConfiguration": {
-          "title__deleted": "The network configuration for the pool.",
           "description__added": "The network configuration for a pool."
         },
-        "taskSlotsPerNode": {
-          "title__deleted": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool."
-        },
-        "taskSchedulingPolicy": {
-          "title__deleted": "How tasks are distributed across compute nodes in a pool."
-        },
         "userAccounts": {
-          "title__deleted": "The list of user accounts to be created on each node in the pool.",
           "description__added": "The list of user accounts to be created on each node in the pool."
         },
-        "metadata": {
-          "title__deleted": "A list of name-value pairs associated with the pool as metadata."
-        },
-        "startTask": {
-          "title__deleted": "A task specified to run on each compute node as it joins the pool."
-        },
-        "certificates": {
-          "title__deleted": "The list of certificates to be installed on each compute node in the pool."
-        },
-        "applicationPackages": {
-          "title__deleted": "The list of application packages to be installed on each compute node in the pool."
-        },
-        "applicationLicenses": {
-          "title__deleted": "The list of application licenses the Batch service will make available on each compute node in the pool."
-        },
         "resizeOperationStatus": {
-          "title__deleted": "Contains details about the current or last completed resize operation.",
           "description__added": "Describes either the current operation (if the pool AllocationState is Resizing) or the previously completed operation (if the AllocationState is Steady)."
         },
-        "mountConfiguration": {
-          "title__deleted": "A list of file systems to mount on each node in the pool."
-        },
         "targetNodeCommunicationMode": {
-          "title__deleted": "Determines how a pool communicates with the Batch service.",
           "description": {
             "__old": "If omitted, the default value is Default.",
             "__new": "Determines how a pool communicates with the Batch service."
           }
         },
         "currentNodeCommunicationMode": {
-          "title__deleted": "Determines how a pool communicates with the Batch service.",
           "description__added": "Determines how a pool communicates with the Batch service."
         },
         "upgradePolicy": {
-          "title__deleted": "The upgrade policy for the pool.",
           "description__added": "Describes an upgrade policy - automatic, manual, or rolling."
-        },
-        "resourceTags": {
-          "title__deleted": "The user-specified tags associated with the pool."
         }
       }
     },
     "PrivateEndpoint": {
       "properties": {
         "id": {
-          "title__deleted": "The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.",
           "description__added": "The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}."
         }
       }
@@ -1871,7 +1657,8 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "readOnly": true
         },
         "tags__added": {
           "type": "object",
@@ -1896,16 +1683,11 @@
     "PrivateEndpointConnectionProperties": {
       "properties": {
         "provisioningState": {
-          "title__deleted": "The provisioning state of the private endpoint connection.",
           "x-nullable__deleted": false,
           "description__added": "The provisioning state of the private endpoint connection."
         },
         "privateEndpoint": {
-          "title__deleted": "The ARM resource identifier of the private endpoint.",
           "description__added": "The private endpoint of the private endpoint connection."
-        },
-        "groupIds": {
-          "title__deleted": "The group id of the private endpoint connection."
         },
         "privateLinkServiceConnectionState": {
           "title__deleted": "The private link service connection state of the private endpoint connection.",
@@ -1917,7 +1699,8 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "readOnly": true
         },
         "tags__added": {
           "type": "object",
@@ -1941,31 +1724,27 @@
     },
     "PrivateLinkResourceProperties": {
       "properties": {
-        "groupId": {
-          "title__deleted": "The group id of the private link resource."
-        },
         "requiredMembers": {
-          "title__deleted": "The list of required members that are used to establish the private link connection.",
           "description__added": "The list of required members that are used to establish the private link connection."
         },
         "requiredZoneNames": {
-          "title__deleted": "The list of required zone names for the private DNS resource name",
-          "description__added": "The list of required zone names for the private DNS resource name"
+          "description__added": "The list of required zone names for the private DNS resource name",
+          "title": {
+            "__old": "The list of required zone names for the private DNS resource name",
+            "__new": "The list of required zone names for the private DNS resource name."
+          }
         }
       }
     },
     "PrivateLinkServiceConnectionState": {
       "properties": {
         "status": {
-          "title__deleted": "The status of the Batch private endpoint connection",
           "description__added": "The status of the Batch private endpoint connection"
         },
         "description": {
-          "title__deleted": "Description of the private Connection state",
           "description__added": "Description of the private Connection state"
         },
         "actionsRequired": {
-          "title__deleted": "Action required on the private connection state",
           "description__added": "Action required on the private connection state"
         }
       }

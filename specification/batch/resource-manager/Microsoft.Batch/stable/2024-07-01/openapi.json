@@ -87,7 +87,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -3328,7 +3328,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe ETag of the resource, used for concurrency statements."
         },
         "tags": {
           "type": "object",
@@ -4289,7 +4289,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate.",
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags": {
@@ -5007,7 +5007,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate.",
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags": {
@@ -5170,6 +5170,7 @@
       "properties": {
         "defaultAction": {
           "$ref": "#/definitions/EndpointAccessDefaultAction",
+          "title": "The default action when there is no IPRule matched.",
           "description": "Default action for endpoint access. It is only applicable when publicNetworkAccess is enabled."
         },
         "ipRules": {
@@ -5228,14 +5229,17 @@
     },
     "EnvironmentSetting": {
       "type": "object",
+      "title": "An environment variable to be set on a task process.",
       "description": "An environment variable to be set on a task process.",
       "properties": {
         "name": {
           "type": "string",
+          "title": "The name of the environment variable.",
           "description": "The name of the environment variable."
         },
         "value": {
           "type": "string",
+          "title": "The value of the environment variable.",
           "description": "The value of the environment variable."
         }
       },
@@ -5245,25 +5249,31 @@
     },
     "FixedScaleSettings": {
       "type": "object",
+      "title": "Fixed scale settings for the pool.",
       "description": "Fixed scale settings for the pool.",
       "properties": {
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "title": "The timeout for allocation of compute nodes to the pool.",
+          "description": "The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).",
+          "default": "PT15M"
         },
         "targetDedicatedNodes": {
           "type": "integer",
           "format": "int32",
+          "title": "The desired number of dedicated compute nodes in the pool.",
           "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
+          "title": "The desired number of Spot/low-priority compute nodes in the pool.",
           "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "nodeDeallocationOption": {
           "$ref": "#/definitions/ComputeNodeDeallocationOption",
+          "title": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
           "description": "If omitted, the default value is Requeue.",
           "x-ms-mutability": [
             "update",
@@ -5307,26 +5317,12 @@
       "description": "Rule to filter client IP address.",
       "properties": {
         "action": {
-          "type": "string",
-          "description": "Action when client IP address is matched.",
-          "default": "Allow",
-          "enum": [
-            "Allow"
-          ],
-          "x-ms-enum": {
-            "name": "IPRuleAction",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Allow",
-                "value": "Allow",
-                "description": "Deny client access."
-              }
-            ]
-          }
+          "$ref": "#/definitions/IPRuleAction",
+          "description": "Action when client IP address is matched."
         },
         "value": {
           "type": "string",
+          "title": "The IP address or IP address range to filter",
           "description": "IPv4 address, or IPv4 address range in CIDR format."
         }
       },
@@ -5335,36 +5331,62 @@
         "value"
       ]
     },
+    "IPRuleAction": {
+      "type": "string",
+      "description": "The action when client IP address is matched.",
+      "enum": [
+        "Allow"
+      ],
+      "x-ms-enum": {
+        "name": "IPRuleAction",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Deny client access."
+          }
+        ]
+      }
+    },
     "ImageReference": {
       "type": "object",
+      "title": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.",
       "description": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.",
       "properties": {
         "publisher": {
           "type": "string",
+          "title": "The publisher of the Azure Virtual Machines Marketplace image.",
           "description": "For example, Canonical or MicrosoftWindowsServer."
         },
         "offer": {
           "type": "string",
+          "title": "The offer type of the Azure Virtual Machines Marketplace image.",
           "description": "For example, UbuntuServer or WindowsServer."
         },
         "sku": {
           "type": "string",
+          "title": "The SKU of the Azure Virtual Machines Marketplace image.",
           "description": "For example, 18.04-LTS or 2022-datacenter."
         },
         "version": {
           "type": "string",
+          "title": "The version of the Azure Virtual Machines Marketplace image.",
           "description": "A value of 'latest' can be specified to select the latest version of an image. If omitted, the default is 'latest'."
         },
         "id": {
           "type": "string",
+          "title": "The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId}.",
           "description": "This property is mutually exclusive with other properties. The Azure Compute Gallery Image must have replicas in the same region as the Azure Batch account. For information about the firewall settings for the Batch node agent to communicate with the Batch service see https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         },
         "sharedGalleryImageId": {
           "type": "string",
+          "title": "The shared gallery image unique identifier",
           "description": "This property is mutually exclusive with other properties and can be fetched from shared gallery image GET call."
         },
         "communityGalleryImageId": {
           "type": "string",
+          "title": "The community gallery image unique identifier",
           "description": "This property is mutually exclusive with other properties and can be fetched from community gallery image GET call."
         }
       }
@@ -5395,33 +5417,40 @@
     },
     "InboundNatPool": {
       "type": "object",
+      "title": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.",
       "description": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.",
       "properties": {
         "name": {
           "type": "string",
+          "title": "The name of the endpoint.",
           "description": "The name must be unique within a Batch pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400."
         },
         "protocol": {
           "$ref": "#/definitions/InboundEndpointProtocol",
+          "title": "The protocol of the endpoint.",
           "description": "The protocol of the endpoint."
         },
         "backendPort": {
           "type": "integer",
           "format": "int32",
+          "title": "The port number on the compute node.",
           "description": "This must be unique within a Batch pool. Acceptable values are between 1 and 65535 except for 29876 and 29877 as these are reserved. If any reserved values are provided the request fails with HTTP status code 400."
         },
         "frontendPortRangeStart": {
           "type": "integer",
           "format": "int32",
+          "title": "The first port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes.",
           "description": "Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved. All ranges within a pool must be distinct and cannot overlap. If any reserved or overlapping values are provided the request fails with HTTP status code 400."
         },
         "frontendPortRangeEnd": {
           "type": "integer",
           "format": "int32",
+          "title": "The last port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes.",
           "description": "Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved by the Batch service. All ranges within a pool must be distinct and cannot overlap. If any reserved or overlapping values are provided the request fails with HTTP status code 400."
         },
         "networkSecurityGroupRules": {
           "type": "array",
+          "title": "A list of network security group rules that will be applied to the endpoint.",
           "description": "The maximum number of rules that can be specified across all the endpoints on a Batch pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityGroupRule"
@@ -5559,21 +5588,25 @@
     },
     "LinuxUserConfiguration": {
       "type": "object",
+      "title": "Properties used to create a user account on a Linux node.",
       "description": "Properties used to create a user account on a Linux node.",
       "properties": {
         "uid": {
           "type": "integer",
           "format": "int32",
+          "title": "The user ID of the user account.",
           "description": "The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the uid."
         },
         "gid": {
           "type": "integer",
           "format": "int32",
+          "title": "The group ID for the user account.",
           "description": "The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the gid."
         },
         "sshPrivateKey": {
           "type": "string",
           "format": "password",
+          "title": "The SSH private key for the user account.",
           "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between nodes (no modification of the user's .ssh directory is done).",
           "x-ms-secret": true
         }
@@ -5734,24 +5767,29 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
+          "title": "The storage account type for use in creating data disks or OS disk.",
           "description": "The storage account type for use in creating data disks or OS disk."
         },
         "securityProfile": {
           "$ref": "#/definitions/VMDiskSecurityProfile",
+          "title": "Specifies the security profile for the managed disk.",
           "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs."
         }
       }
     },
     "MetadataItem": {
       "type": "object",
+      "title": "A name-value pair associated with a Batch service resource.",
       "description": "The Batch service does not assign any meaning to this metadata; it is solely for the use of user code.",
       "properties": {
         "name": {
           "type": "string",
+          "title": "The name of the metadata item.",
           "description": "The name of the metadata item."
         },
         "value": {
           "type": "string",
+          "title": "The value of the metadata item.",
           "description": "The value of the metadata item."
         }
       },
@@ -5762,40 +5800,49 @@
     },
     "MountConfiguration": {
       "type": "object",
+      "title": "The file system to mount on each node.",
       "description": "The file system to mount on each node.",
       "properties": {
         "azureBlobFileSystemConfiguration": {
           "$ref": "#/definitions/AzureBlobFileSystemConfiguration",
+          "title": "The Azure Storage Container to mount using blob FUSE on each node.",
           "description": "This property is mutually exclusive with all other properties."
         },
         "nfsMountConfiguration": {
           "$ref": "#/definitions/NFSMountConfiguration",
+          "title": "The NFS file system to mount on each node.",
           "description": "This property is mutually exclusive with all other properties."
         },
         "cifsMountConfiguration": {
           "$ref": "#/definitions/CifsMountConfiguration",
+          "title": "The CIFS/SMB file system to mount on each node.",
           "description": "This property is mutually exclusive with all other properties."
         },
         "azureFileShareConfiguration": {
           "$ref": "#/definitions/AzureFileShareConfiguration",
+          "title": "The Azure File Share to mount on each node.",
           "description": "This property is mutually exclusive with all other properties."
         }
       }
     },
     "NFSMountConfiguration": {
       "type": "object",
+      "title": "Information used to connect to an NFS file system.",
       "description": "Information used to connect to an NFS file system.",
       "properties": {
         "source": {
           "type": "string",
+          "title": "The URI of the file system to mount.",
           "description": "The URI of the file system to mount."
         },
         "relativeMountPath": {
           "type": "string",
+          "title": "The relative path on the compute node where the file system will be mounted",
           "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
         },
         "mountOptions": {
           "type": "string",
+          "title": "Additional command line options to pass to the mount command.",
           "description": "These are 'net use' options in Windows and 'mount' options in Linux."
         }
       },
@@ -5834,10 +5881,12 @@
       "properties": {
         "subnetId": {
           "type": "string",
+          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
           "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication，including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
         },
         "dynamicVnetAssignmentScope": {
           "type": "string",
+          "title": "The scope of dynamic vnet assignment.",
           "description": "The scope of dynamic vnet assignment.",
           "default": "none",
           "enum": [
@@ -5863,14 +5912,17 @@
         },
         "endpointConfiguration": {
           "$ref": "#/definitions/PoolEndpointConfiguration",
+          "title": "The configuration for endpoints on compute nodes in the Batch pool.",
           "description": "The endpoint configuration for a pool."
         },
         "publicIPAddressConfiguration": {
           "$ref": "#/definitions/PublicIPAddressConfiguration",
+          "title": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
           "description": "The public IP Address configuration of the networking configuration of a Pool."
         },
         "enableAcceleratedNetworking": {
           "type": "boolean",
+          "title": "Whether this pool should enable accelerated networking.",
           "description": "Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview."
         }
       }
@@ -5891,23 +5943,28 @@
     },
     "NetworkSecurityGroupRule": {
       "type": "object",
+      "title": "A network security group rule to apply to an inbound endpoint.",
       "description": "A network security group rule to apply to an inbound endpoint.",
       "properties": {
         "priority": {
           "type": "integer",
           "format": "int32",
+          "title": "The priority for this rule.",
           "description": "Priorities within a pool must be unique and are evaluated in order of priority. The lower the number the higher the priority. For example, rules could be specified with order numbers of 150, 250, and 350. The rule with the order number of 150 takes precedence over the rule that has an order of 250. Allowed priorities are 150 to 4096. If any reserved or duplicate values are provided the request fails with HTTP status code 400."
         },
         "access": {
           "$ref": "#/definitions/NetworkSecurityGroupRuleAccess",
+          "title": "The action that should be taken for a specified IP address, subnet range or tag.",
           "description": "The action that should be taken for a specified IP address, subnet range or tag."
         },
         "sourceAddressPrefix": {
           "type": "string",
+          "title": "The source address prefix or tag to match for the rule.",
           "description": "Valid values are a single IP address (i.e. 10.10.10.10), IP subnet (i.e. 192.168.1.0/24), default tag, or * (for all addresses).  If any other values are provided the request fails with HTTP status code 400."
         },
         "sourcePortRanges": {
           "type": "array",
+          "title": "The source port ranges to match for the rule.",
           "description": "Valid values are '*' (for all ports 0 - 65535) or arrays of ports or port ranges (i.e. 100-200). The ports should in the range of 0 to 65535 and the port ranges or ports can't overlap. If any other values are provided the request fails with HTTP status code 400. Default value will be *.",
           "items": {
             "type": "string"
@@ -6186,10 +6243,12 @@
     },
     "NodePlacementConfiguration": {
       "type": "object",
+      "title": "Node placement configuration for batch pools.",
       "description": "Allocation configuration used by Batch Service to provision the nodes.",
       "properties": {
         "policy": {
           "$ref": "#/definitions/NodePlacementPolicyType",
+          "title": "The placement policy for allocating nodes in the pool.",
           "description": "Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy."
         }
       }
@@ -6310,29 +6369,118 @@
     },
     "OSDisk": {
       "type": "object",
+      "title": "Settings for the operating system disk of the virtual machine.",
       "description": "Settings for the operating system disk of the virtual machine.",
       "properties": {
         "ephemeralOSDiskSettings": {
           "$ref": "#/definitions/DiffDiskSettings",
+          "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
           "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
         },
         "caching": {
           "$ref": "#/definitions/CachingType",
+          "title": "The type of caching to enable for the disk.",
           "description": "The type of caching to enable for the disk."
         },
         "managedDisk": {
-          "$ref": "#/definitions/ManagedDisk"
+          "$ref": "#/definitions/ManagedDisk",
+          "title": "The managed disk parameters."
         },
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
+          "title": "The initial disk size in GB when creating new OS disk.",
           "description": "The initial disk size in GB when creating new OS disk."
         },
         "writeAcceleratorEnabled": {
           "type": "boolean",
+          "title": "Specifies whether writeAccelerator should be enabled or disabled on the disk.",
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
         }
       }
+    },
+    "Operation": {
+      "type": "object",
+      "title": "A REST API operation",
+      "description": "A REST API operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "title": "The object that describes the operation.",
+          "description": "The object that describes the operation."
+        },
+        "origin": {
+          "type": "string",
+          "title": "The operation type.",
+          "description": "The intended executor of the operation."
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "description": "Properties of the operation."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that describes the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "title": "Friendly name of the resource provider.",
+          "description": "Friendly name of the resource provider."
+        },
+        "operation": {
+          "type": "string",
+          "title": "For example: read, write, delete, or listKeys/action",
+          "description": "For example: read, write, delete, or listKeys/action"
+        },
+        "resource": {
+          "type": "string",
+          "title": "The resource type on which the operation is performed.",
+          "description": "The resource type on which the operation is performed."
+        },
+        "description": {
+          "type": "string",
+          "title": "The friendly name of the operation",
+          "description": "The friendly name of the operation"
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "The list of operations supported by the resource provider.",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "title": "The URL to get the next set of operation list results if there are any.",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "OutboundEnvironmentEndpoint": {
       "type": "object",
@@ -6365,7 +6513,8 @@
           "description": "The OutboundEnvironmentEndpoint items on this page",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -6416,7 +6565,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -6458,10 +6608,12 @@
     },
     "PoolEndpointConfiguration": {
       "type": "object",
+      "title": "The endpoint configuration for a pool.",
       "description": "The endpoint configuration for a pool.",
       "properties": {
         "inboundNatPools": {
           "type": "array",
+          "title": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.",
           "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.",
           "items": {
             "$ref": "#/definitions/InboundNatPool"
@@ -6505,91 +6657,109 @@
       "properties": {
         "displayName": {
           "type": "string",
+          "title": "The display name for the pool.",
           "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "lastModified": {
           "type": "string",
           "format": "date-time",
+          "title": "The last modified time of the pool.",
           "description": "This is the last time at which the pool level data, such as the targetDedicatedNodes or autoScaleSettings, changed. It does not factor in node-level changes such as a compute node changing state.",
           "readOnly": true
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The creation time of the pool.",
           "description": "The creation time of the pool.",
           "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/PoolProvisioningState",
+          "title": "The current state of the pool.",
           "description": "The current state of the pool.",
           "readOnly": true
         },
         "provisioningStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the pool entered its current state.",
           "description": "The time at which the pool entered its current state.",
           "readOnly": true
         },
         "allocationState": {
           "$ref": "#/definitions/AllocationState",
+          "title": "Whether the pool is resizing.",
           "description": "Whether the pool is resizing.",
           "readOnly": true
         },
         "allocationStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the pool entered its current allocation state.",
           "description": "The time at which the pool entered its current allocation state.",
           "readOnly": true
         },
         "vmSize": {
           "type": "string",
+          "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
           "description": "For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
+          "title": "This property describes the virtual machines that the pool nodes will be deployed on.",
           "description": "Deployment configuration properties."
         },
         "currentDedicatedNodes": {
           "type": "integer",
           "format": "int32",
+          "title": "The number of dedicated compute nodes currently in the pool.",
           "description": "The number of dedicated compute nodes currently in the pool.",
           "readOnly": true
         },
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
+          "title": "The number of Spot/low-priority compute nodes currently in the pool.",
           "description": "The number of Spot/low-priority compute nodes currently in the pool.",
           "readOnly": true
         },
         "scaleSettings": {
           "$ref": "#/definitions/ScaleSettings",
+          "title": "Settings which configure the number of nodes in the pool.",
           "description": "Defines the desired size of the pool. This can either be 'fixedScale' where the requested targetDedicatedNodes is specified, or 'autoScale' which defines a formula which is periodically reevaluated. If this property is not specified, the pool will have a fixed scale with 0 targetDedicatedNodes."
         },
         "autoScaleRun": {
           "$ref": "#/definitions/AutoScaleRun",
+          "title": "The results and errors from the last execution of the autoscale formula.",
           "description": "This property is set only if the pool automatically scales, i.e. autoScaleSettings are used.",
           "readOnly": true
         },
         "interNodeCommunication": {
           "$ref": "#/definitions/InterNodeCommunicationState",
+          "title": "Whether the pool permits direct communication between nodes.",
           "description": "This imposes restrictions on which nodes can be assigned to the pool. Enabling this value can reduce the chance of the requested number of nodes to be allocated in the pool. If not specified, this value defaults to 'Disabled'."
         },
         "networkConfiguration": {
           "$ref": "#/definitions/NetworkConfiguration",
+          "title": "The network configuration for the pool.",
           "description": "The network configuration for a pool."
         },
         "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
+          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
           "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.",
           "default": 1
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
+          "title": "How tasks are distributed across compute nodes in a pool.",
           "description": "If not specified, the default is spread."
         },
         "userAccounts": {
           "type": "array",
+          "title": "The list of user accounts to be created on each node in the pool.",
           "description": "The list of user accounts to be created on each node in the pool.",
           "items": {
             "$ref": "#/definitions/UserAccount"
@@ -6600,6 +6770,7 @@
         },
         "metadata": {
           "type": "array",
+          "title": "A list of name-value pairs associated with the pool as metadata.",
           "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/MetadataItem"
@@ -6610,10 +6781,12 @@
         },
         "startTask": {
           "$ref": "#/definitions/StartTask",
+          "title": "A task specified to run on each compute node as it joins the pool.",
           "description": "In an PATCH (update) operation, this property can be set to an empty object to remove the start task from the pool."
         },
         "certificates": {
           "type": "array",
+          "title": "The list of certificates to be installed on each compute node in the pool.",
           "description": "For Windows compute nodes, the Batch service installs the certificates to the specified certificate store and location. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/CertificateReference"
@@ -6621,6 +6794,7 @@
         },
         "applicationPackages": {
           "type": "array",
+          "title": "The list of application packages to be installed on each compute node in the pool.",
           "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool.",
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
@@ -6628,6 +6802,7 @@
         },
         "applicationLicenses": {
           "type": "array",
+          "title": "The list of application licenses the Batch service will make available on each compute node in the pool.",
           "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail.",
           "items": {
             "type": "string"
@@ -6635,11 +6810,13 @@
         },
         "resizeOperationStatus": {
           "$ref": "#/definitions/ResizeOperationStatus",
+          "title": "Contains details about the current or last completed resize operation.",
           "description": "Describes either the current operation (if the pool AllocationState is Resizing) or the previously completed operation (if the AllocationState is Steady).",
           "readOnly": true
         },
         "mountConfiguration": {
           "type": "array",
+          "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
@@ -6648,20 +6825,24 @@
         },
         "targetNodeCommunicationMode": {
           "$ref": "#/definitions/NodeCommunicationMode",
+          "title": "Determines how a pool communicates with the Batch service.",
           "description": "If omitted, the default value is Default."
         },
         "currentNodeCommunicationMode": {
           "$ref": "#/definitions/NodeCommunicationMode",
+          "title": "Determines how a pool communicates with the Batch service.",
           "description": "Determines how a pool communicates with the Batch service.",
           "x-nullable": true,
           "readOnly": true
         },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
+          "title": "The upgrade policy for the pool.",
           "description": "Describes an upgrade policy - automatic, manual, or rolling."
         },
         "resourceTags": {
           "type": "object",
+          "title": "The user-specified tags associated with the pool.",
           "description": "The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.",
           "additionalProperties": {
             "type": "string"
@@ -6699,6 +6880,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "title": "The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.",
           "description": "The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.",
           "readOnly": true
         }
@@ -6715,7 +6897,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -6737,16 +6920,19 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "title": "The provisioning state of the private endpoint connection.",
           "description": "The provisioning state of the private endpoint connection.",
           "readOnly": true
         },
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
+          "title": "The ARM resource identifier of the private endpoint.",
           "description": "The private endpoint of the private endpoint connection.",
           "readOnly": true
         },
         "groupIds": {
           "type": "array",
+          "title": "The group id of the private endpoint connection.",
           "description": "The value has one and only one group id.",
           "items": {
             "type": "string"
@@ -6818,7 +7004,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe entity tag for the certificate."
+          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -6840,11 +7027,13 @@
       "properties": {
         "groupId": {
           "type": "string",
+          "title": "The group id of the private link resource.",
           "description": "The group id is used to establish the private link connection.",
           "readOnly": true
         },
         "requiredMembers": {
           "type": "array",
+          "title": "The list of required members that are used to establish the private link connection.",
           "description": "The list of required members that are used to establish the private link connection.",
           "items": {
             "type": "string"
@@ -6853,6 +7042,7 @@
         },
         "requiredZoneNames": {
           "type": "array",
+          "title": "The list of required zone names for the private DNS resource name.",
           "description": "The list of required zone names for the private DNS resource name",
           "items": {
             "type": "string"
@@ -6867,14 +7057,17 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
+          "title": "The status of the Batch private endpoint connection",
           "description": "The status of the Batch private endpoint connection"
         },
         "description": {
           "type": "string",
+          "title": "Description of the private Connection state",
           "description": "Description of the private Connection state"
         },
         "actionsRequired": {
           "type": "string",
+          "title": "Action required on the private connection state",
           "description": "Action required on the private connection state",
           "readOnly": true
         }

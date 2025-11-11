@@ -1000,6 +1000,7 @@ model EndpointAccessProfile {
   /**
    * Default action for endpoint access. It is only applicable when publicNetworkAccess is enabled.
    */
+  @summary("The default action when there is no IPRule matched.")
   defaultAction: EndpointAccessDefaultAction;
 
   /**
@@ -1012,13 +1013,11 @@ model EndpointAccessProfile {
 /**
  * The action when client IP address is matched.
  */
-union IPRuleAction {
+enum IPRuleAction {
   /**
    * Deny client access.
    */
   Allow: "Allow",
-
-  string,
 }
 /**
  * Rule to filter client IP address.
@@ -1027,11 +1026,12 @@ model IPRule {
   /**
    * Action when client IP address is matched.
    */
-  action: IPRuleAction = IPRuleAction.Allow;
+  action: IPRuleAction;
 
   /**
    * IPv4 address, or IPv4 address range in CIDR format.
    */
+  @summary("The IP address or IP address range to filter")
   value: string;
 }
 
@@ -1243,18 +1243,21 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection.
    */
+  @summary("The provisioning state of the private endpoint connection.")
   @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 
   /**
    * The private endpoint of the private endpoint connection.
    */
+  @summary("The ARM resource identifier of the private endpoint.")
   @visibility(Lifecycle.Read)
   privateEndpoint?: PrivateEndpoint;
 
   /**
    * The value has one and only one group id.
    */
+  @summary("The group id of the private endpoint connection.")
   @visibility(Lifecycle.Read)
   groupIds?: string[];
 
@@ -1271,6 +1274,7 @@ model PrivateEndpoint {
   /**
    * The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.
    */
+  @summary("The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.")
   @visibility(Lifecycle.Read)
   id?: string;
 }
@@ -1282,16 +1286,19 @@ model PrivateLinkServiceConnectionState {
   /**
    * The status of the Batch private endpoint connection
    */
+  @summary("The status of the Batch private endpoint connection")
   status: PrivateLinkServiceConnectionStatus;
 
   /**
    * Description of the private Connection state
    */
+  @summary("Description of the private Connection state")
   description?: string;
 
   /**
    * Action required on the private connection state
    */
+  @summary("Action required on the private connection state")
   @visibility(Lifecycle.Read)
   actionsRequired?: string;
 }
@@ -1672,10 +1679,12 @@ model SkuCapability {
 /**
  * A REST API operation
  */
+@summary("A REST API operation")
 model Operation {
   /**
    * This is of the format {provider}/{resource}/{operation}
    */
+  @summary("The operation name.")
   name?: string;
 
   /**
@@ -1686,18 +1695,21 @@ model Operation {
   /**
    * The object that describes the operation.
    */
+  @summary("The object that describes the operation.")
   display?: OperationDisplay;
 
   /**
    * The intended executor of the operation.
    */
+  @summary("The operation type.")
   origin?: string;
 
   /**
    * Properties of the operation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: Record<unknown>;
+  @summary("Properties of the operation.")
+  properties?: unknown;
 }
 
 /**
@@ -1707,21 +1719,25 @@ model OperationDisplay {
   /**
    * Friendly name of the resource provider.
    */
+  @summary("Friendly name of the resource provider.")
   provider?: string;
 
   /**
    * For example: read, write, delete, or listKeys/action
    */
+  @summary("For example: read, write, delete, or listKeys/action")
   operation?: string;
 
   /**
    * The resource type on which the operation is performed.
    */
+  @summary("The resource type on which the operation is performed.")
   resource?: string;
 
   /**
    * The friendly name of the operation
    */
+  @summary("The friendly name of the operation")
   description?: string;
 }
 
@@ -1930,18 +1946,21 @@ model PrivateLinkResourceProperties {
   /**
    * The group id is used to establish the private link connection.
    */
+  @summary("The group id of the private link resource.")
   @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The list of required members that are used to establish the private link connection.
    */
+  @summary("The list of required members that are used to establish the private link connection.")
   @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
    * The list of required zone names for the private DNS resource name
    */
+  @summary("The list of required zone names for the private DNS resource name.")
   @visibility(Lifecycle.Read)
   requiredZoneNames?: string[];
 }
@@ -1964,31 +1983,34 @@ model PoolProperties {
   /**
    * The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.
    */
+  @summary("The display name for the pool.")
   displayName?: string;
 
   /**
    * This is the last time at which the pool level data, such as the targetDedicatedNodes or autoScaleSettings, changed. It does not factor in node-level changes such as a compute node changing state.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @summary("The last modified time of the pool.")
   lastModified?: utcDateTime;
 
   /**
    * The creation time of the pool.
    */
+  @summary("The creation time of the pool.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * The current state of the pool.
    */
+  @summary("The current state of the pool.")
   @visibility(Lifecycle.Read)
   provisioningState?: PoolProvisioningState;
 
   /**
    * The time at which the pool entered its current state.
    */
+  @summary("The time at which the pool entered its current state.")
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   provisioningStateTransitionTime?: utcDateTime;
@@ -1996,12 +2018,14 @@ model PoolProperties {
   /**
    * Whether the pool is resizing.
    */
+  @summary("Whether the pool is resizing.")
   @visibility(Lifecycle.Read)
   allocationState?: AllocationState;
 
   /**
    * The time at which the pool entered its current allocation state.
    */
+  @summary("The time at which the pool entered its current allocation state.")
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   allocationStateTransitionTime?: utcDateTime;
@@ -2009,71 +2033,84 @@ model PoolProperties {
   /**
    * For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).
    */
+  @summary("The size of virtual machines in the pool. All VMs in a pool are the same size.")
   vmSize?: string;
 
   /**
    * Deployment configuration properties.
    */
+  @summary("This property describes the virtual machines that the pool nodes will be deployed on.")
   deploymentConfiguration?: DeploymentConfiguration;
 
   /**
    * The number of dedicated compute nodes currently in the pool.
    */
+  @summary("The number of dedicated compute nodes currently in the pool.")
   @visibility(Lifecycle.Read)
   currentDedicatedNodes?: int32;
 
   /**
    * The number of Spot/low-priority compute nodes currently in the pool.
    */
+  @summary("The number of Spot/low-priority compute nodes currently in the pool.")
   @visibility(Lifecycle.Read)
   currentLowPriorityNodes?: int32;
 
   /**
    * Defines the desired size of the pool. This can either be 'fixedScale' where the requested targetDedicatedNodes is specified, or 'autoScale' which defines a formula which is periodically reevaluated. If this property is not specified, the pool will have a fixed scale with 0 targetDedicatedNodes.
    */
+  @summary("Settings which configure the number of nodes in the pool.")
   scaleSettings?: ScaleSettings;
 
   /**
    * This property is set only if the pool automatically scales, i.e. autoScaleSettings are used.
    */
+  @summary("The results and errors from the last execution of the autoscale formula.")
   @visibility(Lifecycle.Read)
   autoScaleRun?: AutoScaleRun;
 
   /**
    * This imposes restrictions on which nodes can be assigned to the pool. Enabling this value can reduce the chance of the requested number of nodes to be allocated in the pool. If not specified, this value defaults to 'Disabled'.
    */
+  @summary("Whether the pool permits direct communication between nodes.")
   interNodeCommunication?: InterNodeCommunicationState;
 
   /**
    * The network configuration for a pool.
    */
+  @summary("The network configuration for the pool.")
   networkConfiguration?: NetworkConfiguration;
 
   /**
    * The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.
    */
+  @summary("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.")
   taskSlotsPerNode?: int32 = 1;
 
   /**
    * If not specified, the default is spread.
    */
+  @summary("How tasks are distributed across compute nodes in a pool.")
   taskSchedulingPolicy?: TaskSchedulingPolicy;
 
   /**
    * The list of user accounts to be created on each node in the pool.
    */
+  @summary("The list of user accounts to be created on each node in the pool.")
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   userAccounts?: UserAccount[];
 
   /**
    * The Batch service does not assign any meaning to metadata; it is solely for the use of user code.
    */
+  @summary("A list of name-value pairs associated with the pool as metadata.")
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   metadata?: MetadataItem[];
 
   /**
    * In an PATCH (update) operation, this property can be set to an empty object to remove the start task from the pool.
    */
+  @summary("A task specified to run on each compute node as it joins the pool.")
   startTask?: StartTask;
 
   /**
@@ -2081,33 +2118,39 @@ model PoolProperties {
    *
    * Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
+  @summary("The list of certificates to be installed on each compute node in the pool.")
   certificates?: CertificateReference[];
 
   /**
    * Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool.
    */
+  @summary("The list of application packages to be installed on each compute node in the pool.")
   applicationPackages?: ApplicationPackageReference[];
 
   /**
    * The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail.
    */
+  @summary("The list of application licenses the Batch service will make available on each compute node in the pool.")
   applicationLicenses?: string[];
 
   /**
    * Describes either the current operation (if the pool AllocationState is Resizing) or the previously completed operation (if the AllocationState is Steady).
    */
+  @summary("Contains details about the current or last completed resize operation.")
   @visibility(Lifecycle.Read)
   resizeOperationStatus?: ResizeOperationStatus;
 
   /**
    * This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.
    */
+  @summary("A list of file systems to mount on each node in the pool.")
   @OpenAPI.extension("x-ms-identifiers", #[])
   mountConfiguration?: MountConfiguration[];
 
   /**
    * If omitted, the default value is Default.
    */
+  @summary("Determines how a pool communicates with the Batch service.")
   targetNodeCommunicationMode?: NodeCommunicationMode;
 
   /**
@@ -2115,18 +2158,21 @@ model PoolProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Determines how a pool communicates with the Batch service.")
   @visibility(Lifecycle.Read)
   currentNodeCommunicationMode?: NodeCommunicationMode | null;
 
   /**
    * Describes an upgrade policy - automatic, manual, or rolling.
    */
+  @summary("The upgrade policy for the pool.")
   upgradePolicy?: UpgradePolicy;
 
   /**
    * The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("The user-specified tags associated with the pool.")
   resourceTags?: Record<string>;
 }
 
@@ -2216,40 +2262,48 @@ model VirtualMachineConfiguration {
 /**
  * A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.
  */
+@summary("A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.")
 model ImageReference {
   /**
    * For example, Canonical or MicrosoftWindowsServer.
    */
+  @summary("The publisher of the Azure Virtual Machines Marketplace image.")
   publisher?: string;
 
   /**
    * For example, UbuntuServer or WindowsServer.
    */
+  @summary("The offer type of the Azure Virtual Machines Marketplace image.")
   offer?: string;
 
   /**
    * For example, 18.04-LTS or 2022-datacenter.
    */
+  @summary("The SKU of the Azure Virtual Machines Marketplace image.")
   sku?: string;
 
   /**
    * A value of 'latest' can be specified to select the latest version of an image. If omitted, the default is 'latest'.
    */
+  @summary("The version of the Azure Virtual Machines Marketplace image.")
   version?: string;
 
   /**
    * This property is mutually exclusive with other properties. The Azure Compute Gallery Image must have replicas in the same region as the Azure Batch account. For information about the firewall settings for the Batch node agent to communicate with the Batch service see https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.
    */
+  @summary("The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId}.")
   id?: string;
 
   /**
    * This property is mutually exclusive with other properties and can be fetched from shared gallery image GET call.
    */
+  @summary("The shared gallery image unique identifier")
   sharedGalleryImageId?: string;
 
   /**
    * This property is mutually exclusive with other properties and can be fetched from community gallery image GET call.
    */
+  @summary("The community gallery image unique identifier")
   communityGalleryImageId?: string;
 }
 
@@ -2372,10 +2426,12 @@ model DiskEncryptionConfiguration {
 /**
  * Allocation configuration used by Batch Service to provision the nodes.
  */
+@summary("Node placement configuration for batch pools.")
 model NodePlacementConfiguration {
   /**
    * Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy.
    */
+  @summary("The placement policy for allocating nodes in the pool.")
   policy?: NodePlacementPolicyType;
 }
 
@@ -2434,36 +2490,43 @@ model VMExtension {
 /**
  * Settings for the operating system disk of the virtual machine.
  */
+@summary("Settings for the operating system disk of the virtual machine.")
 model OSDisk {
   /**
    * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.")
   ephemeralOSDiskSettings?: DiffDiskSettings;
 
   /**
    * The type of caching to enable for the disk.
    */
+  @summary("The type of caching to enable for the disk.")
   caching?: CachingType;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("The managed disk parameters.")
   managedDisk?: ManagedDisk;
 
   /**
    * The initial disk size in GB when creating new OS disk.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("The initial disk size in GB when creating new OS disk.")
   diskSizeGB?: int32;
 
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  @summary("Specifies whether writeAccelerator should be enabled or disabled on the disk.")
   writeAcceleratorEnabled?: boolean;
 }
 
 /**
  * The location where the OS disk should be placed.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DiffDiskPlacement {
   /**
    * The OS disk will be placed on the cache disk of the VM.
@@ -2488,11 +2551,13 @@ model ManagedDisk {
   /**
    * The storage account type for use in creating data disks or OS disk.
    */
+  @summary("The storage account type for use in creating data disks or OS disk.")
   storageAccountType?: StorageAccountType;
 
   /**
    * Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.
    */
+  @summary("Specifies the security profile for the managed disk.")
   securityProfile?: VMDiskSecurityProfile;
 }
 
@@ -2570,25 +2635,30 @@ model ScaleSettings {
 /**
  * Fixed scale settings for the pool.
  */
+@summary("Fixed scale settings for the pool.")
 model FixedScaleSettings {
   /**
    * The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).
    */
-  resizeTimeout?: duration;
+  @summary("The timeout for allocation of compute nodes to the pool.")
+  resizeTimeout?: duration = duration.fromISO("PT15M");
 
   /**
    * At least one of targetDedicatedNodes, targetLowPriorityNodes must be set.
    */
+  @summary("The desired number of dedicated compute nodes in the pool.")
   targetDedicatedNodes?: int32;
 
   /**
    * At least one of targetDedicatedNodes, targetLowPriorityNodes must be set.
    */
+  @summary("The desired number of Spot/low-priority compute nodes in the pool.")
   targetLowPriorityNodes?: int32;
 
   /**
    * If omitted, the default value is Requeue.
    */
+  @summary("Determines what to do with a node and its running task(s) after it has been selected for deallocation.")
   @visibility(Lifecycle.Create, Lifecycle.Update)
   nodeDeallocationOption?: ComputeNodeDeallocationOption;
 }
@@ -2670,37 +2740,52 @@ model NetworkConfiguration {
   /**
    * The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication，including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
    */
+  @OpenAPI.externalDocs(
+    "https://learn.microsoft.com/azure/batch/batch-virtual-networks",
+    "Create an Azure Batch pool in a virtual network"
+  )
+  @summary("The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.")
   subnetId?: string;
 
   /**
    * The scope of dynamic vnet assignment.
    */
+  @summary("The scope of dynamic vnet assignment.")
   dynamicVnetAssignmentScope?: DynamicVNetAssignmentScope = DynamicVNetAssignmentScope.none;
 
   /**
    * The endpoint configuration for a pool.
    */
+  @summary("The configuration for endpoints on compute nodes in the Batch pool.")
   endpointConfiguration?: PoolEndpointConfiguration;
 
   /**
    * The public IP Address configuration of the networking configuration of a Pool.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("The Public IPAddress configuration for Compute Nodes in the Batch Pool.")
   publicIPAddressConfiguration?: PublicIPAddressConfiguration;
 
   /**
    * Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.
    */
+  @summary("Whether this pool should enable accelerated networking.")
+  @OpenAPI.externalDocs(
+    "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview",
+    "Create a VM with Accelerated Networking."
+  )
   enableAcceleratedNetworking?: boolean;
 }
 
 /**
  * The endpoint configuration for a pool.
  */
+@summary("The endpoint configuration for a pool.")
 model PoolEndpointConfiguration {
   /**
    * The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.
    */
+  @summary("A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.")
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   inboundNatPools: InboundNatPool[];
 }
@@ -2708,35 +2793,42 @@ model PoolEndpointConfiguration {
 /**
  * A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.
  */
+@summary("A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.")
 model InboundNatPool {
   /**
    * The name must be unique within a Batch pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400.
    */
+  @summary("The name of the endpoint.")
   name: string;
 
   /**
    * The protocol of the endpoint.
    */
+  @summary("The protocol of the endpoint.")
   protocol: InboundEndpointProtocol;
 
   /**
    * This must be unique within a Batch pool. Acceptable values are between 1 and 65535 except for 29876 and 29877 as these are reserved. If any reserved values are provided the request fails with HTTP status code 400.
    */
+  @summary("The port number on the compute node.")
   backendPort: int32;
 
   /**
    * Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved. All ranges within a pool must be distinct and cannot overlap. If any reserved or overlapping values are provided the request fails with HTTP status code 400.
    */
+  @summary("The first port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes.")
   frontendPortRangeStart: int32;
 
   /**
    * Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved by the Batch service. All ranges within a pool must be distinct and cannot overlap. If any reserved or overlapping values are provided the request fails with HTTP status code 400.
    */
+  @summary("The last port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes.")
   frontendPortRangeEnd: int32;
 
   /**
    * The maximum number of rules that can be specified across all the endpoints on a Batch pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.
    */
+  @summary("A list of network security group rules that will be applied to the endpoint.")
   @OpenAPI.extension("x-ms-identifiers", #[])
   networkSecurityGroupRules?: NetworkSecurityGroupRule[];
 }
@@ -2744,25 +2836,30 @@ model InboundNatPool {
 /**
  * A network security group rule to apply to an inbound endpoint.
  */
+@summary("A network security group rule to apply to an inbound endpoint.")
 model NetworkSecurityGroupRule {
   /**
    * Priorities within a pool must be unique and are evaluated in order of priority. The lower the number the higher the priority. For example, rules could be specified with order numbers of 150, 250, and 350. The rule with the order number of 150 takes precedence over the rule that has an order of 250. Allowed priorities are 150 to 4096. If any reserved or duplicate values are provided the request fails with HTTP status code 400.
    */
+  @summary("The priority for this rule.")
   priority: int32;
 
   /**
    * The action that should be taken for a specified IP address, subnet range or tag.
    */
+  @summary("The action that should be taken for a specified IP address, subnet range or tag.")
   access: NetworkSecurityGroupRuleAccess;
 
   /**
    * Valid values are a single IP address (i.e. 10.10.10.10), IP subnet (i.e. 192.168.1.0/24), default tag, or * (for all addresses).  If any other values are provided the request fails with HTTP status code 400.
    */
+  @summary("The source address prefix or tag to match for the rule.")
   sourceAddressPrefix: string;
 
   /**
    * Valid values are '*' (for all ports 0 - 65535) or arrays of ports or port ranges (i.e. 100-200). The ports should in the range of 0 to 65535 and the port ranges or ports can't overlap. If any other values are provided the request fails with HTTP status code 400. Default value will be *.
    */
+  @summary("The source port ranges to match for the rule.")
   sourcePortRanges?: string[];
 }
 
@@ -2826,20 +2923,24 @@ model UserAccount {
 /**
  * Properties used to create a user account on a Linux node.
  */
+@summary("Properties used to create a user account on a Linux node.")
 model LinuxUserConfiguration {
   /**
    * The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the uid.
    */
+  @summary("The user ID of the user account.")
   uid?: int32;
 
   /**
    * The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the gid.
    */
+  @summary("The group ID for the user account.")
   gid?: int32;
 
   /**
    * The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between nodes (no modification of the user's .ssh directory is done).
    */
+  @summary("The SSH private key for the user account.")
   @secret
   sshPrivateKey?: string;
 }
@@ -2857,15 +2958,18 @@ model WindowsUserConfiguration {
 /**
  * The Batch service does not assign any meaning to this metadata; it is solely for the use of user code.
  */
+@summary("A name-value pair associated with a Batch service resource.")
 model MetadataItem {
   /**
    * The name of the metadata item.
    */
+  @summary("The name of the metadata item.")
   name: string;
 
   /**
    * The value of the metadata item.
    */
+  @summary("The value of the metadata item.")
   value: string;
 }
 
@@ -2954,15 +3058,18 @@ model ResourceFile {
 /**
  * An environment variable to be set on a task process.
  */
+@summary("An environment variable to be set on a task process.")
 model EnvironmentSetting {
   /**
    * The name of the environment variable.
    */
+  @summary("The name of the environment variable.")
   name: string;
 
   /**
    * The value of the environment variable.
    */
+  @summary("The value of the environment variable.")
   value?: string;
 }
 
@@ -3157,25 +3264,30 @@ model ResizeError {
 /**
  * The file system to mount on each node.
  */
+@summary("The file system to mount on each node.")
 model MountConfiguration {
   /**
    * This property is mutually exclusive with all other properties.
    */
+  @summary("The Azure Storage Container to mount using blob FUSE on each node.")
   azureBlobFileSystemConfiguration?: AzureBlobFileSystemConfiguration;
 
   /**
    * This property is mutually exclusive with all other properties.
    */
+  @summary("The NFS file system to mount on each node.")
   nfsMountConfiguration?: NFSMountConfiguration;
 
   /**
    * This property is mutually exclusive with all other properties.
    */
+  @summary("The CIFS/SMB file system to mount on each node.")
   cifsMountConfiguration?: CifsMountConfiguration;
 
   /**
    * This property is mutually exclusive with all other properties.
    */
+  @summary("The Azure File Share to mount on each node.")
   azureFileShareConfiguration?: AzureFileShareConfiguration;
 }
 
@@ -3233,20 +3345,24 @@ model AzureBlobFileSystemConfiguration {
  * Information used to connect to an NFS file system.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@summary("Information used to connect to an NFS file system.")
 model NFSMountConfiguration {
   /**
    * The URI of the file system to mount.
    */
+  @summary("The URI of the file system to mount.")
   source: string;
 
   /**
    * All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
    */
+  @summary("The relative path on the compute node where the file system will be mounted")
   relativeMountPath: string;
 
   /**
    * These are 'net use' options in Windows and 'mount' options in Linux.
    */
+  @summary("Additional command line options to pass to the mount command.")
   mountOptions?: string;
 }
 
@@ -3760,5 +3876,18 @@ union NspAccessRuleDirection {
 
 model DetectorListResult is Azure.Core.Page<DetectorResponse>;
 
+model OperationListResult is Azure.Core.Page<Operation>;
+
 model BatchAccountListResult is Azure.Core.Page<BatchAccount>;
 @@identifiers(BatchAccountListResult.value, #["/properties/accountEndpoint"]);
+@@summary(OperationListResult.value,
+  "The list of operations supported by the resource provider."
+);
+@@summary(OperationListResult.nextLink,
+  "The URL to get the next set of operation list results if there are any."
+);
+@@summary(OperationListResult,
+  "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results."
+);
+@@identifiers(OperationListResult.value, #["name"]);
+@@visibility(OutboundEnvironmentEndpointCollection.value, Lifecycle.Read);
