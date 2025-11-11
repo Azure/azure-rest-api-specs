@@ -31,6 +31,13 @@ To see additional help and options, run:
 
 These are the global settings for the Legacy AlertsManagement Services.
 
+### Suppression
+``` yaml
+directive:
+  - suppress: MULTIPLE_API_VERSION
+    reason: The legacy services are on deprecation path
+```
+
 ``` yaml
 title: LegacyAlertsManagementClient
 description: Legacy AlertsManagement Client
@@ -76,6 +83,24 @@ These settings apply only when `--tag=package-smartdetector-stable-2021-04` is s
 ```yaml $(tag) == 'package-smartdetector-stable-2021-04'
 input-file:
   - stable/2021-04-01/SmartDetectorAlertRulesApi.json
+```
+
+### Tag: package-smartdetector-stable-2019-06
+
+These settings apply only when `--tag=package-smartdetector-stable-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-smartdetector-stable-2019-06'
+input-file:
+  - stable/2019-06-01/SmartDetectorAlertRulesApi.json
+```
+
+### Tag: package-smartdetector-stable-2019-03
+
+These settings apply only when `--tag=package-smartdetector-stable-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-smartdetector-stable-2019-03'
+input-file:
+  - stable/2019-03-01/SmartDetectorAlertRulesApi.json
 ```
 
 ### Tag: package-smartgroups-preview-2019-05
