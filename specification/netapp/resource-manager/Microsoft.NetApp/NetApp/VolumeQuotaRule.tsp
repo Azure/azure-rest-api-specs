@@ -7,6 +7,7 @@ import "./Volume.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 

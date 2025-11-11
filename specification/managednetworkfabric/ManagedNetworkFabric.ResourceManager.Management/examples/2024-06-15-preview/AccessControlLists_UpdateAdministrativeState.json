@@ -1,0 +1,40 @@
+{
+  "title": "AccessControlLists_UpdateAdministrativeState_MaximumSet_Gen",
+  "operationId": "AccessControlLists_UpdateAdministrativeState",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "accessControlListName": "example-acl",
+    "body": {
+      "resourceIds": [
+        ""
+      ],
+      "state": "Enable"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "error": {
+          "code": "",
+          "message": "",
+          "target": "",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "",
+              "info": {}
+            }
+          ]
+        },
+        "configurationState": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
