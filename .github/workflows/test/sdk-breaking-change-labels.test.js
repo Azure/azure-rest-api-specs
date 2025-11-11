@@ -12,9 +12,10 @@ vi.mock("../src/context.js", () => ({
   extractInputs: vi.fn(),
 }));
 
+/** @type {import('vitest').Mock<(url: string) => Promise<Partial<Response>>>} */
 const mockFetch = vi.fn();
 // Mock global fetch
-global.fetch = mockFetch;
+global.fetch = /** @type {import('vitest').MockedFunction<typeof fetch>} */ (mockFetch);
 
 const mockGithub = createMockGithub();
 const mockContext = createMockContext();
@@ -75,9 +76,9 @@ describe("sdk-breaking-change-labels", () => {
       // Setup fetch to return different responses for each call
       mockFetch.mockImplementation((url) => {
         if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
+          return Promise.resolve(mockArtifactResponse);
         } else {
-          return mockContentResponse;
+          return Promise.resolve(mockContentResponse);
         }
       });
 
@@ -131,9 +132,9 @@ describe("sdk-breaking-change-labels", () => {
       // Setup fetch to return different responses for each call
       mockFetch.mockImplementation((url) => {
         if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
+          return Promise.resolve(mockArtifactResponse);
         } else {
-          return mockContentResponse;
+          return Promise.resolve(mockContentResponse);
         }
       });
 
@@ -187,9 +188,9 @@ describe("sdk-breaking-change-labels", () => {
       // Setup fetch to return different responses for each call
       mockFetch.mockImplementation((url) => {
         if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
+          return Promise.resolve(mockArtifactResponse);
         } else {
-          return mockContentResponse;
+          return Promise.resolve(mockContentResponse);
         }
       });
 
@@ -343,11 +344,7 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       // Setup fetch to return different responses for each call
-      mockFetch.mockImplementation((url) => {
-        if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
-        }
-      });
+      mockFetch.mockResolvedValue(mockArtifactResponse);
 
       // Call function and expect it to throw
       await expect(
@@ -374,11 +371,7 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       // Setup fetch to return different responses for each call
-      mockFetch.mockImplementation((url) => {
-        if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
-        }
-      });
+      mockFetch.mockResolvedValue(mockArtifactResponse);
 
       // Call function and expect it to throw
       await expect(
@@ -419,9 +412,9 @@ describe("sdk-breaking-change-labels", () => {
       // Setup fetch to return different responses for each call
       mockFetch.mockImplementation((url) => {
         if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
+          return Promise.resolve(mockArtifactResponse);
         } else {
-          return mockContentResponse;
+          return Promise.resolve(mockContentResponse);
         }
       });
 
