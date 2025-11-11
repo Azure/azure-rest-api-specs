@@ -101,7 +101,7 @@ describe("Summarize Checks Integration Tests", () => {
         );
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
-        let labelContext = updateLabels(adjustedStartLabels, impactAssessment);
+        let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);
 
         adjustedStartLabels = adjustedStartLabels.filter(
           (name) => !labelContext.toRemove.has(name),
