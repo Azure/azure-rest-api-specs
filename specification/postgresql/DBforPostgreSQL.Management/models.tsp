@@ -3072,6 +3072,11 @@ model ServerPropertiesForPatch {
   dataEncryption?: DataEncryption;
 
   /**
+   * Availability zone of a server.
+   */
+  availabilityZone?: string = "";
+
+  /**
    * Update mode of an existing server.
    */
   @visibility(Lifecycle.Update)
