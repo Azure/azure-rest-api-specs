@@ -298,6 +298,8 @@ model TokenUsage {
 }
 
 /** Represents a mcp tool definition. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-azure-core/no-unknown" // The input_schema and annotations can be of any type according to OpenAI response.
 @usage(ResponseUsage)
 model MCPTool {
   /** The name of the tool. */
@@ -329,6 +331,7 @@ model ResponseMCPListToolItem extends ResponseItem {
 
 /** A response item that represents a call to an MCP tool. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-azure-core/no-unknown" // The error can be of any type according to OpenAI response.
 @usage(ResponseUsage)
 model ResponseMCPCallItem extends ResponseItem {
   /** The type of the item. */
