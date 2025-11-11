@@ -87,7 +87,7 @@ model MCPServer extends Tool {
   authorization?: string;
   headers?: Record<string>;
   allowed_tools?: string[];
-  require_approval?: MCPApprovalType | Record<MCPApprovalType, string[]>;
+  require_approval?: MCPApprovalType | Record<string[]>;
 }
 
 /**
