@@ -56,18 +56,15 @@ export default async function incrementalTypeSpec({ core }) {
       }
     }
 
-    const swagger = new Swagger(file, { content: swaggerText });
-    let typeSpecGenerated;
     try {
-      typeSpecGenerated = await swagger.getTypeSpecGenerated();
+      const swagger = new Swagger(file, { content: swaggerText });
+      if (!(await swagger.getTypeSpecGenerated())) {
+        core.info(`File "${file}" does not contain "info.x-typespec-generated"`);
+        return false;
+      }
     } catch {
       // If swagger cannot be parsed as JSON, it's not "incremental typespec"
       core.info(`File "${file}" cannot be parsed as JSON`);
-      return false;
-    }
-
-    if (!typeSpecGenerated) {
-      core.info(`File "${file}" does not contain "info.x-typespec-generated"`);
       return false;
     }
   }
