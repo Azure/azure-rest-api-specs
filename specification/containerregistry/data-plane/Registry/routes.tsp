@@ -539,6 +539,7 @@ interface ContainerRegistryBlob {
    * request without a body will just complete the upload with previously uploaded
    * content.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Ensuring existing operation name for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @route("/{nextBlobUuidLink}")
@@ -564,7 +565,12 @@ interface ContainerRegistryBlob {
       @bodyRoot
       value?: bytes;
     },
-    void
+    {
+      @statusCode statusCode: 201;
+      @header("Location") location: string;
+      @header("Range") range: string;
+      @header("Docker-Content-Digest") dockerContentDigest: string;
+    }
   >;
 
   /**
@@ -602,7 +608,12 @@ interface ContainerRegistryBlob {
       @path
       name: string;
     },
-    void
+    {
+      @statusCode statusCode: 202;
+      @header("Location") location: string;
+      @header("Range") range: string;
+      @header("Docker-Upload-UUID") dockerUploadUuid: string;
+    }
   >;
 
   /**
