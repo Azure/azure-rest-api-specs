@@ -552,9 +552,9 @@ function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
 /**
  * @param {string[]} existingLabels
  * @param {import("./labelling.js").ImpactAssessment | undefined} impactAssessment
- * @returns {import("./labelling.js").LabelContext}
+ * @returns {Promise<import("./labelling.js").LabelContext>}
  */
-export function updateLabels(existingLabels, impactAssessment) {
+export async function updateLabels(existingLabels, impactAssessment) {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
   //  - public/rest-api-specs-scripts/src/prSummary.ts
@@ -569,7 +569,7 @@ export function updateLabels(existingLabels, impactAssessment) {
 
   if (impactAssessment) {
     // will further update the label context if necessary
-    processImpactAssessment(labelContext, impactAssessment);
+    await processImpactAssessment(labelContext, impactAssessment);
   }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
