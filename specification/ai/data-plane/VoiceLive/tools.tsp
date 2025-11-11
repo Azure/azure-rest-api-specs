@@ -11,6 +11,7 @@ namespace VoiceLive;
 union ToolType {
   string,
   function: "function",
+  mcp: "mcp",
 }
 
 /**
@@ -76,4 +77,33 @@ model ToolChoiceObject {
 model ToolChoiceFunctionObject extends ToolChoiceObject {
   type: ToolType.function;
   name: string;
+}
+
+/**
+ * The definition of an MCP server as used by the voicelive endpoint.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-autorest/union-unsupported" // require_approval is represented this way in OpenAI style.
+@usage(RequestUsage)
+model MCPServer extends Tool {
+  type: ToolType.mcp;
+  server_label: string;
+  server_url: string;
+  authorization?: string;
+  headers?: Record<string>;
+  allowed_tools?: string[];
+  require_approval?: MCPApprovalType | Record<string[]>;
+}
+
+/**
+ * The available set of MCP approval types.
+ */
+union MCPApprovalType {
+  string,
+
+  /** Approval is never required. */
+  Never: "never",
+
+  /** Approval is always required. */
+  Always: "always",
 }

@@ -1,5 +1,6 @@
 import "./client.tsp";
 import "./custom.tsp";
+import "./events.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -1241,4 +1242,80 @@ model ServerEventResponseFunctionCallArgumentsDone extends ServerEvent {
 
   /** The name of the function call. */
   name: string;
+}
+
+/** MCP list tools in progress message. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@usage(ResponseUsage)
+model ServerEventMcpListToolsInProgress extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.mcp_list_tools_in_progress;
+
+  /** The item ID. */
+  item_id: string;
+}
+
+/** MCP list tools completed message. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@usage(ResponseUsage)
+model ServerEventMcpListToolsCompleted extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.mcp_list_tools_completed;
+
+  /** The item ID. */
+  item_id: string;
+}
+
+/** MCP list tools failed message. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@usage(ResponseUsage)
+model ServerEventMcpListToolsFailed extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.mcp_list_tools_failed;
+
+  /** The item ID. */
+  item_id: string;
+}
+
+/** Represents a delta update of the arguments for an MCP tool call. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseMcpCallArgumentsDelta extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_mcp_call_arguments_delta;
+
+  /** The delta of the arguments. */
+  delta: string;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The ID of the response associated with the event. */
+  response_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+
+  /** The obfuscation of the arguments. */
+  obfuscation?: string;
+}
+
+/** Indicates the completion of the arguments for an MCP tool call. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseMcpCallArgumentsDone extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_mcp_call_arguments_done;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The ID of the response associated with the event. */
+  response_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+
+  /** The full arguments for the tool call. */
+  arguments?: string;
 }
