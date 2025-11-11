@@ -1,0 +1,800 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "kubernetesClusterName": "kubernetesClusterName",
+    "kubernetesClusterParameters": {
+      "extendedLocation": {
+        "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+        "type": "CustomLocation"
+      },
+      "location": "location",
+      "properties": {
+        "aadConfiguration": {
+          "adminGroupObjectIds": [
+            "ffffffff-ffff-ffff-ffff-ffffffffffff"
+          ]
+        },
+        "administratorConfiguration": {
+          "adminUsername": "azure",
+          "sshPublicKeys": [
+            {
+              "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+            }
+          ]
+        },
+        "controlPlaneNodeConfiguration": {
+          "administratorConfiguration": {
+            "adminUsername": "azure",
+            "sshPublicKeys": [
+              {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              }
+            ]
+          },
+          "availabilityZones": [
+            "1",
+            "2",
+            "3"
+          ],
+          "count": 3,
+          "vmSkuName": "NC_G6_28_v1"
+        },
+        "initialAgentPoolConfigurations": [
+          {
+            "name": "SystemPool-1",
+            "administratorConfiguration": {
+              "adminUsername": "azure",
+              "sshPublicKeys": [
+                {
+                  "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+                }
+              ]
+            },
+            "agentOptions": {
+              "hugepagesCount": 96,
+              "hugepagesSize": "1G"
+            },
+            "attachedNetworkConfiguration": {
+              "l2Networks": [
+                {
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                  "pluginType": "DPDK"
+                }
+              ],
+              "l3Networks": [
+                {
+                  "ipamEnabled": "False",
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                  "pluginType": "SRIOV"
+                }
+              ],
+              "trunkedNetworks": [
+                {
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                  "pluginType": "MACVLAN"
+                }
+              ]
+            },
+            "availabilityZones": [
+              "1",
+              "2",
+              "3"
+            ],
+            "count": 3,
+            "labels": [
+              {
+                "key": "kubernetes.label",
+                "value": "true"
+              }
+            ],
+            "mode": "System",
+            "taints": [
+              {
+                "key": "kubernetes.taint",
+                "value": "true:NoSchedule"
+              }
+            ],
+            "upgradeSettings": {
+              "maxSurge": "1"
+            },
+            "vmSkuName": "NC_P46_224_v1"
+          }
+        ],
+        "kubernetesVersion": "1.XX.Y",
+        "managedResourceGroupConfiguration": {
+          "name": "my-managed-rg",
+          "location": "East US"
+        },
+        "networkConfiguration": {
+          "attachedNetworkConfiguration": {
+            "l2Networks": [
+              {
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                "pluginType": "DPDK"
+              }
+            ],
+            "l3Networks": [
+              {
+                "ipamEnabled": "False",
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                "pluginType": "SRIOV"
+              }
+            ],
+            "trunkedNetworks": [
+              {
+                "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                "pluginType": "MACVLAN"
+              }
+            ]
+          },
+          "bgpServiceLoadBalancerConfiguration": {
+            "bgpAdvertisements": [
+              {
+                "advertiseToFabric": "True",
+                "communities": [
+                  "64512:100"
+                ],
+                "ipAddressPools": [
+                  "pool1"
+                ],
+                "peers": [
+                  "peer1"
+                ]
+              }
+            ],
+            "bgpPeers": [
+              {
+                "name": "peer1",
+                "bfdEnabled": "False",
+                "bgpMultiHop": "False",
+                "holdTime": "P300s",
+                "keepAliveTime": "P300s",
+                "myAsn": 64512,
+                "peerAddress": "203.0.113.254",
+                "peerAsn": 64497,
+                "peerPort": 179
+              }
+            ],
+            "fabricPeeringEnabled": "True",
+            "ipAddressPools": [
+              {
+                "name": "pool1",
+                "addresses": [
+                  "198.51.102.0/24"
+                ],
+                "autoAssign": "True",
+                "onlyUseHostIps": "True"
+              }
+            ]
+          },
+          "cloudServicesNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+          "cniNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+          "dnsServiceIp": "198.51.101.2",
+          "podCidrs": [
+            "198.51.100.0/24"
+          ],
+          "serviceCidrs": [
+            "198.51.101.0/24"
+          ]
+        }
+      },
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
+      }
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "KubernetesClusterName",
+        "type": "Microsoft.NetworkCloud/kubernetesClusters",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName",
+        "location": "location",
+        "properties": {
+          "aadConfiguration": {
+            "adminGroupObjectIds": [
+              "ffffffff-ffff-ffff-ffff-ffffffffffff"
+            ]
+          },
+          "administratorConfiguration": {
+            "adminUsername": "azure",
+            "sshPublicKeys": [
+              {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              }
+            ]
+          },
+          "attachedNetworkIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName"
+          ],
+          "availableUpgrades": [
+            {
+              "availabilityLifecycle": "GenerallyAvailable",
+              "version": "1.XX.Y"
+            }
+          ],
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "connectedClusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/connectedClusterName",
+          "controlPlaneKubernetesVersion": "1.XX.Y",
+          "controlPlaneNodeConfiguration": {
+            "administratorConfiguration": {
+              "adminUsername": "azure",
+              "sshPublicKeys": [
+                {
+                  "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+                }
+              ]
+            },
+            "availabilityZones": [
+              "1",
+              "2",
+              "3"
+            ],
+            "count": 3,
+            "vmSkuName": "NC_G6_28_v1"
+          },
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Kubernetes cluster is operational",
+          "featureStatuses": [
+            {
+              "name": "Feature1",
+              "detailedStatus": "Running",
+              "detailedStatusMessage": "No issues detected",
+              "version": "1"
+            }
+          ],
+          "initialAgentPoolConfigurations": [
+            {
+              "name": "SystemPool-1",
+              "administratorConfiguration": {
+                "adminUsername": "azure",
+                "sshPublicKeys": [
+                  {
+                    "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+                  }
+                ]
+              },
+              "agentOptions": {
+                "hugepagesCount": 96,
+                "hugepagesSize": "1G"
+              },
+              "attachedNetworkConfiguration": {
+                "l2Networks": [
+                  {
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                    "pluginType": "DPDK"
+                  }
+                ],
+                "l3Networks": [
+                  {
+                    "ipamEnabled": "False",
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                    "pluginType": "SRIOV"
+                  }
+                ],
+                "trunkedNetworks": [
+                  {
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                    "pluginType": "MACVLAN"
+                  }
+                ]
+              },
+              "availabilityZones": [
+                "1",
+                "2",
+                "3"
+              ],
+              "count": 3,
+              "labels": [
+                {
+                  "key": "kubernetes.label",
+                  "value": "true"
+                }
+              ],
+              "mode": "System",
+              "taints": [
+                {
+                  "key": "kubernetes.taint",
+                  "value": "true:NoSchedule"
+                }
+              ],
+              "upgradeSettings": {
+                "maxSurge": "1"
+              },
+              "vmSkuName": "NC_P46_224_v1"
+            }
+          ],
+          "kubernetesVersion": "1.XX.Y",
+          "managedResourceGroupConfiguration": {
+            "name": "my-managed-rg",
+            "location": "East US"
+          },
+          "networkConfiguration": {
+            "attachedNetworkConfiguration": {
+              "l2Networks": [
+                {
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                  "pluginType": "DPDK"
+                }
+              ],
+              "l3Networks": [
+                {
+                  "ipamEnabled": "False",
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                  "pluginType": "SRIOV"
+                }
+              ],
+              "trunkedNetworks": [
+                {
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                  "pluginType": "MACVLAN"
+                }
+              ]
+            },
+            "bgpServiceLoadBalancerConfiguration": {
+              "bgpAdvertisements": [
+                {
+                  "advertiseToFabric": "True",
+                  "communities": [
+                    "64512:100"
+                  ],
+                  "ipAddressPools": [
+                    "pool1"
+                  ],
+                  "peers": [
+                    "peer1"
+                  ]
+                }
+              ],
+              "bgpPeers": [
+                {
+                  "name": "peer1",
+                  "bfdEnabled": "False",
+                  "bgpMultiHop": "False",
+                  "holdTime": "P300s",
+                  "keepAliveTime": "P300s",
+                  "myAsn": 64512,
+                  "peerAddress": "203.0.113.254",
+                  "peerAsn": 64497,
+                  "peerPort": 179
+                }
+              ],
+              "fabricPeeringEnabled": "True",
+              "ipAddressPools": [
+                {
+                  "name": "pool1",
+                  "addresses": [
+                    "198.51.102.0/24"
+                  ],
+                  "autoAssign": "True",
+                  "onlyUseHostIps": "True"
+                }
+              ]
+            },
+            "cloudServicesNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+            "cniNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+            "dnsServiceIp": "198.51.101.2",
+            "podCidrs": [
+              "198.51.100.0/24"
+            ],
+            "serviceCidrs": [
+              "198.51.101.0/24"
+            ]
+          },
+          "nodes": [
+            {
+              "name": "kubernetesClusterName-SystemPool-1-md-cqjvd",
+              "agentPoolId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/agentPools/agentPoolName",
+              "availabilityZone": "1",
+              "bareMetalMachineId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+              "cpuCores": 46,
+              "detailedStatus": "Running",
+              "detailedStatusMessage": "Running - virtual machine is running.",
+              "diskSizeGB": 300,
+              "image": "mariner-guest-image-qcow2-k8s-1.XX.Y",
+              "kubernetesVersion": "v1.XX.Y",
+              "labels": [
+                {
+                  "key": "kubernetes.label",
+                  "value": "true"
+                }
+              ],
+              "memorySizeGB": 224,
+              "mode": "System",
+              "networkAttachments": [
+                {
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+                  "defaultGateway": "False",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "169.254.8.4",
+                  "macAddress": "aa:bb:cc:06:79:2a",
+                  "networkAttachmentName": "cloudservices"
+                },
+                {
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                  "defaultGateway": "False",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "10.14.48.12",
+                  "ipv6Address": "fda0:d59c:da0a:e30::a",
+                  "macAddress": "aa:bb:cc:ad:40:cf",
+                  "networkAttachmentName": "defaultcni"
+                }
+              ],
+              "powerState": "On",
+              "role": "Worker",
+              "taints": [
+                {
+                  "key": "kubernetes.taint",
+                  "value": "true:NoSchedule"
+                }
+              ],
+              "vmSkuName": "NC_P46_224_v1"
+            },
+            {
+              "name": "kubernetesClusterName-control-plane-7nsh2",
+              "bareMetalMachineId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+              "cpuCores": 6,
+              "detailedStatus": "Running",
+              "detailedStatusMessage": "Running - virtual machine is running.",
+              "diskSizeGB": 300,
+              "image": "mariner-guest-image-qcow2-k8s-1.XX.Y",
+              "kubernetesVersion": "v1.XX.Y",
+              "memorySizeGB": 28,
+              "networkAttachments": [
+                {
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+                  "defaultGateway": "False",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "169.254.8.2",
+                  "macAddress": "aa:bb:cc:fa:91:71",
+                  "networkAttachmentName": "cloudservices"
+                },
+                {
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                  "defaultGateway": "False",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "10.14.48.11",
+                  "ipv6Address": "fda0:d59c:da0a:e30::9",
+                  "macAddress": "aa:bb:cc:c8:a2:40",
+                  "networkAttachmentName": "defaultcni"
+                }
+              ],
+              "powerState": "On",
+              "role": "ControlPlane",
+              "vmSkuName": "NC_G6_28_v1"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "KubernetesClusterName",
+        "type": "Microsoft.NetworkCloud/kubernetesClusters",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName",
+        "location": "location",
+        "properties": {
+          "aadConfiguration": {
+            "adminGroupObjectIds": [
+              "ffffffff-ffff-ffff-ffff-ffffffffffff"
+            ]
+          },
+          "administratorConfiguration": {
+            "adminUsername": "azure",
+            "sshPublicKeys": [
+              {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              }
+            ]
+          },
+          "attachedNetworkIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName"
+          ],
+          "availableUpgrades": [
+            {
+              "availabilityLifecycle": "GenerallyAvailable",
+              "version": "1.XX.Y"
+            }
+          ],
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "connectedClusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/connectedClusterName",
+          "controlPlaneKubernetesVersion": "1.XX.Y",
+          "controlPlaneNodeConfiguration": {
+            "administratorConfiguration": {
+              "adminUsername": "azure",
+              "sshPublicKeys": [
+                {
+                  "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+                }
+              ]
+            },
+            "availabilityZones": [
+              "1",
+              "2",
+              "3"
+            ],
+            "count": 3,
+            "vmSkuName": "NC_G6_28_v1"
+          },
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Kubernetes cluster is operational",
+          "featureStatuses": [
+            {
+              "name": "Feature1",
+              "detailedStatus": "Running",
+              "detailedStatusMessage": "No issues detected",
+              "version": "1"
+            }
+          ],
+          "initialAgentPoolConfigurations": [
+            {
+              "name": "SystemPool-1",
+              "administratorConfiguration": {
+                "adminUsername": "azure",
+                "sshPublicKeys": [
+                  {
+                    "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+                  }
+                ]
+              },
+              "agentOptions": {
+                "hugepagesCount": 96,
+                "hugepagesSize": "1G"
+              },
+              "attachedNetworkConfiguration": {
+                "l2Networks": [
+                  {
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                    "pluginType": "DPDK"
+                  }
+                ],
+                "l3Networks": [
+                  {
+                    "ipamEnabled": "False",
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                    "pluginType": "SRIOV"
+                  }
+                ],
+                "trunkedNetworks": [
+                  {
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                    "pluginType": "MACVLAN"
+                  }
+                ]
+              },
+              "availabilityZones": [
+                "1",
+                "2",
+                "3"
+              ],
+              "count": 3,
+              "labels": [
+                {
+                  "key": "kubernetes.label",
+                  "value": "true"
+                }
+              ],
+              "mode": "System",
+              "taints": [
+                {
+                  "key": "kubernetes.taint",
+                  "value": "true:NoSchedule"
+                }
+              ],
+              "upgradeSettings": {
+                "maxSurge": "1"
+              },
+              "vmSkuName": "NC_P46_224_v1"
+            }
+          ],
+          "kubernetesVersion": "1.XX.Y",
+          "managedResourceGroupConfiguration": {
+            "name": "my-managed-rg",
+            "location": "East US"
+          },
+          "networkConfiguration": {
+            "attachedNetworkConfiguration": {
+              "l2Networks": [
+                {
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                  "pluginType": "DPDK"
+                }
+              ],
+              "l3Networks": [
+                {
+                  "ipamEnabled": "False",
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                  "pluginType": "SRIOV"
+                }
+              ],
+              "trunkedNetworks": [
+                {
+                  "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                  "pluginType": "MACVLAN"
+                }
+              ]
+            },
+            "bgpServiceLoadBalancerConfiguration": {
+              "bgpAdvertisements": [
+                {
+                  "advertiseToFabric": "True",
+                  "communities": [
+                    "64512:100"
+                  ],
+                  "ipAddressPools": [
+                    "pool1"
+                  ],
+                  "peers": [
+                    "peer1"
+                  ]
+                }
+              ],
+              "bgpPeers": [
+                {
+                  "name": "peer1",
+                  "bfdEnabled": "False",
+                  "bgpMultiHop": "False",
+                  "holdTime": "P300s",
+                  "keepAliveTime": "P300s",
+                  "myAsn": 64512,
+                  "peerAddress": "203.0.113.254",
+                  "peerAsn": 64497,
+                  "peerPort": 179
+                }
+              ],
+              "fabricPeeringEnabled": "True",
+              "ipAddressPools": [
+                {
+                  "name": "pool1",
+                  "addresses": [
+                    "198.51.102.0/24"
+                  ],
+                  "autoAssign": "True",
+                  "onlyUseHostIps": "True"
+                }
+              ]
+            },
+            "cloudServicesNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+            "cniNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+            "dnsServiceIp": "198.51.101.2",
+            "podCidrs": [
+              "198.51.100.0/24"
+            ],
+            "serviceCidrs": [
+              "198.51.101.0/24"
+            ]
+          },
+          "nodes": [
+            {
+              "name": "kubernetesClusterName-SystemPool-1-md-cqjvd",
+              "agentPoolId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/agentPools/agentPoolName",
+              "availabilityZone": "1",
+              "bareMetalMachineId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+              "cpuCores": 46,
+              "detailedStatus": "Running",
+              "detailedStatusMessage": "Running - virtual machine is running.",
+              "diskSizeGB": 300,
+              "image": "mariner-guest-image-qcow2-k8s-1.XX.Y",
+              "kubernetesVersion": "v1.XX.Y",
+              "labels": [
+                {
+                  "key": "kubernetes.label",
+                  "value": "true"
+                }
+              ],
+              "memorySizeGB": 224,
+              "mode": "System",
+              "networkAttachments": [
+                {
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+                  "defaultGateway": "False",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "169.254.8.4",
+                  "macAddress": "aa:bb:cc:06:79:2a",
+                  "networkAttachmentName": "cloudservices"
+                },
+                {
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                  "defaultGateway": "False",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "10.14.48.12",
+                  "ipv6Address": "fda0:d59c:da0a:e30::a",
+                  "macAddress": "aa:bb:cc:ad:40:cf",
+                  "networkAttachmentName": "defaultcni"
+                }
+              ],
+              "powerState": "On",
+              "role": "Worker",
+              "taints": [
+                {
+                  "key": "kubernetes.taint",
+                  "value": "true:NoSchedule"
+                }
+              ],
+              "vmSkuName": "NC_P46_224_v1"
+            },
+            {
+              "name": "kubernetesClusterName-control-plane-7nsh2",
+              "bareMetalMachineId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+              "cpuCores": 6,
+              "detailedStatus": "Running",
+              "detailedStatusMessage": "Running - virtual machine is running.",
+              "diskSizeGB": 300,
+              "image": "mariner-guest-image-qcow2-k8s-1.XX.Y",
+              "kubernetesVersion": "v1.XX.Y",
+              "memorySizeGB": 28,
+              "networkAttachments": [
+                {
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+                  "defaultGateway": "False",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "169.254.8.2",
+                  "macAddress": "aa:bb:cc:fa:91:71",
+                  "networkAttachmentName": "cloudservices"
+                },
+                {
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                  "defaultGateway": "False",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "10.14.48.11",
+                  "ipv6Address": "fda0:d59c:da0a:e30::9",
+                  "macAddress": "aa:bb:cc:c8:a2:40",
+                  "networkAttachmentName": "defaultcni"
+                }
+              ],
+              "powerState": "On",
+              "role": "ControlPlane",
+              "vmSkuName": "NC_G6_28_v1"
+            }
+          ],
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview"
+      }
+    }
+  },
+  "operationId": "KubernetesClusters_CreateOrUpdate",
+  "title": "Create or update Kubernetes cluster"
+}

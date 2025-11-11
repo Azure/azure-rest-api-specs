@@ -1,0 +1,291 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "bareMetalMachineName": "bareMetalMachineName",
+    "bareMetalMachineUpdateParameters": {
+      "properties": {
+        "machineDetails": "machinedetails"
+      },
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
+      }
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "bareMetalMachineName",
+        "type": "Microsoft.NetworkCloud/bareMetalMachines",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+        "location": "location",
+        "properties": {
+          "actionStates": [
+            {
+              "actionType": "Microsoft.NetworkCloud/BareMetalMachines/reimage/action",
+              "correlationId": "a45a00bb-3b02-42d5-baaf-033497574e97",
+              "endTime": "2023-04-29T12:00:00Z",
+              "message": "Action completed successfully",
+              "startTime": "2023-04-29T11:00:00Z",
+              "status": "Completed",
+              "stepStates": [
+                {
+                  "endTime": "2023-04-29T11:30:00Z",
+                  "message": "BareMetalMachine was validated as ready for reimage",
+                  "startTime": "2023-04-29T11:00:00Z",
+                  "status": "Completed",
+                  "stepName": "ValidateImageState"
+                },
+                {
+                  "endTime": "2023-04-29T11:45:00Z",
+                  "message": "BareMetalMachine was reimaged successfully",
+                  "startTime": "2023-04-29T11:30:00Z",
+                  "status": "Completed",
+                  "stepName": "Reimage"
+                }
+              ]
+            }
+          ],
+          "associatedResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "bmcConnectionString": "redfish+https://10.10.10.16/redfish/v1/Systems/System.Embedded.1",
+          "bmcCredentials": {
+            "username": "bmcuser"
+          },
+          "bmcIpv4Address": "10.10.10.16",
+          "bmcIpv6Address": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+          "bmcMacAddress": "00:00:4f:00:57:00",
+          "bootMacAddress": "00:00:4e:00:58:af",
+          "caCertificate": {
+            "hash": "dea698309efd2830a1d440a807650d9aa6d954b3243ab8cb556ac98c1f3faa60",
+            "value": "-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAL4a5b1d8f2wM...A0GCSqGSIb3DQEBCwUAMEUxCzAJB==\n-----END CERTIFICATE-----"
+          },
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "cordonStatus": "Uncordoned",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "DetailedStatusMessage",
+          "hardwareInventory": {
+            "additionalHostInformation": "Machine specific information...",
+            "interfaces": [
+              {
+                "name": "networkInterfaceName",
+                "linkStatus": "Up",
+                "macAddress": "2C:54:91:88:C9:E3",
+                "networkInterfaceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkDevices/networkDeviceName/networkInterfaces/networkInterfaceName"
+              }
+            ]
+          },
+          "hardwareValidationStatus": {
+            "lastValidationTime": "2022-09-30T13:27:03.008Z",
+            "result": "Pass"
+          },
+          "kubernetesNodeName": "node01",
+          "kubernetesVersion": "1.28.3",
+          "machineClusterVersion": "3.8.7",
+          "machineDetails": "User-provided machine details.",
+          "machineName": "r01c001",
+          "machineRoles": [
+            "platform.afo-nc.microsoft.com/management-plane=true"
+          ],
+          "machineSkuId": "684E-3B16-399E",
+          "oamIpv4Address": "192.0.2.1",
+          "oamIpv6Address": "0:0:0:0:0:FFFF:7F00:0001",
+          "osImage": "v20220805e",
+          "powerState": "On",
+          "provisioningState": "Succeeded",
+          "rackId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/racks/rackName",
+          "rackSlot": 1,
+          "readyState": "True",
+          "runtimeProtectionStatus": {
+            "agentHealthStatus": "HealthIssuesPresent",
+            "agentHealthStatusIssues": [
+              "Issue1",
+              "Issue2"
+            ],
+            "agentLicenseStatus": "Licensed",
+            "definitionUpdateMode": "None",
+            "definitionsLastUpdated": "2023-09-28T13:27:03.008Z",
+            "definitionsVersion": "1.2.3",
+            "enforcementLevel": "OnDemand",
+            "scanCompletedTime": "2023-09-30T13:27:23.103Z",
+            "scanScheduledTime": "2023-10-01T13:00:00.000Z",
+            "scanStartedTime": "2023-09-30T13:00:03.008Z"
+          },
+          "secretRotationStatus": [
+            {
+              "expirePeriodDays": 90,
+              "lastRotationTime": "2023-09-30T13:27:23.103Z",
+              "rotationPeriodDays": 60,
+              "secretArchiveReference": {
+                "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName",
+                "secretName": "ffffffff-ffff-ffff-ffff-ffffffffffff-resource-group-cluster-1679871-console-credential-manager-ffffffff",
+                "secretVersion": "02ab6c1f9c0f4982b0632b0d5d74a33b"
+              },
+              "secretType": "Bare Metal Machine Identity - console"
+            }
+          ],
+          "serialNumber": "BM1219XXX",
+          "serviceTag": "ST1219XXX"
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "bareMetalMachineName",
+        "type": "Microsoft.NetworkCloud/bareMetalMachines",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+        "location": "location",
+        "properties": {
+          "actionStates": [
+            {
+              "actionType": "Microsoft.NetworkCloud/BareMetalMachines/reimage/action",
+              "correlationId": "a45a00bb-3b02-42d5-baaf-033497574e97",
+              "endTime": "2023-04-29T12:00:00Z",
+              "message": "Action completed successfully",
+              "startTime": "2023-04-29T11:00:00Z",
+              "status": "Completed",
+              "stepStates": [
+                {
+                  "endTime": "2023-04-29T11:30:00Z",
+                  "message": "BareMetalMachine was validated as ready for reimage",
+                  "startTime": "2023-04-29T11:00:00Z",
+                  "status": "Completed",
+                  "stepName": "ValidateImageState"
+                },
+                {
+                  "endTime": "2023-04-29T11:45:00Z",
+                  "message": "BareMetalMachine was reimaged successfully",
+                  "startTime": "2023-04-29T11:30:00Z",
+                  "status": "Completed",
+                  "stepName": "Reimage"
+                }
+              ]
+            }
+          ],
+          "associatedResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "bmcConnectionString": "redfish+https://10.10.10.16/redfish/v1/Systems/System.Embedded.1",
+          "bmcCredentials": {
+            "username": "bmcuser"
+          },
+          "bmcIpv4Address": "10.10.10.16",
+          "bmcIpv6Address": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+          "bmcMacAddress": "00:00:4f:00:57:00",
+          "bootMacAddress": "00:00:4e:00:58:af",
+          "caCertificate": {
+            "hash": "dea698309efd2830a1d440a807650d9aa6d954b3243ab8cb556ac98c1f3faa60",
+            "value": "-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAL4a5b1d8f2wM...A0GCSqGSIb3DQEBCwUAMEUxCzAJB==\n-----END CERTIFICATE-----"
+          },
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "cordonStatus": "Uncordoned",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "DetailedStatusMessage",
+          "hardwareInventory": {
+            "additionalHostInformation": "Machine specific information...",
+            "interfaces": [
+              {
+                "name": "networkInterfaceName",
+                "linkStatus": "Up",
+                "macAddress": "2C:54:91:88:C9:E3",
+                "networkInterfaceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkDevices/networkDeviceName/networkInterfaces/networkInterfaceName"
+              }
+            ]
+          },
+          "hardwareValidationStatus": {
+            "lastValidationTime": "2022-09-30T13:27:03.008Z",
+            "result": "Pass"
+          },
+          "kubernetesNodeName": "node01",
+          "kubernetesVersion": "1.28.3",
+          "machineClusterVersion": "3.8.7",
+          "machineDetails": "User-provided machine details.",
+          "machineName": "r01c001",
+          "machineRoles": [
+            "platform.afo-nc.microsoft.com/management-plane=true"
+          ],
+          "machineSkuId": "684E-3B16-399E",
+          "oamIpv4Address": "192.0.2.1",
+          "oamIpv6Address": "0:0:0:0:0:FFFF:7F00:0001",
+          "osImage": "v20220805e",
+          "powerState": "On",
+          "provisioningState": "Accepted",
+          "rackId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/racks/rackName",
+          "rackSlot": 1,
+          "readyState": "True",
+          "runtimeProtectionStatus": {
+            "agentHealthStatus": "HealthIssuesPresent",
+            "agentHealthStatusIssues": [
+              "Issue1",
+              "Issue2"
+            ],
+            "agentLicenseStatus": "Licensed",
+            "definitionUpdateMode": "None",
+            "definitionsLastUpdated": "2023-09-28T13:27:03.008Z",
+            "definitionsVersion": "1.2.3",
+            "enforcementLevel": "OnDemand",
+            "scanCompletedTime": "2023-09-30T13:27:23.103Z",
+            "scanScheduledTime": "2023-10-01T13:00:00.000Z",
+            "scanStartedTime": "2023-09-30T13:00:03.008Z"
+          },
+          "secretRotationStatus": [
+            {
+              "expirePeriodDays": 90,
+              "lastRotationTime": "2023-09-30T13:27:23.103Z",
+              "rotationPeriodDays": 60,
+              "secretArchiveReference": {
+                "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName",
+                "secretName": "ffffffff-ffff-ffff-ffff-ffffffffffff-resource-group-cluster-1679871-console-credential-manager-ffffffff",
+                "secretVersion": "02ab6c1f9c0f4982b0632b0d5d74a33b"
+              },
+              "secretType": "Bare Metal Machine Identity - console"
+            }
+          ],
+          "serialNumber": "BM1219XXX",
+          "serviceTag": "ST1219XXX"
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview",
+        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview"
+      }
+    }
+  },
+  "operationId": "BareMetalMachines_Update",
+  "title": "Patch bare metal machine"
+}

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://fully.qualified.hyperlink",
+        "value": [
+          {
+            "name": "l3NetworkName",
+            "type": "Microsoft.NetworkCloud/l3Networks",
+            "extendedLocation": {
+              "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+              "type": "CustomLocation"
+            },
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+            "location": "location",
+            "properties": {
+              "associatedResourceIds": [
+                "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+              ],
+              "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+              "detailedStatus": "Available",
+              "detailedStatusMessage": "L3 network is up",
+              "interfaceName": "eth0",
+              "ipAllocationType": "DualStack",
+              "ipv4ConnectedPrefix": "198.51.100.0/24",
+              "ipv6ConnectedPrefix": "2001:db8::/64",
+              "l3IsolationDomainId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName",
+              "provisioningState": "Succeeded",
+              "vlan": 12
+            },
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "L3Networks_ListByResourceGroup",
+  "title": "List L3 networks for resource group"
+}
