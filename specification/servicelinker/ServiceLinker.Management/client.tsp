@@ -59,7 +59,7 @@ op linkerResourcesCreateOrUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
   connectorName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-  resource: LinkerResource,
+  parameters: LinkerResource,
 ): LinkerResource;
 
 @@override(LinkerResources.createOrUpdate, linkerResourcesCreateOrUpdate);
@@ -80,7 +80,7 @@ op linkerResourcesUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
   connectorName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-  properties: LinkerPatch,
+  parameters: LinkerPatch,
 ): LinkerResource;
 
 @@override(LinkerResources.update, linkerResourcesUpdate);
@@ -161,7 +161,7 @@ op linkerResourcesGenerateConfigurations(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
   connectorName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-  body?: ConfigurationInfo,
+  parameters?: ConfigurationInfo,
 ): ConfigurationResult;
 
 @@override(LinkerResources.generateConfigurations,
@@ -203,7 +203,7 @@ op dryrunResourcesCreateDryrun(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
   dryrunName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-  @body resource: DryrunResource,
+  @body parameters: DryrunResource,
 ): DryrunResource;
 
 @@override(DryrunResources.createDryrun, dryrunResourcesCreateDryrun);
@@ -224,7 +224,7 @@ op dryrunResourcesUpdateDryrun(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
   dryrunName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-  @body properties: DryrunPatch,
+  @body parameters: DryrunPatch,
 ): DryrunResource;
 
 @@override(DryrunResources.updateDryrun, dryrunResourcesUpdateDryrun);
