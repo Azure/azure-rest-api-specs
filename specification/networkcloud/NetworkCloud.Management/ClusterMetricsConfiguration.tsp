@@ -106,7 +106,7 @@ interface ClusterMetricsConfigurations {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<ClusterMetricsConfiguration> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = ClusterMetricsConfiguration> &
+    Response = ArmResponse<ClusterMetricsConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ClusterMetricsConfiguration> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ClusterMetricsConfiguration;

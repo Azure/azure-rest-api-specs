@@ -100,7 +100,7 @@ interface BareMetalMachineKeySets {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<BareMetalMachineKeySet> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = BareMetalMachineKeySet> &
+    Response = ArmResponse<BareMetalMachineKeySet> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BareMetalMachineKeySet> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BareMetalMachineKeySet;

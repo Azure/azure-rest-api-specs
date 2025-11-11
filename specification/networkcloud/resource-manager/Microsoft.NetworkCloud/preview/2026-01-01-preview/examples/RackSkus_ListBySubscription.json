@@ -8,91 +8,83 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/rackSkus/rackSkuName",
             "name": "rackSkuName",
-            "systemData": {
-              "createdAt": "2021-01-22T13:27:03.008Z",
-              "createdBy": "identityA",
-              "createdByType": "Application",
-              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
-              "lastModifiedBy": "identityB",
-              "lastModifiedByType": "User"
-            },
             "type": "Microsoft.NetworkCloud/rackSkus",
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/rackSkus/rackSkuName",
             "properties": {
-              "provisioningState": "Succeeded",
-              "deploymentType": "AzureLocal",
-              "rackType": "Single",
-              "maxClusterSlots": 0,
               "description": "Sample SKU for the single rack.",
-              "controllerMachines": [
-                {
-                  "properties": {
-                    "vendor": "Dell",
-                    "model": "PowerEdge R650",
-                    "generation": "8",
-                    "hardwareVersion": "3",
-                    "bootstrapProtocol": "PXE",
-                    "cpuSockets": 1,
-                    "cpuCores": 8,
-                    "totalThreads": 16,
-                    "memoryCapacityGB": 128,
-                    "disks": [
-                      {
-                        "capacityGB": 893,
-                        "type": "SSD",
-                        "connection": "SAS"
-                      }
-                    ],
-                    "networkInterfaces": [
-                      {
-                        "address": "04:00.0",
-                        "physicalSlot": 2,
-                        "portCount": 2,
-                        "portSpeed": 1,
-                        "deviceConnectionType": "PCI",
-                        "vendor": "Broadcom Corp",
-                        "model": "Broadcom Gigabit Ethernet BCM5720"
-                      }
-                    ]
-                  },
-                  "rackSlot": 5
-                }
-              ],
               "computeMachines": [
                 {
                   "properties": {
-                    "vendor": "Dell",
-                    "model": "PowerEdge R750",
-                    "generation": "8",
-                    "hardwareVersion": "3",
                     "bootstrapProtocol": "PXE",
-                    "cpuSockets": 2,
                     "cpuCores": 28,
-                    "totalThreads": 112,
-                    "memoryCapacityGB": 512,
+                    "cpuSockets": 2,
                     "disks": [
                       {
-                        "capacityGB": 893,
                         "type": "SSD",
+                        "capacityGB": 893,
                         "connection": "SAS"
                       }
                     ],
+                    "generation": "8",
+                    "hardwareVersion": "3",
+                    "memoryCapacityGB": 512,
+                    "model": "PowerEdge R750",
                     "networkInterfaces": [
                       {
                         "address": "04:00.0",
+                        "deviceConnectionType": "PCI",
+                        "model": "Broadcom Gigabit Ethernet BCM5720",
                         "physicalSlot": 1,
                         "portCount": 2,
                         "portSpeed": 1,
-                        "deviceConnectionType": "PCI",
-                        "vendor": "Broadcom Corp",
-                        "model": "Broadcom Gigabit Ethernet BCM5720"
+                        "vendor": "Broadcom Corp"
                       }
-                    ]
+                    ],
+                    "totalThreads": 112,
+                    "vendor": "Dell"
                   },
                   "rackSlot": 1
                 }
               ],
+              "controllerMachines": [
+                {
+                  "properties": {
+                    "bootstrapProtocol": "PXE",
+                    "cpuCores": 8,
+                    "cpuSockets": 1,
+                    "disks": [
+                      {
+                        "type": "SSD",
+                        "capacityGB": 893,
+                        "connection": "SAS"
+                      }
+                    ],
+                    "generation": "8",
+                    "hardwareVersion": "3",
+                    "memoryCapacityGB": 128,
+                    "model": "PowerEdge R650",
+                    "networkInterfaces": [
+                      {
+                        "address": "04:00.0",
+                        "deviceConnectionType": "PCI",
+                        "model": "Broadcom Gigabit Ethernet BCM5720",
+                        "physicalSlot": 2,
+                        "portCount": 2,
+                        "portSpeed": 1,
+                        "vendor": "Broadcom Corp"
+                      }
+                    ],
+                    "totalThreads": 16,
+                    "vendor": "Dell"
+                  },
+                  "rackSlot": 5
+                }
+              ],
+              "deploymentType": "AzureLocal",
+              "maxClusterSlots": 0,
+              "provisioningState": "Succeeded",
+              "rackType": "Single",
               "storageAppliances": [
                 {
                   "properties": {
@@ -102,10 +94,20 @@
                   "rackSlot": 2
                 }
               ]
+            },
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "RackSkus_ListBySubscription",
+  "title": "List rack SKUs for subscription"
 }

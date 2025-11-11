@@ -1,29 +1,47 @@
 {
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
-    "resourceGroupName": "resourceGroupName",
-    "virtualMachineName": "virtualMachineName",
     "consoleName": "default",
     "consoleUpdateParameters": {
+      "properties": {
+        "enabled": "True",
+        "expiration": "2022-06-01T01:27:03.008Z",
+        "sshPublicKey": {
+          "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+        }
+      },
       "tags": {
         "key1": "myvalue1",
         "key2": "myvalue2"
-      },
-      "properties": {
-        "sshPublicKey": {
-          "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
-        },
-        "expiration": "2022-06-01T01:27:03.008Z",
-        "enabled": "True"
       }
-    }
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "virtualMachineName": "virtualMachineName"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName/consoles/default",
         "name": "default",
+        "type": "Microsoft.NetworkCloud/virtualMachines/consoles",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName/consoles/default",
+        "location": "location",
+        "properties": {
+          "detailedStatus": "Ready",
+          "detailedStatusMessage": "Console is ready for use",
+          "enabled": "True",
+          "expiration": "2022-06-01T01:27:03.008Z",
+          "privateLinkServiceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Network/privateLinkServices/console-pls",
+          "provisioningState": "Succeeded",
+          "sshPublicKey": {
+            "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+          },
+          "virtualMachineAccessId": "VirtualMachineAccessId"
+        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -32,34 +50,34 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
-        "type": "Microsoft.NetworkCloud/virtualMachines/consoles",
-        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
-        },
-        "extendedLocation": {
-          "type": "CustomLocation",
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName"
-        },
-        "properties": {
-          "sshPublicKey": {
-            "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
-          },
-          "enabled": "True",
-          "expiration": "2022-06-01T01:27:03.008Z",
-          "provisioningState": "Succeeded",
-          "privateLinkServiceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Network/privateLinkServices/console-pls",
-          "virtualMachineAccessId": "VirtualMachineAccessId",
-          "detailedStatus": "Ready",
-          "detailedStatusMessage": "Console is ready for use"
         }
       }
     },
     "202": {
       "body": {
-        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName/consoles/default",
         "name": "default",
+        "type": "Microsoft.NetworkCloud/virtualMachines/consoles",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName/consoles/default",
+        "location": "location",
+        "properties": {
+          "detailedStatus": "Ready",
+          "detailedStatusMessage": "Console is ready for use",
+          "enabled": "True",
+          "expiration": "2022-06-01T01:27:03.008Z",
+          "privateLinkServiceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Network/privateLinkServices/console-pls",
+          "provisioningState": "Accepted",
+          "sshPublicKey": {
+            "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+          },
+          "virtualMachineAccessId": "VirtualMachineAccessId"
+        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -68,27 +86,9 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
-        "type": "Microsoft.NetworkCloud/virtualMachines/consoles",
-        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
-        },
-        "extendedLocation": {
-          "type": "CustomLocation",
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName"
-        },
-        "properties": {
-          "sshPublicKey": {
-            "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
-          },
-          "enabled": "True",
-          "expiration": "2022-06-01T01:27:03.008Z",
-          "provisioningState": "Accepted",
-          "privateLinkServiceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Network/privateLinkServices/console-pls",
-          "virtualMachineAccessId": "VirtualMachineAccessId",
-          "detailedStatus": "Ready",
-          "detailedStatusMessage": "Console is ready for use"
         }
       },
       "headers": {
@@ -96,5 +96,7 @@
         "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview"
       }
     }
-  }
+  },
+  "operationId": "Consoles_Update",
+  "title": "Patch virtual machine console"
 }

@@ -104,7 +104,7 @@ interface Clusters {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = Cluster> &
+    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Cluster> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Cluster;

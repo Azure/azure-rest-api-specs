@@ -1,15 +1,8 @@
 {
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
-    "resourceGroupName": "resourceGroupName",
-    "kubernetesClusterName": "kubernetesClusterName",
     "featureName": "featureName",
     "kubernetesClusterFeatureUpdateParameters": {
-      "tags": {
-        "key1": "myvalue1",
-        "key2": "myvalue2"
-      },
       "properties": {
         "options": [
           {
@@ -17,14 +10,37 @@
             "value": "featureOptionValue"
           }
         ]
+      },
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
       }
-    }
+    },
+    "kubernetesClusterName": "kubernetesClusterName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/features/featureName",
         "name": "featureName",
+        "type": "Microsoft.NetworkCloud/kubernetesClusters/features",
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/features/featureName",
+        "location": "location",
+        "properties": {
+          "availabilityLifecycle": "GenerallyAvailable",
+          "detailedStatus": "Installed",
+          "detailedStatusMessage": "The feature is successfully installed.",
+          "options": [
+            {
+              "key": "featureOptionName",
+              "value": "featureOptionValue"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "required": "True",
+          "version": "1.2.3"
+        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -33,32 +49,32 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
-        "type": "Microsoft.NetworkCloud/kubernetesClusters/features",
-        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
-        },
-        "properties": {
-          "options": [
-            {
-              "key": "featureOptionName",
-              "value": "featureOptionValue"
-            }
-          ],
-          "availabilityLifecycle": "GenerallyAvailable",
-          "detailedStatus": "Installed",
-          "detailedStatusMessage": "The feature is successfully installed.",
-          "required": "True",
-          "version": "1.2.3",
-          "provisioningState": "Succeeded"
         }
       }
     },
     "202": {
       "body": {
-        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/features/featureName",
         "name": "featureName",
+        "type": "Microsoft.NetworkCloud/kubernetesClusters/features",
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/features/featureName",
+        "location": "location",
+        "properties": {
+          "availabilityLifecycle": "GenerallyAvailable",
+          "detailedStatus": "Installed",
+          "detailedStatusMessage": "The feature is successfully installed.",
+          "options": [
+            {
+              "key": "featureOptionName",
+              "value": "featureOptionValue"
+            }
+          ],
+          "provisioningState": "Accepted",
+          "required": "True",
+          "version": "1.2.3"
+        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -67,25 +83,9 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
-        "type": "Microsoft.NetworkCloud/kubernetesClusters/features",
-        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
-        },
-        "properties": {
-          "options": [
-            {
-              "key": "featureOptionName",
-              "value": "featureOptionValue"
-            }
-          ],
-          "availabilityLifecycle": "GenerallyAvailable",
-          "detailedStatus": "Installed",
-          "detailedStatusMessage": "The feature is successfully installed.",
-          "required": "True",
-          "version": "1.2.3",
-          "provisioningState": "Accepted"
         }
       },
       "headers": {
@@ -93,5 +93,7 @@
         "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview"
       }
     }
-  }
+  },
+  "operationId": "KubernetesClusterFeatures_Update",
+  "title": "Patch Kubernetes cluster feature"
 }

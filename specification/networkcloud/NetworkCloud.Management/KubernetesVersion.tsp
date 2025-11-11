@@ -95,7 +95,7 @@ interface KubernetesVersions {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<KubernetesVersion> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = KubernetesVersion> &
+    Response = ArmResponse<KubernetesVersion> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = KubernetesVersion> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: KubernetesVersion;

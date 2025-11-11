@@ -97,7 +97,7 @@ interface AgentPools {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<AgentPool> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = AgentPool> &
+    Response = ArmResponse<AgentPool> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AgentPool> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AgentPool;

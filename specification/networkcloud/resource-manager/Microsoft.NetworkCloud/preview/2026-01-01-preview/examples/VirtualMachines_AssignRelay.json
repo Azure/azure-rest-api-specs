@@ -1,13 +1,13 @@
 {
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
-    "virtualMachineName": "virtualMachineName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "virtualMachineAssignRelayParameters": {
       "machineId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.HybridCompute/machines/machineName",
       "relayType": "Platform"
-    }
+    },
+    "virtualMachineName": "virtualMachineName"
   },
   "responses": {
     "202": {
@@ -15,5 +15,7 @@
         "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview"
       }
     }
-  }
+  },
+  "operationId": "VirtualMachines_AssignRelay",
+  "title": "Assign relay to the Microsoft.HybridCompute machine for a virtual machine"
 }

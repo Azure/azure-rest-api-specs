@@ -94,7 +94,7 @@ interface Racks {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<Rack> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = Rack> &
+    Response = ArmResponse<Rack> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rack> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Rack;

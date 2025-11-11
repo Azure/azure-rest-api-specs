@@ -97,7 +97,7 @@ interface BmcKeySets {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<BmcKeySet> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = BmcKeySet> &
+    Response = ArmResponse<BmcKeySet> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BmcKeySet> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BmcKeySet;

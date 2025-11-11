@@ -95,7 +95,7 @@ interface StorageAppliances {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<StorageAppliance> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = StorageAppliance> &
+    Response = ArmResponse<StorageAppliance> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageAppliance> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: StorageAppliance;

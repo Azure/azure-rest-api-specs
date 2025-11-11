@@ -97,7 +97,7 @@ interface VirtualMachines {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<VirtualMachine> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = VirtualMachine> &
+    Response = ArmResponse<VirtualMachine> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualMachine> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: VirtualMachine;

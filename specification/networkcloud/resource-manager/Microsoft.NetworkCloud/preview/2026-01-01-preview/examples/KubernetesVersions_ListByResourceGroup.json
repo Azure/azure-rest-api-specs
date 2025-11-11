@@ -1,16 +1,36 @@
 {
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
-    "resourceGroupName": "resourceGroupName"
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://fully.qualified.hyperlink",
         "value": [
           {
-            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesVersions/default",
             "name": "default",
+            "type": "Microsoft.NetworkCloud/kubernetesVersions",
+            "extendedLocation": {
+              "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+              "type": "CustomLocation"
+            },
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesVersions/default",
+            "location": "location",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "values": [
+                {
+                  "description": "Version Description",
+                  "version": "1.28.3"
+                },
+                {
+                  "description": "Version Description",
+                  "version": "1.27.7"
+                }
+              ]
+            },
             "systemData": {
               "createdAt": "2021-01-22T13:27:03.008Z",
               "createdBy": "identityA",
@@ -19,33 +39,15 @@
               "lastModifiedBy": "identityB",
               "lastModifiedByType": "User"
             },
-            "type": "Microsoft.NetworkCloud/kubernetesVersions",
-            "location": "location",
             "tags": {
               "key1": "myvalue1",
               "key2": "myvalue2"
-            },
-            "extendedLocation": {
-              "type": "CustomLocation",
-              "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
-            },
-            "properties": {
-              "provisioningState": "Succeeded",
-              "values": [
-                {
-                  "version": "1.28.3",
-                  "description": "Version Description"
-                },
-                {
-                  "version": "1.27.7",
-                  "description": "Version Description"
-                }
-              ]
             }
           }
-        ],
-        "nextLink": "https://fully.qualified.hyperlink"
+        ]
       }
     }
-  }
+  },
+  "operationId": "KubernetesVersions_ListByResourceGroup",
+  "title": "List Kubernetes versions for resource group"
 }

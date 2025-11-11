@@ -97,7 +97,7 @@ interface Consoles {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<Console> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = Console> &
+    Response = ArmResponse<Console> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Console> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Console;

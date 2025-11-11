@@ -75,7 +75,7 @@ interface AccessBridges {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<AccessBridge> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = AccessBridge> &
+    Response = ArmResponse<AccessBridge> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AccessBridge> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AccessBridge;

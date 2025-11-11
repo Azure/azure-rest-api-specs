@@ -1,57 +1,48 @@
 {
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
-    "resourceGroupName": "resourceGroupName",
+    "bmcKeySetName": "bmcKeySetName",
     "clusterName": "clusterName",
-    "bmcKeySetName": "bmcKeySetName"
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName/bmcKeySets/bmcKeySetName",
         "name": "bmcKeySetName",
-        "systemData": {
-          "createdAt": "2021-01-22T13:27:03.008Z",
-          "createdBy": "identityA",
-          "createdByType": "Application",
-          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
-          "lastModifiedBy": "identityB",
-          "lastModifiedByType": "User"
-        },
         "type": "Microsoft.NetworkCloud/clusters/bmcKeySets",
-        "location": "location",
-        "tags": {
-          "key1": "myvalue1",
-          "key2": "myvalue2"
-        },
         "extendedLocation": {
-          "type": "CustomLocation",
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
         },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName/bmcKeySets/bmcKeySetName",
+        "location": "location",
         "properties": {
-          "privilegeLevel": "Administrator",
-          "expiration": "2022-12-31T23:59:59.008Z",
           "azureGroupId": "f110271b-XXXX-4163-9b99-214d91660f0e",
+          "detailedStatus": "SomeInvalid",
+          "detailedStatusMessage": "Invalid Azure user(s) were provided: userXYZ",
+          "expiration": "2022-12-31T23:59:59.008Z",
+          "lastValidation": "2022-12-12T12:00:00.008Z",
+          "privilegeLevel": "Administrator",
+          "provisioningState": "Succeeded",
           "userList": [
             {
+              "description": "Needs access for troubleshooting as a part of the support team",
               "azureUserName": "userABC",
               "sshPublicKey": {
                 "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
               },
-              "userPrincipalName": "userABC@contoso.com",
-              "description": "Needs access for troubleshooting as a part of the support team"
+              "userPrincipalName": "userABC@contoso.com"
             },
             {
+              "description": "Needs access for troubleshooting as a part of the support team",
               "azureUserName": "userXYZ",
               "sshPublicKey": {
                 "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
               },
-              "userPrincipalName": "userXYZ@contoso.com",
-              "description": "Needs access for troubleshooting as a part of the support team"
+              "userPrincipalName": "userXYZ@contoso.com"
             }
           ],
-          "provisioningState": "Succeeded",
           "userListStatus": [
             {
               "azureUserName": "userABC",
@@ -63,12 +54,23 @@
               "status": "Invalid",
               "statusMessage": "User is not a valid Azure user"
             }
-          ],
-          "lastValidation": "2022-12-12T12:00:00.008Z",
-          "detailedStatus": "SomeInvalid",
-          "detailedStatusMessage": "Invalid Azure user(s) were provided: userXYZ"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
         }
       }
     }
-  }
+  },
+  "operationId": "BmcKeySets_Get",
+  "title": "Get baseboard management controller key set of cluster"
 }

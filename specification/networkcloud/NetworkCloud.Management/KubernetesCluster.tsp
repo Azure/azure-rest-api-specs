@@ -95,7 +95,7 @@ interface KubernetesClusters {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<KubernetesCluster> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = KubernetesCluster> &
+    Response = ArmResponse<KubernetesCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = KubernetesCluster> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: KubernetesCluster;

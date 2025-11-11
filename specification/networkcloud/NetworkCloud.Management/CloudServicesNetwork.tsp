@@ -95,7 +95,7 @@ interface CloudServicesNetworks {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<CloudServicesNetwork> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = CloudServicesNetwork> &
+    Response = ArmResponse<CloudServicesNetwork> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudServicesNetwork> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: CloudServicesNetwork;

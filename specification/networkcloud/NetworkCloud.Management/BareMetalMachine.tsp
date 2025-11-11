@@ -95,7 +95,7 @@ interface BareMetalMachines {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<BareMetalMachine> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = BareMetalMachine> &
+    Response = ArmResponse<BareMetalMachine> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BareMetalMachine> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BareMetalMachine;

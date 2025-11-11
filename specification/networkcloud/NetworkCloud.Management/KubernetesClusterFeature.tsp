@@ -91,7 +91,7 @@ interface KubernetesClusterFeatures {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<KubernetesClusterFeature> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = KubernetesClusterFeature> &
+    Response = ArmResponse<KubernetesClusterFeature> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = KubernetesClusterFeature> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: KubernetesClusterFeature;

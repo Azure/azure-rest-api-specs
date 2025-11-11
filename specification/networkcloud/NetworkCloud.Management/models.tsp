@@ -3613,7 +3613,6 @@ model RuntimeProtectionStatus {
   /**
    * The runtime protection agent health status issues, if present.
    */
-  @identifiers(#[])
   agentHealthStatusIssues?: string[];
 
   /**
@@ -3856,7 +3855,6 @@ model ClusterManagerProperties {
    * The Azure availability zones within the region that will be used to support the cluster manager resource.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @identifiers(#[])
   availabilityZones?: string[];
 
   /**
@@ -7470,7 +7468,6 @@ model ClusterManagerPatchProperties {
    * The Azure availability zones within the region that will be used to support the cluster manager resource.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @identifiers(#[])
   availabilityZones?: string[];
 
   /**
