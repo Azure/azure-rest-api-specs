@@ -697,8 +697,6 @@ model ServerEventConversationItemTruncated extends ServerEvent {
 
   /** The duration up to which the audio was truncated, in milliseconds. */
   audio_end_ms: int32;
-
-  event_id?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -715,8 +713,6 @@ model ServerEventConversationItemDeleted extends ServerEvent {
 
   /** The ID of the item that was deleted. */
   item_id: string;
-
-  event_id?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
