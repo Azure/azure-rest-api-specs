@@ -77,7 +77,12 @@ interface ContainerRegistry {
       @bodyRoot
       payload: Manifest;
     },
-    void
+    {
+      @statusCode statusCode: 201;
+      @header("Location") location: string;
+      @header("Content-Length") contentLength: int64;
+      @header("Docker-Content-Digest") dockerContentDigest: string;
+    }
   >;
 
   /**
@@ -101,7 +106,9 @@ interface ContainerRegistry {
       @path
       reference: string;
     },
-    void
+    {
+      @statusCode statusCode: 202;
+    } | NotFoundResponse
   >;
 
   /**
@@ -296,7 +303,9 @@ interface ContainerRegistry {
       @path
       reference: string;
     },
-    void
+    {
+      @statusCode statusCode: 202;
+    } | NotFoundResponse
   >;
 
   /**
@@ -410,7 +419,25 @@ interface ContainerRegistryBlob {
       @path
       digest: string;
     },
-    void
+    {
+      /** The blob identified by digest is available. The blob content will be present in the body of the response. */
+      @statusCode statusCode: 200;
+
+      /** The length of the requested blob content. */
+      @header("Content-Length") contentLength: int64;
+
+      /** Digest of the targeted content for the request. */
+      @header("Docker-Content-Digest") dockerContentDigest: string;
+
+      /** blob binary data */
+      @bodyRoot body: bytes;
+    } | {
+      /** The blob identified by digest is available at the provided location. */
+      @statusCode statusCode: 307;
+
+      /** The location where the layer should be accessible. */
+      @header("Location") location: string;
+    }
   >;
 
   /**
@@ -434,7 +461,22 @@ interface ContainerRegistryBlob {
       @path
       digest: string;
     },
-    void
+    {
+      /** The blob identified by digest is available. The blob content will be present in the body of the response. */
+      @statusCode statusCode: 200;
+
+      /** The length of the requested blob content. */
+      @header("Content-Length") contentLength: int64;
+
+      /** Digest of the targeted content for the request. */
+      @header("Docker-Content-Digest") dockerContentDigest: string;
+    } | {
+      /** The blob identified by digest is available at the provided location. */
+      @statusCode statusCode: 307;
+
+      /** The location where the layer should be accessible. */
+      @header("Location") location: string;
+    }
   >;
 
   /**
@@ -457,7 +499,13 @@ interface ContainerRegistryBlob {
       @path
       digest: string;
     },
-    void
+    {
+      /** The blob identified by digest is available. The blob content will be present in the body of the response. */
+      @statusCode statusCode: 202;
+
+      /** Digest of the targeted content for the request. */
+      @header("Docker-Content-Digest") dockerContentDigest: string;
+    }
   >;
 
   /**
@@ -487,7 +535,19 @@ interface ContainerRegistryBlob {
       @query("mount")
       mount: string;
     },
-    void
+    {
+      /** The blob has been created in the registry and is available at the provided location. */
+      @statusCode statusCode: 201;
+
+      /** Provided location for blob */
+      @header("Location") location: string;
+
+      /** Identifies the docker upload uuid for the current request. */
+      @header("Docker-Upload-UUID") dockerUploadUuid: string;
+
+      /** Digest of the targeted content for the request. */
+      @header("Docker-Content-Digest") dockerContentDigest: string;
+    }
   >;
 
   /**
@@ -506,7 +566,15 @@ interface ContainerRegistryBlob {
       @path("nextBlobUuidLink")
       location: string;
     },
-    void
+    {
+      /** The upload is known and in progress. The last received offset is available in the Range header. */
+      @statusCode statusCode: 204;
+
+      /** Range indicating the current progress of the upload. */
+      @header("Range") range: string;
+
+      @header("Docker-Upload-UUID") dockerUploadUuid: string;
+    }
   >;
 
   /**
@@ -531,7 +599,19 @@ interface ContainerRegistryBlob {
       @bodyRoot
       value: bytes;
     },
-    void
+    {
+      /** The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header. */
+      @statusCode statusCode: 202;
+
+      /** Provided location for blob */
+      @header("Location") location: string;
+
+      /** Range indicating the current progress of the upload. */
+      @header("Range") range: string;
+
+      /** Identifies the docker upload uuid for the current request. */
+      @header("Docker-Upload-UUID") dockerUploadUuid: string;
+    }
   >;
 
   /**
@@ -566,9 +646,16 @@ interface ContainerRegistryBlob {
       value?: bytes;
     },
     {
+      /** The upload has been completed and accepted by the registry. */
       @statusCode statusCode: 201;
+
+      /** Provided location for blob */
       @header("Location") location: string;
+
+      /** Range indicating the current progress of the upload. */
       @header("Range") range: string;
+
+      /** Digest of the targeted content for the request. */
       @header("Docker-Content-Digest") dockerContentDigest: string;
     }
   >;
@@ -590,7 +677,7 @@ interface ContainerRegistryBlob {
       @path("nextBlobUuidLink")
       location: string;
     },
-    void
+    NoContentResponse
   >;
 
   /**
@@ -609,9 +696,16 @@ interface ContainerRegistryBlob {
       name: string;
     },
     {
+      /** The upload has been created. The Location header must be used to complete the upload. The response should be identical to a GET request on the contents of the returned Location header. */
       @statusCode statusCode: 202;
+
+      /** Provided location for blob */
       @header("Location") location: string;
+
+      /** Range indicating the current progress of the upload. */
       @header("Range") range: string;
+
+      /** Identifies the docker upload uuid for the current request. */
       @header("Docker-Upload-UUID") dockerUploadUuid: string;
     }
   >;
@@ -647,7 +741,16 @@ interface ContainerRegistryBlob {
       @header
       Range: string;
     },
-    void
+    {
+      /** The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request. */
+      @statusCode statusCode: 206;
+
+      /** The length of the requested blob content. */
+      @header("Content-Length") contentLength: int64;
+
+      /** Content range of the blob chunk. */
+      @header("Content-Range") contentRange: string;
+    }
   >;
 
   /**
@@ -678,7 +781,16 @@ interface ContainerRegistryBlob {
       @header
       Range: string;
     },
-    void
+    {
+      /** The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request. */
+      @statusCode statusCode: 200;
+
+      /** The length of the requested blob content. */
+      @header("Content-Length") contentLength: int64;
+
+      /** Content range of the blob chunk. */
+      @header("Content-Range") contentRange: string;
+    }
   >;
 }
 

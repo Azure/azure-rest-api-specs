@@ -67,7 +67,16 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Docker-Upload-UUID": {
+                "type": "string"
+              },
+              "Range": {
+                "type": "string",
+                "description": "Range indicating the current progress of the upload."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -129,13 +138,16 @@
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
               "Docker-Content-Digest": {
-                "type": "string"
+                "type": "string",
+                "description": "Digest of the targeted content for the request."
               },
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "Provided location for blob"
               },
               "Range": {
-                "type": "string"
+                "type": "string",
+                "description": "Range indicating the current progress of the upload."
               }
             }
           },
@@ -188,8 +200,22 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Docker-Upload-UUID": {
+                "type": "string",
+                "description": "Identifies the docker upload uuid for the current request."
+              },
+              "Location": {
+                "type": "string",
+                "description": "Provided location for blob"
+              },
+              "Range": {
+                "type": "string",
+                "description": "Range indicating the current progress of the upload."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -228,7 +254,7 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -799,8 +825,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1099,6 +1128,10 @@
       "get": {
         "operationId": "ContainerRegistryBlob_GetBlob",
         "description": "Retrieve the blob from the registry identified by digest.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1119,8 +1152,31 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the requested blob content."
+              },
+              "Docker-Content-Digest": {
+                "type": "string",
+                "description": "Digest of the targeted content for the request."
+              }
+            }
+          },
+          "307": {
+            "description": "Redirection",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The location where the layer should be accessible."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1164,8 +1220,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Docker-Content-Digest": {
+                "type": "string",
+                "description": "Digest of the targeted content for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1209,8 +1271,28 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the requested blob content."
+              },
+              "Docker-Content-Digest": {
+                "type": "string",
+                "description": "Digest of the targeted content for the request."
+              }
+            }
+          },
+          "307": {
+            "description": "Redirection",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The location where the layer should be accessible."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1263,8 +1345,22 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Docker-Content-Digest": {
+                "type": "string",
+                "description": "Digest of the targeted content for the request."
+              },
+              "Docker-Upload-UUID": {
+                "type": "string",
+                "description": "Identifies the docker upload uuid for the current request."
+              },
+              "Location": {
+                "type": "string",
+                "description": "Provided location for blob"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1374,8 +1470,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "Docker-Content-Digest": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1419,8 +1527,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1509,8 +1620,19 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "206": {
+            "description": "Successful",
+            "headers": {
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the requested blob content."
+              },
+              "Content-Range": {
+                "type": "string",
+                "description": "Content range of the blob chunk."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1564,8 +1686,19 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the requested blob content."
+              },
+              "Content-Range": {
+                "type": "string",
+                "description": "Content range of the blob chunk."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1608,13 +1741,16 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Docker-Upload-UUID": {
-                "type": "string"
+                "type": "string",
+                "description": "Identifies the docker upload uuid for the current request."
               },
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "Provided location for blob"
               },
               "Range": {
-                "type": "string"
+                "type": "string",
+                "description": "Range indicating the current progress of the upload."
               }
             }
           },
