@@ -470,10 +470,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(VoiceLive.ResponseStatus, "SessionResponseStatus", "java");
-@@clientName(VoiceLive.ResponseItemStatus,
-  "SessionResponseItemStatus",
-  "java"
-);
+@@clientName(VoiceLive.ResponseItemStatus, "SessionResponseItemStatus", "java");
 @@clientName(VoiceLive.ServerEvent, "SessionUpdate", "java");
 @@clientName(VoiceLive.ServerEventSessionCreated,
   "SessionUpdateSessionCreated",
@@ -620,10 +617,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "java");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "java");
 @@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "java");
-@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms,
-  "TimeoutMs",
-  "java"
-);
+@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms, "TimeoutMs", "java");
 @@clientName(VoiceLive.AzureSemanticDetectionEn.timeout_ms,
   "TimeoutMs",
   "java"
@@ -659,34 +653,102 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(VoiceLive.Background, "VideoBackground", "java");
 
-@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms, "timeoutInMs", "javascript");
-@@clientName(VoiceLive.ClientEventConversationItemTruncate.audio_end_ms, "audioEndInMs", "javascript");
-@@clientName(VoiceLive.ServerEventConversationItemTruncated.audio_end_ms, "audioEndInMs", "javascript");
-@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStopped.audio_end_ms, "audioEndInMs", "javascript");
-@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStarted.audio_start_ms, "audioStartInMs", "javascript");
-@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDelta.audio_offset_ms, "audioOffsetInMs", "javascript");
-@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta.audio_offset_ms, "audioOffsetInMs", "javascript");
-@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta.audio_duration_ms, "audioDurationInMs", "javascript");
+@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms,
+  "timeoutInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.ClientEventConversationItemTruncate.audio_end_ms,
+  "audioEndInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.ServerEventConversationItemTruncated.audio_end_ms,
+  "audioEndInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStopped.audio_end_ms,
+  "audioEndInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStarted.audio_start_ms,
+  "audioStartInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDelta.audio_offset_ms,
+  "audioOffsetInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta.audio_offset_ms,
+  "audioOffsetInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta.audio_duration_ms,
+  "audioDurationInMs",
+  "javascript"
+);
 
+@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms,
+  "timeoutInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.AzureSemanticDetectionEn.timeout_ms,
+  "timeoutInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms,
+  "timeoutInMs",
+  "javascript"
+);
 
-@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms,"timeoutInMs", "javascript");
-@@clientName(VoiceLive.AzureSemanticDetectionEn.timeout_ms, "timeoutInMs", "javascript");
-@@clientName(VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms, "timeoutInMs", "javascript");
+@@clientName(VoiceLive.ServerVad.prefix_padding_ms,
+  "prefixPaddingInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.ServerVad.silence_duration_ms,
+  "silenceDurationInMs",
+  "javascript"
+);
 
-@@clientName(VoiceLive.ServerVad.prefix_padding_ms, "prefixPaddingInMs", "javascript");
-@@clientName(VoiceLive.ServerVad.silence_duration_ms, "silenceDurationInMs", "javascript");
+@@clientName(VoiceLive.AzureSemanticVad.prefix_padding_ms,
+  "prefixPaddingInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.AzureSemanticVad.silence_duration_ms,
+  "silenceDurationInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.AzureSemanticVad.speech_duration_ms,
+  "speechDurationInMs",
+  "javascript"
+);
 
-@@clientName(VoiceLive.AzureSemanticVad.prefix_padding_ms, "prefixPaddingInMs", "javascript");
-@@clientName(VoiceLive.AzureSemanticVad.silence_duration_ms, "silenceDurationInMs", "javascript");
-@@clientName(VoiceLive.AzureSemanticVad.speech_duration_ms, "speechDurationInMs", "javascript");
+@@clientName(VoiceLive.AzureSemanticVadEn.prefix_padding_ms,
+  "prefixPaddingInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.AzureSemanticVadEn.silence_duration_ms,
+  "silenceDurationInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.AzureSemanticVadEn.speech_duration_ms,
+  "speechDurationInMs",
+  "javascript"
+);
 
-@@clientName(VoiceLive.AzureSemanticVadEn.prefix_padding_ms, "prefixPaddingInMs", "javascript");
-@@clientName(VoiceLive.AzureSemanticVadEn.silence_duration_ms, "silenceDurationInMs", "javascript");
-@@clientName(VoiceLive.AzureSemanticVadEn.speech_duration_ms, "speechDurationInMs", "javascript");
-
-@@clientName(VoiceLive.AzureSemanticVadMultilingual.prefix_padding_ms, "prefixPaddingInMs", "javascript");
-@@clientName(VoiceLive.AzureSemanticVadMultilingual.silence_duration_ms, "silenceDurationInMs", "javascript");
-@@clientName(VoiceLive.AzureSemanticVadMultilingual.speech_duration_ms, "speechDurationInMs", "javascript");
+@@clientName(VoiceLive.AzureSemanticVadMultilingual.prefix_padding_ms,
+  "prefixPaddingInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.AzureSemanticVadMultilingual.silence_duration_ms,
+  "silenceDurationInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.AzureSemanticVadMultilingual.speech_duration_ms,
+  "speechDurationInMs",
+  "javascript"
+);
 
 @@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "javascript");
-@@clientName(VoiceLive.ToolChoiceFunctionObject, "ToolChoiceFunctionSelection", "javascript");
+@@clientName(VoiceLive.ToolChoiceFunctionObject,
+  "ToolChoiceFunctionSelection",
+  "javascript"
+);
