@@ -3,7 +3,7 @@
   "info": {
     "title": "MariaDBManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MariaDB resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.",
-    "version": "2018-06-01-preview"
+    "version": "2018-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1033,64 +1033,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/updateConfigurations": {
-      "post": {
-        "tags": [
-          "UpdateConfigurations"
-        ],
-        "operationId": "ServerParameters_ListUpdateConfigurations",
-        "x-ms-examples": {
-          "ConfigurationList": {
-            "$ref": "./examples/ConfigurationsUpdateByServer.json"
-          }
-        },
-        "description": "Update a list of configurations in a given server.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "value",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
-            },
-            "description": "The parameters for updating a list of server configuration."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
@@ -1122,93 +1064,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/LogFileListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/recoverableServers": {
-      "get": {
-        "tags": [
-          "RecoverableServers"
-        ],
-        "operationId": "RecoverableServers_Get",
-        "x-ms-examples": {
-          "ReplicasListByServer": {
-            "$ref": "./examples/RecoverableServersGet.json"
-          }
-        },
-        "description": "Gets a recoverable MariaDB Server.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecoverableServerResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/performanceTiers": {
-      "get": {
-        "tags": [
-          "ServerBasedPerformanceTier"
-        ],
-        "operationId": "ServerBasedPerformanceTier_List",
-        "x-ms-examples": {
-          "PerformanceTiersList": {
-            "$ref": "./examples/PerformanceTiersListByServer.json"
-          }
-        },
-        "description": "List all the performance tiers for a MariaDB server.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PerformanceTierListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1412,14 +1267,25 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/securityAlertPolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/queryTexts/{queryId}": {
       "get": {
         "tags": [
-          "ServerSecurityAlertPolicies"
+          "QueryTexts"
         ],
-        "description": "Get the server's threat detection policies.",
-        "operationId": "ServerSecurityAlertPolicies_ListByServer",
+        "operationId": "QueryTexts_Get",
+        "x-ms-examples": {
+          "QueryTextsGet": {
+            "$ref": "./examples/QueryTextsGet.json"
+          }
+        },
+        "description": "Retrieve the Query-Store query texts for the queryId.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
@@ -1427,30 +1293,537 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/QueryIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the server threat detection policies.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicyListResult"
+              "$ref": "#/definitions/QueryText"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/queryTexts": {
+      "get": {
+        "tags": [
+          "QueryTexts"
+        ],
+        "operationId": "QueryTexts_ListByServer",
+        "x-ms-examples": {
+          "QueryTextsListByServer": {
+            "$ref": "./examples/QueryTextsListByServer.json"
+          }
+        },
+        "description": "Retrieve the Query-Store query texts for specified queryIds.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings"
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "queryIds",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            },
+            "description": "The query identifiers"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QueryTextsResultList"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/topQueryStatistics/{queryStatisticId}": {
+      "get": {
+        "tags": [
+          "TopQueryStatistics"
+        ],
+        "operationId": "TopQueryStatistics_Get",
         "x-ms-examples": {
-          "List the server's threat detection policies": {
-            "$ref": "./examples/ServerSecurityAlertsListByServer.json"
+          "TopQueryStatisticsGet": {
+            "$ref": "./examples/TopQueryStatisticsGet.json"
           }
+        },
+        "description": "Retrieve the query statistic for specified identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryStatisticIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QueryStatistic"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/topQueryStatistics": {
+      "get": {
+        "tags": [
+          "TopQueryStatistics"
+        ],
+        "operationId": "TopQueryStatistics_ListByServer",
+        "x-ms-examples": {
+          "TopQueryStatisticsListByServer": {
+            "$ref": "./examples/TopQueryStatisticsListByServer.json"
+          }
+        },
+        "description": "Retrieve the Query-Store top queries for specified metric and aggregation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TopQueryStatisticsInput"
+            },
+            "description": "The required parameters for retrieving top query statistics."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopQueryStatisticsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/waitStatistics/{waitStatisticsId}": {
+      "get": {
+        "tags": [
+          "WaitStatistics"
+        ],
+        "operationId": "WaitStatistics_Get",
+        "x-ms-examples": {
+          "WaitStatisticsGet": {
+            "$ref": "./examples/WaitStatisticsGet.json"
+          }
+        },
+        "description": "Retrieve wait statistics for specified identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WaitStatisticsIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WaitStatistic"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/waitStatistics": {
+      "get": {
+        "tags": [
+          "WaitStatistics"
+        ],
+        "operationId": "WaitStatistics_ListByServer",
+        "x-ms-examples": {
+          "WaitStatisticsListByServer": {
+            "$ref": "./examples/WaitStatisticsListByServer.json"
+          }
+        },
+        "description": "Retrieve wait statistics for specified aggregation window.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WaitStatisticsInput"
+            },
+            "description": "The required parameters for retrieving wait statistics."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WaitStatisticsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}": {
+      "get": {
+        "tags": [
+          "Advisors"
+        ],
+        "operationId": "Advisors_Get",
+        "x-ms-examples": {
+          "AdvisorsGet": {
+            "$ref": "./examples/AdvisorsGet.json"
+          }
+        },
+        "description": "Get a recommendation action advisor.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdvisorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors": {
+      "get": {
+        "tags": [
+          "Advisors"
+        ],
+        "operationId": "Advisors_ListByServer",
+        "x-ms-examples": {
+          "AdvisorsListByServer": {
+            "$ref": "./examples/AdvisorsListByServer.json"
+          }
+        },
+        "description": "List recommendation action advisors.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdvisorsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/createRecommendedActionSession": {
+      "post": {
+        "tags": [
+          "RecommendedActionSessions"
+        ],
+        "operationId": "CreateRecommendedActionSession",
+        "x-ms-examples": {
+          "RecommendedActionSessionCreate": {
+            "$ref": "./examples/RecommendedActionSessionCreate.json"
+          }
+        },
+        "description": "Create recommendation action session for the advisor.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdvisorNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}": {
+      "get": {
+        "tags": [
+          "RecommendedActions"
+        ],
+        "operationId": "RecommendedActions_Get",
+        "x-ms-examples": {
+          "RecommendedActionsGet": {
+            "$ref": "./examples/RecommendedActionsGet.json"
+          }
+        },
+        "description": "Retrieve recommended actions from the advisor.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdvisorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RecommendedActionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationAction"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/recommendedActions": {
+      "get": {
+        "tags": [
+          "RecommendedActions"
+        ],
+        "operationId": "RecommendedActions_ListByServer",
+        "x-ms-examples": {
+          "RecommendedActionsListByServer": {
+            "$ref": "./examples/RecommendedActionsListByServer.json"
+          }
+        },
+        "description": "Retrieve recommended actions from the advisor.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdvisorNameParameter"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The recommendation action session identifier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationActionsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/recommendedActionSessionsAzureAsyncOperation/{operationId}": {
+      "get": {
+        "tags": [
+          "LocationBasedRecommendedActionSessionsOperationStatus"
+        ],
+        "operationId": "LocationBasedRecommendedActionSessionsOperationStatus_Get",
+        "x-ms-examples": {
+          "RecommendedActionSessionOperationStatus": {
+            "$ref": "./examples/RecommendedActionSessionOperationStatus.json"
+          }
+        },
+        "description": "Recommendation action session operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionSessionsOperationStatus"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/recommendedActionSessionsOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "LocationBasedRecommendedActionSessionsResult"
+        ],
+        "operationId": "LocationBasedRecommendedActionSessionsResult_List",
+        "x-ms-examples": {
+          "RecommendedActionSessionResult": {
+            "$ref": "./examples/RecommendedActionSessionResult.json"
+          }
+        },
+        "description": "Recommendation action session operation result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RecommendationActionsResultList"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RecommendationActionsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1586,7 +1959,6 @@
       "properties": {
         "backupRetentionDays": {
           "type": "integer",
-          "format": "int32",
           "description": "Backup retention days for the server."
         },
         "geoRedundantBackup": {
@@ -1675,8 +2047,7 @@
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
-          "description": "The password of the administrator login.",
-          "x-ms-secret": true
+          "description": "The password of the administrator login."
         }
       },
       "required": [
@@ -1831,7 +2202,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -1953,7 +2324,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "required": [
@@ -2011,7 +2382,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2064,7 +2435,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Database."
@@ -2124,7 +2495,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Configuration."
@@ -2262,7 +2633,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a log file."
@@ -2291,7 +2662,6 @@
         },
         "vCore": {
           "type": "integer",
-          "format": "int32",
           "description": "vCore associated with the service level objective"
         },
         "hardwareGeneration": {
@@ -2300,12 +2670,10 @@
         },
         "maxBackupRetentionDays": {
           "type": "integer",
-          "format": "int32",
           "description": "Maximum Backup retention in days for the performance tier edition"
         },
         "minBackupRetentionDays": {
           "type": "integer",
-          "format": "int32",
           "description": "Minimum Backup retention in days for the performance tier edition"
         },
         "maxStorageMB": {
@@ -2326,36 +2694,6 @@
         "id": {
           "type": "string",
           "description": "ID of the performance tier."
-        },
-        "maxBackupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum Backup retention in days for the performance tier edition"
-        },
-        "minBackupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Minimum Backup retention in days for the performance tier edition"
-        },
-        "maxStorageMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage allowed for a server."
-        },
-        "minLargeStorageMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage allowed for a server."
-        },
-        "maxLargeStorageMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage allowed for a server."
-        },
-        "minStorageMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage allowed for a server."
         },
         "serviceLevelObjectives": {
           "type": "array",
@@ -2469,7 +2807,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2488,25 +2826,6 @@
         }
       },
       "description": "An error response from the Batch service."
-    },
-    "ServerSecurityAlertPolicyListResult": {
-      "description": "A list of the server's security alert policies.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerSecurityAlertPolicy"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "CloudErrorBody": {
       "x-ms-external": true,
@@ -2533,58 +2852,442 @@
       },
       "description": "An error response from the Batch service."
     },
-    "RecoverableServerProperties": {
-      "description": "The recoverable server's properties.",
+    "QueryTextProperties": {
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "Query identifier unique to the server."
+        },
+        "queryText": {
+          "type": "string",
+          "description": "Query text."
+        }
+      },
+      "description": "The properties of a query text."
+    },
+    "QueryText": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryTextProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a query text."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Query Text."
+    },
+    "QueryTextsResultList": {
+      "description": "A list of query texts.",
       "type": "object",
       "properties": {
-        "lastAvailableBackupDateTime": {
-          "type": "string",
-          "description": "The last available backup date time.",
+        "value": {
+          "description": "The list of query texts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryText"
+          },
           "readOnly": true
         },
-        "serviceLevelObjective": {
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
           "type": "string",
-          "description": "The service level objective",
-          "readOnly": true
-        },
-        "edition": {
-          "type": "string",
-          "description": "Edition of the performance tier.",
-          "readOnly": true
-        },
-        "vCore": {
-          "type": "integer",
-          "format": "int32",
-          "description": "vCore associated with the service level objective",
-          "readOnly": true
-        },
-        "hardwareGeneration": {
-          "type": "string",
-          "description": "Hardware generation associated with the service level objective",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "description": "The MariaDB version",
           "readOnly": true
         }
       }
     },
-    "RecoverableServerResource": {
-      "description": "A recoverable server resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+    "TopQueryStatisticsInputProperties": {
+      "properties": {
+        "numberOfTopQueries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max number of top queries to return."
+        },
+        "aggregationFunction": {
+          "type": "string",
+          "description": "Aggregation function name."
+        },
+        "observedMetric": {
+          "type": "string",
+          "description": "Observed metric name."
+        },
+        "observationStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation start time."
+        },
+        "observationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation end time."
+        },
+        "aggregationWindow": {
+          "type": "string",
+          "description": "Aggregation interval type in ISO 8601 format."
         }
+      },
+      "required": [
+        "numberOfTopQueries",
+        "aggregationFunction",
+        "observedMetric",
+        "observationStartTime",
+        "observationEndTime",
+        "aggregationWindow"
       ],
+      "description": "The properties for input to get top query statistics"
+    },
+    "TopQueryStatisticsInput": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RecoverableServerProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/TopQueryStatisticsInputProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a wait statistics input."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Input to get top query statistics"
+    },
+    "QueryStatisticProperties": {
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "Database query identifier."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation end time."
+        },
+        "aggregationFunction": {
+          "type": "string",
+          "description": "Aggregation function name."
+        },
+        "databaseNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of database names."
+        },
+        "queryExecutionCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of query executions in this time interval."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Metric name."
+        },
+        "metricDisplayName": {
+          "type": "string",
+          "description": "Metric display name."
+        },
+        "metricValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value."
+        },
+        "metricValueUnit": {
+          "type": "string",
+          "description": "Metric value unit."
+        }
+      },
+      "description": "The properties of a query statistic."
+    },
+    "QueryStatistic": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryStatisticProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a query statistic."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Query Statistic."
+    },
+    "TopQueryStatisticsResultList": {
+      "description": "A list of query statistics.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of top query statistics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryStatistic"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
+    },
+    "WaitStatisticsInputProperties": {
+      "properties": {
+        "observationStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation start time."
+        },
+        "observationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation end time."
+        },
+        "aggregationWindow": {
+          "type": "string",
+          "description": "Aggregation interval type in ISO 8601 format."
+        }
+      },
+      "required": [
+        "observationStartTime",
+        "observationEndTime",
+        "aggregationWindow"
+      ],
+      "description": "The properties for input to get wait statistics"
+    },
+    "WaitStatisticsInput": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WaitStatisticsInputProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a wait statistics input."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Input to get wait statistics"
+    },
+    "WaitStatisticProperties": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation end time."
+        },
+        "eventName": {
+          "type": "string",
+          "description": "Wait event name."
+        },
+        "eventTypeName": {
+          "type": "string",
+          "description": "Wait event type name."
+        },
+        "queryId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Database query identifier."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database Name."
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Database user identifier."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Wait event count observed in this time interval."
+        },
+        "totalTimeInMs": {
+          "type": "number",
+          "format": "double",
+          "description": "Total time of wait in milliseconds in this time interval."
+        }
+      },
+      "description": "The properties of a wait statistic."
+    },
+    "WaitStatistic": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WaitStatisticProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a wait statistic."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Wait Statistic."
+    },
+    "WaitStatisticsResultList": {
+      "description": "A list of wait statistics.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of wait statistics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WaitStatistic"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AdvisorProperties": {
+      "properties": {},
+      "description": "The properties of a recommendation action advisor."
+    },
+    "Advisor": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdvisorProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a recommendation action advisor."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a recommendation action advisor."
+    },
+    "AdvisorsResultList": {
+      "description": "A list of query statistics.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of recommendation action advisors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Advisor"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendationActionProperties": {
+      "properties": {
+        "advisorName": {
+          "type": "string",
+          "description": "Advisor name."
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "Recommendation action session identifier."
+        },
+        "actionId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Recommendation action identifier."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recommendation action creation time."
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recommendation action expiration time."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Recommendation action reason."
+        },
+        "recommendationType": {
+          "type": "string",
+          "description": "Recommendation action type."
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Recommendation action details."
+        }
+      },
+      "description": "The properties of a recommendation action."
+    },
+    "RecommendationAction": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendationActionProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a recommendation action."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Recommendation Action."
+    },
+    "RecommendationActionsResultList": {
+      "description": "A list of recommendation actions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of recommendation action advisors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendationAction"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionSessionsOperationStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation identifier."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        }
+      },
+      "description": "Recommendation action session operation status."
     }
   },
   "parameters": {
@@ -2667,6 +3370,54 @@
       "enum": [
         "default"
       ],
+      "x-ms-parameter-location": "method"
+    },
+    "QueryIdParameter": {
+      "name": "queryId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Query-Store query identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryStatisticIdParameter": {
+      "name": "queryStatisticId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Query Statistic identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "WaitStatisticsIdParameter": {
+      "name": "waitStatisticsId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Wait Statistic identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "AdvisorNameParameter": {
+      "name": "advisorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The advisor name for recommendation action.",
+      "x-ms-parameter-location": "method"
+    },
+    "RecommendedActionNameParameter": {
+      "name": "recommendedActionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The recommended action name.",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The operation identifier.",
       "x-ms-parameter-location": "method"
     }
   }

@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2018-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-06-01-preview'
 input-file:
-- Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json
+- ./preview/2018-06-01-preview/mariadb.json
 ```
 
 
@@ -47,12 +47,12 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
-- Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
+- ./stable/2018-06-01/mariadb.json
+- ./stable/2018-06-01/QueryPerformanceInsights.json
+- ./stable/2018-06-01/PerformanceRecommendations.json
+- ./stable/2018-06-01/PrivateEndpointConnections.json
+- ./stable/2018-06-01/PrivateLinkResources.json
+- ./stable/2018-06-01/ServerSecurityAlertPolicies.json
 ```
 
 
@@ -62,9 +62,9 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
-- Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json
-- Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-- Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+- ./preview/2018-06-01-privatepreview/mariadb.json
+- ./preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+- ./preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
 ### Tag: package-2020-01-01-privatepreview
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2020-01-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2020-01-01-privatepreview'
 input-file:
-- Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+- ./preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
 
@@ -84,13 +84,13 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
-- Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
-- Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
-- Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
+- ./stable/2018-06-01/mariadb.json
+- ./stable/2018-06-01/QueryPerformanceInsights.json
+- ./stable/2018-06-01/PerformanceRecommendations.json
+- ./stable/2018-06-01/PrivateEndpointConnections.json
+- ./stable/2018-06-01/PrivateLinkResources.json
+- ./stable/2018-06-01/ServerSecurityAlertPolicies.json
+- ./stable/2020-01-01/Servers.json
 ```
 
 ## Suppression
