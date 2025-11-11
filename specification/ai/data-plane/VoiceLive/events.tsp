@@ -21,7 +21,7 @@ union ClientEventType {
   response_create: "response.create",
   response_cancel: "response.cancel",
   session_avatar_connect: "session.avatar.connect",
-  mcp_approval_response: "mcp.approval_response",
+  mcp_approval_response: "mcp_approval_response",
 }
 
 /** Server event types used in VoiceLive protocol. */
