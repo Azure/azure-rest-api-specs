@@ -9,9 +9,9 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -32,6 +32,7 @@ using TypeSpec.Versioning;
 @versioned(ApiVersions)
 namespace PurviewDataQuality;
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" "API versioning enum is required for @versioned decorator"
 @doc("Service API versions")
 enum ApiVersions {
   @doc("2025-09-01-preview service API version")

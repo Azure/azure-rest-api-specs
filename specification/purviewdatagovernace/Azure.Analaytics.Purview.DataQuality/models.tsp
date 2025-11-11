@@ -10,7 +10,7 @@ namespace PurviewDataQuality;
 
 /**
  * Defines the type of asset metadata observer used for data quality monitoring.
- * Observers monitor data assets and execute quality checks based on their configuration.
+ * Observers monitor data assets and execut e quality checks based on their configuration.
  */
 @doc("Type of asset metadata observer for data quality monitoring")
 union AssetMetadataObserverType {
@@ -259,7 +259,7 @@ model ObservationAssetMetadata {
 @doc("Descriptive and operational metadata for data asset governance and discovery")
 @parentResource(DataAsset)
 @resource("asset-metadata")
-model AssetMetadata {
+model AssetMetadataRoute {
   /**
    * Unique identifier for the asset metadata within the data asset context
    */
@@ -289,12 +289,9 @@ model AssetMetadata {
 
 /**
  * Defines the execution status of data quality rules and operations.
- * Used to track the current state and lifecycle of various data quality processes.
  */
 @doc("Execution status for data quality rules and operations")
 union Status {
-  string,
-
   /** The rule or operation is active and currently executing */
   Active: "Active",
 
@@ -309,68 +306,78 @@ union Status {
 
   /** The rule or operation is currently executing */
   InProgress: "InProgress",
+
+  /** Custom status not predefined above */
+  string,
 }
 
 /**
- * Provides comprehensive status monitoring for data quality rules and operations.
- * Includes execution state, progress tracking, and error reporting capabilities.
+ * Type of operation being monitored.
  */
-@doc("Status monitoring with execution state, progress tracking, and error reporting")
-model StatusMonitor {
-  /**
-   * Current execution status of the monitored rule or operation
-   */
-  @doc("Current execution status")
-  status: Status;
+@doc("Type of operation being monitored")
+union OperationKind {
+  /** Operation type is unknown */
+  Unknown: "Unknown",
 
-  /**
-   * Timestamp when the status was last updated or changed
-   */
-  @doc("Last status update timestamp")
-  lastUpdated: utcDateTime;
+  /** Create operation */
+  Create: "Create",
 
-  /**
-   * Human-readable message providing additional context about the current status
-   */
-  @doc("Status description message")
-  statusMessage?: string;
+  /** Update operation */
+  Update: "Update",
 
-  /**
-   * Completion percentage for operations that are currently in progress (0-100)
-   */
-  @doc("Completion percentage (0-100)")
-  progressPercentage?: int32;
+  /** Delete operation */
+  Delete: "Delete",
 
-  /**
-   * Detailed error information when the status indicates a failure
-   */
-  @doc("Error details for failed operations")
-  errorDetails?: ErrorDetails;
+  /** Retrieve operation */
+  Retrieve: "Retrieve",
+
+  /** Custom operation kind not predefined above */
+  string,
 }
 
 /**
- * Comprehensive error information for failed operations.
- * Provides structured error reporting with codes, messages, and contextual details.
+ * Structured error information with codes, messages, and contextual details.
  */
 @doc("Structured error information with codes, messages, and contextual details")
 model ErrorDetails {
-  /**
-   * Standardized error code identifying the type of error that occurred
-   */
   @doc("Standardized error code")
-  code: string;
+  code?: string;
 
-  /**
-   * Human-readable error message describing what went wrong
-   */
   @doc("Human-readable error message")
-  message: string;
+  message?: string;
 
-  /**
-   * Additional contextual information about the error as key-value pairs
-   */
   @doc("Additional error context as key-value pairs")
   details?: Record<string>;
+}
+
+/**
+ * Status monitoring with execution state, progress tracking, and error reporting.
+ */
+@doc("Status monitoring with execution state, progress tracking, and error reporting")
+model StatusMonitor {
+  @key
+  @visibility(Lifecycle.Create)
+  @doc("Unique identifier of the monitored operation")
+  id: string;
+
+  @doc("Kind of operation being monitored")
+  kind?: OperationKind;
+
+  @doc("Last status update timestamp (UTC)")
+  lastUpdated: utcDateTime;
+
+  @doc("Status description message")
+  statusMessage?: string;
+
+  @doc("Completion percentage (0–100)")
+  progressPercentage?: int32;
+
+  @doc("Error details for failed operations")
+  errorDetails?: ErrorDetails;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy API design uses unknown type for flexible result payloads"
+  @doc("Result payload for successful operations")
+  result?: unknown;
 }
 
 /**
@@ -401,6 +408,10 @@ model DataAssetRuleResourceId {
   dataAssetId: string;
 }
 
+/**
+ * Represents a comprehensive data quality rule entity with validation logic and scoring.
+ * Rules define validation criteria, execution parameters, and track quality scores for data assets.
+ */
 /**
  * Represents a comprehensive data quality rule entity with validation logic and scoring.
  * Rules define validation criteria, execution parameters, and track quality scores for data assets.
@@ -466,6 +477,36 @@ model RuleEntity {
    */
   @doc("Quality score (0.0 to 1.0)")
   score?: float64;
+
+  /**
+   * Optional business dimension or classification (e.g., Completeness, Accuracy)
+   */
+  @doc("Optional business dimension or classification")
+  dimension?: string;
+
+  /**
+   * Timestamp when this rule was created
+   */
+  @doc("Timestamp when this rule was created")
+  createdAt?: utcDateTime;
+
+  /**
+   * Timestamp when this rule was last modified
+   */
+  @doc("Timestamp when this rule was last modified")
+  lastModifiedAt?: utcDateTime;
+
+  /**
+   * User identifier for the creator of the rule
+   */
+  @doc("User identifier for the creator of the rule")
+  createdBy?: string;
+
+  /**
+   * User identifier for the last modifier of the rule
+   */
+  @doc("User identifier for the last modifier of the rule")
+  lastModifiedBy?: string;
 }
 
 /**
@@ -496,15 +537,55 @@ alias rulesParameter = {
  * Contains type-specific configuration properties for data quality rules.
  * Provides flexible configuration options that vary based on the rule type being implemented.
  */
-@doc("Type-specific configuration properties for data quality rules")
+/**
+ * Contains type-specific configuration properties for data quality rules.
+ * Provides flexible configuration options that vary based on the rule type being implemented.
+ */
+/**
+ * Contains type-specific configuration properties for data quality rules.
+ * Supports both column-based and expression-based configurations.
+ */
+@doc("Type-specific configuration properties for data quality rules.")
 model TypeProperties {
   /**
-   * Column specification when the rule applies to specific dataset columns
+   * Column specification when the rule applies to a single column.
    */
-  @doc("Column specification for column-specific rules")
+  @doc("Column specification for column-specific rules.")
   column?: Column;
-}
 
+  /**
+   * List of columns for multi-column or relational rules (e.g., Duplicate, CustomTruth).
+   */
+  @doc("List of columns for multi-column or relational rules (e.g., Duplicate, CustomTruth).")
+  columns?: Column[];
+
+  /**
+   * Regex or pattern-based validation logic for format rules.
+   */
+  @doc("Regex or pattern-based validation logic for format rules.")
+  pattern?: string;
+
+  /**
+   * Main logical condition or expression defining validation criteria.
+   * Example: {City} != 'Berlin'
+   */
+  @doc("Main logical condition or expression defining validation criteria.")
+  condition?: string;
+
+  /**
+   * Optional filter condition to limit rows that are validated by this rule.
+   * Example: ID > 1
+   */
+  @doc("Optional filter condition to limit rows that are validated by this rule.")
+  filterCriteria?: string;
+
+  /**
+   * Optional condition defining when a field or column is considered empty.
+   * Example: REVENUE == 0.0
+   */
+  @doc("Optional condition defining when a field or column is considered empty.")
+  emptyCriteria?: string;
+}
 /**
  * Represents a column definition within a dataset for rule applications.
  * Used to specify which columns are subject to validation or quality checks.
@@ -785,7 +866,7 @@ model LocationTypeProperties {
  * Supports multiple data source types including Lakehouse, Snowflake, SQL Server, and Oracle systems.
  */
 @doc("Unified metadata observer for monitoring data assets across platforms")
-model AssetMetadataObserver {
+model AssetMetadata {
   /**
    * Unique system identifier for the metadata observer instance
    */
@@ -895,6 +976,15 @@ model AssetMetadataObserver {
    */
   @doc("Host server name for on-premises database connections")
   hostName?: string;
+
+  @doc("Connection Dataset name for Google Big Quey type of data asset")
+  testConnectionDatasetName?: string;
+
+  @doc("Connection Schema name for Google Big Query type of data asset")
+  testConnectionSchemaName?: string;
+
+  @doc("Project ID for Google Big Query type of data asset")
+  projectId?: string;
 }
 
 /**
@@ -961,12 +1051,14 @@ model AssetMetadataCommonProperties {
   /**
    * Collection of input dataset definitions and schemas associated with this asset
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Legacy API design uses unknown array type"
   @doc("Input dataset definitions and schemas")
   inputDatasets?: unknown[];
 
   /**
    * Projection configuration for data transformation and mapping operations
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy API design uses unknown type for flexible projection values"
   @encodedName("application/json", "projection")
   @doc("Data projection and mapping configuration")
   projectionValue?: unknown;
@@ -1790,10 +1882,6 @@ model JobConfigDTOResponse {
   /**
    * HTTP status code indicating accepted request for processing (202 Accepted)
    */
-  @doc("HTTP status code for accepted operation")
-  @statusCode
-  statusCode: 202;
-
   /**
    * Response value containing operation result or reference identifier
    */
@@ -1805,7 +1893,10 @@ model JobConfigDTOResponse {
    */
   @doc("Long-running operation status")
   @lroStatus
-  statuslro: LroStatus;
+  status: LroStatus;
+
+  @doc("Real-time job execution monitoring information")
+  statusMonitor?: StatusMonitor;
 }
 
 /**
@@ -1817,13 +1908,6 @@ model JobConfigDTOResponse {
 @doc("HTTP response for scan operations with status tracking and monitoring")
 model ScanDTOResponse {
   /**
-   * HTTP status code indicating accepted scan request for processing (202 Accepted)
-   */
-  @doc("HTTP status code for accepted scan operation")
-  @statusCode
-  statusCode: 202;
-
-  /**
    * Unique identifier of the initiated scan operation for tracking and reference
    */
   @doc("Unique scan operation identifier")
@@ -1834,7 +1918,7 @@ model ScanDTOResponse {
    */
   @doc("Long-running operation execution status")
   @lroStatus
-  statuslro: LroStatus;
+  status: LroStatus;
 
   /**
    * Detailed monitoring information providing real-time scan execution metrics
@@ -1945,6 +2029,102 @@ model AssetMetadataObserverResponse {
 }
 
 /**
+ * Represents the scoped asset metadata configuration for a given data asset.
+ * Encapsulates domain, product, and asset references, runtime parameters, and audit metadata.
+ */
+@doc("Scoped asset metadata configuration linked to a specific data asset.")
+@parentResource(DataAsset)
+@resource("scoped-asset-metadata")
+model ScopedAssetMetadata {
+  /**
+   * Unique identifier for the scoped asset metadata entity.
+   */
+  @key
+  @visibility(Lifecycle.Create)
+  @doc("Unique identifier for the scoped asset metadata entity.")
+  id: string;
+
+  /**
+   * Description of the scoped asset metadata.
+   */
+  @doc("Descriptive text providing details about the scoped asset metadata.")
+  description?: string;
+
+  /**
+   * Reference to the associated Business Domain.
+   */
+  @doc("Reference to the associated Business Domain.")
+  businessDomain: Reference;
+
+  /**
+   * Reference to the associated Data Product.
+   */
+  @doc("Reference to the associated Data Product.")
+  dataProduct: Reference;
+
+  /**
+   * Reference to the associated Data Asset.
+   */
+  @doc("Reference to the associated Data Asset.")
+  dataAsset: Reference;
+
+  /**
+   * Runtime configuration parameters defining error row behavior and output format.
+   */
+  @doc("Runtime configuration parameters defining error row behavior and output format.")
+  runtime: ScopedAssetMetadataRuntime;
+
+  /**
+   * List of favorite column paths selected for quick access or monitoring.
+   */
+  @doc("List of favorite column paths selected for quick access or monitoring.")
+  favouriteColumnPaths?: string[];
+
+  /**
+   * Timestamp when this metadata was created.
+   */
+  @doc("Timestamp when this metadata was created.")
+  createdAt?: utcDateTime;
+
+  /**
+   * Timestamp when this metadata was last modified.
+   */
+  @doc("Timestamp when this metadata was last modified.")
+  lastModifiedAt?: utcDateTime;
+
+  /**
+   * Identifier of the user who created this metadata.
+   */
+  @doc("Identifier of the user who created this metadata.")
+  createdBy?: string;
+
+  /**
+   * Identifier of the user who last modified this metadata.
+   */
+  @doc("Identifier of the user who last modified this metadata.")
+  lastModifiedBy?: string;
+
+  /**
+   * Entity tag used for concurrency control and version validation.
+   */
+  @doc("Entity tag used for concurrency control and version validation.")
+  eTag?: string;
+}
+
+/**
+ * Defines runtime configuration options for a scoped asset metadata entity.
+ * Controls whether error rows are captured and specifies the output format.
+ */
+@doc("Runtime configuration options for a scoped asset metadata entity.")
+model ScopedAssetMetadataRuntime {
+  @doc("Indicates whether error row details should be captured.")
+  isErrorRowRequired: boolean;
+
+  @doc("Specifies the format in which error rows are written (e.g., CSV, Parquet).")
+  errorRowWriteFormat?: string;
+}
+
+/**
  * Comprehensive data source entity representing external data connections and their configurations.
  * Manages access credentials, network settings, and scope definitions for various data platforms.
  */
@@ -1955,6 +2135,7 @@ model DataSourceEntity {
    */
   @key
   @doc("Unique system identifier for the data source entity.")
+  @visibility(Lifecycle.Create)
   id: string;
 
   /**
@@ -2381,7 +2562,65 @@ model ProfileEntityResponse {
    */
   @doc("Long-running operation status for profiling")
   @lroStatus
-  statuslro: LroStatus;
+  status: LroStatus;
+
+  @doc("Real-time profiling execution monitoring information")
+  statusMonitor?: StatusMonitor;
+}
+
+/**
+ * Represents a list of trend records showing data quality score evolution
+ * across different business domains, data products, and assets.
+ */
+@doc("List of data quality trend records grouped by domain, product, and asset.")
+model DataQualityTrendResponse {
+  /**
+   * Array of trend entries representing data quality metrics for each job.
+   */
+  @doc("Array of trend entries representing data quality metrics for each job.")
+  value: DataQualityTrendRecord[];
+}
+
+/**
+ * Represents an individual trend record for a single data asset and job run.
+ */
+@doc("Trend record capturing data quality score and job execution information for a specific asset.")
+model DataQualityTrendRecord {
+  /**
+   * Identifier of the business domain associated with the trend record.
+   */
+  @doc("Identifier of the business domain associated with the trend record.")
+  businessDomainId: string;
+
+  /**
+   * Identifier of the data product under the business domain.
+   */
+  @doc("Identifier of the data product under the business domain.")
+  dataProductId: string;
+
+  /**
+   * Identifier of the data asset whose quality score is represented.
+   */
+  @doc("Identifier of the data asset whose quality score is represented.")
+  dataAssetId: string;
+
+  /**
+   * Data quality score for this job execution, if computed.
+   */
+  @doc("Data quality score for this job execution, if computed.")
+  score?: float64;
+
+  /**
+   * Identifier of the job execution or monitoring run.
+   */
+  @doc("Identifier of the job execution or monitoring run.")
+  jobId: string;
+
+  /**
+   * Migration status information, if available.
+   */
+  @doc("Migration status information, if available.")
+  migrationStatus?: string;
 }
 
 /**
@@ -2633,9 +2872,11 @@ model SnapshotDetails {
   @doc("List of data sources")
   dataSources?: SnapshotDataSource[];
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Legacy API design uses unknown array type for validation results"
   @doc("Observer validation results")
   observerValidationResults?: unknown[];
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Legacy API design uses unknown array type for schemas"
   @doc("Observer schemas")
   observerSchemas?: unknown[];
 
@@ -2657,9 +2898,11 @@ model SnapshotObserver {
   @doc("Reference to the data asset")
   dataAsset?: Reference;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy API design uses unknown type for flexible type-specific properties"
   @doc("Type-specific properties of the observer")
   typeProperties?: unknown;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "ETag is a well-known property name in Azure APIs"
   @doc("Entity tag for the observer")
   ETag?: string;
 
@@ -2699,9 +2942,11 @@ model SnapshotDataSource {
   @doc("Type of the data source")
   type?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy API design uses unknown type for flexible credential configuration"
   @doc("Credential configuration")
   credential?: unknown;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy API design uses unknown type for flexible type-specific properties"
   @doc("Type-specific properties")
   typeProperties?: unknown;
 
@@ -2711,6 +2956,7 @@ model SnapshotDataSource {
   @doc("Region of the data source")
   region?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VNet is a well-known Azure term and follows established naming convention"
   @doc("Whether VNet is enabled")
   isVNetEnabled?: boolean;
 
@@ -2780,6 +3026,7 @@ model ScoredRule {
   @doc("Status of the rule")
   status?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Legacy API design uses unknown array type for flexible column data"
   @doc("Columns associated with the rule")
   columns?: unknown[];
 
@@ -2817,7 +3064,7 @@ model SnapshotJob {
 @doc("Complete metadata entry for bulk operations including asset metadata, scoped metadata, rules, and score snapshot")
 model BulkAssetMetadataEntry {
   @doc("Asset metadata information")
-  assetMetadata: AssetMetadataObserver;
+  assetMetadata: AssetMetadata;
 
   @doc("Asset scoped metadata information")
   assetScopedMetadata: AssetScopedMetadata;
