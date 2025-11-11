@@ -7,12 +7,8 @@ parameters:
     default: ""
   "python-sdk-folder":
     default: "{project-root}/azure-sdk-for-python/"
-  "java-sdk-folder":
-    default: "{project-root}/azure-sdk-for-java/"
   "js-sdk-folder":
     default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-net/"
   "service-directory-name":
     default: "healthinsights"
 emit:
@@ -31,12 +27,11 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-health-insights-radiologyinsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-health-insights-radiologyinsights"
     package-version: 1.1.0
     namespace: com.azure.health.insights.radiologyinsights
     service-name: "RadiologyInsights"
     partial-update: true
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-health-insights-radiologyinsights"
     use-object-for-unknown: true
     polling:
       inferRadiologyInsights:
@@ -45,13 +40,14 @@ options:
     api-version: 2024-10-01
     service-version-exclude-preview: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     save-inputs: false
     clear-output-folder: true
-    package-dir: "Azure.Health.Insights.RadiologyInsights"
-    namespace: "{package-dir}"
+    namespace: "Azure.Health.Insights.RadiologyInsights"
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Health.Insights.RadiologyInsights
     model-namespace: false
   "@azure-tools/typespec-ts":

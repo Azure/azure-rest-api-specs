@@ -7,6 +7,7 @@ import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
+import { Duration } from "../src/time.js";
 import { repoRoot } from "./repo.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
@@ -305,52 +306,48 @@ describe("SpecModel", () => {
 // the '.skip' from the describe block. Put '.skip' back in when done or this
 // test may fail unexpectedly in the future.
 describe.skip("Parse readmes", () => {
-  it(
-    "Does not produce exceptions",
-    { timeout: 30 * 60 * 1000 /* 30 minutes */ },
-    async ({ expect }) => {
-      const excludeFolders = [
-        "authorization", // specification/authorization/resource-manager/readme.md defines has duplicate tags including 'package-2020-10-01'
-        "azureactivedirectory", // specification/azureactivedirectory/resource-manager/readme.md has duplicate tags including 'package-preview-2020-07'
-        "cost-management", // specification/cost-management/resource-manager/readme.md has duplicate tags including 'package-2019-01'
-        "migrate", // specification/migrate/resource-manager/readme.md has duplicate tags including 'package-migrate-2023-04'
-        "quota", // specification/quota/resource-manager/readme.md has duplicate tags including 'package-2023-02-01'
-        "redisenterprise", // specification/redisenterprise/resource-manager/readme.md has duplicate tags including 'package-2024-02'
-        "security", // specification/security/resource-manager/readme.md has duplicate tags including 'package-2021-07-preview-only'
-        "confidentialledger", // data-plane/readme.md tag 'package-2022-04-20-preview-ledger' points to a swagger file that doesn't exist
-        "network", // network takes a long time to evaluate
-        "servicenetworking", // servicenetworking includes a swagger file which references a file that doesn't exist
-      ];
+  it("Does not produce exceptions", { timeout: 30 * Duration.Minute }, async ({ expect }) => {
+    const excludeFolders = [
+      "authorization", // specification/authorization/resource-manager/readme.md defines has duplicate tags including 'package-2020-10-01'
+      "azureactivedirectory", // specification/azureactivedirectory/resource-manager/readme.md has duplicate tags including 'package-preview-2020-07'
+      "cost-management", // specification/cost-management/resource-manager/readme.md has duplicate tags including 'package-2019-01'
+      "migrate", // specification/migrate/resource-manager/readme.md has duplicate tags including 'package-migrate-2023-04'
+      "quota", // specification/quota/resource-manager/readme.md has duplicate tags including 'package-2023-02-01'
+      "redisenterprise", // specification/redisenterprise/resource-manager/readme.md has duplicate tags including 'package-2024-02'
+      "security", // specification/security/resource-manager/readme.md has duplicate tags including 'package-2021-07-preview-only'
+      "confidentialledger", // data-plane/readme.md tag 'package-2022-04-20-preview-ledger' points to a swagger file that doesn't exist
+      "network", // network takes a long time to evaluate
+      "servicenetworking", // servicenetworking includes a swagger file which references a file that doesn't exist
+    ];
 
-      // List all folders under specification/
-      const folders = await readdir(join(repoRoot, "specification"), {
-        withFileTypes: true,
-      });
-      const services = folders
-        .filter((f) => f.isDirectory() && !excludeFolders.includes(f.name))
-        .map((f) => f.name);
-      for (const folder of services) {
-        // Folders are listed in alphabetical order, when running this function
-        // iteratively over all service folders, a value can be placed in in this
-        // condition to skip folders that appear before a given folder. This means
-        // you won't have to wait for tests to run over all folders that have
-        // previously passed.
-        if (folder < "000") {
-          console.log(`Skipping service: ${folder}`);
-          continue;
-        }
-
-        console.log(`Testing service: ${folder}`);
-        const specModel = new SpecModel(`specification/${folder}`, options);
-
-        expect(specModel).toBeDefined();
+    // List all folders under specification/
+    const folders = await readdir(join(repoRoot, "specification"), {
+      withFileTypes: true,
+    });
+    const services = folders
+      .filter((f) => f.isDirectory() && !excludeFolders.includes(f.name))
+      .map((f) => f.name);
+    for (const folder of services) {
+      // Folders are listed in alphabetical order, when running this function
+      // iteratively over all service folders, a value can be placed in in this
+      // condition to skip folders that appear before a given folder. This means
+      // you won't have to wait for tests to run over all folders that have
+      // previously passed.
+      if (folder < "000") {
+        console.log(`Skipping service: ${folder}`);
+        continue;
       }
-    },
-  );
+
+      console.log(`Testing service: ${folder}`);
+      const specModel = new SpecModel(`specification/${folder}`, options);
+
+      expect(specModel).toBeDefined();
+    }
+  });
 
   it(
     "runs properly against specific services",
-    { timeout: 30 * 60 * 1000 /* 30 minutes */ },
+    { timeout: 30 * Duration.Minute },
     async ({ expect }) => {
       const folders = [
         // Fill in services to test here

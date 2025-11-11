@@ -8,20 +8,20 @@ import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
-  TspConfigCsharpAzNamespaceEqualStringSubRule,
-  TspConfigCsharpAzPackageDirectorySubRule,
-  TspConfigCsharpMgmtPackageDirectorySubRule,
+  TspConfigCsharpAzNamespaceSubRule,
+  TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
-  TspConfigGoDpModuleMatchPatternSubRule,
-  TspConfigGoDpPackageDirectoryMatchPatternSubRule,
+  TspConfigGoContainingModuleMatchPatternSubRule,
+  TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
+  TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
-  TspConfigGoMgmtModuleEqualStringSubRule,
-  TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigJavaAzPackageDirectorySubRule,
+  TspConfigGoModuleMatchPatternSubRule,
+  TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
+  TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
   TspConfigPythonDpPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
@@ -203,6 +203,14 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
   [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
 );
 
+const commonAzureServiceDirWithOutputDirTestCases = createParameterTestCases(
+  "",
+  "service-dir",
+  "{output-dir}/sdk/aaa",
+  "{output-dir}/sdka/aaa",
+  [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
+);
+
 const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
@@ -266,24 +274,36 @@ const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   "sdk/resourcemanager/aaa",
   "sdk/manager/aaa",
   [new TspConfigGoMgmtServiceDirMatchPatternSubRule()],
+  true,
 );
 
-const goManagementPackageDirTestCases = createEmitterOptionTestCases(
+const goManagementEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
-  "package-dir",
-  "armaaa",
-  "aaa",
-  [new TspConfigGoMgmtPackageDirectorySubRule()],
+  "emitter-output-dir",
+  "{output-dir}/sdk/resourcemanager/compute/armcompute",
+  "{output-dir}/sdk/messaging/eventgrid/azsystemevents",
+  [new TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule()],
 );
 
 const goManagementModuleTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
   "module",
-  "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}",
-  "github.com/Azure/azure-sdk-for-java/{service-dir}/{package-dir}",
-  [new TspConfigGoMgmtModuleEqualStringSubRule()],
+  "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute",
+  "github.com/Azure/azure-sdk-for-java/sdk/compute/arm-compute",
+  [new TspConfigGoModuleMatchPatternSubRule()],
+  false,
+);
+
+const goManagementContainingModuleTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  managementTspconfigFolder,
+  "containing-module",
+  "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute",
+  "github.com/Azure/azure-sdk-for-java/sdk/compute/arm-compute",
+  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  false,
 );
 
 const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
@@ -335,19 +355,29 @@ const goDpModuleTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   "",
   "module",
-  "github.com/Azure/azure-sdk-for-go/aaa",
+  "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
-  [new TspConfigGoDpModuleMatchPatternSubRule()],
-  true,
+  [new TspConfigGoModuleMatchPatternSubRule()],
+  false,
 );
 
-const goDpPackageDirTestCases = createEmitterOptionTestCases(
+const goDpContainingModuleTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   "",
-  "package-dir",
-  "az1/2/3",
-  "bzasd",
-  [new TspConfigGoDpPackageDirectoryMatchPatternSubRule()],
+  "containing-module",
+  "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
+  "github.com/Azure/azure-sdk-for-cpp/bbb",
+  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  false,
+);
+
+const goDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "emitter-output-dir",
+  "{output-dir}/sdk/messaging/eventgrid/azsystemevents",
+  "{output-dir}/sdk/resourcemanager/compute/armcompute",
+  [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
 );
 
 const goDpServiceDirTestCases = createEmitterOptionTestCases(
@@ -357,15 +387,27 @@ const goDpServiceDirTestCases = createEmitterOptionTestCases(
   "sdk/2/3",
   "sd/k",
   [new TspConfigGoDpServiceDirMatchPatternSubRule()],
+  true,
 );
 
-const javaManagementPackageDirTestCases = createEmitterOptionTestCases(
+const javaAzEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-java",
   "",
-  "package-dir",
-  "azure-aaa",
+  "emitter-output-dir",
+  "{output-dir}/{service-dir}/azure-aaa",
   "aaa",
-  [new TspConfigJavaAzPackageDirectorySubRule()],
+  [new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule()],
+  true,
+);
+
+const javaMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-java",
+  managementTspconfigFolder,
+  "emitter-output-dir",
+  "{service-dir}/azure-resourcemanager-aaa-bbb",
+  "azure-aaa",
+  [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
+  true,
 );
 
 const javaMgmtNamespaceTestCases = createEmitterOptionTestCases(
@@ -486,59 +528,14 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpPackageDirectorySubRule()],
 );
 
-const csharpAzPackageDirTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  "",
-  "package-dir",
-  "Azure.AAA",
-  "AAA",
-  [new TspConfigCsharpAzPackageDirectorySubRule()],
-);
-
 const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   "",
   "namespace",
-  "{package-dir}",
+  "Azure.AAA",
   "AAA",
-  [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
+  [new TspConfigCsharpAzNamespaceSubRule()],
 );
-
-const csharpAzNamespaceWithPackageDirTestCases: Case[] = [
-  {
-    description: `Validate csharp\'s option: namespace is equal to {package-dir} and package-dir exists`,
-    folder: "",
-    tspconfigContent: createEmitterOptionExample(
-      "@azure-tools/typespec-csharp",
-      { key: "namespace", value: "{package-dir}" },
-      { key: "package-dir", value: "Azure.AAA" },
-    ),
-    success: true,
-    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
-  },
-  {
-    description: `Validate csharp\'s option: namespace is equal to package-dir`,
-    folder: "",
-    tspconfigContent: createEmitterOptionExample(
-      "@azure-tools/typespec-csharp",
-      { key: "namespace", value: "Azure.AAA" },
-      { key: "package-dir", value: "Azure.AAA" },
-    ),
-    success: true,
-    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
-  },
-  {
-    description: `Validate csharp\'s option: namespace is not equal to package-dir`,
-    folder: "",
-    tspconfigContent: createEmitterOptionExample(
-      "@azure-tools/typespec-csharp",
-      { key: "namespace", value: "namespace" },
-      { key: "package-dir", value: "Azure.AAA" },
-    ),
-    success: shouldBeTrueOnFailSubRuleValidation("@azure-tools/typespec-csharp"),
-    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
-  },
-];
 
 const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
@@ -549,13 +546,13 @@ const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
 );
 
-const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
+const csharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   managementTspconfigFolder,
-  "package-dir",
+  "namespace",
   "Azure.ResourceManager.AAA",
   "Azure.Management.AAA",
-  [new TspConfigCsharpMgmtPackageDirectorySubRule()],
+  [new TspConfigCsharpMgmtNamespaceSubRule()],
 );
 
 const suppressEntireRuleTestCase: Case = {
@@ -598,15 +595,14 @@ options:
     description: "Suppress option with wildcard at the end",
     folder: managementTspconfigFolder,
     subRules: [
-      new TspConfigGoMgmtPackageDirectorySubRule(),
-      new TspConfigGoMgmtModuleEqualStringSubRule(),
+      new TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule(),
+      new TspConfigGoModuleMatchPatternSubRule(),
     ],
     tspconfigContent: `
 options:
   "@azure-tools/typespec-go":
     package-dir: "wrong/directory"
-    module-name: "invalid-module"
-    generate-consts: false
+    module: "invalid-module"
 `,
     success: true,
     ignoredKeyPaths: ["options.@azure-tools/typespec-go.*"],
@@ -630,6 +626,7 @@ describe("tspconfig", function () {
   it.each([
     // common
     ...commonAzureServiceDirTestCases,
+    ...commonAzureServiceDirWithOutputDirTestCases,
     // ts
     ...tsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementPackageDirTestCases,
@@ -639,18 +636,21 @@ describe("tspconfig", function () {
     ...tsDpModularPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
-    ...goManagementPackageDirTestCases,
+    ...goManagementEmitterOutputDirTestCases,
     ...goManagementModuleTestCases,
+    ...goManagementContainingModuleTestCases,
     ...goManagementGenerateExamplesTestCases,
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
     ...goDpInjectSpansTestCases,
     ...goDpModuleTestCases,
-    ...goDpPackageDirTestCases,
+    ...goDpContainingModuleTestCases,
+    ...goDpEmitterOutputDirTestCases,
     ...goDpServiceDirTestCases,
     // java
-    ...javaManagementPackageDirTestCases,
+    ...javaAzEmitterOutputDirTestCases,
+    ...javaMgmtEmitterOutputDirTestCases,
     ...javaMgmtNamespaceTestCases,
     ...javaMgmtNamespaceExtendedTestCases,
     // python
@@ -660,11 +660,10 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
     // csharp
-    ...csharpAzPackageDirTestCases,
+    ...csharpAzNamespaceTestCases,
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
-    ...csharpMgmtPackageDirTestCases,
-    ...csharpAzNamespaceWithPackageDirTestCases,
+    ...csharpMgmtNamespaceTestCases,
   ])(`$description`, async (c: Case) => {
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [

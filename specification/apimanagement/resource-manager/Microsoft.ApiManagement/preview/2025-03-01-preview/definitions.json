@@ -2726,7 +2726,29 @@
           ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "CarbonEmissionCategory"
+            "name": "CarbonEmissionCategory",
+            "values": [
+              {
+                "value": "VeryLow",
+                "description": "Carbon intensity of less than or equal to 150 grams CO₂e per KWh"
+              },
+              {
+                "value": "Low",
+                "description": "Carbon intensity between 151 & 300 (incl) grams CO₂e per KWh"
+              },
+              {
+                "value": "Medium",
+                "description": "Carbon intensity between 301 & 500 (incl) grams CO₂e per KWh"
+              },
+              {
+                "value": "High",
+                "description": "Carbon intensity between 501 & 700 (incl) grams CO₂e per KWh"
+              },
+              {
+                "value": "VeryHigh",
+                "description": "Carbon intensity of more than 700 grams CO₂e per KWh"
+              }
+            ]
           }
         }
       },
@@ -5016,6 +5038,61 @@
         }
       ],
       "description": "Operation Update Contract Properties."
+    },
+    "ToolCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ToolContract"
+          },
+          "description": "Page values of Tools contract.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Tool list representation."
+    },
+    "ToolContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ToolContractProperties",
+          "description": "Properties of the Tool Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Tool details."
+    },
+    "ToolContractProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Tool Name. MCP tool name must contain only letters, numbers, underscores, and hyphens.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the tool.",
+          "maxLength": 1000
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Identifier of the operation this MCP tool is associated with in the form of /apis/{apiId}/operations/{operationId}."
+        }
+      }
     },
     "ParameterContract": {
       "type": "object",

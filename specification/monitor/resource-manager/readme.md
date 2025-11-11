@@ -81,6 +81,20 @@ suppressions:
     reason: Existing service design behavior. Fixing this causes breaking changes.
 ```
 
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+  - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
+
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: metricAlert_API.json
+    reason: Service design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
+```
+
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.

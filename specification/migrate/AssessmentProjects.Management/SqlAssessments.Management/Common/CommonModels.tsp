@@ -1,8 +1,8 @@
 import "./SqlEnums.tsp";
-import "../../Common/StandardizedContracts/CommonModels.tsp";
-import "../../Common/StandardizedContracts/AssessedWorkloadProperties.tsp";
-import "../../Common/StandardizedContracts/CostComponent.tsp";
-import "../../Common/StandardizedContracts/ProductSupportStatus.tsp";
+import "../Normalized Contract/StandardizedContracts/CommonModels.tsp";
+import "../Normalized Contract/StandardizedContracts/AssessedWorkloadProperties.tsp";
+import "../Normalized Contract/StandardizedContracts/CostComponent.tsp";
+import "../Normalized Contract/StandardizedContracts/ProductSupportStatus.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

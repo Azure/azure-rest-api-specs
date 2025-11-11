@@ -10,10 +10,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/iotoperations.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.IotOperations"
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.IotOperations"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-iotoperations"
     namespace: "azure.mgmt.iotoperations"
@@ -21,7 +21,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-iotoperations"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-iotoperations"
     namespace: "com.azure.resourcemanager.iotoperations"
     service-name: "IoT Operations"
     flavor: "azure"
@@ -33,8 +33,8 @@ options:
       name: "@azure/arm-iotoperations"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/iotoperations"
-    package-dir: "armiotoperations"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armiotoperations"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armiotoperations"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

@@ -1068,18 +1068,14 @@ model TemplateConversationMessageContent extends ConversationMessageContent {
 @doc("Azure Communication Messages Versions")
 enum Versions {
   @doc("Azure Communication Messages 2024-02-01 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
 
   @doc("Azure Communication Messages 2024-08-30 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_08_30: "2024-08-30",
 
   @doc("Azure Communication Messages 2025-01-15-preview api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_01_15_Preview: "2025-01-15-preview",
 
   @doc("Azure Communication Messages 2025-04-01-preview api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_04_01_Preview: "2025-04-01-preview",
 }

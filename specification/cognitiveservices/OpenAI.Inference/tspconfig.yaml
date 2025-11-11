@@ -16,18 +16,19 @@ options:
     emit-lro-options: "none"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.OpenAI"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.OpenAI"
     clear-output-folder: true
     model-namespace: false
     generate-protocol-methods: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     generate-protocol-methods: false
     namespace: Azure.AI.OpenAI
     model-namespace: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-openai"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-openai"
     namespace: "com.azure.ai.openai"
     service-version-exclude-preview: false
     partial-update: true

@@ -451,7 +451,7 @@ interface DevBoxes {
     {
       ...DeleteAtQueryParameter;
     },
-    DevBoxAction
+    NoContentResponse
   >;
 
   @doc("Lists operations on the Dev Box which have occurred within the past 90 days.")

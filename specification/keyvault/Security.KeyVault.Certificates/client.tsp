@@ -42,9 +42,9 @@ op updateCertificate is KeyVaultOperation<
     /**
      * The parameters for certificate update.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: CertificateUpdateParameters;
   },
   CertificateBundle
@@ -281,7 +281,8 @@ op listDeletedCertificateProperties is KeyVaultOperation<
   "ListDeletedCertificateProperties",
   "rust"
 );
-@@clientName(updateCertificate, "UpdateCertificateProperties", "rust");
+// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
+@@clientName(KeyVault.updateCertificate, "UpdateCertificateProperties", "rust");
 
 @@clientName(getCertificateContacts, "GetContacts", "rust");
 @@clientName(deleteCertificateContacts, "DeleteContacts", "rust");

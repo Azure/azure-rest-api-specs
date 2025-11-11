@@ -31,16 +31,17 @@ options:
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Developer.MicrosoftPlaywrightTesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.Developer.MicrosoftPlaywrightTesting"
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Developer.MicrosoftPlaywrightTesting
     model-namespace: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-developer-microsoftplaywrighttesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-microsoftplaywrighttesting"
     namespace: com.azure.developer.microsoftplaywrighttesting
     partial-update: true
     generate-tests: false

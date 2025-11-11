@@ -1,5 +1,6 @@
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { setOutput } from "@azure-tools/specs-shared/error-reporting";
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
@@ -74,7 +75,11 @@ export async function main() {
   const targetDirectory = opts.targetDirectory as string;
   const sourceGitRoot = await getRootFolder(sourceDirectory);
   const targetGitRoot = await getRootFolder(targetDirectory);
-  const fileList = await getChangedFilesStatuses({ cwd: sourceGitRoot, paths: ["specification"] });
+  const fileList = await getChangedFilesStatuses({
+    cwd: sourceGitRoot,
+    logger: defaultLogger,
+    paths: ["specification"],
+  });
   const sha = opts.sha as string;
   const sourceBranch = opts.sourceBranch as string;
   const targetBranch = opts.targetBranch as string;

@@ -22,12 +22,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.ContentSafety"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.AI.ContentSafety"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.ContentSafety
     model-namespace: false
   "@azure-tools/typespec-ts":
@@ -39,7 +40,7 @@ options:
       description: "ContentSafety Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-contentsafety"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentsafety"
     namespace: com.azure.ai.contentsafety
     partial-update: true
     flavor: azure

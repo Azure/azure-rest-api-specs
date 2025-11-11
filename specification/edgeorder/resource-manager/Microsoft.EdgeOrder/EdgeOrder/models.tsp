@@ -1052,7 +1052,6 @@ model Configuration {
   /**
    * Properties of configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ConfigurationProperties;
 }
@@ -1233,7 +1232,6 @@ model ChildConfiguration {
   /**
    * Properties of child configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ChildConfigurationProperties;
 }
@@ -1618,7 +1616,6 @@ model ProductFamily {
   /**
    * Properties of product family.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ProductFamilyProperties;
 }
@@ -1649,7 +1646,6 @@ model ProductLine {
   /**
    * Properties of product line.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ProductLineProperties;
 }
@@ -1674,7 +1670,6 @@ model Product {
   /**
    * Properties of product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ProductProperties;
 }
@@ -2409,7 +2404,6 @@ model ProductFamiliesMetadataDetails {
   /**
    * Product family properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ProductFamilyProperties;
 }
@@ -2421,7 +2415,6 @@ model AddressUpdateParameter {
   /**
    * Properties of an address to be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AddressUpdateProperties;
 
   /**
@@ -2453,7 +2446,6 @@ model OrderItemUpdateParameter {
   /**
    * Order item update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: OrderItemUpdateProperties;
 
   /**

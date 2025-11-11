@@ -17,7 +17,6 @@ namespace Microsoft.AgriculturePlatform;
 @doc("Supported API versions for the Microsoft.AgriculturePlatform resource provider.")
 enum Versions {
   @doc("The 2024-06-01-preview version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01_preview: "2024-06-01-preview",
 }
@@ -242,6 +241,7 @@ model MoboBrokerResource {
 interface AgriService {
   get is ArmResourceRead<AgriServiceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AgriServiceResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AgriServiceResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

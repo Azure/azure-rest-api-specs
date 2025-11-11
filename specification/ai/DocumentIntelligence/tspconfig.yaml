@@ -4,14 +4,15 @@ parameters:
 
 emit:
   - "@azure-tools/typespec-autorest"
-  # - "@azure-tools/typespec-csharp",
-  # - "@azure-tools/typespec-python",
-  # - "@azure-tools/typespec-ts"
+    # - "@azure-tools/typespec-csharp",
+    # - "@azure-tools/typespec-python",
+    # - "@azure-tools/typespec-ts"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.DocumentIntelligence
     model-namespace: false
   "@azure-tools/typespec-autorest":
@@ -29,7 +30,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-documentintelligence"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-documentintelligence"
     namespace: "com.azure.ai.documentintelligence"
     enable-sync-stack: true
     custom-types-subpackage: "implementation.models"
@@ -48,7 +49,7 @@ options:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.DocumentIntelligence"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.DocumentIntelligence"
     model-namespace: false
     flavor: azure

@@ -19,12 +19,13 @@ options:
     generate-test: false
     generate-sample: false
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Health.Deidentification"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Health.Deidentification"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Health.Deidentification
     model-namespace: false
   "@azure-tools/typespec-ts":
@@ -37,7 +38,7 @@ options:
       description: "Health Deidentification Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-health-deidentification"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-health-deidentification"
     namespace: "com.azure.health.deidentification"
     service-name: Deidentification
     flavor: azure

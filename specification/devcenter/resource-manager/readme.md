@@ -28,6 +28,87 @@ These are the global settings for devcenter.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-preview-2025-07-01-preview
+
+directive:
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions/{devBoxDefinitionName}"].patch.parameters[5].schema.properties.properties
+    suppress:
+      PatchBodyParametersSchema
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[5].schema.properties.properties
+    suppress:
+      PatchBodyParametersSchema
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest"]
+    suppress:
+      - PathForNestedResource
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[0].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[1].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[2].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[3].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[4].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[5].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.DayOfWeek["x-ms-enum"].values[6].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.UsageUnit["x-ms-enum"].values[0].description
+    suppress:
+      - DescriptionMustNotBeNodeName
+
+  - where:
+    - $.definitions.OperationStatus.properties.properties
+    suppress:
+      - AvoidAdditionalProperties
+
+  - where:
+    - $.definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment.properties.roles
+    suppress:
+      - AvoidAdditionalProperties
+
+  - where:
+    - $.definitions.OutboundEnvironmentEndpointCollection
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+
+  - where:
+    - $.definitions.Schedule
+    suppress:
+      - ArmResourcePropertiesBag
+
+  - where:
+    - $.definitions.SkuListResult
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
 ```
 
 
@@ -37,13 +118,7 @@ These settings apply only when `--tag=package-preview-2025-07-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-07-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-07-01-preview/commonDefinitions.json
   - Microsoft.DevCenter/preview/2025-07-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2025-07-01-preview/vdi.json
-suppressions:
-  - code: PatchBodyParametersSchema
-    from: vdi.json
-    reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
 
 ### Tag: package-preview-2025-04-01-preview

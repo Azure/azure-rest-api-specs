@@ -27,7 +27,7 @@ options:
     "package-dir": "azure-keyvault-administration"
   "@azure-tools/typespec-java":
     flavor: azure
-    package-dir: "azure-security-keyvault-administration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-administration"
     namespace: "com.azure.security.keyvault.administration"
     models-subpackage: "implementation.models"
     custom-types: "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
@@ -38,10 +38,11 @@ options:
     generate-samples: false
     include-api-view-properties: false
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Security.KeyVault.Administration
     model-namespace: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Security.KeyVault.Administration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Security.KeyVault.Administration"
     "output-path": "./src/Generated"
     flavor: azure

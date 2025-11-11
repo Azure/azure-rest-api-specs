@@ -111,14 +111,22 @@ using Microsoft.Workloads;
 );
 
 // CSharp
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(SAPApplicationServerInstance.properties, "csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(SAPCentralServerInstance.properties, "csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(SAPDatabaseInstance.properties, "csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(SAPVirtualInstance.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPApplicationServerInstance.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPCentralServerInstance.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPDatabaseInstance.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPVirtualInstance.properties,
+  "csharp"
+);
 
 @@clientName(ErrorDefinition, "ErrorInformation", "csharp");
 

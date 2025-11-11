@@ -23,12 +23,13 @@ options:
     package-version: 2.0.0
     flavor: azure
     namespace: azure.monitor.query
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Monitor.Query.Logs"
-    namespace: "{package-dir}"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.Monitor.Query.Logs"
+    namespace: "{package-name}"
+    generate-convenience-methods: true
+    generate-protocol-methods: false
+    model-namespace: true
   "@azure-tools/typespec-ts":
     package-dir: "monitor-query-logs"
     is-modular-library: true
@@ -38,7 +39,7 @@ options:
       version: "1.0.0"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-monitor-query-logs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-query-logs"
     namespace: com.azure.monitor.query.logs
     flavor: azure
     use-object-for-unknown: true
@@ -51,9 +52,8 @@ options:
     service-name: LogsQuery
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/query"
-    package-dir: "azlogs"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/query/azlogs"
-    module-version: "0.0.1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azlogs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azlogs"
     single-client: true
     generate-fakes: true
     inject-spans: true

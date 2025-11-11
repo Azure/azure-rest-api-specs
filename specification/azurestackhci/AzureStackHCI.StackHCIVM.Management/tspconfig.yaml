@@ -21,8 +21,8 @@ options:
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/azurestackhci"
-    package-dir: "armazurestackhcivm"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armazurestackhcivm"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armazurestackhcivm"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -30,11 +30,17 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-azurestackhci-vm"
     service-dir: "sdk/azurestackhci"
-    package-dir: "azure-resourcemanager-azurestackhci-vm"
     namespace: "com.azure.resourcemanager.azurestackhci.vm"
     service-name: "Azure Stack Hci Vm"
     flavor: azure
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Hci.Vm"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-azurestackhcivm"

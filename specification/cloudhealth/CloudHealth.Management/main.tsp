@@ -19,8 +19,6 @@ namespace Microsoft.CloudHealth;
 
 @doc("API Versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2025-05-01-preview")
   v2025_05_01_preview: "2025-05-01-preview",
@@ -785,6 +783,7 @@ alias TimestampQueryParam = {
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     HealthModel,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

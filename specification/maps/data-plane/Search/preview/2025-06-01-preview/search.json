@@ -74,7 +74,7 @@
     "Accept-Language": {
       "name": "Accept-Language",
       "in": "header",
-      "description": "Language in which search results should be returned. \n\nPlease refer to [Supported Languages](/azure/azure-maps/supported-languages) for details.",
+      "description": "Language in which search results should be returned. \n\nPlease refer to [Supported Languages](/azure/azure-maps/supported-languages?pivots=service-latest) for details.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "client"
@@ -97,7 +97,7 @@
     "Bbox": {
       "name": "bbox",
       "in": "query",
-      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2",
+      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangle are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2.\n\nMinimum size: approximately 0.00001 degrees (~0.01 meters).\n\n  Maximum size: up to the full global extent (-180,-90 to 180,90)",
       "required": false,
       "type": "array",
       "items": {
@@ -613,7 +613,7 @@
     "/geocode:autocomplete": {
       "get": {
         "summary": "Use to get ranked list of suggested entities based on a user's location and a partial query.",
-        "description": "\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.\n\n",
+        "description": "\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
         "operationId": "Search_GetGeocodeAutocomplete",
         "produces": [
           "application/geo+json"
@@ -1715,7 +1715,8 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Feature"
+                "value": "Feature",
+                "description": "Specifies the `GeoJSON` Feature object type."
               }
             ]
           }
@@ -1924,7 +1925,7 @@
     },
     "FeatureCollectionType": {
       "type": "string",
-      "description": "The type of a FeatureCollection object must be FeatureCollection.",
+      "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "enum": [
         "FeatureCollection"
       ],
@@ -1933,7 +1934,8 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "FeatureCollection"
+            "value": "FeatureCollection",
+            "description": "Specifies the `GeoJSON` `FeatureCollection` object type."
           }
         ]
       }
@@ -2032,7 +2034,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of a feature must be Feature.",
+          "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
           "enum": [
             "Feature"
           ],
@@ -2041,7 +2043,8 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Feature"
+                "value": "Feature",
+                "description": "Specifies the `GeoJSON` Feature object type."
               }
             ]
           }

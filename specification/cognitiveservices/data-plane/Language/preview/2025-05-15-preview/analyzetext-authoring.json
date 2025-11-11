@@ -3429,11 +3429,11 @@
           "type": "string",
           "description": "Represents the trained model label."
         },
-        "assignedResources": {
+        "assignedResourceIds": {
           "type": "array",
-          "description": "Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "description": "Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResource"
+            "type": "string"
           }
         }
       },
@@ -3824,10 +3824,6 @@
         "region": {
           "type": "string",
           "description": "Represents the resource region."
-        },
-        "assignedAoaiResource": {
-          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationConnectionInfo",
-          "description": "Represents the AOAI resource assigned for data generation."
         }
       },
       "required": [
@@ -5382,10 +5378,6 @@
         "projectKind": {
           "$ref": "#/definitions/ProjectKind",
           "description": "The project kind."
-        },
-        "storageAccountResourceId": {
-          "type": "string",
-          "description": "The project storage account resource ID."
         },
         "storageInputContainerName": {
           "type": "string",

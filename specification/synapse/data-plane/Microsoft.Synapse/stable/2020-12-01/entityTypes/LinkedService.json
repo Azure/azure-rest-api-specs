@@ -1213,6 +1213,19 @@
           "type": "object",
           "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
         },
+        "clusterAuthType": {
+          "x-ms-enum": {
+            "name": "HDInsightClusterAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "BasicAuth",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "type": "string",
+          "description": "HDInsight cluster authentication type."
+        },
         "userName": {
           "type": "object",
           "description": "HDInsight cluster user name. Type: string (or Expression with resultType string)."
@@ -1240,6 +1253,10 @@
         "fileSystem": {
           "type": "object",
           "description": "Specify the FileSystem if the main storage for the HDInsight is ADLS Gen2. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "description": "The credential reference containing MI authentication information for the HDInsight cluster.",
+          "$ref": "../artifacts.json#/definitions/CredentialReference"
         }
       },
       "required": [
@@ -7867,6 +7884,19 @@
           "type": "object",
           "description": "The ID of Microsoft Fabric Lakehouse artifact. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "LakehouseAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "servicePrincipalId": {
           "type": "object",
           "description": "The ID of the application used to authenticate against Microsoft Fabric Lakehouse. Type: string (or Expression with resultType string)."
@@ -7890,6 +7920,10 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -8067,6 +8101,19 @@
           "type": "object",
           "description": "The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "WarehouseAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "servicePrincipalId": {
           "type": "object",
           "description": "The ID of the application used to authenticate against Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
@@ -8090,6 +8137,10 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [

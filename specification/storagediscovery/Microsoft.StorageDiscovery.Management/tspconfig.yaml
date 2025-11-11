@@ -13,12 +13,12 @@ options:
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.StorageDiscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.StorageDiscovery"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storagediscovery"
     namespace: "com.azure.resourcemanager.storagediscovery"
     flavor: "azure"
     service-name: "Storage Discovery"
@@ -36,8 +36,8 @@ options:
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storagediscovery"
-    package-dir: "armstoragediscovery"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armstoragediscovery"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragediscovery"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -49,7 +49,7 @@ options:
     package-dir: "StorageDiscovery/StorageDiscovery.Autorest"
     clear-output-folder: true
     azure: true
-    module-version: 0.1.0
+    module-version: 1.0.0
     prefix: "Az"
     subject-prefix: "StorageDiscovery"
     service-name: StorageDiscovery
@@ -76,11 +76,11 @@ options:
       - where:
           verb: Set
         remove: true
-      # Add model
+        # Add model
       - model-cmdlet:
           - model-name: StorageDiscoveryScope
             cmdlet-name: New-AzStorageDiscoveryScopeObject
-      # hide report APIs
+        # hide report APIs
       - where:
           subject: ^Report$|^ReportStorageDiscoveryWorkspace$
         remove: true
