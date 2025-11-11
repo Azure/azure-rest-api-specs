@@ -1036,7 +1036,8 @@
         "conversation.item.delete",
         "response.create",
         "response.cancel",
-        "session.avatar.connect"
+        "session.avatar.connect",
+        "mcp_approval_response"
       ],
       "x-ms-enum": {
         "name": "ClientEventType",
@@ -1105,6 +1106,10 @@
           {
             "name": "session_avatar_connect",
             "value": "session.avatar.connect"
+          },
+          {
+            "name": "mcp_approval_response",
+            "value": "mcp_approval_response"
           }
         ]
       }
@@ -1473,7 +1478,11 @@
       "enum": [
         "message",
         "function_call",
-        "function_call_output"
+        "function_call_output",
+        "mcp_list_tools",
+        "mcp_call",
+        "mcp_approval_request",
+        "mcp_approval_response"
       ],
       "x-ms-enum": {
         "name": "ItemType",
@@ -1490,6 +1499,22 @@
           {
             "name": "function_call_output",
             "value": "function_call_output"
+          },
+          {
+            "name": "mcp_list_tools",
+            "value": "mcp_list_tools"
+          },
+          {
+            "name": "mcp_call",
+            "value": "mcp_call"
+          },
+          {
+            "name": "mcp_approval_request",
+            "value": "mcp_approval_request"
+          },
+          {
+            "name": "mcp_approval_response",
+            "value": "mcp_approval_response"
           }
         ]
       }
@@ -1520,6 +1545,116 @@
         "token",
         "logprob",
         "bytes"
+      ]
+    },
+    "MCPApprovalResponseRequestItem": {
+      "type": "object",
+      "description": "A request item that represents a response to an MCP approval request.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request."
+        },
+        "approve": {
+          "type": "boolean",
+          "description": "Whether the tool call was approved."
+        }
+      },
+      "required": [
+        "approval_request_id",
+        "approve"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationRequestItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_response"
+    },
+    "MCPApprovalType": {
+      "type": "string",
+      "description": "The available set of MCP approval types.",
+      "enum": [
+        "never",
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "MCPApprovalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Never",
+            "value": "never",
+            "description": "Approval is never required."
+          },
+          {
+            "name": "Always",
+            "value": "always",
+            "description": "Approval is always required."
+          }
+        ]
+      }
+    },
+    "MCPServer": {
+      "type": "object",
+      "description": "The definition of an MCP server as used by the voicelive endpoint.",
+      "properties": {
+        "server_label": {
+          "type": "string"
+        },
+        "server_url": {
+          "type": "string"
+        },
+        "authorization": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "allowed_tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "require_approval": {}
+      },
+      "required": [
+        "server_label",
+        "server_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
+    "MCPTool": {
+      "type": "object",
+      "description": "Represents a mcp tool definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tool."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the tool."
+        },
+        "input_schema": {
+          "description": "The input schema for the tool."
+        },
+        "annotations": {
+          "description": "The annotations for the tool."
+        }
+      },
+      "required": [
+        "name",
+        "input_schema"
       ]
     },
     "MessageContentPart": {
@@ -2410,6 +2545,129 @@
         ]
       }
     },
+    "ResponseMCPApprovalRequestItem": {
+      "type": "object",
+      "description": "A response item that represents a request for approval to call an MCP tool.",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for the tool call."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the tool to call."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tool."
+        }
+      },
+      "required": [
+        "name",
+        "server_label"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_request"
+    },
+    "ResponseMCPApprovalResponseItem": {
+      "type": "object",
+      "description": "A response item that represents a response to an MCP approval request.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request."
+        },
+        "approve": {
+          "type": "boolean",
+          "description": "Whether the tool call was approved."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the approval decision."
+        }
+      },
+      "required": [
+        "approval_request_id",
+        "approve"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_response"
+    },
+    "ResponseMCPCallItem": {
+      "type": "object",
+      "description": "A response item that represents a call to an MCP tool.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request, if any."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for the tool call."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tool."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the tool to call."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output of the tool call."
+        },
+        "error": {
+          "description": "The error, if any, from the tool call."
+        }
+      },
+      "required": [
+        "arguments",
+        "server_label",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_call"
+    },
+    "ResponseMCPListToolItem": {
+      "type": "object",
+      "description": "A response item that lists the tools available on an MCP server.",
+      "properties": {
+        "tools": {
+          "type": "array",
+          "description": "The tools available on the server.",
+          "items": {
+            "$ref": "#/definitions/MCPTool"
+          }
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tools."
+        }
+      },
+      "required": [
+        "tools",
+        "server_label"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools"
+    },
     "ResponseMessageItem": {
       "type": "object",
       "description": "Base type for message item within a conversation.",
@@ -3004,6 +3262,63 @@
       ],
       "x-ms-discriminator-value": "input_audio_buffer.speech_stopped"
     },
+    "ServerEventMcpListToolsCompleted": {
+      "type": "object",
+      "description": "MCP list tools completed message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.completed"
+    },
+    "ServerEventMcpListToolsFailed": {
+      "type": "object",
+      "description": "MCP list tools failed message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.failed"
+    },
+    "ServerEventMcpListToolsInProgress": {
+      "type": "object",
+      "description": "MCP list tools in progress message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.in_progress"
+    },
     "ServerEventResponseAnimationBlendshapeDelta": {
       "type": "object",
       "description": "Represents a delta update of blendshape animation frames for a specific output of a response.",
@@ -3168,7 +3483,7 @@
         },
         "delta": {
           "type": "string",
-          "format": "base64",
+          "format": "byte",
           "description": "Base64-encoded audio data delta."
         }
       },
@@ -3595,6 +3910,79 @@
       ],
       "x-ms-discriminator-value": "response.function_call_arguments.done"
     },
+    "ServerEventResponseMcpCallArgumentsDelta": {
+      "type": "object",
+      "description": "Represents a delta update of the arguments for an MCP tool call.",
+      "properties": {
+        "delta": {
+          "type": "string",
+          "description": "The delta of the arguments."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "obfuscation": {
+          "type": "string",
+          "description": "The obfuscation of the arguments."
+        }
+      },
+      "required": [
+        "delta",
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call_arguments.delta"
+    },
+    "ServerEventResponseMcpCallArgumentsDone": {
+      "type": "object",
+      "description": "Indicates the completion of the arguments for an MCP tool call.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The full arguments for the tool call."
+        }
+      },
+      "required": [
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call_arguments.done"
+    },
     "ServerEventResponseOutputItemAdded": {
       "type": "object",
       "description": "Returned when a new Item is created during Response generation.",
@@ -3826,7 +4214,17 @@
         "response.animation_viseme.delta",
         "response.animation_viseme.done",
         "response.function_call_arguments.delta",
-        "response.function_call_arguments.done"
+        "response.function_call_arguments.done",
+        "mcp_list_tools.in_progress",
+        "mcp_list_tools.completed",
+        "mcp_list_tools.failed",
+        "response.mcp_call_arguments.delta",
+        "response.mcp_call_arguments.done",
+        "mcp_approval_request",
+        "mcp_approval_response",
+        "response.mcp_call.in_progress",
+        "response.mcp_call.completed",
+        "response.mcp_call.failed"
       ],
       "x-ms-enum": {
         "name": "ServerEventType",
@@ -3971,6 +4369,46 @@
           {
             "name": "response_function_call_arguments_done",
             "value": "response.function_call_arguments.done"
+          },
+          {
+            "name": "mcp_list_tools_in_progress",
+            "value": "mcp_list_tools.in_progress"
+          },
+          {
+            "name": "mcp_list_tools_completed",
+            "value": "mcp_list_tools.completed"
+          },
+          {
+            "name": "mcp_list_tools_failed",
+            "value": "mcp_list_tools.failed"
+          },
+          {
+            "name": "response_mcp_call_arguments_delta",
+            "value": "response.mcp_call_arguments.delta"
+          },
+          {
+            "name": "response_mcp_call_arguments_done",
+            "value": "response.mcp_call_arguments.done"
+          },
+          {
+            "name": "mcp_approval_request",
+            "value": "mcp_approval_request"
+          },
+          {
+            "name": "mcp_approval_response",
+            "value": "mcp_approval_response"
+          },
+          {
+            "name": "response_mcp_call_in_progress",
+            "value": "response.mcp_call.in_progress"
+          },
+          {
+            "name": "response_mcp_call_completed",
+            "value": "response.mcp_call.completed"
+          },
+          {
+            "name": "response_mcp_call_failed",
+            "value": "response.mcp_call.failed"
           }
         ]
       }
@@ -4145,7 +4583,8 @@
       "type": "string",
       "description": "The supported tool type discriminators for voicelive tools.\nCurrently, only 'function' tools are supported.",
       "enum": [
-        "function"
+        "function",
+        "mcp"
       ],
       "x-ms-enum": {
         "name": "ToolType",
@@ -4154,6 +4593,10 @@
           {
             "name": "function",
             "value": "function"
+          },
+          {
+            "name": "mcp",
+            "value": "mcp"
           }
         ]
       }
