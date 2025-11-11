@@ -342,4 +342,230 @@ options:
 
     assert(result.success);
   });
+
+  describe("v2 compliance enforcement", function () {
+    let simpleGitSpy: MockInstance;
+
+    beforeEach(async () => {
+      const { simpleGit } = await import("simple-git");
+      simpleGitSpy = vi.spyOn({ simpleGit }, "simpleGit");
+    });
+
+    it("should enforce v2 compliance when target branch uses v2 structure", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return ["/foo/bar/tspconfig.yaml"];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Mock git to simulate target branch having v2 structure
+      const mockGit = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "feature-branch" }),
+        getRemotes: vi.fn().mockResolvedValue([
+          { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } }
+        ]),
+        raw: vi.fn().mockImplementation((args) => {
+          if (args.includes("ls-tree")) {
+            return Promise.resolve("data-plane\nresource-manager");
+          }
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as any);
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+      assert(!result.success);
+      assert(result.errorOutput?.includes("must use v2 structure"));
+    });
+
+    it("should not enforce v2 compliance when target branch uses v1 structure", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return ["/foo/bar/tspconfig.yaml"];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Mock git to simulate target branch having v1 structure
+      const mockGit = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "feature-branch" }),
+        getRemotes: vi.fn().mockResolvedValue([
+          { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } }
+        ]),
+        raw: vi.fn().mockImplementation((args) => {
+          if (args.includes("ls-tree")) {
+            return Promise.resolve("Service1\nService2\nShared");
+          }
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as any);
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+      // Should succeed with v1 validation since target branch is v1
+      assert(result.success);
+    });
+
+    it("should detect target branch from GITHUB_BASE_REF environment variable", async function () {
+      const originalEnv = process.env.GITHUB_BASE_REF;
+      process.env.GITHUB_BASE_REF = "main";
+
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return ["/foo/bar/tspconfig.yaml"];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const mockGit = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "feature-branch" }),
+        getRemotes: vi.fn().mockResolvedValue([
+          { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } }
+        ]),
+        raw: vi.fn().mockImplementation((args) => {
+          if (args.includes("ls-tree")) {
+            return Promise.resolve("data-plane\nresource-manager");
+          }
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as any);
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+      
+      // Restore environment
+      if (originalEnv !== undefined) {
+        process.env.GITHUB_BASE_REF = originalEnv;
+      } else {
+        delete process.env.GITHUB_BASE_REF;
+      }
+
+      assert(!result.success);
+      assert(result.errorOutput?.includes("must use v2 structure"));
+    });
+  });
+
+  describe("v2 structure validation", function () {
+    let simpleGitSpy: MockInstance;
+
+    beforeEach(async () => {
+      const { simpleGit } = await import("simple-git");
+      simpleGitSpy = vi.spyOn({ simpleGit }, "simpleGit");
+      
+      // Mock git for v2 structure tests
+      const mockGit = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "main" }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as any);
+    });
+
+    it("should fail v2 data-plane with incorrect depth", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return ["/foo/bar/tspconfig.yaml"];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/data-plane",
+      );
+      assert(!result.success);
+      assert(result.errorOutput?.includes("exactly 4 levels deep"));
+    });
+
+    it("should fail v2 resource-manager with incorrect depth", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return ["/foo/bar/tspconfig.yaml"];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/resource-manager/Microsoft.Foo",
+      );
+      assert(!result.success);
+      assert(result.errorOutput?.includes("exactly 5 levels deep"));
+    });
+
+    it("should fail v2 with invalid service name (not PascalCase)", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return ["/foo/bar/tspconfig.yaml"];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/data-plane/foo-service",
+      );
+      assert(!result.success);
+      assert(result.errorOutput?.includes("PascalCase without any special characters"));
+    });
+
+    it("should fail v2 resource-manager with invalid RP namespace", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return ["/foo/bar/tspconfig.yaml"];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/resource-manager/microsoft.foo/FooService",
+      );
+      assert(!result.success);
+      assert(result.errorOutput?.includes("must be in format 'A.B' where A and B are PascalCase"));
+    });
+
+    it("should fail v2 with uppercase org name", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return ["/foo/bar/tspconfig.yaml"];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/Foo/data-plane/FooService",
+      );
+      assert(!result.success);
+      assert(result.errorOutput?.includes("must be all lowercase"));
+    });
+  });
+
+  describe("TypeSpec project detection", function () {
+    it("should detect TypeSpec project with tspconfig.yaml", async function () {
+      vi.mocked(globby.globby).mockImplementation(async (patterns) => {
+        return patterns[0].includes("tspconfig") ? ["tspconfig.yaml"] : [];
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+      // Should apply TypeSpec-specific validations
+      assert(result.errorOutput?.includes("main.tsp or client.tsp"));
+    });
+
+    it("should detect TypeSpec project with main.tsp", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return [];
+      });
+      fileExistsSpy.mockImplementation(async (path) => {
+        return path.includes("main.tsp");
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+      // Should require examples folder when main.tsp exists
+      assert(result.errorOutput?.includes("examples folder"));
+    });
+
+    it("should not apply TypeSpec validations to non-TypeSpec projects", async function () {
+      vi.mocked(globby.globby).mockImplementation(async () => {
+        return [];
+      });
+      fileExistsSpy.mockResolvedValue(false);
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+      // Should succeed for non-TypeSpec projects
+      assert(result.success);
+    });
+  });
 });

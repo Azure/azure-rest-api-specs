@@ -1,4 +1,4 @@
-name: TypeSpec Validation - Test
+name: Spec Validation - Test
 
 on:
   push:
@@ -12,18 +12,18 @@ on:
       - tsconfig.json
       - .github/shared
       - .github/workflows/_reusable-eng-tools-test.yaml
-      - .github/workflows/typespec-validation-test.yaml
+      - .github/workflows/spec-validation-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
       - eng/tools/suppressions/**
-      - eng/tools/typespec-validation/**
+      - eng/tools/spec-validation/**
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  typespec-validation:
+  spec-validation:
     uses: ./.github/workflows/_reusable-eng-tools-test.yaml
     with:
-      package: typespec-validation
+      package: spec-validation
