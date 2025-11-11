@@ -29,7 +29,7 @@ export async function extractInputs(github, context, core) {
     const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunEvent} */ (
       context.payload
     );
-    workflowRunEvent = payload.workflow_run.event;
+    workflowRunEvent = payload.workflow_run?.event;
   }
   core.info(`  payload.workflow_run.event: ${workflowRunEvent}`);
 
