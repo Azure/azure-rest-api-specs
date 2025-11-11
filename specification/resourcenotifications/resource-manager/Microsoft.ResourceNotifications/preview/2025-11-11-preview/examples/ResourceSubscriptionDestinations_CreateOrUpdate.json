@@ -1,0 +1,62 @@
+{
+  "operationId": "ResourceSubscriptionDestinations_CreateOrUpdate",
+  "title": "Create or update a fabric table destination",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "example-rg",
+    "subscriptionRuleName": "example-subscription",
+    "destinationName": "fabric-destination",
+    "api-version": "2025-11-11-preview",
+    "resource": {
+      "properties": {
+        "kind": "fabricTable",
+        "endpoint": {
+          "workspaceId": "12345678-1234-1234-1234-123456789012",
+          "databaseId": "sample-database-id"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription/destinations/fabric-destination",
+        "name": "fabric-destination",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions/destinations",
+        "properties": {
+          "kind": "fabricTable",
+          "outputSchema": "fabric",
+          "outputEncoding": "parquet",
+          "endpoint": {
+            "workspaceId": "12345678-1234-1234-1234-123456789012",
+            "databaseId": "sample-database-id"
+          },
+          "options": [
+            "enableInitialSnapshot"
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription/destinations/fabric-destination",
+        "name": "fabric-destination",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions/destinations",
+        "properties": {
+          "kind": "fabricTable",
+          "outputSchema": "fabric",
+          "outputEncoding": "parquet",
+          "endpoint": {
+            "workspaceId": "12345678-1234-1234-1234-123456789012",
+            "databaseId": "sample-database-id"
+          },
+          "options": [
+            "enableInitialSnapshot"
+          ],
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/resourcenotifications"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/resourcenotifications.json"
+    examples-dir: "{project-root}/examples"
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.ResourceNotifications"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.ResourceNotifications"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-resourcenotifications"
+    namespace: "azure.mgmt.resourcenotifications"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-resourcenotifications"
+    namespace: "com.azure.resourcemanager.resourcenotifications"
+    service-name: "resourcenotifications"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-resourcenotifications"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourcenotifications"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-core/no-openapi": "Suppressed because x-ms-error-response extension is required for proper error response handling"
+    "@azure-tools/typespec-azure-core/documentation-required": "Minimal documentation approach - parameters and union variants are self-explanatory"
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator": "Custom operations do not follow standard ARM resource pattern"

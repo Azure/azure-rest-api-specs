@@ -1,0 +1,70 @@
+{
+  "operationId": "ResourceSubscriptionDestinations_List",
+  "title": "List all destinations for a resource subscription",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "example-rg",
+    "subscriptionRuleName": "example-subscription",
+    "api-version": "2025-11-11-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription/destinations/fabric-destination",
+            "name": "fabric-destination",
+            "type": "Microsoft.ResourceNotifications/resourceSubscriptions/destinations",
+            "properties": {
+              "kind": "fabricTable",
+              "outputSchema": "fabric",
+              "outputEncoding": "parquet",
+              "endpoint": {
+                "workspaceId": "12345678-1234-1234-1234-123456789012",
+                "databaseId": "sample-database-id"
+              },
+              "options": [
+                "enableInitialSnapshot"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription/destinations/storage-destination",
+            "name": "storage-destination",
+            "type": "Microsoft.ResourceNotifications/resourceSubscriptions/destinations",
+            "properties": {
+              "kind": "storageAccount",
+              "partitions": ["p0", "p1"],
+              "pathPolicy": {
+                "kind": "timeAndScopeRangeHash",
+                "timeSource": "eventTime",
+                "scope": "tenant",
+                "scopeBuckets": 50,
+                "pathTemplate": "year={yyyy},month={mm},day={dd}/hour={hh}/tenantBucket={scopeBucket}"
+              },
+              "batchingPolicy": {
+                "kind": "minCountMaxDelay",
+                "minResources": "500",
+                "maxDelay": "PT10M"
+              },
+              "outputSchema": "firstParty",
+              "outputEncoding": "parquet",
+              "endpointContainer": "events",
+              "endpointDeliveryMode": "failover",
+              "endpoints": [
+                {
+                  "url": "https://primary.blob.core.windows.net"
+                },
+                {
+                  "url": "https://secondary.blob.core.windows.net"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

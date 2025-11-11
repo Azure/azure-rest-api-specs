@@ -1,0 +1,37 @@
+{
+  "operationId": "ResourceSubscriptions_Update",
+  "title": "Update a resource subscription scope",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "example-rg",
+    "subscriptionRuleName": "example-subscription",
+    "api-version": "2025-11-11-preview",
+    "resource": {
+      "properties": {
+        "scope": {
+          "kind": "cloud",
+          "providerNamespace": "Microsoft.ResourceGraph"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription",
+        "name": "example-subscription",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions",
+        "location": "eastus",
+        "properties": {
+          "query": "resources",
+          "scope": {
+            "kind": "cloud",
+            "providerNamespace": "Microsoft.ResourceGraph",
+            "appId": "87654321-4321-4321-4321-210987654321"
+          },
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  }
+}

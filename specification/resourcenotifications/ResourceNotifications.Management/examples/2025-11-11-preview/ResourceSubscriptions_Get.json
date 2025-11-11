@@ -1,0 +1,46 @@
+{
+  "operationId": "ResourceSubscriptions_Get",
+  "title": "Get a resource subscription with cloud scope and partitioning",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "example-rg",
+    "subscriptionRuleName": "inventory-subscription",
+    "api-version": "2025-11-11-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/inventory-subscription",
+        "name": "inventory-subscription",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions",
+        "location": "westus",
+        "properties": {
+          "query": "where (event.type startswith 'Microsoft.ContainerService/managedClusters/nodes)",
+          "scope": {
+            "kind": "cloud",
+            "providerNamespace": "Microsoft.ResourceGraph",
+            "appId": "87654321-4321-4321-4321-210987654321"
+          },
+          "partitioningConfiguration": {
+            "kind": "arnLocation",
+            "partitions": [
+              {
+                "name": "p0",
+                "regions": ["centraluseuap", "eastus2euap"]
+              },
+              {
+                "name": "p1",
+                "regions": ["northeurope", "westeurope"]
+              },
+              {
+                "name": "p2",
+                "regions": ["eastasia", "southeastasia"]
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "operationId": "ResourceSubscriptionDestinations_Get",
+  "title": "Get a storage account destination",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "example-rg",
+    "subscriptionRuleName": "example-subscription",
+    "destinationName": "storage-destination",
+    "api-version": "2025-11-11-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription/destinations/storage-destination",
+        "name": "storage-destination",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions/destinations",
+        "properties": {
+          "kind": "storageAccount",
+          "partitions": ["p0", "p1", "p2"],
+          "pathPolicy": {
+            "kind": "timeAndScopeRangeHash",
+            "timeSource": "eventTime",
+            "scope": "tenant",
+            "scopeBuckets": 100,
+            "pathTemplate": "year={yyyy},month={mm},day={dd}/hour={hh}/tenantBucket={scopeBucket}"
+          },
+          "batchingPolicy": {
+            "kind": "minCountMaxDelay",
+            "minResources": "1000",
+            "maxDelay": "PT5M"
+          },
+          "outputSchema": "firstParty",
+          "outputEncoding": "parquet",
+          "endpointContainer": "notifications",
+          "endpointDeliveryMode": "round-robin",
+          "endpoints": [
+            {
+              "url": "https://storage1.blob.core.windows.net"
+            },
+            {
+              "url": "https://storage2.blob.core.windows.net"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
