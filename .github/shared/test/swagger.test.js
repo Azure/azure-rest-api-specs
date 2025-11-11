@@ -64,6 +64,52 @@ describe("Swagger", () => {
     expect(await swagger.getTypeSpecGenerated()).toEqual(true);
   });
 
+  it("can be created with sample string content", async () => {
+    const content = `
+    {
+      "paths": {
+        "/foo": {
+          "parameters": ["unknown", 0],
+          "get": {
+            "operationId": "Foo_Get"
+          },
+          "put": {
+            "operationId": "Foo_CreateOrUpdate"
+          }
+        },
+        "/bar": {
+          "get": {
+            "operationId": "Bar_Get"
+          }
+        }
+      },
+      "x-ms-paths": {
+        "/baz": {
+          "get": {
+            "operationId": "Baz_Get"
+          }
+        }
+      }
+    }
+    `;
+
+    const folder = "/fake";
+    const swagger = new Swagger(resolve(folder, "empty.json"), {
+      content,
+    });
+
+    const operations = await swagger.getOperations();
+    expect(new Set(operations.keys())).toEqual(
+      new Set(["Foo_Get", "Foo_CreateOrUpdate", "Bar_Get", "Baz_Get"]),
+    );
+
+    const examples = await swagger.getExamples();
+    expect(new Set(examples.keys())).toEqual(new Set());
+
+    const refs = await swagger.getRefs();
+    expect(new Set(refs.keys())).toEqual(new Set());
+  });
+
   it("throws when created with invalid JSON content", async () => {
     const folder = "/fake";
     const swagger = new Swagger(resolve(folder, "invalid.json"), {
