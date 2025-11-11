@@ -3,7 +3,7 @@
   "info": {
     "title": "Open Energy Platform Management Service APIs",
     "description": "Open Energy Platform Management Service APIs",
-    "version": "2025-08-06"
+    "version": "2025-11-11"
   },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/checkNameAvailability": {
@@ -1366,6 +1366,9 @@
         "encryption": {
           "$ref": "#/definitions/Encryption"
         },
+        "eds": {
+          "$ref": "#/definitions/Eds"
+        },
         "publicNetworkAccess": {
           "description": "Whether or not public network access is allowed for the OAK resource.",
           "default": "Enabled",
@@ -1452,6 +1455,66 @@
           "type": "string",
           "description": "The user assigned identity (ARM resource id) that has access to the key.",
           "x-ms-client-name": "UserIdentity"
+        }
+      }
+    },
+    "Eds": {
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "description": "Properties to configure EDS",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/EdsKeyVaultProperties",
+          "x-ms-client-name": "EdsKeyVaultProperties"
+        }
+      }
+    },
+    "EdsKeyVaultProperties": {
+      "type": "object",
+      "description": "Properties of KeyVault",
+      "required": [
+        "keyVaultUri",
+        "identity"
+      ],
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Uri of the key vault.",
+          "x-ms-client-name": "KeyVaultUri"
+        },
+        "identity": {
+          "type": "object",
+          "description": "The identity used to access the key vault.",
+          "properties": {
+            "identityType": {
+              "type": "string",
+              "title": "The type of identity used for accessing the keyvault",
+              "description": "The type of identity used for accessing the keyvault. Possible values include: 'SystemAssigned', 'UserAssigned'",
+              "enum": [
+                "SystemAssigned",
+                "UserAssigned"
+              ],
+              "x-ms-enum": {
+                "name": "IdentityType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "SystemAssigned",
+                    "description": "Use an implicitly created system assigned managed identity to access the specified key vault."
+                  },
+                  {
+                    "value": "UserAssigned",
+                    "description": "Use a user-specified identity to access the specified key vault."
+                  }
+                ]
+              }
+            },
+            "userAssignedIdentityId": {
+              "type": "string",
+              "description": "The user assigned identity (ARM resource id) that has access to the key. This property is required if identityType is 'UserAssigned'.",
+              "x-ms-client-name": "UserAssignedIdentity"
+            }
+          }
         }
       }
     },
