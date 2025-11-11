@@ -54,7 +54,7 @@ interface NodeTypes {
   >;
 
   /**
-   * Update the configuration of a node type of a given managed cluster, only updating tags.
+   * Update the configuration of a node type of a given managed cluster, only updating tags or capacity.
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -880,8 +880,8 @@ model VMSSExtension {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Backwards compatibility with existing flatten"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility with existing flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: VMSSExtensionProperties;
 }
 /**
