@@ -414,7 +414,7 @@ interface Destinations {
     "x-ms-examples",
     #{
       `List all destinations for a resource subscription`: #{
-        $ref: "./examples/Destinations_List.json",
+        $ref: "./examples/ResourceSubscriptionDestinations_List.json",
       },
     }
   )
