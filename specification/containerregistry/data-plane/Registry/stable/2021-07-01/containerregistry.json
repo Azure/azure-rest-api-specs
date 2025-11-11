@@ -125,8 +125,19 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Docker-Content-Digest": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              },
+              "Range": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1593,8 +1604,19 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Docker-Upload-UUID": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              },
+              "Range": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
