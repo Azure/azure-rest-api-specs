@@ -48,7 +48,11 @@ interface AccessBridges {
    * Create a new access bridge or update the properties of the existing access bridge.
    */
   @summary("Create or update the access bridge.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AccessBridge>;
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
+    AccessBridge,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Update properties of the provided access bridge, or update tags associated with the access bridge. Properties and tag updates can be done independently.
