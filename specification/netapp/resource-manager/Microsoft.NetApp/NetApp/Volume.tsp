@@ -6,11 +6,10 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./CapacityPool.tsp";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
@@ -54,6 +53,7 @@ model VolumeProperties {
   /**
    * A unique file path for the volume. Used when creating mount targets
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark with @secret if this value should be kept private"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
@@ -171,7 +171,7 @@ model VolumeProperties {
    * List of mount targets
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["fileSystemId"])
+  @identifiers(#["fileSystemId"])
   mountTargets?: MountTargetProperties[];
 
   /**
@@ -383,7 +383,7 @@ model VolumeProperties {
   /**
    * Application specific placement rules for the particular volume
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   placementRules?: PlacementKeyValuePairs[];
 
   /**
@@ -817,7 +817,7 @@ model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ExportPolicyRule[];
 }
 
@@ -1035,7 +1035,7 @@ model ReplicationObject {
    * A list of destination replications
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   destinationReplications?: DestinationReplication[];
 
   /**
@@ -1348,7 +1348,7 @@ model VolumePatchPropertiesExportPolicy {
   /**
    * Export policy rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ExportPolicyRule[];
 }
 
@@ -2086,7 +2086,7 @@ model ListQuotaReportResponse {
   /**
    * List of quota reports
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: QuotaReport[];
 }
 
