@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/apimanagement"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+    arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ApiManagement"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.ApiManagement"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-apimanagement"
+    namespace: "azure.mgmt.apimanagement"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-apimanagement"
+    namespace: "com.azure.resourcemanager.apimanagement"
+    service-name: "ApiManagement"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-apimanagement"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-apimanagement"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/apimanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/armapimanagement"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armapimanagement"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
