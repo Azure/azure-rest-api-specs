@@ -2,10 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ResourceConnector;
 
@@ -297,6 +294,7 @@ model ApplianceGetTelemetryConfigResult {
   /**
    * Telemetry instrumentation key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property as @secret if it should be kept private."
   @visibility(Lifecycle.Read)
   telemetryInstrumentationKey?: string;
 }
@@ -327,7 +325,7 @@ model ApplianceListCredentialResults {
    * The list of appliance kubeconfigs.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   kubeconfigs?: ApplianceCredentialKubeconfig[];
 }
 
@@ -356,6 +354,7 @@ model HybridConnectionConfig {
   /**
    * Listener access token
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property as @secret if it should be kept private."
   @visibility(Lifecycle.Read)
   token?: string;
 }
@@ -392,7 +391,7 @@ model ApplianceListKeysResults {
    * The list of appliance kubeconfigs.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   kubeconfigs?: ApplianceCredentialKubeconfig[];
 
   /**
@@ -440,6 +439,7 @@ model SSHKey {
   /**
    * Private Key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property as @secret if it should be kept private."
   @visibility(Lifecycle.Read)
   privateKey?: string;
 
@@ -486,7 +486,7 @@ model UpgradeGraphProperties {
    * This contains the current version and supported upgrade versions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedVersions?: SupportedVersion[];
 }
 

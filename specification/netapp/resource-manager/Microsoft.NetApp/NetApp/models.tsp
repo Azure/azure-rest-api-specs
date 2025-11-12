@@ -4,11 +4,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
@@ -377,13 +374,13 @@ model ServiceSpecification {
   /**
    * Metric specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 
   /**
    * Log specification of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -444,7 +441,7 @@ model MetricSpecification {
   /**
    * Dimensions of blobs, including blob type and access tier.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: Dimension[];
 
   /**
@@ -662,7 +659,7 @@ model RegionInfo {
   /**
    * Provides logical availability zone mappings for the subscription for a region.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["availabilityZone"])
+  @identifiers(#["availabilityZone"])
   availabilityZoneMappings?: RegionInfoAvailabilityZoneMappingsItem[];
 }
 
@@ -744,7 +741,7 @@ model NetworkSiblingSet {
   /**
    * List of NIC information
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicInfoList?: NicInfo[];
 }
 
@@ -860,7 +857,7 @@ model GetKeyVaultStatusResponseProperties {
   /**
    * Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["virtualNetworkId"])
+  @identifiers(#["virtualNetworkId"])
   keyVaultPrivateEndpoints?: KeyVaultPrivateEndpoint[];
 }
 
