@@ -5,11 +5,10 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
+using Rest;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
@@ -51,7 +50,7 @@ model AccountProperties {
   /**
    * Active Directories
    */
-  @OpenAPI.extension("x-ms-identifiers", #["activeDirectoryId"])
+  @identifiers(#["activeDirectoryId"])
   activeDirectories?: ActiveDirectory[];
 
   /**
@@ -443,7 +442,7 @@ model ChangeKeyVault {
   /**
    * Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["virtualNetworkId"])
+  @identifiers(#["virtualNetworkId"])
   keyVaultPrivateEndpoints: KeyVaultPrivateEndpoint[];
 }
 
