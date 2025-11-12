@@ -13,27 +13,38 @@ options:
   "@azure-tools/typespec-csharp":
     flavor: azure
     package-dir: "Azure.ResourceManager.ResourceNotifications"
+    emitter-output-dir: "{project-root}/../../sdk/resourcenotifications/Azure.ResourceManager.ResourceNotifications"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.ResourceNotifications"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-resourcenotifications"
+    emitter-output-dir: "{project-root}/../../sdk/resourcenotifications/azure-mgmt-resourcenotifications"
     namespace: "azure.mgmt.resourcenotifications"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-resourcenotifications"
+    emitter-output-dir: "{project-root}/../../sdk/resourcenotifications/azure-resourcemanager-resourcenotifications"
     namespace: "com.azure.resourcemanager.resourcenotifications"
     service-name: "resourcenotifications"
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "arm-resourcenotifications"
+    emitter-output-dir: "{project-root}/../../sdk/resourcenotifications/arm-resourcenotifications"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-resourcenotifications"
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{project-root}/../../sdk/resourcenotifications/armresourcenotifications"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resourcenotifications/armresourcenotifications"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 
 linter:
   extends:
