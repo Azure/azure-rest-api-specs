@@ -1,12 +1,12 @@
-# ResourceNotifications
+# Microsoft.ResourceNotifications
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Resource Notifications.
+This is the AutoRest configuration file for Microsoft Resource Notifications.
 
 ## Getting Started
 
-To build the SDKs for Resource Notifications API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for Microsoft Resource Notifications API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 
@@ -22,11 +22,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for Resource Notifications.
+These are the global settings for Microsoft Resource Notifications.
 
 ``` yaml
+title: ResourceNotificationsManagementClient
+description: Microsoft Resource Notifications Management Client
 openapi-type: arm
-openapi-subtype: rpaas
 tag: package-preview-2025-11
 ```
 
