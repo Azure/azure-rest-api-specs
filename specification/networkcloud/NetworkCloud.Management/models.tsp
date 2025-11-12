@@ -2938,6 +2938,7 @@ model AccessBridgeProperties {
   /**
    * The provisioning state of the access bridge.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: AccessBridgeProvisioningState;
 
   /**
@@ -3162,6 +3163,7 @@ model BareMetalMachineProperties {
   /**
    * The provisioning state of the bare metal machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: BareMetalMachineProvisioningState;
 
   /**
@@ -3722,6 +3724,7 @@ model CloudServicesNetworkProperties {
   /**
    * The provisioning state of the cloud services network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: CloudServicesNetworkProvisioningState;
 
   /**
@@ -3754,6 +3757,7 @@ model EgressEndpoint {
   /**
    * The list of endpoint dependencies.
    */
+  @minItems(1)
   @identifiers(#[])
   endpoints: EndpointDependency[];
 }
@@ -3901,6 +3905,7 @@ model ClusterManagerProperties {
   /**
    * The provisioning state of the cluster manager.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ClusterManagerProvisioningState;
 
   /**
@@ -4430,6 +4435,7 @@ model ClusterProperties {
   /**
    * The provisioning state of the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ClusterProvisioningState;
 
   /**
@@ -4629,6 +4635,7 @@ model IdentitySelector {
   /**
    * The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier | null;
 }
 
@@ -5077,6 +5084,7 @@ model KubernetesClusterProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#["name"])
+  @minItems(1)
   initialAgentPoolConfigurations: InitialAgentPoolConfiguration[];
 
   /**
@@ -5109,6 +5117,7 @@ model KubernetesClusterProperties {
   /**
    * The provisioning state of the Kubernetes cluster resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: KubernetesClusterProvisioningState;
 }
 
@@ -5119,6 +5128,7 @@ model AadConfiguration {
   /**
    * The list of Azure Active Directory group object IDs that will have an administrative role on the Kubernetes cluster.
    */
+  @minItems(1)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   adminGroupObjectIds: string[];
 }
@@ -5974,6 +5984,7 @@ model KubernetesVersionProperties {
   /**
    * The provisioning state of the Kubernetes version resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: KubernetesVersionProvisioningState;
 
   /**
@@ -6055,6 +6066,7 @@ model L2NetworkProperties {
   /**
    * The provisioning state of the L2 network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: L2NetworkProvisioningState;
 
   /**
@@ -6143,6 +6155,7 @@ model L3NetworkProperties {
   /**
    * The provisioning state of the L3 network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: L3NetworkProvisioningState;
 
   /**
@@ -6196,6 +6209,7 @@ model RackSkuProperties {
   /**
    * The provisioning state of the rack SKU resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: RackSkuProvisioningState;
 
   /**
@@ -6418,6 +6432,7 @@ model RackProperties {
   /**
    * The provisioning state of the rack resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: RackProvisioningState;
 
   /**
@@ -6578,6 +6593,7 @@ model StorageApplianceProperties {
   /**
    * The provisioning state of the storage appliance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: StorageApplianceProvisioningState;
 
   /**
@@ -6770,12 +6786,14 @@ model TrunkedNetworkProperties {
   /**
    * The list of resource IDs representing the Network Fabric isolation domains. It can be any combination of l2IsolationDomain and l3IsolationDomain resources.
    */
+  @minItems(1)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isolationDomainIds: string[];
 
   /**
    * The provisioning state of the trunked network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: TrunkedNetworkProvisioningState;
 
   /**
@@ -6787,6 +6805,7 @@ model TrunkedNetworkProperties {
    * The list of vlans that are selected from the isolation domains for trunking.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minItems(1)
   vlans: int64[];
 }
 
@@ -6911,6 +6930,7 @@ model VirtualMachineProperties {
   /**
    * The provisioning state of the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: VirtualMachineProvisioningState;
 
   /**
@@ -7099,6 +7119,7 @@ model VolumeProperties {
   /**
    * The provisioning state of the volume.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: VolumeProvisioningState;
 
   /**
@@ -7367,6 +7388,7 @@ model BareMetalMachineRunDataExtractsParameters {
    * The list of curated data extraction commands to be executed directly against the target machine.
    */
   @identifiers(#[])
+  @minItems(1)
   commands: BareMetalMachineCommandSpecification[];
 
   /**
@@ -7400,6 +7422,7 @@ model BareMetalMachineRunReadCommandsParameters {
    * The list of read-only commands to be executed directly against the target machine.
    */
   @identifiers(#[])
+  @minItems(1)
   commands: BareMetalMachineCommandSpecification[];
 
   /**
@@ -7624,6 +7647,7 @@ model ClusterPatchProperties {
   /**
    * The settings for the log analytics workspace used for output of logs from this cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   analyticsOutputSettings?: AnalyticsOutputSettings | null;
 
   /**
@@ -7634,16 +7658,19 @@ model ClusterPatchProperties {
   /**
    * Field Deprecated: Use managed identity to provide cluster privileges. The service principal to be used by the cluster during Arc Appliance installation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   clusterServicePrincipal?: ServicePrincipalInformation | null;
 
   /**
    * The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   commandOutputSettings?: CommandOutputSettings | null;
 
   /**
    * The validation threshold indicating the allowable failures of compute machines during environment validation and deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   computeDeploymentThreshold?: ValidationThreshold | null;
 
   /**
@@ -7660,26 +7687,31 @@ model ClusterPatchProperties {
   /**
    * The settings for cluster runtime protection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   runtimeProtectionConfiguration?: RuntimeProtectionConfiguration | null;
 
   /**
    * The configuration for use of a key vault to store secrets for later retrieval by the operator.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   secretArchive?: ClusterSecretArchive | null;
 
   /**
    * The settings for the secret archive used to hold credentials for the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   secretArchiveSettings?: SecretArchiveSettings | null;
 
   /**
    * The strategy for updating the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   updateStrategy?: ClusterUpdateStrategy | null;
 
   /**
    * The settings for how security vulnerability scanning is applied to the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   vulnerabilityScanningSettings?: VulnerabilityScanningSettingsPatch | null;
 }
 
@@ -7758,6 +7790,7 @@ model BareMetalMachineKeySetProperties {
   /**
    * The provisioning state of the bare metal machine key set.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: BareMetalMachineKeySetProvisioningState;
 
   /**
@@ -7904,6 +7937,7 @@ model BmcKeySetProperties {
   /**
    * The provisioning state of the baseboard management controller key set.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: BmcKeySetProvisioningState;
 
   /**
@@ -8042,6 +8076,7 @@ model ClusterMetricsConfigurationProperties {
   /**
    * The provisioning state of the metrics configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ClusterMetricsConfigurationProvisioningState;
 }
 
@@ -8230,6 +8265,7 @@ model AgentPoolProperties {
   /**
    * The provisioning state of the agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: AgentPoolProvisioningState;
 
   /**
@@ -8336,6 +8372,7 @@ model KubernetesClusterFeatureProperties {
   /**
    * The provisioning state of the Kubernetes cluster feature.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: KubernetesClusterFeatureProvisioningState;
 
   /**
@@ -8559,6 +8596,7 @@ model StorageApplianceRunReadCommandsParameters {
    * The list of read-only commands to be executed directly against the target storage appliance.
    */
   @identifiers(#[])
+  @minItems(1)
   commands: StorageApplianceCommandSpecification[];
 
   /**
@@ -8693,6 +8731,7 @@ model ConsoleProperties {
   /**
    * The provisioning state of the virtual machine console.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ConsoleProvisioningState;
 
   /**

@@ -10977,6 +10977,7 @@
         "adminGroupObjectIds": {
           "type": "array",
           "description": "The list of Azure Active Directory group object IDs that will have an administrative role on the Kubernetes cluster.",
+          "minItems": 1,
           "items": {
             "type": "string"
           },
@@ -13001,6 +13002,7 @@
         "commands": {
           "type": "array",
           "description": "The list of curated data extraction commands to be executed directly against the target machine.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/BareMetalMachineCommandSpecification"
           },
@@ -13026,6 +13028,7 @@
         "commands": {
           "type": "array",
           "description": "The list of read-only commands to be executed directly against the target machine.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/BareMetalMachineCommandSpecification"
           },
@@ -16245,6 +16248,7 @@
         "endpoints": {
           "type": "array",
           "description": "The list of endpoint dependencies.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           },
@@ -17538,6 +17542,7 @@
         "initialAgentPoolConfigurations": {
           "type": "array",
           "description": "The agent pools that are created with this Kubernetes cluster for running critical system services and workloads. This data in this field is only used during creation, and the field will be empty following the creation of the Kubernetes Cluster. After creation, the management of agent pools is done using the agentPools sub-resource.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/InitialAgentPoolConfiguration"
           },
@@ -20953,6 +20958,7 @@
         "commands": {
           "type": "array",
           "description": "The list of read-only commands to be executed directly against the target storage appliance.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/StorageApplianceCommandSpecification"
           },
@@ -21252,6 +21258,7 @@
         "isolationDomainIds": {
           "type": "array",
           "description": "The list of resource IDs representing the Network Fabric isolation domains. It can be any combination of l2IsolationDomain and l3IsolationDomain resources.",
+          "minItems": 1,
           "items": {
             "type": "string"
           },
@@ -21274,6 +21281,7 @@
         "vlans": {
           "type": "array",
           "description": "The list of vlans that are selected from the isolation domains for trunking.",
+          "minItems": 1,
           "items": {
             "type": "integer",
             "format": "int64"
