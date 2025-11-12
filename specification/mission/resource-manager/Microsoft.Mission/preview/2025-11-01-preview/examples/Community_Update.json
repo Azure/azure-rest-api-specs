@@ -2,7 +2,7 @@
   "title": "Community_Update",
   "operationId": "Community_Update",
   "parameters": {
-    "api-version": "2025-05-01-preview",
+    "api-version": "2025-11-01-preview",
     "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093",
     "resourceGroupName": "rgopenapi",
     "communityName": "TestMyCommunity",
@@ -127,7 +127,8 @@
                 "id": "355a6bb0-abc0-4cba-000d-12a345b678c0",
                 "type": "User"
               }
-            ]
+            ],
+            "condition": "@RoleDefinition.Name StringNotEquals 'Owner'"
           },
           {
             "roleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
@@ -138,7 +139,61 @@
               }
             ]
           }
-        ]
+        ],
+        "dedicatedHubList": [
+          {
+            "vHubResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestResourceGroup/providers/Microsoft.Network/virtualHubs/TestVirtualHub",
+            "firewallResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestResourceGroup/providers/Microsoft.Network/azureFirewalls/TestFirewall",
+            "firewallPolicyResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestResourceGroup/providers/Microsoft.Network/firewallPolicies/TestFirewallPolicy",
+            "designation": "Allocated"
+          }
+        ],
+        "approvalSettings": {
+          "communityEndpointUpdate": {
+            "approvalPolicy": "Required",
+            "minimumApproversRequired": 2,
+            "mandatoryApprovers": [
+              {
+                "approverEntraId": "00000000-0000-0000-0000-000000000001"
+              }
+            ]
+          },
+          "enclaveEndpointUpdate": {
+            "approvalPolicy": "Required",
+            "minimumApproversRequired": 1
+          },
+          "enclaveCreation": {
+            "approvalPolicy": "NotRequired"
+          },
+          "connectionCreation": {
+            "approvalPolicy": "Required",
+            "minimumApproversRequired": 1,
+            "mandatoryApprovers": [
+              {
+                "approverEntraId": "00000000-0000-0000-0000-000000000002"
+              }
+            ]
+          },
+          "connectionUpdate": {
+            "approvalPolicy": "Required",
+            "minimumApproversRequired": 1
+          },
+          "communityMaintenanceMode": {
+            "approvalPolicy": "Required",
+            "minimumApproversRequired": 2,
+            "mandatoryApprovers": [
+              {
+                "approverEntraId": "00000000-0000-0000-0000-000000000003"
+              },
+              {
+                "approverEntraId": "00000000-0000-0000-0000-000000000004"
+              }
+            ]
+          },
+          "enclaveMaintenanceMode": {
+            "approvalPolicy": "NotRequired"
+          }
+        }
       }
     }
   },
@@ -319,7 +374,8 @@
                   "id": "355a6bb0-abc0-4cba-000d-12a345b678c0",
                   "type": "User"
                 }
-              ]
+              ],
+              "condition": "@RoleDefinition.Name StringNotEquals 'Owner'"
             },
             {
               "roleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
@@ -330,7 +386,79 @@
                 }
               ]
             }
-          ]
+          ],
+          "dedicatedHubList": [
+            {
+              "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/rgopenapi/providers/Microsoft.Mission/communities/TestMyCommunity/dedicatedHubs/TestDedicatedHub",
+              "name": "TestDedicatedHub",
+              "type": "Microsoft.Mission/communities/dedicatedHubs",
+              "location": "westcentralus",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "vHubResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestResourceGroup/providers/Microsoft.Network/virtualHubs/TestVirtualHub",
+                "firewallResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestResourceGroup/providers/Microsoft.Network/azureFirewalls/TestFirewall",
+                "firewallPolicyResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestResourceGroup/providers/Microsoft.Network/firewallPolicies/TestFirewallPolicy",
+                "designation": "Allocated"
+              },
+              "tags": {
+                "environment": "test"
+              },
+              "systemData": {
+                "createdBy": "myAlias",
+                "createdByType": "User",
+                "createdAt": "2023-03-17T20:43:17.760Z",
+                "lastModifiedBy": "myAlias",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2023-03-17T20:43:17.760Z"
+              }
+            }
+          ],
+          "approvalSettings": {
+            "communityEndpointUpdate": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 2,
+              "mandatoryApprovers": [
+                {
+                  "approverEntraId": "00000000-0000-0000-0000-000000000001"
+                }
+              ]
+            },
+            "enclaveEndpointUpdate": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 1
+            },
+            "enclaveCreation": {
+              "approvalPolicy": "NotRequired"
+            },
+            "connectionCreation": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 1,
+              "mandatoryApprovers": [
+                {
+                  "approverEntraId": "00000000-0000-0000-0000-000000000002"
+                }
+              ]
+            },
+            "connectionUpdate": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 1
+            },
+            "communityMaintenanceMode": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 2,
+              "mandatoryApprovers": [
+                {
+                  "approverEntraId": "00000000-0000-0000-0000-000000000003"
+                },
+                {
+                  "approverEntraId": "00000000-0000-0000-0000-000000000004"
+                }
+              ]
+            },
+            "enclaveMaintenanceMode": {
+              "approvalPolicy": "NotRequired"
+            }
+          }
         },
         "tags": {
           "sampletag": "samplevalue"

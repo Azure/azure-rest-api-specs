@@ -2,7 +2,7 @@
   "title": "VirtualEnclave_CreateOrUpdate",
   "operationId": "VirtualEnclave_CreateOrUpdate",
   "parameters": {
-    "api-version": "2025-05-01-preview",
+    "api-version": "2025-11-01-preview",
     "subscriptionId": "c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c",
     "resourceGroupName": "rgopenapi",
     "virtualEnclaveName": "TestMyEnclave",
@@ -39,7 +39,10 @@
           ],
           "justification": "Off"
         },
+        "dedicatedHubResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestResourceGroup/providers/Microsoft.Mission/communities/TestMyCommunity/dedicatedHubs/TestDedicatedHub",
         "bastionEnabled": true,
+        "workloadResourceVisibility": "Disabled",
+        "rbacInheritance": "Disabled",
         "enclaveRoleAssignments": [
           {
             "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
@@ -52,7 +55,8 @@
                 "id": "355a6bb0-abc0-4cba-000d-12a345b678c0",
                 "type": "User"
               }
-            ]
+            ],
+            "condition": "@RoleDefinition.Name StringNotEquals 'Owner'"
           },
           {
             "roleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
@@ -72,7 +76,8 @@
                 "id": "01234567-89ab-ef01-2345-0123456789ab",
                 "type": "Group"
               }
-            ]
+            ],
+            "condition": "@RoleDefinition.Name StringNotEquals 'Owner'"
           },
           {
             "roleDefinitionId": "fb879df8-f326-4884-b1cf-06f3ad86be52",
@@ -83,7 +88,34 @@
               }
             ]
           }
-        ]
+        ],
+        "approvalSettings": {
+          "enclaveEndpointUpdate": {
+            "approvalPolicy": "Required",
+            "minimumApproversRequired": 1,
+            "mandatoryApprovers": [
+              {
+                "approverEntraId": "00000000-0000-0000-0000-000000000001"
+              }
+            ]
+          },
+          "connectionCreation": {
+            "approvalPolicy": "Required",
+            "minimumApproversRequired": 2,
+            "mandatoryApprovers": [
+              {
+                "approverEntraId": "00000000-0000-0000-0000-000000000002"
+              }
+            ]
+          },
+          "connectionUpdate": {
+            "approvalPolicy": "Required",
+            "minimumApproversRequired": 1
+          },
+          "enclaveMaintenanceMode": {
+            "approvalPolicy": "NotRequired"
+          }
+        }
       },
       "tags": {
         "Tag1": "Value1"
@@ -139,7 +171,10 @@
             ],
             "justification": "Off"
           },
+          "dedicatedHubResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestResourceGroup/providers/Microsoft.Mission/communities/TestMyCommunity/dedicatedHubs/TestDedicatedHub",
           "bastionEnabled": true,
+          "workloadResourceVisibility": "Disabled",
+          "rbacInheritance": "Disabled",
           "enclaveRoleAssignments": [
             {
               "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
@@ -152,7 +187,8 @@
                   "id": "355a6bb0-abc0-4cba-000d-12a345b678c0",
                   "type": "User"
                 }
-              ]
+              ],
+              "condition": "@RoleDefinition.Name StringNotEquals 'Owner'"
             },
             {
               "roleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
@@ -172,7 +208,8 @@
                   "id": "01234567-89ab-ef01-2345-0123456789ab",
                   "type": "Group"
                 }
-              ]
+              ],
+              "condition": "@RoleDefinition.Name StringNotEquals 'Owner'"
             },
             {
               "roleDefinitionId": "fb879df8-f326-4884-b1cf-06f3ad86be52",
@@ -183,7 +220,34 @@
                 }
               ]
             }
-          ]
+          ],
+          "approvalSettings": {
+            "enclaveEndpointUpdate": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 1,
+              "mandatoryApprovers": [
+                {
+                  "approverEntraId": "00000000-0000-0000-0000-000000000001"
+                }
+              ]
+            },
+            "connectionCreation": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 2,
+              "mandatoryApprovers": [
+                {
+                  "approverEntraId": "00000000-0000-0000-0000-000000000002"
+                }
+              ]
+            },
+            "connectionUpdate": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 1
+            },
+            "enclaveMaintenanceMode": {
+              "approvalPolicy": "NotRequired"
+            }
+          }
         },
         "tags": {
           "Tag1": "Value1"
@@ -253,6 +317,8 @@
             "justification": "Off"
           },
           "bastionEnabled": true,
+          "workloadResourceVisibility": "Disabled",
+          "rbacInheritance": "Disabled",
           "enclaveRoleAssignments": [
             {
               "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
@@ -265,7 +331,8 @@
                   "id": "355a6bb0-abc0-4cba-000d-12a345b678c0",
                   "type": "User"
                 }
-              ]
+              ],
+              "condition": "@RoleDefinition.Name StringNotEquals 'Owner'"
             },
             {
               "roleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
@@ -285,7 +352,8 @@
                   "id": "01234567-89ab-ef01-2345-0123456789ab",
                   "type": "Group"
                 }
-              ]
+              ],
+              "condition": "@RoleDefinition.Name StringNotEquals 'Owner'"
             },
             {
               "roleDefinitionId": "fb879df8-f326-4884-b1cf-06f3ad86be52",
@@ -296,7 +364,34 @@
                 }
               ]
             }
-          ]
+          ],
+          "approvalSettings": {
+            "enclaveEndpointUpdate": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 1,
+              "mandatoryApprovers": [
+                {
+                  "approverEntraId": "00000000-0000-0000-0000-000000000001"
+                }
+              ]
+            },
+            "connectionCreation": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 2,
+              "mandatoryApprovers": [
+                {
+                  "approverEntraId": "00000000-0000-0000-0000-000000000002"
+                }
+              ]
+            },
+            "connectionUpdate": {
+              "approvalPolicy": "Required",
+              "minimumApproversRequired": 1
+            },
+            "enclaveMaintenanceMode": {
+              "approvalPolicy": "NotRequired"
+            }
+          }
         },
         "tags": {
           "Tag1": "Value1"

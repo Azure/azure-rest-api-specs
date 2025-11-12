@@ -54,6 +54,9 @@ union DestinationType {
 
   @doc("DestinationType Type PrivateNetwork")
   PrivateNetwork: "PrivateNetwork",
+
+  @doc("DestinationType Type ServiceTag")
+  ServiceTag: "ServiceTag",
 }
 
 @doc("Base type for destination rules.")
@@ -88,6 +91,10 @@ model CommunityEndpointProperties {
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Whether update mode is automatic or manual.")
+  updateMode?: UpdateMode;
 }
 
 @doc("Community Endpoint patchable Properties")

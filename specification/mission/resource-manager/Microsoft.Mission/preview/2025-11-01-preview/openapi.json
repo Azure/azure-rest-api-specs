@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Mission",
-    "version": "2025-05-01-preview",
+    "version": "2025-11-01-preview",
     "description": "Microsoft Mission Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -62,6 +62,9 @@
     },
     {
       "name": "CommunityEndpoints"
+    },
+    {
+      "name": "DedicatedHub"
     },
     {
       "name": "Approval"
@@ -535,6 +538,53 @@
         "x-ms-examples": {
           "CommunityEndpoints_ListBySubscription": {
             "$ref": "./examples/CommunityEndpoints_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Mission/communities/{communityName}/dedicatedHubs": {
+      "get": {
+        "operationId": "DedicatedHub_ListBySubscription",
+        "tags": [
+          "DedicatedHub"
+        ],
+        "description": "List DedicatedHubResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHubResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DedicatedHub_ListBySubscription": {
+            "$ref": "./examples/DedicatedHubs_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1605,6 +1655,342 @@
         "x-ms-examples": {
           "CommunityEndpoints_HandleApprovalDeletion": {
             "$ref": "./examples/CommunityEndpoints_HandleApprovalDeletion.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/dedicatedHubs": {
+      "get": {
+        "operationId": "DedicatedHub_ListByCommunityResource",
+        "tags": [
+          "DedicatedHub"
+        ],
+        "description": "List DedicatedHubResource resources by CommunityResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHubResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DedicatedHub_ListByCommunityResource": {
+            "$ref": "./examples/DedicatedHubs_ListByCommunityResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/dedicatedHubs/{dedicatedHubName}": {
+      "get": {
+        "operationId": "DedicatedHub_Get",
+        "tags": [
+          "DedicatedHub"
+        ],
+        "description": "Get a DedicatedHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "dedicatedHubName",
+            "in": "path",
+            "description": "The name of the Dedicated Hub Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHubResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DedicatedHub_Get": {
+            "$ref": "./examples/DedicatedHubs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DedicatedHub_CreateOrUpdate",
+        "tags": [
+          "DedicatedHub"
+        ],
+        "description": "Create a DedicatedHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "dedicatedHubName",
+            "in": "path",
+            "description": "The name of the Dedicated Hub Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedHubResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DedicatedHubResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHubResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DedicatedHubResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHubResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DedicatedHub_CreateOrUpdate": {
+            "$ref": "./examples/DedicatedHubs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DedicatedHub_Update",
+        "tags": [
+          "DedicatedHub"
+        ],
+        "description": "Update a DedicatedHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "dedicatedHubName",
+            "in": "path",
+            "description": "The name of the Dedicated Hub Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedHubPatchModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHubResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DedicatedHub_Update": {
+            "$ref": "./examples/DedicatedHubs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DedicatedHub_Delete",
+        "tags": [
+          "DedicatedHub"
+        ],
+        "description": "Delete a DedicatedHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "dedicatedHubName",
+            "in": "path",
+            "description": "The name of the Dedicated Hub Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DedicatedHub_Delete": {
+            "$ref": "./examples/DedicatedHubs_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3958,148 +4344,96 @@
         "value"
       ]
     },
-    "ApprovalSettings": {
+    "ApprovalSettingConfiguration": {
       "type": "object",
-      "description": "ApprovalSettings Properties",
+      "description": "Granular approval setting configuration with policy, minimum approvers, and mandatory approvers.",
       "properties": {
-        "endpointCreation": {
+        "approvalPolicy": {
           "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for endpoint creation (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Approval policy (Required or NotRequired)."
         },
-        "endpointUpdate": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for endpoint update (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "endpointDeletion": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for endpoint deletion (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "connectionCreation": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for enclave connection creation (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "connectionUpdate": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for enclave connection update (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "connectionDeletion": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for enclave connection deletion (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "enclaveCreation": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for virtual enclave creation (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "enclaveDeletion": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for virtual enclave deletion (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "maintenanceMode": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for toggling maintenance mode (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "serviceCatalogDeployment": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for deploying service catalog templates (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "notificationOnApprovalCreation": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Notification will be sent on creation of an Approval Request",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "notificationOnApprovalAction": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Notification will be sent on any action taken (Approve/Reject) on an Approval Request",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "notificationOnApprovalDeletion": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Notification will be sent on deletion of an Approval Request",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+        "minimumApproversRequired": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum number of approvers required for this approval setting."
         },
         "mandatoryApprovers": {
           "type": "array",
-          "description": "List of mandatory approvers for the approval request",
+          "description": "List of mandatory approvers for this approval setting.",
           "items": {
             "$ref": "#/definitions/MandatoryApprover"
           },
           "x-ms-identifiers": [
             "approverEntraId"
           ]
+        }
+      }
+    },
+    "ApprovalSettings": {
+      "type": "object",
+      "description": "Granular ApprovalSettings Properties for 2025-11-01-preview and later versions",
+      "properties": {
+        "communityEndpointUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for community endpoint updates."
         },
-        "minimumApproversRequired": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum number of approvers required for the approval request",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+        "enclaveEndpointUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave endpoint updates."
+        },
+        "enclaveCreation": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave creation."
+        },
+        "connectionCreation": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for connection creation."
+        },
+        "connectionUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for connection updates."
+        },
+        "communityMaintenanceMode": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for community maintenance mode."
+        },
+        "enclaveMaintenanceMode": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave maintenance mode."
         }
       }
     },
     "ApprovalSettingsPatchProperties": {
       "type": "object",
-      "description": "ApprovalSettings Properties",
+      "description": "Granular ApprovalSettings Patch Properties",
       "properties": {
-        "mandatoryApprovers": {
-          "type": "array",
-          "description": "List of mandatory approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/MandatoryApprover"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
+        "communityEndpointUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for community endpoint updates."
+        },
+        "enclaveEndpointUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave endpoint updates."
+        },
+        "enclaveCreation": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave creation."
+        },
+        "connectionCreation": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for connection creation."
+        },
+        "connectionUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for connection updates."
+        },
+        "communityMaintenanceMode": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for community maintenance mode."
+        },
+        "enclaveMaintenanceMode": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave maintenance mode."
         }
       }
     },
@@ -4278,6 +4612,10 @@
             "$ref": "#/definitions/CommunityEndpointDestinationRule"
           },
           "x-ms-identifiers": []
+        },
+        "updateMode": {
+          "$ref": "#/definitions/UpdateMode",
+          "description": "Whether update mode is automatic or manual."
         }
       }
     },
@@ -4307,6 +4645,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
           "readOnly": true
+        },
+        "updateMode": {
+          "$ref": "#/definitions/UpdateMode",
+          "description": "Whether update mode is automatic or manual."
         }
       },
       "required": [
@@ -4475,11 +4817,20 @@
         },
         "approvalSettings": {
           "$ref": "#/definitions/ApprovalSettingsPatchProperties",
-          "description": "Approval requirements for various actions on the community's resources."
+          "description": "Granular approval requirements for various actions on the community's resources.",
+          "x-ms-client-name": "granularApprovalSettings"
         },
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
           "description": "Maintenance Mode configuration."
+        },
+        "dedicatedHubList": {
+          "type": "array",
+          "description": "DedicatedHub List.",
+          "items": {
+            "$ref": "#/definitions/DedicatedHubBaseModel"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4587,11 +4938,20 @@
         },
         "approvalSettings": {
           "$ref": "#/definitions/ApprovalSettings",
-          "description": "Approval requirements for various actions on the community's resources."
+          "description": "Granular approval requirements for various actions on the community's resources.",
+          "x-ms-client-name": "granularApprovalSettings"
         },
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationModel",
           "description": "Maintenance Mode configuration."
+        },
+        "dedicatedHubList": {
+          "type": "array",
+          "description": "DedicatedHub List.",
+          "items": {
+            "$ref": "#/definitions/DedicatedHubResource"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4648,6 +5008,178 @@
         "value"
       ]
     },
+    "DedicatedHubBaseModel": {
+      "type": "object",
+      "description": "Dedicated Hub Base Properties",
+      "properties": {
+        "vHubResourceId": {
+          "$ref": "#/definitions/VirtualHubResourceId",
+          "description": "Virtual Hub Resource ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "firewallResourceId": {
+          "$ref": "#/definitions/FirewallResourceId",
+          "description": "Firewall Resource ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "firewallPolicyResourceId": {
+          "$ref": "#/definitions/FirewallPolicyResourceId",
+          "description": "Firewall Policy Resource ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "designation": {
+          "$ref": "#/definitions/Designation",
+          "description": "Designation of hub resource allocation (Communal or Allocated)"
+        }
+      }
+    },
+    "DedicatedHubPatchModel": {
+      "type": "object",
+      "description": "Dedicated Hub Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DedicatedHubPatchProperties",
+          "description": "The DedicatedHub resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DedicatedHubPatchProperties": {
+      "type": "object",
+      "description": "Dedicated Hub patchable Properties",
+      "properties": {
+        "designation": {
+          "$ref": "#/definitions/Designation",
+          "description": "Designation of hub resource allocation (Communal or Allocated)"
+        }
+      }
+    },
+    "DedicatedHubProperties": {
+      "type": "object",
+      "description": "Describes the properties of a Dedicated Hub.",
+      "properties": {
+        "vHubResourceId": {
+          "$ref": "#/definitions/VirtualHubResourceId",
+          "description": "Virtual Hub Resource ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "firewallResourceId": {
+          "$ref": "#/definitions/FirewallResourceId",
+          "description": "Firewall Resource ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "firewallPolicyResourceId": {
+          "$ref": "#/definitions/FirewallPolicyResourceId",
+          "description": "Firewall Policy Resource ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "designation": {
+          "$ref": "#/definitions/Designation",
+          "description": "Designation of hub resource allocation (Communal or Allocated)"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "DedicatedHubResource": {
+      "type": "object",
+      "description": "DedicatedHub Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DedicatedHubProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DedicatedHubResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Mission/communities/dedicatedHubs"
+          }
+        ]
+      }
+    },
+    "DedicatedHubResourceListResult": {
+      "type": "object",
+      "description": "The response of a DedicatedHubResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DedicatedHubResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DedicatedHubResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Designation": {
+      "type": "string",
+      "description": "Specifies the designation of the dedicated hub.",
+      "enum": [
+        "Communal",
+        "Allocated"
+      ],
+      "x-ms-enum": {
+        "name": "Designation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Communal",
+            "value": "Communal",
+            "description": "Designation Type Communal"
+          },
+          {
+            "name": "Allocated",
+            "value": "Allocated",
+            "description": "Designation Type Allocated"
+          }
+        ]
+      }
+    },
     "DestinationEndpointResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -4670,7 +5202,8 @@
         "FQDN",
         "FQDNTag",
         "IPAddress",
-        "PrivateNetwork"
+        "PrivateNetwork",
+        "ServiceTag"
       ],
       "x-ms-enum": {
         "name": "DestinationType",
@@ -4695,6 +5228,11 @@
             "name": "PrivateNetwork",
             "value": "PrivateNetwork",
             "description": "DestinationType Type PrivateNetwork"
+          },
+          {
+            "name": "ServiceTag",
+            "value": "ServiceTag",
+            "description": "DestinationType Type ServiceTag"
           }
         ]
       }
@@ -4820,6 +5358,11 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
+          "readOnly": true
+        },
+        "updateMode": {
+          "$ref": "#/definitions/UpdateMode",
+          "description": "Destination Endpoint supports automatic or manual updates.",
           "readOnly": true
         }
       },
@@ -5053,6 +5596,10 @@
             "$ref": "#/definitions/EnclaveEndpointDestinationRule"
           },
           "x-ms-identifiers": []
+        },
+        "updateMode": {
+          "$ref": "#/definitions/UpdateMode",
+          "description": "Whether update mode is automatic or manual."
         }
       }
     },
@@ -5082,6 +5629,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
           "readOnly": true
+        },
+        "updateMode": {
+          "$ref": "#/definitions/UpdateMode",
+          "description": "Whether update mode is automatic or manual."
         }
       },
       "required": [
@@ -5255,6 +5806,30 @@
             "create"
           ]
         }
+      }
+    },
+    "FirewallPolicyResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/firewallPolicies"
+          }
+        ]
+      }
+    },
+    "FirewallResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/azureFirewalls"
+          }
+        ]
       }
     },
     "FirewallSKU": {
@@ -5575,6 +6150,30 @@
       },
       "readOnly": true
     },
+    "RbacInheritanceMode": {
+      "type": "string",
+      "description": "Rbac Inheritance Mode",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "RbacInheritanceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "RbacInheritanceMode Type Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "RbacInheritanceMode Type Disabled"
+          }
+        ]
+      }
+    },
     "RequestMetadata": {
       "type": "object",
       "description": "Request Metadata for approvals request.",
@@ -5661,6 +6260,30 @@
         }
       }
     },
+    "ResourceVisibilityMode": {
+      "type": "string",
+      "description": "Resource Visibility Mode",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceVisibilityMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "ResourceVisibilityMode Type Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "ResourceVisibilityMode Type Disabled"
+          }
+        ]
+      }
+    },
     "RoleAssignmentItem": {
       "type": "object",
       "description": "Role assignment item that indicates which principals should be assigned this role definition",
@@ -5675,6 +6298,10 @@
           "items": {
             "$ref": "#/definitions/Principal"
           }
+        },
+        "condition": {
+          "type": "string",
+          "description": "Condition under which the principal can be granted permission"
         }
       },
       "required": [
@@ -6055,6 +6682,74 @@
         ]
       }
     },
+    "UpdateMode": {
+      "type": "string",
+      "description": "Update Mode",
+      "enum": [
+        "Automatic",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "UpdateMode Type Automatic"
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "UpdateMode Type Manual"
+          }
+        ]
+      }
+    },
+    "VirtualEnclaveApprovalSettings": {
+      "type": "object",
+      "description": "Virtual Enclave ApprovalSettings Properties for 2025-11-01-preview and later versions",
+      "properties": {
+        "enclaveEndpointUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave endpoint updates."
+        },
+        "connectionCreation": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for connection creation."
+        },
+        "connectionUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for connection updates."
+        },
+        "enclaveMaintenanceMode": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave maintenance mode."
+        }
+      }
+    },
+    "VirtualEnclaveApprovalSettingsPatchProperties": {
+      "type": "object",
+      "description": "Virtual Enclave ApprovalSettings Patch Properties",
+      "properties": {
+        "enclaveEndpointUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave endpoint updates."
+        },
+        "connectionCreation": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for connection creation."
+        },
+        "connectionUpdate": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for connection updates."
+        },
+        "enclaveMaintenanceMode": {
+          "$ref": "#/definitions/ApprovalSettingConfiguration",
+          "description": "Approval configuration for enclave maintenance mode."
+        }
+      }
+    },
     "VirtualEnclavePatchModel": {
       "type": "object",
       "description": "Virtual Enclave Patch Model",
@@ -6088,6 +6783,14 @@
           "type": "boolean",
           "description": "Deploy Bastion service (True or False)."
         },
+        "workloadResourceVisibility": {
+          "$ref": "#/definitions/ResourceVisibilityMode",
+          "description": "Specifies whether resources in the workload resource group(s) are visible through standard RBAC"
+        },
+        "rbacInheritance": {
+          "$ref": "#/definitions/RbacInheritanceMode",
+          "description": "Controls whether standard Azure RBAC role inheritance applies to the workload resource group(s)"
+        },
         "enclaveRoleAssignments": {
           "type": "array",
           "description": "Enclave role assignments",
@@ -6119,6 +6822,14 @@
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
           "description": "Maintenance Mode configuration."
+        },
+        "dedicatedHubResourceId": {
+          "$ref": "#/definitions/DedicatedHubResourceId",
+          "description": "DedicatedHub Resource ID."
+        },
+        "approvalSettings": {
+          "$ref": "#/definitions/VirtualEnclaveApprovalSettingsPatchProperties",
+          "description": "Approval requirements for various actions on the enclave's resources."
         }
       }
     },
@@ -6173,6 +6884,56 @@
           "description": "Deploy Bastion service (True or False).",
           "default": false
         },
+        "workloadResourceVisibility": {
+          "type": "string",
+          "description": "Specifies whether resources in the workload resource group(s) are visible through standard RBAC",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceVisibilityMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "ResourceVisibilityMode Type Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "ResourceVisibilityMode Type Disabled"
+              }
+            ]
+          }
+        },
+        "rbacInheritance": {
+          "type": "string",
+          "description": "Controls whether standard Azure RBAC role inheritance applies to the workload resource group(s)",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "RbacInheritanceMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "RbacInheritanceMode Type Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "RbacInheritanceMode Type Disabled"
+              }
+            ]
+          }
+        },
         "enclaveRoleAssignments": {
           "type": "array",
           "description": "Enclave role assignments",
@@ -6204,12 +6965,32 @@
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationModel",
           "description": "Maintenance Mode configuration."
+        },
+        "dedicatedHubResourceId": {
+          "$ref": "#/definitions/DedicatedHubResourceId",
+          "description": "DedicatedHub Resource ID."
+        },
+        "approvalSettings": {
+          "$ref": "#/definitions/VirtualEnclaveApprovalSettings",
+          "description": "Approval requirements for various actions on the enclave's resources."
         }
       },
       "required": [
         "enclaveVirtualNetwork",
         "communityResourceId"
       ]
+    },
+    "VirtualHubResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualHubs"
+          }
+        ]
+      }
     },
     "VirtualNetworkResourceId": {
       "type": "string",
