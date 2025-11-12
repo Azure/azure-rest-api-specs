@@ -1575,6 +1575,19 @@
           "type": "string",
           "description": "The external key identifier. The valid id can only contain characters in the set [a-zA-Z0-9-]. Maximum length is 64 characters."
         }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ExternalKeyUpdate": {
+      "type": "object",
+      "description": "External Key parameters.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The external key identifier. The valid id can only contain characters in the set [a-zA-Z0-9-]. Maximum length is 64 characters."
+        }
       }
     },
     "GetRandomBytesRequest": {
@@ -2196,6 +2209,37 @@
         }
       }
     },
+    "KeyAttributesUpdate": {
+      "type": "object",
+      "description": "The attributes of a key managed by the key vault service.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether the object is enabled."
+        },
+        "nbf": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Not before date in UTC.",
+          "x-ms-client-name": "notBefore"
+        },
+        "exp": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Expiry date in UTC.",
+          "x-ms-client-name": "expires"
+        },
+        "exportable": {
+          "type": "boolean",
+          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key."
+        },
+        "external_key": {
+          "$ref": "#/definitions/ExternalKeyUpdate",
+          "description": "The external key information.",
+          "x-ms-client-name": "externalKey"
+        }
+      }
+    },
     "KeyBundle": {
       "type": "object",
       "description": "A KeyBundle consisting of a WebKey plus its attributes.",
@@ -2685,7 +2729,7 @@
           "x-ms-client-name": "keyOps"
         },
         "attributes": {
-          "$ref": "#/definitions/KeyAttributes",
+          "$ref": "#/definitions/KeyAttributesUpdate",
           "description": "The attributes of a key managed by the key vault service.",
           "x-ms-client-name": "keyAttributes"
         },
