@@ -18,7 +18,7 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "listAssignedResourceDeployments"
 );
 @@clientName(conversationAuthoringListProjectResources,
-  "listDeploymentResources"
+  "listProjectResources"
 );
 @@clientName(conversationAuthoringListSupportedPrebuiltEntities,
   "listSupportedPrebuiltEntities"
@@ -320,20 +320,20 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceInfo,
-  "ConversationAuthoringAssignedDeploymentResource"
+  "ConversationAuthoringAssignedProjectResource"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceInfo,
-  "AssignedDeploymentResource",
+  "AssignedProjectResource",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceInfo.azureResourceId,
   "resourceId"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceAssignments,
-  "ConversationAuthoringAssignDeploymentResourcesDetails"
+  "ConversationAuthoringAssignProjectResourcesDetails"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceAssignments,
-  "AssignDeploymentResourcesDetails",
+  "AssignProjectResourcesDetails",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceAssignments.projectResources,
@@ -354,10 +354,10 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
-  "ConversationAuthoringDeploymentResourcesState"
+  "ConversationAuthoringProjectResourcesState"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
-  "DeploymentResourcesState",
+  "ProjectResourcesJobState",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringTrainingJobs,
