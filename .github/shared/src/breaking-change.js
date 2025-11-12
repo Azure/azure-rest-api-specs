@@ -1,5 +1,4 @@
 /* v8 ignore start */
-// @ts-check
 
 /**
  * Breaking change configuration and constants for Azure REST API specs

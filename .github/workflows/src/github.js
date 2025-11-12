@@ -1,5 +1,3 @@
-// @ts-check
-
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { toPercent } from "../../shared/src/math.js";
 import { byDate, invert } from "../../shared/src/sort.js";

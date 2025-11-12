@@ -201,14 +201,16 @@ op ComputeResourceActionSync<
   Response extends TypeSpec.Reflection.Model | void,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
   Parameters extends {} = {},
-  Error extends {} = CloudError
+  Error extends {} = CloudError,
+  OptionalRequestBody extends valueof boolean = false
 > is ArmResourceActionSync<
   Resource,
   Request,
   Response,
   BaseParameters,
   Parameters,
-  Error
+  Error,
+  OptionalRequestBody
 >;
 
 /** Custom ArmResourceActionAsync operation template with CloudError as Error */
@@ -224,7 +226,8 @@ op ComputeResourceActionAsync<
   > &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Error extends {} = CloudError
+  Error extends {} = CloudError,
+  OptionalRequestBody extends valueof boolean = false
 > is ArmResourceActionAsync<
   Resource,
   Request,
@@ -232,7 +235,8 @@ op ComputeResourceActionAsync<
   BaseParameters,
   LroHeaders,
   Parameters,
-  Error
+  Error,
+  OptionalRequestBody
 >;
 /** Custom ArmResourceActionAsync operation template with CloudError as Error */
 op ComputeResourceActionAsyncBase<
@@ -268,12 +272,14 @@ op ComputeResourceActionNoResponseContentAsync<
   > &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Error extends {} = ErrorResponse
+  Error extends {} = ErrorResponse,
+  OptionalRequestBody extends valueof boolean = false
 > is ArmResourceActionNoResponseContentAsync<
   Resource,
   Request,
   BaseParameters,
   LroHeaders,
   Parameters,
-  Error
+  Error,
+  OptionalRequestBody
 >;

@@ -50,7 +50,8 @@ interface GalleryApplicationVersions {
     GalleryApplicationVersion,
     Response = ArmResourceUpdatedResponse<GalleryApplicationVersion> | ArmResourceCreatedResponse<
       GalleryApplicationVersion,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = GalleryApplicationVersion> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: GalleryApplicationVersion;
@@ -65,7 +66,7 @@ interface GalleryApplicationVersions {
     GalleryApplicationVersion,
     PatchModel = GalleryApplicationVersionUpdate,
     Response = ArmResponse<GalleryApplicationVersion> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = GalleryApplicationVersion> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;

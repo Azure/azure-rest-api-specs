@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace TextTranslation;
@@ -40,8 +41,14 @@ model ErrorResponse {
 
 @doc("Error details as returned by Translator Service.")
 model ErrorDetails {
+  @removed(APIVersion.v2025_10_01_preview)
+  @renamedFrom(APIVersion.v2025_10_01_preview, "code")
   @doc("Number identifier of the error.")
-  code: int32;
+  codeV3: int32;
+
+  @added(APIVersion.v2025_10_01_preview)
+  @doc("String identifier of the error.")
+  code: string;
 
   @doc("Human readable error description.")
   message: string;

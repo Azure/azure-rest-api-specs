@@ -15,6 +15,7 @@ import "./ApiDefinition.tsp";
 import "./ApiSource.tsp";
 import "./Deployment.tsp";
 import "./Environment.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

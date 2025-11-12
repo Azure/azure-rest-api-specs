@@ -6,10 +6,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.ClientGenerator.Core;
 
 namespace DocumentIntelligence;
 

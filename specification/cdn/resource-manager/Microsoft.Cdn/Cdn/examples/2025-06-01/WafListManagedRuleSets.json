@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DefaultRuleSet_1.0",
+            "type": "Microsoft.Cdn/cdnwebapplicationfirewallmanagedrulesets",
+            "id": "/subscriptions/subid/providers/Microsoft.Cdn/CdnWebApplicationFirewallManagedRuleSets/DefaultRuleSet_1.0",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ruleGroups": [
+                {
+                  "description": "Description for rule group 1.",
+                  "ruleGroupName": "Group1",
+                  "rules": [
+                    {
+                      "description": "Generic managed web application firewall rule.",
+                      "ruleId": "GROUP1-0001"
+                    },
+                    {
+                      "description": "Generic managed web application firewall rule.",
+                      "ruleId": "GROUP1-0002"
+                    }
+                  ]
+                },
+                {
+                  "description": "Description for rule group 2.",
+                  "ruleGroupName": "Group2",
+                  "rules": [
+                    {
+                      "description": "Generic managed web application firewall rule.",
+                      "ruleId": "GROUP2-0001"
+                    }
+                  ]
+                }
+              ],
+              "ruleSetType": "DefaultRuleSet",
+              "ruleSetVersion": "preview-1.0"
+            },
+            "sku": {
+              "name": "Standard_Microsoft"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedRuleSets_List",
+  "title": "List Policies in a Resource Group"
+}

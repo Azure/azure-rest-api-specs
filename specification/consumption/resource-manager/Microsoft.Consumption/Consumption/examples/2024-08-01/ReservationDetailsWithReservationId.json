@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "$filter": "properties/usageDate ge 2017-10-01 AND properties/usageDate le 2017-12-05",
+    "api-version": "2024-08-01",
+    "reservationId": "00000000-0000-0000-0000-000000000000",
+    "reservationOrderId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000_20171129",
+            "type": "Microsoft.Consumption/reservationDetails",
+            "id": "providers/Microsoft.Capacity/reservationOrders/00000000-0000-0000-0000-000000000000/reservations/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationDetails/20171129",
+            "properties": {
+              "instanceFlexibilityGroup": "D2v2 Series",
+              "instanceFlexibilityRatio": "1",
+              "instanceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/wvn-sql/providers/microsoft.compute/virtualmachines/wvn-sql2014sp33",
+              "kind": "Reservation",
+              "reservationId": "00000000-0000-0000-0000-000000000000",
+              "reservationOrderId": "00000000-0000-0000-0000-000000000000",
+              "reservedHours": 24,
+              "skuName": "Standard_D2_v2",
+              "totalReservedQuantity": 1,
+              "usageDate": "2017-11-29T00:00:00Z",
+              "usedHours": 24
+            },
+            "tags": {
+              "dev": "tools",
+              "env": "newcrp"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ReservationsDetails_ListByReservationOrderAndReservation",
+  "title": "ReservationDetailsWithReservationId"
+}

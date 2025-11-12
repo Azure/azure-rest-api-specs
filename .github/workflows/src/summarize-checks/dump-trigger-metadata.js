@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}

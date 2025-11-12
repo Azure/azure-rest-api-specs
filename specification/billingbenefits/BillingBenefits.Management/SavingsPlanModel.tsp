@@ -102,5 +102,6 @@ interface SavingsPlanModels {
 @@clientInitialization(Microsoft.BillingBenefits,
   {
     parameters: ExpandParameter,
-  }
+  },
+  "!go,!javascript"
 );

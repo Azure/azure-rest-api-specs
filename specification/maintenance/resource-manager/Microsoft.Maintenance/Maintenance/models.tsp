@@ -536,7 +536,7 @@ model ListUpdatesResult {
    * The pending updates
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: Update[];
 
   /**
@@ -606,6 +606,6 @@ model OperationsListResult {
    * A collection of operations
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: Operation[];
 }

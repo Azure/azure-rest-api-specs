@@ -19,7 +19,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.EdgeOrder"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-edgeorder"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-edgeorder"
     namespace: "azure.mgmt.edgeorder"
     generate-test: true
     generate-sample: true
@@ -30,7 +30,7 @@ options:
     service-name: "edgeorder" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-edgeorder"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-edgeorder"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -38,8 +38,8 @@ options:
       name: "@azure/arm-edgeorder"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/edgeorder"
-    package-dir: "armedgeorder"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armedgeorder"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armedgeorder"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

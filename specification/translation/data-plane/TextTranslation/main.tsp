@@ -3,9 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"
@@ -35,10 +33,6 @@ using TypeSpec.Versioning;
   Transliterate. Converts characters or letters of a source language to the corresponding characters or letters of a target language.
   
   Detect. Returns the source code language code and a boolean variable denoting whether the detected language is supported for text translation and transliteration.
-  
-  Dictionary lookup. Returns equivalent words for the source term in the target language.
-  
-  Dictionary example Returns grammatical structure and context examples for the source term and target term pair.
   """)
 @versioned(APIVersion)
 namespace TextTranslation;
@@ -47,4 +41,7 @@ namespace TextTranslation;
 enum APIVersion {
   @doc("Version 3.0")
   v3_0: "3.0",
+
+  @doc("Version 2025-10-01")
+  v2025_10_01_preview: "2025-10-01-preview",
 }

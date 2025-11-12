@@ -1,5 +1,3 @@
-// @ts-check
-
 import { describe, expect, it } from "vitest";
 
 import { resolve } from "path";
@@ -16,6 +14,6 @@ describe("Tag", () => {
     const swagger = [...tag.inputFiles.values()][0];
     expect(swagger.path).toBe(resolve("swagger"));
 
-    await expect(swagger.getRefs()).rejects.toThrowError(/Failed to resolve file for swagger/i);
+    await expect(swagger.getRefs()).rejects.toThrowError(/Failed to read file for swagger/i);
   });
 });

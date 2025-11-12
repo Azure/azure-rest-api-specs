@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager3640",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "azuresdkfornetautoresttrafficmanager1005",
+            "type": "Microsoft.Network/trafficManagerProfiles",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager1005",
+            "location": "global",
+            "properties": {
+              "dnsConfig": {
+                "fqdn": "azuresdkfornetautoresttrafficmanager1005.tmpreview.watmtest.azure-test.net",
+                "relativeName": "azuresdkfornetautoresttrafficmanager1005",
+                "ttl": 35
+              },
+              "endpoints": [
+                {
+                  "name": "My external endpoint",
+                  "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager1005/externalEndpoints/My external endpoint",
+                  "properties": {
+                    "endpointLocation": "North Europe",
+                    "endpointMonitorStatus": "CheckingEndpoint",
+                    "endpointStatus": "Enabled",
+                    "priority": 1,
+                    "target": "foobar.contoso.com",
+                    "weight": 1
+                  }
+                }
+              ],
+              "monitorConfig": {
+                "path": "/testpath.aspx",
+                "intervalInSeconds": 30,
+                "port": 80,
+                "profileMonitorStatus": "Online",
+                "timeoutInSeconds": 10,
+                "toleratedNumberOfFailures": 3,
+                "protocol": "HTTP"
+              },
+              "profileStatus": "Enabled",
+              "trafficRoutingMethod": "Performance"
+            },
+            "tags": {}
+          },
+          {
+            "name": "azuresdkfornetautoresttrafficmanager959",
+            "type": "Microsoft.Network/trafficManagerProfiles",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager959",
+            "location": "global",
+            "properties": {
+              "dnsConfig": {
+                "fqdn": "azuresdkfornetautoresttrafficmanager959.tmpreview.watmtest.azure-test.net",
+                "relativeName": "azuresdkfornetautoresttrafficmanager959",
+                "ttl": 35
+              },
+              "endpoints": [
+                {
+                  "name": "My external endpoint",
+                  "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager959/externalEndpoints/My external endpoint",
+                  "properties": {
+                    "endpointLocation": "North Europe",
+                    "endpointMonitorStatus": "Online",
+                    "endpointStatus": "Enabled",
+                    "priority": 1,
+                    "target": "foobar.contoso.com",
+                    "weight": 1
+                  }
+                }
+              ],
+              "monitorConfig": {
+                "path": "/testpath.aspx",
+                "intervalInSeconds": 30,
+                "port": 80,
+                "profileMonitorStatus": "Online",
+                "timeoutInSeconds": 10,
+                "toleratedNumberOfFailures": 3,
+                "protocol": "HTTP"
+              },
+              "profileStatus": "Enabled",
+              "trafficRoutingMethod": "Performance"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Profiles_ListByResourceGroup",
+  "title": "ListProfilesByResourceGroup"
+}

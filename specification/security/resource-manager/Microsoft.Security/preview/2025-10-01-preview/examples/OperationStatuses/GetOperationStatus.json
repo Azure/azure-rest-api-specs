@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "eastus",
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "status": "Succeeded",
+        "startTime": "2025-10-01T10:00:00.000Z",
+        "endTime": "2025-10-01T10:05:00.000Z",
+        "percentComplete": 100.0
+      },
+      "description": "Status: Succeeded"
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "OperationNotFound",
+          "message": "The requested operation was not found.",
+          "target": "operationId",
+          "details": [
+            {
+              "code": "InvalidOperationId",
+              "message": "The operation ID does not exist or has expired."
+            }
+          ]
+        }
+      }
+    }
+  },
+  "examples": {
+    "InProgress": {
+      "parameters": {
+        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+        "location": "eastus",
+        "operationId": "11111111-1111-1111-1111-111111111111",
+        "api-version": "2025-10-01-preview"
+      },
+      "responses": {
+        "200": {
+          "body": {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/eastus/operationStatuses/11111111-1111-1111-1111-111111111111",
+            "name": "11111111-1111-1111-1111-111111111111",
+            "status": "InProgress",
+            "startTime": "2025-10-01T10:00:00.000Z",
+            "percentComplete": 45.5
+          }
+        }
+      }
+    },
+    "Failed": {
+      "parameters": {
+        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+        "location": "eastus",
+        "operationId": "22222222-2222-2222-2222-222222222222",
+        "api-version": "2025-10-01-preview"
+      },
+      "responses": {
+        "200": {
+          "body": {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/eastus/operationStatuses/22222222-2222-2222-2222-222222222222",
+            "name": "22222222-2222-2222-2222-222222222222",
+            "status": "Failed",
+            "startTime": "2025-10-01T10:00:00.000Z",
+            "endTime": "2025-10-01T10:02:30.000Z",
+            "percentComplete": 100.0,
+            "error": {
+              "code": "ResourceValidationFailed",
+              "message": "The resource validation failed with the following error: Invalid configuration provided.",
+              "target": "privateLink",
+              "details": [
+                {
+                  "code": "InvalidParameter",
+                  "message": "The parameter 'groupIds' is invalid.",
+                  "target": "groupIds"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Canceled": {
+      "parameters": {
+        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+        "location": "westus",
+        "operationId": "33333333-3333-3333-3333-333333333333",
+        "api-version": "2025-10-01-preview"
+      },
+      "responses": {
+        "200": {
+          "body": {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/westus/operationStatuses/33333333-3333-3333-3333-333333333333",
+            "name": "33333333-3333-3333-3333-333333333333",
+            "status": "Canceled",
+            "startTime": "2025-10-01T09:00:00.000Z",
+            "endTime": "2025-10-01T09:01:15.000Z",
+            "percentComplete": 25.0
+          }
+        }
+      }
+    }
+  }
+}

@@ -12,15 +12,13 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     emitter-output-dir: "{project-root}/.."
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     output-file: "{azure-resource-provider-folder}/{service-name}/deploymentsafeguards/{version-status}/{version}/deploymentsafeguards.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-containerservicesafeguards"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerservicesafeguards"
     namespace: "azure.mgmt.containerservicesafeguards"
     service-dir: "sdk/containerservice"
     generate-test: true
@@ -34,8 +32,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerservice"
-    package-dir: "armdeploymentsafeguards"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdeploymentsafeguards"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdeploymentsafeguards"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -46,7 +44,7 @@ options:
     service-dir: "sdk/containerservice"
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-containerservicesafeguards"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservicesafeguards"
     package-details:
       name: "@azure/arm-containerservicesafeguards"
   "@azure-tools/typespec-csharp":

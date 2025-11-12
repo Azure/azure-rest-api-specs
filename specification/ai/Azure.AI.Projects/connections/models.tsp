@@ -78,9 +78,8 @@ model CustomCredential extends BaseCredentials {
   @visibility(Lifecycle.Read)
   type: CredentialType.custom;
 
-  @doc("The credential type")
-  @visibility(Lifecycle.Read)
-  keys: Record<string>;
+  // Secret custom keys
+  ...Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"

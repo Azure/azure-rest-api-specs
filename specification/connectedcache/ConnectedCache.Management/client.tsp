@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.ConnectedCache;
 
-@@clientName(Microsoft.ConnectedCache, "ConnectedCacheMgmt", "python");
+@@clientName(Microsoft.ConnectedCache, "ConnectedCacheMgmtClient", "python");
 @@clientName(Microsoft.ConnectedCache,
   "ConnectedCacheManagementClient",
   "java"

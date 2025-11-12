@@ -28,8 +28,8 @@ model GalleryImage extends Resource {
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: GalleryImageProperties;
 }
 

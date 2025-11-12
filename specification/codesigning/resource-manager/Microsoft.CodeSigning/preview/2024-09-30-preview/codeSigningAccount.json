@@ -930,7 +930,6 @@
             "$ref": "#/definitions/Certificate"
           },
           "readOnly": true,
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": []
         }
       },
@@ -1003,12 +1002,17 @@
       "type": "object",
       "description": "The parameters used to check the availability of the trusted signing account name.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource, \"Microsoft.CodeSigning/codeSigningAccounts\"."
+        },
         "name": {
           "type": "string",
           "description": "Trusted signing account name."
         }
       },
       "required": [
+        "type",
         "name"
       ]
     },

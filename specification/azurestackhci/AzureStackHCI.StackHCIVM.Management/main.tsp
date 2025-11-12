@@ -16,6 +16,8 @@ import "./VirtualMachineInstance.tsp";
 import "./HybridIdentityMetadata.tsp";
 import "./AttestationStatus.tsp";
 import "./GuestAgent.tsp";
+import "./back-compatible.tsp";
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;

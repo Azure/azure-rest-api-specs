@@ -24,6 +24,7 @@ interface Volumes {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Volume>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Volume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

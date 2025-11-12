@@ -157,7 +157,7 @@ async function runLintDiff(
     })
     .filter((result) => result.errors.length > 0);
   if (autoRestErrors.length > 0) {
-    generateAutoRestErrorReport(autoRestErrors, outFile);
+    await generateAutoRestErrorReport(autoRestErrors, outFile);
     console.log("AutoRest errors found. See workflow summary for details.");
 
     process.exitCode = 1;

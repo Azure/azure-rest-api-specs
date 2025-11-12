@@ -1791,14 +1791,14 @@
       "type": "object",
       "description": "Describes a DNS record set (a collection of DNS records with the same name and type).",
       "properties": {
-        "etag": {
-          "type": "string",
-          "description": "The etag of the record set."
-        },
         "properties": {
           "$ref": "#/definitions/RecordSetProperties",
           "description": "The properties of the record set.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the record set."
         }
       },
       "allOf": [
@@ -2125,8 +2125,7 @@
           "description": "The text value of this TXT record.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2134,14 +2133,14 @@
       "type": "object",
       "description": "Describes a DNS zone.",
       "properties": {
-        "etag": {
-          "type": "string",
-          "description": "The etag of the zone."
-        },
         "properties": {
           "$ref": "#/definitions/ZoneProperties",
           "description": "The properties of the zone.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the zone."
         }
       },
       "allOf": [
@@ -2199,8 +2198,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "zoneType": {
           "type": "string",

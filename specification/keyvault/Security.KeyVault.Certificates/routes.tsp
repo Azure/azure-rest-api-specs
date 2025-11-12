@@ -134,9 +134,9 @@ op setCertificateIssuer is KeyVaultOperation<
     /**
      * Certificate issuer set parameter.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameter: CertificateIssuerSetParameters;
   },
   IssuerBundle
@@ -161,9 +161,9 @@ op updateCertificateIssuer is KeyVaultOperation<
     /**
      * Certificate issuer update parameter.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameter: CertificateIssuerUpdateParameters;
   },
   IssuerBundle
@@ -227,9 +227,9 @@ op createCertificate is KeyVaultOperation<
     /**
      * The parameters to create a certificate.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: CertificateCreateParameters;
   },
   AcceptedResponse & CertificateOperation
@@ -255,9 +255,9 @@ op importCertificate is KeyVaultOperation<
     /**
      * The parameters to import the certificate.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: CertificateImportParameters;
   },
   CertificateBundle
@@ -362,9 +362,9 @@ op updateCertificate is KeyVaultOperation<
     /**
      * The parameters for certificate update.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: CertificateUpdateParameters;
   },
   CertificateBundle
@@ -416,9 +416,9 @@ op updateCertificateOperation is KeyVaultOperation<
     /**
      * The certificate operation response.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     certificateOperation: CertificateOperationUpdateParameter;
   },
   CertificateOperation
@@ -481,9 +481,9 @@ op mergeCertificate is KeyVaultOperation<
     /**
      * The parameters to merge certificate.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: CertificateMergeParameters;
   },
   CreatedResponse & CertificateBundle
@@ -520,9 +520,9 @@ op restoreCertificate is KeyVaultOperation<
     /**
      * The parameters to restore the certificate.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: CertificateRestoreParameters;
   },
   CertificateBundle

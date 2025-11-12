@@ -1,8 +1,8 @@
-import "../../Common/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
-import "../../Common/ArmModels/AzureResourceProperties.tsp";
-import "../../Common/StandardizedContracts/CostComponent.tsp";
-import "../../Common/StandardizedContracts/SavingComponent.tsp";
-import "../../Common/StandardizedContracts/CommonModels.tsp";
+import "../Common/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
+import "../Common/ArmModels/AzureResourceProperties.tsp";
+import "../Common/StandardizedContracts/CostComponent.tsp";
+import "../Common/StandardizedContracts/SavingComponent.tsp";
+import "../Common/StandardizedContracts/CommonModels.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -39,12 +39,12 @@ model HeterogeneousAssessmentSummaryProperties {
 
   @doc("Gets the migration type summaries.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   migrationPaths?: MigrationTypeSummaries[];
 
   @doc("Gets the readiness summary.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   readinessSummary?: NameValuePair<CloudSuitabilityCommon, int32>[];
 
   @doc("Gets the confidence score.")
@@ -53,12 +53,12 @@ model HeterogeneousAssessmentSummaryProperties {
 
   @doc("Gets the cost components.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   costComponents?: CostComponent[];
 
   @doc("Gets the saving component.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   savingComponent?: SavingComponent[];
 }
 
@@ -74,6 +74,6 @@ model MigrationTypeSummaries {
 
   @doc("Gets the readiness summary.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   readinessSummary?: NameValuePair<CloudSuitabilityCommon, int32>[];
 }

@@ -1,0 +1,125 @@
+{
+  "title": "AksSummaryOperations_Get_MaximumSet",
+  "operationId": "AksSummaryOperations_Get",
+  "parameters": {
+    "api-version": "2024-03-03-preview",
+    "subscriptionId": "572C3D3F-425D-4AE8-A935-72631EADDE56",
+    "resourceGroupName": "rgaksAssessments",
+    "projectName": "testProject",
+    "assessmentName": "testaksassessment",
+    "summaryName": "AKS"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "summaryType": "Target",
+          "summaryName": "AKS",
+          "sources": [
+            {
+              "sourceName": "IIS",
+              "sourceType": "WebApplication",
+              "platform": "PaaS",
+              "count": 10
+            }
+          ],
+          "targets": [
+            {
+              "targetName": "AKS",
+              "targetType": "WebApplication",
+              "platform": "PaaS",
+              "count": 1
+            }
+          ],
+          "targetSourceMapping": [
+            {
+              "sourceRef": "IIS",
+              "targetRef": "AKS",
+              "sourceCount": 10,
+              "targetCount": 1,
+              "migrationDetails": {
+                "readinessSummary": [
+                  {
+                    "name": "Unknown",
+                    "value": 10
+                  }
+                ],
+                "migrationType": "Unknown"
+              },
+              "managementDetails": [
+                {
+                  "name": "No",
+                  "readinessSummary": [
+                    {
+                      "name": "Unknown",
+                      "value": 18
+                    }
+                  ]
+                }
+              ],
+              "costDetails": [
+                {
+                  "savingOptions": "None",
+                  "costDetail": [
+                    {
+                      "name": "MonthlyStorageCost",
+                      "value": 23
+                    }
+                  ]
+                }
+              ],
+              "savingsDetails": [
+                {
+                  "savingOptions": "None",
+                  "savingsDetail": [
+                    {
+                      "name": "MonthlyAzureHybridCostSavings",
+                      "value": 11
+                    }
+                  ]
+                }
+              ],
+              "confidenceScore": 4
+            }
+          ],
+          "costComponents": [
+            {
+              "savingOptions": "None",
+              "costDetail": [
+                {
+                  "name": "MonthlyStorageCost",
+                  "value": 23
+                }
+              ]
+            }
+          ],
+          "savingsComponents": [
+            {
+              "savingOptions": "None",
+              "savingsDetail": [
+                {
+                  "name": "MonthlyAzureHybridCostSavings",
+                  "value": 11
+                }
+              ]
+            }
+          ],
+          "webAppCount": 10,
+          "webServerCount": 1,
+          "machineCount": 1
+        },
+        "id": "/subscriptions/572C3D3F-425D-4AE8-A935-72631EADDE56/resourceGroups/rgaksAssessments/providers/Microsoft.Migrate/assessmentProjects/testProject/aksAssessments/testaksassessment/summaries/AKS",
+        "name": "AKS",
+        "type": "Microsoft.Migrate/assessmentProjects/aksAssessments/summaries",
+        "systemData": {
+          "createdBy": "rfrp",
+          "createdByType": "User",
+          "createdAt": "2025-02-14T07:09:08.948Z",
+          "lastModifiedBy": "xwqzbue",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-14T07:09:08.948Z"
+        }
+      }
+    }
+  }
+}

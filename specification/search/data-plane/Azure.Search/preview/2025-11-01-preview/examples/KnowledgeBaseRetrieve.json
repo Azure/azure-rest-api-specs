@@ -1,0 +1,289 @@
+{
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeBaseRetrieve",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "knowledgeBaseName": "base-preview-test",
+    "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "x-ms-query-source-authorization": null,
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "text": "hello world",
+              "type": "text"
+            }
+          ]
+        }
+      ],
+      "maxRuntimeInSeconds": 60,
+      "maxOutputSize": 100000,
+      "retrievalReasoningEffort": {
+        "kind": "low"
+      },
+      "includeActivity": true,
+      "outputMode": "answerSynthesis",
+      "knowledgeSourceParams": [
+        {
+          "filterAddOn": "foo eq bar",
+          "knowledgeSourceName": "ks-preview-test",
+          "includeReferences": true,
+          "includeReferenceSourceData": true,
+          "alwaysQuerySource": false,
+          "rerankerThreshold": 2.1,
+          "kind": "searchIndex"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "[{...}]"
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "modelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10
+          },
+          {
+            "type": "searchIndex",
+            "id": 1,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "hello world",
+              "filter": "foo eq bar",
+              "sourceDataFields": [
+                {
+                  "name": "category"
+                },
+                {
+                  "name": "description"
+                },
+                {
+                  "name": "ownerId"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": [
+                {
+                  "name": "*"
+                }
+              ],
+              "semanticConfigurationName": "testconfig"
+            }
+          },
+          {
+            "type": "searchIndex",
+            "id": 2,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "hello world two",
+              "filter": "foo eq bar",
+              "sourceDataFields": [
+                {
+                  "name": "category"
+                },
+                {
+                  "name": "description"
+                },
+                {
+                  "name": "ownerId"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": [
+                {
+                  "name": "*"
+                }
+              ],
+              "semanticConfigurationName": "testconfig"
+            }
+          },
+          {
+            "type": "agenticReasoning",
+            "id": 3,
+            "retrievalReasoningEffort": {
+              "kind": "low"
+            },
+            "reasoningTokens": 74
+          },
+          {
+            "type": "modelAnswerSynthesis",
+            "id": 4,
+            "inputTokens": 664,
+            "outputTokens": 1328,
+            "elapsedMs": 10
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey1",
+              "title": "high_doc",
+              "content": "hello world"
+            },
+            "rerankerScore": 3.5,
+            "docKey": "myDocKey1"
+          },
+          {
+            "type": "searchIndex",
+            "id": "83dd7d41",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey2",
+              "title": "low_doc",
+              "content": "goodbye world"
+            },
+            "rerankerScore": 2.7,
+            "docKey": "myDocKey2"
+          }
+        ]
+      }
+    },
+    "206": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "[{...}]"
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "modelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10
+          },
+          {
+            "type": "searchIndex",
+            "id": 1,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "hello world",
+              "filter": "foo eq bar",
+              "sourceDataFields": [
+                {
+                  "name": "category"
+                },
+                {
+                  "name": "description"
+                },
+                {
+                  "name": "ownerId"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": [
+                {
+                  "name": "*"
+                }
+              ],
+              "semanticConfigurationName": "testconfig"
+            }
+          },
+          {
+            "type": "web",
+            "id": 2,
+            "knowledgeSourceName": "ks-preview-web",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 10,
+            "elapsedMs": 2345,
+            "error": {
+              "code": "403",
+              "message": "The error message",
+              "details": [],
+              "additionalInfo": [
+                {
+                  "type": "SomeErrorType",
+                  "info": {
+                    "someProperty": "Some value"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "agenticReasoning",
+            "id": 3,
+            "retrievalReasoningEffort": {
+              "kind": "low"
+            },
+            "reasoningTokens": 74
+          },
+          {
+            "type": "modelAnswerSynthesis",
+            "id": 4,
+            "inputTokens": 664,
+            "outputTokens": 1328,
+            "elapsedMs": 10
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey1",
+              "title": "high_doc",
+              "content": "hello world"
+            },
+            "rerankerScore": 3.5,
+            "docKey": "myDocKey1"
+          },
+          {
+            "type": "searchIndex",
+            "id": "83dd7d41",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey2",
+              "title": "low_doc",
+              "content": "goodbye world"
+            },
+            "rerankerScore": 2.7,
+            "docKey": "myDocKey2"
+          }
+        ]
+      }
+    }
+  }
+}

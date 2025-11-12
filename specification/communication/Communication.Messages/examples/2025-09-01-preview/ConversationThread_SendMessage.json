@@ -1,0 +1,24 @@
+{
+  "title": "Sends a conversation message from Business to User",
+  "operationId": "ConversationThreadOperations_SendMessage",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "content-type": "application/json",
+    "conversationId": "19:34adfa4f-cedf-4dc0-ba29-b6d1a69ab345@thread.v2",
+    "options": {
+      "request": {
+        "kind": "text",
+        "content": "I need help"
+      },
+      "outboundDeliveryStrategy": "allParticipants"
+    },
+    "endpoint": "https://my-resource.communication.azure.com"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "messageId": "1593107077690"
+      }
+    }
+  }
+}
