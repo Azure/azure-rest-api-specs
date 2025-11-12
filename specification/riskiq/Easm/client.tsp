@@ -148,5 +148,6 @@ interface EasmClient {
   "csharp"
 );
 @@clientName(EasmClient.getDiscoTemplate, "GetDiscoveryTemplate", "csharp");
+@@clientName(EasmClient.listAssetResource, "GetAssetResources", "csharp");
 @@clientName(EasmClient.listDiscoTemplate, "GetDiscoveryTemplates", "csharp");
 @@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");
