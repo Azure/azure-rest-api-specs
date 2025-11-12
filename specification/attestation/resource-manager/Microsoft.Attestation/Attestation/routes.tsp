@@ -18,8 +18,6 @@ interface AttestationProvidersOperationGroup {
   /**
    * Get the default provider
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AttestationProviders_ListDefault")
   @autoRoute
   @get
   @action("defaultProviders")
@@ -32,8 +30,6 @@ interface AttestationProvidersOperationGroup {
   /**
    * Get the default provider by location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AttestationProviders_GetDefaultByLocation")
   @autoRoute
   @get
   @action("defaultProvider")

@@ -34,7 +34,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is PrivateEndpointOperations.CreateOrReplaceSync<
     AttestationProvider,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>,
     Error = CloudError
   >;
 
@@ -54,11 +54,7 @@ interface PrivateEndpointConnections {
     Error = CloudError
   >;
 }
-/*
-@@doc(PrivateEndpointConnection.name,
-  "The name of the private endpoint connection associated with the Azure resource"
-);
-*/
+
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection properties."

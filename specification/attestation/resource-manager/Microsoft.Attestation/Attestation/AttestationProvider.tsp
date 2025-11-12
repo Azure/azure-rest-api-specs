@@ -100,8 +100,6 @@ interface AttestationProviders {
   /**
    * Gets the private link resources supported for the attestation provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkResources_ListByProvider")
   @get
   @action("privateLinkResources")
   listByProvider is ArmResourceActionSync<
