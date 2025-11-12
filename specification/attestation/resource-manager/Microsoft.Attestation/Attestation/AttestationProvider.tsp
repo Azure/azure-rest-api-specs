@@ -33,7 +33,7 @@ interface AttestationProvidersOps
         ...Azure.ResourceManager.Legacy.Provider,
 
         /**
-         * aaaaaaaaaaaaaaaaaaaaa
+         * Name of the attestation provider.
          */
         @path
         @segment("attestationProviders")

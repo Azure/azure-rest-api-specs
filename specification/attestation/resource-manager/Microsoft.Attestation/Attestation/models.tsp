@@ -435,17 +435,17 @@ model AttestationProviderListResult {
 }
 
 /**
- * aaaaaaaaaaa
+ * List of supported operations.
  */
 model OperationList {
   /**
-   * aaaaaaaaaa
+   * The system metadata relating to this resource
    */
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
 
   /**
-   * aaaaaaaaaaa
+   * List of supported operations.
    */
   @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
