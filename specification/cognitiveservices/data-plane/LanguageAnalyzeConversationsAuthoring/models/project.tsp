@@ -491,19 +491,11 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
 /**
  * Represents the payload for deleting a project deployment.
  */
-@renamedFrom(
-  Versions.v2025_05_15_preview,
-  "AnalyzeConversationAuthoringProjectAzureResourceIds"
-)
-@renamedFrom(
-  Versions.v2025_11_15_preview,
-  "AnalyzeConversationAuthoringAssignedDeploymentResources"
-)
 model AnalyzeConversationAuthoringProjectAzureResourceIds {
   /**
    * Represents the Language or AIService resource IDs to unassign from the project or delete the deployment from.
    */
-  assignedResourceIds?: string[];
+  azureResourceIds?: string[];
 }
 
 /**
