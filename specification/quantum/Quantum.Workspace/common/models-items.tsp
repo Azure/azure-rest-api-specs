@@ -70,6 +70,26 @@ model ItemDetails {
   @visibility(Lifecycle.Read)
   creationTime?: utcDateTime;
 
+  /** The user that created the item. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  createdBy?: string;
+
+  /** The last time the item was modified by a user. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: utcDateTime;
+
+  /** The last user that modified the item. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  lastModifiedBy?: string;
+
+  /** The last time the item was updated by the system. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  lastUpdatedTime?: utcDateTime;
+
   /** The time when the item began execution. */
   @visibility(Lifecycle.Read)
   beginExecutionTime?: utcDateTime;
