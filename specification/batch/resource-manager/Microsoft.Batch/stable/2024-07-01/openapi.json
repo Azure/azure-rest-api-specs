@@ -1918,9 +1918,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
             }
           },
           "default": {
@@ -1978,9 +1978,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
             }
           },
           "default": {
@@ -3211,17 +3211,6 @@
     }
   },
   "definitions": {
-    "AccessRulePropertiesSubscriptionsItem": {
-      "type": "object",
-      "description": "Subscription identifiers",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000')"
-        }
-      }
-    },
     "AccountKeyType": {
       "type": "string",
       "description": "The type of account key to regenerate.",
@@ -5491,42 +5480,6 @@
         ]
       }
     },
-    "IssueType": {
-      "type": "string",
-      "description": "Type of issue",
-      "enum": [
-        "Unknown",
-        "ConfigurationPropagationFailure",
-        "MissingPerimeterConfiguration",
-        "MissingIdentityConfiguration"
-      ],
-      "x-ms-enum": {
-        "name": "IssueType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown issue type"
-          },
-          {
-            "name": "ConfigurationPropagationFailure",
-            "value": "ConfigurationPropagationFailure",
-            "description": "An error occurred while applying the network security perimeter (NSP) configuration."
-          },
-          {
-            "name": "MissingPerimeterConfiguration",
-            "value": "MissingPerimeterConfiguration",
-            "description": "A network connectivity issue is happening on the resource which could be addressed either by adding new resources to the network security perimeter (NSP) or by modifying access rules."
-          },
-          {
-            "name": "MissingIdentityConfiguration",
-            "value": "MissingIdentityConfiguration",
-            "description": "An managed identity hasn't been associated with the resource. The resource will still be able to validate inbound traffic from the network security perimeter (NSP) or matching inbound access rules, but it won't be able to perform outbound access as a member of the NSP."
-          }
-        ]
-      }
-    },
     "KeySource": {
       "type": "string",
       "description": "Type of the key source.",
@@ -6002,216 +5955,6 @@
         ]
       }
     },
-    "NetworkSecurityPerimeter": {
-      "type": "object",
-      "description": "NetworkSecurityPerimeter related information",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified identifier of the resource",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/networkSecurityPerimeters"
-              }
-            ]
-          }
-        },
-        "perimeterGuid": {
-          "type": "string",
-          "description": "Guid of the resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfiguration": {
-      "type": "object",
-      "description": "Network security perimeter (NSP) configuration resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
-          "description": "Network security configuration properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "NetworkSecurityPerimeterConfigurationListResult": {
-      "type": "object",
-      "description": "The response of a NetworkSecurityPerimeterConfiguration list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The NetworkSecurityPerimeterConfiguration items on this page",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "NetworkSecurityPerimeterConfigurationProperties": {
-      "type": "object",
-      "description": "Properties of NetworkSecurityPerimeterConfiguration",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProvisioningState",
-          "description": "Provisioning state of NetworkSecurityPerimeter configuration propagation",
-          "readOnly": true
-        },
-        "provisioningIssues": {
-          "type": "array",
-          "description": "List of Provisioning Issues if any",
-          "items": {
-            "$ref": "#/definitions/ProvisioningIssue"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "networkSecurityPerimeter": {
-          "$ref": "#/definitions/NetworkSecurityPerimeter",
-          "description": "NetworkSecurityPerimeter related information"
-        },
-        "resourceAssociation": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation",
-          "description": "Information about resource association",
-          "readOnly": true
-        },
-        "profile": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationPropertiesProfile",
-          "description": "Information about current network profile",
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationPropertiesProfile": {
-      "type": "object",
-      "description": "Information about current network profile",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the resource"
-        },
-        "accessRulesVersion": {
-          "type": "string",
-          "description": "Current access rules version"
-        },
-        "accessRules": {
-          "type": "array",
-          "description": "List of Access Rules",
-          "items": {
-            "$ref": "#/definitions/NspAccessRule"
-          }
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation": {
-      "type": "object",
-      "description": "Information about resource association",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the resource association"
-        },
-        "accessMode": {
-          "$ref": "#/definitions/ResourceAssociationAccessMode",
-          "description": "Access Mode of the resource association"
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state of NetworkSecurityPerimeter configuration propagation",
-      "enum": [
-        "Unknown",
-        "Creating",
-        "Updating",
-        "Accepted",
-        "InvalidResponse",
-        "Succeeded",
-        "SucceededWithIssues",
-        "Failed",
-        "Deleting",
-        "Deleted",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown provisioning state"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "Configuration is being created"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Configuration is being updated"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Configuration has been accepted"
-          },
-          {
-            "name": "InvalidResponse",
-            "value": "InvalidResponse",
-            "description": "Invalid response received"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Configuration succeeded"
-          },
-          {
-            "name": "SucceededWithIssues",
-            "value": "SucceededWithIssues",
-            "description": "Configuration succeeded with issues"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Configuration failed"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Configuration is being deleted"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Configuration has been deleted"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Configuration was canceled"
-          }
-        ]
-      }
-    },
     "NodeCommunicationMode": {
       "type": "string",
       "description": "Determines how a pool communicates with the Batch service.",
@@ -6276,96 +6019,6 @@
             "description": "Nodes in the pool will be spread across different zones with best effort balancing."
           }
         ]
-      }
-    },
-    "NspAccessRule": {
-      "type": "object",
-      "description": "Network security perimeter access rule",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the NSP access rule"
-        },
-        "properties": {
-          "$ref": "#/definitions/NspAccessRuleProperties",
-          "description": "Properties of the NSP access rule"
-        }
-      }
-    },
-    "NspAccessRuleDirection": {
-      "type": "string",
-      "description": "Direction of the access rule",
-      "enum": [
-        "Inbound",
-        "Outbound"
-      ],
-      "x-ms-enum": {
-        "name": "NspAccessRuleDirection",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Inbound",
-            "value": "Inbound",
-            "description": "Inbound access rule"
-          },
-          {
-            "name": "Outbound",
-            "value": "Outbound",
-            "description": "Outbound access rule"
-          }
-        ]
-      }
-    },
-    "NspAccessRuleProperties": {
-      "type": "object",
-      "description": "Properties of NSP access rule",
-      "properties": {
-        "direction": {
-          "$ref": "#/definitions/NspAccessRuleDirection",
-          "description": "Direction of the access rule"
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "description": "Address prefixes in the CIDR format for inbound rules",
-          "items": {
-            "type": "string"
-          }
-        },
-        "subscriptions": {
-          "type": "array",
-          "description": "Subscriptions for inbound rules",
-          "items": {
-            "$ref": "#/definitions/AccessRulePropertiesSubscriptionsItem"
-          }
-        },
-        "networkSecurityPerimeters": {
-          "type": "array",
-          "description": "Network security perimeters for inbound rules",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeter"
-          }
-        },
-        "fullyQualifiedDomainNames": {
-          "type": "array",
-          "description": "Fully qualified domain names (FQDNs) for outbound rules",
-          "items": {
-            "type": "string"
-          }
-        },
-        "emailAddresses": {
-          "type": "array",
-          "description": "Email addresses for notifications",
-          "items": {
-            "type": "string"
-          }
-        },
-        "phoneNumbers": {
-          "type": "array",
-          "description": "Phone numbers for notifications",
-          "items": {
-            "type": "string"
-          }
-        }
       }
     },
     "OSDisk": {
@@ -7113,39 +6766,6 @@
         ]
       }
     },
-    "ProvisioningIssue": {
-      "type": "object",
-      "description": "Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the issue"
-        },
-        "properties": {
-          "$ref": "#/definitions/ProvisioningIssueProperties",
-          "description": "Properties of Provisioning Issue",
-          "readOnly": true
-        }
-      }
-    },
-    "ProvisioningIssueProperties": {
-      "type": "object",
-      "description": "Properties of Provisioning Issue",
-      "properties": {
-        "issueType": {
-          "$ref": "#/definitions/IssueType",
-          "description": "Type of Issue"
-        },
-        "severity": {
-          "$ref": "#/definitions/Severity",
-          "description": "Severity of the issue"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the issue"
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioned state of the resource",
@@ -7288,42 +6908,6 @@
             "code"
           ]
         }
-      }
-    },
-    "ResourceAssociationAccessMode": {
-      "type": "string",
-      "description": "Access Mode of the resource association",
-      "enum": [
-        "NoAssociationMode",
-        "EnforcedMode",
-        "LearningMode",
-        "AuditMode"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceAssociationAccessMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NoAssociationMode",
-            "value": "NoAssociationMode",
-            "description": "No association mode"
-          },
-          {
-            "name": "EnforcedMode",
-            "value": "EnforcedMode",
-            "description": "Enforced mode"
-          },
-          {
-            "name": "LearningMode",
-            "value": "LearningMode",
-            "description": "Learning mode"
-          },
-          {
-            "name": "AuditMode",
-            "value": "AuditMode",
-            "description": "Audit mode"
-          }
-        ]
       }
     },
     "ResourceFile": {
@@ -7555,28 +7139,6 @@
       "required": [
         "id"
       ]
-    },
-    "Severity": {
-      "type": "string",
-      "description": "Severity of the issue.",
-      "enum": [
-        "Warning",
-        "Error"
-      ],
-      "x-ms-enum": {
-        "name": "Severity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Warning",
-            "value": "Warning"
-          },
-          {
-            "name": "Error",
-            "value": "Error"
-          }
-        ]
-      }
     },
     "SkuCapability": {
       "type": "object",

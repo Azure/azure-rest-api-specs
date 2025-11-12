@@ -32,14 +32,17 @@ interface NetworkSecurityPerimeterConfigurations {
    */
   getConfiguration is ArmResourceRead<
     NetworkSecurityPerimeterConfiguration,
+    Response = CommonTypes.NetworkSecurityPerimeterConfiguration,
     Error = CloudError
   >;
 
   /**
    * Lists all of the NSP configurations in the specified account.
    */
+  @list
   listConfigurations is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,
+    Response = CommonTypes.NetworkSecurityPerimeterConfigurationListResult,
     Error = CloudError
   >;
 
@@ -61,4 +64,7 @@ interface NetworkSecurityPerimeterConfigurations {
 );
 @@doc(NetworkSecurityPerimeterConfiguration.properties,
   "Network security configuration properties."
+);
+@@pageItems(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.value);
+@@nextLink(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.nextLink
 );
