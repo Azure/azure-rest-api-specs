@@ -42,11 +42,13 @@ interface AgentPools {
   /**
    * Get properties of the provided Kubernetes cluster agent pool.
    */
+  @summary("Retrieve the Kubernetes cluster agent pool.")
   get is ArmResourceRead<AgentPool>;
 
   /**
    * Create a new Kubernetes cluster agent pool or update the properties of the existing one.
    */
+  @summary("Create or update the Kubernetes cluster agent pool.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AgentPool,
     Parameters = {
@@ -77,6 +79,7 @@ interface AgentPools {
    * Patch the properties of the provided Kubernetes cluster agent pool, or update the tags associated with the Kubernetes cluster agent pool. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the Kubernetes cluster agent pool.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     AgentPool,
@@ -114,6 +117,7 @@ interface AgentPools {
   /**
    * Delete the provided Kubernetes cluster agent pool.
    */
+  @summary("Delete the Kubernetes cluster agent pool.")
   delete is ArmResourceDeleteWithoutOkAsync<
     AgentPool,
     Parameters = {
@@ -144,6 +148,7 @@ interface AgentPools {
   /**
    * Get a list of agent pools for the provided Kubernetes cluster.
    */
+  @summary("List agent pools of the Kubernetes cluster.")
   listByKubernetesCluster is ArmResourceListByParent<
     AgentPool,
     Parameters = {

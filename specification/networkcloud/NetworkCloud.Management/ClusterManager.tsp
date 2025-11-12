@@ -43,11 +43,13 @@ interface ClusterManagers {
   /**
    * Get the properties of the provided cluster manager.
    */
+  @summary("Retrieve the cluster manager.")
   get is ArmResourceRead<ClusterManager>;
 
   /**
    * Create a new cluster manager or update properties of the cluster manager if it exists.
    */
+  @summary("Create or update the cluster manager.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ClusterManager,
     Parameters = {
@@ -77,6 +79,7 @@ interface ClusterManagers {
   /**
    * Patch properties of the provided cluster manager, or update the tags assigned to the cluster manager. Properties and tag updates can be done independently.
    */
+  @summary("Patch the cluster manager.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     ClusterManager,
@@ -109,6 +112,7 @@ interface ClusterManagers {
   /**
    * Delete the provided cluster manager.
    */
+  @summary("Delete the cluster manager.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ClusterManager,
     Parameters = {
@@ -139,6 +143,7 @@ interface ClusterManagers {
   /**
    * Get a list of cluster managers in the provided resource group.
    */
+  @summary("List cluster managers in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     ClusterManager,
     Parameters = {
@@ -160,6 +165,7 @@ interface ClusterManagers {
   /**
    * Get a list of cluster managers in the provided subscription.
    */
+  @summary("List cluster managers in the subscription.")
   listBySubscription is ArmListBySubscription<
     ClusterManager,
     Parameters = {
@@ -181,6 +187,7 @@ interface ClusterManagers {
   /**
    * Update the private endpoint connection for the Azure Relay namespace managed by the specified cluster manager. Use this operation to approve or reject a pending private endpoint connection request for the relay namespace managed by the cluster manager.
    */
+  @summary("Approve or reject a relay private endpoint connection.")
   updateRelayPrivateEndpointConnection is ArmResourceActionAsync<
     ClusterManager,
     ClusterManagerUpdateRelayPrivateEndpointConnectionParameters,

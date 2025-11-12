@@ -42,11 +42,13 @@ interface BmcKeySets {
   /**
    * Get baseboard management controller key set of the provided cluster.
    */
+  @summary("Retrieve the baseboard management controller key set of the cluster.")
   get is ArmResourceRead<BmcKeySet>;
 
   /**
    * Create a new baseboard management controller key set or update the existing one for the provided cluster.
    */
+  @summary("Create or update the baseboard management controller key set of the cluster.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BmcKeySet,
     Parameters = {
@@ -77,6 +79,7 @@ interface BmcKeySets {
    * Patch properties of baseboard management controller key set for the provided cluster, or update the tags associated with it. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch baseboard management controller key set of the cluster.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     BmcKeySet,
@@ -114,6 +117,7 @@ interface BmcKeySets {
   /**
    * Delete the baseboard management controller key set of the provided cluster.
    */
+  @summary("Delete the baseboard management controller key set of the cluster.")
   delete is ArmResourceDeleteWithoutOkAsync<
     BmcKeySet,
     Parameters = {
@@ -144,6 +148,7 @@ interface BmcKeySets {
   /**
    * Get a list of baseboard management controller key sets for the provided cluster.
    */
+  @summary("List baseboard management controller key sets of the cluster.")
   listByCluster is ArmResourceListByParent<
     BmcKeySet,
     Parameters = {

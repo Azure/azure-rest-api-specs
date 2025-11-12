@@ -45,11 +45,13 @@ interface BareMetalMachineKeySets {
   /**
    * Get bare metal machine key set of the provided cluster.
    */
+  @summary("Retrieve the bare metal machine key set of the cluster.")
   get is ArmResourceRead<BareMetalMachineKeySet>;
 
   /**
    * Create a new bare metal machine key set or update the existing one for the provided cluster.
    */
+  @summary("Create or update the bare metal machine key set of the cluster.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BareMetalMachineKeySet,
     Parameters = {
@@ -80,6 +82,7 @@ interface BareMetalMachineKeySets {
    * Patch properties of bare metal machine key set for the provided cluster, or update the tags associated with it. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch bare metal machine key set of the cluster.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     BareMetalMachineKeySet,
@@ -117,6 +120,7 @@ interface BareMetalMachineKeySets {
   /**
    * Delete the bare metal machine key set of the provided cluster.
    */
+  @summary("Delete the bare metal machine key set of the cluster.")
   delete is ArmResourceDeleteWithoutOkAsync<
     BareMetalMachineKeySet,
     Parameters = {
@@ -147,6 +151,7 @@ interface BareMetalMachineKeySets {
   /**
    * Get a list of bare metal machine key sets for the provided cluster.
    */
+  @summary("List bare metal machine key sets of the cluster.")
   listByCluster is ArmResourceListByParent<
     BareMetalMachineKeySet,
     Parameters = {

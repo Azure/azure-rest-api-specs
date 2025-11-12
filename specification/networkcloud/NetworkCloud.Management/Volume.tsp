@@ -39,11 +39,13 @@ interface Volumes {
   /**
    * Get properties of the provided volume.
    */
+  @summary("Retrieve the volume.")
   get is ArmResourceRead<Volume>;
 
   /**
    * Create a new volume or update the properties of the existing one.
    */
+  @summary("Create or update the volume.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Volume,
     Parameters = {
@@ -73,6 +75,7 @@ interface Volumes {
   /**
    * Update tags associated with the provided volume.
    */
+  @summary("Patch the volume.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     Volume,
@@ -105,6 +108,7 @@ interface Volumes {
   /**
    * Delete the provided volume.
    */
+  @summary("Delete the volume.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Volume,
     Parameters = {
@@ -135,6 +139,7 @@ interface Volumes {
   /**
    * Get a list of volumes in the provided resource group.
    */
+  @summary("List volumes in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Volume,
     Parameters = {
@@ -156,6 +161,7 @@ interface Volumes {
   /**
    * Get a list of volumes in the provided subscription.
    */
+  @summary("List volumes in the subscription.")
   listBySubscription is ArmListBySubscription<
     Volume,
     Parameters = {

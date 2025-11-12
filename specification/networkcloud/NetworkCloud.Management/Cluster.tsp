@@ -49,11 +49,13 @@ interface Clusters {
   /**
    * Get properties of the provided cluster.
    */
+  @summary("Retrieve the cluster.")
   get is ArmResourceRead<Cluster>;
 
   /**
    * Create a new cluster or update the properties of the cluster if it exists.
    */
+  @summary("Create or update the cluster.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
     Parameters = {
@@ -84,6 +86,7 @@ interface Clusters {
    * Patch the properties of the provided cluster, or update the tags associated with the cluster. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the cluster.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Cluster,
@@ -121,6 +124,7 @@ interface Clusters {
   /**
    * Delete the provided cluster.
    */
+  @summary("Delete the cluster.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
     Parameters = {
@@ -151,6 +155,7 @@ interface Clusters {
   /**
    * Get a list of clusters in the provided resource group.
    */
+  @summary("List clusters in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Cluster,
     Parameters = {
@@ -172,6 +177,7 @@ interface Clusters {
   /**
    * Get a list of clusters in the provided subscription.
    */
+  @summary("List clusters in the subscription.")
   listBySubscription is ArmListBySubscription<
     Cluster,
     Parameters = {
@@ -193,6 +199,7 @@ interface Clusters {
   /**
    * Trigger the continuation of an update for a cluster with a matching update strategy that has paused after completing a segment of the update.
    */
+  @summary("Continue a paused update to the cluster version.")
   continueUpdateVersion is ArmResourceActionAsync<
     Cluster,
     ClusterContinueUpdateVersionParameters,
@@ -202,6 +209,7 @@ interface Clusters {
   /**
    * Deploy the cluster using the rack configuration provided during creation.
    */
+  @summary("Deploy the cluster.")
   deploy is ArmResourceActionAsync<
     Cluster,
     ClusterDeployParameters,
@@ -212,6 +220,7 @@ interface Clusters {
   /**
    * Trigger an inspection of the cluster to perform validation and optional corrective actions based on the supplied additional actions and filters.
    */
+  @summary("Inspect the cluster.")
   inspect is ArmResourceActionAsync<
     Cluster,
     ClusterInspectParameters,
@@ -222,6 +231,7 @@ interface Clusters {
   /**
    * Triggers the execution of a runtime protection scan to detect and remediate detected issues, in accordance with the cluster configuration.
    */
+  @summary("Execute a runtime protection scan on the cluster.")
   scanRuntime is ArmResourceActionAsync<
     Cluster,
     ClusterScanRuntimeParameters,
@@ -232,6 +242,7 @@ interface Clusters {
   /**
    * Update the version of the provided cluster to one of the available supported versions.
    */
+  @summary("Update the cluster version.")
   updateVersion is ArmResourceActionAsync<
     Cluster,
     ClusterUpdateVersionParameters,

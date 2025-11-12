@@ -40,11 +40,13 @@ interface L2Networks {
   /**
    * Get properties of the provided layer 2 (L2) network.
    */
+  @summary("Retrieve the layer 2 (L2) network.")
   get is ArmResourceRead<L2Network>;
 
   /**
    * Create a new layer 2 (L2) network or update the properties of the existing network.
    */
+  @summary("Create or update the layer 2 (L2) network.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     L2Network,
     Parameters = {
@@ -74,6 +76,7 @@ interface L2Networks {
   /**
    * Update tags associated with the provided layer 2 (L2) network.
    */
+  @summary("Patch the layer 2 (L2) network.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     L2Network,
@@ -106,6 +109,7 @@ interface L2Networks {
   /**
    * Delete the provided layer 2 (L2) network.
    */
+  @summary("Delete the layer 2 (L2) network.")
   delete is ArmResourceDeleteWithoutOkAsync<
     L2Network,
     Parameters = {
@@ -136,6 +140,7 @@ interface L2Networks {
   /**
    * Get a list of layer 2 (L2) networks in the provided resource group.
    */
+  @summary("List layer 2 (L2) networks in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     L2Network,
     Parameters = {
@@ -157,6 +162,7 @@ interface L2Networks {
   /**
    * Get a list of layer 2 (L2) networks in the provided subscription.
    */
+  @summary("List layer 2 (L2) networks in the subscription.")
   listBySubscription is ArmListBySubscription<
     L2Network,
     Parameters = {

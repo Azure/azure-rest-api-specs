@@ -39,11 +39,13 @@ interface Racks {
   /**
    * Get properties of the provided rack.
    */
+  @summary("Retrieve the rack.")
   get is ArmResourceRead<Rack>;
 
   /**
    * Create a new rack or update properties of the existing one. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.
    */
+  @summary("Create or update the rack.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Rack,
     Parameters = {
@@ -74,6 +76,7 @@ interface Racks {
    * Patch properties of the provided rack, or update the tags associated with the rack. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the rack.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Rack,
@@ -111,6 +114,7 @@ interface Racks {
   /**
    * Delete the provided rack. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.
    */
+  @summary("Delete the rack.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Rack,
     Parameters = {
@@ -141,6 +145,7 @@ interface Racks {
   /**
    * Get a list of racks in the provided resource group.
    */
+  @summary("List racks in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Rack,
     Parameters = {
@@ -162,6 +167,7 @@ interface Racks {
   /**
    * Get a list of racks in the provided subscription.
    */
+  @summary("List racks in the subscription.")
   listBySubscription is ArmListBySubscription<
     Rack,
     Parameters = {

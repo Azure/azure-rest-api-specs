@@ -40,11 +40,13 @@ interface L3Networks {
   /**
    * Get properties of the provided layer 3 (L3) network.
    */
+  @summary("Retrieve the layer 3 (L3) network.")
   get is ArmResourceRead<L3Network>;
 
   /**
    * Create a new layer 3 (L3) network or update the properties of the existing network.
    */
+  @summary("Create or update the layer 3 (L3) network.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     L3Network,
     Parameters = {
@@ -74,6 +76,7 @@ interface L3Networks {
   /**
    * Update tags associated with the provided layer 3 (L3) network.
    */
+  @summary("Patch the layer 3 (L3) network.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     L3Network,
@@ -106,6 +109,7 @@ interface L3Networks {
   /**
    * Delete the provided layer 3 (L3) network.
    */
+  @summary("Delete the layer 3 (L3) network.")
   delete is ArmResourceDeleteWithoutOkAsync<
     L3Network,
     Parameters = {
@@ -136,6 +140,7 @@ interface L3Networks {
   /**
    * Get a list of layer 3 (L3) networks in the provided resource group.
    */
+  @summary("List layer 3 (L3) networks in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     L3Network,
     Parameters = {
@@ -157,6 +162,7 @@ interface L3Networks {
   /**
    * Get a list of layer 3 (L3) networks in the provided subscription.
    */
+  @summary("List layer 3 (L3) networks in the subscription.")
   listBySubscription is ArmListBySubscription<
     L3Network,
     Parameters = {

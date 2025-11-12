@@ -40,11 +40,13 @@ interface BareMetalMachines {
   /**
    * Get properties of the provided bare metal machine.
    */
+  @summary("Retrieve the bare metal machine.")
   get is ArmResourceRead<BareMetalMachine>;
 
   /**
    * Create a new bare metal machine or update the properties of the existing one. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.
    */
+  @summary("Create or update the bare metal machine.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BareMetalMachine,
     Parameters = {
@@ -75,6 +77,7 @@ interface BareMetalMachines {
    * Patch properties of the provided bare metal machine, or update tags associated with the bare metal machine. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the bare metal machine.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     BareMetalMachine,
@@ -112,6 +115,7 @@ interface BareMetalMachines {
   /**
    * Delete the provided bare metal machine. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.
    */
+  @summary("Delete the bare metal machine.")
   delete is ArmResourceDeleteWithoutOkAsync<
     BareMetalMachine,
     Parameters = {
@@ -142,6 +146,7 @@ interface BareMetalMachines {
   /**
    * Get a list of bare metal machines in the provided resource group.
    */
+  @summary("List bare metal machines in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     BareMetalMachine,
     Parameters = {
@@ -163,6 +168,7 @@ interface BareMetalMachines {
   /**
    * Get a list of bare metal machines in the provided subscription.
    */
+  @summary("List bare metal machines in the subscription.")
   listBySubscription is ArmListBySubscription<
     BareMetalMachine,
     Parameters = {
@@ -184,6 +190,7 @@ interface BareMetalMachines {
   /**
    * Cordon the provided bare metal machine's Kubernetes node.
    */
+  @summary("Cordon the bare metal machine.")
   cordon is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineCordonParameters,
@@ -194,6 +201,7 @@ interface BareMetalMachines {
   /**
    * Power off the provided bare metal machine.
    */
+  @summary("Power off the bare metal machine.")
   powerOff is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachinePowerOffParameters,
@@ -204,6 +212,7 @@ interface BareMetalMachines {
   /**
    * Reimage the provided bare metal machine.
    */
+  @summary("Reimage the bare metal machine.")
   reimage is ArmResourceActionAsync<
     BareMetalMachine,
     void,
@@ -213,6 +222,7 @@ interface BareMetalMachines {
   /**
    * Replace the provided bare metal machine.
    */
+  @summary("Replace (service) the bare metal machine.")
   replace is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineReplaceParameters,
@@ -223,6 +233,7 @@ interface BareMetalMachines {
   /**
    * Restart the provided bare metal machine.
    */
+  @summary("Restart the bare metal machine.")
   restart is ArmResourceActionAsync<
     BareMetalMachine,
     void,
@@ -232,6 +243,7 @@ interface BareMetalMachines {
   /**
    * Run the command or the script on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
+  @summary("Run the command on the bare metal machine.")
   runCommand is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineRunCommandParameters,
@@ -241,6 +253,7 @@ interface BareMetalMachines {
   /**
    * Run one or more data extractions on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
+  @summary("Run data extraction for a bare metal machine.")
   runDataExtracts is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineRunDataExtractsParameters,
@@ -250,6 +263,7 @@ interface BareMetalMachines {
   /**
    * Run one or more restricted data extractions on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
+  @summary("Run restricted data extraction for a bare metal machine.")
   runDataExtractsRestricted is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineRunDataExtractsParameters,
@@ -259,6 +273,7 @@ interface BareMetalMachines {
   /**
    * Run one or more read-only commands on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
+  @summary("Run read-only commands against a bare metal machine.")
   runReadCommands is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineRunReadCommandsParameters,
@@ -268,6 +283,7 @@ interface BareMetalMachines {
   /**
    * Start the provided bare metal machine.
    */
+  @summary("Start the bare metal machine.")
   start is ArmResourceActionAsync<
     BareMetalMachine,
     void,
@@ -277,6 +293,7 @@ interface BareMetalMachines {
   /**
    * Uncordon the provided bare metal machine's Kubernetes node.
    */
+  @summary("Uncordon the bare metal machine.")
   uncordon is ArmResourceActionAsync<
     BareMetalMachine,
     void,

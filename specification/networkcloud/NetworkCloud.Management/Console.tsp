@@ -42,11 +42,13 @@ interface Consoles {
   /**
    * Get properties of the provided virtual machine console.
    */
+  @summary("Retrieve the virtual machine console.")
   get is ArmResourceRead<Console>;
 
   /**
    * Create a new virtual machine console or update the properties of the existing virtual machine console.
    */
+  @summary("Create or update the virtual machine console.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Console,
     Parameters = {
@@ -77,6 +79,7 @@ interface Consoles {
    * Patch the properties of the provided virtual machine console, or update the tags associated with the virtual machine console. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the virtual machine console.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Console,
@@ -114,6 +117,7 @@ interface Consoles {
   /**
    * Delete the provided virtual machine console.
    */
+  @summary("Delete the virtual machine console.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Console,
     Parameters = {
@@ -144,6 +148,7 @@ interface Consoles {
   /**
    * Get a list of consoles for the provided virtual machine.
    */
+  @summary("List consoles of the virtual machine.")
   listByVirtualMachine is ArmResourceListByParent<
     Console,
     Parameters = {

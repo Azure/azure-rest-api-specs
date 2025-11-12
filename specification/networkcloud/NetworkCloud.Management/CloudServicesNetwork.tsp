@@ -40,11 +40,13 @@ interface CloudServicesNetworks {
   /**
    * Get properties of the provided cloud services network.
    */
+  @summary("Retrieve the cloud services network.")
   get is ArmResourceRead<CloudServicesNetwork>;
 
   /**
    * Create a new cloud services network or update the properties of the existing cloud services network.
    */
+  @summary("Create or update the cloud services network.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CloudServicesNetwork,
     Parameters = {
@@ -75,6 +77,7 @@ interface CloudServicesNetworks {
    * Update properties of the provided cloud services network, or update the tags associated with it. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the cloud services network.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     CloudServicesNetwork,
@@ -112,6 +115,7 @@ interface CloudServicesNetworks {
   /**
    * Delete the provided cloud services network.
    */
+  @summary("Delete the cloud services network.")
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudServicesNetwork,
     Parameters = {
@@ -142,6 +146,7 @@ interface CloudServicesNetworks {
   /**
    * Get a list of cloud services networks in the provided resource group.
    */
+  @summary("List cloud services networks in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     CloudServicesNetwork,
     Parameters = {
@@ -163,6 +168,7 @@ interface CloudServicesNetworks {
   /**
    * Get a list of cloud services networks in the provided subscription.
    */
+  @summary("List cloud services networks in the subscription.")
   listBySubscription is ArmListBySubscription<
     CloudServicesNetwork,
     Parameters = {

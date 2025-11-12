@@ -36,11 +36,13 @@ interface KubernetesClusterFeatures {
   /**
    * Get properties of the provided the Kubernetes cluster feature.
    */
+  @summary("Retrieve the Kubernetes cluster feature.")
   get is ArmResourceRead<KubernetesClusterFeature>;
 
   /**
    * Create a new Kubernetes cluster feature or update properties of the Kubernetes cluster feature if it exists.
    */
+  @summary("Create or update the Kubernetes cluster feature.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     KubernetesClusterFeature,
     Parameters = {
@@ -71,6 +73,7 @@ interface KubernetesClusterFeatures {
    * Patch properties of the provided Kubernetes cluster feature.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the Kubernetes cluster feature.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     KubernetesClusterFeature,
@@ -108,6 +111,7 @@ interface KubernetesClusterFeatures {
   /**
    * Delete the provided Kubernetes cluster feature.
    */
+  @summary("Delete the Kubernetes cluster feature.")
   delete is ArmResourceDeleteWithoutOkAsync<
     KubernetesClusterFeature,
     Parameters = {
@@ -138,6 +142,7 @@ interface KubernetesClusterFeatures {
   /**
    * Get a list of features for the provided Kubernetes cluster.
    */
+  @summary("List features for the Kubernetes cluster.")
   listByKubernetesCluster is ArmResourceListByParent<
     KubernetesClusterFeature,
     Parameters = {

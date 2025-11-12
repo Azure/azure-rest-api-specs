@@ -40,11 +40,13 @@ interface KubernetesClusters {
   /**
    * Get properties of the provided the Kubernetes cluster.
    */
+  @summary("Retrieve the Kubernetes cluster.")
   get is ArmResourceRead<KubernetesCluster>;
 
   /**
    * Create a new Kubernetes cluster or update the properties of the existing one.
    */
+  @summary("Create or update the Kubernetes cluster.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     KubernetesCluster,
     Parameters = {
@@ -75,6 +77,7 @@ interface KubernetesClusters {
    * Patch the properties of the provided Kubernetes cluster, or update the tags associated with the Kubernetes cluster. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the Kubernetes cluster.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     KubernetesCluster,
@@ -112,6 +115,7 @@ interface KubernetesClusters {
   /**
    * Delete the provided Kubernetes cluster.
    */
+  @summary("Delete the Kubernetes cluster.")
   delete is ArmResourceDeleteWithoutOkAsync<
     KubernetesCluster,
     Parameters = {
@@ -142,6 +146,7 @@ interface KubernetesClusters {
   /**
    * Get a list of Kubernetes clusters in the provided resource group.
    */
+  @summary("List Kubernetes clusters in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     KubernetesCluster,
     Parameters = {
@@ -163,6 +168,7 @@ interface KubernetesClusters {
   /**
    * Get a list of Kubernetes clusters in the provided subscription.
    */
+  @summary("List Kubernetes clusters in the subscription.")
   listBySubscription is ArmListBySubscription<
     KubernetesCluster,
     Parameters = {
@@ -184,6 +190,7 @@ interface KubernetesClusters {
   /**
    * Restart a targeted node of a Kubernetes cluster.
    */
+  @summary("Restart a targeted node.")
   restartNode is ArmResourceActionAsync<
     KubernetesCluster,
     KubernetesClusterRestartNodeParameters,

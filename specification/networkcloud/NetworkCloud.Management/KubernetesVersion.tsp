@@ -40,11 +40,13 @@ interface KubernetesVersions {
   /**
    * Retrieve the Kubernetes version resource that describes the available Kubernetes versions for deployment.
    */
+  @summary("Get the Kubernetes version resource.")
   get is ArmResourceRead<KubernetesVersion>;
 
   /**
    * Create the Kubernetes version resource or update its tags. This resource is system managed and should only be created with the name "default".
    */
+  @summary("Create or update the Kubernetes version resource.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     KubernetesVersion,
     Parameters = {
@@ -75,6 +77,7 @@ interface KubernetesVersions {
    * Update tags associated with the Kubernetes version resource. No other properties are supported for update.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the Kubernetes version resource.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     KubernetesVersion,
@@ -112,6 +115,7 @@ interface KubernetesVersions {
   /**
    * Delete the specified Kubernetes version resource.
    */
+  @summary("Delete the Kubernetes version resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     KubernetesVersion,
     Parameters = {
@@ -142,6 +146,7 @@ interface KubernetesVersions {
   /**
    * Get a list of Kubernetes version resources in the provided resource group.
    */
+  @summary("List Kubernetes versions in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     KubernetesVersion,
     Parameters = {
@@ -163,6 +168,7 @@ interface KubernetesVersions {
   /**
    * Get a list of Kubernetes version resources in the provided subscription.
    */
+  @summary("List Kubernetes versions in the subscription.")
   listBySubscription is ArmListBySubscription<
     KubernetesVersion,
     Parameters = {

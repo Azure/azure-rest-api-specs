@@ -41,17 +41,20 @@ interface AccessBridges {
   /**
    * Get the properties of the provided access bridge.
    */
+  @summary("Retrieve the access bridge.")
   get is ArmResourceRead<AccessBridge>;
 
   /**
    * Create a new access bridge or update the properties of the existing access bridge.
    */
+  @summary("Create or update the access bridge.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AccessBridge>;
 
   /**
    * Update properties of the provided access bridge, or update tags associated with the access bridge. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the access bridge.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     AccessBridge,
@@ -89,6 +92,7 @@ interface AccessBridges {
   /**
    * Delete the specified access bridge.
    */
+  @summary("Delete the access bridge.")
   delete is ArmResourceDeleteWithoutOkAsync<
     AccessBridge,
     Parameters = {
@@ -119,6 +123,7 @@ interface AccessBridges {
   /**
    * Get a list of access bridges in the provided resource group.
    */
+  @summary("List access bridges in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     AccessBridge,
     Parameters = {
@@ -140,6 +145,7 @@ interface AccessBridges {
   /**
    * Get a list of access bridges in the provided subscription.
    */
+  @summary("List access bridges in the subscription.")
   listBySubscription is ArmListBySubscription<
     AccessBridge,
     Parameters = {

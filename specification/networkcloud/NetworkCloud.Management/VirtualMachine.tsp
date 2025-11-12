@@ -42,11 +42,13 @@ interface VirtualMachines {
   /**
    * Get properties of the provided virtual machine.
    */
+  @summary("Retrieve the virtual machine.")
   get is ArmResourceRead<VirtualMachine>;
 
   /**
    * Create a new virtual machine or update the properties of the existing virtual machine.
    */
+  @summary("Create or update the virtual machine.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachine,
     Parameters = {
@@ -77,6 +79,7 @@ interface VirtualMachines {
    * Patch the properties of the provided virtual machine, or update the tags associated with the virtual machine. Properties and tag updates can be done independently.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patch the virtual machine.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     VirtualMachine,
@@ -114,6 +117,7 @@ interface VirtualMachines {
   /**
    * Delete the provided virtual machine.
    */
+  @summary("Delete the virtual machine.")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachine,
     Parameters = {
@@ -144,6 +148,7 @@ interface VirtualMachines {
   /**
    * Get a list of virtual machines in the provided resource group.
    */
+  @summary("List virtual machines in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     VirtualMachine,
     Parameters = {
@@ -165,6 +170,7 @@ interface VirtualMachines {
   /**
    * Get a list of virtual machines in the provided subscription.
    */
+  @summary("List virtual machines in the subscription.")
   listBySubscription is ArmListBySubscription<
     VirtualMachine,
     Parameters = {
@@ -186,6 +192,7 @@ interface VirtualMachines {
   /**
    * Assigns a relay to the specified Microsoft.HybridCompute machine associated with the provided virtual machine.
    */
+  @summary("Assigns a relay to the specified Microsoft.HybridCompute machine.")
   assignRelay is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineAssignRelayParameters,
@@ -196,6 +203,7 @@ interface VirtualMachines {
   /**
    * Power off the provided virtual machine.
    */
+  @summary("Power off the virtual machine.")
   powerOff is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachinePowerOffParameters,
@@ -206,6 +214,7 @@ interface VirtualMachines {
   /**
    * Reimage the provided virtual machine.
    */
+  @summary("Reimage the virtual machine.")
   reimage is ArmResourceActionAsync<
     VirtualMachine,
     void,
@@ -215,6 +224,7 @@ interface VirtualMachines {
   /**
    * Restart the provided virtual machine.
    */
+  @summary("Restart the virtual machine.")
   restart is ArmResourceActionAsync<
     VirtualMachine,
     void,
@@ -224,6 +234,7 @@ interface VirtualMachines {
   /**
    * Start the provided virtual machine.
    */
+  @summary("Start the virtual machine.")
   start is ArmResourceActionAsync<
     VirtualMachine,
     void,

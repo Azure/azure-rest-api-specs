@@ -40,11 +40,13 @@ interface TrunkedNetworks {
   /**
    * Get properties of the provided trunked network.
    */
+  @summary("Retrieve the trunked network.")
   get is ArmResourceRead<TrunkedNetwork>;
 
   /**
    * Create a new trunked network or update the properties of the existing trunked network.
    */
+  @summary("Create or update the trunked network.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     TrunkedNetwork,
     Parameters = {
@@ -74,6 +76,7 @@ interface TrunkedNetworks {
   /**
    * Update tags associated with the provided trunked network.
    */
+  @summary("Patch the trunked network.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     TrunkedNetwork,
@@ -106,6 +109,7 @@ interface TrunkedNetworks {
   /**
    * Delete the provided trunked network.
    */
+  @summary("Delete the trunked network.")
   delete is ArmResourceDeleteWithoutOkAsync<
     TrunkedNetwork,
     Parameters = {
@@ -136,6 +140,7 @@ interface TrunkedNetworks {
   /**
    * Get a list of trunked networks in the provided resource group.
    */
+  @summary("List trunked networks in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     TrunkedNetwork,
     Parameters = {
@@ -157,6 +162,7 @@ interface TrunkedNetworks {
   /**
    * Get a list of trunked networks in the provided subscription.
    */
+  @summary("List trunked networks in the subscription.")
   listBySubscription is ArmListBySubscription<
     TrunkedNetwork,
     Parameters = {

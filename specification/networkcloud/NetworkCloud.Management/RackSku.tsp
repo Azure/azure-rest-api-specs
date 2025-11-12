@@ -28,6 +28,7 @@ interface RackSkus {
   /**
    * Get the properties of the provided rack SKU.
    */
+  @summary("Retrieve the rack SKU.")
   get is ArmResourceRead<
     RackSku,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -36,6 +37,7 @@ interface RackSkus {
   /**
    * Get a list of rack SKUs in the provided subscription.
    */
+  @summary("List rack SKUs in the subscription.")
   listBySubscription is ArmResourceListByParent<
     RackSku,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

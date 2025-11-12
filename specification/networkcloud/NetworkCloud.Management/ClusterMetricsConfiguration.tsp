@@ -47,6 +47,7 @@ interface ClusterMetricsConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MetricsConfigurations_Get")
+  @summary("Retrieve the metrics configuration of the cluster.")
   get is ArmResourceRead<ClusterMetricsConfiguration>;
 
   /**
@@ -54,6 +55,7 @@ interface ClusterMetricsConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MetricsConfigurations_CreateOrUpdate")
+  @summary("Create or update metrics configuration of the cluster.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ClusterMetricsConfiguration,
     Parameters = {
@@ -86,6 +88,7 @@ interface ClusterMetricsConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("MetricsConfigurations_Update")
+  @summary("Patch metrics configuration of the cluster.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     ClusterMetricsConfiguration,
@@ -125,6 +128,7 @@ interface ClusterMetricsConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MetricsConfigurations_Delete")
+  @summary("Delete the metrics configuration of the cluster.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ClusterMetricsConfiguration,
     Parameters = {
@@ -157,6 +161,7 @@ interface ClusterMetricsConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MetricsConfigurations_ListByCluster")
+  @summary("List metrics configurations of the cluster.")
   listByCluster is ArmResourceListByParent<
     ClusterMetricsConfiguration,
     Parameters = {

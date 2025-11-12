@@ -60,5 +60,9 @@ enum Versions {
    */
   v2026_01_01_preview: "2026-01-01-preview",
 }
-
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(Operations.list,
+  "Get a list of all available resource provider operations. It contains a URL link to get the next set of results."
+);
+@@summary(Operations.list, "List resource provider operations.");
