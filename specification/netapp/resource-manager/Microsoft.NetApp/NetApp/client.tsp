@@ -12,6 +12,9 @@ using Microsoft.NetApp;
 // Snapshot is not updatable
 @@scope(Microsoft.NetApp.Snapshots.update, "!java");
 
+// rename QuotaItem to SubscriptionQuotaItem, avoid break in SDK
+@@clientName(QuotaItem, "SubscriptionQuotaItem", "java");
+
 // Fix property name case changes
 @@clientName(Microsoft.NetApp.AccountProperties.nfsV4IDDomain,
   "nfsV4IdDomain",
