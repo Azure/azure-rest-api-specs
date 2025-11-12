@@ -179,7 +179,10 @@ interface ResourceSubscriptions {
   >;
 
   /** Updates a resource subscription (supports tags and property updates) */
-  update is ArmResourcePatchSync<ResourceSubscription, ResourceSubscriptionPatch>;
+  update is ArmResourcePatchSync<
+    ResourceSubscription,
+    ResourceSubscriptionPatch
+  >;
 
   /** Deletes a resource subscription */
   delete is ArmResourceDeleteSync<ResourceSubscription>;
