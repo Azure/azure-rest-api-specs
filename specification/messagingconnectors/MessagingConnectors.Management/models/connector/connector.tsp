@@ -81,6 +81,9 @@ union ConnectorState {
   @doc("Failed State")
   Failed: "Failed",
 
+  @doc("Pausing State")
+  Pausing: "Pausing",
+
   string,
 }
 
