@@ -1347,7 +1347,6 @@ model AutoStorageProperties extends AutoStorageBaseProperties {
   /**
    * The UTC time at which storage keys were last synchronized with the Batch account.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastKeySync: utcDateTime;
 }
 
@@ -2771,6 +2770,7 @@ model NetworkConfiguration {
   /**
    * The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication，including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs(
     "https://learn.microsoft.com/azure/batch/batch-virtual-networks",
     "Create an Azure Batch pool in a virtual network"
@@ -2800,6 +2800,7 @@ model NetworkConfiguration {
   /**
    * Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Whether this pool should enable accelerated networking.")
   @OpenAPI.externalDocs(
     "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview",
