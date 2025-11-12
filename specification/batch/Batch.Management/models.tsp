@@ -1265,6 +1265,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The private link service connection state of the private endpoint connection.
    */
+  @summary("The private link service connection state of the private endpoint connection.")
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 }
 
@@ -1701,7 +1702,7 @@ model Operation {
   /**
    * The intended executor of the operation.
    */
-  @summary("The operation type.")
+  @summary("The intended executor of the operation.")
   origin?: string;
 
   /**
@@ -1726,7 +1727,7 @@ model OperationDisplay {
   /**
    * For example: read, write, delete, or listKeys/action
    */
-  @summary("For example: read, write, delete, or listKeys/action")
+  @summary("The operation type.")
   operation?: string;
 
   /**
@@ -1745,13 +1746,12 @@ model OperationDisplay {
 /**
  * The result of the request to list operations.
  */
-union ResourceType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum ResourceType {
   /**
    * The resource type for Microsoft.Batch/batchAccounts
    */
   MicrosoftBatchBatchAccounts: "Microsoft.Batch/batchAccounts",
-
-  string,
 }
 
 /**
@@ -2593,6 +2593,7 @@ model VMDiskSecurityProfile {
   /**
    * Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.
    */
+  @summary("Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.")
   securityEncryptionType?: SecurityEncryptionTypes;
 }
 
@@ -3141,7 +3142,7 @@ model UserIdentity {
   /**
    * The userName and autoUser properties are mutually exclusive; you must specify one but not both.
    */
-  @summary("The name of the user under which the task is run.")
+  @summary("The name of the user identity under which the task is run.")
   userName?: string;
 
   /**
@@ -3974,3 +3975,6 @@ model BatchAccountListResult is Azure.Core.Page<BatchAccount>;
 @@identifiers(OperationListResult.value, #["name"]);
 @@visibility(OutboundEnvironmentEndpointCollection.value, Lifecycle.Read);
 @@identifiers(SupportedSkusResult.value, #["name"]);
+@@Azure.ClientGenerator.Core.clientName(CifsMountConfiguration,
+  "CIFSMountConfiguration"
+);

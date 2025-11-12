@@ -52,6 +52,9 @@ interface Pools {
   get is ArmResourceRead<
     Pool,
     Response = ArmResourceUpdatedResponse<Pool> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },
@@ -80,6 +83,9 @@ interface Pools {
       `If-None-Match`?: string;
     },
     Response = ArmResourceUpdatedResponse<Pool> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },
@@ -102,6 +108,9 @@ interface Pools {
       `If-Match`?: string;
     },
     Response = ArmResourceUpdatedResponse<Pool> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },
@@ -165,6 +174,9 @@ interface Pools {
     Pool,
     void,
     Response = ArmResponse<Pool> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },
@@ -178,6 +190,9 @@ interface Pools {
     Pool,
     void,
     Response = ArmResponse<Pool> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },

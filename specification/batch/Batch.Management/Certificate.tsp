@@ -48,6 +48,9 @@ interface Certificates {
   get is ArmResourceRead<
     Certificate,
     Response = ArmResponse<Certificate> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },
@@ -78,6 +81,9 @@ interface Certificates {
       `If-None-Match`?: string;
     },
     Response = ArmResourceUpdatedResponse<Certificate> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },
@@ -101,6 +107,9 @@ interface Certificates {
       `If-Match`?: string;
     },
     Response = ArmResponse<Certificate> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },
@@ -158,6 +167,9 @@ interface Certificates {
     Certificate,
     void,
     Response = ArmResponse<Certificate> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
       @header("ETag")
       etag?: string;
     },

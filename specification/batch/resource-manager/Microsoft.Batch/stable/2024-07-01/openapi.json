@@ -1392,7 +1392,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -1482,7 +1483,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -1568,7 +1570,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -1711,7 +1714,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -2241,7 +2245,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -2344,7 +2349,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -2461,7 +2467,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -2609,7 +2616,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -2674,7 +2682,8 @@
             },
             "headers": {
               "ETag": {
-                "type": "string"
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
               }
             }
           },
@@ -4238,6 +4247,46 @@
         "type"
       ]
     },
+    "CIFSMountConfiguration": {
+      "type": "object",
+      "title": "Information used to connect to a CIFS file system.",
+      "description": "Information used to connect to a CIFS file system.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "title": "The user to use for authentication against the CIFS file system.",
+          "description": "The user to use for authentication against the CIFS file system."
+        },
+        "source": {
+          "type": "string",
+          "title": "The URI of the file system to mount.",
+          "description": "The URI of the file system to mount."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "The relative path on the compute node where the file system will be mounted",
+          "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        },
+        "mountOptions": {
+          "type": "string",
+          "title": "Additional command line options to pass to the mount command.",
+          "description": "These are 'net use' options in Windows and 'mount' options in Linux."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "title": "The password to use for authentication against the CIFS file system.",
+          "description": "The password to use for authentication against the CIFS file system.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "userName",
+        "source",
+        "relativeMountPath",
+        "password"
+      ]
+    },
     "CachingType": {
       "type": "string",
       "description": "The type of caching to enable for the disk.",
@@ -4585,46 +4634,6 @@
           "readOnly": true
         }
       }
-    },
-    "CifsMountConfiguration": {
-      "type": "object",
-      "title": "Information used to connect to a CIFS file system.",
-      "description": "Information used to connect to a CIFS file system.",
-      "properties": {
-        "userName": {
-          "type": "string",
-          "title": "The user to use for authentication against the CIFS file system.",
-          "description": "The user to use for authentication against the CIFS file system."
-        },
-        "source": {
-          "type": "string",
-          "title": "The URI of the file system to mount.",
-          "description": "The URI of the file system to mount."
-        },
-        "relativeMountPath": {
-          "type": "string",
-          "title": "The relative path on the compute node where the file system will be mounted",
-          "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
-        },
-        "mountOptions": {
-          "type": "string",
-          "title": "Additional command line options to pass to the mount command.",
-          "description": "These are 'net use' options in Windows and 'mount' options in Linux."
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "title": "The password to use for authentication against the CIFS file system.",
-          "description": "The password to use for authentication against the CIFS file system.",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "userName",
-        "source",
-        "relativeMountPath",
-        "password"
-      ]
     },
     "CloudError": {
       "type": "object",
@@ -5769,7 +5778,7 @@
           "description": "This property is mutually exclusive with all other properties."
         },
         "cifsMountConfiguration": {
-          "$ref": "#/definitions/CifsMountConfiguration",
+          "$ref": "#/definitions/CIFSMountConfiguration",
           "title": "The CIFS/SMB file system to mount on each node.",
           "description": "This property is mutually exclusive with all other properties."
         },
@@ -6075,7 +6084,7 @@
         },
         "origin": {
           "type": "string",
-          "title": "The operation type.",
+          "title": "The intended executor of the operation.",
           "description": "The intended executor of the operation."
         },
         "properties": {
@@ -6095,7 +6104,7 @@
         },
         "operation": {
           "type": "string",
-          "title": "For example: read, write, delete, or listKeys/action",
+          "title": "The operation type.",
           "description": "For example: read, write, delete, or listKeys/action"
         },
         "resource": {
@@ -6596,6 +6605,7 @@
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "title": "The private link service connection state of the private endpoint connection.",
           "description": "The private link service connection state of the private endpoint connection."
         }
       }
@@ -6991,7 +7001,7 @@
       ],
       "x-ms-enum": {
         "name": "ResourceType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "MicrosoftBatchBatchAccounts",
@@ -7504,7 +7514,7 @@
       "properties": {
         "userName": {
           "type": "string",
-          "title": "The name of the user under which the task is run.",
+          "title": "The name of the user identity under which the task is run.",
           "description": "The userName and autoUser properties are mutually exclusive; you must specify one but not both."
         },
         "autoUser": {
@@ -7520,6 +7530,7 @@
       "properties": {
         "securityEncryptionType": {
           "$ref": "#/definitions/SecurityEncryptionTypes",
+          "title": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
           "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs."
         }
       }
