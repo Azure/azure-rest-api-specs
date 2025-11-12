@@ -1,0 +1,41 @@
+{
+  "operationId": "GetRule",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataAssetId": "abcd1234-5678-abcd-1234-abcd5678ef00",
+    "dataProductId": "12345678-abcd-1234-ef00-123456abcdef",
+    "ruleId": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  "title": "Rules_Get",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Duplicate_Rows",
+        "type": "Duplicate",
+        "description": "Rule to check completeness of data",
+        "businessDomain": {
+          "type": "BusinessDomainReference",
+          "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+        },
+        "dataAsset": {
+          "type": "DataAssetReference",
+          "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
+        },
+        "dataProduct": {
+          "type": "DataProductReference",
+          "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
+        },
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "score": 0.95,
+        "status": "Active",
+        "typeProperties": {
+          "column": {
+            "type": "Column",
+            "value": "AccountNumber"
+          }
+        }
+      }
+    }
+  }
+}
