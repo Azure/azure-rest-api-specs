@@ -1339,7 +1339,7 @@ union KubernetesClusterProvisioningState {
 /**
  * The provisioning state of the Kubernetes version resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KubernetesVersionProvisioningState {
   string,
 
@@ -2171,7 +2171,7 @@ union VolumeProvisioningState {
   Accepted: "Accepted",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AccessBridgeAllowedName {
   string,
 
@@ -2462,7 +2462,7 @@ union ClusterContinueUpdateVersionMachineGroupTargetingMode {
   AlphaByRack: "AlphaByRack",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ClusterInspectParametersAdditionalActionsItem {
   string,
 
@@ -2938,7 +2938,7 @@ model AccessBridgeProperties {
   /**
    * The provisioning state of the access bridge.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: AccessBridgeProvisioningState;
 
   /**
@@ -3163,7 +3163,7 @@ model BareMetalMachineProperties {
   /**
    * The provisioning state of the bare metal machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: BareMetalMachineProvisioningState;
 
   /**
@@ -3315,11 +3315,11 @@ model AdministrativeCredentials {
  * PasswordReference contains the reference to the source of a password.
  */
 model PasswordReference {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `namespace`?: string;
 }
 
@@ -3510,7 +3510,7 @@ model BmcNcUserData {
   /**
    * The list of BMC users created internally.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bmcUsers?: Record<BmcUserDetails>;
 }
 
@@ -3724,7 +3724,7 @@ model CloudServicesNetworkProperties {
   /**
    * The provisioning state of the cloud services network.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: CloudServicesNetworkProvisioningState;
 
   /**
@@ -3905,7 +3905,7 @@ model ClusterManagerProperties {
   /**
    * The provisioning state of the cluster manager.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ClusterManagerProvisioningState;
 
   /**
@@ -4435,7 +4435,7 @@ model ClusterProperties {
   /**
    * The provisioning state of the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ClusterProvisioningState;
 
   /**
@@ -4635,7 +4635,7 @@ model IdentitySelector {
   /**
    * The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier | null;
 }
 
@@ -5117,7 +5117,7 @@ model KubernetesClusterProperties {
   /**
    * The provisioning state of the Kubernetes cluster resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: KubernetesClusterProvisioningState;
 }
 
@@ -5460,7 +5460,7 @@ model KubernetesClusterInternalMetadata {
   /**
    * AddOn Conditions. This field was renamed to FeatureConditions. Field remains here for compatibility.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   addonConditions?: Record<KubernetesCondition[]>;
 
   /**
@@ -5488,7 +5488,7 @@ model KubernetesClusterInternalMetadata {
   /**
    * A debug storage key value map that may contain low level diagnostic information and results.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   debug?: Record<string>;
 
   /**
@@ -5504,7 +5504,7 @@ model KubernetesClusterInternalMetadata {
   /**
    * Feature Conditions. This field was renamed from AddOnConditions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   featureConditions?: Record<KubernetesCondition[]>;
 
   /**
@@ -5984,7 +5984,7 @@ model KubernetesVersionProperties {
   /**
    * The provisioning state of the Kubernetes version resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: KubernetesVersionProvisioningState;
 
   /**
@@ -6066,7 +6066,7 @@ model L2NetworkProperties {
   /**
    * The provisioning state of the L2 network.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: L2NetworkProvisioningState;
 
   /**
@@ -6155,7 +6155,7 @@ model L3NetworkProperties {
   /**
    * The provisioning state of the L3 network.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: L3NetworkProvisioningState;
 
   /**
@@ -6209,7 +6209,7 @@ model RackSkuProperties {
   /**
    * The provisioning state of the rack SKU resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: RackSkuProvisioningState;
 
   /**
@@ -6432,7 +6432,7 @@ model RackProperties {
   /**
    * The provisioning state of the rack resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: RackProvisioningState;
 
   /**
@@ -6593,7 +6593,7 @@ model StorageApplianceProperties {
   /**
    * The provisioning state of the storage appliance.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: StorageApplianceProvisioningState;
 
   /**
@@ -6711,7 +6711,7 @@ model StorageApplianceInternalMetadata {
   /**
    * The Storage Appliance Syslog Server
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageApplianceSyslogServers?: Record<string>;
 
   /**
@@ -6793,7 +6793,7 @@ model TrunkedNetworkProperties {
   /**
    * The provisioning state of the trunked network.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: TrunkedNetworkProvisioningState;
 
   /**
@@ -6930,7 +6930,7 @@ model VirtualMachineProperties {
   /**
    * The provisioning state of the virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: VirtualMachineProvisioningState;
 
   /**
@@ -7119,7 +7119,7 @@ model VolumeProperties {
   /**
    * The provisioning state of the volume.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: VolumeProvisioningState;
 
   /**
@@ -7251,7 +7251,7 @@ model AccessBridgePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -7278,7 +7278,7 @@ model BareMetalMachinePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -7445,7 +7445,7 @@ model CloudServicesNetworkPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -7512,7 +7512,7 @@ model ClusterManagerPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -7631,7 +7631,7 @@ model ClusterPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -7647,7 +7647,7 @@ model ClusterPatchProperties {
   /**
    * The settings for the log analytics workspace used for output of logs from this cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   analyticsOutputSettings?: AnalyticsOutputSettings | null;
 
   /**
@@ -7658,19 +7658,19 @@ model ClusterPatchProperties {
   /**
    * Field Deprecated: Use managed identity to provide cluster privileges. The service principal to be used by the cluster during Arc Appliance installation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clusterServicePrincipal?: ServicePrincipalInformation | null;
 
   /**
    * The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   commandOutputSettings?: CommandOutputSettings | null;
 
   /**
    * The validation threshold indicating the allowable failures of compute machines during environment validation and deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   computeDeploymentThreshold?: ValidationThreshold | null;
 
   /**
@@ -7687,31 +7687,31 @@ model ClusterPatchProperties {
   /**
    * The settings for cluster runtime protection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runtimeProtectionConfiguration?: RuntimeProtectionConfiguration | null;
 
   /**
    * The configuration for use of a key vault to store secrets for later retrieval by the operator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   secretArchive?: ClusterSecretArchive | null;
 
   /**
    * The settings for the secret archive used to hold credentials for the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   secretArchiveSettings?: SecretArchiveSettings | null;
 
   /**
    * The strategy for updating the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateStrategy?: ClusterUpdateStrategy | null;
 
   /**
    * The settings for how security vulnerability scanning is applied to the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vulnerabilityScanningSettings?: VulnerabilityScanningSettingsPatch | null;
 }
 
@@ -7790,7 +7790,7 @@ model BareMetalMachineKeySetProperties {
   /**
    * The provisioning state of the bare metal machine key set.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: BareMetalMachineKeySetProvisioningState;
 
   /**
@@ -7865,7 +7865,7 @@ model BareMetalMachineKeySetPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -7937,7 +7937,7 @@ model BmcKeySetProperties {
   /**
    * The provisioning state of the baseboard management controller key set.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: BmcKeySetProvisioningState;
 
   /**
@@ -7965,7 +7965,7 @@ model BmcKeySetPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8076,7 +8076,7 @@ model ClusterMetricsConfigurationProperties {
   /**
    * The provisioning state of the metrics configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ClusterMetricsConfigurationProvisioningState;
 }
 
@@ -8092,7 +8092,7 @@ model ClusterMetricsConfigurationPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8145,7 +8145,7 @@ model KubernetesClusterPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8265,7 +8265,7 @@ model AgentPoolProperties {
   /**
    * The provisioning state of the agent pool.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: AgentPoolProvisioningState;
 
   /**
@@ -8299,7 +8299,7 @@ model AgentPoolPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8372,7 +8372,7 @@ model KubernetesClusterFeatureProperties {
   /**
    * The provisioning state of the Kubernetes cluster feature.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: KubernetesClusterFeatureProvisioningState;
 
   /**
@@ -8425,7 +8425,7 @@ model KubernetesClusterFeaturePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8492,7 +8492,7 @@ model KubernetesVersionPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8503,7 +8503,7 @@ model L2NetworkPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8514,7 +8514,7 @@ model L3NetworkPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8530,7 +8530,7 @@ model RackPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8564,7 +8564,7 @@ model StorageAppliancePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8629,7 +8629,7 @@ model TrunkedNetworkPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8650,7 +8650,7 @@ model VirtualMachinePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8731,7 +8731,7 @@ model ConsoleProperties {
   /**
    * The provisioning state of the virtual machine console.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ConsoleProvisioningState;
 
   /**
@@ -8767,7 +8767,7 @@ model ConsolePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8809,7 +8809,7 @@ model VolumePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8884,6 +8884,6 @@ model TagsParameter {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }

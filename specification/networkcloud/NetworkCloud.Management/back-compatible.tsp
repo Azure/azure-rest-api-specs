@@ -5,65 +5,65 @@ using Microsoft.NetworkCloud;
 
 @@clientName(SecretRotationStatus.k8sSecretName, "k8SSecretName");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MachineSkuSlot.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StorageApplianceSkuSlot.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(OperationStatusResult.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessBridgePatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BareMetalMachinePatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CloudServicesNetworkPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClusterManagerPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClusterPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BareMetalMachineKeySetPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BmcKeySetPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClusterMetricsConfigurationPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(KubernetesClusterPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AgentPoolPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(KubernetesClusterFeaturePatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RackPatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StorageAppliancePatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualMachinePatchParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ConsolePatchParameters.properties);
 
 @@clientName(AccessBridges.createOrUpdate::parameters.resource, "accessBridge");
 @@clientName(AccessBridges.update::parameters.properties,
   "accessBridgeUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessBridge.properties);
 
 @@clientName(BareMetalMachines.createOrUpdate::parameters.resource,
@@ -93,7 +93,7 @@ using Microsoft.NetworkCloud;
 @@clientName(BareMetalMachines.runReadCommands::parameters.body,
   "bareMetalMachineRunReadCommandsParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BareMetalMachine.properties);
 
 @@clientName(CloudServicesNetworks.createOrUpdate::parameters.resource,
@@ -102,7 +102,7 @@ using Microsoft.NetworkCloud;
 @@clientName(CloudServicesNetworks.update::parameters.properties,
   "cloudServicesNetworkUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CloudServicesNetwork.properties);
 
 @@clientName(ClusterManagers.createOrUpdate::parameters.resource,
@@ -114,7 +114,7 @@ using Microsoft.NetworkCloud;
 @@clientName(ClusterManagers.updateRelayPrivateEndpointConnection::parameters.body,
   "clusterManagerUpdateRelayPrivateEndpointConnectionParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClusterManager.properties);
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "clusterParameters");
@@ -130,7 +130,7 @@ using Microsoft.NetworkCloud;
 @@clientName(Clusters.updateVersion::parameters.body,
   "clusterUpdateVersionParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Cluster.properties);
 
 @@clientName(KubernetesClusters.createOrUpdate::parameters.resource,
@@ -142,7 +142,7 @@ using Microsoft.NetworkCloud;
 @@clientName(KubernetesClusters.restartNode::parameters.body,
   "kubernetesClusterRestartNodeParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(KubernetesCluster.properties);
 
 @@clientName(KubernetesVersions.createOrUpdate::parameters.resource,
@@ -151,7 +151,7 @@ using Microsoft.NetworkCloud;
 @@clientName(KubernetesVersions.update::parameters.properties,
   "kubernetesVersionPatchParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(KubernetesVersion.properties);
 
 @@clientName(L2Networks.createOrUpdate::parameters.resource,
@@ -160,7 +160,7 @@ using Microsoft.NetworkCloud;
 @@clientName(L2Networks.update::parameters.properties,
   "l2NetworkUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(L2Network.properties);
 
 @@clientName(L3Networks.createOrUpdate::parameters.resource,
@@ -169,15 +169,15 @@ using Microsoft.NetworkCloud;
 @@clientName(L3Networks.update::parameters.properties,
   "l3NetworkUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(L3Network.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RackSku.properties);
 
 @@clientName(Racks.createOrUpdate::parameters.resource, "rackParameters");
 @@clientName(Racks.update::parameters.properties, "rackUpdateParameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Rack.properties);
 
 @@clientName(StorageAppliances.createOrUpdate::parameters.resource,
@@ -192,7 +192,7 @@ using Microsoft.NetworkCloud;
 @@clientName(StorageAppliances.runReadCommands::parameters.body,
   "storageApplianceRunReadCommandsParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StorageAppliance.properties);
 
 @@clientName(TrunkedNetworks.createOrUpdate::parameters.resource,
@@ -201,7 +201,7 @@ using Microsoft.NetworkCloud;
 @@clientName(TrunkedNetworks.update::parameters.properties,
   "trunkedNetworkUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TrunkedNetwork.properties);
 
 @@clientName(VirtualMachines.createOrUpdate::parameters.resource,
@@ -216,12 +216,12 @@ using Microsoft.NetworkCloud;
 @@clientName(VirtualMachines.powerOff::parameters.body,
   "virtualMachinePowerOffParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualMachine.properties);
 
 @@clientName(Volumes.createOrUpdate::parameters.resource, "volumeParameters");
 @@clientName(Volumes.update::parameters.properties, "volumeUpdateParameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Volume.properties);
 
 @@clientName(BareMetalMachineKeySets.createOrUpdate::parameters.resource,
@@ -230,7 +230,7 @@ using Microsoft.NetworkCloud;
 @@clientName(BareMetalMachineKeySets.update::parameters.properties,
   "bareMetalMachineKeySetUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BareMetalMachineKeySet.properties);
 
 @@clientName(BmcKeySets.createOrUpdate::parameters.resource,
@@ -239,7 +239,7 @@ using Microsoft.NetworkCloud;
 @@clientName(BmcKeySets.update::parameters.properties,
   "bmcKeySetUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BmcKeySet.properties);
 
 @@clientLocation(ClusterMetricsConfigurations.get, "MetricsConfigurations");
@@ -257,7 +257,7 @@ using Microsoft.NetworkCloud;
 @@clientLocation(ClusterMetricsConfigurations.listByCluster,
   "MetricsConfigurations"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClusterMetricsConfiguration.properties);
 
 @@clientName(AgentPools.createOrUpdate::parameters.resource,
@@ -266,7 +266,7 @@ using Microsoft.NetworkCloud;
 @@clientName(AgentPools.update::parameters.properties,
   "agentPoolUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AgentPool.properties);
 
 @@clientName(KubernetesClusterFeatures.createOrUpdate::parameters.resource,
@@ -275,12 +275,12 @@ using Microsoft.NetworkCloud;
 @@clientName(KubernetesClusterFeatures.update::parameters.properties,
   "kubernetesClusterFeatureUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(KubernetesClusterFeature.properties);
 
 @@clientName(Consoles.createOrUpdate::parameters.resource, "consoleParameters");
 @@clientName(Consoles.update::parameters.properties, "consoleUpdateParameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Console.properties);
 
 @@clientLocation(RegisteredSubscriptionsOperationGroup.list,

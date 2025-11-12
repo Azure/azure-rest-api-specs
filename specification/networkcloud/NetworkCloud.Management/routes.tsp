@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetworkCloud;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RegisteredSubscriptionsOperationGroup {
   /**
    * Get a list of Registered Subscriptions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List Registered Subscriptions.")
   @operationId("RegisteredSubscriptions_List")
   @autoRoute
@@ -39,7 +39,7 @@ interface RegisteredSubscriptionsOperationGroup {
   /**
    * Get a Registered Subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get a Registered Subscription.")
   @operationId("RegisteredSubscriptions_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/registeredSubscriptions/{registeredSubscriptionName}")
@@ -57,12 +57,12 @@ interface RegisteredSubscriptionsOperationGroup {
   ): ArmResponse<RegisteredSubscription> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusOperationGroup {
   /**
    * Get the properties of the provided operation status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieve the operation status.")
   @operationId("OperationStatus_Get")
   @route("/{operationStatusId}")
@@ -80,7 +80,7 @@ interface OperationStatusOperationGroup {
   /**
    * Create a new operation status or update properties of the operation status if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update the operation status.")
   @operationId("OperationStatus_CreateOrUpdate")
   @route("/{operationStatusId}")
@@ -118,7 +118,7 @@ interface OperationStatusOperationGroup {
   /**
    * Patch properties of the provided operation status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Patch the operation status.")
   @operationId("OperationStatus_Update")
   @route("/{operationStatusId}")

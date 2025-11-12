@@ -30,13 +30,13 @@ model ClusterMetricsConfiguration
   /**
    * Resource ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * The extended location of the cluster associated with the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation: ExtendedLocation;
 }
 
@@ -45,7 +45,7 @@ interface ClusterMetricsConfigurations {
   /**
    * Get metrics configuration of the provided cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MetricsConfigurations_Get")
   @summary("Retrieve the metrics configuration of the cluster.")
   get is ArmResourceRead<ClusterMetricsConfiguration>;
@@ -53,7 +53,7 @@ interface ClusterMetricsConfigurations {
   /**
    * Create new or update the existing metrics configuration of the provided cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MetricsConfigurations_CreateOrUpdate")
   @summary("Create or update metrics configuration of the cluster.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -85,8 +85,8 @@ interface ClusterMetricsConfigurations {
   /**
    * Patch properties of metrics configuration for the provided cluster, or update the tags associated with it. Properties and tag updates can be done independently.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MetricsConfigurations_Update")
   @summary("Patch metrics configuration of the cluster.")
   @patch(#{ implicitOptionality: false })
@@ -127,7 +127,7 @@ interface ClusterMetricsConfigurations {
   /**
    * Delete the metrics configuration of the provided cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MetricsConfigurations_Delete")
   @summary("Delete the metrics configuration of the cluster.")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -160,7 +160,7 @@ interface ClusterMetricsConfigurations {
   /**
    * Get a list of metrics configurations for the provided cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MetricsConfigurations_ListByCluster")
   @summary("List metrics configurations of the cluster.")
   listByCluster is ArmResourceListByParent<
