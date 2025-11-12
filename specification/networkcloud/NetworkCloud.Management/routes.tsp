@@ -24,6 +24,7 @@ interface RegisteredSubscriptionsOperationGroup {
   @autoRoute
   @get
   @action("registeredSubscriptions")
+  @list
   list is ArmProviderActionSync<
     Response = RegisteredSubscriptionList,
     Scope = SubscriptionActionScope,
