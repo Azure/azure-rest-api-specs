@@ -4,8 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.CostManagement;
 
-// Java-specific customizations to mitigate breaking changes
-
 // Rename PivotTypeType back to PivotType for Java
 @@clientName(PivotTypeType, "PivotType", "java");
 
@@ -16,11 +14,7 @@ using Microsoft.CostManagement;
 @@clientName(DownloadURL, "DownloadUrl", "java");
 
 // Rename statusModificationUserName back to statusModificationUsername for Java
-@@clientName(AlertPropertiesDetails.statusModificationUserName,
-  "statusModificationUsername",
-  "java"
-);
-@@clientName(DismissAlertPayload.statusModificationUserName,
+@@clientName(AlertProperties.statusModificationUserName,
   "statusModificationUsername",
   "java"
 );
