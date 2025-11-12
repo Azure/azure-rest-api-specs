@@ -4308,9 +4308,7 @@ model OperationsContentProperties {
   /**
    * Operations content.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   contents?: LocalizedOperationDefinition[];
 }
 
@@ -4797,9 +4795,7 @@ model ResourceManagementAction {
   /**
    * resource management action content.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["resourceId"])
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   resources?: ResourceManagementEntity[];
 }
 
@@ -5062,8 +5058,6 @@ model OperationsContent extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Operations content.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationsDefinition;
 }
 
