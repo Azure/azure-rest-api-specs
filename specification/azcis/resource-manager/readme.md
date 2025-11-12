@@ -71,6 +71,17 @@ These settings apply only when `--tag=2025-11-05-preview` is specified on the co
 ```yaml $(tag) == '2025-11-05-preview'
 input-file:
   - Microsoft.AzureCis/preview/2025-11-05-preview/azcopy.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/aad.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/certificate.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/dns.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/dscm.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/dsmsmanagedkeysecret.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/environment.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/eventgrid.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/ficp.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/storageAccountDsms.json
 ```
 
 ## Suppression
