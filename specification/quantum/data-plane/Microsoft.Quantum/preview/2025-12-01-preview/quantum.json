@@ -1560,8 +1560,13 @@
       "type": "string",
       "description": "The status of the job.",
       "enum": [
+        "Queued",
         "Waiting",
         "Executing",
+        "CancellationRequested",
+        "Cancelling",
+        "Finishing",
+        "Completed",
         "Succeeded",
         "Failed",
         "Cancelled"
@@ -1571,6 +1576,11 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The job has been queued."
+          },
+          {
             "name": "Waiting",
             "value": "Waiting",
             "description": "The job is waiting in the queue to be executed."
@@ -1579,6 +1589,26 @@
             "name": "Executing",
             "value": "Executing",
             "description": "The job is being executed."
+          },
+          {
+            "name": "CancellationRequested",
+            "value": "CancellationRequested",
+            "description": "Cancellation of the job has been requested."
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "The job is in the process of being cancelled."
+          },
+          {
+            "name": "Finishing",
+            "value": "Finishing",
+            "description": "The job is in the process of being finished."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The job completed."
           },
           {
             "name": "Succeeded",
