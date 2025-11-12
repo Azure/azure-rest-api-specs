@@ -8,7 +8,6 @@ namespace Microsoft.HybridNetwork;
 @@clientName(HelmInstallOptions.wait, "waitOption", "java");
 @@clientName(HelmUpgradeOptions.wait, "waitOption", "java");
 
-// Mitigate breaks from TypeSpec migration
 @@clientName(NSDArtifactProfile, "NsdArtifactProfile", "java");
 @@clientName(NFVIs, "NfvIs", "java");
 @@clientName(AzureCoreNFVIDetails, "AzureCoreNfviDetails", "java");
