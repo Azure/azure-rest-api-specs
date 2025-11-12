@@ -3,7 +3,7 @@
   "info": {
     "title": "PurviewDataQuality",
     "version": "2025-09-01-preview",
-    "description": "Purview Data Quality Service is a fully managed cloud service whose users can\nrun Data Quality Job to get some score. This spec defines REST API of Purview\nData Quality Service.",
+    "description": "Purview Data Quality Service is a fully managed cloud service that enables users to\nmonitor, assess, and improve the quality of their data assets across their organization.\nUsers can define data quality rules, execute scans and assessments, track quality metrics\nover time, and ensure data meets business requirements. At the same time, Data Quality\nhelps organizations maintain trust in their data and get more value from their existing\ndata investments. This spec defines REST API of Purview Data Quality Service.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -77,9 +77,6 @@
     },
     {
       "name": "Profiles"
-    },
-    {
-      "name": "Scans"
     },
     {
       "name": "Reports"
@@ -1689,7 +1686,8 @@
           "Scan_CancelByRunId": {
             "$ref": "./examples/Scan_CancelByRunId.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/business-domains/{businessDomainId}/schedules": {
@@ -2076,7 +2074,8 @@
           "Scan_Cancel": {
             "$ref": "./examples/Scan_Cancel.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}": {
@@ -2143,7 +2142,7 @@
       "get": {
         "operationId": "GetRuns",
         "tags": [
-          "Scans"
+          "JobRunMonitoring"
         ],
         "description": "Retrieves all runs associated with a specific scan under a given schedule.",
         "parameters": [

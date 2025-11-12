@@ -3,10 +3,12 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@typespec/openapi";
 
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.OpenAPI;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
@@ -313,9 +315,11 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @post
   @tag("ScheduleScan")
   @doc("Cancels a specific scan under a given schedule within a business domain.")
+  @extension("x-ms-long-running-operation", true)
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}:cancel")
   op cancelScan is RpcOperation<
     {
@@ -398,10 +402,12 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @route("/business-domains/{businessDomainId}/runs/{runId}:cancel")
   @post
   @tag("JobRunMonitoring")
   @doc("Cancels a specific scan run within a business domain.")
+  @extension("x-ms-long-running-operation", true)
   op cancelScanByRunId is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")

@@ -15,15 +15,18 @@ import "./routes.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-/**
- * Purview Data Quality Service is a fully managed cloud service whose users can
- * run Data Quality Job to get some score. This spec defines REST API of Purview
- * Data Quality Service.
- */
+@doc("""
+  Purview Data Quality Service is a fully managed cloud service that enables users to
+  monitor, assess, and improve the quality of their data assets across their organization.
+  Users can define data quality rules, execute scans and assessments, track quality metrics
+  over time, and ensure data meets business requirements. At the same time, Data Quality
+  helps organizations maintain trust in their data and get more value from their existing
+  data investments. This spec defines REST API of Purview Data Quality Service.
+  """)
 @service(#{ title: "PurviewDataQuality" })
 @server(
   "{endpoint}/purviewdataquality/api",
-  "Purview Data Quality Service is a fully managed cloud service whose users can run Data Quality Job to get some score. This spec defines REST API of Purview Data Quality Service.",
+  "Purview Data Quality Service is a fully managed cloud service that enables comprehensive data quality monitoring, assessment, and governance across organizational data assets.",
   {
     endpoint: url,
   }
@@ -45,5 +48,6 @@ alias AuthToken = OAuth2Auth<[
     type: OAuth2FlowType.implicit;
     authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
     scopes: ["https://purview.azure.net/.default"];
+    description: "Azure Active Directory OAuth2 implicit flow for Purview Data Quality API access";
   }
 ]>;

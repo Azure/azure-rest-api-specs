@@ -3,7 +3,7 @@
   "info": {
     "title": "PurviewDataQuality",
     "version": "2025-09-01-preview",
-    "description": "Purview Data Quality Service is a fully managed cloud service whose users can\nrun Data Quality Job to get some score. This spec defines REST API of Purview\nData Quality Service.",
+    "description": "Purview Data Quality Service is a fully managed cloud service that enables users to\nmonitor, assess, and improve the quality of their data assets across their organization.\nUsers can define data quality rules, execute scans and assessments, track quality metrics\nover time, and ensure data meets business requirements. At the same time, Data Quality\nhelps organizations maintain trust in their data and get more value from their existing\ndata investments. This spec defines REST API of Purview Data Quality Service.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -50,108 +50,61 @@
       }
     }
   },
-  "tags": [],
-  "paths": {
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata": {
-      "patch": {
-        "operationId": "UpdateObserver",
-        "description": "Update Observer",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique Identifier for Business Domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Unique Identifier for Data Product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Unique Identifier for Data Asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "AssetMetaDataObserver",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/AssetMetadataObserver"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AssetMetadataObserver"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AssetMetaData_Update": {
-            "$ref": "./examples/AssetMetaData_Update.json"
-          }
-        }
-      }
+  "tags": [
+    {
+      "name": "Rules"
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}": {
+    {
+      "name": "AssetMetadata"
+    },
+    {
+      "name": "Schedules"
+    },
+    {
+      "name": "ScheduleScan"
+    },
+    {
+      "name": "JobRunMonitoring"
+    },
+    {
+      "name": "DQ Assessment Observations"
+    },
+    {
+      "name": "DataSources"
+    },
+    {
+      "name": "Scoped Asset Metadata"
+    },
+    {
+      "name": "Profiles"
+    },
+    {
+      "name": "Reports"
+    },
+    {
+      "name": "Trend"
+    },
+    {
+      "name": "BulkMetadata"
+    }
+  ],
+  "paths": {
+    "/bulk-asset-metadata": {
       "get": {
-        "operationId": "GetObserver",
-        "description": "Get Observer",
+        "operationId": "GetBulkAssetMetadata",
+        "tags": [
+          "BulkMetadata"
+        ],
+        "description": "Retrieves metadata for all assets in an account with pagination support. Returns up to 10 assets per request.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Get Business Domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Get Data Product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Get Data Asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "description": "Unique Identifier for Rule",
-            "required": true,
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination. Use this to get all results until continuationToken from the response becomes null.",
+            "required": false,
             "type": "string"
           }
         ],
@@ -159,7 +112,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RuleParameters"
+              "$ref": "#/definitions/BulkAssetMetadataResponse"
             }
           },
           "default": {
@@ -173,70 +126,38 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "AssetMetaData_Get": {
-            "$ref": "./examples/AssetMetaData_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "CreateAssetMetaData",
-        "description": "Create Asset Metadata Observer",
+        "operationId": "CreateBulkAssetMetadata",
+        "tags": [
+          "BulkMetadata"
+        ],
+        "description": "Inserts metadata for multiple assets into a new account ID.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Get Business Domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Get Data Product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Get Data Asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "description": "Unique Identifier for Rule",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
+            "name": "request",
             "in": "body",
-            "description": "The resource instance.",
+            "description": "Bulk asset metadata to insert",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RuleEntities"
+              "$ref": "#/definitions/BulkAssetMetadataRequest"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RuleEntities"
-            }
-          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/RuleEntities"
+              "type": "string"
             }
           },
           "default": {
@@ -251,97 +172,16 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "AssetMetaData_Create": {
-            "$ref": "./examples/AssetMetaData_Create.json"
-          }
         }
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}": {
-      "put": {
-        "operationId": "CreateBulkRules",
-        "description": "Create Bulk Rules for Assets",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Get Business Domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Get Data Product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Get Data Asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "description": "Unique Identifier for Rule",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RuleEntities"
-            }
-          }
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:observations": {
+      "post": {
+        "operationId": "Observations",
+        "tags": [
+          "DQ Assessment Observations"
         ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RuleEntities"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/RuleEntities"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Rules_Create": {
-            "$ref": "./examples/RulesBulk_Create.json"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations": {
-      "put": {
-        "operationId": "Observe",
-        "description": "Do an observation",
+        "description": "Triggers a long-running observation job for a specific data asset.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -349,28 +189,27 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get Data Product Id",
+            "description": "Unique identifier for the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get Data Asset Id",
+            "description": "Unique identifier for the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Body Job Config DTO",
             "required": true,
             "schema": {
               "$ref": "#/definitions/JobConfigDTO"
@@ -378,8 +217,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Job Config DTO Response",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/JobConfigDTOResponse"
             }
@@ -397,79 +236,16 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Observation_Create": {
-            "$ref": "./examples/Observation_Create.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}": {
-      "delete": {
-        "operationId": "Delete Observation",
-        "description": "Deletes a specific observation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Get Business Domain Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Get Data Product Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Get Data Asset Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "observationId",
-            "in": "path",
-            "description": "Get Observation Id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Observation_Delete": {
-            "$ref": "./examples/Observation_Delete.json"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles": {
-      "put": {
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:profiles": {
+      "post": {
         "operationId": "Profile",
-        "description": "The most basic operation.",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Creates or updates the profile for a given data asset within a business domain. Supports polling as a long-running operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -477,28 +253,28 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get data product Id",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get data asset Id",
+            "description": "Unique identifier for the data asset whose profile is being created or updated",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profiles",
+            "name": "request",
             "in": "body",
-            "description": "Scoped asset meta data body",
+            "description": "Profile entity with configuration and properties",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ProfileEntity"
@@ -507,7 +283,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Profile Entity",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/ProfileEntityResponse"
             }
@@ -533,10 +309,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileRunId}": {
-      "delete": {
-        "operationId": "Delete Profile",
-        "description": "The most basic operation.",
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules": {
+      "put": {
+        "operationId": "CreateBulkRules",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Creates bulk rules for a specific data asset within a data product and business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -544,28 +323,97 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get data product Id",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get data asset Id",
+            "description": "Unique identifier for the data asset for the bulk rules operation",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileRunId",
+            "name": "request",
+            "in": "body",
+            "description": "Bulk rules creation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BulkRulesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BulkRulesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Create": {
+            "$ref": "./examples/RulesBulk_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}": {
+      "delete": {
+        "operationId": "DeleteObservation",
+        "tags": [
+          "DQ Assessment Observations"
+        ],
+        "description": "Deletes a specific observation associated with a data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
             "in": "path",
-            "description": "Get Profile Run Id",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique identifier for the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "observationId",
+            "in": "path",
+            "description": "Unique identifier for the observation metadata",
             "required": true,
             "type": "string"
           }
@@ -586,18 +434,16 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Profile_Delete": {
-            "$ref": "./examples/Profile_Delete.json"
-          }
         }
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-opinions/{ruleId}": {
-      "get": {
-        "operationId": "OpinionTrend",
-        "description": "The most basic operation.",
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileId}": {
+      "delete": {
+        "operationId": "DeleteProfileRun",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Deletes a specific profile run for a given data asset within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -605,37 +451,123 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get data product Id",
+            "description": "Unique identifier for the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get data asset Id",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "Unique identifier for the profile run execution",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-opinions/{ruleId}": {
+      "get": {
+        "operationId": "OpinionTrend",
+        "tags": [
+          "Trend"
+        ],
+        "description": "Retrieves the opinion trend for a specific profile rule under a given data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique identifier for the data product containing the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset whose rule opinion trend is being retrieved",
             "required": true,
             "type": "string"
           },
           {
             "name": "ruleId",
             "in": "path",
-            "description": "Get Rule Id",
+            "description": "Unique identifier of the rule for opinion trend retrieval",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start time for the opinion trend query. If specified, endTime must also be provided. Maximum time window is 90 days.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End time for the opinion trend query. Can only be used with startTime. Maximum time window is 90 days.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "maxRecordsToReturn",
+            "in": "query",
+            "description": "Maximum number of records to return in a single request. Must be between 1 and 100. Default is 10.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OpinionEntity"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OpinionEntity"
+              }
             }
           },
           "default": {
@@ -661,7 +593,10 @@
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules": {
       "get": {
         "operationId": "GetRules",
-        "description": "Get Rules for Assets",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Retrieves all rules associated with data assets.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -669,21 +604,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get Data Product",
+            "description": "Unique identifier for the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get Data Asset",
+            "description": "Unique identifier for the data asset",
             "required": true,
             "type": "string"
           }
@@ -716,12 +651,13 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}": {
-      "get": {
-        "operationId": "GetRule",
-        "description": "Get a Rule",
+      },
+      "put": {
+        "operationId": "CreateRules",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Creates rules for a specific data asset within a data product and business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -729,28 +665,97 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get Data Product",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get Data Asset",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Rule creation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateRules_DataAsset": {
+            "$ref": "./examples/Rules_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}": {
+      "get": {
+        "operationId": "GetRule",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Retrieves a specific rule associated with a data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique identifier for the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "ruleId",
             "in": "path",
-            "description": "Unique Identifier for Rule",
+            "description": "Unique identifier for the data quality rule",
             "required": true,
             "type": "string"
           }
@@ -781,86 +786,12 @@
           }
         }
       },
-      "put": {
-        "operationId": "CreateRules",
-        "description": "Create Rules for Assets",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Get Business Domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Get Data Product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Get Data Asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleId",
-            "in": "path",
-            "description": "Unique Identifier for Rule",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RuleEntities"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RuleEntities"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/RuleEntities"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateRules_DataAsset": {
-            "$ref": "./examples/Rules_Create.json"
-          }
-        }
-      },
       "patch": {
         "operationId": "UpdateRule",
-        "description": "Update a rule",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Updates an existing rule associated with a data asset.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -871,28 +802,28 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get Data Product",
+            "description": "Unique identifier for the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get Data Asset",
+            "description": "Unique identifier for the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "ruleId",
             "in": "path",
-            "description": "Unique Identifier for Rule",
+            "description": "Unique identifier for the data quality rule",
             "required": true,
             "type": "string"
           },
@@ -934,7 +865,10 @@
       },
       "delete": {
         "operationId": "DeleteRule",
-        "description": "Delete a rule",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Deletes a specific rule associated with a data asset.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -942,28 +876,28 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get Data Product",
+            "description": "Unique identifier for the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get Data Asset",
+            "description": "Unique identifier for the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "ruleId",
             "in": "path",
-            "description": "Unique Identifier for Rule",
+            "description": "Unique identifier for the data quality rule",
             "required": true,
             "type": "string"
           }
@@ -995,7 +929,10 @@
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/runs": {
       "get": {
         "operationId": "GetRunsForAsset",
-        "description": "Get runs for asset",
+        "tags": [
+          "JobRunMonitoring"
+        ],
+        "description": "Retrieves all runs associated with a specific data asset, optionally filtered by run type.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1003,28 +940,28 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business domain id",
+            "description": "The unique identifier for the business domain.",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get data product id",
+            "description": "The unique identifier for the data product.",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get data asset id",
+            "description": "The unique identifier for the data asset.",
             "required": true,
             "type": "string"
           },
           {
             "name": "runType",
             "in": "query",
-            "description": "Get run type",
+            "description": "Specifies the type of run to filter results by (e.g., 'Scan' or 'Validation').",
             "required": true,
             "type": "string"
           }
@@ -1033,10 +970,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JobHistoryEntity"
-              }
+              "$ref": "#/definitions/JobHistoryResponse"
             }
           },
           "default": {
@@ -1062,7 +996,10 @@
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata": {
       "get": {
         "operationId": "GetScopedAssetMetaData",
-        "description": "Get scoped asset meta data",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Retrieves the scoped asset metadata for a given data asset within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1070,21 +1007,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get data product Id",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get data asset Id",
+            "description": "Unique identifier for the data asset whose scoped metadata is being retrieved",
             "required": true,
             "type": "string"
           }
@@ -1093,7 +1030,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataSourceEntity"
+              "$ref": "#/definitions/ScopedAssetMetadata"
             }
           },
           "default": {
@@ -1117,7 +1054,10 @@
       },
       "put": {
         "operationId": "CreateScopedAssetMetaData",
-        "description": "The most basic operation.",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Creates or replaces the scoped asset metadata for a given data asset within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1125,39 +1065,39 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get data product Id",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get data asset Id",
+            "description": "Unique identifier for the data asset whose scoped metadata is being created or replaced",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
-            "description": "Scoped asset meta data body",
+            "description": "Scoped asset metadata entity with configuration and properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataSourceEntity"
+              "$ref": "#/definitions/ScopedAssetMetadata"
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataSourceEntityResponse"
+              "$ref": "#/definitions/ScopedAssetMetadata"
             }
           },
           "default": {
@@ -1181,7 +1121,10 @@
       },
       "patch": {
         "operationId": "UpdateScopedAssetMetaData",
-        "description": "Update scoped asset meta data",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Updates the scoped asset metadata for a given data asset within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1189,31 +1132,31 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get data product Id",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get data asset Id",
+            "description": "Unique identifier for the data asset whose scoped metadata is being updated",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
-            "description": "Scoped asset meta data body",
+            "description": "Updated scoped asset metadata with partial modifications",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataSourceEntity"
+              "$ref": "#/definitions/ScopedAssetMetadataUpdate"
             }
           }
         ],
@@ -1221,7 +1164,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataSourceEntity"
+              "$ref": "#/definitions/ScopedAssetMetadata"
             }
           },
           "default": {
@@ -1245,7 +1188,10 @@
       },
       "delete": {
         "operationId": "DeleteScopedAssetMetaData",
-        "description": "Delete scoped asset meta data",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Deletes the scoped asset metadata for a given data asset within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1253,28 +1199,28 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Get data product Id",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Get data asset Id",
+            "description": "Unique identifier for the data asset whose scoped metadata is being deleted",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1299,7 +1245,10 @@
     "/business-domains/{businessDomainId}/data-sources": {
       "get": {
         "operationId": "GetDataSources",
-        "description": "Get all Data Sources for a given Business Domain",
+        "tags": [
+          "DataSources"
+        ],
+        "description": "Retrieves all data sources connections for a given business domain, with optional name filtering and pagination.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1307,21 +1256,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data sources",
             "required": true,
             "type": "string"
           },
           {
             "name": "skipToken",
             "in": "query",
-            "description": "token",
+            "description": "Continuation token for paginated results.",
             "required": false,
             "type": "string"
           },
           {
             "name": "name",
             "in": "query",
-            "description": "name",
+            "description": "Optional name filter for data sources.",
             "required": false,
             "type": "string"
           }
@@ -1330,10 +1279,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DataSourceEntity"
-              }
+              "$ref": "#/definitions/DataSourceEntityListResponse"
             }
           },
           "default": {
@@ -1354,62 +1300,15 @@
             "$ref": "./examples/DataSources_Get.json"
           }
         }
-      },
-      "put": {
-        "operationId": "CreateDataSource",
-        "description": "Update data source",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Get Business Domain Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Data Source Entity",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataSourceEntity"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
-            "schema": {
-              "$ref": "#/definitions/DataSourceEntityResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataSource_Create": {
-            "$ref": "./examples/DataSource_Create.json"
-          }
-        }
       }
     },
     "/business-domains/{businessDomainId}/data-sources/{dataSourceId}": {
       "get": {
         "operationId": "GetDataSource",
-        "description": "Get Data Source for a given data source id",
+        "tags": [
+          "DataSources"
+        ],
+        "description": "Retrieves a specific data source connection by its ID within a given business domain, with optional query parameters.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1417,15 +1316,29 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data source",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataSourceId",
             "in": "path",
-            "description": "Get Data Source Id",
+            "description": "Unique identifier for the data source connection within the business domain",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for paginated results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Optional name filter for data sources.",
+            "required": false,
             "type": "string"
           }
         ],
@@ -1455,9 +1368,12 @@
           }
         }
       },
-      "patch": {
-        "operationId": "UpdateDataSource",
-        "description": "Update data source",
+      "put": {
+        "operationId": "CreateDataSource",
+        "tags": [
+          "DataSources"
+        ],
+        "description": "Creates a new data source connection under a given business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1465,24 +1381,84 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain that will contain the new data source",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataSourceId",
             "in": "path",
-            "description": "Get Data Source Id",
+            "description": "Unique identifier for the data source connection to be created",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
-            "description": "Data Source Entity",
+            "description": "Data source entity with configuration for the new data source",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Create": {
+            "$ref": "./examples/DataSource_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateDataSource",
+        "tags": [
+          "DataSources"
+        ],
+        "description": "Updates an existing data source within a given business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data source",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceId",
+            "in": "path",
+            "description": "Unique identifier for the data source connection to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Updated data source entity with partial modifications",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntityUpdate"
             }
           }
         ],
@@ -1514,7 +1490,10 @@
       },
       "delete": {
         "operationId": "DeleteDataSource",
-        "description": "Delete data source",
+        "tags": [
+          "DataSources"
+        ],
+        "description": "Deletes a specific data source connection within a given business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1522,14 +1501,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataSourceId",
             "in": "path",
-            "description": "Get Data Source Id",
+            "description": "Unique identifier for the data source",
             "required": true,
             "type": "string"
           }
@@ -1558,10 +1537,13 @@
         }
       }
     },
-    "/business-domains/{businessDomainId}/report/snapshots/dataquality/latest": {
+    "/business-domains/{businessDomainId}/report/snapshots": {
       "get": {
         "operationId": "GetLatestSnapshot",
-        "description": "The most basic operation.",
+        "tags": [
+          "Reports"
+        ],
+        "description": "Retrieves the latest data quality snapshot report for a given business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1569,14 +1551,17 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataQualityTrendResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1601,7 +1586,10 @@
     "/business-domains/{businessDomainId}/runs/{runId}": {
       "get": {
         "operationId": "GetRunStatus",
-        "description": "Get the run status by run id",
+        "tags": [
+          "JobRunMonitoring"
+        ],
+        "description": "Retrieves execution metadata and status for a specific schedule run within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1609,14 +1597,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business domain id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "runId",
             "in": "path",
-            "description": "Get run id",
+            "description": "Unique identifier for the run within the business domain",
             "required": true,
             "type": "string"
           }
@@ -1649,9 +1637,12 @@
       }
     },
     "/business-domains/{businessDomainId}/runs/{runId}:cancel": {
-      "put": {
+      "post": {
         "operationId": "CancelScanByRunId",
-        "description": "Cancel Scan",
+        "tags": [
+          "JobRunMonitoring"
+        ],
+        "description": "Cancels a specific scan run within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1659,21 +1650,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business domain id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "runId",
             "in": "path",
-            "description": "Get run id",
+            "description": "Unique identifier for the run within the business domain",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "202": {
-            "description": "Job Config DTO Response",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/ScanDTOResponse"
             }
@@ -1702,7 +1693,10 @@
     "/business-domains/{businessDomainId}/schedules": {
       "get": {
         "operationId": "GetSchedules",
-        "description": "Get Schedules",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Retrieves all scheduled jobs defined under a given business domain, optionally supporting pagination with `skipToken`.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1710,15 +1704,8 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "Unique identifier for the business domain",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "skipToken",
-            "in": "query",
-            "description": "token",
-            "required": false,
             "type": "string"
           }
         ],
@@ -1726,10 +1713,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ScheduleEntity"
-              }
+              "$ref": "#/definitions/PagedScheduleEntity"
             }
           },
           "default": {
@@ -1749,63 +1733,19 @@
           "Schedules_Get": {
             "$ref": "./examples/Schedules_Get.json"
           }
-        }
-      },
-      "put": {
-        "operationId": "CreateSchedule",
-        "description": "Create Schedule",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique Identifier for Business Domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Schedule Entity",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ScheduleEntity"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Represents a scheduled scan entity.",
-            "schema": {
-              "$ref": "#/definitions/ScheduleEntityResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
         },
-        "x-ms-examples": {
-          "Schedule_Create": {
-            "$ref": "./examples/Schedule_Create.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/business-domains/{businessDomainId}/schedules/{scheduleId}": {
       "get": {
         "operationId": "GetSchedule",
-        "description": "Get Schedule",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Retrieves a specific scheduled job by its unique identifier under a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1813,14 +1753,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Unique Identifier for Schedule",
+            "description": "Unique identifier of the schedule",
             "required": true,
             "type": "string"
           }
@@ -1851,9 +1791,12 @@
           }
         }
       },
-      "patch": {
-        "operationId": "UpdateSchedule",
-        "description": "Update Schedule",
+      "put": {
+        "operationId": "CreateSchedule",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Creates a new scheduled job under a business domain for selected data assets.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1861,32 +1804,92 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Unique Identifier for Schedule",
+            "description": "Unique identifier for the scheduled job within the business domain",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
-            "description": "Body for Schedule Entity",
-            "required": false,
+            "description": "The payload for creating scheduled job",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ScheduleEntity"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntity"
+              "$ref": "#/definitions/ScheduleEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Create": {
+            "$ref": "./examples/Schedule_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateSchedule",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Updates the details of an existing schedule under a specific business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Unique identifier for the schedule within the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The payload for creating schedule",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntityResponse"
             }
           },
           "default": {
@@ -1910,7 +1913,10 @@
       },
       "delete": {
         "operationId": "DeleteSchedule",
-        "description": "Delete Schedule",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Deletes a specific schedule under a given business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1918,14 +1924,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique Identifier for Business Domain",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Unique identifier for Schedule",
+            "description": "Unique identifier of the schedule",
             "required": true,
             "type": "string"
           }
@@ -1954,10 +1960,13 @@
         }
       }
     },
-    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans": {
-      "put": {
-        "operationId": "CreateScan",
-        "description": "Create Scan",
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}:scans": {
+      "post": {
+        "operationId": "Scans",
+        "tags": [
+          "ScheduleScan"
+        ],
+        "description": "Creates a scan under a specific business domain and schedule.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1965,30 +1974,29 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get business domain id",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Get schedule id",
+            "description": "Unique identifier of the schedule",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Get scanDTO",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ScanDTO"
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Job Config DTO Response",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ScanDTOResponse"
             }
@@ -2006,18 +2014,16 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Scan_Create": {
-            "$ref": "./examples/Scan_Create.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}:cancel": {
-      "put": {
+      "post": {
         "operationId": "CancelScan",
-        "description": "Cancel Scan",
+        "tags": [
+          "ScheduleScan"
+        ],
+        "description": "Cancels a specific scan under a given schedule within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2025,28 +2031,28 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get business domain id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Get schedule id",
+            "description": "Unique identifier for the scheduled job within the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "scanId",
             "in": "path",
-            "description": "Get scan id",
+            "description": "Unique identifier for the scan within the scheduled job",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "202": {
-            "description": "Job Config DTO Response",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/ScanDTOResponse"
             }
@@ -2075,7 +2081,10 @@
     "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}": {
       "get": {
         "operationId": "ScanByScanId",
-        "description": "Get Scan by ScanId",
+        "tags": [
+          "ScheduleScan"
+        ],
+        "description": "Retrieves details of a specific scan under a given schedule within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2083,21 +2092,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get business domain id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Get schedule id",
+            "description": "Unique identifier for the scheduled job within the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "scanId",
             "in": "path",
-            "description": "Get scan id",
+            "description": "Unique identifier for the scan within the scheduled job",
             "required": true,
             "type": "string"
           }
@@ -2132,7 +2141,10 @@
     "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/runs": {
       "get": {
         "operationId": "GetRuns",
-        "description": "The most basic operation.",
+        "tags": [
+          "JobRunMonitoring"
+        ],
+        "description": "Retrieves all runs associated with a specific scan under a given schedule.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2140,28 +2152,28 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Get Business Domain Id",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Get schedule Id",
+            "description": "Unique identifier for the scheduled job within the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "scanId",
             "in": "path",
-            "description": "Get scan id",
+            "description": "Unique identifier for the scan within the scheduled job",
             "required": true,
             "type": "string"
           },
           {
             "name": "offset",
             "in": "query",
-            "description": "Get offset",
+            "description": "Offset value for pagination or incremental retrieval of runs.",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -2171,10 +2183,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ScheduleScanMonitoringEntity"
-              }
+              "$ref": "#/definitions/ScheduleScanMonitoringResponse"
             }
           },
           "default": {
@@ -2196,75 +2205,291 @@
           }
         }
       }
+    },
+    "/data-assets/{dataAssetId}/asset-metadata": {
+      "get": {
+        "operationId": "GetObserver",
+        "tags": [
+          "AssetMetadata"
+        ],
+        "description": "Retrieves the asset metadata associated with a Data Asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset whose metadata observer is being retrieved",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Get": {
+            "$ref": "./examples/AssetMetaData_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateObserver",
+        "tags": [
+          "AssetMetadata"
+        ],
+        "description": "Updates the asset metadata  associated with a Data Asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset whose metadata observer is being updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Asset metadata update request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserverResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Update": {
+            "$ref": "./examples/AssetMetaData_Update.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "AssetMetadataObserver": {
+    "AssetMetadata": {
       "type": "object",
-      "description": "Represents metadata observer entity for a data asset.",
+      "description": "Unified metadata observer for monitoring data assets across platforms",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier of the observer."
+          "description": "Unique identifier of the asset metadata observer",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "name": {
           "type": "string",
-          "description": "Name of the observer."
+          "description": "Display name of the asset metadata observer"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated business domain"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated data product"
         },
         "dataAsset": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the associated DataAsset entity."
+          "description": "Reference to the associated data asset"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the observer was created."
+          "description": "Creation timestamp (UTC)"
         },
         "createdBy": {
           "type": "string",
-          "description": "User who created the observer."
+          "description": "Identity of the creating user"
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the observer was last modified."
+          "description": "Last modification timestamp (UTC)"
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "User who last modified the observer."
+          "description": "Identity of the last modifying user"
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Soft deletion flag"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity tag for concurrency control"
+        },
+        "type": {
+          "type": "string",
+          "description": "Data source type classification"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/AssetMetadataCommonProperties",
+          "description": "Common metadata properties across all asset types"
+        },
+        "location": {
+          "type": "array",
+          "description": "Physical storage locations for file-based assets",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "format": {
+          "type": "string",
+          "description": "Data format specification for structured assets"
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Database schema name for SQL-based assets"
+        },
+        "tableName": {
+          "type": "string",
+          "description": "Table name for SQL-based data assets"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host server name for on-premises database connections"
+        },
+        "testConnectionDatasetName": {
+          "type": "string",
+          "description": "Connection Dataset name for Google Big Quey type of data asset"
+        },
+        "testConnectionSchemaName": {
+          "type": "string",
+          "description": "Connection Schema name for Google Big Query type of data asset"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project ID for Google Big Query type of data asset"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "AssetMetadataCommonProperties": {
+      "type": "object",
+      "description": "Shared metadata properties across all data asset types",
+      "properties": {
+        "inputDatasets": {
+          "type": "array",
+          "description": "Input dataset definitions and schemas",
+          "items": {}
+        },
+        "projection": {
+          "description": "Data projection and mapping configuration",
+          "x-ms-client-name": "projectionValue"
+        }
+      }
+    },
+    "AssetMetadataObserverResponse": {
+      "type": "object",
+      "description": "HTTP response for asset metadata observer operations",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique metadata observer identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable observer display name"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the observed data asset"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observer creation timestamp (UTC)"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Identity of the creating user"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observer last modification timestamp (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identity of the last modifying user"
         },
         "executionData": {
           "type": "object",
-          "description": "Dictionary containing execution data.",
+          "description": "Runtime execution parameters and configuration",
           "additionalProperties": {
             "type": "string"
           }
         },
         "isDeleted": {
           "type": "boolean",
-          "description": "Indicates if the observer is deleted."
+          "description": "Soft deletion flag"
         },
         "businessDomain": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related BusinessDomain entity."
+          "description": "Reference to the governing business domain"
         },
         "dataProduct": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataProduct entity."
+          "description": "Reference to the containing data product"
         },
         "eTag": {
           "type": "string",
-          "description": "ETag used for concurrency control."
+          "description": "Entity tag for concurrency control"
         },
         "type": {
           "$ref": "#/definitions/AssetMetadataObserverType",
-          "description": "Type of the observer."
+          "description": "Observer type classification"
         }
       }
     },
     "AssetMetadataObserverType": {
       "type": "string",
-      "description": "AssetMetaDataObserverType",
+      "description": "Type of asset metadata observer for data quality monitoring",
       "enum": [
         "Basic"
       ],
@@ -2275,10 +2500,185 @@
           {
             "name": "Basic",
             "value": "Basic",
-            "description": "Basic"
+            "description": "Basic observer type for standard data quality monitoring operations"
           }
         ]
       }
+    },
+    "AssetMetadataUpdate": {
+      "type": "object",
+      "description": "Unified metadata observer for monitoring data assets across platforms",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the asset metadata observer"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated business domain"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated data product"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated data asset"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp (UTC)"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Identity of the creating user"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identity of the last modifying user"
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Soft deletion flag"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity tag for concurrency control"
+        },
+        "type": {
+          "type": "string",
+          "description": "Data source type classification"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/AssetMetadataCommonProperties",
+          "description": "Common metadata properties across all asset types"
+        },
+        "location": {
+          "type": "array",
+          "description": "Physical storage locations for file-based assets",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "format": {
+          "type": "string",
+          "description": "Data format specification for structured assets"
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Database schema name for SQL-based assets"
+        },
+        "tableName": {
+          "type": "string",
+          "description": "Table name for SQL-based data assets"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host server name for on-premises database connections"
+        },
+        "testConnectionDatasetName": {
+          "type": "string",
+          "description": "Connection Dataset name for Google Big Quey type of data asset"
+        },
+        "testConnectionSchemaName": {
+          "type": "string",
+          "description": "Connection Schema name for Google Big Query type of data asset"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project ID for Google Big Query type of data asset"
+        }
+      }
+    },
+    "AssetRuntimeConfiguration": {
+      "type": "object",
+      "description": "Runtime configuration settings for asset processing",
+      "properties": {
+        "isErrorRowRequired": {
+          "type": "boolean",
+          "description": "Whether error row is required during processing"
+        },
+        "errorRowWriteFormat": {
+          "type": "string",
+          "description": "Format for writing error rows"
+        }
+      }
+    },
+    "AssetScopedMetadata": {
+      "type": "object",
+      "description": "Asset scoped metadata with runtime configuration and references to business domain, data product, and data asset",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the asset scoped metadata"
+        },
+        "favouriteColumnPaths": {
+          "type": "array",
+          "description": "List of favorite column paths for the asset",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the asset scoped metadata"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the business domain"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the data product"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the data asset"
+        },
+        "runtime": {
+          "$ref": "#/definitions/AssetRuntimeConfiguration",
+          "description": "Runtime configuration for the asset"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the metadata was created"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the metadata was last modified"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User ID who created the metadata"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User ID who last modified the metadata"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity tag for optimistic concurrency control"
+        }
+      },
+      "required": [
+        "id",
+        "businessDomain",
+        "dataProduct",
+        "dataAsset",
+        "createdAt",
+        "lastModifiedAt",
+        "createdBy",
+        "lastModifiedBy",
+        "eTag"
+      ]
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -2340,51 +2740,201 @@
         }
       }
     },
+    "BulkAssetMetadataEntry": {
+      "type": "object",
+      "description": "Complete metadata entry for bulk operations including asset metadata, scoped metadata, rules, and score snapshot",
+      "properties": {
+        "assetMetadata": {
+          "$ref": "#/definitions/AssetMetadata",
+          "description": "Asset metadata information"
+        },
+        "assetScopedMetadata": {
+          "$ref": "#/definitions/AssetScopedMetadata",
+          "description": "Asset scoped metadata information"
+        },
+        "globalRules": {
+          "type": "array",
+          "description": "Global rules applied to the asset",
+          "items": {
+            "$ref": "#/definitions/GlobalRule"
+          }
+        }
+      },
+      "required": [
+        "assetMetadata",
+        "assetScopedMetadata",
+        "globalRules"
+      ]
+    },
+    "BulkAssetMetadataRequest": {
+      "type": "object",
+      "description": "Request containing bulk asset metadata for insertion",
+      "properties": {
+        "metadata": {
+          "type": "array",
+          "description": "Array of metadata entries to insert",
+          "items": {
+            "$ref": "#/definitions/BulkAssetMetadataEntry"
+          }
+        }
+      },
+      "required": [
+        "metadata"
+      ]
+    },
+    "BulkAssetMetadataResponse": {
+      "type": "object",
+      "description": "Response containing bulk asset metadata with pagination support",
+      "properties": {
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for pagination. Null when no more results are available."
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Array of metadata entries (up to 10 per response)",
+          "items": {
+            "$ref": "#/definitions/BulkAssetMetadataEntry"
+          }
+        }
+      },
+      "required": [
+        "metadata"
+      ]
+    },
+    "BulkRulesRequest": {
+      "type": "object",
+      "description": "Request model for bulk rule creation operations",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "Array of rule entities for bulk creation",
+          "items": {
+            "$ref": "#/definitions/RuleEntity"
+          }
+        }
+      },
+      "required": [
+        "rules"
+      ]
+    },
+    "BulkRulesResponse": {
+      "type": "object",
+      "description": "Response model for bulk rule creation operations",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "Array of created rule entities",
+          "items": {
+            "$ref": "#/definitions/RuleEntityBulkResponse"
+          }
+        }
+      },
+      "required": [
+        "rules"
+      ]
+    },
     "Column": {
       "type": "object",
-      "description": "Represents a column in a dataset.",
+      "description": "Column definition for dataset validation and quality checks",
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of the column."
+          "description": "Column data type or classification"
         },
         "value": {
           "type": "string",
-          "description": "The value of the column."
+          "description": "Column name or identifier"
         }
       }
     },
+    "DataQualityTrendRecord": {
+      "type": "object",
+      "description": "Trend record capturing data quality score and job execution information for a specific asset.",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Identifier of the business domain associated with the trend record."
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Identifier of the data product under the business domain."
+        },
+        "dataAssetId": {
+          "type": "string",
+          "description": "Identifier of the data asset whose quality score is represented."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Data quality score for this job execution, if computed."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier of the job execution or monitoring run."
+        },
+        "migrationStatus": {
+          "type": "string",
+          "description": "Migration status information, if available."
+        }
+      },
+      "required": [
+        "businessDomainId",
+        "dataProductId",
+        "dataAssetId",
+        "jobId"
+      ]
+    },
+    "DataQualityTrendResponse": {
+      "type": "object",
+      "description": "List of data quality trend records grouped by domain, product, and asset.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of trend entries representing data quality metrics for each job.",
+          "items": {
+            "$ref": "#/definitions/DataQualityTrendRecord"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DataSourceEntity": {
       "type": "object",
-      "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+      "description": "Unified data source entity model combining all supported data source types and their configuration properties.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The display name of the data source connection."
-        },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the data source."
+          "description": "Unique system identifier for the data source entity.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable display name identifying the data source connection."
         },
         "isVnetEnabled": {
           "type": "boolean",
-          "description": "Indicates whether the data source is enabled with Virtual Network (VNet)."
+          "description": "Virtual Network connectivity flag."
         },
         "targetResourceId": {
           "type": "string",
-          "description": "The Azure resource ID of the target resource (if applicable)."
+          "description": "Azure resource identifier for target platform (if applicable)."
         },
         "businessDomain": {
           "type": "object",
-          "description": "The business domain this data source belongs to.",
+          "description": "Business domain governance reference for this data source.",
           "properties": {
             "type": {
               "type": "string",
-              "description": "Type of business domain reference."
+              "description": "Business domain reference type classification."
             },
             "referenceId": {
               "type": "string",
-              "description": "Unique identifier for the business domain."
+              "description": "Unique business domain identifier associated with this data source."
             }
           },
           "required": [
@@ -2394,40 +2944,135 @@
         },
         "lastModifiedAt": {
           "type": "string",
-          "description": "ISO 8601 timestamp when the data source was last modified."
+          "description": "ISO 8601 timestamp representing the last modification time."
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "Identifier (GUID or user ID) of the last modifier."
+          "description": "Identifier or name of the last modifying user."
         },
         "type": {
           "type": "string",
-          "description": "The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics)."
+          "description": "Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.)."
         },
         "typeProperties": {
           "type": "object",
-          "description": "A dictionary of key-value pairs with additional properties\nspecific to the data source type.",
-          "additionalProperties": {
-            "type": "string"
+          "description": "Combined configuration properties for all supported data source platforms.",
+          "properties": {
+            "server": {
+              "type": "string",
+              "description": "Azure SQL server name (for AzureSqlDatabase)."
+            },
+            "database": {
+              "type": "string",
+              "description": "Database name (for AzureSqlDatabase, Snowflake, Synapse)."
+            },
+            "host": {
+              "type": "string",
+              "description": "Oracle host IP or DNS (for OnPremiseOracleDatabase)."
+            },
+            "port": {
+              "type": "string",
+              "description": "Oracle database port (for OnPremiseOracleDatabase)."
+            },
+            "username": {
+              "type": "string",
+              "description": "Oracle username (for OnPremiseOracleDatabase)."
+            },
+            "schema": {
+              "type": "string",
+              "description": "Schema name (for Oracle, Snowflake, or Databricks)."
+            },
+            "service": {
+              "type": "string",
+              "description": "Oracle service name (for OnPremiseOracleDatabase)."
+            },
+            "dataIntegrationRuntimeId": {
+              "type": "string",
+              "description": "Integration runtime ID (for OnPremiseOracleDatabase)."
+            },
+            "url": {
+              "type": "string",
+              "description": "Snowflake account URL."
+            },
+            "warehouse": {
+              "type": "string",
+              "description": "Snowflake warehouse name."
+            },
+            "testConnectionSchemaName": {
+              "type": "string",
+              "description": "Schema name used for test connection (for Snowflake)."
+            },
+            "testConnectionTableName": {
+              "type": "string",
+              "description": "Table name used for test connection (for Snowflake)."
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "Primary DFS endpoint for ADLS Gen2."
+            },
+            "workspaceUrl": {
+              "type": "string",
+              "description": "Databricks workspace URL."
+            },
+            "httpPath": {
+              "type": "string",
+              "description": "HTTP path for Databricks SQL warehouse."
+            },
+            "catalog": {
+              "type": "string",
+              "description": "Unity Catalog name."
+            },
+            "metastoreId": {
+              "type": "string",
+              "description": "Metastore identifier for Unity Catalog."
+            },
+            "workspaceName": {
+              "type": "string",
+              "description": "Synapse workspace name."
+            },
+            "dedicatedEndpoint": {
+              "type": "string",
+              "description": "Dedicated SQL endpoint for Synapse."
+            },
+            "serverlessEndpoint": {
+              "type": "string",
+              "description": "Serverless SQL endpoint for Synapse."
+            },
+            "endpointType": {
+              "type": "string",
+              "description": "Endpoint type classification (e.g., sql)."
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "Microsoft Entra tenant ID (for OneLake)."
+            },
+            "workspaceId": {
+              "type": "string",
+              "description": "Fabric workspace ID (for OneLake)."
+            },
+            "lakehouseId": {
+              "type": "string",
+              "description": "Lakehouse ID (for OneLake)."
+            }
           }
         },
         "scopes": {
           "type": "array",
-          "description": "Optional list of scopes that define access levels or boundaries for this data source.",
+          "description": "Access scope definitions controlling which data objects are included or excluded from operations.",
           "items": {
             "type": "object",
             "properties": {
               "scope": {
                 "type": "object",
-                "description": "The scope definition containing type and included objects.",
+                "description": "Scope configuration defining inclusion and exclusion boundaries.",
                 "properties": {
                   "type": {
                     "type": "string",
-                    "description": "The scope type (e.g., Sql)."
+                    "description": "Scope type classification (SQL, NoSQL, File, etc.)."
                   },
                   "includes": {
                     "type": "array",
-                    "description": "List of included items in the scope.",
+                    "description": "List of included data object names or patterns within this scope.",
                     "items": {
                       "type": "string"
                     }
@@ -2440,7 +3085,7 @@
               },
               "id": {
                 "type": "string",
-                "description": "Unique identifier for the scope."
+                "description": "Unique identifier for this scope definition."
               }
             },
             "required": [
@@ -2451,6 +3096,7 @@
         }
       },
       "required": [
+        "id",
         "name",
         "isVnetEnabled",
         "businessDomain",
@@ -2458,37 +3104,53 @@
         "typeProperties"
       ]
     },
+    "DataSourceEntityListResponse": {
+      "type": "object",
+      "description": "Paginated response for data source listing operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of data source entities",
+          "items": {
+            "$ref": "#/definitions/DataSourceEntity"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DataSourceEntityResponse": {
       "type": "object",
-      "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+      "description": "HTTP response model for data source operations with complete configuration and metadata.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The display name of the data source connection."
+          "description": "Display name of the data source connection."
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the data source."
+          "description": "Unique data source identifier."
         },
         "isVnetEnabled": {
           "type": "boolean",
-          "description": "Indicates whether the data source is enabled with Virtual Network (VNet)."
+          "description": "Virtual Network connectivity flag."
         },
         "targetResourceId": {
           "type": "string",
-          "description": "The Azure resource ID of the target resource (if applicable)."
+          "description": "Azure resource identifier for target platform (if applicable)."
         },
         "businessDomain": {
           "type": "object",
-          "description": "The business domain this data source belongs to.",
+          "description": "Business domain governance reference for this data source.",
           "properties": {
             "type": {
               "type": "string",
-              "description": "Type of business domain reference."
+              "description": "Business domain reference type classification."
             },
             "referenceId": {
               "type": "string",
-              "description": "Unique identifier for the business domain."
+              "description": "Unique identifier of the governing business domain."
             }
           },
           "required": [
@@ -2498,40 +3160,40 @@
         },
         "lastModifiedAt": {
           "type": "string",
-          "description": "ISO 8601 timestamp when the data source was last modified."
+          "description": "Timestamp when the data source configuration was last modified (ISO 8601)."
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "Identifier (GUID or user ID) of the last modifier."
+          "description": "Identity of the last modifying user."
         },
         "type": {
           "type": "string",
-          "description": "The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics)."
+          "description": "Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.)."
         },
         "typeProperties": {
           "type": "object",
-          "description": "A dictionary of key-value pairs with additional properties\nspecific to the data source type.",
+          "description": "Platform-specific configuration properties and credentials (key-value pairs).",
           "additionalProperties": {
             "type": "string"
           }
         },
         "scopes": {
           "type": "array",
-          "description": "Optional list of scopes that define access levels or boundaries for this data source.",
+          "description": "Access scope definitions controlling inclusion and exclusion of data objects.",
           "items": {
             "type": "object",
             "properties": {
               "scope": {
                 "type": "object",
-                "description": "The scope definition containing type and included objects.",
+                "description": "Scope configuration defining inclusion and exclusion boundaries.",
                 "properties": {
                   "type": {
                     "type": "string",
-                    "description": "The scope type (e.g., Sql)."
+                    "description": "Scope type classification (e.g., SQL, NoSQL, File, etc.)."
                   },
                   "includes": {
                     "type": "array",
-                    "description": "List of included items in the scope.",
+                    "description": "Collection of included data object names or patterns.",
                     "items": {
                       "type": "string"
                     }
@@ -2544,7 +3206,7 @@
               },
               "id": {
                 "type": "string",
-                "description": "Unique identifier for the scope."
+                "description": "Unique identifier for the scope definition."
               }
             },
             "required": [
@@ -2565,56 +3227,311 @@
         "typeProperties"
       ]
     },
+    "DataSourceEntityUpdate": {
+      "type": "object",
+      "description": "Unified data source entity model combining all supported data source types and their configuration properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable display name identifying the data source connection."
+        },
+        "isVnetEnabled": {
+          "type": "boolean",
+          "description": "Virtual Network connectivity flag."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Azure resource identifier for target platform (if applicable)."
+        },
+        "businessDomain": {
+          "type": "object",
+          "description": "Business domain governance reference for this data source.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Business domain reference type classification."
+            },
+            "referenceId": {
+              "type": "string",
+              "description": "Unique business domain identifier associated with this data source."
+            }
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "description": "ISO 8601 timestamp representing the last modification time."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identifier or name of the last modifying user."
+        },
+        "type": {
+          "type": "string",
+          "description": "Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.)."
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "Combined configuration properties for all supported data source platforms.",
+          "properties": {
+            "server": {
+              "type": "string",
+              "description": "Azure SQL server name (for AzureSqlDatabase)."
+            },
+            "database": {
+              "type": "string",
+              "description": "Database name (for AzureSqlDatabase, Snowflake, Synapse)."
+            },
+            "host": {
+              "type": "string",
+              "description": "Oracle host IP or DNS (for OnPremiseOracleDatabase)."
+            },
+            "port": {
+              "type": "string",
+              "description": "Oracle database port (for OnPremiseOracleDatabase)."
+            },
+            "username": {
+              "type": "string",
+              "description": "Oracle username (for OnPremiseOracleDatabase)."
+            },
+            "schema": {
+              "type": "string",
+              "description": "Schema name (for Oracle, Snowflake, or Databricks)."
+            },
+            "service": {
+              "type": "string",
+              "description": "Oracle service name (for OnPremiseOracleDatabase)."
+            },
+            "dataIntegrationRuntimeId": {
+              "type": "string",
+              "description": "Integration runtime ID (for OnPremiseOracleDatabase)."
+            },
+            "url": {
+              "type": "string",
+              "description": "Snowflake account URL."
+            },
+            "warehouse": {
+              "type": "string",
+              "description": "Snowflake warehouse name."
+            },
+            "testConnectionSchemaName": {
+              "type": "string",
+              "description": "Schema name used for test connection (for Snowflake)."
+            },
+            "testConnectionTableName": {
+              "type": "string",
+              "description": "Table name used for test connection (for Snowflake)."
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "Primary DFS endpoint for ADLS Gen2."
+            },
+            "workspaceUrl": {
+              "type": "string",
+              "description": "Databricks workspace URL."
+            },
+            "httpPath": {
+              "type": "string",
+              "description": "HTTP path for Databricks SQL warehouse."
+            },
+            "catalog": {
+              "type": "string",
+              "description": "Unity Catalog name."
+            },
+            "metastoreId": {
+              "type": "string",
+              "description": "Metastore identifier for Unity Catalog."
+            },
+            "workspaceName": {
+              "type": "string",
+              "description": "Synapse workspace name."
+            },
+            "dedicatedEndpoint": {
+              "type": "string",
+              "description": "Dedicated SQL endpoint for Synapse."
+            },
+            "serverlessEndpoint": {
+              "type": "string",
+              "description": "Serverless SQL endpoint for Synapse."
+            },
+            "endpointType": {
+              "type": "string",
+              "description": "Endpoint type classification (e.g., sql)."
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "Microsoft Entra tenant ID (for OneLake)."
+            },
+            "workspaceId": {
+              "type": "string",
+              "description": "Fabric workspace ID (for OneLake)."
+            },
+            "lakehouseId": {
+              "type": "string",
+              "description": "Lakehouse ID (for OneLake)."
+            }
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Access scope definitions controlling which data objects are included or excluded from operations.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scope": {
+                "type": "object",
+                "description": "Scope configuration defining inclusion and exclusion boundaries.",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Scope type classification (SQL, NoSQL, File, etc.)."
+                  },
+                  "includes": {
+                    "type": "array",
+                    "description": "List of included data object names or patterns within this scope.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "includes"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for this scope definition."
+              }
+            },
+            "required": [
+              "scope",
+              "id"
+            ]
+          }
+        }
+      }
+    },
     "DatasetToDatasourceMapping": {
       "type": "object",
-      "description": "Maps a dataset to a datasource.",
+      "description": "Dataset to data source mapping for job execution abstraction",
       "properties": {
         "datasetAliasName": {
           "type": "string",
-          "description": "Alias name of the dataset."
+          "description": "Logical dataset alias name"
         },
         "datasourceId": {
           "type": "string",
-          "description": "Identifier of the datasource."
+          "description": "Physical data source identifier"
         }
       }
     },
     "ErrorDetails": {
       "type": "object",
-      "description": "Details about an error that occurred",
+      "description": "Structured error information with codes, messages, and contextual details",
       "properties": {
         "code": {
           "type": "string",
-          "description": "Error code"
+          "description": "Standardized error code"
         },
         "message": {
           "type": "string",
-          "description": "Error message"
+          "description": "Human-readable error message"
         },
         "details": {
           "type": "object",
-          "description": "Additional details about the error",
+          "description": "Additional error context as key-value pairs",
           "additionalProperties": {
             "type": "string"
           }
         }
+      }
+    },
+    "GlobalRule": {
+      "type": "object",
+      "description": "Global rule definition with scoring and metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the rule"
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the rule"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the rule"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/RuleTypeProperties",
+          "description": "Type-specific properties of the rule"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the rule (Active, Inactive)"
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Score associated with the rule"
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Dimension of the rule (e.g., Conformity, Completeness)"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the business domain"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the data product"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the data asset"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the rule was last modified"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User ID who last modified the rule"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the rule was created"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User ID who created the rule"
+        }
       },
       "required": [
-        "code",
-        "message"
+        "name",
+        "id",
+        "type",
+        "status"
       ]
     },
     "JobConfigDTO": {
       "type": "object",
-      "description": "Configuration for jobs.",
+      "description": "Job execution configuration with runtime parameters and data mappings",
       "properties": {
         "redundancyCheck": {
           "type": "boolean",
-          "description": "Indicates if redundancy check is enabled."
+          "description": "Flag for redundancy validation checks"
         },
         "datasetToDatasourceMappings": {
           "type": "array",
-          "description": "Mappings between datasets and data sources.",
+          "description": "Dataset to data source mapping configurations",
           "items": {
             "$ref": "#/definitions/DatasetToDatasourceMapping"
           }
@@ -2623,72 +3540,76 @@
     },
     "JobConfigDTOResponse": {
       "type": "object",
-      "description": "Job Config DTO Response",
+      "description": "HTTP response for job configuration operations with LRO support",
       "properties": {
         "value": {
           "type": "string",
-          "description": "Value"
+          "description": "Operation result value or reference"
         },
-        "statuslro": {
+        "status": {
           "$ref": "#/definitions/LroStatus",
-          "description": "lro status"
+          "description": "Long-running operation status"
+        },
+        "statusMonitor": {
+          "$ref": "#/definitions/StatusMonitor",
+          "description": "Real-time job execution monitoring information"
         }
       },
       "required": [
         "value",
-        "statuslro"
+        "status"
       ]
     },
     "JobHistoryEntity": {
       "type": "object",
-      "description": "Job history information.",
+      "description": "Historical execution record for completed data quality jobs",
       "properties": {
         "dataAssetId": {
           "type": "string",
-          "description": "Identifier of the data asset.",
+          "description": "Processed data asset identifier",
           "minLength": 1
         },
         "runId": {
           "type": "string",
-          "description": "Job run identifier.",
+          "description": "Job execution run identifier",
           "minLength": 1
         },
         "dataProductId": {
           "type": "string",
-          "description": "Identifier of the data product.",
+          "description": "Parent data product identifier",
           "minLength": 1
         },
         "businessDomainId": {
           "type": "string",
-          "description": "Business domain identifier.",
+          "description": "Governing business domain identifier",
           "minLength": 1
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the job started."
+          "description": "Job execution start timestamp (UTC)"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the job ended."
+          "description": "Job execution end timestamp (UTC)"
         },
         "submissionTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the job was submitted."
+          "description": "Job submission timestamp (UTC)"
         },
         "status": {
           "type": "string",
-          "description": "Status of the job."
+          "description": "Final job execution status"
         },
         "jobType": {
           "type": "string",
-          "description": "Type of job."
+          "description": "Job type classification"
         },
         "accountId": {
           "type": "string",
-          "description": "Account identifier."
+          "description": "Job execution account identifier"
         }
       },
       "required": [
@@ -2698,132 +3619,188 @@
         "businessDomainId"
       ]
     },
+    "JobHistoryResponse": {
+      "type": "object",
+      "description": "Response for job history listing with execution records and metrics",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of job history execution records",
+          "items": {
+            "$ref": "#/definitions/JobHistoryEntity"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "JobMetadataEntity": {
       "type": "object",
-      "description": "Metadata for jobs.",
+      "description": "Comprehensive metadata for data quality job tracking and lifecycle management",
       "properties": {
         "runId": {
           "type": "string",
-          "description": "Unique run identifier for the job."
+          "description": "Unique execution run identifier"
         },
         "dataProductId": {
           "type": "string",
-          "description": "Identifier of the data product."
+          "description": "Data product identifier containing target assets"
         },
         "redundancyCheck": {
           "type": "boolean",
-          "description": "Indicates if redundancy check is enabled."
+          "description": "Flag for redundancy validation checks"
         },
         "accountId": {
           "type": "string",
-          "description": "Account identifier."
+          "description": "Executing account identifier"
         },
         "businessDomainId": {
           "type": "string",
-          "description": "Business domain identifier."
+          "description": "Governing business domain identifier"
         },
         "submissionTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the job was submitted."
+          "description": "Job submission timestamp (UTC)"
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the job started."
+          "description": "Job execution start timestamp (UTC)"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the job ended."
+          "description": "Job execution end timestamp (UTC)"
         },
         "cancelRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when a cancel request was made."
+          "description": "Job cancellation request timestamp (UTC)"
         },
         "status": {
           "type": "string",
-          "description": "Current job status."
+          "description": "Current job execution status"
         },
         "pfsJobId": {
           "type": "string",
-          "description": "Platform job ID."
+          "description": "Platform-specific external job identifier"
         },
         "message": {
           "type": "string",
-          "description": "Job-related message."
+          "description": "Job execution message with status or error details"
         },
         "duration": {
           "type": "integer",
           "format": "int64",
-          "description": "Duration of the job in milliseconds."
+          "description": "Job execution duration in milliseconds"
         },
         "startedBy": {
           "type": "string",
-          "description": "User who started the job."
+          "description": "Identity of the job initiating user"
         },
         "cancelledBy": {
           "type": "string",
-          "description": "User who cancelled the job."
+          "description": "Identity of the job cancelling user"
         },
         "jobType": {
           "type": "string",
-          "description": "Type of job."
+          "description": "Job type classification"
         },
         "jobExecutionRegion": {
           "type": "string",
-          "description": "Region where the job executed."
+          "description": "Job execution geographic region"
         },
         "dataAssetId": {
           "type": "string",
-          "description": "Identifier of the associated data asset."
+          "description": "Primary data asset identifier"
         },
         "dataAssetName": {
           "type": "string",
-          "description": "Name of the associated data asset."
+          "description": "Primary data asset name"
         },
         "scheduleId": {
           "type": "string",
-          "description": "Schedule identifier if job is scheduled."
+          "description": "Triggering schedule identifier"
         },
         "scheduleName": {
           "type": "string",
-          "description": "Schedule name if job is scheduled."
+          "description": "Triggering schedule name"
         },
         "qualifiedPath": {
           "type": "string",
-          "description": "Fully qualified path related to the job."
+          "description": "Fully qualified data resource path"
         },
         "scanId": {
           "type": "string",
-          "description": "Scan identifier associated with the job."
+          "description": "Associated scan operation identifier"
         },
         "scheduleScanType": {
           "type": "string",
-          "description": "Type of schedule scan."
+          "description": "Schedule scan type classification"
         },
         "jobBillingSparkSku": {
           "type": "string",
-          "description": "Spark SKU used for job billing."
+          "description": "Spark compute SKU for billing and resource allocation"
         },
         "dataSourceType": {
           "type": "string",
-          "description": "Type of data source."
+          "description": "Data source type classification"
         },
         "primaryDataSourceID": {
           "type": "string",
-          "description": "Primary data source identifier."
+          "description": "Primary data source identifier"
         },
         "puDetail": {
           "type": "string",
-          "description": "Additional details related to Purview."
+          "description": "Additional Purview-specific governance details"
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "description": "Physical storage location for data assets across different storage types",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Storage type classification"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/LocationTypeProperties",
+          "description": "Storage-specific configuration properties"
+        }
+      },
+      "required": [
+        "type",
+        "typeProperties"
+      ]
+    },
+    "LocationTypeProperties": {
+      "type": "object",
+      "description": "Storage-specific configuration properties for different location types",
+      "properties": {
+        "fileSystem": {
+          "type": "string",
+          "description": "File system or container name"
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "Hierarchical path within the storage location"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Storage account name or endpoint identifier"
+        },
+        "region": {
+          "type": "string",
+          "description": "Geographic region or environment location"
         }
       }
     },
     "LroStatus": {
       "type": "string",
-      "description": "lro status",
+      "description": "Long-running operation status enumeration with extensibility",
       "enum": [
         "InProgress",
         "Succeeded",
@@ -2836,61 +3813,103 @@
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "In Progress status"
+            "description": "Operation in progress"
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded status"
+            "description": "Operation completed successfully"
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed status"
+            "description": "Operation failed with errors"
+          }
+        ]
+      }
+    },
+    "OperationKind": {
+      "type": "string",
+      "description": "Type of operation being monitored",
+      "enum": [
+        "Unknown",
+        "Create",
+        "Update",
+        "Delete",
+        "Retrieve"
+      ],
+      "x-ms-enum": {
+        "name": "OperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Operation type is unknown"
+          },
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create operation"
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update operation"
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete operation"
+          },
+          {
+            "name": "Retrieve",
+            "value": "Retrieve",
+            "description": "Retrieve operation"
           }
         ]
       }
     },
     "OpinionEntity": {
       "type": "object",
-      "description": "Opinion Entity",
+      "description": "Opinion entity for stakeholder feedback and data quality control assessments",
       "properties": {
         "businessDomainId": {
           "type": "string",
-          "description": "Get Business domain Id"
+          "description": "Business domain identifier for opinion context"
         },
         "dataProductId": {
           "type": "string",
-          "description": "Get data product id"
+          "description": "Data product identifier for opinion scope"
         },
         "dataAssetId": {
           "type": "string",
-          "description": "Get data asset id"
+          "description": "Data asset identifier for opinion target"
         },
         "controlId": {
           "type": "string",
-          "description": "Get control id"
+          "description": "Data quality control identifier"
         },
         "opinionId": {
           "type": "string",
-          "description": "Get opinion id"
+          "description": "Opinion record unique identifier"
         },
         "value": {
           "type": "string",
-          "description": "Get value"
+          "description": "Opinion assessment value or result"
         },
         "resultedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Get result At"
+          "description": "Opinion completion timestamp (UTC)"
         },
         "outcomeId": {
           "type": "string",
-          "description": "Get outcomeId"
+          "description": "Assessment outcome identifier"
         },
         "queryExecuted": {
           "type": "string",
-          "description": "Get queryExecutionId"
+          "description": "Supporting query execution identifier"
         }
       },
       "required": [
@@ -2924,34 +3943,60 @@
         "value"
       ]
     },
+    "PagedScheduleEntity": {
+      "type": "object",
+      "description": "Paged collection of ScheduleEntity items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScheduleEntity items on this page",
+          "items": {
+            "$ref": "#/definitions/ScheduleEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProfileEntity": {
       "type": "object",
-      "description": "Profile Entity",
+      "description": "Profile entity for data profiling and quality analysis configuration",
       "properties": {
         "type": {
           "type": "string",
-          "description": "type"
+          "description": "Profile type classification"
         },
         "typeProperties": {
           "type": "object",
-          "description": "Type properties",
+          "description": "Type-specific profiling configuration properties",
           "properties": {
             "location": {
               "type": "array",
+              "description": "Collection of data location definitions specifying where profiling should be performed",
               "items": {
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Location type classification (AdlsGen2FileLocation, BlobStorageLocation, etc.)"
                   },
                   "typeProperties": {
                     "type": "object",
+                    "description": "Location-specific properties defining file system and path details",
                     "properties": {
                       "fileSystem": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "File system or container name where data resides"
                       },
                       "folderPath": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Folder path within the file system containing target data"
                       }
                     },
                     "required": [
@@ -2973,19 +4018,21 @@
         },
         "dataSourceId": {
           "type": "string",
-          "description": "data source id"
+          "description": "Data source identifier for profiling target"
         },
         "configuration": {
           "type": "object",
-          "description": "configuration",
+          "description": "Profiling configuration with key columns and parameters",
           "properties": {
             "keyColumns": {
               "type": "array",
+              "description": "Collection of key columns that serve as primary identifiers for profiling analysis",
               "items": {
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the key column used for data identification and grouping"
                   }
                 },
                 "required": [
@@ -3008,50 +4055,72 @@
     },
     "ProfileEntityResponse": {
       "type": "object",
-      "description": "Profile Entity",
+      "description": "HTTP response for profile operations with LRO support and run tracking",
       "properties": {
         "profileRunId": {
           "type": "string",
-          "description": "profile run id"
+          "description": "Profile run execution identifier"
         },
-        "statuslro": {
+        "status": {
           "$ref": "#/definitions/LroStatus",
-          "description": "lro status"
+          "description": "Long-running operation status for profiling"
+        },
+        "statusMonitor": {
+          "$ref": "#/definitions/StatusMonitor",
+          "description": "Real-time profiling execution monitoring information"
         }
       },
       "required": [
         "profileRunId",
-        "statuslro"
+        "status"
       ]
     },
     "Reference": {
       "type": "object",
-      "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset).",
+      "description": "Reference to entities in the data governance hierarchy for relationship establishment",
       "properties": {
         "type": {
           "type": "string",
-          "description": "Type of the referenced entity."
+          "description": "Type classification of the referenced entity"
         },
         "referenceId": {
           "type": "string",
-          "description": "Unique identifier of the referenced entity."
+          "description": "Unique identifier of the referenced entity"
         }
       }
     },
+    "RuleColumn": {
+      "type": "object",
+      "description": "Column definition used in rule configurations",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value or name of the column"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the column reference"
+        }
+      },
+      "required": [
+        "value",
+        "type"
+      ]
+    },
     "RuleEntities": {
       "type": "object",
-      "description": "Rule Entities",
+      "description": "Rule entities containing rule identifier and complete rule configuration",
       "properties": {
         "ruleId": {
           "type": "string",
-          "description": "Unique Identifier for Rule",
+          "description": "Unique identifier for the data quality rule",
           "x-ms-mutability": [
             "create"
           ]
         },
         "ruleEntity": {
           "$ref": "#/definitions/RuleEntity",
-          "description": "ruleEntity"
+          "description": "Complete rule entity with configuration and metadata"
         }
       },
       "required": [
@@ -3061,58 +4130,186 @@
     },
     "RuleEntitiesUpdate": {
       "type": "object",
-      "description": "Rule Entities",
+      "description": "Rule entities containing rule identifier and complete rule configuration",
       "properties": {
         "ruleEntity": {
           "$ref": "#/definitions/RuleEntityUpdate",
-          "description": "ruleEntity"
+          "description": "Complete rule entity with configuration and metadata"
         }
       }
     },
     "RuleEntity": {
       "type": "object",
-      "description": "Represents a business/data quality rule entity.",
+      "description": "Data quality rule entity with validation logic, execution parameters, and scoring",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Descriptive name of the rule"
         },
         "description": {
           "type": "string",
-          "description": "Represents description of the rule."
+          "description": "Detailed description of rule validation and business purpose"
         },
         "type": {
           "type": "string",
-          "description": "Represents the type of rule."
+          "description": "Rule type classification"
         },
         "status": {
           "type": "string",
-          "description": "Represents the status of the rule."
+          "description": "Current execution status"
         },
         "typeProperties": {
           "$ref": "#/definitions/TypeProperties",
-          "description": "Holds additional properties related to rule type."
+          "description": "Type-specific configuration properties"
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier of the rule."
+          "description": "Unique rule identifier"
         },
         "businessDomain": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related BusinessDomain entity."
+          "description": "Business domain reference"
         },
         "dataProduct": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataProduct entity."
+          "description": "Data product reference"
         },
         "dataAsset": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataAsset entity."
+          "description": "Data asset reference"
         },
         "score": {
           "type": "number",
           "format": "double",
-          "description": "Represents the rule's score."
+          "description": "Quality score (0.0 to 1.0)"
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Optional business dimension or classification"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this rule was created"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this rule was last modified"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User identifier for the creator of the rule"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User identifier for the last modifier of the rule"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "status",
+        "id"
+      ]
+    },
+    "RuleEntityBulkResponse": {
+      "type": "object",
+      "description": "Individual rule entity for bulk operations",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Descriptive name of the data quality rule"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of rule validation and purpose"
+        },
+        "type": {
+          "type": "string",
+          "description": "Classification of the data quality rule type"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current execution status of the rule"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Type-specific configuration for rule validation"
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique system identifier for the rule"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated business domain"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated data product"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the target data asset"
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Current quality score from rule execution"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "status",
+        "id"
+      ]
+    },
+    "RuleEntityResponse": {
+      "type": "object",
+      "description": "HTTP response containing complete data quality rule information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Descriptive name of the data quality rule"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of rule validation logic and purpose"
+        },
+        "type": {
+          "type": "string",
+          "description": "Classification of the data quality rule type"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current execution status of the rule"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Type-specific configuration parameters for rule validation"
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique system identifier for the rule"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated business domain"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated data product"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the target data asset"
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Current quality score from rule execution"
         }
       },
       "required": [
@@ -3124,137 +4321,188 @@
     },
     "RuleEntityUpdate": {
       "type": "object",
-      "description": "Represents a business/data quality rule entity.",
+      "description": "Data quality rule entity with validation logic, execution parameters, and scoring",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+          "description": "Descriptive name of the rule"
         },
         "description": {
           "type": "string",
-          "description": "Represents description of the rule."
+          "description": "Detailed description of rule validation and business purpose"
         },
         "type": {
           "type": "string",
-          "description": "Represents the type of rule."
+          "description": "Rule type classification"
         },
         "status": {
           "type": "string",
-          "description": "Represents the status of the rule."
+          "description": "Current execution status"
         },
         "typeProperties": {
           "$ref": "#/definitions/TypeProperties",
-          "description": "Holds additional properties related to rule type."
+          "description": "Type-specific configuration properties"
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier of the rule."
+          "description": "Unique rule identifier"
         },
         "businessDomain": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related BusinessDomain entity."
+          "description": "Business domain reference"
         },
         "dataProduct": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataProduct entity."
+          "description": "Data product reference"
         },
         "dataAsset": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related DataAsset entity."
+          "description": "Data asset reference"
         },
         "score": {
           "type": "number",
           "format": "double",
-          "description": "Represents the rule's score."
+          "description": "Quality score (0.0 to 1.0)"
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Optional business dimension or classification"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this rule was created"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this rule was last modified"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User identifier for the creator of the rule"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User identifier for the last modifier of the rule"
         }
       }
     },
     "RuleParameters": {
       "type": "object",
-      "description": "Rule Parameters",
+      "description": "Parameters for rule operations including rule identifier and optional response data",
       "properties": {
         "ruleId": {
           "type": "string",
-          "description": "Unique Identifier for Rule",
+          "description": "Unique identifier for the data quality rule",
           "x-ms-mutability": [
             "create"
           ]
         },
         "response": {
           "$ref": "#/definitions/RuleEntity",
-          "description": "Rule Entity response"
+          "description": "Rule entity response data"
         }
       },
       "required": [
         "ruleId"
       ]
     },
+    "RuleTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties configuration for rules",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "Condition expression for the rule"
+        },
+        "filterCriteria": {
+          "type": "string",
+          "description": "Filter criteria for the rule"
+        },
+        "columns": {
+          "type": "array",
+          "description": "Columns associated with the rule",
+          "items": {
+            "$ref": "#/definitions/RuleColumn"
+          }
+        }
+      }
+    },
     "ScanDTO": {
       "type": "object",
-      "description": "Data transfer object for scan information.",
+      "description": "Data transfer object for scan configuration",
       "properties": {
         "scanType": {
           "type": "string",
-          "description": "Type of the scan."
+          "description": "Scan type classification"
         }
       }
     },
     "ScanDTOResponse": {
       "type": "object",
-      "description": "Job Config DTO Response",
+      "description": "HTTP response for scan operations with status tracking and monitoring",
       "properties": {
         "scanId": {
           "type": "string",
-          "description": "Scan Id"
+          "description": "Unique scan operation identifier"
         },
-        "statuslro": {
+        "status": {
           "$ref": "#/definitions/LroStatus",
-          "description": "lro status"
+          "description": "Long-running operation execution status"
         },
         "statusMonitor": {
           "$ref": "#/definitions/StatusMonitor",
-          "description": "Monitoring information for the scan status"
+          "description": "Real-time scan execution monitoring information"
         }
       },
       "required": [
-        "statuslro"
+        "status"
       ]
     },
     "ScheduleEntity": {
       "type": "object",
-      "description": "Represents a scheduled scan entity.",
+      "description": "Schedule entity for automated data quality scanning and validation",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier of the schedule."
+          "description": "Unique identifier of the schedule",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "name": {
           "type": "string",
-          "description": "Name of the schedule."
+          "description": "Human-readable schedule display name"
         },
         "description": {
           "type": "string",
-          "description": "Description of the schedule."
+          "description": "Detailed description of schedule purpose and strategy"
         },
         "trigger": {
           "type": "object",
-          "description": "Trigger configuration for the schedule.",
+          "description": "Trigger configuration for execution timing and scheduling",
           "properties": {
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Trigger type classification"
             },
             "typeProperties": {
               "type": "object",
+              "description": "Type-specific trigger configuration properties",
               "properties": {
                 "timezone": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Time zone identifier for schedule evaluation"
                 },
                 "isScheduled": {
-                  "type": "boolean"
+                  "type": "boolean",
+                  "description": "Flag for automatic execution activation"
                 },
                 "triggerTime": {
                   "type": "string",
-                  "format": "date-time"
+                  "format": "date-time",
+                  "description": "Next scheduled execution time (UTC)"
                 }
               }
             }
@@ -3266,21 +4514,25 @@
         },
         "scope": {
           "type": "object",
-          "description": "Scope of the scan, including data products and data assets.",
+          "description": "Execution scope for data quality scanning",
           "properties": {
             "items": {
               "type": "array",
+              "description": "Collection of target data products and assets",
               "items": {
                 "type": "object",
                 "properties": {
                   "dataProduct": {
                     "type": "object",
+                    "description": "Data product reference within scope",
                     "properties": {
                       "referenceId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Data product unique identifier"
                       },
                       "type": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Data product reference type"
                       }
                     },
                     "required": [
@@ -3290,12 +4542,15 @@
                   },
                   "dataAsset": {
                     "type": "object",
+                    "description": "Data asset reference within scope",
                     "properties": {
                       "referenceId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Data asset unique identifier"
                       },
                       "type": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Data asset reference type"
                       }
                     },
                     "required": [
@@ -3317,13 +4572,15 @@
         },
         "businessDomain": {
           "type": "object",
-          "description": "Reference to the related BusinessDomain entity.",
+          "description": "Reference to the governing business domain",
           "properties": {
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Business domain reference type"
             },
             "referenceId": {
-              "type": "string"
+              "type": "string",
+              "description": "Business domain unique identifier"
             }
           },
           "required": [
@@ -3334,57 +4591,60 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the schedule was created."
+          "description": "Creation timestamp (UTC)"
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the schedule was last modified."
+          "description": "Last modification timestamp (UTC)"
         },
         "createdBy": {
           "type": "string",
-          "description": "User who created the schedule."
+          "description": "Identity of the creating user"
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "User who last modified the schedule."
+          "description": "Identity of the last modifying user"
         },
         "eTag": {
           "type": "string",
-          "description": "Entity tag for concurrency control."
+          "description": "Entity tag for concurrency control"
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "ScheduleEntityResponse": {
       "type": "object",
-      "description": "Represents a scheduled scan entity.",
+      "description": "HTTP response for schedule operations with complete configuration",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the schedule."
+          "description": "Human-readable schedule name"
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier of the schedule."
+          "description": "Unique schedule identifier"
         },
         "description": {
           "type": "string",
-          "description": "Description of the schedule."
+          "description": "Detailed schedule description and purpose"
         },
         "annotations": {
           "type": "object",
-          "description": "Dictionary of annotations for the schedule.",
+          "description": "Metadata annotations for categorization",
           "additionalProperties": {
             "type": "string"
           }
         },
         "businessDomain": {
           "$ref": "#/definitions/Reference",
-          "description": "Reference to the related BusinessDomain entity."
+          "description": "Reference to the governing business domain"
         },
         "scope": {
           "type": "object",
-          "description": "Scope of the scan, including data products and data assets.",
+          "description": "Execution scope for data products and assets",
           "properties": {
             "items": {
               "type": "array",
@@ -3435,7 +4695,7 @@
         },
         "trigger": {
           "type": "object",
-          "description": "Trigger configuration for the schedule.",
+          "description": "Trigger configuration for schedule timing",
           "properties": {
             "type": {
               "type": "string"
@@ -3464,213 +4724,509 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the schedule was last modified."
+          "description": "Last modification timestamp (UTC)"
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "User who last modified the schedule."
+          "description": "Identity of the last modifying user"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the schedule was created."
+          "description": "Creation timestamp (UTC)"
         },
         "createdBy": {
           "type": "string",
-          "description": "User who created the schedule."
+          "description": "Identity of the creating user"
         },
         "executionData": {
           "type": "object",
-          "description": "Dictionary of execution data for the schedule.",
+          "description": "Runtime execution parameters and configuration",
           "additionalProperties": {
             "type": "string"
           }
         }
       }
     },
+    "ScheduleEntityUpdate": {
+      "type": "object",
+      "description": "Schedule entity for automated data quality scanning and validation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable schedule display name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of schedule purpose and strategy"
+        },
+        "trigger": {
+          "type": "object",
+          "description": "Trigger configuration for execution timing and scheduling",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Trigger type classification"
+            },
+            "typeProperties": {
+              "type": "object",
+              "description": "Type-specific trigger configuration properties",
+              "properties": {
+                "timezone": {
+                  "type": "string",
+                  "description": "Time zone identifier for schedule evaluation"
+                },
+                "isScheduled": {
+                  "type": "boolean",
+                  "description": "Flag for automatic execution activation"
+                },
+                "triggerTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Next scheduled execution time (UTC)"
+                }
+              }
+            }
+          }
+        },
+        "scope": {
+          "type": "object",
+          "description": "Execution scope for data quality scanning",
+          "properties": {
+            "items": {
+              "type": "array",
+              "description": "Collection of target data products and assets",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dataProduct": {
+                    "type": "object",
+                    "description": "Data product reference within scope",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string",
+                        "description": "Data product unique identifier"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "Data product reference type"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  },
+                  "dataAsset": {
+                    "type": "object",
+                    "description": "Data asset reference within scope",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string",
+                        "description": "Data asset unique identifier"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "Data asset reference type"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "dataProduct",
+                  "dataAsset"
+                ]
+              }
+            }
+          }
+        },
+        "businessDomain": {
+          "type": "object",
+          "description": "Reference to the governing business domain",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Business domain reference type"
+            },
+            "referenceId": {
+              "type": "string",
+              "description": "Business domain unique identifier"
+            }
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp (UTC)"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp (UTC)"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Identity of the creating user"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identity of the last modifying user"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity tag for concurrency control"
+        }
+      }
+    },
     "ScheduleScanMonitoringEntity": {
       "type": "object",
-      "description": "Monitoring information for schedule scans.",
+      "description": "Monitoring metrics and execution information for scheduled scans",
       "properties": {
         "succeeded": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of succeeded scans."
+          "description": "Number of successful scan executions"
         },
         "failed": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of failed scans."
+          "description": "Number of failed scan executions"
         },
         "skipped": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of skipped scans."
+          "description": "Number of skipped scan executions"
         },
         "scheduleStatus": {
           "type": "string",
-          "description": "Status of the schedule."
+          "description": "Current schedule operational status"
         },
         "scheduleName": {
           "type": "string",
-          "description": "Name of the schedule."
+          "description": "Associated schedule name"
         },
         "scheduleId": {
           "type": "string",
-          "description": "Unique identifier of the schedule."
+          "description": "Associated schedule identifier"
         },
         "scanId": {
           "type": "string",
-          "description": "Unique identifier of the scan."
+          "description": "Specific scan execution identifier"
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the scan started."
+          "description": "Scan execution start time (UTC)"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the scan ended."
+          "description": "Scan execution end time (UTC)"
         },
         "accountId": {
           "type": "string",
-          "description": "Identifier of the account."
+          "description": "Executing account identifier"
         },
         "businessDomainId": {
           "type": "string",
-          "description": "Identifier of the business domain."
+          "description": "Business domain identifier"
         },
         "totalJobCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Total number of jobs in the scan."
+          "description": "Total job count within scan execution"
         },
         "status": {
           "type": "string",
-          "description": "Status of the scan."
+          "description": "Current scan execution status"
         },
         "scheduleRunType": {
           "type": "string",
-          "description": "Type of schedule run."
+          "description": "Schedule run type classification"
         },
         "scanType": {
           "type": "string",
-          "description": "Type of the scan."
+          "description": "Scan type classification"
         },
         "startedBy": {
           "type": "string",
-          "description": "User who started the scan."
+          "description": "Identity of the scan initiating user"
         },
         "cancelledBy": {
           "type": "string",
-          "description": "User who cancelled the scan."
+          "description": "Identity of the scan cancelling user"
         },
         "cancelRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when a cancel request was made."
+          "description": "Cancellation request timestamp (UTC)"
         },
         "partitionKey": {
           "type": "string",
-          "description": "Partition key for storage."
+          "description": "Storage partition key for data organization"
         },
         "rowKey": {
           "type": "string",
-          "description": "Row key for storage."
+          "description": "Storage row key for unique record identification"
         },
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of the record."
+          "description": "Record timestamp for temporal tracking"
         },
         "eTag": {
           "type": "string",
-          "description": "ETag for concurrency control."
+          "description": "Entity tag for concurrency control"
         }
       }
     },
-    "Status": {
-      "type": "string",
-      "description": "Status of a rule or operation",
-      "enum": [
-        "Active",
-        "Suspended",
-        "Completed",
-        "Failed",
-        "InProgress"
-      ],
-      "x-ms-enum": {
-        "name": "Status",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "The rule or operation is active and running"
-          },
-          {
-            "name": "Suspended",
-            "value": "Suspended",
-            "description": "The rule or operation is currently suspended"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "The rule or operation has completed successfully"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The rule or operation has failed"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The rule or operation is currently in progress"
+    "ScheduleScanMonitoringResponse": {
+      "type": "object",
+      "description": "HTTP response for schedule scan monitoring with execution metrics",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of schedule scan monitoring entities",
+          "items": {
+            "$ref": "#/definitions/ScheduleScanMonitoringEntity"
           }
-        ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScopedAssetMetadata": {
+      "type": "object",
+      "description": "Scoped asset metadata configuration linked to a specific data asset.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the scoped asset metadata entity.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Descriptive text providing details about the scoped asset metadata."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated Business Domain."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated Data Product."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated Data Asset."
+        },
+        "runtime": {
+          "$ref": "#/definitions/ScopedAssetMetadataRuntime",
+          "description": "Runtime configuration parameters defining error row behavior and output format."
+        },
+        "favouriteColumnPaths": {
+          "type": "array",
+          "description": "List of favorite column paths selected for quick access or monitoring.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this metadata was created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this metadata was last modified."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Identifier of the user who created this metadata."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identifier of the user who last modified this metadata."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity tag used for concurrency control and version validation."
+        }
+      },
+      "required": [
+        "id",
+        "businessDomain",
+        "dataProduct",
+        "dataAsset",
+        "runtime"
+      ]
+    },
+    "ScopedAssetMetadataRuntime": {
+      "type": "object",
+      "description": "Runtime configuration options for a scoped asset metadata entity.",
+      "properties": {
+        "isErrorRowRequired": {
+          "type": "boolean",
+          "description": "Indicates whether error row details should be captured."
+        },
+        "errorRowWriteFormat": {
+          "type": "string",
+          "description": "Specifies the format in which error rows are written (e.g., CSV, Parquet)."
+        }
+      },
+      "required": [
+        "isErrorRowRequired"
+      ]
+    },
+    "ScopedAssetMetadataRuntimeUpdate": {
+      "type": "object",
+      "description": "Runtime configuration options for a scoped asset metadata entity.",
+      "properties": {
+        "isErrorRowRequired": {
+          "type": "boolean",
+          "description": "Indicates whether error row details should be captured."
+        },
+        "errorRowWriteFormat": {
+          "type": "string",
+          "description": "Specifies the format in which error rows are written (e.g., CSV, Parquet)."
+        }
+      }
+    },
+    "ScopedAssetMetadataUpdate": {
+      "type": "object",
+      "description": "Scoped asset metadata configuration linked to a specific data asset.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Descriptive text providing details about the scoped asset metadata."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated Business Domain."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated Data Product."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated Data Asset."
+        },
+        "runtime": {
+          "$ref": "#/definitions/ScopedAssetMetadataRuntimeUpdate",
+          "description": "Runtime configuration parameters defining error row behavior and output format."
+        },
+        "favouriteColumnPaths": {
+          "type": "array",
+          "description": "List of favorite column paths selected for quick access or monitoring.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this metadata was created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this metadata was last modified."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Identifier of the user who created this metadata."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identifier of the user who last modified this metadata."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity tag used for concurrency control and version validation."
+        }
       }
     },
     "StatusMonitor": {
       "type": "object",
-      "description": "Model for monitoring the status of rules and operations",
+      "description": "Status monitoring with execution state, progress tracking, and error reporting",
       "properties": {
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "Current status of the rule or operation"
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the monitored operation",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "kind": {
+          "$ref": "#/definitions/OperationKind",
+          "description": "Kind of operation being monitored"
         },
         "lastUpdated": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of the last status update"
+          "description": "Last status update timestamp (UTC)"
         },
         "statusMessage": {
           "type": "string",
-          "description": "Detailed message about the current status"
+          "description": "Status description message"
         },
         "progressPercentage": {
           "type": "integer",
           "format": "int32",
-          "description": "Percentage of completion for in-progress operations"
+          "description": "Completion percentage (0–100)"
         },
         "errorDetails": {
           "$ref": "#/definitions/ErrorDetails",
-          "description": "Error details if the status is Failed"
+          "description": "Error details for failed operations"
+        },
+        "result": {
+          "description": "Result payload for successful operations"
         }
       },
       "required": [
-        "status",
+        "id",
         "lastUpdated"
       ]
     },
     "TypeProperties": {
       "type": "object",
-      "description": "Holds additional properties related to rule type.",
+      "description": "Type-specific configuration properties for data quality rules.",
       "properties": {
         "column": {
           "$ref": "#/definitions/Column",
-          "description": "Represents a column in a dataset."
+          "description": "Column specification for column-specific rules."
+        },
+        "columns": {
+          "type": "array",
+          "description": "List of columns for multi-column or relational rules (e.g., Duplicate, CustomTruth).",
+          "items": {
+            "$ref": "#/definitions/Column"
+          }
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Regex or pattern-based validation logic for format rules."
+        },
+        "condition": {
+          "type": "string",
+          "description": "Main logical condition or expression defining validation criteria."
+        },
+        "filterCriteria": {
+          "type": "string",
+          "description": "Optional filter condition to limit rows that are validated by this rule."
+        },
+        "emptyCriteria": {
+          "type": "string",
+          "description": "Optional condition defining when a field or column is considered empty."
         }
       }
     }
