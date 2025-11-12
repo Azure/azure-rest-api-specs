@@ -197,7 +197,7 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "ConversationAuthoringDeleteDeploymentDetails"
 );
 @@clientName(AnalyzeConversationAuthoringProjectAzureResourceIds,
-  "DeleteDeploymentDetails",
+  "ProjectResourceIds",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringDeploymentJobState,
