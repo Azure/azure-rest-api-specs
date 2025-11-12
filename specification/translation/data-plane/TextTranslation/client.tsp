@@ -5,16 +5,16 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(TextTranslation.TranslationLanguage.dir,
   "Directionality",
-  "dotnet"
+  "csharp"
 );
 @@clientName(TextTranslation.TranslationLanguage.dir, "Directionality", "java");
 
-@@clientName(TextTranslation.LanguageScript.dir, "Directionality", "dotnet");
+@@clientName(TextTranslation.LanguageScript.dir, "Directionality", "csharp");
 @@clientName(TextTranslation.LanguageScript.dir, "Directionality", "java");
 
 @@clientName(TextTranslation.TranslateInputItem.targets,
   "TranslationTargets",
-  "dotnet"
+  "csharp"
 );
 @@clientName(TextTranslation.TranslateInputItem.targets,
   "TranslationTargets",
