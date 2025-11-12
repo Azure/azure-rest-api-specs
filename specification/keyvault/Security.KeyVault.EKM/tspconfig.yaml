@@ -17,50 +17,21 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/ekm.json"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  "@azure-tools/typespec-python":
-    flavor: azure
-    "basic-setup-py": true
-    "package-name": "azure-keyvault-ekm"
-    "package-pprint-name": "Key Vault EKM"
-    "package-version": "4.10.0"
-    "namespace": "azure.keyvault.ekm._generated"
-    "package-dir": "azure-keyvault-ekm"
-  "@azure-tools/typespec-java":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-ekm"
-    namespace: "com.azure.security.keyvault.ekm"
-    models-subpackage: "implementation.models"
-    customization-class: "customizations/src/main/java/EkmCustomizations.java"
-    use-eclipse-language-server: false
-    generate-tests: false
-    generate-samples: false
-    include-api-view-properties: false
+  # "@azure-tools/typespec-python": true
+  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
+  # "@azure-tools/typespec-java": true
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
-  "@azure-tools/typespec-ts":
-    package-dir: "keyvault-ekm"
-    generate-metadata: true
-    src-folder: "src/generated"
-    experimental-extensible-enums: true
-    is-modular-library: true
-    package-details:
-      name: "@azure/keyvault-ekm"
-      description: "Azure Key Vault EKM"
-    flavor: azure
+  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate TypeSpec code
+  # "@azure-tools/typespec-ts": true
   "@azure-tools/typespec-go":
     service-dir: "sdk/security/keyvault"
-    package-dir: "azekm"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azekm"
-    module-version: "0.1.0"
-    emitter-output-dir: "{project-root}"
-    override-client-name: "Client"
-    single-client: true
+    package-dir: "azadmin/ekm"
     inject-spans: true
+    single-client: true
     generate-fakes: true
-  "@azure-tools/typespec-rust":
-    crate-name: "azure_security_keyvault_ekm"
-    crate-version: "0.1.0"
-    emitter-output-dir: "{project-root}/generated"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azadmin"
+    module-version: "0.0.1"
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/keyvault/Security.KeyVault.Common/"
