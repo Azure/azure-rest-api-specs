@@ -98,7 +98,7 @@ interface DatadogMonitorResources {
   manageSreAgentConnectors is ArmResourceActionSync<
     DatadogMonitorResource,
     SreAgentConnectorRequest,
-    ArmResponse<SreAgentConfiguration[]>
+    ArmResponse<SreAgentConfigurationListResponse>
   >;
 
   /**
