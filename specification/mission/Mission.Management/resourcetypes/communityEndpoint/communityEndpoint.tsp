@@ -55,6 +55,7 @@ union DestinationType {
   @doc("DestinationType Type PrivateNetwork")
   PrivateNetwork: "PrivateNetwork",
 
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
   @doc("DestinationType Type ServiceTag")
   ServiceTag: "ServiceTag",
 }
