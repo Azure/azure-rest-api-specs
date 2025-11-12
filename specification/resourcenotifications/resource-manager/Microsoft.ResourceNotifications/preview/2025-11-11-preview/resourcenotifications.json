@@ -284,6 +284,55 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "ResourceSubscriptions_Update",
+        "tags": [
+          "ResourceSubscriptions"
+        ],
+        "description": "Updates a resource subscription (supports tags and property updates)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "subscriptionRuleName",
+            "in": "path",
+            "description": "The name of the resource subscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceSubscriptionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "operationId": "ResourceSubscriptions_Delete",
         "tags": [
@@ -580,6 +629,44 @@
       ],
       "x-ms-discriminator-value": "arnLocation"
     },
+    "ArnLocationPartitioningConfigurationUpdate": {
+      "type": "object",
+      "description": "ARN location partitioning configuration",
+      "properties": {
+        "partitions": {
+          "type": "array",
+          "description": "The partitions list",
+          "items": {
+            "$ref": "#/definitions/Partition"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartitioningConfigurationUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "arnLocation"
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "BatchingPolicy": {
       "type": "object",
       "description": "Base properties for batching policy configuration",
@@ -633,6 +720,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/Scope"
+        }
+      ],
+      "x-ms-discriminator-value": "cloud"
+    },
+    "CloudScopeUpdate": {
+      "type": "object",
+      "description": "Cloud scope configuration",
+      "properties": {
+        "providerNamespace": {
+          "type": "string",
+          "description": "The provider namespace populated by caller"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScopeUpdate"
         }
       ],
       "x-ms-discriminator-value": "cloud"
@@ -868,6 +971,20 @@
         ]
       }
     },
+    "PartitioningConfigurationUpdate": {
+      "type": "object",
+      "description": "Base properties for partitioning configuration",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/PartitioningConfigurationKind",
+          "description": "The kind of partitioning configuration"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
     "PathPolicy": {
       "type": "object",
       "description": "Base properties for path policy configuration",
@@ -1026,6 +1143,39 @@
         "scope"
       ]
     },
+    "ResourceSubscriptionPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of a resource subscription",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query to execute - only one table can be targeted at a time"
+        },
+        "scope": {
+          "$ref": "#/definitions/ScopeUpdate",
+          "description": "The scope for the execution of the filter"
+        },
+        "partitioningConfiguration": {
+          "$ref": "#/definitions/PartitioningConfigurationUpdate",
+          "description": "Defines how to partition the event stream. Supported kind: arnLocation"
+        }
+      }
+    },
+    "ResourceSubscriptionUpdate": {
+      "type": "object",
+      "description": "Resource subscription for Azure Resource Notifications",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceSubscriptionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "Scope": {
       "type": "object",
       "description": "Base properties for scope configuration",
@@ -1062,6 +1212,20 @@
           }
         ]
       }
+    },
+    "ScopeUpdate": {
+      "type": "object",
+      "description": "Base properties for scope configuration",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ScopeKind",
+          "description": "The kind of scope"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "StorageAccountDestinationProperties": {
       "type": "object",
@@ -1182,6 +1346,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/Scope"
+        }
+      ],
+      "x-ms-discriminator-value": "tenant"
+    },
+    "TenantScopeUpdate": {
+      "type": "object",
+      "description": "Tenant scope configuration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScopeUpdate"
         }
       ],
       "x-ms-discriminator-value": "tenant"

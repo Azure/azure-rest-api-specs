@@ -153,6 +153,18 @@ model ResourceSubscription
   name: string;
 }
 
+/** Resource subscription properties for update operations */
+model ResourceSubscriptionPatchProperties {
+  /** The scope for the execution of the filter */
+  scope?: Scope;
+}
+
+/** Resource subscription for update operations */
+model ResourceSubscriptionPatch {
+  /** The updatable properties */
+  properties?: ResourceSubscriptionPatchProperties;
+}
+
 /** Operations for Resource Subscriptions */
 @armResourceOperations
 interface ResourceSubscriptions {
@@ -165,6 +177,9 @@ interface ResourceSubscriptions {
     ResourceSubscription,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /** Updates a resource subscription (supports tags and property updates) */
+  update is ArmResourcePatchSync<ResourceSubscription, ResourceSubscriptionPatch>;
 
   /** Deletes a resource subscription */
   delete is ArmResourceDeleteSync<ResourceSubscription>;
