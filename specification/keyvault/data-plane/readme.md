@@ -44,6 +44,24 @@ input-file:
   - Microsoft.KeyVault/preview/2026-01-01-preview/securitydomain.json
   - Microsoft.KeyVault/preview/2026-01-01-preview/settings.json
   - Microsoft.KeyVault/preview/2026-01-01-preview/storage.json
+tag: package-2025-07-01
+```
+
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+input-file:
+  - Microsoft.KeyVault/stable/2025-07-01/backuprestore.json
+  - Microsoft.KeyVault/stable/2025-07-01/certificates.json
+  - Microsoft.KeyVault/stable/2025-07-01/common.json
+  - Microsoft.KeyVault/stable/2025-07-01/keys.json
+  - Microsoft.KeyVault/stable/2025-07-01/rbac.json
+  - Microsoft.KeyVault/stable/2025-07-01/secrets.json
+  - Microsoft.KeyVault/stable/2025-07-01/securitydomain.json
+  - Microsoft.KeyVault/stable/2025-07-01/settings.json
+  - Microsoft.KeyVault/stable/2025-07-01/storage.json
 ```
 
 ### Tag: package-preview-2025-06-01-preview

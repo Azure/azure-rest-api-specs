@@ -17,7 +17,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.Fileshares"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-fileshares"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-fileshares"
     namespace: "azure.mgmt.fileshares"
     generate-test: true
     generate-sample: true
@@ -28,7 +28,7 @@ options:
     service-name: "fileshares"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-fileshares"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-fileshares"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -36,8 +36,8 @@ options:
       name: "@azure/arm-fileshares"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/fileshares"
-    package-dir: "armfileshares"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armfileshares"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfileshares"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

@@ -1,11 +1,19 @@
-// @ts-check
-
+import { inspect } from "util";
 import { mapAsync } from "./array.js";
+import { embedError } from "./spec-model.js";
 import { Swagger } from "./swagger.js";
 
 /**
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./readme.js').Readme} Readme
+ * @typedef {import('./swagger.js').SwaggerJSON} SwaggerJSON
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
+ */
+
+/**
+ * @typedef {Object} TagJSON
+ * @property {string} name
+ * @property {(SwaggerJSON|ErrorJSON)[]} inputFiles
  */
 
 export class Tag {
@@ -31,10 +39,12 @@ export class Tag {
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {Readme} [options.readme]
    */
-  constructor(name, inputFilePaths, options) {
+  constructor(name, inputFilePaths, options = {}) {
+    const { logger, readme } = options;
+
     this.#name = name;
-    this.#logger = options?.logger;
-    this.#readme = options?.readme;
+    this.#logger = logger;
+    this.#readme = readme;
 
     this.#inputFiles = new Map(
       inputFilePaths.map((p) => {
@@ -67,19 +77,22 @@ export class Tag {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<Object>}
+   * @returns {Promise<TagJSON|ErrorJSON>}
    */
-  async toJSONAsync(options) {
-    return {
-      name: this.#name,
-      inputFiles: await mapAsync(
-        [...this.#inputFiles.values()].sort((a, b) => a.path.localeCompare(b.path)),
-        async (s) => await s.toJSONAsync(options),
-      ),
-    };
+  async toJSONAsync(options = {}) {
+    return await embedError(
+      async () => ({
+        name: this.#name,
+        inputFiles: await mapAsync(
+          [...this.#inputFiles.values()].sort((a, b) => a.path.localeCompare(b.path)),
+          async (s) => await s.toJSONAsync(options),
+        ),
+      }),
+      options,
+    );
   }
 
   toString() {
-    return `Tag(${this.#name}, {logger: ${this.#logger}})`;
+    return `Tag(${this.#name}, {logger: ${inspect(this.#logger)}})`;
   }
 }

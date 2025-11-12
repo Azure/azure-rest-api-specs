@@ -332,7 +332,7 @@ model NotificationHubProperties {
    * Gets or sets the AuthorizationRules of the created NotificationHub
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["keyName"])
+  @identifiers(#["keyName"])
   authorizationRules?: SharedAccessAuthorizationRuleProperties[];
 
   /**
@@ -860,7 +860,7 @@ model DebugSendResult {
    * Gets or sets actual failure description
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   results?: RegistrationResult[];
 }
 
@@ -1150,7 +1150,7 @@ model NetworkAcls {
   /**
    * List of IP rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IpRule[];
 
   /**
@@ -1285,14 +1285,14 @@ model ServiceSpecification {
    * Log specifications.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 
   /**
    * Metric specification.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name", "unit"])
+  @identifiers(#["name", "unit"])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -1362,14 +1362,13 @@ model MetricSpecification {
    * List of availabilities.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   availabilities?: Availability[];
 
   /**
    * List of supported time grain types.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   supportedTimeGrainTypes?: string[];
 
   /**
@@ -1585,4 +1584,4 @@ model SharedAccessAuthorizationRuleListResult
 
 model NotificationHubListResult is Azure.Core.Page<NotificationHubResource>;
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
-@@OpenAPI.extension(OperationListResult.value, "x-ms-identifiers", #["name"]);
+@@identifiers(OperationListResult.value, #["name"]);

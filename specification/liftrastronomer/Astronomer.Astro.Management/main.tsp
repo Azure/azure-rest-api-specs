@@ -1,4 +1,5 @@
 import "./LiftrBase.Data/main.tsp";
+import "./back-compatible.tsp";
 
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -66,6 +67,7 @@ interface Organizations {
     OrganizationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     OrganizationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

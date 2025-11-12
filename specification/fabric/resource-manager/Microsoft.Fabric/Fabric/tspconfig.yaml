@@ -10,8 +10,6 @@ options:
     azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{version-status}/{version}/fabric.json"
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
@@ -20,14 +18,14 @@ options:
     namespace: "Azure.ResourceManager.Fabric"
     api-version: "2023-11-01"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-fabric"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-fabric"
     flavor: "azure"
     namespace: "azure.mgmt.fabric"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-fabric"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-fabric"
     flavor: azure
     package-details:
       name: "@azure/arm-fabric"
@@ -37,8 +35,8 @@ options:
     namespace: "com.azure.resourcemanager.fabric"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/fabric"
-    package-dir: "armfabric"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armfabric"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfabric"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

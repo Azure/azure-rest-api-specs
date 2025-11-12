@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/relay"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/relay.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-relay"
+    namespace: "azure.mgmt.relay"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-relay"
+    namespace: "com.azure.resourcemanager.relay"
+    service-name: "Relay" # human-readable service name, whitespace allowed
+    flavor: azure
+    resource-collection-associations:
+      - resource: AuthorizationRule
+        collection: Namespaces
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-relay"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    typespec-title-map:
+      RelayClient: "RelayAPI"
+    package-details:
+      name: "@azure/arm-relay"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/relay"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrelay"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrelay"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

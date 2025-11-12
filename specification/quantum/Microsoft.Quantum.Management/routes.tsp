@@ -28,8 +28,8 @@ interface Offerings {
    */
   @autoRoute
   @get
-  @action("offerings")
   @list
+  @action("offerings")
   list is ArmProviderActionSync<
     Response = OfferingsListResult,
     Scope = SubscriptionActionScope,
@@ -41,6 +41,13 @@ interface Offerings {
       @segment("locations")
       @typeChangedFrom(Versions.v2025_01_01_preview, string)
       locationName: AzureLocationParameter;
+
+      /**
+       * The filter to apply to the operation. Example: '$filter=kind eq 'v1'
+       */
+      @added(Versions.v2025_11_01_preview)
+      @query("filter")
+      filter?: string;
     }
   >;
 }

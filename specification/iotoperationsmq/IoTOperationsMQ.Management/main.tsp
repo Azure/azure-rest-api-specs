@@ -3,12 +3,14 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./models/datalakeconnector.tsp";
 import "./models/diagnosticservice.tsp";
 import "./models/mqttbroker.tsp";
 import "./models/mqttbridgeconnector.tsp";
 import "./models/kafkaconnector.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -41,6 +43,7 @@ interface Mq {
     MqResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -63,6 +66,7 @@ interface Broker {
     BrokerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -84,6 +88,7 @@ interface BrokerListener {
     BrokerListenerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerListenerResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -105,6 +110,7 @@ interface BrokerAuthentication {
     BrokerAuthenticationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerAuthenticationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -126,6 +132,7 @@ interface BrokerAuthorization {
     BrokerAuthorizationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerAuthorizationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -147,6 +154,7 @@ interface MqttBridgeConnector {
     MqttBridgeConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqttBridgeConnectorResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -168,6 +176,7 @@ interface MqttBridgeTopicMap {
     MqttBridgeTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqttBridgeTopicMapResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -189,6 +198,7 @@ interface DiagnosticService {
     DiagnosticServiceResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DiagnosticServiceResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -210,6 +220,7 @@ interface DataLakeConnector {
     DataLakeConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DataLakeConnectorResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -231,6 +242,7 @@ interface DataLakeConnectorTopicMap {
     DataLakeTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DataLakeTopicMapResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -252,6 +264,7 @@ interface KafkaConnector {
     KafkaConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     KafkaConnectorResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -273,6 +286,7 @@ interface KafkaConnectorTopicMap {
     KafkaTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     KafkaTopicMapResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
