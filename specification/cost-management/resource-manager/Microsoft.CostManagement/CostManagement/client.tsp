@@ -13,6 +13,9 @@ using Microsoft.CostManagement;
 // Rename DownloadURL back to DownloadUrl for Java
 @@clientName(DownloadURL, "DownloadUrl", "java");
 
+// Rename ReportURL back to ReportUrl for Java
+@@clientName(ReportURL, "ReportUrl", "java");
+
 // Rename statusModificationUserName back to statusModificationUsername for Java
 @@clientName(AlertProperties.statusModificationUserName,
   "statusModificationUsername",
