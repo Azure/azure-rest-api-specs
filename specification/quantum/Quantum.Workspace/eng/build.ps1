@@ -97,7 +97,7 @@ Copying examples from $source to $newVersionExamples
     }
 
     RunAndCheck "tsp-format" $logDirectory {
-        tsp format **/*.tsp
+        npx tsp format **/*.tsp
     }
 
     RunAndCheck "prettify-examples" $logDirectory {
@@ -114,11 +114,11 @@ Copying examples from $source to $newVersionExamples
     }
 
     RunAndCheck "tsp-compile" $logDirectory {
-        tsp compile . --pretty --debug
+        npx tsp compile . --pretty --debug
     }
 
     RunAndCheck "tsp-compile-api-view" $logDirectory {
-        tsp compile . --pretty --debug --emit=@azure-tools/typespec-apiview --output-dir (Join-Path $logDirectory "../api-view/")
+        npx tsp compile . --pretty --debug --emit=@azure-tools/typespec-apiview --output-dir (Join-Path $logDirectory "../api-view/")
     }
         
     # copy to swagger folder to easy upload to https://apiview.dev/
@@ -156,15 +156,15 @@ Copying examples from $source to $newVersionExamples
     }   
 
     RunAndCheck "example-validation" $logDirectory {
-        oav validate-example $newSwaggerFile
+        npx oav validate-example $newSwaggerFile
     }
 
     RunAndCheck "semantic-validation" $logDirectory {
-        oav validate-spec $newSwaggerFile
+        npx oav validate-spec $newSwaggerFile
     }
 
     RunAndCheck "model-compare" $logDirectory {
-        oad compare $previousSwaggerFile $newSwaggerFile --logFilepath (Join-Path $logDirectory "/oad-compare-log.json") > (Join-Path $logDirectory "/model-compare.json")
+        npx oad compare $previousSwaggerFile $newSwaggerFile --logFilepath (Join-Path $logDirectory "/oad-compare-log.json") > (Join-Path $logDirectory "/model-compare.json")
     }
 
     RunAndCheck "model-compare-viz" $logDirectory {
@@ -182,11 +182,11 @@ Copying examples from $source to $newVersionExamples
     }
 
     RunAndCheck "lint-diff" $logDirectory {
-        autorest --v3 --spectral --validation --azure-validator --openapi-type=data-plane --use=@microsoft.azure/openapi-validator@latest $newTag $configFile
+        npx autorest --v3 --spectral --validation --azure-validator --openapi-type=data-plane --use=@microsoft.azure/openapi-validator@latest $newTag $configFile
     }
 
     RunAndCheck "avocado" $logDirectory {
-        avocado -f (Join-Path $logDirectory "/avocado-log.txt") -d (Join-Path $logDirectory "../data-plane")
+        npx avocado -f (Join-Path $logDirectory "/avocado-log.txt") -d (Join-Path $logDirectory "../data-plane")
     }
 
     Write-Host @"
