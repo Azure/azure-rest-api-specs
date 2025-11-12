@@ -179,6 +179,14 @@ interface ResourceSubscriptions {
   >;
 
   /** Updates a resource subscription (supports tags and property updates) */
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      `Update a resource subscription`: #{
+        $ref: "./examples/ResourceSubscriptions_Update.json",
+      },
+    }
+  )
   update is ArmResourcePatchSync<
     ResourceSubscription,
     ResourceSubscriptionPatch

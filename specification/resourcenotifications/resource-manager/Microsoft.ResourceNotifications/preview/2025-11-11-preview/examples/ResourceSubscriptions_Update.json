@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "rg-resourcenotifications",
+    "subscriptionRuleName": "subscription1",
+    "api-version": "2025-11-11-preview",
+    "properties": {
+      "properties": {
+        "scope": {
+          "kind": "tenant"
+        }
+      },
+      "tags": {
+        "environment": "production",
+        "team": "notifications"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg-resourcenotifications/providers/Microsoft.ResourceNotifications/resourceSubscriptions/subscription1",
+        "name": "subscription1",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions",
+        "location": "eastus",
+        "tags": {
+          "environment": "production",
+          "team": "notifications"
+        },
+        "properties": {
+          "query": "SELECT * FROM Microsoft.Resources/subscriptions/resourceGroups/providers/Microsoft.Compute/virtualMachines",
+          "scope": {
+            "kind": "tenant",
+            "tenantId": "00000000-0000-0000-0000-000000000000",
+            "servicePrincipal": "spn@contoso.com"
+          },
+          "partitioningConfiguration": {
+            "kind": "arnLocation",
+            "partitions": [
+              {
+                "name": "eastus-partition",
+                "regions": ["eastus", "eastus2"]
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-11-11T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-11-11T11:00:00.000Z"
+        }
+      }
+    }
+  }
+}
