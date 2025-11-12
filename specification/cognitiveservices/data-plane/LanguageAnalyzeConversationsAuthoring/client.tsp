@@ -357,7 +357,7 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "ConversationAuthoringProjectResourcesState"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
-  "ProjectResourcesJobState",
+  "ProjectResourcesState",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringTrainingJobs,
