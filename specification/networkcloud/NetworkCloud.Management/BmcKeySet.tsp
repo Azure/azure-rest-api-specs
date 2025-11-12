@@ -81,6 +81,7 @@ interface BmcKeySets {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch baseboard management controller key set of the cluster.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     BmcKeySet,
     PatchModel = BmcKeySetPatchParameters,
@@ -106,7 +107,7 @@ interface BmcKeySets {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<BmcKeySet> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BmcKeySet> &
+    Response = ArmResponse<BmcKeySet> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BmcKeySet> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BmcKeySet;

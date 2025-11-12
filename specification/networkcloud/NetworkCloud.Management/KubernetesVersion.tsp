@@ -79,6 +79,7 @@ interface KubernetesVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the Kubernetes version resource.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     KubernetesVersion,
     PatchModel = KubernetesVersionPatchParameters,
@@ -104,7 +105,7 @@ interface KubernetesVersions {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<KubernetesVersion> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = KubernetesVersion> &
+    Response = ArmResponse<KubernetesVersion> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = KubernetesVersion> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: KubernetesVersion;

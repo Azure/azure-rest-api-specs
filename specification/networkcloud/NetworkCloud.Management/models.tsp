@@ -3294,6 +3294,7 @@ model AdministrativeCredentials {
    * The password of the administrator of the device used during initialization.
    */
   @minLength(1)
+  @secret
   password: string;
 
   /**
@@ -3699,7 +3700,7 @@ model CloudServicesNetworkProperties {
   /**
    * The indicator of whether the platform default endpoints are allowed for the egress traffic.
    */
-  enableDefaultEgressEndpoints?: CloudServicesNetworkEnableDefaultEgressEndpoints;
+  enableDefaultEgressEndpoints?: CloudServicesNetworkEnableDefaultEgressEndpoints = CloudServicesNetworkEnableDefaultEgressEndpoints.True;
 
   /**
    * The full list of additional and default egress endpoints that are currently enabled.
@@ -3781,7 +3782,7 @@ model CloudServicesNetworkStorageOptions {
   /**
    * The indicator to enable shared storage on the cloud services network. If not specified, the allocation will align with the standard storage enablement.
    */
-  mode?: CloudServicesNetworkStorageMode;
+  mode?: CloudServicesNetworkStorageMode = CloudServicesNetworkStorageMode.Standard;
 
   /**
    * The requested storage allocation for the volume in Mebibytes.
@@ -3811,6 +3812,7 @@ model CloudServicesNetworkStorageStatus {
   /**
    * The size in Mebibytes of the storage allocation.
    */
+  @minValue(0)
   sizeMiB?: int64;
 
   /**
@@ -4627,7 +4629,7 @@ model IdentitySelector {
   /**
    * The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.
    */
-  userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier;
+  userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier | null;
 }
 
 /**
@@ -4728,6 +4730,7 @@ model ServicePrincipalInformation {
   /**
    * The password of the service principal.
    */
+  @secret
   password: string;
 
   /**
@@ -4804,6 +4807,7 @@ model ValidationThreshold {
   /**
    * The numeric threshold value.
    */
+  @minValue(0)
   value: int64;
 }
 
@@ -4911,12 +4915,12 @@ model RuntimeProtectionConfiguration {
   /**
    * The definition update mode for runtime protection.
    */
-  definitionUpdateMode?: RuntimeProtectionDefinitionUpdateMode;
+  definitionUpdateMode?: RuntimeProtectionDefinitionUpdateMode = RuntimeProtectionDefinitionUpdateMode.None;
 
   /**
    * The mode of operation for runtime protection.
    */
-  enforcementLevel?: RuntimeProtectionEnforcementLevel;
+  enforcementLevel?: RuntimeProtectionEnforcementLevel = RuntimeProtectionEnforcementLevel.Disabled;
 }
 
 /**
@@ -4976,12 +4980,14 @@ model ClusterUpdateStrategy {
   /**
    * The numeric threshold value.
    */
+  @minValue(0)
   thresholdValue: int64;
 
   /**
    * The time to wait between the increments of update defined by the strategy.
    */
   @maxValue(60)
+  @minValue(0)
   waitTimeMinutes?: int64 = 15;
 }
 
@@ -4992,7 +4998,7 @@ model VulnerabilityScanningSettings {
   /**
    * The mode selection for container vulnerability scanning.
    */
-  containerScan?: VulnerabilityScanningSettingsContainerScan;
+  containerScan?: VulnerabilityScanningSettingsContainerScan = VulnerabilityScanningSettingsContainerScan.Enabled;
 }
 
 /**
@@ -5374,7 +5380,7 @@ model L3NetworkAttachmentConfiguration {
    * The indicator of how this network will be utilized by the Kubernetes cluster.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  pluginType?: KubernetesPluginType;
+  pluginType?: KubernetesPluginType = KubernetesPluginType.SRIOV;
 }
 
 /**
@@ -5694,7 +5700,7 @@ model ServiceLoadBalancerBgpPeer {
    * The indicator of BFD enablement for this BgpPeer.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  bfdEnabled?: BfdEnabled;
+  bfdEnabled?: BfdEnabled = BfdEnabled.False;
 
   /**
    * The indicator to enable multi-hop peering support.
@@ -5719,6 +5725,7 @@ model ServiceLoadBalancerBgpPeer {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxValue(4294967295)
+  @minValue(0)
   myAsn?: int64;
 
   /**
@@ -5734,6 +5741,7 @@ model ServiceLoadBalancerBgpPeer {
   @visibility(Lifecycle.Create)
   @maxLength(80)
   @pattern("^[a-zA-Z0-9]{0,80}$")
+  @secret
   password?: string;
 
   /**
@@ -5752,6 +5760,7 @@ model ServiceLoadBalancerBgpPeer {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxValue(4294967295)
+  @minValue(0)
   peerAsn: int64;
 
   /**
@@ -5775,7 +5784,7 @@ model IpAddressPool {
    * The indicator to determine if automatic allocation from the pool should occur.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  autoAssign?: BfdEnabled;
+  autoAssign?: BfdEnabled = BfdEnabled.True;
 
   /**
    * The name used to identify this IP address pool for association with a BGP advertisement.
@@ -5788,7 +5797,7 @@ model IpAddressPool {
    * The indicator to prevent the use of IP addresses ending with .0 and .255 for this pool. Enabling this option will only use IP addresses between .1 and .254 inclusive.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  onlyUseHostIps?: BfdEnabled;
+  onlyUseHostIps?: BfdEnabled = BfdEnabled.True;
 }
 
 /**
@@ -6027,7 +6036,7 @@ model L2NetworkProperties {
    * Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hybridAksPluginType?: HybridAksPluginType;
+  hybridAksPluginType?: HybridAksPluginType = HybridAksPluginType.SRIOV;
 
   /**
    * The default interface name for this L2 network in the virtual machine. This name can be overridden by the name supplied in the network attachment configuration of that virtual machine.
@@ -6098,7 +6107,7 @@ model L3NetworkProperties {
    * Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hybridAksPluginType?: HybridAksPluginType;
+  hybridAksPluginType?: HybridAksPluginType = HybridAksPluginType.SRIOV;
 
   /**
    * The default interface name for this L3 network in the virtual machine. This name can be overridden by the name supplied in the network attachment configuration of that virtual machine.
@@ -6748,7 +6757,7 @@ model TrunkedNetworkProperties {
    * Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hybridAksPluginType?: HybridAksPluginType;
+  hybridAksPluginType?: HybridAksPluginType = HybridAksPluginType.SRIOV;
 
   /**
    * The default interface name for this trunked network in the virtual machine. This name can be overridden by the name supplied in the network attachment configuration of that virtual machine.
@@ -6879,6 +6888,7 @@ model VirtualMachineProperties {
    * The Base64 encoded cloud-init network data.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @secret
   networkDataContent?: string;
 
   /**
@@ -6926,6 +6936,7 @@ model VirtualMachineProperties {
    * The Base64 encoded cloud-init user data.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @secret
   userDataContent?: string;
 
   /**
@@ -7035,6 +7046,7 @@ model ImageRepositoryCredentials {
    * The password or token used to access an image in the target repository.
    */
   @minLength(1)
+  @secret
   password: string;
 
   /**
@@ -7066,6 +7078,7 @@ model VolumeProperties {
   /**
    * The allocated size of the volume in Mebibytes.
    */
+  @minValue(0)
   allocatedSizeMiB?: int64;
 
   /**
@@ -7149,6 +7162,7 @@ model OperationStatusResult {
    */
   @visibility(Lifecycle.Read)
   @maxValue(100)
+  @minValue(0)
   percentComplete?: float32;
 
   /**
@@ -7610,7 +7624,7 @@ model ClusterPatchProperties {
   /**
    * The settings for the log analytics workspace used for output of logs from this cluster.
    */
-  analyticsOutputSettings?: AnalyticsOutputSettings;
+  analyticsOutputSettings?: AnalyticsOutputSettings | null;
 
   /**
    * The customer-provided location information to identify where the cluster resides.
@@ -7620,17 +7634,17 @@ model ClusterPatchProperties {
   /**
    * Field Deprecated: Use managed identity to provide cluster privileges. The service principal to be used by the cluster during Arc Appliance installation.
    */
-  clusterServicePrincipal?: ServicePrincipalInformation;
+  clusterServicePrincipal?: ServicePrincipalInformation | null;
 
   /**
    * The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts.
    */
-  commandOutputSettings?: CommandOutputSettings;
+  commandOutputSettings?: CommandOutputSettings | null;
 
   /**
    * The validation threshold indicating the allowable failures of compute machines during environment validation and deployment.
    */
-  computeDeploymentThreshold?: ValidationThreshold;
+  computeDeploymentThreshold?: ValidationThreshold | null;
 
   /**
    * The list of rack definitions for the compute racks in a multi-rack cluster, or an empty list in a single-rack cluster.
@@ -7646,27 +7660,27 @@ model ClusterPatchProperties {
   /**
    * The settings for cluster runtime protection.
    */
-  runtimeProtectionConfiguration?: RuntimeProtectionConfiguration;
+  runtimeProtectionConfiguration?: RuntimeProtectionConfiguration | null;
 
   /**
    * The configuration for use of a key vault to store secrets for later retrieval by the operator.
    */
-  secretArchive?: ClusterSecretArchive;
+  secretArchive?: ClusterSecretArchive | null;
 
   /**
    * The settings for the secret archive used to hold credentials for the cluster.
    */
-  secretArchiveSettings?: SecretArchiveSettings;
+  secretArchiveSettings?: SecretArchiveSettings | null;
 
   /**
    * The strategy for updating the cluster.
    */
-  updateStrategy?: ClusterUpdateStrategy;
+  updateStrategy?: ClusterUpdateStrategy | null;
 
   /**
    * The settings for how security vulnerability scanning is applied to the cluster.
    */
-  vulnerabilityScanningSettings?: VulnerabilityScanningSettingsPatch;
+  vulnerabilityScanningSettings?: VulnerabilityScanningSettingsPatch | null;
 }
 
 /**

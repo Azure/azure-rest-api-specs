@@ -79,6 +79,7 @@ interface KubernetesClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the Kubernetes cluster.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     KubernetesCluster,
     PatchModel = KubernetesClusterPatchParameters,
@@ -104,7 +105,7 @@ interface KubernetesClusters {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<KubernetesCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = KubernetesCluster> &
+    Response = ArmResponse<KubernetesCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = KubernetesCluster> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: KubernetesCluster;

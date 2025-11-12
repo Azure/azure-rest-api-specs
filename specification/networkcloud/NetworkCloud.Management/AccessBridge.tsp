@@ -56,6 +56,7 @@ interface AccessBridges {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the access bridge.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     AccessBridge,
     PatchModel = AccessBridgePatchParameters,
@@ -81,7 +82,7 @@ interface AccessBridges {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<AccessBridge> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AccessBridge> &
+    Response = ArmResponse<AccessBridge> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AccessBridge> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AccessBridge;

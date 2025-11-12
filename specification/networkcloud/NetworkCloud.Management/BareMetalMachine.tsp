@@ -79,6 +79,7 @@ interface BareMetalMachines {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the bare metal machine.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     BareMetalMachine,
     PatchModel = BareMetalMachinePatchParameters,
@@ -104,7 +105,7 @@ interface BareMetalMachines {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<BareMetalMachine> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BareMetalMachine> &
+    Response = ArmResponse<BareMetalMachine> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BareMetalMachine> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BareMetalMachine;

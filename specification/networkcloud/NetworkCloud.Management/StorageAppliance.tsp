@@ -79,6 +79,7 @@ interface StorageAppliances {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the storage appliance.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     StorageAppliance,
     PatchModel = StorageAppliancePatchParameters,
@@ -104,7 +105,7 @@ interface StorageAppliances {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<StorageAppliance> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageAppliance> &
+    Response = ArmResponse<StorageAppliance> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageAppliance> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: StorageAppliance;

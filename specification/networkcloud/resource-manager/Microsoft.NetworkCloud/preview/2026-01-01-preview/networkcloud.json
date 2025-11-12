@@ -1535,7 +1535,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1953,7 +1958,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3017,7 +3027,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3851,7 +3866,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -4297,7 +4317,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -4730,7 +4755,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -5358,7 +5388,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -5890,7 +5925,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -6315,7 +6355,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -6748,7 +6793,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -7213,7 +7263,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -8741,7 +8796,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -9688,7 +9748,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -10177,7 +10242,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -11280,8 +11350,10 @@
       "properties": {
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password of the administrator of the device used during initialization.",
-          "minLength": 1
+          "minLength": 1,
+          "x-ms-secret": true
         },
         "passwordRef": {
           "$ref": "#/definitions/PasswordReference",
@@ -12972,30 +13044,6 @@
         "limitTimeSeconds"
       ]
     },
-    "BfdEnabled": {
-      "type": "string",
-      "description": "The indicator to determine if automatic allocation from the pool should occur.",
-      "enum": [
-        "True",
-        "False"
-      ],
-      "x-ms-enum": {
-        "name": "BfdEnabled",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "True",
-            "value": "True",
-            "description": "True"
-          },
-          {
-            "name": "False",
-            "value": "False",
-            "description": "False"
-          }
-        ]
-      }
-    },
     "BgpAdvertisement": {
       "type": "object",
       "description": "BgpAdvertisement represents the association of IP address pools to the communities and peers.",
@@ -13640,8 +13688,29 @@
           "description": "The descriptive message about the current detailed status."
         },
         "enableDefaultEgressEndpoints": {
-          "$ref": "#/definitions/CloudServicesNetworkEnableDefaultEgressEndpoints",
-          "description": "The indicator of whether the platform default endpoints are allowed for the egress traffic."
+          "type": "string",
+          "description": "The indicator of whether the platform default endpoints are allowed for the egress traffic.",
+          "default": "True",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "CloudServicesNetworkEnableDefaultEgressEndpoints",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "True",
+                "value": "True",
+                "description": "True"
+              },
+              {
+                "name": "False",
+                "value": "False",
+                "description": "False"
+              }
+            ]
+          }
         },
         "enabledEgressEndpoints": {
           "type": "array",
@@ -13757,8 +13826,29 @@
       "description": "CloudServicesNetworkStorageOptions represents the storage options for the cloud services network.",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/CloudServicesNetworkStorageMode",
-          "description": "The indicator to enable shared storage on the cloud services network. If not specified, the allocation will align with the standard storage enablement."
+          "type": "string",
+          "description": "The indicator to enable shared storage on the cloud services network. If not specified, the allocation will align with the standard storage enablement.",
+          "default": "Standard",
+          "enum": [
+            "None",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "CloudServicesNetworkStorageMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "None"
+              },
+              {
+                "name": "Standard",
+                "value": "Standard",
+                "description": "Standard"
+              }
+            ]
+          }
         },
         "sizeMiB": {
           "type": "integer",
@@ -13819,7 +13909,8 @@
         "sizeMiB": {
           "type": "integer",
           "format": "int64",
-          "description": "The size in Mebibytes of the storage allocation."
+          "description": "The size in Mebibytes of the storage allocation.",
+          "minimum": 0
         },
         "status": {
           "$ref": "#/definitions/CloudServicesNetworkStorageStatusStatus",
@@ -15156,7 +15247,8 @@
         },
         "analyticsOutputSettings": {
           "$ref": "#/definitions/AnalyticsOutputSettings",
-          "description": "The settings for the log analytics workspace used for output of logs from this cluster."
+          "description": "The settings for the log analytics workspace used for output of logs from this cluster.",
+          "x-nullable": true
         },
         "clusterLocation": {
           "type": "string",
@@ -15164,15 +15256,18 @@
         },
         "clusterServicePrincipal": {
           "$ref": "#/definitions/ServicePrincipalInformation",
-          "description": "Field Deprecated: Use managed identity to provide cluster privileges. The service principal to be used by the cluster during Arc Appliance installation."
+          "description": "Field Deprecated: Use managed identity to provide cluster privileges. The service principal to be used by the cluster during Arc Appliance installation.",
+          "x-nullable": true
         },
         "commandOutputSettings": {
           "$ref": "#/definitions/CommandOutputSettings",
-          "description": "The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts."
+          "description": "The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts.",
+          "x-nullable": true
         },
         "computeDeploymentThreshold": {
           "$ref": "#/definitions/ValidationThreshold",
-          "description": "The validation threshold indicating the allowable failures of compute machines during environment validation and deployment."
+          "description": "The validation threshold indicating the allowable failures of compute machines during environment validation and deployment.",
+          "x-nullable": true
         },
         "computeRackDefinitions": {
           "type": "array",
@@ -15190,23 +15285,28 @@
         },
         "runtimeProtectionConfiguration": {
           "$ref": "#/definitions/RuntimeProtectionConfiguration",
-          "description": "The settings for cluster runtime protection."
+          "description": "The settings for cluster runtime protection.",
+          "x-nullable": true
         },
         "secretArchive": {
           "$ref": "#/definitions/ClusterSecretArchive",
-          "description": "The configuration for use of a key vault to store secrets for later retrieval by the operator."
+          "description": "The configuration for use of a key vault to store secrets for later retrieval by the operator.",
+          "x-nullable": true
         },
         "secretArchiveSettings": {
           "$ref": "#/definitions/SecretArchiveSettings",
-          "description": "The settings for the secret archive used to hold credentials for the cluster."
+          "description": "The settings for the secret archive used to hold credentials for the cluster.",
+          "x-nullable": true
         },
         "updateStrategy": {
           "$ref": "#/definitions/ClusterUpdateStrategy",
-          "description": "The strategy for updating the cluster."
+          "description": "The strategy for updating the cluster.",
+          "x-nullable": true
         },
         "vulnerabilityScanningSettings": {
           "$ref": "#/definitions/VulnerabilityScanningSettingsPatch",
-          "description": "The settings for how security vulnerability scanning is applied to the cluster."
+          "description": "The settings for how security vulnerability scanning is applied to the cluster.",
+          "x-nullable": true
         }
       }
     },
@@ -15579,13 +15679,15 @@
         "thresholdValue": {
           "type": "integer",
           "format": "int64",
-          "description": "The numeric threshold value."
+          "description": "The numeric threshold value.",
+          "minimum": 0
         },
         "waitTimeMinutes": {
           "type": "integer",
           "format": "int64",
           "description": "The time to wait between the increments of update defined by the strategy.",
           "default": 15,
+          "minimum": 0,
           "maximum": 60
         }
       },
@@ -16339,36 +16441,6 @@
         }
       }
     },
-    "HybridAksPluginType": {
-      "type": "string",
-      "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.",
-      "enum": [
-        "DPDK",
-        "SRIOV",
-        "OSDevice"
-      ],
-      "x-ms-enum": {
-        "name": "HybridAksPluginType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DPDK",
-            "value": "DPDK",
-            "description": "DPDK"
-          },
-          {
-            "name": "SRIOV",
-            "value": "SRIOV",
-            "description": "SRIOV"
-          },
-          {
-            "name": "OSDevice",
-            "value": "OSDevice",
-            "description": "OSDevice"
-          }
-        ]
-      }
-    },
     "IdentitySelector": {
       "type": "object",
       "description": "IdentitySelector represents the selection of a managed identity for use.",
@@ -16380,7 +16452,8 @@
         "userAssignedIdentityResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type."
+          "description": "The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.",
+          "x-nullable": true
         }
       }
     },
@@ -16390,8 +16463,10 @@
       "properties": {
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password or token used to access an image in the target repository.",
-          "minLength": 1
+          "minLength": 1,
+          "x-ms-secret": true
         },
         "passwordRef": {
           "$ref": "#/definitions/PasswordReference",
@@ -16570,8 +16645,29 @@
           ]
         },
         "autoAssign": {
-          "$ref": "#/definitions/BfdEnabled",
+          "type": "string",
           "description": "The indicator to determine if automatic allocation from the pool should occur.",
+          "default": "True",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "BfdEnabled",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "True",
+                "value": "True",
+                "description": "True"
+              },
+              {
+                "name": "False",
+                "value": "False",
+                "description": "False"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -16587,8 +16683,29 @@
           ]
         },
         "onlyUseHostIps": {
-          "$ref": "#/definitions/BfdEnabled",
+          "type": "string",
           "description": "The indicator to prevent the use of IP addresses ending with .0 and .255 for this pool. Enabling this option will only use IP addresses between .1 and .254 inclusive.",
+          "default": "True",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "BfdEnabled",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "True",
+                "value": "True",
+                "description": "True"
+              },
+              {
+                "name": "False",
+                "value": "False",
+                "description": "False"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -17985,8 +18102,35 @@
           }
         },
         "hybridAksPluginType": {
-          "$ref": "#/definitions/HybridAksPluginType",
+          "type": "string",
           "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.",
+          "default": "SRIOV",
+          "enum": [
+            "DPDK",
+            "SRIOV",
+            "OSDevice"
+          ],
+          "x-ms-enum": {
+            "name": "HybridAksPluginType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DPDK",
+                "value": "DPDK",
+                "description": "DPDK"
+              },
+              {
+                "name": "SRIOV",
+                "value": "SRIOV",
+                "description": "SRIOV"
+              },
+              {
+                "name": "OSDevice",
+                "value": "OSDevice",
+                "description": "OSDevice"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -18165,8 +18309,47 @@
           }
         },
         "pluginType": {
-          "$ref": "#/definitions/KubernetesPluginType",
+          "type": "string",
           "description": "The indicator of how this network will be utilized by the Kubernetes cluster.",
+          "default": "SRIOV",
+          "enum": [
+            "DPDK",
+            "SRIOV",
+            "OSDevice",
+            "MACVLAN",
+            "IPVLAN"
+          ],
+          "x-ms-enum": {
+            "name": "KubernetesPluginType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DPDK",
+                "value": "DPDK",
+                "description": "DPDK"
+              },
+              {
+                "name": "SRIOV",
+                "value": "SRIOV",
+                "description": "SRIOV"
+              },
+              {
+                "name": "OSDevice",
+                "value": "OSDevice",
+                "description": "OSDevice"
+              },
+              {
+                "name": "MACVLAN",
+                "value": "MACVLAN",
+                "description": "MACVLAN"
+              },
+              {
+                "name": "IPVLAN",
+                "value": "IPVLAN",
+                "description": "IPVLAN"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -18302,8 +18485,35 @@
           ]
         },
         "hybridAksPluginType": {
-          "$ref": "#/definitions/HybridAksPluginType",
+          "type": "string",
           "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.",
+          "default": "SRIOV",
+          "enum": [
+            "DPDK",
+            "SRIOV",
+            "OSDevice"
+          ],
+          "x-ms-enum": {
+            "name": "HybridAksPluginType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DPDK",
+                "value": "DPDK",
+                "description": "DPDK"
+              },
+              {
+                "name": "SRIOV",
+                "value": "SRIOV",
+                "description": "SRIOV"
+              },
+              {
+                "name": "OSDevice",
+                "value": "OSDevice",
+                "description": "OSDevice"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -18943,6 +19153,7 @@
           "type": "number",
           "format": "float",
           "description": "Percent of the operation that is complete.",
+          "minimum": 0,
           "maximum": 100,
           "readOnly": true
         },
@@ -19748,12 +19959,72 @@
       "description": "RuntimeProtectionConfiguration represents the runtime protection configuration for the cluster.",
       "properties": {
         "definitionUpdateMode": {
-          "$ref": "#/definitions/RuntimeProtectionDefinitionUpdateMode",
-          "description": "The definition update mode for runtime protection."
+          "type": "string",
+          "description": "The definition update mode for runtime protection.",
+          "default": "None",
+          "enum": [
+            "Automatic",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "RuntimeProtectionDefinitionUpdateMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Automatic",
+                "value": "Automatic",
+                "description": "Automatic"
+              },
+              {
+                "name": "None",
+                "value": "None",
+                "description": "None"
+              }
+            ]
+          }
         },
         "enforcementLevel": {
-          "$ref": "#/definitions/RuntimeProtectionEnforcementLevel",
-          "description": "The mode of operation for runtime protection."
+          "type": "string",
+          "description": "The mode of operation for runtime protection.",
+          "default": "Disabled",
+          "enum": [
+            "Audit",
+            "Disabled",
+            "OnDemand",
+            "Passive",
+            "RealTime"
+          ],
+          "x-ms-enum": {
+            "name": "RuntimeProtectionEnforcementLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Audit",
+                "value": "Audit",
+                "description": "Audit"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              },
+              {
+                "name": "OnDemand",
+                "value": "OnDemand",
+                "description": "OnDemand"
+              },
+              {
+                "name": "Passive",
+                "value": "Passive",
+                "description": "Passive"
+              },
+              {
+                "name": "RealTime",
+                "value": "RealTime",
+                "description": "RealTime"
+              }
+            ]
+          }
         }
       }
     },
@@ -19986,8 +20257,29 @@
       "description": "ServiceLoadBalancerBgpPeer represents the configuration of the BGP service load balancer for the Kubernetes cluster.",
       "properties": {
         "bfdEnabled": {
-          "$ref": "#/definitions/BfdEnabled",
+          "type": "string",
           "description": "The indicator of BFD enablement for this BgpPeer.",
+          "default": "False",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "BfdEnabled",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "True",
+                "value": "True",
+                "description": "True"
+              },
+              {
+                "name": "False",
+                "value": "False",
+                "description": "False"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -20042,6 +20334,7 @@
           "type": "integer",
           "format": "int64",
           "description": "The autonomous system number used for the local end of the BGP session.",
+          "minimum": 0,
           "maximum": 4294967295,
           "x-ms-mutability": [
             "read",
@@ -20059,12 +20352,14 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The authentication password for routers enforcing TCP MD5 authenticated sessions.",
           "maxLength": 80,
           "pattern": "^[a-zA-Z0-9]{0,80}$",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "passwordRef": {
           "$ref": "#/definitions/PasswordReference",
@@ -20082,6 +20377,7 @@
           "type": "integer",
           "format": "int64",
           "description": "The autonomous system number expected from the remote end of the BGP session.",
+          "minimum": 0,
           "maximum": 4294967295,
           "x-ms-mutability": [
             "read",
@@ -20115,7 +20411,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password of the service principal."
+          "format": "password",
+          "description": "The password of the service principal.",
+          "x-ms-secret": true
         },
         "passwordRef": {
           "$ref": "#/definitions/PasswordReference",
@@ -20907,8 +21205,35 @@
           }
         },
         "hybridAksPluginType": {
-          "$ref": "#/definitions/HybridAksPluginType",
+          "type": "string",
           "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.",
+          "default": "SRIOV",
+          "enum": [
+            "DPDK",
+            "SRIOV",
+            "OSDevice"
+          ],
+          "x-ms-enum": {
+            "name": "HybridAksPluginType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DPDK",
+                "value": "DPDK",
+                "description": "DPDK"
+              },
+              {
+                "name": "SRIOV",
+                "value": "SRIOV",
+                "description": "SRIOV"
+              },
+              {
+                "name": "OSDevice",
+                "value": "OSDevice",
+                "description": "OSDevice"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -21021,7 +21346,8 @@
         "value": {
           "type": "integer",
           "format": "int64",
-          "description": "The numeric threshold value."
+          "description": "The numeric threshold value.",
+          "minimum": 0
         }
       },
       "required": [
@@ -21606,11 +21932,13 @@
         },
         "networkDataContent": {
           "type": "string",
+          "format": "password",
           "description": "The Base64 encoded cloud-init network data.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "networkDataContentRef": {
           "$ref": "#/definitions/PasswordReference",
@@ -21666,11 +21994,13 @@
         },
         "userDataContent": {
           "type": "string",
+          "format": "password",
           "description": "The Base64 encoded cloud-init user data.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "userDataContentRef": {
           "$ref": "#/definitions/PasswordReference",
@@ -21934,7 +22264,8 @@
         "allocatedSizeMiB": {
           "type": "integer",
           "format": "int64",
-          "description": "The allocated size of the volume in Mebibytes."
+          "description": "The allocated size of the volume in Mebibytes.",
+          "minimum": 0
         },
         "attachedTo": {
           "type": "array",
@@ -22029,8 +22360,29 @@
       "description": "VulnerabilityScanningSettings represents the settings for how security vulnerability scanning is applied to the cluster.",
       "properties": {
         "containerScan": {
-          "$ref": "#/definitions/VulnerabilityScanningSettingsContainerScan",
-          "description": "The mode selection for container vulnerability scanning."
+          "type": "string",
+          "description": "The mode selection for container vulnerability scanning.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "VulnerabilityScanningSettingsContainerScan",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              }
+            ]
+          }
         }
       }
     },

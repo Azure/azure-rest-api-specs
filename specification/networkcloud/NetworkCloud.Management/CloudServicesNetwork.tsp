@@ -79,6 +79,7 @@ interface CloudServicesNetworks {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the cloud services network.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     CloudServicesNetwork,
     PatchModel = CloudServicesNetworkPatchParameters,
@@ -104,7 +105,7 @@ interface CloudServicesNetworks {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<CloudServicesNetwork> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = CloudServicesNetwork> &
+    Response = ArmResponse<CloudServicesNetwork> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CloudServicesNetwork> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: CloudServicesNetwork;

@@ -81,6 +81,7 @@ interface Consoles {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the virtual machine console.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Console,
     PatchModel = ConsolePatchParameters,
@@ -106,7 +107,7 @@ interface Consoles {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<Console> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Console> &
+    Response = ArmResponse<Console> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Console> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Console;

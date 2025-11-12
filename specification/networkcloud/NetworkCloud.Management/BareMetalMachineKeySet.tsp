@@ -84,6 +84,7 @@ interface BareMetalMachineKeySets {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch bare metal machine key set of the cluster.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     BareMetalMachineKeySet,
     PatchModel = BareMetalMachineKeySetPatchParameters,
@@ -109,7 +110,7 @@ interface BareMetalMachineKeySets {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<BareMetalMachineKeySet> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BareMetalMachineKeySet> &
+    Response = ArmResponse<BareMetalMachineKeySet> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BareMetalMachineKeySet> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BareMetalMachineKeySet;

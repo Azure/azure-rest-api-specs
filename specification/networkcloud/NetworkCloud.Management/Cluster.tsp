@@ -88,6 +88,7 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the cluster.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Cluster,
     PatchModel = ClusterPatchParameters,
@@ -113,7 +114,7 @@ interface Clusters {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Cluster> &
+    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Cluster;

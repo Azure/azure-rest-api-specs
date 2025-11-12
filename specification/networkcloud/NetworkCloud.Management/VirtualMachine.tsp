@@ -81,6 +81,7 @@ interface VirtualMachines {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the virtual machine.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     VirtualMachine,
     PatchModel = VirtualMachinePatchParameters,
@@ -106,7 +107,7 @@ interface VirtualMachines {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<VirtualMachine> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualMachine> &
+    Response = ArmResponse<VirtualMachine> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachine> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: VirtualMachine;

@@ -81,6 +81,7 @@ interface AgentPools {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the Kubernetes cluster agent pool.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     AgentPool,
     PatchModel = AgentPoolPatchParameters,
@@ -106,7 +107,7 @@ interface AgentPools {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<AgentPool> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AgentPool> &
+    Response = ArmResponse<AgentPool> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AgentPool> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AgentPool;

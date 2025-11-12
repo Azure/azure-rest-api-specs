@@ -90,6 +90,7 @@ interface ClusterMetricsConfigurations {
   @operationId("MetricsConfigurations_Update")
   @summary("Patch metrics configuration of the cluster.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     ClusterMetricsConfiguration,
     PatchModel = ClusterMetricsConfigurationPatchParameters,
@@ -115,7 +116,7 @@ interface ClusterMetricsConfigurations {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<ClusterMetricsConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ClusterMetricsConfiguration> &
+    Response = ArmResponse<ClusterMetricsConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ClusterMetricsConfiguration> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ClusterMetricsConfiguration;
