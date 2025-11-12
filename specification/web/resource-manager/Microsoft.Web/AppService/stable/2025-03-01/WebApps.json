@@ -29359,7 +29359,30 @@
             },
             "publicNetworkAccess": {
               "description": "Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "",
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "name": "PublicNetworkAccess",
+                "modelAsString": false,
+                "values": [
+                  {
+                  "value": "",
+                  "description": "NotSpecified Network Access"
+                  },
+                  {
+                  "value": "Enabled",
+                  "description": "Enabled Network Access"
+                  },
+                  {
+                  "value": "Disabled",
+                  "description": "Disabled Network Access"
+                  }
+                ]
+              }
             },
             "storageAccountRequired": {
               "description": "Checks if Customer provided storage account is required",
