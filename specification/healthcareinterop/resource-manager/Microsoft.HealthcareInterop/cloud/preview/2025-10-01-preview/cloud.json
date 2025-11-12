@@ -74,6 +74,9 @@
     },
     {
       "name": "DdmsFhirEventBatchChannels"
+    },
+    {
+      "name": "DdmsFhirFlatFileBatchChannels"
     }
   ],
   "paths": {
@@ -187,6 +190,45 @@
         "x-ms-examples": {
           "DdmsFhirEventBatchChannels_ListBySubscription_MaximumSet": {
             "$ref": "./examples/DdmsFhirEventBatchChannels_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels": {
+      "get": {
+        "operationId": "DdmsFhirFlatFileBatchChannels_ListBySubscription",
+        "tags": [
+          "DdmsFhirFlatFileBatchChannels"
+        ],
+        "description": "List DdmsFhirFlatFileBatchChannel resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DdmsFhirFlatFileBatchChannels_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/DdmsFhirFlatFileBatchChannels_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1132,6 +1174,302 @@
         "x-ms-examples": {
           "DdmsFhirEventBatchChannels_Delete_MaximumSet": {
             "$ref": "./examples/DdmsFhirEventBatchChannels_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels": {
+      "get": {
+        "operationId": "DdmsFhirFlatFileBatchChannels_ListByResourceGroup",
+        "tags": [
+          "DdmsFhirFlatFileBatchChannels"
+        ],
+        "description": "List DdmsFhirFlatFileBatchChannel resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DdmsFhirFlatFileBatchChannels_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/DdmsFhirFlatFileBatchChannels_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels/{ddmsFhirFlatFileBatchChannelName}": {
+      "get": {
+        "operationId": "DdmsFhirFlatFileBatchChannels_Get",
+        "tags": [
+          "DdmsFhirFlatFileBatchChannels"
+        ],
+        "description": "Get a DdmsFhirFlatFileBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ddmsFhirFlatFileBatchChannelName",
+            "in": "path",
+            "description": "The name of the DdmsFhirFlatFileBatchChannel resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DdmsFhirFlatFileBatchChannel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DdmsFhirFlatFileBatchChannels_Get_MaximumSet": {
+            "$ref": "./examples/DdmsFhirFlatFileBatchChannels_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DdmsFhirFlatFileBatchChannels_CreateOrUpdate",
+        "tags": [
+          "DdmsFhirFlatFileBatchChannels"
+        ],
+        "description": "Create a DdmsFhirFlatFileBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ddmsFhirFlatFileBatchChannelName",
+            "in": "path",
+            "description": "The name of the DdmsFhirFlatFileBatchChannel resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DdmsFhirFlatFileBatchChannel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DdmsFhirFlatFileBatchChannel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DdmsFhirFlatFileBatchChannel"
+            }
+          },
+          "201": {
+            "description": "Resource 'DdmsFhirFlatFileBatchChannel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DdmsFhirFlatFileBatchChannel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DdmsFhirFlatFileBatchChannels_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/DdmsFhirFlatFileBatchChannels_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DdmsFhirFlatFileBatchChannels_Update",
+        "tags": [
+          "DdmsFhirFlatFileBatchChannels"
+        ],
+        "description": "Update a DdmsFhirFlatFileBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ddmsFhirFlatFileBatchChannelName",
+            "in": "path",
+            "description": "The name of the DdmsFhirFlatFileBatchChannel resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DdmsFhirFlatFileBatchChannel"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DdmsFhirFlatFileBatchChannels_Update_MaximumSet": {
+            "$ref": "./examples/DdmsFhirFlatFileBatchChannels_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DdmsFhirFlatFileBatchChannels_Delete",
+        "tags": [
+          "DdmsFhirFlatFileBatchChannels"
+        ],
+        "description": "Delete a DdmsFhirFlatFileBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ddmsFhirFlatFileBatchChannelName",
+            "in": "path",
+            "description": "The name of the DdmsFhirFlatFileBatchChannel resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DdmsFhirFlatFileBatchChannels_Delete_MaximumSet": {
+            "$ref": "./examples/DdmsFhirFlatFileBatchChannels_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4165,6 +4503,377 @@
         }
       ],
       "x-ms-discriminator-value": "DdmsConnector"
+    },
+    "DdmsFhirFlatFileBatchChannel": {
+      "type": "object",
+      "description": "The healthcare interop resource that extracts IDs from file that contains a list of delimited IDs and queries the configured EMR FHIR endpoint to retrieve the representative resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelDdmsConnectorDestinationProperties": {
+      "type": "object",
+      "description": "DdmsConnector destination properties for DDMS Flat File batch channel.",
+      "properties": {
+        "ddmsConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing ddmsConnector resource linked/associated to the same hub resource, to use as destination.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/ddmsConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "ddmsConnectorResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelDestinationProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DdmsConnector"
+    },
+    "DdmsFhirFlatFileBatchChannelDdmsConnectorDestinationPropertiesUpdate": {
+      "type": "object",
+      "description": "DdmsConnector destination properties for DDMS Flat File batch channel.",
+      "properties": {
+        "ddmsConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing ddmsConnector resource linked/associated to the same hub resource, to use as destination.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/ddmsConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelDestinationPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "DdmsConnector"
+    },
+    "DdmsFhirFlatFileBatchChannelDestinationConnectorType": {
+      "type": "string",
+      "description": "Types of destination connectors supported for the DdmsFhirFlatFileBatchChannel resource.",
+      "enum": [
+        "DdmsConnector"
+      ],
+      "x-ms-enum": {
+        "name": "DdmsFhirFlatFileBatchChannelDestinationConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DdmsConnector",
+            "value": "DdmsConnector",
+            "description": "DDMS destination connector."
+          }
+        ]
+      }
+    },
+    "DdmsFhirFlatFileBatchChannelDestinationProperties": {
+      "type": "object",
+      "description": "The destination configuration for the DdmsFhirFlatFileBatchChannel resource.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelDestinationConnectorType",
+          "description": "The type of destination connector to be used for this channel."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelDestinationPropertiesUpdate": {
+      "type": "object",
+      "description": "The destination configuration for the DdmsFhirFlatFileBatchChannel resource.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelDestinationConnectorType",
+          "description": "The type of destination connector to be used for this channel."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelJobProperties": {
+      "type": "object",
+      "description": "Properties for Job",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/BatchTriggerProperties",
+          "description": "The trigger configuration"
+        }
+      },
+      "required": [
+        "trigger"
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelJobPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties for Job",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/BatchTriggerPropertiesUpdate",
+          "description": "The trigger configuration"
+        }
+      }
+    },
+    "DdmsFhirFlatFileBatchChannelListResult": {
+      "type": "object",
+      "description": "The response of a DdmsFhirFlatFileBatchChannel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DdmsFhirFlatFileBatchChannel items on this page",
+          "items": {
+            "$ref": "#/definitions/DdmsFhirFlatFileBatchChannel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelProperties": {
+      "type": "object",
+      "description": "The properties to configure the DdmsFhirFlatFileBatchChannel resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this DdmsFhirFlatFileBatchChannel resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelSourceProperties",
+          "description": "The settings to configure the source of the data to be ingested."
+        },
+        "transformationConfiguration": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelTransformationProperties",
+          "description": "The settings to configure the transformations to process the data."
+        },
+        "destinationConfiguration": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelDestinationProperties",
+          "description": "The settings to configure the destination of the data to be persisted."
+        },
+        "jobConfiguration": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelJobProperties",
+          "description": "The settings to configure the job executions to process the data."
+        }
+      },
+      "required": [
+        "hubResourceId",
+        "sourceConfiguration",
+        "transformationConfiguration",
+        "destinationConfiguration",
+        "jobConfiguration"
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the DdmsFhirFlatFileBatchChannel resource.",
+      "properties": {
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this DdmsFhirFlatFileBatchChannel resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelSourcePropertiesUpdate",
+          "description": "The settings to configure the source of the data to be ingested."
+        },
+        "transformationConfiguration": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelTransformationPropertiesUpdate",
+          "description": "The settings to configure the transformations to process the data."
+        },
+        "destinationConfiguration": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelDestinationPropertiesUpdate",
+          "description": "The settings to configure the destination of the data to be persisted."
+        },
+        "jobConfiguration": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelJobPropertiesUpdate",
+          "description": "The settings to configure the job executions to process the data."
+        }
+      }
+    },
+    "DdmsFhirFlatFileBatchChannelSourceConnectorType": {
+      "type": "string",
+      "description": "Types of source connectors supported for the DdmsFhirFlatFileBatchChannel resource.",
+      "enum": [
+        "StorageAccountConnector"
+      ],
+      "x-ms-enum": {
+        "name": "DdmsFhirFlatFileBatchChannelSourceConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StorageAccountConnector",
+            "value": "StorageAccountConnector",
+            "description": "Storage Account connector."
+          }
+        ]
+      }
+    },
+    "DdmsFhirFlatFileBatchChannelSourceProperties": {
+      "type": "object",
+      "description": "The source configuration for the DdmsFhirFlatFileBatchChannel resource.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelSourceConnectorType",
+          "description": "The type of source connector to be used for this channel."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "The source configuration for the DdmsFhirFlatFileBatchChannel resource.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelSourceConnectorType",
+          "description": "The type of source connector to be used for this channel."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelStorageAccountConnectorSourceProperties": {
+      "type": "object",
+      "description": "StorageAccountConnector source properties.",
+      "properties": {
+        "storageAccountConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing storageAccountConnector resource linked/associated to the same hub resource, to use as source.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/storageAccountConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "storageAccountConnectorResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "StorageAccountConnector"
+    },
+    "DdmsFhirFlatFileBatchChannelStorageAccountConnectorSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "StorageAccountConnector source properties.",
+      "properties": {
+        "storageAccountConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing storageAccountConnector resource linked/associated to the same hub resource, to use as source.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/storageAccountConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "StorageAccountConnector"
+    },
+    "DdmsFhirFlatFileBatchChannelTransformationProperties": {
+      "type": "object",
+      "description": "The transformation configuration for the DdmsFhirFlatFileBatchChannel resource.",
+      "properties": {
+        "fhirQueryConfiguration": {
+          "$ref": "#/definitions/FhirQueryProperties",
+          "description": "The FHIR Query configuration."
+        }
+      },
+      "required": [
+        "fhirQueryConfiguration"
+      ]
+    },
+    "DdmsFhirFlatFileBatchChannelTransformationPropertiesUpdate": {
+      "type": "object",
+      "description": "The transformation configuration for the DdmsFhirFlatFileBatchChannel resource.",
+      "properties": {
+        "fhirQueryConfiguration": {
+          "$ref": "#/definitions/FhirQueryPropertiesUpdate",
+          "description": "The FHIR Query configuration."
+        }
+      }
+    },
+    "DdmsFhirFlatFileBatchChannelUpdate": {
+      "type": "object",
+      "description": "The healthcare interop resource that extracts IDs from file that contains a list of delimited IDs and queries the configured EMR FHIR endpoint to retrieve the representative resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DdmsFhirFlatFileBatchChannelPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "DdmsHl7ConnectorSourceProperties": {
       "type": "object",

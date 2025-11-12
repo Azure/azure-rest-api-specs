@@ -13,6 +13,7 @@ import "./channels/dicomDirectChannel.tsp";
 import "./channels/fhirQueryEventBatchChannel.tsp";
 import "./channels/fhirQueryFlatFileBatchChannel.tsp";
 import "./channels/ddmsFhirEventBatchChannel.tsp";
+import "./channels/ddmsFhirFlatFileBatchChannel.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
