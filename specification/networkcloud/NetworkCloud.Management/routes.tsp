@@ -122,7 +122,7 @@ interface OperationStatusOperationGroup {
   @summary("Patch the operation status.")
   @operationId("OperationStatus_Update")
   @route("/{operationStatusId}")
-  @patch
+  @patch(#{ implicitOptionality: false })
   update(
     ...ApiVersionParameter,
 

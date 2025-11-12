@@ -78,6 +78,7 @@ interface Racks {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Patch the rack.")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Rack,
     PatchModel = RackPatchParameters,
@@ -103,7 +104,7 @@ interface Racks {
       @header
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmResponse<Rack> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rack> &
+    Response = ArmResponse<Rack> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Rack> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Rack;
