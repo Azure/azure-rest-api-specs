@@ -72,11 +72,10 @@ interface SBNamespaces {
   update is ArmCustomPatchSync<
     SBNamespace,
     PatchModel = SBNamespaceUpdateParameters,
-    Response =
-      ArmResponse<SBNamespace> |
-      ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
-      Error = ErrorResponse
-    >;
+    Response = ArmResponse<SBNamespace> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Error = ErrorResponse
+  >;
 
   /**
    * Deletes an existing namespace. This operation also removes all associated resources under the namespace.

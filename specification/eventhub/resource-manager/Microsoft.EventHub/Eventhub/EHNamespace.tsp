@@ -68,11 +68,8 @@ interface EHNamespaces {
   update is ArmCustomPatchSync<
     EHNamespace,
     PatchModel = EHNamespace,
-    Response = ArmResponse<EHNamespace> |
-              ArmAcceptedLroResponse<
-                LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
-                              Azure.Core.Foundations.RetryAfterHeader
-              >,
+    Response = ArmResponse<EHNamespace> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
