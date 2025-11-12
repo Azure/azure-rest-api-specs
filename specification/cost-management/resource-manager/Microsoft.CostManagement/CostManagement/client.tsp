@@ -19,5 +19,12 @@ using Microsoft.CostManagement;
   "java"
 );
 
-// Keep tagFilter as Object instead of Map for Java
 @@alternateType(AlertPropertiesDetails.tagFilter, unknown, "java");
+
+// Rename eTag back to etag for Java (backward compatibility)
+@@clientName(CostManagementProxyResource.eTag, "etag", "java");
+@@clientName(CostManagementResource.eTag, "etag", "java");
+@@clientName(View.eTag, "etag", "java");
+@@clientName(ScheduledAction.eTag, "etag", "java");
+@@clientName(Export.eTag, "etag", "java");
+@@clientName(Alert.eTag, "etag", "java");
