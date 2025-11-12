@@ -75,3 +75,9 @@ using Microsoft.NetApp;
   "$DO_NOT_NORMALIZE$\"10Minutely\"",
   "javascript"
 );
+
+// Mitigate enum renames for Java SDK
+@@clientName(Microsoft.NetApp.NetAppProvisioningState,
+  "ProvisioningState",
+  "java"
+);
