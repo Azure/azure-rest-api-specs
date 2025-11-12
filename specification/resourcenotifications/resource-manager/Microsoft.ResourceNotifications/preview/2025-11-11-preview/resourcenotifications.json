@@ -284,60 +284,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "ResourceSubscriptions_Update",
-        "tags": [
-          "ResourceSubscriptions"
-        ],
-        "description": "Updates a resource subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "subscriptionRuleName",
-            "in": "path",
-            "description": "The name of the resource subscription",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceSubscriptionUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceSubscription"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a resource subscription scope": {
-            "$ref": "./examples/ResourceSubscriptions_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "ResourceSubscriptions_Delete",
         "tags": [
@@ -556,68 +502,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "ResourceSubscriptionDestinations_Update",
-        "tags": [
-          "Destinations"
-        ],
-        "description": "Updates a destination",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "subscriptionRuleName",
-            "in": "path",
-            "description": "The name of the resource subscription",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          },
-          {
-            "name": "destinationName",
-            "in": "path",
-            "description": "The name of the destination",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DestinationUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Destination"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a fabric table destination endpoint": {
-            "$ref": "./examples/ResourceSubscriptionDestinations_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "ResourceSubscriptionDestinations_Delete",
         "tags": [
@@ -696,44 +580,6 @@
       ],
       "x-ms-discriminator-value": "arnLocation"
     },
-    "ArnLocationPartitioningConfigurationUpdate": {
-      "type": "object",
-      "description": "ARN location partitioning configuration",
-      "properties": {
-        "partitions": {
-          "type": "array",
-          "description": "The partitions list",
-          "items": {
-            "$ref": "#/definitions/Partition"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PartitioningConfigurationUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "arnLocation"
-    },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "BatchingPolicy": {
       "type": "object",
       "description": "Base properties for batching policy configuration",
@@ -766,20 +612,6 @@
         ]
       }
     },
-    "BatchingPolicyUpdate": {
-      "type": "object",
-      "description": "Base properties for batching policy configuration",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/BatchingPolicyKind",
-          "description": "The kind of batching policy"
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
     "CloudScope": {
       "type": "object",
       "description": "Cloud scope configuration",
@@ -801,22 +633,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Scope"
-        }
-      ],
-      "x-ms-discriminator-value": "cloud"
-    },
-    "CloudScopeUpdate": {
-      "type": "object",
-      "description": "Cloud scope configuration",
-      "properties": {
-        "providerNamespace": {
-          "type": "string",
-          "description": "The provider namespace populated by caller"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScopeUpdate"
         }
       ],
       "x-ms-discriminator-value": "cloud"
@@ -918,35 +734,6 @@
         "kind"
       ]
     },
-    "DestinationPropertiesUpdate": {
-      "type": "object",
-      "description": "Base properties for destination configuration",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/DestinationKind",
-          "description": "The kind of destination"
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
-    "DestinationUpdate": {
-      "type": "object",
-      "description": "Destination resource for Azure Resource Notifications",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DestinationPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "FabricEndpoint": {
       "type": "object",
       "description": "Fabric endpoint configuration",
@@ -964,20 +751,6 @@
         "workspaceId",
         "databaseId"
       ]
-    },
-    "FabricEndpointUpdate": {
-      "type": "object",
-      "description": "Fabric endpoint configuration",
-      "properties": {
-        "workspaceId": {
-          "type": "string",
-          "description": "The workspace ID"
-        },
-        "databaseId": {
-          "type": "string",
-          "description": "The database ID"
-        }
-      }
     },
     "FabricTableDestinationProperties": {
       "type": "object",
@@ -1018,22 +791,6 @@
       ],
       "x-ms-discriminator-value": "fabricTable"
     },
-    "FabricTableDestinationPropertiesUpdate": {
-      "type": "object",
-      "description": "Fabric table destination properties",
-      "properties": {
-        "endpoint": {
-          "$ref": "#/definitions/FabricEndpointUpdate",
-          "description": "The fabric endpoint configuration"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DestinationPropertiesUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "fabricTable"
-    },
     "MinCountMaxDelayBatchingPolicy": {
       "type": "object",
       "description": "Min count max delay batching policy",
@@ -1054,26 +811,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/BatchingPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "minCountMaxDelay"
-    },
-    "MinCountMaxDelayBatchingPolicyUpdate": {
-      "type": "object",
-      "description": "Min count max delay batching policy",
-      "properties": {
-        "minResources": {
-          "type": "string",
-          "description": "Minimum number of resources"
-        },
-        "maxDelay": {
-          "type": "string",
-          "description": "Maximum delay"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BatchingPolicyUpdate"
         }
       ],
       "x-ms-discriminator-value": "minCountMaxDelay"
@@ -1131,20 +868,6 @@
         ]
       }
     },
-    "PartitioningConfigurationUpdate": {
-      "type": "object",
-      "description": "Base properties for partitioning configuration",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/PartitioningConfigurationKind",
-          "description": "The kind of partitioning configuration"
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
     "PathPolicy": {
       "type": "object",
       "description": "Base properties for path policy configuration",
@@ -1176,20 +899,6 @@
           }
         ]
       }
-    },
-    "PathPolicyUpdate": {
-      "type": "object",
-      "description": "Base properties for path policy configuration",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/PathPolicyKind",
-          "description": "The kind of path policy"
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
     },
     "ProvisioningState": {
       "type": "string",
@@ -1317,39 +1026,6 @@
         "scope"
       ]
     },
-    "ResourceSubscriptionPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties of a resource subscription",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "The query to execute - only one table can be targeted at a time"
-        },
-        "scope": {
-          "$ref": "#/definitions/ScopeUpdate",
-          "description": "The scope for the execution of the filter"
-        },
-        "partitioningConfiguration": {
-          "$ref": "#/definitions/PartitioningConfigurationUpdate",
-          "description": "Defines how to partition the event stream. Supported kind: arnLocation"
-        }
-      }
-    },
-    "ResourceSubscriptionUpdate": {
-      "type": "object",
-      "description": "Resource subscription for Azure Resource Notifications",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ResourceSubscriptionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
-    },
     "Scope": {
       "type": "object",
       "description": "Base properties for scope configuration",
@@ -1386,20 +1062,6 @@
           }
         ]
       }
-    },
-    "ScopeUpdate": {
-      "type": "object",
-      "description": "Base properties for scope configuration",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ScopeKind",
-          "description": "The kind of scope"
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
     },
     "StorageAccountDestinationProperties": {
       "type": "object",
@@ -1457,49 +1119,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/DestinationProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "storageAccount"
-    },
-    "StorageAccountDestinationPropertiesUpdate": {
-      "type": "object",
-      "description": "Storage account destination properties",
-      "properties": {
-        "partitions": {
-          "type": "array",
-          "description": "Which partitions go to this destination",
-          "items": {
-            "type": "string"
-          }
-        },
-        "pathPolicy": {
-          "$ref": "#/definitions/PathPolicyUpdate",
-          "description": "Incoming notifications are mapped to a path based on the path policy"
-        },
-        "batchingPolicy": {
-          "$ref": "#/definitions/BatchingPolicyUpdate",
-          "description": "Notifications for the same path are batched following the batching policy"
-        },
-        "endpointContainer": {
-          "type": "string",
-          "description": "Storage container to store the data"
-        },
-        "endpointDeliveryMode": {
-          "type": "string",
-          "description": "How to deliver to the endpoints below: round-robin spreads load over all endpoints, failover delivers to the first available"
-        },
-        "endpoints": {
-          "type": "array",
-          "description": "Set of endpoints to use",
-          "items": {
-            "$ref": "#/definitions/StorageAccountEndpoint"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DestinationPropertiesUpdate"
         }
       ],
       "x-ms-discriminator-value": "storageAccount"
@@ -1567,16 +1186,6 @@
       ],
       "x-ms-discriminator-value": "tenant"
     },
-    "TenantScopeUpdate": {
-      "type": "object",
-      "description": "Tenant scope configuration",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScopeUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "tenant"
-    },
     "TimeAndScopeRangeHashPathPolicy": {
       "type": "object",
       "description": "Time and scope range hash path policy",
@@ -1608,35 +1217,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/PathPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "timeAndScopeRangeHash"
-    },
-    "TimeAndScopeRangeHashPathPolicyUpdate": {
-      "type": "object",
-      "description": "Time and scope range hash path policy",
-      "properties": {
-        "timeSource": {
-          "type": "string",
-          "description": "The time source"
-        },
-        "scope": {
-          "type": "string",
-          "description": "The scope"
-        },
-        "scopeBuckets": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of scope buckets"
-        },
-        "pathTemplate": {
-          "type": "string",
-          "description": "The path template following the pattern: year={yyyy},month={mm},day={dd}/hour={hh}/tenantBucket={scopeBucket}"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PathPolicyUpdate"
         }
       ],
       "x-ms-discriminator-value": "timeAndScopeRangeHash"

@@ -153,15 +153,6 @@ model ResourceSubscription
   name: string;
 }
 
-/** Resource subscription for update operations */
-model ResourceSubscriptionPatch {
-  /** The updatable properties */
-  properties?: {
-    /** The scope for the execution of the filter */
-    scope?: Scope;
-  };
-}
-
 /** Operations for Resource Subscriptions */
 @armResourceOperations
 interface ResourceSubscriptions {
@@ -173,12 +164,6 @@ interface ResourceSubscriptions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ResourceSubscription,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /** Updates a resource subscription */
-  update is ArmResourcePatchSync<
-    ResourceSubscription,
-    ResourceSubscriptionPatch
   >;
 
   /** Deletes a resource subscription */
@@ -381,18 +366,6 @@ model Destination
   name: string;
 }
 
-/** Properties for destination update operations */
-model DestinationPatchProperties {
-  /** The fabric endpoint configuration (only for fabric destinations) */
-  endpoint?: FabricEndpoint;
-}
-
-/** Destination for update operations */
-model DestinationPatch {
-  /** The updatable properties */
-  properties?: DestinationPatchProperties;
-}
-
 /** Operations for Destinations */
 @armResourceOperations
 interface Destinations {
@@ -403,10 +376,6 @@ interface Destinations {
   /** Creates or updates a destination */
   @operationId("ResourceSubscriptionDestinations_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Destination>;
-
-  /** Updates a destination */
-  @operationId("ResourceSubscriptionDestinations_Update")
-  update is ArmResourcePatchSync<Destination, DestinationPatch>;
 
   /** Deletes a destination */
   @operationId("ResourceSubscriptionDestinations_Delete")
