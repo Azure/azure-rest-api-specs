@@ -53,4 +53,7 @@ op getReplace(
 
 @@override(HeatMapModels.get, getReplace, "go");
 @@alternateType(getReplace::parameters.heatMapType, "default", "go");
-@@clientName(Microsoft.Network, "TrafficManagerManagementClient", "javascript, python");
+@@clientName(Microsoft.Network,
+  "TrafficManagerManagementClient",
+  "javascript, python"
+);
