@@ -35,17 +35,17 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects {
   @doc("Azure AI Projects API versions")
   enum Versions {
-    @doc("Azure AI API version 2025-05-01.")
-    v2025_05_01: "2025-05-01",
+    @doc("Azure AI API version v1.")
+    v1: "v1",
 
     @doc("Azure AI API version 2025-05-15-preview.")
     v2025_05_15_preview: "2025-05-15-preview",
 
+    @doc("Azure AI API version 2025-05-01.")
+    v2025_05_01: "2025-05-01",
+
     @doc("Azure AI API version 2025-11-15-preview.")
     v2025_11_15_preview: "2025-11-15-preview",
-
-    @doc("Azure AI API version v1.")
-    v1: "v1",
   }
 
   scalar integer extends OpenAI.integer;
@@ -53,6 +53,6 @@ namespace Azure.AI.Projects {
 }
 
 namespace OpenAI {
-  scalar integer extends TypeSpec.int64;
-  scalar numeric extends TypeSpec.float64;
+  scalar integer extends int64;
+  scalar numeric extends float64;
 }
