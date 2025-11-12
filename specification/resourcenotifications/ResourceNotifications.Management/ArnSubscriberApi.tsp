@@ -153,16 +153,10 @@ model ResourceSubscription
   name: string;
 }
 
-/** Resource subscription properties for update operations */
-model ResourceSubscriptionPatchProperties {
-  /** The scope for the execution of the filter */
-  scope?: Scope;
-}
-
-/** Resource subscription for update operations */
-model ResourceSubscriptionPatch {
-  /** The updatable properties */
-  properties?: ResourceSubscriptionPatchProperties;
+/** Resource subscription properties for update operations (excludes discriminated unions) */
+model ResourceSubscriptionUpdateProperties {
+  /** The query to execute - only one table can be targeted at a time */
+  query?: string;
 }
 
 /** Operations for Resource Subscriptions */
@@ -187,9 +181,13 @@ interface ResourceSubscriptions {
       },
     }
   )
-  update is ArmResourcePatchSync<
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchSync<
     ResourceSubscription,
-    ResourceSubscriptionPatch
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ResourceSubscription,
+      ResourceSubscriptionUpdateProperties
+    >
   >;
 
   /** Deletes a resource subscription */
