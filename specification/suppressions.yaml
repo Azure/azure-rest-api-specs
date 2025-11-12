@@ -657,19 +657,6 @@
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-go.flavor
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.*
-  paths:
-    - keyvault/data-plane/BackupRestore/tspconfig.yaml
-    - keyvault/data-plane/RBAC/tspconfig.yaml
-    - keyvault/data-plane/Settings/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.flavor
     - options.@azure-tools/typespec-java.namespace
     - options.@azure-tools/typespec-python.generate-sample
     - options.@azure-tools/typespec-python.generate-test
