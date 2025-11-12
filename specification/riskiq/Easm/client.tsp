@@ -153,4 +153,5 @@ interface EasmClient {
 @@clientName(EasmClient.listDiscoTemplate, "GetDiscoveryTemplates", "csharp");
 @@clientName(EasmClient.listPolicy, "GetPolicies", "csharp");
 @@clientName(EasmClient.listSavedFilter, "GetSavedFilters", "csharp");
+@@clientName(EasmClient.listTask, "GetTasks", "csharp");
 @@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");
