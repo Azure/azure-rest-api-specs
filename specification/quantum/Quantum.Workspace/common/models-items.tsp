@@ -70,7 +70,7 @@ model ItemDetails {
   @visibility(Lifecycle.Read)
   creationTime?: utcDateTime;
 
-  /** The user that created the item. */
+  /** The identity that created the item. */
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
   createdBy?: string;
