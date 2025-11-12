@@ -17784,48 +17784,6 @@
         ]
       }
     },
-    "KubernetesPluginType": {
-      "type": "string",
-      "description": "The indicator of how this network will be utilized by the Kubernetes cluster.",
-      "enum": [
-        "DPDK",
-        "SRIOV",
-        "OSDevice",
-        "MACVLAN",
-        "IPVLAN"
-      ],
-      "x-ms-enum": {
-        "name": "KubernetesPluginType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DPDK",
-            "value": "DPDK",
-            "description": "DPDK"
-          },
-          {
-            "name": "SRIOV",
-            "value": "SRIOV",
-            "description": "SRIOV"
-          },
-          {
-            "name": "OSDevice",
-            "value": "OSDevice",
-            "description": "OSDevice"
-          },
-          {
-            "name": "MACVLAN",
-            "value": "MACVLAN",
-            "description": "MACVLAN"
-          },
-          {
-            "name": "IPVLAN",
-            "value": "IPVLAN",
-            "description": "IPVLAN"
-          }
-        ]
-      }
-    },
     "KubernetesVersion": {
       "type": "object",
       "description": "KubernetesVersion represents the available Kubernetes versions for a cluster.",
@@ -18004,8 +17962,47 @@
           }
         },
         "pluginType": {
-          "$ref": "#/definitions/KubernetesPluginType",
+          "type": "string",
           "description": "The indicator of how this network will be utilized by the Kubernetes cluster.",
+          "default": "SRIOV",
+          "enum": [
+            "DPDK",
+            "SRIOV",
+            "OSDevice",
+            "MACVLAN",
+            "IPVLAN"
+          ],
+          "x-ms-enum": {
+            "name": "KubernetesPluginType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DPDK",
+                "value": "DPDK",
+                "description": "DPDK"
+              },
+              {
+                "name": "SRIOV",
+                "value": "SRIOV",
+                "description": "SRIOV"
+              },
+              {
+                "name": "OSDevice",
+                "value": "OSDevice",
+                "description": "OSDevice"
+              },
+              {
+                "name": "MACVLAN",
+                "value": "MACVLAN",
+                "description": "MACVLAN"
+              },
+              {
+                "name": "IPVLAN",
+                "value": "IPVLAN",
+                "description": "IPVLAN"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -21108,8 +21105,47 @@
           }
         },
         "pluginType": {
-          "$ref": "#/definitions/KubernetesPluginType",
+          "type": "string",
           "description": "The indicator of how this network will be utilized by the Kubernetes cluster.",
+          "default": "SRIOV",
+          "enum": [
+            "DPDK",
+            "SRIOV",
+            "OSDevice",
+            "MACVLAN",
+            "IPVLAN"
+          ],
+          "x-ms-enum": {
+            "name": "KubernetesPluginType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DPDK",
+                "value": "DPDK",
+                "description": "DPDK"
+              },
+              {
+                "name": "SRIOV",
+                "value": "SRIOV",
+                "description": "SRIOV"
+              },
+              {
+                "name": "OSDevice",
+                "value": "OSDevice",
+                "description": "OSDevice"
+              },
+              {
+                "name": "MACVLAN",
+                "value": "MACVLAN",
+                "description": "MACVLAN"
+              },
+              {
+                "name": "IPVLAN",
+                "value": "IPVLAN",
+                "description": "IPVLAN"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"

@@ -5363,7 +5363,7 @@ model L2NetworkAttachmentConfiguration {
    * The indicator of how this network will be utilized by the Kubernetes cluster.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  pluginType?: KubernetesPluginType;
+  pluginType?: KubernetesPluginType = KubernetesPluginType.SRIOV;
 }
 
 /**
@@ -5411,7 +5411,7 @@ model TrunkedNetworkAttachmentConfiguration {
    * The indicator of how this network will be utilized by the Kubernetes cluster.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  pluginType?: KubernetesPluginType;
+  pluginType?: KubernetesPluginType = KubernetesPluginType.SRIOV;
 }
 
 /**
