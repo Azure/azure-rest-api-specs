@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/networkcloud"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,35 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/networkcloud.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-networkcloud"
+    namespace: "azure.mgmt.networkcloud"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-networkcloud"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-networkcloud"
+    namespace: "com.azure.resourcemanager.networkcloud"
+    service-name: "NetworkCloud"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/networkcloud"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnetworkcloud"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetworkcloud"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-networkcloud"
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-networkcloud"
+    package-details:
+      name: "@azure/arm-networkcloud"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
