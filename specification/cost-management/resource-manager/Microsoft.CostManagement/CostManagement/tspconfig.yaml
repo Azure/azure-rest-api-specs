@@ -12,32 +12,21 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.CostManagement"
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.ResourceManager.CostManagement"
-    flavor: azure
-  "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-costmanagement"
+ "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-costmanagement"
     namespace: "azure.mgmt.costmanagement"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-costmanagement"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-costmanagement"
     namespace: "com.azure.resourcemanager.costmanagement"
     service-name: "CostManagement" # human-readable service name, whitespace allowed
     flavor: azure
-    service-dir: "sdk/costmanagement"
-    premium: true
-    enable-sync-stack: false
   "@azure-tools/typespec-ts":
-    package-dir: "arm-costmanagement"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-costmanagement"
-    flavor: azure
+    is-modular-library: true
+    flavor: "azure"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-costmanagement"
