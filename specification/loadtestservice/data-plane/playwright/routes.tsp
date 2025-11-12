@@ -63,7 +63,7 @@ alias GetBrowsersResponse = {
 
   @header
   @doc("The redirect target URL for executing Playwright scripts on remote browsers.")
-  location: url;
+  location: string;
 };
 
 interface Workspaces {
