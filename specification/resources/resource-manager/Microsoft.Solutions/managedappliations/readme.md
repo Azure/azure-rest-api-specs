@@ -25,8 +25,8 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: ManagedApplicationsClient
-description: Managed Applications Client
+title: ApplicationClient
+description: Application Client
 openapi-type: arm
 tag: package-preview-2020-08
 ```
@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
-  - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
+  - preview/2020-08-21-preview/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2019-07
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-managedapplications-2019-07` is sp
 
 ``` yaml $(tag) == 'package-managedapplications-2019-07'
 input-file:
-- Microsoft.Solutions/stable/2019-07-01/managedapplications.json
+- stable/2019-07-01/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2018-06
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-managedapplications-2018-06` is sp
 
 ``` yaml $(tag) == 'package-managedapplications-2018-06'
 input-file:
-- Microsoft.Solutions/stable/2018-06-01/managedapplications.json
+- stable/2018-06-01/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2017-09
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-managedapplications-2017-09` is sp
 
 ``` yaml $(tag) == 'package-managedapplications-2017-09'
 input-file:
-- Microsoft.Solutions/stable/2017-09-01/managedapplications.json
+- stable/2017-09-01/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2016-09
@@ -73,9 +73,8 @@ These settings apply only when `--tag=package-managedapplications-2016-09` is sp
 
 ``` yaml $(tag) == 'package-managedapplications-2016-09'
 input-file:
-- Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
+- preview/2016-09-01-preview/managedapplications.json
 ```
-
 
 ## Suppression
 

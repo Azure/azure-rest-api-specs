@@ -25,10 +25,10 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: FeaturesClient
-description: Features Client
+title: FeatureClient
+description: Feature Client
 openapi-type: arm
-tag: package-2022-12
+tag: package-features-2021-07
 ```
 
 ### Tag: package-features-2021-07
@@ -37,8 +37,8 @@ These settings apply only when `--tag=package-features-2021-07` is specified on 
 
 ``` yaml $(tag) == 'package-features-2021-07'
 input-file:
-- Microsoft.Features/stable/2021-07-01/features.json
-- Microsoft.Features/stable/2021-07-01/SubscriptionFeatureRegistration.json
+- stable/2021-07-01/features.json
+- stable/2021-07-01/SubscriptionFeatureRegistration.json
 
 # Needed when there is more than one input file
 override-info:
@@ -51,7 +51,16 @@ These settings apply only when `--tag=package-features-2015-12` is specified on 
 
 ``` yaml $(tag) == 'package-features-2015-12'
 input-file:
-- Microsoft.Features/stable/2015-12-01/features.json
+- stable/2015-12-01/features.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - from: SubscriptionFeatureRegistration.json
+    suppress: R4009
+    reason: Currently systemData is not allowed
 ```
 
 ---

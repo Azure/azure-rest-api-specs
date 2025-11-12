@@ -23,8 +23,8 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: PrivateLinksClient
-description: PrivateLinks Client
+title: ResourcePrivateLinkClient
+description: ResourcePrivateLink Client
 openapi-type: arm
 tag: package-privatelinks-2020-05
 ```

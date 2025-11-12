@@ -23,8 +23,8 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: LocksClient
-description: Locks Client
+title: ManagementLockClient
+description: ManagementLock Client
 openapi-type: arm
 tag: package-locks-2020-05
 ```

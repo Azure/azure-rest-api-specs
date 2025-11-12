@@ -4,7 +4,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ### Fix up regular expressions to support Unicode.
 
-``` yaml 
+``` yaml
 directive:
   from: swagger-document # do it globally
   where: $.paths..parameters[?(@.name == "resourceGroupName" || @.name == "sourceResourceGroupName")].pattern
