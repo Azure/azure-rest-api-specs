@@ -49,6 +49,14 @@ using Microsoft.NetApp;
   "groupMetadata",
   "java"
 );
+@@clientName(Microsoft.NetApp.VolumeGroupProperties.groupMetaData,
+  "groupMetadata",
+  "java"
+);
+@@clientName(Microsoft.NetApp.NetAppProvisioningState,
+  "ProvisioningState",
+  "java"
+);
 
 // Fix model name changes
 @@clientName(Microsoft.NetApp.VolumeGroupMetaData,
@@ -74,10 +82,4 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.ReplicationSchedule._10minutely,
   "$DO_NOT_NORMALIZE$\"10Minutely\"",
   "javascript"
-);
-
-// Mitigate enum renames for Java SDK
-@@clientName(Microsoft.NetApp.NetAppProvisioningState,
-  "ProvisioningState",
-  "java"
 );
