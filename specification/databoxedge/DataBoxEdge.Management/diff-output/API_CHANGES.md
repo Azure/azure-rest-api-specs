@@ -221,24 +221,24 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Addon.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.Alert.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.BandwidthSchedule.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.Container.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.DataBoxEdgeDevice.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.DeviceCapacityInfo.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.DiagnosticProactiveLogCollectionSettings.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.DiagnosticRemoteSupportSettings.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.MonitoringMetricConfiguration.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.NetworkSettings.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.Order.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.Role.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.Share.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.StorageAccount.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.StorageAccountCredential.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.Trigger.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.UpdateSummary.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
-| `definitions.User.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","rea...` |
+| `definitions.Addon.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.Alert.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.BandwidthSchedule.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.Container.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.DataBoxEdgeDevice.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.DeviceCapacityInfo.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.DiagnosticProactiveLogCollectionSettings.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.DiagnosticRemoteSupportSettings.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.MonitoringMetricConfiguration.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.NetworkSettings.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.Order.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.Role.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.Share.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.StorageAccount.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.StorageAccountCredential.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.Trigger.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.UpdateSummary.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
+| `definitions.User.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
 
 ### Changes for `properties`
 
@@ -408,8 +408,8 @@ Change Type: added
 | `definitions.BandwidthSchedule.allOf[0].$ref` | `#/definitions/ARMBaseModel` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.Container.allOf[0].$ref` | `#/definitions/ARMBaseModel` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.DataBoxEdgeDevice.allOf[0].$ref` | `#/definitions/ARMBaseModel` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
-| `definitions.DataBoxEdgeDeviceExtendedInfo.properties.systemData.$ref` | `../../../../../common-types/resource-management/v2/types.json#/definitions/systemData` | `../../../../../common-types/resource-management/v3/types.json#/definitions/systemData` |
-| `definitions.DataBoxEdgeDeviceProperties.properties.systemData.$ref` | `../../../../../common-types/resource-management/v2/types.json#/definitions/systemData` | `../../../../../common-types/resource-management/v3/types.json#/definitions/systemData` |
+| `definitions.DataBoxEdgeDeviceExtendedInfo.properties.systemData.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData` | `../../../../../common-types/resource-management/v3/types.json#/definitions/systemData` |
+| `definitions.DataBoxEdgeDeviceProperties.properties.systemData.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData` | `../../../../../common-types/resource-management/v3/types.json#/definitions/systemData` |
 | `definitions.DeviceCapacityInfo.allOf[0].$ref` | `#/definitions/ARMBaseModel` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.DiagnosticProactiveLogCollectionSettings.allOf[0].$ref` | `#/definitions/ARMBaseModel` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.DiagnosticRemoteSupportSettings.allOf[0].$ref` | `#/definitions/ARMBaseModel` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
