@@ -303,6 +303,6 @@ interface SkuResourceOperationGroupThird {
 @@doc(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
-@@doc(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond::parameters.resource,
+@@doc(SkuResourceOperationGroupThird.createOrUpdateNestedResourceTypeThird::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
