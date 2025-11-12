@@ -21,6 +21,7 @@ describe("ndjson", () => {
   });
 
   it("empty array", () => {
+    /** @type {string[]} */
     let values = [];
 
     const stringifiedValues = stringify(values);

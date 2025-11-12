@@ -31,6 +31,24 @@ model DataRangeLimit extends DataRangeBaseConfig {
   limit: int32;
 }
 
+@doc("Configuration of datapreview limit")
+model FetchingLimits {
+  @doc("Max starting time in Millisecond for datapreview.")
+  maxStartingTimeMs: int64;
+
+  @doc("Max idle time in Millisecond for datapreview.")
+  maxIdleTimeMs: int64;
+
+  @doc("Max polling time in Millisecond for datapreview.")
+  maxPollingTimeMs: int64;
+
+  @doc("Max record count for datapreview.")
+  maxRecordCount: int32;
+
+  @doc("Max data size in Millisecond for datapreview.")
+  maxDataSize: int64;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Request of DataPreview")
 model DataPreviewRequest {
@@ -39,6 +57,9 @@ model DataPreviewRequest {
 
   @doc("Skip validation or not")
   skipValidation?: boolean;
+
+  @doc("Configuration of datapreview limit.")
+  fetchingLimits?: FetchingLimits;
 }
 
 @doc("Properties of one DataPreview")
@@ -84,9 +105,44 @@ model JsonConvertedRecord {
   value: string;
 }
 
+@doc("Result Code of DataPreview request")
+union DataPreviewResultCode {
+  @doc("Represents DataPreview Timeout.")
+  Timeout: "TIMEOUT",
+
+  @doc("Represents No Data of DataPreview.")
+  NoData: "NO_DATA",
+
+  @doc("Represents Succeeded of DataPreview.")
+  Succeeded: "SUCCEEDED",
+
+  @doc("Represents DataPreview Succeeded with skipped data due to up limit.")
+  SucceededWithSkippedDataUpLimit: "SUCCEEDED_WITH_SKIPPED_DATA_UP_LIMIT",
+
+  @doc("Represents DataPreview Succeeded with skipped data due to down limit")
+  SucceededWithSkippedDataDownLimit: "SUCCEEDED_WITH_SKIPPED_DATA",
+
+  @doc("Represents DataPreview No data with skipped data due to up limit")
+  NoDataWithSkippedDataUpLimit: "NO_DATA_WITH_SKIPPED_DATA",
+
+  string,
+}
+
 @doc("Properties of DataPreview results")
 model DataPreviewResults {
   @Azure.ResourceManager.identifiers(#[])
   @doc("Content of DataPreview results in Json format.")
   results: JsonConvertedRecord[];
+
+  @doc("Skipped records count of DataPreview.")
+  skippedCount: int32;
+
+  @doc("Result records count of DataPreview.")
+  resultCount: int32;
+
+  @doc("Result message of DataPreview.")
+  message: string;
+
+  @doc("Result code of DataPreview.")
+  resultCode: DataPreviewResultCode;
 }

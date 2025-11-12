@@ -29,7 +29,7 @@ model SliResource {
   provisioningState?: ProvisioningState;
 
   @doc("A user-provided description of the SLI, with a maximum length of 1000 characters.")
-  @pattern("^.{3,1000}$")
+  @pattern("^[\\s\\S]{0,1000}$")
   description: string;
 
   @doc("Specifies the category of the SLI, used to classify signals such as Availability and Latency.")
