@@ -10,7 +10,7 @@ namespace PurviewDataQuality;
 
 /**
  * Defines the type of asset metadata observer used for data quality monitoring.
- * Observers monitor data assets and execut e quality checks based on their configuration.
+ * Observers monitor data assets and execute quality checks based on their configuration.
  */
 @doc("Type of asset metadata observer for data quality monitoring")
 union AssetMetadataObserverType {
