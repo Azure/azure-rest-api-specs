@@ -11,16 +11,16 @@ options:
     output-file: "{version-status}/{version}/databox.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
+
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.DataBox"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DataBox"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-databox"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-databox"
     namespace: "azure.mgmt.databox"
     generate-test: true
     generate-sample: true
@@ -32,7 +32,7 @@ options:
     flavor: azure
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
-    package-dir: "arm-databox"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-databox"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

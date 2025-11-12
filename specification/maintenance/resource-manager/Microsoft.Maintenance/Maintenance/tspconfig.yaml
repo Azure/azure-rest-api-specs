@@ -13,7 +13,7 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-maintenance"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-maintenance"
     namespace: "azure.mgmt.maintenance"
     generate-test: true
     generate-sample: true
@@ -24,7 +24,7 @@ options:
     service-name: "Maintenance" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-maintenance"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-maintenance"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true

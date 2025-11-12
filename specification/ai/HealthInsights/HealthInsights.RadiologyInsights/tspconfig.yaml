@@ -7,8 +7,6 @@ parameters:
     default: ""
   "python-sdk-folder":
     default: "{project-root}/azure-sdk-for-python/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
   "service-directory-name":
     default: "healthinsights"
 emit:
@@ -21,7 +19,7 @@ options:
     package-pprint-name: '"Azure Health Insights - Radiology Insights"'
     package-mode: "dataplane"
     package-version: 1.1.0
-    package-dir: "azure-healthinsights-radiologyinsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-healthinsights-radiologyinsights"
     namespace: "azure.healthinsights.radiologyinsights"
     flavor: azure
     generate-test: true
@@ -51,8 +49,7 @@ options:
     namespace: Azure.Health.Insights.RadiologyInsights
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "health-insights-radiologyinsights-rest"
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/health-insights-cancerprofiling-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/health-insights-radiologyinsights-rest"
     generate-metadata: true
     is-modular-library: false
     package-details:

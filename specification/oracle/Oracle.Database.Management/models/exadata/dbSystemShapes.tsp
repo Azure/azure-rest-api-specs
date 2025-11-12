@@ -100,6 +100,13 @@ model DbSystemShapeProperties {
   @minLength(1)
   @maxLength(255)
   displayName?: string;
+
+  @added(Versions.v20250801_preview)
+  @doc("The shapeAttributes of the DB system shape..")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @minItems(0)
+  @maxItems(20)
+  shapeAttributes?: string[];
 }
 
 @added(Versions.v20241201_preview)
@@ -108,4 +115,9 @@ model DbSystemShapeFilter {
   @query
   @doc("Filters the result for the given Azure Availability Zone")
   zone?: string;
+
+  @added(Versions.v20250801_preview)
+  @query
+  @doc("Filters the result for the given Shape Attribute, such as BLOCK_STORAGE or SMART_STORAGE.")
+  shapeAttribute?: string;
 }

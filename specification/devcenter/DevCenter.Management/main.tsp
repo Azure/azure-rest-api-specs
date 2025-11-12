@@ -36,10 +36,6 @@ import "./NetworkConnection.tsp";
 import "./HealthCheckStatusDetails.tsp";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -53,9 +49,10 @@ namespace Microsoft.DevCenter;
 @doc("The available API versions.")
 enum Versions {
   @doc("The 2025-07-01-preview API version.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_07_01_preview: "2025-07-01-preview",
+
+  @doc("The 2025-10-01-preview API version.")
+  v2025_10_01_preview: "2025-10-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
