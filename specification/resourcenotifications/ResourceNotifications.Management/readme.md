@@ -31,7 +31,7 @@ These settings apply only when `--tag=package-2025-11-11-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-11-11-preview'
 input-file:
-- Microsoft.ResourceNotifications/preview/2025-11-11-preview/resourcenotifications.json
+- ../resource-manager/Microsoft.ResourceNotifications/preview/2025-11-11-preview/resourcenotifications.json
 ```
 
 ## Code Generation
