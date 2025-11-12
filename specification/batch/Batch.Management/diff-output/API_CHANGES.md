@@ -175,6 +175,8 @@
 |------|------------|-------|
 | `definitions.Operation.properties.display.type__deleted` | deleted | `object` |
 | `definitions.Operation.properties.properties.type__deleted` | deleted | `object` |
+| `definitions.VMExtension.properties.protectedSettings.type__deleted` | deleted | `object` |
+| `definitions.VMExtension.properties.settings.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Batch/batchAccounts/{accountName}/networkSecurityPerimeterConfigurations'].get.parameters[0].type__added` | added | `string` |
 
 ### Changes for `minLength`
@@ -347,6 +349,7 @@
 | `definitions.ContainerRegistry.properties.password.format__added` | added | `password` |
 | `definitions.LinuxUserConfiguration.properties.sshPrivateKey.format__added` | added | `password` |
 | `definitions.UserAccount.properties.password.format__added` | added | `password` |
+| `definitions.VMExtension.properties.protectedSettings.format__added` | added | `password` |
 
 ### Changes for `x-nullable`
 
@@ -385,109 +388,14 @@
 | `definitions.DiskEncryptionConfiguration.properties.targets.items.title__deleted` | deleted | `The disks to encrypt on each compute node.` |
 | `definitions.Pool.properties.identity.title__deleted` | deleted | `The type of identity used for the Batch Pool.` |
 | `definitions.PrivateEndpointConnectionProperties.properties.privateLinkServiceConnectionState.title__deleted` | deleted | `The private link service connection state of the private endpoint connection.` |
-| `definitions.PublicIPAddressConfiguration.properties.ipAddressIds.title__deleted` | deleted | `The list of public IPs which the Batch service will use when provisioning Compute Nodes.` |
-| `definitions.PublicIPAddressConfiguration.properties.provision.title__deleted` | deleted | `The provisioning type for Public IP Addresses for the Batch Pool.` |
-| `definitions.ResizeError.properties.details.title__deleted` | deleted | `Additional details about the error.` |
-| `definitions.ResizeError.title__deleted` | deleted | `An error that occurred when resizing a pool.` |
-| `definitions.ResizeOperationStatus.properties.errors.title__deleted` | deleted | `Details of any errors encountered while performing the last resize on the pool.` |
-| `definitions.ResizeOperationStatus.properties.nodeDeallocationOption.title__deleted` | deleted | `Determines what to do with a node and its running task(s) after it has been selected for deallocation.` |
-| `definitions.ResizeOperationStatus.properties.resizeTimeout.title__deleted` | deleted | `The timeout for allocation of compute nodes to the pool or removal of compute nodes from the pool.` |
-| `definitions.ResizeOperationStatus.properties.startTime.title__deleted` | deleted | `The time when this resize operation was started.` |
-| `definitions.ResizeOperationStatus.properties.targetDedicatedNodes.title__deleted` | deleted | `The desired number of dedicated compute nodes in the pool.` |
-| `definitions.ResizeOperationStatus.properties.targetLowPriorityNodes.title__deleted` | deleted | `The desired number of Spot/low-priority compute nodes in the pool.` |
-| `definitions.ResizeOperationStatus.title__deleted` | deleted | `Details about the current or last completed resize operation.` |
-| `definitions.ResourceFile.properties.autoStorageContainerName.title__deleted` | deleted | `The storage container name in the auto storage account.` |
-| `definitions.ResourceFile.properties.blobPrefix.title__deleted` | deleted | `The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded.` |
-| `definitions.ResourceFile.properties.fileMode.title__deleted` | deleted | `The file permission mode attribute in octal format.` |
-| `definitions.ResourceFile.properties.filePath.title__deleted` | deleted | `The location on the compute node to which to download the file, relative to the task's working directory.` |
-| `definitions.ResourceFile.properties.httpUrl.title__deleted` | deleted | `The URL of the file to download.` |
-| `definitions.ResourceFile.properties.identityReference.title__deleted` | deleted | `The reference to the user assigned identity to use to access Azure Blob Storage specified by storageContainerUrl or httpUrl` |
-| `definitions.ResourceFile.properties.storageContainerUrl.title__deleted` | deleted | `The URL of the blob container within Azure Blob Storage.` |
-| `definitions.ResourceFile.title__deleted` | deleted | `A single file or multiple files to be downloaded to a compute node.` |
-| `definitions.ScaleSettings.properties.autoScale.title__deleted` | deleted | `AutoScale settings for the pool.` |
-| `definitions.ScaleSettings.properties.fixedScale.title__deleted` | deleted | `Fixed scale settings for the pool.` |
-| `definitions.ScaleSettings.title__deleted` | deleted | `Scale settings for the pool` |
-| `definitions.SecurityProfile.properties.securityType.title__deleted` | deleted | `Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.` |
-| `definitions.SecurityProfile.properties.uefiSettings.title__deleted` | deleted | `Specifies the security settings like secure boot and vTPM used while creating the virtual machine.` |
-| `definitions.ServiceArtifactReference.properties.id.title__deleted` | deleted | `The service artifact reference id of ServiceArtifactReference` |
-| `definitions.StartTask.properties.commandLine.title__deleted` | deleted | `The command line of the start task.` |
-| `definitions.StartTask.properties.containerSettings.title__deleted` | deleted | `The settings for the container under which the start task runs.` |
-| `definitions.StartTask.properties.environmentSettings.title__deleted` | deleted | `A list of environment variable settings for the start task.` |
-| `definitions.StartTask.properties.maxTaskRetryCount.title__deleted` | deleted | `The maximum number of times the task may be retried.` |
-| `definitions.StartTask.properties.resourceFiles.title__deleted` | deleted | `A list of files that the Batch service will download to the compute node before running the command line.` |
-| `definitions.StartTask.properties.userIdentity.title__deleted` | deleted | `The user identity under which the start task runs.` |
-| `definitions.StartTask.properties.waitForSuccess.title__deleted` | deleted | `Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node.` |
-| `definitions.StartTask.title__deleted` | deleted | `A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged.` |
-| `definitions.TaskContainerSettings.properties.containerHostBatchBindMounts.title__deleted` | deleted | `The paths you want to mounted to container task.` |
-| `definitions.TaskContainerSettings.properties.containerRunOptions.title__deleted` | deleted | `Additional options to the container create command.` |
-| `definitions.TaskContainerSettings.properties.imageName.title__deleted` | deleted | `The image to use to create the container in which the task will run.` |
-| `definitions.TaskContainerSettings.properties.registry.title__deleted` | deleted | `The private registry which contains the container image.` |
-| `definitions.TaskContainerSettings.properties.workingDirectory.title__deleted` | deleted | `A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.` |
-| `definitions.TaskContainerSettings.title__deleted` | deleted | `The container settings for a task.` |
-| `definitions.TaskSchedulingPolicy.properties.nodeFillType.title__deleted` | deleted | `How tasks should be distributed across compute nodes.` |
-| `definitions.TaskSchedulingPolicy.title__deleted` | deleted | `Specifies how tasks should be distributed across compute nodes.` |
-| `definitions.UpgradePolicy.properties.automaticOSUpgradePolicy.title__deleted` | deleted | `Configuration parameters used for performing automatic OS Upgrade.` |
-| `definitions.UpgradePolicy.properties.mode.title__deleted` | deleted | `Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.` |
-| `definitions.UpgradePolicy.properties.rollingUpgradePolicy.title__deleted` | deleted | `The configuration parameters used while performing a rolling upgrade.` |
-| `definitions.UserAccount.properties.elevationLevel.title__deleted` | deleted | `The elevation level of the user.` |
-| `definitions.UserAccount.properties.linuxUserConfiguration.title__deleted` | deleted | `The Linux-specific user configuration for the user account.` |
-| `definitions.UserAccount.properties.name.title__deleted` | deleted | `The name of the user account. Names can contain any Unicode characters up to a maximum length of 20.` |
-| `definitions.UserAccount.properties.password.title__deleted` | deleted | `The password for the user account.` |
-| `definitions.UserAccount.properties.windowsUserConfiguration.title__deleted` | deleted | `The Windows-specific user configuration for the user account.` |
-| `definitions.UserAccount.title__deleted` | deleted | `Properties used to create a user on an Azure Batch node.` |
-| `definitions.UserIdentity.properties.autoUser.title__deleted` | deleted | `The auto user under which the task is run.` |
-| `definitions.UserIdentity.properties.userName.title__deleted` | deleted | `The name of the user identity under which the task is run.` |
-| `definitions.UserIdentity.title__deleted` | deleted | `The definition of the user identity under which the task is run.` |
-| `definitions.VirtualMachineConfiguration.properties.containerConfiguration.title__deleted` | deleted | `The container configuration for the pool.` |
-| `definitions.VirtualMachineConfiguration.properties.dataDisks.title__deleted` | deleted | `The configuration for data disks attached to the compute nodes in the pool.` |
-| `definitions.VirtualMachineConfiguration.properties.diskEncryptionConfiguration.title__deleted` | deleted | `The disk encryption configuration for the pool.` |
-| `definitions.VirtualMachineConfiguration.properties.extensions.title__deleted` | deleted | `The virtual machine extension for the pool.` |
-| `definitions.VirtualMachineConfiguration.properties.imageReference.title__deleted` | deleted | `A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.` |
-| `definitions.VirtualMachineConfiguration.properties.licenseType.title__deleted` | deleted | `The type of on-premises license to be used when deploying the operating system.` |
-| `definitions.VirtualMachineConfiguration.properties.nodeAgentSkuId.title__deleted` | deleted | `The SKU of the Batch node agent to be provisioned on compute nodes in the pool.` |
-| `definitions.VirtualMachineConfiguration.properties.nodePlacementConfiguration.title__deleted` | deleted | `The node placement configuration for the pool.` |
-| `definitions.VirtualMachineConfiguration.properties.osDisk.title__deleted` | deleted | `Settings for the operating system disk of the Virtual Machine.` |
-| `definitions.VirtualMachineConfiguration.properties.securityProfile.title__deleted` | deleted | `Specifies the security profile settings for the virtual machine or virtual machine scale set.` |
-| `definitions.VirtualMachineConfiguration.properties.serviceArtifactReference.title__deleted` | deleted | `Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.` |
-| `definitions.VirtualMachineConfiguration.properties.windowsConfiguration.title__deleted` | deleted | `Windows operating system settings on the virtual machine.` |
-| `definitions.VirtualMachineConfiguration.title__deleted` | deleted | `The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.` |
 | `definitions.VMDiskSecurityProfile.properties.securityEncryptionType.title__deleted` | deleted | `Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.` |
-| `definitions.VMExtension.properties.name.title__deleted` | deleted | `The name of the virtual machine extension.` |
-| `definitions.VMExtension.properties.provisionAfterExtensions.title__deleted` | deleted | `The collection of extension names.` |
-| `definitions.VMExtension.properties.publisher.title__deleted` | deleted | `The name of the extension handler publisher.` |
-| `definitions.VMExtension.properties.settings.title__deleted` | deleted | `JSON formatted public settings for the extension.` |
-| `definitions.VMExtension.properties.type.title__deleted` | deleted | `The type of the extensions.` |
-| `definitions.VMExtension.properties.typeHandlerVersion.title__deleted` | deleted | `The version of script handler.` |
-| `definitions.VMExtension.title__deleted` | deleted | `The configuration for virtual machine extensions.` |
-| `definitions.WindowsConfiguration.properties.enableAutomaticUpdates.title__deleted` | deleted | `Whether automatic updates are enabled on the virtual machine.` |
-| `definitions.WindowsConfiguration.title__deleted` | deleted | `Windows operating system settings to apply to the virtual machine.` |
-| `definitions.WindowsUserConfiguration.properties.loginMode.title__deleted` | deleted | `Login mode for user` |
-| `definitions.WindowsUserConfiguration.title__deleted` | deleted | `Properties used to create a user account on a Windows node.` |
+| `definitions.VMDiskSecurityProfile.title__added` | added | `Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.` |
 
 ### Changes for `properties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.Operation.properties.display.properties__deleted` | deleted | `{"provider":{"type":"string","title":"Friendly name of the resource provider."},"operation":{"type":...` |
-
-### Changes for `x-ms-identifiers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SupportedSkusResult.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
-
-### Changes for `additionalProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VMExtension.properties.protectedSettings.additionalProperties__added` | added | `{}` |
-| `definitions.VMExtension.properties.settings.additionalProperties__added` | added | `{}` |
-
-### Changes for `x-ms-secret`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VMExtension.properties.protectedSettings['x-ms-secret__deleted']` | deleted | `true` |
 
 ## Modified Values
 
@@ -536,7 +444,11 @@ The KeyVault has soft-delete and purge protection enabled` |
 | `definitions.PrivateLinkResourceProperties.properties.requiredZoneNames.title` | `The list of required zone names for the private DNS resource name` | `The list of required zone names for the private DNS resource name.` |
 | `definitions.PublicIPAddressConfiguration.properties.provision.description` | `The default value is BatchManaged` | `The provisioning type for Public IP Addresses for the Batch Pool.` |
 | `definitions.ResizeOperationStatus.properties.nodeDeallocationOption.description` | `The default value is requeue.` | `Determines what to do with a node and its running task(s) after it has been selected for deallocation.` |
+| `definitions.TaskContainerSettings.properties.imageName.title` | `The image to use to create the container in which the task will run.` | `The private registry which contains the container image.` |
 | `definitions.UserAccount.properties.elevationLevel.description` | `nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.` | `The elevation level of the user.` |
+| `definitions.UserAccount.properties.elevationLevel.title` | `The elevation level of the user.` | `The elevation level for the user.` |
+| `definitions.UserIdentity.properties.userName.title` | `The name of the user identity under which the task is run.` | `The name of the user under which the task is run.` |
+| `definitions.VirtualMachineConfiguration.properties.dataDisks.title` | `The configuration for data disks attached to the compute nodes in the pool.` | `The data disks to be attached to each compute node in the pool.` |
 | `definitions.VirtualMachineConfiguration.properties.licenseType.description` | `This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:
 
  Windows_Server - The on-premises license is for Windows Server.

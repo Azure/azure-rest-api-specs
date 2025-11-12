@@ -2191,25 +2191,30 @@ model DeploymentConfiguration {
 /**
  * The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.
  */
+@summary("The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.")
 model VirtualMachineConfiguration {
   /**
    * A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.
    */
+  @summary("A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.")
   imageReference: ImageReference;
 
   /**
    * The Batch node agent is a program that runs on each node in the pool, and provides the command-and-control interface between the node and the Batch service. There are different implementations of the node agent, known as SKUs, for different operating systems. You must specify a node agent SKU which matches the selected image reference. To get the list of supported node agent SKUs along with their list of verified image references, see the 'List supported node agent SKUs' operation.
    */
+  @summary("The SKU of the Batch node agent to be provisioned on compute nodes in the pool.")
   nodeAgentSkuId: string;
 
   /**
    * This property must not be specified if the imageReference specifies a Linux OS image.
    */
+  @summary("Windows operating system settings on the virtual machine.")
   windowsConfiguration?: WindowsConfiguration;
 
   /**
    * This property must be specified if the compute nodes in the pool need to have empty data disks attached to them.
    */
+  @summary("The data disks to be attached to each compute node in the pool.")
   @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDisks?: DataDisk[];
 
@@ -2220,42 +2225,50 @@ model VirtualMachineConfiguration {
    *  Windows_Client - The on-premises license is for Windows Client.
    *
    */
+  @summary("The type of on-premises license to be used when deploying the operating system.")
   licenseType?: string;
 
   /**
    * If specified, setup is performed on each node in the pool to allow tasks to run in containers. All regular tasks and job manager tasks run on this pool must specify the containerSettings property, and all other tasks may specify it.
    */
+  @summary("The container configuration for the pool.")
   containerConfiguration?: ContainerConfiguration;
 
   /**
    * If specified, encryption is performed on each node in the pool during node provisioning.
    */
+  @summary("The disk encryption configuration for the pool.")
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
 
   /**
    * This configuration will specify rules on how nodes in the pool will be physically allocated.
    */
+  @summary("The node placement configuration for the pool.")
   nodePlacementConfiguration?: NodePlacementConfiguration;
 
   /**
    * If specified, the extensions mentioned in this configuration will be installed on each node.
    */
+  @summary("The virtual machine extension for the pool.")
   @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   extensions?: VMExtension[];
 
   /**
    * Contains configuration for ephemeral OSDisk settings.
    */
+  @summary("Settings for the operating system disk of the Virtual Machine.")
   osDisk?: OSDisk;
 
   /**
    * Specifies the security profile settings for the virtual machine or virtual machine scale set.
    */
+  @summary("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
   securityProfile?: SecurityProfile;
 
   /**
    * The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}
    */
+  @summary("Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.")
   serviceArtifactReference?: ServiceArtifactReference;
 }
 
@@ -2310,10 +2323,12 @@ model ImageReference {
 /**
  * Windows operating system settings to apply to the virtual machine.
  */
+@summary("Windows operating system settings to apply to the virtual machine.")
 model WindowsConfiguration {
   /**
    * If omitted, the default value is true.
    */
+  @summary("Whether automatic updates are enabled on the virtual machine.")
   enableAutomaticUpdates?: boolean;
 }
 
@@ -2438,25 +2453,30 @@ model NodePlacementConfiguration {
 /**
  * The configuration for virtual machine extensions.
  */
+@summary("The configuration for virtual machine extensions.")
 model VMExtension {
   /**
    * The name of the virtual machine extension.
    */
+  @summary("The name of the virtual machine extension.")
   name: string;
 
   /**
    * The name of the extension handler publisher.
    */
+  @summary("The name of the extension handler publisher.")
   publisher: string;
 
   /**
    * The type of the extensions.
    */
+  @summary("The type of the extensions.")
   type: string;
 
   /**
    * The version of script handler.
    */
+  @summary("The version of script handler.")
   typeHandlerVersion?: string;
 
   /**
@@ -2473,17 +2493,20 @@ model VMExtension {
    * JSON formatted public settings for the extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  settings?: Record<unknown>;
+  @summary("JSON formatted public settings for the extension.")
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  protectedSettings?: Record<unknown>;
+  @secret
+  protectedSettings?: unknown;
 
   /**
    * Collection of extension names after which this extension needs to be provisioned.
    */
+  @summary("The collection of extension names.")
   provisionAfterExtensions?: string[];
 }
 
@@ -2565,6 +2588,7 @@ model ManagedDisk {
  * Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@summary("Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.")
 model VMDiskSecurityProfile {
   /**
    * Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.
@@ -2579,6 +2603,7 @@ model SecurityProfile {
   /**
    * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.
    */
+  @summary("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
   securityType?: SecurityTypes;
 
   /**
@@ -2589,6 +2614,7 @@ model SecurityProfile {
   /**
    * Specifies the security settings like secure boot and vTPM used while creating the virtual machine.
    */
+  @summary("Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
   uefiSettings?: UefiSettings;
 }
 
@@ -2614,21 +2640,25 @@ model ServiceArtifactReference {
   /**
    * The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}
    */
+  @summary("The service artifact reference id of ServiceArtifactReference")
   id: string;
 }
 
 /**
  * Defines the desired size of the pool. This can either be 'fixedScale' where the requested targetDedicatedNodes is specified, or 'autoScale' which defines a formula which is periodically reevaluated. If this property is not specified, the pool will have a fixed scale with 0 targetDedicatedNodes.
  */
+@summary("Scale settings for the pool")
 model ScaleSettings {
   /**
    * This property and autoScale are mutually exclusive and one of the properties must be specified.
    */
+  @summary("Fixed scale settings for the pool.")
   fixedScale?: FixedScaleSettings;
 
   /**
    * This property and fixedScale are mutually exclusive and one of the properties must be specified.
    */
+  @summary("AutoScale settings for the pool.")
   autoScale?: AutoScaleSettings;
 }
 
@@ -2871,52 +2901,62 @@ model PublicIPAddressConfiguration {
   /**
    * The default value is BatchManaged
    */
+  @summary("The provisioning type for Public IP Addresses for the Batch Pool.")
   provision?: IPAddressProvisioningType;
 
   /**
    * The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.
    */
+  @summary("The list of public IPs which the Batch service will use when provisioning Compute Nodes.")
   ipAddressIds?: string[];
 }
 
 /**
  * Specifies how tasks should be distributed across compute nodes.
  */
+@summary("Specifies how tasks should be distributed across compute nodes.")
 model TaskSchedulingPolicy {
   /**
    * How tasks should be distributed across compute nodes.
    */
+  @summary("How tasks should be distributed across compute nodes.")
   nodeFillType: ComputeNodeFillType = ComputeNodeFillType.Spread;
 }
 
 /**
  * Properties used to create a user on an Azure Batch node.
  */
+@summary("Properties used to create a user on an Azure Batch node.")
 model UserAccount {
   /**
    * The name of the user account. Names can contain any Unicode characters up to a maximum length of 20.
    */
+  @summary("The name of the user account. Names can contain any Unicode characters up to a maximum length of 20.")
   name: string;
 
   /**
    * The password for the user account.
    */
+  @summary("The password for the user account.")
   @secret
   password: string;
 
   /**
    * nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.
    */
+  @summary("The elevation level for the user.")
   elevationLevel?: ElevationLevel;
 
   /**
    * This property is ignored if specified on a Windows pool. If not specified, the user is created with the default options.
    */
+  @summary("The Linux-specific user configuration for the user account.")
   linuxUserConfiguration?: LinuxUserConfiguration;
 
   /**
    * This property can only be specified if the user is on a Windows pool. If not specified and on a Windows pool, the user is created with the default options.
    */
+  @summary("The Windows-specific user configuration for the user account.")
   windowsUserConfiguration?: WindowsUserConfiguration;
 }
 
@@ -2948,10 +2988,12 @@ model LinuxUserConfiguration {
 /**
  * Properties used to create a user account on a Windows node.
  */
+@summary("Properties used to create a user account on a Windows node.")
 model WindowsUserConfiguration {
   /**
    * Specifies login mode for the user. The default value is Interactive.
    */
+  @summary("Login mode for user")
   loginMode?: LoginMode;
 }
 
@@ -2976,82 +3018,98 @@ model MetadataItem {
 /**
  * In some cases the start task may be re-run even though the node was not rebooted. Due to this, start tasks should be idempotent and exit gracefully if the setup they're performing has already been done. Special care should be taken to avoid start tasks which create breakaway process or install/launch services from the start task working directory, as this will block Batch from being able to re-run the start task.
  */
+@summary("A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged.")
 model StartTask {
   /**
    * The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using "cmd /c MyCommand" in Windows or "/bin/sh -c MyCommand" in Linux. Required if any other properties of the startTask are specified.
    */
+  @summary("The command line of the start task.")
   commandLine?: string;
 
   /**
    * A list of files that the Batch service will download to the compute node before running the command line.
    */
+  @summary("A list of files that the Batch service will download to the compute node before running the command line.")
   @OpenAPI.extension("x-ms-identifiers", #["httpUrl"])
   resourceFiles?: ResourceFile[];
 
   /**
    * A list of environment variable settings for the start task.
    */
+  @summary("A list of environment variable settings for the start task.")
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   environmentSettings?: EnvironmentSetting[];
 
   /**
    * If omitted, the task runs as a non-administrative user unique to the task.
    */
+  @summary("The user identity under which the start task runs.")
   userIdentity?: UserIdentity;
 
   /**
    * The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit. Default is 0
    */
+  @summary("The maximum number of times the task may be retried.")
   maxTaskRetryCount?: int32 = 0;
 
   /**
    * If true and the start task fails on a compute node, the Batch service retries the start task up to its maximum retry count (maxTaskRetryCount). If the task has still not completed successfully after all retries, then the Batch service marks the compute node unusable, and will not schedule tasks to it. This condition can be detected via the node state and scheduling error detail. If false, the Batch service will not wait for the start task to complete. In this case, other tasks can start executing on the compute node while the start task is still running; and even if the start task fails, new tasks will continue to be scheduled on the node. The default is true.
    */
+  @summary("Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node.")
   waitForSuccess?: boolean;
 
   /**
    * When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container.
    */
+  @summary("The settings for the container under which the start task runs.")
   containerSettings?: TaskContainerSettings;
 }
 
 /**
  * A single file or multiple files to be downloaded to a compute node.
  */
+@summary("A single file or multiple files to be downloaded to a compute node.")
 model ResourceFile {
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified.
    */
+  @summary("The storage container name in the auto storage account.")
   autoStorageContainerName?: string;
 
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access.
    */
+  @summary("The URL of the blob container within Azure Blob Storage.")
   storageContainerUrl?: string;
 
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access.
    */
+  @summary("The URL of the file to download.")
   httpUrl?: string;
 
   /**
    * The property is valid only when autoStorageContainerName or storageContainerUrl is used. This prefix can be a partial filename or a subdirectory. If a prefix is not specified, all the files in the container will be downloaded.
    */
+  @summary("The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded.")
   blobPrefix?: string;
 
   /**
    * If the httpUrl property is specified, the filePath is required and describes the path which the file will be downloaded to, including the filename. Otherwise, if the autoStorageContainerName or storageContainerUrl property is specified, filePath is optional and is the directory to download the files to. In the case where filePath is used as a directory, any directory structure already associated with the input data will be retained in full and appended to the specified filePath directory. The specified relative path cannot break out of the task's working directory (for example by using '..').
    */
+  @summary("The location on the compute node to which to download the file, relative to the task's working directory.")
   filePath?: string;
 
   /**
    * This property applies only to files being downloaded to Linux compute nodes. It will be ignored if it is specified for a resourceFile which will be downloaded to a Windows node. If this property is not specified for a Linux node, then a default value of 0770 is applied to the file.
    */
+  @summary("The file permission mode attribute in octal format.")
   fileMode?: string;
 
   /**
    * The reference to a user assigned identity associated with the Batch pool which a compute node will use.
    */
+  @summary("The reference to the user assigned identity to use to access Azure Blob Storage specified by storageContainerUrl or httpUrl")
   identityReference?: ComputeNodeIdentityReference;
 }
 
@@ -3076,15 +3134,18 @@ model EnvironmentSetting {
 /**
  * Specify either the userName or autoUser property, but not both.
  */
+@summary("The definition of the user identity under which the task is run.")
 model UserIdentity {
   /**
    * The userName and autoUser properties are mutually exclusive; you must specify one but not both.
    */
+  @summary("The name of the user under which the task is run.")
   userName?: string;
 
   /**
    * The userName and autoUser properties are mutually exclusive; you must specify one but not both.
    */
+  @summary("The auto user under which the task is run.")
   autoUser?: AutoUserSpecification;
 }
 
@@ -3109,30 +3170,36 @@ model AutoUserSpecification {
 /**
  * The container settings for a task.
  */
+@summary("The container settings for a task.")
 model TaskContainerSettings {
   /**
    * These additional options are supplied as arguments to the "docker create" command, in addition to those controlled by the Batch Service.
    */
+  @summary("Additional options to the container create command.")
   containerRunOptions?: string;
 
   /**
    * This is the full image reference, as would be specified to "docker pull". If no tag is provided as part of the image name, the tag ":latest" is used as a default.
    */
+  @summary("The private registry which contains the container image.")
   imageName: string;
 
   /**
    * This setting can be omitted if was already provided at pool creation.
    */
+  @summary("The private registry which contains the container image.")
   registry?: ContainerRegistry;
 
   /**
    * A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.
    */
+  @summary("A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.")
   workingDirectory?: ContainerWorkingDirectory;
 
   /**
    * If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.
    */
+  @summary("The paths you want to mounted to container task.")
   @OpenAPI.extension("x-ms-identifiers", #[])
   containerHostBatchBindMounts?: ContainerHostBatchBindMountEntry[];
 }
@@ -3206,36 +3273,43 @@ model ApplicationPackageReference {
 /**
  * Describes either the current operation (if the pool AllocationState is Resizing) or the previously completed operation (if the AllocationState is Steady).
  */
+@summary("Details about the current or last completed resize operation.")
 model ResizeOperationStatus {
   /**
    * The desired number of dedicated compute nodes in the pool.
    */
+  @summary("The desired number of dedicated compute nodes in the pool.")
   targetDedicatedNodes?: int32;
 
   /**
    * The desired number of Spot/low-priority compute nodes in the pool.
    */
+  @summary("The desired number of Spot/low-priority compute nodes in the pool.")
   targetLowPriorityNodes?: int32;
 
   /**
    * The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).
    */
+  @summary("The timeout for allocation of compute nodes to the pool or removal of compute nodes from the pool.")
   resizeTimeout?: duration;
 
   /**
    * The default value is requeue.
    */
+  @summary("Determines what to do with a node and its running task(s) after it has been selected for deallocation.")
   nodeDeallocationOption?: ComputeNodeDeallocationOption;
 
   /**
    * The time when this resize operation was started.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @summary("The time when this resize operation was started.")
   startTime?: utcDateTime;
 
   /**
    * This property is set only if an error occurred during the last pool resize, and only when the pool allocationState is Steady.
    */
+  @summary("Details of any errors encountered while performing the last resize on the pool.")
   @OpenAPI.extension("x-ms-identifiers", #["code"])
   errors?: ResizeError[];
 }
@@ -3243,6 +3317,7 @@ model ResizeOperationStatus {
 /**
  * An error that occurred when resizing a pool.
  */
+@summary("An error that occurred when resizing a pool.")
 model ResizeError {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -3257,6 +3332,7 @@ model ResizeError {
   /**
    * Additional details about the error.
    */
+  @summary("Additional details about the error.")
   @OpenAPI.extension("x-ms-identifiers", #["code"])
   details?: ResizeError[];
 }
@@ -3446,17 +3522,20 @@ model UpgradePolicy {
   /**
    * Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.
    */
+  @summary("Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.")
   mode: UpgradeMode;
 
   /**
    * The configuration parameters used for performing automatic OS upgrade.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Configuration parameters used for performing automatic OS Upgrade.")
   automaticOSUpgradePolicy?: AutomaticOSUpgradePolicy;
 
   /**
    * The configuration parameters used while performing a rolling upgrade.
    */
+  @summary("The configuration parameters used while performing a rolling upgrade.")
   rollingUpgradePolicy?: RollingUpgradePolicy;
 }
 
@@ -3891,3 +3970,4 @@ model BatchAccountListResult is Azure.Core.Page<BatchAccount>;
 );
 @@identifiers(OperationListResult.value, #["name"]);
 @@visibility(OutboundEnvironmentEndpointCollection.value, Lifecycle.Read);
+@@identifiers(SupportedSkusResult.value, #["name"]);

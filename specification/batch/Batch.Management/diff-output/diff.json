@@ -1752,179 +1752,83 @@
     "PublicIPAddressConfiguration": {
       "properties": {
         "provision": {
-          "title__deleted": "The provisioning type for Public IP Addresses for the Batch Pool.",
           "description": {
             "__old": "The default value is BatchManaged",
             "__new": "The provisioning type for Public IP Addresses for the Batch Pool."
           }
-        },
-        "ipAddressIds": {
-          "title__deleted": "The list of public IPs which the Batch service will use when provisioning Compute Nodes."
         }
       }
     },
     "ResizeError": {
-      "title__deleted": "An error that occurred when resizing a pool.",
       "description__added": "An error that occurred when resizing a pool.",
       "properties": {
         "details": {
-          "title__deleted": "Additional details about the error.",
           "description__added": "Additional details about the error."
         }
       }
     },
     "ResizeOperationStatus": {
-      "title__deleted": "Details about the current or last completed resize operation.",
       "properties": {
         "targetDedicatedNodes": {
-          "title__deleted": "The desired number of dedicated compute nodes in the pool.",
           "description__added": "The desired number of dedicated compute nodes in the pool."
         },
         "targetLowPriorityNodes": {
-          "title__deleted": "The desired number of Spot/low-priority compute nodes in the pool.",
           "description__added": "The desired number of Spot/low-priority compute nodes in the pool."
         },
-        "resizeTimeout": {
-          "title__deleted": "The timeout for allocation of compute nodes to the pool or removal of compute nodes from the pool."
-        },
         "nodeDeallocationOption": {
-          "title__deleted": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
           "description": {
             "__old": "The default value is requeue.",
             "__new": "Determines what to do with a node and its running task(s) after it has been selected for deallocation."
           }
         },
         "startTime": {
-          "title__deleted": "The time when this resize operation was started.",
           "description__added": "The time when this resize operation was started."
-        },
-        "errors": {
-          "title__deleted": "Details of any errors encountered while performing the last resize on the pool."
         }
       }
     },
     "ResourceFile": {
-      "title__deleted": "A single file or multiple files to be downloaded to a compute node.",
       "description__added": "A single file or multiple files to be downloaded to a compute node.",
       "properties": {
-        "autoStorageContainerName": {
-          "title__deleted": "The storage container name in the auto storage account."
-        },
-        "storageContainerUrl": {
-          "title__deleted": "The URL of the blob container within Azure Blob Storage."
-        },
-        "httpUrl": {
-          "title__deleted": "The URL of the file to download."
-        },
-        "blobPrefix": {
-          "title__deleted": "The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded."
-        },
-        "filePath": {
-          "title__deleted": "The location on the compute node to which to download the file, relative to the task's working directory."
-        },
-        "fileMode": {
-          "title__deleted": "The file permission mode attribute in octal format."
-        },
         "identityReference": {
-          "title__deleted": "The reference to the user assigned identity to use to access Azure Blob Storage specified by storageContainerUrl or httpUrl",
           "description__added": "The reference to a user assigned identity associated with the Batch pool which a compute node will use."
-        }
-      }
-    },
-    "ScaleSettings": {
-      "title__deleted": "Scale settings for the pool",
-      "properties": {
-        "fixedScale": {
-          "title__deleted": "Fixed scale settings for the pool."
-        },
-        "autoScale": {
-          "title__deleted": "AutoScale settings for the pool."
         }
       }
     },
     "SecurityProfile": {
       "properties": {
         "securityType": {
-          "title__deleted": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.",
           "description__added": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings."
-        },
-        "uefiSettings": {
-          "title__deleted": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
-        }
-      }
-    },
-    "ServiceArtifactReference": {
-      "properties": {
-        "id": {
-          "title__deleted": "The service artifact reference id of ServiceArtifactReference"
         }
       }
     },
     "StartTask": {
-      "title__deleted": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged.",
       "properties": {
-        "commandLine": {
-          "title__deleted": "The command line of the start task."
-        },
         "resourceFiles": {
-          "title__deleted": "A list of files that the Batch service will download to the compute node before running the command line.",
           "description__added": "A list of files that the Batch service will download to the compute node before running the command line."
         },
         "environmentSettings": {
-          "title__deleted": "A list of environment variable settings for the start task.",
           "description__added": "A list of environment variable settings for the start task."
-        },
-        "userIdentity": {
-          "title__deleted": "The user identity under which the start task runs."
-        },
-        "maxTaskRetryCount": {
-          "title__deleted": "The maximum number of times the task may be retried."
-        },
-        "waitForSuccess": {
-          "title__deleted": "Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node."
-        },
-        "containerSettings": {
-          "title__deleted": "The settings for the container under which the start task runs."
-        }
-      }
-    },
-    "SupportedSkusResult": {
-      "properties": {
-        "value": {
-          "x-ms-identifiers__deleted": [
-            "name"
-          ]
         }
       }
     },
     "TaskContainerSettings": {
-      "title__deleted": "The container settings for a task.",
       "description__added": "The container settings for a task.",
       "properties": {
-        "containerRunOptions": {
-          "title__deleted": "Additional options to the container create command."
-        },
         "imageName": {
-          "title__deleted": "The image to use to create the container in which the task will run."
-        },
-        "registry": {
-          "title__deleted": "The private registry which contains the container image."
+          "title": {
+            "__old": "The image to use to create the container in which the task will run.",
+            "__new": "The private registry which contains the container image."
+          }
         },
         "workingDirectory": {
-          "title__deleted": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.",
           "description__added": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'."
-        },
-        "containerHostBatchBindMounts": {
-          "title__deleted": "The paths you want to mounted to container task."
         }
       }
     },
     "TaskSchedulingPolicy": {
-      "title__deleted": "Specifies how tasks should be distributed across compute nodes.",
       "description__added": "Specifies how tasks should be distributed across compute nodes.",
       "properties": {
         "nodeFillType": {
-          "title__deleted": "How tasks should be distributed across compute nodes.",
           "description__added": "How tasks should be distributed across compute nodes."
         }
       }
@@ -1932,58 +1836,47 @@
     "UpgradePolicy": {
       "properties": {
         "mode": {
-          "title__deleted": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.",
           "description__added": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between."
         },
-        "automaticOSUpgradePolicy": {
-          "title__deleted": "Configuration parameters used for performing automatic OS Upgrade."
-        },
         "rollingUpgradePolicy": {
-          "title__deleted": "The configuration parameters used while performing a rolling upgrade.",
           "description__added": "The configuration parameters used while performing a rolling upgrade."
         }
       }
     },
     "UserAccount": {
-      "title__deleted": "Properties used to create a user on an Azure Batch node.",
       "description__added": "Properties used to create a user on an Azure Batch node.",
       "properties": {
         "name": {
-          "title__deleted": "The name of the user account. Names can contain any Unicode characters up to a maximum length of 20.",
           "description__added": "The name of the user account. Names can contain any Unicode characters up to a maximum length of 20."
         },
         "password": {
-          "title__deleted": "The password for the user account.",
           "format__added": "password",
           "description__added": "The password for the user account."
         },
         "elevationLevel": {
-          "title__deleted": "The elevation level of the user.",
+          "title": {
+            "__old": "The elevation level of the user.",
+            "__new": "The elevation level for the user."
+          },
           "description": {
             "__old": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
             "__new": "The elevation level of the user."
           }
-        },
-        "linuxUserConfiguration": {
-          "title__deleted": "The Linux-specific user configuration for the user account."
-        },
-        "windowsUserConfiguration": {
-          "title__deleted": "The Windows-specific user configuration for the user account."
         }
       }
     },
     "UserIdentity": {
-      "title__deleted": "The definition of the user identity under which the task is run.",
       "properties": {
         "userName": {
-          "title__deleted": "The name of the user identity under which the task is run."
-        },
-        "autoUser": {
-          "title__deleted": "The auto user under which the task is run."
+          "title": {
+            "__old": "The name of the user identity under which the task is run.",
+            "__new": "The name of the user under which the task is run."
+          }
         }
       }
     },
     "VMDiskSecurityProfile": {
+      "title__added": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.",
       "properties": {
         "securityEncryptionType": {
           "title__deleted": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
@@ -1992,88 +1885,54 @@
       }
     },
     "VMExtension": {
-      "title__deleted": "The configuration for virtual machine extensions.",
       "description__added": "The configuration for virtual machine extensions.",
       "properties": {
         "name": {
-          "title__deleted": "The name of the virtual machine extension.",
           "description__added": "The name of the virtual machine extension."
         },
         "publisher": {
-          "title__deleted": "The name of the extension handler publisher.",
           "description__added": "The name of the extension handler publisher."
         },
         "type": {
-          "title__deleted": "The type of the extensions.",
           "description__added": "The type of the extensions."
         },
         "typeHandlerVersion": {
-          "title__deleted": "The version of script handler.",
           "description__added": "The version of script handler."
         },
         "settings": {
-          "title__deleted": "JSON formatted public settings for the extension.",
-          "description__added": "JSON formatted public settings for the extension.",
-          "additionalProperties__added": {}
+          "type__deleted": "object",
+          "description__added": "JSON formatted public settings for the extension."
         },
         "protectedSettings": {
-          "x-ms-secret__deleted": true,
-          "additionalProperties__added": {},
+          "type__deleted": "object",
+          "format__added": "password",
           "description": {
             "__old": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. ",
             "__new": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
           }
-        },
-        "provisionAfterExtensions": {
-          "title__deleted": "The collection of extension names."
         }
       }
     },
     "VirtualMachineConfiguration": {
-      "title__deleted": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.",
       "description__added": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.",
       "properties": {
         "imageReference": {
-          "title__deleted": "A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.",
           "description__added": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
         },
-        "nodeAgentSkuId": {
-          "title__deleted": "The SKU of the Batch node agent to be provisioned on compute nodes in the pool."
-        },
-        "windowsConfiguration": {
-          "title__deleted": "Windows operating system settings on the virtual machine."
-        },
         "dataDisks": {
-          "title__deleted": "The configuration for data disks attached to the compute nodes in the pool."
+          "title": {
+            "__old": "The configuration for data disks attached to the compute nodes in the pool.",
+            "__new": "The data disks to be attached to each compute node in the pool."
+          }
         },
         "licenseType": {
-          "title__deleted": "The type of on-premises license to be used when deploying the operating system.",
           "description": {
             "__old": "This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:\n\n Windows_Server - The on-premises license is for Windows Server.\n Windows_Client - The on-premises license is for Windows Client.\n",
             "__new": "This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:\n\nWindows_Server - The on-premises license is for Windows Server.\nWindows_Client - The on-premises license is for Windows Client."
           }
         },
-        "containerConfiguration": {
-          "title__deleted": "The container configuration for the pool."
-        },
-        "diskEncryptionConfiguration": {
-          "title__deleted": "The disk encryption configuration for the pool."
-        },
-        "nodePlacementConfiguration": {
-          "title__deleted": "The node placement configuration for the pool."
-        },
-        "extensions": {
-          "title__deleted": "The virtual machine extension for the pool."
-        },
-        "osDisk": {
-          "title__deleted": "Settings for the operating system disk of the Virtual Machine."
-        },
         "securityProfile": {
-          "title__deleted": "Specifies the security profile settings for the virtual machine or virtual machine scale set.",
           "description__added": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
-        },
-        "serviceArtifactReference": {
-          "title__deleted": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version."
         }
       }
     },
@@ -2088,22 +1947,10 @@
       }
     },
     "WindowsConfiguration": {
-      "title__deleted": "Windows operating system settings to apply to the virtual machine.",
-      "description__added": "Windows operating system settings to apply to the virtual machine.",
-      "properties": {
-        "enableAutomaticUpdates": {
-          "title__deleted": "Whether automatic updates are enabled on the virtual machine."
-        }
-      }
+      "description__added": "Windows operating system settings to apply to the virtual machine."
     },
     "WindowsUserConfiguration": {
-      "title__deleted": "Properties used to create a user account on a Windows node.",
-      "description__added": "Properties used to create a user account on a Windows node.",
-      "properties": {
-        "loginMode": {
-          "title__deleted": "Login mode for user"
-        }
-      }
+      "description__added": "Properties used to create a user account on a Windows node."
     }
   }
 }
