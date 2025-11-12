@@ -200,20 +200,22 @@ interface Clusters {
    * Trigger the continuation of an update for a cluster with a matching update strategy that has paused after completing a segment of the update.
    */
   @summary("Continue a paused update to the cluster version.")
-  continueUpdateVersion is ArmResourceActionAsync<
+  continueUpdateVersion is ArmResourceActionAsyncBase<
     Cluster,
     ClusterContinueUpdateVersionParameters,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
   /**
    * Deploy the cluster using the rack configuration provided during creation.
    */
   @summary("Deploy the cluster.")
-  deploy is ArmResourceActionAsync<
+  deploy is ArmResourceActionAsyncBase<
     Cluster,
     ClusterDeployParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
 
@@ -221,10 +223,11 @@ interface Clusters {
    * Trigger an inspection of the cluster to perform validation and optional corrective actions based on the supplied additional actions and filters.
    */
   @summary("Inspect the cluster.")
-  inspect is ArmResourceActionAsync<
+  inspect is ArmResourceActionAsyncBase<
     Cluster,
     ClusterInspectParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
 
@@ -232,10 +235,11 @@ interface Clusters {
    * Triggers the execution of a runtime protection scan to detect and remediate detected issues, in accordance with the cluster configuration.
    */
   @summary("Execute a runtime protection scan on the cluster.")
-  scanRuntime is ArmResourceActionAsync<
+  scanRuntime is ArmResourceActionAsyncBase<
     Cluster,
     ClusterScanRuntimeParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
 
@@ -243,10 +247,11 @@ interface Clusters {
    * Update the version of the provided cluster to one of the available supported versions.
    */
   @summary("Update the cluster version.")
-  updateVersion is ArmResourceActionAsync<
+  updateVersion is ArmResourceActionAsyncBase<
     Cluster,
     ClusterUpdateVersionParameters,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 }
 

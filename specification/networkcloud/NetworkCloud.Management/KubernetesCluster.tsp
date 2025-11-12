@@ -191,10 +191,11 @@ interface KubernetesClusters {
    * Restart a targeted node of a Kubernetes cluster.
    */
   @summary("Restart a targeted node.")
-  restartNode is ArmResourceActionAsync<
+  restartNode is ArmResourceActionAsyncBase<
     KubernetesCluster,
     KubernetesClusterRestartNodeParameters,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<KubernetesCluster>
   >;
 }
 

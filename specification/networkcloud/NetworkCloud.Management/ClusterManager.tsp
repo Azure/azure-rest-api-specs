@@ -188,10 +188,11 @@ interface ClusterManagers {
    * Update the private endpoint connection for the Azure Relay namespace managed by the specified cluster manager. Use this operation to approve or reject a pending private endpoint connection request for the relay namespace managed by the cluster manager.
    */
   @summary("Approve or reject a relay private endpoint connection.")
-  updateRelayPrivateEndpointConnection is ArmResourceActionAsync<
+  updateRelayPrivateEndpointConnection is ArmResourceActionAsyncBase<
     ClusterManager,
     ClusterManagerUpdateRelayPrivateEndpointConnectionParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterManager>,
     OptionalRequestBody = true
   >;
 }

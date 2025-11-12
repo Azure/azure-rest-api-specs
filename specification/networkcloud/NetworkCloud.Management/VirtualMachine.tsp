@@ -193,10 +193,11 @@ interface VirtualMachines {
    * Assigns a relay to the specified Microsoft.HybridCompute machine associated with the provided virtual machine.
    */
   @summary("Assigns a relay to the specified Microsoft.HybridCompute machine.")
-  assignRelay is ArmResourceActionAsync<
+  assignRelay is ArmResourceActionAsyncBase<
     VirtualMachine,
     VirtualMachineAssignRelayParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>,
     OptionalRequestBody = true
   >;
 
@@ -204,10 +205,11 @@ interface VirtualMachines {
    * Power off the provided virtual machine.
    */
   @summary("Power off the virtual machine.")
-  powerOff is ArmResourceActionAsync<
+  powerOff is ArmResourceActionAsyncBase<
     VirtualMachine,
     VirtualMachinePowerOffParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>,
     OptionalRequestBody = true
   >;
 
@@ -215,30 +217,33 @@ interface VirtualMachines {
    * Reimage the provided virtual machine.
    */
   @summary("Reimage the virtual machine.")
-  reimage is ArmResourceActionAsync<
+  reimage is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 
   /**
    * Restart the provided virtual machine.
    */
   @summary("Restart the virtual machine.")
-  restart is ArmResourceActionAsync<
+  restart is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 
   /**
    * Start the provided virtual machine.
    */
   @summary("Start the virtual machine.")
-  start is ArmResourceActionAsync<
+  start is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 }
 

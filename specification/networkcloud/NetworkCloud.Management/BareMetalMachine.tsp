@@ -191,10 +191,11 @@ interface BareMetalMachines {
    * Cordon the provided bare metal machine's Kubernetes node.
    */
   @summary("Cordon the bare metal machine.")
-  cordon is ArmResourceActionAsync<
+  cordon is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineCordonParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
 
@@ -202,10 +203,11 @@ interface BareMetalMachines {
    * Power off the provided bare metal machine.
    */
   @summary("Power off the bare metal machine.")
-  powerOff is ArmResourceActionAsync<
+  powerOff is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachinePowerOffParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
 
@@ -213,20 +215,22 @@ interface BareMetalMachines {
    * Reimage the provided bare metal machine.
    */
   @summary("Reimage the bare metal machine.")
-  reimage is ArmResourceActionAsync<
+  reimage is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Replace the provided bare metal machine.
    */
   @summary("Replace (service) the bare metal machine.")
-  replace is ArmResourceActionAsync<
+  replace is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineReplaceParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
 
@@ -234,70 +238,77 @@ interface BareMetalMachines {
    * Restart the provided bare metal machine.
    */
   @summary("Restart the bare metal machine.")
-  restart is ArmResourceActionAsync<
+  restart is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Run the command or the script on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
   @summary("Run the command on the bare metal machine.")
-  runCommand is ArmResourceActionAsync<
+  runCommand is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunCommandParameters,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Run one or more data extractions on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
   @summary("Run data extraction for a bare metal machine.")
-  runDataExtracts is ArmResourceActionAsync<
+  runDataExtracts is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunDataExtractsParameters,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Run one or more restricted data extractions on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
   @summary("Run restricted data extraction for a bare metal machine.")
-  runDataExtractsRestricted is ArmResourceActionAsync<
+  runDataExtractsRestricted is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunDataExtractsParameters,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Run one or more read-only commands on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
   @summary("Run read-only commands against a bare metal machine.")
-  runReadCommands is ArmResourceActionAsync<
+  runReadCommands is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunReadCommandsParameters,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Start the provided bare metal machine.
    */
   @summary("Start the bare metal machine.")
-  start is ArmResourceActionAsync<
+  start is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Uncordon the provided bare metal machine's Kubernetes node.
    */
   @summary("Uncordon the bare metal machine.")
-  uncordon is ArmResourceActionAsync<
+  uncordon is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 }
 

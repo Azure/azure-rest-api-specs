@@ -191,20 +191,22 @@ interface StorageAppliances {
    * Disable remote vendor management of the provided storage appliance.
    */
   @summary("Turn off remote vendor management for a storage appliance, if supported.")
-  disableRemoteVendorManagement is ArmResourceActionAsync<
+  disableRemoteVendorManagement is ArmResourceActionAsyncBase<
     StorageAppliance,
     void,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>
   >;
 
   /**
    * Enable remote vendor management of the provided storage appliance.
    */
   @summary("Turn on remote vendor management for a storage appliance, if supported.")
-  enableRemoteVendorManagement is ArmResourceActionAsync<
+  enableRemoteVendorManagement is ArmResourceActionAsyncBase<
     StorageAppliance,
     StorageApplianceEnableRemoteVendorManagementParameters,
-    ArmResponse<OperationStatusResult>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>,
     OptionalRequestBody = true
   >;
 
@@ -212,10 +214,11 @@ interface StorageAppliances {
    * Run one or more read-only commands on the provided storage appliance.
    */
   @summary("Run read-only commands against a storage appliance.")
-  runReadCommands is ArmResourceActionAsync<
+  runReadCommands is ArmResourceActionAsyncBase<
     StorageAppliance,
     StorageApplianceRunReadCommandsParameters,
-    ArmResponse<OperationStatusResult>
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>
   >;
 }
 
