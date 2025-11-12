@@ -7774,7 +7774,7 @@
           "x-nullable": false
         },
         "compression": {
-          "x-ms-client-name": "compressionConfigurationName",
+          "x-ms-client-name": "compressionName",
           "type": "string",
           "description": "The name of the compression method configuration that specifies the compression method and optional parameters.",
           "x-nullable": false
@@ -7956,10 +7956,12 @@
       "description": "The algorithm used for indexing and querying."
     },
     "VectorSearchCompressionConfiguration": {
+      "x-ms-client-name": "VectorSearchCompression",
       "type": "object",
       "discriminator": "kind",
       "properties": {
         "name": {
+          "x-ms-client-name": "compressionName",
           "externalDocs": {
             "url": "https://learn.microsoft.com/rest/api/searchservice/Naming-rules"
           },
@@ -8017,7 +8019,7 @@
       "description": "Contains the options for rescoring."
     },
     "ScalarQuantizationVectorSearchCompressionConfiguration": {
-      "x-ms-client-name": "ScalarQuantizationCompressionConfiguration",
+      "x-ms-client-name": "ScalarQuantizationCompression",
       "type": "object",
       "x-ms-discriminator-value": "scalarQuantization",
       "allOf": [
@@ -8046,7 +8048,7 @@
       "description": "Contains the parameters specific to Scalar Quantization."
     },
     "BinaryQuantizationVectorSearchCompressionConfiguration": {
-      "x-ms-client-name": "BinaryQuantizationCompressionConfiguration",
+      "x-ms-client-name": "BinaryQuantizationCompression",
       "type": "object",
       "x-ms-discriminator-value": "binaryQuantization",
       "allOf": [
@@ -8062,7 +8064,7 @@
         "int8"
       ],
       "x-ms-enum": {
-        "name": "VectorSearchCompressionTargetDataType",
+        "name": "VectorSearchCompressionTarget",
         "modelAsString": true,
         "values": [
           {
@@ -8158,6 +8160,7 @@
       "discriminator": "kind",
       "properties": {
         "name": {
+          "x-ms-client-name": "VectorizerName",
           "externalDocs": {
             "url": "https://learn.microsoft.com/rest/api/searchservice/Naming-rules"
           },
@@ -8187,7 +8190,7 @@
       ],
       "properties": {
         "azureOpenAIParameters": {
-          "x-ms-client-name": "AzureOpenAIParameters",
+          "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/AzureOpenAIParameters",
           "description": "Contains the parameters specific to Azure OpenAI embedding vectorization."
         }
@@ -8195,9 +8198,11 @@
       "description": "Specifies the Azure OpenAI resource used to vectorize a query string."
     },
     "AzureOpenAIParameters": {
+      "x-ms-client-name": "AzureOpenAIVectorizerParameters",
       "type": "object",
       "properties": {
         "resourceUri": {
+          "x-ms-client-name": "resourceUrl",
           "type": "string",
           "format": "uri",
           "description": "The resource URI of the Azure OpenAI resource."
@@ -8308,9 +8313,11 @@
       "description": "Specifies a user-defined vectorizer for generating the vector embedding of a query string. Integration of an external vectorizer is achieved using the custom Web API interface of a skillset."
     },
     "WebApiParameters": {
+      "x-ms-client-name": "WebApiVectorizerParameters",
       "type": "object",
       "properties": {
         "uri": {
+          "x-ms-client-name": "Url",
           "type": "string",
           "format": "uri",
           "description": "The URI of the Web API providing the vectorizer."
@@ -8596,6 +8603,7 @@
       ],
       "properties": {
         "userAssignedIdentity": {
+          "x-ms-client-name": "ResourceId",
           "type": "string",
           "description": "The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service."
         }
@@ -10775,6 +10783,7 @@
           "description": "Definition of additional projections to Azure blob, table, or files, of enriched data."
         },
         "indexProjections": {
+          "x-ms-client-name": "IndexProjection",
           "$ref": "#/definitions/SearchIndexerIndexProjections",
           "description": "Definition of additional projections to secondary search index(es)."
         },
@@ -10979,6 +10988,7 @@
       "description": "A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
     },
     "SearchIndexerIndexProjections": {
+      "x-ms-client-name": "SearchIndexerIndexProjection",
       "type": "object",
       "properties": {
         "selectors": {
@@ -11767,6 +11777,7 @@
           "description": "Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character."
         },
         "azureOpenAITokenizerParameters": {
+          "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/AzureOpenAITokenizerParameters",
           "x-nullable": true,
           "description": "Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property."
@@ -13858,7 +13869,7 @@
         "carriageReturnLineFeed"
       ],
       "x-ms-enum": {
-        "name": "LineEnding",
+        "name": "OcrLineEnding",
         "modelAsString": true,
         "values": [
           {
