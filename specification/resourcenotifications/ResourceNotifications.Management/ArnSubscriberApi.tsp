@@ -381,13 +381,16 @@ model Destination
   name: string;
 }
 
+/** Properties for destination update operations */
+model DestinationPatchProperties {
+  /** The fabric endpoint configuration (only for fabric destinations) */
+  endpoint?: FabricEndpoint;
+}
+
 /** Destination for update operations */
 model DestinationPatch {
   /** The updatable properties */
-  properties?: {
-    /** The fabric endpoint configuration (only for fabric destinations) */
-    endpoint?: FabricEndpoint;
-  };
+  properties?: DestinationPatchProperties;
 }
 
 /** Operations for Destinations */
