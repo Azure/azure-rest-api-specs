@@ -54,7 +54,7 @@ suppressions:
     from: cloud.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels/{ddmsFhirEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
     reason: There are properties (connectorType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
-- code: PatchBodyParametersSchema
+  - code: PatchBodyParametersSchema
     from: cloud.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels/{ddmsFhirFlatFileBatchChannelName}"].patch.parameters[4].schema.properties.properties
     reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
