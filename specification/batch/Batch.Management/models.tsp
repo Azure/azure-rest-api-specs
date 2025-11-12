@@ -1013,6 +1013,7 @@ model EndpointAccessProfile {
 /**
  * The action when client IP address is matched.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum IPRuleAction {
   /**
    * Deny client access.
@@ -1135,7 +1136,7 @@ model BatchAccountProperties {
    * The allocation mode for creating pools in the Batch account.
    */
   @visibility(Lifecycle.Read)
-  @summary("The allocation mode used for creating pools in the Batch account.")
+  @summary("The allocation mode to use for creating pools in the Batch account.")
   poolAllocationMode?: PoolAllocationMode;
 
   /**
@@ -1262,7 +1263,7 @@ model PrivateEndpointConnectionProperties {
   groupIds?: string[];
 
   /**
-   * The private link service connection state of the private endpoint connection
+   * The private link service connection state of the private endpoint connection.
    */
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 }
@@ -1708,6 +1709,7 @@ model Operation {
    * Properties of the operation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Properties of the operation.")
   properties?: unknown;
 }
@@ -2185,7 +2187,7 @@ model DeploymentConfiguration {
    * The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.
    */
   @summary("The virtual machine configuration for the pool.")
-  virtualMachineConfiugration?: VirtualMachineConfiguration;
+  virtualMachineConfiguration?: VirtualMachineConfiguration;
 }
 
 /**
@@ -2214,7 +2216,7 @@ model VirtualMachineConfiguration {
   /**
    * This property must be specified if the compute nodes in the pool need to have empty data disks attached to them.
    */
-  @summary("The data disks to be attached to each compute node in the pool.")
+  @summary("The configuration for data disks attached to the compute nodes in the pool.")
   @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDisks?: DataDisk[];
 
@@ -2492,14 +2494,14 @@ model VMExtension {
   /**
    * JSON formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("JSON formatted public settings for the extension.")
   settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   protectedSettings?: unknown;
 
@@ -2588,7 +2590,6 @@ model ManagedDisk {
  * Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@summary("Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.")
 model VMDiskSecurityProfile {
   /**
    * Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.
@@ -2944,7 +2945,7 @@ model UserAccount {
   /**
    * nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.
    */
-  @summary("The elevation level for the user.")
+  @summary("The elevation level of the user.")
   elevationLevel?: ElevationLevel;
 
   /**
@@ -3157,13 +3158,13 @@ model AutoUserSpecification {
   /**
    * The default value is Pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by start tasks.
    */
-  @summary("The scope of the auto user.")
+  @summary("The scope for the auto user")
   scope?: AutoUserScope;
 
   /**
    * The default value is nonAdmin.
    */
-  @summary("The elevation level of the auto user.")
+  @summary("The elevation level of the user.")
   elevationLevel?: ElevationLevel;
 }
 
@@ -3181,7 +3182,7 @@ model TaskContainerSettings {
   /**
    * This is the full image reference, as would be specified to "docker pull". If no tag is provided as part of the image name, the tag ":latest" is used as a default.
    */
-  @summary("The private registry which contains the container image.")
+  @summary("The image to use to create the container in which the task will run.")
   imageName: string;
 
   /**
@@ -3445,6 +3446,7 @@ model NFSMountConfiguration {
 /**
  * Information used to connect to a CIFS file system.
  */
+@summary("Information used to connect to a CIFS file system.")
 model CifsMountConfiguration {
   /**
    * The user to use for authentication against the CIFS file system.

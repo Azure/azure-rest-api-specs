@@ -3300,7 +3300,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags": {
@@ -3328,7 +3328,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements."
+          "description": "The ETag of the resource, used for concurrency statements."
         },
         "tags": {
           "type": "object",
@@ -3623,12 +3623,12 @@
       "properties": {
         "scope": {
           "$ref": "#/definitions/AutoUserScope",
-          "title": "The scope of the auto user.",
+          "title": "The scope for the auto user",
           "description": "The default value is Pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by start tasks."
         },
         "elevationLevel": {
           "$ref": "#/definitions/ElevationLevel",
-          "title": "The elevation level of the auto user.",
+          "title": "The elevation level of the user.",
           "description": "The default value is nonAdmin."
         }
       }
@@ -3993,7 +3993,7 @@
         },
         "poolAllocationMode": {
           "$ref": "#/definitions/PoolAllocationMode",
-          "title": "The allocation mode used for creating pools in the Batch account.",
+          "title": "The allocation mode to use for creating pools in the Batch account.",
           "description": "The allocation mode for creating pools in the Batch account.",
           "readOnly": true
         },
@@ -4289,7 +4289,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags": {
@@ -4598,6 +4598,7 @@
     },
     "CifsMountConfiguration": {
       "type": "object",
+      "title": "Information used to connect to a CIFS file system.",
       "description": "Information used to connect to a CIFS file system.",
       "properties": {
         "userName": {
@@ -4968,7 +4969,7 @@
       "title": "Deployment configuration properties.",
       "description": "Deployment configuration properties.",
       "properties": {
-        "virtualMachineConfiugration": {
+        "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
           "title": "The virtual machine configuration for the pool.",
           "description": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
@@ -5007,7 +5008,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags": {
@@ -6565,7 +6566,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags": {
@@ -6897,7 +6898,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags": {
@@ -6941,7 +6942,7 @@
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "The private link service connection state of the private endpoint connection"
+          "description": "The private link service connection state of the private endpoint connection."
         }
       }
     },
@@ -7004,7 +7005,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags": {
@@ -7748,7 +7749,7 @@
         },
         "imageName": {
           "type": "string",
-          "title": "The private registry which contains the container image.",
+          "title": "The image to use to create the container in which the task will run.",
           "description": "This is the full image reference, as would be specified to \"docker pull\". If no tag is provided as part of the image name, the tag \":latest\" is used as a default."
         },
         "registry": {
@@ -7898,7 +7899,7 @@
         },
         "elevationLevel": {
           "$ref": "#/definitions/ElevationLevel",
-          "title": "The elevation level for the user.",
+          "title": "The elevation level of the user.",
           "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin."
         },
         "linuxUserConfiguration": {
@@ -7952,7 +7953,6 @@
     },
     "VMDiskSecurityProfile": {
       "type": "object",
-      "title": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.",
       "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.",
       "properties": {
         "securityEncryptionType": {
@@ -8040,7 +8040,7 @@
         },
         "dataDisks": {
           "type": "array",
-          "title": "The data disks to be attached to each compute node in the pool.",
+          "title": "The configuration for data disks attached to the compute nodes in the pool.",
           "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them.",
           "items": {
             "$ref": "#/definitions/DataDisk"

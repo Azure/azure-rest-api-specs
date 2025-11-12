@@ -585,6 +585,7 @@
     },
     "CifsMountConfiguration__added": {
       "type": "object",
+      "title": "Information used to connect to a CIFS file system.",
       "description": "Information used to connect to a CIFS file system.",
       "properties": {
         "userName": {
@@ -936,7 +937,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags__added": {
@@ -963,7 +964,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements."
+          "description": "The ETag of the resource, used for concurrency statements."
         },
         "tags__added": {
           "type": "object",
@@ -1027,17 +1028,7 @@
     "AutoUserSpecification": {
       "description__added": "Specifies the parameters for the auto user that runs a task on the Batch service.",
       "properties": {
-        "scope": {
-          "title": {
-            "__old": "The scope for the auto user",
-            "__new": "The scope of the auto user."
-          }
-        },
         "elevationLevel": {
-          "title": {
-            "__old": "The elevation level of the user.",
-            "__new": "The elevation level of the auto user."
-          },
           "description": {
             "__old": "The default value is nonAdmin.",
             "__new": "The elevation level of the user."
@@ -1098,11 +1089,7 @@
           "x-nullable__deleted": false
         },
         "poolAllocationMode": {
-          "x-nullable__deleted": false,
-          "title": {
-            "__old": "The allocation mode to use for creating pools in the Batch account.",
-            "__new": "The allocation mode used for creating pools in the Batch account."
-          }
+          "x-nullable__deleted": false
         },
         "keyVaultReference": {
           "description__added": "Identifies the Azure key vault associated with a Batch account."
@@ -1132,7 +1119,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags__added": {
@@ -1267,14 +1254,8 @@
     "DeploymentConfiguration": {
       "description__added": "Deployment configuration properties.",
       "properties": {
-        "virtualMachineConfiguration__deleted": {
-          "$ref": "#/definitions/VirtualMachineConfiguration",
-          "title": "The virtual machine configuration for the pool."
-        },
-        "virtualMachineConfiugration__added": {
-          "$ref": "#/definitions/VirtualMachineConfiguration",
-          "title": "The virtual machine configuration for the pool.",
-          "description": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
+        "virtualMachineConfiguration": {
+          "description__added": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
         }
       }
     },
@@ -1287,7 +1268,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags__added": {
@@ -1565,7 +1546,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags__added": {
@@ -1657,7 +1638,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags__added": {
@@ -1691,7 +1672,7 @@
         },
         "privateLinkServiceConnectionState": {
           "title__deleted": "The private link service connection state of the private endpoint connection.",
-          "description__added": "The private link service connection state of the private endpoint connection"
+          "description__added": "The private link service connection state of the private endpoint connection."
         }
       }
     },
@@ -1699,7 +1680,7 @@
       "properties": {
         "etag__added": {
           "type": "string",
-          "description": "*\nThe ETag of the resource, used for concurrency statements.",
+          "description": "The ETag of the resource, used for concurrency statements.",
           "readOnly": true
         },
         "tags__added": {
@@ -1814,12 +1795,6 @@
     "TaskContainerSettings": {
       "description__added": "The container settings for a task.",
       "properties": {
-        "imageName": {
-          "title": {
-            "__old": "The image to use to create the container in which the task will run.",
-            "__new": "The private registry which contains the container image."
-          }
-        },
         "workingDirectory": {
           "description__added": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'."
         }
@@ -1854,10 +1829,6 @@
           "description__added": "The password for the user account."
         },
         "elevationLevel": {
-          "title": {
-            "__old": "The elevation level of the user.",
-            "__new": "The elevation level for the user."
-          },
           "description": {
             "__old": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
             "__new": "The elevation level of the user."
@@ -1876,7 +1847,6 @@
       }
     },
     "VMDiskSecurityProfile": {
-      "title__added": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.",
       "properties": {
         "securityEncryptionType": {
           "title__deleted": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
@@ -1918,12 +1888,6 @@
       "properties": {
         "imageReference": {
           "description__added": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
-        },
-        "dataDisks": {
-          "title": {
-            "__old": "The configuration for data disks attached to the compute nodes in the pool.",
-            "__new": "The data disks to be attached to each compute node in the pool."
-          }
         },
         "licenseType": {
           "description": {

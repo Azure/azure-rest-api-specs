@@ -24,7 +24,7 @@ model ApplicationPackage
     NamePattern = "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]*$"
   >;
 
-  /***
+  /**
    * The ETag of the resource, used for concurrency statements.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

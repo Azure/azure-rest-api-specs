@@ -38,6 +38,7 @@
 | `definitions.ContainerRegistry.properties.username.description__added` | added | `The user name to log into the registry server.` |
 | `definitions.DataDisk.properties.diskSizeGB.description__added` | added | `The initial disk size in GB when creating new data disk.` |
 | `definitions.DeploymentConfiguration.description__added` | added | `Deployment configuration properties.` |
+| `definitions.DeploymentConfiguration.properties.virtualMachineConfiguration.description__added` | added | `The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.` |
 | `definitions.DiffDiskSettings.description__added` | added | `Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.` |
 | `definitions.EnvironmentSetting.description__added` | added | `An environment variable to be set on a task process.` |
 | `definitions.EnvironmentSetting.properties.name.description__added` | added | `The name of the environment variable.` |
@@ -85,7 +86,7 @@
 | `definitions.PoolProperties.properties.userAccounts.description__added` | added | `The list of user accounts to be created on each node in the pool.` |
 | `definitions.PrivateEndpoint.properties.id.description__added` | added | `The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.` |
 | `definitions.PrivateEndpointConnectionProperties.properties.privateEndpoint.description__added` | added | `The private endpoint of the private endpoint connection.` |
-| `definitions.PrivateEndpointConnectionProperties.properties.privateLinkServiceConnectionState.description__added` | added | `The private link service connection state of the private endpoint connection` |
+| `definitions.PrivateEndpointConnectionProperties.properties.privateLinkServiceConnectionState.description__added` | added | `The private link service connection state of the private endpoint connection.` |
 | `definitions.PrivateEndpointConnectionProperties.properties.provisioningState.description__added` | added | `The provisioning state of the private endpoint connection.` |
 | `definitions.PrivateLinkResourceProperties.properties.requiredMembers.description__added` | added | `The list of required members that are used to establish the private link connection.` |
 | `definitions.PrivateLinkResourceProperties.properties.requiredZoneNames.description__added` | added | `The list of required zone names for the private DNS resource name` |
@@ -238,7 +239,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CifsMountConfiguration__added` | added | `{"type":"object","description":"Information used to connect to a CIFS file system.","properties":{"u...` |
+| `definitions.CifsMountConfiguration__added` | added | `{"type":"object","title":"Information used to connect to a CIFS file system.","description":"Informa...` |
 
 ### Changes for `NetworkSecurityPerimeter`
 
@@ -310,13 +311,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Application.properties.etag__added` | added | `{"type":"string","description":"*\\nThe ETag of the resource, used for concurrency statements.","read...` |
-| `definitions.ApplicationPackage.properties.etag__added` | added | `{"type":"string","description":"*\\nThe ETag of the resource, used for concurrency statements."}` |
-| `definitions.Certificate.properties.etag__added` | added | `{"type":"string","description":"*\\nThe ETag of the resource, used for concurrency statements.","read...` |
-| `definitions.DetectorResponse.properties.etag__added` | added | `{"type":"string","description":"*\\nThe ETag of the resource, used for concurrency statements.","read...` |
-| `definitions.Pool.properties.etag__added` | added | `{"type":"string","description":"*\\nThe ETag of the resource, used for concurrency statements.","read...` |
-| `definitions.PrivateEndpointConnection.properties.etag__added` | added | `{"type":"string","description":"*\\nThe ETag of the resource, used for concurrency statements.","read...` |
-| `definitions.PrivateLinkResource.properties.etag__added` | added | `{"type":"string","description":"*\\nThe ETag of the resource, used for concurrency statements.","read...` |
+| `definitions.Application.properties.etag__added` | added | `{"type":"string","description":"The ETag of the resource, used for concurrency statements.","readOnl...` |
+| `definitions.ApplicationPackage.properties.etag__added` | added | `{"type":"string","description":"The ETag of the resource, used for concurrency statements."}` |
+| `definitions.Certificate.properties.etag__added` | added | `{"type":"string","description":"The ETag of the resource, used for concurrency statements.","readOnl...` |
+| `definitions.DetectorResponse.properties.etag__added` | added | `{"type":"string","description":"The ETag of the resource, used for concurrency statements.","readOnl...` |
+| `definitions.Pool.properties.etag__added` | added | `{"type":"string","description":"The ETag of the resource, used for concurrency statements.","readOnl...` |
+| `definitions.PrivateEndpointConnection.properties.etag__added` | added | `{"type":"string","description":"The ETag of the resource, used for concurrency statements.","readOnl...` |
+| `definitions.PrivateLinkResource.properties.etag__added` | added | `{"type":"string","description":"The ETag of the resource, used for concurrency statements.","readOnl...` |
 
 ### Changes for `tags`
 
@@ -369,18 +370,6 @@
 | `definitions.VirtualMachineFamilyCoreQuota.properties.coreQuota['x-nullable__deleted']` | deleted | `false` |
 | `definitions.VirtualMachineFamilyCoreQuota.properties.name['x-nullable__deleted']` | deleted | `false` |
 
-### Changes for `virtualMachineConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeploymentConfiguration.properties.virtualMachineConfiguration__deleted` | deleted | `{"$ref":"#/definitions/VirtualMachineConfiguration","title":"The virtual machine configuration for t...` |
-
-### Changes for `virtualMachineConfiugration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeploymentConfiguration.properties.virtualMachineConfiugration__added` | added | `{"$ref":"#/definitions/VirtualMachineConfiguration","title":"The virtual machine configuration for t...` |
-
 ### Changes for `title`
 
 | Path | Change Type | Value |
@@ -389,7 +378,6 @@
 | `definitions.Pool.properties.identity.title__deleted` | deleted | `The type of identity used for the Batch Pool.` |
 | `definitions.PrivateEndpointConnectionProperties.properties.privateLinkServiceConnectionState.title__deleted` | deleted | `The private link service connection state of the private endpoint connection.` |
 | `definitions.VMDiskSecurityProfile.properties.securityEncryptionType.title__deleted` | deleted | `Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.` |
-| `definitions.VMDiskSecurityProfile.title__added` | added | `Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.` |
 
 ### Changes for `properties`
 
@@ -404,10 +392,7 @@
 | `definitions.Application.allOf[0].$ref` | `#/definitions/AzureProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ApplicationPackage.allOf[0].$ref` | `#/definitions/AzureProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.AutoUserSpecification.properties.elevationLevel.description` | `The default value is nonAdmin.` | `The elevation level of the user.` |
-| `definitions.AutoUserSpecification.properties.elevationLevel.title` | `The elevation level of the user.` | `The elevation level of the auto user.` |
-| `definitions.AutoUserSpecification.properties.scope.title` | `The scope for the auto user` | `The scope of the auto user.` |
 | `definitions.BatchAccount.allOf[0].$ref` | `#/definitions/AzureResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource` |
-| `definitions.BatchAccountProperties.properties.poolAllocationMode.title` | `The allocation mode to use for creating pools in the Batch account.` | `The allocation mode used for creating pools in the Batch account.` |
 | `definitions.Certificate.allOf[0].$ref` | `#/definitions/AzureProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.CheckNameAvailabilityParameters.properties.type.description` | `The resource type.` | `The result of the request to list operations.` |
 | `definitions.CheckNameAvailabilityParameters.properties.type['x-ms-enum'].modelAsString` | `false` | `true` |
@@ -444,11 +429,8 @@ The KeyVault has soft-delete and purge protection enabled` |
 | `definitions.PrivateLinkResourceProperties.properties.requiredZoneNames.title` | `The list of required zone names for the private DNS resource name` | `The list of required zone names for the private DNS resource name.` |
 | `definitions.PublicIPAddressConfiguration.properties.provision.description` | `The default value is BatchManaged` | `The provisioning type for Public IP Addresses for the Batch Pool.` |
 | `definitions.ResizeOperationStatus.properties.nodeDeallocationOption.description` | `The default value is requeue.` | `Determines what to do with a node and its running task(s) after it has been selected for deallocation.` |
-| `definitions.TaskContainerSettings.properties.imageName.title` | `The image to use to create the container in which the task will run.` | `The private registry which contains the container image.` |
 | `definitions.UserAccount.properties.elevationLevel.description` | `nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.` | `The elevation level of the user.` |
-| `definitions.UserAccount.properties.elevationLevel.title` | `The elevation level of the user.` | `The elevation level for the user.` |
 | `definitions.UserIdentity.properties.userName.title` | `The name of the user identity under which the task is run.` | `The name of the user under which the task is run.` |
-| `definitions.VirtualMachineConfiguration.properties.dataDisks.title` | `The configuration for data disks attached to the compute nodes in the pool.` | `The data disks to be attached to each compute node in the pool.` |
 | `definitions.VirtualMachineConfiguration.properties.licenseType.description` | `This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:
 
  Windows_Server - The on-premises license is for Windows Server.
